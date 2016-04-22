@@ -347,19 +347,19 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-/* line 4, site.css.scss */
+/* line 3, site.css.scss */
 body {
   background: #f8f8f8;
   text-align: center;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1em; }
 
-/* line 11, site.css.scss */
+/* line 10, site.css.scss */
 .logo img {
   height: 18.75em;
   margin-top: 6em; }
 
-/* line 16, site.css.scss */
+/* line 15, site.css.scss */
 h1 {
   color: rgba(0, 0, 0, 0.5);
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -367,13 +367,13 @@ h1 {
   font-weight: 400;
   margin: 0; }
 
-/* line 24, site.css.scss */
+/* line 23, site.css.scss */
 .doc {
   margin: 3em 0;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.1em;
   font-weight: 300; }
-  /* line 30, site.css.scss */
+  /* line 29, site.css.scss */
   .doc a {
     border: 1px solid white;
     border-radius: 3px;
@@ -381,13 +381,13 @@ h1 {
     color: white;
     text-decoration: none;
     transition: color 0.1s linear; }
-    /* line 37, site.css.scss */
+    /* line 36, site.css.scss */
     .doc a:hover {
       background: rgba(0, 0, 0, 0.2);
       color: white;
       transition: all 0.15s linear; }
 
-/* line 45, site.css.scss */
+/* line 44, site.css.scss */
 .welcome {
   -webkit-animation-name: welcome;
   -webkit-animation-duration: .9s; }
