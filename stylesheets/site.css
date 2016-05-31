@@ -613,27 +613,32 @@ section {
   /* line 263, _agency.scss */
   section h3.section-subheading-dark-background {
     color: #E0E0E0; }
+  /* line 268, _agency.scss */
+  section h3.tag-line {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 75px; }
 
 @media (min-width: 768px) {
-  /* line 270, _agency.scss */
+  /* line 276, _agency.scss */
   section {
     padding: 150px 0; } }
-/* line 277, _agency.scss */
+/* line 283, _agency.scss */
 .service-heading {
   margin: 15px 0;
   text-transform: none; }
 
-/* line 285, _agency.scss */
+/* line 291, _agency.scss */
 #portfolio .portfolio-item {
   margin: 0 0 15px;
   right: 0; }
-  /* line 289, _agency.scss */
+  /* line 295, _agency.scss */
   #portfolio .portfolio-item .portfolio-link {
     display: block;
     margin: 0 auto;
     max-width: 400px;
     position: relative; }
-    /* line 295, _agency.scss */
+    /* line 301, _agency.scss */
     #portfolio .portfolio-item .portfolio-link .portfolio-hover {
       background: rgba(238, 115, 53, 0.9);
       height: 100%;
@@ -643,10 +648,10 @@ section {
       -webkit-transition: all ease .5s;
       transition: all ease .5s;
       width: 100%; }
-      /* line 305, _agency.scss */
+      /* line 311, _agency.scss */
       #portfolio .portfolio-item .portfolio-link .portfolio-hover:hover {
         opacity: 1; }
-      /* line 309, _agency.scss */
+      /* line 315, _agency.scss */
       #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content {
         color: #fff;
         font-size: 20px;
@@ -656,14 +661,14 @@ section {
         text-align: center;
         top: 50%;
         width: 100%; }
-        /* line 319, _agency.scss */
+        /* line 325, _agency.scss */
         #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content i {
           margin-top: -12px; }
-        /* line 323, _agency.scss */
+        /* line 329, _agency.scss */
         #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h3,
         #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h4 {
           margin: 0; }
-  /* line 331, _agency.scss */
+  /* line 337, _agency.scss */
   #portfolio .portfolio-item .portfolio-caption {
     background-color: #fff;
     margin: 0 auto;
@@ -671,30 +676,30 @@ section {
     padding: 25px;
     text-align: center;
     white-space: nowrap; }
-    /* line 339, _agency.scss */
+    /* line 345, _agency.scss */
     #portfolio .portfolio-item .portfolio-caption h4 {
       margin: 0;
       text-transform: none; }
-    /* line 344, _agency.scss */
+    /* line 350, _agency.scss */
     #portfolio .portfolio-item .portfolio-caption p {
       font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-style: italic;
       margin: 0; }
-/* line 353, _agency.scss */
+/* line 359, _agency.scss */
 #portfolio * {
   z-index: 2; }
 
 @media (min-width: 767px) {
-  /* line 360, _agency.scss */
+  /* line 366, _agency.scss */
   #portfolio .portfolio-item {
     margin: 0 0 30px; } }
-/* line 368, _agency.scss */
+/* line 374, _agency.scss */
 .timeline {
   list-style: none;
   padding: 0;
   position: relative; }
-  /* line 373, _agency.scss */
+  /* line 379, _agency.scss */
   .timeline:before {
     background-color: #f1f1f1;
     bottom: 0;
@@ -704,38 +709,38 @@ section {
     position: absolute;
     top: 0;
     width: 2px; }
-  /* line 384, _agency.scss */
+  /* line 390, _agency.scss */
   .timeline > li {
     margin-bottom: 50px;
     min-height: 50px;
     position: relative; }
-    /* line 389, _agency.scss */
+    /* line 395, _agency.scss */
     .timeline > li:before, .timeline > li:after {
       content: ' ';
       display: table; }
-    /* line 395, _agency.scss */
+    /* line 401, _agency.scss */
     .timeline > li:after {
       clear: both; }
-    /* line 399, _agency.scss */
+    /* line 405, _agency.scss */
     .timeline > li .timeline-panel {
       float: right;
       padding: 0 20px 0 100px;
       position: relative;
       text-align: left;
       width: 100%; }
-      /* line 406, _agency.scss */
+      /* line 412, _agency.scss */
       .timeline > li .timeline-panel:before {
         border-left-width: 0;
         border-right-width: 15px;
         left: -15px;
         right: auto; }
-      /* line 413, _agency.scss */
+      /* line 419, _agency.scss */
       .timeline > li .timeline-panel:after {
         border-left-width: 0;
         border-right-width: 14px;
         left: -14px;
         right: auto; }
-    /* line 421, _agency.scss */
+    /* line 427, _agency.scss */
     .timeline > li .timeline-image {
       background-color: #ee7335;
       border: 7px solid #f1f1f1;
@@ -748,236 +753,236 @@ section {
       text-align: center;
       width: 80px;
       z-index: 100; }
-      /* line 434, _agency.scss */
+      /* line 440, _agency.scss */
       .timeline > li .timeline-image h4 {
         font-size: 10px;
         line-height: 14px;
         margin-top: 12px; }
-    /* line 441, _agency.scss */
+    /* line 447, _agency.scss */
     .timeline > li.timeline-inverted > .timeline-panel {
       float: right;
       padding: 0 20px 0 100px;
       text-align: left; }
-      /* line 446, _agency.scss */
+      /* line 452, _agency.scss */
       .timeline > li.timeline-inverted > .timeline-panel:before {
         border-left-width: 0;
         border-right-width: 15px;
         left: -15px;
         right: auto; }
-      /* line 453, _agency.scss */
+      /* line 459, _agency.scss */
       .timeline > li.timeline-inverted > .timeline-panel:after {
         border-left-width: 0;
         border-right-width: 14px;
         left: -14px;
         right: auto; }
-    /* line 461, _agency.scss */
+    /* line 467, _agency.scss */
     .timeline > li:last-child {
       margin-bottom: 0; }
-  /* line 467, _agency.scss */
+  /* line 473, _agency.scss */
   .timeline .timeline-heading h4 {
     color: inherit;
     margin-top: 0; }
-    /* line 471, _agency.scss */
+    /* line 477, _agency.scss */
     .timeline .timeline-heading h4.subheading {
       text-transform: none; }
-  /* line 478, _agency.scss */
+  /* line 484, _agency.scss */
   .timeline .timeline-body > p,
   .timeline .timeline-body > ul {
     margin-bottom: 0; }
 
 @media (min-width: 768px) {
-  /* line 487, _agency.scss */
+  /* line 493, _agency.scss */
   .timeline:before {
     left: 50%; }
-  /* line 491, _agency.scss */
+  /* line 497, _agency.scss */
   .timeline > li {
     margin-bottom: 100px;
     min-height: 100px; }
-    /* line 495, _agency.scss */
+    /* line 501, _agency.scss */
     .timeline > li .timeline-panel {
       float: left;
       padding: 0 20px 20px 30px;
       text-align: right;
       width: 41%; }
-    /* line 502, _agency.scss */
+    /* line 508, _agency.scss */
     .timeline > li .timeline-image {
       height: 100px;
       left: 50%;
       margin-left: -50px;
       width: 100px; }
-      /* line 508, _agency.scss */
+      /* line 514, _agency.scss */
       .timeline > li .timeline-image h4 {
         font-size: 13px;
         line-height: 18px;
         margin-top: 16px; }
-    /* line 515, _agency.scss */
+    /* line 521, _agency.scss */
     .timeline > li.timeline-inverted > .timeline-panel {
       float: right;
       padding: 0 30px 20px 20px;
       text-align: left; } }
 @media (min-width: 992px) {
-  /* line 526, _agency.scss */
+  /* line 532, _agency.scss */
   .timeline > li {
     min-height: 150px; }
-    /* line 529, _agency.scss */
+    /* line 535, _agency.scss */
     .timeline > li .timeline-panel {
       padding: 0 20px 20px; }
-    /* line 533, _agency.scss */
+    /* line 539, _agency.scss */
     .timeline > li .timeline-image {
       height: 150px;
       margin-left: -75px;
       width: 150px; }
-      /* line 538, _agency.scss */
+      /* line 544, _agency.scss */
       .timeline > li .timeline-image h4 {
         font-size: 18px;
         line-height: 26px;
         margin-top: 30px; }
-    /* line 545, _agency.scss */
+    /* line 551, _agency.scss */
     .timeline > li.timeline-inverted > .timeline-panel {
       padding: 0 20px 20px; } }
 @media (min-width: 1200px) {
-  /* line 554, _agency.scss */
+  /* line 560, _agency.scss */
   .timeline > li {
     min-height: 170px; }
-    /* line 557, _agency.scss */
+    /* line 563, _agency.scss */
     .timeline > li .timeline-panel {
       padding: 0 20px 20px 100px; }
-    /* line 561, _agency.scss */
+    /* line 567, _agency.scss */
     .timeline > li .timeline-image {
       height: 170px;
       margin-left: -85px;
       width: 170px; }
-      /* line 566, _agency.scss */
+      /* line 572, _agency.scss */
       .timeline > li .timeline-image h4 {
         margin-top: 40px; }
-    /* line 571, _agency.scss */
+    /* line 577, _agency.scss */
     .timeline > li.timeline-inverted > .timeline-panel {
       padding: 0 100px 20px 20px; } }
-/* line 580, _agency.scss */
+/* line 586, _agency.scss */
 .team-member {
   margin-bottom: 50px;
   text-align: center; }
-  /* line 584, _agency.scss */
+  /* line 590, _agency.scss */
   .team-member img {
     border: 7px solid #fff;
     margin: 0 auto; }
-  /* line 589, _agency.scss */
+  /* line 595, _agency.scss */
   .team-member h4 {
     margin-bottom: 0;
     margin-top: 25px;
     text-transform: none; }
-  /* line 595, _agency.scss */
+  /* line 601, _agency.scss */
   .team-member p {
     margin-top: 0; }
 
-/* line 603, _agency.scss */
+/* line 609, _agency.scss */
 aside.clients img {
   margin: 50px auto; }
 
-/* line 610, _agency.scss */
+/* line 616, _agency.scss */
 section#contact {
   background-color: #222;
   background-image: url("../images/map-image.png");
   background-position: center;
   background-repeat: no-repeat; }
-  /* line 616, _agency.scss */
+  /* line 622, _agency.scss */
   section#contact .section-heading {
     color: #fff; }
-  /* line 620, _agency.scss */
+  /* line 626, _agency.scss */
   section#contact .form-group {
     margin-bottom: 25px; }
-    /* line 623, _agency.scss */
+    /* line 629, _agency.scss */
     section#contact .form-group input,
     section#contact .form-group textarea {
       padding: 20px; }
-    /* line 628, _agency.scss */
+    /* line 634, _agency.scss */
     section#contact .form-group input.form-control {
       height: auto; }
-    /* line 632, _agency.scss */
+    /* line 638, _agency.scss */
     section#contact .form-group textarea.form-control {
       height: 236px; }
-  /* line 637, _agency.scss */
+  /* line 643, _agency.scss */
   section#contact .form-control:focus {
     border-color: #ee7335;
     box-shadow: none; }
-  /* line 642, _agency.scss */
+  /* line 648, _agency.scss */
   section#contact ::-webkit-input-placeholder {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     color: #bbb;
     font-weight: 700; }
-  /* line 648, _agency.scss */
+  /* line 654, _agency.scss */
   section#contact :-moz-placeholder {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     color: #bbb;
     font-weight: 700; }
-  /* line 654, _agency.scss */
+  /* line 660, _agency.scss */
   section#contact ::-moz-placeholder {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     color: #bbb;
     font-weight: 700; }
-  /* line 660, _agency.scss */
+  /* line 666, _agency.scss */
   section#contact :-ms-input-placeholder {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     color: #bbb;
     font-weight: 700; }
-  /* line 666, _agency.scss */
+  /* line 672, _agency.scss */
   section#contact .text-danger {
     color: #34459e; }
 
-/* line 673, _agency.scss */
+/* line 679, _agency.scss */
 footer {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 25px 0;
   text-align: center; }
-  /* line 678, _agency.scss */
+  /* line 684, _agency.scss */
   footer span.copyright {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     line-height: 40px;
     text-transform: none; }
-  /* line 684, _agency.scss */
+  /* line 690, _agency.scss */
   footer ul.quicklinks {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     line-height: 40px;
     margin-bottom: 0;
     text-transform: none; }
-  /* line 691, _agency.scss */
+  /* line 697, _agency.scss */
   footer p.blurb {
     text-align: justify;
     font-size: 1.25em; }
-  /* line 696, _agency.scss */
+  /* line 702, _agency.scss */
   footer .list {
     padding-left: 20%;
     text-align: left;
     font-size: 1.5em;
     margin-bottom: 50px; }
-  /* line 703, _agency.scss */
+  /* line 709, _agency.scss */
   footer .contact-list {
     padding-left: 20%;
     text-align: left;
     font-size: 1.5em;
     margin-bottom: 50px; }
-  /* line 710, _agency.scss */
+  /* line 716, _agency.scss */
   footer h3 {
     margin-bottom: 20px; }
-  /* line 714, _agency.scss */
+  /* line 720, _agency.scss */
   footer i.fa-text {
     margin-bottom: 10px;
     display: block; }
-  /* line 719, _agency.scss */
+  /* line 725, _agency.scss */
   footer .font-override {
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 110%; }
 
-/* line 727, _agency.scss */
+/* line 733, _agency.scss */
 ul.social-buttons {
   margin-bottom: 0; }
-  /* line 731, _agency.scss */
+  /* line 737, _agency.scss */
   ul.social-buttons li a {
     background-color: #222;
     border-radius: 100%;
@@ -991,18 +996,18 @@ ul.social-buttons {
     -webkit-transition: all .3s;
     transition: all .3s;
     width: 40px; }
-    /* line 745, _agency.scss */
+    /* line 751, _agency.scss */
     ul.social-buttons li a:hover, ul.social-buttons li a:focus, ul.social-buttons li a:active {
       background-color: #ee7335; }
 
-/* line 754, _agency.scss */
+/* line 760, _agency.scss */
 .btn:focus,
 .btn:active,
 .btn.active,
 .btn:active:focus {
   outline: none; }
 
-/* line 762, _agency.scss */
+/* line 768, _agency.scss */
 .portfolio-modal .modal-content {
   background-clip: border-box;
   border: 0;
@@ -1012,27 +1017,27 @@ ul.social-buttons {
   min-height: 100%;
   padding: 100px 0;
   text-align: center; }
-  /* line 772, _agency.scss */
+  /* line 778, _agency.scss */
   .portfolio-modal .modal-content h2 {
     font-size: 3em;
     margin-bottom: 15px; }
-  /* line 777, _agency.scss */
+  /* line 783, _agency.scss */
   .portfolio-modal .modal-content p {
     margin-bottom: 30px; }
-    /* line 780, _agency.scss */
+    /* line 786, _agency.scss */
     .portfolio-modal .modal-content p .item-intro {
       font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-style: italic;
       margin: 20px 0 30px; }
-  /* line 789, _agency.scss */
+  /* line 795, _agency.scss */
   .portfolio-modal .modal-content ul.list-inline {
     margin-bottom: 30px;
     margin-top: 0; }
-  /* line 794, _agency.scss */
+  /* line 800, _agency.scss */
   .portfolio-modal .modal-content img {
     margin-bottom: 30px; }
-/* line 799, _agency.scss */
+/* line 805, _agency.scss */
 .portfolio-modal .close-modal {
   background-color: transparent;
   cursor: pointer;
@@ -1041,10 +1046,10 @@ ul.social-buttons {
   right: 25px;
   top: 25px;
   width: 75px; }
-  /* line 808, _agency.scss */
+  /* line 814, _agency.scss */
   .portfolio-modal .close-modal:hover {
     opacity: .3; }
-  /* line 812, _agency.scss */
+  /* line 818, _agency.scss */
   .portfolio-modal .close-modal .lr {
     background-color: #222;
     height: 75px;
@@ -1054,7 +1059,7 @@ ul.social-buttons {
     transform: rotate(45deg);
     width: 1px;
     z-index: 1051; }
-    /* line 822, _agency.scss */
+    /* line 828, _agency.scss */
     .portfolio-modal .close-modal .lr .rl {
       background-color: #222;
       height: 75px;
@@ -1063,34 +1068,34 @@ ul.social-buttons {
       transform: rotate(90deg);
       width: 1px;
       z-index: 1052; }
-/* line 834, _agency.scss */
+/* line 840, _agency.scss */
 .portfolio-modal .modal-backdrop {
   display: none;
   opacity: 0; }
 
-/* line 842, _agency.scss */
+/* line 848, _agency.scss */
 ::-moz-selection {
   background: #ee7335;
   text-shadow: none; }
 
-/* line 847, _agency.scss */
+/* line 853, _agency.scss */
 ::selection {
   background: #ee7335;
   text-shadow: none; }
 
-/* line 852, _agency.scss */
+/* line 858, _agency.scss */
 img::selection {
   background: transparent; }
 
-/* line 856, _agency.scss */
+/* line 862, _agency.scss */
 img::-moz-selection {
   background: transparent; }
 
-/* line 860, _agency.scss */
+/* line 866, _agency.scss */
 body {
   webkit-tap-highlight-color: #ee7335; }
 
-/* line 864, _agency.scss */
+/* line 870, _agency.scss */
 .mc-response {
   padding-bottom: 10px;
   color: white; }
