@@ -971,7 +971,7 @@ footer {
     padding-left: 20%;
     text-align: left;
     font-size: 1.5em;
-    margin-bottom: 50px; }
+    margin-bottom: 30px; }
   /* line 717, _agency.scss */
   footer .contact-list {
     padding-left: 20%;
@@ -990,14 +990,11 @@ footer {
     font-size: .9em;
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 110%; }
-  /* line 738, _agency.scss */
-  footer a.no-special-color {
-    color: inherit; }
 
-/* line 745, _agency.scss */
+/* line 743, _agency.scss */
 ul.social-buttons {
   margin-bottom: 0; }
-  /* line 749, _agency.scss */
+  /* line 747, _agency.scss */
   ul.social-buttons li a {
     background-color: #222;
     border-radius: 100%;
@@ -1011,18 +1008,18 @@ ul.social-buttons {
     -webkit-transition: all .3s;
     transition: all .3s;
     width: 40px; }
-    /* line 763, _agency.scss */
+    /* line 761, _agency.scss */
     ul.social-buttons li a:hover, ul.social-buttons li a:focus, ul.social-buttons li a:active {
       background-color: #ee7335; }
 
-/* line 772, _agency.scss */
+/* line 770, _agency.scss */
 .btn:focus,
 .btn:active,
 .btn.active,
 .btn:active:focus {
   outline: none; }
 
-/* line 780, _agency.scss */
+/* line 778, _agency.scss */
 .portfolio-modal .modal-content {
   background-clip: border-box;
   border: 0;
@@ -1032,27 +1029,27 @@ ul.social-buttons {
   min-height: 100%;
   padding: 100px 0;
   text-align: center; }
-  /* line 790, _agency.scss */
+  /* line 788, _agency.scss */
   .portfolio-modal .modal-content h2 {
     font-size: 3em;
     margin-bottom: 15px; }
-  /* line 795, _agency.scss */
+  /* line 793, _agency.scss */
   .portfolio-modal .modal-content p {
     margin-bottom: 30px; }
-    /* line 798, _agency.scss */
+    /* line 796, _agency.scss */
     .portfolio-modal .modal-content p .item-intro {
       font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-style: italic;
       margin: 20px 0 30px; }
-  /* line 807, _agency.scss */
+  /* line 805, _agency.scss */
   .portfolio-modal .modal-content ul.list-inline {
     margin-bottom: 30px;
     margin-top: 0; }
-  /* line 812, _agency.scss */
+  /* line 810, _agency.scss */
   .portfolio-modal .modal-content img {
     margin-bottom: 30px; }
-/* line 817, _agency.scss */
+/* line 815, _agency.scss */
 .portfolio-modal .close-modal {
   background-color: transparent;
   cursor: pointer;
@@ -1061,10 +1058,10 @@ ul.social-buttons {
   right: 25px;
   top: 25px;
   width: 75px; }
-  /* line 826, _agency.scss */
+  /* line 824, _agency.scss */
   .portfolio-modal .close-modal:hover {
     opacity: .3; }
-  /* line 830, _agency.scss */
+  /* line 828, _agency.scss */
   .portfolio-modal .close-modal .lr {
     background-color: #222;
     height: 75px;
@@ -1074,7 +1071,7 @@ ul.social-buttons {
     transform: rotate(45deg);
     width: 1px;
     z-index: 1051; }
-    /* line 840, _agency.scss */
+    /* line 838, _agency.scss */
     .portfolio-modal .close-modal .lr .rl {
       background-color: #222;
       height: 75px;
@@ -1083,34 +1080,34 @@ ul.social-buttons {
       transform: rotate(90deg);
       width: 1px;
       z-index: 1052; }
-/* line 852, _agency.scss */
+/* line 850, _agency.scss */
 .portfolio-modal .modal-backdrop {
   display: none;
   opacity: 0; }
 
-/* line 860, _agency.scss */
+/* line 858, _agency.scss */
 ::-moz-selection {
   background: #ee7335;
   text-shadow: none; }
 
-/* line 865, _agency.scss */
+/* line 863, _agency.scss */
 ::selection {
   background: #ee7335;
   text-shadow: none; }
 
-/* line 870, _agency.scss */
+/* line 868, _agency.scss */
 img::selection {
   background: transparent; }
 
-/* line 874, _agency.scss */
+/* line 872, _agency.scss */
 img::-moz-selection {
   background: transparent; }
 
-/* line 878, _agency.scss */
+/* line 876, _agency.scss */
 body {
   webkit-tap-highlight-color: #ee7335; }
 
-/* line 882, _agency.scss */
+/* line 880, _agency.scss */
 .mc-response {
   padding-bottom: 10px;
   color: white; }
