@@ -403,7 +403,7 @@ a.active {
 h1,
 h2,
 h3,
-section div.sales-contact,
+section div.nonprofits-contact,
 h4,
 h5,
 h6 {
@@ -614,7 +614,7 @@ section {
     margin-bottom: 15px;
     margin-top: 0; }
   /* line 261, _agency.scss */
-  section h3.section-subheading, section h3.section-subheading-dark-background, section div.section-subheading-dark-background.sales-contact, section div.section-subheading.sales-contact {
+  section h3.section-subheading, section h3.section-subheading-dark-background, section div.section-subheading-dark-background.nonprofits-contact, section div.section-subheading.nonprofits-contact {
     font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px;
     font-style: italic;
@@ -623,15 +623,15 @@ section {
     text-transform: none;
     line-height: 130%; }
   /* line 271, _agency.scss */
-  section h3.section-subheading-dark-background, section div.section-subheading-dark-background.sales-contact {
+  section h3.section-subheading-dark-background, section div.section-subheading-dark-background.nonprofits-contact {
     color: #E0E0E0; }
   /* line 276, _agency.scss */
-  section h3.tag-line, section div.sales-contact {
+  section h3.tag-line, section div.nonprofits-contact {
     margin-left: 5%;
     margin-right: 5%;
     margin-top: 75px; }
   /* line 282, _agency.scss */
-  section div.sales-contact {
+  section div.nonprofits-contact {
     text-transform: none;
     font-size: 24px; }
 
@@ -681,7 +681,7 @@ section {
         #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content i {
           margin-top: -12px; }
         /* line 344, _agency.scss */
-        #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h3, #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content section div.sales-contact, section #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content div.sales-contact,
+        #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h3, #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content section div.nonprofits-contact, section #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content div.nonprofits-contact,
         #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h4 {
           margin: 0; }
   /* line 352, _agency.scss */
@@ -984,7 +984,7 @@ footer {
     font-size: 1.5em;
     margin-bottom: 50px; }
   /* line 731, _agency.scss */
-  footer h3, footer section div.sales-contact, section footer div.sales-contact {
+  footer h3, footer section div.nonprofits-contact, section footer div.nonprofits-contact {
     margin-bottom: 20px; }
   /* line 735, _agency.scss */
   footer i.fa-text {
