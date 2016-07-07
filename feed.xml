@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Blog Name</title>
+  <subtitle>Blog subtitle</subtitle>
+  <id>http://blog.url.com/</id>
+  <link href="http://blog.url.com/"/>
+  <link href="http://blog.url.com/feed.xml" rel="self"/>
+  <updated>2016-06-20T20:00:00-04:00</updated>
+  <author>
+    <name>Blog Author</name>
+  </author>
+  <entry>
+    <title>Agile Approach to Login/SignUp Problems</title>
+    <link rel="alternate" href="http://blog.url.com/2016/06/21/agile-approach-to-login-signup-problems/"/>
+    <id>http://blog.url.com/2016/06/21/agile-approach-to-login-signup-problems/</id>
+    <published>2016-06-20T20:00:00-04:00</published>
+    <updated>2016-07-07T10:58:46-04:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Nobody likes passwords.  Nobody enjoys signing up and logging in, but we need authentication, don't we?  The AgileVentures site is actually very open as regards who can edit what, the site is really one giant wiki; not that many people actually notice.  No one expects to be able to edit a site that isn't explicitly labelled as a wiki.&lt;/p&gt;
+
+&lt;p&gt;However we do want to be able to see who does the editing, and have a list of people participating in our community.  Hence signup and login (or signin).  Originally WebSiteOne (WSO - the codename for the &lt;a href="http://www.agileventures.org/"&gt;AgileVentures&lt;/a&gt; site software) had three ways to signup:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;signup via email address&lt;/li&gt;
+  &lt;li&gt;signup via GitHub&lt;/li&gt;
+  &lt;li&gt;signup via Google+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;SignUp via a third party is a great convenience in that if avoids having to manage yet another password.  &lt;a href="http://www.agileventures.org/"&gt;AgileVentures&lt;/a&gt; is a pair programming community and so it makes sense that most users would have a GitHub account to manage their code, and a Google+ account in order to use Google Hangouts, the default video conferencing and pair programming framework.&lt;/p&gt;
+
+&lt;p&gt;All was not rosy however.  We had to turn off the pure email sign up because the spambots caught us and starting creating hundreds of dummy accounts.&lt;/p&gt;
+
+&lt;p&gt;The GitHub signup (always?) had the problem that if the user's GitHub profile does not have their email set to public we get an error.  This is partly because our system is set to use email as the &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1093"&gt;unique identifier&lt;/a&gt; of the user, and also because we'd like to email users a welcome message when they sign up, support secure password reset etc.  A quick fix for this issue was a message to alert the user their GitHub email needs to be public, but complexities of the GitHub interface means that a non-trivial number of users get stuck.&lt;/p&gt;
+
+&lt;p&gt;The Google+ signup/in used to work fine, but some change in the system added dynamic elements to the redirect URL making it &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1063"&gt;impossible to sign up&lt;/a&gt; (or sign in?) via Google+.  We were contemplating removing Google+ entirely, but that's complicated since users who previously signed up via G+ wouldn't be able to sign in and can't create GitHub accounts due to email conflicts with their old accounts - although this can be fixed with a password reset.  Working out all of the above was sucking up valuable resources, not to mention the negative reflection on the site.  We also wanted to be able to track who's pairing with who in which hangout which requires connecting Google+ ids to AgileVentures users.&lt;/p&gt;
+
+&lt;p&gt;Analysis of the sites' user footfall suggested that a clear majority of users were successfully signing up and logging in; making this whole issue an annoyance rather than a crisis.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="" src="https://www.dropbox.com/s/r59glrb1wg3qroe/google_analytics_wso_signup.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;That appeared to reduce the priority of fixing these issues, relative to other minor bugs currently that were being reported about the site, e.g. some timezones not being correctly detected, and working on new developments such as the static site and the premium members page which might lead to sustainability of AgileVentures in the long run.&lt;/p&gt;
+
+&lt;p&gt;You might say, well hey, let's add a captcha to prevent the spam sign ups and re-enable the pure email signup?  Yes, but do we really want to managing that tech?  That's adding a somewhat complex tech solution that GitHub and G+ have already handled for us.  Not to mention that we don't yet have the resources to pay for the SSL certificates that would completely secure pure email login.  AgileVentures is a community for everyone, but unlike FreeCodeCamp we're not focused on total beginners.  We assume you've got a modicum of programming experience. Although that said, we'd love to get more marketing and project management people involved - but they can login through Google+ - the absolute minimum requirement is that you can at least join a hangout.&lt;/p&gt;
+
+&lt;p&gt;So we focused on taking some simple steps, e.g. &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1099"&gt;removing the G+ signup button&lt;/a&gt;, and adding &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1120"&gt;more instructions about how to handle GitHub settings for public emails&lt;/a&gt;.  In my book &lt;em&gt;this&lt;/em&gt; is the Agile approach at its heart - do the simplest possible thing to improve the situation and see if that helps before rushing into a more complex intervention like a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1067"&gt;captcha&lt;/a&gt; or &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1093#issuecomment-225562997"&gt;adding a form for non-public GitHub users to add their email&lt;/a&gt;.  Not that we rule out taking those steps at some point, but it's sensible to start with small steps to explore the issue to see if the resources to support the more complex solutions are going to be a wise investment.&lt;/p&gt;
+
+&lt;p&gt;Having taken those first steps we got a lid on the issue, i.e. no more complaints about Google+ sign up failure since it is no longer an option; and clearer documentation to help those getting stuck on GitHub email publicity settings.  The desire to support better tracking of pair partners led us to try and get to the bottom of the Google+ redirect url problem.  Turns out that &lt;a href="https://github.com/samdunne/omniauth-gplus/issues/25"&gt;upgrading the Omniauth-oauth2&lt;/a&gt; gem introduced a change to the redirect_url that broke Google+ authentication, but not Github authentication.&lt;/p&gt;
+
+&lt;p&gt;The Omniauth test mode acceptance tests we had in place did not catch the change to the redirect_url so we had no idea until users started encountering the problem - far from ideal.  Having manually tested that downgrading the Omniauth-oauth2 gem to version 1.3.1 did actually fix the problem, we spent a chunk of time looking for a more realistic acceptance test.  The problem is that there was no test that the redirect_url being generated was correct - something that can't be achieved with our acceptance test supporting tool Capybara; at least not without &lt;a href="http://makandracards.com/makandra/15217-test-redirects-to-an-external-url-with-cucumber-capybara"&gt;hacking up the underlying Rails system itself&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The compromise seemed to be creating a request spec, a sort of unit test for the Rails authentication controller; to check that the redirect url is formatted correctly.  This test should fail if someone were to accidentally upgrade the gem again - although we've locked it to the working version in the Gemfile.&lt;/p&gt;
+
+&lt;p&gt;We decided to push out the &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1126"&gt;fix&lt;/a&gt; ASAP and create a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1127"&gt;chore&lt;/a&gt; for the request spec.  Partly because it would be great to have the fix out to support the legacy users who signed up with Google+ in the past, but also because experience tells us that we may have a further testing insight in a few days or weeks.&lt;/p&gt;
+
+&lt;p&gt;In summary, it's a complex web we weave, and to navigate it we need to take tiny steps, be careful about taking on maintenance burdens, or doing things that won't support our long term goals.  We've also got to be pragmatic about what we can actually test and balance the time spent searching for testing solutions with delivering needed features to users.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Collaborating in Software Teams</title>
+    <link rel="alternate" href="http://blog.url.com/2016/05/17/collaborating-in-software-teams/"/>
+    <id>http://blog.url.com/2016/05/17/collaborating-in-software-teams/</id>
+    <published>2016-05-16T20:00:00-04:00</published>
+    <updated>2016-07-07T10:58:46-04:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Collaborating and communicating effectively can be particularly challenging under certain circumstances.  Effective "soft skills" are critical in many professions, but especially for groups of programmers collaborating with project managers, designers, clients and other stakeholders.&lt;/p&gt;
+
+&lt;p&gt;A particular challenge arises from the communication mindset that one might adopt in order to solve a programming problem, versus the mindset that best supports communicating with another human effectively.&lt;/p&gt;
+
+&lt;p&gt;Computers are interesting interlocutors because you can generally ask them just as much as you like and they will continue providing answers.  Sometimes it can be difficult to get the answer you want; but solving a programming problem is often a Holmesian deductive process whereby you construct hypotheses and try to drive towards what you hope is the underlying truth of what is going on.&lt;/p&gt;
+
+&lt;p&gt;After several hours of little progress on a problem you may need to restrain yourself and re-focus on higher level project goals, but it's unlikely that the computer will start complaining, or simply shut down and avoid interacting with you in future.&lt;/p&gt;
+
+&lt;p&gt;Humans are, in my experience, a different story.  There are some humans who may be willing to continue debating with you until the "deep truth" of a matter is uncovered.  These individuals are perhaps more likely to be found in an academic setting, or to be judged as somewhere along the autistic spectrum; and of course anybody may be happy to have a deep debate if they are sufficiently interested in a topic and not under time pressure to be doing something else.&lt;/p&gt;
+
+&lt;p&gt;However, many people seem to find an excess of debate uncomfortable and/or frustrating, particularly if they are not interested in the debate or have something else that they really want to get done.  Unfortunately it's easy for someone with a strong academic or programmatic mindset to create and/or pursue a debate on a topic past the comfort point of other's involved in the dialogue, or indeed those who are simply present and listening.&lt;/p&gt;
+
+&lt;p&gt;What those with the academic/programmer mindset may sometimes miss is the social cues that people give to indicate that they are uncomfortable with the intensity or duration of a debate.  People vary enormously in their capacity to give and interpret those social cues.  These cues also vary to different extents across nationalities, cultures and social classes.  A given individual will also wax and wane in their ability to read those cues depending on their level of fatigue, stress, intoxication and so forth.&lt;/p&gt;
+
+&lt;h2 id="how-much-debate-is-right-for-your-team"&gt;How much debate is right for your team?&lt;/h2&gt;
+
+&lt;p&gt;It's important when working with a group to consider carefully how far to pursue a debate.  It may be that there is an important decision to be made that depends on whether certain hypotheses are true; however it makes sense to pick these sorts of battles very carefully.  In particular, fierce debates can make others uncomfortable and put them off contributing their potentially valuable ideas both immediately, and in the long run.&lt;/p&gt;
+
+&lt;p&gt;I believe there is also an aspect of ego here.  The desire to continue the debate can be connected to a wish to show that one's position is correct, that one is smart, informed and logical.  There are points where the best thing for the team is to end the debate, but the desire to prove one's point or get the upper hand can make that difficult for some personalities.&lt;/p&gt;
+
+&lt;p&gt;This can come in very strongly as regards criticism, or the raising of concerns. When people are criticised they may be tempted to defend their actions, e.g.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Critic&lt;/strong&gt;: "I'm not sure that X was a good idea"&lt;br /&gt;
+&lt;strong&gt;Defender&lt;/strong&gt;: "I did X because of Y and we knew that was a problem, and actually it's not that big an issue because of Z and we'll do it differently next time and, and, and …"&lt;/p&gt;
+
+&lt;p&gt;There is a particular danger that if you strongly dispute or defend against people's concerns, they may well end up being dis-incentivized to raise those concerns with you in future; and when they really have a problem with you, they may feel that a resolution is impossible.  An alternative approach is to avoid defending your past actions and where possible create space to focus on understanding the concern, e.g.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Critic&lt;/strong&gt;: "I'm not sure that X was a good idea"&lt;br /&gt;
+&lt;strong&gt;Responder&lt;/strong&gt;: "That's interesting, what didn't you like about X?"&lt;br /&gt;
+&lt;strong&gt;Critic&lt;/strong&gt;: "Well it seemed too risky; I think we should do more Y in future"&lt;br /&gt;
+&lt;strong&gt;Responder&lt;/strong&gt;: "Ah, and why would Y be less risky?"&lt;/p&gt;
+
+&lt;p&gt;Here the responder is employing a questioning tactic to draw out ideas from the critic.  There's still the danger that excessive questioning can sometimes feel like debate, but a small number of carefully chosen and calmly posed questions can go a long way to making the critic feel that they are being listened to and understood.&lt;/p&gt;
+
+&lt;p&gt;On occasion there may not be time to draw a critic's ideas out; and fair enough, but unfortunately a defensive reaction can be mis-interpreted as a failure to listen and understand.  I personally find it difficult to avoid debating assertions that I strongly disagree with.  Not stating my alternative point of view feels to me, on an emotional level, that I am conceding to something I disagree with.    However that is no excuse; as a team member, or particularly a team leader, it's critical to assess whether it is the right time to have a debate.&lt;/p&gt;
+
+&lt;p&gt;Maybe on a given occasion a debate is needed, but the danger is that the debate is started or continued because of an emotional reaction rather than a rational decision that it's a good time to have a debate on that particular topic with or in front of the team.&lt;/p&gt;
+
+&lt;p&gt;In summary, interacting with people is complicated, but the Agile method gives guidance.  Reflect at some regular interval (weekly? monthly?) on how your interactions with other team members are going and try to see where you can change your approach to make those interactions smoother and more effective.&lt;/p&gt;
+</content>
+  </entry>
+</feed>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Agile Approach to Login/SignUp Problems</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_06 x2016_06_21 x2016_06_21_agile-approach-to-login-signup-problems x2016_06_21_agile-approach-to-login-signup-problems_index">
+    
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/06/21/agile-approach-to-login-signup-problems/">Agile Approach to Login/SignUp Problems</a></h2>
+        <h5 class='date'>21 Jun 2016</h5>
+    <p>Nobody likes passwords.  Nobody enjoys signing up and logging in, but we need authentication, don't we?  The AgileVentures site is actually very open as regards who can edit what, the site is really one giant wiki; not that many people actually notice.  No one expects to be able to edit a site that isn't explicitly labelled as a wiki.</p>
+
+<p>However we do want to be able to see who does the editing, and have a list of people participating in our community.  Hence signup and login (or signin).  Originally WebSiteOne (WSO - the codename for the <a href="http://www.agileventures.org/">AgileVentures</a> site software) had three ways to signup:</p>
+
+<ol>
+  <li>signup via email address</li>
+  <li>signup via GitHub</li>
+  <li>signup via Google+</li>
+</ol>
+
+<p>SignUp via a third party is a great convenience in that if avoids having to manage yet another password.  <a href="http://www.agileventures.org/">AgileVentures</a> is a pair programming community and so it makes sense that most users would have a GitHub account to manage their code, and a Google+ account in order to use Google Hangouts, the default video conferencing and pair programming framework.</p>
+
+<p>All was not rosy however.  We had to turn off the pure email sign up because the spambots caught us and starting creating hundreds of dummy accounts.</p>
+
+<p>The GitHub signup (always?) had the problem that if the user's GitHub profile does not have their email set to public we get an error.  This is partly because our system is set to use email as the <a href="https://github.com/AgileVentures/WebsiteOne/issues/1093">unique identifier</a> of the user, and also because we'd like to email users a welcome message when they sign up, support secure password reset etc.  A quick fix for this issue was a message to alert the user their GitHub email needs to be public, but complexities of the GitHub interface means that a non-trivial number of users get stuck.</p>
+
+<p>The Google+ signup/in used to work fine, but some change in the system added dynamic elements to the redirect URL making it <a href="https://github.com/AgileVentures/WebsiteOne/issues/1063">impossible to sign up</a> (or sign in?) via Google+.  We were contemplating removing Google+ entirely, but that's complicated since users who previously signed up via G+ wouldn't be able to sign in and can't create GitHub accounts due to email conflicts with their old accounts - although this can be fixed with a password reset.  Working out all of the above was sucking up valuable resources, not to mention the negative reflection on the site.  We also wanted to be able to track who's pairing with who in which hangout which requires connecting Google+ ids to AgileVentures users.</p>
+
+<p>Analysis of the sites' user footfall suggested that a clear majority of users were successfully signing up and logging in; making this whole issue an annoyance rather than a crisis.</p>
+
+<p><img alt="" src="https://www.dropbox.com/s/r59glrb1wg3qroe/google_analytics_wso_signup.png?dl=1" /></p>
+
+<p>That appeared to reduce the priority of fixing these issues, relative to other minor bugs currently that were being reported about the site, e.g. some timezones not being correctly detected, and working on new developments such as the static site and the premium members page which might lead to sustainability of AgileVentures in the long run.</p>
+
+<p>You might say, well hey, let's add a captcha to prevent the spam sign ups and re-enable the pure email signup?  Yes, but do we really want to managing that tech?  That's adding a somewhat complex tech solution that GitHub and G+ have already handled for us.  Not to mention that we don't yet have the resources to pay for the SSL certificates that would completely secure pure email login.  AgileVentures is a community for everyone, but unlike FreeCodeCamp we're not focused on total beginners.  We assume you've got a modicum of programming experience. Although that said, we'd love to get more marketing and project management people involved - but they can login through Google+ - the absolute minimum requirement is that you can at least join a hangout.</p>
+
+<p>So we focused on taking some simple steps, e.g. <a href="https://github.com/AgileVentures/WebsiteOne/pull/1099">removing the G+ signup button</a>, and adding <a href="https://github.com/AgileVentures/WebsiteOne/pull/1120">more instructions about how to handle GitHub settings for public emails</a>.  In my book <em>this</em> is the Agile approach at its heart - do the simplest possible thing to improve the situation and see if that helps before rushing into a more complex intervention like a <a href="https://github.com/AgileVentures/WebsiteOne/issues/1067">captcha</a> or <a href="https://github.com/AgileVentures/WebsiteOne/issues/1093#issuecomment-225562997">adding a form for non-public GitHub users to add their email</a>.  Not that we rule out taking those steps at some point, but it's sensible to start with small steps to explore the issue to see if the resources to support the more complex solutions are going to be a wise investment.</p>
+
+<p>Having taken those first steps we got a lid on the issue, i.e. no more complaints about Google+ sign up failure since it is no longer an option; and clearer documentation to help those getting stuck on GitHub email publicity settings.  The desire to support better tracking of pair partners led us to try and get to the bottom of the Google+ redirect url problem.  Turns out that <a href="https://github.com/samdunne/omniauth-gplus/issues/25">upgrading the Omniauth-oauth2</a> gem introduced a change to the redirect_url that broke Google+ authentication, but not Github authentication.</p>
+
+<p>The Omniauth test mode acceptance tests we had in place did not catch the change to the redirect_url so we had no idea until users started encountering the problem - far from ideal.  Having manually tested that downgrading the Omniauth-oauth2 gem to version 1.3.1 did actually fix the problem, we spent a chunk of time looking for a more realistic acceptance test.  The problem is that there was no test that the redirect_url being generated was correct - something that can't be achieved with our acceptance test supporting tool Capybara; at least not without <a href="http://makandracards.com/makandra/15217-test-redirects-to-an-external-url-with-cucumber-capybara">hacking up the underlying Rails system itself</a>.</p>
+
+<p>The compromise seemed to be creating a request spec, a sort of unit test for the Rails authentication controller; to check that the redirect url is formatted correctly.  This test should fail if someone were to accidentally upgrade the gem again - although we've locked it to the working version in the Gemfile.</p>
+
+<p>We decided to push out the <a href="https://github.com/AgileVentures/WebsiteOne/pull/1126">fix</a> ASAP and create a <a href="https://github.com/AgileVentures/WebsiteOne/issues/1127">chore</a> for the request spec.  Partly because it would be great to have the fix out to support the legacy users who signed up with Google+ in the past, but also because experience tells us that we may have a further testing insight in a few days or weeks.</p>
+
+<p>In summary, it's a complex web we weave, and to navigate it we need to take tiny steps, be careful about taking on maintenance burdens, or doing things that won't support our long term goals.  We've also got to be pragmatic about what we can actually test and balance the time spent searching for testing solutions with delivering needed features to users.</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;<a href='mailto:nonprofits@agileventures.org'>nonprofits@agileventures.org</a></span></i>
+                  <i class="fa fa-map-marker fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;AgileVentures</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
