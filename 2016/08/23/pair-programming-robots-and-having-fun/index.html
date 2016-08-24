@@ -32,7 +32,7 @@
 
 </head>
 <body class="x2016 x2016_08 x2016_08_23 x2016_08_23_pair-programming-robots-and-having-fun x2016_08_23_pair-programming-robots-and-having-fun_index">
-    
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
 <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -167,7 +167,7 @@
     <span class="nb">eval</span> <span class="s2">"def </span><span class="si">#{</span><span class="vg">$1</span><span class="si">}</span><span class="s2">; 'robot method' ; end "</span>
   <span class="k">elsif</span> <span class="n">e</span><span class="p">.</span><span class="nf">class</span> <span class="o">==</span> <span class="no">ArgumentError</span>
     <span class="sr">/wrong number of arguments \(given (.*), expected \d\)/</span> <span class="o">=~</span> <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
-    <span class="n">num_args</span> <span class="o">=</span> <span class="vg">$1</span><span class="p">.</span><span class="nf">to_i</span> <span class="c1"># could use class or arg to auto-infer an approprate name?</span>
+    <span class="n">num_args</span> <span class="o">=</span> <span class="vg">$1</span><span class="p">.</span><span class="nf">to_i</span> <span class="c1"># use class or arg to auto-infer an approprate name?</span>
     <span class="n">arg_string</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="nf">.</span><span class="n">num_args</span><span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">map</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="s2">"arg</span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">}.</span><span class="nf">join</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span> 
     <span class="sr">/\(eval\)\:1\:in \`(.*)\'/</span> <span class="o">=~</span> <span class="n">e</span><span class="p">.</span><span class="nf">backtrace</span><span class="p">.</span><span class="nf">first</span>
     <span class="n">method_name</span> <span class="o">=</span> <span class="vg">$1</span>

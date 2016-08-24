@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/08/23/pair-programming-robots-and-having-fun/"/>
     <id>http://blog.url.com/2016/08/23/pair-programming-robots-and-having-fun/</id>
     <published>2016-08-23T01:00:00+01:00</published>
-    <updated>2016-08-23T17:29:13+01:00</updated>
+    <updated>2016-08-24T12:11:42+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -103,7 +103,7 @@
     &lt;span class="nb"&gt;eval&lt;/span&gt; &lt;span class="s2"&gt;"def &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="vg"&gt;$1&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;; 'robot method' ; end "&lt;/span&gt;
   &lt;span class="k"&gt;elsif&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;class&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="no"&gt;ArgumentError&lt;/span&gt;
     &lt;span class="sr"&gt;/wrong number of arguments \(given (.*), expected \d\)/&lt;/span&gt; &lt;span class="o"&gt;=~&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;
-    &lt;span class="n"&gt;num_args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vg"&gt;$1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_i&lt;/span&gt; &lt;span class="c1"&gt;# could use class or arg to auto-infer an approprate name?&lt;/span&gt;
+    &lt;span class="n"&gt;num_args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vg"&gt;$1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_i&lt;/span&gt; &lt;span class="c1"&gt;# use class or arg to auto-infer an approprate name?&lt;/span&gt;
     &lt;span class="n"&gt;arg_string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="n"&gt;num_args&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="s2"&gt;"arg&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;}.&lt;/span&gt;&lt;span class="nf"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;','&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
     &lt;span class="sr"&gt;/\(eval\)\:1\:in \`(.*)\'/&lt;/span&gt; &lt;span class="o"&gt;=~&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;backtrace&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;
     &lt;span class="n"&gt;method_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vg"&gt;$1&lt;/span&gt;
@@ -124,7 +124,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/06/21/agile-approach-to-login-signup-problems/"/>
     <id>http://blog.url.com/2016/06/21/agile-approach-to-login-signup-problems/</id>
     <published>2016-06-21T01:00:00+01:00</published>
-    <updated>2016-07-07T15:59:50+01:00</updated>
+    <updated>2016-08-24T12:09:36+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -172,7 +172,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/05/17/collaborating-in-software-teams/"/>
     <id>http://blog.url.com/2016/05/17/collaborating-in-software-teams/</id>
     <published>2016-05-17T01:00:00+01:00</published>
-    <updated>2016-07-07T15:59:50+01:00</updated>
+    <updated>2016-08-24T12:09:36+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
