@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Pair Programming Robots and having Fun</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_08 x2016_08_23 x2016_08_23_pair-programming-robots-and-having-fun x2016_08_23_pair-programming-robots-and-having-fun_index">
+    
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/08/23/pair-programming-robots-and-having-fun/">Pair Programming Robots and having Fun</a></h2>
+        <h5 class='date'>23 Aug 2016</h5>
+    <p>I&rsquo;ve had this idea for a lightweight pair programming app for a while now.  One of the main inspirations is the <a href="https://itunes.apple.com/gb/app/letterpress-word-game/id526619424?mt=8">iOS letterpress app</a>.  If you don&rsquo;t know the game it&rsquo;s a letter square, and you try to make the longest word you can from the letter square.  Pretty straightforward stuff, except that you can play and challenge people all round the world.  You take turns to make the longest word you can. What&rsquo;s really cool about the app is that you can have a little game with a total stranger.  At least I assume you are actually playing with someone rather than against a robot.  I&rsquo;m not sure how drop outs are managed.  When I think about it, playing against robots would be a more reliable experience, but I don&rsquo;t know the stats for drop outs.  I&rsquo;ve certainly dropped out of games, but perhaps I&rsquo;m a sociopath and 99% of people carry on playing with each other till the end?</p>
+
+<p>Anyway, these days there are lots of games where you compete and even team up with strangers, e.g. Splatoon, League of Legends (LoL) and so on.  I&rsquo;d love to learn more about how these games match people up to try and maximise the user experience as I think we have a related problem with matching people up for pairing sessions in our &ldquo;Agile Development using Ruby on Rails&rdquo; MOOC.  If Splatoon/LoL are the gaming equivalent of full screenshare pairing, then simpler games like letterpress would correspond to a sort of micro-pairing experience on a small toy problem.</p>
+
+<p>Ever since I&rsquo;ve looked into the different styles of <a href="http://www.agileventures.org/remote-pair-programming/pair-programming-protocols">ping-pong pairing</a> I&rsquo;ve been fascinated how protocols like &ldquo;one undermanship&rdquo; have a game like feel.  They remind me somehow of turn based games like chess.  So I keep thinking of a letterpress style micro-pair programming game where you are involved in light-weight ping-pong pairing sessions with people all round the world.</p>
+
+<p>Maybe there&rsquo;s nowhere near the number of people interested in pair programming as there are in playing word games, so maybe there would never be the critical mass to make it fun, &hellip; unless, robots?  I finally spent some time on a micro-pairing robot on a plane recently.  There are a couple of challenges; one is working out the rules of this ping-pong pairing game I&rsquo;m imagining, and another is getting a robot to pair program sensibly with you.   </p>
+
+<p>An instance of a pairing game might run like this:</p>
+
+<p>Spec involves input/output, e.g. 2 =&gt; 4, 3 =&gt; 6, 4 =&gt; 8  (in this case a numeric doubler).  The &ldquo;one undermanship&rdquo; protocol involves writing the absolute minimum amount of code (which we could perhaps measure in terms of characters? code-complexity?)</p>
+
+<p>Pair A writes:</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="s1">'doubler'</span> <span class="k">do</span>
+
+  <span class="n">it</span> <span class="s1">'doubles a number'</span> <span class="k">do</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="mi">2</span><span class="p">)).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">4</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre>
+<p>Initial failing test.  So Pair B works to write the absolute minimum code to make this test pass, e.g. </p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">double</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+  <span class="mi">4</span>
+<span class="k">end</span>
+</code></pre>
+<p>and then writes a new test that will fail</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="s1">'doubler'</span> <span class="k">do</span>
+
+  <span class="n">it</span> <span class="s1">'doubles a number'</span> <span class="k">do</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="mi">2</span><span class="p">)).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">4</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'doubles a number'</span> <span class="k">do</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="mi">3</span><span class="p">)).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">6</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre>
+<p>So pair A writes the minimum to make this pass, in this case being intentionally obtuse (they could write <code>number*2</code> which would be fewer characters, but perhaps we can give them points for passing only the existing tests and not others?):</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">double</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+  <span class="mi">4</span> <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">2</span>
+  <span class="mi">6</span>
+<span class="k">end</span>
+</code></pre>
+<p>then pair A adds another failing test:</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="s1">'doubler'</span> <span class="k">do</span>
+
+  <span class="n">it</span> <span class="s1">'doubles a number'</span> <span class="k">do</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="mi">2</span><span class="p">)).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">4</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'doubles a number'</span> <span class="k">do</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="mi">3</span><span class="p">)).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">6</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'doubles a number'</span> <span class="k">do</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">double</span><span class="p">(</span><span class="mi">4</span><span class="p">)).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">8</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre>
+<p>And finally pair B writes the general solution:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">double</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+  <span class="n">number</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="k">end</span>
+</code></pre>
+<p>Of course pair B could write:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">double</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+  <span class="mi">4</span> <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">2</span>
+  <span class="mi">6</span> <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">3</span>
+  <span class="mi">8</span>
+<span class="k">end</span>
+</code></pre>
+<p>But it would be nice if we could somehow end on the more general case, with a stronger set of tests (for edge cases etc.? could build those into the initial input/outputs).  The thing about making this an enjoyable game might be a scoring system? So that you get points for one-undermanship obtuseness to an extent, but that past a certain point there&rsquo;s a refactoring bonus.  Maybe the sensible approach is to only score a single round of hard coding where the complexity is actually less than the general solution?</p>
+
+<p>So there&rsquo;s also the issue of coming up with a range of simple coding problems that make this more interesting than the most trivial cases - I guess there&rsquo;s enough complexity in a few basic arithmetic problems, and we can collect more over time - there are great repositories like code wars.  Anyway, with any multi-player game we have the classic bootstrap problem that if we had a great game that lots of people were playing, then there would be lots of people to play with and it would be great; but initially there are no people playing it.  So in the meantime can we scaffold the gameplay with pretend people?  Can we write a robot pairer than can make a test pass, and generate a new chunk of code to move the ping pong on?</p>
+
+<p>For a restricted set of cases I think the answer is yes.  At least what I started on the plane was a chunk of code that would take and analyse a ruby exception and write the necessary code to make it pass.  It&rsquo;s not very complex at the moment, it&rsquo;s basically this:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">fix_code</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">e</span><span class="p">.</span><span class="nf">class</span> <span class="o">==</span> <span class="no">NoMethodError</span>
+    <span class="sr">/undefined method \`(.*)\' for main\:Object/</span> <span class="o">=~</span> <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
+    <span class="nb">eval</span> <span class="s2">"def </span><span class="si">#{</span><span class="vg">$1</span><span class="si">}</span><span class="s2">; 'robot method' ; end "</span>
+  <span class="k">elsif</span> <span class="n">e</span><span class="p">.</span><span class="nf">class</span> <span class="o">==</span> <span class="no">ArgumentError</span>
+    <span class="sr">/wrong number of arguments \(given (.*), expected \d\)/</span> <span class="o">=~</span> <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
+    <span class="n">num_args</span> <span class="o">=</span> <span class="vg">$1</span><span class="p">.</span><span class="nf">to_i</span> <span class="c1"># could use class or arg to auto-infer an approprate name?</span>
+    <span class="n">arg_string</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="nf">.</span><span class="n">num_args</span><span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">map</span> <span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="s2">"arg</span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">}.</span><span class="nf">join</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span> 
+    <span class="sr">/\(eval\)\:1\:in \`(.*)\'/</span> <span class="o">=~</span> <span class="n">e</span><span class="p">.</span><span class="nf">backtrace</span><span class="p">.</span><span class="nf">first</span>
+    <span class="n">method_name</span> <span class="o">=</span> <span class="vg">$1</span>
+    <span class="nb">eval</span> <span class="s2">"def </span><span class="si">#{</span><span class="n">method_name</span><span class="si">}</span><span class="s2">(</span><span class="si">#{</span><span class="n">arg_string</span><span class="si">}</span><span class="s2">); 'robot method' ; end"</span>  
+  <span class="k">else</span>
+    <span class="nb">puts</span> <span class="s2">"cannot handle error class </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">class</span><span class="si">}</span><span class="s2">; </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre>
+<p>What it does at the moment is take NoMethodErrors and ArgumentErrors and fix things up so the specified method is created with the correct number of arguments.  Assuming that the game involves working through a set of input/output values on a range of basic arithmetic problems I can imagine it being fairly easy to extend to make the majority of failing tests pass.  Given an input/output pair, generating an RSpec test is pretty trivial.  So a little more work here and one could have a basic ping pong pairing partner.  I don&rsquo;t fool myself that it wouldn&rsquo;t break fairly quickly, but I think rounds of polishing could make it work reasonable well for a range of introductory problems.  Would it create a fun game that many people would want to play?  Probably not &hellip; Might it be a good learning experience for some people? &hellip; maybe?  I think the process of stack-trace/error analysis is quite interesting and a nice feature would be to have the robot be able to explain why it does what it does - they would be canned explanations, but they could highlight how the stacktrace/error has been analysed in order to work out what to do next.</p>
+
+<p>I guess the best initial interface would be to make it a command line game that you could play and the robot would edit the file that you are both working on perhaps?   Having started it I&rsquo;m kind of interested in extending it; we&rsquo;ll see if anyone else thinks this is anything other than mindless naval gazing :-)</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;<a href='mailto:nonprofits@agileventures.org'>nonprofits@agileventures.org</a></span></i>
+                  <i class="fa fa-map-marker fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;AgileVentures</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
