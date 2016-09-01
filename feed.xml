@@ -5,10 +5,72 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-08-31T01:00:00+01:00</updated>
+  <updated>2016-09-01T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>How Much Sandboxing?</title>
+    <link rel="alternate" href="http://blog.url.com/2016/09/01/how-much-sandboxing/"/>
+    <id>http://blog.url.com/2016/09/01/how-much-sandboxing/</id>
+    <published>2016-09-01T01:00:00+01:00</published>
+    <updated>2016-09-01T21:10:33+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Michael and I were pairing on a new feature for the AgileVentures Stripe integration.  As the number of premium members paying recurring subscriptions via credit card is increasing we come to issues such as wanting to edit credit card details.  Stripe has a handy recipe for allowing users to update their card details:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://stripe.com/docs/recipes/updating-customer-cards"&gt;https://stripe.com/docs/recipes/updating-customer-cards&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Apparently passing expiry dates (and even changing card numbers?) are already &lt;a href="https://stripe.com/blog/smarter-saved-cards"&gt;handled automatically&lt;/a&gt; by Stripe, which is good to know, but users may want to switch to a different card.  Unfortunately for us the recipe for the Stripe card update feature is in PHP.   We managed to figure things out referring to it for reference and to a handy &lt;a href="http://stackoverflow.com/a/28548367/316729"&gt;Stack Overflow post&lt;/a&gt;.  The load bearing part of the code is this:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;
+    &lt;span class="n"&gt;stripe_customer_token&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer&lt;/span&gt;
+    &lt;span class="n"&gt;customer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stripe_customer_token&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+    &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cards&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;card: &lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:stripeToken&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
+    &lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;default_card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;
+    &lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
+  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;InvalidRequestError&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
+    &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;error&lt;/span&gt; &lt;span class="s2"&gt;"Stripe error while updating card info: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+    &lt;span class="n"&gt;errors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;add&lt;/span&gt; &lt;span class="ss"&gt;:base&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+    &lt;span class="kp"&gt;false&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It took us a little while to get clear on how this all worked.  The &lt;code&gt;Stripe::Customer&lt;/code&gt; entity is provided by the Stripe gem and allows our rails server to make a request to the Stripe server to retrieve details about a customer.  The tricky thing is that the update operation can only happen on our server after we&amp;rsquo;ve served a form to the user&amp;rsquo;s browser that will make an ajax request to the Stripe servers directly from the users computer.  That form is generated using the following template:&lt;/p&gt;
+&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= form_tag charge_path(@current_user.name), method: :put do %&amp;gt;
+  &lt;span class="nt"&gt;&amp;lt;script
+  &lt;/span&gt;&lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"https://checkout.stripe.com/checkout.js"&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"stripe-button"&lt;/span&gt;
+  &lt;span class="na"&gt;data-key=&lt;/span&gt;&lt;span class="s"&gt;"&amp;lt;%= Rails.configuration.stripe[:publishable_key] %&amp;gt;"&lt;/span&gt;
+  &lt;span class="na"&gt;data-name=&lt;/span&gt;&lt;span class="s"&gt;"Agile Ventures"&lt;/span&gt;
+  &lt;span class="na"&gt;data-panel-label=&lt;/span&gt;&lt;span class="s"&gt;"Update Card Details"&lt;/span&gt;
+  &lt;span class="na"&gt;data-label=&lt;/span&gt;&lt;span class="s"&gt;"Update Card Details"&lt;/span&gt;
+  &lt;span class="na"&gt;data-allow-remember-me=&lt;/span&gt;&lt;span class="s"&gt;false&lt;/span&gt;
+  &lt;span class="na"&gt;data-locale=&lt;/span&gt;&lt;span class="s"&gt;"auto"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When a user wants to edit their card details we serve this to their browser.  The user&amp;rsquo;s browser loads Stripe&amp;rsquo;s checkout.js library and uses the base details we provide to generate a popup form like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Stripe pop up form" src="https://www.dropbox.com/s/ja4rsvbra17t8qk/Screenshot%202016-09-01%2008.49.19.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The user puts their updated details into the form, and when they hit submit that data is sent encrypted to the Stripe servers. We never see it directly on our server, which is clearly good from a security standpoint.  So the Stripe JS library is enabling a direct communication between the user&amp;rsquo;s computer and Stripe.  Once Stripe has processed the data it generates a token and redirects the user&amp;rsquo;s browser back to our server, appending that token to the URL.  That&amp;rsquo;s the point at which the update method above gets called.  We store the Stripe customer id in our user database and can use that to retrieve customer details from the Stripe server on our rails server.  Confused? :-)&lt;/p&gt;
+
+&lt;p&gt;Given that additional information we can move on to understand the rest of the update method.  We now call &lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cards&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;card: &lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:stripeToken&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This &lt;code&gt;params[:stripeToken]&lt;/code&gt; is the token that Stripe generated on its servers after it received the new card details from the user.  It&amp;rsquo;s essentially a &amp;ldquo;session&amp;rdquo; that has the card details associated so we can use it to instantiate a card object that represents the customer&amp;rsquo;s new card.  Calling save on it might seem like we are storing something in our local database, but we&amp;rsquo;re not.  We&amp;rsquo;re generating another request to the Stripe servers that this card should be remembered by Stripe and then we&amp;rsquo;re setting it as the default card for the customer and then calling save on customer generates another network request to Stripe to ensure that the new card is used in future.&lt;/p&gt;
+
+&lt;p&gt;So there&amp;rsquo;s a lot of networking going on there behind the scenes.  Stripe helpfully provides test tokens and a test Stripe endpoint for testing purposes.  For our automated tests we assume that it&amp;rsquo;s not good practice to keep hitting the Stripe endpoints so we use the &lt;a href="https://github.com/vcr/vcr"&gt;VCR gem&lt;/a&gt; to record all the interactions between our rails server and Stripe.  Of course it&amp;rsquo;s not just the Rails server that&amp;rsquo;s communicating with Stripe.  It&amp;rsquo;s also the user&amp;rsquo;s browser via Ajax calls, so to properly sandbox everything in our acceptance tests we use the &lt;a href="https://github.com/oesmith/puffing-billy"&gt;puffing billy gem&lt;/a&gt;, which acts like VCR but on our headless browser (phantomjs) instead of on our server.&lt;/p&gt;
+
+&lt;p&gt;Getting these sandboxing gems all set up to work with the Stripe interactions is not trivial, and requires a fair amount of playing with configuration.  This is because Stripe won&amp;rsquo;t allow the same token to be used twice, and naturally it is very sensitive to attempts to hack it, so if the environment is slightly off what it expects then it will refuse to operate.  We&amp;rsquo;d previously got the full sandboxed acceptance tests working for our premium and premium plus subscription sign up processes.  Adding this new functionality (which isn&amp;rsquo;t completed yet) is causing me to think through this whole set up again.&lt;/p&gt;
+
+&lt;p&gt;We had to start tweaking the config again to get the new tests to pass, and where we are up to currently some of the old tests are now failing.  Maybe that will be an easy fix today and maybe not, but I wonder to what extent other organisations are writing fully sandboxed acceptance tests of this kind of functionality?  The guideline I&amp;rsquo;ve been following is that to be a good net citizen you shouldn&amp;rsquo;t allow your acceptance tests to make network calls to third party sites, as that puts unnecessary load on other people&amp;rsquo;s servers, and introduces a dependency and latency into your tests.  But have I been overly-zealous here?  Companies like Google and Stripe expect their services to come under heavy load.  Perhaps they won&amp;rsquo;t even notice the extra load from our test runs? Note: we sandbox our Google Maps interactions in the LocalSupport project.&lt;/p&gt;
+
+&lt;p&gt;Avoiding external dependencies and network latency in our test suites sounds good, but if the majority of us have fast internet connections all the time, and those remote services are up close to 24/7 is that really such a big deal?  I guess it all depends on just how hard it is to maintain the acceptance test suites.  One big downside with sandboxing is that if the 3rd party endpoints change then we can have the situation where all our tests pass but the app is broken.  VCR and PuffingBilly at least make it simple to reset in that situation.  Both gems record network interactions to static files and then play them back to simulate the situation of being connected to the network.  Those recordings go out of date, but you can delete them and re-record, then check in the new files and you are bang up to date.  Much faster than having to re-stub individual network calls with something like webmock, but then perhaps our acceptance tests shouldn&amp;rsquo;t try to be so high fidelity, or perhaps we should rely more on unit tests?&lt;/p&gt;
+
+&lt;p&gt;PuffingBilly is newer than VCR and it doesn&amp;rsquo;t yet have some of the features that I rely on in VCR such as grouping network recording files in directories named after the test that generated them, and config to clean sensitive data out of the recordings.  I imagine those will come - I&amp;rsquo;ve opened some tickets that I&amp;rsquo;ll check again now, but I really wonder how the majority of others are doing things?  I guess I&amp;rsquo;ll ask Stripe what their testing recommendations are, but the thing I think I&amp;rsquo;ve really learnt over the last few years is that you should be cautious taking a guideline to the limits.  Pursuing 100% test coverage, or 100% test driven, or perfect adherence to style guidelines often generates more friction than anything else.  I love the idea of fully sandboxed acceptance testing, but is it really practical as a real world system grows and has to cope with an increasing number of corner cases?&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>New Projects</title>
     <link rel="alternate" href="http://blog.url.com/2016/08/31/new-projects/"/>
