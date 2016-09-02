@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>More Sandboxing</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_09 x2016_09_02 x2016_09_02_more-sandboxing x2016_09_02_more-sandboxing_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/09/02/more-sandboxing/">More Sandboxing</a></h2>
+        <h5 class='date'> 2 Sep 2016</h5>
+    <p>So, following up on yesterday&rsquo;s <a href="http://nonprofits.agileventures.org/2016/09/01/how-much-sandboxing/">post on sandboxing</a> acceptance tests of Stripe&rsquo;s credit card functionality in Rails, Michael and I did another pairing session.  In a couple of hours we had the tests passing, and the basic card update functionality in place, but not without a little jiggery-pokery with the way that the PuffingBilly gem stores its HTTP cache files.  The point of departure was that having added an extra Cucumber scenario for the card update operation, a related scenario about signing up for premium plus failing with the common refrain of:</p>
+<pre class="highlight plaintext"><code>You cannot use a Stripe token more than once: tok_18CsXM... (Stripe::InvalidRequestError)
+</code></pre>
+<p>Now I am not 100% certain, but I had strong suspicions that this was because the Billy cache is shared between different scenarios, and so a token that gets used in one scenario gets re-used in another.  As I described in some detail yesterday, Stripe interactions involve network connections to the Stripe servers from the users browser via Ajax, and from our server side.  VCR caches and plays back http connections that our server makes, but does nothing for the Ajax requests made by the headless browser as part of our Cucumber/Capybara/Poltergeist/PhantomJS acceptance test.  </p>
+
+<p>I found the <a href="https://github.com/oesmith/puffing-billy/issues/152">billy github issue</a> where I had been asking about functionality to support different caches for different scenarios, and saw ronwsmith&rsquo;s suggestion about changing the cache_path in a before block.  VCR does this automatically, and I guess we could get this into Billy by default with a PR, but in the first instance we created the following:</p>
+<pre class="highlight ruby"><code><span class="no">Before</span><span class="p">(</span><span class="s1">'@javascript'</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">scenario</span><span class="p">,</span> <span class="n">block</span><span class="o">|</span>
+  <span class="no">Billy</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+    <span class="n">feature_name</span> <span class="o">=</span> <span class="n">scenario</span><span class="p">.</span><span class="nf">feature</span><span class="p">.</span><span class="nf">name</span><span class="p">.</span><span class="nf">underscore</span>
+    <span class="n">scenario_name</span> <span class="o">=</span> <span class="n">scenario</span><span class="p">.</span><span class="nf">name</span><span class="p">.</span><span class="nf">underscore</span>
+    <span class="n">c</span><span class="p">.</span><span class="nf">cache_path</span> <span class="o">=</span> <span class="s2">"features/support/fixtures/req_cache/</span><span class="si">#{</span><span class="n">feature_name</span><span class="si">}</span><span class="s2">/"</span>
+    <span class="no">Dir</span><span class="p">.</span><span class="nf">mkdir</span><span class="p">(</span><span class="no">Billy</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">cache_path</span><span class="p">)</span> <span class="k">unless</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="no">Billy</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">cache_path</span><span class="p">)</span>
+    <span class="n">c</span><span class="p">.</span><span class="nf">cache_path</span> <span class="o">=</span> <span class="s2">"features/support/fixtures/req_cache/</span><span class="si">#{</span><span class="n">feature_name</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s2">/"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>This took several passes and a bit of poking around in the Billy code to reveal that we had to make the directories incrementally, but with this in place we had separate http caches set up for each scenario.  Although this means checking in some cache files repeatedly it ensures our tests are independent, and this allowed all of our charge related scenarios to pass both individually and in batch.  We still hadn&rsquo;t finished the scenario to test all the way through to changing the customers card.  Pushing on there we still got the same error in a single scenario when we tried to have more than one interaction with the Stripe server.  I&rsquo;m not 100% sure we have the ideal setup, but we have a big load of Billy config to ignore the URL params on many Stripe related requests like so:</p>
+<pre class="highlight ruby"><code><span class="no">Billy</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">cache</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">cache_request_headers</span> <span class="o">=</span> <span class="kp">false</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">ignore_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'https://api.stripe.com/v1/tokens'</span><span class="p">,</span>
+                     <span class="s1">'https://q.stripe.com/'</span><span class="p">,</span>
+                     <span class="s1">'https://js.stripe.com/v2/'</span><span class="p">,</span>
+                     <span class="s1">'https://checkout.stripe.com/api/outer/manhattan'</span><span class="p">,</span>
+                     <span class="s1">'https://checkout.stripe.com/api/account/lookup'</span><span class="p">,</span>
+                     <span class="s1">'https://checkout.stripe.com/'</span><span class="p">,</span>
+                     <span class="s1">'https://checkout.stripe.com/v3/'</span><span class="p">,</span>
+                     <span class="s1">'https://checkout.stripe.com/v3/data/locales/en_gb-TXHkb1MWMa7xOQfCZf1DFA.json'</span><span class="p">,</span>
+                     <span class="s1">'https://checkout.stripe.com/v3/data/locales/en_us-tZLon0RoQY0knbOURjQ.json'</span><span class="p">,</span>
+                     <span class="s1">'https://checkout.stripe.com/v3/data/locales/en_gb-LkmkoD88BacHIqnX4OXm6w.json'</span><span class="p">,</span>
+                     <span class="s1">'https://checkout.stripe.com/v3/BFV9gQSjIO6MQNzvbBr9GA.html'</span><span class="p">,</span>
+                     <span class="s1">'http://checkout.stripe.com/v3/BFV9gQSjIO6MQNzvbBr9GA.html'</span><span class="p">,</span>
+
+  <span class="p">]</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">persist_cache</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">cache_path</span> <span class="o">=</span> <span class="s1">'features/support/fixtures/req_cache/'</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">non_successful_cache_disabled</span> <span class="o">=</span> <span class="kp">false</span>
+<span class="k">end</span>
+</code></pre>
+<p>Our VCR it set up to ignore all parameters on requests:</p>
+<pre class="highlight ruby"><code>
+<span class="no">VCR</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">hook_into</span> <span class="ss">:webmock</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">cassette_library_dir</span> <span class="o">=</span> <span class="s1">'features/support/fixtures/cassettes'</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">ignore_localhost</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">default_cassette_options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="ss">:match_requests_on</span> <span class="o">=&gt;</span> <span class="p">[</span>
+          <span class="ss">:method</span><span class="p">,</span>
+          <span class="no">VCR</span><span class="p">.</span><span class="nf">request_matchers</span><span class="p">.</span><span class="nf">uri_without_param</span><span class="p">(</span><span class="ss">:imp</span><span class="p">,</span> <span class="ss">:prev_imp</span><span class="p">)</span>
+      <span class="p">]</span>
+  <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+<p>I did open a <a href="https://github.com/oesmith/puffing-billy/issues/147">ticket</a> to request a similar feature on Billy.</p>
+
+<p>Anyhow, getting the Billy cache to work with Stripe seems particularly tricky.  Without many of the ignore params specifications in the Billy config each new run of the tests will generate new entries in the Billy cache, because they are requesting a resource over the network with different ids in the URL params.  The tokens and ids from these requests then generate new requests that VCR caches, and so we have a cache leak situation.  Without the right set of ignore_params in Billy we are still hitting the network every time, and there are confusing extra files lying around which other developers don&rsquo;t know what to do with.  To check in?  To delete?  Note also that some of the Stripe requests have hash ids in the URL themselves, so we have to create the test, run once, check the URL from the cache and then add that specific config.  Also there are other requests that Stripe JS makes based on the locale of the developer.  Locking this stuff down is really helped by the fact that Michael is based in the US and I&rsquo;m in the UK, so we can push the code back and forth quickly.  That fact really helped us address some of the tricky timezone issues we&rsquo;ve had in AgileVentures WebSiteOne.</p>
+
+<p>So if you look carefully you can see the individual locale requests that we&rsquo;re adding to the Billy config to ensure that developers in en<em>gb and en</em>us don&rsquo;t experience cache leaks.  For developers in other locales we&rsquo;ll have to add extra elements to the Billy config, or get that <a href="https://github.com/oesmith/puffing-billy/issues/147">general param ignore functionality</a>.</p>
+
+<p>Now I could go in there and start removing elements from the Billy config to see if we really need all those different ignores, but having spent the best part of two hours on it yesterday, that&rsquo;s not very appealing.  It&rsquo;s a slow process of running a series of acceptance tests, checking to see if there are new files generated, investigating the contents of those files, adjusting the config, deleting all the cache files in two places, and then re-running the acceptance tests.  Maybe some of that could be automated if we linked the two caches somehow (same naming conventions?).  And is anybody doing this besides us?  It&rsquo;s not rocket science, but it is fiddly.</p>
+
+<p>The time we spent on caching could have been spent on a few of the other things that I&rsquo;d love to have in place, such as getting all our AV logos for Stripe sorted, linking the card update into the UI flow (although that probably should wait till we&rsquo;ve done a live test on production), refactoring out a separate Stripe customer table (since the User table is now a bit bloated), migrating the Stripe customer data from a separate store, and so on.</p>
+
+<p>Stripe customer support is pretty solid actually.  They&rsquo;d previously given helpful advice that even our test (vs live) tokens should probably not be checked into version control, which we&rsquo;ve tried to avoid, although I have a feeling that Billy doesn&rsquo;t have the VCR-like ability to <a href="https://github.com/oesmith/puffing-billy/issues/143">strip sensitive tokens from the http caches</a>.  We were also wondering if it was okay to store stripe Customer ids in our database directly, or if we should be encrypting them like we do with passwords.  Stripe support emailed back to say that they should be in a secure database, but wouldn&rsquo;t usually need more security than usernames and emails, which is one less thing to worry about. Thanks Stripe!</p>
+
+<p>I think the key thing I now need to ask Stripe is what there thoughts are on fully sandboxed acceptance tests.  It&rsquo;s pleasing that we&rsquo;ve managed to get a green test suite with no cache leaks (fully sandboxed) but I&rsquo;m not sure how much it buys us.  We have a strong set of regression tests so if there is some change in our codebase that breaks these tests we&rsquo;ll know about it pretty fast; but the real acid test is whether the customer can do what they want on our site, and we won&rsquo;t know that for sure when a customer tried to update their card details for real.   Will all of our work testing really pay off?</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;<a href='mailto:nonprofits@agileventures.org'>nonprofits@agileventures.org</a></span></i>
+                  <i class="fa fa-map-marker fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;AgileVentures</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

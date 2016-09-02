@@ -5,10 +5,87 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-09-01T01:00:00+01:00</updated>
+  <updated>2016-09-02T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>More Sandboxing</title>
+    <link rel="alternate" href="http://blog.url.com/2016/09/02/more-sandboxing/"/>
+    <id>http://blog.url.com/2016/09/02/more-sandboxing/</id>
+    <published>2016-09-02T01:00:00+01:00</published>
+    <updated>2016-09-02T20:34:03+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So, following up on yesterday&amp;rsquo;s &lt;a href="http://nonprofits.agileventures.org/2016/09/01/how-much-sandboxing/"&gt;post on sandboxing&lt;/a&gt; acceptance tests of Stripe&amp;rsquo;s credit card functionality in Rails, Michael and I did another pairing session.  In a couple of hours we had the tests passing, and the basic card update functionality in place, but not without a little jiggery-pokery with the way that the PuffingBilly gem stores its HTTP cache files.  The point of departure was that having added an extra Cucumber scenario for the card update operation, a related scenario about signing up for premium plus failing with the common refrain of:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;You cannot use a Stripe token more than once: tok_18CsXM... (Stripe::InvalidRequestError)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now I am not 100% certain, but I had strong suspicions that this was because the Billy cache is shared between different scenarios, and so a token that gets used in one scenario gets re-used in another.  As I described in some detail yesterday, Stripe interactions involve network connections to the Stripe servers from the users browser via Ajax, and from our server side.  VCR caches and plays back http connections that our server makes, but does nothing for the Ajax requests made by the headless browser as part of our Cucumber/Capybara/Poltergeist/PhantomJS acceptance test.  &lt;/p&gt;
+
+&lt;p&gt;I found the &lt;a href="https://github.com/oesmith/puffing-billy/issues/152"&gt;billy github issue&lt;/a&gt; where I had been asking about functionality to support different caches for different scenarios, and saw ronwsmith&amp;rsquo;s suggestion about changing the cache_path in a before block.  VCR does this automatically, and I guess we could get this into Billy by default with a PR, but in the first instance we created the following:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Before&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'@javascript'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;scenario&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="no"&gt;Billy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;configure&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="n"&gt;feature_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scenario&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;feature&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;underscore&lt;/span&gt;
+    &lt;span class="n"&gt;scenario_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scenario&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;underscore&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cache_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"features/support/fixtures/req_cache/&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;feature_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/"&lt;/span&gt;
+    &lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;mkdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Billy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cache_path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;exist?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Billy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cache_path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cache_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"features/support/fixtures/req_cache/&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;feature_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;scenario_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/"&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This took several passes and a bit of poking around in the Billy code to reveal that we had to make the directories incrementally, but with this in place we had separate http caches set up for each scenario.  Although this means checking in some cache files repeatedly it ensures our tests are independent, and this allowed all of our charge related scenarios to pass both individually and in batch.  We still hadn&amp;rsquo;t finished the scenario to test all the way through to changing the customers card.  Pushing on there we still got the same error in a single scenario when we tried to have more than one interaction with the Stripe server.  I&amp;rsquo;m not 100% sure we have the ideal setup, but we have a big load of Billy config to ignore the URL params on many Stripe related requests like so:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Billy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;configure&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cache&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
+  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cache_request_headers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;false&lt;/span&gt;
+  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ignore_params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'https://api.stripe.com/v1/tokens'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="s1"&gt;'https://q.stripe.com/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="s1"&gt;'https://js.stripe.com/v2/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="s1"&gt;'https://checkout.stripe.com/api/outer/manhattan'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="s1"&gt;'https://checkout.stripe.com/api/account/lookup'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="s1"&gt;'https://checkout.stripe.com/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="s1"&gt;'https://checkout.stripe.com/v3/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="s1"&gt;'https://checkout.stripe.com/v3/data/locales/en_gb-TXHkb1MWMa7xOQfCZf1DFA.json'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="s1"&gt;'https://checkout.stripe.com/v3/data/locales/en_us-tZLon0RoQY0knbOURjQ.json'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="s1"&gt;'https://checkout.stripe.com/v3/data/locales/en_gb-LkmkoD88BacHIqnX4OXm6w.json'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="s1"&gt;'https://checkout.stripe.com/v3/BFV9gQSjIO6MQNzvbBr9GA.html'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                     &lt;span class="s1"&gt;'http://checkout.stripe.com/v3/BFV9gQSjIO6MQNzvbBr9GA.html'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+
+  &lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;persist_cache&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
+  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cache_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'features/support/fixtures/req_cache/'&lt;/span&gt;
+  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;non_successful_cache_disabled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;false&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Our VCR it set up to ignore all parameters on requests:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;
+&lt;span class="no"&gt;VCR&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;configure&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hook_into&lt;/span&gt; &lt;span class="ss"&gt;:webmock&lt;/span&gt;
+  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cassette_library_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'features/support/fixtures/cassettes'&lt;/span&gt;
+  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ignore_localhost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
+  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;default_cassette_options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="ss"&gt;:match_requests_on&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+          &lt;span class="ss"&gt;:method&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+          &lt;span class="no"&gt;VCR&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;request_matchers&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;uri_without_param&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:imp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:prev_imp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I did open a &lt;a href="https://github.com/oesmith/puffing-billy/issues/147"&gt;ticket&lt;/a&gt; to request a similar feature on Billy.&lt;/p&gt;
+
+&lt;p&gt;Anyhow, getting the Billy cache to work with Stripe seems particularly tricky.  Without many of the ignore params specifications in the Billy config each new run of the tests will generate new entries in the Billy cache, because they are requesting a resource over the network with different ids in the URL params.  The tokens and ids from these requests then generate new requests that VCR caches, and so we have a cache leak situation.  Without the right set of ignore_params in Billy we are still hitting the network every time, and there are confusing extra files lying around which other developers don&amp;rsquo;t know what to do with.  To check in?  To delete?  Note also that some of the Stripe requests have hash ids in the URL themselves, so we have to create the test, run once, check the URL from the cache and then add that specific config.  Also there are other requests that Stripe JS makes based on the locale of the developer.  Locking this stuff down is really helped by the fact that Michael is based in the US and I&amp;rsquo;m in the UK, so we can push the code back and forth quickly.  That fact really helped us address some of the tricky timezone issues we&amp;rsquo;ve had in AgileVentures WebSiteOne.&lt;/p&gt;
+
+&lt;p&gt;So if you look carefully you can see the individual locale requests that we&amp;rsquo;re adding to the Billy config to ensure that developers in en&lt;em&gt;gb and en&lt;/em&gt;us don&amp;rsquo;t experience cache leaks.  For developers in other locales we&amp;rsquo;ll have to add extra elements to the Billy config, or get that &lt;a href="https://github.com/oesmith/puffing-billy/issues/147"&gt;general param ignore functionality&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now I could go in there and start removing elements from the Billy config to see if we really need all those different ignores, but having spent the best part of two hours on it yesterday, that&amp;rsquo;s not very appealing.  It&amp;rsquo;s a slow process of running a series of acceptance tests, checking to see if there are new files generated, investigating the contents of those files, adjusting the config, deleting all the cache files in two places, and then re-running the acceptance tests.  Maybe some of that could be automated if we linked the two caches somehow (same naming conventions?).  And is anybody doing this besides us?  It&amp;rsquo;s not rocket science, but it is fiddly.&lt;/p&gt;
+
+&lt;p&gt;The time we spent on caching could have been spent on a few of the other things that I&amp;rsquo;d love to have in place, such as getting all our AV logos for Stripe sorted, linking the card update into the UI flow (although that probably should wait till we&amp;rsquo;ve done a live test on production), refactoring out a separate Stripe customer table (since the User table is now a bit bloated), migrating the Stripe customer data from a separate store, and so on.&lt;/p&gt;
+
+&lt;p&gt;Stripe customer support is pretty solid actually.  They&amp;rsquo;d previously given helpful advice that even our test (vs live) tokens should probably not be checked into version control, which we&amp;rsquo;ve tried to avoid, although I have a feeling that Billy doesn&amp;rsquo;t have the VCR-like ability to &lt;a href="https://github.com/oesmith/puffing-billy/issues/143"&gt;strip sensitive tokens from the http caches&lt;/a&gt;.  We were also wondering if it was okay to store stripe Customer ids in our database directly, or if we should be encrypting them like we do with passwords.  Stripe support emailed back to say that they should be in a secure database, but wouldn&amp;rsquo;t usually need more security than usernames and emails, which is one less thing to worry about. Thanks Stripe!&lt;/p&gt;
+
+&lt;p&gt;I think the key thing I now need to ask Stripe is what there thoughts are on fully sandboxed acceptance tests.  It&amp;rsquo;s pleasing that we&amp;rsquo;ve managed to get a green test suite with no cache leaks (fully sandboxed) but I&amp;rsquo;m not sure how much it buys us.  We have a strong set of regression tests so if there is some change in our codebase that breaks these tests we&amp;rsquo;ll know about it pretty fast; but the real acid test is whether the customer can do what they want on our site, and we won&amp;rsquo;t know that for sure when a customer tried to update their card details for real.   Will all of our work testing really pay off?&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>How Much Sandboxing?</title>
     <link rel="alternate" href="http://blog.url.com/2016/09/01/how-much-sandboxing/"/>
@@ -299,56 +376,6 @@
 &lt;p&gt;We decided to push out the &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1126"&gt;fix&lt;/a&gt; ASAP and create a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1127"&gt;chore&lt;/a&gt; for the request spec.  Partly because it would be great to have the fix out to support the legacy users who signed up with Google+ in the past, but also because experience tells us that we may have a further testing insight in a few days or weeks.&lt;/p&gt;
 
 &lt;p&gt;In summary, it&amp;rsquo;s a complex web we weave, and to navigate it we need to take tiny steps, be careful about taking on maintenance burdens, or doing things that won&amp;rsquo;t support our long term goals.  We&amp;rsquo;ve also got to be pragmatic about what we can actually test and balance the time spent searching for testing solutions with delivering needed features to users.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Collaborating in Software Teams</title>
-    <link rel="alternate" href="http://blog.url.com/2016/05/17/collaborating-in-software-teams/"/>
-    <id>http://blog.url.com/2016/05/17/collaborating-in-software-teams/</id>
-    <published>2016-05-17T01:00:00+01:00</published>
-    <updated>2016-08-24T12:09:36+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Collaborating and communicating effectively can be particularly challenging under certain circumstances.  Effective &amp;ldquo;soft skills&amp;rdquo; are critical in many professions, but especially for groups of programmers collaborating with project managers, designers, clients and other stakeholders.&lt;/p&gt;
-
-&lt;p&gt;A particular challenge arises from the communication mindset that one might adopt in order to solve a programming problem, versus the mindset that best supports communicating with another human effectively.&lt;/p&gt;
-
-&lt;p&gt;Computers are interesting interlocutors because you can generally ask them just as much as you like and they will continue providing answers.  Sometimes it can be difficult to get the answer you want; but solving a programming problem is often a Holmesian deductive process whereby you construct hypotheses and try to drive towards what you hope is the underlying truth of what is going on.&lt;/p&gt;
-
-&lt;p&gt;After several hours of little progress on a problem you may need to restrain yourself and re-focus on higher level project goals, but it&amp;rsquo;s unlikely that the computer will start complaining, or simply shut down and avoid interacting with you in future.&lt;/p&gt;
-
-&lt;p&gt;Humans are, in my experience, a different story.  There are some humans who may be willing to continue debating with you until the &amp;ldquo;deep truth&amp;rdquo; of a matter is uncovered.  These individuals are perhaps more likely to be found in an academic setting, or to be judged as somewhere along the autistic spectrum; and of course anybody may be happy to have a deep debate if they are sufficiently interested in a topic and not under time pressure to be doing something else.  &lt;/p&gt;
-
-&lt;p&gt;However, many people seem to find an excess of debate uncomfortable and/or frustrating, particularly if they are not interested in the debate or have something else that they really want to get done.  Unfortunately it&amp;rsquo;s easy for someone with a strong academic or programmatic mindset to create and/or pursue a debate on a topic past the comfort point of other&amp;rsquo;s involved in the dialogue, or indeed those who are simply present and listening.&lt;/p&gt;
-
-&lt;p&gt;What those with the academic/programmer mindset may sometimes miss is the social cues that people give to indicate that they are uncomfortable with the intensity or duration of a debate.  People vary enormously in their capacity to give and interpret those social cues.  These cues also vary to different extents across nationalities, cultures and social classes.  A given individual will also wax and wane in their ability to read those cues depending on their level of fatigue, stress, intoxication and so forth.&lt;/p&gt;
-
-&lt;h2&gt;How much debate is right for your team?&lt;/h2&gt;
-
-&lt;p&gt;It&amp;rsquo;s important when working with a group to consider carefully how far to pursue a debate.  It may be that there is an important decision to be made that depends on whether certain hypotheses are true; however it makes sense to pick these sorts of battles very carefully.  In particular, fierce debates can make others uncomfortable and put them off contributing their potentially valuable ideas both immediately, and in the long run.&lt;/p&gt;
-
-&lt;p&gt;I believe there is also an aspect of ego here.  The desire to continue the debate can be connected to a wish to show that one&amp;rsquo;s position is correct, that one is smart, informed and logical.  There are points where the best thing for the team is to end the debate, but the desire to prove one&amp;rsquo;s point or get the upper hand can make that difficult for some personalities.&lt;/p&gt;
-
-&lt;p&gt;This can come in very strongly as regards criticism, or the raising of concerns. When people are criticised they may be tempted to defend their actions, e.g.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Critic&lt;/strong&gt;: &amp;ldquo;I&amp;rsquo;m not sure that X was a good idea&amp;rdquo;&lt;br&gt;
-&lt;strong&gt;Defender&lt;/strong&gt;: &amp;ldquo;I did X because of Y and we knew that was a problem, and actually it&amp;rsquo;s not that big an issue because of Z and we&amp;rsquo;ll do it differently next time and, and, and &amp;hellip;&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;There is a particular danger that if you strongly dispute or defend against people&amp;rsquo;s concerns, they may well end up being dis-incentivized to raise those concerns with you in future; and when they really have a problem with you, they may feel that a resolution is impossible.  An alternative approach is to avoid defending your past actions and where possible create space to focus on understanding the concern, e.g. &lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Critic&lt;/strong&gt;: &amp;ldquo;I&amp;rsquo;m not sure that X was a good idea&amp;rdquo;&lt;br&gt;
-&lt;strong&gt;Responder&lt;/strong&gt;: &amp;ldquo;That&amp;rsquo;s interesting, what didn&amp;rsquo;t you like about X?&amp;rdquo;&lt;br&gt;
-&lt;strong&gt;Critic&lt;/strong&gt;: &amp;ldquo;Well it seemed too risky; I think we should do more Y in future&amp;rdquo;&lt;br&gt;
-&lt;strong&gt;Responder&lt;/strong&gt;: &amp;ldquo;Ah, and why would Y be less risky?&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;Here the responder is employing a questioning tactic to draw out ideas from the critic.  There&amp;rsquo;s still the danger that excessive questioning can sometimes feel like debate, but a small number of carefully chosen and calmly posed questions can go a long way to making the critic feel that they are being listened to and understood.&lt;/p&gt;
-
-&lt;p&gt;On occasion there may not be time to draw a critic&amp;rsquo;s ideas out; and fair enough, but unfortunately a defensive reaction can be mis-interpreted as a failure to listen and understand.  I personally find it difficult to avoid debating assertions that I strongly disagree with.  Not stating my alternative point of view feels to me, on an emotional level, that I am conceding to something I disagree with.    However that is no excuse; as a team member, or particularly a team leader, it&amp;rsquo;s critical to assess whether it is the right time to have a debate.&lt;/p&gt;
-
-&lt;p&gt;Maybe on a given occasion a debate is needed, but the danger is that the debate is started or continued because of an emotional reaction rather than a rational decision that it&amp;rsquo;s a good time to have a debate on that particular topic with or in front of the team.&lt;/p&gt;
-
-&lt;p&gt;In summary, interacting with people is complicated, but the Agile method gives guidance.  Reflect at some regular interval (weekly? monthly?) on how your interactions with other team members are going and try to see where you can change your approach to make those interactions smoother and more effective.&lt;/p&gt;
 </content>
   </entry>
 </feed>
