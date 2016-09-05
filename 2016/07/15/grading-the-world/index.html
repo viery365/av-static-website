@@ -95,152 +95,152 @@
 <p>Yesterday I started work on trying to see what error was behind this particular <a href="https://github.com/saasbook/hw-bdd-cucumber/issues/8">learner issue</a>.  It turned out to be a simple ActiveRecord error that should be discoverable by the student on their local machine, but having got started on that I pushed on to have a look at why that error was not being exposed to the learner.</p>
 
 <p>The autograder runs student code in a sandbox created by a Ruby <code>fork</code> operation.  Here&rsquo;s the code from the heart of the grader:</p>
-<pre class="highlight ruby"><code>    <span class="c1"># Takes a Proc object representing the grading behavior of the auto grader and runs it in a separate process.</span>
-    <span class="c1"># If the subprocess takes longer than @timeout seconds, the function will kill the subprocess and return a score</span>
-    <span class="c1"># of 0.</span>
-    <span class="k">def</span> <span class="nf">run_in_subprocess</span><span class="p">(</span><span class="n">grading_func</span><span class="p">)</span>
-      <span class="k">begin</span>
-        <span class="n">read</span><span class="p">,</span> <span class="n">write</span> <span class="o">=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">pipe</span>
-        <span class="n">logger</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="s1">'Start subprocess to run student code.'</span><span class="p">)</span>
-        <span class="vi">@pid</span> <span class="o">=</span> <span class="nb">fork</span> <span class="k">do</span>
-            <span class="n">read</span><span class="p">.</span><span class="nf">close</span>
-            <span class="c1"># $stdout.reopen('stdout_subprocess', 'w')  # Don't clutter the main terminal with subprocess information.  If you are wondering, RSpec writes its output to STDOUT</span>
-            <span class="c1"># $stderr.reopen('err_subprocess', 'w')  # and you can't redirect it w/o redirecting all of STDOUT.</span>
-            <span class="n">output_hash</span> <span class="o">=</span> <span class="n">grading_func</span><span class="p">.</span><span class="nf">call</span>
-            <span class="n">write</span><span class="p">.</span><span class="nf">puts</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">generate</span> <span class="n">output_hash</span>
-            <span class="n">write</span><span class="p">.</span><span class="nf">close</span>
-        <span class="k">end</span>
-        <span class="no">Timeout</span><span class="p">.</span><span class="nf">timeout</span><span class="p">(</span><span class="vi">@timeout</span><span class="p">)</span> <span class="k">do</span>
-          <span class="no">Process</span><span class="p">.</span><span class="nf">wait</span> <span class="vi">@pid</span>
-        <span class="k">end</span>
-        <span class="n">write</span><span class="p">.</span><span class="nf">close</span>
-        <span class="n">subprocess_response</span> <span class="o">=</span> <span class="n">read</span><span class="p">.</span><span class="nf">gets</span>
-        <span class="n">output_hash</span> <span class="o">=</span> <span class="no">HashWithIndifferentAccess</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">subprocess_response</span><span class="p">))</span> <span class="k">unless</span> <span class="n">subprocess_response</span><span class="p">.</span><span class="nf">nil?</span>
+<pre class="highlight ruby"><code><span class="c1"># Takes a Proc object representing the grading behavior of the auto grader and runs it in a separate process.</span>
+<span class="c1"># If the subprocess takes longer than @timeout seconds, the function will kill the subprocess and return a score</span>
+<span class="c1"># of 0.</span>
+<span class="k">def</span> <span class="nf">run_in_subprocess</span><span class="p">(</span><span class="n">grading_func</span><span class="p">)</span>
+  <span class="k">begin</span>
+    <span class="n">read</span><span class="p">,</span> <span class="n">write</span> <span class="o">=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">pipe</span>
+    <span class="n">logger</span><span class="p">.</span><span class="nf">debug</span><span class="p">(</span><span class="s1">'Start subprocess to run student code.'</span><span class="p">)</span>
+    <span class="vi">@pid</span> <span class="o">=</span> <span class="nb">fork</span> <span class="k">do</span>
         <span class="n">read</span><span class="p">.</span><span class="nf">close</span>
-      <span class="k">rescue</span> <span class="no">Timeout</span><span class="o">::</span><span class="no">Error</span>
-        <span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="s1">'Subprocess timed out killed and submission received 0 pts.'</span><span class="p">)</span>
-        <span class="no">Process</span><span class="p">.</span><span class="nf">kill</span> <span class="mi">9</span><span class="p">,</span> <span class="vi">@pid</span> <span class="c1"># dunno what signal to put for this</span>
-        <span class="no">Process</span><span class="p">.</span><span class="nf">detach</span> <span class="vi">@pid</span>  <span class="c1"># express disinterest in process so that OS hopefully takes care of zombie</span>
-      <span class="k">end</span>
-      <span class="n">output_hash</span>
+        <span class="c1"># $stdout.reopen('stdout_subprocess', 'w')  # Don't clutter the main terminal with subprocess information.  If you are wondering, RSpec writes its output to STDOUT</span>
+        <span class="c1"># $stderr.reopen('err_subprocess', 'w')  # and you can't redirect it w/o redirecting all of STDOUT.</span>
+        <span class="n">output_hash</span> <span class="o">=</span> <span class="n">grading_func</span><span class="p">.</span><span class="nf">call</span>
+        <span class="n">write</span><span class="p">.</span><span class="nf">puts</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">generate</span> <span class="n">output_hash</span>
+        <span class="n">write</span><span class="p">.</span><span class="nf">close</span>
     <span class="k">end</span>
+    <span class="no">Timeout</span><span class="p">.</span><span class="nf">timeout</span><span class="p">(</span><span class="vi">@timeout</span><span class="p">)</span> <span class="k">do</span>
+      <span class="no">Process</span><span class="p">.</span><span class="nf">wait</span> <span class="vi">@pid</span>
+    <span class="k">end</span>
+    <span class="n">write</span><span class="p">.</span><span class="nf">close</span>
+    <span class="n">subprocess_response</span> <span class="o">=</span> <span class="n">read</span><span class="p">.</span><span class="nf">gets</span>
+    <span class="n">output_hash</span> <span class="o">=</span> <span class="no">HashWithIndifferentAccess</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">subprocess_response</span><span class="p">))</span> <span class="k">unless</span> <span class="n">subprocess_response</span><span class="p">.</span><span class="nf">nil?</span>
+    <span class="n">read</span><span class="p">.</span><span class="nf">close</span>
+  <span class="k">rescue</span> <span class="no">Timeout</span><span class="o">::</span><span class="no">Error</span>
+    <span class="n">logger</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="s1">'Subprocess timed out killed and submission received 0 pts.'</span><span class="p">)</span>
+    <span class="no">Process</span><span class="p">.</span><span class="nf">kill</span> <span class="mi">9</span><span class="p">,</span> <span class="vi">@pid</span> <span class="c1"># dunno what signal to put for this</span>
+    <span class="no">Process</span><span class="p">.</span><span class="nf">detach</span> <span class="vi">@pid</span>  <span class="c1"># express disinterest in process so that OS hopefully takes care of zombie</span>
+  <span class="k">end</span>
+  <span class="n">output_hash</span>
+<span class="k">end</span>
 </code></pre>
 <p>An individual grader like the FeatureGrader extends the base AutoGrader class (of which the above method is a part)</p>
-<pre class="highlight ruby"><code>  <span class="k">class</span> <span class="nc">FeatureGrader</span> <span class="o">&lt;</span> <span class="no">AutoGrader</span>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">FeatureGrader</span> <span class="o">&lt;</span> <span class="no">AutoGrader</span>
 
-    <span class="c1"># other methods removed for brevity</span>
+  <span class="c1"># other methods removed for brevity</span>
 
-    <span class="k">def</span> <span class="nf">grade</span>
-      <span class="n">response</span> <span class="o">=</span> <span class="n">run_in_subprocess</span><span class="p">(</span><span class="nb">method</span><span class="p">(</span><span class="ss">:runner_block</span><span class="p">))</span>
-      <span class="k">if</span> <span class="n">response</span>
-        <span class="n">response</span>
-      <span class="k">else</span>
-        <span class="no">ERROR_HASH</span>
-      <span class="k">end</span>
+  <span class="k">def</span> <span class="nf">grade</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">run_in_subprocess</span><span class="p">(</span><span class="nb">method</span><span class="p">(</span><span class="ss">:runner_block</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">response</span>
+      <span class="n">response</span>
+    <span class="k">else</span>
+      <span class="no">ERROR_HASH</span>
     <span class="k">end</span>
-
-    <span class="kp">private</span>
-    <span class="k">def</span> <span class="nf">runner_block</span>
-      <span class="n">load_description</span>
-
-      <span class="no">ENV</span><span class="p">[</span><span class="s1">'RAILS_ENV'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'test'</span>
-      <span class="no">ENV</span><span class="p">[</span><span class="s1">'RAILS_ROOT'</span><span class="p">]</span> <span class="o">=</span> <span class="vi">@base_app_path</span>
-
-      <span class="n">start_time</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span>
-
-      <span class="n">score</span> <span class="o">=</span> <span class="no">Feature</span><span class="p">.</span><span class="nf">total</span><span class="p">(</span><span class="vi">@features</span><span class="p">)</span>   <span class="c1"># TODO: integrate Score</span>
-
-      <span class="vi">@raw_score</span><span class="p">,</span> <span class="vi">@raw_max</span> <span class="o">=</span> <span class="n">score</span><span class="p">.</span><span class="nf">points</span><span class="p">,</span> <span class="n">score</span><span class="p">.</span><span class="nf">max</span>
-
-      <span class="n">log</span> <span class="s2">"Total score: </span><span class="si">#{</span><span class="vi">@raw_score</span><span class="si">}</span><span class="s2"> / </span><span class="si">#{</span><span class="vi">@raw_max</span><span class="si">}</span><span class="s2">"</span>
-      <span class="n">log</span> <span class="s2">"Completed in </span><span class="si">#{</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span> <span class="o">-</span> <span class="n">start_time</span><span class="si">}</span><span class="s2"> seconds."</span>
-
-      <span class="n">dump_output</span>
-      <span class="p">{</span><span class="ss">raw_score: </span><span class="vi">@raw_score</span><span class="p">,</span> <span class="ss">raw_max: </span><span class="vi">@raw_max</span><span class="p">,</span> <span class="ss">comments: </span><span class="vi">@comments</span><span class="p">}</span>
-    <span class="k">end</span>
-
-    <span class="c1"># other methods removed for brevity</span>
   <span class="k">end</span>
+
+  <span class="kp">private</span>
+  <span class="k">def</span> <span class="nf">runner_block</span>
+    <span class="n">load_description</span>
+
+    <span class="no">ENV</span><span class="p">[</span><span class="s1">'RAILS_ENV'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'test'</span>
+    <span class="no">ENV</span><span class="p">[</span><span class="s1">'RAILS_ROOT'</span><span class="p">]</span> <span class="o">=</span> <span class="vi">@base_app_path</span>
+
+    <span class="n">start_time</span> <span class="o">=</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span>
+
+    <span class="n">score</span> <span class="o">=</span> <span class="no">Feature</span><span class="p">.</span><span class="nf">total</span><span class="p">(</span><span class="vi">@features</span><span class="p">)</span>   <span class="c1"># TODO: integrate Score</span>
+
+    <span class="vi">@raw_score</span><span class="p">,</span> <span class="vi">@raw_max</span> <span class="o">=</span> <span class="n">score</span><span class="p">.</span><span class="nf">points</span><span class="p">,</span> <span class="n">score</span><span class="p">.</span><span class="nf">max</span>
+
+    <span class="n">log</span> <span class="s2">"Total score: </span><span class="si">#{</span><span class="vi">@raw_score</span><span class="si">}</span><span class="s2"> / </span><span class="si">#{</span><span class="vi">@raw_max</span><span class="si">}</span><span class="s2">"</span>
+    <span class="n">log</span> <span class="s2">"Completed in </span><span class="si">#{</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span> <span class="o">-</span> <span class="n">start_time</span><span class="si">}</span><span class="s2"> seconds."</span>
+
+    <span class="n">dump_output</span>
+    <span class="p">{</span><span class="ss">raw_score: </span><span class="vi">@raw_score</span><span class="p">,</span> <span class="ss">raw_max: </span><span class="vi">@raw_max</span><span class="p">,</span> <span class="ss">comments: </span><span class="vi">@comments</span><span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="c1"># other methods removed for brevity</span>
+<span class="k">end</span>
 </code></pre>
 <p>We can see here the FeatureGrader <code>grade</code> method that hands off the forking operation to it&rsquo;s parent AutoGrader class.  The running in a separate subprocess is common across the different styles of grader, but the actual running of the grader is not.  We can see above how the method <code>grade</code> specified to the <code>run_in_subprocess</code> parent method which method should actually be run to grade the learner&rsquo;s submission.  In this case the private method <code>runner_block</code> is passed in and we can see that apart from a few bits of station keeping, the key operation is run through the Feature.total method, which runs Cucumber Features in another sandbox.</p>
 
 <p>Here&rsquo;s the Feature total method:</p>
-<pre class="highlight ruby"><code>      <span class="c1"># from the Feature class</span>
-      <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+<pre class="highlight ruby"><code><span class="c1"># from the Feature class</span>
+<span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
 
-        <span class="c1"># Compute the total +Score+ resulting from the given array</span>
-        <span class="c1"># of +Feature+s.</span>
-        <span class="c1">#</span>
-        <span class="c1"># See +$config[:mt]+</span>
-        <span class="c1">#</span>
-        <span class="k">def</span> <span class="nf">total</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="p">[])</span>
+  <span class="c1"># Compute the total +Score+ resulting from the given array</span>
+  <span class="c1"># of +Feature+s.</span>
+  <span class="c1">#</span>
+  <span class="c1"># See +$config[:mt]+</span>
+  <span class="c1">#</span>
+  <span class="k">def</span> <span class="nf">total</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="p">[])</span>
 
-          <span class="n">s</span> <span class="o">=</span> <span class="no">Score</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="no">Score</span><span class="p">.</span><span class="nf">new</span>
 
-          <span class="n">features</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-            <span class="k">begin</span>
-              <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">run!</span>
-              <span class="n">s</span><span class="o">+=</span> <span class="n">result</span>
-            <span class="k">rescue</span> <span class="no">TestFailedError</span><span class="p">,</span> <span class="no">IncorrectAnswer</span>
-              <span class="n">s</span> <span class="o">+=</span> <span class="o">-</span><span class="n">result</span>
-            <span class="k">end</span>
-          <span class="k">end</span>
-
-          <span class="c1"># Dump output. TODO: better way to do this?</span>
-          <span class="n">features</span><span class="p">.</span><span class="nf">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="n">f</span><span class="p">.</span><span class="nf">dump_output</span> <span class="p">}</span>
-          <span class="k">return</span> <span class="n">s</span>
-        <span class="k">end</span>
+    <span class="n">features</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+      <span class="k">begin</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">run!</span>
+        <span class="n">s</span><span class="o">+=</span> <span class="n">result</span>
+      <span class="k">rescue</span> <span class="no">TestFailedError</span><span class="p">,</span> <span class="no">IncorrectAnswer</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="o">-</span><span class="n">result</span>
       <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="c1"># Dump output. TODO: better way to do this?</span>
+    <span class="n">features</span><span class="p">.</span><span class="nf">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="n">f</span><span class="p">.</span><span class="nf">dump_output</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">s</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 <p>Each of the features in the learner submission is run through the Feature <code>run!</code> class method, the heart of which is this:</p>
-<pre class="highlight ruby"><code>        <span class="k">begin</span>
-          <span class="k">raise</span> <span class="no">TestFailedError</span><span class="p">,</span> <span class="s2">"Nonexistent feature file </span><span class="si">#{</span><span class="n">h</span><span class="p">[</span><span class="s2">"FEATURE"</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span> <span class="k">unless</span> <span class="no">File</span><span class="p">.</span><span class="nf">readable?</span> <span class="n">h</span><span class="p">[</span><span class="s2">"FEATURE"</span><span class="p">]</span>
-          <span class="k">raise</span><span class="p">(</span><span class="no">TestFailedError</span><span class="p">,</span> <span class="s2">"Failed to find test db"</span><span class="p">)</span> <span class="k">unless</span> <span class="no">File</span><span class="p">.</span><span class="nf">readable?</span> <span class="no">SOURCE_DB</span>
-          <span class="no">FileUtils</span><span class="p">.</span><span class="nf">cp</span> <span class="no">SOURCE_DB</span><span class="p">,</span> <span class="n">h</span><span class="p">[</span><span class="s2">"TEST_DB"</span><span class="p">]</span>
-          <span class="no">Open3</span><span class="p">.</span><span class="nf">popen3</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="vg">$CUKE_RUNNER</span><span class="p">,</span> <span class="n">popen_opts</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">wait_thr</span><span class="o">|</span>
-            <span class="c1">#exit_status = wait_thr.value</span>
+<pre class="highlight ruby"><code><span class="k">begin</span>
+  <span class="k">raise</span> <span class="no">TestFailedError</span><span class="p">,</span> <span class="s2">"Nonexistent feature file </span><span class="si">#{</span><span class="n">h</span><span class="p">[</span><span class="s2">"FEATURE"</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span> <span class="k">unless</span> <span class="no">File</span><span class="p">.</span><span class="nf">readable?</span> <span class="n">h</span><span class="p">[</span><span class="s2">"FEATURE"</span><span class="p">]</span>
+  <span class="k">raise</span><span class="p">(</span><span class="no">TestFailedError</span><span class="p">,</span> <span class="s2">"Failed to find test db"</span><span class="p">)</span> <span class="k">unless</span> <span class="no">File</span><span class="p">.</span><span class="nf">readable?</span> <span class="no">SOURCE_DB</span>
+  <span class="no">FileUtils</span><span class="p">.</span><span class="nf">cp</span> <span class="no">SOURCE_DB</span><span class="p">,</span> <span class="n">h</span><span class="p">[</span><span class="s2">"TEST_DB"</span><span class="p">]</span>
+  <span class="no">Open3</span><span class="p">.</span><span class="nf">popen3</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="vg">$CUKE_RUNNER</span><span class="p">,</span> <span class="n">popen_opts</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">wait_thr</span><span class="o">|</span>
+    <span class="c1">#exit_status = wait_thr.value</span>
 
-            <span class="n">lines</span> <span class="o">=</span> <span class="n">stdout</span><span class="p">.</span><span class="nf">readlines</span>
-            <span class="n">lines</span><span class="p">.</span><span class="nf">each</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:chomp!</span><span class="p">)</span>
-            <span class="nb">self</span><span class="p">.</span><span class="nf">send</span> <span class="ss">:process_output</span><span class="p">,</span> <span class="n">lines</span>
-          <span class="k">end</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">stdout</span><span class="p">.</span><span class="nf">readlines</span>
+    <span class="n">lines</span><span class="p">.</span><span class="nf">each</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:chomp!</span><span class="p">)</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">send</span> <span class="ss">:process_output</span><span class="p">,</span> <span class="n">lines</span>
+  <span class="k">end</span>
 
-        <span class="c1">##</span>
-        <span class="c1"># XXX Can only raise StandardError in these rescue clauses.</span>
-        <span class="c1"># Any other subclass will give incorrect results ("undefined method `-@'").</span>
-        <span class="c1">##</span>
+<span class="c1">##</span>
+<span class="c1"># XXX Can only raise StandardError in these rescue clauses.</span>
+<span class="c1"># Any other subclass will give incorrect results ("undefined method `-@'").</span>
+<span class="c1">##</span>
 
-        <span class="k">rescue</span> <span class="no">TestFailedError</span> <span class="o">=&gt;</span> <span class="n">e</span>
-          <span class="n">log</span> <span class="s2">"test failed: </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">"</span>
-          <span class="n">log</span> <span class="n">e</span><span class="p">.</span><span class="nf">backtrace</span>
-          <span class="k">raise</span> <span class="no">StandardError</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
+<span class="k">rescue</span> <span class="no">TestFailedError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="n">log</span> <span class="s2">"test failed: </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">"</span>
+  <span class="n">log</span> <span class="n">e</span><span class="p">.</span><span class="nf">backtrace</span>
+  <span class="k">raise</span> <span class="no">StandardError</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
 
-        <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
-          <span class="n">log</span> <span class="s2">"test failed: </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">"</span><span class="c1">#.red.bold</span>
-          <span class="n">log</span> <span class="n">e</span><span class="p">.</span><span class="nf">backtrace</span>
-          <span class="k">raise</span> <span class="no">StandardError</span><span class="p">,</span> <span class="s2">"test failed to run because </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="n">log</span> <span class="s2">"test failed: </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">"</span><span class="c1">#.red.bold</span>
+  <span class="n">log</span> <span class="n">e</span><span class="p">.</span><span class="nf">backtrace</span>
+  <span class="k">raise</span> <span class="no">StandardError</span><span class="p">,</span> <span class="s2">"test failed to run because </span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="si">}</span><span class="s2">"</span>
 
-        <span class="k">ensure</span>
-          <span class="no">FileUtils</span><span class="p">.</span><span class="nf">rm</span> <span class="n">h</span><span class="p">[</span><span class="s2">"TEST_DB"</span><span class="p">]</span> <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">exists?</span> <span class="n">h</span><span class="p">[</span><span class="s2">"TEST_DB"</span><span class="p">]</span>
+<span class="k">ensure</span>
+  <span class="no">FileUtils</span><span class="p">.</span><span class="nf">rm</span> <span class="n">h</span><span class="p">[</span><span class="s2">"TEST_DB"</span><span class="p">]</span> <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">exists?</span> <span class="n">h</span><span class="p">[</span><span class="s2">"TEST_DB"</span><span class="p">]</span>
 
-        <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 <p>and we can start to see the reason why errors in the student code don&rsquo;t get exposed as part of the grader output.  Inside this <code>begin ... rescue</code> we can see the <code>CUKE_RUNNER</code> being started into an external process.  All the errors that are rescued are re-raised as StandardErrors.  There&rsquo;s a comment that says they have to be Standard Errors.  That&rsquo;s a comment from Jonathan Ko from 2012.  If we trace the path of execution back up to the top level of the system, we see that an error raised by running the learner&rsquo;s Cucumber features will we re-raised here in <code>Feature.run!</code>, will stop execution of the <code>Feature.total</code> method who&rsquo;s rescue clause only checks for TestFailedError and IncorrectAnswer custom errors. Note that this means that we skip the <code>dump_output</code> operation at the end of that method. The FeatureGrader&rsquo;s <code>runner_block</code> method will halt execution, skipping other <code>dump_output</code> operations.</p>
 
 <p>Ultimately what this means to the AutoGrader class is that nothing will be returned from the <code>runner_block</code>, so there is no output from the call to the grading function, and nothing to report to the learner, other than the default message about the underlying process having errored.  I managed to change that yesterday by modifying the <code>Feature.total</code> method like so:</p>
-<pre class="highlight ruby"><code>        <span class="k">def</span> <span class="nf">total</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="p">[])</span>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">total</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="p">[])</span>
 
-          <span class="n">s</span> <span class="o">=</span> <span class="no">Score</span><span class="p">.</span><span class="nf">new</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="no">Score</span><span class="p">.</span><span class="nf">new</span>
 
-          <span class="n">features</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
-            <span class="k">begin</span>
-              <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">run!</span>
-              <span class="n">s</span><span class="o">+=</span> <span class="n">result</span>
-            <span class="k">rescue</span> <span class="no">TestFailedError</span><span class="p">,</span> <span class="no">IncorrectAnswer</span>
-              <span class="n">s</span> <span class="o">+=</span> <span class="o">-</span><span class="n">result</span>
-            <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
-            <span class="k">end</span>
-          <span class="k">end</span>
+  <span class="n">features</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span>
+    <span class="k">begin</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">run!</span>
+      <span class="n">s</span><span class="o">+=</span> <span class="n">result</span>
+    <span class="k">rescue</span> <span class="no">TestFailedError</span><span class="p">,</span> <span class="no">IncorrectAnswer</span>
+      <span class="n">s</span> <span class="o">+=</span> <span class="o">-</span><span class="n">result</span>
+    <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 </code></pre>
 <p>This looks like terrible coding practice.  I&rsquo;m catching an error and not doing anything with it.  However it makes some sense in this case because the error&rsquo;s it is catching are actually re-thrown ones that have already had their output written to a log, which will get passed back up to the autograder as long as we avoid these re-thrown errors derailing the process.</p>
 
