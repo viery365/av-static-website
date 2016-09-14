@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Unexpected Progress and Twin Stakeholder Strategies</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_07 x2016_07_17 x2016_07_17_unexpected-progress x2016_07_17_unexpected-progress_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/07/17/unexpected-progress/">Unexpected Progress and Twin Stakeholder Strategies</a></h2>
+        <h5 class='date'>17 Jul 2016</h5>
+    <p>Yesterday was one of those relatively rare days when implementing a feature turned out to be less work than expected.  More often than not what seems like it should be simple to achieve, ends up taking 10 times longer than expected (VCR, I&rsquo;m looking at you).  Yesterday we sat down to work on something that a few premium users had suggested, which was the ability to see a list of AgileVentures Mentors.</p>
+
+<p>Looking through the existing codebase we saw that User model employed the <a href="https://github.com/mbleigh/acts-as-taggable-on">acts_as_taggable_on</a> gem to associate titles and skills with AgileVentures users:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+
+  <span class="n">acts_as_taggable_on</span> <span class="ss">:skills</span><span class="p">,</span> <span class="ss">:titles</span>
+
+  <span class="c1"># rest of class omitted for brevity</span>
+<span class="k">end</span>
+</code></pre>
+<p>This made it pretty simple to add &ldquo;Mentor&rdquo; titles to users and set up a quick &ldquo;Mentor Only&rdquo; view with the addition of a new route and model method:</p>
+<pre class="highlight ruby"><code><span class="c1"># routes.rb</span>
+
+<span class="n">get</span> <span class="s1">'/mentors'</span> <span class="o">=&gt;</span> <span class="s1">'users#index'</span><span class="p">,</span> <span class="ss">defaults: </span><span class="p">{</span><span class="ss">title: </span><span class="s1">'Mentor'</span><span class="p">}</span>
+</code></pre><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+
+  <span class="n">acts_as_taggable_on</span> <span class="ss">:skills</span><span class="p">,</span> <span class="ss">:titles</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">filter_if_title</span> <span class="n">title</span>
+    <span class="k">return</span> <span class="no">User</span><span class="p">.</span><span class="nf">all</span> <span class="k">if</span> <span class="n">title</span><span class="p">.</span><span class="nf">blank?</span>
+    <span class="no">User</span><span class="p">.</span><span class="nf">tagged_with</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="c1"># rest of class omitted for brevity</span>
+<span class="k">end</span>
+</code></pre>
+<p>and the appropriate controller hookup</p>
+<pre class="highlight plaintext"><code>def index
+  @users = User.filter_if_title(params[:title])
+               .includes(:status, :titles)
+               .filter(set_filter_params)
+               .allow_to_display
+               .by_create
+# rest of method omitted for brevity
+end
+</code></pre>
+<p>This did leave us with a rather complex controller method which CodeClimate flagged for us.  Of course we drove all of the above via a Cucumber acceptance test:</p>
+<pre class="highlight gherkin"><code>  <span class="kn">Background</span><span class="p">:</span>
+    <span class="nf">And</span> the following users exist
+      <span class="p">|</span> <span class="nv">first_name</span> <span class="p">|</span> <span class="nv">last_name</span> <span class="p">|</span> <span class="nv">email</span>                  <span class="p">|</span> <span class="nv">title_list</span>      <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Alice</span>      <span class="p">|</span> <span class="n">Jones</span>     <span class="p">|</span> <span class="n">alicejones@hotmail.com</span> <span class="p">|</span> <span class="n">Mentor</span>          <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Bob</span>        <span class="p">|</span> <span class="n">Butcher</span>   <span class="p">|</span> <span class="n">bobb112@hotmail.com</span>    <span class="p">|</span> <span class="n">Premium</span>         <span class="p">|</span>
+      <span class="p">|</span> <span class="n">John</span>       <span class="p">|</span> <span class="n">Jenkins</span>   <span class="p">|</span> <span class="n">john@hotmail.com</span>       <span class="p">|</span> <span class="n">Premium,</span> <span class="n">Plus</span>   <span class="p">|</span>
+
+  <span class="kn">Scenario</span><span class="p">:</span> see mentors
+    <span class="nf">Given</span> I am on the mentors page
+    <span class="nf">Then</span> I should see <span class="s">"Alice Jones"</span>
+    <span class="nf">And</span> I should not see <span class="s">"Bob Butcher"</span>
+    <span class="nf">And</span> I should see <span class="s">"Mentors Directory"</span>
+    <span class="nf">And</span> I should see <span class="s">"Check out our 1 awesome mentor from all over the globe"</span>
+</code></pre>
+<p>and appropriate unit tests for the model:</p>
+<pre class="highlight ruby"><code>  <span class="n">describe</span> <span class="s1">'.filter_if_title'</span> <span class="k">do</span>
+    <span class="n">let!</span><span class="p">(</span><span class="ss">:mentor</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="ss">title_list: </span><span class="s1">'Mentor'</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let!</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="ss">title_list: </span><span class="s1">'Premium'</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'returns mentors'</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="no">User</span><span class="p">.</span><span class="nf">filter_if_title</span><span class="p">(</span><span class="s1">'Mentor'</span><span class="p">)).</span><span class="nf">to</span> <span class="kp">include</span> <span class="n">mentor</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'does not return non-mentors'</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="no">User</span><span class="p">.</span><span class="nf">filter_if_title</span><span class="p">(</span><span class="s1">'Mentor'</span><span class="p">)).</span><span class="nf">not_to</span> <span class="kp">include</span> <span class="n">user</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'returns all users if title is empty string'</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="no">User</span><span class="p">.</span><span class="nf">filter_if_title</span><span class="p">(</span><span class="s1">''</span><span class="p">)).</span><span class="nf">to</span> <span class="kp">include</span> <span class="n">mentor</span><span class="p">,</span> <span class="n">user</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'returns all users if title is nil'</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="no">User</span><span class="p">.</span><span class="nf">filter_if_title</span><span class="p">(</span><span class="kp">nil</span><span class="p">)).</span><span class="nf">to</span> <span class="kp">include</span> <span class="n">mentor</span><span class="p">,</span> <span class="n">user</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre>
+<p>About 90 minutes to get everything working, and quickly we had something that we can use to see if a list of the AV mentors will have any impact on premium membership sign up.</p>
+
+<p>Initially I was looking at the unit test we added and thinking this doesn&rsquo;t buy us much over the acceptance test, but Michael pointed out the importance of testing the handling of the situation where there is no title parameter; and of course that&rsquo;s the key here.  We&rsquo;re re-using the existing users index view to make all this quick and simple, and we want that to carry on working for normal views of the user index. We&rsquo;re overloading the users index method, but mentors (or premium or premium plus members) are all types of user, and so parameterising the existing listing mechanism to get views of subsets of the resource feels cleaner than setting up other actions on the controller that correspond to non-RESTful routes like <code>users/mentors</code> or similar.</p>
+
+<p>Of course what we&rsquo;re seeing here is the emergence of new concepts in our domain model.  In the long run we may well want classes to represent Mentors, Premium Members and so on.  Superficially it would make sense for these classes to inherit from User, and we&rsquo;ve got all the fun of Rails single table inheritance to play with, but there&rsquo;s no rush.  Let&rsquo;s see how this functionality actually impacts our ability to sign up additional premium members.</p>
+
+<p>Reflecting on the code I can see that we missed some details about how filtering was already implemented in the UserController.  Just in the process of writing this blog I noticed something we didn&rsquo;t see yesterday, which is that the User model is including a <code>Filterable</code> concern:</p>
+<pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">Filterable</span>
+  <span class="kp">extend</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Concern</span>
+
+  <span class="k">module</span> <span class="nn">ClassMethods</span>
+    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="n">filtering_params</span><span class="p">)</span>
+      <span class="n">results</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="kp">nil</span><span class="p">)</span>
+      <span class="n">filtering_params</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="nf">public_send</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">value</span><span class="p">.</span><span class="nf">present?</span>
+      <span class="k">end</span>
+      <span class="n">results</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>which is set up to allow filtering the users by timezone, project and whether they are online.  Looking back over this I imagine we can consolidate and reduce the complexity of the old and new filtering.  We probably got the feature out faster by creating our own method on the model.  The filterable module above almost has all the functionality we need, but I&rsquo;m not immediately sure if it will work with the tagging plugin.  Maybe it would if we adjusted our route like so  :</p>
+<pre class="highlight ruby"><code><span class="c1"># routes.rb</span>
+
+<span class="n">get</span> <span class="s1">'/mentors'</span> <span class="o">=&gt;</span> <span class="s1">'users#index'</span><span class="p">,</span> <span class="ss">defaults: </span><span class="p">{</span><span class="ss">title_tags: </span><span class="s1">'Mentor'</span><span class="p">}</span>
+</code></pre>
+<p>So many options, so much code to experiment with!  So much paranoia that any piece of public code might be sneered at for failing to have DRYed one thing out, or followed a particular code heuristic.   However I can calm my paranoia by focusing on the key metric - are we making AgileVentures financially sustainable?  Is making <a href="https://github.com/AgileVentures/WebsiteOne/issues/1203">refactoring tickets</a> that you maybe never get to the lowest of the low?  Better than just doing nothing I guess.  At least from yesterday&rsquo;s work we have the tests that will allow us to quickly assess if some alternate consolidating approaches will work.</p>
+
+<p>Seeing the filtering module the following day does underline how one keeps getting new information, and that information keeps changing what looks like a sensible way to refactor.  Refactoring good - rushed refactoring hmmm &hellip;</p>
+
+<p>Given that the above took less time than expected it created space for us to work on the outstanding issues on the AV static site:</p>
+
+<p><a href="https://github.com/AgileVentures/av-static-website/issues/42">https://github.com/AgileVentures/av-static-website/issues/42</a></p>
+
+<p>We&rsquo;d had a lot of great feedback from a few users during an alpha release, but the workload from the MOOC and agonizing about how to make the Premium AgileVentures model work had been causing me to question the static site strategy.  For a long time there&rsquo;d been general agreement it would be good to have a &ldquo;showcase&rdquo; site aimed at non-profits.  The main AgileVentures site is aimed at developers getting together to help non-profits, and we have a non-profit sign up form for charities to sign up their interest in working with our developers.  However it makes intuitive sense that we can help more non-profits if we have a site explaining how we can help them.  Also part of the premium package is the idea that membership makes you eligible for participation in paid projects, and we&rsquo;d love to attract non-profits who were willing to pay for higher levels of service and support, which would in turn attract in more premium members.</p>
+
+<p>We&rsquo;ve been chatting with sales and marketing specialists who are keen to get our non-profit offering nailed down in lots of detail, which seems to involve specifying every aspect of the offering and man-hour costs up front.  I&rsquo;d been feeling dispirited about this kind of work up-front when previous experience with paying projects suggests we should be focusing on payment per feature rather than payment for hour.  Also, the premium membership gives us incremental feedback.  As we gradually sign up more members we can tell how we are doing - we can get feedback from each member, slowly evolving and improving the offering.</p>
+
+<p>Lots of documentation work up front to describe exactly how we are going to work with more and more non-profits doesn&rsquo;t feel very Agile, and the biggest danger is that there&rsquo;s a big delay until we can assess the effectiveness of all that work.  So I&rsquo;d put the static site on a back burner.  However the Mentor titling functionality suddenly makes a lot of non-coding &ldquo;charity business model&rdquo; experiments available.  That gave me the emotional energy to tackle some of the detailed feedback about the static site and so we got a few things done including switching from http://showcase.agileventures.org to <a href="http://nonprofits.agileventures.org">http://nonprofits.agileventures.org</a> - getting the emails all pointing to <a href="mailto:nonprofits@agileventures.org">nonprofits@agileventures.org</a> (for consistency) and adjusting some of the icons on the site.</p>
+
+<p>I&rsquo;m now feeling confident that we can finish a last couple of design tweaks today to improve navigation on the site, and switch from the slow &ldquo;Ghost on Heroku&rdquo; blog to a middleman blog that will also make the site more maintainable.  There are more content tweaks that will need to go in next week, but it should mean there aren&rsquo;t any more huge coding barriers to pushing both sides of our &ldquo;twin strategy charity business model&rdquo; bringing benefits to both developer and non-profit stakeholders.  Maybe we should be carefully focusing on one stakeholder or the other, but you only live once right? :-) </p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;<a href='mailto:nonprofits@agileventures.org'>nonprofits@agileventures.org</a></span></i>
+                  <i class="fa fa-map-marker fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;AgileVentures</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
