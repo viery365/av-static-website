@@ -653,23 +653,27 @@ section {
   display: block;
   margin: 0 auto;
   padding: 20px; }
+/* line 314, _agency.scss */
+#blog li {
+  font-size: 1.5em;
+  line-height: 1.75; }
 
-/* line 318, _agency.scss */
+/* line 322, _agency.scss */
 .service-heading {
   margin: 15px 0;
   text-transform: none; }
 
-/* line 326, _agency.scss */
+/* line 330, _agency.scss */
 #portfolio .portfolio-item {
   margin: 0 0 15px;
   right: 0; }
-  /* line 330, _agency.scss */
+  /* line 334, _agency.scss */
   #portfolio .portfolio-item .portfolio-link {
     display: block;
     margin: 0 auto;
     max-width: 400px;
     position: relative; }
-    /* line 336, _agency.scss */
+    /* line 340, _agency.scss */
     #portfolio .portfolio-item .portfolio-link .portfolio-hover {
       background: rgba(238, 115, 53, 0.9);
       height: 100%;
@@ -679,10 +683,10 @@ section {
       -webkit-transition: all ease .5s;
       transition: all ease .5s;
       width: 100%; }
-      /* line 346, _agency.scss */
+      /* line 350, _agency.scss */
       #portfolio .portfolio-item .portfolio-link .portfolio-hover:hover {
         opacity: 1; }
-      /* line 350, _agency.scss */
+      /* line 354, _agency.scss */
       #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content {
         color: #fff;
         font-size: 20px;
@@ -692,14 +696,14 @@ section {
         text-align: center;
         top: 50%;
         width: 100%; }
-        /* line 360, _agency.scss */
+        /* line 364, _agency.scss */
         #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content i {
           margin-top: -12px; }
-        /* line 364, _agency.scss */
+        /* line 368, _agency.scss */
         #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h3, #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content section div.nonprofits-contact, section #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content div.nonprofits-contact,
         #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h4 {
           margin: 0; }
-  /* line 372, _agency.scss */
+  /* line 376, _agency.scss */
   #portfolio .portfolio-item .portfolio-caption {
     background-color: #fff;
     margin: 0 auto;
@@ -707,30 +711,30 @@ section {
     padding: 25px;
     text-align: center;
     white-space: nowrap; }
-    /* line 380, _agency.scss */
+    /* line 384, _agency.scss */
     #portfolio .portfolio-item .portfolio-caption h4 {
       margin: 0;
       text-transform: none; }
-    /* line 385, _agency.scss */
+    /* line 389, _agency.scss */
     #portfolio .portfolio-item .portfolio-caption p {
       font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-style: italic;
       margin: 0; }
-/* line 394, _agency.scss */
+/* line 398, _agency.scss */
 #portfolio * {
   z-index: 2; }
 
 @media (min-width: 767px) {
-  /* line 401, _agency.scss */
+  /* line 405, _agency.scss */
   #portfolio .portfolio-item {
     margin: 0 0 30px; } }
-/* line 409, _agency.scss */
+/* line 413, _agency.scss */
 .timeline {
   list-style: none;
   padding: 0;
   position: relative; }
-  /* line 414, _agency.scss */
+  /* line 418, _agency.scss */
   .timeline:before {
     background-color: #f1f1f1;
     bottom: 0;
@@ -740,38 +744,38 @@ section {
     position: absolute;
     top: 0;
     width: 2px; }
-  /* line 425, _agency.scss */
+  /* line 429, _agency.scss */
   .timeline > li {
     margin-bottom: 50px;
     min-height: 50px;
     position: relative; }
-    /* line 430, _agency.scss */
+    /* line 434, _agency.scss */
     .timeline > li:before, .timeline > li:after {
       content: ' ';
       display: table; }
-    /* line 436, _agency.scss */
+    /* line 440, _agency.scss */
     .timeline > li:after {
       clear: both; }
-    /* line 440, _agency.scss */
+    /* line 444, _agency.scss */
     .timeline > li .timeline-panel {
       float: right;
       padding: 0 20px 0 100px;
       position: relative;
       text-align: left;
       width: 100%; }
-      /* line 447, _agency.scss */
+      /* line 451, _agency.scss */
       .timeline > li .timeline-panel:before {
         border-left-width: 0;
         border-right-width: 15px;
         left: -15px;
         right: auto; }
-      /* line 454, _agency.scss */
+      /* line 458, _agency.scss */
       .timeline > li .timeline-panel:after {
         border-left-width: 0;
         border-right-width: 14px;
         left: -14px;
         right: auto; }
-    /* line 462, _agency.scss */
+    /* line 466, _agency.scss */
     .timeline > li .timeline-image {
       background-color: #ee7335;
       border: 7px solid #f1f1f1;
@@ -784,241 +788,241 @@ section {
       text-align: center;
       width: 80px;
       z-index: 100; }
-      /* line 475, _agency.scss */
+      /* line 479, _agency.scss */
       .timeline > li .timeline-image h4 {
         font-size: 10px;
         line-height: 14px;
         margin-top: 12px; }
-    /* line 482, _agency.scss */
+    /* line 486, _agency.scss */
     .timeline > li.timeline-inverted > .timeline-panel {
       float: right;
       padding: 0 20px 0 100px;
       text-align: left; }
-      /* line 487, _agency.scss */
+      /* line 491, _agency.scss */
       .timeline > li.timeline-inverted > .timeline-panel:before {
         border-left-width: 0;
         border-right-width: 15px;
         left: -15px;
         right: auto; }
-      /* line 494, _agency.scss */
+      /* line 498, _agency.scss */
       .timeline > li.timeline-inverted > .timeline-panel:after {
         border-left-width: 0;
         border-right-width: 14px;
         left: -14px;
         right: auto; }
-    /* line 502, _agency.scss */
+    /* line 506, _agency.scss */
     .timeline > li:last-child {
       margin-bottom: 0; }
-  /* line 508, _agency.scss */
+  /* line 512, _agency.scss */
   .timeline .timeline-heading h4 {
     color: inherit;
     margin-top: 0; }
-    /* line 512, _agency.scss */
+    /* line 516, _agency.scss */
     .timeline .timeline-heading h4.subheading {
       text-transform: none; }
-  /* line 519, _agency.scss */
+  /* line 523, _agency.scss */
   .timeline .timeline-body > p,
   .timeline .timeline-body > ul {
     margin-bottom: 0; }
 
 @media (min-width: 768px) {
-  /* line 528, _agency.scss */
+  /* line 532, _agency.scss */
   .timeline:before {
     left: 50%; }
-  /* line 532, _agency.scss */
+  /* line 536, _agency.scss */
   .timeline > li {
     margin-bottom: 100px;
     min-height: 100px; }
-    /* line 536, _agency.scss */
+    /* line 540, _agency.scss */
     .timeline > li .timeline-panel {
       float: left;
       padding: 0 20px 20px 30px;
       text-align: right;
       width: 41%; }
-    /* line 543, _agency.scss */
+    /* line 547, _agency.scss */
     .timeline > li .timeline-image {
       height: 100px;
       left: 50%;
       margin-left: -50px;
       width: 100px; }
-      /* line 549, _agency.scss */
+      /* line 553, _agency.scss */
       .timeline > li .timeline-image h4 {
         font-size: 13px;
         line-height: 18px;
         margin-top: 16px; }
-    /* line 556, _agency.scss */
+    /* line 560, _agency.scss */
     .timeline > li.timeline-inverted > .timeline-panel {
       float: right;
       padding: 0 30px 20px 20px;
       text-align: left; } }
 @media (min-width: 992px) {
-  /* line 567, _agency.scss */
+  /* line 571, _agency.scss */
   .timeline > li {
     min-height: 150px; }
-    /* line 570, _agency.scss */
+    /* line 574, _agency.scss */
     .timeline > li .timeline-panel {
       padding: 0 20px 20px; }
-    /* line 574, _agency.scss */
+    /* line 578, _agency.scss */
     .timeline > li .timeline-image {
       height: 150px;
       margin-left: -75px;
       width: 150px; }
-      /* line 579, _agency.scss */
+      /* line 583, _agency.scss */
       .timeline > li .timeline-image h4 {
         font-size: 18px;
         line-height: 26px;
         margin-top: 30px; }
-    /* line 586, _agency.scss */
+    /* line 590, _agency.scss */
     .timeline > li.timeline-inverted > .timeline-panel {
       padding: 0 20px 20px; } }
 @media (min-width: 1200px) {
-  /* line 595, _agency.scss */
+  /* line 599, _agency.scss */
   .timeline > li {
     min-height: 170px; }
-    /* line 598, _agency.scss */
+    /* line 602, _agency.scss */
     .timeline > li .timeline-panel {
       padding: 0 20px 20px 100px; }
-    /* line 602, _agency.scss */
+    /* line 606, _agency.scss */
     .timeline > li .timeline-image {
       height: 170px;
       margin-left: -85px;
       width: 170px; }
-      /* line 607, _agency.scss */
+      /* line 611, _agency.scss */
       .timeline > li .timeline-image h4 {
         margin-top: 40px; }
-    /* line 612, _agency.scss */
+    /* line 616, _agency.scss */
     .timeline > li.timeline-inverted > .timeline-panel {
       padding: 0 100px 20px 20px; } }
-/* line 621, _agency.scss */
+/* line 625, _agency.scss */
 .team-member {
   margin-bottom: 50px;
   text-align: center; }
-  /* line 625, _agency.scss */
+  /* line 629, _agency.scss */
   .team-member img {
     border: 7px solid #fff;
     margin: 0 auto; }
-  /* line 630, _agency.scss */
+  /* line 634, _agency.scss */
   .team-member h4 {
     margin-bottom: 0;
     margin-top: 25px;
     text-transform: none; }
-  /* line 636, _agency.scss */
+  /* line 640, _agency.scss */
   .team-member p {
     margin-top: 0; }
 
-/* line 644, _agency.scss */
+/* line 648, _agency.scss */
 aside.clients img {
   margin: 50px auto; }
 
-/* line 651, _agency.scss */
+/* line 655, _agency.scss */
 section#subscribe {
   background-color: #222;
   background-image: url("../images/map-image.png");
   background-position: center;
   background-repeat: no-repeat; }
-  /* line 657, _agency.scss */
+  /* line 661, _agency.scss */
   section#subscribe .section-heading {
     color: #fff; }
-  /* line 661, _agency.scss */
+  /* line 665, _agency.scss */
   section#subscribe .form-group {
     margin-bottom: 25px; }
-    /* line 664, _agency.scss */
+    /* line 668, _agency.scss */
     section#subscribe .form-group input,
     section#subscribe .form-group textarea {
       padding: 20px; }
-    /* line 669, _agency.scss */
+    /* line 673, _agency.scss */
     section#subscribe .form-group input.form-control {
       height: auto; }
-    /* line 673, _agency.scss */
+    /* line 677, _agency.scss */
     section#subscribe .form-group textarea.form-control {
       height: 236px; }
-  /* line 678, _agency.scss */
+  /* line 682, _agency.scss */
   section#subscribe .form-control:focus {
     border-color: #ee7335;
     box-shadow: none; }
-  /* line 683, _agency.scss */
+  /* line 687, _agency.scss */
   section#subscribe ::-webkit-input-placeholder {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     color: #bbb;
     font-weight: 700; }
-  /* line 689, _agency.scss */
+  /* line 693, _agency.scss */
   section#subscribe :-moz-placeholder {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     color: #bbb;
     font-weight: 700; }
-  /* line 695, _agency.scss */
+  /* line 699, _agency.scss */
   section#subscribe ::-moz-placeholder {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     color: #bbb;
     font-weight: 700; }
-  /* line 701, _agency.scss */
+  /* line 705, _agency.scss */
   section#subscribe :-ms-input-placeholder {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     color: #bbb;
     font-weight: 700; }
-  /* line 707, _agency.scss */
+  /* line 711, _agency.scss */
   section#subscribe .text-danger {
     color: #34459e; }
 
-/* line 712, _agency.scss */
+/* line 716, _agency.scss */
 section#contact {
   padding: 75px 0px 0px 0px; }
 
-/* line 718, _agency.scss */
+/* line 722, _agency.scss */
 footer {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 25px 0;
   text-align: center; }
-  /* line 723, _agency.scss */
+  /* line 727, _agency.scss */
   footer span.copyright {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     line-height: 40px;
     text-transform: none; }
-  /* line 729, _agency.scss */
+  /* line 733, _agency.scss */
   footer ul.quicklinks {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     line-height: 40px;
     margin-bottom: 0;
     text-transform: none; }
-  /* line 736, _agency.scss */
+  /* line 740, _agency.scss */
   footer p.blurb {
     text-align: justify;
     font-size: 1.25em; }
-  /* line 741, _agency.scss */
+  /* line 745, _agency.scss */
   footer .list {
     padding-left: 20%;
     text-align: left;
     font-size: 1.5em;
     margin-bottom: 30px; }
-  /* line 748, _agency.scss */
+  /* line 752, _agency.scss */
   footer .contact-list {
     padding-left: 20%;
     text-align: left;
     font-size: 1.5em;
     margin-bottom: 50px; }
-  /* line 755, _agency.scss */
+  /* line 759, _agency.scss */
   footer h3, footer section div.nonprofits-contact, section footer div.nonprofits-contact {
     margin-bottom: 20px; }
-  /* line 759, _agency.scss */
+  /* line 763, _agency.scss */
   footer i.fa-text {
     margin-bottom: 10px;
     display: block; }
-  /* line 764, _agency.scss */
+  /* line 768, _agency.scss */
   footer .font-override {
     font-size: .9em;
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 110%; }
 
-/* line 774, _agency.scss */
+/* line 778, _agency.scss */
 ul.social-buttons {
   margin-bottom: 0; }
-  /* line 778, _agency.scss */
+  /* line 782, _agency.scss */
   ul.social-buttons li a {
     background-color: #222;
     border-radius: 100%;
@@ -1032,18 +1036,18 @@ ul.social-buttons {
     -webkit-transition: all .3s;
     transition: all .3s;
     width: 40px; }
-    /* line 792, _agency.scss */
+    /* line 796, _agency.scss */
     ul.social-buttons li a:hover, ul.social-buttons li a:focus, ul.social-buttons li a:active {
       background-color: #ee7335; }
 
-/* line 801, _agency.scss */
+/* line 805, _agency.scss */
 .btn:focus,
 .btn:active,
 .btn.active,
 .btn:active:focus {
   outline: none; }
 
-/* line 809, _agency.scss */
+/* line 813, _agency.scss */
 .portfolio-modal .modal-content {
   background-clip: border-box;
   border: 0;
@@ -1053,27 +1057,27 @@ ul.social-buttons {
   min-height: 100%;
   padding: 100px 0;
   text-align: center; }
-  /* line 819, _agency.scss */
+  /* line 823, _agency.scss */
   .portfolio-modal .modal-content h2 {
     font-size: 3em;
     margin-bottom: 15px; }
-  /* line 824, _agency.scss */
+  /* line 828, _agency.scss */
   .portfolio-modal .modal-content p {
     margin-bottom: 30px; }
-    /* line 827, _agency.scss */
+    /* line 831, _agency.scss */
     .portfolio-modal .modal-content p .item-intro {
       font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-style: italic;
       margin: 20px 0 30px; }
-  /* line 836, _agency.scss */
+  /* line 840, _agency.scss */
   .portfolio-modal .modal-content ul.list-inline {
     margin-bottom: 30px;
     margin-top: 0; }
-  /* line 841, _agency.scss */
+  /* line 845, _agency.scss */
   .portfolio-modal .modal-content img {
     margin-bottom: 30px; }
-/* line 846, _agency.scss */
+/* line 850, _agency.scss */
 .portfolio-modal .close-modal {
   background-color: transparent;
   cursor: pointer;
@@ -1082,10 +1086,10 @@ ul.social-buttons {
   right: 25px;
   top: 25px;
   width: 75px; }
-  /* line 855, _agency.scss */
+  /* line 859, _agency.scss */
   .portfolio-modal .close-modal:hover {
     opacity: .3; }
-  /* line 859, _agency.scss */
+  /* line 863, _agency.scss */
   .portfolio-modal .close-modal .lr {
     background-color: #222;
     height: 75px;
@@ -1095,7 +1099,7 @@ ul.social-buttons {
     transform: rotate(45deg);
     width: 1px;
     z-index: 1051; }
-    /* line 869, _agency.scss */
+    /* line 873, _agency.scss */
     .portfolio-modal .close-modal .lr .rl {
       background-color: #222;
       height: 75px;
@@ -1104,34 +1108,34 @@ ul.social-buttons {
       transform: rotate(90deg);
       width: 1px;
       z-index: 1052; }
-/* line 881, _agency.scss */
+/* line 885, _agency.scss */
 .portfolio-modal .modal-backdrop {
   display: none;
   opacity: 0; }
 
-/* line 889, _agency.scss */
+/* line 893, _agency.scss */
 ::-moz-selection {
   background: grey;
   text-shadow: none; }
 
-/* line 894, _agency.scss */
+/* line 898, _agency.scss */
 ::selection {
   background: grey;
   text-shadow: none; }
 
-/* line 899, _agency.scss */
+/* line 903, _agency.scss */
 img::selection {
   background: transparent; }
 
-/* line 903, _agency.scss */
+/* line 907, _agency.scss */
 img::-moz-selection {
   background: transparent; }
 
-/* line 907, _agency.scss */
+/* line 911, _agency.scss */
 body {
   webkit-tap-highlight-color: #ee7335; }
 
-/* line 911, _agency.scss */
+/* line 915, _agency.scss */
 .mc-response {
   padding-bottom: 10px;
   color: white; }
