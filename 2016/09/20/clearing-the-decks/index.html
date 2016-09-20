@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Clearing the Decks</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_09 x2016_09_20 x2016_09_20_clearing-the-decks x2016_09_20_clearing-the-decks_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/09/20/clearing-the-decks/">Clearing the Decks</a></h2>
+        <h5 class='date'>20 Sep 2016</h5>
+    <p>Monday involved continuing on two &ldquo;clear the decks&rdquo; tickets that Michael and I had started on the previous Thursday and Friday. The heuristics in my mind thus included:</p>
+
+<ul>
+<li>clear the decks before starting on something else big</li>
+<li>finish what you&rsquo;ve started</li>
+<li>deal with things in the &ldquo;in progress&rdquo; column in your Kanban board to reduce cognitive overload for the team</li>
+<li>drive-by coding, i.e. try not to get too bogged down in any one thing, make tickets for additional features, refactorings and so forth</li>
+<li>focus on completing one task rather than constantly worrying if it is the right task</li>
+</ul>
+
+<p>and that&rsquo;s forming a nice-ish set, even if some of them aren&rsquo;t that pithy :-) Lots of room for improvement there.  There are parallel collections of heuristics being applied in the actual coding going on, e.g.</p>
+
+<ul>
+<li>be confident (don&rsquo;t keep nil checking)</li>
+<li>don&rsquo;t mock what you don&rsquo;t own; prefer to introduce adapters you control</li>
+<li>follow the testing pyramid (few acceptance, some integration and lots of unit tests)</li>
+<li>keep methods/classes short</li>
+<li>try to name methods/classes for understandability and maintainability</li>
+<li>start DRYing once it&rsquo;s clear there is a pattern</li>
+<li>use Dependency Injection to avoid locking what objects collaborate with</li>
+</ul>
+
+<p>Many more could be added to the list, but the above are the set that are more to the forefront of my mind at the moment.  There&rsquo;s a cross-talk between the two levels though, because seeing a place where you could use dependency injection, or introduce an adapter can extend the amount of time on task.  If you&rsquo;re practising &ldquo;drive-by&rdquo; coding, then that&rsquo;s a key place to ask if that refactoring needs to be done now, or if it&rsquo;s something to create a ticket for.</p>
+
+<p>You might say, you must immediately do any refactoring you think of, and if you put it in a ticket it&rsquo;ll never get done.  However there&rsquo;s a counter-example from the LocalSupport project, where we had a nasty case statement, I created a refactoring ticket, and worked on it with someone later, and we eventually completely removed the case statement and replaced it with a gem using the strategy pattern; so that&rsquo;s at least a proof that it&rsquo;s possible in principle :-)</p>
+
+<p>The thing about refactoring is that there&rsquo;s always a little more you could do, but fundamentally we don&rsquo;t know what the future holds.  As needs change maybe that refactoring will have to be undone, or that code thrown out.  That isn&rsquo;t to disregard general code smells, but it is all relative.  Either way you have the interplay of the different heuristics.  Say you notice you could use some dependency injection, and/or some adapters, which do you work on first?  Or put both in a ticket?</p>
+
+<p>For the set of heuristics at the higher level there&rsquo;s less conflict for me at the moment.  Focusing on completing one task in a drive-by fashion is all about not getting too distracted, and if the distraction is important, get that distraction into a ticket that you can review later for relative importance and complexity.  Huge ideas about a different direction?  Sure, but let&rsquo;s clear the decks by finishing what we started, especially those things we identified as going in the ready/backlog column in the current sprint.</p>
+
+<p>So that&rsquo;s all well and good, however the memory leak task that Michael and I started on from the &ldquo;in progress&rdquo; column &ndash; taking on something another developer didn&rsquo;t seem to be progressing on &ndash; was not simple to resolve quickly.  Just investigating the task involves leaving a process running overnight to see what the memory profile is like after 12 hours.  That wasn&rsquo;t too hard to fit into the heuristic since once we had set up a memory profiling experiment we could leave that and move on to something else, but the ticket was still in the &ldquo;in progress&rdquo; column. Hmm &hellip;</p>
+
+<p>Mixed shout out to Heroku; positive for their memory profiling beta tools, negative for not getting back to me about the sudden spike in charging us for our group account without warning.  Still I&rsquo;m enjoying seeing memory traces like this one that show the critical memory errors our app is generating in the resting state on develop.</p>
+
+<p><img alt="memory trace with errors" src="https://www.dropbox.com/s/z20m133bcd4b3ph/Screenshot%202016-09-20%2009.09.00.png?dl=1" /></p>
+
+<p>Interestingly those errors are removed from develop by having the setup match production:  </p>
+
+<p><img alt="lower trace with from matching production puma workers and threads" src="https://www.dropbox.com/s/jqwv7pxtdw41nd0/Screenshot%202016-09-20%2009.09.46.png?dl=1" /></p>
+
+<p>Production itself still experiences memory errors, but it&rsquo;s under a higher load:</p>
+
+<p><img alt="production memory errors" src="https://www.dropbox.com/s/poi23wzp8i0wvg8/Screenshot%202016-09-20%2009.34.00.png?dl=1" /></p>
+
+<p>We&rsquo;re basically following Heroku&rsquo;s tips on getting better <a href="https://devcenter.heroku.com/articles/ruby-memory-use">memory performance from Ruby apps</a> which has pointed us to the <code>nearest_time_zone</code> gem as being our biggest memory hog.  Removing it cuts our baseline by about 10% (based on leaving things running overnight):</p>
+
+<p><img alt="reduced baseline profile after removing nearest_timezone" src="https://www.dropbox.com/s/8zg6xgvbzz1nn2x/Screenshot%202016-09-20%2009.10.12.png?dl=1" /></p>
+
+<p>Which leaves us with a complicated choice.  Would that 10% reduction actually help us reduce memory errors in production? Can we re-arrange the way the main app works so that we don&rsquo;t use that gem?  Is that worth it?  Following the heuristics, it feels to me we are getting to the end of the &ldquo;investigating the memory errors&rdquo; issue, and into new issues of trying different solutions to the memory errors, as well as needing to consider how serious these memory errors are, in that the app still seems to be running despite them.</p>
+
+<p>The other task we&rsquo;re bashing away at in parallel is setting up an admin mailer to notify us when the slack invites fail (as they sometimes do).  I&rsquo;d love to drive that with an acceptance test, but the difference in settings in test from production (invites are turned off), and the use of async tasks, means that is a more involved process to create an acceptance test than usual.  We&rsquo;ve gone for a couple of unit tests and pushed the acceptance test into a separate ticket.  This is an example of the higher level heuristics overriding the lower level ones; which makes intuitive sense.  The admin mailer was something we spiked somewhat to get a tracer bullet to see the end to end connection, i.e. see the emails sent.  Although it was ultimately wrapped in a unit test, I berated myself at the end that <em>if</em> I&rsquo;d written a really clear unit test at the start I&rsquo;d have spent less time in the spike, but then again it was seeing the output from the email spike that helped me understand what I needed to be testing.</p>
+
+<p>Drive with tests?  Sure, but let me spike to understand the problem.  More importantly, please let me drive with an acceptance test.  An architecture that doesn&rsquo;t let me easily add an acceptance test always makes me a little uncomfortable.   More heuristics at the coding level.  My intuition is that it&rsquo;s the higher level heuristics that should over-rule the lower level ones.  So on with clearing the decks.  We&rsquo;ll see how that goes &hellip;.</p>
+
+<p>Related Videos</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Qveh4RtiWN4">Pairing on AV main site</a></li>
+<li><a href="https://www.youtube.com/watch?v=UBo8d0Yebyw">&ldquo;Kent Beck&rdquo; scrum</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

@@ -5,10 +5,81 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-09-19T01:00:00+01:00</updated>
+  <updated>2016-09-20T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Clearing the Decks</title>
+    <link rel="alternate" href="http://blog.url.com/2016/09/20/clearing-the-decks/"/>
+    <id>http://blog.url.com/2016/09/20/clearing-the-decks/</id>
+    <published>2016-09-20T01:00:00+01:00</published>
+    <updated>2016-09-20T17:14:36+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Monday involved continuing on two &amp;ldquo;clear the decks&amp;rdquo; tickets that Michael and I had started on the previous Thursday and Friday. The heuristics in my mind thus included:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;clear the decks before starting on something else big&lt;/li&gt;
+&lt;li&gt;finish what you&amp;rsquo;ve started&lt;/li&gt;
+&lt;li&gt;deal with things in the &amp;ldquo;in progress&amp;rdquo; column in your Kanban board to reduce cognitive overload for the team&lt;/li&gt;
+&lt;li&gt;drive-by coding, i.e. try not to get too bogged down in any one thing, make tickets for additional features, refactorings and so forth&lt;/li&gt;
+&lt;li&gt;focus on completing one task rather than constantly worrying if it is the right task&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and that&amp;rsquo;s forming a nice-ish set, even if some of them aren&amp;rsquo;t that pithy :-) Lots of room for improvement there.  There are parallel collections of heuristics being applied in the actual coding going on, e.g.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;be confident (don&amp;rsquo;t keep nil checking)&lt;/li&gt;
+&lt;li&gt;don&amp;rsquo;t mock what you don&amp;rsquo;t own; prefer to introduce adapters you control&lt;/li&gt;
+&lt;li&gt;follow the testing pyramid (few acceptance, some integration and lots of unit tests)&lt;/li&gt;
+&lt;li&gt;keep methods/classes short&lt;/li&gt;
+&lt;li&gt;try to name methods/classes for understandability and maintainability&lt;/li&gt;
+&lt;li&gt;start DRYing once it&amp;rsquo;s clear there is a pattern&lt;/li&gt;
+&lt;li&gt;use Dependency Injection to avoid locking what objects collaborate with&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Many more could be added to the list, but the above are the set that are more to the forefront of my mind at the moment.  There&amp;rsquo;s a cross-talk between the two levels though, because seeing a place where you could use dependency injection, or introduce an adapter can extend the amount of time on task.  If you&amp;rsquo;re practising &amp;ldquo;drive-by&amp;rdquo; coding, then that&amp;rsquo;s a key place to ask if that refactoring needs to be done now, or if it&amp;rsquo;s something to create a ticket for.&lt;/p&gt;
+
+&lt;p&gt;You might say, you must immediately do any refactoring you think of, and if you put it in a ticket it&amp;rsquo;ll never get done.  However there&amp;rsquo;s a counter-example from the LocalSupport project, where we had a nasty case statement, I created a refactoring ticket, and worked on it with someone later, and we eventually completely removed the case statement and replaced it with a gem using the strategy pattern; so that&amp;rsquo;s at least a proof that it&amp;rsquo;s possible in principle :-)&lt;/p&gt;
+
+&lt;p&gt;The thing about refactoring is that there&amp;rsquo;s always a little more you could do, but fundamentally we don&amp;rsquo;t know what the future holds.  As needs change maybe that refactoring will have to be undone, or that code thrown out.  That isn&amp;rsquo;t to disregard general code smells, but it is all relative.  Either way you have the interplay of the different heuristics.  Say you notice you could use some dependency injection, and/or some adapters, which do you work on first?  Or put both in a ticket?&lt;/p&gt;
+
+&lt;p&gt;For the set of heuristics at the higher level there&amp;rsquo;s less conflict for me at the moment.  Focusing on completing one task in a drive-by fashion is all about not getting too distracted, and if the distraction is important, get that distraction into a ticket that you can review later for relative importance and complexity.  Huge ideas about a different direction?  Sure, but let&amp;rsquo;s clear the decks by finishing what we started, especially those things we identified as going in the ready/backlog column in the current sprint.&lt;/p&gt;
+
+&lt;p&gt;So that&amp;rsquo;s all well and good, however the memory leak task that Michael and I started on from the &amp;ldquo;in progress&amp;rdquo; column &amp;ndash; taking on something another developer didn&amp;rsquo;t seem to be progressing on &amp;ndash; was not simple to resolve quickly.  Just investigating the task involves leaving a process running overnight to see what the memory profile is like after 12 hours.  That wasn&amp;rsquo;t too hard to fit into the heuristic since once we had set up a memory profiling experiment we could leave that and move on to something else, but the ticket was still in the &amp;ldquo;in progress&amp;rdquo; column. Hmm &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Mixed shout out to Heroku; positive for their memory profiling beta tools, negative for not getting back to me about the sudden spike in charging us for our group account without warning.  Still I&amp;rsquo;m enjoying seeing memory traces like this one that show the critical memory errors our app is generating in the resting state on develop.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="memory trace with errors" src="https://www.dropbox.com/s/z20m133bcd4b3ph/Screenshot%202016-09-20%2009.09.00.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Interestingly those errors are removed from develop by having the setup match production:  &lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="lower trace with from matching production puma workers and threads" src="https://www.dropbox.com/s/jqwv7pxtdw41nd0/Screenshot%202016-09-20%2009.09.46.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Production itself still experiences memory errors, but it&amp;rsquo;s under a higher load:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="production memory errors" src="https://www.dropbox.com/s/poi23wzp8i0wvg8/Screenshot%202016-09-20%2009.34.00.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;re basically following Heroku&amp;rsquo;s tips on getting better &lt;a href="https://devcenter.heroku.com/articles/ruby-memory-use"&gt;memory performance from Ruby apps&lt;/a&gt; which has pointed us to the &lt;code&gt;nearest_time_zone&lt;/code&gt; gem as being our biggest memory hog.  Removing it cuts our baseline by about 10% (based on leaving things running overnight):&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="reduced baseline profile after removing nearest_timezone" src="https://www.dropbox.com/s/8zg6xgvbzz1nn2x/Screenshot%202016-09-20%2009.10.12.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Which leaves us with a complicated choice.  Would that 10% reduction actually help us reduce memory errors in production? Can we re-arrange the way the main app works so that we don&amp;rsquo;t use that gem?  Is that worth it?  Following the heuristics, it feels to me we are getting to the end of the &amp;ldquo;investigating the memory errors&amp;rdquo; issue, and into new issues of trying different solutions to the memory errors, as well as needing to consider how serious these memory errors are, in that the app still seems to be running despite them.&lt;/p&gt;
+
+&lt;p&gt;The other task we&amp;rsquo;re bashing away at in parallel is setting up an admin mailer to notify us when the slack invites fail (as they sometimes do).  I&amp;rsquo;d love to drive that with an acceptance test, but the difference in settings in test from production (invites are turned off), and the use of async tasks, means that is a more involved process to create an acceptance test than usual.  We&amp;rsquo;ve gone for a couple of unit tests and pushed the acceptance test into a separate ticket.  This is an example of the higher level heuristics overriding the lower level ones; which makes intuitive sense.  The admin mailer was something we spiked somewhat to get a tracer bullet to see the end to end connection, i.e. see the emails sent.  Although it was ultimately wrapped in a unit test, I berated myself at the end that &lt;em&gt;if&lt;/em&gt; I&amp;rsquo;d written a really clear unit test at the start I&amp;rsquo;d have spent less time in the spike, but then again it was seeing the output from the email spike that helped me understand what I needed to be testing.&lt;/p&gt;
+
+&lt;p&gt;Drive with tests?  Sure, but let me spike to understand the problem.  More importantly, please let me drive with an acceptance test.  An architecture that doesn&amp;rsquo;t let me easily add an acceptance test always makes me a little uncomfortable.   More heuristics at the coding level.  My intuition is that it&amp;rsquo;s the higher level heuristics that should over-rule the lower level ones.  So on with clearing the decks.  We&amp;rsquo;ll see how that goes &amp;hellip;.&lt;/p&gt;
+
+&lt;p&gt;Related Videos&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Qveh4RtiWN4"&gt;Pairing on AV main site&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=UBo8d0Yebyw"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Business as Usual</title>
     <link rel="alternate" href="http://blog.url.com/2016/09/19/business-as-usual/"/>
@@ -215,50 +286,6 @@
 &lt;p&gt;Okay, so now I&amp;rsquo;m poised to reclaim that 40 minutes, and get on top of the meaty topics of the week.  Yesterday Michael and I added some tests to, and merged in, a PR on ProjectScope that allows us to update all the metrics using a rake task.  I popped that in a Heroku scheduler so that they&amp;rsquo;ll be daily updates of project metrics.  Clearly key for the Berkeley teaching assistants who are each going to be trying to monitor 8 or so different project teams this semester.  With some misgivings I started using Waffle to organise our workflow, but I think we identified the critical path.  The key thing was a new instance for the Berkeley TAs to use.  The client (Armando) wanted every end point secure, which we&amp;rsquo;ll try to get on today, but I wanted to check that deploy process and the scheduler first - that&amp;rsquo;s critical (Make one change at a time).  We&amp;rsquo;re finding the encrypted application.yml file a bit of a handful - probably more on that tomorrow, but the big thing was that we saw that we now couldn&amp;rsquo;t have a free-tier Heroku instance in our AgileVentures team on Heroku, and more catastrophically they&amp;rsquo;d upgraded our legacy apps to paying tiers.&lt;/p&gt;
 
 &lt;p&gt;Careful review showed that a cluster of apps that were all redundant had each been accumulating charges of $7 a month for the last three months or so.  Not good for a struggling charity startup.  Michael started shutting down the apps, and I contacted Heroku customer support to ask for a refund.  We&amp;rsquo;ll see how that goes &amp;hellip; frustrating stuff.  I totally understand Heroku changing their plan there.  We were using the team feature of Heroku for free for a long while since we took it up as an early beta.   I&amp;rsquo;m &amp;ldquo;happy&amp;rdquo; to pay for our key apps to run on the team, but this all feels like a stab out of the blue.  Did I miss an email alerting me about this?  Have I not been keeping my eye on the ball?  Investigation required, but it seems like the key is keep focusing on doing things that will free up time like ensuring the transition of old phone to son; printing and laminating a FAQ for the under eights football team so I can hand them out to parents to avoid spending time trying to explain things to them while running a practise session; and ruthlessly eliminating, simplifying, automating or delegating anything and everything I spend my time doing during the working day.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>People Are Strange, I Mean Me</title>
-    <link rel="alternate" href="http://blog.url.com/2016/09/12/people-are-strange-i-mean-me/"/>
-    <id>http://blog.url.com/2016/09/12/people-are-strange-i-mean-me/</id>
-    <published>2016-09-12T01:00:00+01:00</published>
-    <updated>2016-09-14T13:41:56+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Okay, so I feel like a bit of a social klutz.  Often there are ideas that seem really important and well-formed in my head, and then I say them and it comes out as a mess.  Also, I think I&amp;rsquo;m not so good about reading the mood-music of the social group around me.  I mean, I get by &amp;hellip;  One to one conversations I think I don&amp;rsquo;t do too badly at.  Case in point regarding bigger groups, this Sunday I was at a football match for my 11 year old.  I know the coach and assistant coach well, and before I started coaching the team for the seven year olds (which my younger twins are in), I was sort of an assistant-assistant coach.  I would referee the matches, help out.  I&amp;rsquo;ve been quite involved.  The coach asked me to video the match on the Sunday, which I did.  So there was the half time team talk and the post-match team talk.  At the end of the half-time team talk I asked to add something about strategy.  What was so clear in my head didn&amp;rsquo;t come out so clearly.  No big deal, but then in the final team talk after the coach had finished reviewing the match with the boys, he asked if the assistant coach or I had anything to say.  The assistant coach made a few points, and I was preparing a simple point in my mind, however when the assistant coach finished the coach said something to the effect of &amp;ldquo;Right, great work everyone, round of applause for the boys&amp;rdquo;, basically a finish up thing.&lt;/p&gt;
-
-&lt;p&gt;What I should have done looking back at it was think like &amp;ldquo;it&amp;rsquo;s hot, people want to get on, the coach is wrapping up and my point&amp;rsquo;s not that important, and just left it&amp;rdquo;, but like so often I don&amp;rsquo;t seem to be able to let these things go.  So I kind of talked over the end of the applause to make a point about communication amongst the team; which is of course doubly ironic, because while I was making the point about the need for effective communication amongst the team players, I was failing to read the communicative situation I was in, where I think it would be much better to have gone with the flow, i.e. to just say nothing.  I felt stupid after, but of course that&amp;rsquo;s no big deal.  I&amp;rsquo;m probably the only one who will remember, and the worst that will be is that a few parents/coaches/players might be affected subtly in a negative direction towards me, although I think I&amp;rsquo;ve been making these communication mistakes all my life, so it&amp;rsquo;s probably more a case of &amp;ldquo;That&amp;rsquo;s just Sam&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;Maybe I&amp;rsquo;m being too hard on myself, but I do feel a big turnaround in my thoughts recently.  I always thought it was of paramount importance to speak the truth and communicate your thoughts, and that was what made me a good communicator.  What I&amp;rsquo;ve realised recently is that often what we think is the &amp;ldquo;truth&amp;rdquo; at one moment is really just a &amp;ldquo;perspective&amp;rdquo; and quite often the value gained from communicating it can be undone by a poor choice of timing.  I&amp;rsquo;m starting to see how important it is to be reading the mood of the others and adjusting one&amp;rsquo;s verbal output as a function of that.  I&amp;rsquo;ve blogged before about the concepts of &amp;ldquo;overloading&amp;rdquo; and &amp;ldquo;blocking&amp;rdquo;.  Overloading is what I commonly do when I give people too much information and under-estimate their level of discomfort.  Blocking is something else that I can easily slip into when someone says something that doesn&amp;rsquo;t match my mental model of reality.  Rather than focusing on connecting with what the other person is feeling, or what they are trying to communicate, I go into academic debate mode trying to compare their statements logically with my model of reality.&lt;/p&gt;
-
-&lt;p&gt;Of course, it all depends.  I guess I need to add &amp;ldquo;timing&amp;rdquo; to the list of &amp;ldquo;blocking&amp;rdquo; and &amp;ldquo;overloading&amp;rdquo;.  Sometimes a block might be appropriate - it&amp;rsquo;s all about relative costs, and how certain you feel about things at the time; but to summarise, I think I tend to block people at the wrong times, I tend to overload them at the wrong times, and hey, I&amp;rsquo;m working on it. :-) This being human thing didn&amp;rsquo;t come with a manual.  I was mercilessly bullied in school and cocooned myself in television programs and computer games from age 13 to 17.  I&amp;rsquo;m still working through that.  It&amp;rsquo;s no excuse for being a irritating person, but I&amp;rsquo;m working on trying to make myself a more pleasant person to interact with. &lt;/p&gt;
-
-&lt;p&gt;The funny thing is that I then also baulk at saying some things that I think are really important because I&amp;rsquo;m worried about upsetting someone, or that they&amp;rsquo;ll respond angrily.   The ironic thing is that I think I often upset people saying things that I hadn&amp;rsquo;t particularly thought through, or that it just hadn&amp;rsquo;t occurred to me would be controversial.  Conversely, when I think something might be inflammatory I beat around the bush, have trouble getting to it, and go into waffle mode.  That&amp;rsquo;s something else I&amp;rsquo;m working on.  I am finding the Non-Violent Communication (NVC) model quite helpful in that regard, which goes something like this:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Tell the person an observation e.g. &amp;ldquo;I notice you seem to be raising your voice&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;Tell the person your feeling e.g. &amp;ldquo;That makes me feel scared&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;Tell them your need e.g. &amp;ldquo;I need to feel safe in my work environment&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;Make a request e.g. &amp;ldquo;I was hoping the you might be able to talk to me a little more quietly&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;Continue the conversation from there, perhaps coming to a compromise, and listening out for needs and feelings that the other person is expressing, reflecting that back to them where appropriate.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Whether it&amp;rsquo;s genetic or the way I grew up, but it seems I&amp;rsquo;m not sensitive enough to social cues from others, and too sensitive to internal fears, maybe?  It&amp;rsquo;s a complicated tuning process.  If I do actually manage to turn up my social sensitivity too much I would probably revert to the state of my 16 year old self, where I was a total wall-flower and would never speak in front of a group.  Famously, the prize winning physicist Richard Feynman published a book called &amp;ldquo;What Do You Care What Other People Think?&amp;rdquo;, which I read when I was 17.  At 17 I seemed to lose all inhibitions and became somewhat of an exhibitionist, being totally happy to speak in front of groups, the bigger the better.  I got involved in amateur dramatics and was happily oblivious to the many people who probably thought I was a total idiot.  What do I care what other people think?  Well ultimately I don&amp;rsquo;t, really, but I don&amp;rsquo;t want to irritate them unnecessarily.  I&amp;rsquo;d also like to collaborate with them on cool projects, and I&amp;rsquo;d really prefer not to upset them.&lt;/p&gt;
-
-&lt;p&gt;While there&amp;rsquo;s plenty for me to improve, I don&amp;rsquo;t think it&amp;rsquo;s entirely about me.  The other thing I notice is that most people seem pretty reluctant to share how they feel.  Maybe perfectly sensibly people will not say &amp;ldquo;you&amp;rsquo;re irritating me&amp;rdquo; or &amp;ldquo;stop that&amp;rdquo;.  They&amp;rsquo;ll just let you carry on and then avoid you in the future.  This is not to criticise others, per se.  I mean it&amp;rsquo;s not that everyone has a responsibility to be able to pinpoint why they are irritated with something you&amp;rsquo;ve done and provide feedback in a format you can digest; particularly if you&amp;rsquo;re someone who will react by contesting their point.  People are trying to live their lives, fight their own battles, improve themselves.  Everyone&amp;rsquo;s on their own journey, and while we always have great insight into our own pain and struggle, we really don&amp;rsquo;t know what it&amp;rsquo;s like for others.  Why should they make any exceptions for our poor behaviour?&lt;/p&gt;
-
-&lt;p&gt;Anyhow, I can&amp;rsquo;t control other people&amp;rsquo;s reactions to me.  I have trouble enough controlling my own behaviour, or at least trouble breaking the habits of a lifetime.  So the real responsibility has to lie with me to get my sensitivity to social cues set correctly.  Of course the other problem I have is with putting too much pressure on myself to get things right.  Trying too hard to adjust myself may well be counter-productive. :-) Anyway, let&amp;rsquo;s wrap this self-diagnosis up with a little more on what I was planning to write about, which is the strangeness of people.  I think it&amp;rsquo;s this thing where people tend to not say what they are thinking and just not show up. I can illustrate with a story from when I was 13 and had just started high school.  I and some others were learning the trumpet.  The vivacious music teacher was very keen for us to be in the school orchestra.  &lt;/p&gt;
-
-&lt;p&gt;I think that we had no interest in being in the school orchestra.  It meant additional practise and playing in a big group. That wasn&amp;rsquo;t our idea of fun.  I remember getting grief from the music teacher because I told her straight that I didn&amp;rsquo;t want to be in the orchestra.  My &amp;ldquo;friends&amp;rdquo; at the time didn&amp;rsquo;t confront the music teacher. They just didn&amp;rsquo;t show up for orchestra practise.  I always remember that I thought that was back to front.  I was being honest and straightforward, while others were just ducking out and got a much easier ride as a result. However maybe they were smarter than me; sensibly avoiding confrontation.  I see this all over the place; people preferring to just not show up, or not do, with no explanation, rather than providing an honest assertion that they don&amp;rsquo;t want to do something, or that they can&amp;rsquo;t make it.  Maybe this is just some part of the missing &amp;ldquo;how to be human manual&amp;rdquo; that my peers were discovering by interacting with each other between the ages of 13 and 17 when I was wrapped up in 8 bit computer games, game shows, sitcoms and TV dramas.  Who knows? :-) It&amp;rsquo;s complicated, this life stuff.  I do like the NVC framework though - I really think that has helped me address some tough issues when I&amp;rsquo;ve realised that something is highly contentious; or at least I&amp;rsquo;m nervous about saying it.  I&amp;rsquo;ll just keep working on my framework for being an effective social human being.  Three things in the list now:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Timing&lt;/li&gt;
-&lt;li&gt;Blocking&lt;/li&gt;
-&lt;li&gt;Overloading&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I&amp;rsquo;ll keep tinkering with it till I get something that works. :-)&lt;/p&gt;
 </content>
   </entry>
 </feed>
