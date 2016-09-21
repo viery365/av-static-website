@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Missed Ships</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_09 x2016_09_21 x2016_09_21_missed-ships x2016_09_21_missed-ships_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/09/21/missed-ships/">Missed Ships</a></h2>
+        <h5 class='date'>21 Sep 2016</h5>
+    <p>I got confused yesterday about adjustments to the pairing schedule.  I thought Michael was going to be available later in the day, but actually he had to leave early.   As a result our pairing was contracted to an hour, and he started on a new task working solo.  Michael was looking at adjusting the way we managed our 3rd party JavaScript assets in the WebSiteOne Rails app.  We&rsquo;ve been storing them in the vendor directory and checking them into our source code repository.  This doesn&rsquo;t make for a smooth upgrade and dependency management strategy.  </p>
+
+<p>We&rsquo;ve been hearing that npm is becoming the standard for JavaScript dependency management, with bower falling out of favour.  Although clearly the <a href="https://www.quora.com/Why-use-Bower-when-there-is-npm">conversation is still ongoing</a>.  Anyhow, Michael started some <a href="https://github.com/AgileVentures/WebsiteOne/pull/1278">solo work</a>, adding a package.json and a script to copy files from the node_modules directory into the rails vendor directory.  In our quick pairing session we got his spike working on my machine, and updated the install documentation.  After Michael had to go I made some adjustments to our CI and the heroku build packs to ensure that this would all work with the rest of our development pipeline.  I think I sorted the CI, but not the heroku, which required another solo pass from Michael after I got back, although the fact that I was migrating our servers from group to individual accounts means I&rsquo;m not sure we&rsquo;ve been able to run a final check that the Heroku install works.</p>
+
+<p>Anyhow, it&rsquo;s interesting that I would not have picked this particular task off the backlog if Michael and I were choosing together.  I&rsquo;d have been pushing for things that might have a more direct impact for our users.  Michael chose this one because he was interested in it, which is a great motivation.  I would also have been worried about opening a can of worms here.  However it seems like we might have been able to sort it in an otherwise chaotic day, and we&rsquo;ve explored an important part of our stack, as well as revealing some JavaScript files that shouldn&rsquo;t have been checked in.</p>
+
+<p>Modern software engineer management often talks about groups like Steam or Github where groups of programmers just experiment with things that interest them and those things turn into &ldquo;product&rdquo; as a function of programmer interest.  I&rsquo;d find it easier to take that attitude if I was independently wealthy and not worrying about whether I&rsquo;ll have to go find a different job or completely pivot in three months or so :-)  However as I was saying in the heuristics blog yesterday, once you&rsquo;ve started a task &hellip; my strong temptation is often to try and switch tasks, or rebuild something, but maybe that&rsquo;s just too disruptive?  Strains the social bonds of the people you&rsquo;re working with?  Pick your battles they say :-)</p>
+
+<p>Michael is looking ahead to interesting vistas involving replacing the whole Rails asset pipeline with npm and gulp, which is apparently the in-thing these days.  The issue that was highlighted to me yesterday is how we need to improve and update our installation documentation.  We&rsquo;ve migrated the wiki into the repo doc directory, but there&rsquo;s still a lot of cleanup to do.  I&rsquo;m also reminded that this stuff needs to be tested with installs on fresh machines.  I did an install on C9 yesterday which went smoothly, but made it look like this could be turned into an install script.</p>
+
+<p>I also installed docker and used it to create a vanilla ubuntu instance, that I started installing WSO on.  Docker was great - installing WSO on ubuntu less so, with a series of sticking issues for the upfront install of phantomjs using npm.  I was pleased to find a way round my old friend:</p>
+<pre class="highlight plaintext"><code>root@8c7aad239bc9:~# npm install -g phantomjs
+npm WARN deprecated phantomjs@2.1.7: Package renamed to phantomjs-prebuilt. Please update 'phantomjs' package references to 'phantomjs-prebuilt'
+npm WARN deprecated tough-cookie@2.2.2: ReDoS vulnerability parsing Set-Cookie https://nodesecurity.io/advisories/130
+/root/.nvm/versions/node/v5.10.1/bin/phantomjs -&gt; /root/.nvm/versions/node/v5.10.1/lib/node_modules/phantomjs/bin/phantomjs
+
+&gt; phantomjs@2.1.7 install /root/.nvm/versions/node/v5.10.1/lib/node_modules/phantomjs
+&gt; node install.js
+
+sh: 1: node: Permission denied
+</code></pre>
+<p>with http://sourcode.net/sh-1-node-permission-denied/</p>
+
+<p>but that only lead me to a follow up error:</p>
+<pre class="highlight plaintext"><code>root@8c7aad239bc9:~# npm install phantomjs
+npm WARN deprecated phantomjs@2.1.7: Package renamed to phantomjs-prebuilt. Please update 'phantomjs' package references to 'phantomjs-prebuilt'
+npm WARN deprecated tough-cookie@2.2.2: ReDoS vulnerability parsing Set-Cookie https://nodesecurity.io/advisories/130
+
+&gt; phantomjs@2.1.7 install /root/node_modules/phantomjs
+&gt; node install.js
+
+PhantomJS not found on PATH
+Download already available at /tmp/phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
+Verified checksum of previously downloaded file
+Extracting tar contents (via spawned process)
+Error extracting archive
+Phantom installation failed { Error: Command failed: tar jxf /tmp/phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
+tar (child): bzip2: Cannot exec: No such file or directory
+tar (child): Error is not recoverable: exiting now
+tar: Child returned status 2
+tar: Error is not recoverable: exiting now
+</code></pre>
+<p>and it was getting late.  I did try a few things, but I left that to tinker with later.  I probably should get more into docker and look into not accessing that ubuntu image as root.  I&rsquo;m intrigued by the idea of publishing a WSO docker image and/or docker install script.  What would be really nice would be if our install scripts (docker or otherwise) could be run via acceptance tests.  It&rsquo;s ironic that our CI is installing the app from scratch a dozen times a day.  We really should have an instantaneous deploy for anyone wanting to get set up with the project.</p>
+
+<p>So anyway, maybe me screwing up the pairing schedule was serendipitous.  I often find myself shy of things that I think will take a long time, but then my intuitions are also wrong sometimes.  I remember when an AV volunteer (Pavel) first set up Travis for us.  Not knowing much about it it felt like a big thing to get into; and then I saw that all Pavel had done was flick a switch and add a .travis.yml file.  Of course there&rsquo;s a lot more to go wrong with CI as your project gets bigger, but sometimes the younger person just giving things a try, reveals that the older person&rsquo;s fears of a briar patch are unfounded.  And then there are other times when the older person&rsquo;s fears are correct and you get stuck in a sticky mess.  If only one could predict reliably which way round it&rsquo;s going to end up &hellip; :-)  </p>
+
+<p>So my moral for today is pair with people of all levels, and don&rsquo;t beat yourself up too much when you screw up the schedule, or start on a task you have misgivings about.  Better to enjoy the process and see what emerges :-)</p>
+
+<p>Related Videos:</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=OihKyI6SEew">Pairing on AV main site</a></li>
+<li><a href="https://www.youtube.com/watch?v=hbO9l328TR0">&ldquo;Kent Beck&rdquo; scrum</a></li>
+</ul>
+
+<p>Related Links:</p>
+
+<ul>
+<li><a href="https://github.com/rstacruz/npm-pipeline-rails">https://github.com/rstacruz/npm-pipeline-rails</a></li>
+<li><a href="https://gofore.com/stop-using-bower/">https://gofore.com/stop-using-bower/</a></li>
+<li><a href="https://medium.com/@nickheiner/why-my-team-uses-npm-instead-of-bower-eecfe1b9afcb">https://medium.com/@nickheiner/why-my-team-uses-npm-instead-of-bower-eecfe1b9afcb</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

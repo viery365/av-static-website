@@ -5,10 +5,83 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-09-20T01:00:00+01:00</updated>
+  <updated>2016-09-21T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Missed Ships</title>
+    <link rel="alternate" href="http://blog.url.com/2016/09/21/missed-ships/"/>
+    <id>http://blog.url.com/2016/09/21/missed-ships/</id>
+    <published>2016-09-21T01:00:00+01:00</published>
+    <updated>2016-09-21T21:00:32+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;I got confused yesterday about adjustments to the pairing schedule.  I thought Michael was going to be available later in the day, but actually he had to leave early.   As a result our pairing was contracted to an hour, and he started on a new task working solo.  Michael was looking at adjusting the way we managed our 3rd party JavaScript assets in the WebSiteOne Rails app.  We&amp;rsquo;ve been storing them in the vendor directory and checking them into our source code repository.  This doesn&amp;rsquo;t make for a smooth upgrade and dependency management strategy.  &lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve been hearing that npm is becoming the standard for JavaScript dependency management, with bower falling out of favour.  Although clearly the &lt;a href="https://www.quora.com/Why-use-Bower-when-there-is-npm"&gt;conversation is still ongoing&lt;/a&gt;.  Anyhow, Michael started some &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1278"&gt;solo work&lt;/a&gt;, adding a package.json and a script to copy files from the node_modules directory into the rails vendor directory.  In our quick pairing session we got his spike working on my machine, and updated the install documentation.  After Michael had to go I made some adjustments to our CI and the heroku build packs to ensure that this would all work with the rest of our development pipeline.  I think I sorted the CI, but not the heroku, which required another solo pass from Michael after I got back, although the fact that I was migrating our servers from group to individual accounts means I&amp;rsquo;m not sure we&amp;rsquo;ve been able to run a final check that the Heroku install works.&lt;/p&gt;
+
+&lt;p&gt;Anyhow, it&amp;rsquo;s interesting that I would not have picked this particular task off the backlog if Michael and I were choosing together.  I&amp;rsquo;d have been pushing for things that might have a more direct impact for our users.  Michael chose this one because he was interested in it, which is a great motivation.  I would also have been worried about opening a can of worms here.  However it seems like we might have been able to sort it in an otherwise chaotic day, and we&amp;rsquo;ve explored an important part of our stack, as well as revealing some JavaScript files that shouldn&amp;rsquo;t have been checked in.&lt;/p&gt;
+
+&lt;p&gt;Modern software engineer management often talks about groups like Steam or Github where groups of programmers just experiment with things that interest them and those things turn into &amp;ldquo;product&amp;rdquo; as a function of programmer interest.  I&amp;rsquo;d find it easier to take that attitude if I was independently wealthy and not worrying about whether I&amp;rsquo;ll have to go find a different job or completely pivot in three months or so :-)  However as I was saying in the heuristics blog yesterday, once you&amp;rsquo;ve started a task &amp;hellip; my strong temptation is often to try and switch tasks, or rebuild something, but maybe that&amp;rsquo;s just too disruptive?  Strains the social bonds of the people you&amp;rsquo;re working with?  Pick your battles they say :-)&lt;/p&gt;
+
+&lt;p&gt;Michael is looking ahead to interesting vistas involving replacing the whole Rails asset pipeline with npm and gulp, which is apparently the in-thing these days.  The issue that was highlighted to me yesterday is how we need to improve and update our installation documentation.  We&amp;rsquo;ve migrated the wiki into the repo doc directory, but there&amp;rsquo;s still a lot of cleanup to do.  I&amp;rsquo;m also reminded that this stuff needs to be tested with installs on fresh machines.  I did an install on C9 yesterday which went smoothly, but made it look like this could be turned into an install script.&lt;/p&gt;
+
+&lt;p&gt;I also installed docker and used it to create a vanilla ubuntu instance, that I started installing WSO on.  Docker was great - installing WSO on ubuntu less so, with a series of sticking issues for the upfront install of phantomjs using npm.  I was pleased to find a way round my old friend:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;root@8c7aad239bc9:~# npm install -g phantomjs
+npm WARN deprecated phantomjs@2.1.7: Package renamed to phantomjs-prebuilt. Please update 'phantomjs' package references to 'phantomjs-prebuilt'
+npm WARN deprecated tough-cookie@2.2.2: ReDoS vulnerability parsing Set-Cookie https://nodesecurity.io/advisories/130
+/root/.nvm/versions/node/v5.10.1/bin/phantomjs -&amp;gt; /root/.nvm/versions/node/v5.10.1/lib/node_modules/phantomjs/bin/phantomjs
+
+&amp;gt; phantomjs@2.1.7 install /root/.nvm/versions/node/v5.10.1/lib/node_modules/phantomjs
+&amp;gt; node install.js
+
+sh: 1: node: Permission denied
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;with http://sourcode.net/sh-1-node-permission-denied/&lt;/p&gt;
+
+&lt;p&gt;but that only lead me to a follow up error:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;root@8c7aad239bc9:~# npm install phantomjs
+npm WARN deprecated phantomjs@2.1.7: Package renamed to phantomjs-prebuilt. Please update 'phantomjs' package references to 'phantomjs-prebuilt'
+npm WARN deprecated tough-cookie@2.2.2: ReDoS vulnerability parsing Set-Cookie https://nodesecurity.io/advisories/130
+
+&amp;gt; phantomjs@2.1.7 install /root/node_modules/phantomjs
+&amp;gt; node install.js
+
+PhantomJS not found on PATH
+Download already available at /tmp/phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
+Verified checksum of previously downloaded file
+Extracting tar contents (via spawned process)
+Error extracting archive
+Phantom installation failed { Error: Command failed: tar jxf /tmp/phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
+tar (child): bzip2: Cannot exec: No such file or directory
+tar (child): Error is not recoverable: exiting now
+tar: Child returned status 2
+tar: Error is not recoverable: exiting now
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and it was getting late.  I did try a few things, but I left that to tinker with later.  I probably should get more into docker and look into not accessing that ubuntu image as root.  I&amp;rsquo;m intrigued by the idea of publishing a WSO docker image and/or docker install script.  What would be really nice would be if our install scripts (docker or otherwise) could be run via acceptance tests.  It&amp;rsquo;s ironic that our CI is installing the app from scratch a dozen times a day.  We really should have an instantaneous deploy for anyone wanting to get set up with the project.&lt;/p&gt;
+
+&lt;p&gt;So anyway, maybe me screwing up the pairing schedule was serendipitous.  I often find myself shy of things that I think will take a long time, but then my intuitions are also wrong sometimes.  I remember when an AV volunteer (Pavel) first set up Travis for us.  Not knowing much about it it felt like a big thing to get into; and then I saw that all Pavel had done was flick a switch and add a .travis.yml file.  Of course there&amp;rsquo;s a lot more to go wrong with CI as your project gets bigger, but sometimes the younger person just giving things a try, reveals that the older person&amp;rsquo;s fears of a briar patch are unfounded.  And then there are other times when the older person&amp;rsquo;s fears are correct and you get stuck in a sticky mess.  If only one could predict reliably which way round it&amp;rsquo;s going to end up &amp;hellip; :-)  &lt;/p&gt;
+
+&lt;p&gt;So my moral for today is pair with people of all levels, and don&amp;rsquo;t beat yourself up too much when you screw up the schedule, or start on a task you have misgivings about.  Better to enjoy the process and see what emerges :-)&lt;/p&gt;
+
+&lt;p&gt;Related Videos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=OihKyI6SEew"&gt;Pairing on AV main site&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=hbO9l328TR0"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Related Links:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/rstacruz/npm-pipeline-rails"&gt;https://github.com/rstacruz/npm-pipeline-rails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gofore.com/stop-using-bower/"&gt;https://gofore.com/stop-using-bower/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://medium.com/@nickheiner/why-my-team-uses-npm-instead-of-bower-eecfe1b9afcb"&gt;https://medium.com/@nickheiner/why-my-team-uses-npm-instead-of-bower-eecfe1b9afcb&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Clearing the Decks</title>
     <link rel="alternate" href="http://blog.url.com/2016/09/20/clearing-the-decks/"/>
@@ -260,32 +333,6 @@
 &lt;p&gt;The itch I still want to scratch though is how fast I could make an express or Sinatra micro service to do the same thing.  Am I delusional that I think I could do the Sinatra one in a couple of days and the express one in half a day?  I won&amp;rsquo;t drag Michael on that whale hunt :-) I think that&amp;rsquo;s just something I need to waste my own spare time on to help in my internal estimation process.  I also worry that my constant questioning of the architecture of the system is kind of draining for people.  I want to work on the things that will deliver the most value to our users, and in turn generate revenue for AgileVentures that makes the whole charity enterprise sustainable.  I have so many thoughts, so many possibilities, but it really isn&amp;rsquo;t clear to me where to focus.  Would it be easier for everyone if I just pretended that I was certain that a particular approach was the best? :-) Maybe that debate is just something that I should be having internally without dumping it on other people through blogs, scrums and pairing sessions?&lt;/p&gt;
 
 &lt;p&gt;I just love that feeling when you can jump up a level and say, right, we don&amp;rsquo;t need to build X, we can achieve our goal by building Y.  I love jumping those levels.  I guess many others like to stay focused on one level, at least for longer than I do.  If one thing is certain it is that I think too much :-) More doing, less thinking/debating perhaps? :-) Still, the whole reason I enjoy working with AV is thinking about the architectural/team/structural decisions and how they can make us more efficient and sustainable.  I&amp;rsquo;ll save the other thoughts I have on that for another micro-services blog.  In the meantime I think we can reflect that pithy sayings and heuristics can often be contradictory, but the take home today is: make sure your production and staging environments are as similar as they can possibly be!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Eye on the Ball</title>
-    <link rel="alternate" href="http://blog.url.com/2016/09/13/eye-on-the-ball/"/>
-    <id>http://blog.url.com/2016/09/13/eye-on-the-ball/</id>
-    <published>2016-09-13T01:00:00+01:00</published>
-    <updated>2016-09-14T13:41:56+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;My last few days have been taken up a lot with transferring data between iPhones.  This has been precipitated by the gradually faltering abilities of my 2 year old iPhone 5S:  Trickle charge not working, normal charging intermittent except with specific cables.  Also, my eldest son is starting cycling to a high school that&amp;rsquo;s some distance away.  He wants a phone to stay in touch with his circle of friends, some of whom are starting at other schools even further away.  My wife and I have been &amp;ldquo;technologically conservative&amp;rdquo;.  We&amp;rsquo;ve held off getting a phone for him, while his peer group now all seems to have one and use texting and whatsapp to arrange get togethers etc.  &lt;/p&gt;
-
-&lt;p&gt;So the social pressure has mounted to get him a phone.  The last 10 days I&amp;rsquo;ve been cycling with him to school to check his road safety, and that&amp;rsquo;s great exercise and it&amp;rsquo;s nice to spend the time with him, but it&amp;rsquo;s taking a good 40 minutes plus out of my work day, which is difficult given I&amp;rsquo;m trying to get the new AgileVentures charity enterprise off the ground (burning my savings to do so), and also my increasing commitments to the under eights football team, which has had an explosion of players this season.  Anyhow, so I bought an iPhone SE directly from Apple because I&amp;rsquo;m not interested in a larger phone.  What I should have done was do the immediate sync of data, but as I do recently when I upgrade laptops, I was tempted not to in order to switch items over one at a time.  Have a clear out so to speak.&lt;/p&gt;
-
-&lt;p&gt;That approach has worked very well for me on laptops.  Going through the re-install process for all the software and projects is a sharp reminder of the install process for people trying to onboard onto our AgileVentures open source projects.  However it turned out to be a bad choice for a quick move to the new phone, or at least, a bad choice when I was trying to quickly decommission the old phone so that my son could use it, take it with him on the commute to school and calm my &amp;ldquo;he&amp;rsquo;ll be knocked off his bike and not be able to phone for help!&amp;rdquo; paranoia sufficiently so I can reclaim the missing 40 minutes of my day that I need to get back on top of the current work avalanche.&lt;/p&gt;
-
-&lt;p&gt;What&amp;rsquo;s rather frustrating is the time I invested in the independent move of data - re-entering all my email data, migrating whatsapp messages through iCloud etc., but the real sticking point was the 1Password app.  I got that on iPhone a couple of years ago. It works really well; allows me to manage complex passwords for things that really should be secure like Stripe on the phone.  However since I got 1password on my iPhone they&amp;rsquo;ve pivoted their approach so that now there are family and business accounts; new approaches to sharing.  I&amp;rsquo;ve also been using LastPass, but they charge for their mobile support, so I was finding myself in a sticky situation.  I&amp;rsquo;d burned a lot of time with a gradual transfer that kind of relied on me having my old phone around as backup.  However I needed to give up the old phone to my son, and although he&amp;rsquo;s pretty responsible, there&amp;rsquo;s a chance he might lose it, and so I really need to wipe all the old data off that phone before giving it to him.&lt;/p&gt;
-
-&lt;p&gt;Lots of time was burnt on that last night that I would have preferred to spend on practising the guitar or working on next Saturday&amp;rsquo;s football training session for the under-eights.  It&amp;rsquo;s all quite stressful, not least because of the memories it brings up of my own high-school days, and this transition involving my eldest son taking/getting more and more independence! :-)  Judgement call on judgement call!  I went for doing the sync after all, throwing out the time I had spent on the step by step, and despite knowing that maybe there would be problems with doing the sync itself.  My old phone was still on iOS7 (I&amp;rsquo;d got conservative. As an iOS dev I knew you couldn&amp;rsquo;t downgrade once you upgrade), the new one is on iOS10, but thank goodness it worked out.  All the old apps including 1Password now work on the new phone; although I didn&amp;rsquo;t really have the heart to do a full test of all the Japanese banking apps yet &amp;hellip;  &lt;/p&gt;
-
-&lt;p&gt;And the other thing is this new &amp;ldquo;Find Friends&amp;rdquo; app - I upgraded what is now my son&amp;rsquo;s phone to iOS10 and it seems I can now track where he is.  So he cycled to high school by himself for the first time this morning and I was able to follow his progress.  He texted me to say he had got to school, and I could see he was there.  Big brother or what!  This really does feel like science fiction, although clearly it&amp;rsquo;s been totally possible for the last 10 years or so; that it was such a relatively simple set up on iOS10 gives me pause for thought.&lt;/p&gt;
-
-&lt;p&gt;Okay, so now I&amp;rsquo;m poised to reclaim that 40 minutes, and get on top of the meaty topics of the week.  Yesterday Michael and I added some tests to, and merged in, a PR on ProjectScope that allows us to update all the metrics using a rake task.  I popped that in a Heroku scheduler so that they&amp;rsquo;ll be daily updates of project metrics.  Clearly key for the Berkeley teaching assistants who are each going to be trying to monitor 8 or so different project teams this semester.  With some misgivings I started using Waffle to organise our workflow, but I think we identified the critical path.  The key thing was a new instance for the Berkeley TAs to use.  The client (Armando) wanted every end point secure, which we&amp;rsquo;ll try to get on today, but I wanted to check that deploy process and the scheduler first - that&amp;rsquo;s critical (Make one change at a time).  We&amp;rsquo;re finding the encrypted application.yml file a bit of a handful - probably more on that tomorrow, but the big thing was that we saw that we now couldn&amp;rsquo;t have a free-tier Heroku instance in our AgileVentures team on Heroku, and more catastrophically they&amp;rsquo;d upgraded our legacy apps to paying tiers.&lt;/p&gt;
-
-&lt;p&gt;Careful review showed that a cluster of apps that were all redundant had each been accumulating charges of $7 a month for the last three months or so.  Not good for a struggling charity startup.  Michael started shutting down the apps, and I contacted Heroku customer support to ask for a refund.  We&amp;rsquo;ll see how that goes &amp;hellip; frustrating stuff.  I totally understand Heroku changing their plan there.  We were using the team feature of Heroku for free for a long while since we took it up as an early beta.   I&amp;rsquo;m &amp;ldquo;happy&amp;rdquo; to pay for our key apps to run on the team, but this all feels like a stab out of the blue.  Did I miss an email alerting me about this?  Have I not been keeping my eye on the ball?  Investigation required, but it seems like the key is keep focusing on doing things that will free up time like ensuring the transition of old phone to son; printing and laminating a FAQ for the under eights football team so I can hand them out to parents to avoid spending time trying to explain things to them while running a practise session; and ruthlessly eliminating, simplifying, automating or delegating anything and everything I spend my time doing during the working day.&lt;/p&gt;
 </content>
   </entry>
 </feed>
