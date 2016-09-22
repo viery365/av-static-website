@@ -5,10 +5,128 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-09-21T01:00:00+01:00</updated>
+  <updated>2016-09-22T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Can't We Go Any Faster?</title>
+    <link rel="alternate" href="http://blog.url.com/2016/09/22/cant-we-go-any-faster/"/>
+    <id>http://blog.url.com/2016/09/22/cant-we-go-any-faster/</id>
+    <published>2016-09-22T01:00:00+01:00</published>
+    <updated>2016-09-22T11:09:38+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Got the pairing times right today, but didn&amp;rsquo;t get started as early as we could.  Having a family and working from home means that things can easily come up, like suddenly my eldest needs a new school approved calculator which is sold out on Amazon.  Anyway, we managed two and a half hours or so.  The new JavaScript vendor pipeline looking good due to Michael&amp;rsquo;s solo follow up work.  We created a small flurry of tickets of possible follow up issues.  We were close to sliding into working on them, and in the background Michael actually resolved one issue about un-needed JavaScript files before we&amp;rsquo;d completed an async vote on the subject.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s become increasingly clear to me that it&amp;rsquo;s counter-productive to stand on ceremony with these things.  Running the async votes is definitely an overhead that I would like to automate away, but let&amp;rsquo;s see if perhaps we don&amp;rsquo;t want to return to the kickoff/retro meeting.  I notice Armando Fox&amp;rsquo;s students voting to &lt;a href="http://saasbook.blogspot.co.uk/2016/09/flipped-classroom-no-thanks-id-rather.html"&gt;return to a lecture format&lt;/a&gt;, but that&amp;rsquo;s getting off my main point that if your pair partner or colleague has just got something working, it&amp;rsquo;s not the time to say &amp;ldquo;you should have waited for the vote to complete&amp;rdquo;.  There are lots of great heuristics like not working on issues that haven&amp;rsquo;t been voted on, but that&amp;rsquo;s not a suggestion, not a law to be enforced.  Working effectively is not about getting them to adopt your latest thinking on how things should be done, it&amp;rsquo;s about accepting the way they work and finding a collaborative path.&lt;/p&gt;
+
+&lt;p&gt;I guess some people get away with &amp;ldquo;It&amp;rsquo;s my way, or the highway&amp;rdquo; but that&amp;rsquo;s not much fun, and what I really don&amp;rsquo;t want is to &lt;em&gt;accidentally&lt;/em&gt; go that way.  Anyhow, so I had a backlog of tickets in my mind, which I also got into the issues list:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1281"&gt;Relace CoreJS-Typeahead (to remove bower dependency)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1283"&gt;investigate removing or replacing cubeportfolio.js/confy.js&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1284"&gt;investigate options for other items in vendor/assets/javascript&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1286"&gt;updating installation documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1287"&gt;replacing nearest_timezone&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1288"&gt;investigate other possible sources of memory leak&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So Michael had removed cubeportfolio.js/confy.js before the dust had settled. We could have followed up on other items relating to the JavaScript vendor upgrade such as removing the bower dependency, or trying to modularise other libraries, but I was itching to make some other kinds of changes.  I closed out our existing memory investigation ticket and replaced it with two new ones - one for more investigation in general and another for removing a heavyweight gem.  There was also the issue of the install documentation.&lt;/p&gt;
+
+&lt;p&gt;The two other things on my mind were improving out hangout telemetry and the profile of our premium plan.  The former might allow us better understand how the pairing sessions would go in this next run of the MOOC, while the later might improve our balance sheet. As we investigated it seemed we didn&amp;rsquo;t have tickets for some of the things that Michael and I had been regularly discussing, specifically for giving members Karma credit for &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1290"&gt;participating in, rather than just starting, hangouts&lt;/a&gt;.  I had been thinking that this would require a refactoring of the way we represented hangout data that would also be part of improving our telemetry (which we also didn&amp;rsquo;t have an explicit &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1291"&gt;ticket&lt;/a&gt; for).  In fact the ticket we did have was focused on improving hangout participant &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1197"&gt;identity tracking&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To explain, from our hangout plugin, we get a hangout participants G+ id.  Those AgileVenture members who have authenticated with G+ on our site have a G+ id associated with their account.  For those members in principle we can connect their presence in a hangout with their AV account.  This allows us to display more information about who was in a hangout in the &lt;a href="http://www.agileventures.org/hangouts"&gt;past events view&lt;/a&gt;.  In order to encourage people to link up with their G+ accounts we&amp;rsquo;d already increased the amount of Karma you get for making that connection.  A quick check on the production DB indicated that a third of our members were connected up.  We should have checked that number several months back when we made the change to give us a hint if the change had an impact.  Doh!&lt;/p&gt;
+
+&lt;p&gt;Given that we&amp;rsquo;d had a long period when the G+ signup was not working at all, I was pleasantly surprised to find a third of our members connected, and while I&amp;rsquo;m not sure if that&amp;rsquo;s due to our change to the Karma, or fixing the G+ signup (although I guess I could do more mining to get more hints), it drew me away from the ticket&amp;rsquo;s focus of increasing G+ identity match up.  Or at least it pushed me to say, we have the incentive in place, we&amp;rsquo;ll need to make Karma more visible so that the incentive has greater chance of working.  I threw a load of thoughts about that into the ticket itself:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[ ] G+ link up might improve if we give more credit for participating in hangouts #1290 potentially helps here&lt;/li&gt;
+&lt;li&gt;[ ] perhaps more importantly we need more people to be aware of karma
+
+&lt;ul&gt;
+&lt;li&gt;[ ] linking karma number to breakdown on user page #1245&lt;/li&gt;
+&lt;li&gt;[ ] breakdown on user page is hidden in sub-tab&lt;/li&gt;
+&lt;li&gt;[ ] breakdown doesn&amp;rsquo;t look so nice&lt;/li&gt;
+&lt;li&gt;[ ] need to mail members about their karma scores?  slack ping them?&lt;/li&gt;
+&lt;li&gt;[ ] tooltips to explain things&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And I found myself making tickets that I thought should have already existed (I did search) on these things that Michael and I had been discussing a lot.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1290"&gt;improve hangout telemetry
+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1291"&gt;give karma credit for participating in a hangout &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and Michael also started speculating about further &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1292"&gt;gamification&lt;/a&gt; of Karma, which I&amp;rsquo;d love to get into.  Anyhow, a little playing on the production DB showed that actually we could grab an indication of hangout participation without needing a big refactor:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;EventInstance&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;select&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;participants&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;nil?&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;participants&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;values&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;count&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;participants&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;values&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;any?&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'person'&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'id'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"103524399391704001670"&lt;/span&gt;&lt;span class="p"&gt;}}.&lt;/span&gt;&lt;span class="nf"&gt;count&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The EventInstance (or hangout) class, currently stores a text string representation of the JSON that comes back from the HangoutPlugin, which looks like this:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"0"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"hangoutA749C12C_ephemeral.id.google.com^6285825550"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"hasMicrophone"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"hasCamera"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"hasAppEnabled"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"isBroadcaster"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"isInBroadcast"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"displayIndex"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"0"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"person"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"108104108523167071445"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;"displayName"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"Michael C"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;"image"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"url"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"https://lh5.googleusercontent.com/-AtamIgns520/AAAAAAAAAAI/AAAAAAAAAAA/4TTnoJlntEM/s96-c/photo.jpg"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+     &lt;span class="s2"&gt;"qa"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+   &lt;span class="s2"&gt;"locale"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"en"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"qa"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+ &lt;span class="s2"&gt;"1"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"hangoutEDC38696_ephemeral.id.google.com^4f0e2ab2d8"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"hasMicrophone"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"hasCamera"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"hasAppEnabled"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"isBroadcaster"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"isInBroadcast"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"displayIndex"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"1"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"person"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"103524399391704001670"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;"displayName"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"Sam Joseph"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+     &lt;span class="s2"&gt;"image"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"url"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"https://lh3.googleusercontent.com/-Kt12k8aqqTs/AAAAAAAAAAI/AAAAAAAAAAA/TL0ZFPtM2Tc/s96-c/photo.jpg"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+     &lt;span class="s2"&gt;"qa"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+   &lt;span class="s2"&gt;"locale"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"en"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+   &lt;span class="s2"&gt;"qa"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It&amp;rsquo;s stored using the serialise method, so we get back a ruby object, which allows for the above code to work without requiring a parsing step.  Effectively we&amp;rsquo;ve got a micro noSQL database inside out bigger SQL relational database.  The computation over the entire dataset for an individual is not particular fast, but it doesn&amp;rsquo;t take more than a second, and since we&amp;rsquo;re largely calculating Karma offline it seems like we could get this into production relatively quickly.&lt;/p&gt;
+
+&lt;p&gt;The logic here is that we want to encourage hangout participation by giving Karmic credit for it, and in particular you&amp;rsquo;ll need to be G+ up&amp;rsquo;d on our site in order to get the benefit, so a potentially happy side effect is an increase in the fidelity of our tracking, and improvements in the results of our data mining.  All this virtuous circle will hopefully just help us to help everyone to help charities, and of course ultimately save the world, haha.  Anyway, just as long as we get to play with cool tech along they way eh? :-)&lt;/p&gt;
+
+&lt;p&gt;So I was still on the fence about what to do when Michael pointed out that our Karma overview calculated all this directly in real time and could slow down the load of the users profile page.  We talked about caching that in the User table.  Felt ill about how bloated that table has got, and the technical debt we were building up, which pushed me up to wanting to work on premium and pull the stripe components out of the user table; but then I had a breakthrough.  We could pull the karma components into a separate table, cache them all, improve load times on the profile page, and also quickly deliver the incentives we wanted.  I could tell Michael was wishing I had been able to come to that conclusion 45 minutes earlier in order to get more actual programming done, but I was still pleased with the tickets we had created and the ideas we had had.&lt;/p&gt;
+
+&lt;p&gt;In the remaining 45 minutes or so we managed to knock off a quick acceptance test driven creating of a separate Karma table, that also involved using some funky delegation pattern:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+
+  &lt;span class="kp"&gt;extend&lt;/span&gt; &lt;span class="no"&gt;Forwardable&lt;/span&gt;
+
+  &lt;span class="n"&gt;def_delegator&lt;/span&gt; &lt;span class="ss"&gt;:karma&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:hangouts_attended_with_more_than_one_participant&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
+  &lt;span class="n"&gt;def_delegator&lt;/span&gt; &lt;span class="ss"&gt;:karma&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:hangouts_attended_with_more_than_one_participant&lt;/span&gt;
+
+  &lt;span class="n"&gt;has_one&lt;/span&gt; &lt;span class="ss"&gt;:karma&lt;/span&gt;
+
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="nf"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;rsquo;m sure there&amp;rsquo;s a tighter way to do that, but it breaks up our mammoth user table, and we can now write a separate test for quickly calculating hangout participation offline, and then get on to the bigger refactoring to see who joins a hangout when, break the user table up further with better support for premium, and improve the installation documentation.  These are the key things for me in the next few weeks, although they could certainly be derailed if the memory issues turn out to be more serious than we thought.  The question remains, can&amp;rsquo;t we go any faster?  One drag is me spending all this time with my kids.  Maybe I can get them to code for AV too? :-)&lt;/p&gt;
+
+&lt;p&gt;Related videos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=PliTRMoNrR8"&gt;Pairing part 1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=6zO-FCmJQSk"&gt;Pairing part 2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=_dXb5QASWeU"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Missed Ships</title>
     <link rel="alternate" href="http://blog.url.com/2016/09/21/missed-ships/"/>
@@ -285,54 +403,6 @@ tar: Error is not recoverable: exiting now
 &lt;li&gt;&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=nuyODPgitIk"&gt;Pairing on WebsiteOne&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=60EREsMw00o"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Production and Staging Similarity</title>
-    <link rel="alternate" href="http://blog.url.com/2016/09/14/production-staging-similarity/"/>
-    <id>http://blog.url.com/2016/09/14/production-staging-similarity/</id>
-    <published>2016-09-14T01:00:00+01:00</published>
-    <updated>2016-09-14T21:18:16+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So Michael and I finished up an important piece of work on the AgileBot yesterday.  At least we completed something we had started working on a while ago, which was getting the AgileBot legacy code wrapped in tests, and refactoring the config out of the main script file.  It seems like a good heuristic to finish what you start, although of course there&amp;rsquo;s always the danger of throwing good money after bad, or rather time; since time is of course, money.  It&amp;rsquo;s definitely been an interesting process though, and it feels very good to get to this point where we can catch our breath.&lt;/p&gt;
-
-&lt;p&gt;As I&amp;rsquo;ve mentioned before, AgileBot is a chunk of CoffeeScript that takes incoming requests to send notifications about hangouts from WebSiteOne (our Rails monolith for AgileVentures) and pass them on to Slack and Gitter.  AgileBot&amp;rsquo;s CoffeeScript runs in Hubot (which runs on Node) and is deployed on Heroku.  AgileBot was an experiment from a couple of years ago to see what could be achieved in CoffeeScript (a Ruby flavoured variant of JavaScript) and Hubot.  Hubot has a range of functions and is extendible to allow it to respond to users in chat rooms, which is certainly something I&amp;rsquo;ve been interested in in the past.  Chatbots tend to become annoying rather quickly though, and users will often fail to take them seriously, although we do read reports of some &lt;a href="https://www.washingtonpost.com/news/innovations/wp/2016/05/11/this-professor-stunned-his-students-when-he-revealed-the-secret-identity-of-his-teaching-assistant/"&gt;chatbots fooling students into thinking they are human&lt;/a&gt; in some online classes.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d love to be deploying really effective chatbot tech, but we&amp;rsquo;re a small community and I think we&amp;rsquo;re in the stage where value is being derived from authentic connections between humans, rather than automating 1000&amp;rsquo;s of responses.  We&amp;rsquo;ve totally not played with the range of functions that Hubot can support, and the AgileBot script is taking advantage of Hubot&amp;rsquo;s ability to act like an API endpoint to act as a waypoint between our Rails monolith and the 3rd party endpoints of Gitter and Slack.  We&amp;rsquo;ve been making little changes to the AgileBot script over the months, and the lack of tests was a little nerve-wracking.  After tweaking the Jasmine tests on HangoutConnection we thought, yeah, let&amp;rsquo;s get some tests wrapped around AgileBot.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve blogged about parts of that before, and my nagging concern is that we could have completely re-created this micro service as a gem in our Rails monolith, or as a separate Sinatra micro service, faster than we could get the tests working and fix the associated issues.  In the meantime, particularly valiant solo efforts from Michael have got us to the point where the code is wrapped in integration tests, the config is refactored, and yesterday we got the new AgileBot deployed in production.&lt;/p&gt;
-
-&lt;p&gt;The big hurdle that came up at the end was that when we deployed the new code to the staging server we saw a thrashing in the logs.  The logs were dumping what looked like the entire list of our slack instance users in JSON format, and that&amp;rsquo;s so big we couldn&amp;rsquo;t see the actual error message.  It was this issue that we really took apart yesterday.  It was a tricky issue and while speculating about whether we&amp;rsquo;d been hacked, or the upgrade had changed some node modules out from under us, we made some progress by managing to replicate the error locally.  This took us copying the entire staging server config locally and running the hubot locally just as it would run on the Heroku server.  This allowed us to see some error specifics:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;node_redis: no callback to send error: OOM command not allowed when used memory &amp;gt; 'maxmemory'.
-[Tue Sep 13 2016 14:50:21 GMT+0100 (BST)] ERROR Error: OOM command not allowed when used memory &amp;gt; 'maxmemory'.
-  at ReplyParser.&amp;lt;anonymous&amp;gt; (/Users/tansaku/Documents/GitHub/AgileVentures/agile-bot/node_modules/hubot-scripts/node_modules/redis/index.js:279:27)
-  at emitOne (events.js:77:13)
-  at ReplyParser.emit (events.js:169:7)
-  at ReplyParser.send_error (/Users/tansaku/Documents/GitHub/AgileVentures/agile-bot/node_modules/hubot-scripts/node_modules/redis/lib/parser/javascript.js:296:10)
-  at ReplyParser.execute (/Users/tansaku/Documents/GitHub/AgileVentures/agile-bot/node_modules/hubot-scripts/node_modules/redis/lib/parser/javascript.js:181:22)
-  at RedisClient.on_data (/Users/tansaku/Documents/GitHub/AgileVentures/agile-bot/node_modules/hubot-scripts/node_modules/redis/index.js:504:27)
-  at Socket.&amp;lt;anonymous&amp;gt; (/Users/tansaku/Documents/GitHub/AgileVentures/agile-bot/node_modules/hubot-scripts/node_modules/redis/index.js:82:14)
-  at emitOne (events.js:77:13)
-  at Socket.emit (events.js:169:7)
-  at readableAddChunk (_stream_readable.js:146:16)
-  at Socket.Readable.push (_stream_readable.js:110:10)
-  at TCP.onread (net.js:523:20)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So it seemed like we might be having a problem with Redis, the key-value cache that Hubot uses as a memory.  We&amp;rsquo;d copied over the Redis URL in the server config, so our local Hubot was also hitting the same Redis cache as the staging server.  We cycled through various loops of trying to clear out that Redis cache, but to no avail.  Our AgileBot script doesn&amp;rsquo;t use Redis at all.  It&amp;rsquo;s just part of booting up Hubot, which also has its own Slack connections and code.  That we&amp;rsquo;re spending time debugging something that&amp;rsquo;s not really related to our microservice logic is fuel for my thoughts that we would move faster building an express or Sinatra app, but maybe getting distracted by those thoughts are counter-productive &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Anyhow we couldn&amp;rsquo;t seem to empty the Redis cache.  Even with resets and flushes and shutting everything down it still seemed to be filling up. We also tried deploying the master branch of the production code to staging and got the same thrashing issue.  This was an important step - we&amp;rsquo;d isolated the problem as not being related to any of the new code changes we&amp;rsquo;d introduced.  That&amp;rsquo;s such a crucial step when debugging.  All our speculations about how all sorts of updates might be influencing this thrashing issue could be thrown out, and we could focus on the problem being either the Redis cache, or some unknown upgrade of a node module.  It&amp;rsquo;s fascinating to me that npm doesn&amp;rsquo;t create a lock of the particular versions that get installed.  When we use bundle in the Ruby world we get a Gemfile.lock, and if you check that in the versions of libraries that you&amp;rsquo;re using can&amp;rsquo;t change.  Unless I&amp;rsquo;m missing something npm seems much more permissive.  At least if you don&amp;rsquo;t check in the node_modules directory itself then any time you do a fresh install (say on Heroku) then you&amp;rsquo;re doing the equivalent of Ruby&amp;rsquo;s &lt;code&gt;bundle update&lt;/code&gt;.  Maybe the Heroku build pack for node mitigates that somehow, but it feels like the node/npm keeps you more on the bleeding edge of your libraries?  That&amp;rsquo;s both exhilarating and frightening! :-)&lt;/p&gt;
-
-&lt;p&gt;The fix for our thrashing problem came when Michael noticed that we had different Redis plugins on the production and staging instances of AgileBot.  HerokuRedis on production and RedisToGo on staging.  We uninstalled RedisToGo and installed HerokuRedis on staging.  The bug was gone locally, and gone from staging too.   A great reminder of how you really really really want staging to be as much like production as possible.  We were now able to proceed with doing manual acceptance tests of staging to check that hits from WebSiteOne would cause AgileBot to ping our Slack instance (but in suitable test channels), and that wasn&amp;rsquo;t working.  We spent some time trying to get live debugging working in the context of Hubot, which was partially successful.  Michael wrote a debug Hubot script, and we got node-inspector running, and finally got the chrome inspector hooked on the debugger, but there was a time out and we lost the connection.  I&amp;rsquo;ve seen that with Rails running on Puma - the web server timeouts killing the debugger.&lt;/p&gt;
-
-&lt;p&gt;We gave up on that - worked out how to post to the Hubot logs, and then saw that the problem was that our slack token wasn&amp;rsquo;t set correctly.  Fixin that our manual acceptance tests worked.  We deployed to production just in time for a live test running the &amp;ldquo;Kent Beck&amp;rdquo; scrum - everything worked fine, and over night I can see the PacificRim scrum notified fine, and the days pair notifications came through fine too.&lt;/p&gt;
-
-&lt;p&gt;In the Kent Beck scrum Michael and I took stock, comparing the hours spent on getting the bots&amp;rsquo; legacy code wrapped in tests and deployed.  Michael thinks we spent less time getting to this point than we would trying to rebuild.  He might be right, but I think there&amp;rsquo;s a range of rebuilding options including just switching to JavaScript, moving to express, or moving to Sinatra, with each having different pros/cons and likely times to completion.  Undeniably we are much more familiar with the Node/Hubot/CoffeeScript tech stack now, and that information is valuable.  Having got this far it would be silly not to now make a few more refactoring to AgileBot to deliver some noticeable improvements to our users, and see how our regression suite helps us make those changes; that much is clear.&lt;/p&gt;
-
-&lt;p&gt;The itch I still want to scratch though is how fast I could make an express or Sinatra micro service to do the same thing.  Am I delusional that I think I could do the Sinatra one in a couple of days and the express one in half a day?  I won&amp;rsquo;t drag Michael on that whale hunt :-) I think that&amp;rsquo;s just something I need to waste my own spare time on to help in my internal estimation process.  I also worry that my constant questioning of the architecture of the system is kind of draining for people.  I want to work on the things that will deliver the most value to our users, and in turn generate revenue for AgileVentures that makes the whole charity enterprise sustainable.  I have so many thoughts, so many possibilities, but it really isn&amp;rsquo;t clear to me where to focus.  Would it be easier for everyone if I just pretended that I was certain that a particular approach was the best? :-) Maybe that debate is just something that I should be having internally without dumping it on other people through blogs, scrums and pairing sessions?&lt;/p&gt;
-
-&lt;p&gt;I just love that feeling when you can jump up a level and say, right, we don&amp;rsquo;t need to build X, we can achieve our goal by building Y.  I love jumping those levels.  I guess many others like to stay focused on one level, at least for longer than I do.  If one thing is certain it is that I think too much :-) More doing, less thinking/debating perhaps? :-) Still, the whole reason I enjoy working with AV is thinking about the architectural/team/structural decisions and how they can make us more efficient and sustainable.  I&amp;rsquo;ll save the other thoughts I have on that for another micro-services blog.  In the meantime I think we can reflect that pithy sayings and heuristics can often be contradictory, but the take home today is: make sure your production and staging environments are as similar as they can possibly be!&lt;/p&gt;
 </content>
   </entry>
 </feed>

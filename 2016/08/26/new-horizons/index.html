@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>New Horizons</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_08 x2016_08_26 x2016_08_26_new-horizons x2016_08_26_new-horizons_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/08/26/new-horizons/">New Horizons</a></h2>
+        <h5 class='date'>26 Aug 2016</h5>
+    <p>A bit of a red letter day yesterday - what does that mean actually? Calendars use a red font on days that are holidays?  Anyway, yesterday we did a PremiumPlus pairing session on Elixir/Phoenix.  A new tech stack, and a first for AgileVentures in terms of the new charity business model.  It was pretty good fun.  Kudos to Federico for being our PremiumPlus beta-tester.  Elixir itself is interesting.  The basic syntax is Ruby-esque.  I&rsquo;d say it feels superficially as different from Ruby as, say, Python or JavaScript.  Of course we&rsquo;re only scratching the surface at the moment, but I liked how maps immediately let you access keys with the dot syntax;</p>
+<pre class="highlight elixir"><code><span class="n">iex</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="p">%{</span><span class="ss">a:</span> <span class="m">1</span><span class="p">,</span> <span class="ss">b:</span> <span class="m">2</span><span class="p">}</span>
+<span class="p">%{</span><span class="ss">a:</span> <span class="m">1</span><span class="p">,</span> <span class="ss">b:</span> <span class="m">2</span><span class="p">}</span>
+
+<span class="n">iex</span><span class="o">&gt;</span> <span class="n">map</span><span class="o">.</span><span class="n">a</span>
+<span class="m">1</span>
+</code></pre>
+<p>That makes me think of JavaScript, and it&rsquo;s an aspect of both JavaScript and Elixir that I like, and I&rsquo;d love Ruby to support that.  For some reason putting a new key in a map in Elixir is a little more complex, requiring:</p>
+<pre class="highlight elixir"><code><span class="n">iex</span><span class="p">(</span><span class="m">3</span><span class="p">)</span><span class="o">&gt;</span> <span class="no">Map</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">map</span><span class="p">,</span> <span class="ss">:c</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+<span class="p">%{</span><span class="ss">a:</span> <span class="m">1</span><span class="p">,</span> <span class="ss">b:</span> <span class="m">2</span><span class="p">,</span> <span class="ss">c:</span> <span class="m">3</span><span class="p">}</span>
+</code></pre>
+<p>while I think Ruby&rsquo;s syntax is easier here;</p>
+<pre class="highlight ruby"><code><span class="n">map</span><span class="p">[</span><span class="ss">:c</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+</code></pre>
+<p>but JavaScript wins hands down over both languages:</p>
+<pre class="highlight javascript"><code><span class="nx">map</span><span class="p">.</span><span class="nx">c</span> <span class="o">=</span> <span class="mi">3</span>
+</code></pre>
+<p>Anyhow, Elixir may evolve a simpler syntax over time, although it uses the assignment operator <code>=</code> in subtly different ways from JavaScript and Ruby, so perhaps it&rsquo;s more complex than I imagine.  Actually thinking about it, a simple <code>method_missing</code> on Hash in Ruby would allow that simpler JS style access, but I guess that would lead to some weird situations if you had keys in your hash that corresponded to other methods you would call on a Hash, hmmm &hellip; there are some gotchas with that power in JS aren&rsquo;t there &hellip; :-)</p>
+
+<p>So Elixir syntax looks okay and Ruby-ish.  I&rsquo;m not particularly enamoured with having to concatenate Strings and List with different operators (<code>&lt;&gt;</code> and <code>++</code>).  One of the things I love about Ruby is just using <code>+</code> for all these things.  However whatever I feel about the syntax the process of getting Phoenix up and running had relatively little to do with the syntax in the first instance, and that was the main focus of our session yesterday.  We got Phoenix installed on a few boxes, two OSX and one Ubuntu.  The main confusion came from searching for &ldquo;Phoenix getting started&rdquo; in Google and clicking on the first hit, which is actually an out of date link to v0.10, when Phoenix is currently on 1.2, so watch out for that.  Make sure you get started on the up to date documentation:</p>
+
+<p><a href="http://www.phoenixframework.org/docs/up-and-running">http://www.phoenixframework.org/docs/up-and-running</a></p>
+
+<p>Having got to the correct documentation (and assuming Elixir and few other things were set up), getting started with Phoenix was as simple as:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
+<span class="gp">$ </span>mix phoenix.new hello_phoenix
+<span class="gp">$ </span><span class="nb">cd </span>hello_phoenix
+<span class="gp">$ </span>mix ecto.create <span class="c"># set up the database</span>
+<span class="gp">$ </span>mix phoenix.server
+</code></pre>
+<p>There were some bumps on Ubuntu as we needed to install and configure Postgres, but before you could say &ldquo;new technology stack&rdquo; we were looking at the Phoenix startup page on running Phoenix servers, and thinking wistfully back to 2006 and a similar looking page from Rails (at least I was thinking wistfully back).  Of course that start up page from Rails was just a static one, as is the Phoenix one, so the critical next step was to see how challenging it would be to set up some custom functionality.  We started in to adding some new pages, but ran out of time for the session, but have a new one scheduled for next Tuesday to see how deep we can get.</p>
+
+<p>I can piece together the different elements that led to this session.  Me hearing about Elixir/Phoenix on RubyRogues, my main pair partner Michael talking about the same, and PremiumPlus BetaTester Extraordinaire Federico expressing an interest in it.  New tech stacks are kind of a gamble though.  A good portion of my brain at AgileVentures is focused on avoiding bells and whistles - what&rsquo;s the absolute simplest path we can take to deliver the simplest piece of functionality that will allow our clients to assess whether we are heading in the right direction?</p>
+
+<p>The attraction of Elixir/Phoenix (apart from the new and shiny) is that it will scale better than Ruby/Rails, but massive scaling is not a critical problem for AgileVentures or our charity clients, yet.  Of course if we wait till it becomes a huge problem it may be too late to scale.  Premature optimisation?  Sensible advance scouting and foraging activity?  Only hind-sight will tell us, and then how can we be sure if the way things turned out was just luck (or lack of it)? :-)</p>
+
+<p>Anyway, AgileVentures the charity enterprise now has a new sort of client/customer - the Premium and PremiumPlus member, and if they&rsquo;re interested in a particular tech stack, then exploring that tech stack is part of the process of meeting the needs of our clients, so the Agile tiger in my brain is pacified.  So now the trick is, can we get enough Premium and PremiumPlus members of our charity to make this sustainable?  The problem with listening to Ruby Rogues is hearing about all the great tech salaries and listening to advertising about reverse auctions for developers and so on.  A recruiter hit me up for a well paid job involving Machine Learning and Ruby on Rails yesterday and it&rsquo;s damn tempting.  I worry about money a fair amount recently.  We&rsquo;re slowly scaling the AgileVentures experience, but we need an order of magnitude more paying members, or two or three rich charities paying us for product before I&rsquo;ll sleep easy &hellip;</p>
+
+<p>As my cash reserves run down should I take a break for 6 months to earn money working closed-source; but if I do so, will I be missing the critical chance to take AgileVentures to the next level?  I love coding open source for non-profits and with other professionals who are levelling up their tech skills.  Can it be made sustainable?</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
