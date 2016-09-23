@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Longer than Expected</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_09 x2016_09_23 x2016_09_23_longer-than-expected x2016_09_23_longer-than-expected_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/09/23/longer-than-expected/">Longer than Expected</a></h2>
+        <h5 class='date'>23 Sep 2016</h5>
+    <p>Adding the function to give Karma credit for attending hangouts took longer than expected.  Ironically spiking it had been fast, but adding a test for it was time consuming and frustrating.  I&rsquo;m trying to dissect why that was.  Looking back I can see a few things that caused us to spin our wheels:</p>
+
+<p>1) the EventInstance FactoryGirl was creating a participants structure that was different to our assumptions
+2) the <code>after_validation</code> hook on user causes the Karma calculation to take place during FactoryGirl object creation
+3) the EventInstance FactoryGirl was creating an additional user object
+4) the version of FactoryGirl we are on (4.5) does not <a href="https://robots.thoughtbot.com/getting-sequential-a-look-into-a-factory-girl">reset sequence integers between test runs</a></p>
+
+<p>Let&rsquo;s have a quick look at the original EventInstance FactoryGirl factory:</p>
+<pre class="highlight ruby"><code><span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">define</span> <span class="k">do</span>
+  <span class="n">sequence</span> <span class="ss">:participant</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+    <span class="p">[</span> <span class="s2">"</span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:person</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">displayName: </span><span class="s2">"Participant_</span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="ss">id: </span><span class="s2">"youtube_id_</span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="ss">isBroadcaster: </span><span class="s1">'false'</span> <span class="p">}</span> <span class="p">}</span> <span class="p">]</span>
+  <span class="k">end</span>
+  <span class="n">sequence</span> <span class="ss">:broadcaster</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+    <span class="p">[</span> <span class="s2">"</span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:person</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">displayName: </span><span class="s2">"Broadcaster</span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="ss">id: </span><span class="s2">"youtube_id_</span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="ss">isBroadcaster: </span><span class="s1">'true'</span> <span class="p">}</span> <span class="p">}</span> <span class="p">]</span>
+  <span class="k">end</span>
+
+  <span class="n">factory</span> <span class="ss">:event_instance</span> <span class="k">do</span>
+    <span class="n">transient</span> <span class="k">do</span>
+      <span class="n">created</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span>
+      <span class="n">updated</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span>
+    <span class="k">end</span>
+
+    <span class="n">sequence</span><span class="p">(</span><span class="ss">:uid</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="s2">"uid_</span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">}</span>
+    <span class="n">sequence</span><span class="p">(</span><span class="ss">:title</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="s2">"Hangout_</span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">}</span>
+    <span class="n">sequence</span><span class="p">(</span><span class="ss">:category</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="s2">"Category_</span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">}</span>
+    <span class="n">hangout_url</span> <span class="s2">"http://hangout.test"</span>
+    <span class="n">sequence</span><span class="p">(</span><span class="ss">:yt_video_id</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="s2">"yt_video_id_</span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">}</span>
+
+    <span class="n">project</span>
+    <span class="n">event</span>
+    <span class="n">user</span>
+
+    <span class="n">participants</span> <span class="p">{</span> <span class="p">[(</span><span class="n">generate</span> <span class="ss">:broadcaster</span><span class="p">),</span> <span class="p">(</span><span class="n">generate</span> <span class="ss">:participant</span><span class="p">)]</span> <span class="p">}</span>
+
+    <span class="n">created_at</span> <span class="p">{</span> <span class="no">Time</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="n">created</span><span class="si">}</span><span class="s2"> UTC"</span><span class="p">)}</span>
+    <span class="n">updated_at</span> <span class="p">{</span> <span class="no">Time</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="n">updated</span><span class="si">}</span><span class="s2"> UTC"</span><span class="p">)}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>Note the creation of the participants field to be an array consisting of a broadcaster and a participant.  Notice also the use of sequences to generate that participant and broadcaster.  That&rsquo;s a custom structure that&rsquo;s only somewhat related to what comes back from the database in the real system.  Without going into all the details I think we fell a foul of working with a legacy test and legacy object that had more interrelationships than we expected.  It&rsquo;s not quite a mock train wreck as there are no mocks here.  Effectively what we were working on, after our acceptance test of pulling some Karma data into a new AR model, was an integration test, which had more moving parts than we anticipated.</p>
+
+<p>It makes me think of Avdi&rsquo;s &ldquo;MacGyver method&rdquo; where we got wrapped up in using the existing tools, rather than writing our own compelling narrative.  My own &ldquo;drive-by&rdquo; coding strategy is often one of just going with the existing grain to make the smallest change possible, so I&rsquo;m definitely one who can get wrapped up in the existing tool set.  Maybe we would have done better to complete the planned refactoring of the EventInstance participants field, which as I mentioned is currently a micro-noSQL database inside our SQL database.</p>
+
+<p>I think we might also want to look at our pairing strategy.  I think Michael was getting frustrated at the speed with which I window switched from stack trace to code and back again as we tried to hunt bugs through the legacy test infrastructure.  There&rsquo;s the lag of the hangout screenshare as well, but I think it&rsquo;s more an indication of my keyboard hogging.  We seem to have fallen into a pattern of switching roles about once an hour, and I wonder if that&rsquo;s too infrequent.  There are other issues with me having less available time to code due to family commitments.  I wonder if we might benefit from having an enforced 10 min switch as I&rsquo;ve seen in some companies.</p>
+
+<p>There&rsquo;s also what we are doing to the domain model.  I&rsquo;m still conflicted about the dissonance between the terms &ldquo;EventInstance&rdquo; and &ldquo;Hangout&rdquo;.  EventInstances do represent data from Google Hangouts in our system.  EventInstances is nicely generic - maybe in the future we&rsquo;ll support alternatives to Google Hangouts, but our hangouts are very often associated with events, but not always.  Actually Michael and I mainly pair in spontaneous hangouts that are associated with the project, so EventInstance is a misnomer there.</p>
+
+<p>We were feeling good about pulling Karma out of the User table, and given that we have a Karma calculator it certainly seems like we are moving towards evolving a Karma entity in our domain.  It occurs to me that all the logic in the KarmaCalculation service could be moved to the Karma model.  Much as I love recombinable services, given that we now have a need to persist the intermediate calculations from the other Karma Calculator, I&rsquo;m moving to think that the sensible next step is a real &ldquo;unit&rdquo; and not &ldquo;integration&rdquo; test of the Karma model so that we can avoid getting bogged down in too much complexity, i.e. dependencies on many other elements of the system.</p>
+
+<p>Following that logic, it would be nice if the Karma calculation could avoid depending on the structure of the data coming back from the hangout, i.e. that lump of JSON that gets transformed into a ruby data-structure by the serialise method.  That&rsquo;s a bigger operation which might involve developing a domain model like so:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Participant</span> <span class="o">&lt;</span> <span class="no">AR</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">has_many</span> <span class="ss">:hangouts</span>
+  <span class="n">belongs_to</span> <span class="ss">:user</span>
+  <span class="n">has_many</span> <span class="ss">:hangout_events</span> <span class="c1"># join at x time, leave at y time</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Hangout</span> <span class="o">&lt;</span> <span class="no">AR</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">has_many</span> <span class="ss">:participants</span>
+  <span class="n">belongs_to</span> <span class="ss">:initiator</span><span class="p">,</span> <span class="ss">class_name: </span><span class="n">user</span>
+<span class="k">end</span>
+</code></pre>
+<p>At the end of day&rsquo;s pairing we had got the tests green, but not without removing the <code>after_validation</code> Karma calculation from the User class, and having to adjust a number of other tests to adapt to how we had adjusted the EventInstance FactoryGirl participant model.  Part of the issue there was that the serialise operation gives us &ldquo;indifferent access&rdquo; to the returned data structure, i.e. strings and symbols are interchangeable.  That was only part of the difference between the data structure the Factory was creating and that real data-structure coming back from the DB.  That pushes me to want to refactor away from that, but that&rsquo;s a bigger task&hellip;. </p>
+
+<p>We were then asking ourselves how to slice and dice to try and stick with our &ldquo;drive-by&rdquo; methodology.  What was the simplest thing we could release?  And what activities should be pushed off into other tickets?  The following three seemed sensible other tickets:</p>
+
+<ul>
+<li>remove Karma total from user table</li>
+<li>create all the other Karma breakdown elements in Karma table</li>
+<li>ensure that any reference to these throughout codebase is linked correctly to the Karma table</li>
+</ul>
+
+<p>In principle the work of the day could be a PR, and the only additional thing required to release it would be the creation of a separate Karma update task.  We&rsquo;d be losing the feature that Karma would be updated whenever users saved their profiles, but that seems like something we could easily add back in later, without using these dangerous AR lifecycle hooks.</p>
+
+<p>The real question would be should we get that simpler PR in, and then immediately start more tickets based on it?  The danger there, as we&rsquo;d seen before, is that particularly with the new &ldquo;squash and merge&rdquo; feature on GitHub PRs, building on an unmerged PR would guarantee merge conflicts down the line.  That would seem to point us towards reviewing all the tickets and working on a different corner of the codebase until this got merged.  That feels challenging in that I&rsquo;m now itching to do that bigger participant refactoring, and try and get some clean confident code.</p>
+
+<p>We&rsquo;ll see - I guess after a day in which a lot of your assumptions are thrown, it makes sense to allow a bit of time for the dust to settle.  Reflect on what worked and what didn&rsquo;t work, and maybe work on something else before coming back to the code face &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
