@@ -82,7 +82,7 @@
       <div class="col-lg-8 text-left">
         <h2 class='title'><a href="/2016/09/27/dodging-a-bullet/">Dodging a Bullet</a></h2>
         <h5 class='date'>27 Sep 2016</h5>
-    <p>So Monday was the day to see if our new domain model components would ease the process of delivering a new feature. As warm up I made a quick refactoring requested by Raoul on our Karma calculation changes.  There was the possibility of re-using some cucumber steps.  We&rsquo;d submitted the following:</p>
+    <p>So Monday was the day to see if our new domain model components would ease the process of delivering a new feature. As warm up I did a quick refactoring requested by Raoul on our Karma calculation changes.  There was the possibility of re-using some cucumber steps.  We&rsquo;d submitted the following:</p>
 <pre class="highlight ruby"><code><span class="no">When</span><span class="p">(</span><span class="sr">/^I run rake task "([^"]*)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">task</span><span class="o">|</span>
   <span class="vg">$rake</span><span class="p">[</span><span class="n">task</span><span class="p">].</span><span class="nf">invoke</span>    
 <span class="k">end</span>
@@ -126,9 +126,9 @@
     <span class="nf">Then</span> I should not see <span class="s">"Basic Member"</span>
     <span class="nf">And</span> I should not see <span class="s">"Upgrade to Premium"</span>
 </code></pre>
-<p>We didn&rsquo;t get to these all at once.  We&rsquo;d put the fruits of our InsideOut work aside (the new domain elements Subscription and PaymentSource) and reverted to OutsideIn.  This was the set of experiences we wanted for the end user, in association with the <a href="https://github.com/AgileVentures/WebsiteOne/issues/1261">ticket</a> we were working on.  We&rsquo;d actually started with two scenarios, one about upgrade to premium and the other about upgrade to premium plus, and in my mind had been the idea that we would ultimately make both types of upgrade work using our new domain entities.</p>
+<p>We didn&rsquo;t get to these all at once.  We&rsquo;d put the fruits of our InsideOut work aside (the new domain elements Subscription and PaymentSource) and reverted to OutsideIn.  This was the set of experiences we wanted for the end user, in association with the <a href="https://github.com/AgileVentures/WebsiteOne/issues/1261">ticket</a> we were working on. We&rsquo;d actually started with two scenarios, one about upgrade to premium and the other about upgrade to premium plus, and in my mind had been the idea that we would ultimately make both types of upgrade work using our new domain entities.</p>
 
-<p>However that was actually scope creep off the ticket, and actually there was a chunk of work specific to the ticket (upgrade from basic to premium) that could be implemented in the existing system without any reference to the new domain entities, so we got that done.  It was mainly a change to the view to add a report about the user&rsquo;s current membership status, and an upgrade button:</p>
+<p>However that was actually scope creep off the ticket, and in fact there was a chunk of work specific to the ticket (upgrade from basic to premium) that could be implemented in the existing system without any reference to the new domain entities, so we got that done.  It was mainly a change to the view to add a report about the user&rsquo;s current membership status, and an upgrade button:</p>
 <pre class="highlight html"><code>    <span class="err">&lt;</span>% if current_user <span class="err">&amp;&amp;</span> current_user == presenter.user %&gt;
         <span class="nt">&lt;li&gt;</span><span class="err">&lt;</span>%= current_user.membership_type %&gt; Member<span class="nt">&lt;/li&gt;</span>
         <span class="err">&lt;</span>% unless current_user.membership_type == 'Premium' %&gt;
@@ -150,15 +150,21 @@
 <p>I&rsquo;m itching to pull this into a partial (<a href="https://github.com/AgileVentures/WebsiteOne/issues/1306">refactoring ticket</a>), and I also worry we&rsquo;re not being confident enough with our logic - of which there is also too much in the view.  Devise&rsquo;s <code>current_user</code> method is maybe the source of our timidity, since if no one is logged in, it returns nil.  Perhaps it would be better if it returned an AnonymousUser object.  Michael started looking into how we might override it, but I demurred, writing an email to Stripe about our new approach of locking the data-locale to &ldquo;en-US&rdquo;.  All that was actually after we&rsquo;d dropped to the RSpec level to create the necessary supporting operations for the view fragment above.  Let&rsquo;s just take a look at them:</p>
 <pre class="highlight ruby"><code><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="n">describe</span> <span class="s1">'#membership_type'</span> <span class="k">do</span>
+
     <span class="n">subject</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
+
     <span class="n">it</span> <span class="s1">'returns membership type'</span> <span class="k">do</span>
       <span class="n">expect</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">membership_type</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="s1">'Basic'</span>
     <span class="k">end</span>
+
     <span class="n">context</span> <span class="s1">'premium member'</span> <span class="k">do</span>
+
       <span class="n">subject</span><span class="p">(</span><span class="ss">:user</span><span class="p">){</span><span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="ss">stripe_customer: </span><span class="s2">"sdfdfds"</span><span class="p">)}</span>
+
       <span class="n">it</span> <span class="s1">'returns premium'</span> <span class="k">do</span>
         <span class="n">expect</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">membership_type</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="s1">'Premium'</span>
       <span class="k">end</span>
+
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">do</span>
@@ -171,7 +177,7 @@
   <span class="p">.</span><span class="nf">.</span><span class="p">.</span>
 <span class="nf">end</span>
 </code></pre>
-<p>and finally a little addition to the charges controller so that when users sign up premium, that we store their customer id in the user table:</p>
+<p>and finally a little addition to the charges controller, so that when users sign up for premium their customer id is stored in the user table:</p>
 <pre class="highlight ruby"><code>
   <span class="k">def</span> <span class="nf">create</span>
     <span class="vi">@plan</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="ss">:plan</span><span class="p">]</span>
@@ -199,13 +205,13 @@
     <span class="n">current_user</span><span class="p">.</span><span class="nf">save</span>
   <span class="k">end</span>
 </code></pre>
-<p>The upshot of which, was that using only the existing aspects of the system, we would now store the stripe customer id of the premium member in the user table, and the premium users would see their status on their profile page, and non-premium users would see the upgrade button.  It was all working without the aid of the new domain entities.  As I mentioned above, Michael and I had other concerns, but with my eye on the clock I suggested we get this in as a pull request, and then use the new domain entities to support work on a subsequent <a href="https://github.com/AgileVentures/WebsiteOne/issues/1303">ticket of allowing premium users to upgrade to premium plus</a>.</p>
+<p>The upshot of which was that using only the existing aspects of the system the premium users would see their status on their profile page, and non-premium users would see the upgrade button.  It was all working without the aid of the new domain entities.  As I mentioned above, Michael and I had other concerns with our implementation, but with my eye on the clock I suggested we get this in as a pull request, and then use the new domain entities to support work on a subsequent <a href="https://github.com/AgileVentures/WebsiteOne/issues/1303">ticket of allowing premium users to upgrade to premium plus</a>.</p>
 
-<p>I had other concerns dripping out of me, such as whether we should be testing Stripe differently, whether we should be making our scenarios more declarative.  I guess part of the challenge with our increasing list of heuristics for good coding and good project management is that it can feel like you are being pulled in multiple directions at once, and you can be forgiven for a kind of paranoia about which really is the most important issue to work on first.</p>
+<p>I had other conflicts dripping out of me, such as whether we should be testing Stripe differently (webmock?) and whether we should be making our scenarios more declarative.  I guess part of the challenge with our increasing list of heuristics for good coding and good project management is that it can feel like you are being pulled in multiple directions at once, and you can be forgiven for a kind of paranoia about which really is the most important issue to work on first.</p>
 
-<p>Submitting the PR for just the above code involved pulling out the commits for the new domain model entities.  One thing that was easy to prioritise for me was to put only the smallest set of necessary elements in the pull request.  I didn&rsquo;t want Raoul&rsquo;s code review to get distracted by having a set of un-used domain entities in the incoming code.  Michael found a <a href="http://stackoverflow.com/a/1994491/316729">cool technique for cherry picking a set of commits</a> and we got in a PR with just the code above, and moved the domain entities onto a new branch associated with the ticket for creating the premium plus upgrade button.  Will we fall foul of premature refactoring?  Did we just dodge a bullet?</p>
+<p>Submitting the PR for just the above code involved pulling out the commits for the new domain model entities.  One thing that was easy to prioritise for me was to put only the smallest set of necessary elements in the pull request.  I didn&rsquo;t want Raoul&rsquo;s to get distracted during his code review by having a set of un-used domain entities in the incoming code.  Michael found a <a href="http://stackoverflow.com/a/1994491/316729">cool technique for cherry picking a set of commits</a> and we got in a PR with just the code above, and moved the domain entities onto a new branch associated with the ticket for creating the premium plus upgrade button.  Will we fall foul of premature refactoring?  Or did we just dodge a bullet?</p>
 
-<p>It&rsquo;s pretty to clear to me that the current stripe_customer field on user can&rsquo;t support information about different membership plans.  Hopefully our InsideOut work will bear fruit in the next session!</p>
+<p>It&rsquo;s pretty clear to me that the current stripe_customer field on user can&rsquo;t support information about different membership plans.  Hopefully our InsideOut work will bear fruit in the next session!  Would it be too much to hope that we&rsquo;ll have dodged one bullet and be ready to unleash some of our own? :-)</p>
 
 <p>Related Videos:</p>
 
