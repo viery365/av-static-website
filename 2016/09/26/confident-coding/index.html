@@ -129,7 +129,7 @@
     <span class="n">t</span><span class="p">.</span><span class="nf">string</span>   <span class="s2">"stripe_customer"</span>
   <span class="k">end</span>
 </code></pre>
-<p>Part of our recent focus had been on how we could reduce bloat on this table.  Adding the <code>stripe_customer</code> field had made us feel a little queasy.   However actually moving payment info or Karma wasn&rsquo;t going to reduce bloat.  A real impact would require pulling out an Address or SignIn class.  However it wasn&rsquo;t clear that either of those latter two would yield any short-term business value.  It&rsquo;s a bit like a game of Jenga.  There are some parts of the structure that if you pull at will cause a lot of blocks to come crashing down.  At least pulling out the payment and premium elements to other models would allow those parts of the system to evolve without further increasing the technical debt associated with the User table.,</p>
+<p>Part of our recent focus had been on how we could reduce bloat on this table.  Adding the <code>stripe_customer</code> field had made us feel a little queasy.   However actually moving payment info or Karma wasn&rsquo;t going to reduce bloat.  A real impact would require pulling out an Address or SignIn class.  Yet it wasn&rsquo;t clear that either of those latter two would yield any short-term business value.  It&rsquo;s a bit like a game of Jenga.  There are some parts of the structure that if you pull at will cause a lot of blocks to come crashing down.  At least pulling out the payment and premium elements to other models would allow those parts of the system to evolve without further increasing the technical debt associated with the User table.</p>
 
 <p>Maybe we should have been using whiteboard software or pencil and paper, but I found myself writing the following with a few changes coming here and there:</p>
 <pre class="highlight ruby"><code>  <span class="n">subscriptions</span>
@@ -148,7 +148,7 @@
   <span class="k">end</span>
 
 </code></pre>
-<p>See the video to follow how this evolved from one model to three models and then back to too.  However I did feel uncomfortable that we were being too specific at this level of ruby database instructions, so I pulled that snippet into a text document and re-framed it in terms of Ruby objects:</p>
+<p>See the video to follow how this evolved from one model to three models and then back to two.  However I did feel uncomfortable that we were being too specific at this level of ruby database instructions, so I pulled that snippet into a text document and re-framed it in terms of Ruby objects:</p>
 <pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Subscription</span> <span class="o">&gt;</span> <span class="no">AR</span><span class="ss">:Base</span>
   <span class="n">belongs_to</span> <span class="ss">:user</span>
   <span class="n">has_one</span> <span class="ss">:payment_source</span>

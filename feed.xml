@@ -5,16 +5,158 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-09-26T01:00:00+01:00</updated>
+  <updated>2016-09-27T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Dodging a Bullet</title>
+    <link rel="alternate" href="http://blog.url.com/2016/09/27/dodging-a-bullet/"/>
+    <id>http://blog.url.com/2016/09/27/dodging-a-bullet/</id>
+    <published>2016-09-27T01:00:00+01:00</published>
+    <updated>2016-09-27T10:56:17+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So Monday was the day to see if our new domain model components would ease the process of delivering a new feature. As warm up I made a quick refactoring requested by Raoul on our Karma calculation changes.  There was the possibility of re-using some cucumber steps.  We&amp;rsquo;d submitted the following:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I run rake task "([^"]*)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="vg"&gt;$rake&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;invoke&lt;/span&gt;    
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I run the rake task for calculating karma points$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="vg"&gt;$rake&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"karma_calculator"&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and Raoul was suggesting re-using the the first step.  Looking it over I actually modified it to the following:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I run the rake task for calculating karma points$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="vg"&gt;$rake&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"karma_calculator"&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I run the rake task for fetching github commits$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="vg"&gt;$rake&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"fetch_github_commits"&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Following the idea that the high level cucumber scenarios should be as readable English as possible, preferring &lt;code&gt;When I run the rake task for calculating karma points&lt;/code&gt; to &lt;code&gt;When I run the rake task for &amp;quot;karma_calculator&amp;quot;&lt;/code&gt;.  Trivial?  Maybe.  I&amp;rsquo;m conflicted.  These are related to cucumber stories we have in our dev-ops section which I&amp;rsquo;m hoping provides some testable documentation of the operational aspect of the application that&amp;rsquo;s used by app admins rather than end users.  I&amp;rsquo;m also going with not re-using step-definitions within step-definitions.  Two more heuristics there to add to the list.&lt;/p&gt;
+
+&lt;p&gt;I mention this warm up partly because I feel like there&amp;rsquo;s clean up for the Cucumber stories we wrote on Monday.  As it happens, Raoul approved that above change and merged the new Karma calculation PR in, making it possible that we could get started on refactoring work there.  But anyhow, here, ultimately, are the Cucumber scenarios that defined our Monday&amp;rsquo;s work:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; User is on free tier and looking at own page
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I am logged in
+    &lt;span class="nf"&gt;And&lt;/span&gt; I am on my profile page
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Basic Member"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Premium Member"&lt;/span&gt;
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; User is on free tier and looking at other persons profile page
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I am logged in
+    &lt;span class="nf"&gt;And&lt;/span&gt; I visit Alice's profile page
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Basic Member"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Premium Member"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; User upgrades to premium from free tier
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I am logged in
+    &lt;span class="nf"&gt;And&lt;/span&gt; I am on my profile page
+    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;
+    &lt;span class="nf"&gt;When&lt;/span&gt; I fill in appropriate card details for premium
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Premium Member"&lt;/span&gt;
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I am on my profile page
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Basic Member"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We didn&amp;rsquo;t get to these all at once.  We&amp;rsquo;d put the fruits of our InsideOut work aside (the new domain elements Subscription and PaymentSource) and reverted to OutsideIn.  This was the set of experiences we wanted for the end user, in association with the &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1261"&gt;ticket&lt;/a&gt; we were working on.  We&amp;rsquo;d actually started with two scenarios, one about upgrade to premium and the other about upgrade to premium plus, and in my mind had been the idea that we would ultimately make both types of upgrade work using our new domain entities.&lt;/p&gt;
+
+&lt;p&gt;However that was actually scope creep off the ticket, and actually there was a chunk of work specific to the ticket (upgrade from basic to premium) that could be implemented in the existing system without any reference to the new domain entities, so we got that done.  It was mainly a change to the view to add a report about the user&amp;rsquo;s current membership status, and an upgrade button:&lt;/p&gt;
+&lt;pre class="highlight html"&gt;&lt;code&gt;    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if current_user &lt;span class="err"&gt;&amp;amp;&amp;amp;&lt;/span&gt; current_user == presenter.user %&amp;gt;
+        &lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= current_user.membership_type %&amp;gt; Member&lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% unless current_user.membership_type == 'Premium' %&amp;gt;
+            &lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= form_tag charges_path(plan: 'premium') do %&amp;gt;
+                  &lt;span class="nt"&gt;&amp;lt;script &lt;/span&gt;&lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"https://checkout.stripe.com/checkout.js"&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"stripe-button"&lt;/span&gt;
+                          &lt;span class="na"&gt;data-key=&lt;/span&gt;&lt;span class="s"&gt;"&amp;lt;%= Rails.configuration.stripe[:publishable_key] %&amp;gt;"&lt;/span&gt;
+                          &lt;span class="na"&gt;data-description=&lt;/span&gt;&lt;span class="s"&gt;"A month's subscription"&lt;/span&gt;
+                          &lt;span class="na"&gt;data-amount=&lt;/span&gt;&lt;span class="s"&gt;"1000"&lt;/span&gt;
+                          &lt;span class="na"&gt;data-currency=&lt;/span&gt;&lt;span class="s"&gt;"GBP"&lt;/span&gt;
+                          &lt;span class="na"&gt;data-locale=&lt;/span&gt;&lt;span class="s"&gt;"en-US"&lt;/span&gt;
+                          &lt;span class="na"&gt;data-name=&lt;/span&gt;&lt;span class="s"&gt;"Premium Membership"&lt;/span&gt;
+                          &lt;span class="na"&gt;data-label=&lt;/span&gt;&lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+
+              &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
+            &lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+        &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;rsquo;m itching to pull this into a partial (&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1306"&gt;refactoring ticket&lt;/a&gt;), and I also worry we&amp;rsquo;re not being confident enough with our logic - of which there is also too much in the view.  Devise&amp;rsquo;s &lt;code&gt;current_user&lt;/code&gt; method is maybe the source of our timidity, since if no one is logged in, it returns nil.  Perhaps it would be better if it returned an AnonymousUser object.  Michael started looking into how we might override it, but I demurred, writing an email to Stripe about our new approach of locking the data-locale to &amp;ldquo;en-US&amp;rdquo;.  All that was actually after we&amp;rsquo;d dropped to the RSpec level to create the necessary supporting operations for the view fragment above.  Let&amp;rsquo;s just take a look at them:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="s1"&gt;'#membership_type'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'returns membership type'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;membership_type&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="s1"&gt;'Basic'&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'premium member'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;&lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;stripe_customer: &lt;/span&gt;&lt;span class="s2"&gt;"sdfdfds"&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
+      &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'returns premium'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;membership_type&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="s1"&gt;'Premium'&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;do&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+  &lt;span class="nf"&gt;def&lt;/span&gt; &lt;span class="n"&gt;membership_type&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"Basic"&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;stripe_customer&lt;/span&gt;
+    &lt;span class="s2"&gt;"Premium"&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="nf"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and finally a little addition to the charges controller so that when users sign up premium, that we store their customer id in the user table:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create&lt;/span&gt;
+    &lt;span class="vi"&gt;@plan&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="n"&gt;customer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:stripeEmail&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="ss"&gt;source: &lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:stripeToken&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="ss"&gt;plan: &lt;/span&gt;&lt;span class="vi"&gt;@plan&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;update_user_to_premium&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;send_acknowledgement_email&lt;/span&gt;
+
+  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;CardError&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
+    &lt;span class="n"&gt;flash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:error&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;
+    &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="n"&gt;new_charge_path&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="kp"&gt;private&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update_user_to_premium&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;current_user&lt;/span&gt;
+    &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;
+    &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The upshot of which, was that using only the existing aspects of the system, we would now store the stripe customer id of the premium member in the user table, and the premium users would see their status on their profile page, and non-premium users would see the upgrade button.  It was all working without the aid of the new domain entities.  As I mentioned above, Michael and I had other concerns, but with my eye on the clock I suggested we get this in as a pull request, and then use the new domain entities to support work on a subsequent &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1303"&gt;ticket of allowing premium users to upgrade to premium plus&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I had other concerns dripping out of me, such as whether we should be testing Stripe differently, whether we should be making our scenarios more declarative.  I guess part of the challenge with our increasing list of heuristics for good coding and good project management is that it can feel like you are being pulled in multiple directions at once, and you can be forgiven for a kind of paranoia about which really is the most important issue to work on first.&lt;/p&gt;
+
+&lt;p&gt;Submitting the PR for just the above code involved pulling out the commits for the new domain model entities.  One thing that was easy to prioritise for me was to put only the smallest set of necessary elements in the pull request.  I didn&amp;rsquo;t want Raoul&amp;rsquo;s code review to get distracted by having a set of un-used domain entities in the incoming code.  Michael found a &lt;a href="http://stackoverflow.com/a/1994491/316729"&gt;cool technique for cherry picking a set of commits&lt;/a&gt; and we got in a PR with just the code above, and moved the domain entities onto a new branch associated with the ticket for creating the premium plus upgrade button.  Will we fall foul of premature refactoring?  Did we just dodge a bullet?&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s pretty to clear to me that the current stripe_customer field on user can&amp;rsquo;t support information about different membership plans.  Hopefully our InsideOut work will bear fruit in the next session!&lt;/p&gt;
+
+&lt;p&gt;Related Videos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=UprAXzePQmo"&gt;Pairing on the above&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=JPvkCffsHOo"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Confident Coding</title>
     <link rel="alternate" href="http://blog.url.com/2016/09/26/confident-coding/"/>
     <id>http://blog.url.com/2016/09/26/confident-coding/</id>
     <published>2016-09-26T01:00:00+01:00</published>
-    <updated>2016-09-26T21:16:47+01:00</updated>
+    <updated>2016-09-27T13:24:59+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -65,7 +207,7 @@
     &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;string&lt;/span&gt;   &lt;span class="s2"&gt;"stripe_customer"&lt;/span&gt;
   &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Part of our recent focus had been on how we could reduce bloat on this table.  Adding the &lt;code&gt;stripe_customer&lt;/code&gt; field had made us feel a little queasy.   However actually moving payment info or Karma wasn&amp;rsquo;t going to reduce bloat.  A real impact would require pulling out an Address or SignIn class.  However it wasn&amp;rsquo;t clear that either of those latter two would yield any short-term business value.  It&amp;rsquo;s a bit like a game of Jenga.  There are some parts of the structure that if you pull at will cause a lot of blocks to come crashing down.  At least pulling out the payment and premium elements to other models would allow those parts of the system to evolve without further increasing the technical debt associated with the User table.,&lt;/p&gt;
+&lt;p&gt;Part of our recent focus had been on how we could reduce bloat on this table.  Adding the &lt;code&gt;stripe_customer&lt;/code&gt; field had made us feel a little queasy.   However actually moving payment info or Karma wasn&amp;rsquo;t going to reduce bloat.  A real impact would require pulling out an Address or SignIn class.  Yet it wasn&amp;rsquo;t clear that either of those latter two would yield any short-term business value.  It&amp;rsquo;s a bit like a game of Jenga.  There are some parts of the structure that if you pull at will cause a lot of blocks to come crashing down.  At least pulling out the payment and premium elements to other models would allow those parts of the system to evolve without further increasing the technical debt associated with the User table.&lt;/p&gt;
 
 &lt;p&gt;Maybe we should have been using whiteboard software or pencil and paper, but I found myself writing the following with a few changes coming here and there:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;subscriptions&lt;/span&gt;
@@ -84,7 +226,7 @@
   &lt;span class="k"&gt;end&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;See the video to follow how this evolved from one model to three models and then back to too.  However I did feel uncomfortable that we were being too specific at this level of ruby database instructions, so I pulled that snippet into a text document and re-framed it in terms of Ruby objects:&lt;/p&gt;
+&lt;p&gt;See the video to follow how this evolved from one model to three models and then back to two.  However I did feel uncomfortable that we were being too specific at this level of ruby database instructions, so I pulled that snippet into a text document and re-framed it in terms of Ruby objects:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Subscription&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="no"&gt;AR&lt;/span&gt;&lt;span class="ss"&gt;:Base&lt;/span&gt;
   &lt;span class="n"&gt;belongs_to&lt;/span&gt; &lt;span class="ss"&gt;:user&lt;/span&gt;
   &lt;span class="n"&gt;has_one&lt;/span&gt; &lt;span class="ss"&gt;:payment_source&lt;/span&gt;
@@ -556,40 +698,6 @@ tar: Error is not recoverable: exiting now
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Qveh4RtiWN4"&gt;Pairing on AV main site&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=UBo8d0Yebyw"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Business as Usual</title>
-    <link rel="alternate" href="http://blog.url.com/2016/09/19/business-as-usual/"/>
-    <id>http://blog.url.com/2016/09/19/business-as-usual/</id>
-    <published>2016-09-19T01:00:00+01:00</published>
-    <updated>2016-09-19T20:29:13+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Trying to run a business is notoriously hard.  How about a charity?  A volunteer organisation?  I&amp;rsquo;m starting to see some patterns from the last few years.  I notice at the Karate classes that I do with my kids that there&amp;rsquo;s been a huge turnover of participants in the last three years we&amp;rsquo;ve been doing it.  There are people who come once or twice and then you never see them again.  There are people who show up for a period and seem quite committed, like the group of students doing their Duke of Edinburgh award who were saying they wanted to go all the way to black belt, and then there are people who are there every time for a couple of years and then just disappear.  The funny thing, to me, is that pretty much everyone strikes a post of &amp;ldquo;see you next week&amp;rdquo;.  No one says &amp;ldquo;I think I won&amp;rsquo;t come any more&amp;rdquo;.  Maybe they&amp;rsquo;re saying it to the Karate instructor?&lt;/p&gt;
-
-&lt;p&gt;I speculate that Karate is aspirational, a bit like coding for some people.  I also coach kids football (soccer).  We have a similar sort of pattern with participants coming and going, and generally you&amp;rsquo;re not going to be informed about a change of attendance.   People vary of course.  Sometimes I might get a &amp;ldquo;sorry we&amp;rsquo;ve signed up for another club&amp;rdquo; message on WhatsApp, but it&amp;rsquo;s almost never the kind of thing that&amp;rsquo;s said to you in person.  I&amp;rsquo;ve always found this a little strange.  The other day I mentioned the rough ride I had at 13 telling my music teacher I didn&amp;rsquo;t want to play in the orchestra, while my friends slinked off to avoid any confrontation.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m guilty of the same thing online sometimes.  One that springs to mind was that I was getting stuck on an issue related to the simplecov gem, and was having an interaction with the gem author in an &lt;a href="https://github.com/colszowka/simplecov-html/issues/41"&gt;issue&lt;/a&gt; and I remember that there were huge currents of work on different things going on at the time, and I just totally failed to respond.  Now I found the issue again I&amp;rsquo;m tempted to go back and at least thank the gem author for their input.  It must be a pretty common experience for open source projects.  You&amp;rsquo;ve potentially got the whole world working on getting something done.  They start a conversation and sometimes it just gets cut off.&lt;/p&gt;
-
-&lt;p&gt;If you&amp;rsquo;re unlikely to interact with the person again then you&amp;rsquo;re not strongly incentivised to give them warning about your plans.  I guess the majority of people just want to avoid any conflict and usually won&amp;rsquo;t make the time to say sorry.  In May last year there were lots of people I was meeting daily face to face who were getting my priority attention over open source projects.  Oh yes, and if I remember correctly I did collapse with pneumonia a few days later, so perhaps I can be forgiven :-)&lt;/p&gt;
-
-&lt;p&gt;There&amp;rsquo;s something to the scale of our modern civilisation.  In the past I imagine you&amp;rsquo;d have known everyone in your village and it would be much more important to let people know that you were or weren&amp;rsquo;t going to keep on doing something with them.  Maybe not.  Maybe it&amp;rsquo;s always been like this.  If someone asks you if you want to get involved in something, you express an interest, even if really what you&amp;rsquo;re feeling is a no; and then just don&amp;rsquo;t show up on the date.  Of course sometimes people will make the effort to give an explicit no, but most of the time it&amp;rsquo;s easier to say &amp;ldquo;yes/probably/maybe&amp;rdquo; and that keeps your options open.  &lt;/p&gt;
-
-&lt;p&gt;Something we observed when we were using G+ to organise pairing events, and something that is common to most meetup gatherings I&amp;rsquo;ve seen, is that out of the people that sign up to say they will attend, 50% or less will actually turn up.  If you&amp;rsquo;re trying to run a voluntary organisation then people who sound like they are committing but don&amp;rsquo;t show up can be incredibly draining.  I remember when we started AgileVentures, talking to the AirPair founder who said he was just sick of volunteering groups.  He&amp;rsquo;d been trying to organise a voluntary rock-climbing group for people to find rock-climbing partners, and at the time it didn&amp;rsquo;t dissuade me from trying AgileVentures as a purely voluntary organisation.  We had such numbers as a result of the interest in the MOOC that I thought why not give it a try, and we certainly accomplished a lot of cool things, but it is frustrating when you put a lot of effort and energy answering someone&amp;rsquo;s questions, helping them get set up and then they just disappear without so much as a word.&lt;/p&gt;
-
-&lt;p&gt;There&amp;rsquo;s an aspect of this in business too.  For every 10 people that you explain your product to, you might be lucky to get one customer; but in a business at least when you get that customer they&amp;rsquo;re paying for all the &amp;ldquo;marketing/sales&amp;rdquo; work (if you&amp;rsquo;ve priced things right).  In a voluntary organisation that&amp;rsquo;s much more draining.  I gave up doing face to face AgileVentures meetups in central London after it seemed that I would spend all my time greeting, being friendly, answering questions, for not much follow up.  Sometimes people would be really intense, asking lots and lots of questions, monopolising the discussion when other people were waiting to ask, or move on; talk about how involved they were going to get, and then totally disappear.  At least by being completely online, I don&amp;rsquo;t have to deal with the logistical overhead of getting into central London, arranging a place for a meet up, and so on.&lt;/p&gt;
-
-&lt;p&gt;Personally it would make quite a big difference to me if people emailed or texted to say, thanks for your help the other night, but I think this isn&amp;rsquo;t for me; and then give a little more input on why it&amp;rsquo;s not a match.  However the chances are they will never encounter me again, so there&amp;rsquo;s not much upside for them in doing that, and the downside of risking all that unpleasant confrontation that everyone fears.  Honest feedback would be truly valuable but there isn&amp;rsquo;t much incentive for people to give it.  It&amp;rsquo;s difficult to get that feedback from the people who know you best, such as family, friends and work colleagues, let alone total strangers.&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s funny, though; we had some people in the last few weeks I&amp;rsquo;d love to have got that feedback from.  We had one person jumping into a scrum (after a series of emails and slacks) who wanted to propose a new project, which sounded really interesting, and the guy was really keen.  We set up a chat room for him, promoted it, got a few people in there, and then nothing.  No communication whatsoever, my follow up emails ignored.  Of course he may have dropped with pneumonia like I did last year, who knows.  However it leads me to question the whole concept of the AgileVentures &amp;ldquo;open to all to make a pitch&amp;rdquo; - I mean I guess we did&amp;rsquo;t lose that much, but it&amp;rsquo;s just strange not to have any follow up.&lt;/p&gt;
-
-&lt;p&gt;There&amp;rsquo;s similarity with onboarding to projects like LocalSupport.  There&amp;rsquo;s some people we&amp;rsquo;ve spent the time to onboard who go on to contribute loads, but others were we spend a fair amount of time trying to get them setup, and then we just don&amp;rsquo;t hear from them again.  I mean fair enough - people work out the project isn&amp;rsquo;t for them, other stuff in their life comes up.  However, it would just be nice to get a text or email saying &amp;ldquo;this isn&amp;rsquo;t for me&amp;rdquo; and maybe a bit of feedback.  I&amp;rsquo;m left confused about whether there&amp;rsquo;s anything we can do to make a difference.  Better onboarding documentation?  More friendly in the chatroom? Our whole site and setup just looking more professional? Maybe there&amp;rsquo;s nothing we can do to make a difference.  The question in my mind is do people realise that when they are asking for help to get setup that they are taking up valuable resources from our voluntary organisation?&lt;/p&gt;
-
-&lt;p&gt;Moving forward I think I have to assume this is just the way people are.  Part of the valuable offering of a bootcamp or university is the filtering mechanism that means that, rather than a random group of people you might get in a MOOC, you get a group of smart, motivated people, who are really committed to studying together.  Having members of a group that are not as committed can be really draining on everybody, particularly in terms of logistics, e.g. team members not showing up etc.  Hence our switch to providing a premium level of AgileVentures.  Those in the premium tier are necessarily more committed.  Similarly for the new &amp;ldquo;Agile Development using Ruby on Rails&amp;rdquo; project course, which will be paid-only.&lt;/p&gt;
-
-&lt;p&gt;It would be nice to think that super UX and value proposition by themselves could lead to the critical mass we&amp;rsquo;re looking forward.  That&amp;rsquo;s what FreeCodeCamp is going for, but trying to extract revenue from companies that hire their graduates.  I&amp;rsquo;d be interested to know how that&amp;rsquo;s really going. I&amp;rsquo;m certainly very impressed with their interface.  Still maybe there&amp;rsquo;s something in the saying that if you&amp;rsquo;re NOT paying for something, then YOU are the product.&lt;/p&gt;
 </content>
   </entry>
 </feed>
