@@ -5,16 +5,121 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-09-28T01:00:00+01:00</updated>
+  <updated>2016-09-29T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Ducking and Diving</title>
+    <link rel="alternate" href="http://blog.url.com/2016/09/29/ducking-and-diving/"/>
+    <id>http://blog.url.com/2016/09/29/ducking-and-diving/</id>
+    <published>2016-09-29T01:00:00+01:00</published>
+    <updated>2016-09-29T20:51:17+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So having partially recovered from the cold I was able to pair program again today.  Interleaving work on the Karma calculation and the premium memberships, we now had an outstanding PR for premium upgrade buttons, so we ducked back to the Karma work of the previous week where we had got tangled up in all sorts of trouble with legacy tests, factories and objects.  The ardour of frustration had cooled.  I was not now in such a hurry to &amp;ldquo;solve&amp;rdquo; the problem.  I think that really helped.  We&amp;rsquo;d broken up the follow on refactorings into two tickets; one to get the karma total out of the user table, and the other to transfer all the rest of the intermediate calculations into the Karma model itself.&lt;/p&gt;
+
+&lt;p&gt;We started on removing karma from the user table.  The approach here was just to create the migration and see what errors we flushed out:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;RemoveKarmaFromUserTable&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Migration&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;change&lt;/span&gt;
+    &lt;span class="n"&gt;remove_column&lt;/span&gt; &lt;span class="ss"&gt;:users&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:karma_points&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:integer&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I was torn about this sort of hacky approach, versus the other ticket which would see us refactoring away the KarmaCalculation service.  Still that bigger refactoring had more to go wrong, so it made sense to take the simpler step first.  Well maybe it wouldn&amp;rsquo;t be simpler, but we needed to flush out any unknowns before we went on to the bigger refactoring.  It also felt good to be removing something from the bloated user table.&lt;/p&gt;
+
+&lt;p&gt;So we proceeded with the migration and flushed out the following 16 failures in the specs:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rspec ./spec/views/users/index.html.erb_spec.rb:48 # users/index.html.erb renders User name link with href
+rspec ./spec/views/users/index.html.erb_spec.rb:41 # users/index.html.erb should display a list of users
+rspec ./spec/views/users/index.html.erb_spec.rb:91 # users/index.html.erb display user status there should be 4 green dots
+rspec ./spec/views/users/index.html.erb_spec.rb:85 # users/index.html.erb display user status display green dot for online users
+rspec ./spec/views/users/index.html.erb_spec.rb:97 # users/index.html.erb display user status do not display green dot for offline users
+rspec ./spec/views/users/index.html.erb_spec.rb:103 # users/index.html.erb display user status displays the user's status with a speech bubble
+rspec ./spec/views/users/index.html.erb_spec.rb:18 # users/index.html.erb advanced filtering should display an advanced filter form
+rspec ./spec/views/users/index.html.erb_spec.rb:32 # users/index.html.erb advanced filtering timezone select is populated with titles
+rspec ./spec/views/users/index.html.erb_spec.rb:25 # users/index.html.erb advanced filtering projects select is populated with project titles
+rspec ./spec/views/users/index.html.erb_spec.rb:62 # users/index.html.erb renders the users count in the sentence above shows different sentence if invalid users count
+rspec ./spec/views/users/index.html.erb_spec.rb:56 # users/index.html.erb renders the users count in the sentence above has valid users count
+rspec ./spec/controllers/users_controller_spec.rb:10 # UsersController#index should assign the results of the search to @users
+rspec ./spec/services/karma_calculator_spec.rb:10 # KarmaCalculator for new members should assign 0 karma points to members who have not yet been created
+rspec ./spec/services/karma_calculator_spec.rb:23 # KarmaCalculator for existing members for old members should assign karma points to members
+rspec ./spec/services/karma_calculator_spec.rb:34 # KarmaCalculator for existing members for members attending hangouts gives points for hangout participation
+rspec ./spec/views/layouts/application.html.erb_spec.rb:73 # layouts/application.html.erb should return 200 for all link visits
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which were all variations on the expected error message of:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;column users.karma_points does not exist
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We started by fixing up the Karma controller so that it switched its references from &lt;code&gt;user.karma_points&lt;/code&gt; to &lt;code&gt;user.karma.karma&lt;/code&gt;.  That latter looked silly so we switched it to &lt;code&gt;user.karma.total&lt;/code&gt; with another migration:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;RenameKarmaKarmaToTotal&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Migration&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;change&lt;/span&gt;
+    &lt;span class="n"&gt;rename_column&lt;/span&gt; &lt;span class="ss"&gt;:karmas&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:karma&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:total&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Reaching through from one object into another like &lt;code&gt;user.karma.total&lt;/code&gt; is a Demeter violation.   We shouldn&amp;rsquo;t know or assume too much about the objects we are collaborating with, but we knew our next ticket was going to refactor away the KarmaCalculation service, so we didn&amp;rsquo;t want to get pulled in to fixing that immediately.  After getting the KarmaCalculation specs to pass we had a few views to update to use &lt;code&gt;user.karma.total&lt;/code&gt; instead of &lt;code&gt;user.karma_points&lt;/code&gt; and they were soon passing.  The user controller needed a slightly more complex change from:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;page&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:page&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nf"&gt;per&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;includes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:status&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:titles&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;set_filter_params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;allow_to_display&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;karma_points: :desc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;to&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;page&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:page&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nf"&gt;per&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;includes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:status&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:titles&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:karma&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;set_filter_params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;allow_to_display&lt;/span&gt;
+    &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'karmas.total DESC'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;to cope with the fact that we were now ordering the main user view based on a field in another table.  That done, all the specs were passing, and we ran the cukes to see if any of the features were broken. Before we did that I had half a mind to start deleting the view specs that were failing, and even the controller specs.  I&amp;rsquo;ve lost any motivation to write view and controller specs that effectively unit test parts of the view and controller in isolation.  It feels like the features and integration tests will check that logic, and that &amp;ldquo;unit&amp;rdquo; tests of controllers and views encourage logic to appear in those areas when all complex stuff should be being pushed into models, services, gems and remote services where possible.  That&amp;rsquo;s what we&amp;rsquo;ve done with some success in our work on ProjectScope.&lt;/p&gt;
+
+&lt;p&gt;However, the fixes for the specs had been relatively simple, and the fear of deleting something that might have use in the future (dangerous paranoia?) kept me from hacking and slashing.  The idea of more extensive unit tests of controllers and views is that they can find you problems faster than the slow running acceptance tests.  Ironically our acceptance tests don&amp;rsquo;t take much longer to run than our specs, and anyway for all this to work you need to trust that your specs are testing the right things.  In fact we did get a failure in the cukes, which was related to the way we were setting up our default user objects - there was no Karma object associated with them by default, so calling &lt;code&gt;user.karma.total&lt;/code&gt; was failing with no method &lt;code&gt;total&lt;/code&gt; on nil object.  Our Demeter violation was biting us.&lt;/p&gt;
+
+&lt;p&gt;Now we could have been less confident and fixed this with &lt;code&gt;user.karma.try(:total)&lt;/code&gt; or even the new ampersand dot syntax &lt;code&gt;user.karma&amp;amp;.total&lt;/code&gt;, but given that we were already uncomfortable with the Demeter violation, we went another, perhaps more confident, route.  We TDD&amp;rsquo;d a new method on the User object:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="s1"&gt;'#karma_total'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'returns 0 when user initially created'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;karma_total&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'once associated karma object is created'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;karma: &lt;/span&gt;&lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:karma&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;total: &lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'returns non zero'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;karma_total&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Effectively we created the sort of method we had before, i.e. &lt;code&gt;karma_points&lt;/code&gt; but called it &lt;code&gt;karma_total&lt;/code&gt;, and the user object could now confidently return the Karma total under any circumstances:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;karma_total&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;karma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;total&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;karma&lt;/span&gt;
+  &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Much more confident, and now everything was green.  For a long time I&amp;rsquo;ve been talking about how much I like Objective-C&amp;rsquo;s set up where calling a method on nil just results in nil.  The ampersand dot in Ruby promises that much, but now I&amp;rsquo;ve been infected by Avdi&amp;rsquo;s &amp;ldquo;confidence&amp;rdquo; meme.  I also just watched this talk by Peter Bhat Harkins, which was almost going to be called &amp;ldquo;kill nil&amp;rdquo;:&lt;/p&gt;
+
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/tg3YjMqWNj0" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;and I&amp;rsquo;m starting to see nil as evil.  Well at least something to address by avoiding passing it around rather than using &lt;code&gt;try&lt;/code&gt; or ampersand-dot which screws with our readability.  Anyhow we&amp;rsquo;d managed to follow a drive-by methodology, doing the minimum work necessary to get our pull request out.  We&amp;rsquo;d fixed the Demeter violation for &amp;ldquo;getting&amp;rdquo; Karma where it was breaking our feature tests, but we left the Demeter violation for &amp;ldquo;setting&amp;rdquo; Karma in the KarmaCalculation service, which we were planning to refactor in the next ticket.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;d finished early so we got in some quick PRs to upgrade to Ruby 2.3.1, remove some old Vagrant scripts and started on a new ticket for improving hangout telemetry.  A reasonable afternoon&amp;rsquo;s work.  We&amp;rsquo;d ducked and dived and at the end of it I felt we&amp;rsquo;d taken a reasonable middle road down the profusion of coding and project heuristics that infest my mind.  Let&amp;rsquo;s see what tomorrow brings :-)&lt;/p&gt;
+
+&lt;p&gt;Related Videos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=fPGJ5lon92M"&gt;Pairing Video&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=r6pWaOVKyRM"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Fallow Day</title>
     <link rel="alternate" href="http://blog.url.com/2016/09/28/fallow-day/"/>
     <id>http://blog.url.com/2016/09/28/fallow-day/</id>
     <published>2016-09-28T01:00:00+01:00</published>
-    <updated>2016-09-28T21:08:49+01:00</updated>
+    <updated>2016-09-29T09:29:58+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -132,7 +237,7 @@ i’m not sure who wants to do this story, but my coworker seems interested in p
     <link rel="alternate" href="http://blog.url.com/2016/09/27/dodging-a-bullet/"/>
     <id>http://blog.url.com/2016/09/27/dodging-a-bullet/</id>
     <published>2016-09-27T01:00:00+01:00</published>
-    <updated>2016-09-27T21:51:16+01:00</updated>
+    <updated>2016-09-29T09:29:58+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -280,7 +385,7 @@ i’m not sure who wants to do this story, but my coworker seems interested in p
     <link rel="alternate" href="http://blog.url.com/2016/09/26/confident-coding/"/>
     <id>http://blog.url.com/2016/09/26/confident-coding/</id>
     <published>2016-09-26T01:00:00+01:00</published>
-    <updated>2016-09-27T13:24:59+01:00</updated>
+    <updated>2016-09-29T09:29:58+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -481,7 +586,7 @@ i’m not sure who wants to do this story, but my coworker seems interested in p
     <link rel="alternate" href="http://blog.url.com/2016/09/23/longer-than-expected/"/>
     <id>http://blog.url.com/2016/09/23/longer-than-expected/</id>
     <published>2016-09-23T01:00:00+01:00</published>
-    <updated>2016-09-23T18:42:57+01:00</updated>
+    <updated>2016-09-29T09:29:58+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -568,7 +673,7 @@ i’m not sure who wants to do this story, but my coworker seems interested in p
     <link rel="alternate" href="http://blog.url.com/2016/09/22/cant-we-go-any-faster/"/>
     <id>http://blog.url.com/2016/09/22/cant-we-go-any-faster/</id>
     <published>2016-09-22T01:00:00+01:00</published>
-    <updated>2016-09-23T09:17:20+01:00</updated>
+    <updated>2016-09-29T09:29:58+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -677,79 +782,6 @@ i’m not sure who wants to do this story, but my coworker seems interested in p
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=PliTRMoNrR8"&gt;Pairing part 1&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=6zO-FCmJQSk"&gt;Pairing part 2&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=_dXb5QASWeU"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Missed Ships</title>
-    <link rel="alternate" href="http://blog.url.com/2016/09/21/missed-ships/"/>
-    <id>http://blog.url.com/2016/09/21/missed-ships/</id>
-    <published>2016-09-21T01:00:00+01:00</published>
-    <updated>2016-09-21T21:00:32+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;I got confused yesterday about adjustments to the pairing schedule.  I thought Michael was going to be available later in the day, but actually he had to leave early.   As a result our pairing was contracted to an hour, and he started on a new task working solo.  Michael was looking at adjusting the way we managed our 3rd party JavaScript assets in the WebSiteOne Rails app.  We&amp;rsquo;ve been storing them in the vendor directory and checking them into our source code repository.  This doesn&amp;rsquo;t make for a smooth upgrade and dependency management strategy.  &lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ve been hearing that npm is becoming the standard for JavaScript dependency management, with bower falling out of favour.  Although clearly the &lt;a href="https://www.quora.com/Why-use-Bower-when-there-is-npm"&gt;conversation is still ongoing&lt;/a&gt;.  Anyhow, Michael started some &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1278"&gt;solo work&lt;/a&gt;, adding a package.json and a script to copy files from the node_modules directory into the rails vendor directory.  In our quick pairing session we got his spike working on my machine, and updated the install documentation.  After Michael had to go I made some adjustments to our CI and the heroku build packs to ensure that this would all work with the rest of our development pipeline.  I think I sorted the CI, but not the heroku, which required another solo pass from Michael after I got back, although the fact that I was migrating our servers from group to individual accounts means I&amp;rsquo;m not sure we&amp;rsquo;ve been able to run a final check that the Heroku install works.&lt;/p&gt;
-
-&lt;p&gt;Anyhow, it&amp;rsquo;s interesting that I would not have picked this particular task off the backlog if Michael and I were choosing together.  I&amp;rsquo;d have been pushing for things that might have a more direct impact for our users.  Michael chose this one because he was interested in it, which is a great motivation.  I would also have been worried about opening a can of worms here.  However it seems like we might have been able to sort it in an otherwise chaotic day, and we&amp;rsquo;ve explored an important part of our stack, as well as revealing some JavaScript files that shouldn&amp;rsquo;t have been checked in.&lt;/p&gt;
-
-&lt;p&gt;Modern software engineer management often talks about groups like Steam or Github where groups of programmers just experiment with things that interest them and those things turn into &amp;ldquo;product&amp;rdquo; as a function of programmer interest.  I&amp;rsquo;d find it easier to take that attitude if I was independently wealthy and not worrying about whether I&amp;rsquo;ll have to go find a different job or completely pivot in three months or so :-)  However as I was saying in the heuristics blog yesterday, once you&amp;rsquo;ve started a task &amp;hellip; my strong temptation is often to try and switch tasks, or rebuild something, but maybe that&amp;rsquo;s just too disruptive?  Strains the social bonds of the people you&amp;rsquo;re working with?  Pick your battles they say :-)&lt;/p&gt;
-
-&lt;p&gt;Michael is looking ahead to interesting vistas involving replacing the whole Rails asset pipeline with npm and gulp, which is apparently the in-thing these days.  The issue that was highlighted to me yesterday is how we need to improve and update our installation documentation.  We&amp;rsquo;ve migrated the wiki into the repo doc directory, but there&amp;rsquo;s still a lot of cleanup to do.  I&amp;rsquo;m also reminded that this stuff needs to be tested with installs on fresh machines.  I did an install on C9 yesterday which went smoothly, but made it look like this could be turned into an install script.&lt;/p&gt;
-
-&lt;p&gt;I also installed docker and used it to create a vanilla ubuntu instance, that I started installing WSO on.  Docker was great - installing WSO on ubuntu less so, with a series of sticking issues for the upfront install of phantomjs using npm.  I was pleased to find a way round my old friend:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;root@8c7aad239bc9:~# npm install -g phantomjs
-npm WARN deprecated phantomjs@2.1.7: Package renamed to phantomjs-prebuilt. Please update 'phantomjs' package references to 'phantomjs-prebuilt'
-npm WARN deprecated tough-cookie@2.2.2: ReDoS vulnerability parsing Set-Cookie https://nodesecurity.io/advisories/130
-/root/.nvm/versions/node/v5.10.1/bin/phantomjs -&amp;gt; /root/.nvm/versions/node/v5.10.1/lib/node_modules/phantomjs/bin/phantomjs
-
-&amp;gt; phantomjs@2.1.7 install /root/.nvm/versions/node/v5.10.1/lib/node_modules/phantomjs
-&amp;gt; node install.js
-
-sh: 1: node: Permission denied
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;with http://sourcode.net/sh-1-node-permission-denied/&lt;/p&gt;
-
-&lt;p&gt;but that only lead me to a follow up error:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;root@8c7aad239bc9:~# npm install phantomjs
-npm WARN deprecated phantomjs@2.1.7: Package renamed to phantomjs-prebuilt. Please update 'phantomjs' package references to 'phantomjs-prebuilt'
-npm WARN deprecated tough-cookie@2.2.2: ReDoS vulnerability parsing Set-Cookie https://nodesecurity.io/advisories/130
-
-&amp;gt; phantomjs@2.1.7 install /root/node_modules/phantomjs
-&amp;gt; node install.js
-
-PhantomJS not found on PATH
-Download already available at /tmp/phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
-Verified checksum of previously downloaded file
-Extracting tar contents (via spawned process)
-Error extracting archive
-Phantom installation failed { Error: Command failed: tar jxf /tmp/phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
-tar (child): bzip2: Cannot exec: No such file or directory
-tar (child): Error is not recoverable: exiting now
-tar: Child returned status 2
-tar: Error is not recoverable: exiting now
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and it was getting late.  I did try a few things, but I left that to tinker with later.  I probably should get more into docker and look into not accessing that ubuntu image as root.  I&amp;rsquo;m intrigued by the idea of publishing a WSO docker image and/or docker install script.  What would be really nice would be if our install scripts (docker or otherwise) could be run via acceptance tests.  It&amp;rsquo;s ironic that our CI is installing the app from scratch a dozen times a day.  We really should have an instantaneous deploy for anyone wanting to get set up with the project.&lt;/p&gt;
-
-&lt;p&gt;So anyway, maybe me screwing up the pairing schedule was serendipitous.  I often find myself shy of things that I think will take a long time, but then my intuitions are also wrong sometimes.  I remember when an AV volunteer (Pavel) first set up Travis for us.  Not knowing much about it it felt like a big thing to get into; and then I saw that all Pavel had done was flick a switch and add a .travis.yml file.  Of course there&amp;rsquo;s a lot more to go wrong with CI as your project gets bigger, but sometimes the younger person just giving things a try, reveals that the older person&amp;rsquo;s fears of a briar patch are unfounded.  And then there are other times when the older person&amp;rsquo;s fears are correct and you get stuck in a sticky mess.  If only one could predict reliably which way round it&amp;rsquo;s going to end up &amp;hellip; :-)  &lt;/p&gt;
-
-&lt;p&gt;So my moral for today is pair with people of all levels, and don&amp;rsquo;t beat yourself up too much when you screw up the schedule, or start on a task you have misgivings about.  Better to enjoy the process and see what emerges :-)&lt;/p&gt;
-
-&lt;p&gt;Related Videos:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=OihKyI6SEew"&gt;Pairing on AV main site&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=hbO9l328TR0"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Related Links:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/rstacruz/npm-pipeline-rails"&gt;https://github.com/rstacruz/npm-pipeline-rails&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://gofore.com/stop-using-bower/"&gt;https://gofore.com/stop-using-bower/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://medium.com/@nickheiner/why-my-team-uses-npm-instead-of-bower-eecfe1b9afcb"&gt;https://medium.com/@nickheiner/why-my-team-uses-npm-instead-of-bower-eecfe1b9afcb&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

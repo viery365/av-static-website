@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Ducking and Diving</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_09 x2016_09_29 x2016_09_29_ducking-and-diving x2016_09_29_ducking-and-diving_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/09/29/ducking-and-diving/">Ducking and Diving</a></h2>
+        <h5 class='date'>29 Sep 2016</h5>
+    <p>So having partially recovered from the cold I was able to pair program again today.  Interleaving work on the Karma calculation and the premium memberships, we now had an outstanding PR for premium upgrade buttons, so we ducked back to the Karma work of the previous week where we had got tangled up in all sorts of trouble with legacy tests, factories and objects.  The ardour of frustration had cooled.  I was not now in such a hurry to &ldquo;solve&rdquo; the problem.  I think that really helped.  We&rsquo;d broken up the follow on refactorings into two tickets; one to get the karma total out of the user table, and the other to transfer all the rest of the intermediate calculations into the Karma model itself.</p>
+
+<p>We started on removing karma from the user table.  The approach here was just to create the migration and see what errors we flushed out:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">RemoveKarmaFromUserTable</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+  <span class="k">def</span> <span class="nf">change</span>
+    <span class="n">remove_column</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">:karma_points</span><span class="p">,</span> <span class="ss">:integer</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>I was torn about this sort of hacky approach, versus the other ticket which would see us refactoring away the KarmaCalculation service.  Still that bigger refactoring had more to go wrong, so it made sense to take the simpler step first.  Well maybe it wouldn&rsquo;t be simpler, but we needed to flush out any unknowns before we went on to the bigger refactoring.  It also felt good to be removing something from the bloated user table.</p>
+
+<p>So we proceeded with the migration and flushed out the following 16 failures in the specs:</p>
+<pre class="highlight plaintext"><code>rspec ./spec/views/users/index.html.erb_spec.rb:48 # users/index.html.erb renders User name link with href
+rspec ./spec/views/users/index.html.erb_spec.rb:41 # users/index.html.erb should display a list of users
+rspec ./spec/views/users/index.html.erb_spec.rb:91 # users/index.html.erb display user status there should be 4 green dots
+rspec ./spec/views/users/index.html.erb_spec.rb:85 # users/index.html.erb display user status display green dot for online users
+rspec ./spec/views/users/index.html.erb_spec.rb:97 # users/index.html.erb display user status do not display green dot for offline users
+rspec ./spec/views/users/index.html.erb_spec.rb:103 # users/index.html.erb display user status displays the user's status with a speech bubble
+rspec ./spec/views/users/index.html.erb_spec.rb:18 # users/index.html.erb advanced filtering should display an advanced filter form
+rspec ./spec/views/users/index.html.erb_spec.rb:32 # users/index.html.erb advanced filtering timezone select is populated with titles
+rspec ./spec/views/users/index.html.erb_spec.rb:25 # users/index.html.erb advanced filtering projects select is populated with project titles
+rspec ./spec/views/users/index.html.erb_spec.rb:62 # users/index.html.erb renders the users count in the sentence above shows different sentence if invalid users count
+rspec ./spec/views/users/index.html.erb_spec.rb:56 # users/index.html.erb renders the users count in the sentence above has valid users count
+rspec ./spec/controllers/users_controller_spec.rb:10 # UsersController#index should assign the results of the search to @users
+rspec ./spec/services/karma_calculator_spec.rb:10 # KarmaCalculator for new members should assign 0 karma points to members who have not yet been created
+rspec ./spec/services/karma_calculator_spec.rb:23 # KarmaCalculator for existing members for old members should assign karma points to members
+rspec ./spec/services/karma_calculator_spec.rb:34 # KarmaCalculator for existing members for members attending hangouts gives points for hangout participation
+rspec ./spec/views/layouts/application.html.erb_spec.rb:73 # layouts/application.html.erb should return 200 for all link visits
+</code></pre>
+<p>which were all variations on the expected error message of:</p>
+<pre class="highlight plaintext"><code>column users.karma_points does not exist
+</code></pre>
+<p>We started by fixing up the Karma controller so that it switched its references from <code>user.karma_points</code> to <code>user.karma.karma</code>.  That latter looked silly so we switched it to <code>user.karma.total</code> with another migration:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">RenameKarmaKarmaToTotal</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+  <span class="k">def</span> <span class="nf">change</span>
+    <span class="n">rename_column</span> <span class="ss">:karmas</span><span class="p">,</span> <span class="ss">:karma</span><span class="p">,</span> <span class="ss">:total</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>Reaching through from one object into another like <code>user.karma.total</code> is a Demeter violation.   We shouldn&rsquo;t know or assume too much about the objects we are collaborating with, but we knew our next ticket was going to refactor away the KarmaCalculation service, so we didn&rsquo;t want to get pulled in to fixing that immediately.  After getting the KarmaCalculation specs to pass we had a few views to update to use <code>user.karma.total</code> instead of <code>user.karma_points</code> and they were soon passing.  The user controller needed a slightly more complex change from:</p>
+<pre class="highlight ruby"><code><span class="no">User</span><span class="p">.</span><span class="nf">page</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:page</span><span class="p">]).</span><span class="nf">per</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="ss">:status</span><span class="p">,</span> <span class="ss">:titles</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">set_filter_params</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">allow_to_display</span>
+    <span class="p">.</span><span class="nf">order</span><span class="p">(</span><span class="ss">karma_points: :desc</span><span class="p">)</span>
+</code></pre>
+<p>to</p>
+<pre class="highlight ruby"><code><span class="no">User</span><span class="p">.</span><span class="nf">page</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:page</span><span class="p">]).</span><span class="nf">per</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="ss">:status</span><span class="p">,</span> <span class="ss">:titles</span><span class="p">,</span> <span class="ss">:karma</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">set_filter_params</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">allow_to_display</span>
+    <span class="p">.</span><span class="nf">order</span><span class="p">(</span><span class="s1">'karmas.total DESC'</span><span class="p">)</span>
+</code></pre>
+<p>to cope with the fact that we were now ordering the main user view based on a field in another table.  That done, all the specs were passing, and we ran the cukes to see if any of the features were broken. Before we did that I had half a mind to start deleting the view specs that were failing, and even the controller specs.  I&rsquo;ve lost any motivation to write view and controller specs that effectively unit test parts of the view and controller in isolation.  It feels like the features and integration tests will check that logic, and that &ldquo;unit&rdquo; tests of controllers and views encourage logic to appear in those areas when all complex stuff should be being pushed into models, services, gems and remote services where possible.  That&rsquo;s what we&rsquo;ve done with some success in our work on ProjectScope.</p>
+
+<p>However, the fixes for the specs had been relatively simple, and the fear of deleting something that might have use in the future (dangerous paranoia?) kept me from hacking and slashing.  The idea of more extensive unit tests of controllers and views is that they can find you problems faster than the slow running acceptance tests.  Ironically our acceptance tests don&rsquo;t take much longer to run than our specs, and anyway for all this to work you need to trust that your specs are testing the right things.  In fact we did get a failure in the cukes, which was related to the way we were setting up our default user objects - there was no Karma object associated with them by default, so calling <code>user.karma.total</code> was failing with no method <code>total</code> on nil object.  Our Demeter violation was biting us.</p>
+
+<p>Now we could have been less confident and fixed this with <code>user.karma.try(:total)</code> or even the new ampersand dot syntax <code>user.karma&amp;.total</code>, but given that we were already uncomfortable with the Demeter violation, we went another, perhaps more confident, route.  We TDD&rsquo;d a new method on the User object:</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="s1">'#karma_total'</span> <span class="k">do</span>
+  <span class="n">subject</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
+
+  <span class="n">it</span> <span class="s1">'returns 0 when user initially created'</span> <span class="k">do</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">karma_total</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">0</span>
+  <span class="k">end</span>
+
+  <span class="n">context</span> <span class="s1">'once associated karma object is created'</span> <span class="k">do</span>
+    <span class="n">subject</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">build</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="ss">karma: </span><span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:karma</span><span class="p">,</span> <span class="ss">total: </span><span class="mi">50</span><span class="p">))</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'returns non zero'</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">karma_total</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">50</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span> 
+</code></pre>
+<p>Effectively we created the sort of method we had before, i.e. <code>karma_points</code> but called it <code>karma_total</code>, and the user object could now confidently return the Karma total under any circumstances:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">karma_total</span>
+  <span class="k">return</span> <span class="n">karma</span><span class="p">.</span><span class="nf">total</span> <span class="k">if</span> <span class="n">karma</span>
+  <span class="mi">0</span>
+<span class="k">end</span>
+</code></pre>
+<p>Much more confident, and now everything was green.  For a long time I&rsquo;ve been talking about how much I like Objective-C&rsquo;s set up where calling a method on nil just results in nil.  The ampersand dot in Ruby promises that much, but now I&rsquo;ve been infected by Avdi&rsquo;s &ldquo;confidence&rdquo; meme.  I also just watched this talk by Peter Bhat Harkins, which was almost going to be called &ldquo;kill nil&rdquo;:</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tg3YjMqWNj0" frameborder="0" allowfullscreen></iframe>
+
+<p>and I&rsquo;m starting to see nil as evil.  Well at least something to address by avoiding passing it around rather than using <code>try</code> or ampersand-dot which screws with our readability.  Anyhow we&rsquo;d managed to follow a drive-by methodology, doing the minimum work necessary to get our pull request out.  We&rsquo;d fixed the Demeter violation for &ldquo;getting&rdquo; Karma where it was breaking our feature tests, but we left the Demeter violation for &ldquo;setting&rdquo; Karma in the KarmaCalculation service, which we were planning to refactor in the next ticket.</p>
+
+<p>We&rsquo;d finished early so we got in some quick PRs to upgrade to Ruby 2.3.1, remove some old Vagrant scripts and started on a new ticket for improving hangout telemetry.  A reasonable afternoon&rsquo;s work.  We&rsquo;d ducked and dived and at the end of it I felt we&rsquo;d taken a reasonable middle road down the profusion of coding and project heuristics that infest my mind.  Let&rsquo;s see what tomorrow brings :-)</p>
+
+<p>Related Videos:</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=fPGJ5lon92M">Pairing Video</a></li>
+<li><a href="https://www.youtube.com/watch?v=r6pWaOVKyRM">&ldquo;Kent Beck&rdquo; scrum</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
