@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/09/29/ducking-and-diving/"/>
     <id>http://blog.url.com/2016/09/29/ducking-and-diving/</id>
     <published>2016-09-29T01:00:00+01:00</published>
-    <updated>2016-09-29T20:51:17+01:00</updated>
+    <updated>2016-09-29T20:53:14+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -100,7 +100,7 @@ rspec ./spec/views/layouts/application.html.erb_spec.rb:73 # layouts/application
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Much more confident, and now everything was green.  For a long time I&amp;rsquo;ve been talking about how much I like Objective-C&amp;rsquo;s set up where calling a method on nil just results in nil.  The ampersand dot in Ruby promises that much, but now I&amp;rsquo;ve been infected by Avdi&amp;rsquo;s &amp;ldquo;confidence&amp;rdquo; meme.  I also just watched this talk by Peter Bhat Harkins, which was almost going to be called &amp;ldquo;kill nil&amp;rdquo;:&lt;/p&gt;
 
-&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/tg3YjMqWNj0" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;iframe style="display: block; margin: auto;" align="center" width="560" height="315" src="https://www.youtube.com/embed/tg3YjMqWNj0" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
 
 &lt;p&gt;and I&amp;rsquo;m starting to see nil as evil.  Well at least something to address by avoiding passing it around rather than using &lt;code&gt;try&lt;/code&gt; or ampersand-dot which screws with our readability.  Anyhow we&amp;rsquo;d managed to follow a drive-by methodology, doing the minimum work necessary to get our pull request out.  We&amp;rsquo;d fixed the Demeter violation for &amp;ldquo;getting&amp;rdquo; Karma where it was breaking our feature tests, but we left the Demeter violation for &amp;ldquo;setting&amp;rdquo; Karma in the KarmaCalculation service, which we were planning to refactor in the next ticket.&lt;/p&gt;
 

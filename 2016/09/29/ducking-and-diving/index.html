@@ -164,7 +164,7 @@ rspec ./spec/views/layouts/application.html.erb_spec.rb:73 # layouts/application
 </code></pre>
 <p>Much more confident, and now everything was green.  For a long time I&rsquo;ve been talking about how much I like Objective-C&rsquo;s set up where calling a method on nil just results in nil.  The ampersand dot in Ruby promises that much, but now I&rsquo;ve been infected by Avdi&rsquo;s &ldquo;confidence&rdquo; meme.  I also just watched this talk by Peter Bhat Harkins, which was almost going to be called &ldquo;kill nil&rdquo;:</p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/tg3YjMqWNj0" frameborder="0" allowfullscreen></iframe>
+<iframe style="display: block; margin: auto;" align="center" width="560" height="315" src="https://www.youtube.com/embed/tg3YjMqWNj0" frameborder="0" allowfullscreen></iframe>
 
 <p>and I&rsquo;m starting to see nil as evil.  Well at least something to address by avoiding passing it around rather than using <code>try</code> or ampersand-dot which screws with our readability.  Anyhow we&rsquo;d managed to follow a drive-by methodology, doing the minimum work necessary to get our pull request out.  We&rsquo;d fixed the Demeter violation for &ldquo;getting&rdquo; Karma where it was breaking our feature tests, but we left the Demeter violation for &ldquo;setting&rdquo; Karma in the KarmaCalculation service, which we were planning to refactor in the next ticket.</p>
 
