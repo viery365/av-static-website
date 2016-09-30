@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Pride Comes Before a Fall</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_09 x2016_09_30 x2016_09_30_pride-comes-before-a-fall x2016_09_30_pride-comes-before-a-fall_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/09/30/pride-comes-before-a-fall/">Pride Comes Before a Fall</a></h2>
+        <h5 class='date'>30 Sep 2016</h5>
+    <p>They say pride comes before a fall.  Looking back at yesterdays blog I was feeling pretty pleased about how we&rsquo;d split things up as regards the development of the new Karma feature.  That was getting deployed in the background yesterday whilst Michael and I paired on completing the improve hangout telemetry ticket we had started.  That turned out to be relatively straightforward, although I worry about how much data we might end up storing.  That&rsquo;s an interesting set up that I&rsquo;ve blogged about before and will come back to again, but is a side show to yesterday&rsquo;s main event, which is that in the middle of that work, we experienced a serious problem on production.</p>
+
+<p>The first we heard was that AV CoFounder Thomas was getting a 500 error on his profile page on the main AgileVentures site.  He was surprised to say the least.  We were confused too; all the acceptance tests were passing.  Raoul had just deployed a chunk of changes to production (including upgrade to Ruby 3.1) and I&rsquo;d kicked off a run of the new karma update rake task.  Michael was seeing failures from the rake task, and noticing that everyone now had zero karma on the main users page.  As Michael was asserting that we had a problem with the rake task, and that the database was screwed up, I took several breaths to keep calm.  Michael&rsquo;s assertions were true, but we had a bigger problem - the 500 errors on the individual user pages.  </p>
+
+<p>I knew that the real data for the users&rsquo; karma was not lost, since we calculate that from other aspects of the site.  The Karma values are re-summarised each day - they could easily be re-calculated and the ordering on the main users page fixed.  Something was causing all the individual user profile pages to fail.   Airbrake was telling us about the problem with the failing rake task, but telling us nothing about the 500 error on the user profile pages.  Airbrake posted to our #websiteone-notify channel and created a GitHub issue:</p>
+
+<p>https://github.com/AgileVentures/WebsiteOne/issues/1313</p>
+
+<p><img src="https://www.dropbox.com/s/2i4ner1w4gka2r6/Screenshot%202016-09-30%2009.07.00.png?dl=1" /></p>
+
+<p>We were getting <code>undefined method</code>total=&rsquo; for nil:NilClass` in a run of the KarmaCalculator:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">perform</span>
+    <span class="n">user</span><span class="p">.</span><span class="nf">karma</span><span class="p">.</span><span class="nf">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="k">if</span> <span class="n">user</span><span class="p">.</span><span class="nf">created_at</span><span class="p">.</span><span class="nf">blank?</span>
+
+    <span class="n">user</span><span class="p">.</span><span class="nf">karma</span><span class="p">.</span><span class="nf">total</span> <span class="o">=</span> <span class="n">sum_elements</span>
+  <span class="k">end</span>
+</code></pre>
+<p>Our Demeter Violation and a nil object, two things I had been blogging about that morning had bitten us.  I rolled the production code back to the previous deploy.  My priority was getting the user profile pages working again.  Working out the karma calculation could wait.  I was excited to be capturing all of this on the hangout video.   We could have got distracted trying to fix the karma calculation here, and all the while anyone coming to the site trying to look at an individual profile page would get a 500 error.  We had to rectify that before anything else.</p>
+
+<p>I was frustrated that Airbrake was not reporting the 500 error - but that was nothing compared to when I completed the rollback to the previous working version and realised that that didn&rsquo;t fix the problem.  There had been migrations, so even though the code was back in the working state, the database was changed.  There was no longer a karma_points field on the user table, and I couldn&rsquo;t roll back the database without the migrations that were in the latest version of master.</p>
+
+<p>Looking at that now, what I could/should have done is rollback the migrations before taking the code base back.  In principle that would have allowed us to get the site back into the working order it was before the deploy.  As it was, I now faced needing to roll the code forward again, roll back the migrations and then take the code back again, and all that while important parts of the site would be non-functional.  As this was all running through my cortex, I managed to get the error message associated with the individual profile pages in the general heroku logs.  This was it:</p>
+<pre class="highlight plaintext"><code>Started GET "/users/tattsy" for 122.175.241.121 at 2016-09-29 15:05:48 +0000
+2016-09-29T15:05:48.174796+00:00 app[web.1]: Processing by UsersController#show as HTML
+2016-09-29T15:05:48.256332+00:00 app[web.1]:   Rendered users/profile/_summary.html.erb (10.2ms)
+2016-09-29T15:05:48.174869+00:00 app[web.1]:   Parameters: {"id"=&gt;"tattsy"}
+2016-09-29T15:05:48.314400+00:00 app[web.1]:   Rendered users/profile/_detail.html.erb (57.5ms)
+2016-09-29T15:05:48.314624+00:00 app[web.1]:   Rendered users/show.html.erb within layouts/user_profile_layout (69.6ms)
+2016-09-29T15:05:48.314861+00:00 app[web.1]: undefined method `hangouts_attended_with_more_than_one_participant' for nil:NilClass
+2016-09-29T15:05:48.314863+00:00 app[web.1]: /app/app/views/users/profile/_detail.html.erb:65:in `_app_views_users_profile__detail_html_erb__30276934721546551_69862305882580'
+</code></pre>
+<p><code>hangouts_attended_with_more_than_one_participant</code> was being called on a nil.  We&rsquo;d set up that method on the user class to delegate to the single Karma object associated with the User.  That Karma object was nil.  The issue was the same as the problem with the karma update rake task was encountering.  In this case a fix for one would likely be a fix for the other, but in my mind it was critical to confirm that.  If the 500 error on the profile pages had been caused by something else we would have been fixing the wrong thing in terms of bringing the site back to functionality as fast as possible.</p>
+
+<p>Now of course if I had taken the site straight back to fully operational status by rolling back the migrations before the code we could have been looking at both issues at our leisure.  However the site was still unoperational and we understood the problem and had a chance to just fix it and complete the production deploy.  We jumped into the production console and ran a procedure to create default Karma objects for all the users:</p>
+<pre class="highlight plaintext"><code>→ heroku run rails c -r production
+Running rails c on ⬢ websiteone-production... up, run.1677
+Loading production environment (Rails 4.2.6)
+irb(main):001:0&gt; User.all.each {|u| u.karma = Karma.new ; u.save! }
+</code></pre>
+<p>This removed the nil association from all the users, and the individual profile pages started working again.  If they hadn&rsquo;t (i.e. we had mis-analyzed) I would have rolled back the database and then the code, hopefully getting the site stable in it&rsquo;s old state and then done further analysis.  However our quick fix had worked and confirmed our hypothesis about the problem.  Still the ordering on the users page was out of whack and everyone had zero Karma.  This was easy to fix now that every user object had a non-nil karma object associated.  We took the heart of the karma update rake task and ran it direct:</p>
+<pre class="highlight plaintext"><code>irb(main):002:0&gt;   User.all.each do |usr|
+irb(main):003:1*     KarmaCalculator.new(usr).perform
+irb(main):004:1&gt;     usr.karma.save!
+irb(main):005:1&gt;   end
+</code></pre>
+<p>As it ran we could see individual Karma totals being restored.  We were getting out of the woods, but how could this have happened?  We had all sorts of acceptance tests that displayed the individual profile pages.  How could they all be passing, but deploying that code lead to an error on production?</p>
+
+<p>Going over things slowly and carefully it&rsquo;s clear that there are many things that could have prevented this problem from occurring.  Let&rsquo;s look first at why our acceptance tests didn&rsquo;t fail.  Acceptance tests like the following look at individual profile pages:</p>
+<pre class="highlight gherkin"><code>  <span class="kn">Background</span><span class="p">:</span>
+    <span class="nf">Given</span> the following users exist
+      <span class="p">|</span> <span class="nv">first_name</span> <span class="p">|</span> <span class="nv">last_name</span> <span class="p">|</span> <span class="nv">email</span>                  <span class="p">|</span> 
+      <span class="p">|</span> <span class="n">Alice</span>      <span class="p">|</span> <span class="n">Jones</span>     <span class="p">|</span> <span class="n">alice@btinternet.co.uk</span> <span class="p">|</span>   
+
+  <span class="kn">Scenario</span><span class="p">:</span> Having user profile page
+    <span class="nf">When</span> I click on the avatar for <span class="s">"Alice"</span>
+    <span class="nf">Then</span> I should be on the <span class="s">"user profile"</span> page for <span class="s">"Alice"</span>
+    <span class="nf">And</span> I should see the avatar for <span class="s">"Alice"</span> at 250 px
+    <span class="nf">And</span> I should see <span class="s">"Alice Jones"</span>
+</code></pre>
+<p>We would expect a 500 error caused by a failure in the view to be caught here.  However if we look at how the user is created we see that it uses FactoryGirl.  </p>
+<pre class="highlight ruby"><code><span class="no">Given</span> <span class="sr">/^the following users exist$/</span> <span class="k">do</span> <span class="o">|</span><span class="n">table</span><span class="o">|</span>
+  <span class="n">table</span><span class="p">.</span><span class="nf">hashes</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">attributes</span><span class="o">|</span>
+    <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="n">attributes</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">and</span> <span class="n">it</span> <span class="n">seems</span> <span class="n">that</span> <span class="n">our</span> <span class="no">Cucumber</span> <span class="n">steps</span> <span class="n">are</span> <span class="n">using</span> <span class="n">the</span> <span class="n">same</span> <span class="n">factories</span> <span class="n">as</span> <span class="n">our</span> <span class="no">RSpecs</span><span class="p">,</span> <span class="n">hmmm</span><span class="o">.</span>  <span class="no">Let</span><span class="s1">'s look at that factory:
+
+```rb
+FactoryGirl.define do
+  factory :user, aliases: [:whodunnit] do
+    transient do
+      gplus '</span><span class="n">youtube_id_1</span><span class="s1">'
+    end
+
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    email { Faker::Internet.email }
+    password '</span><span class="mi">12345678</span><span class="s1">'
+    password_confirmation { password }
+    display_profile true
+    slug { "#{first_name} #{last_name}".parameterize }
+    bio { Faker::Lorem.sentence }
+    skill_list { Faker::Lorem.words(4) }
+    karma { Karma.new }
+
+    after(:create) do |user, evaluator|
+      create(:authentication, provider: '</span><span class="n">gplus</span><span class="err">'</span><span class="p">,</span> <span class="ss">uid: </span><span class="n">evaluator</span><span class="p">.</span><span class="nf">gplus</span><span class="p">,</span> <span class="ss">user_id: </span><span class="n">user</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre>
+<p>Aha, it seems that our acceptance tests are not as end to end as we might like.  A default Karma is being created.  Michael and I added that <code>karma { Karma.new }</code> line for the RSpecs, not realising that we&rsquo;d be impacting the Cucumber acceptance tests.  In LocalSupport we&rsquo;d always avoided factory girl in Cucumber.  Of course one can say we should have been investigating the steps more thoroughly to anticipate this connection.  </p>
+
+<p>Anyway, so hopefully it&rsquo;s clear why all the acceptance tests passed, and we can wail and gnash our teeth about the use of factories in the acceptances test, but we could have encountered this error well before production if we&rsquo;d looked at the individual profile pages, or run the rake update karma task, on our local machines, develop, or staging.  That that didn&rsquo;t happen is an oversight, but also a reflection of our trust in the acceptance tests.</p>
+
+<p>Another thing that might have helped would have been completing the full refactoring of the Karma first, although who knows, we might just have pushed out a bigger code change and had more trouble getting to the bottom of things.  Post-mortem&rsquo;s aside we had the remaining problem that a newly created user would not have a Karma object.  We got off a quick PR with the following that Raoul merged in quickly:</p>
+<pre class="highlight ruby"><code>  <span class="n">context</span> <span class="s1">'creating user'</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s1">'should not be possible to save a user with nil Karma'</span> <span class="k">do</span>
+      <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span> <span class="ss">email: </span><span class="s1">'doh@doh.com'</span><span class="p">,</span> <span class="ss">password: </span><span class="s1">'12345678'</span> <span class="p">})</span>
+      <span class="n">user</span><span class="p">.</span><span class="nf">save!</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">karma</span><span class="p">).</span><span class="nf">not_to</span> <span class="n">be_nil</span>
+    <span class="k">end</span>
+    <span class="n">it</span> <span class="s1">'should not override existing karma'</span> <span class="k">do</span>
+      <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">new</span><span class="p">({</span> <span class="ss">email: </span><span class="s1">'doh@doh.com'</span><span class="p">,</span> <span class="ss">password: </span><span class="s1">'12345678'</span> <span class="p">})</span>
+      <span class="n">user</span><span class="p">.</span><span class="nf">karma</span> <span class="o">=</span> <span class="no">Karma</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">total: </span><span class="mi">50</span><span class="p">)</span>
+      <span class="n">user</span><span class="p">.</span><span class="nf">save!</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">karma</span><span class="p">.</span><span class="nf">total</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="mi">50</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre><pre class="highlight ruby"><code>  <span class="n">has_one</span> <span class="ss">:karma</span>
+  <span class="n">after_save</span> <span class="ss">:build_karma</span><span class="p">,</span> <span class="ss">if: </span><span class="o">-&gt;</span> <span class="p">{</span> <span class="n">karma</span><span class="p">.</span><span class="nf">nil?</span> <span class="p">}</span>
+</code></pre>
+<p>and I noticed that we were still getting some errors from the karma update rake task which looked like they were related to ill-formed participant data.  That wasn&rsquo;t catastrophic, but the karma update rake task would need upgrading to allow it to not get derailed by those errors; at least until we completed the full upgrade of the hangout telemetry making separate models for participants and so forth.  Although that looks like it might be a tricky migration of the legacy data.</p>
+
+<p>Ironically we had been working on the profile pages during the week and they had been working fine, but we&rsquo;d been jumping back and forth between different branches.  The addition of the premium upgrade button had worked fine, but that had been isolated from any karma changes until it got merged to develop.  It makes me wonder if we shouldn&rsquo;t prefer some kind of continuous deployment structure where we deploy to production more frequently rather than grouping things in bunches.  Or should we see yesterday&rsquo;s problem as an inditement of the &ldquo;drive-by&rdquo; coding style, where we try to make the smallest fixes possible, and avoid building on top of things until they are merged to develop?</p>
+
+<p>I still hold out hope for the &ldquo;drive-by&rdquo; style in moderation.  We are interleaving it with domain entity development.  If anything yesterday&rsquo;s production fail points to the need for slightly more rigorous manual checks on local, develop and staging servers.  In my experience programming proceeds like this.  There is a period with fewer problems and increasing confidence and you tend to take bigger and bigger steps and move faster and faster, and then sometimes you are brought up short, and that forces you to move more slowly again.  The critical thing is to learn as much as you can when the mistakes happen; and remember that pride often comes before a fall :-)</p>
+
+<p>Related Videos:</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=sraE18A_BZ8">Pair Programming</a></li>
+<li><a href="https://www.youtube.com/watch?v=GAXcM9HHGyc">&ldquo;Kent Beck&rdquo; Scrum</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

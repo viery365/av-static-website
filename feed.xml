@@ -5,10 +5,148 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-09-29T01:00:00+01:00</updated>
+  <updated>2016-09-30T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Pride Comes Before a Fall</title>
+    <link rel="alternate" href="http://blog.url.com/2016/09/30/pride-comes-before-a-fall/"/>
+    <id>http://blog.url.com/2016/09/30/pride-comes-before-a-fall/</id>
+    <published>2016-09-30T01:00:00+01:00</published>
+    <updated>2016-09-30T16:41:54+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;They say pride comes before a fall.  Looking back at yesterdays blog I was feeling pretty pleased about how we&amp;rsquo;d split things up as regards the development of the new Karma feature.  That was getting deployed in the background yesterday whilst Michael and I paired on completing the improve hangout telemetry ticket we had started.  That turned out to be relatively straightforward, although I worry about how much data we might end up storing.  That&amp;rsquo;s an interesting set up that I&amp;rsquo;ve blogged about before and will come back to again, but is a side show to yesterday&amp;rsquo;s main event, which is that in the middle of that work, we experienced a serious problem on production.&lt;/p&gt;
+
+&lt;p&gt;The first we heard was that AV CoFounder Thomas was getting a 500 error on his profile page on the main AgileVentures site.  He was surprised to say the least.  We were confused too; all the acceptance tests were passing.  Raoul had just deployed a chunk of changes to production (including upgrade to Ruby 3.1) and I&amp;rsquo;d kicked off a run of the new karma update rake task.  Michael was seeing failures from the rake task, and noticing that everyone now had zero karma on the main users page.  As Michael was asserting that we had a problem with the rake task, and that the database was screwed up, I took several breaths to keep calm.  Michael&amp;rsquo;s assertions were true, but we had a bigger problem - the 500 errors on the individual user pages.  &lt;/p&gt;
+
+&lt;p&gt;I knew that the real data for the users&amp;rsquo; karma was not lost, since we calculate that from other aspects of the site.  The Karma values are re-summarised each day - they could easily be re-calculated and the ordering on the main users page fixed.  Something was causing all the individual user profile pages to fail.   Airbrake was telling us about the problem with the failing rake task, but telling us nothing about the 500 error on the user profile pages.  Airbrake posted to our #websiteone-notify channel and created a GitHub issue:&lt;/p&gt;
+
+&lt;p&gt;https://github.com/AgileVentures/WebsiteOne/issues/1313&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/2i4ner1w4gka2r6/Screenshot%202016-09-30%2009.07.00.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;We were getting &lt;code&gt;undefined method&lt;/code&gt;total=&amp;rsquo; for nil:NilClass` in a run of the KarmaCalculator:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;
+    &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;karma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;total&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;created_at&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;blank?&lt;/span&gt;
+
+    &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;karma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;total&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sum_elements&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Our Demeter Violation and a nil object, two things I had been blogging about that morning had bitten us.  I rolled the production code back to the previous deploy.  My priority was getting the user profile pages working again.  Working out the karma calculation could wait.  I was excited to be capturing all of this on the hangout video.   We could have got distracted trying to fix the karma calculation here, and all the while anyone coming to the site trying to look at an individual profile page would get a 500 error.  We had to rectify that before anything else.&lt;/p&gt;
+
+&lt;p&gt;I was frustrated that Airbrake was not reporting the 500 error - but that was nothing compared to when I completed the rollback to the previous working version and realised that that didn&amp;rsquo;t fix the problem.  There had been migrations, so even though the code was back in the working state, the database was changed.  There was no longer a karma_points field on the user table, and I couldn&amp;rsquo;t roll back the database without the migrations that were in the latest version of master.&lt;/p&gt;
+
+&lt;p&gt;Looking at that now, what I could/should have done is rollback the migrations before taking the code base back.  In principle that would have allowed us to get the site back into the working order it was before the deploy.  As it was, I now faced needing to roll the code forward again, roll back the migrations and then take the code back again, and all that while important parts of the site would be non-functional.  As this was all running through my cortex, I managed to get the error message associated with the individual profile pages in the general heroku logs.  This was it:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Started GET "/users/tattsy" for 122.175.241.121 at 2016-09-29 15:05:48 +0000
+2016-09-29T15:05:48.174796+00:00 app[web.1]: Processing by UsersController#show as HTML
+2016-09-29T15:05:48.256332+00:00 app[web.1]:   Rendered users/profile/_summary.html.erb (10.2ms)
+2016-09-29T15:05:48.174869+00:00 app[web.1]:   Parameters: {"id"=&amp;gt;"tattsy"}
+2016-09-29T15:05:48.314400+00:00 app[web.1]:   Rendered users/profile/_detail.html.erb (57.5ms)
+2016-09-29T15:05:48.314624+00:00 app[web.1]:   Rendered users/show.html.erb within layouts/user_profile_layout (69.6ms)
+2016-09-29T15:05:48.314861+00:00 app[web.1]: undefined method `hangouts_attended_with_more_than_one_participant' for nil:NilClass
+2016-09-29T15:05:48.314863+00:00 app[web.1]: /app/app/views/users/profile/_detail.html.erb:65:in `_app_views_users_profile__detail_html_erb__30276934721546551_69862305882580'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;hangouts_attended_with_more_than_one_participant&lt;/code&gt; was being called on a nil.  We&amp;rsquo;d set up that method on the user class to delegate to the single Karma object associated with the User.  That Karma object was nil.  The issue was the same as the problem with the karma update rake task was encountering.  In this case a fix for one would likely be a fix for the other, but in my mind it was critical to confirm that.  If the 500 error on the profile pages had been caused by something else we would have been fixing the wrong thing in terms of bringing the site back to functionality as fast as possible.&lt;/p&gt;
+
+&lt;p&gt;Now of course if I had taken the site straight back to fully operational status by rolling back the migrations before the code we could have been looking at both issues at our leisure.  However the site was still unoperational and we understood the problem and had a chance to just fix it and complete the production deploy.  We jumped into the production console and ran a procedure to create default Karma objects for all the users:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ heroku run rails c -r production
+Running rails c on ⬢ websiteone-production... up, run.1677
+Loading production environment (Rails 4.2.6)
+irb(main):001:0&amp;gt; User.all.each {|u| u.karma = Karma.new ; u.save! }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This removed the nil association from all the users, and the individual profile pages started working again.  If they hadn&amp;rsquo;t (i.e. we had mis-analyzed) I would have rolled back the database and then the code, hopefully getting the site stable in it&amp;rsquo;s old state and then done further analysis.  However our quick fix had worked and confirmed our hypothesis about the problem.  Still the ordering on the users page was out of whack and everyone had zero Karma.  This was easy to fix now that every user object had a non-nil karma object associated.  We took the heart of the karma update rake task and ran it direct:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;irb(main):002:0&amp;gt;   User.all.each do |usr|
+irb(main):003:1*     KarmaCalculator.new(usr).perform
+irb(main):004:1&amp;gt;     usr.karma.save!
+irb(main):005:1&amp;gt;   end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As it ran we could see individual Karma totals being restored.  We were getting out of the woods, but how could this have happened?  We had all sorts of acceptance tests that displayed the individual profile pages.  How could they all be passing, but deploying that code lead to an error on production?&lt;/p&gt;
+
+&lt;p&gt;Going over things slowly and carefully it&amp;rsquo;s clear that there are many things that could have prevented this problem from occurring.  Let&amp;rsquo;s look first at why our acceptance tests didn&amp;rsquo;t fail.  Acceptance tests like the following look at individual profile pages:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nf"&gt;Given&lt;/span&gt; the following users exist
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;first_name&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;last_name&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;email&lt;/span&gt;                  &lt;span class="p"&gt;|&lt;/span&gt; 
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Alice&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Jones&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;alice@btinternet.co.uk&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;   
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Having user profile page
+    &lt;span class="nf"&gt;When&lt;/span&gt; I click on the avatar for &lt;span class="s"&gt;"Alice"&lt;/span&gt;
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should be on the &lt;span class="s"&gt;"user profile"&lt;/span&gt; page for &lt;span class="s"&gt;"Alice"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I should see the avatar for &lt;span class="s"&gt;"Alice"&lt;/span&gt; at 250 px
+    &lt;span class="nf"&gt;And&lt;/span&gt; I should see &lt;span class="s"&gt;"Alice Jones"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We would expect a 500 error caused by a failure in the view to be caught here.  However if we look at how the user is created we see that it uses FactoryGirl.  &lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Given&lt;/span&gt; &lt;span class="sr"&gt;/^the following users exist$/&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hashes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;attributes&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;attributes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;seems&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;our&lt;/span&gt; &lt;span class="no"&gt;Cucumber&lt;/span&gt; &lt;span class="n"&gt;steps&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;using&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;same&lt;/span&gt; &lt;span class="n"&gt;factories&lt;/span&gt; &lt;span class="n"&gt;as&lt;/span&gt; &lt;span class="n"&gt;our&lt;/span&gt; &lt;span class="no"&gt;RSpecs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hmmm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;  &lt;span class="no"&gt;Let&lt;/span&gt;&lt;span class="s1"&gt;'s look at that factory:
+
+```rb
+FactoryGirl.define do
+  factory :user, aliases: [:whodunnit] do
+    transient do
+      gplus '&lt;/span&gt;&lt;span class="n"&gt;youtube_id_1&lt;/span&gt;&lt;span class="s1"&gt;'
+    end
+
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    email { Faker::Internet.email }
+    password '&lt;/span&gt;&lt;span class="mi"&gt;12345678&lt;/span&gt;&lt;span class="s1"&gt;'
+    password_confirmation { password }
+    display_profile true
+    slug { "#{first_name} #{last_name}".parameterize }
+    bio { Faker::Lorem.sentence }
+    skill_list { Faker::Lorem.words(4) }
+    karma { Karma.new }
+
+    after(:create) do |user, evaluator|
+      create(:authentication, provider: '&lt;/span&gt;&lt;span class="n"&gt;gplus&lt;/span&gt;&lt;span class="err"&gt;'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;uid: &lt;/span&gt;&lt;span class="n"&gt;evaluator&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;gplus&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;user_id: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Aha, it seems that our acceptance tests are not as end to end as we might like.  A default Karma is being created.  Michael and I added that &lt;code&gt;karma { Karma.new }&lt;/code&gt; line for the RSpecs, not realising that we&amp;rsquo;d be impacting the Cucumber acceptance tests.  In LocalSupport we&amp;rsquo;d always avoided factory girl in Cucumber.  Of course one can say we should have been investigating the steps more thoroughly to anticipate this connection.  &lt;/p&gt;
+
+&lt;p&gt;Anyway, so hopefully it&amp;rsquo;s clear why all the acceptance tests passed, and we can wail and gnash our teeth about the use of factories in the acceptances test, but we could have encountered this error well before production if we&amp;rsquo;d looked at the individual profile pages, or run the rake update karma task, on our local machines, develop, or staging.  That that didn&amp;rsquo;t happen is an oversight, but also a reflection of our trust in the acceptance tests.&lt;/p&gt;
+
+&lt;p&gt;Another thing that might have helped would have been completing the full refactoring of the Karma first, although who knows, we might just have pushed out a bigger code change and had more trouble getting to the bottom of things.  Post-mortem&amp;rsquo;s aside we had the remaining problem that a newly created user would not have a Karma object.  We got off a quick PR with the following that Raoul merged in quickly:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'creating user'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'should not be possible to save a user with nil Karma'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="s1"&gt;'doh@doh.com'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;password: &lt;/span&gt;&lt;span class="s1"&gt;'12345678'&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
+      &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save!&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;karma&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;not_to&lt;/span&gt; &lt;span class="n"&gt;be_nil&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'should not override existing karma'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="s1"&gt;'doh@doh.com'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;password: &lt;/span&gt;&lt;span class="s1"&gt;'12345678'&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
+      &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;karma&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Karma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;total: &lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save!&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;karma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;total&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;has_one&lt;/span&gt; &lt;span class="ss"&gt;:karma&lt;/span&gt;
+  &lt;span class="n"&gt;after_save&lt;/span&gt; &lt;span class="ss"&gt;:build_karma&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;if: &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;karma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;nil?&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and I noticed that we were still getting some errors from the karma update rake task which looked like they were related to ill-formed participant data.  That wasn&amp;rsquo;t catastrophic, but the karma update rake task would need upgrading to allow it to not get derailed by those errors; at least until we completed the full upgrade of the hangout telemetry making separate models for participants and so forth.  Although that looks like it might be a tricky migration of the legacy data.&lt;/p&gt;
+
+&lt;p&gt;Ironically we had been working on the profile pages during the week and they had been working fine, but we&amp;rsquo;d been jumping back and forth between different branches.  The addition of the premium upgrade button had worked fine, but that had been isolated from any karma changes until it got merged to develop.  It makes me wonder if we shouldn&amp;rsquo;t prefer some kind of continuous deployment structure where we deploy to production more frequently rather than grouping things in bunches.  Or should we see yesterday&amp;rsquo;s problem as an inditement of the &amp;ldquo;drive-by&amp;rdquo; coding style, where we try to make the smallest fixes possible, and avoid building on top of things until they are merged to develop?&lt;/p&gt;
+
+&lt;p&gt;I still hold out hope for the &amp;ldquo;drive-by&amp;rdquo; style in moderation.  We are interleaving it with domain entity development.  If anything yesterday&amp;rsquo;s production fail points to the need for slightly more rigorous manual checks on local, develop and staging servers.  In my experience programming proceeds like this.  There is a period with fewer problems and increasing confidence and you tend to take bigger and bigger steps and move faster and faster, and then sometimes you are brought up short, and that forces you to move more slowly again.  The critical thing is to learn as much as you can when the mistakes happen; and remember that pride often comes before a fall :-)&lt;/p&gt;
+
+&lt;p&gt;Related Videos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=sraE18A_BZ8"&gt;Pair Programming&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=GAXcM9HHGyc"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Ducking and Diving</title>
     <link rel="alternate" href="http://blog.url.com/2016/09/29/ducking-and-diving/"/>
@@ -666,123 +804,6 @@ i’m not sure who wants to do this story, but my coworker seems interested in p
 &lt;p&gt;The real question would be should we get that simpler PR in, and then immediately start more tickets based on it?  The danger there, as we&amp;rsquo;d seen before, is that particularly with the new &amp;ldquo;squash and merge&amp;rdquo; feature on GitHub PRs, building on an unmerged PR would guarantee merge conflicts down the line.  That would seem to point us towards reviewing all the tickets and working on a different corner of the codebase until this got merged.  That feels challenging in that I&amp;rsquo;m now itching to do that bigger participant refactoring, and try and get some clean confident code.&lt;/p&gt;
 
 &lt;p&gt;We&amp;rsquo;ll see - I guess after a day in which a lot of your assumptions are thrown, it makes sense to allow a bit of time for the dust to settle.  Reflect on what worked and what didn&amp;rsquo;t work, and maybe work on something else before coming back to the code face &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Can't We Go Any Faster?</title>
-    <link rel="alternate" href="http://blog.url.com/2016/09/22/cant-we-go-any-faster/"/>
-    <id>http://blog.url.com/2016/09/22/cant-we-go-any-faster/</id>
-    <published>2016-09-22T01:00:00+01:00</published>
-    <updated>2016-09-29T09:29:58+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Got the pairing times right today, but didn&amp;rsquo;t get started as early as we could.  Having a family and working from home means that things can easily come up, like suddenly my eldest needs a new school approved calculator which is sold out on Amazon.  Anyway, we managed two and a half hours or so.  The new JavaScript vendor pipeline&amp;rsquo;s looking good due to Michael&amp;rsquo;s solo follow up work.  We created a small flurry of tickets of possible follow up issues.  We were close to sliding into working on them, and in the background Michael actually resolved one issue about un-needed JavaScript files before we&amp;rsquo;d completed an async vote on the subject.&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s become increasingly clear to me that it&amp;rsquo;s counter-productive to stand on ceremony with these things.  Running the async votes is definitely an overhead that I would like to automate away, but let&amp;rsquo;s see if perhaps we don&amp;rsquo;t want to return to the kickoff/retro meeting.  I notice Armando Fox&amp;rsquo;s students voting to &lt;a href="http://saasbook.blogspot.co.uk/2016/09/flipped-classroom-no-thanks-id-rather.html"&gt;return to a lecture format&lt;/a&gt;, but that&amp;rsquo;s getting off my main point that if your pair partner or colleague has just got something working, it&amp;rsquo;s not the time to say &amp;ldquo;you should have waited for the vote to complete&amp;rdquo; or make any similar objections.  There are lots of great heuristics like &amp;ldquo;not working on issues that haven&amp;rsquo;t been voted on&amp;rdquo;, but that&amp;rsquo;s not a suggestion, not a law to be enforced.  Working effectively is not about getting everyone to adopt your latest thinking on how things should be done, it&amp;rsquo;s about accepting the way they work and finding a collaborative path.&lt;/p&gt;
-
-&lt;p&gt;I guess some people get away with &amp;ldquo;It&amp;rsquo;s my way, or the highway&amp;rdquo; but that&amp;rsquo;s not much fun, and what I really don&amp;rsquo;t want is to &lt;em&gt;accidentally&lt;/em&gt; go that way.  Anyhow, so I had a backlog of tickets in my mind, which I also got into the issues list:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1281"&gt;Relace CoreJS-Typeahead (to remove bower dependency)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1283"&gt;investigate removing or replacing cubeportfolio.js/confy.js&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1284"&gt;investigate options for other items in vendor/assets/javascript&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1286"&gt;updating installation documentation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1287"&gt;replacing nearest_timezone&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1288"&gt;investigate other possible sources of memory leak&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;So Michael had removed cubeportfolio.js/confy.js before the dust had settled.  We could have followed up on other items relating to the JavaScript vendor upgrade such as removing the bower dependency, or trying to modularise other libraries, but I was itching to make some different kinds of changes.  I closed out our existing memory investigation ticket and replaced it with two new ones - one for more investigation in general and another for removing a heavyweight gem.  There was also the issue of the install documentation.&lt;/p&gt;
-
-&lt;p&gt;The two other things on my mind were improving our hangout telemetry and the profile of our premium plan.  The former might allow us to better understand how the pairing sessions would go in this next run of the MOOC, while the later might improve our balance sheet. As we investigated, it seemed we didn&amp;rsquo;t have tickets for some of the things that Michael and I had been regularly discussing, specifically for giving members Karma credit for &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1290"&gt;participating in, rather than just starting, hangouts&lt;/a&gt;.  I had been thinking that this would require a refactoring of the way we represented hangout data that would also be part of improving our telemetry (which we also didn&amp;rsquo;t have an explicit &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1291"&gt;ticket&lt;/a&gt; for).  In fact the ticket we did have was focused on improving hangout participant &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1197"&gt;identity tracking&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;To explain, from our hangout plugin, we get a hangout participants G+ id.  Those AgileVenture members who have authenticated with G+ on our site have a G+ id associated with their account.  For those members we can connect their presence in a hangout with their AV account.  This allows us to display more information about who was in a hangout in the &lt;a href="http://www.agileventures.org/hangouts"&gt;past events view&lt;/a&gt;.  In order to encourage people to link up with their G+ accounts we&amp;rsquo;d already increased the amount of Karma you get for making that connection.  A quick check on the production DB indicated that a third of our members were connected up.  We should have checked that number several months back when we made the change to give us a hint if the change had an impact.  Doh!&lt;/p&gt;
-
-&lt;p&gt;Given that we&amp;rsquo;d had a long period when the G+ signup was not working at all, I was pleasantly surprised to find a third of our members connected, and while I&amp;rsquo;m not sure if that&amp;rsquo;s due to our change to the Karma, or fixing the G+ signup (although I guess I could do more mining to get more hints), it drew me away from the ticket&amp;rsquo;s focus of increasing G+ identity match up.  Or at least it pushed me to say, we have the incentive in place, we&amp;rsquo;ll need to make Karma more visible so that the incentive has greater chance of working.  I threw a load of thoughts about that into the ticket itself:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;[ ] G+ link up might improve if we give more credit for participating in hangouts #1290 potentially helps here&lt;/li&gt;
-&lt;li&gt;[ ] perhaps more importantly we need more people to be aware of karma
-
-&lt;ul&gt;
-&lt;li&gt;[ ] linking karma number to breakdown on user page #1245&lt;/li&gt;
-&lt;li&gt;[ ] breakdown on user page is hidden in sub-tab&lt;/li&gt;
-&lt;li&gt;[ ] breakdown doesn&amp;rsquo;t look so nice&lt;/li&gt;
-&lt;li&gt;[ ] need to mail members about their karma scores?  slack ping them?&lt;/li&gt;
-&lt;li&gt;[ ] tooltips to explain things&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And I found myself making tickets that I thought should have already existed (I did search) on these things that Michael and I had been discussing a lot.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1290"&gt;improve hangout telemetry&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1291"&gt;give karma credit for participating in a hangout&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And Michael also started speculating about further &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1292"&gt;gamification&lt;/a&gt; of Karma, which I&amp;rsquo;d love to get into.  Anyhow, a little playing on the production DB showed that actually we could grab an indication of hangout participation without needing a big refactor (although it might give Avdi a coronary for its timidity):&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;EventInstance&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;select&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;participants&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;nil?&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;participants&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;values&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;count&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;participants&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;values&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;any?&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'person'&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'id'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"103524399391704001670"&lt;/span&gt;&lt;span class="p"&gt;}}.&lt;/span&gt;&lt;span class="nf"&gt;count&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The EventInstance (or hangout) class currently stores a text string representation of the JSON that comes back from the HangoutPlugin, which looks like this:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"0"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
-  &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"hangoutA749C12C_ephemeral.id.google.com^6285825550"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"hasMicrophone"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"hasCamera"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"hasAppEnabled"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"isBroadcaster"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"isInBroadcast"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"displayIndex"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"0"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"person"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
-    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"108104108523167071445"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-     &lt;span class="s2"&gt;"displayName"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"Michael C"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-     &lt;span class="s2"&gt;"image"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"url"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"https://lh5.googleusercontent.com/-AtamIgns520/AAAAAAAAAAI/AAAAAAAAAAA/4TTnoJlntEM/s96-c/photo.jpg"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-     &lt;span class="s2"&gt;"qa"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-   &lt;span class="s2"&gt;"locale"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"en"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"qa"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
- &lt;span class="s2"&gt;"1"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
-  &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"hangoutEDC38696_ephemeral.id.google.com^4f0e2ab2d8"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"hasMicrophone"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"hasCamera"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"hasAppEnabled"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"isBroadcaster"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"isInBroadcast"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"displayIndex"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"1"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"person"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
-    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"103524399391704001670"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-     &lt;span class="s2"&gt;"displayName"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"Sam Joseph"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-     &lt;span class="s2"&gt;"image"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"url"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"https://lh3.googleusercontent.com/-Kt12k8aqqTs/AAAAAAAAAAI/AAAAAAAAAAA/TL0ZFPtM2Tc/s96-c/photo.jpg"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-     &lt;span class="s2"&gt;"qa"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-   &lt;span class="s2"&gt;"locale"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"en"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-   &lt;span class="s2"&gt;"qa"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It&amp;rsquo;s stored using the serialise method, so we get back a ruby object, which allows for the above code to work without requiring a parsing step.  Effectively we&amp;rsquo;ve got a micro noSQL database inside our bigger SQL relational database.  The computation over the entire dataset for an individual is not particularly fast, but it doesn&amp;rsquo;t take more than a second, and since we&amp;rsquo;re largely calculating Karma offline, it seems like we could get this into production relatively quickly.&lt;/p&gt;
-
-&lt;p&gt;The logic here is that we want to encourage hangout participation by giving Karmic credit for it, and in particular you&amp;rsquo;ll need to be G+ up&amp;rsquo;d on our site in order to get the benefit, so a potentially happy side effect is an increase in the fidelity of our tracking, and improvements in the results of our data mining.  All this virtuous circle will hopefully just help us to help everyone to help charities, and of course ultimately save the world, haha.  Anyway, just as long as we get to play with cool tech along they way, eh? :-)&lt;/p&gt;
-
-&lt;p&gt;So I was still on the fence about what to do, when Michael pointed out that our Karma overview calculated all this directly in real time and could slow down the load of the user&amp;rsquo;s profile page.  We talked about caching that in the User table.  Felt ill about how bloated that table has got, and the technical debt we were building up, which pushed me up to wanting to work on premium and pull the Stripe components out of the user table; but then I had a breakthrough.  We could pull the karma components into a separate table, cache them all, improve load times on the profile page, and also quickly deliver the incentives we wanted.  I could tell Michael wished I had been able to come to that conclusion without the previous 45 minutes of discussion, but I was still pleased with the tickets we had created and the ideas we had had.&lt;/p&gt;
-
-&lt;p&gt;In the remaining 45 minutes or so we managed to knock off a quick acceptance test driven creation of a separate Karma table. It also involved using a funky delegation pattern:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
-
-  &lt;span class="kp"&gt;extend&lt;/span&gt; &lt;span class="no"&gt;Forwardable&lt;/span&gt;
-
-  &lt;span class="n"&gt;def_delegator&lt;/span&gt; &lt;span class="ss"&gt;:karma&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:hangouts_attended_with_more_than_one_participant&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
-  &lt;span class="n"&gt;def_delegator&lt;/span&gt; &lt;span class="ss"&gt;:karma&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:hangouts_attended_with_more_than_one_participant&lt;/span&gt;
-
-  &lt;span class="n"&gt;has_one&lt;/span&gt; &lt;span class="ss"&gt;:karma&lt;/span&gt;
-
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="nf"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I&amp;rsquo;m sure there&amp;rsquo;s a tighter way to do that, but it breaks up our mammoth user table, and we can now write a separate test for quickly calculating hangout participation offline, and then get on to the bigger refactoring to see details about when people join hangouts, break the user table up further with better support for premium, and improve the installation documentation.  These are the key things for me in the next few weeks, although they could certainly be derailed if the memory issues turn out to be more serious than we thought.  The question remains, can&amp;rsquo;t we go any faster?  One drag is me spending all this time with my kids.  Maybe I can get them to code for AV too? :-)&lt;/p&gt;
-
-&lt;p&gt;Related videos:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=PliTRMoNrR8"&gt;Pairing part 1&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=6zO-FCmJQSk"&gt;Pairing part 2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=_dXb5QASWeU"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>
