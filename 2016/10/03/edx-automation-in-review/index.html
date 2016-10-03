@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Reviewing My EdX Automation</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_10 x2016_10_03 x2016_10_03_edx-automation-in-review x2016_10_03_edx-automation-in-review_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/10/03/edx-automation-in-review/">Reviewing My EdX Automation</a></h2>
+        <h5 class='date'> 3 Oct 2016</h5>
+    <p>Michael was away on Friday and I busied myself with admin work.  I was making clones of the &ldquo;Agile Development using Ruby on Rails&rdquo; MOOC for instructors around the world (two in the US, one in Ireland).  The instructors are provided with Small Private Online Classes (SPOCs), a term coined by Armando Fox to describe the copies of the MOOC that we make available on edX edge.  Edge is an edX Learning Management System (LMS) separate from the main hosted edX system.  It is different in that the classes don&rsquo;t show up in the main edX listings, and that we are never quite sure if the software is the same version as the main edX instance.  </p>
+
+<p>I&rsquo;ve been working with edX for the past few years, and I have lots of interaction with their support folks, but very rarely with their developers.  edX&rsquo;s organisational model is somewhat opaque to me, but I sense this is a somewhat common pattern for larger organisations, where you generally can&rsquo;t talk to the engineers directly. Instead you have to raise issues with non-technical support people.  I&rsquo;ve encountered the same with Heroku, Do-It, StackExchange and a few other largish organisations.  As a developer myself, I&rsquo;m not a huge fan of it.  I would prefer to be talking directly to the engineers without the time delay and chinese whispers effect, but I think I understand the respective organisation&rsquo;s fears about overloading their individual developers, and their desire to coordinate their operation at a higher level.</p>
+
+<p>edX has started doing hourly hangouts once a month to try and explain what they&rsquo;re doing on the open edX side of things, which is a great initiative.  edX have open-sourced all their LMS code (which is awesome) and so anyone can download and install and run their own instance of the edX LMS.  <a href="https://craftacademy.se/international/">CraftAcademy</a> have been doing this with some success, but I&rsquo;m unclear about the relationship between the open edX code base and what happens to be running on the hosted edX servers, edge edX and main edX.  Some version names would be super useful, and in the recordings of the open edX hangouts I&rsquo;m hearing names like &ldquo;Eucalyptus&rdquo;.  That&rsquo;s great, but what&rsquo;s unclear to me is what version of the edX software is on edX edge or the main edX.  I&rsquo;d love to have a little &ldquo;about menu&rdquo; in the edX interface where I could click through to see the precise version and even a link through to the changelog or features list.</p>
+
+<p>If we hosted our own edX for the SPOC or the MOOC we&rsquo;d have a lot more clarity about which versions of the software we were running.  Hosting our own is not trivial given that there are various moving parts besides the LMS, such as the edX queues that our auto graders use.  Maybe a day or two to setup and an unclear amount of time for maintenance.  At the moment UCBerkeley pays edX for hosting services, which means we get access to support from non-technical staff, but it&rsquo;s always slightly unclear which version of the software we are working against, or which features are being rolled out when.  In the latest version of the MOOC there have been some changes to the forum software, so that on initial load you see a list of categories of discussions rather than the list of discussions themselves.</p>
+
+<p><img src="https://www.dropbox.com/s/k5c8un5gwye6zr6/Screenshot%202016-10-03%2008.53.22.png?dl=1" /></p>
+
+<p>I&rsquo;ve asked edX support about this, and apparently this is intended to encourage learners to think about where they are posting.  Here&rsquo;s what I see if I click through on &ldquo;all discussions&rdquo;:</p>
+
+<p><img src="https://www.dropbox.com/s/i6mk6xw2r18fhm9/Screenshot%202016-10-03%2008.54.19.png?dl=1" /></p>
+
+<p>That&rsquo;s what the initial view used to look like.  I could immediately see the updates.  The first few times I came to the discussion page, I thought there were no discussions there at all, and it took me a few times before I realised that I could click through to see discussions.  Several TAs have confirmed my impression, and we seem to be seeing much lower forum activity than in previous runs of the course.  That said things are picking up now, so perhaps people are getting used to the need to click through.  Then again, perhaps that is entirely unrelated to the interface change.  Difficult to know for certain without a randomised trial.</p>
+
+<p>And who knows, maybe this is a good thing, with some people who might have written out a long question, instead trying things again themselves and solving it on their own.  Again it&rsquo;s very hard to tell.  One thing I do know is that it&rsquo;s slightly disconcerting trying to run a course and not quite knowing what version of the software you are running against and how it might suddenly change.  I guess that&rsquo;s the same for lots of other &ldquo;Software as a Service&rdquo; that I use, such as GitHub, Heroku, Google Drive etc.; it&rsquo;s just that with those guys, at least GitHub, I feel like I can generally find a blog post, or something in the interface telling me about changes.</p>
+
+<p>That said, I was blindsided by some Heroku policy changes over the summer, and edX probably feels more bumpy to me because I have full admin access to our auto graders and can carefully control the version of the software that&rsquo;s being used to grade student assignments, but not the LMS that&rsquo;s being used to handle submission and delivery of them.  edX is trying to support lots more use cases than just our &ldquo;Agile Development using Ruby on Rails&rdquo; MOOC, and UCBerkeley is delivering a lot more MOOCs than us, so our situation is somewhat of a corner case, even if we are one of the most popular MOOCs on the platform.</p>
+
+<p>As part of the deal of being editor of the &ldquo;Engineering Software as a Service&rdquo; textbook, I&rsquo;m also the community manager for the instructors around the world who are working against the MOOC materials.  As I mentioned we currently host SPOCs for those instructors on edge edX, and I have an interface for creating new instances, into which I can import clones of the MOOC.  I&rsquo;ve attempted to automate this process with a set of <a href="https://github.com/saasbook/SPOC">scripts</a>.  I&rsquo;m not particularly proud of the code, but it&rsquo;s an attempt to escape from the robotic operations I have to repeat each time an instructor wants a new instance of a SPOC.</p>
+
+<p>The automation has been only partially successful.  edX as yet has no API for managing course.  I see they do have some <a href="https://open.edx.org/open-edx-rest-apis">APIs</a> for enrollment, users and data-analytics on Open edX, which maybe I can use for managing TA accounts next year, but again perhaps that will require us to host our own LMS&hellip;?  Anyway, about the automation, I&rsquo;m using Capybara and selenium web driver and firefox 47 to run a headed operation that opens a browser and logs in using my edge account credentials and then types the relevant SPOC information into a form.  I put instructor information in this YML format:</p>
+<pre class="highlight yaml"><code><span class="s">:joseph_2014</span><span class="pi">:</span> <span class="kt">!ruby/struct:Struct::Course</span> 
+  <span class="na">title</span><span class="pi">:</span> <span class="s">Software Engineering</span>
+  <span class="na">institution</span><span class="pi">:</span> <span class="s">HPU</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">CSC14249</span>
+  <span class="na">date</span><span class="pi">:</span> <span class="s">2015_Fall</span>
+  <span class="na">contact</span><span class="pi">:</span> <span class="s">sjoseph@hpu.edu</span>
+</code></pre>
+<p>And my scripts read that in and then create the course through the web interface, and set the relevant instructor as an admin.  There are then two other steps that I cannot seem to automate.  One is importing the course XML from the MOOC, since the file upload operation involves steps I can&rsquo;t seem to replicate with selenium, and two, re-setting the course title and id after the upload, which unfortunately gets overridden by the MOOC import.  Both of these operations in the edX interface involve a lot of JavaScript that makes automation difficult.  </p>
+
+<p>I wrote the scripts a while ago, and it may be time to have another go at automating the file upload process, but my fear will be that I&rsquo;ll spend an hour or two on it and still not quite get it working.  A different approach might be to automate manipulating the course XML file locally to fix the name and id, which is more likely to succeed and remove one of those tedious manual steps.  I also worked out on Friday how to merge the two parts of the course, which many instructors want and seems scriptable.  Maybe if I get that all sorted, I can get the system to the point that it takes me to the right page, has the right file ready for upload, and all I need to do is hit a single button?</p>
+
+<p>It&rsquo;s a difficult trade off relating to how many times I will be repeating this operation, which in turn depends on the evolving numbers of SPOC instructors, and the presence of an alternative model called CCX that provides instructors with a skin on the MOOC that is less flexibility in terms of modification.  I guess I&rsquo;ll have a go on another admin day, but pouring time on this is all predicated on me being a salaried instructor, and I&rsquo;m still on leave of absence from HPU.  Our instructor community is based on a freemium model where students buying copies of our super-cheap textbook provide the only income, and despite winning some awards the sales are still modest.</p>
+
+<p>Maybe we need to adjust that model?  Armando&rsquo;s working on bundling more coupons with the book.  Perhaps I should be running paid sessions working through book chapters or something?  On the automation side, what I&rsquo;d also really like from edX is some kind of coordinated course creation API.  My scripts for automating SPOC creation could break any time that edX updates their interface, and they often break when firefox updates.  Of course creating lots of micro-courses is not necessarily part of edX&rsquo;s bigger strategy.  I&rsquo;ve put in a lot of volunteer-time because I wanted to join in with the bigger education revolution.  I&rsquo;ll have to carefully re-assess how to move forward from here.</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

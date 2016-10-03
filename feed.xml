@@ -5,16 +5,64 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-09-30T01:00:00+01:00</updated>
+  <updated>2016-10-03T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Reviewing My EdX Automation</title>
+    <link rel="alternate" href="http://blog.url.com/2016/10/03/edx-automation-in-review/"/>
+    <id>http://blog.url.com/2016/10/03/edx-automation-in-review/</id>
+    <published>2016-10-03T01:00:00+01:00</published>
+    <updated>2016-10-03T22:01:54+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Michael was away on Friday and I busied myself with admin work.  I was making clones of the &amp;ldquo;Agile Development using Ruby on Rails&amp;rdquo; MOOC for instructors around the world (two in the US, one in Ireland).  The instructors are provided with Small Private Online Classes (SPOCs), a term coined by Armando Fox to describe the copies of the MOOC that we make available on edX edge.  Edge is an edX Learning Management System (LMS) separate from the main hosted edX system.  It is different in that the classes don&amp;rsquo;t show up in the main edX listings, and that we are never quite sure if the software is the same version as the main edX instance.  &lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve been working with edX for the past few years, and I have lots of interaction with their support folks, but very rarely with their developers.  edX&amp;rsquo;s organisational model is somewhat opaque to me, but I sense this is a somewhat common pattern for larger organisations, where you generally can&amp;rsquo;t talk to the engineers directly. Instead you have to raise issues with non-technical support people.  I&amp;rsquo;ve encountered the same with Heroku, Do-It, StackExchange and a few other largish organisations.  As a developer myself, I&amp;rsquo;m not a huge fan of it.  I would prefer to be talking directly to the engineers without the time delay and chinese whispers effect, but I think I understand the respective organisation&amp;rsquo;s fears about overloading their individual developers, and their desire to coordinate their operation at a higher level.&lt;/p&gt;
+
+&lt;p&gt;edX has started doing hourly hangouts once a month to try and explain what they&amp;rsquo;re doing on the open edX side of things, which is a great initiative.  edX have open-sourced all their LMS code (which is awesome) and so anyone can download and install and run their own instance of the edX LMS.  &lt;a href="https://craftacademy.se/international/"&gt;CraftAcademy&lt;/a&gt; have been doing this with some success, but I&amp;rsquo;m unclear about the relationship between the open edX code base and what happens to be running on the hosted edX servers, edge edX and main edX.  Some version names would be super useful, and in the recordings of the open edX hangouts I&amp;rsquo;m hearing names like &amp;ldquo;Eucalyptus&amp;rdquo;.  That&amp;rsquo;s great, but what&amp;rsquo;s unclear to me is what version of the edX software is on edX edge or the main edX.  I&amp;rsquo;d love to have a little &amp;ldquo;about menu&amp;rdquo; in the edX interface where I could click through to see the precise version and even a link through to the changelog or features list.&lt;/p&gt;
+
+&lt;p&gt;If we hosted our own edX for the SPOC or the MOOC we&amp;rsquo;d have a lot more clarity about which versions of the software we were running.  Hosting our own is not trivial given that there are various moving parts besides the LMS, such as the edX queues that our auto graders use.  Maybe a day or two to setup and an unclear amount of time for maintenance.  At the moment UCBerkeley pays edX for hosting services, which means we get access to support from non-technical staff, but it&amp;rsquo;s always slightly unclear which version of the software we are working against, or which features are being rolled out when.  In the latest version of the MOOC there have been some changes to the forum software, so that on initial load you see a list of categories of discussions rather than the list of discussions themselves.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/k5c8un5gwye6zr6/Screenshot%202016-10-03%2008.53.22.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve asked edX support about this, and apparently this is intended to encourage learners to think about where they are posting.  Here&amp;rsquo;s what I see if I click through on &amp;ldquo;all discussions&amp;rdquo;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/i6mk6xw2r18fhm9/Screenshot%202016-10-03%2008.54.19.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s what the initial view used to look like.  I could immediately see the updates.  The first few times I came to the discussion page, I thought there were no discussions there at all, and it took me a few times before I realised that I could click through to see discussions.  Several TAs have confirmed my impression, and we seem to be seeing much lower forum activity than in previous runs of the course.  That said things are picking up now, so perhaps people are getting used to the need to click through.  Then again, perhaps that is entirely unrelated to the interface change.  Difficult to know for certain without a randomised trial.&lt;/p&gt;
+
+&lt;p&gt;And who knows, maybe this is a good thing, with some people who might have written out a long question, instead trying things again themselves and solving it on their own.  Again it&amp;rsquo;s very hard to tell.  One thing I do know is that it&amp;rsquo;s slightly disconcerting trying to run a course and not quite knowing what version of the software you are running against and how it might suddenly change.  I guess that&amp;rsquo;s the same for lots of other &amp;ldquo;Software as a Service&amp;rdquo; that I use, such as GitHub, Heroku, Google Drive etc.; it&amp;rsquo;s just that with those guys, at least GitHub, I feel like I can generally find a blog post, or something in the interface telling me about changes.&lt;/p&gt;
+
+&lt;p&gt;That said, I was blindsided by some Heroku policy changes over the summer, and edX probably feels more bumpy to me because I have full admin access to our auto graders and can carefully control the version of the software that&amp;rsquo;s being used to grade student assignments, but not the LMS that&amp;rsquo;s being used to handle submission and delivery of them.  edX is trying to support lots more use cases than just our &amp;ldquo;Agile Development using Ruby on Rails&amp;rdquo; MOOC, and UCBerkeley is delivering a lot more MOOCs than us, so our situation is somewhat of a corner case, even if we are one of the most popular MOOCs on the platform.&lt;/p&gt;
+
+&lt;p&gt;As part of the deal of being editor of the &amp;ldquo;Engineering Software as a Service&amp;rdquo; textbook, I&amp;rsquo;m also the community manager for the instructors around the world who are working against the MOOC materials.  As I mentioned we currently host SPOCs for those instructors on edge edX, and I have an interface for creating new instances, into which I can import clones of the MOOC.  I&amp;rsquo;ve attempted to automate this process with a set of &lt;a href="https://github.com/saasbook/SPOC"&gt;scripts&lt;/a&gt;.  I&amp;rsquo;m not particularly proud of the code, but it&amp;rsquo;s an attempt to escape from the robotic operations I have to repeat each time an instructor wants a new instance of a SPOC.&lt;/p&gt;
+
+&lt;p&gt;The automation has been only partially successful.  edX as yet has no API for managing course.  I see they do have some &lt;a href="https://open.edx.org/open-edx-rest-apis"&gt;APIs&lt;/a&gt; for enrollment, users and data-analytics on Open edX, which maybe I can use for managing TA accounts next year, but again perhaps that will require us to host our own LMS&amp;hellip;?  Anyway, about the automation, I&amp;rsquo;m using Capybara and selenium web driver and firefox 47 to run a headed operation that opens a browser and logs in using my edge account credentials and then types the relevant SPOC information into a form.  I put instructor information in this YML format:&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="s"&gt;:joseph_2014&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="kt"&gt;!ruby/struct:Struct::Course&lt;/span&gt; 
+  &lt;span class="na"&gt;title&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;Software Engineering&lt;/span&gt;
+  &lt;span class="na"&gt;institution&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;HPU&lt;/span&gt;
+  &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;CSC14249&lt;/span&gt;
+  &lt;span class="na"&gt;date&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;2015_Fall&lt;/span&gt;
+  &lt;span class="na"&gt;contact&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;sjoseph@hpu.edu&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And my scripts read that in and then create the course through the web interface, and set the relevant instructor as an admin.  There are then two other steps that I cannot seem to automate.  One is importing the course XML from the MOOC, since the file upload operation involves steps I can&amp;rsquo;t seem to replicate with selenium, and two, re-setting the course title and id after the upload, which unfortunately gets overridden by the MOOC import.  Both of these operations in the edX interface involve a lot of JavaScript that makes automation difficult.  &lt;/p&gt;
+
+&lt;p&gt;I wrote the scripts a while ago, and it may be time to have another go at automating the file upload process, but my fear will be that I&amp;rsquo;ll spend an hour or two on it and still not quite get it working.  A different approach might be to automate manipulating the course XML file locally to fix the name and id, which is more likely to succeed and remove one of those tedious manual steps.  I also worked out on Friday how to merge the two parts of the course, which many instructors want and seems scriptable.  Maybe if I get that all sorted, I can get the system to the point that it takes me to the right page, has the right file ready for upload, and all I need to do is hit a single button?&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s a difficult trade off relating to how many times I will be repeating this operation, which in turn depends on the evolving numbers of SPOC instructors, and the presence of an alternative model called CCX that provides instructors with a skin on the MOOC that is less flexibility in terms of modification.  I guess I&amp;rsquo;ll have a go on another admin day, but pouring time on this is all predicated on me being a salaried instructor, and I&amp;rsquo;m still on leave of absence from HPU.  Our instructor community is based on a freemium model where students buying copies of our super-cheap textbook provide the only income, and despite winning some awards the sales are still modest.&lt;/p&gt;
+
+&lt;p&gt;Maybe we need to adjust that model?  Armando&amp;rsquo;s working on bundling more coupons with the book.  Perhaps I should be running paid sessions working through book chapters or something?  On the automation side, what I&amp;rsquo;d also really like from edX is some kind of coordinated course creation API.  My scripts for automating SPOC creation could break any time that edX updates their interface, and they often break when firefox updates.  Of course creating lots of micro-courses is not necessarily part of edX&amp;rsquo;s bigger strategy.  I&amp;rsquo;ve put in a lot of volunteer-time because I wanted to join in with the bigger education revolution.  I&amp;rsquo;ll have to carefully re-assess how to move forward from here.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Pride Comes Before a Fall</title>
     <link rel="alternate" href="http://blog.url.com/2016/09/30/pride-comes-before-a-fall/"/>
     <id>http://blog.url.com/2016/09/30/pride-comes-before-a-fall/</id>
     <published>2016-09-30T01:00:00+01:00</published>
-    <updated>2016-09-30T21:12:52+01:00</updated>
+    <updated>2016-10-03T21:08:50+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -154,7 +202,7 @@ FactoryGirl.define do
     <link rel="alternate" href="http://blog.url.com/2016/09/29/ducking-and-diving/"/>
     <id>http://blog.url.com/2016/09/29/ducking-and-diving/</id>
     <published>2016-09-29T01:00:00+01:00</published>
-    <updated>2016-09-29T20:57:14+01:00</updated>
+    <updated>2016-10-03T21:08:50+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -259,7 +307,7 @@ layouts/application.html.erb should return 200 for all link visits
     <link rel="alternate" href="http://blog.url.com/2016/09/28/fallow-day/"/>
     <id>http://blog.url.com/2016/09/28/fallow-day/</id>
     <published>2016-09-28T01:00:00+01:00</published>
-    <updated>2016-10-01T13:47:44+01:00</updated>
+    <updated>2016-10-03T21:08:50+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -377,7 +425,7 @@ i’m not sure who wants to do this story, but my coworker seems interested in p
     <link rel="alternate" href="http://blog.url.com/2016/09/27/dodging-a-bullet/"/>
     <id>http://blog.url.com/2016/09/27/dodging-a-bullet/</id>
     <published>2016-09-27T01:00:00+01:00</published>
-    <updated>2016-09-29T09:29:58+01:00</updated>
+    <updated>2016-10-03T21:08:50+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -525,7 +573,7 @@ i’m not sure who wants to do this story, but my coworker seems interested in p
     <link rel="alternate" href="http://blog.url.com/2016/09/26/confident-coding/"/>
     <id>http://blog.url.com/2016/09/26/confident-coding/</id>
     <published>2016-09-26T01:00:00+01:00</published>
-    <updated>2016-09-29T09:29:58+01:00</updated>
+    <updated>2016-10-03T21:08:50+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -719,93 +767,6 @@ i’m not sure who wants to do this story, but my coworker seems interested in p
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=pXGkwvF_UH8"&gt;Pairing on the domain models&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=QIn_wN2VE4k"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Longer than Expected</title>
-    <link rel="alternate" href="http://blog.url.com/2016/09/23/longer-than-expected/"/>
-    <id>http://blog.url.com/2016/09/23/longer-than-expected/</id>
-    <published>2016-09-23T01:00:00+01:00</published>
-    <updated>2016-09-29T09:29:58+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Adding the function to give Karma credit for attending hangouts took longer than expected.  Ironically spiking it had been fast, but adding a test for it was time consuming and frustrating.  I&amp;rsquo;m trying to dissect why that was.  Looking back I can see a few things that caused us to spin our wheels:&lt;/p&gt;
-
-&lt;p&gt;1) the EventInstance FactoryGirl was creating a participants structure that was different to our assumptions
-2) the &lt;code&gt;after_validation&lt;/code&gt; hook on user causes the Karma calculation to take place during FactoryGirl object creation
-3) the EventInstance FactoryGirl was creating an additional user object
-4) the version of FactoryGirl we are on (4.5) does not &lt;a href="https://robots.thoughtbot.com/getting-sequential-a-look-into-a-factory-girl"&gt;reset sequence integers between test runs&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s have a quick look at the original EventInstance FactoryGirl factory:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;define&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;sequence&lt;/span&gt; &lt;span class="ss"&gt;:participant&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;:person&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;displayName: &lt;/span&gt;&lt;span class="s2"&gt;"Participant_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;id: &lt;/span&gt;&lt;span class="s2"&gt;"youtube_id_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;isBroadcaster: &lt;/span&gt;&lt;span class="s1"&gt;'false'&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;]&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="n"&gt;sequence&lt;/span&gt; &lt;span class="ss"&gt;:broadcaster&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;:person&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;displayName: &lt;/span&gt;&lt;span class="s2"&gt;"Broadcaster&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;id: &lt;/span&gt;&lt;span class="s2"&gt;"youtube_id_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;isBroadcaster: &lt;/span&gt;&lt;span class="s1"&gt;'true'&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;]&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;factory&lt;/span&gt; &lt;span class="ss"&gt;:event_instance&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;transient&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;created&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;
-      &lt;span class="n"&gt;updated&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;sequence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:uid&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="s2"&gt;"uid_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;sequence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:title&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="s2"&gt;"Hangout_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;sequence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:category&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="s2"&gt;"Category_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;hangout_url&lt;/span&gt; &lt;span class="s2"&gt;"http://hangout.test"&lt;/span&gt;
-    &lt;span class="n"&gt;sequence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:yt_video_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="s2"&gt;"yt_video_id_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="n"&gt;project&lt;/span&gt;
-    &lt;span class="n"&gt;event&lt;/span&gt;
-    &lt;span class="n"&gt;user&lt;/span&gt;
-
-    &lt;span class="n"&gt;participants&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;generate&lt;/span&gt; &lt;span class="ss"&gt;:broadcaster&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;generate&lt;/span&gt; &lt;span class="ss"&gt;:participant&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="n"&gt;created_at&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;created&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; UTC"&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
-    &lt;span class="n"&gt;updated_at&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;updated&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; UTC"&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note the creation of the participants field to be an array consisting of a broadcaster and a participant.  Notice also the use of sequences to generate that participant and broadcaster.  That&amp;rsquo;s a custom structure that&amp;rsquo;s only somewhat related to what comes back from the database in the real system.  Without going into all the details I think we fell a foul of working with a legacy test and legacy object that had more interrelationships than we expected.  It&amp;rsquo;s not quite a mock train wreck as there are no mocks here.  Effectively what we were working on, after our acceptance test of pulling some Karma data into a new AR model, was an integration test, which had more moving parts than we anticipated.&lt;/p&gt;
-
-&lt;p&gt;It makes me think of Avdi&amp;rsquo;s &amp;ldquo;MacGyver method&amp;rdquo; where we got wrapped up in using the existing tools, rather than writing our own compelling narrative.  My own &amp;ldquo;drive-by&amp;rdquo; coding strategy is often one of just going with the existing grain to make the smallest change possible, so I&amp;rsquo;m definitely one who can get wrapped up in the existing tool set.  Maybe we would have done better to complete the planned refactoring of the EventInstance participants field, which as I mentioned is currently a micro-noSQL database inside our SQL database.&lt;/p&gt;
-
-&lt;p&gt;I think we might also want to look at our pairing strategy.  I think Michael was getting frustrated at the speed with which I window switched from stack trace to code and back again as we tried to hunt bugs through the legacy test infrastructure.  There&amp;rsquo;s the lag of the hangout screenshare as well, but I think it&amp;rsquo;s more an indication of my keyboard hogging.  We seem to have fallen into a pattern of switching roles about once an hour, and I wonder if that&amp;rsquo;s too infrequent.  There are other issues with me having less available time to code due to family commitments.  I wonder if we might benefit from having an enforced 10 min switch as I&amp;rsquo;ve seen in some companies.&lt;/p&gt;
-
-&lt;p&gt;There&amp;rsquo;s also what we are doing to the domain model.  I&amp;rsquo;m still conflicted about the dissonance between the terms &amp;ldquo;EventInstance&amp;rdquo; and &amp;ldquo;Hangout&amp;rdquo;.  EventInstances do represent data from Google Hangouts in our system.  EventInstances is nicely generic - maybe in the future we&amp;rsquo;ll support alternatives to Google Hangouts, but our hangouts are very often associated with events, but not always.  Actually Michael and I mainly pair in spontaneous hangouts that are associated with the project, so EventInstance is a misnomer there.&lt;/p&gt;
-
-&lt;p&gt;We were feeling good about pulling Karma out of the User table, and given that we have a Karma calculator it certainly seems like we are moving towards evolving a Karma entity in our domain.  It occurs to me that all the logic in the KarmaCalculation service could be moved to the Karma model.  Much as I love recombinable services, given that we now have a need to persist the intermediate calculations from the other Karma Calculator, I&amp;rsquo;m moving to think that the sensible next step is a real &amp;ldquo;unit&amp;rdquo; and not &amp;ldquo;integration&amp;rdquo; test of the Karma model so that we can avoid getting bogged down in too much complexity, i.e. dependencies on many other elements of the system.&lt;/p&gt;
-
-&lt;p&gt;Following that logic, it would be nice if the Karma calculation could avoid depending on the structure of the data coming back from the hangout, i.e. that lump of JSON that gets transformed into a ruby data-structure by the serialise method.  That&amp;rsquo;s a bigger operation which might involve developing a domain model like so:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Participant&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;AR&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
-  &lt;span class="n"&gt;has_many&lt;/span&gt; &lt;span class="ss"&gt;:hangouts&lt;/span&gt;
-  &lt;span class="n"&gt;belongs_to&lt;/span&gt; &lt;span class="ss"&gt;:user&lt;/span&gt;
-  &lt;span class="n"&gt;has_many&lt;/span&gt; &lt;span class="ss"&gt;:hangout_events&lt;/span&gt; &lt;span class="c1"&gt;# join at x time, leave at y time&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Hangout&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;AR&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
-  &lt;span class="n"&gt;has_many&lt;/span&gt; &lt;span class="ss"&gt;:participants&lt;/span&gt;
-  &lt;span class="n"&gt;belongs_to&lt;/span&gt; &lt;span class="ss"&gt;:initiator&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;class_name: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;At the end of day&amp;rsquo;s pairing we had got the tests green, but not without removing the &lt;code&gt;after_validation&lt;/code&gt; Karma calculation from the User class, and having to adjust a number of other tests to adapt to how we had adjusted the EventInstance FactoryGirl participant model.  Part of the issue there was that the serialise operation gives us &amp;ldquo;indifferent access&amp;rdquo; to the returned data structure, i.e. strings and symbols are interchangeable.  That was only part of the difference between the data structure the Factory was creating and that real data-structure coming back from the DB.  That pushes me to want to refactor away from that, but that&amp;rsquo;s a bigger task&amp;hellip;. &lt;/p&gt;
-
-&lt;p&gt;We were then asking ourselves how to slice and dice to try and stick with our &amp;ldquo;drive-by&amp;rdquo; methodology.  What was the simplest thing we could release?  And what activities should be pushed off into other tickets?  The following three seemed sensible other tickets:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;remove Karma total from user table&lt;/li&gt;
-&lt;li&gt;create all the other Karma breakdown elements in Karma table&lt;/li&gt;
-&lt;li&gt;ensure that any reference to these throughout codebase is linked correctly to the Karma table&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In principle the work of the day could be a PR, and the only additional thing required to release it would be the creation of a separate Karma update task.  We&amp;rsquo;d be losing the feature that Karma would be updated whenever users saved their profiles, but that seems like something we could easily add back in later, without using these dangerous AR lifecycle hooks.&lt;/p&gt;
-
-&lt;p&gt;The real question would be should we get that simpler PR in, and then immediately start more tickets based on it?  The danger there, as we&amp;rsquo;d seen before, is that particularly with the new &amp;ldquo;squash and merge&amp;rdquo; feature on GitHub PRs, building on an unmerged PR would guarantee merge conflicts down the line.  That would seem to point us towards reviewing all the tickets and working on a different corner of the codebase until this got merged.  That feels challenging in that I&amp;rsquo;m now itching to do that bigger participant refactoring, and try and get some clean confident code.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ll see - I guess after a day in which a lot of your assumptions are thrown, it makes sense to allow a bit of time for the dust to settle.  Reflect on what worked and what didn&amp;rsquo;t work, and maybe work on something else before coming back to the code face &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
