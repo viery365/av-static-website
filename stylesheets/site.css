@@ -1156,15 +1156,11 @@ body {
   font-size: 1.5em; }
 
 /* line 12, site.css.scss */
-li {
-  text-align: left; }
-
-/* line 16, site.css.scss */
 .logo img {
   height: 18.75em;
   margin-top: 6em; }
 
-/* line 21, site.css.scss */
+/* line 17, site.css.scss */
 h1 {
   color: rgba(0, 0, 0, 0.5);
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1172,13 +1168,13 @@ h1 {
   font-weight: 400;
   margin: 0; }
 
-/* line 29, site.css.scss */
+/* line 25, site.css.scss */
 .doc {
   margin: 3em 0;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.1em;
   font-weight: 300; }
-  /* line 35, site.css.scss */
+  /* line 31, site.css.scss */
   .doc a {
     border: 1px solid white;
     border-radius: 3px;
@@ -1186,13 +1182,13 @@ h1 {
     color: white;
     text-decoration: none;
     transition: color 0.1s linear; }
-    /* line 42, site.css.scss */
+    /* line 38, site.css.scss */
     .doc a:hover {
       background: rgba(0, 0, 0, 0.2);
       color: white;
       transition: all 0.15s linear; }
 
-/* line 50, site.css.scss */
+/* line 46, site.css.scss */
 .welcome {
   -webkit-animation-name: welcome;
   -webkit-animation-duration: .9s; }
