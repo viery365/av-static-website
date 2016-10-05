@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Pull Requests for Learning</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_10 x2016_10_05 x2016_10_05_pull-requests-for-learning x2016_10_05_pull-requests-for-learning_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/10/05/pull-requests-for-learning/">Pull Requests for Learning</a></h2>
+        <h5 class='date'> 5 Oct 2016</h5>
+    <p>Call me crazy but I love pull requests.  Well let me place a caveat on that.  I love small pull requests, the smaller the better.  I guess I still love the big ones, even if that my response to them will usually be, &ldquo;that needs to be smaller&rdquo;.  Part of my PR joy is the way that GitHub displays them to me, and lets me comment on them.  I&rsquo;m not so keen on the web interface for creating them, but I now primarily use <code>hub pull-request</code> from the command line, so that&rsquo;s all good.</p>
+
+<p>What I love about giving feedback on a pull request is that it has so much context.  It&rsquo;s on a specific repo, it shows everything that&rsquo;s changed.  Given appropriate configuration it will also include the results of running all the test suites, and a link to the deployed instance of the system.  I&rsquo;ll generally be encouraging submitter to include screenshots to highlight any UI changes (would be great to automate that too somehow &hellip;) and a clickable ticket that the pull request addresses in Pivotal Tracker or Jira or whatever.  If it&rsquo;s a Github issue then that linkage is partially automated.</p>
+
+<p>I was talking about StackOverflow posts <a href="http://nonprofits.agileventures.org/2016/10/04/anatomy-of-a-question/">yesterday</a>, and I gave example of two question from some former students and pretty much the first thing I was asking was for more context on their codebase.  Asking questions in the form of a pull-request removes the chance that context will be missing.  Call me crazy or extraordinarily lazy, but trying to help someone stuck on something when you don&rsquo;t have the full context is asking to burn a lot of time.  As <a href="http://nonprofits.agileventures.org/2016/10/04/anatomy-of-a-question/">Kent Beck says</a>, any decent answer to an interesting question being, &ldquo;it depends&rdquo;, and if you ask me, it depends on the context.</p>
+
+<p>Back in the day I was always trying to pop three levels up the abstraction and ask, do you even need to be trying to cross that bridge?  If I&rsquo;m stuck on anything I&rsquo;m always trying to do that, but other parties don&rsquo;t always appreciate that approach.  Often I think they just want to stay at the level of abstraction they are at.  They want to work with the particularly technology because that&rsquo;s what they think is the right pathway to a job, or with a particular system they are building because they think it will solve some sort of problem for themselves, or for someone else.  Pushing them too strongly out of the question zone they are in will generally make them uncomfortable.  Not that occasionally making people uncomfortable is wrong.  Sometimes that discomfort is Vygotsky&rsquo;s <a href="https://en.wikipedia.org/wiki/Zone_of_proximal_development">zone of proximal development</a>, but other times it&rsquo;s a panic or resentment zone.  What I&rsquo;m working is getting better is knowing how much discomfort others can take.</p>
+
+<p>Which brings me back to pull requests.  In AgileVentures we field a lot of incoming pull requests on open source projects from developer of all experience levels.  Our goals are two fold.  One, we want to me improving the quality of our codebases in order to deliver value to the users of our software.  Two, we want the submitters of those pull requests to be having a positive &ldquo;team&rdquo; learning experience.  Not that other open source projects don&rsquo;t have the same goals, but we&rsquo;re explicit about it.  We really want the submitters to feel that they are part of an agile team, getting involved with voting on the point complexity of stories, bugs and chores; hanging out with each other online, and having access to meetings with the end clients who are generating the feature requests in the first place.</p>
+
+<p>There are several patterns that I have noticed; that:</p>
+
+<p>1) many people are reluctant to make pull requests until they think their code is &ldquo;finished&rdquo;
+2) some people are quite intimidated to make pull requests at all, perhaps thinking they might break something
+3) some people can feel quite negative after receiving feedback on their pull request
+4) most people will get quite frustrated if you keep on asking for additional changes on their pull requests</p>
+
+<p>A few years ago in my naivety about interacting with humans, I had implicitly assumed that making a pull request was an emotional non-event for people, and that they would appreciate ongoing requests for changes in order to get their code into the best state possible.  Looking at things now that seems self-defeating if our objective is to help people learn.  How have I evolved my PR management strategy?  Here&rsquo;s a few things:</p>
+
+<p>1) encourage people to submit &ldquo;Work in Progress&rdquo; pull requests, but don&rsquo;t push too hard
+2) always start by thanking the submitter for their contribution
+3) try and find at least one good thing to say about their contribution
+4) limit the number of constructive criticisms
+5) be kind, because everyone is struggling
+6) use automated tools like houndci and code-climate, and tune them to not be overwhelming
+7) tell people that automated tools can be ignored
+8) gently encourage people to read the CONTRIBUTING.md and follow the PR submission guidelines
+9) if there is a trivial fix that I want in the PR, push it in myself</p>
+
+<p>But the most important and revolutionary to me has been the strategy of refactoring tickets.  I&rsquo;m still wondering if these aren&rsquo;t actually evil technical debt in disguise; but now we&rsquo;ve been using them for a while, and I&rsquo;ve had a fair few follow up refactoring tickets closed with pull requests from other developers, I&rsquo;m starting to think they really are a good way to go.  They are a pretty good way of avoiding two unpleasant and difficult situations.</p>
+
+<p>One thing that happens is that a person submits a pull request, and as project maintainer you ask for a refactoring.  The submitter doesn&rsquo;t necessarily agree with the refactoring, or just doesn&rsquo;t have time to get to it.  So the pull-request sits there getting further and further out of sync with the codebase, and either requires a lot of work for later merge, or ends up getting thrown away which is a waste.  One way round this that I mention above as item 9) is making critical little changes in the pull request myself.  In the past I&rsquo;ve got contributors to give me access to their forks, and now GitHub has a checkbox to make it easy for submitters to allow that.  From a learning point of view I might think it would be better if the submitter made the changes themselves, but often they are exhausted, frustrated, or just won&rsquo;t have time to get to it for a few days.  For the sake of the project it&rsquo;s best to get the PR pulled in and the submitter can still learn from the changes you made in the closed PR view.</p>
+
+<p>The other difficult situation is that refactoring tickets are made, but no one ever works on them and so the overall codebase quality suffers.  In a couple of projects we&rsquo;ve started voting on refactoring chores, and this has had the effect of increasing their visibility, and now new team members have started working on them as a lower intensity way into the codebase.  Pivotal recommends not assigning points to bugs and chores, but in true Agile fashion we came to reflect on whether that was working for us.  In a project with a full time team points for bugs and chores are dangerous because they distort estimates of when work is going to complete.  We&rsquo;re not a full time team; we have a lot of part-time volunteers with a high churn rate.  For those volunteers it&rsquo;s important to know how complex a bug or chore is before they decide to work on it.  We&rsquo;re not working to tight deadlines and so the estimation process is a nice to have, rather than a must to have.</p>
+
+<p>With the addition of asynchronous voting allowing more of our distributed volunteers to participate in the process of assessing the complexity/difficulty of stories, bugs and chores, I&rsquo;ve been enjoying a little wave of refactoring pull requests, and I think we&rsquo;re getting a win-win here.  We&rsquo;re breaking up bigger jobs into smaller more manageable chunks that new team members can start on in order to get familiar with our codebases and our processes.  Our code quality is improving and I think there&rsquo;s a fair bit of learning going on :-)</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

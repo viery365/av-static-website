@@ -5,16 +5,63 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-10-04T01:00:00+01:00</updated>
+  <updated>2016-10-05T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Pull Requests for Learning</title>
+    <link rel="alternate" href="http://blog.url.com/2016/10/05/pull-requests-for-learning/"/>
+    <id>http://blog.url.com/2016/10/05/pull-requests-for-learning/</id>
+    <published>2016-10-05T01:00:00+01:00</published>
+    <updated>2016-10-05T09:28:34+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Call me crazy but I love pull requests.  Well let me place a caveat on that.  I love small pull requests, the smaller the better.  I guess I still love the big ones, even if that my response to them will usually be, &amp;ldquo;that needs to be smaller&amp;rdquo;.  Part of my PR joy is the way that GitHub displays them to me, and lets me comment on them.  I&amp;rsquo;m not so keen on the web interface for creating them, but I now primarily use &lt;code&gt;hub pull-request&lt;/code&gt; from the command line, so that&amp;rsquo;s all good.&lt;/p&gt;
+
+&lt;p&gt;What I love about giving feedback on a pull request is that it has so much context.  It&amp;rsquo;s on a specific repo, it shows everything that&amp;rsquo;s changed.  Given appropriate configuration it will also include the results of running all the test suites, and a link to the deployed instance of the system.  I&amp;rsquo;ll generally be encouraging submitter to include screenshots to highlight any UI changes (would be great to automate that too somehow &amp;hellip;) and a clickable ticket that the pull request addresses in Pivotal Tracker or Jira or whatever.  If it&amp;rsquo;s a Github issue then that linkage is partially automated.&lt;/p&gt;
+
+&lt;p&gt;I was talking about StackOverflow posts &lt;a href="http://nonprofits.agileventures.org/2016/10/04/anatomy-of-a-question/"&gt;yesterday&lt;/a&gt;, and I gave example of two question from some former students and pretty much the first thing I was asking was for more context on their codebase.  Asking questions in the form of a pull-request removes the chance that context will be missing.  Call me crazy or extraordinarily lazy, but trying to help someone stuck on something when you don&amp;rsquo;t have the full context is asking to burn a lot of time.  As &lt;a href="http://nonprofits.agileventures.org/2016/10/04/anatomy-of-a-question/"&gt;Kent Beck says&lt;/a&gt;, any decent answer to an interesting question being, &amp;ldquo;it depends&amp;rdquo;, and if you ask me, it depends on the context.&lt;/p&gt;
+
+&lt;p&gt;Back in the day I was always trying to pop three levels up the abstraction and ask, do you even need to be trying to cross that bridge?  If I&amp;rsquo;m stuck on anything I&amp;rsquo;m always trying to do that, but other parties don&amp;rsquo;t always appreciate that approach.  Often I think they just want to stay at the level of abstraction they are at.  They want to work with the particularly technology because that&amp;rsquo;s what they think is the right pathway to a job, or with a particular system they are building because they think it will solve some sort of problem for themselves, or for someone else.  Pushing them too strongly out of the question zone they are in will generally make them uncomfortable.  Not that occasionally making people uncomfortable is wrong.  Sometimes that discomfort is Vygotsky&amp;rsquo;s &lt;a href="https://en.wikipedia.org/wiki/Zone_of_proximal_development"&gt;zone of proximal development&lt;/a&gt;, but other times it&amp;rsquo;s a panic or resentment zone.  What I&amp;rsquo;m working is getting better is knowing how much discomfort others can take.&lt;/p&gt;
+
+&lt;p&gt;Which brings me back to pull requests.  In AgileVentures we field a lot of incoming pull requests on open source projects from developer of all experience levels.  Our goals are two fold.  One, we want to me improving the quality of our codebases in order to deliver value to the users of our software.  Two, we want the submitters of those pull requests to be having a positive &amp;ldquo;team&amp;rdquo; learning experience.  Not that other open source projects don&amp;rsquo;t have the same goals, but we&amp;rsquo;re explicit about it.  We really want the submitters to feel that they are part of an agile team, getting involved with voting on the point complexity of stories, bugs and chores; hanging out with each other online, and having access to meetings with the end clients who are generating the feature requests in the first place.&lt;/p&gt;
+
+&lt;p&gt;There are several patterns that I have noticed; that:&lt;/p&gt;
+
+&lt;p&gt;1) many people are reluctant to make pull requests until they think their code is &amp;ldquo;finished&amp;rdquo;
+2) some people are quite intimidated to make pull requests at all, perhaps thinking they might break something
+3) some people can feel quite negative after receiving feedback on their pull request
+4) most people will get quite frustrated if you keep on asking for additional changes on their pull requests&lt;/p&gt;
+
+&lt;p&gt;A few years ago in my naivety about interacting with humans, I had implicitly assumed that making a pull request was an emotional non-event for people, and that they would appreciate ongoing requests for changes in order to get their code into the best state possible.  Looking at things now that seems self-defeating if our objective is to help people learn.  How have I evolved my PR management strategy?  Here&amp;rsquo;s a few things:&lt;/p&gt;
+
+&lt;p&gt;1) encourage people to submit &amp;ldquo;Work in Progress&amp;rdquo; pull requests, but don&amp;rsquo;t push too hard
+2) always start by thanking the submitter for their contribution
+3) try and find at least one good thing to say about their contribution
+4) limit the number of constructive criticisms
+5) be kind, because everyone is struggling
+6) use automated tools like houndci and code-climate, and tune them to not be overwhelming
+7) tell people that automated tools can be ignored
+8) gently encourage people to read the CONTRIBUTING.md and follow the PR submission guidelines
+9) if there is a trivial fix that I want in the PR, push it in myself&lt;/p&gt;
+
+&lt;p&gt;But the most important and revolutionary to me has been the strategy of refactoring tickets.  I&amp;rsquo;m still wondering if these aren&amp;rsquo;t actually evil technical debt in disguise; but now we&amp;rsquo;ve been using them for a while, and I&amp;rsquo;ve had a fair few follow up refactoring tickets closed with pull requests from other developers, I&amp;rsquo;m starting to think they really are a good way to go.  They are a pretty good way of avoiding two unpleasant and difficult situations.&lt;/p&gt;
+
+&lt;p&gt;One thing that happens is that a person submits a pull request, and as project maintainer you ask for a refactoring.  The submitter doesn&amp;rsquo;t necessarily agree with the refactoring, or just doesn&amp;rsquo;t have time to get to it.  So the pull-request sits there getting further and further out of sync with the codebase, and either requires a lot of work for later merge, or ends up getting thrown away which is a waste.  One way round this that I mention above as item 9) is making critical little changes in the pull request myself.  In the past I&amp;rsquo;ve got contributors to give me access to their forks, and now GitHub has a checkbox to make it easy for submitters to allow that.  From a learning point of view I might think it would be better if the submitter made the changes themselves, but often they are exhausted, frustrated, or just won&amp;rsquo;t have time to get to it for a few days.  For the sake of the project it&amp;rsquo;s best to get the PR pulled in and the submitter can still learn from the changes you made in the closed PR view.&lt;/p&gt;
+
+&lt;p&gt;The other difficult situation is that refactoring tickets are made, but no one ever works on them and so the overall codebase quality suffers.  In a couple of projects we&amp;rsquo;ve started voting on refactoring chores, and this has had the effect of increasing their visibility, and now new team members have started working on them as a lower intensity way into the codebase.  Pivotal recommends not assigning points to bugs and chores, but in true Agile fashion we came to reflect on whether that was working for us.  In a project with a full time team points for bugs and chores are dangerous because they distort estimates of when work is going to complete.  We&amp;rsquo;re not a full time team; we have a lot of part-time volunteers with a high churn rate.  For those volunteers it&amp;rsquo;s important to know how complex a bug or chore is before they decide to work on it.  We&amp;rsquo;re not working to tight deadlines and so the estimation process is a nice to have, rather than a must to have.&lt;/p&gt;
+
+&lt;p&gt;With the addition of asynchronous voting allowing more of our distributed volunteers to participate in the process of assessing the complexity/difficulty of stories, bugs and chores, I&amp;rsquo;ve been enjoying a little wave of refactoring pull requests, and I think we&amp;rsquo;re getting a win-win here.  We&amp;rsquo;re breaking up bigger jobs into smaller more manageable chunks that new team members can start on in order to get familiar with our codebases and our processes.  Our code quality is improving and I think there&amp;rsquo;s a fair bit of learning going on :-)&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Anatomy of a Question</title>
     <link rel="alternate" href="http://blog.url.com/2016/10/04/anatomy-of-a-question/"/>
     <id>http://blog.url.com/2016/10/04/anatomy-of-a-question/</id>
     <published>2016-10-04T01:00:00+01:00</published>
-    <updated>2016-10-04T21:17:49+01:00</updated>
+    <updated>2016-10-05T12:59:36+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -50,7 +97,7 @@ The other thing I sense is that students and learners may often feel like they h
 &lt;li&gt;&lt;a href="https://www.quora.com/Is-there-an-open-source-alternative-to-StackOverflow-I-can-use-for-internal-Q-A"&gt;https://www.quora.com/Is-there-an-open-source-alternative-to-StackOverflow-I-can-use-for-internal-Q-A&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;End of the day I think it&amp;rsquo;s the interactive dynamic between developers asking each other questions in the context of a pull request, in the slack channel, that&amp;rsquo;s key; learning in context.  AgileVentures is a safe space to submit PRs and get supportative feedback - at least that&amp;rsquo;s my vision and ultimately our special sauce :-)&lt;/p&gt;
+&lt;p&gt;End of the day I think it&amp;rsquo;s the interactive dynamic between developers asking each other questions in the context of a pull request, in the slack channel, that&amp;rsquo;s key; learning in context.  AgileVentures is a safe space to submit PRs and get supportive feedback - at least that&amp;rsquo;s my vision and ultimately our special sauce :-)&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -461,154 +508,6 @@ i’m not sure who wants to do this story, but my coworker seems interested in p
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/tansaku/planning_poker_bot"&gt;https://github.com/tansaku/planning_poker_bot&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Dodging a Bullet</title>
-    <link rel="alternate" href="http://blog.url.com/2016/09/27/dodging-a-bullet/"/>
-    <id>http://blog.url.com/2016/09/27/dodging-a-bullet/</id>
-    <published>2016-09-27T01:00:00+01:00</published>
-    <updated>2016-09-29T09:29:58+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So Monday was the day to see if our new domain model components would ease the process of delivering a new feature. As warm up I did a quick refactoring requested by Raoul on our Karma calculation changes.  There was the possibility of re-using some cucumber steps.  We&amp;rsquo;d submitted the following:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I run rake task "([^"]*)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="vg"&gt;$rake&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;invoke&lt;/span&gt;    
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I run the rake task for calculating karma points$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="vg"&gt;$rake&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"karma_calculator"&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and Raoul was suggesting re-using the the first step.  Looking it over I actually modified it to the following:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I run the rake task for calculating karma points$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="vg"&gt;$rake&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"karma_calculator"&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I run the rake task for fetching github commits$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="vg"&gt;$rake&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"fetch_github_commits"&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Following the idea that the high level cucumber scenarios should be as readable English as possible, preferring &lt;code&gt;When I run the rake task for calculating karma points&lt;/code&gt; to &lt;code&gt;When I run the rake task for &amp;quot;karma_calculator&amp;quot;&lt;/code&gt;.  Trivial?  Maybe.  I&amp;rsquo;m conflicted.  These are related to cucumber stories we have in our dev-ops section which I&amp;rsquo;m hoping provides some testable documentation of the operational aspect of the application that&amp;rsquo;s used by app admins rather than end users.  I&amp;rsquo;m also going with not re-using step-definitions within step-definitions.  Two more heuristics there to add to the list.&lt;/p&gt;
-
-&lt;p&gt;I mention this warm up partly because I feel like there&amp;rsquo;s clean up for the Cucumber stories we wrote on Monday.  As it happens, Raoul approved that above change and merged the new Karma calculation PR in, making it possible that we could get started on refactoring work there.  But anyhow, here, ultimately, are the Cucumber scenarios that defined our Monday&amp;rsquo;s work:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; User is on free tier and looking at own page
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I am logged in
-    &lt;span class="nf"&gt;And&lt;/span&gt; I am on my profile page
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Basic Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Premium Member"&lt;/span&gt;
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; User is on free tier and looking at other persons profile page
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I am logged in
-    &lt;span class="nf"&gt;And&lt;/span&gt; I visit Alice's profile page
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Basic Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Premium Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; User upgrades to premium from free tier
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I am logged in
-    &lt;span class="nf"&gt;And&lt;/span&gt; I am on my profile page
-    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;
-    &lt;span class="nf"&gt;When&lt;/span&gt; I fill in appropriate card details for premium
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Premium Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I am on my profile page
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Basic Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We didn&amp;rsquo;t get to these all at once.  We&amp;rsquo;d put the fruits of our InsideOut work aside (the new domain elements Subscription and PaymentSource) and reverted to OutsideIn.  This was the set of experiences we wanted for the end user, in association with the &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1261"&gt;ticket&lt;/a&gt; we were working on. We&amp;rsquo;d actually started with two scenarios, one about upgrade to premium and the other about upgrade to premium plus, and in my mind had been the idea that we would ultimately make both types of upgrade work using our new domain entities.&lt;/p&gt;
-
-&lt;p&gt;However that was actually scope creep off the ticket, and in fact there was a chunk of work specific to the ticket (upgrade from basic to premium) that could be implemented in the existing system without any reference to the new domain entities, so we got that done.  It was mainly a change to the view to add a report about the user&amp;rsquo;s current membership status, and an upgrade button:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if current_user &lt;span class="err"&gt;&amp;amp;&amp;amp;&lt;/span&gt; current_user == presenter.user %&amp;gt;
-        &lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= current_user.membership_type %&amp;gt; Member&lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-        &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% unless current_user.membership_type == 'Premium' %&amp;gt;
-            &lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= form_tag charges_path(plan: 'premium') do %&amp;gt;
-                  &lt;span class="nt"&gt;&amp;lt;script &lt;/span&gt;&lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"https://checkout.stripe.com/checkout.js"&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"stripe-button"&lt;/span&gt;
-                          &lt;span class="na"&gt;data-key=&lt;/span&gt;&lt;span class="s"&gt;"&amp;lt;%= Rails.configuration.stripe[:publishable_key] %&amp;gt;"&lt;/span&gt;
-                          &lt;span class="na"&gt;data-description=&lt;/span&gt;&lt;span class="s"&gt;"A month's subscription"&lt;/span&gt;
-                          &lt;span class="na"&gt;data-amount=&lt;/span&gt;&lt;span class="s"&gt;"1000"&lt;/span&gt;
-                          &lt;span class="na"&gt;data-currency=&lt;/span&gt;&lt;span class="s"&gt;"GBP"&lt;/span&gt;
-                          &lt;span class="na"&gt;data-locale=&lt;/span&gt;&lt;span class="s"&gt;"en-US"&lt;/span&gt;
-                          &lt;span class="na"&gt;data-name=&lt;/span&gt;&lt;span class="s"&gt;"Premium Membership"&lt;/span&gt;
-                          &lt;span class="na"&gt;data-label=&lt;/span&gt;&lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-
-              &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
-            &lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-        &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;  
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I&amp;rsquo;m itching to pull this into a partial (&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1306"&gt;refactoring ticket&lt;/a&gt;), and I also worry we&amp;rsquo;re not being confident enough with our logic - of which there is also too much in the view.  Devise&amp;rsquo;s &lt;code&gt;current_user&lt;/code&gt; method is maybe the source of our timidity, since if no one is logged in, it returns nil.  Perhaps it would be better if it returned an AnonymousUser object.  Michael started looking into how we might override it, but I demurred, writing an email to Stripe about our new approach of locking the data-locale to &amp;ldquo;en-US&amp;rdquo;.  All that was actually after we&amp;rsquo;d dropped to the RSpec level to create the necessary supporting operations for the view fragment above.  Let&amp;rsquo;s just take a look at them:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="s1"&gt;'#membership_type'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-
-    &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'returns membership type'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;membership_type&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="s1"&gt;'Basic'&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'premium member'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-
-      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;&lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;stripe_customer: &lt;/span&gt;&lt;span class="s2"&gt;"sdfdfds"&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
-
-      &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'returns premium'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;membership_type&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="s1"&gt;'Premium'&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;do&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-  &lt;span class="nf"&gt;def&lt;/span&gt; &lt;span class="n"&gt;membership_type&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"Basic"&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;stripe_customer&lt;/span&gt;
-    &lt;span class="s2"&gt;"Premium"&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-&lt;span class="nf"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and finally a little addition to the charges controller, so that when users sign up for premium their customer id is stored in the user table:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create&lt;/span&gt;
-    &lt;span class="vi"&gt;@plan&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-    &lt;span class="n"&gt;customer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-        &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:stripeEmail&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-        &lt;span class="ss"&gt;source: &lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:stripeToken&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-        &lt;span class="ss"&gt;plan: &lt;/span&gt;&lt;span class="vi"&gt;@plan&lt;/span&gt;
-    &lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="n"&gt;update_user_to_premium&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="n"&gt;send_acknowledgement_email&lt;/span&gt;
-
-  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;CardError&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-    &lt;span class="n"&gt;flash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:error&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;
-    &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="n"&gt;new_charge_path&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="kp"&gt;private&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update_user_to_premium&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;current_user&lt;/span&gt;
-    &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;
-    &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The upshot of which was that using only the existing aspects of the system the premium users would see their status on their profile page, and non-premium users would see the upgrade button.  It was all working without the aid of the new domain entities.  As I mentioned above, Michael and I had other concerns with our implementation, but with my eye on the clock I suggested we get this in as a pull request, and then use the new domain entities to support work on a subsequent &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1303"&gt;ticket of allowing premium users to upgrade to premium plus&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;I had other conflicts dripping out of me, such as whether we should be testing Stripe differently (webmock?) and whether we should be making our scenarios more declarative.  I guess part of the challenge with our increasing list of heuristics for good coding and good project management is that it can feel like you are being pulled in multiple directions at once, and you can be forgiven for a kind of paranoia about which really is the most important issue to work on first.&lt;/p&gt;
-
-&lt;p&gt;Submitting the PR for just the above code involved pulling out the commits for the new domain model entities.  One thing that was easy to prioritise for me was to put only the smallest set of necessary elements in the pull request.  I didn&amp;rsquo;t want Raoul&amp;rsquo;s to get distracted during his code review by having a set of un-used domain entities in the incoming code.  Michael found a &lt;a href="http://stackoverflow.com/a/1994491/316729"&gt;cool technique for cherry picking a set of commits&lt;/a&gt; and we got in a PR with just the code above, and moved the domain entities onto a new branch associated with the ticket for creating the premium plus upgrade button.  Will we fall foul of premature refactoring?  Or did we just dodge a bullet?&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s pretty clear to me that the current stripe_customer field on user can&amp;rsquo;t support information about different membership plans.  Hopefully our InsideOut work will bear fruit in the next session!  Would it be too much to hope that we&amp;rsquo;ll have dodged one bullet and be ready to unleash some of our own? :-)&lt;/p&gt;
-
-&lt;p&gt;Related Videos:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=UprAXzePQmo"&gt;Pairing on the above&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=JPvkCffsHOo"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
