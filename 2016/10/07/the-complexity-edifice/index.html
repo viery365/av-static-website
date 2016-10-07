@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>The Complexity Edifice</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_10 x2016_10_07 x2016_10_07_the-complexity-edifice x2016_10_07_the-complexity-edifice_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/10/07/the-complexity-edifice/">The Complexity Edifice</a></h2>
+        <h5 class='date'> 7 Oct 2016</h5>
+    <p>I assumed getting to safe green shores with this PremiumPlus upgrade button might be a little involved.  I still held out hope that we might be able to address some of the code smells we were encountering and/or generating.  Here were some of my concerns at the end of the last session:</p>
+
+<ol>
+<li>Cukes using the same factories as specs</li>
+<li>Model specs full of a mixture of unit and integration tests</li>
+<li>FactoryGirl object creation having side-effects on how single table inheritance classes were reporting their class</li>
+<li>VCR/Billy file mess from recording all the Stripe interactions</li>
+<li>lack of confidence in code using <code>current_user</code></li>
+</ol>
+
+<p>Some <a href="http://stackoverflow.com/a/20101117/316729">solo googling</a> had showed me that there should be some simple fixes for mixing FactoryGirl and STI; although I was still nervous about the fairylight connections between all these different factories that required special tweaking to behave like objects in production.  I knew we had a potential fix for the insecure <a href="https://github.com/plataformatec/devise/issues/4317#issuecomment-251667866">current_user</a>, and a possible alternate for <a href="https://github.com/rebelidealist/stripe-ruby-mock">mocking Stripe</a>, but all of these were arguably distractions while we were still trying to get the tests green.</p>
+
+<p>We&rsquo;d managed to avoid aggravating the Cuke usage of factories by adjusting the step that created a premium member like so:</p>
+<pre class="highlight ruby"><code><span class="no">Given</span> <span class="sr">/^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/</span> <span class="k">do</span> <span class="o">|</span><span class="n">premium</span><span class="p">,</span> <span class="nb">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">|</span>
+
+  <span class="vi">@current_user</span> <span class="o">=</span> <span class="vi">@user</span> <span class="o">=</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="ss">first_name: </span><span class="nb">name</span><span class="p">,</span> <span class="ss">email: </span><span class="n">email</span><span class="p">,</span> <span class="ss">password: </span><span class="n">password</span><span class="p">,</span> <span class="ss">password_confirmation: </span><span class="n">password</span><span class="p">)</span>
+  <span class="n">subscription</span> <span class="o">=</span> <span class="no">Premium</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">user: </span><span class="vi">@user</span><span class="p">,</span> <span class="ss">started_at: </span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span>
+  <span class="n">payment_source</span> <span class="o">=</span> <span class="no">PaymentSource</span><span class="o">::</span><span class="no">Stripe</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">identifier: </span><span class="s1">'cus_8l47KNxEp3qMB8'</span><span class="p">,</span> <span class="ss">subscription: </span><span class="n">subscription</span> <span class="p">)</span>
+
+  <span class="n">visit</span> <span class="n">new_user_session_path</span>
+  <span class="n">within</span> <span class="p">(</span><span class="s1">'#main'</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">fill_in</span> <span class="s1">'user_email'</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="n">email</span>
+    <span class="n">fill_in</span> <span class="s1">'user_password'</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="n">password</span>
+    <span class="n">click_button</span> <span class="s1">'Sign in'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>Now I still wasn&rsquo;t completely happy with this, but I was feeling a little suspicious of factories and so just creating the Subscription and PaymentSource objects directly felt a little safer.  Of course, the entire acceptance test was slightly compromised by reaching in to the database anyway.  A cleaner test might have gone through the entire sign up process for Premium, before trying a PremiumPlus upgrade.  The trade off here is running time, and the question is can we get the database into a state that corresponds to what would have been the case if a full Premium signup had happened.</p>
+
+<p>Factories in cukes had bitten us hard last week.  In the LocalSupport project we avoided every scenario having to repeat sign in by reaching in to the Capybara session cookies.  Here in WebsiteOne we were stepping directly through the sign in operation, but creating the users with factories.  In LocalSupport we create the users with simple object creation.  I&rsquo;d been burnt in the early days by Rails fixtures, to which factories were supposedly the solution, although apparently even <a href="http://chriskottom.com/blog/2014/11/fixing-fixtures/">fixtures are being rehabilitated</a>.  The right tool is all dependent on context of course :-)</p>
+
+<p>I think the issue here is partly the general one of descriptions of encapsulated things.  We see it in the naming of methods, the naming of steps; it&rsquo;s all about the extent to which the details of what happen under the hood are inferable from the description.  So for example in the above code the step is something like <code>Given I am logged in as a premium user with ...</code>, and this is reasonable, we would expect to have a logged in user who is signed up for Premium.  Then inside the step we have things like <code>Premium.create(user: @user, started_at: Time.now)</code> which creates a Premium subscription for a user starting now.  Maybe it would be better as <code>Subscription::Premium</code> but still, my fear is that <code>FactoryGirl.create(:user, first_name: name, email: email, password: password, password_confirmation: password)</code> is hiding a lot of complexity from me.  It happens to also create a G+ authentication and a Karma object.</p>
+
+<p>I guess the solution there is better names for our factories, rather than throwing out factories themselves.  The creation of the Karma object should just be removed from the factory, but we could call this factory :user<em>authenticated</em>with<em>gplus to make things a little more transparent.  I&rsquo;m still uncomfortable about features and specs sharing factories, but I&rsquo;m also not entirely clear if we can separate them.  We&rsquo;re using the `factory</em>girl_rails` gem and so FactoryGirl appears to be available as a singleton throughout our specs and cucumber steps, hmmm.</p>
+
+<p>So anyway, that&rsquo;s all preamble to the late starting pairing of the day.  The actual fail that we&rsquo;d left things on the day before was this:</p>
+<pre class="highlight plaintext"><code>  Scenario: User upgrades to premium plus from premium                                                       # features/premium/upgrade_membership.feature:40
+    Given I am logged in as a premium user with name "John", email "john@john.com", with password "asdf1234" # features/step_definitions/user_steps.rb:5
+      uninitialized constant Premium (NameError)
+      ./features/step_definitions/user_steps.rb:8:in `/^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/'
+      features/premium/upgrade_membership.feature:41:in `Given I am logged in as a premium user with name "John", email "john@john.com", with password "asdf1234"'
+</code></pre>
+<p>Turns out for Rails(?) to load the STI subscription classes they have to be in their own files.  I created a <code>premium.rb</code> file containing just:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Premium</span> <span class="o">&lt;</span> <span class="no">Subscription</span>
+<span class="k">end</span>
+</code></pre>
+<p>and we were moving forward, although the module for payment source appeared to allow us to group together the STI there in a single file:</p>
+<pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">PaymentSource</span>
+
+  <span class="k">class</span> <span class="nc">PaymentSource</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+    <span class="n">belongs_to</span> <span class="ss">:subscription</span>
+  <span class="k">end</span>
+
+  <span class="k">class</span> <span class="nc">CraftAcademy</span> <span class="o">&lt;</span> <span class="no">PaymentSource</span>
+  <span class="k">end</span>
+
+  <span class="k">class</span> <span class="nc">Stripe</span> <span class="o">&lt;</span> <span class="no">PaymentSource</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>and with that it was a few short steps to get the premium plus upgrade passing.  Our charges controller needed to store the change in plan in our new domain objects:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">upgrade</span>
+    <span class="n">current_user</span><span class="p">.</span><span class="nf">subscription</span><span class="p">.</span><span class="nf">type</span> <span class="o">=</span> <span class="s1">'PremiumPlus'</span>
+    <span class="n">current_user</span><span class="p">.</span><span class="nf">save</span>
+    <span class="n">customer</span> <span class="o">=</span> <span class="no">Stripe</span><span class="o">::</span><span class="no">Customer</span><span class="p">.</span><span class="nf">retrieve</span><span class="p">(</span><span class="n">current_user</span><span class="p">.</span><span class="nf">subscription</span><span class="p">.</span><span class="nf">payment_source</span><span class="p">.</span><span class="nf">identifier</span><span class="p">)</span>
+    <span class="n">subscription</span> <span class="o">=</span> <span class="n">customer</span><span class="p">.</span><span class="nf">subscriptions</span><span class="p">.</span><span class="nf">retrieve</span><span class="p">(</span><span class="n">customer</span><span class="p">.</span><span class="nf">subscriptions</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+    <span class="n">subscription</span><span class="p">.</span><span class="nf">plan</span> <span class="o">=</span> <span class="s2">"premiumplus"</span>
+    <span class="n">subscription</span><span class="p">.</span><span class="nf">save</span>
+  <span class="k">end</span>
+</code></pre>
+<p>This code was still awful, but we had green.  What made the day complicated was that several of the regressions now failed.  That&rsquo;s what they are supposed to do of course, catch how your changes are breaking other parts of your system.  Some of them were fixed by updating how we originally create premium customers in the charges controller</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">update_user_to_premium</span><span class="p">(</span><span class="n">stripe_customer</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">unless</span> <span class="n">current_user</span>
+    <span class="n">current_user</span><span class="p">.</span><span class="nf">subscription</span> <span class="o">=</span> <span class="no">Premium</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">started_at: </span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span>
+    <span class="n">current_user</span><span class="p">.</span><span class="nf">subscription</span><span class="p">.</span><span class="nf">payment_source</span> <span class="o">=</span> <span class="no">PaymentSource</span><span class="o">::</span><span class="no">Stripe</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">identifier: </span><span class="n">stripe_customer</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+    <span class="c1"># current_user.stripe_customer = stripe_customer.id</span>
+    <span class="n">current_user</span><span class="p">.</span><span class="nf">save</span>
+  <span class="k">end</span>
+</code></pre>
+<p>but we were also getting an acceptance fail on upgrade from Basic to Premium, and it was the stripe iframe popup that was not showing up.  It was working in the normal sign up section, and we tried to drop back to see when it had been working.  Michael was driving at this point, and trying a git bisect.  It was starting to look like it had never worked, but upgrade from Basic to Premium had been deployed to production.  It had gone through CI.  It was working when we ran the full rails server locally.  Here&rsquo;s that popup for reference:</p>
+
+<p><img alt="stripe pop up" src="https://www.dropbox.com/s/h5zv1ge3rhrbgly/Screenshot%202016-10-07%2009.45.13.png?dl=1" /></p>
+
+<p>It&rsquo;s the thing that I speculate that most people don&rsquo;t test in their acceptance tests because sandboxing it effectively requires custom work in puffing billy that I&rsquo;ve blogged about before.  Well, who knows, maybe everyone&rsquo;s doing it.  I&rsquo;ve often made the mistake of thinking we&rsquo;re doing something clever or hard, only to find lots of others are doing it and finding it trivial :-)</p>
+
+<p>Michael&rsquo;s faulty modem sound alert was going off, and my post-operative knee was in quite a lot of pain.  I suggested a &ldquo;pair off&rdquo;.  We should separate, work on this individually and then compare notes at the scrum.  I&rsquo;m bedridden this week, and I find the single laptop (I&rsquo;m usually docked to three monitors) very constraining in a pairing session.  We separated and prodded at the system separately.  Michael was in byebug confirming that the dialogue really didn&rsquo;t pop up in the test environment:</p>
+<pre class="highlight plaintext"><code>*** Capybara::Poltergeist::ObsoleteNode Exception: The element you are trying to interact with is either not part of the DOM, or is not currently visible on the page (perhaps display: none is set). It's possible the element has been replaced by another element and you meant to interact with the new element. If so you need to do a new 'find' in order to get a reference to the new element.
+</code></pre>
+<p>I was looking at the traces in the sandbox.  I had rolled back to our stable develop branch and it was clear to me that Stripe was rejecting the request from the headless browser to get the info to display the popup (which involves a request to the Stripe servers):</p>
+<pre class="highlight plaintext"><code>→ more features/support/fixtures/req_cache/allow_users_to_upgrade_membership/user_upgrades_to_premium_from_free_tier/get_checkout.stripe.com_0c264be81b93fe5a9dad2f95b498add8679d7c11.yml
+---
+:scope: 
+:url: https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html?distinct_id=2639e53d-dc62-49f3-ee65-08369e21cd0b
+:body: ''
+:status: 403
+:method: get
+</code></pre>
+<p>Michael pointed to the <a href="https://dashboard.stripe.com/test/logs">stripe logs</a> which showed that we weren&rsquo;t even hitting the test server.  We didn&rsquo;t fix it before the scrum, but afterwards I did some solo work that appeared to get to the bottom of it.  I could see from the VCR sandbox that we were generating a different distinct<em>id for Stripe than we had previously.  I was not sure what had changed, but we were getting VCR cache misses with URLs like `https://checkout.stripe.com/v3/MmIlwJCFOGIGxL58rFJw.html?distinct</em>id=956c69c0-fb75-bf58-cce8-6871b7d0cb73`.</p>
+
+<p>I&rsquo;m still not completely confident about the fix, but adjusting the VCR config to ignore the <code>distinct_id</code> parameter made everything suddenly start working:</p>
+<pre class="highlight ruby"><code><span class="no">VCR</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">hook_into</span> <span class="ss">:webmock</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">cassette_library_dir</span> <span class="o">=</span> <span class="s1">'features/support/fixtures/cassettes'</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">ignore_localhost</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">default_cassette_options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="ss">:match_requests_on</span> <span class="o">=&gt;</span> <span class="p">[</span>
+          <span class="ss">:method</span><span class="p">,</span>
+          <span class="no">VCR</span><span class="p">.</span><span class="nf">request_matchers</span><span class="p">.</span><span class="nf">uri_without_param</span><span class="p">(</span><span class="ss">:imp</span><span class="p">,</span> <span class="ss">:prev_imp</span><span class="p">,</span> <span class="ss">:distinct_id</span><span class="p">)</span>
+      <span class="p">]</span>
+  <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+<p>The VCR cache no longer leaked, the tests passed and it was now a simple fix to sort out the other failing regression (for card update), by switching to the new domain objects.  I&rsquo;m not 100% confident that if we dumped the entire cache that the freshly recorded caches would necessarily pass.  I&rsquo;m nervous that a new developer checking out develop right now would get a fail.  However the feature branch is now passing everything locally and in CI.</p>
+
+<p>It was satisfying to go green, but there are some things here that I don&rsquo;t think I can push off to refactoring tickets:</p>
+
+<p>1) we need some sad paths for upgrade failure 
+2) we&rsquo;ve got to look carefully at Demeter violations in the way we use the Stripe API and our own domain objects
+3) patching develop with the VCR config fix</p>
+
+<p>In the scrum I was talking about Donald Norman&rsquo;s Design of Everyday Things, in which he laments how people blame themselves for not understanding poorly designed things.  Git, Stripe, Rails, Acceptance testing.  There&rsquo;s some real complexity there.  I&rsquo;m not saying they are poorly designed, but the edifice of concepts that someone needs to understand to work with our acceptance tests &hellip; maybe the problem is not the tools, but the way we are building on top of them?</p>
+
+<p>Stripe says that they&rsquo;re okay with our tests hitting their test API at reasonable levels.  Other developers I respect have said that acceptance testing Stripe is too hard, and so just leave that out; testing everything around it.  Do I have a bad habit of pushing some things to the limit when others would sensibly give up and so get myself into trouble?  There&rsquo;s so much here.  Is it even vaguely comprehensible in blog form?  I think it will be at least another week before I&rsquo;m comfortable releasing this feature, but in the meantime I&rsquo;ll keep blogging!</p>
+
+<p>Related Videos </p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=nQEC5HjwTnI">Pairing Video</a></li>
+<li><a href="https://www.youtube.com/watch?v=HCIaCdN6GW4">&ldquo;Kent Beck&rdquo; Scrum</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
