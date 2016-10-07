@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/07/the-complexity-edifice/"/>
     <id>http://blog.url.com/2016/10/07/the-complexity-edifice/</id>
     <published>2016-10-07T01:00:00+01:00</published>
-    <updated>2016-10-07T21:26:02+01:00</updated>
+    <updated>2016-10-07T21:27:12+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -25,7 +25,7 @@
 &lt;li&gt;Model specs full of a mixture of unit and integration tests&lt;/li&gt;
 &lt;li&gt;FactoryGirl object creation having side-effects on how single table inheritance classes were reporting their class&lt;/li&gt;
 &lt;li&gt;VCR/Billy file mess from recording all the Stripe interactions&lt;/li&gt;
-&lt;li&gt;lack of confidence in code using &lt;code&gt;current_user&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Lack of confidence in code using &lt;code&gt;current_user&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Some &lt;a href="http://stackoverflow.com/a/20101117/316729"&gt;solo googling&lt;/a&gt; had showed me that there should be some simple fixes for mixing FactoryGirl and STI; although I was still nervous about the fairylight connections between all these different factories that required special tweaking to behave like objects in production.  I knew we had a potential fix for the insecure &lt;a href="https://github.com/plataformatec/devise/issues/4317#issuecomment-251667866"&gt;current_user&lt;/a&gt;, and a possible alternate for &lt;a href="https://github.com/rebelidealist/stripe-ruby-mock"&gt;mocking Stripe&lt;/a&gt;, but all of these were arguably distractions while we were still trying to get the tests green.&lt;/p&gt;
@@ -134,9 +134,9 @@
 
 &lt;p&gt;It was satisfying to go green, but there are some things here that I don&amp;rsquo;t think I can push off to refactoring tickets:&lt;/p&gt;
 
-&lt;p&gt;1) we need some sad paths for upgrade failure 
-2) we&amp;rsquo;ve got to look carefully at Demeter violations in the way we use the Stripe API and our own domain objects
-3) patching develop with the VCR config fix&lt;/p&gt;
+&lt;p&gt;1) We need some sad paths for upgrade failure 
+2) We&amp;rsquo;ve got to look carefully at Demeter violations in the way we use the Stripe API and our own domain objects
+3) Patching develop with the VCR config fix&lt;/p&gt;
 
 &lt;p&gt;In the scrum I was talking about Donald Norman&amp;rsquo;s Design of Everyday Things, in which he laments how people blame themselves for not understanding poorly designed things.  Git, Stripe, Rails, Acceptance testing.  There&amp;rsquo;s some real complexity there.  I&amp;rsquo;m not saying they are poorly designed, but the edifice of concepts that someone needs to understand to work with our acceptance tests &amp;hellip; maybe the problem is not the tools, but the way we are building on top of them?&lt;/p&gt;
 
