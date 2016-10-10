@@ -5,16 +5,52 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-10-07T01:00:00+01:00</updated>
+  <updated>2016-10-10T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>MultiDimensional Learning Economics</title>
+    <link rel="alternate" href="http://blog.url.com/2016/10/10/multidimensional-learning-economics/"/>
+    <id>http://blog.url.com/2016/10/10/multidimensional-learning-economics/</id>
+    <published>2016-10-10T01:00:00+01:00</published>
+    <updated>2016-10-10T21:25:20+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;This weekend I ran my first Mentive class.  Mentive is an educational startup that provides tutoring for a number of different Massively Open Online Courses (MOOCs), including our “Agile Development using Ruby on Rails”.  We’re currently running the part 2 or “advanced” course that corresponds to the second half of the UCBerkeley Software Engineering class.  It’s my first time trying out the Mentive system which uses GotoMeeting rather than Hangouts.  Myself and John Rofrano are leading tutorial sessions through Mentive on this run.  We’ve both got a couple of students signed up.  I think the numbers might be down for a couple of reasons; one, we removed all the deadlines on the “advanced” course as part of a move towards taking the classes completely self-paced next year.  That probably reduces the sense of urgency as regards sign up.  Also, I hear that Mentive increased their prices, and they may have tipped a limit that we’re also seeing with AgileVentures PremiumPlus.  I’ve had conversations with a few people that the £100 a month price tag on PremiumPlus is beyond their means.  Tweaking those prices and offerings are ultimately what makes all the difference perhaps.&lt;/p&gt;
+
+&lt;p&gt;So anyway, I usually have a rule of not doing any work on the weekends, but I had agreed to take a class on Saturday evenings, since weekday evenings are challenging for me due to early starts to support the daily school run.  Also I’m keen to support Mentive, understand their platform, and furthermore I need to bring in some cash while AgileVentures works its way out of the red.  So I’m running my Mentive class at 8:30pm UTC on Saturday evenings, which makes it practical for anyone from UTC-7 to UTC+2 to attend, which encompasses most of the Americas, Europe and Africa.  I just had one student on this first instance, and so they got a focused one to one session.  We talked about how they had found the previous course, and what they were hoping to get out of this advanced course.  They shared that RSpec had been challenging and I reflected that they weren’t alone.  The common refrain from the different instructors using the MOOC materials around the world was that people tended to get Cucumber, but struggled with RSpec.  So in the session we worked through driving the creation of a small domain model of plain old Ruby objects via RSpec tests, and then did the same for a small Rails app that would use that domain model, driving the creation of an API with RSpecRails tests.  My student seemed pretty pleased with that, and I’m looking forward to developing that further in future sessions.&lt;/p&gt;
+
+&lt;p&gt;Mentive classes are intended to support up to 20 students, and it would be interesting to see if the same guided app creation technique would work with a larger class, keep them engaged and so forth.  Doing it with a single student is not so far removed from what we do in PremiumPlus pairing sessions.  On Saturday my student was on a tablet, and so couldn’t easily type code, but I set up pairing intervention elements by stopping at points and asking my student what they thought I should do next, and that seemed to work well.  Obviously since it was only a single student I was able to tailor what we did and the pace directly to their preference.  Something that’s much more difficult to do with a larger group.&lt;/p&gt;
+
+&lt;p&gt;The big difference between Mentive sessions and AgileVentures Premium/PremiumPlus, is that everything AgileVentures is OpenSource and &amp;ldquo;in context&amp;rdquo;.  All the coding work done with AgileVentures is on a real open source code base, has some relation to the need of a real charity customer or user base.  Of course some learners would much rather work on a more tightly constrained problem or exercise.  Hence the profusion of study tools like CodeWars, CodeAcademy, HackerRank and so forth.  Even the majority of the ADuRoR course uses a toy application, although I really do love the legacy assignments which take an older version of the oldest OpenSource RoR project &amp;ldquo;publify&amp;rdquo; (when it was called typo), and sets the students to do bugfixes and add features fully in context of a working legacy app.  I think that&amp;rsquo;s an inspired choice on the part of Armando Fox, Dave Patterson and the Berkeley TAs who worked on the assignment with them.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s working on that assignment myself several years ago that made me want to do &lt;em&gt;all&lt;/em&gt; my learning in context.  It&amp;rsquo;s why I wanted AgileVentures to exist, a place that could help you do all your learning in context, and contribute to the greater good at the same time.  Of course systems like GitHub, BitBucket and SourceForge already provide a huge vista of OpenSource projects for ongoing learning, but a learner is often thankful for a pathway through the complexity.&lt;/p&gt;
+
+&lt;p&gt;Now AgileVentures doesn&amp;rsquo;t provide as much of a pathway as FreeCodeCamp or CodeCademy or even CodeWars, and all of these still have some beautifully unstructured portions.  We&amp;rsquo;re still working on getting the balance right at AgileVentures, and also the economic model to make is sustainable.  It seems like both CodeWars and CodeCademy are leaning towards being solutions to help employers find job candidates, and FreeCodeCamp is operating as a free for all non-profits and developers, while charging companies a hiring fee when FCC developers are placed (like many bootcamps).&lt;/p&gt;
+
+&lt;p&gt;AgileVentures at the moment is closer to edX and Mentive in that individual learners are paying for additional services.  Actually AgileVentures is a charity so you could also look at it that every premium member is a sponsor who&amp;rsquo;s getting benefits KickStarter or Patreon style.  This is where the multidimensional economics of learning comes in.  What are people willing to contribute for what kind of perk or service?  We&amp;rsquo;ve had very few sign ups for PremiumPlus, but people are happy to pay a lot more money for a bootcamp, and many people pay similar amounts for MOOC course certificates.  &lt;/p&gt;
+
+&lt;p&gt;There seems to be a prevaling view that taking courses equals education.  I guess I&amp;rsquo;m drinking my own cool-aid here, but I feel like learning comes from doing.  More and more courses are hands on these days, but I&amp;rsquo;m skeptical of the learning benefits of watching lots of lectures, or even toy exercuses.  I guess it&amp;rsquo;s a relatively low impact way of floating your brain in some of the domain concepts.  Not everyone wants to become an expert in a particular field.  However if you&amp;rsquo;re in a rush to skill up and you can take the emotional pain of making lots of mistakes (really valuable for learning), then I think diving in to a real project is the way to go.&lt;/p&gt;
+
+&lt;p&gt;AgileVentures tries to create a safe space to fail on an open source project with a real customer.  I don&amp;rsquo;t know how we can convey that more strongly.  What I&amp;rsquo;ve learnt from all the different educational environments I&amp;rsquo;ve taught in (university, MOOC, bootcamp) is that almost everyone hates failure, and that many of us would much rather spend a lot of time watching videos and reading rather than holding our feet to the learning fire.&lt;/p&gt;
+
+&lt;p&gt;It was holding my feet to the learning fire that got me my AstroPhysics degree.  It was so tempting to keep reading, and re-summarizing my notes.  It wasn&amp;rsquo;t until I forced myself to repeatedly answer old exam questions that I got my exam technique down and got the first that got me on to higher education.  Not that I was ever really satisified with myself during my first masters and PhD.  It still felt trivial and isolated from the rest of the world.  Part of the problem was that I was studying in the dark ages before search engines like Google connected learners with the rest of the world.&lt;/p&gt;
+
+&lt;p&gt;So anyhow, I&amp;rsquo;m thinking we need a new Premium tier for AgileVentures.  What I notice (and I&amp;rsquo;ve blogged about before) is how so many people prefer to ask me questions 121 rather than in group chat; and it takes a lot of persuasion before people will post publicly, and it&amp;rsquo;s rare that it becomes their default.  Some individuals will keep on asking for one to one help, even though there&amp;rsquo;s no financial incentive for me to help them.  I don&amp;rsquo;t want to come across as mercenary, but I&amp;rsquo;ve put in thousands of volunteer hours and a lot of my own savings to supporting learning online.  I&amp;rsquo;ve got to put up some toll booths to feed my kids.&lt;/p&gt;
+
+&lt;p&gt;I guess some people are used to coming from a state education system where they can get 121 support from their instructors if they press hard enough.  I wonder if people realise that the time I spend answering their 121 question takes up time that I could be using to earn money to feed my kids?  And my three boys eat like horses! :-)  Maybe they realise and don&amp;rsquo;t care?  Maybe they&amp;rsquo;re just not thinking about it; they&amp;rsquo;re just focused on their own question, trying to solve their own problem.&lt;/p&gt;
+
+&lt;p&gt;I want to get learners comfortable about asking in public so that others can benefit.  If they ask in group chat on AgileVentures it increases the activity in the community, and the community value keeps people around, and the rising tide lifts all the boats.  I could devote all my time to answering 121 questions, and I might get a few thanks from people, and I might learn a few things, but it&amp;rsquo;s not enough to feed my kids.  It makes me think that the new AgileVentures premium tier should be called &amp;ldquo;121&amp;rdquo;, cost about £25 a month, and get you an assigned mentor who can answer your questions on 121 chat.  And maybe a £50 a month version called Premium on Air that gets you an hour of hangout time.  We&amp;rsquo;ll have to work out the details.  We need to avoid changing and tweaking too much or we confuse people, muddy the water.  It really is a complex multidimensional economics of learning problem &amp;hellip; &lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>The Complexity Edifice</title>
     <link rel="alternate" href="http://blog.url.com/2016/10/07/the-complexity-edifice/"/>
     <id>http://blog.url.com/2016/10/07/the-complexity-edifice/</id>
     <published>2016-10-07T01:00:00+01:00</published>
-    <updated>2016-10-07T21:27:12+01:00</updated>
+    <updated>2016-10-10T09:48:24+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -155,7 +191,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/06/non-invasive-programming/"/>
     <id>http://blog.url.com/2016/10/06/non-invasive-programming/</id>
     <published>2016-10-06T01:00:00+01:00</published>
-    <updated>2016-10-06T20:09:07+01:00</updated>
+    <updated>2016-10-10T09:48:24+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -338,7 +374,7 @@ false
     <link rel="alternate" href="http://blog.url.com/2016/10/05/pull-requests-for-learning/"/>
     <id>http://blog.url.com/2016/10/05/pull-requests-for-learning/</id>
     <published>2016-10-05T01:00:00+01:00</published>
-    <updated>2016-10-05T21:27:46+01:00</updated>
+    <updated>2016-10-10T09:48:24+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -391,7 +427,7 @@ false
     <link rel="alternate" href="http://blog.url.com/2016/10/04/anatomy-of-a-question/"/>
     <id>http://blog.url.com/2016/10/04/anatomy-of-a-question/</id>
     <published>2016-10-04T01:00:00+01:00</published>
-    <updated>2016-10-05T12:59:36+01:00</updated>
+    <updated>2016-10-10T09:48:24+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -435,7 +471,7 @@ The other thing I sense is that students and learners may often feel like they h
     <link rel="alternate" href="http://blog.url.com/2016/10/03/edx-automation-in-review/"/>
     <id>http://blog.url.com/2016/10/03/edx-automation-in-review/</id>
     <published>2016-10-03T01:00:00+01:00</published>
-    <updated>2016-10-04T15:55:43+01:00</updated>
+    <updated>2016-10-03T22:01:54+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -476,146 +512,6 @@ The other thing I sense is that students and learners may often feel like they h
 &lt;p&gt;It&amp;rsquo;s a difficult trade off relating to how many times I will be repeating this operation, which in turn depends on the evolving numbers of SPOC instructors, and the presence of an alternative model called CCX that provides instructors with a skin on the MOOC that is less flexibility in terms of modification.  I guess I&amp;rsquo;ll have a go on another admin day, but pouring time on this is all predicated on me being a salaried instructor, and I&amp;rsquo;m still on leave of absence from HPU.  Our instructor community is based on a freemium model where students buying copies of our super-cheap textbook provide the only income, and despite winning some awards the sales are still modest.&lt;/p&gt;
 
 &lt;p&gt;Maybe we need to adjust that model?  Armando&amp;rsquo;s working on bundling more coupons with the book.  Perhaps I should be running paid sessions working through book chapters or something?  On the automation side, what I&amp;rsquo;d also really like from edX is some kind of coordinated course creation API.  My scripts for automating SPOC creation could break any time that edX updates their interface, and they often break when firefox updates.  Of course creating lots of micro-courses is not necessarily part of edX&amp;rsquo;s bigger strategy.  I&amp;rsquo;ve put in a lot of volunteer-time because I wanted to join in with the bigger education revolution.  I&amp;rsquo;ll have to carefully re-assess how to move forward from here.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Pride Comes Before a Fall</title>
-    <link rel="alternate" href="http://blog.url.com/2016/09/30/pride-comes-before-a-fall/"/>
-    <id>http://blog.url.com/2016/09/30/pride-comes-before-a-fall/</id>
-    <published>2016-09-30T01:00:00+01:00</published>
-    <updated>2016-09-30T21:12:52+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;They say pride comes before a fall.  Looking back at yesterday&amp;rsquo;s blog I was feeling pretty pleased about how we&amp;rsquo;d split things up as regards the development of the new Karma feature.  That was getting deployed in the background yesterday whilst Michael and I paired on completing the improve hangout telemetry ticket we had started.  That turned out to be relatively straightforward, although I worry about how much data we might end up storing.  That&amp;rsquo;s an interesting set up that I&amp;rsquo;ve blogged about before and will come back to again, but is a side show to yesterday&amp;rsquo;s main event, which is that in the middle of that work, we experienced a serious problem on production.&lt;/p&gt;
-
-&lt;p&gt;The first we heard was that AV CoFounder Thomas was getting a 500 error on his profile page on the main AgileVentures site.  He was surprised to say the least.  We were confused too; all the acceptance tests were passing.  Raoul had just deployed a chunk of changes to production (including upgrade to Ruby 2.3.1) and I&amp;rsquo;d kicked off a run of the new karma update rake task.  Michael was seeing failures from the rake task, and noticing that everyone now had zero karma on the main users page.  As Michael was asserting that we had a problem with the rake task, and that the database was screwed up, I took several breaths to keep calm.  Michael&amp;rsquo;s assertions were true, but we had a bigger problem - the 500 errors on the individual user pages.  &lt;/p&gt;
-
-&lt;p&gt;I knew that the real data for the users&amp;rsquo; karma was not lost, since we calculate that from other aspects of the site.  The Karma values are re-summarised each day - they could easily be re-calculated and the ordering on the main users page fixed.  That was a relatively minor issue compared to whatever was causing all the individual user profile pages to fail.   Airbrake was telling us about the problem with the failing rake task, but telling us nothing about the 500 error on the user profile pages.  Airbrake posted to our #websiteone-notify channel and created a GitHub issue:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1313"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1313&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/46beetb1yld5vef/Screenshot%202016-09-30%2020.56.19.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;We were getting &lt;code&gt;undefined method&lt;/code&gt;total=&amp;rsquo; for nil:NilClass` in a run of the KarmaCalculator:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;
-    &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;karma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;total&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;created_at&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;blank?&lt;/span&gt;
-
-    &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;karma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;total&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sum_elements&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Our Demeter Violation and a nil object, two things I had been blogging about that morning, had bitten us.  I rolled the production code back to the previous deploy.  My priority was getting the user profile pages working again.  Working out how to fix the Karma calculation could wait.  I was excited to be capturing all of this on the hangout video.   We could have got distracted trying to fix the karma calculation here, and all the while anyone coming to the site trying to look at an individual profile page would get a 500 error.  We had to rectify that before anything else.&lt;/p&gt;
-
-&lt;p&gt;I was frustrated that Airbrake was not reporting the 500 error - but that was nothing compared to when I completed the rollback to the previous working version and realised that that didn&amp;rsquo;t fix the site.  There had been migrations, so even though the code was back in the working state, the database was changed.  There was no longer a &lt;code&gt;karma_points&lt;/code&gt; field on the user table, and I couldn&amp;rsquo;t roll back the database without the migrations that were in the latest version of master.&lt;/p&gt;
-
-&lt;p&gt;Looking at that now, what I could/should have done is rollback the migrations before taking the code base back.  In principle that would have allowed us to get the site back into the working order it was before the deploy.  As it was, I now faced needing to roll the code forward again, roll back the migrations and then take the code back again, and all that while important parts of the site would be non-functional.  As this was all running through my cortex, I managed to get the error message associated with the individual profile pages in the general heroku logs.  This was it:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Started GET "/users/tattsy" for 122.175.241.121 at 2016-09-29 15:05:48 +0000
-2016-09-29T15:05:48.174796+00:00 app[web.1]: Processing by UsersController#show as HTML
-2016-09-29T15:05:48.256332+00:00 app[web.1]:   Rendered users/profile/_summary.html.erb (10.2ms)
-2016-09-29T15:05:48.174869+00:00 app[web.1]:   Parameters: {"id"=&amp;gt;"tattsy"}
-2016-09-29T15:05:48.314400+00:00 app[web.1]:   Rendered users/profile/_detail.html.erb (57.5ms)
-2016-09-29T15:05:48.314624+00:00 app[web.1]:   Rendered users/show.html.erb within layouts/user_profile_layout (69.6ms)
-2016-09-29T15:05:48.314861+00:00 app[web.1]: undefined method `hangouts_attended_with_more_than_one_participant' for nil:NilClass
-2016-09-29T15:05:48.314863+00:00 app[web.1]: /app/app/views/users/profile/_detail.html.erb:65:in `_app_views_users_profile__detail_html_erb__30276934721546551_69862305882580'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;hangouts_attended_with_more_than_one_participant&lt;/code&gt; was being called on a nil.  We&amp;rsquo;d set up that method on the user class to delegate to the single Karma object associated with the User.  The implication whas that Karma object was nil.  The issue was the same as the problem with the karma update that rake task was encountering.  In this case a fix for one would likely be a fix for the other, but in my mind it was critical to confirm that.  If the 500 error on the profile pages had been caused by something else we would have been fixing the wrong thing in terms of bringing the site back to functionality as fast as possible.&lt;/p&gt;
-
-&lt;p&gt;Now of course if I had taken the site straight back to fully operational status by rolling back the migrations before the code we could have been looking at both issues at our leisure.  However the site was still exhibiting failures in key places and we understood the problem and had a chance to just fix it and complete the production deploy.  We jumped into the production console and ran a procedure to create default Karma objects for all the users:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ heroku run rails c -r production
-Running rails c on ⬢ websiteone-production... up, run.1677
-Loading production environment (Rails 4.2.6)
-irb(main):001:0&amp;gt; User.all.each { |u| u.karma = Karma.new ; u.save! }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This removed the nil association from all the users, and the individual profile pages started working again.  If they hadn&amp;rsquo;t (i.e. we had mis-analyzed) I would have rolled back the database and then the code, hopefully getting the site stable in its old state and then done further analysis.  However our quick fix had worked and confirmed our hypothesis about the problem.  Still the ordering on the users page was out of whack and everyone had zero Karma.  This was easy to fix now that every user object had a non-nil karma object associated.  We took the heart of the karma update rake task and ran it direct:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;irb(main):002:0&amp;gt;   User.all.each do |usr|
-irb(main):003:1*     KarmaCalculator.new(usr).perform
-irb(main):004:1&amp;gt;     usr.karma.save!
-irb(main):005:1&amp;gt;   end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;As it ran we could see individual Karma totals being restored.  We were getting out of the woods, but how could this have happened?  We had all sorts of acceptance tests that displayed the individual profile pages.  How could they all be passing, but deploying that code lead to an error on production?&lt;/p&gt;
-
-&lt;p&gt;Going over things slowly and carefully it&amp;rsquo;s clear that there are many things that could have prevented this problem from occurring.  Let&amp;rsquo;s look first at why our acceptance tests didn&amp;rsquo;t fail.  Acceptance tests like the following look at individual profile pages:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nf"&gt;Given&lt;/span&gt; the following users exist
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;first_name&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;last_name&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;email&lt;/span&gt;                  &lt;span class="p"&gt;|&lt;/span&gt; 
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Alice&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Jones&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;alice@btinternet.co.uk&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;   
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Having user profile page
-    &lt;span class="nf"&gt;When&lt;/span&gt; I click on the avatar for &lt;span class="s"&gt;"Alice"&lt;/span&gt;
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should be on the &lt;span class="s"&gt;"user profile"&lt;/span&gt; page for &lt;span class="s"&gt;"Alice"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should see the avatar for &lt;span class="s"&gt;"Alice"&lt;/span&gt; at 250 px
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should see &lt;span class="s"&gt;"Alice Jones"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We would expect a 500 error caused by a failure in the view to be caught here.  However if we look at how the user is created we see that it uses FactoryGirl.  &lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Given&lt;/span&gt; &lt;span class="sr"&gt;/^the following users exist$/&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hashes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;attributes&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;attributes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;seems&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;our&lt;/span&gt; &lt;span class="no"&gt;Cucumber&lt;/span&gt; &lt;span class="n"&gt;steps&lt;/span&gt; &lt;span class="n"&gt;are&lt;/span&gt; &lt;span class="n"&gt;using&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;same&lt;/span&gt; &lt;span class="n"&gt;factories&lt;/span&gt; &lt;span class="n"&gt;as&lt;/span&gt; &lt;span class="n"&gt;our&lt;/span&gt; &lt;span class="no"&gt;RSpecs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hmmm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;  &lt;span class="no"&gt;Let&lt;/span&gt;&lt;span class="s1"&gt;'s look at that factory:
-
-```rb
-FactoryGirl.define do
-  factory :user, aliases: [:whodunnit] do
-    transient do
-      gplus '&lt;/span&gt;&lt;span class="n"&gt;youtube_id_1&lt;/span&gt;&lt;span class="s1"&gt;'
-    end
-
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
-    email { Faker::Internet.email }
-    password '&lt;/span&gt;&lt;span class="mi"&gt;12345678&lt;/span&gt;&lt;span class="s1"&gt;'
-    password_confirmation { password }
-    display_profile true
-    slug { "#{first_name} #{last_name}".parameterize }
-    bio { Faker::Lorem.sentence }
-    skill_list { Faker::Lorem.words(4) }
-    karma { Karma.new }
-
-    after(:create) do |user, evaluator|
-      create(:authentication, provider: '&lt;/span&gt;&lt;span class="n"&gt;gplus&lt;/span&gt;&lt;span class="err"&gt;'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;uid: &lt;/span&gt;&lt;span class="n"&gt;evaluator&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;gplus&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;user_id: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Aha, it seems that our acceptance tests are not as end to end as we might like.  A default Karma is being created.  Michael and I added that &lt;code&gt;karma { Karma.new }&lt;/code&gt; line for the RSpecs, not realising that we&amp;rsquo;d be impacting the Cucumber acceptance tests.  In LocalSupport we&amp;rsquo;d always avoided factory girl in Cucumber.  Of course one can equally counter that we should have been investigating the steps more thoroughly to anticipate this connection.  &lt;/p&gt;
-
-&lt;p&gt;Anyway, so hopefully it&amp;rsquo;s clear why all the acceptance tests passed, and we can wail and gnash our teeth about the use of factories in the acceptances test, but we could have encountered this error well before production if we&amp;rsquo;d looked at the individual profile pages, or run the rake update karma task, on our local machines, develop, or staging.  That that didn&amp;rsquo;t happen is an oversight, but also a reflection of our trust in the acceptance tests.&lt;/p&gt;
-
-&lt;p&gt;Another thing that might have helped would have been completing the full refactoring of the Karma first, although who knows, we might just have pushed out a bigger code change and had more trouble getting to the bottom of things when the proverbial hit the fan.  Postmortems aside we had the remaining problem that a newly created user would not have a Karma object.  We got off a quick PR with the following RSpec that wrapped the issue:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'creating user'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'should not be possible to save a user with nil Karma'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="s1"&gt;'doh@doh.com'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;password: &lt;/span&gt;&lt;span class="s1"&gt;'12345678'&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
-      &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save!&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;karma&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;not_to&lt;/span&gt; &lt;span class="n"&gt;be_nil&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'should not override existing karma'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="s1"&gt;'doh@doh.com'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;password: &lt;/span&gt;&lt;span class="s1"&gt;'12345678'&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
-      &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;karma&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Karma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;total: &lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save!&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;karma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;total&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and the associated fix in the User class:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;has_one&lt;/span&gt; &lt;span class="ss"&gt;:karma&lt;/span&gt;
-  &lt;span class="n"&gt;after_save&lt;/span&gt; &lt;span class="ss"&gt;:build_karma&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;if: &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;karma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;nil?&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Raoul deployed that quickly, but I noticed that we were still getting some errors from the karma update rake task which looked like they were related to ill-formed participant data.  That wasn&amp;rsquo;t catastrophic, but the karma update rake task would need upgrading to allow it to avoid getting derailed by those errors; at least until we completed the full upgrade of the hangout telemetry making separate models for participants and so forth.  Although that looks like we might face a tricky migration of the legacy data.&lt;/p&gt;
-
-&lt;p&gt;Ironically we had been working on the profile pages during the week and they had been working fine, but we&amp;rsquo;d been jumping back and forth between different branches.  The addition of the premium upgrade button had worked fine, but that had been isolated from any Karma changes until it got merged to develop.  It makes me wonder if we shouldn&amp;rsquo;t prefer some kind of continuous deployment structure where we deploy to production more frequently rather than grouping things in bunches.  Or should we see yesterday&amp;rsquo;s problem as an indictment of the &amp;ldquo;drive-by&amp;rdquo; coding style, where we try to make the smallest fixes possible, and avoid building on top of things until they are merged to develop?&lt;/p&gt;
-
-&lt;p&gt;I still hold out hope for the &amp;ldquo;drive-by&amp;rdquo; style in moderation.  We are interleaving it with domain entity development.  If anything, yesterday&amp;rsquo;s production fail points to the need for slightly more rigorous manual checks on local, develop and staging servers during our development and deploy process.  In my experience programming proceeds like this.  There is a period with fewer problems and increasing confidence and you tend to take bigger and bigger steps and move faster and faster, and then eventually you are brought up short, and that forces you to move more slowly again.  The critical thing is to learn as much as you can when the mistakes happen; and remember that pride often comes before a fall :-)&lt;/p&gt;
-
-&lt;p&gt;Related Videos:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=sraE18A_BZ8"&gt;Pair Programming&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=GAXcM9HHGyc"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>
