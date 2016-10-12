@@ -5,16 +5,52 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-10-11T01:00:00+01:00</updated>
+  <updated>2016-10-12T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Non Pairing Day</title>
+    <link rel="alternate" href="http://blog.url.com/2016/10/12/non-pairing-day/"/>
+    <id>http://blog.url.com/2016/10/12/non-pairing-day/</id>
+    <published>2016-10-12T01:00:00+01:00</published>
+    <updated>2016-10-12T09:46:22+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So another day on non-pairing while me knee heals.  Managed to crunch through what feels like two or three async votes on LocalSupport and WebSiteOne.  That&amp;rsquo;s starting to flow nicely, although I would love to get the AsyncVoter project up and running so I don&amp;rsquo;t have to manage the logistics for that.  Main hangover business from yesterday was getting some example code up related to SEO with meta-tags on LocalSupport.  A CraftAcademy bootcamp graduate had put in a great pull request, and after I&amp;rsquo;d dithered about how to give feedback, we&amp;rsquo;d agree I&amp;rsquo;d push up a separate branch.  Ironically in the meantime I was passing on Pat Bolger&amp;rsquo;s fantastic advice about having all team members review PRs to the LocalSupport and WebSiteOne projects, and while I&amp;rsquo;d dithered Raoul and John had both given feedback on that PR covering several of the points that I&amp;rsquo;d been thinking off.&lt;/p&gt;
+
+&lt;p&gt;There was still some refactoring work that wasn&amp;rsquo;t covered, and I thought it was easier to show rather than to explain, so I pulled some of the controller logic into &lt;code&gt;before_filter&lt;/code&gt;s and pushed that up.  I also refocused the cucumber story and fixed some of the issues Jon and Raoul had raised.   What was super-awesome was to see John and Raoul interacting in the PR like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="raoul answering jon's question" src="https://www.dropbox.com/s/029rqql7qrb5fdn/Screenshot%202016-10-11%2010.38.27.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;In my book this is the total antidote to the developer who&amp;rsquo;s intimidated to submit PRs for fear of having someone criticise their code.  Here, Jon, one of our more experienced developers is perfectly comfortable just asking what &amp;lsquo;og&amp;rsquo; means?  And Raoul, another experienced developer is supplying the answer. No shame, no embarrassment, just learning; and all this in the pull request of a recent bootcamp graduate.  Huge credit all round.&lt;/p&gt;
+
+&lt;p&gt;Part of the reason I had wanted to play with my own branch was to look at the app holistically outside of the GitHub view of the pull request.  Having tweaked a little (you can see my &lt;a href="https://github.com/AgileVentures/LocalSupport/pull/371"&gt;branch here&lt;/a&gt;), I saw that while the new code was allowing our individual organisation show pages to have a more specific (and search-engine friendly) title, the changes were also removing some of the default meta-tags from the rest of the site.  After the &amp;ldquo;Martin Fowler&amp;rdquo; scrum, where I was pleased to introduce Kenyan Bootcamp founder Sigu to MetPlus project coordinator Pat, I did a quick hangout with the bootcamp graduate.  Not required, but I sensed that between John, Raoul and myself, we were at risk of overloading our new team member.  Having a hangout might have made that worse, but I went for it.&lt;/p&gt;
+
+&lt;p&gt;I was pleased that I did.  I think we were able to reach a good shared understanding, and find that yes, the new code was removing some functionality from the existing system, but, shock, there weren&amp;rsquo;t any tests for the meta-tag stuff that was removed.  We talked about how some default methods in the ApplicationController could fix this, but also how that was maybe sensibly the subject of another pull request.  It would be easy to be strict here and say, hey, you need to not remove any functionality in this PR; but if that functionality doesn&amp;rsquo;t have tests, then&amp;rsquo;s that&amp;rsquo;s not really in the remit of the person submitting the PR, particularly if they are a volunteer.  Far better to get the current PR fixed up and pulled in and create refactoring tickets for the other tasks, which allows the original submitter to get a sense of completion, keep the team in the loop by voting on those other tickets, and allow someone else to jump in and help with tickets, or the original submitter to carry on if they want - great flexibility?&lt;/p&gt;
+
+&lt;p&gt;This all fed into a dry run of my Rails Remote conference talk on learning through pull requests, which I was really pleased to get done and share with the AV premium members and get feedback.  They key question seems to be how can I get myself to talk slower without a teleprompt? :-)  And that was pretty much the day, I reviewed other PRs, had little chats in slack, posted to the MOOC TAs to say that the next weeks material was ready for review.  Really not sure what to do with the AV102 course and the MOOC support infrastructure there when we go self-paced next year &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;One other thing that I did do as part of an async vote on a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1319"&gt;story&lt;/a&gt; about coordinating our events with Meetup.com.  I&amp;rsquo;m an admin on the RemotePairProgramming group there which keeps getting new sign ups but has been kind of dormant recently.  Actually as part of the discussion of that ticket I went ahead and created a parallel repeating event on Meetup to mirror the &amp;ldquo;Kent Beck&amp;rdquo; scrum, and several people signed up and we had one new person join the scrum and tell us about the Elm and OCaml stuff they were doing.  That was really cool, particularly since I was able to do another pair hookup and new premium member Sasha and Elm/OCaml dude Junior chatted Elm and AgileVentures for an hour or so off the back of the scrum.&lt;/p&gt;
+
+&lt;p&gt;I just love manual prototyping!  Coding and automating is great, but it&amp;rsquo;s so lovely to validate that the thing you&amp;rsquo;re about to automate (async voting, event syncing with another system) will actually reap some dividends.  So it was a non-pairing day for me, but I loved helping bring some others together even if only for a chat :-)  &lt;/p&gt;
+
+&lt;p&gt;Related Videos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=BLM8cmLBkWc"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://youtu.be/S-zJT6rp-Xo"&gt;LocalSupport PR review&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=SfMb5n6Xsrs"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Three Day Week</title>
     <link rel="alternate" href="http://blog.url.com/2016/10/11/three-day-week/"/>
     <id>http://blog.url.com/2016/10/11/three-day-week/</id>
     <published>2016-10-11T01:00:00+01:00</published>
-    <updated>2016-10-11T21:23:00+01:00</updated>
+    <updated>2016-10-12T09:46:54+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -49,7 +85,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/10/multidimensional-learning-economics/"/>
     <id>http://blog.url.com/2016/10/10/multidimensional-learning-economics/</id>
     <published>2016-10-10T01:00:00+01:00</published>
-    <updated>2016-10-10T21:25:20+01:00</updated>
+    <updated>2016-10-12T14:42:07+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -59,25 +95,25 @@
 
 &lt;p&gt;Mentive classes are intended to support up to 20 students, and it would be interesting to see if the same guided app creation technique would work with a larger class, keep them engaged and so forth.  Doing it with a single student is not so far removed from what we do in PremiumPlus pairing sessions.  On Saturday my student was on a tablet, and so couldn’t easily type code, but I set up pairing intervention elements by stopping at points and asking my student what they thought I should do next, and that seemed to work well.  Obviously since it was only a single student I was able to tailor what we did and the pace directly to their preference.  Something that’s much more difficult to do with a larger group.&lt;/p&gt;
 
-&lt;p&gt;The big difference between Mentive sessions and AgileVentures Premium/PremiumPlus, is that everything AgileVentures is OpenSource and &amp;ldquo;in context&amp;rdquo;.  All the coding work done with AgileVentures is on a real open source code base, has some relation to the need of a real charity customer or user base.  Of course some learners would much rather work on a more tightly constrained problem or exercise.  Hence the profusion of study tools like CodeWars, CodeAcademy, HackerRank and so forth.  Even the majority of the ADuRoR course uses a toy application, although I really do love the legacy assignments which take an older version of the oldest OpenSource RoR project &amp;ldquo;publify&amp;rdquo; (when it was called typo), and sets the students to do bugfixes and add features fully in context of a working legacy app.  I think that&amp;rsquo;s an inspired choice on the part of Armando Fox, Dave Patterson and the Berkeley TAs who worked on the assignment with them.&lt;/p&gt;
+&lt;p&gt;The big difference between Mentive sessions and AgileVentures Premium/PremiumPlus, is that everything AgileVentures is OpenSource and &amp;ldquo;in context&amp;rdquo;.  All the coding work done with AgileVentures is on a real open source code base, has some relation to the need of a real charity customer or user base.  Of course some learners would much rather work on a more tightly constrained problem or exercise.  Hence the profusion of study tools like CodeWars, CodeCademy, HackerRank and so forth.  Even the majority of the ADuRoR course uses a toy application, although I really do love the legacy assignments which take an older version of the oldest OpenSource RoR project &amp;ldquo;publify&amp;rdquo; (when it was called typo), and sets the students to do bugfixes and add features fully in context of a working legacy app.  I think that&amp;rsquo;s an inspired choice on the part of Armando Fox, Dave Patterson and the Berkeley TAs who worked on the assignment with them.&lt;/p&gt;
 
 &lt;p&gt;It&amp;rsquo;s working on that assignment myself several years ago that made me want to do &lt;em&gt;all&lt;/em&gt; my learning in context.  It&amp;rsquo;s why I wanted AgileVentures to exist, a place that could help you do all your learning in context, and contribute to the greater good at the same time.  Of course systems like GitHub, BitBucket and SourceForge already provide a huge vista of OpenSource projects for ongoing learning, but a learner is often thankful for a pathway through the complexity.&lt;/p&gt;
 
-&lt;p&gt;Now AgileVentures doesn&amp;rsquo;t provide as much of a pathway as FreeCodeCamp or CodeCademy or even CodeWars, and all of these still have some beautifully unstructured portions.  We&amp;rsquo;re still working on getting the balance right at AgileVentures, and also the economic model to make is sustainable.  It seems like both CodeWars and CodeCademy are leaning towards being solutions to help employers find job candidates, and FreeCodeCamp is operating as a free for all non-profits and developers, while charging companies a hiring fee when FCC developers are placed (like many bootcamps).&lt;/p&gt;
+&lt;p&gt;Now AgileVentures doesn&amp;rsquo;t provide as much of a pathway as FreeCodeCamp or CodeCademy or even CodeWars, and all of these still have some beautifully unstructured portions.  We&amp;rsquo;re still working on getting the balance right at AgileVentures, and also the economic model to make it sustainable.  It seems like both CodeWars and CodeCademy are leaning towards being solutions to help employers find job candidates, and FreeCodeCamp is operating as free forever for all non-profits and developers, while charging companies a hiring fee when FCC developers are placed (like many bootcamps).&lt;/p&gt;
 
 &lt;p&gt;AgileVentures at the moment is closer to edX and Mentive in that individual learners are paying for additional services.  Actually AgileVentures is a charity so you could also look at it that every premium member is a sponsor who&amp;rsquo;s getting benefits KickStarter or Patreon style.  This is where the multidimensional economics of learning comes in.  What are people willing to contribute for what kind of perk or service?  We&amp;rsquo;ve had very few sign ups for PremiumPlus, but people are happy to pay a lot more money for a bootcamp, and many people pay similar amounts for MOOC course certificates.  &lt;/p&gt;
 
-&lt;p&gt;There seems to be a prevaling view that taking courses equals education.  I guess I&amp;rsquo;m drinking my own cool-aid here, but I feel like learning comes from doing.  More and more courses are hands on these days, but I&amp;rsquo;m skeptical of the learning benefits of watching lots of lectures, or even toy exercuses.  I guess it&amp;rsquo;s a relatively low impact way of floating your brain in some of the domain concepts.  Not everyone wants to become an expert in a particular field.  However if you&amp;rsquo;re in a rush to skill up and you can take the emotional pain of making lots of mistakes (really valuable for learning), then I think diving in to a real project is the way to go.&lt;/p&gt;
+&lt;p&gt;There seems to be a prevaling view that taking courses equals education.  I guess I&amp;rsquo;m drinking my own kool-aid here, but I feel like learning comes from doing.  More and more courses are hands on these days, but I&amp;rsquo;m skeptical of the learning benefits of watching lots of lectures, or even toy &amp;ldquo;exercises&amp;rdquo;.  I guess it&amp;rsquo;s a relatively low impact way of floating your brain in some of the domain concepts.  Not everyone wants to become an expert in a particular field.  However if you&amp;rsquo;re in a rush to skill up and you can take the emotional pain of making lots of mistakes (really valuable for learning), then I think diving in to a real project is the way to go.&lt;/p&gt;
 
 &lt;p&gt;AgileVentures tries to create a safe space to fail on an open source project with a real customer.  I don&amp;rsquo;t know how we can convey that more strongly.  What I&amp;rsquo;ve learnt from all the different educational environments I&amp;rsquo;ve taught in (university, MOOC, bootcamp) is that almost everyone hates failure, and that many of us would much rather spend a lot of time watching videos and reading rather than holding our feet to the learning fire.&lt;/p&gt;
 
-&lt;p&gt;It was holding my feet to the learning fire that got me my AstroPhysics degree.  It was so tempting to keep reading, and re-summarizing my notes.  It wasn&amp;rsquo;t until I forced myself to repeatedly answer old exam questions that I got my exam technique down and got the first that got me on to higher education.  Not that I was ever really satisified with myself during my first masters and PhD.  It still felt trivial and isolated from the rest of the world.  Part of the problem was that I was studying in the dark ages before search engines like Google connected learners with the rest of the world.&lt;/p&gt;
+&lt;p&gt;It was holding my feet to the learning fire that got me my AstroPhysics degree.  It was so tempting to keep reading and re-summarizing my notes.  It wasn&amp;rsquo;t until I forced myself to repeatedly answer old exam questions that I got my exam technique down and got the first class degree that got me on to higher education.  Not that I was ever really satisified with myself during my first masters and PhD.  It still felt trivial and isolated from the rest of the world.  Part of the problem was that I was studying in the dark ages before search engines like Google connected learners with the rest of the world.&lt;/p&gt;
 
 &lt;p&gt;So anyhow, I&amp;rsquo;m thinking we need a new Premium tier for AgileVentures.  What I notice (and I&amp;rsquo;ve blogged about before) is how so many people prefer to ask me questions 121 rather than in group chat; and it takes a lot of persuasion before people will post publicly, and it&amp;rsquo;s rare that it becomes their default.  Some individuals will keep on asking for one to one help, even though there&amp;rsquo;s no financial incentive for me to help them.  I don&amp;rsquo;t want to come across as mercenary, but I&amp;rsquo;ve put in thousands of volunteer hours and a lot of my own savings to supporting learning online.  I&amp;rsquo;ve got to put up some toll booths to feed my kids.&lt;/p&gt;
 
 &lt;p&gt;I guess some people are used to coming from a state education system where they can get 121 support from their instructors if they press hard enough.  I wonder if people realise that the time I spend answering their 121 question takes up time that I could be using to earn money to feed my kids?  And my three boys eat like horses! :-)  Maybe they realise and don&amp;rsquo;t care?  Maybe they&amp;rsquo;re just not thinking about it; they&amp;rsquo;re just focused on their own question, trying to solve their own problem.&lt;/p&gt;
 
-&lt;p&gt;I want to get learners comfortable about asking in public so that others can benefit.  If they ask in group chat on AgileVentures it increases the activity in the community, and the community value keeps people around, and the rising tide lifts all the boats.  I could devote all my time to answering 121 questions, and I might get a few thanks from people, and I might learn a few things, but it&amp;rsquo;s not enough to feed my kids.  It makes me think that the new AgileVentures premium tier should be called &amp;ldquo;121&amp;rdquo;, cost about £25 a month, and get you an assigned mentor who can answer your questions on 121 chat.  And maybe a £50 a month version called Premium on Air that gets you an hour of hangout time.  We&amp;rsquo;ll have to work out the details.  We need to avoid changing and tweaking too much or we confuse people, muddy the water.  It really is a complex multidimensional economics of learning problem &amp;hellip; &lt;/p&gt;
+&lt;p&gt;I want to get learners comfortable about asking in public so that others can benefit.  If they ask in group chat on AgileVentures it increases the activity in the community, and the community value keeps people around, and the rising tide lifts all the boats.  I could devote all my time to answering 121 questions, and I might get a few thanks from people, and I might learn a few things, but it&amp;rsquo;s not enough to feed my kids.  It makes me think that the new AgileVentures premium tier should be called &amp;ldquo;121&amp;rdquo;, cost about £25 a month, and get you an assigned mentor who can answer your questions on 121 chat.  And maybe a £50 a month version called Premium on Air that gets you an hour of hangout time.  We&amp;rsquo;ll have to work out the details.  We need to avoid changing and tweaking too much or we confuse people, muddy the water.  The problem really is in the complex space of &amp;ldquo;multidimensional economics of learning&amp;rdquo; &amp;hellip; &lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -85,7 +121,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/07/the-complexity-edifice/"/>
     <id>http://blog.url.com/2016/10/07/the-complexity-edifice/</id>
     <published>2016-10-07T01:00:00+01:00</published>
-    <updated>2016-10-10T09:48:24+01:00</updated>
+    <updated>2016-10-07T21:27:12+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -226,7 +262,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/06/non-invasive-programming/"/>
     <id>http://blog.url.com/2016/10/06/non-invasive-programming/</id>
     <published>2016-10-06T01:00:00+01:00</published>
-    <updated>2016-10-10T09:48:24+01:00</updated>
+    <updated>2016-10-06T20:09:07+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -409,7 +445,7 @@ false
     <link rel="alternate" href="http://blog.url.com/2016/10/05/pull-requests-for-learning/"/>
     <id>http://blog.url.com/2016/10/05/pull-requests-for-learning/</id>
     <published>2016-10-05T01:00:00+01:00</published>
-    <updated>2016-10-10T09:48:24+01:00</updated>
+    <updated>2016-10-05T21:27:46+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -455,50 +491,6 @@ false
 &lt;p&gt;A typical project team at Agile Ventures will have some very junior developers. Some will have just finished a MOOC or a 3-month coding camp, and might feel uncertain about their capability to contribute in a meaningful way. As noted above, working on a refactoring ticket is a lower hurdle to get started. The developer can learn an enormous amount by examining existing code, and gain confidence in their ability to assess design intent and code quality. This is a critical skill (and also a morale booster), and its great when this benefit can be explicitly reinforced by the more senior members of the team.&lt;/p&gt;
 
 &lt;p&gt;Futhermore the addition of asynchronous voting allows more of our distributed part-time volunteers to participate in the process of assessing the complexity/difficulty of stories, bugs and chores. Maybe it&amp;rsquo;s a coincidence, but I&amp;rsquo;ve been enjoying a little wave of refactoring pull requests, and I think we&amp;rsquo;re getting a win-win here.  We&amp;rsquo;re breaking up bigger jobs into smaller more manageable chunks that new team members can start on in order to get familiar with our codebases and our processes.  Our code quality is improving and I think there&amp;rsquo;s a fair bit of learning going on :-)&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Anatomy of a Question</title>
-    <link rel="alternate" href="http://blog.url.com/2016/10/04/anatomy-of-a-question/"/>
-    <id>http://blog.url.com/2016/10/04/anatomy-of-a-question/</id>
-    <published>2016-10-04T01:00:00+01:00</published>
-    <updated>2016-10-10T09:48:24+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;It’s really interesting to hear that &lt;a href="https://hackernoon.com/the-decline-of-stack-overflow-7cb69faa575d#.frp6i4ncr"&gt;StackOverflow (SO) might be on the decline&lt;/a&gt;.  John Slegers writes a really interesting &lt;a href="https://hackernoon.com/the-decline-of-stack-overflow-7cb69faa575d#.frp6i4ncr"&gt;blog post&lt;/a&gt; detailing some of the issues that the community is having.  In summary the suggestion is that StackOverflow is not as friendly to newcomers as it used to be, and that some of the reputation enabled moderators are running parts of the site with rather strict rules about what can and cannot be posted.&lt;/p&gt;
-
-&lt;p&gt;I’ve always encouraged students and colleagues to post on StackOverflow and I know they’ve had some bad experiences, but also some good ones.  I offer “StackOverflow protection” to all my students assuring them that if they post on StackOverflow and anyone gives them any grief then I will get in there, and star and upvote their question and provide support and feedback on how to adjust their question in order to maximise its chances of getting a good answer, even if I don’t answer it myself.  What I encourage everyone to do is post their SO question and then take a link to it and post that into our slack &lt;a href="https://agileventures.slack.com/messages/techtalk/"&gt;#techtalk&lt;/a&gt; channel with a &lt;code&gt;@here&lt;/code&gt; to attract anyone who’s online and a &lt;code&gt;@tansaku&lt;/code&gt; to attract my attention.&lt;/p&gt;
-
-&lt;p&gt;In the past I’ve also encouraged students who were contacting me directly via instant message to post their questions in group channels or on StackOverflow.  Very often students would be extremely reticent about doing this. Here are two examples of students who ultimately posted on SO following my suggestions:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://stackoverflow.com/questions/28678092/how-to-change-recursive-method-into-non-recursive-one-in-js"&gt;http://stackoverflow.com/questions/28678092/how-to-change-recursive-method-into-non-recursive-one-in-js&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://stackoverflow.com/questions/30920118/cucumber-test-which-syntax-to-choose-to-test-a-radio-button-selection"&gt;http://stackoverflow.com/questions/30920118/cucumber-test-which-syntax-to-choose-to-test-a-radio-button-selection&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In one case my upvote cancelled out a -1 from someone else who didn’t like the question, and if you look carefully you can see me teasing out additional information from students in the comments section, and as it happens, I ultimately answered both of these students&amp;rsquo; questions on StackOverflow itself.  However, my sense is the majority of students would really rather not post on StackOverflow, or any public forum if at all possible.  As I’ve mentioned before, many students contact me one to one via emails or instant message.  It seems that this is something they generally prefer, to ask their questions in private.&lt;/p&gt;
-
-&lt;p&gt;I’ve really struggled with that as an instructor because I know about the studies showing how others students can get massive learning benefits from hearing the dialogue between other students and their instructor, and even from student student dialogues.  It’s also much less efficient for me to be answering the same question repeatedly in private than in an open forum, and the numbers of students in a MOOC make one-to-one support completely impractical, particularly when I’m doing it on a volunteer basis.  I still encourage students and colleagues to post in open forums, but I’m beginning to see that when someone comes to you with a question, it’s somewhat dangerous to block them on it.&lt;/p&gt;
-
-&lt;p&gt;Let me explain.  Blocking is when you try and divert the direction that someone is going in.  I’ve realized belatedly that I do it far too much, and often on the wrong occasions.  I think StackOverflow is guilty of it as well in places.  Slegers’ blog post talks about questions being pushed away as “off-topic” but I think StackOverflow should be open to evolving the kinds of questions and discussions it supports.  They want to be a pithy and terse set of purely technical Q&amp;amp;As, but I think that blocks a lot of potential value from the discussions people want to have.  I believe the SO founders did set up https://www.discourse.org/ to be an alternate system where discussion could evolve, which is great, but what we want it a way to allow free flowing discussion that can crystialize out into wonderfully terse summaries.&lt;/p&gt;
-
-&lt;p&gt;Anyhow, my main point is that there is a tricky balance to be kept when dealing with a question that someone is posing. Part of it is economic.  When I’m working with university or bootcamp students, I’m in a context where my time is being paid for, and the student is paying for my support.  If they’re not comfortable asking in a public forum, then I’ve got to be careful not to put too much pressure on them; and yet, potentially they (and their other paying classmates) could really benefit if they did.  Of course ultimately the student has to be the judge of whether they are emotionally ready to post on a public forum.  In the volunteer MOOC context I can justifiably refuse to answer one-to-one questions, although they still come at me thick and fast.  Either which way I think the trick is sensing carefully where the learner is at, and trying not to force a change of medium or question strategy on them if they&amp;rsquo;re not ready for it.&lt;/p&gt;
-
-&lt;p&gt;Coming back to SO, I’m no fan of the locking or downvoting of questions.  I think down voting should be reserved for answers only on SO.  Hmm, maybe we need to create our own alternative Q&amp;amp;A for AgileVentures … although I like the flow of Slack - I think we want our AV members to be actively engaging with each other where possible, rather than reading from dead texts.  Anyhow, I also post in public whenever possible since I’ve got a thick skin - at least as far as it goes on online forums.  I could care less if people are down voting my question or locking it.  Although clearly it makes sense to read the posting guidelines and try and conform to the norms on any given forum.&lt;br&gt;
-The other thing I sense is that students and learners may often feel like they have to wrestle with a problem for some specified set of time before asking for help.  I guess I understand that, but when I’m stuck on a problem I want the whole world to be able to help if possible.  Check out this question that I asked on the Maths stack exchange:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://math.stackexchange.com/questions/1477767/efficiently-partition-a-set-into-all-possible-unique-pair-combinations"&gt;http://math.stackexchange.com/questions/1477767/efficiently-partition-a-set-into-all-possible-unique-pair-combinations&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I don’t want to suffer in silence.  If I’m stuck on something for longer than 20 minutes, I want to write it up, get it on SO, in a blog, on slack - document my process and share what I’m doing with others.  Ultimately as in that maths question I may end up solving it myself, but I want to get input and insights from as many people as possible.  Where I am now though, I think I will only ever push learners very gently to publish on group forums.  I hope we have a nice atmosphere in AgileVentures where people can ask questions in safety.  Slegers laments that neither Quora nor StackOverflow provide this any more, so perhaps AV should provide persistent Q&amp;amp;A outside Slack?  I still get huge value from SO though - I don’t find myself posting there so much but I’m always finding useful stuff in the SO results in Google.  I love the SO interface and hate to reinvent the wheel.  There are some open source alternatives …&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.quora.com/Is-there-an-open-source-alternative-to-StackOverflow-I-can-use-for-internal-Q-A"&gt;https://www.quora.com/Is-there-an-open-source-alternative-to-StackOverflow-I-can-use-for-internal-Q-A&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;End of the day I think it&amp;rsquo;s the interactive dynamic between developers asking each other questions in the context of a pull request, in the slack channel, that&amp;rsquo;s key; learning in context.  AgileVentures is a safe space to submit PRs and get supportive feedback - at least that&amp;rsquo;s my vision and ultimately our special sauce :-)&lt;/p&gt;
 </content>
   </entry>
 </feed>
