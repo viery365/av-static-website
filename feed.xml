@@ -5,10 +5,63 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-10-12T01:00:00+01:00</updated>
+  <updated>2016-10-13T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Agile Pricing Plans</title>
+    <link rel="alternate" href="http://blog.url.com/2016/10/13/agile-pricing-plans/"/>
+    <id>http://blog.url.com/2016/10/13/agile-pricing-plans/</id>
+    <published>2016-10-13T01:00:00+01:00</published>
+    <updated>2016-10-13T20:41:01+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Continuing with my non-pairing streak, I got a fair few things sorted today.  A highlight being prototyping the new pricing plans for AgileVentures.  The current draft looks like:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;£10/month: Premium - private slack group, RubyMine license, eligibility for paid and priority projects&lt;/li&gt;
+&lt;li&gt;£25/month: Premium 121 - private text chat with mentor, 10 year professional development plan&lt;/li&gt;
+&lt;li&gt;£50/month: Premium F2F - face to face hangouts with mentor, voting rights in charity meetings&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In creating the draft, I appeared to fall foul of the difference between ActiveRecord &lt;code&gt;dup&lt;/code&gt; and &lt;code&gt;clone&lt;/code&gt;.  I was taking the existing pricing static page and copying it for tweaks to the new approach, but I used &lt;code&gt;clone&lt;/code&gt; instead of &lt;code&gt;dup&lt;/code&gt; and so ended up over-writing the existing plan, doh!  Fortunately we have versioning via the papertrail gem so I pulled out the old version and then used &lt;code&gt;dup&lt;/code&gt; to create a version without an id, and save it into place. Phew!&lt;/p&gt;
+
+&lt;p&gt;I shared the new plan draft with some of the core team.  On reflection, perhaps I should have been following Scott Klemmer&amp;rsquo;s advice to always share multiple prototypes, but anyway, I&amp;rsquo;m getting great feedback from Federico about page layout to try and highlight the three-way choice, and from Thomas about a mob programming plan.  I guess an alternate could be something like:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;£10/month: Premium - private slack group, RubyMine license, eligibility for paid and priority projects&lt;/li&gt;
+&lt;li&gt;£25/month: Premium Mob - mob programming with mentor, 10 year professional development plan&lt;/li&gt;
+&lt;li&gt;£50/month: Premium F2F - face to face hangouts with mentor, voting rights in charity meetings&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and mob programming is fun.  Different mentors are likely to have different preferences about whether they want to give 121 text support or hosting mob programming sessions, or 121 pairing hangouts.  Much as I love mobbing and pairing, my intuition from the last 5 years of doing online education is that the majority of people seem to really prefer 121 communication.  Once you can get people bitten by the mobbing or pairing bug, then sure they can convert, but that&amp;rsquo;s potentially a slow uphill process.&lt;/p&gt;
+
+&lt;p&gt;We could be throwing in all these options with even more types of plans, but the prevailing wisdom seems to be to have fewer plans to make the decision process easier.  I&amp;rsquo;m certainly not thinking of imposing 121 support on any of the AV mentors; I just seem to be under near constant pressure from MOOC students to give 121 support, so if I can offer them a plan where I do give them 121 support then that makes my life a lot easier and I&amp;rsquo;m giving people what they are asking for.  I haven&amp;rsquo;t yet heard from any learners that they want mob programming.  Now maybe what they &lt;em&gt;need&lt;/em&gt; is mob programming and pair programming.  It&amp;rsquo;s this funny divide between listening to your users and them asking for a &amp;ldquo;faster horse&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;I always thought we&amp;rsquo;d have more people taking up the free pair programming that AgileVentures tries to support.  Some did, but it never got to the critical mass I imagined.  My current working hypothesis is that it is just too intimidating for many people.  It would never occur to me online to conceal my name, or my face, or that I would be put off from attending a google hangout on air because of the message that pops up that says other people can see this broadcast, but over the last few years I&amp;rsquo;ve encountered that a great deal.&lt;/p&gt;
+
+&lt;p&gt;Now we can say: &amp;ldquo;Be strong! If you push through that fear you&amp;rsquo;ll discover a brave new world of learning!&amp;rdquo;.  And I really believe that&amp;rsquo;s true, but I think you can only get so far exhorting people to overcome their fears.  In my mind if you have 100 people, there will be five who are happy to say almost anything in front of the group.  You can probably get those five to do almost anything.  They may also do inappropriate things that causes the group to disperse, so watch out for that.  Of the remaining people, if you&amp;rsquo;re charismatic and articulate you can probably get another five to join in a public learning process through convincing them that it is a great thing.&lt;/p&gt;
+
+&lt;p&gt;However that leaves the remaining 90 people.  There are some who are never going to participate in public learning.  However I&amp;rsquo;d guess there are about 40 who if you are willing to connect to them individually, hear about their fears and needs in a safe space, that you can help them build up to the point that they stop being held back by a fear of failure, particularly public failure.&lt;/p&gt;
+
+&lt;p&gt;Now everyone will probably put different numbers on these different types of people (that I&amp;rsquo;ve just made up).  I&amp;rsquo;m going with:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Happy to learn and fail in public 5%&lt;/li&gt;
+&lt;li&gt;Can be convinced by general arguments 5%&lt;/li&gt;
+&lt;li&gt;Can be convinced by personal support 40%&lt;/li&gt;
+&lt;li&gt;Not ready to learn in public 50%&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It would be great to find some experimental studies to work out real values for these numbers, or even conduct some, although I think my days of doing purely scientific work are over :-)  Counter-arguments might come from saying that well, you think that giving that 121 support is going to help you bring 40% of folks to a place where they are participating at a new level, but actually that&amp;rsquo;s just one or two people and what you&amp;rsquo;ll end up doing is a lot of individual hand holding for not much gain.&lt;/p&gt;
+
+&lt;p&gt;Maybe so, I have no omniscient power.  However my intuition says that sustainability will be hard if we&amp;rsquo;re relying on only those few willing to take the plunge for learning in crowd format.  Besides I love connecting with people individually on a 121 basis.  I love hearing about what&amp;rsquo;s going on for them and throwing my cognitive resources at trying to hook them up with resources, people and activities that will help them achieve their goals.&lt;/p&gt;
+
+&lt;p&gt;What I can&amp;rsquo;t do, if I want to feed my kids, is spend all my time giving 121 support for free.  It even takes up time just saying no politely to all the people asking for 121 support.  Anyway, brain dump!  The tricky thing now, compared to when I first created the pricing page, is that we have other plans like the &amp;ldquo;premium plan&amp;rdquo; melded into the software of the AgileVentures site, so rolling out a new pricing plan will require coordination with some PRs, which is not as lightweight as I would like. Hence the creation of the beta pricing page, blogging about this, and so forth.  One thing that feels really great though is that we really are living the Agile process, and big thanks to Stripe for making it straightforward to take credit card payments.  Creating the new plans on the Stripe dashboard will be trivial, and the complexity of rolling them out to our users will be what we make it to be.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Non Pairing Day</title>
     <link rel="alternate" href="http://blog.url.com/2016/10/12/non-pairing-day/"/>
@@ -438,59 +491,6 @@ false
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=bKu3e_jLrQw"&gt;Pair Programming&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=8EkSfYVt9D0"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Pull Requests for Learning</title>
-    <link rel="alternate" href="http://blog.url.com/2016/10/05/pull-requests-for-learning/"/>
-    <id>http://blog.url.com/2016/10/05/pull-requests-for-learning/</id>
-    <published>2016-10-05T01:00:00+01:00</published>
-    <updated>2016-10-05T21:27:46+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Call me crazy but I love pull requests.  Well let me place a caveat on that.  I love small pull requests, and the smaller the better.  I guess I still love the big ones, even if my response to them will usually be, &amp;ldquo;that needs to be smaller&amp;rdquo;.  Part of my PR joy is the way that GitHub displays them to me, and lets me comment on them.  I&amp;rsquo;m not so keen on the web interface for creating them, but I now primarily use &lt;code&gt;hub pull-request&lt;/code&gt; from the command line, so I don&amp;rsquo;t fight with the web UI like I used to.&lt;/p&gt;
-
-&lt;p&gt;What I love about giving feedback on a pull request is that it has so much context.  It&amp;rsquo;s on a specific repo, it shows everything that&amp;rsquo;s changed.  Given appropriate configuration it will also include the results of running all the test suites, and a link to the deployed instance of the system.  I&amp;rsquo;ll generally be encouraging submitters to include screenshots to highlight any UI changes (would be great to automate that too somehow &amp;hellip;) and a hyperlink to the ticket that the pull request addresses in Pivotal Tracker or Jira or whatever.  If it&amp;rsquo;s a Github issue then that linkage is partially automated.&lt;/p&gt;
-
-&lt;p&gt;I was talking about StackOverflow posts &lt;a href="http://nonprofits.agileventures.org/2016/10/04/anatomy-of-a-question/"&gt;yesterday&lt;/a&gt;, and I gave examples of two questions from some former students, and pretty much the first thing I was asking was for more context on their codebase.  Asking questions in the form of a pull-request removes the chance that context will be missing.  Call me crazy or extraordinarily lazy, but trying to help someone stuck on something when you don&amp;rsquo;t have the full context is asking to burn a lot of time.  As &lt;a href="http://nonprofits.agileventures.org/2016/10/04/anatomy-of-a-question/"&gt;Kent Beck says&lt;/a&gt;, any decent answer to an interesting question being, &amp;ldquo;it depends&amp;rdquo;, and if you ask me, it depends on the context.&lt;/p&gt;
-
-&lt;p&gt;Back in the day I was always trying to pop up three levels of abstraction and ask, do you even need to be trying to cross that bridge?  If I&amp;rsquo;m stuck on anything I&amp;rsquo;m always trying to do that, but other parties don&amp;rsquo;t always appreciate that approach.  Often I think they just want to stay at the level of abstraction they are at.  They want to work with the particular technology because that&amp;rsquo;s what they think is the right pathway to a job, or with a particular system they are building because they think it will solve some sort of problem for themselves, or for someone else.  Pushing them too strongly out of the zone of their original question will generally make them uncomfortable.  Not that occasionally making people uncomfortable is wrong.  Sometimes that discomfort is Vygotsky&amp;rsquo;s &lt;a href="https://en.wikipedia.org/wiki/Zone_of_proximal_development"&gt;zone of proximal development&lt;/a&gt;, but other times it&amp;rsquo;s a panic or resentment zone.  What I&amp;rsquo;m working on is getting better at knowing how much discomfort others can take.&lt;/p&gt;
-
-&lt;p&gt;Which brings me back to pull requests.  In AgileVentures we field a lot of incoming pull requests on open source projects from developers of all experience levels.  Our goals are two-fold.  One, we want to be improving the quality of our codebases in order to deliver value to the users of our software.  Two, we want the submitters of those pull requests to be having a positive &amp;ldquo;team&amp;rdquo; learning experience.  Not that other open source projects don&amp;rsquo;t have the same goals, but we&amp;rsquo;re explicit about the learning part.  We really want the submitters to feel that they are part of an Agile team, getting involved with voting on the complexity of stories, bugs and chores; hanging out with each other online, and having access to meetings with the end clients who are generating the feature requests in the first place.&lt;/p&gt;
-
-&lt;p&gt;There are several patterns that I have noticed:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;many people are reluctant to make pull requests until they think their code is &amp;ldquo;finished&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;some people are quite intimidated to make pull requests at all, perhaps thinking they might break something&lt;/li&gt;
-&lt;li&gt;some people can feel quite negative after receiving feedback on their pull request&lt;/li&gt;
-&lt;li&gt;most people will get quite frustrated if you keep on asking for additional changes on their pull requests&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;A few years ago in my naivety about interacting with humans, I had implicitly assumed that making a pull request was an emotional non-event for people, and that they would appreciate ongoing requests for changes in order to get their code into the best state possible.  Looking at things now that seems self-defeating if our objective is to help people learn.  How have I evolved my PR management strategy?  Here&amp;rsquo;s a few things:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;encourage people to submit &amp;ldquo;Work in Progress&amp;rdquo; pull requests, but don&amp;rsquo;t push too hard&lt;/li&gt;
-&lt;li&gt;always start by thanking the submitter for their contribution&lt;/li&gt;
-&lt;li&gt;try and find at least one good thing to say about their contribution&lt;/li&gt;
-&lt;li&gt;limit the number of constructive criticisms to avoid overloading&lt;/li&gt;
-&lt;li&gt;be kind, because everyone is struggling&lt;/li&gt;
-&lt;li&gt;use automated code-assessment tools like houndci and code-climate, and tune them to not be overwhelming&lt;/li&gt;
-&lt;li&gt;tell people that automated tools can be ignored&lt;/li&gt;
-&lt;li&gt;gently encourage people to read the CONTRIBUTING.md and follow the PR submission guidelines&lt;/li&gt;
-&lt;li&gt;if there is a trivial fix that I want in the PR, push it in myself&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;But the most important and revolutionary thing to me has been the strategy of refactoring tickets.  I&amp;rsquo;m still wondering if these aren&amp;rsquo;t actually evil technical debt in disguise; but now we&amp;rsquo;ve been using them for a while, and I&amp;rsquo;ve had a fair few follow-up refactoring tickets closed with pull requests from other developers, I&amp;rsquo;m starting to think they really are a good way to go.  They are a pretty good way of avoiding two unpleasant and difficult situations.&lt;/p&gt;
-
-&lt;p&gt;One thing that happens is that a person submits a pull request, and as project maintainer you ask for a refactoring.  Next, the submitter doesn&amp;rsquo;t necessarily agree with the refactoring, or just doesn&amp;rsquo;t have time to get to it.  So the pull-request sits there getting further and further out of sync with the codebase, and either requires a lot of work for a later merge, or ends up getting thrown away, which is a waste.  One way round this that I mention above as item 9) is making critical little changes in the pull request myself.  In the past I&amp;rsquo;ve got contributors to give me access to their forks, and now GitHub has a checkbox to make it easy for submitters to allow that.  From a learning point of view I think it might be better if the submitter made the changes themselves, but often the original submitter is exhausted, frustrated, or just won&amp;rsquo;t have time to get to the work for a few days.  For the sake of the project it&amp;rsquo;s best to get the PR pulled in sooner rather than later before the codebase diverges; and the submitter can still learn from the changes you made in the closed PR view.&lt;/p&gt;
-
-&lt;p&gt;The other difficult situation is that refactoring tickets are made, but no one ever works on them and so the overall quality of the codebase suffers.  In a couple of projects we&amp;rsquo;ve started voting on refactoring chores, and this has had the effect of increasing their visibility, and now new team members have started working on them as a lower intensity way into the codebase.  Pivotal recommends not assigning points to bugs and chores, but in true Agile fashion we came to reflect on whether that was working for our situation.  In a project with a full time team, points for bugs and chores are dangerous because they distort estimates of when work is going to be completed.  We&amp;rsquo;re not a full time team; we have a lot of part-time volunteers with a high churn rate.  For those volunteers it&amp;rsquo;s important to know how complex a bug or chore is before they decide to work on it.  We&amp;rsquo;re not working to tight deadlines and so the estimation process is a nice to have, rather than a must to have.  In addition, our &amp;ldquo;staffing&amp;rdquo; model means that our projects sometimes suffer from lack of capacity; and so it&amp;rsquo;s good to have points assigned to anything that consumes our volunteers time. Finally points on bugs and chores also reinforces the concept that refactoring stories can be just as important as new-feature stories.&lt;/p&gt;
-
-&lt;p&gt;A typical project team at Agile Ventures will have some very junior developers. Some will have just finished a MOOC or a 3-month coding camp, and might feel uncertain about their capability to contribute in a meaningful way. As noted above, working on a refactoring ticket is a lower hurdle to get started. The developer can learn an enormous amount by examining existing code, and gain confidence in their ability to assess design intent and code quality. This is a critical skill (and also a morale booster), and its great when this benefit can be explicitly reinforced by the more senior members of the team.&lt;/p&gt;
-
-&lt;p&gt;Futhermore the addition of asynchronous voting allows more of our distributed part-time volunteers to participate in the process of assessing the complexity/difficulty of stories, bugs and chores. Maybe it&amp;rsquo;s a coincidence, but I&amp;rsquo;ve been enjoying a little wave of refactoring pull requests, and I think we&amp;rsquo;re getting a win-win here.  We&amp;rsquo;re breaking up bigger jobs into smaller more manageable chunks that new team members can start on in order to get familiar with our codebases and our processes.  Our code quality is improving and I think there&amp;rsquo;s a fair bit of learning going on :-)&lt;/p&gt;
 </content>
   </entry>
 </feed>
