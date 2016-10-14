@@ -5,10 +5,42 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-10-13T01:00:00+01:00</updated>
+  <updated>2016-10-14T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Online Conferences</title>
+    <link rel="alternate" href="http://blog.url.com/2016/10/14/online-conferences/"/>
+    <id>http://blog.url.com/2016/10/14/online-conferences/</id>
+    <published>2016-10-14T01:00:00+01:00</published>
+    <updated>2016-10-14T21:53:55+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Gave my first ever talk at a remote online conference on Thursday.  It&amp;rsquo;s been a while since I spoke at any kind of conference actually.  I used to give talks pretty regularly as an academic and running meet ups, but I&amp;rsquo;ve got out of the swing of it.  And giving a talk isn&amp;rsquo;t coding, which is what I really want to be doing.  Although by the look of it most of my time is now taken up blogging, devops and reviewing pull requests, but anyway.  I&amp;rsquo;ve given talks in SecondLife and I&amp;rsquo;ve been hosting online tutorials, remote pair programming and recording online lectures for students lots and lots over the last five years.  &lt;/p&gt;
+
+&lt;p&gt;So presenting for &lt;a href="https://allremoteconfs.com/rails-2016"&gt;Rails Remote Conf&lt;/a&gt; was not such a huge difference.  It was a hangout and there was a separate custom chat app from webinarjam to take incoming questions and comments from the audience.  I&amp;rsquo;d done a fair amount of prep during the week, from sharing some &lt;a href="https://dl.dropboxusercontent.com/u/13196858/RailsRemoteConf-OpenSourceRailsCharityProject-SamJoseph.pdf"&gt;draft slides&lt;/a&gt; with our core team, although looking back at it now and considering some of the other talks I saw at the conference I should have animated in the different bullets, and/or replaced all the text with images, and used the slides as speaker notes.  Next time I guess.&lt;/p&gt;
+
+&lt;p&gt;I was a little self-conscious that I wasn&amp;rsquo;t deep diving on Rails tech, but conference organiser and host Charles Max Wood reassured me that he likes to have a couple of less technical talks in the conference, so I launched into the talk, trying to remind myself to speak slowly.  My bane.  I talk too fast.  Listening to lectures and podcasts on 2x doesn&amp;rsquo;t help I&amp;rsquo;m sure, but it&amp;rsquo;s been a problem since my youth.  I guess I am a gabbler.  Maybe the text on the talk slides was not such a bad idea.  If people couldn&amp;rsquo;t understand my accent or pace of delivery, they could at least read the slides :-)&lt;/p&gt;
+
+&lt;p&gt;I got a few comments and questions during the talk, which like usual hangout chat appear to have been lost to the ether when the session ended.  There was a question about how time-pressed project maintainers can manage lots of pull requests, and I responded with Pat Bolger&amp;rsquo;s great points on my first draft about getting the whole team involved in the review of pull requests, and of course my big favourite, &amp;ldquo;small PRs&amp;rdquo;.  There wasn&amp;rsquo;t extensive questioning at the end, hopefully because what I had said was transparently clear rather than just unutterably dull :-) Reassuringly I had some positive feedback by email afterwards from one audience member.&lt;/p&gt;
+
+&lt;p&gt;Despite the time zone difference I managed to catch a few of the other talks, which were pretty good.    &lt;a href="https://twitter.com/philnash"&gt;Phil Nash&lt;/a&gt; spoke about two factor authentication, &lt;a href="https://twitter.com/cmaxw"&gt;Charles&lt;/a&gt; about freelancing and &lt;a href="http://nellshamrell.com/"&gt;Nell Shamrell&lt;/a&gt; about estimates that don&amp;rsquo;t suck.  Nell had a particularly interesting deep dive slide where she took apart a user story in terms of the technical specifics and gave points to each of those elements:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="detailed tech estimate" src="https://www.dropbox.com/s/7kmkkxvqgl2zmrh/Screenshot%202016-10-14%2010.05.22.png?dl=1" /&gt; &lt;/p&gt;
+
+&lt;p&gt;The &lt;a href="http://www.slideshare.net/NellShamrell/estimates-that-dont-suck"&gt;full slides from Nell&amp;rsquo;s talk&lt;/a&gt; have even more.  That 44 points Nell gets for the user story are multiplied by some factor, and that gives a 66.  Which using a scale introduced earlier:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="points in days" src="https://www.dropbox.com/s/104oec3yghsk1im/Screenshot%202016-10-14%2010.07.14.png?dl=1" /&gt; &lt;/p&gt;
+
+&lt;p&gt;Implying that this feature would take about 8 days.  I asked Nell whether there was a danger in over specifying the implementation of the feature here, and she said that that was a possibility and that many teams just stayed at the user story level.   I was interested in this lower level estimating process, and I could imagine how if you had a really serious pressure to deliver, that this would be a very useful process.  In our pro-bono AgileVentures charity projects things take as long as they take, and the process of estimating is more about giving new developers a coherent idea of how long something might take, rather than giving higher ups information to make key business decisions; although we do need to do some of that as well.&lt;/p&gt;
+
+&lt;p&gt;I was probably too chatty in the limited time for chat after Nell&amp;rsquo;s talk.  There was one other question from an audience member, and Charles mentioned an app for voting on estimates.  I was hoping to get more info on that since we&amp;rsquo;re starting an AgileVentures project to build a tool for that.  The overall online conference format was fairly cool, but it was a shame to lose the chat history when each chat session shut down.  I would prefer a Slack instance for the conference where you could have a chat room for each talk that was persistent, and also some general hang-out rooms where people could continue conversations they had started in talk chats etc.&lt;/p&gt;
+
+&lt;p&gt;I wonder if we should do an AgileVentures conference at some point, and use our existing Slack instance to support the chat.  We&amp;rsquo;ve got all the infrastructure we need with our AV events and hangouts system &amp;hellip; would be great to get the project maintainers to each present on their projects, and get one or two devs to each also present on some of the work they&amp;rsquo;ve been doing on the project.  I&amp;rsquo;m always worried about meetings and conferences taking time away from coding, but maybe some sort of online conference is what we need for people to understand what we&amp;rsquo;re all doing at AgileVentures?  I was also just listening to a podcast about Gitlab, which has 100&amp;rsquo;s of purely remote employees, and how they have specific coffee-break, friendly chat hangouts.  Maybe AgileVentures needs more of these social get together things &amp;hellip;?&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Agile Pricing Plans</title>
     <link rel="alternate" href="http://blog.url.com/2016/10/13/agile-pricing-plans/"/>
@@ -307,189 +339,6 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=nQEC5HjwTnI"&gt;Pairing Video&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=HCIaCdN6GW4"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Non Invasive Programming</title>
-    <link rel="alternate" href="http://blog.url.com/2016/10/06/non-invasive-programming/"/>
-    <id>http://blog.url.com/2016/10/06/non-invasive-programming/</id>
-    <published>2016-10-06T01:00:00+01:00</published>
-    <updated>2016-10-06T20:09:07+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So I was back in shape for a bit of pair programming again and Michael and I continued what we&amp;rsquo;d been working on last week, which was allowing &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1303"&gt;Premium members to upgrade to PremiumPlus&lt;/a&gt;.  It took us 15 minutes or so to get up to speed, closing out a few experimental PRs, checking that some airbrake errors weren&amp;rsquo;t anything serious etc.  I had been assuming we&amp;rsquo;d have to focus on other things, so I was pleased when we could continue with a task related to premium.  I was speculating that the small spike in new sign ups we had might have been related to rolling out the &amp;ldquo;Upgrade to Premium&amp;rdquo; button on all the individual user profile pages.&lt;/p&gt;
-
-&lt;p&gt;I was half tempted to start ferreting through our Google Analytics data and checking with the new premium members about this, but put a pin in that and tried to make progress on the outstanding task.  DriveBy heuristic, finish what you started, and find the shortest path to completion.  Hmm, maybe it should be called &amp;ldquo;WhistleStop&amp;rdquo;, or &amp;ldquo;non-invasive&amp;rdquo;, anyhow &amp;hellip; it was an interesting operation because what we were hoping was to pull in the new domain objects we&amp;rsquo;d created the week before (Subscription and PaymentSource).  We had a failing acceptance test that was expecting a premium user&amp;rsquo;s profile page to now show an &amp;ldquo;upgrade to Premium Plus&amp;rdquo; button: &lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; User upgrades to premium plus from premium
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I am logged in as a premium user with name &lt;span class="s"&gt;"John"&lt;/span&gt;, email &lt;span class="s"&gt;"john@john.com"&lt;/span&gt;, with password &lt;span class="s"&gt;"asdf1234"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I am on my profile page
-    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"Upgrade to Premium Plus"&lt;/span&gt;  &lt;span class="c"&gt;# failing step&lt;/span&gt;
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Premium PLUS Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I am on my profile page
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Premium Plus Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Basic Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Premium Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Upgrade to Premium Plus"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I was still not completely happy with the level of abstraction in this scenario, but I jumped into the view to start tinkering with the existing logic:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% unless current_user.membership_type == 'Premium' %&amp;gt;
-  &lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= render 'users/profile/premium_upgrade' %&amp;gt;&lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Not that we wanted logic in our views.  In the previous session we had already extracted the premium upgrade button into a partial &lt;code&gt;_premium_upgrade.html.erb&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= form_tag charges_path(plan: 'premium') do %&amp;gt;
-    &lt;span class="nt"&gt;&amp;lt;script &lt;/span&gt;&lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"https://checkout.stripe.com/checkout.js"&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"stripe-button"&lt;/span&gt;
-            &lt;span class="na"&gt;data-key=&lt;/span&gt;&lt;span class="s"&gt;"&amp;lt;%= Rails.configuration.stripe[:publishable_key] %&amp;gt;"&lt;/span&gt;
-            &lt;span class="na"&gt;data-description=&lt;/span&gt;&lt;span class="s"&gt;"A month's subscription"&lt;/span&gt;
-            &lt;span class="na"&gt;data-amount=&lt;/span&gt;&lt;span class="s"&gt;"1000"&lt;/span&gt;
-            &lt;span class="na"&gt;data-currency=&lt;/span&gt;&lt;span class="s"&gt;"GBP"&lt;/span&gt;
-            &lt;span class="na"&gt;data-locale=&lt;/span&gt;&lt;span class="s"&gt;"en-US"&lt;/span&gt;
-            &lt;span class="na"&gt;data-name=&lt;/span&gt;&lt;span class="s"&gt;"Premium Membership"&lt;/span&gt;
-            &lt;span class="na"&gt;data-label=&lt;/span&gt;&lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-
-&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I had specifically avoided DRYing that out with the similar button in the similar view we had in the main Premium payment page as I wanted us to stay tightly focused on one thing and I knew that our business logic was in flux.  Looking at the logic we had, both Michael and I were thinking about making something like:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if current_user.can_upgrade? %&amp;gt;
-  &lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= render "users/profile/#{current_user.next_upgrade}" %&amp;gt;&lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and how we wanted to be extracting the business logic e.g. the current upgrade path of &amp;ldquo;Basic&amp;rdquo; to &amp;ldquo;Premium&amp;rdquo; to &amp;ldquo;PremiumPlus&amp;rdquo;.  Michael was pushing me to stop talking about it and just get it done, as we all know I have a tendency to run off at the mouth.  In the first instance I did the super simple step of creating an additional premium upgrade partial &lt;code&gt;_premium_plus_upgrade.html.erb&lt;/code&gt; that was similar to the one above and tweaked the logic, thinking we&amp;rsquo;d still get a failure:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if current_user.membership_type == 'Premium' %&amp;gt;
-  &lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= render 'users/profile/premium_plus_upgrade' %&amp;gt;&lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% elsif current_user.membership_type == 'Basic' %&amp;gt;
-  &lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= render 'users/profile/premium_upgrade' %&amp;gt;&lt;span class="nt"&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
-&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I was reflecting about how that business logic would need to be DRYed out, but not also how I didn&amp;rsquo;t want to do that immediately, putting it to one side to see how this failed.  I&amp;rsquo;m not sure quite what I was thinking, but surprisingly the step actually passed, or at least got us on a few more cucumber steps.  We laughed about the importance of proceeding in simple steps.  If we&amp;rsquo;d got sidetracked extracting business abstractions we&amp;rsquo;d have had some missing components in our understanding, or at least in my understanding.  Not that we don&amp;rsquo;t want to extract the business logic eventually, but we don&amp;rsquo;t want to do it prematurely.  The funny thing then was that we realised that actually we didn&amp;rsquo;t want another credit card payment button for the Premium user who was upgrading to Premium Plus.  We already had their credit card details. We could craft our own button and endpoint to do the subscription upgrade as described by Stripe in an example in their docs:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;subscription&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"sub_3R3PlB2YlJe84a"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;plan&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"premium_monthly"&lt;/span&gt;
-&lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So suddenly we were back-peddling.  I could feel the &amp;ldquo;I want to keep coding&amp;rdquo; urge and forced myself to pong the code over to Michael and he wrote a new &lt;code&gt;_premium_plus_upgrade.html.erb&lt;/code&gt; partial that looked like this:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= form_tag charges_upgrade_path, method: "put" do %&amp;gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= submit_tag "Upgrade to Premium Plus", class:"stripe-button"%&amp;gt;
-&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We&amp;rsquo;d decided to create a new action on the charges controller.  What was really interesting here, reflecting on our piecemeal work on the charges controller, is that we realised we&amp;rsquo;d got our RESTfulness totally out of whack.  We&amp;rsquo;d originally put our subscription sign-up in a &amp;ldquo;charges&amp;rdquo; controller from one Stripe example that was all about making single one off charges.  What we had would be more accurately called a &amp;ldquo;Subscription&amp;rdquo; controller.  Let&amp;rsquo;s look at all the code that&amp;rsquo;s accumulated there:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ChargesController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
-
-  &lt;span class="n"&gt;before_filter&lt;/span&gt; &lt;span class="ss"&gt;:authenticate_user!&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;only: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:edit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:update&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="s1"&gt;'premiumplus'&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;premiumplus?&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="s1"&gt;'premium'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;edit&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create&lt;/span&gt;
-    &lt;span class="vi"&gt;@plan&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-    &lt;span class="n"&gt;customer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-        &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:stripeEmail&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-        &lt;span class="ss"&gt;source: &lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:stripeToken&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-        &lt;span class="ss"&gt;plan: &lt;/span&gt;&lt;span class="vi"&gt;@plan&lt;/span&gt;
-    &lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="n"&gt;update_user_to_premium&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="n"&gt;send_acknowledgement_email&lt;/span&gt;
-
-  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;CardError&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-    &lt;span class="n"&gt;flash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:error&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;
-    &lt;span class="n"&gt;redirect_to&lt;/span&gt; &lt;span class="n"&gt;new_charge_path&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update&lt;/span&gt;
-    &lt;span class="n"&gt;customer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# _token?&lt;/span&gt;
-    &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cards&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;card: &lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:stripeToken&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-    &lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
-    &lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;default_card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;
-    &lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
-  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;InvalidRequestError&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-    &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;error&lt;/span&gt; &lt;span class="s2"&gt;"Stripe error while updating card info: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; for &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-    &lt;span class="vi"&gt;@error&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So it looks like a CRUD controller, and you might expect it to be CRUDing charges, but actually it&amp;rsquo;s creating customers, subscriptions and updating customer credit card details; urgh, embarrassing!  It&amp;rsquo;s not immediately clear if what we need are separate controllers for Subscriptions, Customers and Cards; or a StripeController that takes care of all of them.  We&amp;rsquo;ll need to reflect carefully on this.  At the risk of adding insult to injury we went for just adding a non-RESTful action called &lt;code&gt;upgrade&lt;/code&gt;.  Trying to be &amp;ldquo;non-invasive&amp;rdquo; we just wanted to get this one feature completed adding a new route to &lt;code&gt;routes.rb&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;match&lt;/span&gt; &lt;span class="s1"&gt;'/charges/upgrade'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'charges#upgrade'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:via&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:put&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and a new action:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;upgrade&lt;/span&gt;
-    &lt;span class="n"&gt;customer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;subscription&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;plan&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"premiumplus"&lt;/span&gt;
-    &lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It took us a while to get to that logic in the upgrade action. It was failing silently and we had to drop into the debugger where the error message from the Stripe API told us to do something different from their docs; weird.  And total Demeter violation territory. &lt;code&gt;customer.subscriptions.retrieve(customer.subscriptions.first.id)&lt;/code&gt; in particular was looking very brittle.  Surely there would be something like customer.subscriptions.first that we could use instead?  We&amp;rsquo;d circle back - this was working and I had an eye on whether we couldn&amp;rsquo;t get this feature green without using any of our new domain objects.  Was that crazy?  I was thinking that it would give us a safe green space to reflect, and improve our understanding of the Stripe API.  With the upgrade code in place the only thing we needed was for the user object to be able to correctly report its membership type.  It currently did this:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;membership_type&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"Basic"&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;stripe_customer&lt;/span&gt;
-    &lt;span class="s2"&gt;"Premium Plus"&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We updated it like so:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;membership_type&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"Basic"&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;stripe_customer&lt;/span&gt;
-    &lt;span class="n"&gt;plan&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;plan&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"Premium"&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;plan&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"premium"&lt;/span&gt;
-    &lt;span class="s2"&gt;"Premium Plus"&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which should have worked, but even using the debugger to check it step by step, it wouldn&amp;rsquo;t.  We were getting things like this:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;&amp;gt; plan
-"premium"
-&amp;gt; plan == "premium"
-false
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Something very strange was going on.  We were on shaky ground here, pushing at model logic with an acceptance test, for something that we were probably going to throw out anyway.  We threw out that code and I pulled in the new domain objects and got the &lt;code&gt;membership_type&lt;/code&gt; method under an integration test:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;    &lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="s1"&gt;'#membership_type'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-      &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'returns membership type'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;membership_type&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="s1"&gt;'Basic'&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-
-      &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'premium member'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-        &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="n"&gt;let!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:premium&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;user: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-        &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'returns premium'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-          &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;membership_type&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="s1"&gt;'Premium'&lt;/span&gt;
-        &lt;span class="k"&gt;end&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I had to play with a lot of factories, and the above spec was passing with the following:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;has_one&lt;/span&gt; &lt;span class="ss"&gt;:subscription&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;membership_type&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"Basic"&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;subscription&lt;/span&gt;
-    &lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;type&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;but we were running out of time, and we had to finish pairing without getting the acceptance tests green, because the cuke steps were going to need a whole load of refactoring to be creating premium users in terms of setting up these new domain objects like subscription and payment source.  I had several places of discomfort that I hope we can address in future sessions:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Cukes using the same factories as specs&lt;/li&gt;
-&lt;li&gt;Model specs full of a mixture of unit and integration tests&lt;/li&gt;
-&lt;li&gt;FactoryGirl object creation having side-effects on how single table inheritance classes were reporting their class&lt;/li&gt;
-&lt;li&gt;VCR/Billy file mess from recording all the Stripe interactions&lt;/li&gt;
-&lt;li&gt;lack of confidence in code using &lt;code&gt;current_user&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;But which are the ones that we can address &amp;ldquo;non-invasively&amp;rdquo; to stay focused on getting this single feature green?  So much going on here.  Just how many refactoring tickets will we generate? All to be revealed in the next pair programming session!&lt;/p&gt;
-
-&lt;p&gt;Related Videos:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=bKu3e_jLrQw"&gt;Pair Programming&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=8EkSfYVt9D0"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
