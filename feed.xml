@@ -5,16 +5,42 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-10-17T01:00:00+01:00</updated>
+  <updated>2016-10-18T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Lacking Narrative Thread</title>
+    <link rel="alternate" href="http://blog.url.com/2016/10/18/lacking-narrative-thread/"/>
+    <id>http://blog.url.com/2016/10/18/lacking-narrative-thread/</id>
+    <published>2016-10-18T01:00:00+01:00</published>
+    <updated>2016-10-19T06:11:39+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;There is a lot going on, and heads up this blog post meanders over the stuff that happened yesterday rather than having a coherent narrative thread.  So how&amp;rsquo;s that different from any of your blogs you ask?  Very funny :-) So anyway we got a docker PR merged in on LocalSupport yesterday.  I had the app running in a docker instance on my local machine.  It was all reminiscent of vagrant a few years back, except there seems to be lots more excitement about docker at the moment.  Heroku and AWS are offering container services, where you can deploy your containers like docker.  I&amp;rsquo;ve been pretty happy with Heroku&amp;rsquo;s PaaS (Platform as a Service) compared to AWS&amp;rsquo;s IaaS (Infrastructure as a Service) in terms of things working as I expected, and the PaaS reducing the complexity I have to deal with.  That said I haven&amp;rsquo;t been trying to deploy real-time machine learning components and have been dreaming to the siren song of traditional web apps.  Maybe containers like docker will give more flexibility and robustness in the future, but at the moment I&amp;rsquo;m not sure what end-user problem we&amp;rsquo;re solving, apart from following the interests of our developers.  But, as I&amp;rsquo;ve mentioned before, our developers are also our end-users and if they&amp;rsquo;re inspired to look at something, then arguably it makes sense to follow their lead.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m still not at 100% pairing fitness, so Michael was pairing with Sasha and knocking off a few WebSiteOne tickets.  I joined for a bit and did a manual test of Joao&amp;rsquo;s PR on HangoutConnection, to update the notification title to what the user sets it to be, which looked good but failed to work on the staging server.  I think the issue is that Google&amp;rsquo;s Hangout API doesn&amp;rsquo;t do what it says it should do.  I think Yaro pointed that out a couple of years ago, so it was a little frustrating to burn time on the same issue, although there&amp;rsquo;s always the chance that Google might have fixed their API.  The future for Google Hangouts looks a little uncertain at the moment and there are two other thorns in my side recently, which are that the hangout toolbox plugin no longer saves my lower third banner (so I&amp;rsquo;m re-entering it each time) and we keep getting messages about &amp;ldquo;failed to go live&amp;rdquo; for streaming and recording when things &lt;em&gt;are&lt;/em&gt; going live. We&amp;rsquo;re just ignoring the faulty messages for now, but they will confuse many trying to start recordings.&lt;/p&gt;
+
+&lt;p&gt;At some point we should investigate switching to something like Zoom, which does video conferencing, has a free tier and so on.  To be honest what I&amp;rsquo;d really like is stronger support for text scrums, but let&amp;rsquo;s see how the AsyncVoter project goes.  Pleasingly, having run a couple of async votes on the features in the AsyncVoter project has provoked a lot of assumption busting discussion and I&amp;rsquo;m reassured that the folks working on the weekend are really grasping the functionality we&amp;rsquo;d like to have in place to support on-going voting on stories around the clock.  Async text voting on stories, chores and bugs has the great advantage that it&amp;rsquo;s very light weight to join, easy to observe and it keeps an ongoing flow of chat about the project taking place in the Slack channel that everyone can dip into.&lt;/p&gt;
+
+&lt;p&gt;My whole day was bits and pieces of reviewing and merging PRs, moving async votes along, snippets of scrums and hangouts to resolve minor issues.  No serious head down programming such as might deliver a serious feature on WebSiteOne or Two.  I did do more manual connections between AgileVentures scrums and the Remote Pair Programming meetup group.  I think we&amp;rsquo;ve now had a least two new people join hangouts through that.  At yesterday&amp;rsquo;s Kent Beck we had one person coming from the MOOC, one from the meet up group and one who had seen me present at Remote Rails Conf; along with two regulars.  Cusp of critical mass?  I&amp;rsquo;ve thought that so many times before I know not to get my hopes up.&lt;/p&gt;
+
+&lt;p&gt;What I did manage to get done was to reach out more to people about evolving the charity business model of AgileVentures.  I&amp;rsquo;m burning to get some new plans out, get upgrade functionality into the interface of AgileVentures, but getting feedback from first our mentors and then our existing premium members makes sense.  It feels Agile.  Again I&amp;rsquo;m struck by the difference between asking people in a group/public context and asking people individually.  I guess I&amp;rsquo;ve always known that if you ask a generic question in a group then that&amp;rsquo;s far less effective because everyone thinks &amp;ldquo;well he&amp;rsquo;s not asking me&amp;rdquo;.  I think what I hadn&amp;rsquo;t really absorbed was the majority of people don&amp;rsquo;t like talking in front of each other.  I guess it&amp;rsquo;s like this;  someone asks a general question in a general channel - you&amp;rsquo;re busy, and there&amp;rsquo;s not necessarily much upside for you to answer given that it takes effort and exposes you to judgement by the group; you might be wrong!  However if you&amp;rsquo;re asked the same question by someone in a private 121 context, then not answering might seem rude, and you might even be flattered that your opinion is being asked, and it&amp;rsquo;s less complex to craft a reply.  You only need consider how the person who has asked you will react to your response.  You don&amp;rsquo;t have to worry about how many others might judge what you have to say.&lt;/p&gt;
+
+&lt;p&gt;Sorry if that all seems transparently obvious to everyone, but it&amp;rsquo;s taken me a while to come up with this mental model of others, because my own mode of operation is just to say what I&amp;rsquo;m thinking, pretty much all the time.  Sincere apologies to everyone I&amp;rsquo;ve offended over the years, or made uncomfortable.  It&amp;rsquo;s really not intentional.  I just wear my heart on my sleeve and tend to think out loud.  I hope I am learning to review things somewhat recently, to blunt the sharpest parts of my personality.  Fundamentally it brings me back to trying to understand what&amp;rsquo;s the best value that AgileVentures, and I, can offer them on their professional development path.&lt;/p&gt;
+
+&lt;p&gt;Listening to Ruby Book club on Avdi Grimm&amp;rsquo;s confident coding, I really want to do some quick sessions on playing with Ruby.  These could be a totally free loss-leader.  They could be a pay-to-join mob programming session that Thomas has been saying he&amp;rsquo;d be up for.  They could replace the 121 support at the £25 premium level or they could even replace the F2F support at the £50 premium level.  I was saying the other day that people keep on wanting to talk in private and I keep pushing them to group forums for learning and development purposes.  I think people breaking down their fears and being willing to fail in public IS good for them.  Of course it needs to be at their pace and when they are ready.&lt;/p&gt;
+
+&lt;p&gt;I think the 121 premium level I&amp;rsquo;m thinking of is making sure you have an assigned mentor that you know you can go to for 121 support.  Although perhaps the reality of offering any service is that you&amp;rsquo;ll need to provide 121 support at all times.  If you turn down requests for help, you turn people away.  I&amp;rsquo;d like our users to tell me what they really want and how much they&amp;rsquo;re willing to pay for extra services, the perks that they get from sponsoring the AgileVentures charity; but I guess we have to have a relatively simple plan and go with that.  In the meantime I&amp;rsquo;ll keep asking them individually what they think &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Something for the Weekend</title>
     <link rel="alternate" href="http://blog.url.com/2016/10/17/something-for-the-weekend/"/>
     <id>http://blog.url.com/2016/10/17/something-for-the-weekend/</id>
     <published>2016-10-17T01:00:00+01:00</published>
-    <updated>2016-10-17T20:54:06+01:00</updated>
+    <updated>2016-10-19T06:01:58+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -46,7 +72,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/14/online-conferences/"/>
     <id>http://blog.url.com/2016/10/14/online-conferences/</id>
     <published>2016-10-14T01:00:00+01:00</published>
-    <updated>2016-10-14T21:53:55+01:00</updated>
+    <updated>2016-10-17T09:27:45+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -78,7 +104,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/13/agile-pricing-plans/"/>
     <id>http://blog.url.com/2016/10/13/agile-pricing-plans/</id>
     <published>2016-10-13T01:00:00+01:00</published>
-    <updated>2016-10-13T20:41:01+01:00</updated>
+    <updated>2016-10-17T09:27:45+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -131,7 +157,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/12/non-pairing-day/"/>
     <id>http://blog.url.com/2016/10/12/non-pairing-day/</id>
     <published>2016-10-12T01:00:00+01:00</published>
-    <updated>2016-10-12T20:32:03+01:00</updated>
+    <updated>2016-10-17T09:27:45+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -167,7 +193,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/11/three-day-week/"/>
     <id>http://blog.url.com/2016/10/11/three-day-week/</id>
     <published>2016-10-11T01:00:00+01:00</published>
-    <updated>2016-10-12T09:46:54+01:00</updated>
+    <updated>2016-10-11T21:23:00+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -195,42 +221,6 @@
 &lt;p&gt;I didn&amp;rsquo;t get down to any serious coding, but did manage to get through a set of important devops stuff.  I ran the &amp;ldquo;Kent Beck&amp;rdquo; scrum and was really pleased to catch up with Sigu, who&amp;rsquo;s running a coding bootcamp in Kenya.  He tells me that the students pay $60 for the 3 month course on Ruby and Rails.  He&amp;rsquo;s planning a meetup for all his students&amp;ndash;past, present and future&amp;ndash;and hoping to run through some basic ruby stuff, 3rd party APIs etc., and he asked if I would make an intro video for him, which I totally will.  It&amp;rsquo;s staggering to think that people pay $10000+ or so for coding bootcamps in the US and Europe.&lt;/p&gt;
 
 &lt;p&gt;So I think I managed to create a few minor efficiencies that will save me time over the coming months, but I don&amp;rsquo;t suspect I&amp;rsquo;ll get down to a three-day week any time soon.  Particularly when there are initiatives like Sigu&amp;rsquo;s to support in Kenya.  Students there are the ones that AgileVentures&amp;rsquo; fellowship program could really help.  I&amp;rsquo;d love to give all those Kenyan students AgileVentures premium support, like we do for CraftAcademy students from Sweden.  I really need to build out our fellowship materials and payment framework.  Sod the three-day week, there&amp;rsquo;s a world to change here!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>MultiDimensional Learning Economics</title>
-    <link rel="alternate" href="http://blog.url.com/2016/10/10/multidimensional-learning-economics/"/>
-    <id>http://blog.url.com/2016/10/10/multidimensional-learning-economics/</id>
-    <published>2016-10-10T01:00:00+01:00</published>
-    <updated>2016-10-12T14:42:07+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;This weekend I ran my first Mentive class.  Mentive is an educational startup that provides tutoring for a number of different Massively Open Online Courses (MOOCs), including our “Agile Development using Ruby on Rails”.  We’re currently running the part 2 or “advanced” course that corresponds to the second half of the UCBerkeley Software Engineering class.  It’s my first time trying out the Mentive system which uses GotoMeeting rather than Hangouts.  Myself and John Rofrano are leading tutorial sessions through Mentive on this run.  We’ve both got a couple of students signed up.  I think the numbers might be down for a couple of reasons; one, we removed all the deadlines on the “advanced” course as part of a move towards taking the classes completely self-paced next year.  That probably reduces the sense of urgency as regards sign up.  Also, I hear that Mentive increased their prices, and they may have tipped a limit that we’re also seeing with AgileVentures PremiumPlus.  I’ve had conversations with a few people that the £100 a month price tag on PremiumPlus is beyond their means.  Tweaking those prices and offerings are ultimately what makes all the difference perhaps.&lt;/p&gt;
-
-&lt;p&gt;So anyway, I usually have a rule of not doing any work on the weekends, but I had agreed to take a class on Saturday evenings, since weekday evenings are challenging for me due to early starts to support the daily school run.  Also I’m keen to support Mentive, understand their platform, and furthermore I need to bring in some cash while AgileVentures works its way out of the red.  So I’m running my Mentive class at 8:30pm UTC on Saturday evenings, which makes it practical for anyone from UTC-7 to UTC+2 to attend, which encompasses most of the Americas, Europe and Africa.  I just had one student on this first instance, and so they got a focused one to one session.  We talked about how they had found the previous course, and what they were hoping to get out of this advanced course.  They shared that RSpec had been challenging and I reflected that they weren’t alone.  The common refrain from the different instructors using the MOOC materials around the world was that people tended to get Cucumber, but struggled with RSpec.  So in the session we worked through driving the creation of a small domain model of plain old Ruby objects via RSpec tests, and then did the same for a small Rails app that would use that domain model, driving the creation of an API with RSpecRails tests.  My student seemed pretty pleased with that, and I’m looking forward to developing that further in future sessions.&lt;/p&gt;
-
-&lt;p&gt;Mentive classes are intended to support up to 20 students, and it would be interesting to see if the same guided app creation technique would work with a larger class, keep them engaged and so forth.  Doing it with a single student is not so far removed from what we do in PremiumPlus pairing sessions.  On Saturday my student was on a tablet, and so couldn’t easily type code, but I set up pairing intervention elements by stopping at points and asking my student what they thought I should do next, and that seemed to work well.  Obviously since it was only a single student I was able to tailor what we did and the pace directly to their preference.  Something that’s much more difficult to do with a larger group.&lt;/p&gt;
-
-&lt;p&gt;The big difference between Mentive sessions and AgileVentures Premium/PremiumPlus, is that everything AgileVentures is OpenSource and &amp;ldquo;in context&amp;rdquo;.  All the coding work done with AgileVentures is on a real open source code base, has some relation to the need of a real charity customer or user base.  Of course some learners would much rather work on a more tightly constrained problem or exercise.  Hence the profusion of study tools like CodeWars, CodeCademy, HackerRank and so forth.  Even the majority of the ADuRoR course uses a toy application, although I really do love the legacy assignments which take an older version of the oldest OpenSource RoR project &amp;ldquo;publify&amp;rdquo; (when it was called typo), and sets the students to do bugfixes and add features fully in context of a working legacy app.  I think that&amp;rsquo;s an inspired choice on the part of Armando Fox, Dave Patterson and the Berkeley TAs who worked on the assignment with them.&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s working on that assignment myself several years ago that made me want to do &lt;em&gt;all&lt;/em&gt; my learning in context.  It&amp;rsquo;s why I wanted AgileVentures to exist, a place that could help you do all your learning in context, and contribute to the greater good at the same time.  Of course systems like GitHub, BitBucket and SourceForge already provide a huge vista of OpenSource projects for ongoing learning, but a learner is often thankful for a pathway through the complexity.&lt;/p&gt;
-
-&lt;p&gt;Now AgileVentures doesn&amp;rsquo;t provide as much of a pathway as FreeCodeCamp or CodeCademy or even CodeWars, and all of these still have some beautifully unstructured portions.  We&amp;rsquo;re still working on getting the balance right at AgileVentures, and also the economic model to make it sustainable.  It seems like both CodeWars and CodeCademy are leaning towards being solutions to help employers find job candidates, and FreeCodeCamp is operating as free forever for all non-profits and developers, while charging companies a hiring fee when FCC developers are placed (like many bootcamps).&lt;/p&gt;
-
-&lt;p&gt;AgileVentures at the moment is closer to edX and Mentive in that individual learners are paying for additional services.  Actually AgileVentures is a charity so you could also look at it that every premium member is a sponsor who&amp;rsquo;s getting benefits KickStarter or Patreon style.  This is where the multidimensional economics of learning comes in.  What are people willing to contribute for what kind of perk or service?  We&amp;rsquo;ve had very few sign ups for PremiumPlus, but people are happy to pay a lot more money for a bootcamp, and many people pay similar amounts for MOOC course certificates.  &lt;/p&gt;
-
-&lt;p&gt;There seems to be a prevaling view that taking courses equals education.  I guess I&amp;rsquo;m drinking my own kool-aid here, but I feel like learning comes from doing.  More and more courses are hands on these days, but I&amp;rsquo;m skeptical of the learning benefits of watching lots of lectures, or even toy &amp;ldquo;exercises&amp;rdquo;.  I guess it&amp;rsquo;s a relatively low impact way of floating your brain in some of the domain concepts.  Not everyone wants to become an expert in a particular field.  However if you&amp;rsquo;re in a rush to skill up and you can take the emotional pain of making lots of mistakes (really valuable for learning), then I think diving in to a real project is the way to go.&lt;/p&gt;
-
-&lt;p&gt;AgileVentures tries to create a safe space to fail on an open source project with a real customer.  I don&amp;rsquo;t know how we can convey that more strongly.  What I&amp;rsquo;ve learnt from all the different educational environments I&amp;rsquo;ve taught in (university, MOOC, bootcamp) is that almost everyone hates failure, and that many of us would much rather spend a lot of time watching videos and reading rather than holding our feet to the learning fire.&lt;/p&gt;
-
-&lt;p&gt;It was holding my feet to the learning fire that got me my AstroPhysics degree.  It was so tempting to keep reading and re-summarizing my notes.  It wasn&amp;rsquo;t until I forced myself to repeatedly answer old exam questions that I got my exam technique down and got the first class degree that got me on to higher education.  Not that I was ever really satisified with myself during my first masters and PhD.  It still felt trivial and isolated from the rest of the world.  Part of the problem was that I was studying in the dark ages before search engines like Google connected learners with the rest of the world.&lt;/p&gt;
-
-&lt;p&gt;So anyhow, I&amp;rsquo;m thinking we need a new Premium tier for AgileVentures.  What I notice (and I&amp;rsquo;ve blogged about before) is how so many people prefer to ask me questions 121 rather than in group chat; and it takes a lot of persuasion before people will post publicly, and it&amp;rsquo;s rare that it becomes their default.  Some individuals will keep on asking for one to one help, even though there&amp;rsquo;s no financial incentive for me to help them.  I don&amp;rsquo;t want to come across as mercenary, but I&amp;rsquo;ve put in thousands of volunteer hours and a lot of my own savings to supporting learning online.  I&amp;rsquo;ve got to put up some toll booths to feed my kids.&lt;/p&gt;
-
-&lt;p&gt;I guess some people are used to coming from a state education system where they can get 121 support from their instructors if they press hard enough.  I wonder if people realise that the time I spend answering their 121 question takes up time that I could be using to earn money to feed my kids?  And my three boys eat like horses! :-)  Maybe they realise and don&amp;rsquo;t care?  Maybe they&amp;rsquo;re just not thinking about it; they&amp;rsquo;re just focused on their own question, trying to solve their own problem.&lt;/p&gt;
-
-&lt;p&gt;I want to get learners comfortable about asking in public so that others can benefit.  If they ask in group chat on AgileVentures it increases the activity in the community, and the community value keeps people around, and the rising tide lifts all the boats.  I could devote all my time to answering 121 questions, and I might get a few thanks from people, and I might learn a few things, but it&amp;rsquo;s not enough to feed my kids.  It makes me think that the new AgileVentures premium tier should be called &amp;ldquo;121&amp;rdquo;, cost about £25 a month, and get you an assigned mentor who can answer your questions on 121 chat.  And maybe a £50 a month version called Premium on Air that gets you an hour of hangout time.  We&amp;rsquo;ll have to work out the details.  We need to avoid changing and tweaking too much or we confuse people, muddy the water.  The problem really is in the complex space of &amp;ldquo;multidimensional economics of learning&amp;rdquo; &amp;hellip; &lt;/p&gt;
 </content>
   </entry>
 </feed>
