@@ -14,21 +14,21 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/18/lacking-narrative-thread/"/>
     <id>http://blog.url.com/2016/10/18/lacking-narrative-thread/</id>
     <published>2016-10-18T01:00:00+01:00</published>
-    <updated>2016-10-19T06:11:39+01:00</updated>
+    <updated>2016-10-19T06:10:43+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
     <content type="html">&lt;p&gt;There is a lot going on, and heads up this blog post meanders over the stuff that happened yesterday rather than having a coherent narrative thread.  So how&amp;rsquo;s that different from any of your blogs you ask?  Very funny :-) So anyway we got a docker PR merged in on LocalSupport yesterday.  I had the app running in a docker instance on my local machine.  It was all reminiscent of vagrant a few years back, except there seems to be lots more excitement about docker at the moment.  Heroku and AWS are offering container services, where you can deploy your containers like docker.  I&amp;rsquo;ve been pretty happy with Heroku&amp;rsquo;s PaaS (Platform as a Service) compared to AWS&amp;rsquo;s IaaS (Infrastructure as a Service) in terms of things working as I expected, and the PaaS reducing the complexity I have to deal with.  That said I haven&amp;rsquo;t been trying to deploy real-time machine learning components and have been dreaming to the siren song of traditional web apps.  Maybe containers like docker will give more flexibility and robustness in the future, but at the moment I&amp;rsquo;m not sure what end-user problem we&amp;rsquo;re solving, apart from following the interests of our developers.  But, as I&amp;rsquo;ve mentioned before, our developers are also our end-users and if they&amp;rsquo;re inspired to look at something, then arguably it makes sense to follow their lead.&lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;m still not at 100% pairing fitness, so Michael was pairing with Sasha and knocking off a few WebSiteOne tickets.  I joined for a bit and did a manual test of Joao&amp;rsquo;s PR on HangoutConnection, to update the notification title to what the user sets it to be, which looked good but failed to work on the staging server.  I think the issue is that Google&amp;rsquo;s Hangout API doesn&amp;rsquo;t do what it says it should do.  I think Yaro pointed that out a couple of years ago, so it was a little frustrating to burn time on the same issue, although there&amp;rsquo;s always the chance that Google might have fixed their API.  The future for Google Hangouts looks a little uncertain at the moment and there are two other thorns in my side recently, which are that the hangout toolbox plugin no longer saves my lower third banner (so I&amp;rsquo;m re-entering it each time) and we keep getting messages about &amp;ldquo;failed to go live&amp;rdquo; for streaming and recording when things &lt;em&gt;are&lt;/em&gt; going live. We&amp;rsquo;re just ignoring the faulty messages for now, but they will confuse many trying to start recordings.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m still not at 100% pairing fitness, so Michael was pairing with Sasha and knocking off a few WebSiteOne tickets.  I joined for a bit and did a manual test of Joao&amp;rsquo;s PR on HangoutConnection, to update the notification title to what the user sets it to be, which looked good but failed to work on the staging server.  I think the issue is that Google&amp;rsquo;s Hangout API doesn&amp;rsquo;t do what it says it should do.  I think Yaro pointed that out a couple of years ago, so it was a little frustrating to burn time on the same issue.  The future for Google Hangouts looks a little uncertain and there are two other thorns in my side recently, which are that the toolbox plugin no longer saves my lower third banner (so I&amp;rsquo;m re-entering it each time) and we keep getting messages about &amp;ldquo;failed to go live&amp;rdquo; when things are going live, which we&amp;rsquo;re now ignoring, but will be confusing for many.&lt;/p&gt;
 
-&lt;p&gt;At some point we should investigate switching to something like Zoom, which does video conferencing, has a free tier and so on.  To be honest what I&amp;rsquo;d really like is stronger support for text scrums, but let&amp;rsquo;s see how the AsyncVoter project goes.  Pleasingly, having run a couple of async votes on the features in the AsyncVoter project has provoked a lot of assumption busting discussion and I&amp;rsquo;m reassured that the folks working on the weekend are really grasping the functionality we&amp;rsquo;d like to have in place to support on-going voting on stories around the clock.  Async text voting on stories, chores and bugs has the great advantage that it&amp;rsquo;s very light weight to join, easy to observe and it keeps an ongoing flow of chat about the project taking place in the Slack channel that everyone can dip into.&lt;/p&gt;
+&lt;p&gt;At some point maybe we should investigate switching to something like Zoom, which does video conferencing, has a free tier and so on.  To be honest what I&amp;rsquo;d really like is stronger support for text scrums, but let&amp;rsquo;s see how the AsyncVoter project goes.  Pleasingly having run a couple of async votes on the features in the AsyncVoter project has provoked a lot of assumption busting discussion and I&amp;rsquo;m reassured that the folks working on the weekend are really grasping the functionality we&amp;rsquo;d like to have in place to support on-going voting on stories around the clock.  Async text voting on stories, chores and bugs has the great advantage that it&amp;rsquo;s very light weight to join, easy to observe and it keeps an ongoing flow of chat about the project taking place in the Slack channel that everyone can dip into.&lt;/p&gt;
 
-&lt;p&gt;My whole day was bits and pieces of reviewing and merging PRs, moving async votes along, snippets of scrums and hangouts to resolve minor issues.  No serious head down programming such as might deliver a serious feature on WebSiteOne or Two.  I did do more manual connections between AgileVentures scrums and the Remote Pair Programming meetup group.  I think we&amp;rsquo;ve now had a least two new people join hangouts through that.  At yesterday&amp;rsquo;s Kent Beck we had one person coming from the MOOC, one from the meet up group and one who had seen me present at Remote Rails Conf; along with two regulars.  Cusp of critical mass?  I&amp;rsquo;ve thought that so many times before I know not to get my hopes up.&lt;/p&gt;
+&lt;p&gt;My whole day was bits and pieces of reviewing and merging PRs, moving async votes along, snippets of scrums and hangouts to resolve minor issues.  No serious head down programming such as might deliver a serious feature on WebSiteOne or Two.  I did do more manual connection between AgileVentures scrums and the Remote Pair Programming meetup group.  I think we&amp;rsquo;ve now had a least two new people join hangouts through that.  At yesterday&amp;rsquo;s Kent Beck we had one person coming from the MOOC, one from the meet up group and one who had seen me present at Remote Rails Conf; along with two regulars.  Cusp of critical mass?  I&amp;rsquo;ve thought that so many times before I know not to get my hopes up.&lt;/p&gt;
 
-&lt;p&gt;What I did manage to get done was to reach out more to people about evolving the charity business model of AgileVentures.  I&amp;rsquo;m burning to get some new plans out, get upgrade functionality into the interface of AgileVentures, but getting feedback from first our mentors and then our existing premium members makes sense.  It feels Agile.  Again I&amp;rsquo;m struck by the difference between asking people in a group/public context and asking people individually.  I guess I&amp;rsquo;ve always known that if you ask a generic question in a group then that&amp;rsquo;s far less effective because everyone thinks &amp;ldquo;well he&amp;rsquo;s not asking me&amp;rdquo;.  I think what I hadn&amp;rsquo;t really absorbed was the majority of people don&amp;rsquo;t like talking in front of each other.  I guess it&amp;rsquo;s like this;  someone asks a general question in a general channel - you&amp;rsquo;re busy, and there&amp;rsquo;s not necessarily much upside for you to answer given that it takes effort and exposes you to judgement by the group; you might be wrong!  However if you&amp;rsquo;re asked the same question by someone in a private 121 context, then not answering might seem rude, and you might even be flattered that your opinion is being asked, and it&amp;rsquo;s less complex to craft a reply.  You only need consider how the person who has asked you will react to your response.  You don&amp;rsquo;t have to worry about how many others might judge what you have to say.&lt;/p&gt;
+&lt;p&gt;What I did manage to get done was to reach out more people about evolving the charity business model of AgileVentures.  I&amp;rsquo;m burning to get some new plans out, get upgrade functionality into the interface of AgileVentures, but getting feedback from first our mentors and then our existing premium members makes sense.  It feels Agile.  Again I&amp;rsquo;m struck by the difference between asking people in a group/public context and asking people individually.  I guess I&amp;rsquo;ve always known that if you ask a generic question in a group then that&amp;rsquo;s far less effective because everyone thinks &amp;ldquo;well he&amp;rsquo;s not asking me&amp;rdquo;.  I think what I hadn&amp;rsquo;t really absorbed was the majority of people don&amp;rsquo;t like talking in front of each other.  I guess it&amp;rsquo;s like this.  Someone asks a general question in a general channel - you&amp;rsquo;re busy, and there&amp;rsquo;s not necessarily much upside for you to answer given that it takes effort and exposes you to judgement by the group; you might be wrong!  However if you&amp;rsquo;re asked the same question by someone in a private 121 context, then not answering might seem rude, and you might even be flattered that your opinion is being asked, and it&amp;rsquo;s less complex to craft a reply.  You only need consider how the person who has asked you will react to your response.  You don&amp;rsquo;t have to worry about how many others might judge what you have to say.&lt;/p&gt;
 
-&lt;p&gt;Sorry if that all seems transparently obvious to everyone, but it&amp;rsquo;s taken me a while to come up with this mental model of others, because my own mode of operation is just to say what I&amp;rsquo;m thinking, pretty much all the time.  Sincere apologies to everyone I&amp;rsquo;ve offended over the years, or made uncomfortable.  It&amp;rsquo;s really not intentional.  I just wear my heart on my sleeve and tend to think out loud.  I hope I am learning to review things somewhat recently, to blunt the sharpest parts of my personality.  Fundamentally it brings me back to trying to understand what&amp;rsquo;s the best value that AgileVentures, and I, can offer them on their professional development path.&lt;/p&gt;
+&lt;p&gt;Sorry if that all seems transparently obvious to everyone, but it&amp;rsquo;s taken me a while to come up with the mental model, because my own mode of operation is just to say what I&amp;rsquo;m thinking, pretty much all the time.  Sincere apologies to everyone I&amp;rsquo;ve offended over the years, or made uncomfortable.  It&amp;rsquo;s really not intentional.  I just wear my heart on my sleeve and tend to think out loud.  I hope I am learning to review things somewhat recently, to blunt the sharpest parts of my personality.  Fundamentally it brings me back to trying to understand what&amp;rsquo;s the best value that AgileVentures, and I, can offer them on their professional development path.&lt;/p&gt;
 
 &lt;p&gt;Listening to Ruby Book club on Avdi Grimm&amp;rsquo;s confident coding, I really want to do some quick sessions on playing with Ruby.  These could be a totally free loss-leader.  They could be a pay-to-join mob programming session that Thomas has been saying he&amp;rsquo;d be up for.  They could replace the 121 support at the £25 premium level or they could even replace the F2F support at the £50 premium level.  I was saying the other day that people keep on wanting to talk in private and I keep pushing them to group forums for learning and development purposes.  I think people breaking down their fears and being willing to fail in public IS good for them.  Of course it needs to be at their pace and when they are ready.&lt;/p&gt;
 
@@ -40,7 +40,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/17/something-for-the-weekend/"/>
     <id>http://blog.url.com/2016/10/17/something-for-the-weekend/</id>
     <published>2016-10-17T01:00:00+01:00</published>
-    <updated>2016-10-19T06:01:58+01:00</updated>
+    <updated>2016-10-19T05:56:15+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -64,7 +64,8 @@
 
 &lt;p&gt;Maybe that was reasonable station-keeping.  Over the last two weeks as I check email/slack in dribs and drabs in my downtime I have less of a build up of messages post-blog.  I’m still worried that my responses may be too reactionary.  There’s a kind of “whack-a-mole” mentality that you can get into where you want to have replied to everything, want to have addressed everything, so you whack each message as it comes up.  Sometimes it would be better to leave things for others to answer.  Some questions are not critical to answer immediately, and more importantly, they may be distracting you from the activities that will keep you your current job, or sustain your existing business/charity.  Sometimes it can feel like wasting precious seconds on frivolities?&lt;/p&gt;
 
-&lt;p&gt;One thing I start to sense is that too strong a reaction is usually counter-productive, as is worrying too intensely about whether something is an effective use of your time.  Not that you shouldn’t reflect, but that should be done at intervals.  As my father used to say “it’s better to spend 10 minutes doing something, rather than spend 10 minutes worrying about the fact that you haven’t done anything for 10 minutes”.  Make a quick plan for the day, or the half day, do that and see how you feel.  Right - time to get on with my day, and maybe I’ll see you at the weekend :-)&lt;/p&gt;
+&lt;p&gt;One thing I start to sense is that too strong a reaction is usually counter-productive, as is worrying too intensely about whether something
+ is an effective use of your time.  Not that you shouldn’t reflect, but that should be done at intervals.  As my father used to say “it’s better to spend 10 minutes doing something, rather than spend 10 minutes worrying about the fact that you haven’t done anything for 10 minutes”.  Make a quick plan for the day, or the half day, do that and see how you feel.  Right - time to get on with my day, and maybe I’ll see you at the weekend :-)&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -72,7 +73,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/14/online-conferences/"/>
     <id>http://blog.url.com/2016/10/14/online-conferences/</id>
     <published>2016-10-14T01:00:00+01:00</published>
-    <updated>2016-10-17T09:27:45+01:00</updated>
+    <updated>2016-10-14T21:53:55+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -104,7 +105,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/13/agile-pricing-plans/"/>
     <id>http://blog.url.com/2016/10/13/agile-pricing-plans/</id>
     <published>2016-10-13T01:00:00+01:00</published>
-    <updated>2016-10-17T09:27:45+01:00</updated>
+    <updated>2016-10-13T20:41:01+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -157,7 +158,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/12/non-pairing-day/"/>
     <id>http://blog.url.com/2016/10/12/non-pairing-day/</id>
     <published>2016-10-12T01:00:00+01:00</published>
-    <updated>2016-10-17T09:27:45+01:00</updated>
+    <updated>2016-10-12T20:32:03+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -193,7 +194,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/11/three-day-week/"/>
     <id>http://blog.url.com/2016/10/11/three-day-week/</id>
     <published>2016-10-11T01:00:00+01:00</published>
-    <updated>2016-10-11T21:23:00+01:00</updated>
+    <updated>2016-10-12T09:46:54+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
