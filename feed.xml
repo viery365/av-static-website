@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/19/bug-hunt/"/>
     <id>http://blog.url.com/2016/10/19/bug-hunt/</id>
     <published>2016-10-19T01:00:00+01:00</published>
-    <updated>2016-10-19T21:02:14+01:00</updated>
+    <updated>2016-10-19T21:05:33+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -77,13 +77,9 @@ undefined method `display_profile' for nil:NilClass
 &lt;p&gt;I could now see an individual project page on staging and the start a hangout button.  I got the same authentication error.  I&amp;rsquo;d tidied up staging in a way that would make testing hangouts easier in the future, but had only managed to confirm that the plugin authentication error was ocurring for at least two versions fo the plugin and thus more likely to be something on Google&amp;rsquo;s side that we might not be able to fix.  I almost started to compose a blog about data integrity constraints and gracefully code failure.  Bottom line, interface, just display something, anything! I have no interest in 500 errors. I dragged myself back to the hangout narrative and got googling. I found some helpful links:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;http://stackoverflow.com/questions/16850350/got-origin-mismatch-error-in-google-share-api&lt;/li&gt;
-&lt;li&gt;https://developers.google.com/+/sign-in-faq#were&lt;em&gt;seeing&lt;/em&gt;error&lt;em&gt;origin&lt;/em&gt;mismatch&lt;em&gt;during&lt;/em&gt;sign-in&lt;em&gt;testing&lt;/em&gt;what&lt;em&gt;might&lt;/em&gt;be&lt;em&gt;the&lt;/em&gt;issue&lt;/li&gt;
-&lt;li&gt;https://www.google.co.uk/search?q=google+hangout+plugin+%22Error%3A+origin_mismatch%22
-
-&lt;ul&gt;
-&lt;li&gt;https://productforums.google.com/forum/#!topic/hangouts/Y6YdjONMu6Q&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://stackoverflow.com/questions/16850350/got-origin-mismatch-error-in-google-share-api"&gt;http://stackoverflow.com/questions/16850350/got-origin-mismatch-error-in-google-share-api&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developers.google.com/+/sign-in-faq#were_seeing_error_origin_mismatch_during_sign-in_testing_what_might_be_the_issue"&gt;https://developers.google.com/+/sign-in-faq#were_seeing_error_origin_mismatch_during_sign-in_testing_what_might_be_the_issue&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://productforums.google.com/forum/#!topic/hangouts/Y6YdjONMu6Q"&gt;https://productforums.google.com/forum/#!topic/hangouts/Y6YdjONMu6Q&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;I spent the next 30 minutes tweaking things through the google api console.  It looked like our &amp;ldquo;Authorized JavaScript origins&amp;rdquo; for OAuth were all up to date.  I even managed to make G+ login work on the develop server, making it seem like there was no wholesale authentication fail on Google&amp;rsquo;s side.  The last link in the list above (a locked discussion ironically) talked about a potentially brittle fix to the authentication problem.  I tried it on staging, but no joy.  It seemed like the googlecontent URL it suggested adding to the JavaScript origins was variable. A frustrating morning, but I thought to myself perhaps we can use this as a spur to produce a better solution.  Maybe we can get YouTube Live events to start directly from Slack &amp;hellip;&lt;/p&gt;
