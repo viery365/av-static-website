@@ -5,10 +5,56 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-10-20T01:00:00+01:00</updated>
+  <updated>2016-10-21T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Yak Shaving</title>
+    <link rel="alternate" href="http://blog.url.com/2016/10/21/yak-shaving/"/>
+    <id>http://blog.url.com/2016/10/21/yak-shaving/</id>
+    <published>2016-10-21T01:00:00+01:00</published>
+    <updated>2016-10-21T20:43:04+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So I thought I&amp;rsquo;d try and get a little solo programming time in today, but it turned into a yak-shaving devops session.  Yak shaving?  It&amp;rsquo;s when you end up needing a ladder to paint your house, and you have to borrow a ladder from your friend, but you need to go get his keys from his neighbour who has to finish shaving his yak &amp;hellip; I know, it makes no sense - the point is about how you have one goal and then you get successively distracted by a series of activities that become more and more tangentially related to the original goal.  I was trying to get our premium plus upgrade functionality into production.  This was going to involve doing a data migration.  I wanted to get an instance of the branch with that code up in Heroku to test the migration.&lt;/p&gt;
+
+&lt;p&gt;Heroku&amp;rsquo;s automatic deploy of pull requests to Heroku instances is nice when it works.  It came out of beta, but still seems flaky.  I started poking at it.  First up it was saying that there wasn&amp;rsquo;t permission to deploy the app.  I&amp;rsquo;d just moved websiteone-develop from my personal account to my company NeuroGrid Ltd group account since all my personal app hours had been burned up by agile-bot.  Raoul had originally set up the automated deploys for the websiteone develop server, so somehow the automatic deploy of the PR was coming from his account.  I played with moving him from a collaborator to an admin role, which moved things forward a little.  The next error was the deploy was failing due to a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1348"&gt;database error&lt;/a&gt;.  One of the frustrating things about this was the delayed feedback loop.  I&amp;rsquo;d make a change in the &lt;code&gt;app.json&lt;/code&gt; file that specifies how Heroku will auto deploy PRs, or a change in Heroku&amp;rsquo;s admin console, and it takes five minutes or so to find out if the deploy has worked or not.  I was task switching between trying to fix the automated PR deploy and cleaning up what looked like a puffing billy sandbox leak on the branch itself. Ultimately though it was the PR deploy that was taking up more and more of my brain.&lt;/p&gt;
+
+&lt;p&gt;Was this another banana in a coconut?  Really if I wanted to get the premium upgrade feature out I should focus on pushing that to some new Heroku instance and leave fixing automated PR deploys to another time.  Of course automated PR deploys are great when they work, and they help project managers (including me) review PRs faster, and if it worked I wouldn&amp;rsquo;t have to do all the fiddly deploy to get the ENV vars set up for a new Heroku instance to test if the new feature.  The great thing about Heroku PR deploys (when they work) is that they copy all the environment vars from a specified server (in this case develop) and things are good to go.  However, running &lt;code&gt;rake db:seed&lt;/code&gt; to pre-populate the database as part of the &lt;code&gt;app.json&lt;/code&gt; post-deploy script was giving this error message:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;FATAL:  permission denied for database "postgres"
+DETAIL:  User does not have CONNECT privilege.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but ironically, immediately after that we had all the output from what looked like a successful run of db:create and de:seed.  Confusing.  We&amp;rsquo;d had a similar &lt;a href="https://www.pivotaltracker.com/story/show/116276111"&gt;issue on LocalSupport previously&lt;/a&gt;, which had ultimately been fixed by &amp;hellip; I&amp;rsquo;m not sure.  LocalSupport automated Heroku PR deploys had been working for a while.  They were now stuck on a separate issue of us having too many apps, even though they were set to auto-delete after 5 days of inactivity.  Actually now that I type it out, I think the problem might be that the LocalSupport develop server is on my personal account, and I have a load of junk apps there; gotta clean those out - argh, yak shaving!  Either the definite trend over the last few months appears to have been Heroku gradually introducing new limits which we are falling foul of in new and unpleasant ways.&lt;/p&gt;
+
+&lt;p&gt;Anyway, the LocalSupport ticket (and an old Heroku ticket) included some ideas for changing app.json, e.g. including an explicit migrate step, and this from the Heroku folks:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;There is a caveat when building review apps that we have requested a new database addon, but it&amp;rsquo;s not guaranteed to be provisioned during the build phase. It sounds like something in your application is trying to access the database before your database is up and ready to receive connections.&lt;/p&gt;
+
+&lt;p&gt;The ideal fix is to track down why the app is connecting to the database during build and try to prevent that. If that&amp;rsquo;s not an option, we also have a buildpack that you can use to wait for your database to come up: https://github.com/heroku/heroku-buildpack-addon-wait.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I didn&amp;rsquo;t get to trying the build pack suggestion, instead going through a series of changes to app.json; moving the develop server into a heroku pipeline (see image below); an analysis of the stack trace associated with the above database fail, which seemed to possibly implicate &lt;a href="https://github.com/airbrake/airbrake/issues/620"&gt;airbrake&lt;/a&gt; but probably not.  Ultimately I did not get it working, but did succeed in spamming Raoul and myself with failed Slack invites that get generated as part of the &lt;code&gt;rake db:setup&lt;/code&gt;.  I posted support requests to Heroku, which as of this morning have not been picked up and as of this morning I tried removing the &lt;code&gt;rake db:setup&lt;/code&gt; completely, which allowed the app to report &amp;ldquo;successful&amp;rdquo; deployment, but when I looked there was just nothing there.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="heroku pipeline" src="https://www.dropbox.com/s/x6bmiswu6j89q8s/Screenshot%202016-10-21%2011.27.48.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Despite being admin, Raoul reported that he couldn&amp;rsquo;t even see the develop server in the Heroku GUI, and had removed his account over night.  I re-added him, put the &lt;code&gt;rake db:setup&lt;/code&gt; back in, adjusted the config to allow us to set Slack invites to be disabled on develop, and tried another push.  I felt like I could burn a lot of time on this.  The next sequence of things to try with this nasty delayed feedback loop are:&lt;/p&gt;
+
+&lt;p&gt;1) remove &lt;code&gt;rake db:setup&lt;/code&gt; again - maybe I can then just run from command line to a) get a working instance and b) understand the error better
+2) try the suggested &lt;code&gt;heroku-buildpack-addon-wait&lt;/code&gt; from Heroku
+3) re-create the Github web hook that is presumably lending Raoul&amp;rsquo;s credentials to every attempt to deploy an instance for a PR&lt;/p&gt;
+
+&lt;p&gt;Conversely I could say that this is all yak-shaving, and yak-shaving with a time delay as to when the yak is shaved is a real pain.  If I really wanted to get back on track to deploying the feature what I could be doing is just deploying a Heroku instance from scratch and starting work on prodding at the feature, and getting my head back around the data migration we need so that I can write some manual instructions, or get a script together.  We will see.  Having blogged I guess I will now work through all the email and Slack messages that are backing up, and look through/add-to my priority list to work out what&amp;rsquo;s the most profitable way to spend the next few hours.  Yaks!&lt;/p&gt;
+
+&lt;p&gt;Related Videos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ZZa-80c9qos"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>To Pair or Not To Pair</title>
     <link rel="alternate" href="http://blog.url.com/2016/10/20/to-pair-or-not-to-pair/"/>
@@ -206,59 +252,6 @@ undefined method `display_profile' for nil:NilClass
 &lt;p&gt;I was probably too chatty in the limited time for chat after Nell&amp;rsquo;s talk.  There was one other question from an audience member, and Charles mentioned an app for voting on estimates.  I was hoping to get more info on that since we&amp;rsquo;re starting an AgileVentures project to build a tool for that.  The overall online conference format was fairly cool, but it was a shame to lose the chat history when each chat session shut down.  I would prefer a Slack instance for the conference where you could have a chat room for each talk that was persistent, and also some general hang-out rooms where people could continue conversations they had started in talk chats etc.&lt;/p&gt;
 
 &lt;p&gt;I wonder if we should do an AgileVentures conference at some point, and use our existing Slack instance to support the chat.  We&amp;rsquo;ve got all the infrastructure we need with our AV events and hangouts system &amp;hellip; would be great to get the project maintainers to each present on their projects, and get one or two devs to each also present on some of the work they&amp;rsquo;ve been doing on the project.  I&amp;rsquo;m always worried about meetings and conferences taking time away from coding, but maybe some sort of online conference is what we need for people to understand what we&amp;rsquo;re all doing at AgileVentures?  I was also just listening to a podcast about Gitlab, which has 100&amp;rsquo;s of purely remote employees, and how they have specific coffee-break, friendly chat hangouts.  Maybe AgileVentures needs more of these social get together things &amp;hellip;?&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Agile Pricing Plans</title>
-    <link rel="alternate" href="http://blog.url.com/2016/10/13/agile-pricing-plans/"/>
-    <id>http://blog.url.com/2016/10/13/agile-pricing-plans/</id>
-    <published>2016-10-13T01:00:00+01:00</published>
-    <updated>2016-10-13T20:41:01+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Continuing with my non-pairing streak, I got a fair few things sorted today.  A highlight being prototyping the new pricing plans for AgileVentures.  The current draft looks like:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;£10/month: Premium - private slack group, RubyMine license, eligibility for paid and priority projects&lt;/li&gt;
-&lt;li&gt;£25/month: Premium 121 - private text chat with mentor, 10 year professional development plan&lt;/li&gt;
-&lt;li&gt;£50/month: Premium F2F - face to face hangouts with mentor, voting rights in charity meetings&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In creating the draft, I appeared to fall foul of the difference between ActiveRecord &lt;code&gt;dup&lt;/code&gt; and &lt;code&gt;clone&lt;/code&gt;.  I was taking the existing pricing static page and copying it for tweaks to the new approach, but I used &lt;code&gt;clone&lt;/code&gt; instead of &lt;code&gt;dup&lt;/code&gt; and so ended up over-writing the existing plan, doh!  Fortunately we have versioning via the papertrail gem so I pulled out the old version and then used &lt;code&gt;dup&lt;/code&gt; to create a version without an id, and save it into place. Phew!&lt;/p&gt;
-
-&lt;p&gt;I shared the new plan draft with some of the core team.  On reflection, perhaps I should have been following Scott Klemmer&amp;rsquo;s advice to always share multiple prototypes, but anyway, I&amp;rsquo;m getting great feedback from Federico about page layout to try and highlight the three-way choice, and from Thomas about a mob programming plan.  I guess an alternate could be something like:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;£10/month: Premium - private slack group, RubyMine license, eligibility for paid and priority projects&lt;/li&gt;
-&lt;li&gt;£25/month: Premium Mob - mob programming with mentor, 10 year professional development plan&lt;/li&gt;
-&lt;li&gt;£50/month: Premium F2F - face to face hangouts with mentor, voting rights in charity meetings&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;and mob programming is fun.  Different mentors are likely to have different preferences about whether they want to give 121 text support or hosting mob programming sessions, or 121 pairing hangouts.  Much as I love mobbing and pairing, my intuition from the last 5 years of doing online education is that the majority of people seem to really prefer 121 communication.  Once you can get people bitten by the mobbing or pairing bug, then sure they can convert, but that&amp;rsquo;s potentially a slow uphill process.&lt;/p&gt;
-
-&lt;p&gt;We could be throwing in all these options with even more types of plans, but the prevailing wisdom seems to be to have fewer plans to make the decision process easier.  I&amp;rsquo;m certainly not thinking of imposing 121 support on any of the AV mentors; I just seem to be under near constant pressure from MOOC students to give 121 support, so if I can offer them a plan where I do give them 121 support then that makes my life a lot easier and I&amp;rsquo;m giving people what they are asking for.  I haven&amp;rsquo;t yet heard from any learners that they want mob programming.  Now maybe what they &lt;em&gt;need&lt;/em&gt; is mob programming and pair programming.  It&amp;rsquo;s this funny divide between listening to your users and them asking for a &amp;ldquo;faster horse&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;I always thought we&amp;rsquo;d have more people taking up the free pair programming that AgileVentures tries to support.  Some did, but it never got to the critical mass I imagined.  My current working hypothesis is that it is just too intimidating for many people.  It would never occur to me online to conceal my name, or my face, or that I would be put off from attending a google hangout on air because of the message that pops up that says other people can see this broadcast, but over the last few years I&amp;rsquo;ve encountered that a great deal.&lt;/p&gt;
-
-&lt;p&gt;Now we can say: &amp;ldquo;Be strong! If you push through that fear you&amp;rsquo;ll discover a brave new world of learning!&amp;rdquo;.  And I really believe that&amp;rsquo;s true, but I think you can only get so far exhorting people to overcome their fears.  In my mind if you have 100 people, there will be five who are happy to say almost anything in front of the group.  You can probably get those five to do almost anything.  They may also do inappropriate things that causes the group to disperse, so watch out for that.  Of the remaining people, if you&amp;rsquo;re charismatic and articulate you can probably get another five to join in a public learning process through convincing them that it is a great thing.&lt;/p&gt;
-
-&lt;p&gt;However that leaves the remaining 90 people.  There are some who are never going to participate in public learning.  However I&amp;rsquo;d guess there are about 40 who if you are willing to connect to them individually, hear about their fears and needs in a safe space, that you can help them build up to the point that they stop being held back by a fear of failure, particularly public failure.&lt;/p&gt;
-
-&lt;p&gt;Now everyone will probably put different numbers on these different types of people (that I&amp;rsquo;ve just made up).  I&amp;rsquo;m going with:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Happy to learn and fail in public 5%&lt;/li&gt;
-&lt;li&gt;Can be convinced by general arguments 5%&lt;/li&gt;
-&lt;li&gt;Can be convinced by personal support 40%&lt;/li&gt;
-&lt;li&gt;Not ready to learn in public 50%&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;It would be great to find some experimental studies to work out real values for these numbers, or even conduct some, although I think my days of doing purely scientific work are over :-)  Counter-arguments might come from saying that well, you think that giving that 121 support is going to help you bring 40% of folks to a place where they are participating at a new level, but actually that&amp;rsquo;s just one or two people and what you&amp;rsquo;ll end up doing is a lot of individual hand holding for not much gain.&lt;/p&gt;
-
-&lt;p&gt;Maybe so, I have no omniscient power.  However my intuition says that sustainability will be hard if we&amp;rsquo;re relying on only those few willing to take the plunge for learning in crowd format.  Besides I love connecting with people individually on a 121 basis.  I love hearing about what&amp;rsquo;s going on for them and throwing my cognitive resources at trying to hook them up with resources, people and activities that will help them achieve their goals.&lt;/p&gt;
-
-&lt;p&gt;What I can&amp;rsquo;t do, if I want to feed my kids, is spend all my time giving 121 support for free.  It even takes up time just saying no politely to all the people asking for 121 support.  Anyway, brain dump!  The tricky thing now, compared to when I first created the pricing page, is that we have other plans like the &amp;ldquo;premium plan&amp;rdquo; melded into the software of the AgileVentures site, so rolling out a new pricing plan will require coordination with some PRs, which is not as lightweight as I would like. Hence the creation of the beta pricing page, blogging about this, and so forth.  One thing that feels really great though is that we really are living the Agile process, and big thanks to Stripe for making it straightforward to take credit card payments.  Creating the new plans on the Stripe dashboard will be trivial, and the complexity of rolling them out to our users will be what we make it to be.&lt;/p&gt;
 </content>
   </entry>
 </feed>
