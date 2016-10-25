@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Solo Coding</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_10 x2016_10_25 x2016_10_25_solo-coding x2016_10_25_solo-coding_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/10/25/solo-coding/">Solo Coding</a></h2>
+        <h5 class='date'>25 Oct 2016</h5>
+    <p><a href="http://nonprofits.agileventures.org/2016/10/21/yak-shaving/">Yak shaving</a> aside I managed to make time for some solo coding.  There was work outstanding on a feature to allow users to upgrade from Premium to PremiumPlus.  Michael and I had designed some extra domain features in a previous session, but they hadn&rsquo;t immediately been needed, so we cherry-picked them into this PR.  New domain entities of Subscription and PaymentSource were necessary to distinguish between users being Premium or PremiumPlus without having to contact the remote Stripe API for confirmation (see model dump from railroady gem in the image below).  If someone wants to upgrade the last thing we want to do is have the site freeze because the Stripe API isn&rsquo;t responding.  That said we&rsquo;re still using the Stripe API to communicate the intention to upgrade the plan, but having a coherent way of storing the members&rsquo; desire to upgrade in our database seems like a good move.</p>
+
+<p><img alt="new domain entities" src="https://www.dropbox.com/s/lm03tpkm2xqe9kb/Screenshot%202016-10-25%2020.52.36.png?dl=1" /></p>
+
+<p>You might say why didn&rsquo;t you build all this in from the start?  Because we were following the Agile process of only building what we needed for the immediate future.  Now that we&rsquo;ve validated that people will sign up for Premium and Premium Plus plans, we&rsquo;re moving on to gamble that some of them might be willing to upgrade.  Actually the feedback I&rsquo;m getting suggests that the Premium Plus plan is too expensive, so next up we&rsquo;ll be inserting some intermediate plans, but anyway, one feature at a time.  The <a href="https://github.com/AgileVentures/WebsiteOne/pull/1323">PR for this feature</a> has been open a dangerously long time due to my knee operation and it needing fixing up (both the PR and my knew).  It had taken a fair amount of pulling out my hair to get the feature tests all green.  Standing in the way of the release were the data migration that would take existing members&rsquo; Stripe IDs from the User model to the Subscription/PaymentSource models.  There was also a fair amount of gnarly code that was suffering from Demeter violations.</p>
+
+<p>My internal dialogue was as follows:</p>
+
+<blockquote>
+<p>We could do the migrations on the production server manually, but it would be error-prone, and we got in trouble with the Karma migrations last time.  That said, this time we are not deleting the old db column.  Even so, what we really should have done last time was a dry-run of the migration, so if we have a script of it this time, it&rsquo;ll make it easier to dry-run it and/or rerun it.</p>
+</blockquote>
+
+<p>I decided to get the migration code done, and also to write a cucumber test for it.  I&rsquo;d be following up with a later migration to remove the db column and the migration test in a few weeks.  Exhilarating to be writing code that I plan to delete soon!</p>
+<pre class="highlight gherkin"><code><span class="nt">@rake</span>
+<span class="kd">Feature</span><span class="p">:</span> Migrate the stripe data
+  As the admin
+  So that users can get premium related functionality related to the new data schema
+  I want to migrate to the new data structure
+
+  <span class="kn">Background</span><span class="p">:</span>
+    <span class="nf">Given</span> the following users exist
+      <span class="p">|</span> <span class="nv">first_name</span> <span class="p">|</span> <span class="nv">last_name</span> <span class="p">|</span> <span class="nv">email</span>                  <span class="p">|</span> <span class="nv">stripe_customer</span> <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Alice</span>      <span class="p">|</span> <span class="n">Jones</span>     <span class="p">|</span> <span class="n">alice@btinternet.co.uk</span> <span class="p">|</span> <span class="n">345rfyuh</span>        <span class="p">|</span>
+
+  <span class="kn">Scenario</span><span class="p">:</span> Migrate the stripe data to the new architecture
+    <span class="nf">When</span> I run the rake task for migrating stripe
+    <span class="nf">Then</span> <span class="s">"alice@btinternet.co.uk"</span> shoud have <span class="s">"345rfyuh"</span> in their subscription
+</code></pre>
+<p>here are the relevant step definitions:</p>
+<pre class="highlight ruby"><code><span class="no">When</span><span class="p">(</span><span class="sr">/^I run the rake task for migrating stripe$/</span><span class="p">)</span> <span class="k">do</span>
+  <span class="vg">$rake</span><span class="p">[</span><span class="s1">'db:migrate_stripe'</span><span class="p">].</span><span class="nf">execute</span>
+<span class="k">end</span>
+
+<span class="no">Then</span><span class="p">(</span><span class="sr">/^"([^"]*)" shoud have "([^"]*)" in their subscription$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">email</span><span class="p">,</span> <span class="n">stripe_id</span><span class="o">|</span>
+  <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find_by_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">stripe_customer_id</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="n">stripe_id</span>
+<span class="k">end</span>
+</code></pre>
+<p>and the rake hook:</p>
+<pre class="highlight ruby"><code><span class="no">Before</span><span class="p">(</span><span class="s1">'@rake'</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">scenario</span><span class="o">|</span>
+  <span class="k">unless</span> <span class="vg">$rake</span>
+    <span class="nb">require</span> <span class="s1">'rake'</span>
+    <span class="no">Rake</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">rake_require</span> <span class="s1">'tasks/scheduler'</span>
+    <span class="no">Rake</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">rake_require</span> <span class="s1">'tasks/migrate_stripe_customer_ids'</span>
+    <span class="no">Rake</span><span class="o">::</span><span class="no">Task</span><span class="p">.</span><span class="nf">define_task</span><span class="p">(</span><span class="ss">:environment</span><span class="p">)</span>
+    <span class="vg">$rake</span> <span class="o">=</span> <span class="no">Rake</span><span class="o">::</span><span class="no">Task</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>and the rake task itself:</p>
+<pre class="highlight ruby"><code><span class="n">namespace</span> <span class="ss">:db</span> <span class="k">do</span>
+  <span class="n">desc</span> <span class="s2">"Migrate stripe user ids from User model to Subscription model"</span>
+
+  <span class="n">task</span> <span class="ss">:migrate_stripe</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+    <span class="no">User</span><span class="p">.</span><span class="nf">all</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
+      <span class="k">if</span> <span class="n">user</span><span class="p">.</span><span class="nf">stripe_customer</span>
+        <span class="n">user</span><span class="p">.</span><span class="nf">subscription</span> <span class="o">=</span> <span class="no">Premium</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">started_at: </span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span> 
+        <span class="c1"># Time.now not ideal but can set manually later</span>
+        <span class="n">user</span><span class="p">.</span><span class="nf">subscription</span><span class="p">.</span><span class="nf">payment_source</span> <span class="o">=</span> <span class="no">PaymentSource</span><span class="o">::</span><span class="no">Stripe</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">identifier: </span><span class="n">user</span><span class="p">.</span><span class="nf">stripe_customer</span><span class="p">)</span>
+        <span class="n">user</span><span class="p">.</span><span class="nf">save</span>
+        <span class="no">Logger</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">STDOUT</span><span class="p">).</span><span class="nf">info</span> <span class="n">user</span><span class="p">.</span><span class="nf">display_name</span><span class="p">.</span><span class="nf">bold</span><span class="p">.</span><span class="nf">blue</span> <span class="o">+</span> <span class="s2">" stripe customer id migrated"</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="no">Logger</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">STDOUT</span><span class="p">).</span><span class="nf">info</span> <span class="s2">"migration has been completed"</span><span class="p">.</span><span class="nf">green</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>I got this working, but was unhappy that I&rsquo;d replicated gnarly Demeter violations from the charges controller into the migration task itself.  However I had the migration task green, and now I could refactor with more confidence.  I was tempted for a moment to pull this upgrade logic into the User class itself.  It sort of makes sense to say something like <code>user.upgrade_to_premium</code>, but our User model is already overblown with responsibilities, and really this is a process that involves manipulating and setting up several domain entities.  I went for a service, and I test drove it in the London style with the following code:</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="no">UpgradeUserToPremium</span> <span class="k">do</span>
+
+  <span class="n">subject</span><span class="p">(</span><span class="ss">:upgrade_user_to_premium</span><span class="p">)</span> <span class="p">{</span> <span class="n">described_class</span><span class="p">.</span><span class="nf">with</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">stripe_id</span><span class="p">,</span> <span class="n">payment_source_klass</span><span class="p">,</span> <span class="n">subscription_klass</span><span class="p">)</span> <span class="p">}</span>
+
+  <span class="n">let</span><span class="p">(</span><span class="ss">:subscription_klass</span><span class="p">)</span> <span class="p">{</span> <span class="n">class_double</span><span class="p">(</span><span class="no">Premium</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:payment_source_klass</span><span class="p">)</span> <span class="p">{</span> <span class="n">class_double</span><span class="p">(</span><span class="no">PaymentSource</span><span class="o">::</span><span class="no">Stripe</span><span class="p">)</span> <span class="p">}</span>
+
+  <span class="n">let</span><span class="p">(</span><span class="ss">:stripe_id</span><span class="p">)</span> <span class="p">{</span> <span class="n">instance_double</span><span class="p">(</span><span class="s1">'StripeID'</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:time</span><span class="p">)</span> <span class="p">{</span> <span class="n">instance_double</span><span class="p">(</span><span class="no">Time</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="n">instance_double</span><span class="p">(</span><span class="no">User</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:subscription</span><span class="p">)</span> <span class="p">{</span> <span class="n">instance_double</span><span class="p">(</span><span class="no">Premium</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:payment_source</span><span class="p">)</span> <span class="p">{</span> <span class="n">instance_double</span><span class="p">(</span><span class="no">PaymentSource</span><span class="o">::</span><span class="no">Stripe</span><span class="p">)</span> <span class="p">}</span>
+
+  <span class="n">before</span> <span class="k">do</span>
+    <span class="n">allow</span><span class="p">(</span><span class="n">payment_source_klass</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:new</span><span class="p">)</span>
+    <span class="n">allow</span><span class="p">(</span><span class="n">subscription_klass</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:new</span><span class="p">)</span>
+    <span class="n">allow</span><span class="p">(</span><span class="n">user</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:subscription</span><span class="o">=</span><span class="p">)</span>
+    <span class="n">allow</span><span class="p">(</span><span class="n">user</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:save</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'creates a payment source'</span> <span class="k">do</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">payment_source_klass</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:new</span><span class="p">).</span><span class="nf">with</span><span class="p">({</span><span class="ss">identifier: </span><span class="n">stripe_id</span><span class="p">})</span>
+    <span class="n">upgrade_user_to_premium</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'creates a subscription of the appropriate type'</span> <span class="k">do</span>
+    <span class="n">allow</span><span class="p">(</span><span class="n">payment_source_klass</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:new</span><span class="p">).</span><span class="nf">and_return</span><span class="p">(</span><span class="n">payment_source</span><span class="p">)</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">subscription_klass</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:new</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="ss">started_at: </span><span class="n">time</span><span class="p">,</span> <span class="ss">payment_source: </span><span class="n">payment_source</span><span class="p">)</span>
+    <span class="n">upgrade_user_to_premium</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'sets the user subscription'</span> <span class="k">do</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">subscription_klass</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:new</span><span class="p">).</span><span class="nf">and_return</span><span class="p">(</span><span class="n">subscription</span><span class="p">)</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">user</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:subscription</span><span class="o">=</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">subscription</span><span class="p">)</span>
+    <span class="n">upgrade_user_to_premium</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s1">'saves the user'</span> <span class="k">do</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">user</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:save</span><span class="p">)</span>
+    <span class="n">upgrade_user_to_premium</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+</code></pre>
+<p>to be honest I actually wrote out a sketch of the service in a text editor before driving the above in RubyMine, but here&rsquo;s how the TDD&rsquo;d version ended up:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">UpgradeUserToPremium</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">with</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">stripe_id</span><span class="p">,</span> <span class="n">payment_source_klass</span> <span class="o">=</span> <span class="no">PaymentSource</span><span class="o">::</span><span class="no">Stripe</span><span class="p">,</span> <span class="n">subscription_klass</span> <span class="o">=</span> <span class="no">Premium</span><span class="p">)</span>
+    <span class="n">payment_source</span> <span class="o">=</span> <span class="n">payment_source_klass</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">identifier: </span><span class="n">stripe_id</span><span class="p">)</span>
+    <span class="n">user</span><span class="p">.</span><span class="nf">subscription</span> <span class="o">=</span> <span class="n">subscription_klass</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">started_at: </span><span class="n">time</span><span class="p">,</span> <span class="ss">payment_source: </span><span class="n">payment_source</span><span class="p">)</span>
+    <span class="n">user</span><span class="p">.</span><span class="nf">save</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>I know that some of my colleagues prefer the Chicago style, and some people might think that the above involves a ridiculous amount of test code for a three line class method.  The RSpec suffers from not being as comprehensible as it might be by people who aren&rsquo;t comfortable with RSpec concepts like <code>let</code>, <code>allow</code>, <code>receive</code> and so forth.  What I can say in its defence (and I am still on the fence) is that there is a coherent shape in my mind here that has some level of intrinsic beauty.  The RSpec unit test of the service is following the heuristic that each <code>it</code> statement should test only one thing.   The <code>let</code> statements make the set of collaborating entities completely explicit.  The <code>before</code> block sets up to stub all the outgoing collaborators of the method, so that each of the four <code>it</code> statements does not actually reach any other part of the system, making this a unit and not an integration test.  Then each <code>it</code> block tests each of the four key things that happen in the method.  </p>
+
+<p>Here we could argue that the method is doing too much - it does four things and should have a single responsibility (according to the SOLID principles).  I could break out some smaller methods, but I think this is actually the right level of granularity.  We have a concept in the domain that is upgrading a user to premium, and these are the four things that will need to happen to set that up and persist it.  The Demeter violations of the earlier code are gone, and the tests are still green, showing that the migration is working.  Furthermore, we can use the same service in the charges controller which goes from this:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">update_user_to_premium</span><span class="p">(</span><span class="n">stripe_customer</span><span class="p">)</span>
+  <span class="k">return</span> <span class="k">unless</span> <span class="n">current_user</span>
+  <span class="n">current_user</span><span class="p">.</span><span class="nf">subscription</span> <span class="o">=</span> <span class="no">Premium</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">started_at: </span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span>
+  <span class="n">current_user</span><span class="p">.</span><span class="nf">subscription</span><span class="p">.</span><span class="nf">payment_source</span> <span class="o">=</span> <span class="no">PaymentSource</span><span class="o">::</span><span class="no">Stripe</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">identifier: </span><span class="n">stripe_customer</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+  <span class="n">current_user</span><span class="p">.</span><span class="nf">save</span>
+<span class="k">end</span>
+</code></pre>
+<p>to this:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">update_user_to_premium</span><span class="p">(</span><span class="n">stripe_customer</span><span class="p">)</span>
+  <span class="k">return</span> <span class="k">unless</span> <span class="n">current_user</span>
+  <span class="no">UpgradeUserToPremium</span><span class="p">.</span><span class="nf">with</span><span class="p">(</span><span class="n">current_user</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">,</span> <span class="n">stripe_customer</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>and our migration cleans up like so:</p>
+<pre class="highlight ruby"><code><span class="n">namespace</span> <span class="ss">:db</span> <span class="k">do</span>
+  <span class="n">desc</span> <span class="s2">"Migrate stripe user ids from User model to Subscription model"</span>
+
+  <span class="n">task</span> <span class="ss">:migrate_stripe</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+    <span class="no">User</span><span class="p">.</span><span class="nf">all</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
+      <span class="k">if</span> <span class="n">user</span><span class="p">.</span><span class="nf">stripe_customer</span>
+        <span class="c1"># setting time as now not ideal but can set manually later</span>
+        <span class="no">UpgradeUserToPremium</span><span class="p">.</span><span class="nf">with</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="nf">stripe_customer</span><span class="p">)</span>
+        <span class="no">Logger</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">STDOUT</span><span class="p">).</span><span class="nf">info</span> <span class="n">user</span><span class="p">.</span><span class="nf">display_name</span><span class="p">.</span><span class="nf">bold</span><span class="p">.</span><span class="nf">blue</span> <span class="o">+</span> <span class="s2">" stripe customer id migrated"</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="no">Logger</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">STDOUT</span><span class="p">).</span><span class="nf">info</span> <span class="s2">"migration has been completed"</span><span class="p">.</span><span class="nf">green</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>So far so good.  We&rsquo;re left with some Demeter violations in the upgrade to premium plus code in the charges controller:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">upgrade</span>
+  <span class="n">current_user</span><span class="p">.</span><span class="nf">subscription</span><span class="p">.</span><span class="nf">type</span> <span class="o">=</span> <span class="s1">'PremiumPlus'</span>
+  <span class="n">current_user</span><span class="p">.</span><span class="nf">save</span>
+  <span class="n">customer</span> <span class="o">=</span> <span class="no">Stripe</span><span class="o">::</span><span class="no">Customer</span><span class="p">.</span><span class="nf">retrieve</span><span class="p">(</span><span class="n">current_user</span><span class="p">.</span><span class="nf">stripe_customer_id</span><span class="p">)</span>
+  <span class="n">subscription</span> <span class="o">=</span> <span class="n">customer</span><span class="p">.</span><span class="nf">subscriptions</span><span class="p">.</span><span class="nf">retrieve</span><span class="p">(</span><span class="n">customer</span><span class="p">.</span><span class="nf">subscriptions</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+  <span class="n">subscription</span><span class="p">.</span><span class="nf">plan</span> <span class="o">=</span> <span class="s2">"premiumplus"</span>
+  <span class="n">subscription</span><span class="p">.</span><span class="nf">save</span>
+<span class="k">end</span>
+</code></pre>
+<p>I don&rsquo;t like this, and I don&rsquo;t like how we&rsquo;ve ended up overloading the charges controller.  The former is the Stripe API that perhaps we&rsquo;re using incorrectly, but I don&rsquo;t know that I can justify putting an adapter on this right now.  The charges controller needs a bigger refactoring, but I&rsquo;m making the judgement call that these two things go into refactoring tickets.  In the ideal world I&rsquo;d also love more sad path tests in places, but again, this PR has been open long, we need the data migration in and from a charity/business perspective we&rsquo;re likely to bring in more revenue by actually releasing the individual sign up pages for the new intermediate plans, and they&rsquo;ll have to be a fair amount of work going on on top of this code to handle the new sequence of upgrades that are possible, so like Sandi Metz suggests, I&rsquo;m hedging my bets about avoiding too much refactoring in an area where the code is in flux.</p>
+
+<p>At least the Heroku automated deploy is working, so I can easily do a manual test.  I&rsquo;m not thrilled about the placeholder button we have but again that can be another ticket:</p>
+
+<p><img alt="upgrade to premium plus button" src="https://www.dropbox.com/s/2aom85mgn7pv16p/Screenshot%202016-10-25%2010.50.14.png?dl=1" /></p>
+
+<p>Of course now Google Hangouts on Air have switched to YouTube live and our automated distribution of hangouts is failing - we&rsquo;ve got a manual override but it has a bug I blogged about last week which will drag me away from pushing out these other plans &hellip; gah!  It&rsquo;s all about the prioritization &hellip; At least I quite enjoyed writing all the above code :-)</p>
+
+<p>Related Videos:</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Qt1QmFyBdpY">&ldquo;Kent Beck&rdquo; scrum</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
