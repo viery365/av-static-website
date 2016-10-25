@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/25/solo-coding/"/>
     <id>http://blog.url.com/2016/10/25/solo-coding/</id>
     <published>2016-10-25T01:00:00+01:00</published>
-    <updated>2016-10-25T21:04:46+01:00</updated>
+    <updated>2016-10-25T21:14:29+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -22,7 +22,7 @@
 
 &lt;p&gt;&lt;img alt="new domain entities" src="https://www.dropbox.com/s/lm03tpkm2xqe9kb/Screenshot%202016-10-25%2020.52.36.png?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;You might say why didn&amp;rsquo;t you build all this in from the start?  Because we were following the Agile process of only building what we needed for the immediate future.  Now that we&amp;rsquo;ve validated that people will sign up for Premium and Premium Plus plans, we&amp;rsquo;re moving on to gamble that some of them might be willing to upgrade.  Actually the feedback I&amp;rsquo;m getting suggests that the Premium Plus plan is too expensive, so next up we&amp;rsquo;ll be inserting some intermediate plans, but anyway, one feature at a time.  The &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1323"&gt;PR for this feature&lt;/a&gt; has been open a dangerously long time due to my knee operation and it needing fixing up (both the PR and my knew).  It had taken a fair amount of pulling out my hair to get the feature tests all green.  Standing in the way of the release were the data migration that would take existing members&amp;rsquo; Stripe IDs from the User model to the Subscription/PaymentSource models.  There was also a fair amount of gnarly code that was suffering from Demeter violations.&lt;/p&gt;
+&lt;p&gt;You might say why didn&amp;rsquo;t you build all this in from the start?  Because we were following the Agile process of only building what we needed for the immediate future.  Now that we&amp;rsquo;ve validated that people will sign up for Premium and Premium Plus plans, we&amp;rsquo;re moving on to gamble that some of them might be willing to upgrade.  Actually the feedback I&amp;rsquo;m getting suggests that the Premium Plus plan is too expensive, so next up we&amp;rsquo;ll be inserting some intermediate plans, but anyway, one feature at a time.  The &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1323"&gt;PR for this feature&lt;/a&gt; has been open a dangerously long time due to my knee operation and it needing fixing up (both the PR and my knee).  It had taken a fair amount of pulling out my hair to get the feature tests all green.  Standing in the way of the release were the data migration that would take existing members&amp;rsquo; Stripe IDs from the User model to the Subscription/PaymentSource models.  There was also a fair amount of gnarly code that was suffering from Demeter violations.&lt;/p&gt;
 
 &lt;p&gt;My internal dialogue was as follows:&lt;/p&gt;
 
