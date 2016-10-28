@@ -5,16 +5,116 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-10-27T01:00:00+01:00</updated>
+  <updated>2016-10-28T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Opportunity in Disguise</title>
+    <link rel="alternate" href="http://blog.url.com/2016/10/28/opportunity-in-disguise/"/>
+    <id>http://blog.url.com/2016/10/28/opportunity-in-disguise/</id>
+    <published>2016-10-28T01:00:00+01:00</published>
+    <updated>2016-10-28T21:31:37+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;The new plan payment end points are winding their way to production, and I stepped back to the AsyncVoter code (which was now green) following a mob session with Michael, Raphael and Alex yesterday.  I wasn&amp;rsquo;t there so apologies if I left anyone out.  I know Joao, Junior and Chaiwa are following things closely.  The clear difference for me between a Node/Express app and a Ruby/Sinatra app is that I can pretty much fix any problem very fast in the latter.  I&amp;rsquo;ve done Node/Express here and there over the years, but nothing like the volume I have in Ruby.  Raphael also talked about things being slow going in their session, but they&amp;rsquo;d got everything green.  I think ultimately it had come down to making sure the correct database setup was going on in the &lt;code&gt;server.js&lt;/code&gt; file:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;mongoose&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'mongoose'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="nx"&gt;mongoose&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'mongodb://localhost/asyncvoter'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;mongoose&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;connection&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nx"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'error'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;error&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;bind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'connection error:'&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;span class="nx"&gt;db&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;once&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'open'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// we're connected!&lt;/span&gt;
+    &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Connected correctly to server"&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href="https://github.com/AgileVentures/AsyncVoter/blob/2f42dee39c727cd5b6e849ac955a818bc0faa6ae/bin/server.js"&gt;https://github.com/AgileVentures/AsyncVoter/blob/master/bin/server.js&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This is the kind of thing where I would benefit from some &lt;a href="http://philipmjohnson.org/essays/athletic-software-engineering.html"&gt;athletic&lt;/a&gt; coding repetitions (reps).  I used to do those a lot with the students at Makers Academy, following from Philip Johnson&amp;rsquo;s Athletic Software Engineering concept, where you repeat the same exercise over and over, building in muscle memory and getting your task completion time down.  So for example I&amp;rsquo;ve repped generating a Sinatra app many many times, and a PORO domain model with RSpec hundreds of times.  We can also refer to these things as coding kata.  Often kata are just in the plain programming domain, but I think there&amp;rsquo;s a lot to be said for &amp;ldquo;infrastructure&amp;rdquo; kata that involve repeatedly building a Sinatra or Express app from scratch.  You encounter all the setup errors outside the context of trying to get something else done, which makes them less stressful.&lt;/p&gt;
+
+&lt;p&gt;Anyway, it has been a year or so since I was repping on node/express so it was great the others had sorted the database issues in a mob session while I was kicking out the premium plan payment endpoints for our Rails app in a solo session.  In the review session I pulled the code onto my machine and everything pretty much worked except a Rails app I still had running on port 3000 blocked the tests, leading to a new &lt;a href="https://github.com/AgileVentures/AsyncVoter/issues/15"&gt;issue&lt;/a&gt; for the project.  So we got the PR patched up and our first feature completed for AsyncVoter.  While we were waiting for the CI to pass we got a couple of general discussion points out of the way.&lt;/p&gt;
+
+&lt;p&gt;One was the domain model terminology, where we were thinking to rename &lt;a href="https://github.com/AgileVentures/AsyncVoter/issues/16"&gt;&amp;ldquo;Stories&amp;rdquo; to &amp;ldquo;Ballots&amp;rdquo;&lt;/a&gt;.  I dashed off a quick domain model:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Users cast individual Votes, on Ballots that concern Stories. Stories are uniquely identified by a URL, and will often have a Name, which is also the Name of the Ballot. The result of a Ballot will be when all the Users&amp;rsquo; votes are the same, e.g. all 1s, all 2s, or all 3s.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I proposed that we didn&amp;rsquo;t need explicit User or Story domain entities at this point, and that going simplicity first, we could probably get away with a single Ballot having a set of associated Votes.  We&amp;rsquo;ll see if that gets adopted.  The other question was the cool Uncle Bob architecture that Joao had put in the spike where all the code was organised by domain entities.  It had the downside that some folks had been confused by the lack of a &amp;ldquo;standard&amp;rdquo; Express structure, with separate folders for models, controllers etc.  We opened a &lt;a href="https://github.com/AgileVentures/AsyncVoter/issues/17"&gt;ticket&lt;/a&gt; for that.  It seemed like people didn&amp;rsquo;t care too much either way and we agreed that if anyone felt strongly enough they could do a PR to adjust the structure, but do it before the project got too big.&lt;/p&gt;
+
+&lt;p&gt;So, lovely green shoots in the AsyncVoter project, although it may still be a little time before the logistical overhead of running asynchronous votes for other projects will actually be reduced.  Still, no crazy rush now that we&amp;rsquo;re rotating who&amp;rsquo;s running the asynchronous votes in LocalSupport and WebSiteOne.  In the process we&amp;rsquo;re familiarising everyone with the process of asynchronous voting.  Avoiding the synchronous meetings that no one seems to enjoy; providing a lightweight mechanism for people to get involved in projects; leaving a visible trail of discussion in the Slack channels so the project activity is clearly visible.  All good really.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s in stark contrast to the ongoing absence of the Google Hangouts API.  The switch to YouTube Live does not prevent us from starting Hangouts on Air, which we can still do, we just can&amp;rsquo;t seem to do it programmatically.   There has been no response from Google in the three days since I posted my &lt;a href="http://stackoverflow.com/questions/40233393/start-a-hangout-on-air-button-for-youtube-livestreaming-api"&gt;SO question&lt;/a&gt; and reading the YouTube live documentation it seems like it&amp;rsquo;s focused on supporting those who want to start a video stream from their desktop, not start a Hangout where multiple people can congregate to collaborate.&lt;/p&gt;
+
+&lt;p&gt;We started to brainstorm the alternatives: &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://dev.twitch.tv/"&gt;twitch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://agileventures.slack.com/apps/A0F827L3S-room"&gt;room (for slack)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;(other slack meeting tools - &lt;a href="https://agileventures.slack.com/apps/search?q=video"&gt;I see 20+&lt;/a&gt; )&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://zoom.us"&gt;zoom&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.gotomeeting.co.uk/"&gt;gotomeeting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.livecoding.tv/developer/applications/webrt"&gt;live coding&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;build our own - &lt;a href="https://webrtc.org/"&gt;WebRTC&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We need to evaluate each of these in terms of what we need for AgileVentures, which includes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;telemetry (plugins)&lt;/li&gt;
+&lt;li&gt;stability&lt;/li&gt;
+&lt;li&gt;recordable&lt;/li&gt;
+&lt;li&gt;access via URL&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Our AgileVentures Karma system is based on giving people credit for attending events, so we need telemetry.  The whole thing has to be stable, as it is difficult enough to get people together in a hangout.  When the technology is dodgy it&amp;rsquo;s a huge barrier, and we&amp;rsquo;re also committed to recording as part of our open development philosophy.  Also having a URL that will take you to the video conference makes it hugely easy to share with others to get them into the conference.  &lt;/p&gt;
+
+&lt;p&gt;Maybe we will have to end up compromising on one or all of these in order to continue.  At the moment we are limping along manually creating hangouts via the live events interface.  We are bleeding in terms of MOOC students not having support to easily creating pairing hangouts, and people finding it harder to join scrums.  The problems can be itemised as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;manual work for scrum masters (posting links to slack etc.)&lt;/li&gt;
+&lt;li&gt;no telemetry from hangouts (within Google button API our plugin no longer communicates to server)&lt;/li&gt;
+&lt;li&gt;descriptions of how to start pairing sessions now incorrect - MOOC folks and many projects folks confused - unable to connect&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We came up with the following short term solutions:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;adjust WSO functionality to better support manual adding of link to hangout (?) (URL) &amp;ndash;&amp;gt; ping slack (reduces some manual work)&lt;/li&gt;
+&lt;li&gt;adjust WSO functionality to stay alive without telemetry&lt;/li&gt;
+&lt;li&gt;add instructions for copying across URL&lt;/li&gt;
+&lt;li&gt;hangout plugin - add ability to specific data to send telemetry back (will only work for people who previously ran hangout with plugin) &amp;ndash;&amp;gt; no way to now inject hangout plugins?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and also had a few out of the box ideas:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;focus on asynchronous stuff? e.g. scrums in text chat in slack? or something&lt;/li&gt;
+&lt;li&gt;revenue stream from ads on youtube&lt;/li&gt;
+&lt;li&gt;can we use the live event interface to start a hangout with selenium or something?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It felt good to be able to review all the issues in a group.  The sensible thing seemed to be to focus on the first three items in the short term solutions above.  Good support for manual URL addition would not tie us to Hangouts, which of course might completely disappear.  If only they were open source!  The key fundamental is really to be able to share a URL to the video conference through the various media that people are connected with.   I&amp;rsquo;ll try and get to the manual URL hangout fixes today, and then next week we can keep evaluating all the alternatives.  It might also be time to focus on allowing people to start hangouts from Slack where the activity is watchable, repeatable and copyable.  It offers a much more lightweight learning mechanism than a web interface.  Real time text chat really has the huge advantage over the web that you can immediately ask folks how they did anything, whether that&amp;rsquo;s starting or voting in an Asynchronous vote, how they started a hangout etc &amp;hellip;  &lt;/p&gt;
+
+&lt;p&gt;What&amp;rsquo;s been so great to see this week is the AgileVentures members working hard to get round the problems, helping each other, brainstorming solutions.  Maybe this truly is an opportunity in disguise &amp;hellip; Okay, time to code! &lt;/p&gt;
+
+&lt;p&gt;Related Videos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=DyLL5_QxLkU"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Zmt8FjqMTLE"&gt;AsyncVoter Review&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=DyLL5_QxLkU"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Red Green Refactor (Against the Clock)</title>
     <link rel="alternate" href="http://blog.url.com/2016/10/27/red-green-refactor/"/>
     <id>http://blog.url.com/2016/10/27/red-green-refactor/</id>
     <published>2016-10-27T01:00:00+01:00</published>
-    <updated>2016-10-27T18:33:07+01:00</updated>
+    <updated>2016-10-28T21:25:41+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -116,7 +216,7 @@ end
     <link rel="alternate" href="http://blog.url.com/2016/10/26/pulled-in-different-directions/"/>
     <id>http://blog.url.com/2016/10/26/pulled-in-different-directions/</id>
     <published>2016-10-26T01:00:00+01:00</published>
-    <updated>2016-10-26T20:49:37+01:00</updated>
+    <updated>2016-10-28T21:25:41+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -154,7 +254,7 @@ end
     <link rel="alternate" href="http://blog.url.com/2016/10/25/solo-coding/"/>
     <id>http://blog.url.com/2016/10/25/solo-coding/</id>
     <published>2016-10-25T01:00:00+01:00</published>
-    <updated>2016-10-25T21:14:29+01:00</updated>
+    <updated>2016-10-28T21:25:41+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -341,7 +441,7 @@ end
     <link rel="alternate" href="http://blog.url.com/2016/10/24/tying-up-loose-ends/"/>
     <id>http://blog.url.com/2016/10/24/tying-up-loose-ends/</id>
     <published>2016-10-24T01:00:00+01:00</published>
-    <updated>2016-10-24T21:31:38+01:00</updated>
+    <updated>2016-10-28T21:25:41+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -432,7 +532,7 @@ Destroying ⬢ ancient-dusk-4608 (including all add-ons)... done
     <link rel="alternate" href="http://blog.url.com/2016/10/21/yak-shaving/"/>
     <id>http://blog.url.com/2016/10/21/yak-shaving/</id>
     <published>2016-10-21T01:00:00+01:00</published>
-    <updated>2016-10-21T20:43:04+01:00</updated>
+    <updated>2016-10-28T21:25:41+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -471,32 +571,6 @@ DETAIL:  User does not have CONNECT privilege.
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ZZa-80c9qos"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>To Pair or Not To Pair</title>
-    <link rel="alternate" href="http://blog.url.com/2016/10/20/to-pair-or-not-to-pair/"/>
-    <id>http://blog.url.com/2016/10/20/to-pair-or-not-to-pair/</id>
-    <published>2016-10-20T01:00:00+01:00</published>
-    <updated>2016-10-20T19:31:50+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Okay, some coding needs to get done.  Right now there are several things that might bring in more critical revenue for AgileVentures:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1342"&gt;PayPal integration&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1344"&gt;Sponsor others functionality&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1343"&gt;Mid range premium plans&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I have at least one potential sign up standing by on the first two, and after several rounds of feedback a general sense that releasing some mid range premium plans might have a significant impact.  Yesterday I burned a big chunk of time in a meeting with a potential sponsor, and if I can close that deal it&amp;rsquo;s a big step forward, so I don&amp;rsquo;t begrudge the time so much, but I didn&amp;rsquo;t get much programming done.  Michael and I were mid-way through another feature to allow upgrade from premium to premium plus.  The &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1323"&gt;PR&lt;/a&gt; is green after some solo work, but deploying it involves a data migration and there&amp;rsquo;s a fair amount that could go wrong.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m also starting to ask myself if I could make faster progress on some of these things solo.  I&amp;rsquo;ve been very committed to pair programming for several years now and I really do believe in the value of pairing to distribute knowledge through the team, and to help everyone learn and improve.  However we don&amp;rsquo;t have a big team to pair rotate through on WebSiteOne, and whilst we have onboarded or re-boarded a couple of junior/mid-level devs recently, the logistics of getting them together as they do job-hunts in parallel are making my head spin.  Back in the day I used to get up at 4am and do 3 hours coding before breakfast.  Maybe I need to do something like that again to push us forward, or maybe that would be grossly counter-productive.&lt;/p&gt;
-
-&lt;p&gt;Sensibly with all the features it&amp;rsquo;s one thing at a time and don&amp;rsquo;t stress too much about which to do first.  I think the existing feature needs to be pushed out.  In the long run it will make sense to support easy upgrade from one plan to the next.  Voting on the new features is sensible.  In the new AsyncVoter project we&amp;rsquo;re making some good progress by having different people alternate taking the lead on the votes. I should push that in my other projects, although the nature of AsyncVoter is that everyone is keen to understand the &amp;ldquo;bot&amp;rdquo; role to help implement it.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve got another long meeting today, which is an important chance to meet some different local charities but it will prevent me being at the &amp;ldquo;Martin Fowler&amp;rdquo; scrum, and I won&amp;rsquo;t be able to help coordinate others pairing, or get much pairing done myself.  One of the big upsides of pairing is task focus.  Your pair helps you stay on task.  At the moment I&amp;rsquo;m heavily distracted by slack and email and a slew of different admin tasks.  One step at a time.  If I&amp;rsquo;m going to make my next meeting today&amp;rsquo;s will have to be a short blog.  Not a bad thing perhaps as people keep telling me I go on too long.  More programming blogs soon I hope!&lt;/p&gt;
 </content>
   </entry>
 </feed>
