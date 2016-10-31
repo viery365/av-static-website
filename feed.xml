@@ -5,16 +5,133 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-10-28T01:00:00+01:00</updated>
+  <updated>2016-10-31T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Crunch Time</title>
+    <link rel="alternate" href="http://blog.url.com/2016/10/31/crunch-time/"/>
+    <id>http://blog.url.com/2016/10/31/crunch-time/</id>
+    <published>2016-10-31T00:00:00+00:00</published>
+    <updated>2016-10-31T20:39:18+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;It was crunch time.  No answer from Google on the Hangout Button API.  It was dismantle our events framework or make some changes to the manual update functionality that would allow some parts of joining an event to start working again.  The problem was that even though our hangout plugin was automatically loaded into Hangouts started via YouTube, that hangout would only load for people who had previously run a successful AgileVentures hangout, and even then was now not set to communicate back to the AgileVenture&amp;rsquo;s server.&lt;/p&gt;
+
+&lt;p&gt;The current architecture would send notifications about a hangout on Slack and provide a link to that hangout on the AgileVenture&amp;rsquo;s site &lt;em&gt;if&lt;/em&gt; the hangout was started from a button on the AV site, and our custom plugin was loaded into the hangout with the right data payload.  Maybe we could adjust the plugin to be &lt;a href="https://developers.google.com/+/hangouts/publishing"&gt;installable&lt;/a&gt; into a YouTube started hangout and then connect back to our server to support the notifications and link display.  Certainly apps like &lt;a href="https://twitter.com/_madeye"&gt;MadEye&lt;/a&gt; used to work like that, but they&amp;rsquo;ve shut down and who knows how long Google will continue supporting the Hangout Plugin ecosystem.  It was clear from the discussions on Thursday that it made sense to start by enabling users to manually specify the hangout URL; have that act of manual specification lead to Slack notifications, and keep the links to the hangout on AgileVentures live for the duration the event.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="example of a live event link in AV" src="https://www.dropbox.com/s/5vseylfvnfeufd5/Screenshot%202016-10-31%2009.46.02.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The manual update of the URL had been broken for repeating events; a bug I had fixed earlier in the week.  Now the trouble was that following a manual update the event would only stay &amp;ldquo;live&amp;rdquo; for 2 minutes.  As Michael pointed out this was because when the whole system was working the hangout plugin would be sending back telemetry every 2 minutes and would keep the event &amp;ldquo;live&amp;rdquo;.  Effectively we wanted the site to be able to display &amp;ldquo;live&amp;rdquo; events accurately, so that people thinking about joining would be receiving accurate information about whether to expect others in the hangout.  All this was still short of my imagined ideal set up where you are able to see who is in a live hangout before you join.  This functionality was briefly available on the helpdesk hangouts we used to have in the &amp;ldquo;Agile Development using Ruby on Rails&amp;rdquo; MOOC, however it never worked for Hangouts on Air.  If the Google Hangout API had stayed stable, it&amp;rsquo;s something we might have been able to add fairly soon.  As it is now we&amp;rsquo;re just scrambling to keep existing features running.&lt;/p&gt;
+
+&lt;p&gt;Maybe I&amp;rsquo;m deluding myself about this, but I really do imagine that an infrastructure that allowed you to browse a set of collaborative events, seeing a preview of what is going on and who is participating, could recreate some of the wandering, networking aspect of an unconference or similar, but support it completely remotely. (maybe I should do a UI mockup &amp;hellip;).  Anyway, let me tell you how I fixed the manual URL update to support &amp;ldquo;live for the duration&amp;rdquo; and slack notifications.  I started with a cucumber test, splitting the existing edit hangout URL tests into a separate feature file so that I could reduce the dependencies between the background steps.  Long cucumber files with multiple scenarios relying on the same set of background set up start to feel almost as dangerous as tests relying about a large set of fixtures.  Here&amp;rsquo;s the new feature file header:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Manual Edit of Hangout URL
+  As a person involved in an event
+  So that I can ensure everyone can access the correct link to join an event
+  I would like to have means of editing the hangout URL
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And here&amp;rsquo;s the smaller(!) set of background steps I finally converged on:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="err"&gt;Given the date is "2014-02-04 06&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;59&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt;
+    &lt;span class="err"&gt;And following events exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;category&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;start_datetime&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;duration&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;time_zone&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats_every_n_weeks&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats_weekly_each_days_of_the_week_mask&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Daily&lt;/span&gt; &lt;span class="n"&gt;scrum&lt;/span&gt; &lt;span class="n"&gt;meeting&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014/02/04&lt;/span&gt; &lt;span class="n"&gt;07:00:00&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;15&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;never&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt;                       &lt;span class="p"&gt;|&lt;/span&gt;                                           &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Repeat&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Daily&lt;/span&gt; &lt;span class="n"&gt;scrum&lt;/span&gt; &lt;span class="n"&gt;meeting&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014/02/03&lt;/span&gt; &lt;span class="n"&gt;07:00:00&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;15&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;weekly&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt;                     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;15&lt;/span&gt;                                        &lt;span class="p"&gt;|&lt;/span&gt;
+    &lt;span class="err"&gt;And the following hangouts exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Start&lt;/span&gt; &lt;span class="nv"&gt;time&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Title&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Project&lt;/span&gt;    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Category&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Event&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;EventInstance&lt;/span&gt; &lt;span class="nv"&gt;url&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Youtube&lt;/span&gt; &lt;span class="nv"&gt;video&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;End&lt;/span&gt; &lt;span class="nv"&gt;time&lt;/span&gt;            &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2012-02-04&lt;/span&gt; &lt;span class="n"&gt;07:00:00&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;HangoutsFlow&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;WebsiteOne&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Repeat&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;http://hangout.test&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;QWERT55&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014-02-04&lt;/span&gt; &lt;span class="n"&gt;07:02:00&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014-02-05&lt;/span&gt; &lt;span class="n"&gt;07:00:00&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;HangoutsFlow&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;WebsiteOne&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Repeat&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;http://hangout.test&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;QWERT55&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014-02-05&lt;/span&gt; &lt;span class="n"&gt;07:03:00&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I am logged in
+    &lt;span class="nf"&gt;And&lt;/span&gt; I have Slack notifications enabled
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;These are irritatingly long at the moment partly due to the need to specify the &lt;code&gt;repeats_every_n_weeks&lt;/code&gt; and &lt;code&gt;repeats_weekly_each_days_of_the_week_mask&lt;/code&gt; fields on Events.  Trying to move fast I wasn&amp;rsquo;t about to start refactoring that, although I&amp;rsquo;d love to rewrite both of the above &lt;code&gt;following entities exist&lt;/code&gt; steps to avoid using factories that are shared with our specs, and make the whole thing more readable.&lt;/p&gt;
+
+&lt;p&gt;I drove from the simpler non-repeating event situation:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="nt"&gt;@javascript&lt;/span&gt;
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Edit Hangout URL and ensure event stays live
+    &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Scrum"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I open the Edit URL controls
+    &lt;span class="err"&gt;And I fill in "hangout_url" with "http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//test.com"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I click on the Save button
+    &lt;span class="err"&gt;Then I should see link "Join now" with "http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//test.com"&lt;/span&gt;
+    &lt;span class="err"&gt;And I jump to one minute before the end of the event at "2014-02-04 07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;14&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Scrum"&lt;/span&gt;
+    &lt;span class="err"&gt;Then I should see link "Join now" with "http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//test.com"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Naturally this was failing due to no updates from the plugin, and so I dropped to the RSpec level and drove the creation of a new field on EventInstance called &lt;code&gt;url_set_directly&lt;/code&gt; to serve as a flag to indicate that the hangout URL had been set manually. I&amp;rsquo;d been struggling with the domain entity name of EventInstance, which we use to represent a Hangout, and the names are used interchangeably throughout the codebase.  I had been thinking we should consolidate on Hangout, but actually now the future of Hangouts is up in the air, EventInstance starts to feel like the better choice, although surely there must be a better term?  Anyhow, don&amp;rsquo;t get sidetracked making domain model tweaks when you&amp;rsquo;re trying to get a fix into production!  I RSpec&amp;rsquo;d in the EventInstance spec like so:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;EventInstance&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;type: :model&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'has url_set_directly default to false'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;url_set_directly&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;be_falsey&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'hangout_url is present and is not finished'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hangout_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'test'&lt;/span&gt;
+      &lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hoa_status&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'anything'&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'url manually overridden'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;url_set_directly&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+      &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'reports live if the link is older than 2 minutes, and event duration not expired'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:within_current_event_duration?&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:now&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'10:02:01 UTC'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;live?&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;be_truthy&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which naturally failed since there was no such field as &lt;code&gt;url_set_directly&lt;/code&gt;, which lead me to generate this migration:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;AddUrlSetDirectlyColumnToEventInstance&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Migration&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;change&lt;/span&gt;
+    &lt;span class="n"&gt;add_column&lt;/span&gt; &lt;span class="ss"&gt;:event_instances&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:url_set_directly&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:boolean&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;default: &lt;/span&gt;&lt;span class="kp"&gt;false&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And made the following changes in the EventInstance class:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;live?&lt;/span&gt;
+    &lt;span class="n"&gt;started?&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;hoa_status&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s1"&gt;'finished'&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;updated_within_last_two_minutes?&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;manually_updated_event_not_finished?&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="kp"&gt;private&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;manually_updated_event_not_finished?&lt;/span&gt;
+    &lt;span class="n"&gt;url_set_directly&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;within_current_event_duration?&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The spec&amp;rsquo;s passed, although not the cukes.  Notice I&amp;rsquo;d stubbed the EventInstance (hangout) in the spec to allow calling &lt;code&gt;within_current_event_duration?&lt;/code&gt; on EventInstance objects. One usually doesn&amp;rsquo;t stub methods in the object under test, but here I was planning to delegate that call straight out to a collaborator. I wanted to be able to ask that of an EventInstance instance, and I could drive addig that with another spec for a delegation:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;EventInstance&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;type: :model&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;delegate_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:within_current_event_duration?&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and the code to make that spec green was:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;EventInstance&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+
+  &lt;span class="n"&gt;delegate&lt;/span&gt; &lt;span class="ss"&gt;:within_current_event_duration?&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;to: :event&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It would be really tidy to say that then the cukes went green, but there was an additional change in the view (to set the url&lt;em&gt;set&lt;/em&gt;directly flag) and then a good hour of getting lost in the time elements of Event, the IceCube scheduling gem etc. etc.Ultimately I think it was all down to slight incorrectness in the way I was setting the dates in the Cucumber steps.   Those sorted out everything was passing, and I got a &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1370"&gt;PR&lt;/a&gt; in, which Raoul deployed and we tested in staging.  It seemed to keep the event live, but Slack notifications were not going through.  That took the addition of several more parameters to the view, and another &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1372"&gt;PR&lt;/a&gt; which ultimately worked.  I&amp;rsquo;d definitely gone over budget with the time on this, I was not comfortable with some of the compromises I had made on the Cucumber steps, but I had something working that would allow João to run the Pacific Rim scrum in such a way that with a single manual step he&amp;rsquo;d be able to notify everyone on Slack, and the links on the AV site would stay live for 15 minutes to let people into the Scrum.&lt;/p&gt;
+
+&lt;p&gt;The set up also seemed to work at least partially for some less experienced Scrum masters over the weekend, but more support and scaffolding is clearly needed.  I also think that &lt;code&gt;url_set_directly&lt;/code&gt; needs to be a date rather than a flag, since I expect some repeating events may now say &amp;ldquo;live&amp;rdquo; incorrectly &amp;hellip; although maybe events all should say live for their duration? We would just need some kind of popup message in the hangout for people entering to let them know that no one else is there yet and that&amp;rsquo;s okay, and people could still meetup.  Of course Hangout&amp;rsquo;s can&amp;rsquo;t be re-broadcast &amp;hellip; is it worth pursuing a Hangout plugin to handle the new setup or will work invested there have to be thrown out when/if Google completely sunsets Hangouts?&lt;/p&gt;
+
+&lt;p&gt;It often feels like Hangouts is an engineeering black hole.  Perhaps now it&amp;rsquo;s time to switch focus onto adding PayPal payment support, and allowing people to sponsor each other&amp;rsquo;s Premium memberships on AgileVentures.  I have the feeling we could start receiving payments from at least two people if those two features were in place, so perhaps that&amp;rsquo;s the best focus?  In the meantime I could get some emails off to all the Hangout alternatives with a list of our needed features, e.g. recordability, URL to conference etc. &amp;hellip; On to the next Crunch Time!&lt;/p&gt;
+
+&lt;p&gt;Related Videos&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=nJVeelkuoGw"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Opportunity in Disguise</title>
     <link rel="alternate" href="http://blog.url.com/2016/10/28/opportunity-in-disguise/"/>
     <id>http://blog.url.com/2016/10/28/opportunity-in-disguise/</id>
     <published>2016-10-28T01:00:00+01:00</published>
-    <updated>2016-10-28T21:31:37+01:00</updated>
+    <updated>2016-10-31T10:18:34+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -114,7 +231,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/27/red-green-refactor/"/>
     <id>http://blog.url.com/2016/10/27/red-green-refactor/</id>
     <published>2016-10-27T01:00:00+01:00</published>
-    <updated>2016-10-28T21:25:41+01:00</updated>
+    <updated>2016-10-27T18:33:07+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -216,7 +333,7 @@ end
     <link rel="alternate" href="http://blog.url.com/2016/10/26/pulled-in-different-directions/"/>
     <id>http://blog.url.com/2016/10/26/pulled-in-different-directions/</id>
     <published>2016-10-26T01:00:00+01:00</published>
-    <updated>2016-10-28T21:25:41+01:00</updated>
+    <updated>2016-10-26T20:49:37+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -254,7 +371,7 @@ end
     <link rel="alternate" href="http://blog.url.com/2016/10/25/solo-coding/"/>
     <id>http://blog.url.com/2016/10/25/solo-coding/</id>
     <published>2016-10-25T01:00:00+01:00</published>
-    <updated>2016-10-28T21:25:41+01:00</updated>
+    <updated>2016-10-25T21:14:29+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -441,7 +558,7 @@ end
     <link rel="alternate" href="http://blog.url.com/2016/10/24/tying-up-loose-ends/"/>
     <id>http://blog.url.com/2016/10/24/tying-up-loose-ends/</id>
     <published>2016-10-24T01:00:00+01:00</published>
-    <updated>2016-10-28T21:25:41+01:00</updated>
+    <updated>2016-10-24T21:31:38+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -524,52 +641,6 @@ Destroying ⬢ ancient-dusk-4608 (including all add-ons)... done
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://youtu.be/_hAm_6T8r18"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=feu722TBjo4"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Yak Shaving</title>
-    <link rel="alternate" href="http://blog.url.com/2016/10/21/yak-shaving/"/>
-    <id>http://blog.url.com/2016/10/21/yak-shaving/</id>
-    <published>2016-10-21T01:00:00+01:00</published>
-    <updated>2016-10-28T21:25:41+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So I thought I&amp;rsquo;d try and get a little solo programming time in today, but it turned into a yak-shaving devops session.  Yak shaving?  It&amp;rsquo;s when you end up needing a ladder to paint your house, and you have to borrow a ladder from your friend, but you need to go get his keys from his neighbour who has to finish shaving his yak &amp;hellip; I know, it makes no sense - the point is about how you have one goal and then you get successively distracted by a series of activities that become more and more tangentially related to the original goal.  I was trying to get our premium plus upgrade functionality into production.  This was going to involve doing a data migration.  I wanted to get an instance of the branch with that code up in Heroku to test the migration.&lt;/p&gt;
-
-&lt;p&gt;Heroku&amp;rsquo;s automatic deploy of pull requests to Heroku instances is nice when it works.  It came out of beta, but still seems flaky.  I started poking at it.  First up it was saying that there wasn&amp;rsquo;t permission to deploy the app.  I&amp;rsquo;d just moved websiteone-develop from my personal account to my company NeuroGrid Ltd group account since all my personal app hours had been burned up by agile-bot.  Raoul had originally set up the automated deploys for the websiteone develop server, so somehow the automatic deploy of the PR was coming from his account.  I played with moving him from a collaborator to an admin role, which moved things forward a little.  The next error was the deploy was failing due to a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1348"&gt;database error&lt;/a&gt;.  One of the frustrating things about this was the delayed feedback loop.  I&amp;rsquo;d make a change in the &lt;code&gt;app.json&lt;/code&gt; file that specifies how Heroku will auto deploy PRs, or a change in Heroku&amp;rsquo;s admin console, and it takes five minutes or so to find out if the deploy has worked or not.  I was task switching between trying to fix the automated PR deploy and cleaning up what looked like a puffing billy sandbox leak on the branch itself. Ultimately though it was the PR deploy that was taking up more and more of my brain.&lt;/p&gt;
-
-&lt;p&gt;Was this another banana in a coconut?  Really if I wanted to get the premium upgrade feature out I should focus on pushing that to some new Heroku instance and leave fixing automated PR deploys to another time.  Of course automated PR deploys are great when they work, and they help project managers (including me) review PRs faster, and if it worked I wouldn&amp;rsquo;t have to do all the fiddly deploy to get the ENV vars set up for a new Heroku instance to test if the new feature.  The great thing about Heroku PR deploys (when they work) is that they copy all the environment vars from a specified server (in this case develop) and things are good to go.  However, running &lt;code&gt;rake db:seed&lt;/code&gt; to pre-populate the database as part of the &lt;code&gt;app.json&lt;/code&gt; post-deploy script was giving this error message:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;FATAL:  permission denied for database "postgres"
-DETAIL:  User does not have CONNECT privilege.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;but ironically, immediately after that we had all the output from what looked like a successful run of db:create and de:seed.  Confusing.  We&amp;rsquo;d had a similar &lt;a href="https://www.pivotaltracker.com/story/show/116276111"&gt;issue on LocalSupport previously&lt;/a&gt;, which had ultimately been fixed by &amp;hellip; I&amp;rsquo;m not sure.  LocalSupport automated Heroku PR deploys had been working for a while.  They were now stuck on a separate issue of us having too many apps, even though they were set to auto-delete after 5 days of inactivity.  Actually now that I type it out, I think the problem might be that the LocalSupport develop server is on my personal account, and I have a load of junk apps there; gotta clean those out - argh, yak shaving!  Either the definite trend over the last few months appears to have been Heroku gradually introducing new limits which we are falling foul of in new and unpleasant ways.&lt;/p&gt;
-
-&lt;p&gt;Anyway, the LocalSupport ticket (and an old Heroku ticket) included some ideas for changing app.json, e.g. including an explicit migrate step, and this from the Heroku folks:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;There is a caveat when building review apps that we have requested a new database addon, but it&amp;rsquo;s not guaranteed to be provisioned during the build phase. It sounds like something in your application is trying to access the database before your database is up and ready to receive connections.&lt;/p&gt;
-
-&lt;p&gt;The ideal fix is to track down why the app is connecting to the database during build and try to prevent that. If that&amp;rsquo;s not an option, we also have a buildpack that you can use to wait for your database to come up: https://github.com/heroku/heroku-buildpack-addon-wait.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I didn&amp;rsquo;t get to trying the build pack suggestion, instead going through a series of changes to app.json; moving the develop server into a heroku pipeline (see image below); an analysis of the stack trace associated with the above database fail, which seemed to possibly implicate &lt;a href="https://github.com/airbrake/airbrake/issues/620"&gt;airbrake&lt;/a&gt; but probably not.  Ultimately I did not get it working, but did succeed in spamming Raoul and myself with failed Slack invites that get generated as part of the &lt;code&gt;rake db:setup&lt;/code&gt;.  I posted support requests to Heroku, which as of this morning have not been picked up and as of this morning I tried removing the &lt;code&gt;rake db:setup&lt;/code&gt; completely, which allowed the app to report &amp;ldquo;successful&amp;rdquo; deployment, but when I looked there was just nothing there.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="heroku pipeline" src="https://www.dropbox.com/s/x6bmiswu6j89q8s/Screenshot%202016-10-21%2011.27.48.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Despite being admin, Raoul reported that he couldn&amp;rsquo;t even see the develop server in the Heroku GUI, and had removed his account over night.  I re-added him, put the &lt;code&gt;rake db:setup&lt;/code&gt; back in, adjusted the config to allow us to set Slack invites to be disabled on develop, and tried another push.  I felt like I could burn a lot of time on this.  The next sequence of things to try with this nasty delayed feedback loop are:&lt;/p&gt;
-
-&lt;p&gt;1) remove &lt;code&gt;rake db:setup&lt;/code&gt; again - maybe I can then just run from command line to a) get a working instance and b) understand the error better
-2) try the suggested &lt;code&gt;heroku-buildpack-addon-wait&lt;/code&gt; from Heroku
-3) re-create the Github web hook that is presumably lending Raoul&amp;rsquo;s credentials to every attempt to deploy an instance for a PR&lt;/p&gt;
-
-&lt;p&gt;Conversely I could say that this is all yak-shaving, and yak-shaving with a time delay as to when the yak is shaved is a real pain.  If I really wanted to get back on track to deploying the feature what I could be doing is just deploying a Heroku instance from scratch and starting work on prodding at the feature, and getting my head back around the data migration we need so that I can write some manual instructions, or get a script together.  We will see.  Having blogged I guess I will now work through all the email and Slack messages that are backing up, and look through/add-to my priority list to work out what&amp;rsquo;s the most profitable way to spend the next few hours.  Yaks!&lt;/p&gt;
-
-&lt;p&gt;Related Videos:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ZZa-80c9qos"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
