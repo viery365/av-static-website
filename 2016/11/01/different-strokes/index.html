@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Different Strokes for Different Folks</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_11 x2016_11_01 x2016_11_01_different-strokes x2016_11_01_different-strokes_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/11/01/different-strokes/">Different Strokes for Different Folks</a></h2>
+        <h5 class='date'> 1 Nov 2016</h5>
+    <p>Today was a series of intense work outs.  The clocks went back in the UK meaning that we were back in UTC time, so standups broke the day up at 10:30am and 3:45pm.  The &ldquo;Martin Fowler&rdquo; scrum was almost full, with folks from both the MetPlus and AsyncVoter projects.  We had an <a href="https://www.youtube.com/watch?v=AfsoOtqv0eg">&ldquo;AsyncVoter Catch Up&rdquo;</a> immediately after the scrum, which lasted over an hour and we had a good debate over three issues, specifically:</p>
+
+<ul>
+<li>Should be using Cucumber (difficult setup)</li>
+<li>Do we need more development of the Story schema</li>
+<li>Shouldn&rsquo;t we push on to creating the Vote model?</li>
+</ul>
+
+<p>Various people had been working on adding CucumberJS over the weekend, and it seemed that there was concern that Cucumber was just replicating our existing integration test on the RESTful API for the Story model and that it wasn&rsquo;t moving us forward, particularly to the extent that it was proving difficult to set up.  I had strong feelings here and knew that I could easily end up dominating the conversation.  Having clarified that these were the three issues I went round everyone in the meeting, starting with the least outspoken folks to make sure that we heard their point of view before more outspoken folks like myself - I am guilty as charged! :-) </p>
+
+<p>There was a variety of viewpoints and I&rsquo;m really glad we got them all in.  Some people were in favour of Cucumber, others against, and I think everyone was keen to move on.  Michael and I countered the point that Cucumber was pure replication of the existing integration tests by saying that yes, it was, and even though we didn&rsquo;t have a non-technical client, the key value of the Cucumber stories would be making it easier for new developers and ourselves in the future to understand why particular features of the code were there.  We also agreed that if we couldn&rsquo;t quickly get Cucumber working we&rsquo;d need to drop it.</p>
+
+<p>I pulled in some of the spikes from the weekend and pretty soon we had something working.  The key confusion had been about what testing model to use in combination with CucumberJS.  The AsyncVoter mob had been coming together and then splintering.  I think between them they had all the things they needed to move forward, but it was partly a confidence issue.  Just to give you a flavour, here&rsquo;s an example of the existing integration test:</p>
+<pre class="highlight javascript"><code>    <span class="nx">it</span><span class="p">(</span><span class="s1">'GET /stories'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/stories'</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">have</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+                <span class="nx">done</span><span class="p">()</span>
+            <span class="p">});</span>
+    <span class="p">});</span>
+</code></pre>
+<p>Which was paralleled by a Cucumber story like so:</p>
+<pre class="highlight gherkin"><code><span class="kn">Scenario</span><span class="p">:</span> Testing Cucumber
+    <span class="nf">When</span> I make a GET request the response status code should be <span class="s">"200"</span>
+</code></pre>
+<p>and we got a &ldquo;tracer bullet&rdquo; of this working with a step definition like so:</p>
+<pre class="highlight javascript"><code>  <span class="k">this</span><span class="p">.</span><span class="nx">When</span><span class="p">(</span><span class="sr">/^I make a GET request the response status code should be "</span><span class="se">([^</span><span class="sr">"</span><span class="se">]</span><span class="sr">*</span><span class="se">)</span><span class="sr">"$/</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">code</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">chai</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">server</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/stories'</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">if</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">==</span> <span class="nx">code</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">callback</span><span class="p">()</span>
+              <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">callback</span><span class="p">(</span><span class="s2">"res status was "</span> <span class="o">+</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">)</span>
+              <span class="p">}</span>
+          <span class="p">});</span>
+
+     <span class="p">});</span>
+</code></pre>
+<p>The crucial thing here was that this would fail correctly.  We weren&rsquo;t yet using nice chai assertions, but there were <a href="https://github.com/domenic/chai-as-promised">libraries</a> that would help us with that.  </p>
+
+<p>The other thing I emphasised again was that we wanted to be very careful making changes to the functionality and model schema that weren&rsquo;t driven by high level user stories that had gone through the estimation process.  I&rsquo;ve burned too many hours in projects suffering from feature creep not to make that point.  That said, I also underlined that to me the core of Agile is that the team reflects regularly on what works for them, and tries out changes.  BDD, TDD, Cucumber, pairing, mobbing, user stories, estimating are all on the table, and can be removed or tinkered with if the team thinks it&rsquo;s a good idea to make a change.  The way I channel Agile is that there are a lot of group and coding processes that can give us value, so it&rsquo;s great to start with a few tried and tested procedures that you are comfortable with.  At the same time allow the team to evolve its own style, but don&rsquo;t allow the baby to be thrown out with the bathwater.  After a tinker or a change, see how things go.  Reflect after 1 week, 2 weeks, a month.</p>
+
+<p>It was a good session, and after lunch I jumped into a pairing session with Michael on WebsiteOne.  We had a good chat about pairing techniques and how to work together effectively.  There was so much to do on WebsiteOne.  There were performance issues emerging on the events page.  The fixes that I had got in for hangouts needed follow up and new UX flow to match the post Hangout Button API switch off reality.  However we have to be sustainable, and I let the money lead us.  I had one potential Premium signup if we had PayPal in place.  All sorts of other fixes were certainly needed, but if I don&rsquo;t bring in enough money I&rsquo;ll be back to being distracted by a closed-source 9-5 in January; so that&rsquo;s the heuristic I&rsquo;m working on.  </p>
+
+<p>The AsyncVoter and LocalSupport projects seem to have more interested parties at the moment, meaning that we hadn&rsquo;t yet voted on the <a href="https://waffle.io/AgileVentures/WebsiteOne/cards/580787b7bbf5b55b01565370">PayPal story</a>.  In another context the absence of estimation would stop me from working on the ticket, but I think you also have to know when to ignore guidelines.  Michael and I spent a while exploring the PayPal options, discovering that they support recurring subscription payments.  It became clear pretty quickly that we could actually get a test PayPal button up without anything like the integration we needed for Stripe:</p>
+<pre class="highlight html"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"https://www.paypal.com/cgi-bin/webscr"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">target=</span><span class="s">"_top"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"cmd"</span> <span class="na">value=</span><span class="s">"_s-xclick"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"hosted_button_id"</span> <span class="na">value=</span><span class="s">"N5R9T269YU7XC"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"image"</span> <span class="na">src=</span><span class="s">"https://www.paypalobjects.com/en_GB/i/btn/btn_subscribe_LG.gif"</span> <span class="na">border=</span><span class="s">"0"</span> <span class="na">name=</span><span class="s">"submit"</span> <span class="na">alt=</span><span class="s">"PayPal – The safer, easier way to pay online!"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">alt=</span><span class="s">""</span> <span class="na">border=</span><span class="s">"0"</span> <span class="na">src=</span><span class="s">"https://www.paypalobjects.com/en_GB/i/scr/pixel.gif"</span> <span class="na">width=</span><span class="s">"1"</span> <span class="na">height=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+<p>PayPal button tools allow you to create a subscribe button in association with a PayPal business or charity account.  I had already set up an AgileVentures charity account on PayPal, so it was just a question of copying the above code into an appropriate location.  We tried putting it in a static page, but some important tags got filtered out, so we slapped it into an extra endpoint on the already abused <code>ChargesController</code>, wrapped it in a cucumber test (checked it failed when the button was missing) and got it out.  Michael was suggesting adding a redirection endpoint, but the next scrum was coming up and I had a meeting with a sponsor, so I wanted to get to the point where this was up and we could test if it would work, and more importantly, if people would use it.  If we could validate those two, then it would be worth investing more time.</p>
+
+<p>Michael&rsquo;s questioned whether I go too close to the metal here.  It&rsquo;s like extreme Agile.  You could argue that if you&rsquo;re going to take someone&rsquo;s money then you should be doing a lot more work to make everything perfect and just so.  I&rsquo;d love to have the resources to throw at that.  We started the Stripe integration at absolute bare bones, and as people signed up and made comments about things that looked odd, we fixed those things.  I plan to do the same for PayPal.  Raoul got the new feature out super fast and we got our first sign up.  Now I can be confident that more time investing in redirection end-points and tweaking button colour schemes is time being spent in the context of a revenue stream.</p>
+
+<p>On reflection a great day.  The Paypal addition was super simple, and ironically I think we might have moved faster six months ago if we&rsquo;d started with Paypal and not Stripe, but now we have both and that&rsquo;s great.  I retrospectively assigned a &ldquo;1&rdquo; to the PayPal story because that&rsquo;s what it had been, and resolved to get a CONTRIBUTING.md page up for the AsyncVoter project.  I hope I won&rsquo;t be crucified as a hypocrite, but I really do believe this Agile idea of &ldquo;no one size fits all&rdquo;.  Every project is different.  Every team needs to adjust its processes to suit circumstances.  I&rsquo;m going to push AsyncVoter towards more voting and estimating before stories are started to avoid people stepping on each other&rsquo;s toes.  WebSiteOne is quieter also because it&rsquo;s a priority project, so fewer people are eligible to work on it, but if we can get AsyncVoter automation in place maybe we can get more stories estimated faster for WebSiteOne; the two projects will synergise and it will be win-win for everyone! </p>
+
+<h3>Related Videos:</h3>
+
+<ul>
+<li><a href="https://youtu.be/C-E_5uj-YgQ">&ldquo;Martin Fowler&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=AfsoOtqv0eg">AsyncVoter Catch Up</a></li>
+<li><a href="https://www.youtube.com/watch?v=zVS_tyX3Lq8">Pairing on WebsiteOne</a></li>
+<li><a href="https://www.youtube.com/watch?v=IK8O5U4lmfg">&ldquo;Kent Beck&rdquo; scrum</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

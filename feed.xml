@@ -5,28 +5,107 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-10-31T00:00:00+00:00</updated>
+  <updated>2016-11-01T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Different Strokes for Different Folks</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/01/different-strokes/"/>
+    <id>http://blog.url.com/2016/11/01/different-strokes/</id>
+    <published>2016-11-01T00:00:00+00:00</published>
+    <updated>2016-11-01T21:38:51+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Today was a series of intense work outs.  The clocks went back in the UK meaning that we were back in UTC time, so standups broke the day up at 10:30am and 3:45pm.  The &amp;ldquo;Martin Fowler&amp;rdquo; scrum was almost full, with folks from both the MetPlus and AsyncVoter projects.  We had an &lt;a href="https://www.youtube.com/watch?v=AfsoOtqv0eg"&gt;&amp;ldquo;AsyncVoter Catch Up&amp;rdquo;&lt;/a&gt; immediately after the scrum, which lasted over an hour and we had a good debate over three issues, specifically:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Should be using Cucumber (difficult setup)&lt;/li&gt;
+&lt;li&gt;Do we need more development of the Story schema&lt;/li&gt;
+&lt;li&gt;Shouldn&amp;rsquo;t we push on to creating the Vote model?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Various people had been working on adding CucumberJS over the weekend, and it seemed that there was concern that Cucumber was just replicating our existing integration test on the RESTful API for the Story model and that it wasn&amp;rsquo;t moving us forward, particularly to the extent that it was proving difficult to set up.  I had strong feelings here and knew that I could easily end up dominating the conversation.  Having clarified that these were the three issues I went round everyone in the meeting, starting with the least outspoken folks to make sure that we heard their point of view before more outspoken folks like myself - I am guilty as charged! :-) &lt;/p&gt;
+
+&lt;p&gt;There was a variety of viewpoints and I&amp;rsquo;m really glad we got them all in.  Some people were in favour of Cucumber, others against, and I think everyone was keen to move on.  Michael and I countered the point that Cucumber was pure replication of the existing integration tests by saying that yes, it was, and even though we didn&amp;rsquo;t have a non-technical client, the key value of the Cucumber stories would be making it easier for new developers and ourselves in the future to understand why particular features of the code were there.  We also agreed that if we couldn&amp;rsquo;t quickly get Cucumber working we&amp;rsquo;d need to drop it.&lt;/p&gt;
+
+&lt;p&gt;I pulled in some of the spikes from the weekend and pretty soon we had something working.  The key confusion had been about what testing model to use in combination with CucumberJS.  The AsyncVoter mob had been coming together and then splintering.  I think between them they had all the things they needed to move forward, but it was partly a confidence issue.  Just to give you a flavour, here&amp;rsquo;s an example of the existing integration test:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;    &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'GET /stories'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;done&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;chai&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;server&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/stories'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;end&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;should&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;have&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+                &lt;span class="nx"&gt;done&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which was paralleled by a Cucumber story like so:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Testing Cucumber
+    &lt;span class="nf"&gt;When&lt;/span&gt; I make a GET request the response status code should be &lt;span class="s"&gt;"200"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and we got a &amp;ldquo;tracer bullet&amp;rdquo; of this working with a step definition like so:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I make a GET request the response status code should be "&lt;/span&gt;&lt;span class="se"&gt;([^&lt;/span&gt;&lt;span class="sr"&gt;"&lt;/span&gt;&lt;span class="se"&gt;]&lt;/span&gt;&lt;span class="sr"&gt;*&lt;/span&gt;&lt;span class="se"&gt;)&lt;/span&gt;&lt;span class="sr"&gt;"$/&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;code&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="nx"&gt;chai&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;server&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/stories'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;end&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+              &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nx"&gt;code&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+              &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"res status was "&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+              &lt;span class="p"&gt;}&lt;/span&gt;
+          &lt;span class="p"&gt;});&lt;/span&gt;
+
+     &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The crucial thing here was that this would fail correctly.  We weren&amp;rsquo;t yet using nice chai assertions, but there were &lt;a href="https://github.com/domenic/chai-as-promised"&gt;libraries&lt;/a&gt; that would help us with that.  &lt;/p&gt;
+
+&lt;p&gt;The other thing I emphasised again was that we wanted to be very careful making changes to the functionality and model schema that weren&amp;rsquo;t driven by high level user stories that had gone through the estimation process.  I&amp;rsquo;ve burned too many hours in projects suffering from feature creep not to make that point.  That said, I also underlined that to me the core of Agile is that the team reflects regularly on what works for them, and tries out changes.  BDD, TDD, Cucumber, pairing, mobbing, user stories, estimating are all on the table, and can be removed or tinkered with if the team thinks it&amp;rsquo;s a good idea to make a change.  The way I channel Agile is that there are a lot of group and coding processes that can give us value, so it&amp;rsquo;s great to start with a few tried and tested procedures that you are comfortable with.  At the same time allow the team to evolve its own style, but don&amp;rsquo;t allow the baby to be thrown out with the bathwater.  After a tinker or a change, see how things go.  Reflect after 1 week, 2 weeks, a month.&lt;/p&gt;
+
+&lt;p&gt;It was a good session, and after lunch I jumped into a pairing session with Michael on WebsiteOne.  We had a good chat about pairing techniques and how to work together effectively.  There was so much to do on WebsiteOne.  There were performance issues emerging on the events page.  The fixes that I had got in for hangouts needed follow up and new UX flow to match the post Hangout Button API switch off reality.  However we have to be sustainable, and I let the money lead us.  I had one potential Premium signup if we had PayPal in place.  All sorts of other fixes were certainly needed, but if I don&amp;rsquo;t bring in enough money I&amp;rsquo;ll be back to being distracted by a closed-source 9-5 in January; so that&amp;rsquo;s the heuristic I&amp;rsquo;m working on.  &lt;/p&gt;
+
+&lt;p&gt;The AsyncVoter and LocalSupport projects seem to have more interested parties at the moment, meaning that we hadn&amp;rsquo;t yet voted on the &lt;a href="https://waffle.io/AgileVentures/WebsiteOne/cards/580787b7bbf5b55b01565370"&gt;PayPal story&lt;/a&gt;.  In another context the absence of estimation would stop me from working on the ticket, but I think you also have to know when to ignore guidelines.  Michael and I spent a while exploring the PayPal options, discovering that they support recurring subscription payments.  It became clear pretty quickly that we could actually get a test PayPal button up without anything like the integration we needed for Stripe:&lt;/p&gt;
+&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;form&lt;/span&gt; &lt;span class="na"&gt;action=&lt;/span&gt;&lt;span class="s"&gt;"https://www.paypal.com/cgi-bin/webscr"&lt;/span&gt; &lt;span class="na"&gt;method=&lt;/span&gt;&lt;span class="s"&gt;"post"&lt;/span&gt; &lt;span class="na"&gt;target=&lt;/span&gt;&lt;span class="s"&gt;"_top"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;input&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;"hidden"&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;"cmd"&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;"_s-xclick"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;input&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;"hidden"&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;"hosted_button_id"&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;"N5R9T269YU7XC"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;input&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;"image"&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"https://www.paypalobjects.com/en_GB/i/btn/btn_subscribe_LG.gif"&lt;/span&gt; &lt;span class="na"&gt;border=&lt;/span&gt;&lt;span class="s"&gt;"0"&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;"submit"&lt;/span&gt; &lt;span class="na"&gt;alt=&lt;/span&gt;&lt;span class="s"&gt;"PayPal – The safer, easier way to pay online!"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;img&lt;/span&gt; &lt;span class="na"&gt;alt=&lt;/span&gt;&lt;span class="s"&gt;""&lt;/span&gt; &lt;span class="na"&gt;border=&lt;/span&gt;&lt;span class="s"&gt;"0"&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"https://www.paypalobjects.com/en_GB/i/scr/pixel.gif"&lt;/span&gt; &lt;span class="na"&gt;width=&lt;/span&gt;&lt;span class="s"&gt;"1"&lt;/span&gt; &lt;span class="na"&gt;height=&lt;/span&gt;&lt;span class="s"&gt;"1"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;PayPal button tools allow you to create a subscribe button in association with a PayPal business or charity account.  I had already set up an AgileVentures charity account on PayPal, so it was just a question of copying the above code into an appropriate location.  We tried putting it in a static page, but some important tags got filtered out, so we slapped it into an extra endpoint on the already abused &lt;code&gt;ChargesController&lt;/code&gt;, wrapped it in a cucumber test (checked it failed when the button was missing) and got it out.  Michael was suggesting adding a redirection endpoint, but the next scrum was coming up and I had a meeting with a sponsor, so I wanted to get to the point where this was up and we could test if it would work, and more importantly, if people would use it.  If we could validate those two, then it would be worth investing more time.&lt;/p&gt;
+
+&lt;p&gt;Michael&amp;rsquo;s questioned whether I go too close to the metal here.  It&amp;rsquo;s like extreme Agile.  You could argue that if you&amp;rsquo;re going to take someone&amp;rsquo;s money then you should be doing a lot more work to make everything perfect and just so.  I&amp;rsquo;d love to have the resources to throw at that.  We started the Stripe integration at absolute bare bones, and as people signed up and made comments about things that looked odd, we fixed those things.  I plan to do the same for PayPal.  Raoul got the new feature out super fast and we got our first sign up.  Now I can be confident that more time investing in redirection end-points and tweaking button colour schemes is time being spent in the context of a revenue stream.&lt;/p&gt;
+
+&lt;p&gt;On reflection a great day.  The Paypal addition was super simple, and ironically I think we might have moved faster six months ago if we&amp;rsquo;d started with Paypal and not Stripe, but now we have both and that&amp;rsquo;s great.  I retrospectively assigned a &amp;ldquo;1&amp;rdquo; to the PayPal story because that&amp;rsquo;s what it had been, and resolved to get a CONTRIBUTING.md page up for the AsyncVoter project.  I hope I won&amp;rsquo;t be crucified as a hypocrite, but I really do believe this Agile idea of &amp;ldquo;no one size fits all&amp;rdquo;.  Every project is different.  Every team needs to adjust its processes to suit circumstances.  I&amp;rsquo;m going to push AsyncVoter towards more voting and estimating before stories are started to avoid people stepping on each other&amp;rsquo;s toes.  WebSiteOne is quieter also because it&amp;rsquo;s a priority project, so fewer people are eligible to work on it, but if we can get AsyncVoter automation in place maybe we can get more stories estimated faster for WebSiteOne; the two projects will synergise and it will be win-win for everyone! &lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://youtu.be/C-E_5uj-YgQ"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=AfsoOtqv0eg"&gt;AsyncVoter Catch Up&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=zVS_tyX3Lq8"&gt;Pairing on WebsiteOne&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=IK8O5U4lmfg"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Crunch Time</title>
     <link rel="alternate" href="http://blog.url.com/2016/10/31/crunch-time/"/>
     <id>http://blog.url.com/2016/10/31/crunch-time/</id>
     <published>2016-10-31T00:00:00+00:00</published>
-    <updated>2016-10-31T20:47:30+00:00</updated>
+    <updated>2016-11-01T21:34:39+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;It was crunch time.  No answer from Google on the Hangout Button API.  It was dismantle our events framework or make some changes to the manual update functionality that would allow some parts of joining an event to start working again.  The problem was that even though our hangout plugin was automatically loaded into Hangouts started via YouTube, that hangout would only load for people who had previously run a successful AgileVentures hangout, and even then was now not set to communicate back to the AgileVenture&amp;rsquo;s server.&lt;/p&gt;
+    <content type="html">&lt;p&gt;It was crunch time.  No answer from Google on the Hangout Button API.  It was dismantle our events framework or make some changes to the manual update functionality that would allow some parts of joining an event to start working again.  The problem was that even though our hangout plugin was automatically loaded into Hangouts started via YouTube, that hangout would only load for people who had previously run a successful AgileVentures hangout, and even then was now not set to communicate back to the AgileVentures&amp;rsquo; server.&lt;/p&gt;
 
-&lt;p&gt;The current architecture would send notifications about a hangout on Slack and provide a link to that hangout on the AgileVenture&amp;rsquo;s site &lt;em&gt;if&lt;/em&gt; the hangout was started from a button on the AV site, and our custom plugin was loaded into the hangout with the right data payload.  Maybe we could adjust the plugin to be &lt;a href="https://developers.google.com/+/hangouts/publishing"&gt;installable&lt;/a&gt; into a YouTube started hangout and then connect back to our server to support the notifications and link display.  Certainly apps like &lt;a href="https://twitter.com/_madeye"&gt;MadEye&lt;/a&gt; used to work like that, but they&amp;rsquo;ve shut down and who knows how long Google will continue supporting the Hangout Plugin ecosystem.  It was clear from the discussions on Thursday that it made sense to start by enabling users to manually specify the hangout URL; have that act of manual specification lead to Slack notifications, and keep the links to the hangout on AgileVentures live for the duration the event.&lt;/p&gt;
+&lt;p&gt;The current architecture would send notifications about a hangout on Slack and provide a link to that hangout on the AgileVentures&amp;rsquo; site &lt;em&gt;if&lt;/em&gt; the hangout was started from a button on the AV site, and our custom plugin was loaded into the hangout with the right data payload.  Maybe we could adjust the plugin to be &lt;a href="https://developers.google.com/+/hangouts/publishing"&gt;installable&lt;/a&gt; into a YouTube started hangout and then connect back to our server to support the notifications and link display.  Certainly apps like &lt;a href="https://twitter.com/_madeye"&gt;MadEye&lt;/a&gt; used to work like that, but they&amp;rsquo;ve shut down and who knows how long Google will continue supporting the Hangout Plugin ecosystem.  It was clear from the discussions on Thursday that it made sense to start by enabling users to manually specify the hangout URL; have that act of manual specification lead to Slack notifications, and keep the links to the hangout on AgileVentures live for the duration the event.&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="example of a live event link in AV" src="https://www.dropbox.com/s/5vseylfvnfeufd5/Screenshot%202016-10-31%2009.46.02.png?dl=1" /&gt;&lt;/p&gt;
 
 &lt;p&gt;The manual update of the URL had been broken for repeating events; a bug I had fixed earlier in the week.  Now the trouble was that following a manual update the event would only stay &amp;ldquo;live&amp;rdquo; for 2 minutes.  As Michael pointed out this was because when the whole system was working the hangout plugin would be sending back telemetry every 2 minutes and would keep the event &amp;ldquo;live&amp;rdquo;.  Effectively we wanted the site to be able to display &amp;ldquo;live&amp;rdquo; events accurately, so that people thinking about joining would be receiving accurate information about whether to expect others in the hangout.  All this was still short of my imagined ideal set up where you are able to see who is in a live hangout before you join.  This functionality was briefly available on the helpdesk hangouts we used to have in the &amp;ldquo;Agile Development using Ruby on Rails&amp;rdquo; MOOC, however it never worked for Hangouts on Air.  If the Google Hangout API had stayed stable, it&amp;rsquo;s something we might have been able to add fairly soon.  As it is now we&amp;rsquo;re just scrambling to keep existing features running.&lt;/p&gt;
 
-&lt;p&gt;Maybe I&amp;rsquo;m deluding myself about this, but I really do imagine that an infrastructure that allowed you to browse a set of collaborative events, seeing a preview of what is going on and who is participating, could recreate some of the wandering, networking aspect of an unconference or similar, but support it completely remotely. (maybe I should do a UI mockup &amp;hellip;).  Anyway, let me tell you how I fixed the manual URL update to support &amp;ldquo;live for the duration&amp;rdquo; and slack notifications.  I started with a cucumber test, splitting the existing edit hangout URL tests into a separate feature file so that I could reduce the dependencies between the background steps.  Long cucumber files with multiple scenarios relying on the same set of background set up start to feel almost as dangerous as tests relying about a large set of fixtures.  Here&amp;rsquo;s the new feature file header:&lt;/p&gt;
+&lt;p&gt;Maybe I&amp;rsquo;m deluding myself about this, but I really do imagine that an infrastructure that allowed you to browse a set of collaborative events, seeing a preview of what is going on and who is participating, could recreate some of the wandering, networking aspect of an unconference or similar, but support it completely remotely. (maybe I should do a UI mockup &amp;hellip;).  Anyway, let me tell you how I fixed the manual URL update to support &amp;ldquo;live for the duration&amp;rdquo; and Slack notifications.  I started with a cucumber test, splitting the existing edit hangout URL tests into a separate feature file so that I could reduce the dependencies between the background steps.  Long cucumber files with multiple scenarios relying on the same set of background set up start to feel almost as dangerous as tests relying about a large set of fixtures.  Here&amp;rsquo;s the new feature file header:&lt;/p&gt;
 &lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Manual Edit of Hangout URL
   As a person involved in an event
   So that I can ensure everyone can access the correct link to join an event
@@ -103,7 +182,7 @@
   &lt;span class="k"&gt;end&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The spec&amp;rsquo;s passed, although not the cukes.  Notice I&amp;rsquo;d stubbed the EventInstance (hangout) in the spec to allow calling &lt;code&gt;within_current_event_duration?&lt;/code&gt; on EventInstance objects. One usually doesn&amp;rsquo;t stub methods in the object under test, but here I was planning to delegate that call straight out to a collaborator. I wanted to be able to ask that of an EventInstance instance, and I could drive addig that with another spec for a delegation:&lt;/p&gt;
+&lt;p&gt;The spec&amp;rsquo;s passed, although not the cukes.  Notice I&amp;rsquo;d stubbed the EventInstance (hangout) in the spec to allow calling &lt;code&gt;within_current_event_duration?&lt;/code&gt; on EventInstance objects. One usually doesn&amp;rsquo;t stub methods in the object under test, but here I was planning to delegate that call straight out to a collaborator. I wanted to be able to ask that of an EventInstance instance, and I could drive adding that with another spec for a delegation:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;EventInstance&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;type: :model&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
 
   &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;delegate_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:within_current_event_duration?&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
@@ -113,9 +192,9 @@
 
   &lt;span class="n"&gt;delegate&lt;/span&gt; &lt;span class="ss"&gt;:within_current_event_duration?&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;to: :event&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It would be really tidy to say that then the cukes went green, but there was an additional change in the view (to set the url&lt;em&gt;set&lt;/em&gt;directly flag) and then a good hour of getting lost in the time elements of Event, the IceCube scheduling gem etc. etc.Ultimately I think it was all down to slight incorrectness in the way I was setting the dates in the Cucumber steps.   Those sorted out everything was passing, and I got a &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1370"&gt;PR&lt;/a&gt; in, which Raoul deployed and we tested in staging.  It seemed to keep the event live, but Slack notifications were not going through.  That took the addition of several more parameters to the view, and another &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1372"&gt;PR&lt;/a&gt; which ultimately worked.  I&amp;rsquo;d definitely gone over budget with the time on this, I was not comfortable with some of the compromises I had made on the Cucumber steps, but I had something working that would allow João to run the Pacific Rim scrum in such a way that with a single manual step he&amp;rsquo;d be able to notify everyone on Slack, and the links on the AV site would stay live for 15 minutes to let people into the Scrum.&lt;/p&gt;
+&lt;p&gt;It would be really tidy to say that then the cukes went green, but there was an additional change in the view (to set the url&lt;em&gt;set&lt;/em&gt;directly flag) and then a good hour of getting lost in the time elements of Event, the IceCube scheduling gem etc.  Ultimately I think it was all down to slight incorrectness in the way I was setting the dates in the Cucumber steps.   Those sorted out, everything was passing, and I got a &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1370"&gt;PR&lt;/a&gt; in, which Raoul deployed and we tested in staging.  It seemed to keep the event live, but Slack notifications were not going through.  That took the addition of several more parameters to the view, and another &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1372"&gt;PR&lt;/a&gt; which ultimately worked.  I&amp;rsquo;d definitely gone over budget with the time on this, I was not comfortable with some of the compromises I had made on the Cucumber steps, but I had something working that would allow João to run the Pacific Rim scrum in such a way that with a single manual step he&amp;rsquo;d be able to notify everyone on Slack, and the links on the AV site would stay live for 15 minutes to let people into the Scrum.&lt;/p&gt;
 
-&lt;p&gt;The set up also seemed to work at least partially for some less experienced Scrum masters over the weekend, but more support and scaffolding is clearly needed.  I also think that &lt;code&gt;url_set_directly&lt;/code&gt; needs to be a date rather than a flag, since I expect some repeating events may now say &amp;ldquo;live&amp;rdquo; incorrectly &amp;hellip; although maybe events all should say live for their duration? We would just need some kind of popup message in the hangout for people entering to let them know that no one else is there yet and that&amp;rsquo;s okay, and people could still meetup.  Of course Hangout&amp;rsquo;s can&amp;rsquo;t be re-broadcast &amp;hellip; is it worth pursuing a Hangout plugin to handle the new setup or will work invested there have to be thrown out when/if Google completely sunsets Hangouts?&lt;/p&gt;
+&lt;p&gt;The set up also seemed to work at least partially for some less experienced Scrum masters over the weekend, but more support and scaffolding is clearly needed.  I also think that &lt;code&gt;url_set_directly&lt;/code&gt; needs to be a date rather than a flag, since I expect some repeating events may now say &amp;ldquo;live&amp;rdquo; incorrectly &amp;hellip; although maybe events all should say live for their duration? We would just need some kind of popup message in the hangout for people entering to let them know that no one else is there yet and that&amp;rsquo;s okay, and people could still meetup.  Of course Hangouts can&amp;rsquo;t be re-broadcast &amp;hellip; is it worth pursuing a Hangout plugin to handle the new setup or will work invested there have to be thrown out when/if Google completely sunsets Hangouts?&lt;/p&gt;
 
 &lt;p&gt;It often feels like Hangouts is an engineeering black hole.  Perhaps now it&amp;rsquo;s time to switch focus onto adding PayPal payment support, and allowing people to sponsor each other&amp;rsquo;s Premium memberships on AgileVentures.  I have the feeling we could start receiving payments from at least two people if those two features were in place, so perhaps that&amp;rsquo;s the best focus?  In the meantime I could get some emails off to all the Hangout alternatives with a list of our needed features, e.g. recordability, URL to conference etc. &amp;hellip; On to the next Crunch Time!&lt;/p&gt;
 
@@ -131,7 +210,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/28/opportunity-in-disguise/"/>
     <id>http://blog.url.com/2016/10/28/opportunity-in-disguise/</id>
     <published>2016-10-28T01:00:00+01:00</published>
-    <updated>2016-10-31T20:47:49+00:00</updated>
+    <updated>2016-11-01T21:34:39+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -231,7 +310,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/27/red-green-refactor/"/>
     <id>http://blog.url.com/2016/10/27/red-green-refactor/</id>
     <published>2016-10-27T01:00:00+01:00</published>
-    <updated>2016-10-31T20:47:58+00:00</updated>
+    <updated>2016-11-01T21:34:39+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -333,7 +412,7 @@ end
     <link rel="alternate" href="http://blog.url.com/2016/10/26/pulled-in-different-directions/"/>
     <id>http://blog.url.com/2016/10/26/pulled-in-different-directions/</id>
     <published>2016-10-26T01:00:00+01:00</published>
-    <updated>2016-10-31T20:48:07+00:00</updated>
+    <updated>2016-11-01T21:34:39+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -371,7 +450,7 @@ end
     <link rel="alternate" href="http://blog.url.com/2016/10/25/solo-coding/"/>
     <id>http://blog.url.com/2016/10/25/solo-coding/</id>
     <published>2016-10-25T01:00:00+01:00</published>
-    <updated>2016-10-31T20:48:15+00:00</updated>
+    <updated>2016-11-01T21:34:39+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -550,97 +629,6 @@ end
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Qt1QmFyBdpY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Tying Up Loose Ends</title>
-    <link rel="alternate" href="http://blog.url.com/2016/10/24/tying-up-loose-ends/"/>
-    <id>http://blog.url.com/2016/10/24/tying-up-loose-ends/</id>
-    <published>2016-10-24T01:00:00+01:00</published>
-    <updated>2016-10-31T20:48:23+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So after &lt;a href="http://nonprofits.agileventures.org/2016/10/21/yak-shaving/"&gt;Yak shaving&lt;/a&gt; with Heroku automated PR deploys, we finally got it working.  Raoul joined us in the &amp;ldquo;Martin Fowler&amp;rdquo; scrum and through a process of both disabling the PR deploys, AND deleting the GitHub webhooks that Heroku had installed, the permissions issue was resolved.  The deploys themselves were now marked on GitHub as coming from me, and suddenly all the other strange database issues evaporated.  I did also get a reply from Heroku:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The use of ruby-2.3.0 appears to be because you&amp;rsquo;re bundling it into the vendor/ directory:&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ ls vendor/*/*
-
-[…]
-
-vendor/bundle/ruby:
-2.3.0
-&lt;/code&gt;&lt;/pre&gt;
-&lt;blockquote&gt;
-&lt;p&gt;We advise against checking vendor into source control, and relying solely on bundler&amp;rsquo;s installation of Gemfile contents instead.&lt;/p&gt;
-
-&lt;p&gt;The Postgres error appears to be because your database.yml hard codes some connection information:&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;development: &amp;amp;dev
-  adapter: postgresql
-  encoding: unicode
-  database: websiteone_development
-  pool: 20
-  username: postgres
-  password:
-
-[…]
-
-production:
-  &amp;lt;&amp;lt;: *dev
-  database: websiteone_production
-As you can see in the error, the error is that the postgres user attempts to connect, and fails. After it fails, Rails falls back to the value located in $DATABASE_URL. You can change this to simply:
-
-production:
-  url: &amp;lt;%= ENV['DATABASE_URL'] %&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which all sounded like good advice, but this was all for errors that were no longer occurring - at least if they were, they were no longer blocking the deploy.  I asked them about that:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Thanks Jason, that&amp;rsquo;s weird because we don&amp;rsquo;t have vendor/bundle/ruby in our source tree: https://github.com/AgileVentures/WebsiteOne/tree/develop/vendor/ any idea how it&amp;rsquo;s getting in there during deploy?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;and I got back the following:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Regarding the vendor/bundle/ruby question I think there may have been some issue with the build cache on this occasion that was holding the 2.3.0 over from a previous deploy. If you have any trouble in future you could you try running the following commands:&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ heroku plugins:install https://github.com/heroku/heroku-repo.git
-$ heroku repo:purge_cache -a appname
-$ git commit --allow-empty -m "Purge cache"
-$ git push heroku master
-&lt;/code&gt;&lt;/pre&gt;
-&lt;blockquote&gt;
-&lt;p&gt;That will ensure you start from a cold cache for that deploy. Let me know if you have any further questions.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So that&amp;rsquo;s that, except that all these automated PR apps are costing us money, and I&amp;rsquo;m not sure they are being deployed automatically.  The LocalSupport auto-deploy appears to be stuck due to an app limit of 100, and I&amp;rsquo;m starting to suspect that&amp;rsquo;s because the local support develop server is on my personal account.  If I move it to one of our group accounts we&amp;rsquo;ll start incurring more charges, so I found a little script to &lt;a href="https://gist.github.com/naaman/1384970"&gt;delete heroku apps in batch&lt;/a&gt;, which I modified slightly to work with a hand picked list:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;while read app; do heroku apps:destroy --app $app --confirm $app; done &amp;lt; delete_heroku_list 
-
-Destroying ⬢ afternoon-stream-8326 (including all add-ons)... done
-Destroying ⬢ agile-chamber-2464 (including all add-ons)... done
-Destroying ⬢ agile-dawn-9072 (including all add-ons)... done
-Destroying ⬢ agile-thicket-6113 (including all add-ons)... done
-Destroying ⬢ ancient-bastion-6361 (including all add-ons)... done
-Destroying ⬢ ancient-dusk-4608 (including all add-ons)... done
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I could have burnt time doing a regex for the format of &lt;code&gt;&amp;lt;word&amp;gt;-&amp;lt;word&amp;gt;-&amp;lt;four-digits&amp;gt;&lt;/code&gt; to find and delete all my apps without custom names, but that would have burnt time for something I&amp;rsquo;m unlikely to need to do again, and it took a minute to get the file &lt;code&gt;delete_heroku_list&lt;/code&gt; to have the names of all the crufty old apps I haven&amp;rsquo;t used in years.&lt;/p&gt;
-
-&lt;p&gt;So my hereby dashboard is looking a lot cleaner.  I&amp;rsquo;ve got my two main project pipelines in my &amp;ldquo;favourites&amp;rdquo;, and my Heroku navigation is a lot more manageable:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/iaf134csxh7ij1g/Screenshot%202016-10-24%2010.09.56.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Although that doesn&amp;rsquo;t immediately seem to have enabled automated PR deploys on LocalSupport - which still reports the 100 app limit exceeded.  I guess that will take time to flush through the system, or indeed I might need to try this new &lt;code&gt;purge_cache&lt;/code&gt; technique that&amp;rsquo;s mentioned above, but those are Yak&amp;rsquo;s to be shaved.  I only just started on the data migration script for the premium plus upgrade feature, which needs to be finished, and there&amp;rsquo;s a hell of a lot of other critical admin tasks to get to today.  At least this ties up some of the loose ends from last week, when I was worried the Yak shaving would continue indefinitely.  At least I&amp;rsquo;ve got to a reasonably satisfying task switching point &amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://youtu.be/_hAm_6T8r18"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=feu722TBjo4"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
