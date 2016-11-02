@@ -5,10 +5,53 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-01T00:00:00+00:00</updated>
+  <updated>2016-11-02T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Documentation Debt</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/02/documentation-debt/"/>
+    <id>http://blog.url.com/2016/11/02/documentation-debt/</id>
+    <published>2016-11-02T00:00:00+00:00</published>
+    <updated>2016-11-02T22:17:32+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Following on from the previous day I got a &lt;a href="https://github.com/AgileVentures/AsyncVoter/blob/master/CONTRIBUTING.md"&gt;CONTRIBUTING.md&lt;/a&gt; together for the AsyncVoter project.  I&amp;rsquo;d jumped into an AsyncVoter pairing session immediately after the Martin Fowler scrum.  Progress was being made with Cucumber, but in contrast to the day before, there was talk of spending more time working out the right way to work with CucumberJS.  I recommended that if we just had something working then put adjusting it into a refactoring ticket and get a green PR in, but that also it was up to the project members to make their own decision.  I think they ultimately took my advice and we have a &lt;a href="https://github.com/AgileVentures/AsyncVoter/pull/40"&gt;PR&lt;/a&gt; ready to merge.  Note: it took another day to merge, and in the meantime the developers refactored the Cucumber and produced a much cleaner solution.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s a strange ongoing balance between refactoring things so that they&amp;rsquo;re right, and ensuring that PRs get merged quickly and don&amp;rsquo;t serve as a block for other developers trying to build on your work.  My rule of thumb is keep the PRs super small and make refactoring tickets.  Of course those refactoring tickets need to be addressed quickly, ideally getting votes taken on them ASAP.  Poor design decisions can get locked in when a lot of people build on them, but in a project with a high churn of developers and unpredictable availability, long running PRs can lead to a lot of work being thrown away.  I don&amp;rsquo;t think there&amp;rsquo;s any magic solution.&lt;/p&gt;
+
+&lt;p&gt;I went ahead and tried to codify some of this in &lt;a href="https://github.com/AgileVentures/AsyncVoter/blob/master/CONTRIBUTING.md"&gt;CONTRIBUTING.md&lt;/a&gt;.  I think it&amp;rsquo;s an improvement over some other CONTRIBUTING.mds I&amp;rsquo;ve written, but I think we need some images to break it up.  On the same note I started adding some documentation to the &lt;a href="https://github.com/AgileVentures/AgileVentures"&gt;AgileVentures/AgileVentures&lt;/a&gt; repo.  I&amp;rsquo;d had a quick guide to AsyncVoting, which I threw in there.  We&amp;rsquo;d previously only been using this repo as a place to have issues that were AV wide.  The repo wasn&amp;rsquo;t really intended for code.  John had thrown in some &lt;a href="https://github.com/AgileVentures/AgileVentures/blob/master/features/new_developer.feature"&gt;scenarios for new developers&lt;/a&gt; which connects to the key document I wanted to put in there, which was a &lt;a href="https://github.com/AgileVentures/AgileVentures/blob/master/STARTING_A_NEW_PROJECT.md"&gt;starting new projects document&lt;/a&gt;.  I managed to get one video embedded in there which breaks up the flow a little &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Maybe these materials should all be going into documents in our main site, like our &lt;a href="http://www.agileventures.org/getting-started"&gt;Getting Started document&lt;/a&gt;.  I just edited that to link to the start your own project page on GitHub.  The problem I have with the editable static pages throughout our site is that they don&amp;rsquo;t support markdown.  I&amp;rsquo;m just totally addicted to markdown; I write everything in it.  I love how it looks on GitHub.  I love that on GitHub we can get updates via pull requests from anyone with a GitHub account and we can use GitHub&amp;rsquo;s powerful teams and permissions system to manage direct access where needed.  Anyway, so much more work needed - updating our UX and all our instruction documents to reflect how the Google Hangout API has changed etc.&lt;/p&gt;
+
+&lt;p&gt;When users are saying things like &amp;ldquo;I don&amp;rsquo;t know how to get a project started&amp;rdquo;, I can&amp;rsquo;t be spending time routing around creating static pages and working with a WYSIWYG system that requires me to click buttons and open windows to add hyperlinks.  I want all link-like things automatically linked, and markdown links to allow me to throw in references without breaking stride.  I can so easily create new files through the GitHub UI:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="animation of creating new file on GitHub repo" src="https://www.dropbox.com/s/uvyg4by7vmm2wtt/Screencast-2016.11.02-09.17.gif?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;For me GitHub just feels natural whilst most everything else feels cumbersome.  Of course every piece of documentation we create leads to documentation maintenance debt.  We&amp;rsquo;ve made many things editable to everyone on AgileVentures, but very few realise they can edit, and the big advantage of GitHub is that even if people don&amp;rsquo;t realise they can sometimes edit directly, at least there&amp;rsquo;s a higher chance they&amp;rsquo;ll understand they could contribute changes through a pull request.&lt;/p&gt;
+
+&lt;p&gt;In the afternoon Michael and I dived into some performance issues on WebSiteOne.  I really wanted to keep working on the PayPal functionality and the sponsor other members feature that might bring in more cash flow, but the events page giving 500 errors was really not good.  We started analysing the page loads.  It seemed that on production a good eight seconds was spent rendering the view.  It seemed like we had an N+1 query where every little event element made an additional database query to ask what the latest hangout was for an event and checking if it was live.  We spent a while trying to modify the underlying query with &lt;code&gt;includes&lt;/code&gt; to pull in all the hangout info in the first query rather than one at a time.  We didn&amp;rsquo;t have much success.  The base query was complicated by working with the IceCube gem pulling in repeating events.  It might have worked if we&amp;rsquo;d created a scope, but rather than diving deep on that, I realised there really was no need to check for the liveness of an event that wasn&amp;rsquo;t taking place on the current day, so we just modified the view to check if the event was today, and saved ourselves a ton of database queries into the bargain.  It also removed an associated error that when an event was live, all the future events in the sequence also showed as live.  I dashed off a quick &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1378"&gt;pull request&lt;/a&gt; and we&amp;rsquo;ll see if it has a positive impact on production.  We definitely got a speed up locally.&lt;/p&gt;
+
+&lt;p&gt;It was time to jump into a busy &amp;ldquo;Kent Beck&amp;rdquo; scrum with 8 folks reporting on where they were up to.  I really felt like I was spinning plates as I was recording an episode of Ruby Rogues right off the back of the scrum.  I was probably talking on x3, but we managed to dash off a vote on a &lt;a href="https://www.pivotaltracker.com/story/show/122459341"&gt;LocalSupport&lt;/a&gt; story, particularly since we had two MOOC students in the scrum wanting to complete their Open Source assignment.  I was on time to talk to the Ruby Rogues about the AgileVentures mission and it was a major buzz, and then buzz crash 90 minutes later as I tried to bring myself down for an evening with the family.  A busy day!  I spent another hour later on reviewing pull requests.  Still not sure if I&amp;rsquo;m focusing on the right things.  The Premium framework is designed to have me focus on PRs from those who are sponsoring AV.  I still feel like I&amp;rsquo;m drowning in requests sometimes :-) How will we scale this?  Can I get it sustainable before I get distracted by the need to take additional paid work?  Stay tuned to this blog to find out :-)&lt;/p&gt;
+
+&lt;p&gt;Related Videos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=CpHdhYFok80"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=RkgMoF8CmD8"&gt;Pairing on AsyncVoter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=d3YA0nG3-BY"&gt;Pairing on WebSiteOne&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=f5BReS4QDZE"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Related Links:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://gist.github.com/dergachev/4627207"&gt;Quickly make animated gifs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Different Strokes for Different Folks</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/01/different-strokes/"/>
@@ -442,193 +485,6 @@ end
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=oCcWrBHqPfk"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=iUPcDHE7HUM"&gt;AsyncVoter Mob session&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=feCOvYV6fN4"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Solo Coding</title>
-    <link rel="alternate" href="http://blog.url.com/2016/10/25/solo-coding/"/>
-    <id>http://blog.url.com/2016/10/25/solo-coding/</id>
-    <published>2016-10-25T01:00:00+01:00</published>
-    <updated>2016-11-01T21:34:39+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;a href="http://nonprofits.agileventures.org/2016/10/21/yak-shaving/"&gt;Yak shaving&lt;/a&gt; aside I managed to make time for some solo coding.  There was work outstanding on a feature to allow users to upgrade from Premium to PremiumPlus.  Michael and I had designed some extra domain features in a previous session, but they hadn&amp;rsquo;t immediately been needed, so we cherry-picked them into this PR.  New domain entities of Subscription and PaymentSource were necessary to distinguish between users being Premium or PremiumPlus without having to contact the remote Stripe API for confirmation (see model dump from railroady gem in the image below).  If someone wants to upgrade the last thing we want to do is have the site freeze because the Stripe API isn&amp;rsquo;t responding.  That said we&amp;rsquo;re still using the Stripe API to communicate the intention to upgrade the plan, but having a coherent way of storing the members&amp;rsquo; desire to upgrade in our database seems like a good move.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="new domain entities" src="https://www.dropbox.com/s/lm03tpkm2xqe9kb/Screenshot%202016-10-25%2020.52.36.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;You might say why didn&amp;rsquo;t you build all this in from the start?  Because we were following the Agile process of only building what we needed for the immediate future.  Now that we&amp;rsquo;ve validated that people will sign up for Premium and Premium Plus plans, we&amp;rsquo;re moving on to gamble that some of them might be willing to upgrade.  Actually the feedback I&amp;rsquo;m getting suggests that the Premium Plus plan is too expensive, so next up we&amp;rsquo;ll be inserting some intermediate plans, but anyway, one feature at a time.  The &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1323"&gt;PR for this feature&lt;/a&gt; has been open a dangerously long time due to my knee operation and it needing fixing up (both the PR and my knee).  It had taken a fair amount of pulling out my hair to get the feature tests all green.  Standing in the way of the release were the data migration that would take existing members&amp;rsquo; Stripe IDs from the User model to the Subscription/PaymentSource models.  There was also a fair amount of gnarly code that was suffering from Demeter violations.&lt;/p&gt;
-
-&lt;p&gt;My internal dialogue was as follows:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;We could do the migrations on the production server manually, but it would be error-prone, and we got in trouble with the Karma migrations last time.  That said, this time we are not deleting the old db column.  Even so, what we really should have done last time was a dry-run of the migration, so if we have a script of it this time, it&amp;rsquo;ll make it easier to dry-run it and/or rerun it.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I decided to get the migration code done, and also to write a cucumber test for it.  I&amp;rsquo;d be following up with a later migration to remove the db column and the migration test in a few weeks.  Exhilarating to be writing code that I plan to delete soon!&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="nt"&gt;@rake&lt;/span&gt;
-&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Migrate the stripe data
-  As the admin
-  So that users can get premium related functionality related to the new data schema
-  I want to migrate to the new data structure
-
-  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nf"&gt;Given&lt;/span&gt; the following users exist
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;first_name&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;last_name&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;email&lt;/span&gt;                  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;stripe_customer&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Alice&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Jones&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;alice@btinternet.co.uk&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;345rfyuh&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt;
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Migrate the stripe data to the new architecture
-    &lt;span class="nf"&gt;When&lt;/span&gt; I run the rake task for migrating stripe
-    &lt;span class="nf"&gt;Then&lt;/span&gt; &lt;span class="s"&gt;"alice@btinternet.co.uk"&lt;/span&gt; shoud have &lt;span class="s"&gt;"345rfyuh"&lt;/span&gt; in their subscription
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;here are the relevant step definitions:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I run the rake task for migrating stripe$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="vg"&gt;$rake&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'db:migrate_stripe'&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^"([^"]*)" shoud have "([^"]*)" in their subscription$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stripe_id&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_email&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer_id&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="n"&gt;stripe_id&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and the rake hook:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Before&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'@rake'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;scenario&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="vg"&gt;$rake&lt;/span&gt;
-    &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'rake'&lt;/span&gt;
-    &lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rake_require&lt;/span&gt; &lt;span class="s1"&gt;'tasks/scheduler'&lt;/span&gt;
-    &lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rake_require&lt;/span&gt; &lt;span class="s1"&gt;'tasks/migrate_stripe_customer_ids'&lt;/span&gt;
-    &lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;define_task&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:environment&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="vg"&gt;$rake&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Task&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and the rake task itself:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;namespace&lt;/span&gt; &lt;span class="ss"&gt;:db&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;desc&lt;/span&gt; &lt;span class="s2"&gt;"Migrate stripe user ids from User model to Subscription model"&lt;/span&gt;
-
-  &lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="ss"&gt;:migrate_stripe&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="ss"&gt;:environment&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer&lt;/span&gt;
-        &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscription&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Premium&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;started_at: &lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
-        &lt;span class="c1"&gt;# Time.now not ideal but can set manually later&lt;/span&gt;
-        &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;payment_source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;identifier: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
-        &lt;span class="no"&gt;Logger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;STDOUT&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;info&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;display_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;bold&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;blue&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;" stripe customer id migrated"&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="no"&gt;Logger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;STDOUT&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;info&lt;/span&gt; &lt;span class="s2"&gt;"migration has been completed"&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;green&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I got this working, but was unhappy that I&amp;rsquo;d replicated gnarly Demeter violations from the charges controller into the migration task itself.  However I had the migration task green, and now I could refactor with more confidence.  I was tempted for a moment to pull this upgrade logic into the User class itself.  It sort of makes sense to say something like &lt;code&gt;user.upgrade_to_premium&lt;/code&gt;, but our User model is already overblown with responsibilities, and really this is a process that involves manipulating and setting up several domain entities.  I went for a service, and I test drove it in the London style with the following code:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;UpgradeUserToPremium&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-
-  &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:upgrade_user_to_premium&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;described_class&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stripe_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;payment_source_klass&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subscription_klass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription_klass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;class_double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Premium&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:payment_source_klass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;class_double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:stripe_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;instance_double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'StripeID'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;instance_double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;instance_double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;instance_double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Premium&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:payment_source&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;instance_double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;payment_source_klass&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:new&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subscription_klass&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:new&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:save&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'creates a payment source'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;payment_source_klass&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:new&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="ss"&gt;identifier: &lt;/span&gt;&lt;span class="n"&gt;stripe_id&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-    &lt;span class="n"&gt;upgrade_user_to_premium&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'creates a subscription of the appropriate type'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;payment_source_klass&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:new&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;payment_source&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subscription_klass&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:new&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;started_at: &lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;payment_source: &lt;/span&gt;&lt;span class="n"&gt;payment_source&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;upgrade_user_to_premium&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'sets the user subscription'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subscription_klass&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:new&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;upgrade_user_to_premium&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'saves the user'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:save&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;upgrade_user_to_premium&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;to be honest I actually wrote out a sketch of the service in a text editor before driving the above in RubyMine, but here&amp;rsquo;s how the TDD&amp;rsquo;d version ended up:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;UpgradeUserToPremium&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stripe_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;payment_source_klass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subscription_klass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Premium&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;payment_source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;payment_source_klass&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;identifier: &lt;/span&gt;&lt;span class="n"&gt;stripe_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscription&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subscription_klass&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;started_at: &lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;payment_source: &lt;/span&gt;&lt;span class="n"&gt;payment_source&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I know that some of my colleagues prefer the Chicago style, and some people might think that the above involves a ridiculous amount of test code for a three line class method.  The RSpec suffers from not being as comprehensible as it might be by people who aren&amp;rsquo;t comfortable with RSpec concepts like &lt;code&gt;let&lt;/code&gt;, &lt;code&gt;allow&lt;/code&gt;, &lt;code&gt;receive&lt;/code&gt; and so forth.  What I can say in its defence (and I am still on the fence) is that there is a coherent shape in my mind here that has some level of intrinsic beauty.  The RSpec unit test of the service is following the heuristic that each &lt;code&gt;it&lt;/code&gt; statement should test only one thing.   The &lt;code&gt;let&lt;/code&gt; statements make the set of collaborating entities completely explicit.  The &lt;code&gt;before&lt;/code&gt; block sets up to stub all the outgoing collaborators of the method, so that each of the four &lt;code&gt;it&lt;/code&gt; statements does not actually reach any other part of the system, making this a unit and not an integration test.  Then each &lt;code&gt;it&lt;/code&gt; block tests each of the four key things that happen in the method.  &lt;/p&gt;
-
-&lt;p&gt;Here we could argue that the method is doing too much - it does four things and should have a single responsibility (according to the SOLID principles).  I could break out some smaller methods, but I think this is actually the right level of granularity.  We have a concept in the domain that is upgrading a user to premium, and these are the four things that will need to happen to set that up and persist it.  The Demeter violations of the earlier code are gone, and the tests are still green, showing that the migration is working.  Furthermore, we can use the same service in the charges controller which goes from this:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update_user_to_premium&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;current_user&lt;/span&gt;
-  &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscription&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Premium&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;started_at: &lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;payment_source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;identifier: &lt;/span&gt;&lt;span class="n"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;to this:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update_user_to_premium&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;current_user&lt;/span&gt;
-  &lt;span class="no"&gt;UpgradeUserToPremium&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and our migration cleans up like so:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;namespace&lt;/span&gt; &lt;span class="ss"&gt;:db&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;desc&lt;/span&gt; &lt;span class="s2"&gt;"Migrate stripe user ids from User model to Subscription model"&lt;/span&gt;
-
-  &lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="ss"&gt;:migrate_stripe&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="ss"&gt;:environment&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer&lt;/span&gt;
-        &lt;span class="c1"&gt;# setting time as now not ideal but can set manually later&lt;/span&gt;
-        &lt;span class="no"&gt;UpgradeUserToPremium&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="no"&gt;Logger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;STDOUT&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;info&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;display_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;bold&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;blue&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;" stripe customer id migrated"&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="no"&gt;Logger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;STDOUT&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;info&lt;/span&gt; &lt;span class="s2"&gt;"migration has been completed"&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;green&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So far so good.  We&amp;rsquo;re left with some Demeter violations in the upgrade to premium plus code in the charges controller:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;upgrade&lt;/span&gt;
-  &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'PremiumPlus'&lt;/span&gt;
-  &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
-  &lt;span class="n"&gt;customer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;subscription&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;retrieve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;plan&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"premiumplus"&lt;/span&gt;
-  &lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I don&amp;rsquo;t like this, and I don&amp;rsquo;t like how we&amp;rsquo;ve ended up overloading the charges controller.  The former is the Stripe API that perhaps we&amp;rsquo;re using incorrectly, but I don&amp;rsquo;t know that I can justify putting an adapter on this right now.  The charges controller needs a bigger refactoring, but I&amp;rsquo;m making the judgement call that these two things go into refactoring tickets.  In the ideal world I&amp;rsquo;d also love more sad path tests in places, but again, this PR has been open long, we need the data migration in and from a charity/business perspective we&amp;rsquo;re likely to bring in more revenue by actually releasing the individual sign up pages for the new intermediate plans, and they&amp;rsquo;ll have to be a fair amount of work going on on top of this code to handle the new sequence of upgrades that are possible, so like Sandi Metz suggests, I&amp;rsquo;m hedging my bets about avoiding too much refactoring in an area where the code is in flux.&lt;/p&gt;
-
-&lt;p&gt;At least the Heroku automated deploy is working, so I can easily do a manual test.  I&amp;rsquo;m not thrilled about the placeholder button we have but again that can be another ticket:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="upgrade to premium plus button" src="https://www.dropbox.com/s/2aom85mgn7pv16p/Screenshot%202016-10-25%2010.50.14.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Of course now Google Hangouts on Air have switched to YouTube live and our automated distribution of hangouts is failing - we&amp;rsquo;ve got a manual override but it has a bug I blogged about last week which will drag me away from pushing out these other plans &amp;hellip; gah!  It&amp;rsquo;s all about the prioritization &amp;hellip; At least I quite enjoyed writing all the above code :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Qt1QmFyBdpY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

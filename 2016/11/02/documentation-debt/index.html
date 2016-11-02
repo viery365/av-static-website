@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Documentation Debt</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_11 x2016_11_02 x2016_11_02_documentation-debt x2016_11_02_documentation-debt_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/11/02/documentation-debt/">Documentation Debt</a></h2>
+        <h5 class='date'> 2 Nov 2016</h5>
+    <p>Following on from the previous day I got a <a href="https://github.com/AgileVentures/AsyncVoter/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> together for the AsyncVoter project.  I&rsquo;d jumped into an AsyncVoter pairing session immediately after the Martin Fowler scrum.  Progress was being made with Cucumber, but in contrast to the day before, there was talk of spending more time working out the right way to work with CucumberJS.  I recommended that if we just had something working then put adjusting it into a refactoring ticket and get a green PR in, but that also it was up to the project members to make their own decision.  I think they ultimately took my advice and we have a <a href="https://github.com/AgileVentures/AsyncVoter/pull/40">PR</a> ready to merge.  Note: it took another day to merge, and in the meantime the developers refactored the Cucumber and produced a much cleaner solution.</p>
+
+<p>It&rsquo;s a strange ongoing balance between refactoring things so that they&rsquo;re right, and ensuring that PRs get merged quickly and don&rsquo;t serve as a block for other developers trying to build on your work.  My rule of thumb is keep the PRs super small and make refactoring tickets.  Of course those refactoring tickets need to be addressed quickly, ideally getting votes taken on them ASAP.  Poor design decisions can get locked in when a lot of people build on them, but in a project with a high churn of developers and unpredictable availability, long running PRs can lead to a lot of work being thrown away.  I don&rsquo;t think there&rsquo;s any magic solution.</p>
+
+<p>I went ahead and tried to codify some of this in <a href="https://github.com/AgileVentures/AsyncVoter/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.  I think it&rsquo;s an improvement over some other CONTRIBUTING.mds I&rsquo;ve written, but I think we need some images to break it up.  On the same note I started adding some documentation to the <a href="https://github.com/AgileVentures/AgileVentures">AgileVentures/AgileVentures</a> repo.  I&rsquo;d had a quick guide to AsyncVoting, which I threw in there.  We&rsquo;d previously only been using this repo as a place to have issues that were AV wide.  The repo wasn&rsquo;t really intended for code.  John had thrown in some <a href="https://github.com/AgileVentures/AgileVentures/blob/master/features/new_developer.feature">scenarios for new developers</a> which connects to the key document I wanted to put in there, which was a <a href="https://github.com/AgileVentures/AgileVentures/blob/master/STARTING_A_NEW_PROJECT.md">starting new projects document</a>.  I managed to get one video embedded in there which breaks up the flow a little &hellip;</p>
+
+<p>Maybe these materials should all be going into documents in our main site, like our <a href="http://www.agileventures.org/getting-started">Getting Started document</a>.  I just edited that to link to the start your own project page on GitHub.  The problem I have with the editable static pages throughout our site is that they don&rsquo;t support markdown.  I&rsquo;m just totally addicted to markdown; I write everything in it.  I love how it looks on GitHub.  I love that on GitHub we can get updates via pull requests from anyone with a GitHub account and we can use GitHub&rsquo;s powerful teams and permissions system to manage direct access where needed.  Anyway, so much more work needed - updating our UX and all our instruction documents to reflect how the Google Hangout API has changed etc.</p>
+
+<p>When users are saying things like &ldquo;I don&rsquo;t know how to get a project started&rdquo;, I can&rsquo;t be spending time routing around creating static pages and working with a WYSIWYG system that requires me to click buttons and open windows to add hyperlinks.  I want all link-like things automatically linked, and markdown links to allow me to throw in references without breaking stride.  I can so easily create new files through the GitHub UI:</p>
+
+<p><img alt="animation of creating new file on GitHub repo" src="https://www.dropbox.com/s/uvyg4by7vmm2wtt/Screencast-2016.11.02-09.17.gif?dl=1" /></p>
+
+<p>For me GitHub just feels natural whilst most everything else feels cumbersome.  Of course every piece of documentation we create leads to documentation maintenance debt.  We&rsquo;ve made many things editable to everyone on AgileVentures, but very few realise they can edit, and the big advantage of GitHub is that even if people don&rsquo;t realise they can sometimes edit directly, at least there&rsquo;s a higher chance they&rsquo;ll understand they could contribute changes through a pull request.</p>
+
+<p>In the afternoon Michael and I dived into some performance issues on WebSiteOne.  I really wanted to keep working on the PayPal functionality and the sponsor other members feature that might bring in more cash flow, but the events page giving 500 errors was really not good.  We started analysing the page loads.  It seemed that on production a good eight seconds was spent rendering the view.  It seemed like we had an N+1 query where every little event element made an additional database query to ask what the latest hangout was for an event and checking if it was live.  We spent a while trying to modify the underlying query with <code>includes</code> to pull in all the hangout info in the first query rather than one at a time.  We didn&rsquo;t have much success.  The base query was complicated by working with the IceCube gem pulling in repeating events.  It might have worked if we&rsquo;d created a scope, but rather than diving deep on that, I realised there really was no need to check for the liveness of an event that wasn&rsquo;t taking place on the current day, so we just modified the view to check if the event was today, and saved ourselves a ton of database queries into the bargain.  It also removed an associated error that when an event was live, all the future events in the sequence also showed as live.  I dashed off a quick <a href="https://github.com/AgileVentures/WebsiteOne/pull/1378">pull request</a> and we&rsquo;ll see if it has a positive impact on production.  We definitely got a speed up locally.</p>
+
+<p>It was time to jump into a busy &ldquo;Kent Beck&rdquo; scrum with 8 folks reporting on where they were up to.  I really felt like I was spinning plates as I was recording an episode of Ruby Rogues right off the back of the scrum.  I was probably talking on x3, but we managed to dash off a vote on a <a href="https://www.pivotaltracker.com/story/show/122459341">LocalSupport</a> story, particularly since we had two MOOC students in the scrum wanting to complete their Open Source assignment.  I was on time to talk to the Ruby Rogues about the AgileVentures mission and it was a major buzz, and then buzz crash 90 minutes later as I tried to bring myself down for an evening with the family.  A busy day!  I spent another hour later on reviewing pull requests.  Still not sure if I&rsquo;m focusing on the right things.  The Premium framework is designed to have me focus on PRs from those who are sponsoring AV.  I still feel like I&rsquo;m drowning in requests sometimes :-) How will we scale this?  Can I get it sustainable before I get distracted by the need to take additional paid work?  Stay tuned to this blog to find out :-)</p>
+
+<p>Related Videos:</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=CpHdhYFok80">&ldquo;Martin Fowler&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=RkgMoF8CmD8">Pairing on AsyncVoter</a></li>
+<li><a href="https://www.youtube.com/watch?v=d3YA0nG3-BY">Pairing on WebSiteOne</a></li>
+<li><a href="https://www.youtube.com/watch?v=f5BReS4QDZE">&ldquo;Kent Beck&rdquo; scrum</a></li>
+</ul>
+
+<p>Related Links:</p>
+
+<ul>
+<li><a href="https://gist.github.com/dergachev/4627207">Quickly make animated gifs</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
