@@ -5,16 +5,111 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-02T00:00:00+00:00</updated>
+  <updated>2016-11-03T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Frustratingly Slow Debug Cycle</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/03/frustratingly-slow-debug-cycle/"/>
+    <id>http://blog.url.com/2016/11/03/frustratingly-slow-debug-cycle/</id>
+    <published>2016-11-03T00:00:00+00:00</published>
+    <updated>2016-11-03T20:28:32+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Michael had lots of great ideas about tracking people through the site today, but I wanted to quickly push out the &amp;ldquo;sponsor other users&amp;rdquo; feature.  I was following the logic from Monday, where dashing out a PayPal endpoint had opened up some payment streams.  I had one person waiting to use the sponsor others, and I was promising myself a phase of consolidation once that was done.  In fairly short order we stamped out some cucumber scenarios:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Allow Users to Sponsor other members
+  As a user
+  So that I can help someone else get premium services
+  I would like to be able to pay for their premium service
+
+  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nf"&gt;Given&lt;/span&gt; the following users exist
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;first_name&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;last_name&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;email&lt;/span&gt;                  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;github_profile_url&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;last_sign_in_ip&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Alice&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Jones&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;alice@btinternet.co.uk&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;http://github.com/AliceSky&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;127.0.0.1&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt;
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; User upgrades another user from free tier to premium
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I am logged in
+    &lt;span class="nf"&gt;And&lt;/span&gt; I visit Alice's profile page
+    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"Sponsor for Premium"&lt;/span&gt;
+    &lt;span class="nf"&gt;When&lt;/span&gt; I fill in appropriate card details for premium
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"you have sponsored Alice Jones as a Premium Member"&lt;/span&gt;
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit Alice's profile page
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Premium Member"&lt;/span&gt;
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Basic Member"&lt;/span&gt;
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Sponsor for Premium"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; non logged in user upgrades another user from free tier to premium
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit Alice's profile page
+    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"Sponsor for Premium"&lt;/span&gt;
+    &lt;span class="nf"&gt;When&lt;/span&gt; I fill in appropriate card details for premium
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"you have sponsored Alice Jones as a Premium Member"&lt;/span&gt;
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit Alice's profile page
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Premium Member"&lt;/span&gt;
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Basic Member"&lt;/span&gt;
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Sponsor for Premium"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which could be more declarative, but they were good enough for now.  We then stamped out some even messier code to get them green.  This was all me.  I was following my &amp;ldquo;get it green, THEN refactor&amp;rdquo; mantra of the previous week.  Just to show you how messy some things were, take a look at this view:&lt;/p&gt;
+&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if @user.present? &lt;span class="err"&gt;&amp;amp;&amp;amp;&lt;/span&gt; current_user != @user %&amp;gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if @plan == 'premium' %&amp;gt;
+        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you have sponsored &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= @user.display_name %&amp;gt; as a Premium Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;You're seven day free trial has now started.  Your card will not be charged until seven days have passed.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% elsif @plan == 'premiummob'%&amp;gt;
+        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you have sponsored &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= @user.display_name %&amp;gt; as a Premium MOB Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium mob membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% elsif @plan == 'premiumf2f'%&amp;gt;
+        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you have sponsored &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= @user.display_name %&amp;gt; as a Premium F2F Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium f2f membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% else %&amp;gt;
+        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you have sponsored &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= @user.display_name %&amp;gt; as a Premium PLUS Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium plus membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
+&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% else %&amp;gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if @plan == 'premium' %&amp;gt;
+        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you're now an AgileVentures Premium Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;You're seven day free trial has now started.  Your card will not be charged until seven days have passed.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% elsif @plan == 'premiummob'%&amp;gt;
+        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you're now an AgileVentures Premium MOB Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium mob membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% elsif @plan == 'premiumf2f'%&amp;gt;
+        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you're now an AgileVentures Premium F2F Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium f2f membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% else %&amp;gt;
+        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you're now an AgileVentures Premium PLUS Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium plus membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
+&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ugh, business logic in the view, lots to DRY out, and now I look at it again, some mistakes in wording.  However, all those changes would be fairly easy to make.  The danger is that we don&amp;rsquo;t get to them.  Michael and I went to the &amp;ldquo;Kent Beck&amp;rdquo; scrum and changed roles.  The cukes that had been green for me were now failing for Michael, failing on CI, and failing when I pulled them back onto my machine.&lt;/p&gt;
+
+&lt;p&gt;It seemed the full set of Premium related features was failing when run in full batch mode (Stripe iFrame not appearing), but would work when run individually, or from a set in their own folder (i.e. &lt;code&gt;cucumber features/premium/*&lt;/code&gt;).  Michael was then also getting individual failures related to a re-used Stripe token.  We were in a bit of a mess and burnt the best part of an hour investigating.  More importantly we weren&amp;rsquo;t doing any refactoring of the messy app code!&lt;/p&gt;
+
+&lt;p&gt;The functionality was working when we run the site manually.  So frustrating.  Trying to push out something to receive some money, that works manually, but the feature tests don&amp;rsquo;t pass due to some odd bug, which turns into a massive time sink.  I wanted to start trying the &lt;a href="https://github.com/rebelidealist/stripe-ruby-mock"&gt;stripe-ruby-mock&lt;/a&gt; which the CraftAcademy folks had had some success with.  It was not necessarily a snap fix, but I was starting to really hate all the many fixture files that came with sandboxing complex network interactions.  Occasional cache leaks would mean that developers would suddenly find a load of extra files on their file system.  Pull requests for new features would have 112 instead of 12 changed files.  Maybe the PR display on GitHub could be adapted to handle that, but I was really starting to feel this was all more trouble than it was worth.&lt;/p&gt;
+
+&lt;p&gt;Michael was keen to understand these errors and these tests.  We got down into the PuffingBilly config where I remembered there was this additional step to ignore params on a unique URL that Stripe interactions generated.  I got the tests green again, but then they still failed in batch.  Also, Stripe had told us that they were happy with a load on their test servers that was &amp;ldquo;within reason&amp;rdquo;.  So this morning I tried taking the VCR and PuffingBilly caches off the tests, which would make our tests sensitive to network failures, just to see if that could get things passing in batch; but that still fails.  The test needs JavaScript and I think we have puffing billy hardwired in to all JS tests at the moment.  I could remove that and maybe I could get all the tests passing, but then again &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;One of the biggest issues here is the slow debug cycle.  If the failures only occur in full batch then we have to run the entire cucumber suite, which takes ten minutes.  That might not seem like a lot, but it burns up time.  I&amp;rsquo;ve always seen that as a real red flag.  Being stuck with a slow debug cycle is asking for trouble.  Do anything you can to reduce the amount of time before you get feedback on whether a change you make is working or not!  I think the next thing to try is to create a @no-billy tag to opt out these scenarios from headless browser javascript caching to see if that will pass.  Other options include the stripe-ruby-mock gem, or just not having tests on the payment portions, which I&amp;rsquo;ve heard some people advocate.  Fingers crossed for a less frustrating session today &amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=boCPUJ3sdlE"&gt;Pairing on WebSiteOne, part 1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=20ZeJ9FcOxA"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=eAdPTF5A5O8"&gt;Pairing on WebSiteOne part 2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Documentation Debt</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/02/documentation-debt/"/>
     <id>http://blog.url.com/2016/11/02/documentation-debt/</id>
     <published>2016-11-02T00:00:00+00:00</published>
-    <updated>2016-11-02T22:18:14+00:00</updated>
+    <updated>2016-11-03T20:26:08+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -36,7 +131,7 @@
 
 &lt;p&gt;It was time to jump into a busy &amp;ldquo;Kent Beck&amp;rdquo; scrum with 8 folks reporting on where they were up to.  I really felt like I was spinning plates as I was recording an episode of Ruby Rogues right off the back of the scrum.  I was probably talking on x3, but we managed to dash off a vote on a &lt;a href="https://www.pivotaltracker.com/story/show/122459341"&gt;LocalSupport&lt;/a&gt; story, particularly since we had two MOOC students in the scrum wanting to complete their Open Source assignment.  I was on time to talk to the Ruby Rogues about the AgileVentures mission and it was a major buzz, and then buzz crash 90 minutes later as I tried to bring myself down for an evening with the family.  A busy day!  I spent another hour later on reviewing pull requests.  Still not sure if I&amp;rsquo;m focusing on the right things.  The Premium framework is designed to have me focus on PRs from those who are sponsoring AV.  I still feel like I&amp;rsquo;m drowning in requests sometimes :-) How will we scale this?  Can I get it sustainable before I get distracted by the need to take additional paid work?  Stay tuned to this blog to find out :-)&lt;/p&gt;
 
-&lt;p&gt;Related Videos:&lt;/p&gt;
+&lt;h3&gt;Related Videos&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=CpHdhYFok80"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
@@ -45,7 +140,7 @@
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=f5BReS4QDZE"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Related Links:&lt;/p&gt;
+&lt;h3&gt;Related Links:&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://gist.github.com/dergachev/4627207"&gt;Quickly make animated gifs&lt;/a&gt;&lt;/li&gt;
@@ -57,7 +152,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/11/01/different-strokes/"/>
     <id>http://blog.url.com/2016/11/01/different-strokes/</id>
     <published>2016-11-01T00:00:00+00:00</published>
-    <updated>2016-11-02T09:38:17+00:00</updated>
+    <updated>2016-11-01T21:38:51+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -136,7 +231,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/31/crunch-time/"/>
     <id>http://blog.url.com/2016/10/31/crunch-time/</id>
     <published>2016-10-31T00:00:00+00:00</published>
-    <updated>2016-11-02T09:38:17+00:00</updated>
+    <updated>2016-11-01T21:34:39+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -253,7 +348,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/28/opportunity-in-disguise/"/>
     <id>http://blog.url.com/2016/10/28/opportunity-in-disguise/</id>
     <published>2016-10-28T01:00:00+01:00</published>
-    <updated>2016-10-31T20:47:49+00:00</updated>
+    <updated>2016-11-01T21:34:39+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -353,7 +448,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/10/27/red-green-refactor/"/>
     <id>http://blog.url.com/2016/10/27/red-green-refactor/</id>
     <published>2016-10-27T01:00:00+01:00</published>
-    <updated>2016-10-31T20:47:58+00:00</updated>
+    <updated>2016-11-01T21:34:39+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -447,44 +542,6 @@ end
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=1QPgTuAkzUE"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=I8njkwFwTRc"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Pulled in Different Directions</title>
-    <link rel="alternate" href="http://blog.url.com/2016/10/26/pulled-in-different-directions/"/>
-    <id>http://blog.url.com/2016/10/26/pulled-in-different-directions/</id>
-    <published>2016-10-26T01:00:00+01:00</published>
-    <updated>2016-10-31T20:48:07+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;The PremiumPlus upgrade deploy appeared to go completely smoothly.  The test migration ran fine locally (with a copy of the production data).  Given we can&amp;rsquo;t afford to completely replicate the production data on staging I took a risk and ran the migration directly on production.  It all went fine, and I created tickets for &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1360"&gt;removing the migration and old columns&lt;/a&gt;, &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1362"&gt;updating the legacy Premium start dates&lt;/a&gt; and &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1361"&gt;making the upgrade button look nicer&lt;/a&gt;.  The real test will be when a user tries to upgrade, or we get a new sign up, or someone tries to change their credit card.  All those cases are covered by feature tests that are green, but I won&amp;rsquo;t rest easy till a few transactions have gone through on the live servers.&lt;/p&gt;
-
-&lt;p&gt;We also managed to deploy a fix to manual updates of event hangout URLs.  This is particularly important given that the &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1359"&gt;Hangout API is no longer working&lt;/a&gt;, and so our hangouts cannot connect back to our server to provide an easily discoverable link into the hangouts.  Unfortunately the manual updates &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1358"&gt;only stay live for a couple of minutes&lt;/a&gt; at a time before resetting the event status.  This feels like the resurgence of an earlier bug, and I&amp;rsquo;m torn between working on this and on rolling out payment functionality for some new premium plans.  &lt;/p&gt;
-
-&lt;p&gt;At least yesterday, rather than burning time trying to take apart the Google Hangout API, I got the PremiumUpgrade feature out, and helped kick start the AsyncVoter project.  I already had the sense that the Google Hangout API issue was something on the Google side and might not have a quick fix.  This was clear from a &lt;a href="https://productforums.google.com/forum/#!topic/youtube/bww-BpJGAMQ"&gt;YouTube product forum thread&lt;/a&gt; that Michael had found. The YouTube Live API support pages say that support is through StackOverflow, so I got a &lt;a href="http://stackoverflow.com/questions/40233393/start-a-hangout-on-air-button-for-youtube-livestreaming-api"&gt;question&lt;/a&gt; posted, describing the precise details of our problem and linked in all the relevant resources.  Over night I see new posts in the forum with one user having digged deeper into the APIs and coming up against walls it seems only Google engineers will be able to fix.&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s a strange situation.  Google might fix this tomorrow and we&amp;rsquo;ll be back to a stable setup, or that might just be it.  It&amp;rsquo;s a bleed for us, because it means that for the most part all the repeating events that countdown on our homepage will not have the correct hangout links, &lt;em&gt;unless&lt;/em&gt; I can fix the manual link update to work correctly, &lt;em&gt;and&lt;/em&gt; educate all the scrum masters to use it.  At the moment we are all pasting our links manually into Slack.   What we don&amp;rsquo;t have is numbers on how many people come in to hangouts through links posted to Slack, the Meetup group, and those coming in through the site itself.  My sense is we do get some from all these sources.  Regular members tend to come in through Slack (I think), but we&amp;rsquo;ve definitely met great people coming in through the site or the meetup group.&lt;/p&gt;
-
-&lt;p&gt;More frustratingly we also lose all our telemetry and Karma increments related to hangouts, because the Google Hangout plugin is not being loaded.  With all due respect to everyone who worked on the code previously, the hangout/event_instance code is a gnarly mess.  I would anticipate possibly a days work to fix the issue with the manual update, and several days work to clean things up into a state where things were maintainable. We could adapt to the new circumstances by ensuring that manually setting a hangout URL on the website would ping Slack and the meetup group, and reduce the admin load on the scrum masters.&lt;/p&gt;
-
-&lt;p&gt;Maybe this is an opportunity in disguise?   The problem with starting hangouts from the website is that it&amp;rsquo;s not easy for others to learn how to do this.  FreeCodeCamp gets round issues like this by having well place animated gifs in their site that show people what to do.  Another alternative is operating things purely in Slack - there are various integrations with Slack that allow you to start hangouts or other video conferencing tools with commands like &lt;code&gt;/hangout&lt;/code&gt;.  Frustratingly the hangout one does not support recordable hangouts on air.  I&amp;rsquo;ve always felt that the recording of our scrums and pairing sessions is an important part of AgileVentures&amp;rsquo; commitment to &amp;ldquo;Open Development&amp;rdquo;; but the flip side is that some are intimidated by the recording.  Then again, perhaps we get our positive community vibe from people realising they are always being live streamed around the world and so should be nice to each other.  I&amp;rsquo;m not sure &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;A serious challenge is that we have lots of legacy documentation in AgileVentures and in the &amp;ldquo;Agile Development using Ruby on Rails&amp;rdquo; MOOC that talks about things in terms of the event/hangout creation flow that worked in the past.  We have lots of people who are familiar with that flow.  Even if it&amp;rsquo;s not a novice friendly flow.  We could keep approximately with the grain of that flow by having a manual update that pinged Slack/Meetup etc. and then it could even be extended to be started from Slack &amp;hellip; a fair engineering effort, for what returns?  It&amp;rsquo;s unclear.&lt;/p&gt;
-
-&lt;p&gt;I was pleased to kick off some mob programming on the NodeJS AsyncVoter project yesterday.  The ability to run asynchronous votes on stories bugs and chores in Slack channels has something that starting hangouts through web pages does not; you can easily watch other people doing it, and learn the approximate process.  Also, people don&amp;rsquo;t all have to be available at the same time, so there&amp;rsquo;s a lower barrier to entry.  You don&amp;rsquo;t have to click a sign off on a warning saying &amp;ldquo;PEOPLE YOU DON&amp;rsquo;T KNOW WILL BE ABLE TO WATCH YOU!!!!!&amp;rdquo;   &lt;/p&gt;
-
-&lt;p&gt;Almost immediately there are tides that try to make the AsyncVoter project more complex.  Support multiple projects, support for a generic planning poker tool.  I do feel strongly that the challenges we have with maintaining our current infrastructure arise from having tried to add too many features too fast.  Moving forward we need simple tools that have a clear logic and set of domain entities at the centre.  In order to survive money has to flow; I think I must prioritize releasing actual payment pages for the new &lt;a href="http://www.agileventures.org/premium-mob"&gt;Premium Mob&lt;/a&gt; and &lt;a href="http://www.agileventures.org/premium-f2f"&gt;Premium F2F&lt;/a&gt; offerings.  Beyond that I think we need to enable people to start voting on tickets with the minimum of effort and maximum of visibility.  This is the stepping stone to them taking on a ticket and putting in a pull request. It&amp;rsquo;s through pull requests of code that all our members learn, and also how we fundamentally deliver value as an organisation.&lt;/p&gt;
-
-&lt;p&gt;Of course I have to go spend the morning with my accountant, but after that &amp;hellip;!&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=oCcWrBHqPfk"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=iUPcDHE7HUM"&gt;AsyncVoter Mob session&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=feCOvYV6fN4"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
