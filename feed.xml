@@ -5,10 +5,172 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-03T00:00:00+00:00</updated>
+  <updated>2016-11-04T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Light at the End of the Stripe Tunnel</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/04/light-at-the-end-of-the-tunnel/"/>
+    <id>http://blog.url.com/2016/11/04/light-at-the-end-of-the-tunnel/</id>
+    <published>2016-11-04T00:00:00+00:00</published>
+    <updated>2016-11-04T22:01:37+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;My hopes for a less than frustrating day were dashed as I worked through the ongoing Stripe test failures.  Michael wasn&amp;rsquo;t around and I solo&amp;rsquo;d through some different alternatives.  Rather than just burn time repeatedly in the long debug cycle of seeing if the Stripe acceptance tests would all run in batch after random tweaks, I identified some different possible options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Run the existing tests without sandboxing (create a @poltergeist&lt;em&gt;no&lt;/em&gt;billy tag)&lt;/li&gt;
+&lt;li&gt;Slowly re-add code pieces to develop (since batch cukes are green there)&lt;/li&gt;
+&lt;li&gt;Delete the sandbox caches for larger and larger sets of acceptance tests, seeing if regenerating them fixed things&lt;/li&gt;
+&lt;li&gt;Use the StripeRubyMock gem as an alternative&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I started with the first option reckoning that I could at least quickly test whether the existing tests would run without sandboxing.  To re-cap, the develop branch had about 10 Stripe acceptance tests that ran fine with sandboxes; working individually and in batch.  Our new feature for users sponsoring each other introduced 2 new stripe acceptance tests, neither of which did anything fundamentally different from the existing tests.  These 2 new tests ran fine individually, in a group with all the other Stripe acceptance tests, but then the entire set of Stripe tests (new and old) would fail (no Stripe iFrame appearing) when run in batch with all the other Cucumber tests.&lt;/p&gt;
+
+&lt;p&gt;It felt to me like there must be some timing issue here.  Some race condition such as often plagues JavaScript acceptance tests.  Although this wasn&amp;rsquo;t intermittent failure - the whole thing still doesn&amp;rsquo;t make sense to me.  To try and make sense I wanted to get some other data points.  Getting the Stripe tests to run without sandboxing might allow me to exclude sandboxing as the source of the problem.  Not that sandboxing didn&amp;rsquo;t have other usability issues that I&amp;rsquo;ve blogged about recently, but when trying to solve any big problem it&amp;rsquo;s useful to run experiments on the subsets of the components to see try and narrow down the area in which the error is occurring.&lt;/p&gt;
+
+&lt;p&gt;Removing sandboxing was not as easily said as done, as I&amp;rsquo;d previously hooked the PuffingBilly gem directly into all Cucumber Javascript tests like so:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;test_options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="ss"&gt;phantomjs_options: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="s1"&gt;'--ignore-ssl-errors=yes'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"--proxy=&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;Billy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;host&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;Billy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;port&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+    &lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="ss"&gt;phantomjs: &lt;/span&gt;&lt;span class="no"&gt;Phantomjs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="ss"&gt;js_errors: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;register_driver&lt;/span&gt; &lt;span class="ss"&gt;:poltergeist_billy&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Poltergeist&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_options&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Both WebSiteOne and LocalSupport have been plagued, and continue to suffer to some extent, from intermittent JavaScript acceptance test failures.  There&amp;rsquo;s a &lt;a href="https://bibwild.wordpress.com/2016/02/18/struggling-towards-reliable-capybara-javascript-testing/"&gt;good blog post&lt;/a&gt; on why this is a tricky problem.  My own take earlier in the year was that it made sense to nail down all sources of variation.  Tests that make network connections are depending on the network and 3rd party services.  Sandboxing those network connections (recording them and playing them back in test mode) using the VCR and PuffingBilly gems reduces the variability of the test, and makes it more deterministic.  Earlier this year, as part of trying to reduce the overall variability in the WebSiteOne acceptance test, Michael and I had completely re-implemented the Cucumber config and hooks for WebSiteOne.&lt;/p&gt;
+
+&lt;p&gt;To my chagrin this had still not completely removed the occasional intermittent acceptance failure, and the generation of additional cache files on test failure or on other occasions of test variation was confusing for all developers, complicated to manage, and made some PRs unreadable due to the overload of files.  In several smaller projects I&amp;rsquo;d preferred sandboxing over stubbing with WebMock, which has it&amp;rsquo;s own issues of maintaining lots of individual hand-written network calls.  Anyhow, in order to remove the sandboxing I had to get another Capybara JavaScript driver set up.  I ran through a series of alternatives:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Default (Selenium) - opened firefox (v47) browser displayed nothing&lt;/li&gt;
+&lt;li&gt;Poltergeist - not working on my OSX - absolutely bizarre DB errors, with users appearing and disappearing&lt;/li&gt;
+&lt;li&gt;Poltergeist with PhantomJS - Stripe tests passed, but redirects to success page did not work - underlying permissions fail?&lt;/li&gt;
+&lt;li&gt;Poltergeist with PhantomJS and PuffingBilly - going back to this got green, but still failing in batch&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That was a frustrating hour.  I knew that with extra work I could probably get the Selenium testing working, but that headed browser approach wasn&amp;rsquo;t going to work on our CI.  The pure Poltergeist errors with data appearing and disappearing from the DB were bizarre and a big red flag.  Poltergeist with PhantomJS looked promising.  We were avoiding sandboxing, but there was likely some permissions error at some level.  I could probably find that, although I was also encountering some ambiguity about which driver was being used - how other hooks were integrating with the existing Capybara Javascript hook:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Before&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'@poltergeist_no_billy'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;javascript_driver&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;poltergeist_no_billy&lt;/span&gt;
+  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current_driver&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;javascript_driver&lt;/span&gt; &lt;span class="c1"&gt;# this is my copy of the existing @javascript hook&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I wasn&amp;rsquo;t liking any of the options very much.  I thought I&amp;rsquo;d give stripe-ruby-mock a spin.  Working from the &lt;a href="https://github.com/rebelidealist/stripe-ruby-mock/blob/master/README.md"&gt;gem README&lt;/a&gt;, &lt;a href="https://medium.com/craft-academy/keeping-it-simple-3e7d9b186015#.4rc29xv6j"&gt;Thomas&amp;rsquo; CraftAcademy blog&lt;/a&gt;, and probably most importantly the associated &lt;a href="https://github.com/CraftAcademy/sf-online-august/"&gt;CraftAcademy repo&lt;/a&gt; I got first a single Stripe acceptance test working, and then another.  All would be for nothing if I couldn&amp;rsquo;t get them running in batch.  In batch a large number of Stripe acceptance tests were still failing, but importantly the ones using StripeRubyMock were not.  I had a lifeline, a light at the end of the tunnel.  If I could convert all the Stripe acceptance tests to StripeRubyMock I might have something where the entire test suite would go green.&lt;/p&gt;
+
+&lt;p&gt;I had created a custom &lt;code&gt;@stripe_javascript&lt;/code&gt; tag to ensure that our StripeRubyMock tests would not use PuffingBilly, while allowing the other existing tests to keep using it:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Before&lt;/span&gt; &lt;span class="s1"&gt;'@stripe_javascript'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;javascript_driver&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ss"&gt;:poltergeist&lt;/span&gt;
+  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current_driver&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;javascript_driver&lt;/span&gt;
+  &lt;span class="no"&gt;StripeMock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;start&lt;/span&gt;
+  &lt;span class="vi"&gt;@stripe_test_helper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;StripeMock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create_test_helper&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;After&lt;/span&gt; &lt;span class="s1"&gt;'@stripe_javascript'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;javascript_driver&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ss"&gt;:poltergeist_billy&lt;/span&gt;
+  &lt;span class="no"&gt;StripeMock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stop&lt;/span&gt;
+  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'session_pool'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="k"&gt;next&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;is_a?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Poltergeist&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Driver&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;restart&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I was not without concern for some of the other changes.  App code in the ChargesContller had to be adjusted to accommodate testing with StripeRubyMock:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;stripe_token&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;env&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;test?&lt;/span&gt; &lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="n"&gt;generate_test_token&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:stripeToken&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_test_token&lt;/span&gt;
+  &lt;span class="no"&gt;StripeMock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create_test_helper&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;generate_card_token&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The charges controller would now ignore the incoming stripe token from the javascript redirect, and use a StripeRubyMock generated token in test mode.  It was pretty innocuous but a different code path would run in test, compared to development and production.  This was going against another general coding guideline.  Not the end of the world, but a warning flag.  Still this was starting to seem like the most hopeful route back to a green Cucumber suite.  I also came away with a modified poltergeist driver based on the CraftAcademy code:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;register_driver&lt;/span&gt; &lt;span class="ss"&gt;:poltergeist&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Poltergeist&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;js_errors: &lt;/span&gt;&lt;span class="kp"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                    &lt;span class="ss"&gt;phantomjs: &lt;/span&gt;&lt;span class="no"&gt;Phantomjs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                    &lt;span class="ss"&gt;phantomjs_options: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'--ssl-protocol=tlsv1.2'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'--ignore-ssl-errors=yes'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Another key difference was that I now had to explicitly create our Premium plans using the StripeRubyMock as part of the setup for the cuke scenarios:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nf"&gt;Given&lt;/span&gt; the following plans exist
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Premium&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;premium&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;PremiumMob&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;premiummob&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;PremiumF2F&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;premiumf2f&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;PremiumPlus&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;premiumplus&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Given&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^the following plans exist$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hashes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="vi"&gt;@stripe_test_helper&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create_plan&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is interesting as previously the cache of VCR and PuffingBilly would contain the plan information encoded in HTTP responses from the Stripe servers.  That had ensured the Stripe servers were the single authoritative source for this information.  As it happens specifying this in the Cucumber steps makes our business logic description here more complete.  It leaves us with a data dependency, whereby we need to ensure that the plans specified in our Cucumber scenarios match those on the Stripe servers.  Another heuristic red flag, but the prospect of a green test suite was driving me forward.  I wasn&amp;rsquo;t quite there yet, our update card details was failing, and we needed more changes to how we created a Premium user for testing purposes:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Given&lt;/span&gt; &lt;span class="sr"&gt;/^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;premium&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+
+  &lt;span class="vi"&gt;@current_user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vi"&gt;@user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;first_name: &lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;password: &lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;password_confirmation: &lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;premium&lt;/span&gt;
+    &lt;span class="n"&gt;subscription&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Premium&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;user: &lt;/span&gt;&lt;span class="vi"&gt;@user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;started_at: &lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;customer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+                                           &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                           &lt;span class="ss"&gt;source: &lt;/span&gt;&lt;span class="vi"&gt;@stripe_test_helper&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;generate_card_token&lt;/span&gt;
+                                       &lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;plan: &lt;/span&gt;&lt;span class="s1"&gt;'premium'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;payment_source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;identifier: &lt;/span&gt;&lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;subscription: &lt;/span&gt;&lt;span class="n"&gt;subscription&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A card token from the Stripe test server would no longer work and the fix was using the stripe test helper to generate a card token.  This test code was super ugly, and I was still really bothered by the factories being shared between cukes and specs.  Anyhow, I also had to modify the app code for updating cards, because we were now generating a different kind of error.  I added a &lt;code&gt;NoMethodError&lt;/code&gt; to the update card error handling:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  def update
+    customer = Stripe::Customer.retrieve(current_user.stripe_customer_id) # _token?
+    card = customer.sources.create(card: stripe_token(params))
+    card.save
+    customer.default_card = card.id
+    customer.save
+  rescue Stripe::InvalidRequestError, NoMethodError =&amp;gt; e
+    logger.error "Stripe error while updating card info: #{e.message} for #{current_user}"
+    @error = true
+  end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and we were finally all green! Although I did still get an intermittent fail on the very last build on CI at the end, so this isn&amp;rsquo;t over JavaScript Acceptance tests (shakes fist)!  In summary though the full test suite was green for me locally, and after a re-build on semaphore the build passed.  StripeRubyMock was working for us, and I don&amp;rsquo;t have much appetite for burning more time on the complete sandboxing alternative.  What&amp;rsquo;s frustrating is how much time that goes into this that could be going into refactoring the code for maintainability or improving the user interface experience.  However with the test suite green, we can potentially refactor with confidence (until the next time!).&lt;/p&gt;
+
+&lt;p&gt;My concerns about RubyStripeMock is will it be maintained and stay up to date with the Stripe API itself?  To get things to pass I had to change app code that now hasn&amp;rsquo;t been tested in production.  Thomas has updated &lt;a href="https://medium.com/craft-academy/keeping-it-simple-3e7d9b186015#.4rc29xv6j"&gt;his blog post&lt;/a&gt; to talk about using RubyStripeMock completely network independently.  Since Stripe told me they are happy with a few hits from tests, and that removing network dependency has not fixed our intermittent failures I&amp;rsquo;m less concerned about that, than just having code paths that operate in production but don&amp;rsquo;t run in test.  I changed &lt;code&gt;customer.cards&lt;/code&gt; to &lt;code&gt;customer.sources&lt;/code&gt; in the app code to get the RubyStripeMock acceptance tests to work.  I will need to use the StripeRubyMock ability to switch to live tests against the Stripe servers to test that still works:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;configure&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;filter_manager&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;inclusions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rules&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;include?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:live&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="no"&gt;StripeMock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;toggle_live&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Running **live** tests against Stripe..."&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The advantage of a full VCR/PuffingBilly sandbox, is that you are stubbing at the network level.  Your app is effectively running in the exact same environment as it would with a live network connection.  You can dump the sandbox at any time to re-create an accurate network sandbox.  However it becomes challenging with a complex service like Stripe that&amp;rsquo;s trying to be secure and is using a high degree of indeterminacy in terms of the network connections it makes.  The sandbox cache files have to be checked into git to ensure everyone gets a benefit from the sandbox, so test failures or complex system like Stripe can lead to challenging git churn.  Not checking in those files would be an alternative - CI would still hit live network servers, and on second and subsequent runs developer machines would avoid re-hitting the live network, but then network fails could be encoded into caches.  I starting to think sandbox caches are another challenging source of variability when used with services like Stripe.&lt;/p&gt;
+
+&lt;p&gt;In a final analysis it&amp;rsquo;s all about trading off these different heuristics:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Keep test code as close to production code as possible&lt;/li&gt;
+&lt;li&gt;Keep test environment as close to production environment as possible&lt;/li&gt;
+&lt;li&gt;Avoid hitting 3rd party servers during test&lt;/li&gt;
+&lt;li&gt;Ensure development flow is comprehensible and manageable for developers on your team&lt;/li&gt;
+&lt;li&gt;Keep your full test suite green&lt;/li&gt;
+&lt;li&gt;Keep the running time of your test suite down to avoid delayed debug cycle hell&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and various others.  None of these heuristics always trumps all the others.  As Kent Beck says, &amp;ldquo;it depends &amp;hellip;&amp;rdquo;.  I say, keep looking for the light at the end of the tunnel :-) &lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=fDUd9N5iDTA"&gt;Solo on WebSiteOne part 1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=hz_i4DagxkY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=iaRDd35qF_g"&gt;Solo on WebSiteOne part 2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Frustratingly Slow Debug Cycle</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/03/frustratingly-slow-debug-cycle/"/>
@@ -440,108 +602,6 @@
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=DyLL5_QxLkU"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Zmt8FjqMTLE"&gt;AsyncVoter Review&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=DyLL5_QxLkU"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Red Green Refactor (Against the Clock)</title>
-    <link rel="alternate" href="http://blog.url.com/2016/10/27/red-green-refactor/"/>
-    <id>http://blog.url.com/2016/10/27/red-green-refactor/</id>
-    <published>2016-10-27T01:00:00+01:00</published>
-    <updated>2016-11-01T21:34:39+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;While the AsynVoter folks got down to mobbing on the first feature I got on with some solo-coding on payment end points for the new intermediate level Premium payment plans.  I did want to try out &lt;a href="https://github.com/rebelidealist/stripe-ruby-mock"&gt;ruby-stripe-mock&lt;/a&gt; because while I do like the absolutist cover and re-recordability of the vcr/puffing-billy sandbox, the number of additional files that need to be checked in make associated pull requests hard to decipher.  Case in point, the &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1366"&gt;pull request&lt;/a&gt; generated from the day&amp;rsquo;s solo-coding consists of 132 files, of which only about 10 are files that I edited.  It would be great if branch comparisons on GitHub and RubyMine could filter out auto-generated files.&lt;/p&gt;
-
-&lt;p&gt;Under the circumstances of having only a little time and wanting to move at speed, I stuck with our sandboxes.  I just needed these endpoints up to see if anyone would actually sponsor us at these new price points for these new offerings.  Maybe &lt;a href="https://github.com/rebelidealist/stripe-ruby-mock"&gt;ruby-stripe-mock&lt;/a&gt; would be a simple win, but I was still unsure about whether it would really sandbox the browser interaction.  My questions to the stripe-ruby-mock community in Gitter and and GitHub issues had not gained me much clarity.  I knew the CraftAcademy folks had had &lt;a href="https://medium.com/craft-academy/keeping-it-simple-3e7d9b186015#.cvnpccp1f"&gt;some success with the gem&lt;/a&gt;, but still I had less than an hour.&lt;/p&gt;
-
-&lt;p&gt;I went straight for new feature tests which were almost clones of existing ones:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Sign up for premium mob membership
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit &lt;span class="s"&gt;"/charges/new?plan=premiummob"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Sign Me Up For Premium!"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"Sign Me Up For Premium Mob!"&lt;/span&gt;
-    &lt;span class="nf"&gt;When&lt;/span&gt; I fill in appropriate card details for premium mob
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Thanks, you're now an AgileVentures Premium MOB Member!"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; The user should receive a &lt;span class="s"&gt;"Welcome to AgileVentures Premium MOB"&lt;/span&gt; email
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I now had four like this - ripe for a &amp;ldquo;Scenario Outline&amp;rdquo; to DRY things out, but it was not time to refactor yet.  Throughout this session I think I identified a critical point about when to refactor.  Don&amp;rsquo;t refactor when you&amp;rsquo;re in the process of creating new tests or new code.  Refactor when you have new tests and code in place and when the tests are green.  Old advice but is blazed bright on my cortex.  Also every time you DRY things out you introduce a dependency, you reduce an axis of freedom that might be needed by the next incoming feature.  Cautious with that DRYing and refactoring.&lt;/p&gt;
-
-&lt;p&gt;I commented out the feature for the f2f plan and focused on getting this single mob payment end point.  First stop was the incorrectly named &lt;code&gt;charges_controller&lt;/code&gt; (who named it? me).  I knew now that really this should be the subscription (or possibly plan?) controller.  Refactor that later.  I adjusted the new method to support a premiummob template:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="s1"&gt;'premiummob'&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;premiummob?&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="s1"&gt;'premiumplus'&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;premiumplus?&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="s1"&gt;'premium'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and added a private method:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;premiummob?&lt;/span&gt;
-    &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'premiummob'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I noticed that our private &lt;code&gt;update_user_to_premium&lt;/code&gt; was now out of date, and actually had an unidentified bug that meant new PremiumPlus users would not be represented properly.  I could fix that by creating a &lt;code&gt;plan_class&lt;/code&gt; method that would correctly identify the plan type.  &lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;update_user_to_premium&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;current_user&lt;/span&gt;
-    &lt;span class="no"&gt;UpgradeUserToPremium&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stripe_customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;plan_class&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;plan_class&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="no"&gt;PremiumMob&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'premiumob'&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="no"&gt;PremiumPlus&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'premiumplus'&lt;/span&gt;
-    &lt;span class="no"&gt;Premium&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Really I wanted my feature tests to include some mechanism to check that the correct plan type was being stored in the database, but that would require bleeding into another feature which would be displaying the plan types correctly for users.  Actually we did have that, but it only works for logged in members, and we still aren&amp;rsquo;t requiring login for these payment end points.  I didn&amp;rsquo;t want problems with account sign up preventing people from sign up, although now we have 20+ people signed up that starts to look a bit paranoid.  I can probably add that restriction in and get feature tests that are not too tied to the database, but I chose not to get side-tracked by that right there and then.&lt;/p&gt;
-
-&lt;p&gt;I updated the various view templates and ran the feature test. It was failing on the email step.  I needed to support more acknowledgement email templates.  I let the code expand again:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;plan_name&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'premium_mob'&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'premiummob'&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'premium_plus'&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'premiumplus'&lt;/span&gt;
-    &lt;span class="s1"&gt;'premium'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;send_acknowledgement_email&lt;/span&gt;
-    &lt;span class="no"&gt;Mailer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;acknowledgement_email_template&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:stripeEmail&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nf"&gt;deliver_now&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;acknowledgement_email_template&lt;/span&gt;
-    &lt;span class="s2"&gt;"send_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;plan_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;_payment_complete"&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_sym&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There were certainly opportunities for refactoring, but I ignored them and pushed on to get the acceptance green.  I was a little disturbed that my creation of a new class &lt;code&gt;PremiumMob&lt;/code&gt; was not throwing an error.  I turned aside to create specs for that:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;describe PremiumMob, type: :model do
-  let(:type) { 'PremiumMob' }
-  it_behaves_like 'a subscription'
-end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And knowing that implementing the next end point would highlight the places for refactoring I did the same as above for the PremiumF2F plan.  I now had the two key endpoints that I wanted, and I could refactor with some security.  I actually started the refactoring in the cucumber steps (see the PR for details) and held off against using the Scenario Outline as the RubyMine automated refactoring was failing and I had 20 minutes left.  The cucumber steps were cleaner and I focused my attention on the charges controller.  I was feeling uncomfortable about these &lt;code&gt;plan_name&lt;/code&gt; and &lt;code&gt;plan_class&lt;/code&gt; methods that were effectively case statements.  I needed to keep &lt;code&gt;plan_name&lt;/code&gt; as it was doing a not easily automatable mapping from the ids of the plans in the Stripe side to the snake_case versions in use on the Rails side:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;plan_name&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'premium_mob'&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'premiummob'&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'premium_f2f'&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'premiumf2f'&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'premium_plus'&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'premiumplus'&lt;/span&gt;
-    &lt;span class="s1"&gt;'premium'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Looking at this now I see I can refactor this further by replacing it with a hash data structure, but yesterday I used it to DRY out the &lt;code&gt;new&lt;/code&gt; action:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="n"&gt;plan_name&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and the &lt;code&gt;plan_class&lt;/code&gt; method:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;plan_class&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="no"&gt;PremiumF2F&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'premiumf2f'&lt;/span&gt;
-    &lt;span class="n"&gt;plan_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;camelcase&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;constantize&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that there&amp;rsquo;s an exceptional case in the above to handle some Rails Inflector screwiness that comes from the number 2 in the &lt;code&gt;PremiumF2F&lt;/code&gt; class, which itself has to sit in a file named &lt;code&gt;premium_f2_f.rb&lt;/code&gt; file to be auto-loaded.  I think I need all the different subscription types (&lt;code&gt;Premium&lt;/code&gt;, &lt;code&gt;PremiumF2F&lt;/code&gt;, &lt;code&gt;PremiumPlus&lt;/code&gt;) to sit in their own module to avoid the funky file name.  Not sure if that will remove the exceptional case from &lt;code&gt;plan_class&lt;/code&gt;.  I was out of time, but the tests were green and I&amp;rsquo;d DRYed out some of the nastiest dampness from the charges controller.  Lots more to get done, but aside from code navel gazing, the key thing here is whether the new endpoints would generate any revenue.  In a quick mental calculation I worked out we would need 10 F2F sign ups, 20 Mob sign ups and another 40 premiums to make AgileVentures truly stable. Wonder if we can do that before Xmas?  That really would be an awesome Yuletide gift!  &lt;/p&gt;
-
-&lt;p&gt;Even if we don&amp;rsquo;t, I&amp;rsquo;ve highlighted a core insight for myself about an old truth.  Red, Green and THEN refactor :-) Looking back over the years there&amp;rsquo;s so much trouble that&amp;rsquo;s come from refactoring too early.  Maybe leave the refactoring till the acceptance test is green, not every time a unit test passes.  Let the code expand first, and then contract when it&amp;rsquo;s green and try not to build in too much genericism.  Or at least I&amp;rsquo;m saying that because the PR build is green - we&amp;rsquo;ll see what happens when we deploy &amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=1QPgTuAkzUE"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=I8njkwFwTRc"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

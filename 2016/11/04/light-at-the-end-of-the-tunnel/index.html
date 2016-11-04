@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Light at the End of the Stripe Tunnel</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_11 x2016_11_04 x2016_11_04_light-at-the-end-of-the-tunnel x2016_11_04_light-at-the-end-of-the-tunnel_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/11/04/light-at-the-end-of-the-tunnel/">Light at the End of the Stripe Tunnel</a></h2>
+        <h5 class='date'> 4 Nov 2016</h5>
+    <p>My hopes for a less than frustrating day were dashed as I worked through the ongoing Stripe test failures.  Michael wasn&rsquo;t around and I solo&rsquo;d through some different alternatives.  Rather than just burn time repeatedly in the long debug cycle of seeing if the Stripe acceptance tests would all run in batch after random tweaks, I identified some different possible options:</p>
+
+<ul>
+<li>Run the existing tests without sandboxing (create a @poltergeist<em>no</em>billy tag)</li>
+<li>Slowly re-add code pieces to develop (since batch cukes are green there)</li>
+<li>Delete the sandbox caches for larger and larger sets of acceptance tests, seeing if regenerating them fixed things</li>
+<li>Use the StripeRubyMock gem as an alternative</li>
+</ul>
+
+<p>I started with the first option reckoning that I could at least quickly test whether the existing tests would run without sandboxing.  To re-cap, the develop branch had about 10 Stripe acceptance tests that ran fine with sandboxes; working individually and in batch.  Our new feature for users sponsoring each other introduced 2 new stripe acceptance tests, neither of which did anything fundamentally different from the existing tests.  These 2 new tests ran fine individually, in a group with all the other Stripe acceptance tests, but then the entire set of Stripe tests (new and old) would fail (no Stripe iFrame appearing) when run in batch with all the other Cucumber tests.</p>
+
+<p>It felt to me like there must be some timing issue here.  Some race condition such as often plagues JavaScript acceptance tests.  Although this wasn&rsquo;t intermittent failure - the whole thing still doesn&rsquo;t make sense to me.  To try and make sense I wanted to get some other data points.  Getting the Stripe tests to run without sandboxing might allow me to exclude sandboxing as the source of the problem.  Not that sandboxing didn&rsquo;t have other usability issues that I&rsquo;ve blogged about recently, but when trying to solve any big problem it&rsquo;s useful to run experiments on the subsets of the components to see try and narrow down the area in which the error is occurring.</p>
+
+<p>Removing sandboxing was not as easily said as done, as I&rsquo;d previously hooked the PuffingBilly gem directly into all Cucumber Javascript tests like so:</p>
+<pre class="highlight ruby"><code><span class="n">test_options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="ss">phantomjs_options: </span><span class="p">[</span>
+        <span class="s1">'--ignore-ssl-errors=yes'</span><span class="p">,</span>
+        <span class="s2">"--proxy=</span><span class="si">#{</span><span class="no">Billy</span><span class="p">.</span><span class="nf">proxy</span><span class="p">.</span><span class="nf">host</span><span class="si">}</span><span class="s2">:</span><span class="si">#{</span><span class="no">Billy</span><span class="p">.</span><span class="nf">proxy</span><span class="p">.</span><span class="nf">port</span><span class="si">}</span><span class="s2">"</span>
+    <span class="p">],</span>
+    <span class="ss">phantomjs: </span><span class="no">Phantomjs</span><span class="p">.</span><span class="nf">path</span><span class="p">,</span>
+    <span class="ss">js_errors: </span><span class="kp">true</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="no">Capybara</span><span class="p">.</span><span class="nf">register_driver</span> <span class="ss">:poltergeist_billy</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
+  <span class="no">Capybara</span><span class="o">::</span><span class="no">Poltergeist</span><span class="o">::</span><span class="no">Driver</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">test_options</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>Both WebSiteOne and LocalSupport have been plagued, and continue to suffer to some extent, from intermittent JavaScript acceptance test failures.  There&rsquo;s a <a href="https://bibwild.wordpress.com/2016/02/18/struggling-towards-reliable-capybara-javascript-testing/">good blog post</a> on why this is a tricky problem.  My own take earlier in the year was that it made sense to nail down all sources of variation.  Tests that make network connections are depending on the network and 3rd party services.  Sandboxing those network connections (recording them and playing them back in test mode) using the VCR and PuffingBilly gems reduces the variability of the test, and makes it more deterministic.  Earlier this year, as part of trying to reduce the overall variability in the WebSiteOne acceptance test, Michael and I had completely re-implemented the Cucumber config and hooks for WebSiteOne.</p>
+
+<p>To my chagrin this had still not completely removed the occasional intermittent acceptance failure, and the generation of additional cache files on test failure or on other occasions of test variation was confusing for all developers, complicated to manage, and made some PRs unreadable due to the overload of files.  In several smaller projects I&rsquo;d preferred sandboxing over stubbing with WebMock, which has it&rsquo;s own issues of maintaining lots of individual hand-written network calls.  Anyhow, in order to remove the sandboxing I had to get another Capybara JavaScript driver set up.  I ran through a series of alternatives:</p>
+
+<ul>
+<li>Default (Selenium) - opened firefox (v47) browser displayed nothing</li>
+<li>Poltergeist - not working on my OSX - absolutely bizarre DB errors, with users appearing and disappearing</li>
+<li>Poltergeist with PhantomJS - Stripe tests passed, but redirects to success page did not work - underlying permissions fail?</li>
+<li>Poltergeist with PhantomJS and PuffingBilly - going back to this got green, but still failing in batch</li>
+</ul>
+
+<p>That was a frustrating hour.  I knew that with extra work I could probably get the Selenium testing working, but that headed browser approach wasn&rsquo;t going to work on our CI.  The pure Poltergeist errors with data appearing and disappearing from the DB were bizarre and a big red flag.  Poltergeist with PhantomJS looked promising.  We were avoiding sandboxing, but there was likely some permissions error at some level.  I could probably find that, although I was also encountering some ambiguity about which driver was being used - how other hooks were integrating with the existing Capybara Javascript hook:</p>
+<pre class="highlight ruby"><code><span class="no">Before</span><span class="p">(</span><span class="s1">'@poltergeist_no_billy'</span><span class="p">)</span> <span class="k">do</span>
+  <span class="no">Capybara</span><span class="p">.</span><span class="nf">javascript_driver</span> <span class="o">=</span> <span class="p">:</span> <span class="n">poltergeist_no_billy</span>
+  <span class="no">Capybara</span><span class="p">.</span><span class="nf">current_driver</span> <span class="o">=</span> <span class="no">Capybara</span><span class="p">.</span><span class="nf">javascript_driver</span> <span class="c1"># this is my copy of the existing @javascript hook</span>
+<span class="k">end</span>
+</code></pre>
+<p>I wasn&rsquo;t liking any of the options very much.  I thought I&rsquo;d give stripe-ruby-mock a spin.  Working from the <a href="https://github.com/rebelidealist/stripe-ruby-mock/blob/master/README.md">gem README</a>, <a href="https://medium.com/craft-academy/keeping-it-simple-3e7d9b186015#.4rc29xv6j">Thomas&rsquo; CraftAcademy blog</a>, and probably most importantly the associated <a href="https://github.com/CraftAcademy/sf-online-august/">CraftAcademy repo</a> I got first a single Stripe acceptance test working, and then another.  All would be for nothing if I couldn&rsquo;t get them running in batch.  In batch a large number of Stripe acceptance tests were still failing, but importantly the ones using StripeRubyMock were not.  I had a lifeline, a light at the end of the tunnel.  If I could convert all the Stripe acceptance tests to StripeRubyMock I might have something where the entire test suite would go green.</p>
+
+<p>I had created a custom <code>@stripe_javascript</code> tag to ensure that our StripeRubyMock tests would not use PuffingBilly, while allowing the other existing tests to keep using it:</p>
+<pre class="highlight ruby"><code><span class="no">Before</span> <span class="s1">'@stripe_javascript'</span> <span class="k">do</span>
+  <span class="no">Capybara</span><span class="p">.</span><span class="nf">javascript_driver</span> <span class="o">=</span> <span class="ss">:poltergeist</span>
+  <span class="no">Capybara</span><span class="p">.</span><span class="nf">current_driver</span> <span class="o">=</span> <span class="no">Capybara</span><span class="p">.</span><span class="nf">javascript_driver</span>
+  <span class="no">StripeMock</span><span class="p">.</span><span class="nf">start</span>
+  <span class="vi">@stripe_test_helper</span> <span class="o">=</span> <span class="no">StripeMock</span><span class="p">.</span><span class="nf">create_test_helper</span>
+<span class="k">end</span>
+
+<span class="no">After</span> <span class="s1">'@stripe_javascript'</span> <span class="k">do</span>
+  <span class="no">Capybara</span><span class="p">.</span><span class="nf">javascript_driver</span> <span class="o">=</span> <span class="ss">:poltergeist_billy</span>
+  <span class="no">StripeMock</span><span class="p">.</span><span class="nf">stop</span>
+  <span class="no">Capybara</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="s1">'session_pool'</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">_</span><span class="p">,</span> <span class="n">session</span><span class="o">|</span>
+    <span class="k">next</span> <span class="k">unless</span> <span class="n">session</span><span class="p">.</span><span class="nf">driver</span><span class="p">.</span><span class="nf">is_a?</span><span class="p">(</span><span class="no">Capybara</span><span class="o">::</span><span class="no">Poltergeist</span><span class="o">::</span><span class="no">Driver</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">.</span><span class="nf">driver</span><span class="p">.</span><span class="nf">restart</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>I was not without concern for some of the other changes.  App code in the ChargesContller had to be adjusted to accommodate testing with StripeRubyMock:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">stripe_token</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+  <span class="no">Rails</span><span class="p">.</span><span class="nf">env</span><span class="p">.</span><span class="nf">test?</span> <span class="p">?</span> <span class="n">generate_test_token</span> <span class="p">:</span> <span class="n">params</span><span class="p">[</span><span class="ss">:stripeToken</span><span class="p">]</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">generate_test_token</span>
+  <span class="no">StripeMock</span><span class="p">.</span><span class="nf">create_test_helper</span><span class="p">.</span><span class="nf">generate_card_token</span>
+<span class="k">end</span>
+</code></pre>
+<p>The charges controller would now ignore the incoming stripe token from the javascript redirect, and use a StripeRubyMock generated token in test mode.  It was pretty innocuous but a different code path would run in test, compared to development and production.  This was going against another general coding guideline.  Not the end of the world, but a warning flag.  Still this was starting to seem like the most hopeful route back to a green Cucumber suite.  I also came away with a modified poltergeist driver based on the CraftAcademy code:</p>
+<pre class="highlight ruby"><code><span class="no">Capybara</span><span class="p">.</span><span class="nf">register_driver</span> <span class="ss">:poltergeist</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
+  <span class="no">Capybara</span><span class="o">::</span><span class="no">Poltergeist</span><span class="o">::</span><span class="no">Driver</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="ss">js_errors: </span><span class="kp">false</span><span class="p">,</span>
+                                    <span class="ss">phantomjs: </span><span class="no">Phantomjs</span><span class="p">.</span><span class="nf">path</span><span class="p">,</span>
+                                    <span class="ss">phantomjs_options: </span><span class="p">[</span><span class="s1">'--ssl-protocol=tlsv1.2'</span><span class="p">,</span> <span class="s1">'--ignore-ssl-errors=yes'</span><span class="p">])</span>
+<span class="k">end</span>
+</code></pre>
+<p>Another key difference was that I now had to explicitly create our Premium plans using the StripeRubyMock as part of the setup for the cuke scenarios:</p>
+<pre class="highlight gherkin"><code>  <span class="kn">Background</span><span class="p">:</span>
+    <span class="nf">Given</span> the following plans exist
+      <span class="p">|</span> <span class="nv">name</span>        <span class="p">|</span> <span class="nv">id</span>          <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Premium</span>     <span class="p">|</span> <span class="n">premium</span>     <span class="p">|</span>
+      <span class="p">|</span> <span class="n">PremiumMob</span>  <span class="p">|</span> <span class="n">premiummob</span>  <span class="p">|</span>
+      <span class="p">|</span> <span class="n">PremiumF2F</span>  <span class="p">|</span> <span class="n">premiumf2f</span>  <span class="p">|</span>
+      <span class="p">|</span> <span class="n">PremiumPlus</span> <span class="p">|</span> <span class="n">premiumplus</span> <span class="p">|</span>
+</code></pre><pre class="highlight ruby"><code><span class="no">Given</span><span class="p">(</span><span class="sr">/^the following plans exist$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">table</span><span class="o">|</span>
+  <span class="n">table</span><span class="p">.</span><span class="nf">hashes</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="o">|</span>
+    <span class="vi">@stripe_test_helper</span><span class="p">.</span><span class="nf">create_plan</span><span class="p">(</span><span class="nb">hash</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>This is interesting as previously the cache of VCR and PuffingBilly would contain the plan information encoded in HTTP responses from the Stripe servers.  That had ensured the Stripe servers were the single authoritative source for this information.  As it happens specifying this in the Cucumber steps makes our business logic description here more complete.  It leaves us with a data dependency, whereby we need to ensure that the plans specified in our Cucumber scenarios match those on the Stripe servers.  Another heuristic red flag, but the prospect of a green test suite was driving me forward.  I wasn&rsquo;t quite there yet, our update card details was failing, and we needed more changes to how we created a Premium user for testing purposes:</p>
+<pre class="highlight ruby"><code><span class="no">Given</span> <span class="sr">/^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/</span> <span class="k">do</span> <span class="o">|</span><span class="n">premium</span><span class="p">,</span> <span class="nb">name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="o">|</span>
+
+  <span class="vi">@current_user</span> <span class="o">=</span> <span class="vi">@user</span> <span class="o">=</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="ss">first_name: </span><span class="nb">name</span><span class="p">,</span> <span class="ss">email: </span><span class="n">email</span><span class="p">,</span> <span class="ss">password: </span><span class="n">password</span><span class="p">,</span> <span class="ss">password_confirmation: </span><span class="n">password</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">premium</span>
+    <span class="n">subscription</span> <span class="o">=</span> <span class="no">Premium</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">user: </span><span class="vi">@user</span><span class="p">,</span> <span class="ss">started_at: </span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span>
+    <span class="n">customer</span> <span class="o">=</span> <span class="no">Stripe</span><span class="o">::</span><span class="no">Customer</span><span class="p">.</span><span class="nf">create</span><span class="p">({</span>
+                                           <span class="ss">email: </span><span class="n">email</span><span class="p">,</span>
+                                           <span class="ss">source: </span><span class="vi">@stripe_test_helper</span><span class="p">.</span><span class="nf">generate_card_token</span>
+                                       <span class="p">})</span>
+    <span class="n">customer</span><span class="p">.</span><span class="nf">subscriptions</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">plan: </span><span class="s1">'premium'</span><span class="p">)</span>
+    <span class="n">payment_source</span> <span class="o">=</span> <span class="no">PaymentSource</span><span class="o">::</span><span class="no">Stripe</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">identifier: </span><span class="n">customer</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span> <span class="ss">subscription: </span><span class="n">subscription</span> <span class="p">)</span>
+  <span class="k">end</span>
+</code></pre>
+<p>A card token from the Stripe test server would no longer work and the fix was using the stripe test helper to generate a card token.  This test code was super ugly, and I was still really bothered by the factories being shared between cukes and specs.  Anyhow, I also had to modify the app code for updating cards, because we were now generating a different kind of error.  I added a <code>NoMethodError</code> to the update card error handling:</p>
+<pre class="highlight plaintext"><code>  def update
+    customer = Stripe::Customer.retrieve(current_user.stripe_customer_id) # _token?
+    card = customer.sources.create(card: stripe_token(params))
+    card.save
+    customer.default_card = card.id
+    customer.save
+  rescue Stripe::InvalidRequestError, NoMethodError =&gt; e
+    logger.error "Stripe error while updating card info: #{e.message} for #{current_user}"
+    @error = true
+  end
+</code></pre>
+<p>and we were finally all green! Although I did still get an intermittent fail on the very last build on CI at the end, so this isn&rsquo;t over JavaScript Acceptance tests (shakes fist)!  In summary though the full test suite was green for me locally, and after a re-build on semaphore the build passed.  StripeRubyMock was working for us, and I don&rsquo;t have much appetite for burning more time on the complete sandboxing alternative.  What&rsquo;s frustrating is how much time that goes into this that could be going into refactoring the code for maintainability or improving the user interface experience.  However with the test suite green, we can potentially refactor with confidence (until the next time!).</p>
+
+<p>My concerns about RubyStripeMock is will it be maintained and stay up to date with the Stripe API itself?  To get things to pass I had to change app code that now hasn&rsquo;t been tested in production.  Thomas has updated <a href="https://medium.com/craft-academy/keeping-it-simple-3e7d9b186015#.4rc29xv6j">his blog post</a> to talk about using RubyStripeMock completely network independently.  Since Stripe told me they are happy with a few hits from tests, and that removing network dependency has not fixed our intermittent failures I&rsquo;m less concerned about that, than just having code paths that operate in production but don&rsquo;t run in test.  I changed <code>customer.cards</code> to <code>customer.sources</code> in the app code to get the RubyStripeMock acceptance tests to work.  I will need to use the StripeRubyMock ability to switch to live tests against the Stripe servers to test that still works:</p>
+<pre class="highlight ruby"><code><span class="no">RSpec</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+  <span class="k">if</span> <span class="n">c</span><span class="p">.</span><span class="nf">filter_manager</span><span class="p">.</span><span class="nf">inclusions</span><span class="p">.</span><span class="nf">rules</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="ss">:live</span><span class="p">)</span>
+    <span class="no">StripeMock</span><span class="p">.</span><span class="nf">toggle_live</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"Running **live** tests against Stripe..."</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>The advantage of a full VCR/PuffingBilly sandbox, is that you are stubbing at the network level.  Your app is effectively running in the exact same environment as it would with a live network connection.  You can dump the sandbox at any time to re-create an accurate network sandbox.  However it becomes challenging with a complex service like Stripe that&rsquo;s trying to be secure and is using a high degree of indeterminacy in terms of the network connections it makes.  The sandbox cache files have to be checked into git to ensure everyone gets a benefit from the sandbox, so test failures or complex system like Stripe can lead to challenging git churn.  Not checking in those files would be an alternative - CI would still hit live network servers, and on second and subsequent runs developer machines would avoid re-hitting the live network, but then network fails could be encoded into caches.  I starting to think sandbox caches are another challenging source of variability when used with services like Stripe.</p>
+
+<p>In a final analysis it&rsquo;s all about trading off these different heuristics:</p>
+
+<ul>
+<li>Keep test code as close to production code as possible</li>
+<li>Keep test environment as close to production environment as possible</li>
+<li>Avoid hitting 3rd party servers during test</li>
+<li>Ensure development flow is comprehensible and manageable for developers on your team</li>
+<li>Keep your full test suite green</li>
+<li>Keep the running time of your test suite down to avoid delayed debug cycle hell</li>
+</ul>
+
+<p>and various others.  None of these heuristics always trumps all the others.  As Kent Beck says, &ldquo;it depends &hellip;&rdquo;.  I say, keep looking for the light at the end of the tunnel :-) </p>
+
+<h3>Related Videos</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=fDUd9N5iDTA">Solo on WebSiteOne part 1</a></li>
+<li><a href="https://www.youtube.com/watch?v=hz_i4DagxkY">&ldquo;Kent Beck&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=iaRDd35qF_g">Solo on WebSiteOne part 2</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
