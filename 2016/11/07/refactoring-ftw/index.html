@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Refactoring FTW!</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_11 x2016_11_07 x2016_11_07_refactoring-ftw x2016_11_07_refactoring-ftw_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/11/07/refactoring-ftw/">Refactoring FTW!</a></h2>
+        <h5 class='date'> 7 Nov 2016</h5>
+    <p>Friday was full of pull request reviews.  I&rsquo;m currently trying to keep tabs on pull requests coming in on the following projects:</p>
+
+<ul>
+<li><a href="https://github.com/AgileVentures/AsyncVoter/pulls">AsyncVoter</a></li>
+<li><a href="https://github.com/AgileVentures/LocalSupport/pulls">LocalSupport</a></li>
+<li><a href="https://github.com/AgileVentures/projectscope/pulls">ProjectScope</a></li>
+<li><a href="https://github.com/StrawberryCanyon/redeemify/pulls">Redeemify</a></li>
+<li><a href="https://github.com/AgileVentures/WebsiteOne/pulls">WebSiteOne</a></li>
+</ul>
+
+<p>I&rsquo;ve started adding extra notifications to the main slack channels about pull requests opening and closing.  We have separate automated notification channels, but I think pull requests should be highlighted.  When a pull request opens everyone involved in the project should have a look if they can, and make a comment, or just a thumbs up.  Then when a pull request gets merged in that&rsquo;s a time for everyone to thank the submitter of the pull request for completing that work, and then it&rsquo;s great to thank them again when the code is deployed to production.</p>
+
+<p>AsyncVoter has gotten really active and there&rsquo;s been a lot to review in our node project recently, particularly in terms of locking down how the REST api will work.  LocalSupport goes in fits and starts.  ProjectScope has a group of Berkeley students working on it, and there are weekly flurries of activity.  Redeemify has a couple of folks pushing away, and WebSiteOne only has a few people working on it.  WebSiteOne used to have a lot more developers, but I pushed to ring-fence it for only premium members, since I was worried about maintaining it in the face of too many people working on it at the same time, particularly if those people had variable levels of commitment.</p>
+
+<p>At least now I&rsquo;m getting a handle on a codebase that isn&rsquo;t too highly in flux, but there&rsquo;s a lot of stuff that needs doing.  Sasha has been knocking off small tickets pretty regularly the last couple of weeks, which is awesome.  In recent months most of the larger PRs have come from myself and Michael with some notable contributions from Raoul.  There was time for some pairing Friday afternoon, and I invited Ben, my friend from our new sponsor drie.  It ended up being just Ben and myself and we ended up spending a devops sessions looking at drie deploys, and how their different products might match different AgileVentures projects.</p>
+
+<p>What I didn&rsquo;t get onto was the refactoring of the &ldquo;Sponsor a Premium User&rdquo; functionality that we finally had green tests for.  With the time change my Friday meetings ended earlier than usual, and so I got a quick end of week refactoring session in as I was gagging to complete the feature to the point it could be deployed.  The big ugly view from earlier of the week got boiled down to:</p>
+<pre class="highlight ruby"><code><span class="o">&lt;</span><span class="sx">% if </span><span class="vi">@sponsored_user</span> <span class="o">%&gt;</span>
+    <span class="o">&lt;</span><span class="n">h2</span> <span class="nb">id</span><span class="o">=</span><span class="s1">'payment_complete'</span><span class="o">&gt;</span><span class="no">Thanks</span><span class="p">,</span> <span class="n">you</span> <span class="n">have</span> <span class="n">sponsored</span> <span class="o">&lt;</span><span class="sx">%= @user.display_name %&gt; as a &lt;%=</span> <span class="vi">@plan</span> <span class="o">%&gt;</span> <span class="no">Member</span><span class="o">!&lt;</span><span class="sr">/h2&gt;
+    &lt;% if @plan.free_trial? %&gt;
+      &lt;p&gt;A seven day free trial has now started.  Your card will not be charged until seven days have passed.&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+    <span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="no">An</span> <span class="no">AgileVentures</span> <span class="n">mentor</span> <span class="n">will</span> <span class="n">be</span> <span class="k">in</span> <span class="n">touch</span> <span class="n">shortly</span> <span class="n">to</span> <span class="n">help</span> <span class="o">&lt;</span><span class="sx">%= @user.display_name %&gt; receive all their membership benefits.&lt;/p&gt;
+&lt;% else %&gt;
+  &lt;h2 id=</span><span class="s1">'payment_complete'</span><span class="o">&gt;</span><span class="no">Thanks</span><span class="p">,</span> <span class="n">you</span><span class="s1">'re now an AgileVentures &lt;%= @plan %&gt; Member!&lt;/h2&gt;
+    &lt;% if @plan.free_trial? %&gt;
+        &lt;p&gt;You'</span><span class="n">re</span> <span class="n">seven</span> <span class="n">day</span> <span class="n">free</span> <span class="n">trial</span> <span class="n">has</span> <span class="n">now</span> <span class="n">started</span><span class="o">.</span>  <span class="no">Your</span> <span class="n">card</span> <span class="n">will</span> <span class="n">not</span> <span class="n">be</span> <span class="n">charged</span> <span class="k">until</span> <span class="n">seven</span> <span class="n">days</span> <span class="n">have</span> <span class="n">passed</span><span class="p">.</span><span class="nf">&lt;</span><span class="o">/</span><span class="nb">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+    <span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="no">An</span> <span class="no">AgileVentures</span> <span class="n">mentor</span> <span class="n">will</span> <span class="n">be</span> <span class="k">in</span> <span class="n">touch</span> <span class="n">shortly</span> <span class="n">to</span> <span class="n">help</span> <span class="n">you</span> <span class="n">receive</span> <span class="n">all</span> <span class="n">of</span> <span class="n">your</span> <span class="n">membership</span> <span class="n">benefits</span><span class="p">.</span><span class="nf">&lt;</span><span class="o">/</span><span class="nb">p</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+</code></pre>
+<p>although still too much logic for my tastes.  The main if-else block there could be replaced by a call two different templates, although having them side by side in one file highlights the two alternatives here.  I could have pushed and boiled down further, but this part of the codebase is definitely in flux, so there are diminishing returns from pushing too hard on a refactoring binge.  A lot, but not all, of the replication in this view was gone.   I keep saying that it&rsquo;s critical to remember that every time you DRY something out, you also introduce a dependency.  If we start to need highly divergent language for different plans, then some of this DRYing out will need to be undone.</p>
+
+<p>After a duel with code climate warnings on method complexity the charges controller that works the above view looked like this:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">create</span>
+    <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find_by_slug</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:user</span><span class="p">])</span>
+    <span class="vi">@plan</span> <span class="o">=</span> <span class="no">Plan</span><span class="p">.</span><span class="nf">new</span> <span class="n">params</span><span class="p">[</span><span class="ss">:plan</span><span class="p">]</span>
+    <span class="vi">@sponsored_user</span> <span class="o">=</span> <span class="n">sponsored_user?</span>
+
+    <span class="n">update_user_to_premium</span><span class="p">(</span><span class="n">create_customer</span><span class="p">,</span> <span class="vi">@user</span><span class="p">)</span>
+    <span class="n">send_acknowledgement_email</span>
+
+  <span class="k">rescue</span> <span class="no">Stripe</span><span class="o">::</span><span class="no">CardError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+    <span class="n">flash</span><span class="p">[</span><span class="ss">:error</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
+    <span class="n">redirect_to</span> <span class="n">new_charge_path</span>
+  <span class="k">end</span>
+</code></pre>
+<p>and sported a couple of new private methods</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">create_customer</span>
+    <span class="no">Stripe</span><span class="o">::</span><span class="no">Customer</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span>
+        <span class="ss">email: </span><span class="n">params</span><span class="p">[</span><span class="ss">:stripeEmail</span><span class="p">],</span>
+        <span class="ss">source: </span><span class="n">stripe_token</span><span class="p">(</span><span class="n">params</span><span class="p">),</span>
+        <span class="ss">plan: </span><span class="vi">@plan</span><span class="p">.</span><span class="nf">plan_id</span>
+    <span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">sponsored_user?</span>
+    <span class="vi">@user</span><span class="p">.</span><span class="nf">present?</span> <span class="o">&amp;&amp;</span> <span class="n">current_user</span> <span class="o">!=</span> <span class="vi">@user</span>
+  <span class="k">end</span>
+</code></pre>
+<p>and a new class that I left in the same file as the controller for the moment:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Plan</span>
+  <span class="kp">attr_reader</span> <span class="ss">:plan_id</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">plan_id</span><span class="p">)</span>
+    <span class="vi">@plan_id</span> <span class="o">=</span> <span class="n">plan_id</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">to_s</span>
+    <span class="no">PLANS</span><span class="p">[</span><span class="n">plan_id</span><span class="p">]</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">free_trial?</span>
+    <span class="n">plan_id</span> <span class="o">==</span> <span class="s1">'premium'</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="no">PLANS</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">'premium'</span> <span class="o">=&gt;</span> <span class="s1">'Premium'</span><span class="p">,</span>
+      <span class="s1">'premiummob'</span> <span class="o">=&gt;</span> <span class="s1">'Premium Mob'</span><span class="p">,</span>
+      <span class="s1">'premiumf2f'</span> <span class="o">=&gt;</span> <span class="s1">'Premium F2F'</span><span class="p">,</span>
+      <span class="s1">'premiumplus'</span> <span class="o">=&gt;</span> <span class="s1">'Premium Plus'</span>
+  <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+<p>The domain entity of a plan which had previously only really existed on the Stripe servers explicitly, now had a class in our local code.  I was torn between having a class and just going with some functional transformations.  I guess the key thing an instance of plan gives me is the ability to refer to it repeatedly in the view without having to keep passing in the plan_id.  Otherwise it could be collection of methods in a module.  Functional programming tells us to be suspicious of state &hellip; I didn&rsquo;t want to agonise so long we would delay delivering the feature.</p>
+
+<p>I didn&rsquo;t write tests for the Plan class.  I briefly had it in the lib directly, but Rails didn&rsquo;t load it automatically and although I found a <a href="http://stackoverflow.com/questions/19098663/auto-loading-lib-files-in-rails-4">stack overflow post</a> with suggested fixes, I did not want to start playing with the Rails config at 6pm on a Friday.  What I was aiming for here was effectively a private class  that only this controller was using.  In the same way that we wouldn&rsquo;t write tests for private methods, I didn&rsquo;t want to be doing TDD domain entity evolution at this point.  My objective was DRYing out the view and controller while keeping the cukes green.  I did not want to get into other design questions of PORO in lib or ActiveRecord model.  </p>
+
+<p>Again, all this functionality is in flux.  We&rsquo;ve got a restricted set of people working on the codebase.  In a project with a larger team I&rsquo;d have to button down here and make this a serious object with tests, or even explicitly make it private.  I&rsquo;ll need to do one or the other when we work on this again (and start better integrating PayPal and plan upgrades).  I&rsquo;m thinking of giving it a week, and perhaps devoting this week to more fixes on the Google Hangout API fiasco.  Not sure.  Either way Raoul got this all deployed over the weekend and we have Sasha&rsquo;s changes up which include the banner from our new sponsor drie, and the ability for members to sponsor each other for Premium - great work Raoul!</p>
+
+<p>Right then, once more unto the breach dear friends!</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
