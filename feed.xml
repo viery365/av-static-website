@@ -5,16 +5,115 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-07T00:00:00+00:00</updated>
+  <updated>2016-11-08T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Discombobulated (by Google)</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/08/discombobulated/"/>
+    <id>http://blog.url.com/2016/11/08/discombobulated/</id>
+    <published>2016-11-08T00:00:00+00:00</published>
+    <updated>2016-11-08T10:24:19+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Spent a good hour analysing our options to cope with the changes in the Google Hangout API.  The key issue is that the Google Hangout on Air button no longer starts a Hangout directly.  We have the the HOA button throughout our AgileVentures site on project and event pages:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/5esltpqdq8y2abt/Screenshot%202016-11-08%2009.23.04.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Clicking this button now pops up a separate window with instructions on how to create a HOA through the YouTube interface.  BREAKING NEWS.  I just went to WebSiteOne project page to create a screenshot of the pop up for this blog and pressed the button.  Instead of opening an popup with the contents of this page:&lt;/p&gt;
+
+&lt;p&gt;https://support.google.com/youtube/answer/7083786?hl=en-GB&lt;/p&gt;
+
+&lt;p&gt;Which actually has a good straightforward description of how to create a HOA from the YouTube interface:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/gudo78qqtfk04bp/Screenshot%202016-11-08%2009.31.13.png?dl=1" /&gt; &lt;/p&gt;
+
+&lt;p&gt;However a HOA popped up, our plugin worked and pinged Slack through the AV website/agile-bot hookup.  To say I was discombobulated is to put it mildly :-)  I went straight to my &lt;a href="http://stackoverflow.com/questions/40233393/start-a-hangout-on-air-button-for-youtube-livestreaming-api"&gt;StackOverflow post&lt;/a&gt; on the subject to see if there had been an update from the Google engineers, but nothing there.  So, had the activity on the SO post, or our discussion in the YouTube product forums prompted the Google engineers to make a change?  Or was this just another accidental change that will allow HOA buttons to work for a while, but will disappear again at some point in the future?&lt;/p&gt;
+
+&lt;p&gt;I guess Google moves in mysterious ways &amp;hellip; what we identified yesterday was that the hangout on air button not working was very confusing for many users.  The manual update of hangout URL was a work around that helped the more experienced AV members to notify the slack community about the hangout going live, but was unlikely to be used by new users.  I admitted that until recently I had been thinking we might want to move away from trying to support synchronous meetings, but the AV community has got really active recently, with well attended scrums, and Michael and I were agreeing that synchronous meetings were very good for coordinating some issues.&lt;/p&gt;
+
+&lt;p&gt;In our first session Michael and I had listed out some of the key problems with the HOA button change:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;increased effort to start hangout on air&lt;/li&gt;
+&lt;li&gt;lower likelihood of notifications (and pair partners)&lt;/li&gt;
+&lt;li&gt;no telemetry&lt;/li&gt;
+&lt;li&gt;no sharing of video link&lt;/li&gt;
+&lt;li&gt;if no fixed event - no notification pathway &amp;ndash;&amp;gt; pair now on each project page is basically non-functional&lt;/li&gt;
+&lt;li&gt;event live as function of planned duration rather than actual activity&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We reviewed our vision of how the site should ideally operate:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;easy to browse existing sessions&lt;/li&gt;
+&lt;li&gt;easy to join existing sessions&lt;/li&gt;
+&lt;li&gt;easy to start a new session of your own &amp;ndash;&amp;gt; notifications&lt;/li&gt;
+&lt;li&gt;telemetry to give people credit for attending, allow us to analyse and improve&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We listed out some short term options for improvement:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[ ] more documentation on current state of system &lt;/li&gt;
+&lt;li&gt;[ ] build instructions on starting hangout on air into existing interface&lt;/li&gt;
+&lt;li&gt;[ ] allow manual setting of youtube link &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and some longer term options&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[ ] reviewing alternatives videoconferencing software
+
+&lt;ul&gt;
+&lt;li&gt;[ ] GotoMeeting&lt;/li&gt;
+&lt;li&gt;[ ] Zoom&lt;/li&gt;
+&lt;li&gt;[ ] &lt;a href="https://elearningindustry.com/top-6-open-source-web-conferencing-software-tools-elearning-professionals"&gt;Open Source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;[ ] publishing a new hangout app (give us notifications and telemetry)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It would be great if Google hangouts was open source &amp;hellip; anyway, even yesterday I didn&amp;rsquo;t want to leap into working on something.  I also wanted to review the issues related to payment and premium plans.  CraftAcademy Sweden is still keen to work with invoices rather than credit cards, so we how had some premium members who weren&amp;rsquo;t represented in the site correctly.  I tested on my local server that I could update them from the console like to:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;UpgradeUserToPremium&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;CraftAcademy&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It worked locally and I ran the same through the production Rails console.  An example of me playing fast and loose perhaps?  Would a more principled approach be to deploy a rake task, build an admin interface or even an API endpoint? CraftAcademy just graduated three students and it was trivial for me to do through the Rails console, and make the system display the students&amp;rsquo; Premium status correctly.  I thought it was important to get this set, since otherwise they would have the &amp;ldquo;Sponsor for Premium&amp;rdquo; button.  Not that anyone was likely to start throwing money at them, but good to have the database in the correct state.  As the number of CA graduates increases, we&amp;rsquo;ll want to automate this, but right now we&amp;rsquo;re cautiously expanding the domain model.  Michael and I identified a set of other issues:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Expiration date for CA sponsorship (notifications when 1 year support ends)&lt;/li&gt;
+&lt;li&gt;CA sponsorship via Stripe&lt;/li&gt;
+&lt;li&gt;Further PayPal payment integration&lt;/li&gt;
+&lt;li&gt;Keeping track of how many pairing hours premium F2F and Plus members have left&lt;/li&gt;
+&lt;li&gt;Supporting batch payments&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I was pleased to have made the admin changes to the DB.  The Google Hangout API issue underlines the importance of working in small steps.  We&amp;rsquo;re feeling our way with CraftAcademy collaboration.  The number of CraftAcademy graduates getting Premium membership bundled with their bootcamp experience could explode, or could stay at steady state, or even drop off.   It would be inexpedient to invest enormous engineering effort on functionality and extending the domain model until it&amp;rsquo;s clear which way that goes.  In the meantime we need to keep knocking off small improvements.  CraftAcademy SouthAfrica (Raoul) was saying he&amp;rsquo;d really like to make batch payments in credit card.  Another feature.  We just had our first successful Paypal payment (7 day free trial for first paypal premium member just finished).  Naturally we shouldn&amp;rsquo;t just implement every feature that every user asks for.  We&amp;rsquo;ve got to prioritise those that overlap and give us more bang for the buck.&lt;/p&gt;
+
+&lt;p&gt;I asked Michael what he&amp;rsquo;d like to work on and he said the &amp;ldquo;manual setting of youtube links&amp;rdquo;.  We had another AV member join the hangout and tell us that was important for her project.  It made particular sense as it was a feature that would make our events more agnostic in terms of the video recording link.  We did a quick scrum and Michael drove on that feature.  Michael threw up a new feature, and we hammered at the EventInstances controller to see if we could provide a mechanism to manually update the video link for an EventInstance.  Things got a bit sticky.  I was torn a little between refactoring the Cucumber steps and getting things done.  I encouraged Michael as driver to take the route he thought best.  He left the background EventInstance generation steps alone, but tried some simpler versions for the individual scenario steps.  That didn&amp;rsquo;t go smoothly and we saw why the original test writers had gone for executing triggers rather than pure Capybara clicks when things were getting stuck on the overlap.&lt;/p&gt;
+
+&lt;p&gt;There were other complexities with the app code trying to post to twitter, and the dynamics of when and if the hangout live elements were being displayed.  At the end of the session the tests were still red and the debug cycle felt a bit slow.  Over night I wondered if as part of migrating to a new domain model, we should prefer an EventCollection entity that consists of individual Events, and remove the terms EventInstance and Hangout from the domain.  The current model has the term Event representing both repeating and single &amp;ldquo;events&amp;rdquo; which can be scrums, client meetings, pairing sessions, anything where people get together.  The current codebase and tests use the term Hangout and EventInstance interchangeably which can be confusing.  An EventInstance holds a set of data about a Google Hangout at the moment.  I suspect there are also some cases where EventInstances get clobbered in repeat events started manually by the same person.  &lt;/p&gt;
+
+&lt;p&gt;I wondered if we might be able to pull together a more RESTful system by replacing our current Event entity with an EventCollection.  One of the Mentive students I was working with had used that aggregate approach successfully, and discussions about the AsyncVoter REST API made me think I&amp;rsquo;d like to be rebuilding parts of the WSO system more cleanly.  But how to do it one step at a time?  Perhaps introduce a placeholder term like &lt;code&gt;AtomicEvent&lt;/code&gt; to represent single meetups; get a clean REST API around that and then finally migrate it to &lt;code&gt;Event&lt;/code&gt; once the original &lt;code&gt;Event&lt;/code&gt; entity was removed?  Sounds like it could be very confusing.  And now suddenly this morning the HOA button is working again, so suddenly we can leave that part of the system and focus on payments again?&lt;/p&gt;
+
+&lt;p&gt;Or maybe take a detour to AsyncVoter to make sure we get some sort of tracer bullet up?  Again it all comes back to how can be make this charity enterprise sustainable &amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Cuaol-FS9wM"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=tSQztvcBQlY"&gt;Reviewing WSO issues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Zp06E5u7neM"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=eIc_bQxVUd8"&gt;Pairing on WebSiteOne&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Refactoring FTW!</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/07/refactoring-ftw/"/>
     <id>http://blog.url.com/2016/11/07/refactoring-ftw/</id>
     <published>2016-11-07T00:00:00+00:00</published>
-    <updated>2016-11-07T09:42:38+00:00</updated>
+    <updated>2016-11-08T10:23:32+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -28,30 +127,30 @@
 &lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/pulls"&gt;WebSiteOne&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I&amp;rsquo;ve started adding extra notifications to the main slack channels about pull requests opening and closing.  We have separate automated notification channels, but I think pull requests should be highlighted.  When a pull request opens everyone involved in the project should have a look if they can, and make a comment, or just a thumbs up.  Then when a pull request gets merged in that&amp;rsquo;s a time for everyone to thank the submitter of the pull request for completing that work, and then it&amp;rsquo;s great to thank them again when the code is deployed to production.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve started adding extra notifications to the main slack project channels about pull requests opening and closing.  We have separate automated notification channels, but I think pull requests should be highlighted.  When a pull request opens everyone involved in the project should have a look if they can, and make a comment, or just a thumbs up.  Then when a pull request gets merged in that&amp;rsquo;s a time for everyone to thank the submitter of the pull request for completing that work, and then it&amp;rsquo;s great to thank them again when the code is deployed to production.&lt;/p&gt;
 
-&lt;p&gt;AsyncVoter has gotten really active and there&amp;rsquo;s been a lot to review in our node project recently, particularly in terms of locking down how the REST api will work.  LocalSupport goes in fits and starts.  ProjectScope has a group of Berkeley students working on it, and there are weekly flurries of activity.  Redeemify has a couple of folks pushing away, and WebSiteOne only has a few people working on it.  WebSiteOne used to have a lot more developers, but I pushed to ring-fence it for only premium members, since I was worried about maintaining it in the face of too many people working on it at the same time, particularly if those people had variable levels of commitment.&lt;/p&gt;
+&lt;p&gt;AsyncVoter has gotten really active and there&amp;rsquo;s been a lot to review in our nodejs project recently, particularly in terms of locking down how the REST api will work.  LocalSupport goes in fits and starts.  ProjectScope has a group of Berkeley students working on it, and there are weekly flurries of activity.  Redeemify has a couple of folks pushing away, and WebSiteOne only has a few people working on it.  WebSiteOne used to have a lot more developers, but I pushed to ring-fence it for only premium members, since I was worried about maintaining it in the face of too many people working on it at the same time, particularly if those people had variable levels of commitment.&lt;/p&gt;
 
 &lt;p&gt;At least now I&amp;rsquo;m getting a handle on a codebase that isn&amp;rsquo;t too highly in flux, but there&amp;rsquo;s a lot of stuff that needs doing.  Sasha has been knocking off small tickets pretty regularly the last couple of weeks, which is awesome.  In recent months most of the larger PRs have come from myself and Michael with some notable contributions from Raoul.  There was time for some pairing Friday afternoon, and I invited Ben, my friend from our new sponsor drie.  It ended up being just Ben and myself and we ended up spending a devops sessions looking at drie deploys, and how their different products might match different AgileVentures projects.&lt;/p&gt;
 
 &lt;p&gt;What I didn&amp;rsquo;t get onto was the refactoring of the &amp;ldquo;Sponsor a Premium User&amp;rdquo; functionality that we finally had green tests for.  With the time change my Friday meetings ended earlier than usual, and so I got a quick end of week refactoring session in as I was gagging to complete the feature to the point it could be deployed.  The big ugly view from earlier of the week got boiled down to:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;% if &lt;/span&gt;&lt;span class="vi"&gt;@sponsored_user&lt;/span&gt; &lt;span class="o"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;h2&lt;/span&gt; &lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'payment_complete'&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="no"&gt;Thanks&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;have&lt;/span&gt; &lt;span class="n"&gt;sponsored&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;%= @user.display_name %&amp;gt; as a &amp;lt;%=&lt;/span&gt; &lt;span class="vi"&gt;@plan&lt;/span&gt; &lt;span class="o"&gt;%&amp;gt;&lt;/span&gt; &lt;span class="no"&gt;Member&lt;/span&gt;&lt;span class="o"&gt;!&amp;lt;&lt;/span&gt;&lt;span class="sr"&gt;/h2&amp;gt;
-    &amp;lt;% if @plan.free_trial? %&amp;gt;
-      &amp;lt;p&amp;gt;A seven day free trial has now started.  Your card will not be charged until seven days have passed.&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;% end &lt;/span&gt;&lt;span class="o"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="no"&gt;An&lt;/span&gt; &lt;span class="no"&gt;AgileVentures&lt;/span&gt; &lt;span class="n"&gt;mentor&lt;/span&gt; &lt;span class="n"&gt;will&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="n"&gt;shortly&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;help&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;%= @user.display_name %&amp;gt; receive all their membership benefits.&amp;lt;/p&amp;gt;
-&amp;lt;% else %&amp;gt;
-  &amp;lt;h2 id=&lt;/span&gt;&lt;span class="s1"&gt;'payment_complete'&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="no"&gt;Thanks&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="s1"&gt;'re now an AgileVentures &amp;lt;%= @plan %&amp;gt; Member!&amp;lt;/h2&amp;gt;
-    &amp;lt;% if @plan.free_trial? %&amp;gt;
-        &amp;lt;p&amp;gt;You'&lt;/span&gt;&lt;span class="n"&gt;re&lt;/span&gt; &lt;span class="n"&gt;seven&lt;/span&gt; &lt;span class="n"&gt;day&lt;/span&gt; &lt;span class="n"&gt;free&lt;/span&gt; &lt;span class="n"&gt;trial&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;now&lt;/span&gt; &lt;span class="n"&gt;started&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;  &lt;span class="no"&gt;Your&lt;/span&gt; &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="n"&gt;will&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;charged&lt;/span&gt; &lt;span class="k"&gt;until&lt;/span&gt; &lt;span class="n"&gt;seven&lt;/span&gt; &lt;span class="n"&gt;days&lt;/span&gt; &lt;span class="n"&gt;have&lt;/span&gt; &lt;span class="n"&gt;passed&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;&amp;lt;&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;% end &lt;/span&gt;&lt;span class="o"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="no"&gt;An&lt;/span&gt; &lt;span class="no"&gt;AgileVentures&lt;/span&gt; &lt;span class="n"&gt;mentor&lt;/span&gt; &lt;span class="n"&gt;will&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;touch&lt;/span&gt; &lt;span class="n"&gt;shortly&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;help&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;membership&lt;/span&gt; &lt;span class="n"&gt;benefits&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;&amp;lt;&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nb"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;% end &lt;/span&gt;&lt;span class="o"&gt;%&amp;gt;&lt;/span&gt;
+&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if @sponsored_user %&amp;gt;
+    &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you have sponsored &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= @user.display_name %&amp;gt; as a &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= @plan %&amp;gt; Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if @plan.free_trial? %&amp;gt;
+      &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;A seven day free trial has now started.  Your card will not be charged until seven days have passed.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
+    &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= @user.display_name %&amp;gt; receive all their membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% else %&amp;gt;
+  &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you're now an AgileVentures &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= @plan %&amp;gt; Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if @plan.free_trial? %&amp;gt;
+        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;You're seven day free trial has now started.  Your card will not be charged until seven days have passed.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
+    &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;although still too much logic for my tastes.  The main if-else block there could be replaced by a call two different templates, although having them side by side in one file highlights the two alternatives here.  I could have pushed and boiled down further, but this part of the codebase is definitely in flux, so there are diminishing returns from pushing too hard on a refactoring binge.  A lot, but not all, of the replication in this view was gone.   I keep saying that it&amp;rsquo;s critical to remember that every time you DRY something out, you also introduce a dependency.  If we start to need highly divergent language for different plans, then some of this DRYing out will need to be undone.&lt;/p&gt;
+&lt;p&gt;although still too much logic for my tastes.  The main if-else block there could be replaced by a call to two different templates, although having them side by side in one file highlights the two alternatives.  I could have pushed and boiled down further, but this part of the codebase is definitely in flux, so there are diminishing returns from pushing too hard on a refactoring binge.  A lot, but not all, of the replication in this view was gone.   I keep saying that it&amp;rsquo;s critical to remember that every time you DRY something out, you also introduce a dependency.  If we start to need highly divergent language for different plans, then some of this DRYing out will need to be undone.&lt;/p&gt;
 
-&lt;p&gt;After a duel with code climate warnings on method complexity the charges controller that works the above view looked like this:&lt;/p&gt;
+&lt;p&gt;After a duel with code climate warnings on method complexity, the charges controller that works with the above view looked like this:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create&lt;/span&gt;
     &lt;span class="vi"&gt;@user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_slug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
     &lt;span class="vi"&gt;@plan&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Plan&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -104,9 +203,9 @@
   &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The domain entity of a plan which had previously only really existed on the Stripe servers explicitly, now had a class in our local code.  I was torn between having a class and just going with some functional transformations.  I guess the key thing an instance of plan gives me is the ability to refer to it repeatedly in the view without having to keep passing in the plan_id.  Otherwise it could be collection of methods in a module.  Functional programming tells us to be suspicious of state &amp;hellip; I didn&amp;rsquo;t want to agonise so long we would delay delivering the feature.&lt;/p&gt;
+&lt;p&gt;The domain entity of a &lt;code&gt;Plan&lt;/code&gt; which had previously only really existed explicitly on the Stripe servers now had a class in our local code.  I was torn between having a class and just going with a collection of functional transformations.  I guess the key thing an instance of plan gives us is the ability to refer to it repeatedly in the view without having to keep passing in the plan_id.  Otherwise it could be collection of methods in a module.  Functional programming tells us to be suspicious of state &amp;hellip; I didn&amp;rsquo;t want to agonise so long that we would delay delivering the feature.&lt;/p&gt;
 
-&lt;p&gt;I didn&amp;rsquo;t write tests for the Plan class.  I briefly had it in the lib directly, but Rails didn&amp;rsquo;t load it automatically and although I found a &lt;a href="http://stackoverflow.com/questions/19098663/auto-loading-lib-files-in-rails-4"&gt;stack overflow post&lt;/a&gt; with suggested fixes, I did not want to start playing with the Rails config at 6pm on a Friday.  What I was aiming for here was effectively a private class  that only this controller was using.  In the same way that we wouldn&amp;rsquo;t write tests for private methods, I didn&amp;rsquo;t want to be doing TDD domain entity evolution at this point.  My objective was DRYing out the view and controller while keeping the cukes green.  I did not want to get into other design questions of PORO in lib or ActiveRecord model.  &lt;/p&gt;
+&lt;p&gt;I didn&amp;rsquo;t write tests for the Plan class.  I briefly had it in the lib directly, but Rails didn&amp;rsquo;t load it automatically and although I found a &lt;a href="http://stackoverflow.com/questions/19098663/auto-loading-lib-files-in-rails-4"&gt;stack overflow post&lt;/a&gt; with suggested fixes, I did not want to start playing with the Rails config at 6pm on a Friday.  What I was aiming for here was effectively a private class that only this controller was using.  In the same way that we wouldn&amp;rsquo;t write tests for private methods, I didn&amp;rsquo;t want to be doing TDD domain entity evolution at this point.  My objective was DRYing out the view and controller while keeping the cukes green.  I did not want to get into other design questions of PORO in lib or ActiveRecord model.  &lt;/p&gt;
 
 &lt;p&gt;Again, all this functionality is in flux.  We&amp;rsquo;ve got a restricted set of people working on the codebase.  In a project with a larger team I&amp;rsquo;d have to button down here and make this a serious object with tests, or even explicitly make it private.  I&amp;rsquo;ll need to do one or the other when we work on this again (and start better integrating PayPal and plan upgrades).  I&amp;rsquo;m thinking of giving it a week, and perhaps devoting this week to more fixes on the Google Hangout API fiasco.  Not sure.  Either way Raoul got this all deployed over the weekend and we have Sasha&amp;rsquo;s changes up which include the banner from our new sponsor drie, and the ability for members to sponsor each other for Premium - great work Raoul!&lt;/p&gt;
 
@@ -118,7 +217,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/11/04/light-at-the-end-of-the-tunnel/"/>
     <id>http://blog.url.com/2016/11/04/light-at-the-end-of-the-tunnel/</id>
     <published>2016-11-04T00:00:00+00:00</published>
-    <updated>2016-11-07T09:40:54+00:00</updated>
+    <updated>2016-11-08T10:19:13+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -133,7 +232,7 @@
 
 &lt;p&gt;I started with the first option reckoning that I could at least quickly test whether the existing tests would run without sandboxing.  To re-cap, the develop branch had about 10 Stripe acceptance tests that ran fine with sandboxes; working individually and in batch.  Our new feature for users sponsoring each other introduced 2 new stripe acceptance tests, neither of which did anything fundamentally different from the existing tests.  These 2 new tests ran fine individually, in a group with all the other Stripe acceptance tests, but then the entire set of Stripe tests (new and old) would fail (no Stripe iFrame appearing) when run in batch with all the other Cucumber tests.&lt;/p&gt;
 
-&lt;p&gt;It felt to me like there must be some timing issue here.  Some race condition such as often plagues JavaScript acceptance tests.  Although this wasn&amp;rsquo;t intermittent failure - the whole thing still doesn&amp;rsquo;t make sense to me.  To try and make sense I wanted to get some other data points.  Getting the Stripe tests to run without sandboxing might allow me to exclude sandboxing as the source of the problem.  Not that sandboxing didn&amp;rsquo;t have other usability issues that I&amp;rsquo;ve blogged about recently, but when trying to solve any big problem it&amp;rsquo;s useful to run experiments on the subsets of the components to see try and narrow down the area in which the error is occurring.&lt;/p&gt;
+&lt;p&gt;It felt to me like there must be some timing issue here.  Some race condition such as often plagues JavaScript acceptance tests.  Although this wasn&amp;rsquo;t intermittent failure - the whole thing still doesn&amp;rsquo;t make sense to me.  To try and make sense I wanted to get some other data points.  Getting the Stripe tests to run without sandboxing might allow me to exclude sandboxing as the source of the problem.  Not that sandboxing didn&amp;rsquo;t have other usability issues that I&amp;rsquo;ve blogged about recently, but when trying to solve any big problem it&amp;rsquo;s useful to run experiments on the subsets of the components to try and narrow down the area in which the error is occurring.&lt;/p&gt;
 
 &lt;p&gt;Removing sandboxing was not as easily said as done, as I&amp;rsquo;d previously hooked the PuffingBilly gem directly into all Cucumber Javascript tests like so:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;test_options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -151,7 +250,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Both WebSiteOne and LocalSupport have been plagued, and continue to suffer to some extent, from intermittent JavaScript acceptance test failures.  There&amp;rsquo;s a &lt;a href="https://bibwild.wordpress.com/2016/02/18/struggling-towards-reliable-capybara-javascript-testing/"&gt;good blog post&lt;/a&gt; on why this is a tricky problem.  My own take earlier in the year was that it made sense to nail down all sources of variation.  Tests that make network connections are depending on the network and 3rd party services.  Sandboxing those network connections (recording them and playing them back in test mode) using the VCR and PuffingBilly gems reduces the variability of the test, and makes it more deterministic.  Earlier this year, as part of trying to reduce the overall variability in the WebSiteOne acceptance test, Michael and I had completely re-implemented the Cucumber config and hooks for WebSiteOne.&lt;/p&gt;
 
-&lt;p&gt;To my chagrin this had still not completely removed the occasional intermittent acceptance failure, and the generation of additional cache files on test failure or on other occasions of test variation was confusing for all developers, complicated to manage, and made some PRs unreadable due to the overload of files.  In several smaller projects I&amp;rsquo;d preferred sandboxing over stubbing with WebMock, which has it&amp;rsquo;s own issues of maintaining lots of individual hand-written network calls.  Anyhow, in order to remove the sandboxing I had to get another Capybara JavaScript driver set up.  I ran through a series of alternatives:&lt;/p&gt;
+&lt;p&gt;To my chagrin this had still not completely removed the occasional intermittent acceptance failure, and the generation of additional cache files on test failure or on other occasions of test variation that was confusing for all developers, complicated to manage, and made some PRs unreadable due to the overload of files.  In several smaller projects I&amp;rsquo;d preferred sandboxing over stubbing with WebMock, which has its own issues of maintaining lots of individual hand-written network calls.  Anyhow, in order to remove the sandboxing I had to get another Capybara JavaScript driver set up.  I ran through a series of alternatives:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Default (Selenium) - opened firefox (v47) browser displayed nothing&lt;/li&gt;
@@ -489,123 +588,6 @@
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=AfsoOtqv0eg"&gt;AsyncVoter Catch Up&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=zVS_tyX3Lq8"&gt;Pairing on WebsiteOne&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=IK8O5U4lmfg"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Crunch Time</title>
-    <link rel="alternate" href="http://blog.url.com/2016/10/31/crunch-time/"/>
-    <id>http://blog.url.com/2016/10/31/crunch-time/</id>
-    <published>2016-10-31T00:00:00+00:00</published>
-    <updated>2016-11-02T09:38:17+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;It was crunch time.  No answer from Google on the Hangout Button API.  It was dismantle our events framework or make some changes to the manual update functionality that would allow some parts of joining an event to start working again.  The problem was that even though our hangout plugin was automatically loaded into Hangouts started via YouTube, that hangout would only load for people who had previously run a successful AgileVentures hangout, and even then was now not set to communicate back to the AgileVentures&amp;rsquo; server.&lt;/p&gt;
-
-&lt;p&gt;The current architecture would send notifications about a hangout on Slack and provide a link to that hangout on the AgileVentures&amp;rsquo; site &lt;em&gt;if&lt;/em&gt; the hangout was started from a button on the AV site, and our custom plugin was loaded into the hangout with the right data payload.  Maybe we could adjust the plugin to be &lt;a href="https://developers.google.com/+/hangouts/publishing"&gt;installable&lt;/a&gt; into a YouTube started hangout and then connect back to our server to support the notifications and link display.  Certainly apps like &lt;a href="https://twitter.com/_madeye"&gt;MadEye&lt;/a&gt; used to work like that, but they&amp;rsquo;ve shut down and who knows how long Google will continue supporting the Hangout Plugin ecosystem.  It was clear from the discussions on Thursday that it made sense to start by enabling users to manually specify the hangout URL; have that act of manual specification lead to Slack notifications, and keep the links to the hangout on AgileVentures live for the duration the event.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="example of a live event link in AV" src="https://www.dropbox.com/s/5vseylfvnfeufd5/Screenshot%202016-10-31%2009.46.02.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The manual update of the URL had been broken for repeating events; a bug I had fixed earlier in the week.  Now the trouble was that following a manual update the event would only stay &amp;ldquo;live&amp;rdquo; for 2 minutes.  As Michael pointed out this was because when the whole system was working the hangout plugin would be sending back telemetry every 2 minutes and would keep the event &amp;ldquo;live&amp;rdquo;.  Effectively we wanted the site to be able to display &amp;ldquo;live&amp;rdquo; events accurately, so that people thinking about joining would be receiving accurate information about whether to expect others in the hangout.  All this was still short of my imagined ideal set up where you are able to see who is in a live hangout before you join.  This functionality was briefly available on the helpdesk hangouts we used to have in the &amp;ldquo;Agile Development using Ruby on Rails&amp;rdquo; MOOC, however it never worked for Hangouts on Air.  If the Google Hangout API had stayed stable, it&amp;rsquo;s something we might have been able to add fairly soon.  As it is now we&amp;rsquo;re just scrambling to keep existing features running.&lt;/p&gt;
-
-&lt;p&gt;Maybe I&amp;rsquo;m deluding myself about this, but I really do imagine that an infrastructure that allowed you to browse a set of collaborative events, seeing a preview of what is going on and who is participating, could recreate some of the wandering, networking aspect of an unconference or similar, but support it completely remotely. (maybe I should do a UI mockup &amp;hellip;).  Anyway, let me tell you how I fixed the manual URL update to support &amp;ldquo;live for the duration&amp;rdquo; and Slack notifications.  I started with a cucumber test, splitting the existing edit hangout URL tests into a separate feature file so that I could reduce the dependencies between the background steps.  Long cucumber files with multiple scenarios relying on the same set of background set up start to feel almost as dangerous as tests relying about a large set of fixtures.  Here&amp;rsquo;s the new feature file header:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Manual Edit of Hangout URL
-  As a person involved in an event
-  So that I can ensure everyone can access the correct link to join an event
-  I would like to have means of editing the hangout URL
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And here&amp;rsquo;s the smaller(!) set of background steps I finally converged on:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="err"&gt;Given the date is "2014-02-04 06&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;59&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt;
-    &lt;span class="err"&gt;And following events exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;category&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;start_datetime&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;duration&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;time_zone&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats_every_n_weeks&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats_weekly_each_days_of_the_week_mask&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Daily&lt;/span&gt; &lt;span class="n"&gt;scrum&lt;/span&gt; &lt;span class="n"&gt;meeting&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014/02/04&lt;/span&gt; &lt;span class="n"&gt;07:00:00&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;15&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;never&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt;                       &lt;span class="p"&gt;|&lt;/span&gt;                                           &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Repeat&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Daily&lt;/span&gt; &lt;span class="n"&gt;scrum&lt;/span&gt; &lt;span class="n"&gt;meeting&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014/02/03&lt;/span&gt; &lt;span class="n"&gt;07:00:00&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;15&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;weekly&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt;                     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;15&lt;/span&gt;                                        &lt;span class="p"&gt;|&lt;/span&gt;
-    &lt;span class="err"&gt;And the following hangouts exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Start&lt;/span&gt; &lt;span class="nv"&gt;time&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Title&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Project&lt;/span&gt;    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Category&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Event&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;EventInstance&lt;/span&gt; &lt;span class="nv"&gt;url&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Youtube&lt;/span&gt; &lt;span class="nv"&gt;video&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;End&lt;/span&gt; &lt;span class="nv"&gt;time&lt;/span&gt;            &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2012-02-04&lt;/span&gt; &lt;span class="n"&gt;07:00:00&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;HangoutsFlow&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;WebsiteOne&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Repeat&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;http://hangout.test&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;QWERT55&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014-02-04&lt;/span&gt; &lt;span class="n"&gt;07:02:00&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014-02-05&lt;/span&gt; &lt;span class="n"&gt;07:00:00&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;HangoutsFlow&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;WebsiteOne&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Repeat&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;http://hangout.test&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;QWERT55&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014-02-05&lt;/span&gt; &lt;span class="n"&gt;07:03:00&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I am logged in
-    &lt;span class="nf"&gt;And&lt;/span&gt; I have Slack notifications enabled
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;These are irritatingly long at the moment partly due to the need to specify the &lt;code&gt;repeats_every_n_weeks&lt;/code&gt; and &lt;code&gt;repeats_weekly_each_days_of_the_week_mask&lt;/code&gt; fields on Events.  Trying to move fast I wasn&amp;rsquo;t about to start refactoring that, although I&amp;rsquo;d love to rewrite both of the above &lt;code&gt;following entities exist&lt;/code&gt; steps to avoid using factories that are shared with our specs, and make the whole thing more readable.&lt;/p&gt;
-
-&lt;p&gt;I drove from the simpler non-repeating event situation:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="nt"&gt;@javascript&lt;/span&gt;
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Edit Hangout URL and ensure event stays live
-    &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Scrum"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I open the Edit URL controls
-    &lt;span class="err"&gt;And I fill in "hangout_url" with "http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//test.com"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I click on the Save button
-    &lt;span class="err"&gt;Then I should see link "Join now" with "http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//test.com"&lt;/span&gt;
-    &lt;span class="err"&gt;And I jump to one minute before the end of the event at "2014-02-04 07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;14&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Scrum"&lt;/span&gt;
-    &lt;span class="err"&gt;Then I should see link "Join now" with "http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//test.com"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Naturally this was failing due to no updates from the plugin, and so I dropped to the RSpec level and drove the creation of a new field on EventInstance called &lt;code&gt;url_set_directly&lt;/code&gt; to serve as a flag to indicate that the hangout URL had been set manually. I&amp;rsquo;d been struggling with the domain entity name of EventInstance, which we use to represent a Hangout, and the names are used interchangeably throughout the codebase.  I had been thinking we should consolidate on Hangout, but actually now the future of Hangouts is up in the air, EventInstance starts to feel like the better choice, although surely there must be a better term?  Anyhow, don&amp;rsquo;t get sidetracked making domain model tweaks when you&amp;rsquo;re trying to get a fix into production!  I RSpec&amp;rsquo;d in the EventInstance spec like so:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;EventInstance&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;type: :model&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'has url_set_directly default to false'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;url_set_directly&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;be_falsey&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'hangout_url is present and is not finished'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hangout_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'test'&lt;/span&gt;
-      &lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hoa_status&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'anything'&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'url manually overridden'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;url_set_directly&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-      &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'reports live if the link is older than 2 minutes, and event duration not expired'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-        &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:within_current_event_duration?&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:now&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'10:02:01 UTC'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;live?&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;be_truthy&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which naturally failed since there was no such field as &lt;code&gt;url_set_directly&lt;/code&gt;, which lead me to generate this migration:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;AddUrlSetDirectlyColumnToEventInstance&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Migration&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;change&lt;/span&gt;
-    &lt;span class="n"&gt;add_column&lt;/span&gt; &lt;span class="ss"&gt;:event_instances&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:url_set_directly&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:boolean&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;default: &lt;/span&gt;&lt;span class="kp"&gt;false&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And made the following changes in the EventInstance class:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;live?&lt;/span&gt;
-    &lt;span class="n"&gt;started?&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;hoa_status&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s1"&gt;'finished'&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;updated_within_last_two_minutes?&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;manually_updated_event_not_finished?&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="kp"&gt;private&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;manually_updated_event_not_finished?&lt;/span&gt;
-    &lt;span class="n"&gt;url_set_directly&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;within_current_event_duration?&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The spec&amp;rsquo;s passed, although not the cukes.  Notice I&amp;rsquo;d stubbed the EventInstance (hangout) in the spec to allow calling &lt;code&gt;within_current_event_duration?&lt;/code&gt; on EventInstance objects. One usually doesn&amp;rsquo;t stub methods in the object under test, but here I was planning to delegate that call straight out to a collaborator. I wanted to be able to ask that of an EventInstance instance, and I could drive adding that with another spec for a delegation:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;EventInstance&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;type: :model&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;delegate_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:within_current_event_duration?&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and the code to make that spec green was:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;EventInstance&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
-
-  &lt;span class="n"&gt;delegate&lt;/span&gt; &lt;span class="ss"&gt;:within_current_event_duration?&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;to: :event&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It would be really tidy to say that then the cukes went green, but there was an additional change in the view (to set the url&lt;em&gt;set&lt;/em&gt;directly flag) and then a good hour of getting lost in the time elements of Event, the IceCube scheduling gem etc.  Ultimately I think it was all down to slight incorrectness in the way I was setting the dates in the Cucumber steps.   Those sorted out, everything was passing, and I got a &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1370"&gt;PR&lt;/a&gt; in, which Raoul deployed and we tested in staging.  It seemed to keep the event live, but Slack notifications were not going through.  That took the addition of several more parameters to the view, and another &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1372"&gt;PR&lt;/a&gt; which ultimately worked.  I&amp;rsquo;d definitely gone over budget with the time on this, I was not comfortable with some of the compromises I had made on the Cucumber steps, but I had something working that would allow João to run the Pacific Rim scrum in such a way that with a single manual step he&amp;rsquo;d be able to notify everyone on Slack, and the links on the AV site would stay live for 15 minutes to let people into the Scrum.&lt;/p&gt;
-
-&lt;p&gt;The set up also seemed to work at least partially for some less experienced Scrum masters over the weekend, but more support and scaffolding is clearly needed.  I also think that &lt;code&gt;url_set_directly&lt;/code&gt; needs to be a date rather than a flag, since I expect some repeating events may now say &amp;ldquo;live&amp;rdquo; incorrectly &amp;hellip; although maybe events all should say live for their duration? We would just need some kind of popup message in the hangout for people entering to let them know that no one else is there yet and that&amp;rsquo;s okay, and people could still meetup.  Of course Hangouts can&amp;rsquo;t be re-broadcast &amp;hellip; is it worth pursuing a Hangout plugin to handle the new setup or will work invested there have to be thrown out when/if Google completely sunsets Hangouts?&lt;/p&gt;
-
-&lt;p&gt;It often feels like Hangouts is an engineeering black hole.  Perhaps now it&amp;rsquo;s time to switch focus onto adding PayPal payment support, and allowing people to sponsor each other&amp;rsquo;s Premium memberships on AgileVentures.  I have the feeling we could start receiving payments from at least two people if those two features were in place, so perhaps that&amp;rsquo;s the best focus?  In the meantime I could get some emails off to all the Hangout alternatives with a list of our needed features, e.g. recordability, URL to conference etc. &amp;hellip; On to the next Crunch Time!&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=nJVeelkuoGw"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
