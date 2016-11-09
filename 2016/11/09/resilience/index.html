@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Resilient Code Bases</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_11 x2016_11_09 x2016_11_09_resilience x2016_11_09_resilience_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/11/09/resilience/">Resilient Code Bases</a></h2>
+        <h5 class='date'> 9 Nov 2016</h5>
+    <p>How to create a resilient code base?  I daily wrestle with the legacy code base of WebsiteOne, wanting to make more changes and but being afraid of tests with strange dependencies, that sometimes don&rsquo;t test the right thing; while others lock in low level behaviour that doesn&rsquo;t connect to high level features that we need any longer.  As Michael says the WebSiteOne codebase is better than many.  At least it has tests and was written with good software engineering principles in mind.  However it was a learning project for many.  A really good question is how to create a resilient code base where the developers are learning as they go?  It&rsquo;s a more general question than you might think since all developers are learning as they go, just that some of them are moving further out of their comfort zone at any given time.</p>
+
+<p>I&rsquo;ve been maintaining the AutoGraders codebase for a few years and that&rsquo;s even more scary.  At least with WebsiteOne we have the Rails Model View Controller (MVC) architecture so you know approximately where to find things.  AutoGraders has its own custom architecture that I&rsquo;m not sure I completely understand and I don&rsquo;t know that anyone does.  I&rsquo;ve not succeeded in being a developer of the AutoGrader, just a maintainer.  I&rsquo;ve been able to trace some of the logic paths through the system and tinker here and there, but re-architecting is a big undertaking.  My first attempt stalled on the complexity of trying to wrap the entire system in consistent acceptance tests.  </p>
+
+<p>Eric Evan&rsquo;s Domain Driven Design (DDD) and the concept of being able to refactor legacy systems when they have tests serve as inspiration.  I have more hope and motivation for the WebSiteOne project.  It&rsquo;s Rails architecture means that consistent acceptance tests are more likely, although the frustration of working with JavaScript in acceptance tests is an ongoing drain.  However 100% acceptance testing, like 100% test-coverage and 100% TDD are ideals with diminishing returns.  It seems to me that any time you get religious about one of these things you end up sinking an increasing amount of time as you try to get closer to the perfect 100%. </p>
+
+<p>It makes me think that having a clean and consistent domain model under the hood is the antidote, in some respects at least.  If you accept that having completely reliable acceptance tests on every single one of your important features is an unrealistic goal, then what else can you do?  At least if you&rsquo;re repeatedly evolving the underlying domain model towards something that represents more or less the core of your operations there&rsquo;s a chance you can make up for less than perfect acceptance tests.  Of course one person&rsquo;s coherency is another&rsquo;s confusion &hellip;</p>
+
+<p>The AsyncVoter project is steaming ahead and I&rsquo;m hoping we can have a consistent model and manageable test suites in order to make it maintainable in the long run.  I&rsquo;m hoping to learn the lessons from WebSiteOne and avoid AsyncVoter&rsquo;s maintenance debt creeping up.  That&rsquo;s also got to be balanced against not pouring cold water on the enthusiasm of the developers.  My battle cry has to be &ldquo;keep that Pull Request small!&rdquo;.  Every time you think of another thing you could add, write a feature and put the backlog.  I was reviewing to AsyncVoter PRs yesterday.  Both a lovely green of Cucumber and Mocha tests; both for specific features that we&rsquo;d voted on.</p>
+
+<p>Both of them had high level stories that I think should have been tweaked a little, but here&rsquo;s what they were when the developers started working on them:</p>
+<pre class="highlight gherkin"><code><span class="kd">Feature</span><span class="p">:</span> List Votes
+  As a developer
+  In order to cast my vote and see the status of the project
+  I want the ability to check what stories are currently being voted on
+</code></pre>
+<p>and</p>
+<pre class="highlight gherkin"><code><span class="kd">Feature</span><span class="p">:</span> Cast Votes
+  As a developer
+  So that I can indicate my thoughts about a story
+  I want to cast my vote on the story and provide some notes
+</code></pre>
+<p>In the name of simplicity I would have changed the former to specify only a single current vote, and the latter to not mention anything about notes.  I&rsquo;m sure that we&rsquo;ll ultimately need to have support for those two things, but every little extra bloats the pull request, means more code for review, more work for the developers and means it takes longer to get the code merged into master so others can build on it.  Buck stops with me here; I should have got in there and pruned those features aggressively when work started on them.</p>
+
+<p>There might also have been push back from the developers on the scope of the stories.  What&rsquo;s interesting is that others don&rsquo;t seem to be quite so afraid of writing code as I am.  Perhaps I&rsquo;m paranoid, or old, but I deal with so much legacy code, any time I&rsquo;m working on a feature I want to see what is the absolute minimum I can get away with.  Others seem happy to start working on other bits and pieces of functionality, different error paths etc.  Mapping out all the sad paths for a feature is arguably more relevant.</p>
+
+<p>Still there&rsquo;s this ongoing danger in coding of too much anticipation.  You Ain&rsquo;t Gonna Need It (YAGNI).  Right now I&rsquo;m focused on getting a tracer bullet for the simple possible single voting framework.  At this point every additional element like being able to add notes to votes, track who did the votes, catch errors where the vote or person is not specified, are all things keeping us from getting to that tracer bullet demonstration that data can flow through the system and we can complete a high level story of an asynchronous vote on some remote infrastructure.  </p>
+
+<p>I was also quite scared of giving this sort of feedback.  I&rsquo;ve read people really wrong in the past in terms of how they will take different sorts of feedback.  Either way, push people too hard on something and you&rsquo;re likely to really irritate them.  There&rsquo;s also a humility required.  I know I&rsquo;ve been really religious about different approaches in the past, and I&rsquo;ve got to be open to the fact that I don&rsquo;t have all the answers.  I&rsquo;ll likely be pushing for variations on my current approach as we go forward.  People want the freedom to use their ingenuity to fix problems.  We had a mob review session and went through the above with a few members of the AsyncVoter team.  My screen lag didn&rsquo;t help, but I think it was a good session.</p>
+
+<p>I&rsquo;ve got some PR updates from the devs to review now, and I&rsquo;m hoping to get these PRs merged in today, if I need to make a few changes myself, and I think I&rsquo;ve cleared that with the devs so that I won&rsquo;t be stepping too heavily on anyone&rsquo;s toes.  Proof will be if any of them want to submit PRs again in the future :-)</p>
+
+<p>After the AsyncVoter MobReview session Michael and I dived into some WSO refactoring.  We got as far as creating a Cucumber background step that doesn&rsquo;t use the spec fixtures, which ultimately allowed the more effective exposure of a bug.  Most of the time was spent tracing the logic paths through the system.  I really hope that we can evolve the domain model of WebSiteOne sufficiently so it doesn&rsquo;t go the way of the AutoGrader project &hellip;.</p>
+
+<h3>Related Videos</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=NcyTQ_kiV8A">&ldquo;Martin Fowler&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=4khJglSo8s8">AsyncVoter Mob review</a></li>
+<li><a href="https://www.youtube.com/watch?v=NcyTQ_kiV8A">&ldquo;Kent Back&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=EiBb-KFQDF4">WSO Pairing</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

@@ -5,22 +5,75 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-08T00:00:00+00:00</updated>
+  <updated>2016-11-09T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Resilient Code Bases</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/09/resilience/"/>
+    <id>http://blog.url.com/2016/11/09/resilience/</id>
+    <published>2016-11-09T00:00:00+00:00</published>
+    <updated>2016-11-09T09:26:21+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;How to create a resilient code base?  I daily wrestle with the legacy code base of WebsiteOne, wanting to make more changes and but being afraid of tests with strange dependencies, that sometimes don&amp;rsquo;t test the right thing; while others lock in low level behaviour that doesn&amp;rsquo;t connect to high level features that we need any longer.  As Michael says the WebSiteOne codebase is better than many.  At least it has tests and was written with good software engineering principles in mind.  However it was a learning project for many.  A really good question is how to create a resilient code base where the developers are learning as they go?  It&amp;rsquo;s a more general question than you might think since all developers are learning as they go, just that some of them are moving further out of their comfort zone at any given time.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve been maintaining the AutoGraders codebase for a few years and that&amp;rsquo;s even more scary.  At least with WebsiteOne we have the Rails Model View Controller (MVC) architecture so you know approximately where to find things.  AutoGraders has its own custom architecture that I&amp;rsquo;m not sure I completely understand and I don&amp;rsquo;t know that anyone does.  I&amp;rsquo;ve not succeeded in being a developer of the AutoGrader, just a maintainer.  I&amp;rsquo;ve been able to trace some of the logic paths through the system and tinker here and there, but re-architecting is a big undertaking.  My first attempt stalled on the complexity of trying to wrap the entire system in consistent acceptance tests.  &lt;/p&gt;
+
+&lt;p&gt;Eric Evan&amp;rsquo;s Domain Driven Design (DDD) and the concept of being able to refactor legacy systems when they have tests serve as inspiration.  I have more hope and motivation for the WebSiteOne project.  It&amp;rsquo;s Rails architecture means that consistent acceptance tests are more likely, although the frustration of working with JavaScript in acceptance tests is an ongoing drain.  However 100% acceptance testing, like 100% test-coverage and 100% TDD are ideals with diminishing returns.  It seems to me that any time you get religious about one of these things you end up sinking an increasing amount of time as you try to get closer to the perfect 100%. &lt;/p&gt;
+
+&lt;p&gt;It makes me think that having a clean and consistent domain model under the hood is the antidote, in some respects at least.  If you accept that having completely reliable acceptance tests on every single one of your important features is an unrealistic goal, then what else can you do?  At least if you&amp;rsquo;re repeatedly evolving the underlying domain model towards something that represents more or less the core of your operations there&amp;rsquo;s a chance you can make up for less than perfect acceptance tests.  Of course one person&amp;rsquo;s coherency is another&amp;rsquo;s confusion &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;The AsyncVoter project is steaming ahead and I&amp;rsquo;m hoping we can have a consistent model and manageable test suites in order to make it maintainable in the long run.  I&amp;rsquo;m hoping to learn the lessons from WebSiteOne and avoid AsyncVoter&amp;rsquo;s maintenance debt creeping up.  That&amp;rsquo;s also got to be balanced against not pouring cold water on the enthusiasm of the developers.  My battle cry has to be &amp;ldquo;keep that Pull Request small!&amp;rdquo;.  Every time you think of another thing you could add, write a feature and put the backlog.  I was reviewing to AsyncVoter PRs yesterday.  Both a lovely green of Cucumber and Mocha tests; both for specific features that we&amp;rsquo;d voted on.&lt;/p&gt;
+
+&lt;p&gt;Both of them had high level stories that I think should have been tweaked a little, but here&amp;rsquo;s what they were when the developers started working on them:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; List Votes
+  As a developer
+  In order to cast my vote and see the status of the project
+  I want the ability to check what stories are currently being voted on
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Cast Votes
+  As a developer
+  So that I can indicate my thoughts about a story
+  I want to cast my vote on the story and provide some notes
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the name of simplicity I would have changed the former to specify only a single current vote, and the latter to not mention anything about notes.  I&amp;rsquo;m sure that we&amp;rsquo;ll ultimately need to have support for those two things, but every little extra bloats the pull request, means more code for review, more work for the developers and means it takes longer to get the code merged into master so others can build on it.  Buck stops with me here; I should have got in there and pruned those features aggressively when work started on them.&lt;/p&gt;
+
+&lt;p&gt;There might also have been push back from the developers on the scope of the stories.  What&amp;rsquo;s interesting is that others don&amp;rsquo;t seem to be quite so afraid of writing code as I am.  Perhaps I&amp;rsquo;m paranoid, or old, but I deal with so much legacy code, any time I&amp;rsquo;m working on a feature I want to see what is the absolute minimum I can get away with.  Others seem happy to start working on other bits and pieces of functionality, different error paths etc.  Mapping out all the sad paths for a feature is arguably more relevant.&lt;/p&gt;
+
+&lt;p&gt;Still there&amp;rsquo;s this ongoing danger in coding of too much anticipation.  You Ain&amp;rsquo;t Gonna Need It (YAGNI).  Right now I&amp;rsquo;m focused on getting a tracer bullet for the simple possible single voting framework.  At this point every additional element like being able to add notes to votes, track who did the votes, catch errors where the vote or person is not specified, are all things keeping us from getting to that tracer bullet demonstration that data can flow through the system and we can complete a high level story of an asynchronous vote on some remote infrastructure.  &lt;/p&gt;
+
+&lt;p&gt;I was also quite scared of giving this sort of feedback.  I&amp;rsquo;ve read people really wrong in the past in terms of how they will take different sorts of feedback.  Either way, push people too hard on something and you&amp;rsquo;re likely to really irritate them.  There&amp;rsquo;s also a humility required.  I know I&amp;rsquo;ve been really religious about different approaches in the past, and I&amp;rsquo;ve got to be open to the fact that I don&amp;rsquo;t have all the answers.  I&amp;rsquo;ll likely be pushing for variations on my current approach as we go forward.  People want the freedom to use their ingenuity to fix problems.  We had a mob review session and went through the above with a few members of the AsyncVoter team.  My screen lag didn&amp;rsquo;t help, but I think it was a good session.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve got some PR updates from the devs to review now, and I&amp;rsquo;m hoping to get these PRs merged in today, if I need to make a few changes myself, and I think I&amp;rsquo;ve cleared that with the devs so that I won&amp;rsquo;t be stepping too heavily on anyone&amp;rsquo;s toes.  Proof will be if any of them want to submit PRs again in the future :-)&lt;/p&gt;
+
+&lt;p&gt;After the AsyncVoter MobReview session Michael and I dived into some WSO refactoring.  We got as far as creating a Cucumber background step that doesn&amp;rsquo;t use the spec fixtures, which ultimately allowed the more effective exposure of a bug.  Most of the time was spent tracing the logic paths through the system.  I really hope that we can evolve the domain model of WebSiteOne sufficiently so it doesn&amp;rsquo;t go the way of the AutoGrader project &amp;hellip;.&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=NcyTQ_kiV8A"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4khJglSo8s8"&gt;AsyncVoter Mob review&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=NcyTQ_kiV8A"&gt;&amp;ldquo;Kent Back&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=EiBb-KFQDF4"&gt;WSO Pairing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Discombobulated (by Google)</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/08/discombobulated/"/>
     <id>http://blog.url.com/2016/11/08/discombobulated/</id>
     <published>2016-11-08T00:00:00+00:00</published>
-    <updated>2016-11-08T10:24:19+00:00</updated>
+    <updated>2016-11-09T09:25:25+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;Spent a good hour analysing our options to cope with the changes in the Google Hangout API.  The key issue is that the Google Hangout on Air button no longer starts a Hangout directly.  We have the the HOA button throughout our AgileVentures site on project and event pages:&lt;/p&gt;
+    <content type="html">&lt;p&gt;We spent a good hour analysing our options to cope with the changes in the Google Hangout API.  The key issue is that the Google Hangout on Air (HOA) button no longer starts a Hangout directly.  We have the the HOA button throughout our AgileVentures site on project and event pages:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/5esltpqdq8y2abt/Screenshot%202016-11-08%2009.23.04.png?dl=1" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="HOA button" src="https://www.dropbox.com/s/5esltpqdq8y2abt/Screenshot%202016-11-08%2009.23.04.png?dl=1" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Clicking this button now pops up a separate window with instructions on how to create a HOA through the YouTube interface.  BREAKING NEWS.  I just went to WebSiteOne project page to create a screenshot of the pop up for this blog and pressed the button.  Instead of opening an popup with the contents of this page:&lt;/p&gt;
 
@@ -28,9 +81,9 @@
 
 &lt;p&gt;Which actually has a good straightforward description of how to create a HOA from the YouTube interface:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/gudo78qqtfk04bp/Screenshot%202016-11-08%2009.31.13.png?dl=1" /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="create YT live event instructions" src="https://www.dropbox.com/s/gudo78qqtfk04bp/Screenshot%202016-11-08%2009.31.13.png?dl=1" /&gt; &lt;/p&gt;
 
-&lt;p&gt;However a HOA popped up, our plugin worked and pinged Slack through the AV website/agile-bot hookup.  To say I was discombobulated is to put it mildly :-)  I went straight to my &lt;a href="http://stackoverflow.com/questions/40233393/start-a-hangout-on-air-button-for-youtube-livestreaming-api"&gt;StackOverflow post&lt;/a&gt; on the subject to see if there had been an update from the Google engineers, but nothing there.  So, had the activity on the SO post, or our discussion in the YouTube product forums prompted the Google engineers to make a change?  Or was this just another accidental change that will allow HOA buttons to work for a while, but will disappear again at some point in the future?&lt;/p&gt;
+&lt;p&gt;However a HOA popped up, our plugin worked and pinged Slack through the AV website/agile-bot hookup.  To say I was discombobulated is to put it mildly :-)  I went straight to my &lt;a href="http://stackoverflow.com/questions/40233393/start-a-hangout-on-air-button-for-youtube-livestreaming-api"&gt;StackOverflow post&lt;/a&gt; on the subject to see if there had been an update from the Google engineers, but nothing there.  So, had the activity on the SO post or our discussion in the YouTube product forums prompted the Google engineers to make a change?  Or was this just another accidental change that will allow HOA buttons to work for a while, but will disappear again at some point in the future?&lt;/p&gt;
 
 &lt;p&gt;I guess Google moves in mysterious ways &amp;hellip; what we identified yesterday was that the hangout on air button not working was very confusing for many users.  The manual update of hangout URL was a work around that helped the more experienced AV members to notify the slack community about the hangout going live, but was unlikely to be used by new users.  I admitted that until recently I had been thinking we might want to move away from trying to support synchronous meetings, but the AV community has got really active recently, with well attended scrums, and Michael and I were agreeing that synchronous meetings were very good for coordinating some issues.&lt;/p&gt;
 
@@ -39,7 +92,7 @@
 &lt;ul&gt;
 &lt;li&gt;increased effort to start hangout on air&lt;/li&gt;
 &lt;li&gt;lower likelihood of notifications (and pair partners)&lt;/li&gt;
-&lt;li&gt;no telemetry&lt;/li&gt;
+&lt;li&gt;no telemetry (data from who&amp;rsquo;s in the hangout when)&lt;/li&gt;
 &lt;li&gt;no sharing of video link&lt;/li&gt;
 &lt;li&gt;if no fixed event - no notification pathway &amp;ndash;&amp;gt; pair now on each project page is basically non-functional&lt;/li&gt;
 &lt;li&gt;event live as function of planned duration rather than actual activity&lt;/li&gt;
@@ -75,7 +128,7 @@
 &lt;li&gt;[ ] publishing a new hangout app (give us notifications and telemetry)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;It would be great if Google hangouts was open source &amp;hellip; anyway, even yesterday I didn&amp;rsquo;t want to leap into working on something.  I also wanted to review the issues related to payment and premium plans.  CraftAcademy Sweden is still keen to work with invoices rather than credit cards, so we how had some premium members who weren&amp;rsquo;t represented in the site correctly.  I tested on my local server that I could update them from the console like to:&lt;/p&gt;
+&lt;p&gt;It would be great if Google hangouts was open source &amp;hellip; anyway, even yesterday I didn&amp;rsquo;t want to leap into working on something.  I also wanted to review the issues related to payment and premium plans.  CraftAcademy Sweden is still keen to work with invoices rather than credit cards, so we how had some Premium members who weren&amp;rsquo;t represented in the site correctly.  I tested on my local server that I could update them from the console like to:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;UpgradeUserToPremium&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;CraftAcademy&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;It worked locally and I ran the same through the production Rails console.  An example of me playing fast and loose perhaps?  Would a more principled approach be to deploy a rake task, build an admin interface or even an API endpoint? CraftAcademy just graduated three students and it was trivial for me to do through the Rails console, and make the system display the students&amp;rsquo; Premium status correctly.  I thought it was important to get this set, since otherwise they would have the &amp;ldquo;Sponsor for Premium&amp;rdquo; button.  Not that anyone was likely to start throwing money at them, but good to have the database in the correct state.  As the number of CA graduates increases, we&amp;rsquo;ll want to automate this, but right now we&amp;rsquo;re cautiously expanding the domain model.  Michael and I identified a set of other issues:&lt;/p&gt;
@@ -88,11 +141,11 @@
 &lt;li&gt;Supporting batch payments&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I was pleased to have made the admin changes to the DB.  The Google Hangout API issue underlines the importance of working in small steps.  We&amp;rsquo;re feeling our way with CraftAcademy collaboration.  The number of CraftAcademy graduates getting Premium membership bundled with their bootcamp experience could explode, or could stay at steady state, or even drop off.   It would be inexpedient to invest enormous engineering effort on functionality and extending the domain model until it&amp;rsquo;s clear which way that goes.  In the meantime we need to keep knocking off small improvements.  CraftAcademy SouthAfrica (Raoul) was saying he&amp;rsquo;d really like to make batch payments in credit card.  Another feature.  We just had our first successful Paypal payment (7 day free trial for first paypal premium member just finished).  Naturally we shouldn&amp;rsquo;t just implement every feature that every user asks for.  We&amp;rsquo;ve got to prioritise those that overlap and give us more bang for the buck.&lt;/p&gt;
+&lt;p&gt;I was pleased to have made the admin changes to the DB.  The Google Hangout API issue underlines the importance of working in small steps.  We&amp;rsquo;re feeling our way with CraftAcademy collaboration.  The number of CraftAcademy graduates getting Premium membership bundled with their bootcamp experience could explode, or could stay at steady state, or even drop off.   It would be inexpedient to invest enormous engineering effort on functionality and extending the domain model until it&amp;rsquo;s clear which way that goes.  In the meantime we need to keep knocking off small improvements.  CraftAcademy SouthAfrica were saying they&amp;rsquo;d really like to make batch payments in credit card.  Another feature.  We just had our first successful Paypal payment (7 day free trial for first paypal premium member ending).  Naturally we shouldn&amp;rsquo;t just implement every feature that every user asks for.  We&amp;rsquo;ve got to prioritise those that overlap and give us more bang for the buck.&lt;/p&gt;
 
-&lt;p&gt;I asked Michael what he&amp;rsquo;d like to work on and he said the &amp;ldquo;manual setting of youtube links&amp;rdquo;.  We had another AV member join the hangout and tell us that was important for her project.  It made particular sense as it was a feature that would make our events more agnostic in terms of the video recording link.  We did a quick scrum and Michael drove on that feature.  Michael threw up a new feature, and we hammered at the EventInstances controller to see if we could provide a mechanism to manually update the video link for an EventInstance.  Things got a bit sticky.  I was torn a little between refactoring the Cucumber steps and getting things done.  I encouraged Michael as driver to take the route he thought best.  He left the background EventInstance generation steps alone, but tried some simpler versions for the individual scenario steps.  That didn&amp;rsquo;t go smoothly and we saw why the original test writers had gone for executing triggers rather than pure Capybara clicks when things were getting stuck on the overlap.&lt;/p&gt;
+&lt;p&gt;I asked Michael what he&amp;rsquo;d like to work on and he said the &amp;ldquo;manual setting of YouTube links&amp;rdquo;.  We had another AV member join the hangout and tell us that was important for her project.  It made particular sense as it was a feature that would make our events more agnostic in terms of the video recording link.  We did a quick scrum and Michael drove on that feature.  Michael threw up a new feature, and we hammered at the EventInstances controller to see if we could provide a mechanism to manually update the video link for an EventInstance.  Things got a bit sticky.  I was torn a little between refactoring the Cucumber steps and getting things done.  I encouraged Michael as driver to take the route he thought best.  He left the background EventInstance generation steps alone, but tried some simpler versions for the individual scenario steps.  That didn&amp;rsquo;t go smoothly and we saw why the original test writers had gone for executing triggers rather than pure Capybara clicks when things were getting stuck on overlapping CSS elements.&lt;/p&gt;
 
-&lt;p&gt;There were other complexities with the app code trying to post to twitter, and the dynamics of when and if the hangout live elements were being displayed.  At the end of the session the tests were still red and the debug cycle felt a bit slow.  Over night I wondered if as part of migrating to a new domain model, we should prefer an EventCollection entity that consists of individual Events, and remove the terms EventInstance and Hangout from the domain.  The current model has the term Event representing both repeating and single &amp;ldquo;events&amp;rdquo; which can be scrums, client meetings, pairing sessions, anything where people get together.  The current codebase and tests use the term Hangout and EventInstance interchangeably which can be confusing.  An EventInstance holds a set of data about a Google Hangout at the moment.  I suspect there are also some cases where EventInstances get clobbered in repeat events started manually by the same person.  &lt;/p&gt;
+&lt;p&gt;There were other complexities with the app code trying to post to Twitter, and the dynamics of when and if the &amp;ldquo;hangout is live&amp;rdquo; elements were being displayed.  At the end of the session the tests were still red and the debug cycle felt a bit slow.  Over night I wondered if, as part of migrating to a new domain model, we should prefer an EventCollection entity that consists of individual Events, and remove the terms EventInstance and Hangout from the domain.  The current model has the term Event representing both repeating and single &amp;ldquo;events&amp;rdquo; which can be scrums, client meetings, pairing sessions, anything where people get together.  The current codebase and tests use the term Hangout and EventInstance interchangeably which can be confusing.  An EventInstance holds a set of data about a Google Hangout at the moment.  I suspect there are also some cases where EventInstances get clobbered in repeat events started manually by the same person.  &lt;/p&gt;
 
 &lt;p&gt;I wondered if we might be able to pull together a more RESTful system by replacing our current Event entity with an EventCollection.  One of the Mentive students I was working with had used that aggregate approach successfully, and discussions about the AsyncVoter REST API made me think I&amp;rsquo;d like to be rebuilding parts of the WSO system more cleanly.  But how to do it one step at a time?  Perhaps introduce a placeholder term like &lt;code&gt;AtomicEvent&lt;/code&gt; to represent single meetups; get a clean REST API around that and then finally migrate it to &lt;code&gt;Event&lt;/code&gt; once the original &lt;code&gt;Event&lt;/code&gt; entity was removed?  Sounds like it could be very confusing.  And now suddenly this morning the HOA button is working again, so suddenly we can leave that part of the system and focus on payments again?&lt;/p&gt;
 
@@ -509,85 +562,6 @@
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://gist.github.com/dergachev/4627207"&gt;Quickly make animated gifs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Different Strokes for Different Folks</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/01/different-strokes/"/>
-    <id>http://blog.url.com/2016/11/01/different-strokes/</id>
-    <published>2016-11-01T00:00:00+00:00</published>
-    <updated>2016-11-02T09:38:17+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Today was a series of intense work outs.  The clocks went back in the UK meaning that we were back in UTC time, so standups broke the day up at 10:30am and 3:45pm.  The &amp;ldquo;Martin Fowler&amp;rdquo; scrum was almost full, with folks from both the MetPlus and AsyncVoter projects.  We had an &lt;a href="https://www.youtube.com/watch?v=AfsoOtqv0eg"&gt;&amp;ldquo;AsyncVoter Catch Up&amp;rdquo;&lt;/a&gt; immediately after the scrum, which lasted over an hour and we had a good debate over three issues, specifically:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Should be using Cucumber (difficult setup)&lt;/li&gt;
-&lt;li&gt;Do we need more development of the Story schema&lt;/li&gt;
-&lt;li&gt;Shouldn&amp;rsquo;t we push on to creating the Vote model?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Various people had been working on adding CucumberJS over the weekend, and it seemed that there was concern that Cucumber was just replicating our existing integration test on the RESTful API for the Story model and that it wasn&amp;rsquo;t moving us forward, particularly to the extent that it was proving difficult to set up.  I had strong feelings here and knew that I could easily end up dominating the conversation.  Having clarified that these were the three issues I went round everyone in the meeting, starting with the least outspoken folks to make sure that we heard their point of view before more outspoken folks like myself - I am guilty as charged! :-) &lt;/p&gt;
-
-&lt;p&gt;There was a variety of viewpoints and I&amp;rsquo;m really glad we got them all in.  Some people were in favour of Cucumber, others against, and I think everyone was keen to move on.  Michael and I countered the point that Cucumber was pure replication of the existing integration tests by saying that yes, it was, and even though we didn&amp;rsquo;t have a non-technical client, the key value of the Cucumber stories would be making it easier for new developers and ourselves in the future to understand why particular features of the code were there.  We also agreed that if we couldn&amp;rsquo;t quickly get Cucumber working we&amp;rsquo;d need to drop it.&lt;/p&gt;
-
-&lt;p&gt;I pulled in some of the spikes from the weekend and pretty soon we had something working.  The key confusion had been about what testing model to use in combination with CucumberJS.  The AsyncVoter mob had been coming together and then splintering.  I think between them they had all the things they needed to move forward, but it was partly a confidence issue.  Just to give you a flavour, here&amp;rsquo;s an example of the existing integration test:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;    &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'GET /stories'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;done&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="nx"&gt;chai&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;server&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-            &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/stories'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-            &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;end&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;should&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;have&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-                &lt;span class="nx"&gt;done&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-            &lt;span class="p"&gt;});&lt;/span&gt;
-    &lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Which was paralleled by a Cucumber story like so:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Testing Cucumber
-    &lt;span class="nf"&gt;When&lt;/span&gt; I make a GET request the response status code should be &lt;span class="s"&gt;"200"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and we got a &amp;ldquo;tracer bullet&amp;rdquo; of this working with a step definition like so:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;  &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I make a GET request the response status code should be "&lt;/span&gt;&lt;span class="se"&gt;([^&lt;/span&gt;&lt;span class="sr"&gt;"&lt;/span&gt;&lt;span class="se"&gt;]&lt;/span&gt;&lt;span class="sr"&gt;*&lt;/span&gt;&lt;span class="se"&gt;)&lt;/span&gt;&lt;span class="sr"&gt;"$/&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;code&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-      &lt;span class="nx"&gt;chai&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;server&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/stories'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;end&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-              &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nx"&gt;code&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                &lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-              &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-                &lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"res status was "&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-              &lt;span class="p"&gt;}&lt;/span&gt;
-          &lt;span class="p"&gt;});&lt;/span&gt;
-
-     &lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The crucial thing here was that this would fail correctly.  We weren&amp;rsquo;t yet using nice chai assertions, but there were &lt;a href="https://github.com/domenic/chai-as-promised"&gt;libraries&lt;/a&gt; that would help us with that.  &lt;/p&gt;
-
-&lt;p&gt;The other thing I emphasised again was that we wanted to be very careful making changes to the functionality and model schema that weren&amp;rsquo;t driven by high level user stories that had gone through the estimation process.  I&amp;rsquo;ve burned too many hours in projects suffering from feature creep not to make that point.  That said, I also underlined that to me the core of Agile is that the team reflects regularly on what works for them, and tries out changes.  BDD, TDD, Cucumber, pairing, mobbing, user stories, estimating are all on the table, and can be removed or tinkered with if the team thinks it&amp;rsquo;s a good idea to make a change.  The way I channel Agile is that there are a lot of group and coding processes that can give us value, so it&amp;rsquo;s great to start with a few tried and tested procedures that you are comfortable with.  At the same time allow the team to evolve its own style, but don&amp;rsquo;t allow the baby to be thrown out with the bathwater.  After a tinker or a change, see how things go.  Reflect after 1 week, 2 weeks, a month.&lt;/p&gt;
-
-&lt;p&gt;It was a good session, and after lunch I jumped into a pairing session with Michael on WebsiteOne.  We had a good chat about pairing techniques and how to work together effectively.  There was so much to do on WebsiteOne.  There were performance issues emerging on the events page.  The fixes that I had got in for hangouts needed follow up and new UX flow to match the post Hangout Button API switch off reality.  However we have to be sustainable, and I let the money lead us.  I had one potential Premium signup if we had PayPal in place.  All sorts of other fixes were certainly needed, but if I don&amp;rsquo;t bring in enough money I&amp;rsquo;ll be back to being distracted by a closed-source 9-5 in January; so that&amp;rsquo;s the heuristic I&amp;rsquo;m working on.  &lt;/p&gt;
-
-&lt;p&gt;The AsyncVoter and LocalSupport projects seem to have more interested parties at the moment, meaning that we hadn&amp;rsquo;t yet voted on the &lt;a href="https://waffle.io/AgileVentures/WebsiteOne/cards/580787b7bbf5b55b01565370"&gt;PayPal story&lt;/a&gt;.  In another context the absence of estimation would stop me from working on the ticket, but I think you also have to know when to ignore guidelines.  Michael and I spent a while exploring the PayPal options, discovering that they support recurring subscription payments.  It became clear pretty quickly that we could actually get a test PayPal button up without anything like the integration we needed for Stripe:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;form&lt;/span&gt; &lt;span class="na"&gt;action=&lt;/span&gt;&lt;span class="s"&gt;"https://www.paypal.com/cgi-bin/webscr"&lt;/span&gt; &lt;span class="na"&gt;method=&lt;/span&gt;&lt;span class="s"&gt;"post"&lt;/span&gt; &lt;span class="na"&gt;target=&lt;/span&gt;&lt;span class="s"&gt;"_top"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;input&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;"hidden"&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;"cmd"&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;"_s-xclick"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;input&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;"hidden"&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;"hosted_button_id"&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;"N5R9T269YU7XC"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;input&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;"image"&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"https://www.paypalobjects.com/en_GB/i/btn/btn_subscribe_LG.gif"&lt;/span&gt; &lt;span class="na"&gt;border=&lt;/span&gt;&lt;span class="s"&gt;"0"&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;"submit"&lt;/span&gt; &lt;span class="na"&gt;alt=&lt;/span&gt;&lt;span class="s"&gt;"PayPal – The safer, easier way to pay online!"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;img&lt;/span&gt; &lt;span class="na"&gt;alt=&lt;/span&gt;&lt;span class="s"&gt;""&lt;/span&gt; &lt;span class="na"&gt;border=&lt;/span&gt;&lt;span class="s"&gt;"0"&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"https://www.paypalobjects.com/en_GB/i/scr/pixel.gif"&lt;/span&gt; &lt;span class="na"&gt;width=&lt;/span&gt;&lt;span class="s"&gt;"1"&lt;/span&gt; &lt;span class="na"&gt;height=&lt;/span&gt;&lt;span class="s"&gt;"1"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;PayPal button tools allow you to create a subscribe button in association with a PayPal business or charity account.  I had already set up an AgileVentures charity account on PayPal, so it was just a question of copying the above code into an appropriate location.  We tried putting it in a static page, but some important tags got filtered out, so we slapped it into an extra endpoint on the already abused &lt;code&gt;ChargesController&lt;/code&gt;, wrapped it in a cucumber test (checked it failed when the button was missing) and got it out.  Michael was suggesting adding a redirection endpoint, but the next scrum was coming up and I had a meeting with a sponsor, so I wanted to get to the point where this was up and we could test if it would work, and more importantly, if people would use it.  If we could validate those two, then it would be worth investing more time.&lt;/p&gt;
-
-&lt;p&gt;Michael&amp;rsquo;s questioned whether I go too close to the metal here.  It&amp;rsquo;s like extreme Agile.  You could argue that if you&amp;rsquo;re going to take someone&amp;rsquo;s money then you should be doing a lot more work to make everything perfect and just so.  I&amp;rsquo;d love to have the resources to throw at that.  We started the Stripe integration at absolute bare bones, and as people signed up and made comments about things that looked odd, we fixed those things.  I plan to do the same for PayPal.  Raoul got the new feature out super fast and we got our first sign up.  Now I can be confident that more time investing in redirection end-points and tweaking button colour schemes is time being spent in the context of a revenue stream.&lt;/p&gt;
-
-&lt;p&gt;On reflection a great day.  The Paypal addition was super simple, and ironically I think we might have moved faster six months ago if we&amp;rsquo;d started with Paypal and not Stripe, but now we have both and that&amp;rsquo;s great.  I retrospectively assigned a &amp;ldquo;1&amp;rdquo; to the PayPal story because that&amp;rsquo;s what it had been, and resolved to get a CONTRIBUTING.md page up for the AsyncVoter project.  I hope I won&amp;rsquo;t be crucified as a hypocrite, but I really do believe this Agile idea of &amp;ldquo;no one size fits all&amp;rdquo;.  Every project is different.  Every team needs to adjust its processes to suit circumstances.  I&amp;rsquo;m going to push AsyncVoter towards more voting and estimating before stories are started to avoid people stepping on each other&amp;rsquo;s toes.  WebSiteOne is quieter also because it&amp;rsquo;s a priority project, so fewer people are eligible to work on it, but if we can get AsyncVoter automation in place maybe we can get more stories estimated faster for WebSiteOne; the two projects will synergise and it will be win-win for everyone! &lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://youtu.be/C-E_5uj-YgQ"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=AfsoOtqv0eg"&gt;AsyncVoter Catch Up&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=zVS_tyX3Lq8"&gt;Pairing on WebsiteOne&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=IK8O5U4lmfg"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
