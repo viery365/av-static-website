@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Mixing and Matching Guidelines</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_11 x2016_11_10 x2016_11_10_mix-and-match x2016_11_10_mix-and-match_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/11/10/mix-and-match/">Mixing and Matching Guidelines</a></h2>
+        <h5 class='date'>10 Nov 2016</h5>
+    <p>It was another mix of the AsyncVoter and WebSiteOne projects today.  Overnight Arreche had come up with a <a href="https://github.com/AgileVentures/AsyncVoter/compare/master...arreche:7_cast_vote_feature_mvp">slimmed down version</a> of Raphael&rsquo;s <a href="https://github.com/AgileVentures/AsyncVoter/pull/50">pull request</a> on vote casting, so I focused on João&rsquo;s <a href="https://github.com/AgileVentures/AsyncVoter/pull/45">pull request</a> for listing currently voting stories.   I really wanted to get something merged in as we&rsquo;d had these two pull requests open for five days or so, and I also wanted to practice deploying a new feature onto the drie servers.</p>
+
+<p>The async_voter slack channel was active and I was conflicted about posting comments in Github and in slack.  João showed up and said he had some time for programming and what should he change.  I suggested he take out the sorting functionality that wasn&rsquo;t covered by the acceptance test and he got right to it.  My original plan was that there might have been some AsyncVoter folks in the &ldquo;Martin Fowler&rdquo; scrum, but they weren&rsquo;t and I ended up helping out some Premiums fix up issues on the LocalSupport and WebSiteOne projects.</p>
+
+<p>In the meantime João had pushed changes and we had a slimmed down pull request.  I still wasn&rsquo;t entirely sure about the mapping we had set up from <code>GET /stories?state=active</code> to search for <code>size=0</code> stories.  João was very keen on the state=active flag and seemed to be mollifying me by saying that <code>GET /stories?size=0</code> would also work.  I investigated and found that it didn&rsquo;t quite and that <code>GET /stories?state=voting</code> or indeed any other state would return all the size 0 stories.</p>
+
+<p>I pointed that out to João not sure if he was in a position to fix it up.  I started adjusting the code locally and made my own <a href="https://github.com/AgileVentures/AsyncVoter/pull/57">pull request</a>.  In parallel João made further updates.  Perhaps we should have been waiting, but he was commuting.  Maybe I should have just gone to lunch, but I was pleasantly surprised to make some good progress on my own branch.  In particular discovering a <a href="http://jaketrent.com/post/run-single-mocha-test/">method to specify running a single test in a mocha suite</a>, where you insert a <code>.only</code> into the test you want to focus on:</p>
+<pre class="highlight javascript"><code><span class="nx">it</span><span class="p">(</span><span class="s2">"found one active"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">});</span>
+</code></pre>
+<p>becomes:</p>
+<pre class="highlight javascript"><code><span class="nx">it</span><span class="p">.</span><span class="nx">only</span><span class="p">(</span><span class="s2">"found one active"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">});</span>
+</code></pre>
+<p>and you actually don&rsquo;t have to make any changes to the command line argument.  Making the above change, I can run <code>npm test</code> and I get precisely the focus I want.  Eat your heart out RSpec and Cucumber where I have to construct commands like:</p>
+<pre class="highlight plaintext"><code>be cucumber features/hangouts/edit_hangout_url.feature:31
+</code></pre>
+<p>which get derailed when the line numbers change.  So anyhow, on reflection I&rsquo;m glad I did spend some time tinkering with my own PR.  Contrary to previous experiences, node seemed stable and I was able to jump from Cucumber acceptance tests to Mocha Unit tests and make good progress.  The mocking error messages were not as precise as I would have liked, but I think that may be something we can improve.</p>
+
+<p>Of course I then had the quandary of whether to go with my PR or with João&rsquo;s new one.  He had now filled out the filtering functionality and added checks that only <code>state=active</code> would return size 0 stories.  I was now in a hangout with Michael who was asking good questions about what all this would do.  I started the server and used POSTman to hit the new endpoints.  The <code>state=active</code> filtering was working, but not the general filtering.  I think there were key conversion issues or something.  The key point here was the the general filtering functionality wasn&rsquo;t being hit by any tests.</p>
+
+<p>Different guidelines were as usual wrestling in my head.  My concerns were as follows:</p>
+
+<ul>
+<li>was locking to size=0 to represent currently voted stories going to bite us when we decided we needed size=0 stories in the future?</li>
+<li>Wasn&rsquo;t it bad to have functionality not covered by tests, and particularly functionality unrelated to the feature the PR was addressing?</li>
+<li>Should we be adjusting the story model to have a state that could be active, to reflect the domain language that João was keen to use?</li>
+<li>Shouldn&rsquo;t we be going with my simplifying assumption that there is only ever a single story to vote on (for the time being)?</li>
+<li>Shouldn&rsquo;t we be sanitising inputs coming over the wire? although this is search rather than edit so &hellip;</li>
+</ul>
+
+<p>I wanted to do the right thing for the project, and also not offend João who had been putting in lots of great work.  All credit to him and the others who&rsquo;ve got the Cucumber and Mocha set up all working so smoothly, along with a clean core of app code.  </p>
+
+<p>I resolved to go with João&rsquo;s PR but I make some tweaks.  I stuck with João&rsquo;s preferred <code>state=active</code> but pulled out the generic filtering code because it didn&rsquo;t work, and wasn&rsquo;t covered by the tests.  So the core logic in the model class is:</p>
+<pre class="highlight javascript"><code><span class="nx">schema</span><span class="p">.</span><span class="nx">statics</span><span class="p">.</span><span class="nx">findBy</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">filter</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">filterObject</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">filter</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">filter</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="o">===</span> <span class="s1">'active'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">filterObject</span><span class="p">[</span><span class="s1">'size'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span> 
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">'Story'</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="nx">filterObject</span><span class="p">).</span><span class="nx">sort</span><span class="p">(</span><span class="s1">'name'</span><span class="p">).</span><span class="nx">exec</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<p>My two biggest concerns remaining were that now the <code>findBy</code> method was named incorrectly and that we had quite a lot of mockup setup replication in the mocha test suite for the story model.  I created refactoring tickets for these two and got the PR merged in.  From a day&rsquo;s distance I think it was a reasonable compromise.  Let&rsquo;s see how we feel in a week and a month and a year!</p>
+
+<p>This also allowed me to try pushing a new feature to the drie server.  This failed with a 502 and super fast feedback from the drie team allowed us to identify that as a node versioning issue which we can hopefully fix today.  It also highlighted the need for a staging server as I had broken production in the process.  Although that&rsquo;s no disaster here as we only have a single test deploy that no one&rsquo;s using yet so it&rsquo;s not really <code>production</code>.</p>
+
+<p>Michael and I snapped in some progress on WebSiteOne at the end of the session, finally wrapping in a cucumber test the bug we had been hunting the previous day.  Lots of refactoring imperative Cucumber steps to declarative needed there.  It&rsquo;s an interesting perspective; maintaining and evolving a Rails project, while shepherding the creation of a new Node micro service.  Stay tuned for more hair raising tails :-)</p>
+
+<h3>Related Videos</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=rVfDq6YB9D4">&ldquo;Martin Fowler&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=dfmTQuYbwVU">WebsiteOne and LocalSupport Triage</a></li>
+<li><a href="https://www.youtube.com/watch?v=W1GPjCwBzNc">Pairing on AsyncVoter</a></li>
+<li><a href="https://www.youtube.com/watch?v=DlS0zvtKqhU">&ldquo;Kent Beck&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=My04-8l_INc">Pairing on WebSiteOne</a></li>
+<li><a href="https://www.youtube.com/watch?v=Zb29w0BwtEw">More Pairing on WebSiteOne </a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

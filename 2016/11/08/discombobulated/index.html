@@ -86,7 +86,7 @@
 
 <p><img alt="HOA button" src="https://www.dropbox.com/s/5esltpqdq8y2abt/Screenshot%202016-11-08%2009.23.04.png?dl=1" /></p>
 
-<p>Clicking this button now pops up a separate window with instructions on how to create a HOA through the YouTube interface.  BREAKING NEWS.  I just went to WebSiteOne project page to create a screenshot of the pop up for this blog and pressed the button.  Instead of opening an popup with the contents of this page:</p>
+<p>Clicking this button now pops up a separate window with instructions on how to create a HOA through the YouTube interface.  BREAKING NEWS.  I just went to WebSiteOne project page to create a screenshot of the pop up for this blog and pressed the button.  Instead of opening a popup with the contents of this page:</p>
 
 <p>https://support.google.com/youtube/answer/7083786?hl=en-GB</p>
 
@@ -94,7 +94,7 @@
 
 <p><img alt="create YT live event instructions" src="https://www.dropbox.com/s/gudo78qqtfk04bp/Screenshot%202016-11-08%2009.31.13.png?dl=1" /> </p>
 
-<p>However a HOA popped up, our plugin worked and pinged Slack through the AV website/agile-bot hookup.  To say I was discombobulated is to put it mildly :-)  I went straight to my <a href="http://stackoverflow.com/questions/40233393/start-a-hangout-on-air-button-for-youtube-livestreaming-api">StackOverflow post</a> on the subject to see if there had been an update from the Google engineers, but nothing there.  So, had the activity on the SO post or our discussion in the YouTube product forums prompted the Google engineers to make a change?  Or was this just another accidental change that will allow HOA buttons to work for a while, but will disappear again at some point in the future?</p>
+<p>However an HOA popped up, our plugin worked and pinged Slack through the AV website/agile-bot hookup.  To say I was discombobulated is to put it mildly :-)  I went straight to my <a href="http://stackoverflow.com/questions/40233393/start-a-hangout-on-air-button-for-youtube-livestreaming-api">StackOverflow post</a> on the subject to see if there had been an update from the Google engineers, but nothing there.  So, had the activity on the SO post or our discussion in the YouTube product forums prompted the Google engineers to make a change?  Or was this just another accidental change that will allow HOA buttons to work for a while, but will disappear again at some point in the future?</p>
 
 <p>I guess Google moves in mysterious ways &hellip; what we identified yesterday was that the hangout on air button not working was very confusing for many users.  The manual update of hangout URL was a work around that helped the more experienced AV members to notify the slack community about the hangout going live, but was unlikely to be used by new users.  I admitted that until recently I had been thinking we might want to move away from trying to support synchronous meetings, but the AV community has got really active recently, with well attended scrums, and Michael and I were agreeing that synchronous meetings were very good for coordinating some issues.</p>
 
@@ -139,7 +139,7 @@
 <li>publishing a new hangout app (give us notifications and telemetry)</li>
 </ul>
 
-<p>It would be great if Google hangouts was open source &hellip; anyway, even yesterday I didn&rsquo;t want to leap into working on something.  I also wanted to review the issues related to payment and premium plans.  CraftAcademy Sweden is still keen to work with invoices rather than credit cards, so we how had some Premium members who weren&rsquo;t represented in the site correctly.  I tested on my local server that I could update them from the console like to:</p>
+<p>It would be great if Google hangouts was open source &hellip; anyway, even yesterday I didn&rsquo;t want to leap into working on something.  I also wanted to review the issues related to payment and premium plans.  CraftAcademy Sweden is still keen to work with invoices rather than credit cards, so we now had some Premium members who weren&rsquo;t represented in the site correctly.  I tested on my local server that I could update them from the console like to:</p>
 <pre class="highlight ruby"><code><span class="no">UpgradeUserToPremium</span><span class="p">.</span><span class="nf">with</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="no">PaymentSource</span><span class="o">::</span><span class="no">CraftAcademy</span><span class="p">)</span>
 </code></pre>
 <p>It worked locally and I ran the same through the production Rails console.  An example of me playing fast and loose perhaps?  Would a more principled approach be to deploy a rake task, build an admin interface or even an API endpoint? CraftAcademy just graduated three students and it was trivial for me to do through the Rails console, and make the system display the students&rsquo; Premium status correctly.  I thought it was important to get this set, since otherwise they would have the &ldquo;Sponsor for Premium&rdquo; button.  Not that anyone was likely to start throwing money at them, but good to have the database in the correct state.  As the number of CA graduates increases, we&rsquo;ll want to automate this, but right now we&rsquo;re cautiously expanding the domain model.  Michael and I identified a set of other issues:</p>
@@ -160,7 +160,7 @@
 
 <p>I wondered if we might be able to pull together a more RESTful system by replacing our current Event entity with an EventCollection.  One of the Mentive students I was working with had used that aggregate approach successfully, and discussions about the AsyncVoter REST API made me think I&rsquo;d like to be rebuilding parts of the WSO system more cleanly.  But how to do it one step at a time?  Perhaps introduce a placeholder term like <code>AtomicEvent</code> to represent single meetups; get a clean REST API around that and then finally migrate it to <code>Event</code> once the original <code>Event</code> entity was removed?  Sounds like it could be very confusing.  And now suddenly this morning the HOA button is working again, so suddenly we can leave that part of the system and focus on payments again?</p>
 
-<p>Or maybe take a detour to AsyncVoter to make sure we get some sort of tracer bullet up?  Again it all comes back to how can be make this charity enterprise sustainable &hellip;</p>
+<p>Or maybe take a detour to AsyncVoter to make sure we get some sort of tracer bullet up?  Again it all comes back to how can we make this charity enterprise sustainable &hellip;</p>
 
 <h3>Related Videos:</h3>
 
