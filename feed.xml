@@ -5,16 +5,170 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-10T00:00:00+00:00</updated>
+  <updated>2016-11-11T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Naming and Cucumber</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/11/naming-and-cucumber/"/>
+    <id>http://blog.url.com/2016/11/11/naming-and-cucumber/</id>
+    <published>2016-11-11T00:00:00+00:00</published>
+    <updated>2016-11-11T10:03:39+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;In a series of disjointed solo sessions I managed to fix the bug for manual hangout edits making the following event live.  Michael and I had wrapped this bug in a cucumber scenario the day previously.  The manual hangout edit interface looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="manual hangout edit interface" src="https://www.dropbox.com/s/4xbad7ddniesyo7/Screenshot%202016-10-18%2017.00.20.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Originally the manual edit had not worked at all on repeating events with lots of history; which had been a big problem when the automatic updates failed for two weeks while the Google Hangout API was in flux.  We&amp;rsquo;d got manual updates working on recurring events by adjusting the way that an event searched for recent hangouts, replacing a sort and filter by &lt;code&gt;created_at&lt;/code&gt; with one on &lt;code&gt;updated_a&lt;/code&gt;t.  The problem had been that with a long series of event instances, and manual updates clobbering old ones started by the same user, the created&lt;em&gt;at date would lag very far behind the updated&lt;/em&gt;at date.  The recent_hangouts method became:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;recent_hangouts&lt;/span&gt;
+    &lt;span class="n"&gt;event_instances&lt;/span&gt;
+      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'updated_at BETWEEN ? AND ?'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;days&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;beginning_of_day&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;end_of_day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;updated_at: :desc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;rsquo;d also added a flag on the EventInstance model to indicate whether an EventInstance had been manually set.  This manual setting meant that the following EventInstances would also report live.  I considered briefly switching the boolean flag to a date time, but demurred and adjusted the way we create the unique id for manually edited hangout event instances.  I wanted to ensure that every manual edit was recorded as a separate EventInstance instance.  I added a SecureRandom unique id to the EventInstancesHelper method that is used during a manual update:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'securerandom'&lt;/span&gt;
+&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;EventInstancesHelper&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_event_instance_id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;project_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="si"&gt;}#{&lt;/span&gt;&lt;span class="n"&gt;project_id&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="s1"&gt;'00'&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;-&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;SecureRandom&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;uuid&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;By itself this didn&amp;rsquo;t fix the problem, so I also adjusted the &lt;code&gt;recent_hangouts&lt;/code&gt; method further so that it only looked in a time window starting from the same time on the previous day, plus the duration of the event:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;recent_hangouts&lt;/span&gt;
+    &lt;span class="n"&gt;event_instances&lt;/span&gt;
+      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'updated_at BETWEEN ? AND ?'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;days&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;end_of_day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;updated_at: :desc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The cukes went green and I had to fix up a few specs for EventInstanceHelper and Event class.  I was&amp;rsquo;t sure if the fully unique id was actually necessary, but when I saw the specs for EventInstanceHelper that were saying a unique id should be returned, when it patently wasn&amp;rsquo;t doing so, I felt I really wanted to stick with the change.  Arguably it could be the subject of a completely separate pull request, driven by a different cucumber scenario.  I&amp;rsquo;ve been being harsh with the AsyncVoter folks to keep out any functionality not related to the feature being worked on.  It&amp;rsquo;s easy to give myself slack on the other side; but in my defence this is a bug fix, and I&amp;rsquo;m trying to make sure we aren&amp;rsquo;t losing valuable data about user activity.  I did try to get the feature to wrap this.  Actually I did a major refactoring of the cukes here, which relates to a &lt;a href="https://github.com/AgileVentures/LocalSupport/pull/391"&gt;PR from John on LocalSupport&lt;/a&gt; where he&amp;rsquo;s using a lot of nested steps, which I&amp;rsquo;m not such a big fan of.&lt;/p&gt;
+
+&lt;p&gt;On WSO the editing a hangout url on a repeating event cuke scenario had gotten really long  :&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Edit Hangout URL on repeating event and ensure event stays live
+    &lt;span class="err"&gt;Given the date is "2014-02-06 07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt;
+    &lt;span class="c"&gt;# manually setting the hangout link&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I open the Edit URL controls
+    &lt;span class="err"&gt;And I fill in "hangout_url" with "https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&amp;amp;authuser=0"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I click on the Save button
+    &lt;span class="c"&gt;# checking that event shows live and that link&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
+    &lt;span class="err"&gt;Then I should see link "Join now" with "https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&amp;amp;authuser=0"&lt;/span&gt;
+    &lt;span class="c"&gt;# checking that the event stays live for the specified duration (as no pings coming from hangout plugin)&lt;/span&gt;
+    &lt;span class="err"&gt;And I jump to one minute before the end of the event at "2014-02-06 07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;14&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
+    &lt;span class="err"&gt;Then I should see link "Join now" with "https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&amp;amp;authuser=0"&lt;/span&gt;
+    &lt;span class="c"&gt;# Check that the event the following day is not automatically taken live&lt;/span&gt;
+    &lt;span class="err"&gt;And I jump to one minute before the end of the event at "2014-02-07 07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;01&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt; &lt;span class="c"&gt;# actually a week later&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"This event is now live!"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The previous day with Michael I&amp;rsquo;d inserted comments about what each section was doing.  I resolved to turn those into steps.  The quick and dirty path would be to take each set of steps and turn them into nested steps.  But the approach I preferis to make new steps that are collections of ruby statements to avoid multiple levels of redirection.  The steps I generated yesterday were:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;And&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I manually set a hangout link for event "([^"]*)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="vi"&gt;@hangout_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&amp;amp;authuser=0'&lt;/span&gt;
+  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute_script&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;  &lt;span class="sx"&gt;%q{$('li[role="edit_hoa_link"] &amp;gt; a').trigger('click')}&lt;/span&gt;  &lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'hangout_url'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:with&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="vi"&gt;@hangout_url&lt;/span&gt;
+  &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:css&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sx"&gt;%q{input[id="hoa_link_save"]}&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;trigger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'click'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^"([^"]*)" shows live for that hangout link for the event duration$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Join now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;href: &lt;/span&gt;&lt;span class="vi"&gt;@hangout_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@jump_date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minutes&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minute&lt;/span&gt;
+  &lt;span class="no"&gt;Delorean&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;time_travel_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Join now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;href: &lt;/span&gt;&lt;span class="vi"&gt;@hangout_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;And&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^"([^"]*)" is not live the following day$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="no"&gt;Delorean&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;time_travel_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@jump_date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;not_to&lt;/span&gt; &lt;span class="n"&gt;have_content&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'This event is now live!'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which allowed that long convoluted scenario above to be boiled down to the following:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Edit Hangout URL on repeating event and ensure event stays live
+    &lt;span class="err"&gt;Given the date is "2014-02-06 07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I manually set a hangout link for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
+    &lt;span class="nf"&gt;Then&lt;/span&gt; &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt; shows live for that hangout link for the event duration
+    &lt;span class="nf"&gt;And&lt;/span&gt; &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt; is not live the following day
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Maybe I&amp;rsquo;m crazy, not re-using the steps, but my goal is to make it transparent for me in the future, and other developers, to get from the english description to get straight to the description at the ruby/rspec/capybara level.  What I find again and again in WSO and LS where the steps are deeply nested is that I get tripped up because the English descriptions are slightly misleading.  This is actually a facet of a more general problem for coding in general, that wherever an abstraction (e.g. cuke step, or method name) fails to accurately reflect what&amp;rsquo;s going on under the hood, you can easily be misled.  Of course it all comes back to humans.  What&amp;rsquo;s transparently clear for one person might not be for another.  But take a look at this background step from the same Cuke file:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="err"&gt;And the following event instances exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+ &lt;span class="err"&gt;...&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;table&lt;/span&gt; &lt;span class="err"&gt;of&lt;/span&gt; &lt;span class="err"&gt;dat&lt;/span&gt;&lt;span class="nf"&gt;a&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We&amp;rsquo;d created this to replace the original setup step that referred to hangouts (for which there was no corresponding domain model) and used rspec factories that were shared with the specs and did a fair amount of data massaging.  Having made the change we realised that to keep things working we would also need a complex participants data.  It was trivial to adjust our new background step to add that data, but now that was hidden at the level of the feature file so we adjusted as follows:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="err"&gt;And the following event instances (with default participants) exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+ &lt;span class="err"&gt;...&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;table&lt;/span&gt; &lt;span class="err"&gt;of&lt;/span&gt; &lt;span class="err"&gt;dat&lt;/span&gt;&lt;span class="nf"&gt;a&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Too much perhaps?  But the intention is to give someone else who wants to use that step (or method) heads up about what&amp;rsquo;s going on under the hood.  The cuke steps above are a bit long and need some DRYing out, but I think I&amp;rsquo;d rather have them DRYed out into other ruby methods, that are well named.  There&amp;rsquo;s perhaps almost too much room for nuance with the English descriptions of pure cucumber steps.  So for example the following:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^"([^"]*)" shows live for that hangout link for the event duration$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Join now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;href: &lt;/span&gt;&lt;span class="vi"&gt;@hangout_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@jump_date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minutes&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minute&lt;/span&gt;
+  &lt;span class="no"&gt;Delorean&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;time_travel_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Join now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;href: &lt;/span&gt;&lt;span class="vi"&gt;@hangout_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;might become&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;
+&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^"([^"]*)" shows live for that hangout link for the event duration$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="vi"&gt;@event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@jump_date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minutes&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minute&lt;/span&gt;
+  &lt;span class="n"&gt;check_event_live&lt;/span&gt;
+  &lt;span class="no"&gt;Delorean&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;time_travel_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;check_event_live&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check_event_live&lt;/span&gt;
+  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Join now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;href: &lt;/span&gt;&lt;span class="vi"&gt;@hangout_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Perhaps that&amp;rsquo;s no different to:&lt;/p&gt;
+
+&lt;p&gt;Then(/^&amp;ldquo;([^&amp;rdquo;]*)&amp;ldquo; shows live for that hangout link for the event duration$/) do |event&lt;em&gt;name|
+  @event = Event.find&lt;/em&gt;by&lt;em&gt;name(event&lt;/em&gt;name)
+  time = Time.parse(@jump&lt;em&gt;date) + event.duration.minutes - 1.minute
+  step &amp;lsquo;I check event is live &amp;rsquo;
+  Delorean.time&lt;/em&gt;travel&lt;em&gt;to(time)
+  check&lt;/em&gt;live(event)
+end&lt;/p&gt;
+
+&lt;p&gt;Then(/^I check event is live$/) do
+  visit event&lt;em&gt;path(@event)
+  expect(page).to have&lt;/em&gt;link(&amp;#39;Join now&amp;rsquo;, href: @hangout_url)
+end
+&amp;rdquo;`&lt;/p&gt;
+
+&lt;p&gt;which allows that nested step to be re-used in other cucumber scenarios, but the debugging support is not as good.  Maybe this just bike-shedding.  The critical thing is likely to be a constant general refining to a consistent domain model and methods/steps that are not too long and not too short and do a best effort to have a description that doesn&amp;rsquo;t leave too many surprised under the hood.&lt;/p&gt;
+
+&lt;p&gt;I made sure that the refactored cukes did actually break, which took a combination of adjusting the Event#recent&lt;em&gt;hangouts method back to use `created&lt;/em&gt;at` AND removing the secure random id from the EventsInstanceHelper, indicating that both were needed to get the desired behaviour at the user level; so I didn&amp;rsquo;t need to feel a total hypocrite for pushing on the AsyncVoter folks to remove all extraneous code :-)  That didn&amp;rsquo;t stop me waking up in the middle of the night thinking, &amp;ldquo;we don&amp;rsquo;t even need to search for recent&lt;em&gt;hangouts!&amp;rdquo; - we just grab the latest one reverse sorted by updated&lt;/em&gt;at and check if it&amp;rsquo;s live?  That recent_hangouts method is used nowhere else in the code base.  The method name makes no sense in terms of what we want really.  What we want to know is whether the most recently updated event instance is still live?  More refactoring awaits!&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=QMvJADMRpo0"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ntvRINA66UM"&gt;Solo on WebSiteOne&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=xM-QeSOiHqA"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Mixing and Matching Guidelines</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/10/mix-and-match/"/>
     <id>http://blog.url.com/2016/11/10/mix-and-match/</id>
     <published>2016-11-10T00:00:00+00:00</published>
-    <updated>2016-11-10T10:10:57+00:00</updated>
+    <updated>2016-11-11T10:17:35+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -24,7 +178,7 @@
 
 &lt;p&gt;In the meantime João had pushed changes and we had a slimmed down pull request.  I still wasn&amp;rsquo;t entirely sure about the mapping we had set up from &lt;code&gt;GET /stories?state=active&lt;/code&gt; to search for &lt;code&gt;size=0&lt;/code&gt; stories.  João was very keen on the state=active flag and seemed to be mollifying me by saying that &lt;code&gt;GET /stories?size=0&lt;/code&gt; would also work.  I investigated and found that it didn&amp;rsquo;t quite and that &lt;code&gt;GET /stories?state=voting&lt;/code&gt; or indeed any other state would return all the size 0 stories.&lt;/p&gt;
 
-&lt;p&gt;I pointed that out to João not sure if he was in a position to fix it up.  I started adjusting the code locally and made my own &lt;a href="https://github.com/AgileVentures/AsyncVoter/pull/57"&gt;pull request&lt;/a&gt;.  In parallel João made further updates.  Perhaps we should have been waiting, but he was commuting.  Maybe I should have just gone to lunch, but I was pleasantly surprised to make some good progress on my own branch.  In particular discovering a &lt;a href="http://jaketrent.com/post/run-single-mocha-test/"&gt;method to specify running a single test in a mocha suite&lt;/a&gt;, where you insert a &lt;code&gt;.only&lt;/code&gt; into the test you want to focus on:&lt;/p&gt;
+&lt;p&gt;I pointed that out to João not sure if he was in a position to fix it up.  I started adjusting the code locally and made my own &lt;a href="https://github.com/AgileVentures/AsyncVoter/pull/57"&gt;pull request&lt;/a&gt;.  In parallel João made further updates.  Perhaps we should have been pairing, but he was commuting.  Maybe I should have just gone to lunch, but I was pleasantly surprised to make some good progress on my own branch.  In particular discovering a &lt;a href="http://jaketrent.com/post/run-single-mocha-test/"&gt;method to specify running a single test in a mocha suite&lt;/a&gt;, where you insert a &lt;code&gt;.only&lt;/code&gt; into the test you want to focus on:&lt;/p&gt;
 &lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"found one active"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;done&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;becomes:&lt;/p&gt;
@@ -49,7 +203,7 @@
 
 &lt;p&gt;I wanted to do the right thing for the project, and also not offend João who had been putting in lots of great work.  All credit to him and the others who&amp;rsquo;ve got the Cucumber and Mocha set up all working so smoothly, along with a clean core of app code.  &lt;/p&gt;
 
-&lt;p&gt;I resolved to go with João&amp;rsquo;s PR but I make some tweaks.  I stuck with João&amp;rsquo;s preferred &lt;code&gt;state=active&lt;/code&gt; but pulled out the generic filtering code because it didn&amp;rsquo;t work, and wasn&amp;rsquo;t covered by the tests.  So the core logic in the model class is:&lt;/p&gt;
+&lt;p&gt;I resolved to go with João&amp;rsquo;s PR but I made some tweaks.  I stuck with João&amp;rsquo;s preferred &lt;code&gt;state=active&lt;/code&gt; but pulled out the generic filtering code because it didn&amp;rsquo;t work, and wasn&amp;rsquo;t covered by the tests.  So the core logic in the model class is:&lt;/p&gt;
 &lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="nx"&gt;schema&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;statics&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;findBy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;filterObject&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{};&lt;/span&gt;
   &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'state'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nx"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'state'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;'active'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -491,101 +645,6 @@
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=fDUd9N5iDTA"&gt;Solo on WebSiteOne part 1&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=hz_i4DagxkY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=iaRDd35qF_g"&gt;Solo on WebSiteOne part 2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Frustratingly Slow Debug Cycle</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/03/frustratingly-slow-debug-cycle/"/>
-    <id>http://blog.url.com/2016/11/03/frustratingly-slow-debug-cycle/</id>
-    <published>2016-11-03T00:00:00+00:00</published>
-    <updated>2016-11-04T09:49:12+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Michael had lots of great ideas about tracking people through the site today, but I wanted to quickly push out the &amp;ldquo;sponsor other users&amp;rdquo; feature.  I was following the logic from Monday, where dashing out a PayPal endpoint had opened up some payment streams.  I had one person waiting to use the sponsor others, and I was promising myself a phase of consolidation once that was done.  In fairly short order we stamped out some cucumber scenarios:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Allow Users to Sponsor other members
-  As a user
-  So that I can help someone else get premium services
-  I would like to be able to pay for their premium service
-
-  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nf"&gt;Given&lt;/span&gt; the following users exist
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;first_name&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;last_name&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;email&lt;/span&gt;                  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;github_profile_url&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;last_sign_in_ip&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Alice&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Jones&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;alice@btinternet.co.uk&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;http://github.com/AliceSky&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;127.0.0.1&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt;
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; User upgrades another user from free tier to premium
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I am logged in
-    &lt;span class="nf"&gt;And&lt;/span&gt; I visit Alice's profile page
-    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"Sponsor for Premium"&lt;/span&gt;
-    &lt;span class="nf"&gt;When&lt;/span&gt; I fill in appropriate card details for premium
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"you have sponsored Alice Jones as a Premium Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit Alice's profile page
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Premium Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Basic Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Sponsor for Premium"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; non logged in user upgrades another user from free tier to premium
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit Alice's profile page
-    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"Sponsor for Premium"&lt;/span&gt;
-    &lt;span class="nf"&gt;When&lt;/span&gt; I fill in appropriate card details for premium
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"you have sponsored Alice Jones as a Premium Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit Alice's profile page
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Premium Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Basic Member"&lt;/span&gt;
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"Sponsor for Premium"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"Upgrade to Premium"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which could be more declarative, but they were good enough for now.  We then stamped out some even messier code to get them green.  This was all me.  I was following my &amp;ldquo;get it green, THEN refactor&amp;rdquo; mantra of the previous week.  Just to show you how messy some things were, take a look at this view:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if @user.present? &lt;span class="err"&gt;&amp;amp;&amp;amp;&lt;/span&gt; current_user != @user %&amp;gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if @plan == 'premium' %&amp;gt;
-        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you have sponsored &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= @user.display_name %&amp;gt; as a Premium Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;You're seven day free trial has now started.  Your card will not be charged until seven days have passed.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% elsif @plan == 'premiummob'%&amp;gt;
-        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you have sponsored &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= @user.display_name %&amp;gt; as a Premium MOB Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium mob membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% elsif @plan == 'premiumf2f'%&amp;gt;
-        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you have sponsored &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= @user.display_name %&amp;gt; as a Premium F2F Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium f2f membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% else %&amp;gt;
-        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you have sponsored &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= @user.display_name %&amp;gt; as a Premium PLUS Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium plus membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
-&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% else %&amp;gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% if @plan == 'premium' %&amp;gt;
-        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you're now an AgileVentures Premium Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;You're seven day free trial has now started.  Your card will not be charged until seven days have passed.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% elsif @plan == 'premiummob'%&amp;gt;
-        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you're now an AgileVentures Premium MOB Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium mob membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% elsif @plan == 'premiumf2f'%&amp;gt;
-        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you're now an AgileVentures Premium F2F Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium f2f membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% else %&amp;gt;
-        &lt;span class="nt"&gt;&amp;lt;h2&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;'payment_complete'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Thanks, you're now an AgileVentures Premium PLUS Member!&lt;span class="nt"&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;An AgileVentures mentor will be in touch shortly to help you receive all of your premium plus membership benefits.&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
-&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Ugh, business logic in the view, lots to DRY out, and now I look at it again, some mistakes in wording.  However, all those changes would be fairly easy to make.  The danger is that we don&amp;rsquo;t get to them.  Michael and I went to the &amp;ldquo;Kent Beck&amp;rdquo; scrum and changed roles.  The cukes that had been green for me were now failing for Michael, failing on CI, and failing when I pulled them back onto my machine.&lt;/p&gt;
-
-&lt;p&gt;It seemed the full set of Premium related features was failing when run in full batch mode (Stripe iFrame not appearing), but would work when run individually, or from a set in their own folder (i.e. &lt;code&gt;cucumber features/premium/*&lt;/code&gt;).  Michael was then also getting individual failures related to a re-used Stripe token.  We were in a bit of a mess and burnt the best part of an hour investigating.  More importantly we weren&amp;rsquo;t doing any refactoring of the messy app code!&lt;/p&gt;
-
-&lt;p&gt;The functionality was working when we run the site manually.  So frustrating.  Trying to push out something to receive some money, that works manually, but the feature tests don&amp;rsquo;t pass due to some odd bug, which turns into a massive time sink.  I wanted to start trying the &lt;a href="https://github.com/rebelidealist/stripe-ruby-mock"&gt;stripe-ruby-mock&lt;/a&gt; which the CraftAcademy folks had had some success with.  It was not necessarily a snap fix, but I was starting to really hate all the many fixture files that came with sandboxing complex network interactions.  Occasional cache leaks would mean that developers would suddenly find a load of extra files on their file system.  Pull requests for new features would have 112 instead of 12 changed files.  Maybe the PR display on GitHub could be adapted to handle that, but I was really starting to feel this was all more trouble than it was worth.&lt;/p&gt;
-
-&lt;p&gt;Michael was keen to understand these errors and these tests.  We got down into the PuffingBilly config where I remembered there was this additional step to ignore params on a unique URL that Stripe interactions generated.  I got the tests green again, but then they still failed in batch.  Also, Stripe had told us that they were happy with a load on their test servers that was &amp;ldquo;within reason&amp;rdquo;.  So this morning I tried taking the VCR and PuffingBilly caches off the tests, which would make our tests sensitive to network failures, just to see if that could get things passing in batch; but that still fails.  The test needs JavaScript and I think we have puffing billy hardwired in to all JS tests at the moment.  I could remove that and maybe I could get all the tests passing, but then again &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;One of the biggest issues here is the slow debug cycle.  If the failures only occur in full batch then we have to run the entire cucumber suite, which takes ten minutes.  That might not seem like a lot, but it burns up time.  I&amp;rsquo;ve always seen that as a real red flag.  Being stuck with a slow debug cycle is asking for trouble.  Do anything you can to reduce the amount of time before you get feedback on whether a change you make is working or not!  I think the next thing to try is to create a @no-billy tag to opt out these scenarios from headless browser javascript caching to see if that will pass.  Other options include the stripe-ruby-mock gem, or just not having tests on the payment portions, which I&amp;rsquo;ve heard some people advocate.  Fingers crossed for a less frustrating session today &amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=boCPUJ3sdlE"&gt;Pairing on WebSiteOne, part 1&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=20ZeJ9FcOxA"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=eAdPTF5A5O8"&gt;Pairing on WebSiteOne part 2&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
