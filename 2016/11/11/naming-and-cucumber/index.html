@@ -82,35 +82,36 @@
       <div class="col-lg-8 text-left">
         <h2 class='title'><a href="/2016/11/11/naming-and-cucumber/">Naming and Cucumber</a></h2>
         <h5 class='date'>11 Nov 2016</h5>
-    <p>In a series of disjointed solo sessions I managed to fix the bug for manual hangout edits making the following event live.  Michael and I had wrapped this bug in a cucumber scenario the day previously.  The manual hangout edit interface looks like this:</p>
+    <p>In a series of disjointed solo sessions I managed to fix the bug whereby manual hangout edits were making subsequent events live.  Michael and I had wrapped this bug in a cucumber scenario the day previously.  The manual hangout edit interface looks like this:</p>
 
 <p><img alt="manual hangout edit interface" src="https://www.dropbox.com/s/4xbad7ddniesyo7/Screenshot%202016-10-18%2017.00.20.png?dl=1" /></p>
 
-<p>Originally the manual edit had not worked at all on repeating events with lots of history; which had been a big problem when the automatic updates failed for two weeks while the Google Hangout API was in flux.  We&rsquo;d got manual updates working on recurring events by adjusting the way that an event searched for recent hangouts, replacing a sort and filter by <code>created_at</code> with one on <code>updated_a</code>t.  The problem had been that with a long series of event instances, and manual updates clobbering old ones started by the same user, the created<em>at date would lag very far behind the updated</em>at date.  The recent_hangouts method became:</p>
+<p>Originally the manual edit had not worked at all on repeating events with lots of history; which had been a big problem when the automatic updates failed for two weeks while the Google Hangout API was in flux.  We&rsquo;d got manual updates working on recurring events by adjusting the way that an event searched for recent hangouts, replacing a sort and filter on <code>created_at</code> with one on <code>updated_at</code>.  The problem had been that with a long series of event instances, manual updates were clobbering old ones started by the same user, and so the <code>created_at</code> date would lag very far behind the <code>updated_at</code> date.  The recent_hangouts method became:</p>
 <pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">recent_hangouts</span>
     <span class="n">event_instances</span>
       <span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="s1">'updated_at BETWEEN ? AND ?'</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="nf">days</span><span class="p">.</span><span class="nf">ago</span><span class="p">.</span><span class="nf">beginning_of_day</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">end_of_day</span><span class="p">)</span>
       <span class="p">.</span><span class="nf">order</span><span class="p">(</span><span class="ss">updated_at: :desc</span><span class="p">)</span>
   <span class="k">end</span>
 </code></pre>
-<p>I&rsquo;d also added a flag on the EventInstance model to indicate whether an EventInstance had been manually set.  This manual setting meant that the following EventInstances would also report live.  I considered briefly switching the boolean flag to a date time, but demurred and adjusted the way we create the unique id for manually edited hangout event instances.  I wanted to ensure that every manual edit was recorded as a separate EventInstance instance.  I added a SecureRandom unique id to the EventInstancesHelper method that is used during a manual update:</p>
+<p>I&rsquo;d also added a flag on the EventInstance model to indicate whether an EventInstance had been manually set.  This manual setting meant that subsequent Events would also report themselves live, as they were all sharing a single EventInstance.  I considered briefly switching the boolean flag to a datetime, but demurred and adjusted the way we create the unique id for manually edited hangout EventInstances.  I wanted to ensure that every manual edit was recorded as a separate EventInstance instance!  I added a SecureRandom unique id to the EventInstancesHelper method that gets used during a manual update:</p>
 <pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'securerandom'</span>
+
 <span class="k">module</span> <span class="nn">EventInstancesHelper</span>
   <span class="k">def</span> <span class="nf">generate_event_instance_id</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">project_id</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">)</span>
     <span class="s2">"</span><span class="si">#{</span><span class="n">user</span><span class="p">.</span><span class="nf">id</span><span class="si">}#{</span><span class="n">project_id</span> <span class="o">||</span> <span class="s1">'00'</span><span class="si">}</span><span class="s2">-</span><span class="si">#{</span><span class="no">SecureRandom</span><span class="p">.</span><span class="nf">uuid</span><span class="si">}</span><span class="s2">"</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
-<p>By itself this didn&rsquo;t fix the problem, so I also adjusted the <code>recent_hangouts</code> method further so that it only looked in a time window starting from the same time on the previous day, plus the duration of the event:</p>
+<p>By itself this didn&rsquo;t fix the problem, so I also adjusted the <code>recent_hangouts</code> method further such that it only looked in a time window starting from the same time on the previous day, plus the duration of the event:</p>
 <pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">recent_hangouts</span>
     <span class="n">event_instances</span>
       <span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="s1">'updated_at BETWEEN ? AND ?'</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="nf">days</span><span class="p">.</span><span class="nf">ago</span> <span class="o">+</span> <span class="n">duration</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">end_of_day</span><span class="p">)</span>
       <span class="p">.</span><span class="nf">order</span><span class="p">(</span><span class="ss">updated_at: :desc</span><span class="p">)</span>
   <span class="k">end</span>
 </code></pre>
-<p>The cukes went green and I had to fix up a few specs for EventInstanceHelper and Event class.  I was&rsquo;t sure if the fully unique id was actually necessary, but when I saw the specs for EventInstanceHelper that were saying a unique id should be returned, when it patently wasn&rsquo;t doing so, I felt I really wanted to stick with the change.  Arguably it could be the subject of a completely separate pull request, driven by a different cucumber scenario.  I&rsquo;ve been being harsh with the AsyncVoter folks to keep out any functionality not related to the feature being worked on.  It&rsquo;s easy to give myself slack on the other side; but in my defence this is a bug fix, and I&rsquo;m trying to make sure we aren&rsquo;t losing valuable data about user activity.  I did try to get the feature to wrap this.  Actually I did a major refactoring of the cukes here, which relates to a <a href="https://github.com/AgileVentures/LocalSupport/pull/391">PR from John on LocalSupport</a> where he&rsquo;s using a lot of nested steps, which I&rsquo;m not such a big fan of.</p>
+<p>The cukes went green and I had to fix up a few specs for the EventInstanceHelper and the Event class.  I was&rsquo;t sure if the fully unique id was actually necessary, but when I saw the specs for EventInstanceHelper that were saying a unique id should be returned, I felt I really wanted to stick with the change.  Arguably it could be the subject of a completely separate pull request, driven by a different cucumber scenario.  I&rsquo;ve been being harsh with the AsyncVoter folks to keep out any functionality not related to the feature being worked on.  It&rsquo;s easy to give myself slack when I&rsquo;m wo on the other side of the barrier; but in my defence this is a bug fix, and I&rsquo;m trying to make sure we aren&rsquo;t losing valuable data about user activity.  I did try to get the feature to wrap this with limited success.  In the process I did do major refactoring of the cukes, which relates to a <a href="https://github.com/AgileVentures/LocalSupport/pull/391">PR from John on LocalSupport</a> where he&rsquo;s using a lot of nested steps, which I&rsquo;m not such a big fan of.</p>
 
-<p>On WSO the editing a hangout url on a repeating event cuke scenario had gotten really long  :</p>
+<p>On WSO the editing a hangout url on a repeating event cuke scenario had gotten really long:</p>
 <pre class="highlight gherkin"><code>  <span class="kn">Scenario</span><span class="p">:</span> Edit Hangout URL on repeating event and ensure event stays live
     <span class="err">Given the date is "2014-02-06 07</span><span class="p">:</span><span class="err">00</span><span class="p">:</span><span class="err">00"</span>
     <span class="c"># manually setting the hangout link</span>
@@ -130,12 +131,12 @@
     <span class="nf">And</span> I navigate to the show page for event <span class="s">"Repeat Scrum"</span>
     <span class="nf">Then</span> I should not see <span class="s">"This event is now live!"</span>
 </code></pre>
-<p>The previous day with Michael I&rsquo;d inserted comments about what each section was doing.  I resolved to turn those into steps.  The quick and dirty path would be to take each set of steps and turn them into nested steps.  But the approach I preferis to make new steps that are collections of ruby statements to avoid multiple levels of redirection.  The steps I generated yesterday were:</p>
+<p>The previous day with Michael I&rsquo;d inserted comments about what each section was doing.  I resolved to turn those into steps.  The quick and dirty path would be to take each set of steps and turn them into nested steps.  But the approach I prefer is to make new steps that are collections of ruby statements to avoid multiple levels of redirection.  The steps I generated yesterday were:</p>
 <pre class="highlight ruby"><code><span class="no">And</span><span class="p">(</span><span class="sr">/^I manually set a hangout link for event "([^"]*)"$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
   <span class="vi">@hangout_url</span> <span class="o">=</span> <span class="s1">'https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&amp;authuser=0'</span>
   <span class="n">visit</span> <span class="n">event_path</span><span class="p">(</span><span class="no">Event</span><span class="p">.</span><span class="nf">find_by_name</span><span class="p">(</span><span class="nb">name</span><span class="p">))</span>
   <span class="n">page</span><span class="p">.</span><span class="nf">execute_script</span><span class="p">(</span>  <span class="sx">%q{$('li[role="edit_hoa_link"] &gt; a').trigger('click')}</span>  <span class="p">)</span>
-  <span class="n">fill_in</span> <span class="s1">'hangout_url'</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="vi">@hangout_url</span>
+  <span class="n">fill_in</span> <span class="s1">'hangout_url'</span><span class="p">,</span> <span class="ss">with: </span><span class="vi">@hangout_url</span>
   <span class="n">page</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="ss">:css</span><span class="p">,</span> <span class="sx">%q{input[id="hoa_link_save"]}</span><span class="p">).</span><span class="nf">trigger</span><span class="p">(</span><span class="s1">'click'</span><span class="p">)</span>
 <span class="k">end</span>
 
@@ -164,15 +165,15 @@
     <span class="nf">Then</span> <span class="s">"Repeat Scrum"</span> shows live for that hangout link for the event duration
     <span class="nf">And</span> <span class="s">"Repeat Scrum"</span> is not live the following day
 </code></pre>
-<p>Maybe I&rsquo;m crazy, not re-using the steps, but my goal is to make it transparent for me in the future, and other developers, to get from the english description to get straight to the description at the ruby/rspec/capybara level.  What I find again and again in WSO and LS where the steps are deeply nested is that I get tripped up because the English descriptions are slightly misleading.  This is actually a facet of a more general problem for coding in general, that wherever an abstraction (e.g. cuke step, or method name) fails to accurately reflect what&rsquo;s going on under the hood, you can easily be misled.  Of course it all comes back to humans.  What&rsquo;s transparently clear for one person might not be for another.  But take a look at this background step from the same Cuke file:</p>
+<p>Maybe I&rsquo;m crazy, not re-using the steps, but my goal is to make it transparent for me in the future, and other developers, to get from the English description straight to the description at the Ruby/RSpec/Capybara level.  What I find again and again in WSO and LS where the steps are deeply nested is that I get tripped up because the English descriptions can be slightly misleading.  This is actually a facet of a more general problem for coding, in that wherever an abstraction (e.g. cuke step, or method name, or API interface) fails to accurately reflect what&rsquo;s going on under the hood, you can easily be misled.  Of course it all comes back to humans.  What&rsquo;s transparently clear for one person might not be for another.  But take a look at this background step from the same Cuke file:</p>
 <pre class="highlight gherkin"><code><span class="err">And the following event instances exist</span><span class="p">:</span>
  <span class="err">...</span> <span class="err">&lt;table</span> <span class="err">of</span> <span class="err">dat</span><span class="nf">a</span>&gt;
 </code></pre>
-<p>We&rsquo;d created this to replace the original setup step that referred to hangouts (for which there was no corresponding domain model) and used rspec factories that were shared with the specs and did a fair amount of data massaging.  Having made the change we realised that to keep things working we would also need a complex participants data.  It was trivial to adjust our new background step to add that data, but now that was hidden at the level of the feature file so we adjusted as follows:</p>
+<p>We&rsquo;d created this to replace the original setup step that referred to hangouts (for which there was no corresponding domain model). The original setup step had also scarily used RSpec factories that were shared with the specs and did a fair amount of data massaging in the process.  Having made the change we realised that to keep things working we would also need a chunk of complex participant data.  It was trivial to adjust our new background step to add that data, but now that was hidden from someone working at the level of the feature file so we adjusted our step name as follows:</p>
 <pre class="highlight gherkin"><code><span class="err">And the following event instances (with default participants) exist</span><span class="p">:</span>
  <span class="err">...</span> <span class="err">&lt;table</span> <span class="err">of</span> <span class="err">dat</span><span class="nf">a</span>&gt;
 </code></pre>
-<p>Too much perhaps?  But the intention is to give someone else who wants to use that step (or method) heads up about what&rsquo;s going on under the hood.  The cuke steps above are a bit long and need some DRYing out, but I think I&rsquo;d rather have them DRYed out into other ruby methods, that are well named.  There&rsquo;s perhaps almost too much room for nuance with the English descriptions of pure cucumber steps.  So for example the following:</p>
+<p>Too much perhaps?  But the intention is to give someone else who wants to use that step (or method) a heads up about what&rsquo;s going on under the hood.  The ruby contents of the cuke steps above are a bit long and need some DRYing out, but I think I&rsquo;d rather have them DRYed out into other ruby methods, that are well named.  There&rsquo;s perhaps almost too much room for nuance with the English descriptions of pure Cucumber steps.  So for example the following:</p>
 <pre class="highlight ruby"><code><span class="no">Then</span><span class="p">(</span><span class="sr">/^"([^"]*)" shows live for that hangout link for the event duration$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">event_name</span><span class="o">|</span>
   <span class="n">event</span> <span class="o">=</span> <span class="no">Event</span><span class="p">.</span><span class="nf">find_by_name</span><span class="p">(</span><span class="n">event_name</span><span class="p">)</span>
   <span class="n">visit</span> <span class="n">event_path</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -199,24 +200,22 @@
 <span class="k">end</span>
 </code></pre>
 <p>Perhaps that&rsquo;s no different to:</p>
-
-<p>Then(/^&ldquo;([^&rdquo;]*)&ldquo; shows live for that hangout link for the event duration$/) do |event<em>name|
-  @event = Event.find</em>by<em>name(event</em>name)
-  time = Time.parse(@jump<em>date) + event.duration.minutes - 1.minute
-  step &lsquo;I check event is live &rsquo;
-  Delorean.time</em>travel<em>to(time)
-  check</em>live(event)
-end</p>
-
-<p>Then(/^I check event is live$/) do
-  visit event<em>path(@event)
-  expect(page).to have</em>link(&#39;Join now&rsquo;, href: @hangout_url)
+<pre class="highlight plaintext"><code>Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
+  @event = Event.find_by_name(event_name)
+  time = Time.parse(@jump_date) + event.duration.minutes - 1.minute
+  step 'I check event is live '
+  Delorean.time_travel_to(time)
+  check_live(event)
 end
-&rdquo;`</p>
 
-<p>which allows that nested step to be re-used in other cucumber scenarios, but the debugging support is not as good.  Maybe this just bike-shedding.  The critical thing is likely to be a constant general refining to a consistent domain model and methods/steps that are not too long and not too short and do a best effort to have a description that doesn&rsquo;t leave too many surprised under the hood.</p>
+Then(/^I check event is live$/) do
+  visit event_path(@event)
+  expect(page).to have_link('Join now', href: @hangout_url)
+end
+</code></pre>
+<p>which allows that nested step to be re-used in other cucumber scenarios, but the debugging support for nested steps is not as good in my experience.  Maybe this is just bike-shedding (i.e. focusing on trivialities).  The big-picture critical thing seems likely to be a constant general refining to a consistent domain model and methods/steps that are not too long and not too short and do a best effort to have a description that doesn&rsquo;t leave too many surprises under the hood.</p>
 
-<p>I made sure that the refactored cukes did actually break, which took a combination of adjusting the Event#recent<em>hangouts method back to use `created</em>at` AND removing the secure random id from the EventsInstanceHelper, indicating that both were needed to get the desired behaviour at the user level; so I didn&rsquo;t need to feel a total hypocrite for pushing on the AsyncVoter folks to remove all extraneous code :-)  That didn&rsquo;t stop me waking up in the middle of the night thinking, &ldquo;we don&rsquo;t even need to search for recent<em>hangouts!&rdquo; - we just grab the latest one reverse sorted by updated</em>at and check if it&rsquo;s live?  That recent_hangouts method is used nowhere else in the code base.  The method name makes no sense in terms of what we want really.  What we want to know is whether the most recently updated event instance is still live?  More refactoring awaits!</p>
+<p>I made sure that the refactored cukes did actually break (when the app functionality was removed), which took a combination of adjusting the Event#recent<em>hangouts method back to use `created</em>at<code>AND removing the secure random id from the EventsInstanceHelper, indicating that both were needed to get the desired behaviour at the user level; so I didn&#39;t need to feel a total hypocrite for pushing on the AsyncVoter folks to remove all extraneous code :-)  That didn&#39;t stop me waking up in the middle of the night thinking, &quot;we don&#39;t even need to search for recent_hangouts!&quot; - we just grab the latest one reverse sorted by updated_at and check if it&#39;s live, can&#39;t we?  That</code>recent_hangouts` method is used nowhere else in the code base.  The method name makes no sense in terms of what we want really.  What we want to know is whether the most recently updated event instance is still live, isn&rsquo;t it?  More refactoring awaits!</p>
 
 <h3>Related Videos</h3>
 

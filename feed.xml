@@ -5,48 +5,75 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-11T00:00:00+00:00</updated>
+  <updated>2016-11-14T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Banking Disruption</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/14/banking-disruption/"/>
+    <id>http://blog.url.com/2016/11/14/banking-disruption/</id>
+    <published>2016-11-14T00:00:00+00:00</published>
+    <updated>2016-11-14T09:37:10+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;My main achievement on Friday was opening a bank account for the AgileVentures charity.  This has been a long time coming.  I originally started with Lloyds bank and spent an hour or so on the phone explaining the whole concept of &amp;ldquo;in context learning on charity IT projects&amp;rdquo; to them, before receiving a lot of self-contradictory paperwork that they didn&amp;rsquo;t respond to my email queries about.  The need for a bank account has become more pressing as we start to have a non-trivial Premium payments coming through Stripe.  It&amp;rsquo;s still a small trickle, but with our new sponsor drie, we&amp;rsquo;re on the road to becoming sustainable early next year if we can sustain our current rate of growth.  That might make it sound like we can just wait for that growth to happen, but every little bit of growth requires a lot of hard graft on my part, as well as lots of generous donations of time and effort from our AV mentors.  I also have to make sure that in the process of bringing in new sponsors and premium members that we keep supporting our existing sponsors and premium members.  Simplify, Eliminate, Delegate, Automate!&lt;/p&gt;
+
+&lt;p&gt;Having given up on making progress with Lloyds, I heard that the new UK bank &amp;ldquo;Metro&amp;rdquo; had a reasonable charity account, and that some other local charities had got set up with them before official UK charity status approval (which we are still waiting for - no updates since July &amp;hellip;), and seeing their neat, open-plan branch in my local town centre, and their modern looking website I thought I&amp;rsquo;d give them a try.  I&amp;rsquo;ve also received advice that the Coop bank and Triodos are good options.  Metro had an email link for charities and I emailed them and got an email bank within a day.  They were responsive by email which was a big plus.  I did notice that I was emailing a specific person at Metro bank rather than a &lt;code&gt;charities@metrobank.co.uk&lt;/code&gt;, but I pressed on.  We needed to provide the charity constitution, signed minutes of a trustees meeting agreeing to open the bank account, various ID for the bank account signatories, and fill out an application form.  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/8f0kxo94ckkaz3d/Screenshot%202016-11-14%2009.25.52.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Over the course of several weeks we assembled all the different components and sent them off to my contact at the head office.  We had a good back and forth in email with my contact checking electronic copies of the documents before I mailed in signed versions.  It seemed to be going well.  I got the last package of documents together and sent of, paying extra for a verified delivery.  Then nothing.  No communication.  My emails unanswered.  My contact also had a cellphone number on their email signature.  I texted, I left messages, nothing.  After a few days I started calling the head office and trying to get them to contact me.  It turned out that my contact was on annual leave.  Fair enough, although it would have been nice to be getting annual leave notification messages against the emails I was sending.  I was starting to get frustrated.&lt;/p&gt;
+
+&lt;p&gt;It turns out that another person was trying to contact me via email, but they had my email address mis-spelt from the operators I&amp;rsquo;d been speaking to when I was calling the bank.  Eventually we got that figured out, but I didn&amp;rsquo;t manage to make a connection with this person.  They kept on asking me to send in additional paperwork that I believed I had already sent.  I held off as presumably my original contact would soon be back from annual leave and could sort it out.  It stretched out and it seemed that annual leave had become leaving.  I finally managed to speak to the new contact in real time on the phone and established that we had sent in all the paperwork, but that we would have to go into the bank to confirm our identities.&lt;/p&gt;
+
+&lt;p&gt;My plan to save time by doing this all online had backfired.  I&amp;rsquo;d been trying to prefer email but that had caused delays.  Finally on Friday Rachel and I went into the bank and got our identities confirmed, and started working through the other paperwork.  Ultimately it took over 2 hours, first because the bank was saying the accounts they provided couldn&amp;rsquo;t support the detailed finance policy we&amp;rsquo;d put in the minutes.  I was fuming.  I called up the other trustees and on speaker phone allowed the bank manager to hear their approval for an account without detailed support for the finance policy which we would be implementing ourselves rather than relying on bank restrictions.&lt;/p&gt;
+
+&lt;p&gt;That done the bank manager had to re-type the entire PDF application form that I had filled out and sent in.  I was hoping that a recently setup modern bank would be just the sort to avoid this sort of ridiculousness.  Rachel and I caught up and I supported the AV slack channels in the background as we ground through the process.  We were just about to give up and leave when it was all done.  We got bank cards, and I got the online banking hooked up, and the all important sort code and account number that would allow me to issue new invoices and sort out the AgileVentures finances.&lt;/p&gt;
+
+&lt;p&gt;I still like what MetroBank is trying to do.  I think the UK banking industry is ripe for disruption.  Maybe it being difficult to open an account is in some sense a feature.  Convoluted and unnecessary steps discourage all those but the truly serious.  Maybe one day the decentralised cryptocurrencies will replace all this, but I&amp;rsquo;m not holding my breath &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Naming and Cucumber</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/11/naming-and-cucumber/"/>
     <id>http://blog.url.com/2016/11/11/naming-and-cucumber/</id>
     <published>2016-11-11T00:00:00+00:00</published>
-    <updated>2016-11-11T10:03:39+00:00</updated>
+    <updated>2016-11-14T10:06:08+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;In a series of disjointed solo sessions I managed to fix the bug for manual hangout edits making the following event live.  Michael and I had wrapped this bug in a cucumber scenario the day previously.  The manual hangout edit interface looks like this:&lt;/p&gt;
+    <content type="html">&lt;p&gt;In a series of disjointed solo sessions I managed to fix the bug whereby manual hangout edits were making subsequent events live.  Michael and I had wrapped this bug in a cucumber scenario the day previously.  The manual hangout edit interface looks like this:&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="manual hangout edit interface" src="https://www.dropbox.com/s/4xbad7ddniesyo7/Screenshot%202016-10-18%2017.00.20.png?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;Originally the manual edit had not worked at all on repeating events with lots of history; which had been a big problem when the automatic updates failed for two weeks while the Google Hangout API was in flux.  We&amp;rsquo;d got manual updates working on recurring events by adjusting the way that an event searched for recent hangouts, replacing a sort and filter by &lt;code&gt;created_at&lt;/code&gt; with one on &lt;code&gt;updated_a&lt;/code&gt;t.  The problem had been that with a long series of event instances, and manual updates clobbering old ones started by the same user, the created&lt;em&gt;at date would lag very far behind the updated&lt;/em&gt;at date.  The recent_hangouts method became:&lt;/p&gt;
+&lt;p&gt;Originally the manual edit had not worked at all on repeating events with lots of history; which had been a big problem when the automatic updates failed for two weeks while the Google Hangout API was in flux.  We&amp;rsquo;d got manual updates working on recurring events by adjusting the way that an event searched for recent hangouts, replacing a sort and filter on &lt;code&gt;created_at&lt;/code&gt; with one on &lt;code&gt;updated_at&lt;/code&gt;.  The problem had been that with a long series of event instances, manual updates were clobbering old ones started by the same user, and so the &lt;code&gt;created_at&lt;/code&gt; date would lag very far behind the &lt;code&gt;updated_at&lt;/code&gt; date.  The recent_hangouts method became:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;recent_hangouts&lt;/span&gt;
     &lt;span class="n"&gt;event_instances&lt;/span&gt;
       &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'updated_at BETWEEN ? AND ?'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;days&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;beginning_of_day&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;end_of_day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
       &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;updated_at: :desc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I&amp;rsquo;d also added a flag on the EventInstance model to indicate whether an EventInstance had been manually set.  This manual setting meant that the following EventInstances would also report live.  I considered briefly switching the boolean flag to a date time, but demurred and adjusted the way we create the unique id for manually edited hangout event instances.  I wanted to ensure that every manual edit was recorded as a separate EventInstance instance.  I added a SecureRandom unique id to the EventInstancesHelper method that is used during a manual update:&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;d also added a flag on the EventInstance model to indicate whether an EventInstance had been manually set.  This manual setting meant that subsequent Events would also report themselves live, as they were all sharing a single EventInstance.  I considered briefly switching the boolean flag to a datetime, but demurred and adjusted the way we create the unique id for manually edited hangout EventInstances.  I wanted to ensure that every manual edit was recorded as a separate EventInstance instance!  I added a SecureRandom unique id to the EventInstancesHelper method that gets used during a manual update:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'securerandom'&lt;/span&gt;
+
 &lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;EventInstancesHelper&lt;/span&gt;
   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_event_instance_id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;project_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="si"&gt;}#{&lt;/span&gt;&lt;span class="n"&gt;project_id&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="s1"&gt;'00'&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;-&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;SecureRandom&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;uuid&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
   &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;By itself this didn&amp;rsquo;t fix the problem, so I also adjusted the &lt;code&gt;recent_hangouts&lt;/code&gt; method further so that it only looked in a time window starting from the same time on the previous day, plus the duration of the event:&lt;/p&gt;
+&lt;p&gt;By itself this didn&amp;rsquo;t fix the problem, so I also adjusted the &lt;code&gt;recent_hangouts&lt;/code&gt; method further such that it only looked in a time window starting from the same time on the previous day, plus the duration of the event:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;recent_hangouts&lt;/span&gt;
     &lt;span class="n"&gt;event_instances&lt;/span&gt;
       &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'updated_at BETWEEN ? AND ?'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;days&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;end_of_day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
       &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;updated_at: :desc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The cukes went green and I had to fix up a few specs for EventInstanceHelper and Event class.  I was&amp;rsquo;t sure if the fully unique id was actually necessary, but when I saw the specs for EventInstanceHelper that were saying a unique id should be returned, when it patently wasn&amp;rsquo;t doing so, I felt I really wanted to stick with the change.  Arguably it could be the subject of a completely separate pull request, driven by a different cucumber scenario.  I&amp;rsquo;ve been being harsh with the AsyncVoter folks to keep out any functionality not related to the feature being worked on.  It&amp;rsquo;s easy to give myself slack on the other side; but in my defence this is a bug fix, and I&amp;rsquo;m trying to make sure we aren&amp;rsquo;t losing valuable data about user activity.  I did try to get the feature to wrap this.  Actually I did a major refactoring of the cukes here, which relates to a &lt;a href="https://github.com/AgileVentures/LocalSupport/pull/391"&gt;PR from John on LocalSupport&lt;/a&gt; where he&amp;rsquo;s using a lot of nested steps, which I&amp;rsquo;m not such a big fan of.&lt;/p&gt;
+&lt;p&gt;The cukes went green and I had to fix up a few specs for the EventInstanceHelper and the Event class.  I was&amp;rsquo;t sure if the fully unique id was actually necessary, but when I saw the specs for EventInstanceHelper that were saying a unique id should be returned, I felt I really wanted to stick with the change.  Arguably it could be the subject of a completely separate pull request, driven by a different cucumber scenario.  I&amp;rsquo;ve been being harsh with the AsyncVoter folks to keep out any functionality not related to the feature being worked on.  It&amp;rsquo;s easy to give myself slack when I&amp;rsquo;m wo on the other side of the barrier; but in my defence this is a bug fix, and I&amp;rsquo;m trying to make sure we aren&amp;rsquo;t losing valuable data about user activity.  I did try to get the feature to wrap this with limited success.  In the process I did do major refactoring of the cukes, which relates to a &lt;a href="https://github.com/AgileVentures/LocalSupport/pull/391"&gt;PR from John on LocalSupport&lt;/a&gt; where he&amp;rsquo;s using a lot of nested steps, which I&amp;rsquo;m not such a big fan of.&lt;/p&gt;
 
-&lt;p&gt;On WSO the editing a hangout url on a repeating event cuke scenario had gotten really long  :&lt;/p&gt;
+&lt;p&gt;On WSO the editing a hangout url on a repeating event cuke scenario had gotten really long:&lt;/p&gt;
 &lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Edit Hangout URL on repeating event and ensure event stays live
     &lt;span class="err"&gt;Given the date is "2014-02-06 07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt;
     &lt;span class="c"&gt;# manually setting the hangout link&lt;/span&gt;
@@ -66,12 +93,12 @@
     &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
     &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"This event is now live!"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The previous day with Michael I&amp;rsquo;d inserted comments about what each section was doing.  I resolved to turn those into steps.  The quick and dirty path would be to take each set of steps and turn them into nested steps.  But the approach I preferis to make new steps that are collections of ruby statements to avoid multiple levels of redirection.  The steps I generated yesterday were:&lt;/p&gt;
+&lt;p&gt;The previous day with Michael I&amp;rsquo;d inserted comments about what each section was doing.  I resolved to turn those into steps.  The quick and dirty path would be to take each set of steps and turn them into nested steps.  But the approach I prefer is to make new steps that are collections of ruby statements to avoid multiple levels of redirection.  The steps I generated yesterday were:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;And&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I manually set a hangout link for event "([^"]*)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
   &lt;span class="vi"&gt;@hangout_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&amp;amp;authuser=0'&lt;/span&gt;
   &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
   &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute_script&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;  &lt;span class="sx"&gt;%q{$('li[role="edit_hoa_link"] &amp;gt; a').trigger('click')}&lt;/span&gt;  &lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'hangout_url'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:with&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="vi"&gt;@hangout_url&lt;/span&gt;
+  &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'hangout_url'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;with: &lt;/span&gt;&lt;span class="vi"&gt;@hangout_url&lt;/span&gt;
   &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:css&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sx"&gt;%q{input[id="hoa_link_save"]}&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;trigger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'click'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="k"&gt;end&lt;/span&gt;
 
@@ -100,15 +127,15 @@
     &lt;span class="nf"&gt;Then&lt;/span&gt; &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt; shows live for that hangout link for the event duration
     &lt;span class="nf"&gt;And&lt;/span&gt; &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt; is not live the following day
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Maybe I&amp;rsquo;m crazy, not re-using the steps, but my goal is to make it transparent for me in the future, and other developers, to get from the english description to get straight to the description at the ruby/rspec/capybara level.  What I find again and again in WSO and LS where the steps are deeply nested is that I get tripped up because the English descriptions are slightly misleading.  This is actually a facet of a more general problem for coding in general, that wherever an abstraction (e.g. cuke step, or method name) fails to accurately reflect what&amp;rsquo;s going on under the hood, you can easily be misled.  Of course it all comes back to humans.  What&amp;rsquo;s transparently clear for one person might not be for another.  But take a look at this background step from the same Cuke file:&lt;/p&gt;
+&lt;p&gt;Maybe I&amp;rsquo;m crazy, not re-using the steps, but my goal is to make it transparent for me in the future, and other developers, to get from the English description straight to the description at the Ruby/RSpec/Capybara level.  What I find again and again in WSO and LS where the steps are deeply nested is that I get tripped up because the English descriptions can be slightly misleading.  This is actually a facet of a more general problem for coding, in that wherever an abstraction (e.g. cuke step, or method name, or API interface) fails to accurately reflect what&amp;rsquo;s going on under the hood, you can easily be misled.  Of course it all comes back to humans.  What&amp;rsquo;s transparently clear for one person might not be for another.  But take a look at this background step from the same Cuke file:&lt;/p&gt;
 &lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="err"&gt;And the following event instances exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
  &lt;span class="err"&gt;...&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;table&lt;/span&gt; &lt;span class="err"&gt;of&lt;/span&gt; &lt;span class="err"&gt;dat&lt;/span&gt;&lt;span class="nf"&gt;a&lt;/span&gt;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We&amp;rsquo;d created this to replace the original setup step that referred to hangouts (for which there was no corresponding domain model) and used rspec factories that were shared with the specs and did a fair amount of data massaging.  Having made the change we realised that to keep things working we would also need a complex participants data.  It was trivial to adjust our new background step to add that data, but now that was hidden at the level of the feature file so we adjusted as follows:&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;d created this to replace the original setup step that referred to hangouts (for which there was no corresponding domain model). The original setup step had also scarily used RSpec factories that were shared with the specs and did a fair amount of data massaging in the process.  Having made the change we realised that to keep things working we would also need a chunk of complex participant data.  It was trivial to adjust our new background step to add that data, but now that was hidden from someone working at the level of the feature file so we adjusted our step name as follows:&lt;/p&gt;
 &lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="err"&gt;And the following event instances (with default participants) exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
  &lt;span class="err"&gt;...&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;table&lt;/span&gt; &lt;span class="err"&gt;of&lt;/span&gt; &lt;span class="err"&gt;dat&lt;/span&gt;&lt;span class="nf"&gt;a&lt;/span&gt;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Too much perhaps?  But the intention is to give someone else who wants to use that step (or method) heads up about what&amp;rsquo;s going on under the hood.  The cuke steps above are a bit long and need some DRYing out, but I think I&amp;rsquo;d rather have them DRYed out into other ruby methods, that are well named.  There&amp;rsquo;s perhaps almost too much room for nuance with the English descriptions of pure cucumber steps.  So for example the following:&lt;/p&gt;
+&lt;p&gt;Too much perhaps?  But the intention is to give someone else who wants to use that step (or method) a heads up about what&amp;rsquo;s going on under the hood.  The ruby contents of the cuke steps above are a bit long and need some DRYing out, but I think I&amp;rsquo;d rather have them DRYed out into other ruby methods, that are well named.  There&amp;rsquo;s perhaps almost too much room for nuance with the English descriptions of pure Cucumber steps.  So for example the following:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^"([^"]*)" shows live for that hangout link for the event duration$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
   &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -135,24 +162,22 @@
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Perhaps that&amp;rsquo;s no different to:&lt;/p&gt;
-
-&lt;p&gt;Then(/^&amp;ldquo;([^&amp;rdquo;]*)&amp;ldquo; shows live for that hangout link for the event duration$/) do |event&lt;em&gt;name|
-  @event = Event.find&lt;/em&gt;by&lt;em&gt;name(event&lt;/em&gt;name)
-  time = Time.parse(@jump&lt;em&gt;date) + event.duration.minutes - 1.minute
-  step &amp;lsquo;I check event is live &amp;rsquo;
-  Delorean.time&lt;/em&gt;travel&lt;em&gt;to(time)
-  check&lt;/em&gt;live(event)
-end&lt;/p&gt;
-
-&lt;p&gt;Then(/^I check event is live$/) do
-  visit event&lt;em&gt;path(@event)
-  expect(page).to have&lt;/em&gt;link(&amp;#39;Join now&amp;rsquo;, href: @hangout_url)
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
+  @event = Event.find_by_name(event_name)
+  time = Time.parse(@jump_date) + event.duration.minutes - 1.minute
+  step 'I check event is live '
+  Delorean.time_travel_to(time)
+  check_live(event)
 end
-&amp;rdquo;`&lt;/p&gt;
 
-&lt;p&gt;which allows that nested step to be re-used in other cucumber scenarios, but the debugging support is not as good.  Maybe this just bike-shedding.  The critical thing is likely to be a constant general refining to a consistent domain model and methods/steps that are not too long and not too short and do a best effort to have a description that doesn&amp;rsquo;t leave too many surprised under the hood.&lt;/p&gt;
+Then(/^I check event is live$/) do
+  visit event_path(@event)
+  expect(page).to have_link('Join now', href: @hangout_url)
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which allows that nested step to be re-used in other cucumber scenarios, but the debugging support for nested steps is not as good in my experience.  Maybe this is just bike-shedding (i.e. focusing on trivialities).  The big-picture critical thing seems likely to be a constant general refining to a consistent domain model and methods/steps that are not too long and not too short and do a best effort to have a description that doesn&amp;rsquo;t leave too many surprises under the hood.&lt;/p&gt;
 
-&lt;p&gt;I made sure that the refactored cukes did actually break, which took a combination of adjusting the Event#recent&lt;em&gt;hangouts method back to use `created&lt;/em&gt;at` AND removing the secure random id from the EventsInstanceHelper, indicating that both were needed to get the desired behaviour at the user level; so I didn&amp;rsquo;t need to feel a total hypocrite for pushing on the AsyncVoter folks to remove all extraneous code :-)  That didn&amp;rsquo;t stop me waking up in the middle of the night thinking, &amp;ldquo;we don&amp;rsquo;t even need to search for recent&lt;em&gt;hangouts!&amp;rdquo; - we just grab the latest one reverse sorted by updated&lt;/em&gt;at and check if it&amp;rsquo;s live?  That recent_hangouts method is used nowhere else in the code base.  The method name makes no sense in terms of what we want really.  What we want to know is whether the most recently updated event instance is still live?  More refactoring awaits!&lt;/p&gt;
+&lt;p&gt;I made sure that the refactored cukes did actually break (when the app functionality was removed), which took a combination of adjusting the Event#recent&lt;em&gt;hangouts method back to use `created&lt;/em&gt;at&lt;code&gt;AND removing the secure random id from the EventsInstanceHelper, indicating that both were needed to get the desired behaviour at the user level; so I didn&amp;#39;t need to feel a total hypocrite for pushing on the AsyncVoter folks to remove all extraneous code :-)  That didn&amp;#39;t stop me waking up in the middle of the night thinking, &amp;quot;we don&amp;#39;t even need to search for recent_hangouts!&amp;quot; - we just grab the latest one reverse sorted by updated_at and check if it&amp;#39;s live, can&amp;#39;t we?  That&lt;/code&gt;recent_hangouts` method is used nowhere else in the code base.  The method name makes no sense in terms of what we want really.  What we want to know is whether the most recently updated event instance is still live, isn&amp;rsquo;t it?  More refactoring awaits!&lt;/p&gt;
 
 &lt;h3&gt;Related Videos&lt;/h3&gt;
 
@@ -484,168 +509,6 @@ end
 &lt;p&gt;Again, all this functionality is in flux.  We&amp;rsquo;ve got a restricted set of people working on the codebase.  In a project with a larger team I&amp;rsquo;d have to button down here and make this a serious object with tests, or even explicitly make it private.  I&amp;rsquo;ll need to do one or the other when we work on this again (and start better integrating PayPal and plan upgrades).  I&amp;rsquo;m thinking of giving it a week, and perhaps devoting this week to more fixes on the Google Hangout API fiasco.  Not sure.  Either way Raoul got this all deployed over the weekend and we have Sasha&amp;rsquo;s changes up which include the banner from our new sponsor drie, and the ability for members to sponsor each other for Premium - great work Raoul!&lt;/p&gt;
 
 &lt;p&gt;Right then, once more unto the breach dear friends!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Light at the End of the Stripe Tunnel</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/04/light-at-the-end-of-the-tunnel/"/>
-    <id>http://blog.url.com/2016/11/04/light-at-the-end-of-the-tunnel/</id>
-    <published>2016-11-04T00:00:00+00:00</published>
-    <updated>2016-11-08T10:19:13+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;My hopes for a less than frustrating day were dashed as I worked through the ongoing Stripe test failures.  Michael wasn&amp;rsquo;t around and I solo&amp;rsquo;d through some different alternatives.  Rather than just burn time repeatedly in the long debug cycle of seeing if the Stripe acceptance tests would all run in batch after random tweaks, I identified some different possible options:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Run the existing tests without sandboxing (create a @poltergeist&lt;em&gt;no&lt;/em&gt;billy tag)&lt;/li&gt;
-&lt;li&gt;Slowly re-add code pieces to develop (since batch cukes are green there)&lt;/li&gt;
-&lt;li&gt;Delete the sandbox caches for larger and larger sets of acceptance tests, seeing if regenerating them fixed things&lt;/li&gt;
-&lt;li&gt;Use the StripeRubyMock gem as an alternative&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I started with the first option reckoning that I could at least quickly test whether the existing tests would run without sandboxing.  To re-cap, the develop branch had about 10 Stripe acceptance tests that ran fine with sandboxes; working individually and in batch.  Our new feature for users sponsoring each other introduced 2 new stripe acceptance tests, neither of which did anything fundamentally different from the existing tests.  These 2 new tests ran fine individually, in a group with all the other Stripe acceptance tests, but then the entire set of Stripe tests (new and old) would fail (no Stripe iFrame appearing) when run in batch with all the other Cucumber tests.&lt;/p&gt;
-
-&lt;p&gt;It felt to me like there must be some timing issue here.  Some race condition such as often plagues JavaScript acceptance tests.  Although this wasn&amp;rsquo;t intermittent failure - the whole thing still doesn&amp;rsquo;t make sense to me.  To try and make sense I wanted to get some other data points.  Getting the Stripe tests to run without sandboxing might allow me to exclude sandboxing as the source of the problem.  Not that sandboxing didn&amp;rsquo;t have other usability issues that I&amp;rsquo;ve blogged about recently, but when trying to solve any big problem it&amp;rsquo;s useful to run experiments on the subsets of the components to try and narrow down the area in which the error is occurring.&lt;/p&gt;
-
-&lt;p&gt;Removing sandboxing was not as easily said as done, as I&amp;rsquo;d previously hooked the PuffingBilly gem directly into all Cucumber Javascript tests like so:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;test_options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="ss"&gt;phantomjs_options: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
-        &lt;span class="s1"&gt;'--ignore-ssl-errors=yes'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="s2"&gt;"--proxy=&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;Billy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;host&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;Billy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;port&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-    &lt;span class="p"&gt;],&lt;/span&gt;
-    &lt;span class="ss"&gt;phantomjs: &lt;/span&gt;&lt;span class="no"&gt;Phantomjs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="ss"&gt;js_errors: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;register_driver&lt;/span&gt; &lt;span class="ss"&gt;:poltergeist_billy&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Poltergeist&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_options&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Both WebSiteOne and LocalSupport have been plagued, and continue to suffer to some extent, from intermittent JavaScript acceptance test failures.  There&amp;rsquo;s a &lt;a href="https://bibwild.wordpress.com/2016/02/18/struggling-towards-reliable-capybara-javascript-testing/"&gt;good blog post&lt;/a&gt; on why this is a tricky problem.  My own take earlier in the year was that it made sense to nail down all sources of variation.  Tests that make network connections are depending on the network and 3rd party services.  Sandboxing those network connections (recording them and playing them back in test mode) using the VCR and PuffingBilly gems reduces the variability of the test, and makes it more deterministic.  Earlier this year, as part of trying to reduce the overall variability in the WebSiteOne acceptance test, Michael and I had completely re-implemented the Cucumber config and hooks for WebSiteOne.&lt;/p&gt;
-
-&lt;p&gt;To my chagrin this had still not completely removed the occasional intermittent acceptance failure, and the generation of additional cache files on test failure or on other occasions of test variation that was confusing for all developers, complicated to manage, and made some PRs unreadable due to the overload of files.  In several smaller projects I&amp;rsquo;d preferred sandboxing over stubbing with WebMock, which has its own issues of maintaining lots of individual hand-written network calls.  Anyhow, in order to remove the sandboxing I had to get another Capybara JavaScript driver set up.  I ran through a series of alternatives:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Default (Selenium) - opened firefox (v47) browser displayed nothing&lt;/li&gt;
-&lt;li&gt;Poltergeist - not working on my OSX - absolutely bizarre DB errors, with users appearing and disappearing&lt;/li&gt;
-&lt;li&gt;Poltergeist with PhantomJS - Stripe tests passed, but redirects to success page did not work - underlying permissions fail?&lt;/li&gt;
-&lt;li&gt;Poltergeist with PhantomJS and PuffingBilly - going back to this got green, but still failing in batch&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;That was a frustrating hour.  I knew that with extra work I could probably get the Selenium testing working, but that headed browser approach wasn&amp;rsquo;t going to work on our CI.  The pure Poltergeist errors with data appearing and disappearing from the DB were bizarre and a big red flag.  Poltergeist with PhantomJS looked promising.  We were avoiding sandboxing, but there was likely some permissions error at some level.  I could probably find that, although I was also encountering some ambiguity about which driver was being used - how other hooks were integrating with the existing Capybara Javascript hook:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Before&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'@poltergeist_no_billy'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;javascript_driver&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;poltergeist_no_billy&lt;/span&gt;
-  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current_driver&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;javascript_driver&lt;/span&gt; &lt;span class="c1"&gt;# this is my copy of the existing @javascript hook&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I wasn&amp;rsquo;t liking any of the options very much.  I thought I&amp;rsquo;d give stripe-ruby-mock a spin.  Working from the &lt;a href="https://github.com/rebelidealist/stripe-ruby-mock/blob/master/README.md"&gt;gem README&lt;/a&gt;, &lt;a href="https://medium.com/craft-academy/keeping-it-simple-3e7d9b186015#.4rc29xv6j"&gt;Thomas&amp;rsquo; CraftAcademy blog&lt;/a&gt;, and probably most importantly the associated &lt;a href="https://github.com/CraftAcademy/sf-online-august/"&gt;CraftAcademy repo&lt;/a&gt; I got first a single Stripe acceptance test working, and then another.  All would be for nothing if I couldn&amp;rsquo;t get them running in batch.  In batch a large number of Stripe acceptance tests were still failing, but importantly the ones using StripeRubyMock were not.  I had a lifeline, a light at the end of the tunnel.  If I could convert all the Stripe acceptance tests to StripeRubyMock I might have something where the entire test suite would go green.&lt;/p&gt;
-
-&lt;p&gt;I had created a custom &lt;code&gt;@stripe_javascript&lt;/code&gt; tag to ensure that our StripeRubyMock tests would not use PuffingBilly, while allowing the other existing tests to keep using it:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Before&lt;/span&gt; &lt;span class="s1"&gt;'@stripe_javascript'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;javascript_driver&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ss"&gt;:poltergeist&lt;/span&gt;
-  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current_driver&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;javascript_driver&lt;/span&gt;
-  &lt;span class="no"&gt;StripeMock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;start&lt;/span&gt;
-  &lt;span class="vi"&gt;@stripe_test_helper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;StripeMock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create_test_helper&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;After&lt;/span&gt; &lt;span class="s1"&gt;'@stripe_javascript'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;javascript_driver&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ss"&gt;:poltergeist_billy&lt;/span&gt;
-  &lt;span class="no"&gt;StripeMock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stop&lt;/span&gt;
-  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'session_pool'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="k"&gt;next&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;is_a?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Poltergeist&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Driver&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;restart&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I was not without concern for some of the other changes.  App code in the ChargesContller had to be adjusted to accommodate testing with StripeRubyMock:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;stripe_token&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;env&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;test?&lt;/span&gt; &lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="n"&gt;generate_test_token&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:stripeToken&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_test_token&lt;/span&gt;
-  &lt;span class="no"&gt;StripeMock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create_test_helper&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;generate_card_token&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The charges controller would now ignore the incoming stripe token from the javascript redirect, and use a StripeRubyMock generated token in test mode.  It was pretty innocuous but a different code path would run in test, compared to development and production.  This was going against another general coding guideline.  Not the end of the world, but a warning flag.  Still this was starting to seem like the most hopeful route back to a green Cucumber suite.  I also came away with a modified poltergeist driver based on the CraftAcademy code:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;register_driver&lt;/span&gt; &lt;span class="ss"&gt;:poltergeist&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Poltergeist&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;js_errors: &lt;/span&gt;&lt;span class="kp"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                                    &lt;span class="ss"&gt;phantomjs: &lt;/span&gt;&lt;span class="no"&gt;Phantomjs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                                    &lt;span class="ss"&gt;phantomjs_options: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'--ssl-protocol=tlsv1.2'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'--ignore-ssl-errors=yes'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Another key difference was that I now had to explicitly create our Premium plans using the StripeRubyMock as part of the setup for the cuke scenarios:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nf"&gt;Given&lt;/span&gt; the following plans exist
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Premium&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;premium&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;PremiumMob&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;premiummob&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;PremiumF2F&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;premiumf2f&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;PremiumPlus&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;premiumplus&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Given&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^the following plans exist$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hashes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="vi"&gt;@stripe_test_helper&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create_plan&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This is interesting as previously the cache of VCR and PuffingBilly would contain the plan information encoded in HTTP responses from the Stripe servers.  That had ensured the Stripe servers were the single authoritative source for this information.  As it happens specifying this in the Cucumber steps makes our business logic description here more complete.  It leaves us with a data dependency, whereby we need to ensure that the plans specified in our Cucumber scenarios match those on the Stripe servers.  Another heuristic red flag, but the prospect of a green test suite was driving me forward.  I wasn&amp;rsquo;t quite there yet, our update card details was failing, and we needed more changes to how we created a Premium user for testing purposes:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Given&lt;/span&gt; &lt;span class="sr"&gt;/^I am logged in as( a premium)? user with (?:name "([^"]*)", )?email "([^"]*)", with password "([^"]*)"$/&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;premium&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-
-  &lt;span class="vi"&gt;@current_user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vi"&gt;@user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;first_name: &lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;password: &lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;password_confirmation: &lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;premium&lt;/span&gt;
-    &lt;span class="n"&gt;subscription&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Premium&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;user: &lt;/span&gt;&lt;span class="vi"&gt;@user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;started_at: &lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;customer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
-                                           &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                                           &lt;span class="ss"&gt;source: &lt;/span&gt;&lt;span class="vi"&gt;@stripe_test_helper&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;generate_card_token&lt;/span&gt;
-                                       &lt;span class="p"&gt;})&lt;/span&gt;
-    &lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;plan: &lt;/span&gt;&lt;span class="s1"&gt;'premium'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;payment_source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Stripe&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;identifier: &lt;/span&gt;&lt;span class="n"&gt;customer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;subscription: &lt;/span&gt;&lt;span class="n"&gt;subscription&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A card token from the Stripe test server would no longer work and the fix was using the stripe test helper to generate a card token.  This test code was super ugly, and I was still really bothered by the factories being shared between cukes and specs.  Anyhow, I also had to modify the app code for updating cards, because we were now generating a different kind of error.  I added a &lt;code&gt;NoMethodError&lt;/code&gt; to the update card error handling:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  def update
-    customer = Stripe::Customer.retrieve(current_user.stripe_customer_id) # _token?
-    card = customer.sources.create(card: stripe_token(params))
-    card.save
-    customer.default_card = card.id
-    customer.save
-  rescue Stripe::InvalidRequestError, NoMethodError =&amp;gt; e
-    logger.error "Stripe error while updating card info: #{e.message} for #{current_user}"
-    @error = true
-  end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and we were finally all green! Although I did still get an intermittent fail on the very last build on CI at the end, so this isn&amp;rsquo;t over JavaScript Acceptance tests (shakes fist)!  In summary though the full test suite was green for me locally, and after a re-build on semaphore the build passed.  StripeRubyMock was working for us, and I don&amp;rsquo;t have much appetite for burning more time on the complete sandboxing alternative.  What&amp;rsquo;s frustrating is how much time that goes into this that could be going into refactoring the code for maintainability or improving the user interface experience.  However with the test suite green, we can potentially refactor with confidence (until the next time!).&lt;/p&gt;
-
-&lt;p&gt;My concerns about RubyStripeMock is will it be maintained and stay up to date with the Stripe API itself?  To get things to pass I had to change app code that now hasn&amp;rsquo;t been tested in production.  Thomas has updated &lt;a href="https://medium.com/craft-academy/keeping-it-simple-3e7d9b186015#.4rc29xv6j"&gt;his blog post&lt;/a&gt; to talk about using RubyStripeMock completely network independently.  Since Stripe told me they are happy with a few hits from tests, and that removing network dependency has not fixed our intermittent failures I&amp;rsquo;m less concerned about that, than just having code paths that operate in production but don&amp;rsquo;t run in test.  I changed &lt;code&gt;customer.cards&lt;/code&gt; to &lt;code&gt;customer.sources&lt;/code&gt; in the app code to get the RubyStripeMock acceptance tests to work.  I will need to use the StripeRubyMock ability to switch to live tests against the Stripe servers to test that still works:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;configure&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;filter_manager&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;inclusions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rules&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;include?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:live&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="no"&gt;StripeMock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;toggle_live&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Running **live** tests against Stripe..."&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The advantage of a full VCR/PuffingBilly sandbox, is that you are stubbing at the network level.  Your app is effectively running in the exact same environment as it would with a live network connection.  You can dump the sandbox at any time to re-create an accurate network sandbox.  However it becomes challenging with a complex service like Stripe that&amp;rsquo;s trying to be secure and is using a high degree of indeterminacy in terms of the network connections it makes.  The sandbox cache files have to be checked into git to ensure everyone gets a benefit from the sandbox, so test failures or complex system like Stripe can lead to challenging git churn.  Not checking in those files would be an alternative - CI would still hit live network servers, and on second and subsequent runs developer machines would avoid re-hitting the live network, but then network fails could be encoded into caches.  I starting to think sandbox caches are another challenging source of variability when used with services like Stripe.&lt;/p&gt;
-
-&lt;p&gt;In a final analysis it&amp;rsquo;s all about trading off these different heuristics:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Keep test code as close to production code as possible&lt;/li&gt;
-&lt;li&gt;Keep test environment as close to production environment as possible&lt;/li&gt;
-&lt;li&gt;Avoid hitting 3rd party servers during test&lt;/li&gt;
-&lt;li&gt;Ensure development flow is comprehensible and manageable for developers on your team&lt;/li&gt;
-&lt;li&gt;Keep your full test suite green&lt;/li&gt;
-&lt;li&gt;Keep the running time of your test suite down to avoid delayed debug cycle hell&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;and various others.  None of these heuristics always trumps all the others.  As Kent Beck says, &amp;ldquo;it depends &amp;hellip;&amp;rdquo;.  I say, keep looking for the light at the end of the tunnel :-) &lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=fDUd9N5iDTA"&gt;Solo on WebSiteOne part 1&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=hz_i4DagxkY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=iaRDd35qF_g"&gt;Solo on WebSiteOne part 2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>
