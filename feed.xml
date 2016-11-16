@@ -5,20 +5,81 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-15T00:00:00+00:00</updated>
+  <updated>2016-11-16T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Automating What To Do Next</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/16/automating-what-to-do-next/"/>
+    <id>http://blog.url.com/2016/11/16/automating-what-to-do-next/</id>
+    <published>2016-11-16T00:00:00+00:00</published>
+    <updated>2016-11-16T09:51:38+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;After the &amp;ldquo;Martin Fowler&amp;rdquo; scrum I caught up with Raphael to talk about the dynamic of the AsyncVoter project.  Raphael had been suggesting a team meeting.  Team meetings can be great.  I think if a team wants to move forward fast it&amp;rsquo;s great to get everyone in a room, and ideally match that with a shared working space that everyone can come to.  However that usually takes a lot of money to set up.  Actually having the team all distributed around the world might have advantages in terms of pulling in more influences and perspectives.  Of course you don&amp;rsquo;t need a shared space for a team meeting.  We&amp;rsquo;ve run them regularly on different projects at different times.  The ability to have them is a function of team members availability.  Sometimes teams will form or dissipate based on whether there is sufficient overlap in their schedules. &lt;/p&gt;
+
+&lt;p&gt;Part of the idea behind AsyncVoter project is to reduce the need for team meetings.  Not that a team shouldn&amp;rsquo;t get together if they want to, but in WSO at least I&amp;rsquo;d got the sense that people weren&amp;rsquo;t enjoying the meetings, which usually involved voting on tickets in the backlog.  In LocalSupport people were just not on at the same time, or couldn&amp;rsquo;t use hangouts.  I wondered if part of the issue was understanding what to do next.  In a session with Raphael off the back of the &amp;ldquo;Martin Fowler&amp;rdquo; scrum I wrote up the following:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Using Waffle and GitHub to work out what to do next
+---------------------------------------
+
+0) if there are any [open PRs](https://github.com/AgileVentures/AsyncVoter/pulls) then review them and if possible give feedback
+
+1) are there any tickets "in progress" on [waffle](https://waffle.io/AgileVentures/AsyncVoter)? If you'd like to help reach out to the assigned team member to see if you can help
+
+1) is there a estimated ticket in the ready column on waffle that I am interested in working on?
+1a) yes --&amp;gt; then start work on it, pairing or not
+
+1b) no --&amp;gt; find a ticket from the backlog (on waffle) that I'm interested in and start a vote (in a scrum, or async)
+
+2) throughout process rather than adding new features, new elements or major refactoring to the existing ticket, freely make new tickets to go on to the backlog (on waffle)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Hopefully that was some help.  It&amp;rsquo;s seems transparent in my mind as a way of doing distributed Agile work, but there&amp;rsquo;s no reason why others should have that pattern in their minds.  Would be great to have one of those animated videos showing the flow.&lt;/p&gt;
+
+&lt;p&gt;Michael and I started off following the above pattern for WSO after lunch.  We went through the open pull requests, &amp;ldquo;in progress&amp;rdquo; tickets, the &amp;ldquo;ready&amp;rdquo; column and the &amp;ldquo;estimated&amp;rdquo; column.  We have an additional column in WSO called estimated for those tickets we have voted on but yet to prioritise:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="WSO waffle board" src="https://www.dropbox.com/s/o2kc9kx6gimfmx0/Screenshot%202016-11-16%2009.31.25.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;As usual, I agonised about all the different things we seemed to need to get done on WSO, but ultimately followed the &amp;ldquo;drive by&amp;rdquo; or &amp;ldquo;whistle-stop&amp;rdquo; approach that says finish things that are in the rightmost columns on the board, and if there isn&amp;rsquo;t easy progress move back across the board from right to left so that columns get cleared out.  I&amp;rsquo;m a terrible person for leaving stuff lying around.  I&amp;rsquo;ve also noticed that as you clear stuff up you make more space for new things.  We attacked a ticket in the ready column related to AgileBot that looked simple.  Michael drove for an hour, and we got the functionality we needed, but identified oh so many &lt;a href="https://github.com/AgileVentures/agile-bot/issues/45"&gt;refactoring&lt;/a&gt; needs.  I&amp;rsquo;m still intimidated by the apparent brittleness of the Hubot stack we have on AgileBot.  We followed the drive-by pattern and moved on to pastures new after the &amp;ldquo;Kent Beck&amp;rdquo; scrum.&lt;/p&gt;
+
+&lt;p&gt;Raoul had joined us in the scrum, which gave us a chance to talk about the need for team meetings on WSO and whether the AsyncVoting was replacing the team meetings effectively.  Michael reflected that there were a few people who attended those meetings who weren&amp;rsquo;t around now.  Neither Michael nor Raoul seemed passionate about re-instating regular long meetings voting on tickets, and I reflected that what I really wanted was the AsyncVoter bot to kick in and keep us regularly voting on tickets.  We&amp;rsquo;ve built a little RESTful core, and I&amp;rsquo;m worried that we have to hook up fast to something that actually benefits the community.  Got to get a slack bot shell working even if it&amp;rsquo;s only semi-automated.&lt;/p&gt;
+
+&lt;p&gt;After the scrum I drove on a ticket addressing missing video links on the main WSO.  That was fairly straightforward, and although there&amp;rsquo;s still lots of technical debt to pay down on both WSO and AgileBot, we managed to get a feature out and a bug fix in place while not making the code any worse.  In fact I think we improved the test config for AgileBot and reduced the numbers of line of code in both.   In the ideal world we&amp;rsquo;d have a bigger team of folks helping us knock off these additional refactoring tickets we keep generating.  In slack Mikael was making some great suggestions about AgileVentures letting people know what they could do to help given the amount of time they have to spare, e.g. &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&amp;lt;15 minutes to spare?  Review a pull request, vote on a ticket, or even start a new vote&lt;/li&gt;
+&lt;li&gt;&amp;lt;30 minutes to spare? join a scrum and say hi, give us an update on what you&amp;rsquo;re doing, read a project&amp;rsquo;s documentation; observe a pairing session&lt;/li&gt;
+&lt;li&gt;&amp;lt;60 minutes to spare? Start getting set up with a code base for a new project&lt;/li&gt;
+&lt;li&gt;&amp;lt;90 minutes to spare? Start working on a ticket, join a pairing session&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;What I&amp;rsquo;d really love is a performant version of WSO that could give every user a feed of things to do with associated time commitments.  Almost like the feed of unanswered questions from StackOverflow, but a feed of chunks of work to be done on tickets, voting on things, reviewing code:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="StackOverflows unanswered question feed" src="https://www.dropbox.com/s/pvp2i3q3d3xkpmm/Screenshot%202016-11-16%2009.48.54.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Maybe that will be easier to achieve than the wall of pairing/meeting live stream video feeds I keep imagining.&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=aYCGCegwjvY"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=qRCeF-IECaU"&gt;Pairing on AgileBot&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=1gMF_0oALyY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=tKqG-pSQcfU"&gt;Pairing on WebSiteOne&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Multiple Pull Request Learning</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/15/multiple-pull-request-learning/"/>
     <id>http://blog.url.com/2016/11/15/multiple-pull-request-learning/</id>
     <published>2016-11-15T00:00:00+00:00</published>
-    <updated>2016-11-15T09:53:54+00:00</updated>
+    <updated>2016-11-16T10:12:18+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;I didn&amp;rsquo;t get much solo or pair time coding today. It was a day of helping Premium&amp;rsquo;s with big fixes and reviewing pull requests.  The &amp;ldquo;Martin Fowler&amp;rdquo; scrum was crowded and brought up various requests for help, support and review.  I started by creating a hangout to look at Sasha&amp;rsquo;s WSO pull request to check whether YouTube videos were valid before tweeting them.  Sasha was concerned whether he&amp;rsquo;d sandboxed correctly, and I explained the &lt;code&gt;@vcr&lt;/code&gt; tag we had that meant individual VCR cassettes weren&amp;rsquo;t necessary.  More interestingly we were seeing that the tweets going out were slightly out of sync with their messages.  Sasha was investigating the issue of invalid YouTube links going into the tweets:&lt;/p&gt;
+    <content type="html">&lt;p&gt;I didn&amp;rsquo;t get much solo or pair time coding today. It was a day of helping Premium member&amp;rsquo;s with bug fixes and reviewing pull requests.  The &amp;ldquo;Martin Fowler&amp;rdquo; scrum was crowded and brought up various requests for help, support and review.  I started by creating a hangout to look at Sasha&amp;rsquo;s WSO pull request to check whether YouTube videos were valid before tweeting them.  Sasha was concerned whether he&amp;rsquo;d sandboxed correctly, and I explained the &lt;code&gt;@vcr&lt;/code&gt; tag we had that meant individual VCR cassettes weren&amp;rsquo;t necessary.  More interestingly we were seeing that the tweets going out were slightly out of sync with their messages.  Sasha was investigating the issue of invalid YouTube links going into the tweets:&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="AV tweets" src="https://www.dropbox.com/s/845stvx878zuumo/Screenshot%202016-11-15%2009.23.27.png?dl=1" /&gt;&lt;/p&gt;
 
@@ -52,9 +113,9 @@
 
 &lt;p&gt;&lt;img alt="pie chart legend" src="https://www.dropbox.com/s/hjdtgfld0lph838/Screenshot%202016-11-15%2009.33.30.png?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;compared to 60% from edX, 8.3% from Google search and 6.6% from the AV site itself.  While social media traffic to our AV site (over the last year) was dominated by Google+, Meetup, StackOverflow, Facebook and LinkedIn.  Twitter came in 8th with only 3.46%.  Now maybe this is because of broken video links, or because the feed is almost entirely automated. Either way, what we were putting out there was inconsistent, and the simplest fix was to only tweet the video link once the broadcast went live, and Sasha and I saw there was an easy check through the YT gem.   Sasha had to run off to do a tech test; which made me think it would be awesome if tech companies would take AV participation as a tech test equivalent!&lt;/p&gt;
+&lt;p&gt;compared to 60% from edX, 8.3% from Google search and 6.6% from the AV site itself.  While social media traffic to our AV site (over the last year) was dominated by Google+, Meetup, StackOverflow, Facebook and LinkedIn.  Twitter came in 8th with only 3.46%.  Now maybe this is because of broken video links, or because the feed is almost entirely automated. Either way, what we were putting out there was inconsistent, and the simplest fix was to only tweet the video link once the broadcast went live, and Sasha and I saw there was an easy check we could make for that through the YT gem.   Sasha had to run off to do a tech test; which made me think it would be awesome if tech companies would take AV participation as a tech test equivalent!&lt;/p&gt;
 
-&lt;p&gt;After lunch I merged an &lt;a href="https://github.com/AgileVentures/LocalSupport/pull/396"&gt;exquisitely small and updated PR on LocalSupport&lt;/a&gt; from a new contributor and then jumped on an AsyncVoter performance testing issue, running a profile of the AsyncVoter app running on drie and heroku.  &lt;/p&gt;
+&lt;p&gt;After lunch I merged an &lt;a href="https://github.com/AgileVentures/LocalSupport/pull/396"&gt;exquisitely small and updated PR on LocalSupport&lt;/a&gt; from new contributor Kostas and then jumped on an AsyncVoter performance testing issue, running a profile of the AsyncVoter app running on drie and heroku.  &lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ ab -n 50 https://async-voter-production.herokuapp.com/stories
 
 Time per request:       381.987 [ms] (mean)
@@ -100,13 +161,13 @@ Percentage of the requests served within a certain time (ms)
   99%   3186
  100%   3186 (longest request)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This was a very rough test and not really fair on drie since we&amp;rsquo;d just used both the apps, so Heroku was awake and didn&amp;rsquo;t suffer a start up cost.  But drie currently sleeps their &amp;ldquo;push&amp;rdquo; apps every 30 seconds, which means we suffer the slow start up costs much more frequently.  I was able to take that data to discuss with the drie folks in our regular catch up meeting.  No sooner was that done that I was on a bug hunt with new Premium member Rose, identifying issues with seed files and cucumber tests.  Getting the BURideShare cukes green I took a quick pass through an &lt;a href="https://github.com/strawberrycanyon/redeemify/pull/43"&gt;updated Redeemify pull request&lt;/a&gt; which had been updated really nicely.  &lt;/p&gt;
+&lt;p&gt;This was a very rough test and not really fair on drie since we&amp;rsquo;d just used both the apps, so Heroku was awake and didn&amp;rsquo;t suffer a start up cost.  But drie currently sleeps their &amp;ldquo;push&amp;rdquo; apps every 30 seconds, which explains the variance and means we would suffer the slow start up costs much more frequently.  I was able to take that data to discuss with the drie folks in our regular catch up meeting.  No sooner was that done that I was on a bug hunt with new Premium member Rose, identifying issues with seed files and cucumber tests.  After we got the BURideShare cukes green, I took a quick pass through an &lt;a href="https://github.com/strawberrycanyon/redeemify/pull/43"&gt;updated Redeemify pull request&lt;/a&gt; which had been updated really nicely.  &lt;/p&gt;
 
-&lt;p&gt;I was trying to get a handle also on the new SHF-project, reviewing the new &lt;a href="https://github.com/AgileVentures/shf-project/blob/develop/CONTRIBUTING.md"&gt;CONTRIBUTING.md&lt;/a&gt; from Ashley and then joining a hangout with Ashley and Susanna who were discussing a &lt;a href="https://github.com/AgileVentures/shf-project/pull/22"&gt;pull request&lt;/a&gt;.  Susanna was keen to get it pulled in after having followed one set of advice from one mentor, but Ashley was concerned that things were getting to complex, and I was inclined to agree with her.  I offered what advice I could and then had to go to supper.  Bottom line is that it&amp;rsquo;s okay to accrue technical debt from using non-RESTful controller methods, but it&amp;rsquo;s good to be aware that you&amp;rsquo;re doing that and that you&amp;rsquo;ll pay a price later on.  If you&amp;rsquo;ve got to move fast right now then guidelines can be ignored, but short term speed has to be balanced against long term progress.&lt;/p&gt;
+&lt;p&gt;I was trying to get a handle also on the new SHF-project, reviewing the new &lt;a href="https://github.com/AgileVentures/shf-project/blob/develop/CONTRIBUTING.md"&gt;CONTRIBUTING.md&lt;/a&gt; from Ashley and then joining a hangout with Ashley and Susanna who were discussing a &lt;a href="https://github.com/AgileVentures/shf-project/pull/22"&gt;pull request&lt;/a&gt;.  Susanna was keen to get it pulled in after having followed one set of advice from one mentor, but Ashley was concerned that things were getting too complex, and I was inclined to agree with her.  I offered what advice I could and then had to go to supper.  Bottom line is that it&amp;rsquo;s okay to accrue technical debt from things like using non-RESTful controller methods, but it&amp;rsquo;s good to be aware that you&amp;rsquo;re doing that and that you&amp;rsquo;ll pay a price later on.  If you&amp;rsquo;ve got to move fast right now then guidelines can be ignored, but short term speed has to be balanced against long term progress.&lt;/p&gt;
 
 &lt;p&gt;In summary a productive day I think, although I didn&amp;rsquo;t spend much time focused on one thing.  Great to see so many active projects on AgileVentures, and so much learning arising from all the pull requests coming in.  We just need lots more of this and lots of processes in place to ensure my head doesn&amp;rsquo;t spin off trying to keep track of it all :-)&lt;/p&gt;
 
-&lt;h3&gt;Related Videos&lt;/h3&gt;
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?feature=player_embedded&amp;amp;v=kkm2KdUDuC8"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
@@ -413,105 +474,6 @@ end
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4khJglSo8s8"&gt;AsyncVoter Mob review&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=NcyTQ_kiV8A"&gt;&amp;ldquo;Kent Back&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=EiBb-KFQDF4"&gt;WSO Pairing&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Discombobulated (by Google)</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/08/discombobulated/"/>
-    <id>http://blog.url.com/2016/11/08/discombobulated/</id>
-    <published>2016-11-08T00:00:00+00:00</published>
-    <updated>2016-11-10T10:10:57+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;We spent a good hour analysing our options to cope with the changes in the Google Hangout API.  The key issue is that the Google Hangout on Air (HOA) button no longer starts a Hangout directly.  We have the the HOA button throughout our AgileVentures site on project and event pages:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="HOA button" src="https://www.dropbox.com/s/5esltpqdq8y2abt/Screenshot%202016-11-08%2009.23.04.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Clicking this button now pops up a separate window with instructions on how to create a HOA through the YouTube interface.  BREAKING NEWS.  I just went to WebSiteOne project page to create a screenshot of the pop up for this blog and pressed the button.  Instead of opening a popup with the contents of this page:&lt;/p&gt;
-
-&lt;p&gt;https://support.google.com/youtube/answer/7083786?hl=en-GB&lt;/p&gt;
-
-&lt;p&gt;Which actually has a good straightforward description of how to create a HOA from the YouTube interface:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="create YT live event instructions" src="https://www.dropbox.com/s/gudo78qqtfk04bp/Screenshot%202016-11-08%2009.31.13.png?dl=1" /&gt; &lt;/p&gt;
-
-&lt;p&gt;However an HOA popped up, our plugin worked and pinged Slack through the AV website/agile-bot hookup.  To say I was discombobulated is to put it mildly :-)  I went straight to my &lt;a href="http://stackoverflow.com/questions/40233393/start-a-hangout-on-air-button-for-youtube-livestreaming-api"&gt;StackOverflow post&lt;/a&gt; on the subject to see if there had been an update from the Google engineers, but nothing there.  So, had the activity on the SO post or our discussion in the YouTube product forums prompted the Google engineers to make a change?  Or was this just another accidental change that will allow HOA buttons to work for a while, but will disappear again at some point in the future?&lt;/p&gt;
-
-&lt;p&gt;I guess Google moves in mysterious ways &amp;hellip; what we identified yesterday was that the hangout on air button not working was very confusing for many users.  The manual update of hangout URL was a work around that helped the more experienced AV members to notify the slack community about the hangout going live, but was unlikely to be used by new users.  I admitted that until recently I had been thinking we might want to move away from trying to support synchronous meetings, but the AV community has got really active recently, with well attended scrums, and Michael and I were agreeing that synchronous meetings were very good for coordinating some issues.&lt;/p&gt;
-
-&lt;p&gt;In our first session Michael and I had listed out some of the key problems with the HOA button change:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;increased effort to start hangout on air&lt;/li&gt;
-&lt;li&gt;lower likelihood of notifications (and pair partners)&lt;/li&gt;
-&lt;li&gt;no telemetry (data from who&amp;rsquo;s in the hangout when)&lt;/li&gt;
-&lt;li&gt;no sharing of video link&lt;/li&gt;
-&lt;li&gt;if no fixed event - no notification pathway &amp;ndash;&amp;gt; pair now on each project page is basically non-functional&lt;/li&gt;
-&lt;li&gt;event live as function of planned duration rather than actual activity&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We reviewed our vision of how the site should ideally operate:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;easy to browse existing sessions&lt;/li&gt;
-&lt;li&gt;easy to join existing sessions&lt;/li&gt;
-&lt;li&gt;easy to start a new session of your own &amp;ndash;&amp;gt; notifications&lt;/li&gt;
-&lt;li&gt;telemetry to give people credit for attending, allow us to analyse and improve&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We listed out some short term options for improvement:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;more documentation on current state of system &lt;/li&gt;
-&lt;li&gt;build instructions on starting hangout on air into existing interface&lt;/li&gt;
-&lt;li&gt;allow manual setting of youtube link &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;and some longer term options&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;reviewing alternatives videoconferencing software
-
-&lt;ul&gt;
-&lt;li&gt;GotoMeeting&lt;/li&gt;
-&lt;li&gt;Zoom&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://elearningindustry.com/top-6-open-source-web-conferencing-software-tools-elearning-professionals"&gt;Open Source&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;publishing a new hangout app (give us notifications and telemetry)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;It would be great if Google hangouts was open source &amp;hellip; anyway, even yesterday I didn&amp;rsquo;t want to leap into working on something.  I also wanted to review the issues related to payment and premium plans.  CraftAcademy Sweden is still keen to work with invoices rather than credit cards, so we now had some Premium members who weren&amp;rsquo;t represented in the site correctly.  I tested on my local server that I could update them from the console like to:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;UpgradeUserToPremium&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;CraftAcademy&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It worked locally and I ran the same through the production Rails console.  An example of me playing fast and loose perhaps?  Would a more principled approach be to deploy a rake task, build an admin interface or even an API endpoint? CraftAcademy just graduated three students and it was trivial for me to do through the Rails console, and make the system display the students&amp;rsquo; Premium status correctly.  I thought it was important to get this set, since otherwise they would have the &amp;ldquo;Sponsor for Premium&amp;rdquo; button.  Not that anyone was likely to start throwing money at them, but good to have the database in the correct state.  As the number of CA graduates increases, we&amp;rsquo;ll want to automate this, but right now we&amp;rsquo;re cautiously expanding the domain model.  Michael and I identified a set of other issues:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Expiration date for CA sponsorship (notifications when 1 year support ends)&lt;/li&gt;
-&lt;li&gt;CA sponsorship via Stripe&lt;/li&gt;
-&lt;li&gt;Further PayPal payment integration&lt;/li&gt;
-&lt;li&gt;Keeping track of how many pairing hours premium F2F and Plus members have left&lt;/li&gt;
-&lt;li&gt;Supporting batch payments&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I was pleased to have made the admin changes to the DB.  The Google Hangout API issue underlines the importance of working in small steps.  We&amp;rsquo;re feeling our way with CraftAcademy collaboration.  The number of CraftAcademy graduates getting Premium membership bundled with their bootcamp experience could explode, or could stay at steady state, or even drop off.   It would be inexpedient to invest enormous engineering effort on functionality and extending the domain model until it&amp;rsquo;s clear which way that goes.  In the meantime we need to keep knocking off small improvements.  CraftAcademy SouthAfrica were saying they&amp;rsquo;d really like to make batch payments in credit card.  Another feature.  We just had our first successful Paypal payment (7 day free trial for first paypal premium member ending).  Naturally we shouldn&amp;rsquo;t just implement every feature that every user asks for.  We&amp;rsquo;ve got to prioritise those that overlap and give us more bang for the buck.&lt;/p&gt;
-
-&lt;p&gt;I asked Michael what he&amp;rsquo;d like to work on and he said the &amp;ldquo;manual setting of YouTube links&amp;rdquo;.  We had another AV member join the hangout and tell us that was important for her project.  It made particular sense as it was a feature that would make our events more agnostic in terms of the video recording link.  We did a quick scrum and Michael drove on that feature.  Michael threw up a new feature, and we hammered at the EventInstances controller to see if we could provide a mechanism to manually update the video link for an EventInstance.  Things got a bit sticky.  I was torn a little between refactoring the Cucumber steps and getting things done.  I encouraged Michael as driver to take the route he thought best.  He left the background EventInstance generation steps alone, but tried some simpler versions for the individual scenario steps.  That didn&amp;rsquo;t go smoothly and we saw why the original test writers had gone for executing triggers rather than pure Capybara clicks when things were getting stuck on overlapping CSS elements.&lt;/p&gt;
-
-&lt;p&gt;There were other complexities with the app code trying to post to Twitter, and the dynamics of when and if the &amp;ldquo;hangout is live&amp;rdquo; elements were being displayed.  At the end of the session the tests were still red and the debug cycle felt a bit slow.  Over night I wondered if, as part of migrating to a new domain model, we should prefer an EventCollection entity that consists of individual Events, and remove the terms EventInstance and Hangout from the domain.  The current model has the term Event representing both repeating and single &amp;ldquo;events&amp;rdquo; which can be scrums, client meetings, pairing sessions, anything where people get together.  The current codebase and tests use the term Hangout and EventInstance interchangeably which can be confusing.  An EventInstance holds a set of data about a Google Hangout at the moment.  I suspect there are also some cases where EventInstances get clobbered in repeat events started manually by the same person.  &lt;/p&gt;
-
-&lt;p&gt;I wondered if we might be able to pull together a more RESTful system by replacing our current Event entity with an EventCollection.  One of the Mentive students I was working with had used that aggregate approach successfully, and discussions about the AsyncVoter REST API made me think I&amp;rsquo;d like to be rebuilding parts of the WSO system more cleanly.  But how to do it one step at a time?  Perhaps introduce a placeholder term like &lt;code&gt;AtomicEvent&lt;/code&gt; to represent single meetups; get a clean REST API around that and then finally migrate it to &lt;code&gt;Event&lt;/code&gt; once the original &lt;code&gt;Event&lt;/code&gt; entity was removed?  Sounds like it could be very confusing.  And now suddenly this morning the HOA button is working again, so suddenly we can leave that part of the system and focus on payments again?&lt;/p&gt;
-
-&lt;p&gt;Or maybe take a detour to AsyncVoter to make sure we get some sort of tracer bullet up?  Again it all comes back to how can we make this charity enterprise sustainable &amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Cuaol-FS9wM"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=tSQztvcBQlY"&gt;Reviewing WSO issues&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Zp06E5u7neM"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=eIc_bQxVUd8"&gt;Pairing on WebSiteOne&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Automating What To Do Next</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_11 x2016_11_16 x2016_11_16_automating-what-to-do-next x2016_11_16_automating-what-to-do-next_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/11/16/automating-what-to-do-next/">Automating What To Do Next</a></h2>
+        <h5 class='date'>16 Nov 2016</h5>
+    <p>After the &ldquo;Martin Fowler&rdquo; scrum I caught up with Raphael to talk about the dynamic of the AsyncVoter project.  Raphael had been suggesting a team meeting.  Team meetings can be great.  I think if a team wants to move forward fast it&rsquo;s great to get everyone in a room, and ideally match that with a shared working space that everyone can come to.  However that usually takes a lot of money to set up.  Actually having the team all distributed around the world might have advantages in terms of pulling in more influences and perspectives.  Of course you don&rsquo;t need a shared space for a team meeting.  We&rsquo;ve run them regularly on different projects at different times.  The ability to have them is a function of team members availability.  Sometimes teams will form or dissipate based on whether there is sufficient overlap in their schedules. </p>
+
+<p>Part of the idea behind AsyncVoter project is to reduce the need for team meetings.  Not that a team shouldn&rsquo;t get together if they want to, but in WSO at least I&rsquo;d got the sense that people weren&rsquo;t enjoying the meetings, which usually involved voting on tickets in the backlog.  In LocalSupport people were just not on at the same time, or couldn&rsquo;t use hangouts.  I wondered if part of the issue was understanding what to do next.  In a session with Raphael off the back of the &ldquo;Martin Fowler&rdquo; scrum I wrote up the following:</p>
+<pre class="highlight plaintext"><code>Using Waffle and GitHub to work out what to do next
+---------------------------------------
+
+0) if there are any [open PRs](https://github.com/AgileVentures/AsyncVoter/pulls) then review them and if possible give feedback
+
+1) are there any tickets "in progress" on [waffle](https://waffle.io/AgileVentures/AsyncVoter)? If you'd like to help reach out to the assigned team member to see if you can help
+
+1) is there a estimated ticket in the ready column on waffle that I am interested in working on?
+1a) yes --&gt; then start work on it, pairing or not
+
+1b) no --&gt; find a ticket from the backlog (on waffle) that I'm interested in and start a vote (in a scrum, or async)
+
+2) throughout process rather than adding new features, new elements or major refactoring to the existing ticket, freely make new tickets to go on to the backlog (on waffle)
+</code></pre>
+<p>Hopefully that was some help.  It&rsquo;s seems transparent in my mind as a way of doing distributed Agile work, but there&rsquo;s no reason why others should have that pattern in their minds.  Would be great to have one of those animated videos showing the flow.</p>
+
+<p>Michael and I started off following the above pattern for WSO after lunch.  We went through the open pull requests, &ldquo;in progress&rdquo; tickets, the &ldquo;ready&rdquo; column and the &ldquo;estimated&rdquo; column.  We have an additional column in WSO called estimated for those tickets we have voted on but yet to prioritise:</p>
+
+<p><img alt="WSO waffle board" src="https://www.dropbox.com/s/o2kc9kx6gimfmx0/Screenshot%202016-11-16%2009.31.25.png?dl=1" /></p>
+
+<p>As usual, I agonised about all the different things we seemed to need to get done on WSO, but ultimately followed the &ldquo;drive by&rdquo; or &ldquo;whistle-stop&rdquo; approach that says finish things that are in the rightmost columns on the board, and if there isn&rsquo;t easy progress move back across the board from right to left so that columns get cleared out.  I&rsquo;m a terrible person for leaving stuff lying around.  I&rsquo;ve also noticed that as you clear stuff up you make more space for new things.  We attacked a ticket in the ready column related to AgileBot that looked simple.  Michael drove for an hour, and we got the functionality we needed, but identified oh so many <a href="https://github.com/AgileVentures/agile-bot/issues/45">refactoring</a> needs.  I&rsquo;m still intimidated by the apparent brittleness of the Hubot stack we have on AgileBot.  We followed the drive-by pattern and moved on to pastures new after the &ldquo;Kent Beck&rdquo; scrum.</p>
+
+<p>Raoul had joined us in the scrum, which gave us a chance to talk about the need for team meetings on WSO and whether the AsyncVoting was replacing the team meetings effectively.  Michael reflected that there were a few people who attended those meetings who weren&rsquo;t around now.  Neither Michael nor Raoul seemed passionate about re-instating regular long meetings voting on tickets, and I reflected that what I really wanted was the AsyncVoter bot to kick in and keep us regularly voting on tickets.  We&rsquo;ve built a little RESTful core, and I&rsquo;m worried that we have to hook up fast to something that actually benefits the community.  Got to get a slack bot shell working even if it&rsquo;s only semi-automated.</p>
+
+<p>After the scrum I drove on a ticket addressing missing video links on the main WSO.  That was fairly straightforward, and although there&rsquo;s still lots of technical debt to pay down on both WSO and AgileBot, we managed to get a feature out and a bug fix in place while not making the code any worse.  In fact I think we improved the test config for AgileBot and reduced the numbers of line of code in both.   In the ideal world we&rsquo;d have a bigger team of folks helping us knock off these additional refactoring tickets we keep generating.  In slack Mikael was making some great suggestions about AgileVentures letting people know what they could do to help given the amount of time they have to spare, e.g. </p>
+
+<ul>
+<li>&lt;15 minutes to spare?  Review a pull request, vote on a ticket, or even start a new vote</li>
+<li>&lt;30 minutes to spare? join a scrum and say hi, give us an update on what you&rsquo;re doing, read a project&rsquo;s documentation; observe a pairing session</li>
+<li>&lt;60 minutes to spare? Start getting set up with a code base for a new project</li>
+<li>&lt;90 minutes to spare? Start working on a ticket, join a pairing session</li>
+</ul>
+
+<p>What I&rsquo;d really love is a performant version of WSO that could give every user a feed of things to do with associated time commitments.  Almost like the feed of unanswered questions from StackOverflow, but a feed of chunks of work to be done on tickets, voting on things, reviewing code:</p>
+
+<p><img alt="StackOverflows unanswered question feed" src="https://www.dropbox.com/s/pvp2i3q3d3xkpmm/Screenshot%202016-11-16%2009.48.54.png?dl=1" /></p>
+
+<p>Maybe that will be easier to achieve than the wall of pairing/meeting live stream video feeds I keep imagining.</p>
+
+<h3>Related Videos:</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=aYCGCegwjvY">&ldquo;Martin Fowler&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=qRCeF-IECaU">Pairing on AgileBot</a></li>
+<li><a href="https://www.youtube.com/watch?v=1gMF_0oALyY">&ldquo;Kent Beck&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=tKqG-pSQcfU">Pairing on WebSiteOne</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
