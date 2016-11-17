@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Semi Automatic Asynchronous Planning Poker Bot</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_11 x2016_11_17 x2016_11_17_semi-automatic x2016_11_17_semi-automatic_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/11/17/semi-automatic/">Semi Automatic Asynchronous Planning Poker Bot</a></h2>
+        <h5 class='date'>17 Nov 2016</h5>
+    <p>The AsyncVoter project has been humming recently.  A lot of people interested in coding in Node, putting a React front end together.  They say that JavaScript is hot.  We&rsquo;ve also had new folks come in and start to understand some of the Agile development approach, self-organise to get a series of basic RESTful endpoints in place.  All great, but I was starting to worry that our little RESTful MVP was not really making enough contact with end users.  I was getting antsy that we needed to start automating some of the tedious and error-prone parts of running asynchronous votes manually in project slack channels.</p>
+
+<p>I felt that slack integration was key.  We had another vote on refactoring test support code so couldn&rsquo;t start another vote on slack integration if I was to follow my own guidelines of no voting on multiple stories in parallel.  I settled for moving the slack integration ticket to the top of the backlog and searching for integration mechanisms.  Several of our systems ping messages to slack, but I wanted more.  Custom slash commands for slack looked like they might work, but they had custom payloads that our RESTful endpoint wasn&rsquo;t set up to process.  I didn&rsquo;t like the idea of customising endpoint for slack, since it would be nice to support clients other than slack.  I also wanted to be able to have a personal bot that our community members could interact with.  I went ahead and made a <a href="https://api.slack.com/bot-users">custom bot integration</a>:</p>
+
+<p><img alt="AsyncVotingBot integration" src="https://www.dropbox.com/s/wopizsow3ortdbu/Screenshot%202016-11-17%2009.17.40.png?dl=1" /></p>
+
+<p>It&rsquo;s easy to get put off making custom commands and integration in Slack when they paste the &ldquo;Your team has reached the integration limit&rdquo; all over the place.  However this doesn&rsquo;t mean you can&rsquo;t add more configurations on the integrations you already have, including slash commands and bots.  One thing that accelerated my progress here was <a href="https://howdy.ai/botkit/">botkit</a>, which allowed me to avoid diving into Slack&rsquo;s real time messaging API and just get up and started super fast.  Ironically, as I put the bot together Arreche found a <a href="https://github.com/Sergej-Popov/hubot-planning-poker">Planning Poker Plugin</a> for hubot and was getting that set up in another channel.  There are no new things under the sun!  </p>
+
+<p>Just writing this blog I did a search for &ldquo;slack planning poker&rdquo; and found a number of things that would have been good to review and check earlier:</p>
+
+<ul>
+<li>https://tangocode.com/2015/12/scrum-planning-poker-for-slack-part-1/</li>
+<li>https://github.com/apheleia/plan-b-ot</li>
+<li>https://github.com/nateyolles/slack-pokerbot</li>
+<li>https://github.com/paulodiovani/planning-poker-slack</li>
+<li>https://www.scrumbot.co/</li>
+</ul>
+
+<p>Although I think most of these are designed for synchronous operation, i.e. assuming that the team will all be assembled in the channel at the same time.  What I&rsquo;m really after is something that can maintain open votes on a number of channels and provide a mechanism for people to check what they need to vote on, and have the bot proactively prompt the channel to ensure that votes don&rsquo;t get left hanging.</p>
+
+<p>I still had fun creating a bot and running a semi-automated asynchronous vote in the #async_voter channel:</p>
+
+<p><img alt="async bot announces" src="https://www.dropbox.com/s/j2vu3nwh53yt1hp/Screenshot%202016-11-17%2009.28.26.png?dl=1" /></p>
+
+<p>Each team member messaged the bot independently like so:</p>
+
+<p><img alt="me messaging the bot" src="https://www.dropbox.com/s/obn0y3xphjn85pg/Screenshot%202016-11-17%2009.29.38.png?dl=1" /></p>
+
+<p>and then I prompted the bot to display the result:</p>
+
+<p><img alt="async bot results" src="https://www.dropbox.com/s/4s2pjly2u2emsaf/Screenshot%202016-11-17%2009.28.58.png?dl=1" /></p>
+
+<p>Here&rsquo;s the complete code for the bot:</p>
+<pre class="highlight javascript"><code>
+<span class="kd">var</span> <span class="nx">Botkit</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'botkit'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">controller</span> <span class="o">=</span> <span class="nx">Botkit</span><span class="p">.</span><span class="nx">slackbot</span><span class="p">({</span>
+  <span class="na">debug</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">});</span>
+
+<span class="nx">controller</span><span class="p">.</span><span class="nx">spawn</span><span class="p">({</span>
+  <span class="na">token</span><span class="p">:</span> <span class="s2">"&lt;SLACK_BOT_TOKEN&gt;"</span><span class="p">,</span>
+<span class="p">}).</span><span class="nx">startRTM</span><span class="p">()</span>
+
+<span class="kd">var</span> <span class="nx">votes</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="nx">controller</span><span class="p">.</span><span class="nx">hears</span><span class="p">(</span><span class="s1">'start vote'</span><span class="p">,[</span><span class="s1">'direct_message'</span><span class="p">,</span><span class="s1">'direct_mention'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">bot</span><span class="p">,</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">bot</span><span class="p">.</span><span class="nx">reply</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="s1">'&lt;!channel&gt; NEW ASYNC VOTE on "Slack Integration" https://github.com/AgileVentures/AsyncVoter/issues/12  Please DM me with: `vote 1` (Simple), `vote 2` (Medium) or `vote 3` (Hard) - Discussion in ticket or here as you prefer. :slightly_smiling_face:'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">controller</span><span class="p">.</span><span class="nx">hears</span><span class="p">(</span><span class="s1">'vote'</span><span class="p">,[</span><span class="s1">'direct_message'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">bot</span><span class="p">,</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+  <span class="nx">vote</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">text</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/</span><span class="se">\d</span><span class="sr">+/</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="nx">votes</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="na">vote</span><span class="p">:</span><span class="nx">vote</span><span class="p">,</span> <span class="na">user</span><span class="p">:</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">});</span>
+  <span class="nx">bot</span><span class="p">.</span><span class="nx">reply</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="s1">'I received your vote: '</span> <span class="o">+</span> <span class="nx">vote</span> <span class="o">+</span>  <span class="s1">' &lt;@'</span><span class="o">+</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="o">+</span><span class="s1">'&gt;'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">controller</span><span class="p">.</span><span class="nx">hears</span><span class="p">(</span><span class="s1">'result'</span><span class="p">,[</span><span class="s1">'direct_message'</span><span class="p">,</span><span class="s1">'direct_mention'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">bot</span><span class="p">,</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">response</span> <span class="o">=</span> <span class="s1">'votes so far: \n\n'</span>
+  <span class="nx">votes</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">vote</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">response</span> <span class="o">+=</span> <span class="s1">'&lt;@'</span> <span class="o">+</span> <span class="nx">vote</span><span class="p">.</span><span class="nx">user</span> <span class="o">+</span> <span class="s1">'&gt; voted: '</span><span class="o">+</span> <span class="nx">vote</span><span class="p">.</span><span class="nx">vote</span> <span class="o">+</span> <span class="s1">'\n'</span><span class="p">;</span>
+  <span class="p">});</span>
+  <span class="nx">bot</span><span class="p">.</span><span class="nx">reply</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+<p>Note that I hard coded the ticket I wanted the vote on, I ran locally without any persistence, so if my code or computer crashed then state would be lost, and the bot needed to be prompted to both start and finish the vote.  We could wail and gnash our teeth and say that we need all those features before we could push the bot live, but by eschewing them I was able to run a proof of concept of a successful vote in a channel, and I actually saved myself having to update things based on the DMs I would receive during manual asynchronous votes.  You can say, oh, it&rsquo;s obvious that it would all work, but I don&rsquo;t trust computers to do what I think they&rsquo;ll do.  My mental model of them is so often faulty.</p>
+
+<p>I also spiked this without tests.  I did manually test the code in a private channel before unleashing on #async_voter, but I think this is a situation to spike, to get a tracer bullet in to see the round trip.  The danger of course would be to get drunk with power here and keep building on top of this untested code until it really is a total mess and impossible to change without breaking something.  We&rsquo;ve got a nice tested RESTful core ready to start storing the data persistently.  I can run a few more test votes on other channels, and gradually refine the look and feel of the bot, ensuring along the way that it is having the positive effect on the projects and community that I am hoping for.</p>
+
+<p>I think this is the core of the Agile process.  Apart from remembering to reflect on your process frequently, it&rsquo;s getting some sort of working code in front of the end users as often as possible.  I&rsquo;m also a big fan of this semi-automated approach.  I still had to intervene to stop and start the vote, but it saved me some time compared to a full manual run.  What I really need to add next is to have the bot update the channel where the vote started when someone makes a vote.  Let&rsquo;s see if I can add a little of that today &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

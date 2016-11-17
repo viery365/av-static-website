@@ -5,22 +5,103 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-16T00:00:00+00:00</updated>
+  <updated>2016-11-17T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Semi Automatic Asynchronous Planning Poker Bot</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/17/semi-automatic/"/>
+    <id>http://blog.url.com/2016/11/17/semi-automatic/</id>
+    <published>2016-11-17T00:00:00+00:00</published>
+    <updated>2016-11-17T09:42:03+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;The AsyncVoter project has been humming recently.  A lot of people interested in coding in Node, putting a React front end together.  They say that JavaScript is hot.  We&amp;rsquo;ve also had new folks come in and start to understand some of the Agile development approach, self-organise to get a series of basic RESTful endpoints in place.  All great, but I was starting to worry that our little RESTful MVP was not really making enough contact with end users.  I was getting antsy that we needed to start automating some of the tedious and error-prone parts of running asynchronous votes manually in project slack channels.&lt;/p&gt;
+
+&lt;p&gt;I felt that slack integration was key.  We had another vote on refactoring test support code so couldn&amp;rsquo;t start another vote on slack integration if I was to follow my own guidelines of no voting on multiple stories in parallel.  I settled for moving the slack integration ticket to the top of the backlog and searching for integration mechanisms.  Several of our systems ping messages to slack, but I wanted more.  Custom slash commands for slack looked like they might work, but they had custom payloads that our RESTful endpoint wasn&amp;rsquo;t set up to process.  I didn&amp;rsquo;t like the idea of customising endpoint for slack, since it would be nice to support clients other than slack.  I also wanted to be able to have a personal bot that our community members could interact with.  I went ahead and made a &lt;a href="https://api.slack.com/bot-users"&gt;custom bot integration&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="AsyncVotingBot integration" src="https://www.dropbox.com/s/wopizsow3ortdbu/Screenshot%202016-11-17%2009.17.40.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s easy to get put off making custom commands and integration in Slack when they paste the &amp;ldquo;Your team has reached the integration limit&amp;rdquo; all over the place.  However this doesn&amp;rsquo;t mean you can&amp;rsquo;t add more configurations on the integrations you already have, including slash commands and bots.  One thing that accelerated my progress here was &lt;a href="https://howdy.ai/botkit/"&gt;botkit&lt;/a&gt;, which allowed me to avoid diving into Slack&amp;rsquo;s real time messaging API and just get up and started super fast.  Ironically, as I put the bot together Arreche found a &lt;a href="https://github.com/Sergej-Popov/hubot-planning-poker"&gt;Planning Poker Plugin&lt;/a&gt; for hubot and was getting that set up in another channel.  There are no new things under the sun!  &lt;/p&gt;
+
+&lt;p&gt;Just writing this blog I did a search for &amp;ldquo;slack planning poker&amp;rdquo; and found a number of things that would have been good to review and check earlier:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;https://tangocode.com/2015/12/scrum-planning-poker-for-slack-part-1/&lt;/li&gt;
+&lt;li&gt;https://github.com/apheleia/plan-b-ot&lt;/li&gt;
+&lt;li&gt;https://github.com/nateyolles/slack-pokerbot&lt;/li&gt;
+&lt;li&gt;https://github.com/paulodiovani/planning-poker-slack&lt;/li&gt;
+&lt;li&gt;https://www.scrumbot.co/&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Although I think most of these are designed for synchronous operation, i.e. assuming that the team will all be assembled in the channel at the same time.  What I&amp;rsquo;m really after is something that can maintain open votes on a number of channels and provide a mechanism for people to check what they need to vote on, and have the bot proactively prompt the channel to ensure that votes don&amp;rsquo;t get left hanging.&lt;/p&gt;
+
+&lt;p&gt;I still had fun creating a bot and running a semi-automated asynchronous vote in the #async_voter channel:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="async bot announces" src="https://www.dropbox.com/s/j2vu3nwh53yt1hp/Screenshot%202016-11-17%2009.28.26.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Each team member messaged the bot independently like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="me messaging the bot" src="https://www.dropbox.com/s/obn0y3xphjn85pg/Screenshot%202016-11-17%2009.29.38.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and then I prompted the bot to display the result:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="async bot results" src="https://www.dropbox.com/s/4s2pjly2u2emsaf/Screenshot%202016-11-17%2009.28.58.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the complete code for the bot:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;Botkit&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'botkit'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;controller&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Botkit&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;slackbot&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+  &lt;span class="na"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+
+&lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;spawn&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+  &lt;span class="na"&gt;token&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;SLACK_BOT_TOKEN&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;startRTM&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;votes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[];&lt;/span&gt;
+
+&lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;hears&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'start vote'&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="s1"&gt;'direct_message'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'direct_mention'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;reply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;!channel&amp;gt; NEW ASYNC VOTE on "Slack Integration" https://github.com/AgileVentures/AsyncVoter/issues/12  Please DM me with: `vote 1` (Simple), `vote 2` (Medium) or `vote 3` (Hard) - Discussion in ticket or here as you prefer. :slightly_smiling_face:'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+
+&lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;hears&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'vote'&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="s1"&gt;'direct_message'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="nx"&gt;vote&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;text&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;\d&lt;/span&gt;&lt;span class="sr"&gt;+/&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="nx"&gt;votes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="na"&gt;vote&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nx"&gt;vote&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;user&lt;/span&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+  &lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;reply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'I received your vote: '&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;vote&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;  &lt;span class="s1"&gt;' &amp;lt;@'&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;user&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;'&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+
+&lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;hears&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'result'&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="s1"&gt;'direct_message'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'direct_mention'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'votes so far: \n\n'&lt;/span&gt;
+  &lt;span class="nx"&gt;votes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;forEach&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;vote&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+     &lt;span class="nx"&gt;response&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;@'&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;vote&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;user&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;'&amp;gt; voted: '&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;vote&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;vote&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;'\n'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;});&lt;/span&gt;
+  &lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;reply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;response&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that I hard coded the ticket I wanted the vote on, I ran locally without any persistence, so if my code or computer crashed then state would be lost, and the bot needed to be prompted to both start and finish the vote.  We could wail and gnash our teeth and say that we need all those features before we could push the bot live, but by eschewing them I was able to run a proof of concept of a successful vote in a channel, and I actually saved myself having to update things based on the DMs I would receive during manual asynchronous votes.  You can say, oh, it&amp;rsquo;s obvious that it would all work, but I don&amp;rsquo;t trust computers to do what I think they&amp;rsquo;ll do.  My mental model of them is so often faulty.&lt;/p&gt;
+
+&lt;p&gt;I also spiked this without tests.  I did manually test the code in a private channel before unleashing on #async_voter, but I think this is a situation to spike, to get a tracer bullet in to see the round trip.  The danger of course would be to get drunk with power here and keep building on top of this untested code until it really is a total mess and impossible to change without breaking something.  We&amp;rsquo;ve got a nice tested RESTful core ready to start storing the data persistently.  I can run a few more test votes on other channels, and gradually refine the look and feel of the bot, ensuring along the way that it is having the positive effect on the projects and community that I am hoping for.&lt;/p&gt;
+
+&lt;p&gt;I think this is the core of the Agile process.  Apart from remembering to reflect on your process frequently, it&amp;rsquo;s getting some sort of working code in front of the end users as often as possible.  I&amp;rsquo;m also a big fan of this semi-automated approach.  I still had to intervene to stop and start the vote, but it saved me some time compared to a full manual run.  What I really need to add next is to have the bot update the channel where the vote started when someone makes a vote.  Let&amp;rsquo;s see if I can add a little of that today &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Automating What To Do Next</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/16/automating-what-to-do-next/"/>
     <id>http://blog.url.com/2016/11/16/automating-what-to-do-next/</id>
     <published>2016-11-16T00:00:00+00:00</published>
-    <updated>2016-11-16T09:51:38+00:00</updated>
+    <updated>2016-11-17T10:22:01+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;After the &amp;ldquo;Martin Fowler&amp;rdquo; scrum I caught up with Raphael to talk about the dynamic of the AsyncVoter project.  Raphael had been suggesting a team meeting.  Team meetings can be great.  I think if a team wants to move forward fast it&amp;rsquo;s great to get everyone in a room, and ideally match that with a shared working space that everyone can come to.  However that usually takes a lot of money to set up.  Actually having the team all distributed around the world might have advantages in terms of pulling in more influences and perspectives.  Of course you don&amp;rsquo;t need a shared space for a team meeting.  We&amp;rsquo;ve run them regularly on different projects at different times.  The ability to have them is a function of team members availability.  Sometimes teams will form or dissipate based on whether there is sufficient overlap in their schedules. &lt;/p&gt;
+    <content type="html">&lt;p&gt;After the &amp;ldquo;Martin Fowler&amp;rdquo; scrum I caught up with Raphael to talk about the dynamic of the AsyncVoter project.  Raphael had been suggesting a team meeting.  Team meetings can be great.  I think if a team wants to move forward fast it&amp;rsquo;s great to get everyone in a room, and ideally match that with a shared working space that everyone can come to.  However that usually takes a lot of money to set up :-)  Although, having the team all distributed around the world might have advantages in terms of pulling in more influences and perspectives.  Of course you don&amp;rsquo;t need a shared space for a team meeting.  We&amp;rsquo;ve run them regularly on different projects at different times.  The ability to have them is a function of team members&amp;rsquo; availability.  Sometimes teams will form or dissipate based on whether there is sufficient overlap in their schedules. &lt;/p&gt;
 
-&lt;p&gt;Part of the idea behind AsyncVoter project is to reduce the need for team meetings.  Not that a team shouldn&amp;rsquo;t get together if they want to, but in WSO at least I&amp;rsquo;d got the sense that people weren&amp;rsquo;t enjoying the meetings, which usually involved voting on tickets in the backlog.  In LocalSupport people were just not on at the same time, or couldn&amp;rsquo;t use hangouts.  I wondered if part of the issue was understanding what to do next.  In a session with Raphael off the back of the &amp;ldquo;Martin Fowler&amp;rdquo; scrum I wrote up the following:&lt;/p&gt;
+&lt;p&gt;Part of the idea behind the AsyncVoter project is to reduce the need for team meetings.  Not that a team shouldn&amp;rsquo;t get together if they want to, but in WSO at least I&amp;rsquo;d got the sense that people weren&amp;rsquo;t enjoying the meetings, which usually involved voting on tickets in the backlog.  In LocalSupport people were just not on at the same time, or couldn&amp;rsquo;t use hangouts.  I wondered if part of desire for a team meeting was related to the issue was understanding what to do next.  In a session with Raphael off the back of the &amp;ldquo;Martin Fowler&amp;rdquo; scrum I wrote up the following:&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;Using Waffle and GitHub to work out what to do next
 ---------------------------------------
 
@@ -28,24 +109,24 @@
 
 1) are there any tickets "in progress" on [waffle](https://waffle.io/AgileVentures/AsyncVoter)? If you'd like to help reach out to the assigned team member to see if you can help
 
-1) is there a estimated ticket in the ready column on waffle that I am interested in working on?
+1) is there an estimated ticket in the ready column on waffle that I am interested in working on?
 1a) yes --&amp;gt; then start work on it, pairing or not
 
 1b) no --&amp;gt; find a ticket from the backlog (on waffle) that I'm interested in and start a vote (in a scrum, or async)
 
 2) throughout process rather than adding new features, new elements or major refactoring to the existing ticket, freely make new tickets to go on to the backlog (on waffle)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Hopefully that was some help.  It&amp;rsquo;s seems transparent in my mind as a way of doing distributed Agile work, but there&amp;rsquo;s no reason why others should have that pattern in their minds.  Would be great to have one of those animated videos showing the flow.&lt;/p&gt;
+&lt;p&gt;Hopefully that was some help.  It seems transparent in my mind as a way of doing distributed Agile work, but there&amp;rsquo;s no reason why others should have that pattern in their minds.  Would be great to have one of those animated videos showing the flow.&lt;/p&gt;
 
 &lt;p&gt;Michael and I started off following the above pattern for WSO after lunch.  We went through the open pull requests, &amp;ldquo;in progress&amp;rdquo; tickets, the &amp;ldquo;ready&amp;rdquo; column and the &amp;ldquo;estimated&amp;rdquo; column.  We have an additional column in WSO called estimated for those tickets we have voted on but yet to prioritise:&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="WSO waffle board" src="https://www.dropbox.com/s/o2kc9kx6gimfmx0/Screenshot%202016-11-16%2009.31.25.png?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;As usual, I agonised about all the different things we seemed to need to get done on WSO, but ultimately followed the &amp;ldquo;drive by&amp;rdquo; or &amp;ldquo;whistle-stop&amp;rdquo; approach that says finish things that are in the rightmost columns on the board, and if there isn&amp;rsquo;t easy progress move back across the board from right to left so that columns get cleared out.  I&amp;rsquo;m a terrible person for leaving stuff lying around.  I&amp;rsquo;ve also noticed that as you clear stuff up you make more space for new things.  We attacked a ticket in the ready column related to AgileBot that looked simple.  Michael drove for an hour, and we got the functionality we needed, but identified oh so many &lt;a href="https://github.com/AgileVentures/agile-bot/issues/45"&gt;refactoring&lt;/a&gt; needs.  I&amp;rsquo;m still intimidated by the apparent brittleness of the Hubot stack we have on AgileBot.  We followed the drive-by pattern and moved on to pastures new after the &amp;ldquo;Kent Beck&amp;rdquo; scrum.&lt;/p&gt;
+&lt;p&gt;As usual, I agonised about all the different things we seemed to need to get done on WSO, but ultimately followed the &amp;ldquo;drive by&amp;rdquo; or &amp;ldquo;whistle-stop&amp;rdquo; approach that says finish things that are in the rightmost columns on the board, and if there isn&amp;rsquo;t easy progress move back across the board from right to left so that columns get cleared out (assuming &amp;ldquo;done&amp;rdquo; is rightmost).  I&amp;rsquo;m a terrible person for leaving stuff lying around.  I&amp;rsquo;ve also noticed that as you clear stuff up you make more space to think about new things.  We attacked a ticket in the ready column related to AgileBot that looked simple.  Michael drove for an hour, and we got the functionality we needed, but identified &amp;ldquo;oh so many&amp;rdquo; &lt;a href="https://github.com/AgileVentures/agile-bot/issues/45"&gt;refactoring&lt;/a&gt; needs.  I&amp;rsquo;m still intimidated by the apparent brittleness of the Hubot stack we have on AgileBot.  We followed the drive-by pattern and moved on to pastures new after the &amp;ldquo;Kent Beck&amp;rdquo; scrum.&lt;/p&gt;
 
-&lt;p&gt;Raoul had joined us in the scrum, which gave us a chance to talk about the need for team meetings on WSO and whether the AsyncVoting was replacing the team meetings effectively.  Michael reflected that there were a few people who attended those meetings who weren&amp;rsquo;t around now.  Neither Michael nor Raoul seemed passionate about re-instating regular long meetings voting on tickets, and I reflected that what I really wanted was the AsyncVoter bot to kick in and keep us regularly voting on tickets.  We&amp;rsquo;ve built a little RESTful core, and I&amp;rsquo;m worried that we have to hook up fast to something that actually benefits the community.  Got to get a slack bot shell working even if it&amp;rsquo;s only semi-automated.&lt;/p&gt;
+&lt;p&gt;Raoul had joined us in the scrum, which gave us a chance to talk about whether we were missing team meetings on WSO and whether the AsyncVoting was replacing the team meetings effectively.  Michael reflected that there were a few people who attended those meetings who weren&amp;rsquo;t around now.  Neither Michael nor Raoul seemed passionate about re-instating regular long meetings voting on tickets, and I reflected that what I really wanted was the AsyncVoter bot to kick in and keep us regularly voting on tickets.  We&amp;rsquo;ve built a little RESTful core, and I&amp;rsquo;m worried that we have to hook up fast to something that actually benefits the community.  I&amp;rsquo;ve got to get a slack bot shell working even if it&amp;rsquo;s only semi-automated!&lt;/p&gt;
 
-&lt;p&gt;After the scrum I drove on a ticket addressing missing video links on the main WSO.  That was fairly straightforward, and although there&amp;rsquo;s still lots of technical debt to pay down on both WSO and AgileBot, we managed to get a feature out and a bug fix in place while not making the code any worse.  In fact I think we improved the test config for AgileBot and reduced the numbers of line of code in both.   In the ideal world we&amp;rsquo;d have a bigger team of folks helping us knock off these additional refactoring tickets we keep generating.  In slack Mikael was making some great suggestions about AgileVentures letting people know what they could do to help given the amount of time they have to spare, e.g. &lt;/p&gt;
+&lt;p&gt;After the scrum I drove on a ticket addressing missing video links on the main WSO site.  That was fairly straightforward, and although there&amp;rsquo;s still lots of technical debt to pay down on both WSO and AgileBot, we managed to get a feature out and a bug fix in place while not making the code any worse.  In fact I think we improved the test config for AgileBot and reduced the numbers of line in the app code for both projects.   In the ideal world we&amp;rsquo;d have a bigger team of folks helping us knock off these additional refactoring tickets we keep generating.  In slack Mikael was making some great suggestions about AgileVentures letting people know what they could do to help, given the amount of time they have to spare, e.g. &lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&amp;lt;15 minutes to spare?  Review a pull request, vote on a ticket, or even start a new vote&lt;/li&gt;
@@ -209,7 +290,7 @@ Percentage of the requests served within a certain time (ms)
     <link rel="alternate" href="http://blog.url.com/2016/11/11/naming-and-cucumber/"/>
     <id>http://blog.url.com/2016/11/11/naming-and-cucumber/</id>
     <published>2016-11-11T00:00:00+00:00</published>
-    <updated>2016-11-14T10:06:08+00:00</updated>
+    <updated>2016-11-17T09:42:37+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -240,7 +321,7 @@ Percentage of the requests served within a certain time (ms)
       &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;updated_at: :desc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The cukes went green and I had to fix up a few specs for the EventInstanceHelper and the Event class.  I was&amp;rsquo;t sure if the fully unique id was actually necessary, but when I saw the specs for EventInstanceHelper that were saying a unique id should be returned, I felt I really wanted to stick with the change.  Arguably it could be the subject of a completely separate pull request, driven by a different cucumber scenario.  I&amp;rsquo;ve been being harsh with the AsyncVoter folks to keep out any functionality not related to the feature being worked on.  It&amp;rsquo;s easy to give myself slack when I&amp;rsquo;m wo on the other side of the barrier; but in my defence this is a bug fix, and I&amp;rsquo;m trying to make sure we aren&amp;rsquo;t losing valuable data about user activity.  I did try to get the feature to wrap this with limited success.  In the process I did do major refactoring of the cukes, which relates to a &lt;a href="https://github.com/AgileVentures/LocalSupport/pull/391"&gt;PR from John on LocalSupport&lt;/a&gt; where he&amp;rsquo;s using a lot of nested steps, which I&amp;rsquo;m not such a big fan of.&lt;/p&gt;
+&lt;p&gt;The cukes went green and I had to fix up a few specs for the EventInstanceHelper and the Event class.  I wasn&amp;rsquo;t sure if the fully unique id was actually necessary, but when I saw the specs for EventInstanceHelper that were saying a unique id should be returned, I felt I really wanted to stick with the change.  Arguably it could be the subject of a completely separate pull request, driven by a different cucumber scenario.  I&amp;rsquo;ve been being harsh with the AsyncVoter folks to keep out any functionality not related to the feature being worked on.  It&amp;rsquo;s easy to give myself slack when I&amp;rsquo;m on the other side of the barrier; but in my defence this is a bug fix, and I&amp;rsquo;m trying to make sure we aren&amp;rsquo;t losing valuable data about user activity.  I did try to get the feature to wrap this with limited success.  In the process I did do major refactoring of the cukes, which relates to a &lt;a href="https://github.com/AgileVentures/LocalSupport/pull/391"&gt;PR from John on LocalSupport&lt;/a&gt; where he&amp;rsquo;s using a lot of nested steps, which I&amp;rsquo;m not such a big fan of.&lt;/p&gt;
 
 &lt;p&gt;On WSO the editing a hangout url on a repeating event cuke scenario had gotten really long:&lt;/p&gt;
 &lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Edit Hangout URL on repeating event and ensure event stays live
@@ -262,7 +343,7 @@ Percentage of the requests served within a certain time (ms)
     &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
     &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"This event is now live!"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The previous day with Michael I&amp;rsquo;d inserted comments about what each section was doing.  I resolved to turn those into steps.  The quick and dirty path would be to take each set of steps and turn them into nested steps.  But the approach I prefer is to make new steps that are collections of ruby statements to avoid multiple levels of redirection.  The steps I generated yesterday were:&lt;/p&gt;
+&lt;p&gt;The previous day with Michael I&amp;rsquo;d inserted comments about what each section was doing.  I resolved to turn those into steps.  The quick and dirty path would be to take each set of steps and turn them into nested steps, but the approach I prefer is to make new steps that are collections of ruby statements to avoid multiple levels of redirection.  The steps I generated yesterday were:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;And&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I manually set a hangout link for event "([^"]*)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
   &lt;span class="vi"&gt;@hangout_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&amp;amp;authuser=0'&lt;/span&gt;
   &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -296,15 +377,15 @@ Percentage of the requests served within a certain time (ms)
     &lt;span class="nf"&gt;Then&lt;/span&gt; &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt; shows live for that hangout link for the event duration
     &lt;span class="nf"&gt;And&lt;/span&gt; &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt; is not live the following day
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Maybe I&amp;rsquo;m crazy, not re-using the steps, but my goal is to make it transparent for me in the future, and other developers, to get from the English description straight to the description at the Ruby/RSpec/Capybara level.  What I find again and again in WSO and LS where the steps are deeply nested is that I get tripped up because the English descriptions can be slightly misleading.  This is actually a facet of a more general problem for coding, in that wherever an abstraction (e.g. cuke step, or method name, or API interface) fails to accurately reflect what&amp;rsquo;s going on under the hood, you can easily be misled.  Of course it all comes back to humans.  What&amp;rsquo;s transparently clear for one person might not be for another.  But take a look at this background step from the same Cuke file:&lt;/p&gt;
+&lt;p&gt;Maybe I&amp;rsquo;m crazy, not re-using the steps, but my goal is to make it transparent for me in the future (and other developers), to get from the English description straight to the description at the Ruby/RSpec/Capybara level.  What I find again and again in WSO and LS, where the steps are deeply nested, is that I get tripped up because the English descriptions can be slightly misleading.  This is actually a facet of a more general problem for coding, in that wherever an abstraction (e.g. cuke step, or method name, or API interface) fails to accurately reflect what&amp;rsquo;s going on under the hood, you can easily be misled.  Of course it all comes back to humans.  What&amp;rsquo;s transparently clear for one person might not be for another.  But take a look at this background step from the same Cuke file:&lt;/p&gt;
 &lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="err"&gt;And the following event instances exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
  &lt;span class="err"&gt;...&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;table&lt;/span&gt; &lt;span class="err"&gt;of&lt;/span&gt; &lt;span class="err"&gt;dat&lt;/span&gt;&lt;span class="nf"&gt;a&lt;/span&gt;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We&amp;rsquo;d created this to replace the original setup step that referred to hangouts (for which there was no corresponding domain model). The original setup step had also scarily used RSpec factories that were shared with the specs and did a fair amount of data massaging in the process.  Having made the change we realised that to keep things working we would also need a chunk of complex participant data.  It was trivial to adjust our new background step to add that data, but now that was hidden from someone working at the level of the feature file so we adjusted our step name as follows:&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;d created this to replace the original setup step that referred to hangouts (for which there was no corresponding domain model). The original setup step had also scarily used RSpec factories that were shared with the specs and did a fair amount of data massaging in the process.  Having made the change we realised that to keep things working we would also need a chunk of complex participant data.  It was trivial to adjust our new background step to add that data, but now that was hidden from someone working at the level of the feature file, so we adjusted our step name as follows:&lt;/p&gt;
 &lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="err"&gt;And the following event instances (with default participants) exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
  &lt;span class="err"&gt;...&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;table&lt;/span&gt; &lt;span class="err"&gt;of&lt;/span&gt; &lt;span class="err"&gt;dat&lt;/span&gt;&lt;span class="nf"&gt;a&lt;/span&gt;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Too much perhaps?  But the intention is to give someone else who wants to use that step (or method) a heads up about what&amp;rsquo;s going on under the hood.  The ruby contents of the cuke steps above are a bit long and need some DRYing out, but I think I&amp;rsquo;d rather have them DRYed out into other ruby methods, that are well named.  There&amp;rsquo;s perhaps almost too much room for nuance with the English descriptions of pure Cucumber steps.  So for example the following:&lt;/p&gt;
+&lt;p&gt;Too much perhaps?  But the intention is to give someone else who wants to use that step (or method) a heads up about what&amp;rsquo;s going on under the hood.  The ruby contents of the cuke steps above are a bit long and need some DRYing out, but I think I&amp;rsquo;d rather have them DRYed out into other ruby methods that are well named.  There&amp;rsquo;s perhaps almost too much room for nuance with the English descriptions of pure Cucumber steps.  So for example the following:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^"([^"]*)" shows live for that hangout link for the event duration$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
   &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -346,7 +427,7 @@ end
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;which allows that nested step to be re-used in other cucumber scenarios, but the debugging support for nested steps is not as good in my experience.  Maybe this is just bike-shedding (i.e. focusing on trivialities).  The big-picture critical thing seems likely to be a constant general refining to a consistent domain model and methods/steps that are not too long and not too short and do a best effort to have a description that doesn&amp;rsquo;t leave too many surprises under the hood.&lt;/p&gt;
 
-&lt;p&gt;I made sure that the refactored cukes did actually break (when the app functionality was removed), which took a combination of adjusting the Event#recent&lt;em&gt;hangouts method back to use `created&lt;/em&gt;at&lt;code&gt;AND removing the secure random id from the EventsInstanceHelper, indicating that both were needed to get the desired behaviour at the user level; so I didn&amp;#39;t need to feel a total hypocrite for pushing on the AsyncVoter folks to remove all extraneous code :-)  That didn&amp;#39;t stop me waking up in the middle of the night thinking, &amp;quot;we don&amp;#39;t even need to search for recent_hangouts!&amp;quot; - we just grab the latest one reverse sorted by updated_at and check if it&amp;#39;s live, can&amp;#39;t we?  That&lt;/code&gt;recent_hangouts` method is used nowhere else in the code base.  The method name makes no sense in terms of what we want really.  What we want to know is whether the most recently updated event instance is still live, isn&amp;rsquo;t it?  More refactoring awaits!&lt;/p&gt;
+&lt;p&gt;I made sure that the refactored cukes did actually break (when the app functionality was removed), which took a combination of adjusting the Event#recent&lt;em&gt;hangouts method back to use `created&lt;/em&gt;at&lt;code&gt;AND removing the secure random id from the EventsInstanceHelper, indicating that both were needed to get the desired behaviour at the user level; so I didn&amp;#39;t need to feel a total hypocrite for pushing on the AsyncVoter folks to remove all extraneous code :-)  That didn&amp;#39;t stop me waking up in the middle of the night thinking, &amp;quot;we don&amp;#39;t even need to search for recent_hangouts!&amp;quot; - we just grab the latest one, reverse sorted by updated_at, and check if it&amp;#39;s live, can&amp;#39;t we?  That&lt;/code&gt;recent_hangouts` method is used nowhere else in the code base.  The method name makes no sense in terms of what we want really.  What we want to know is whether the most recently updated event instance is still live, isn&amp;rsquo;t it?  More refactoring awaits!&lt;/p&gt;
 
 &lt;h3&gt;Related Videos&lt;/h3&gt;
 
@@ -421,59 +502,6 @@ end
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=DlS0zvtKqhU"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=My04-8l_INc"&gt;Pairing on WebSiteOne&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Zb29w0BwtEw"&gt;More Pairing on WebSiteOne &lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Resilient Code Bases</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/09/resilience/"/>
-    <id>http://blog.url.com/2016/11/09/resilience/</id>
-    <published>2016-11-09T00:00:00+00:00</published>
-    <updated>2016-11-10T10:17:58+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;How to create a resilient code base?  I daily wrestle with the legacy code base of WebsiteOne, wanting to make more changes but being afraid of tests with strange dependencies.  Sometimes they don&amp;rsquo;t test the right thing; while others lock in low level behaviour that doesn&amp;rsquo;t connect to high level features that we need any longer.  As Michael says, the WebSiteOne codebase is better than many.  At least it has tests and was written with good software engineering principles in mind.  However it was a learning project.  A really good question is how to create a resilient code base where the developers are learning as they go?  It&amp;rsquo;s a more general question than you might think since all developers are learning as they go, just that on some projects some of the developers are moving further out of their comfort zone at any given time.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve been maintaining the AutoGraders codebase for a few years and that&amp;rsquo;s even more scary.  At least with WebsiteOne we have the Rails Model View Controller (MVC) architecture so you know approximately where to find things.  AutoGraders has its own custom architecture that I&amp;rsquo;m not sure I completely understand and I don&amp;rsquo;t know that anyone does after waves of part time TAs have been poured on it.  I don&amp;rsquo;t feel I&amp;rsquo;ve succeeded in being a developer of the AutoGrader; I&amp;rsquo;m really just a maintainer.  I&amp;rsquo;ve been able to trace some of the logic paths through the system and tinker here and there, but re-architecting is a big undertaking.  My first attempt stalled on the complexity of trying to wrap the entire system in consistent acceptance tests.  &lt;/p&gt;
-
-&lt;p&gt;Eric Evan&amp;rsquo;s Domain Driven Design (DDD) and the concept of being able to refactor legacy systems when they have tests serve as inspiration.  I have more hope and motivation for the WebSiteOne project.  Its Rails architecture means that consistent acceptance tests are more realistic; although the frustration of working with JavaScript in acceptance tests is an ongoing drain.  In reality 100% acceptance testing, like 100% test-coverage and 100% TDD are ideals with diminishing returns.  It seems to me that any time you get religious about one of these things you end up sinking in ever increasing amounts of time as you try to get closer to the perfect 100%. &lt;/p&gt;
-
-&lt;p&gt;It makes me think that having a clean and consistent domain model under the hood is the antidote, in some respects at least.  If you accept that having completely reliable acceptance tests on every single one of your important features is an unrealistic goal, then what else can you do?  At least if you&amp;rsquo;re repeatedly evolving the underlying domain model towards something that represents more or less the core of your operations there&amp;rsquo;s a chance you can make up for less than perfect acceptance tests.  Of course one person&amp;rsquo;s coherency is another&amp;rsquo;s confusion &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;The AsyncVoter project is steaming ahead and I&amp;rsquo;m hoping we can have a consistent model and manageable test suites in order to make it maintainable in the long run.  I&amp;rsquo;m hoping to learn the lessons from WebSiteOne and avoid AsyncVoter&amp;rsquo;s maintenance debt creeping up.  That&amp;rsquo;s also got to be balanced against not pouring cold water on the enthusiasm of the developers.  My battle cry has to be &amp;ldquo;keep that Pull Request small!&amp;rdquo;.  Every time you think of another thing you could add, write a feature or chore and put the backlog.  I was reviewing two AsyncVoter PRs yesterday.  Both a lovely green of Cucumber and Mocha tests; both for specific features that we&amp;rsquo;d voted on.&lt;/p&gt;
-
-&lt;p&gt;Both of them had high level stories that I think should have been tweaked a little, but here&amp;rsquo;s what they were when the developers started working on them:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; List Votes
-  As a developer
-  In order to cast my vote and see the status of the project
-  I want the ability to check what stories are currently being voted on
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Cast Votes
-  As a developer
-  So that I can indicate my thoughts about a story
-  I want to cast my vote on the story and provide some notes
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In the name of simplicity I would have changed the former to specify only a single current vote, and the latter to not mention anything about notes.  I expect that we&amp;rsquo;ll ultimately need to have support for those two things, but every little extra bloats the pull request, means more code for review, more work for the developers and means it takes longer to get the code merged into master so others can build on it.  Buck stops with me here; I should have got in there and pruned those feature descriptions aggressively before work started on them.&lt;/p&gt;
-
-&lt;p&gt;There might also have been push back from the developers on the scope of the stories.  What&amp;rsquo;s interesting is that others don&amp;rsquo;t seem to be quite so afraid of writing code as I am.  Perhaps I&amp;rsquo;m paranoid, or old, but I deal with so much legacy code, any time I&amp;rsquo;m working on a feature I want to see what is the absolute minimum I can get away with.  Others seem happy to start working on other bits and pieces of functionality, different error paths etc.  This process of working out what to focus on is a key skill.  Not spending too long agonising.  Not going off too far in the weeds.  Of course I conceed that mapping out a few of the key sad paths for a feature is generally a good practice.&lt;/p&gt;
-
-&lt;p&gt;Still there&amp;rsquo;s this ongoing danger in coding of too much anticipation.  The older corollary of our &amp;ldquo;Drive By Coding&amp;rdquo; mantra is &amp;ldquo;You Ain&amp;rsquo;t Gonna Need It&amp;rdquo; (YAGNI).  Right now I&amp;rsquo;m focused on getting a tracer bullet for the simplest possible single voting framework.  At this point every additional element like being able to add notes to votes, track who did the votes, catch errors where the vote or person is not specified, are all things keeping us from getting to that tracer bullet demonstration that data can flow through the system and we can complete a high level story of an asynchronous vote on some remote infrastructure.  &lt;/p&gt;
-
-&lt;p&gt;I was also quite scared of giving this sort of feedback to new developers who I&amp;rsquo;m interacting with online.  I&amp;rsquo;ve read people really wrong in the past in terms of how they will take different sorts of feedback.  Either way, push people too hard on something and you&amp;rsquo;re likely to really irritate them.  There&amp;rsquo;s also a humility required.  I know I&amp;rsquo;ve been really religious about different approaches in the past, and I&amp;rsquo;ve got to be open to the fact that I don&amp;rsquo;t have all the answers.  I&amp;rsquo;ll likely be pushing for variations on my current approach as we go forward.  People want the freedom to use their ingenuity to fix problems.  We had a mob review session and went through the above with a few members of the AsyncVoter team.  My screen lag didn&amp;rsquo;t help, but I think it was a good session.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve got some PR updates from the devs to review now, and I&amp;rsquo;m hoping to get these PRs merged in today, if I need to make a few changes myself, and I think I&amp;rsquo;ve cleared that with the devs so that I won&amp;rsquo;t be stepping too heavily on anyone&amp;rsquo;s toes.  Proof will be if any of them want to submit PRs again in the future :-)&lt;/p&gt;
-
-&lt;p&gt;After the AsyncVoter MobReview session Michael and I dived into some WSO refactoring.  We got as far as creating a Cucumber background step that doesn&amp;rsquo;t use the spec fixtures, which ultimately allowed the more effective exposure of a bug.  Most of the time was spent tracing the logic paths through the system.  I really hope that we can evolve the domain model of WebSiteOne sufficiently so it doesn&amp;rsquo;t go the way of the AutoGrader project &amp;hellip;.&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=NcyTQ_kiV8A"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4khJglSo8s8"&gt;AsyncVoter Mob review&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=NcyTQ_kiV8A"&gt;&amp;ldquo;Kent Back&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=EiBb-KFQDF4"&gt;WSO Pairing&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
