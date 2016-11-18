@@ -5,22 +5,77 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-17T00:00:00+00:00</updated>
+  <updated>2016-11-18T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Microservices Question</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/18/microservices-question/"/>
+    <id>http://blog.url.com/2016/11/18/microservices-question/</id>
+    <published>2016-11-18T00:00:00+00:00</published>
+    <updated>2016-11-18T09:45:18+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Michael was off sick and so I didn&amp;rsquo;t get back to WSO coding.  That&amp;rsquo;s one of the things about having a pair partner, they keep you focused on things.  The previous day we&amp;rsquo;d investigated the poor performance on the projects page, which had turned out to be our non-cached checks of code climate stats for projects.  There was lots of other clear up indicated, but the simple drive-by was to remove that functionality for the moment.  Then we wrapped a payment bug that a Premium user had encountered, and got a fix in.  There were a whole series of other refactorings and changes that I wanted to get to, and thought I might hit today, but I was distracted by further developing the AsyncBot and working with our new sponsor drie.&lt;/p&gt;
+
+&lt;p&gt;I got the AsyncBot up on &lt;a href="https://github.com/AgileVentures/async_slack_bot"&gt;GitHub&lt;/a&gt; and developed the spike a little further so it would announce updates in the channel the vote had been started in:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;story&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+              &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;'document the API'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+              &lt;span class="na"&gt;url&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'https://waffle.io/AgileVentures/AsyncVoter/cards/582afb10c2d2ce320075f487'&lt;/span&gt;
+            &lt;span class="p"&gt;};&lt;/span&gt;
+
+&lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;hears&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'start new vote'&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="s1"&gt;'direct_message'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'direct_mention'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;start_channel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;channel&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;reply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;!channel&amp;gt; NEW ASYNC VOTE on &amp;lt;'&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;story&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;'|'&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;story&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;'&amp;gt; '&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;instructions&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+
+&lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;hears&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'vote'&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="s1"&gt;'direct_message'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="nx"&gt;vote&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;text&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;\d&lt;/span&gt;&lt;span class="sr"&gt;+/&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="nx"&gt;votes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="na"&gt;vote&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nx"&gt;vote&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;user&lt;/span&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+  &lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;reply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'I received your vote: '&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;vote&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;  &lt;span class="s1"&gt;' &amp;lt;@'&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;user&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;'&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;say&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="na"&gt;channel&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;start_channel&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;text&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;!here&amp;gt; ASYNC VOTE UPDATE '&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;vote_text&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;' on &amp;lt;'&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;story&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;'|'&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;story&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;'&amp;gt; '&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;instructions&lt;/span&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I ran a couple of votes in the #websiteone channel and another in the #async channel.  I was getting much more of what I wanted as well as some useful feedback on the system:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="WSO channel vote" src="https://www.dropbox.com/s/5v6ii9lrpox5pi5/Screenshot%202016-11-18%2009.25.31.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;It was clear that when the votes came on thick and fast that the messages were a bit overwhelming.  certainly room for some tuning.  Also running two votes in a row, we had confusion about what was being voted on from one user who hadn&amp;rsquo;t quite got caught up with their slack feed.  I have to say it is so nice to work with a small project where you&amp;rsquo;ve written all the code yourself, and you can tweak the interface as you please.  I can also see how without tests the whole thing could become a complete monster.  I also notice that unlike Ruby/RSpec I don&amp;rsquo;t have throwing together a node test rig memorised; I need to do some reps on setting those ups so that I can&amp;rsquo;t use that as an excuse for continuing the spike indefinitely.&lt;/p&gt;
+
+&lt;p&gt;In the background we got the latest version of the AsyncVoter RESTful API running on drie servers.  It seemed like the failing POST operation was just me not having pushed the right code out, and then getting confused about which endpoints were up and which weren&amp;rsquo;t.  In response I started a vote on documenting the AsyncVoter API, and I think Arreche got started on that.  It occurred to me that we might have moved faster by focusing on the Slack interface initially, but it is good to have a RESTful API up to try and avoid the worst spiky impulses.  It does feel that we&amp;rsquo;ve spent a while building something that could be generated in minutes by a Rails scaffold, or possibly even and Sails or MEAN scaffolding operation.  That said this low level work is great for everyone to appreciate the core of a RESTful API.&lt;/p&gt;
+
+&lt;p&gt;The question is now about architecture going forward and where the slack bot gets hosted.  I paired with Ben from drie and looked at his analysis of our Harrow Community Network logs where he tried to work out how frequently the drie apps should be sleeping in order to give us the best performance.  We ended up identifying the different needs of the final deployed app versus the developer experience during creating it.  It also seemed like it might be problematic to host the slack bot on the &amp;ldquo;drie push&amp;rdquo; offering since it uses an always on web socket and it&amp;rsquo;s not clear whether traffic from slack on the socket will be sufficient to wake up the instance.  I started to think about whether to just host the bot on AWS.  We host the auto graders on AWS and I&amp;rsquo;m pretty familiar with the interface &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;In principle the slack bot could talk directly to the MongoDB in order to persist the details of the vote.  This would mean that it wouldn&amp;rsquo;t be easy to interrogate the bot about the vote other than outside the slack interface.  It would certainly nice to have a web dashboard of all the ongoing votes and get statistics and all.  I guess we have the question of whether the micro services architecture gives us a short term win here.  By making the RESTful API and starting work on two different clients we&amp;rsquo;ve gone for a more distributed architecture that might make the development of any individual client slower, but will give us more flexibility in the long run?&lt;/p&gt;
+
+&lt;p&gt;In the background I&amp;rsquo;m talking to possible new sponsors of AgileVentures and getting ready for our first mob programming sessions on Avdi Grimm&amp;rsquo;s &amp;ldquo;Confident Ruby&amp;rdquo; for those who&amp;rsquo;ve upgraded their Premium memberships.   I think we need the asynchronous voting to keep the individual projects ticking over, but we need more money coming in from sponsors and premiums if we&amp;rsquo;re going to be able to continue to offering all our services, both free and premium.  There&amp;rsquo;s a new feeling of momentum to the community, but as I was saying the other day, it&amp;rsquo;s not just a question of sitting around and waiting for the growth.  Each bit of growth still has to be fought for at this stage, although perhaps the battle is getting easier - until we start coasting after we achieve that fabled critical mass? :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Video:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=lCm8Ht7vvp8"&gt;Pairing on WSO&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=_fogY2nGq2Q"&gt;Previous days &amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=MW6JuYJSEQA"&gt;Pairing on WSO&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=soSqEHPT3tU"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=SoILIjeb02E"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Semi Automatic Asynchronous Planning Poker Bot</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/17/semi-automatic/"/>
     <id>http://blog.url.com/2016/11/17/semi-automatic/</id>
     <published>2016-11-17T00:00:00+00:00</published>
-    <updated>2016-11-17T09:42:03+00:00</updated>
+    <updated>2016-11-18T10:33:36+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;The AsyncVoter project has been humming recently.  A lot of people interested in coding in Node, putting a React front end together.  They say that JavaScript is hot.  We&amp;rsquo;ve also had new folks come in and start to understand some of the Agile development approach, self-organise to get a series of basic RESTful endpoints in place.  All great, but I was starting to worry that our little RESTful MVP was not really making enough contact with end users.  I was getting antsy that we needed to start automating some of the tedious and error-prone parts of running asynchronous votes manually in project slack channels.&lt;/p&gt;
+    <content type="html">&lt;p&gt;The AsyncVoter project has been humming recently.  A lot of people interested in coding in Node, putting a React front end together and so on.  They say that JavaScript is hot.  We&amp;rsquo;ve also had new folks come in and start to understand some of the Agile development approach, self-organise to get a series of basic RESTful endpoints in place.  All great, but I was starting to worry that our little RESTful MVP was not really making enough contact with end users.  I was getting antsy that we needed to start automating some of the tedious and error-prone parts of running asynchronous votes manually in project slack channels.&lt;/p&gt;
 
-&lt;p&gt;I felt that slack integration was key.  We had another vote on refactoring test support code so couldn&amp;rsquo;t start another vote on slack integration if I was to follow my own guidelines of no voting on multiple stories in parallel.  I settled for moving the slack integration ticket to the top of the backlog and searching for integration mechanisms.  Several of our systems ping messages to slack, but I wanted more.  Custom slash commands for slack looked like they might work, but they had custom payloads that our RESTful endpoint wasn&amp;rsquo;t set up to process.  I didn&amp;rsquo;t like the idea of customising endpoint for slack, since it would be nice to support clients other than slack.  I also wanted to be able to have a personal bot that our community members could interact with.  I went ahead and made a &lt;a href="https://api.slack.com/bot-users"&gt;custom bot integration&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;I felt that Slack integration was key.  We had another vote on refactoring test support code so couldn&amp;rsquo;t start another vote on Slack integration if I was to follow my own guidelines of no voting on multiple stories in parallel.  I settled for moving the Slack integration ticket to the top of the backlog and searching for integration mechanisms.  Several of our systems ping messages to Slack, but I wanted more.  Custom slash commands for Slack looked like they might work, but they had custom payloads that our RESTful endpoint wasn&amp;rsquo;t set up to process.  I didn&amp;rsquo;t like the idea of customising endpoint specifically for Slack, since it would be nice to support other clients as well.  I also wanted to be able to have a personal bot that our community members could interact with.  I went ahead and made a &lt;a href="https://api.slack.com/bot-users"&gt;custom bot integration&lt;/a&gt;:&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="AsyncVotingBot integration" src="https://www.dropbox.com/s/wopizsow3ortdbu/Screenshot%202016-11-17%2009.17.40.png?dl=1" /&gt;&lt;/p&gt;
 
@@ -38,7 +93,7 @@
 
 &lt;p&gt;Although I think most of these are designed for synchronous operation, i.e. assuming that the team will all be assembled in the channel at the same time.  What I&amp;rsquo;m really after is something that can maintain open votes on a number of channels and provide a mechanism for people to check what they need to vote on, and have the bot proactively prompt the channel to ensure that votes don&amp;rsquo;t get left hanging.&lt;/p&gt;
 
-&lt;p&gt;I still had fun creating a bot and running a semi-automated asynchronous vote in the #async_voter channel:&lt;/p&gt;
+&lt;p&gt;I went ahead and had fun creating a bot and running a semi-automated asynchronous vote in the #async_voter channel:&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="async bot announces" src="https://www.dropbox.com/s/j2vu3nwh53yt1hp/Screenshot%202016-11-17%2009.28.26.png?dl=1" /&gt;&lt;/p&gt;
 
@@ -83,11 +138,11 @@
   &lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;reply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;response&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="p"&gt;});&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that I hard coded the ticket I wanted the vote on, I ran locally without any persistence, so if my code or computer crashed then state would be lost, and the bot needed to be prompted to both start and finish the vote.  We could wail and gnash our teeth and say that we need all those features before we could push the bot live, but by eschewing them I was able to run a proof of concept of a successful vote in a channel, and I actually saved myself having to update things based on the DMs I would receive during manual asynchronous votes.  You can say, oh, it&amp;rsquo;s obvious that it would all work, but I don&amp;rsquo;t trust computers to do what I think they&amp;rsquo;ll do.  My mental model of them is so often faulty.&lt;/p&gt;
+&lt;p&gt;Note that I hard coded the ticket I wanted the vote on and I ran locally without any persistence, so if my code or computer crashed then state would be lost, AND the bot needed to be prompted to both start &amp;amp; finish the vote.  We could wail and gnash our teeth and say that we need all those features sorted before we could push the bot live, but by eschewing them I was able to run a proof of concept of a successful vote in a channel, and I actually saved myself having to manage all the DMs I get during a manual vote.  You can say, oh, it&amp;rsquo;s obvious that it would all work, but I don&amp;rsquo;t trust computers to do what I think they&amp;rsquo;ll do.  My mental model of them is so often faulty.&lt;/p&gt;
 
-&lt;p&gt;I also spiked this without tests.  I did manually test the code in a private channel before unleashing on #async_voter, but I think this is a situation to spike, to get a tracer bullet in to see the round trip.  The danger of course would be to get drunk with power here and keep building on top of this untested code until it really is a total mess and impossible to change without breaking something.  We&amp;rsquo;ve got a nice tested RESTful core ready to start storing the data persistently.  I can run a few more test votes on other channels, and gradually refine the look and feel of the bot, ensuring along the way that it is having the positive effect on the projects and community that I am hoping for.&lt;/p&gt;
+&lt;p&gt;I also spiked this without tests.  I did manually test the code in a private channel before unleashing it on #async_voter, but I think this is a situation to spike, to get a tracer bullet in to see the round trip.   Of course the danger here is to get drunk with power and keep building on top of this untested code until it really is a total mess and impossible to change without breaking something.  We&amp;rsquo;ve got a nice tested RESTful core ready to start storing the data persistently.  I can run a few more test votes on other channels, and gradually refine the look and feel of the bot, ensuring along the way that it is having the positive effect on the projects and community that I am hoping for.&lt;/p&gt;
 
-&lt;p&gt;I think this is the core of the Agile process.  Apart from remembering to reflect on your process frequently, it&amp;rsquo;s getting some sort of working code in front of the end users as often as possible.  I&amp;rsquo;m also a big fan of this semi-automated approach.  I still had to intervene to stop and start the vote, but it saved me some time compared to a full manual run.  What I really need to add next is to have the bot update the channel where the vote started when someone makes a vote.  Let&amp;rsquo;s see if I can add a little of that today &amp;hellip;&lt;/p&gt;
+&lt;p&gt;I think this is the core of the Agile process.  Apart from remembering to reflect on your process frequently, it&amp;rsquo;s getting some sort of working system in front of the end users as often as possible.  I&amp;rsquo;m also a big fan of this semi-automated approach.  I still had to intervene to stop and start the vote, but it saved me some time compared to a full manual run.  Having confirmed the partial utility of the system I can cautiously automate more and more.  What I really need to add next is to have the bot update the channel where the vote started when someone makes a vote.  Let&amp;rsquo;s see if I can add a little of that today &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -435,73 +490,6 @@ end
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=QMvJADMRpo0"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ntvRINA66UM"&gt;Solo on WebSiteOne&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=xM-QeSOiHqA"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Mixing and Matching Guidelines</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/10/mix-and-match/"/>
-    <id>http://blog.url.com/2016/11/10/mix-and-match/</id>
-    <published>2016-11-10T00:00:00+00:00</published>
-    <updated>2016-11-11T10:17:35+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;It was another mix of the AsyncVoter and WebSiteOne projects today.  Overnight Arreche had come up with a &lt;a href="https://github.com/AgileVentures/AsyncVoter/compare/master...arreche:7_cast_vote_feature_mvp"&gt;slimmed down version&lt;/a&gt; of Raphael&amp;rsquo;s &lt;a href="https://github.com/AgileVentures/AsyncVoter/pull/50"&gt;pull request&lt;/a&gt; on vote casting, so I focused on João&amp;rsquo;s &lt;a href="https://github.com/AgileVentures/AsyncVoter/pull/45"&gt;pull request&lt;/a&gt; for listing currently voting stories.   I really wanted to get something merged in as we&amp;rsquo;d had these two pull requests open for five days or so, and I also wanted to practice deploying a new feature onto the drie servers.&lt;/p&gt;
-
-&lt;p&gt;The async_voter slack channel was active and I was conflicted about posting comments in Github and in slack.  João showed up and said he had some time for programming and what should he change.  I suggested he take out the sorting functionality that wasn&amp;rsquo;t covered by the acceptance test and he got right to it.  My original plan was that there might have been some AsyncVoter folks in the &amp;ldquo;Martin Fowler&amp;rdquo; scrum, but they weren&amp;rsquo;t and I ended up helping out some Premiums fix up issues on the LocalSupport and WebSiteOne projects.&lt;/p&gt;
-
-&lt;p&gt;In the meantime João had pushed changes and we had a slimmed down pull request.  I still wasn&amp;rsquo;t entirely sure about the mapping we had set up from &lt;code&gt;GET /stories?state=active&lt;/code&gt; to search for &lt;code&gt;size=0&lt;/code&gt; stories.  João was very keen on the state=active flag and seemed to be mollifying me by saying that &lt;code&gt;GET /stories?size=0&lt;/code&gt; would also work.  I investigated and found that it didn&amp;rsquo;t quite and that &lt;code&gt;GET /stories?state=voting&lt;/code&gt; or indeed any other state would return all the size 0 stories.&lt;/p&gt;
-
-&lt;p&gt;I pointed that out to João not sure if he was in a position to fix it up.  I started adjusting the code locally and made my own &lt;a href="https://github.com/AgileVentures/AsyncVoter/pull/57"&gt;pull request&lt;/a&gt;.  In parallel João made further updates.  Perhaps we should have been pairing, but he was commuting.  Maybe I should have just gone to lunch, but I was pleasantly surprised to make some good progress on my own branch.  In particular discovering a &lt;a href="http://jaketrent.com/post/run-single-mocha-test/"&gt;method to specify running a single test in a mocha suite&lt;/a&gt;, where you insert a &lt;code&gt;.only&lt;/code&gt; into the test you want to focus on:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"found one active"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;done&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;becomes:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;only&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"found one active"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;done&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and you actually don&amp;rsquo;t have to make any changes to the command line argument.  Making the above change, I can run &lt;code&gt;npm test&lt;/code&gt; and I get precisely the focus I want.  Eat your heart out RSpec and Cucumber where I have to construct commands like:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;be cucumber features/hangouts/edit_hangout_url.feature:31
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which get derailed when the line numbers change.  So anyhow, on reflection I&amp;rsquo;m glad I did spend some time tinkering with my own PR.  Contrary to previous experiences, node seemed stable and I was able to jump from Cucumber acceptance tests to Mocha Unit tests and make good progress.  The mocking error messages were not as precise as I would have liked, but I think that may be something we can improve.&lt;/p&gt;
-
-&lt;p&gt;Of course I then had the quandary of whether to go with my PR or with João&amp;rsquo;s new one.  He had now filled out the filtering functionality and added checks that only &lt;code&gt;state=active&lt;/code&gt; would return size 0 stories.  I was now in a hangout with Michael who was asking good questions about what all this would do.  I started the server and used POSTman to hit the new endpoints.  The &lt;code&gt;state=active&lt;/code&gt; filtering was working, but not the general filtering.  I think there were key conversion issues or something.  The key point here was the the general filtering functionality wasn&amp;rsquo;t being hit by any tests.&lt;/p&gt;
-
-&lt;p&gt;Different guidelines were as usual wrestling in my head.  My concerns were as follows:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;was locking to size=0 to represent currently voted stories going to bite us when we decided we needed size=0 stories in the future?&lt;/li&gt;
-&lt;li&gt;Wasn&amp;rsquo;t it bad to have functionality not covered by tests, and particularly functionality unrelated to the feature the PR was addressing?&lt;/li&gt;
-&lt;li&gt;Should we be adjusting the story model to have a state that could be active, to reflect the domain language that João was keen to use?&lt;/li&gt;
-&lt;li&gt;Shouldn&amp;rsquo;t we be going with my simplifying assumption that there is only ever a single story to vote on (for the time being)?&lt;/li&gt;
-&lt;li&gt;Shouldn&amp;rsquo;t we be sanitising inputs coming over the wire? although this is search rather than edit so &amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I wanted to do the right thing for the project, and also not offend João who had been putting in lots of great work.  All credit to him and the others who&amp;rsquo;ve got the Cucumber and Mocha set up all working so smoothly, along with a clean core of app code.  &lt;/p&gt;
-
-&lt;p&gt;I resolved to go with João&amp;rsquo;s PR but I made some tweaks.  I stuck with João&amp;rsquo;s preferred &lt;code&gt;state=active&lt;/code&gt; but pulled out the generic filtering code because it didn&amp;rsquo;t work, and wasn&amp;rsquo;t covered by the tests.  So the core logic in the model class is:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="nx"&gt;schema&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;statics&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;findBy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;filterObject&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{};&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'state'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nx"&gt;filter&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'state'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;'active'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nx"&gt;filterObject&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'size'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt; 
-  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Story'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;filterObject&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'name'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;exec&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;callback&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;My two biggest concerns remaining were that now the &lt;code&gt;findBy&lt;/code&gt; method was named incorrectly and that we had quite a lot of mockup setup replication in the mocha test suite for the story model.  I created refactoring tickets for these two and got the PR merged in.  From a day&amp;rsquo;s distance I think it was a reasonable compromise.  Let&amp;rsquo;s see how we feel in a week and a month and a year!&lt;/p&gt;
-
-&lt;p&gt;This also allowed me to try pushing a new feature to the drie server.  This failed with a 502 and super fast feedback from the drie team allowed us to identify that as a node versioning issue which we can hopefully fix today.  It also highlighted the need for a staging server as I had broken production in the process.  Although that&amp;rsquo;s no disaster here as we only have a single test deploy that no one&amp;rsquo;s using yet so it&amp;rsquo;s not really &lt;code&gt;production&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Michael and I snapped in some progress on WebSiteOne at the end of the session, finally wrapping in a cucumber test the bug we had been hunting the previous day.  Lots of refactoring imperative Cucumber steps to declarative needed there.  It&amp;rsquo;s an interesting perspective; maintaining and evolving a Rails project, while shepherding the creation of a new Node micro service.  Stay tuned for more hair raising tails :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=rVfDq6YB9D4"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dfmTQuYbwVU"&gt;WebsiteOne and LocalSupport Triage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=W1GPjCwBzNc"&gt;Pairing on AsyncVoter&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=DlS0zvtKqhU"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=My04-8l_INc"&gt;Pairing on WebSiteOne&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Zb29w0BwtEw"&gt;More Pairing on WebSiteOne &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

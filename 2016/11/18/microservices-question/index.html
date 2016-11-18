@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Microservices Question</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_11 x2016_11_18 x2016_11_18_microservices-question x2016_11_18_microservices-question_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/11/18/microservices-question/">Microservices Question</a></h2>
+        <h5 class='date'>18 Nov 2016</h5>
+    <p>Michael was off sick and so I didn&rsquo;t get back to WSO coding.  That&rsquo;s one of the things about having a pair partner, they keep you focused on things.  The previous day we&rsquo;d investigated the poor performance on the projects page, which had turned out to be our non-cached checks of code climate stats for projects.  There was lots of other clear up indicated, but the simple drive-by was to remove that functionality for the moment.  Then we wrapped a payment bug that a Premium user had encountered, and got a fix in.  There were a whole series of other refactorings and changes that I wanted to get to, and thought I might hit today, but I was distracted by further developing the AsyncBot and working with our new sponsor drie.</p>
+
+<p>I got the AsyncBot up on <a href="https://github.com/AgileVentures/async_slack_bot">GitHub</a> and developed the spike a little further so it would announce updates in the channel the vote had been started in:</p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">story</span> <span class="o">=</span> <span class="p">{</span>
+              <span class="na">name</span><span class="p">:</span><span class="s1">'document the API'</span><span class="p">,</span>
+              <span class="na">url</span><span class="p">:</span> <span class="s1">'https://waffle.io/AgileVentures/AsyncVoter/cards/582afb10c2d2ce320075f487'</span>
+            <span class="p">};</span>
+
+<span class="nx">controller</span><span class="p">.</span><span class="nx">hears</span><span class="p">(</span><span class="s1">'start new vote'</span><span class="p">,[</span><span class="s1">'direct_message'</span><span class="p">,</span><span class="s1">'direct_mention'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">bot</span><span class="p">,</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">start_channel</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span>
+  <span class="nx">bot</span><span class="p">.</span><span class="nx">reply</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="s1">'&lt;!channel&gt; NEW ASYNC VOTE on &lt;'</span> <span class="o">+</span> <span class="nx">story</span><span class="p">.</span><span class="nx">url</span> <span class="o">+</span> <span class="s1">'|'</span> <span class="o">+</span> <span class="nx">story</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">'&gt; '</span> <span class="o">+</span> <span class="nx">instructions</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">controller</span><span class="p">.</span><span class="nx">hears</span><span class="p">(</span><span class="s1">'vote'</span><span class="p">,[</span><span class="s1">'direct_message'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">bot</span><span class="p">,</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+  <span class="nx">vote</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">text</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/</span><span class="se">\d</span><span class="sr">+/</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="nx">votes</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="na">vote</span><span class="p">:</span><span class="nx">vote</span><span class="p">,</span> <span class="na">user</span><span class="p">:</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="p">});</span>
+  <span class="nx">bot</span><span class="p">.</span><span class="nx">reply</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="s1">'I received your vote: '</span> <span class="o">+</span> <span class="nx">vote</span> <span class="o">+</span>  <span class="s1">' &lt;@'</span><span class="o">+</span><span class="nx">message</span><span class="p">.</span><span class="nx">user</span><span class="o">+</span><span class="s1">'&gt;'</span><span class="p">);</span>
+  <span class="nx">bot</span><span class="p">.</span><span class="nx">say</span><span class="p">({</span><span class="na">channel</span><span class="p">:</span> <span class="nx">start_channel</span><span class="p">,</span> <span class="na">text</span><span class="p">:</span> <span class="s1">'&lt;!here&gt; ASYNC VOTE UPDATE '</span><span class="o">+</span> <span class="nx">vote_text</span><span class="p">()</span><span class="o">+</span> <span class="s1">' on &lt;'</span> <span class="o">+</span> <span class="nx">story</span><span class="p">.</span><span class="nx">url</span> <span class="o">+</span> <span class="s1">'|'</span> <span class="o">+</span> <span class="nx">story</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">'&gt; '</span> <span class="o">+</span> <span class="nx">instructions</span><span class="p">});</span>
+<span class="p">});</span>
+</code></pre>
+<p>I ran a couple of votes in the #websiteone channel and another in the #async channel.  I was getting much more of what I wanted as well as some useful feedback on the system:</p>
+
+<p><img alt="WSO channel vote" src="https://www.dropbox.com/s/5v6ii9lrpox5pi5/Screenshot%202016-11-18%2009.25.31.png?dl=1" /></p>
+
+<p>It was clear that when the votes came on thick and fast that the messages were a bit overwhelming.  certainly room for some tuning.  Also running two votes in a row, we had confusion about what was being voted on from one user who hadn&rsquo;t quite got caught up with their slack feed.  I have to say it is so nice to work with a small project where you&rsquo;ve written all the code yourself, and you can tweak the interface as you please.  I can also see how without tests the whole thing could become a complete monster.  I also notice that unlike Ruby/RSpec I don&rsquo;t have throwing together a node test rig memorised; I need to do some reps on setting those ups so that I can&rsquo;t use that as an excuse for continuing the spike indefinitely.</p>
+
+<p>In the background we got the latest version of the AsyncVoter RESTful API running on drie servers.  It seemed like the failing POST operation was just me not having pushed the right code out, and then getting confused about which endpoints were up and which weren&rsquo;t.  In response I started a vote on documenting the AsyncVoter API, and I think Arreche got started on that.  It occurred to me that we might have moved faster by focusing on the Slack interface initially, but it is good to have a RESTful API up to try and avoid the worst spiky impulses.  It does feel that we&rsquo;ve spent a while building something that could be generated in minutes by a Rails scaffold, or possibly even and Sails or MEAN scaffolding operation.  That said this low level work is great for everyone to appreciate the core of a RESTful API.</p>
+
+<p>The question is now about architecture going forward and where the slack bot gets hosted.  I paired with Ben from drie and looked at his analysis of our Harrow Community Network logs where he tried to work out how frequently the drie apps should be sleeping in order to give us the best performance.  We ended up identifying the different needs of the final deployed app versus the developer experience during creating it.  It also seemed like it might be problematic to host the slack bot on the &ldquo;drie push&rdquo; offering since it uses an always on web socket and it&rsquo;s not clear whether traffic from slack on the socket will be sufficient to wake up the instance.  I started to think about whether to just host the bot on AWS.  We host the auto graders on AWS and I&rsquo;m pretty familiar with the interface &hellip;</p>
+
+<p>In principle the slack bot could talk directly to the MongoDB in order to persist the details of the vote.  This would mean that it wouldn&rsquo;t be easy to interrogate the bot about the vote other than outside the slack interface.  It would certainly nice to have a web dashboard of all the ongoing votes and get statistics and all.  I guess we have the question of whether the micro services architecture gives us a short term win here.  By making the RESTful API and starting work on two different clients we&rsquo;ve gone for a more distributed architecture that might make the development of any individual client slower, but will give us more flexibility in the long run?</p>
+
+<p>In the background I&rsquo;m talking to possible new sponsors of AgileVentures and getting ready for our first mob programming sessions on Avdi Grimm&rsquo;s &ldquo;Confident Ruby&rdquo; for those who&rsquo;ve upgraded their Premium memberships.   I think we need the asynchronous voting to keep the individual projects ticking over, but we need more money coming in from sponsors and premiums if we&rsquo;re going to be able to continue to offering all our services, both free and premium.  There&rsquo;s a new feeling of momentum to the community, but as I was saying the other day, it&rsquo;s not just a question of sitting around and waiting for the growth.  Each bit of growth still has to be fought for at this stage, although perhaps the battle is getting easier - until we start coasting after we achieve that fabled critical mass? :-)</p>
+
+<h3>Related Video:</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=lCm8Ht7vvp8">Pairing on WSO</a></li>
+<li><a href="https://www.youtube.com/watch?v=_fogY2nGq2Q">Previous days &ldquo;Kent Beck&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=MW6JuYJSEQA">Pairing on WSO</a></li>
+<li><a href="https://www.youtube.com/watch?v=soSqEHPT3tU">&ldquo;Martin Fowler&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=SoILIjeb02E">&ldquo;Kent Beck&rdquo; scrum</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
