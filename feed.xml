@@ -14,11 +14,11 @@
     <link rel="alternate" href="http://blog.url.com/2016/11/18/microservices-question/"/>
     <id>http://blog.url.com/2016/11/18/microservices-question/</id>
     <published>2016-11-18T00:00:00+00:00</published>
-    <updated>2016-11-18T09:45:18+00:00</updated>
+    <updated>2016-11-18T12:13:08+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;Michael was off sick and so I didn&amp;rsquo;t get back to WSO coding.  That&amp;rsquo;s one of the things about having a pair partner, they keep you focused on things.  The previous day we&amp;rsquo;d investigated the poor performance on the projects page, which had turned out to be our non-cached checks of code climate stats for projects.  There was lots of other clear up indicated, but the simple drive-by was to remove that functionality for the moment.  Then we wrapped a payment bug that a Premium user had encountered, and got a fix in.  There were a whole series of other refactorings and changes that I wanted to get to, and thought I might hit today, but I was distracted by further developing the AsyncBot and working with our new sponsor drie.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Michael was off sick and so I didn&amp;rsquo;t get back to WSO coding.  That&amp;rsquo;s one of the things about having a pair partner, they keep you focused on things.  The previous day we&amp;rsquo;d investigated the poor performance on the projects page, which had turned out to be our non-cached checks of code climate stats for projects.  There was lots of other clear up indicated, but the simple drive-by was to remove that functionality for the moment.  Then we wrapped a payment bug that a Premium user had encountered, and got a fix in.  There were a whole series of other refactorings and changes that I wanted to get to, and thought I might hit today, but I was distracted by further developing the AsyncBot and working with our new sponsor &lt;a href="http://drie.co"&gt;drie&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I got the AsyncBot up on &lt;a href="https://github.com/AgileVentures/async_slack_bot"&gt;GitHub&lt;/a&gt; and developed the spike a little further so it would announce updates in the channel the vote had been started in:&lt;/p&gt;
 &lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;story&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -45,9 +45,9 @@
 
 &lt;p&gt;It was clear that when the votes came on thick and fast that the messages were a bit overwhelming.  certainly room for some tuning.  Also running two votes in a row, we had confusion about what was being voted on from one user who hadn&amp;rsquo;t quite got caught up with their slack feed.  I have to say it is so nice to work with a small project where you&amp;rsquo;ve written all the code yourself, and you can tweak the interface as you please.  I can also see how without tests the whole thing could become a complete monster.  I also notice that unlike Ruby/RSpec I don&amp;rsquo;t have throwing together a node test rig memorised; I need to do some reps on setting those ups so that I can&amp;rsquo;t use that as an excuse for continuing the spike indefinitely.&lt;/p&gt;
 
-&lt;p&gt;In the background we got the latest version of the AsyncVoter RESTful API running on drie servers.  It seemed like the failing POST operation was just me not having pushed the right code out, and then getting confused about which endpoints were up and which weren&amp;rsquo;t.  In response I started a vote on documenting the AsyncVoter API, and I think Arreche got started on that.  It occurred to me that we might have moved faster by focusing on the Slack interface initially, but it is good to have a RESTful API up to try and avoid the worst spiky impulses.  It does feel that we&amp;rsquo;ve spent a while building something that could be generated in minutes by a Rails scaffold, or possibly even and Sails or MEAN scaffolding operation.  That said this low level work is great for everyone to appreciate the core of a RESTful API.&lt;/p&gt;
+&lt;p&gt;In the background we got the latest version of the AsyncVoter RESTful API running on &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; servers.  It seemed like the failing POST operation was just me not having pushed the right code out, and then getting confused about which endpoints were up and which weren&amp;rsquo;t.  In response I started a vote on documenting the AsyncVoter API, and I think Arreche got started on that.  It occurred to me that we might have moved faster by focusing on the Slack interface initially, but it is good to have a RESTful API up to try and avoid the worst spiky impulses.  It does feel that we&amp;rsquo;ve spent a while building something that could be generated in minutes by a Rails scaffold, or possibly even and Sails or MEAN scaffolding operation.  That said this low level work is great for everyone to appreciate the core of a RESTful API.&lt;/p&gt;
 
-&lt;p&gt;The question is now about architecture going forward and where the slack bot gets hosted.  I paired with Ben from drie and looked at his analysis of our Harrow Community Network logs where he tried to work out how frequently the drie apps should be sleeping in order to give us the best performance.  We ended up identifying the different needs of the final deployed app versus the developer experience during creating it.  It also seemed like it might be problematic to host the slack bot on the &amp;ldquo;drie push&amp;rdquo; offering since it uses an always on web socket and it&amp;rsquo;s not clear whether traffic from slack on the socket will be sufficient to wake up the instance.  I started to think about whether to just host the bot on AWS.  We host the auto graders on AWS and I&amp;rsquo;m pretty familiar with the interface &amp;hellip;&lt;/p&gt;
+&lt;p&gt;The question is now about architecture going forward and where the slack bot gets hosted.  I paired with Ben from &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; and looked at his analysis of our Harrow Community Network logs where he tried to work out how frequently the &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; apps should be sleeping in order to give us the best performance.  We ended up identifying the different needs of the final deployed app versus the developer experience during creating it.  It also seemed like it might be problematic to host the slack bot on the &amp;ldquo;&lt;a href="http://push.drie.co"&gt;drie push&lt;/a&gt;&amp;rdquo; offering since it uses an always on web socket and it&amp;rsquo;s not clear whether traffic from slack on the socket will be sufficient to wake up the instance.  I started to think about whether to just host the bot on AWS.  We host the auto graders on AWS and I&amp;rsquo;m pretty familiar with the interface &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;In principle the slack bot could talk directly to the MongoDB in order to persist the details of the vote.  This would mean that it wouldn&amp;rsquo;t be easy to interrogate the bot about the vote other than outside the slack interface.  It would certainly nice to have a web dashboard of all the ongoing votes and get statistics and all.  I guess we have the question of whether the micro services architecture gives us a short term win here.  By making the RESTful API and starting work on two different clients we&amp;rsquo;ve gone for a more distributed architecture that might make the development of any individual client slower, but will give us more flexibility in the long run?&lt;/p&gt;
 
@@ -69,7 +69,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/11/17/semi-automatic/"/>
     <id>http://blog.url.com/2016/11/17/semi-automatic/</id>
     <published>2016-11-17T00:00:00+00:00</published>
-    <updated>2016-11-18T10:33:36+00:00</updated>
+    <updated>2016-11-18T12:13:46+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -211,7 +211,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/11/15/multiple-pull-request-learning/"/>
     <id>http://blog.url.com/2016/11/15/multiple-pull-request-learning/</id>
     <published>2016-11-15T00:00:00+00:00</published>
-    <updated>2016-11-16T10:12:18+00:00</updated>
+    <updated>2016-11-18T12:13:35+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -251,7 +251,7 @@
 
 &lt;p&gt;compared to 60% from edX, 8.3% from Google search and 6.6% from the AV site itself.  While social media traffic to our AV site (over the last year) was dominated by Google+, Meetup, StackOverflow, Facebook and LinkedIn.  Twitter came in 8th with only 3.46%.  Now maybe this is because of broken video links, or because the feed is almost entirely automated. Either way, what we were putting out there was inconsistent, and the simplest fix was to only tweet the video link once the broadcast went live, and Sasha and I saw there was an easy check we could make for that through the YT gem.   Sasha had to run off to do a tech test; which made me think it would be awesome if tech companies would take AV participation as a tech test equivalent!&lt;/p&gt;
 
-&lt;p&gt;After lunch I merged an &lt;a href="https://github.com/AgileVentures/LocalSupport/pull/396"&gt;exquisitely small and updated PR on LocalSupport&lt;/a&gt; from new contributor Kostas and then jumped on an AsyncVoter performance testing issue, running a profile of the AsyncVoter app running on drie and heroku.  &lt;/p&gt;
+&lt;p&gt;After lunch I merged an &lt;a href="https://github.com/AgileVentures/LocalSupport/pull/396"&gt;exquisitely small and updated PR on LocalSupport&lt;/a&gt; from new contributor Kostas and then jumped on an AsyncVoter performance testing issue, running a profile of the AsyncVoter app running on &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; and heroku.  &lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ ab -n 50 https://async-voter-production.herokuapp.com/stories
 
 Time per request:       381.987 [ms] (mean)
