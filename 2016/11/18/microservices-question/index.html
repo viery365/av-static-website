@@ -85,10 +85,11 @@
     <p>Michael was off sick and so I didn&rsquo;t get back to WSO coding.  That&rsquo;s one of the things about having a pair partner, they keep you focused on things.  The previous day we&rsquo;d investigated the poor performance on the projects page, which had turned out to be our non-cached checks of code climate stats for projects.  There was lots of other clear up indicated, but the simple drive-by was to remove that functionality for the moment.  Then we wrapped a payment bug that a Premium user had encountered, and got a fix in.  There were a whole series of other refactorings and changes that I wanted to get to, and thought I might hit today, but I was distracted by further developing the AsyncBot and working with our new sponsor <a href="http://drie.co">drie</a>.</p>
 
 <p>I got the AsyncBot up on <a href="https://github.com/AgileVentures/async_slack_bot">GitHub</a> and developed the spike a little further so it would announce updates in the channel the vote had been started in:</p>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">story</span> <span class="o">=</span> <span class="p">{</span>
-              <span class="na">name</span><span class="p">:</span><span class="s1">'document the API'</span><span class="p">,</span>
-              <span class="na">url</span><span class="p">:</span> <span class="s1">'https://waffle.io/AgileVentures/AsyncVoter/cards/582afb10c2d2ce320075f487'</span>
-            <span class="p">};</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">story</span> <span class="o">=</span> 
+  <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span><span class="s1">'document the API'</span><span class="p">,</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s1">'https://waffle.io/ ... '</span>
+  <span class="p">};</span>
 
 <span class="nx">controller</span><span class="p">.</span><span class="nx">hears</span><span class="p">(</span><span class="s1">'start new vote'</span><span class="p">,[</span><span class="s1">'direct_message'</span><span class="p">,</span><span class="s1">'direct_mention'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">bot</span><span class="p">,</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">start_channel</span> <span class="o">=</span> <span class="nx">message</span><span class="p">.</span><span class="nx">channel</span><span class="p">;</span>

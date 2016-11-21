@@ -120,17 +120,18 @@
     <link rel="alternate" href="http://blog.url.com/2016/11/18/microservices-question/"/>
     <id>http://blog.url.com/2016/11/18/microservices-question/</id>
     <published>2016-11-18T00:00:00+00:00</published>
-    <updated>2016-11-21T10:41:36+00:00</updated>
+    <updated>2016-11-21T10:43:32+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
     <content type="html">&lt;p&gt;Michael was off sick and so I didn&amp;rsquo;t get back to WSO coding.  That&amp;rsquo;s one of the things about having a pair partner, they keep you focused on things.  The previous day we&amp;rsquo;d investigated the poor performance on the projects page, which had turned out to be our non-cached checks of code climate stats for projects.  There was lots of other clear up indicated, but the simple drive-by was to remove that functionality for the moment.  Then we wrapped a payment bug that a Premium user had encountered, and got a fix in.  There were a whole series of other refactorings and changes that I wanted to get to, and thought I might hit today, but I was distracted by further developing the AsyncBot and working with our new sponsor &lt;a href="http://drie.co"&gt;drie&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I got the AsyncBot up on &lt;a href="https://github.com/AgileVentures/async_slack_bot"&gt;GitHub&lt;/a&gt; and developed the spike a little further so it would announce updates in the channel the vote had been started in:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;story&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-              &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;'document the API'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-              &lt;span class="na"&gt;url&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'https://waffle.io/AgileVentures/AsyncVoter/cards/582afb10c2d2ce320075f487'&lt;/span&gt;
-            &lt;span class="p"&gt;};&lt;/span&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;story&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 
+  &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;'document the API'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="na"&gt;url&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'https://waffle.io/ ... '&lt;/span&gt;
+  &lt;span class="p"&gt;};&lt;/span&gt;
 
 &lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;hears&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'start new vote'&lt;/span&gt;&lt;span class="p"&gt;,[&lt;/span&gt;&lt;span class="s1"&gt;'direct_message'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'direct_mention'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="nx"&gt;start_channel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;channel&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
