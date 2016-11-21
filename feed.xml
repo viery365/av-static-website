@@ -5,16 +5,122 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-18T00:00:00+00:00</updated>
+  <updated>2016-11-21T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Agile Workshop</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/21/agile-workshop/"/>
+    <id>http://blog.url.com/2016/11/21/agile-workshop/</id>
+    <published>2016-11-21T00:00:00+00:00</published>
+    <updated>2016-11-21T10:21:20+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Friday was mainly consumed with a dry run of an Agile Project management workshop for non-profits and charities.  I&amp;rsquo;ve been working closely with Voluntary Action Harrow Cooperative (VAHC) for the last three years on the &lt;a href="https://www.harrowcn.org.uk"&gt;Harrow Community Network project&lt;/a&gt; which itself uses the &lt;a href="https://github.com/AgileVentures/LocalSupport"&gt;AgileVentures LocalSupport&lt;/a&gt; software&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Harrow Community Network Website" src="https://www.dropbox.com/s/j1n566aoa7hregq/Screenshot%202016-11-21%2009.36.51.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Over those three years we&amp;rsquo;ve been using an Agile project management approach to developing the software and coordinating the efforts and contributions of over 30 volunteers from &lt;a href="https://www.harrowcn.org.uk/contributors"&gt;all around the world&lt;/a&gt;.  We&amp;rsquo;ve been following the principles of behind the Agile Manifesto:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Our highest priority is to satisfy the customer through early and continuous delivery of valuable software.&lt;/p&gt;
+
+&lt;p&gt;Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale.&lt;/p&gt;
+
+&lt;p&gt;Working software is the primary measure of progress.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I meet with VAHC at least once every two weeks to show them the latest deployments to the website and get feedback on any changes, and well as showing them work in progress. &lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Welcome changing requirements, even late in development. Agile processes harness change for the customer&amp;rsquo;s competitive advantage.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Every meeting we review the &lt;a href="https://www.pivotaltracker.com/n/projects/742821"&gt;project board on Pivotal Tracker&lt;/a&gt;, with a particular focus on the features in the backlog.  The backlog is maintained with higher priority items towards the top of the backlog.  As requirements change we follow the clients advice about moving things up and down in the backlog, and even move things back to the icebox if they suddenly become of low relevance.  For example the story on &amp;ldquo;&lt;a href="https://www.pivotaltracker.com/story/show/116028767"&gt;being able to override doit vol ops&lt;/a&gt;&amp;rdquo; was top of the backlog at one point, but got moved onto the icebox as circumstances changed.&lt;/p&gt;
+
+&lt;p&gt;Any new suggestions from the client are immediately added to the icebox and go through a voting process to estimate their technical complexity.  Once they are estimated they can be moved onto the backlog with the client&amp;rsquo;s consent and subject to the client&amp;rsquo;s preferences regarding priority.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Business people and developers must work together daily throughout the project&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This can be challenging with a distributed team of developers all around the world.  We broadcast the client meetings via YouTube, and run a google hangout that developers are encouraged to join.  Any developer can participate in a client meeting, and can communicate with the client via email.  However as project manager I tend to funnel questions from developers through to the client, and bring them up in the client meeting.  Given the part time volunteer nature of our project it is difficult to support daily interaction between client and developers; and since we are all developers our &amp;ldquo;business people&amp;rdquo; are arguably the client, although we make no strong distinction between devs and non-devs in our distributed team.  Everyone is learning, everyone is participating.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Every developer is free to work on what they are interested in.  The client&amp;rsquo;s preferred priorities are expressed through the priority ordering on the backlog, but developers can start any story that takes their interest.  We do strongly encourage all developers to put any unestimated story to a vote (either synchronous in a scrum, or asynchronous in a text vote) before starting work on it just to help increase awareness that they are interested in working on something.  They don&amp;rsquo;t need to wait for the vote to complete in order to start a spike or some experiments.  However it makes strong sense to let others know what you are thinking about so you can benefit from their thoughts and suggestions.  Even so this is not a hard and fast rule.  The software is open source and anyone can submit a pull request at any time, but getting involved in the voting and estimation process is a great way of staying on top of any information relevant to the task and increases the chance of a smooth merge of code later on, while reducing the chance of duplicated effort.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The most efficient and effective method of conveying information to and within a development team is face-to-face conversation.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We agree, but we can&amp;rsquo;t afford to fly all the developers into the same location for this purpose.  Google hangouts gives us a close second to a face to face conversation, and I try to meet with the client in person where possible.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Agile processes promote sustainable development. The sponsors, developers, and users should be able  to maintain a constant pace indefinitely.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We&amp;rsquo;ve been maintaining a slow and steady pace for the last three years.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Continuous attention to technical excellence and good design enhances agility.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;All code is submitted to the project via Pull Request for open review.  We encourage everyone to use google hangouts to pair program online in order to get more immediate ongoing feedback as code is developed, although the logistics of time zones and lives don&amp;rsquo;t always support pairing.  Even with paired code, everything coming into the project is automatically checked for merge conflicts, tests passing, and style/coding guidelines.  Any developer can comment on any pull request, which we try to either close or merge within a week to avoid widely diverging branches.  The ultimate decision for merging rests with myself as project manager, and I try to maintain a match between any code coming in and the domain model that we have developed over the last three years.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Simplicity&amp;ndash;the art of maximizing the amount of work not done&amp;ndash;is essential.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I strongly encourage all developers, whether working on a chore, a bug fix or a feature, to submit the absolute minimum of code.  Only things related the specific ticket being worked on should be in the pull request.  The smaller the code changes in the pull request, the happier I am.  Small pull requests are easier to review, easier to merge, can often be done faster, and provide a more frequent sense of completion and progress for everyone involved.  Seeing something else that needs to be fixed? Open a refactoring ticket and submit a separate pull request for that.  There are always new folks coming into the project who will love a really simple refactoring ticket to allow them to get started on something where they don&amp;rsquo;t have to generate new tests. &lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The best architectures, requirements, and designs emerge from self-organizing teams.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I&amp;rsquo;m a single point of failure in this project, although two or three others have access to all the necessary to continue merging and deploying if I was removed.  Other AgileVenture&amp;rsquo;s projects have more self-organising structures where PRs can be merged with the agreement of any 2 or 3 devs.  All structures are subject to revision.  Maybe ultimately the LocalSupport project management structure needs to evolve and change.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Earlier in the project we had weekly retrospectives, but with few dedicated full timers these have fallen away.  We&amp;rsquo;ve switched from many synchronous standups to more asynchronous voting in group text channels on Slack. The Agile principles are written around the idea of a full time co-located team, and we have adapted them to a volunteer part-time distributed team.  Our adaptations certainly need ongoing review and adjustment.  It&amp;rsquo;s not yet clear how best to ensure reflection, tuning and adjustment happens frequently enough.&lt;/p&gt;
+
+&lt;p&gt;The workshop dry run (remember that?) involved a 90minute session in which we used the Agile process itself to try to answer the general challenge of better understanding Agile.  I initially presented the Agile Manifesto and talked about related concepts such as scrum and XP for a few minutes.  The overall structure, which compressed a two week sprint into 90 minutes was as follows:&lt;/p&gt;
+
+&lt;p&gt;1) Present concept of Agile
+2) Generate stories relating to Agile, and how it can be used in non-profits
+3) Organise stories by theme, to identify core item and vote on them
+4) Form teams and have each team pick a story
+5) Teams each work on an individual story, preparing to present their thoughts
+6) Each team presents their conclusions
+7) Retrospective: each individual looks back on what went well, what could be improved&lt;/p&gt;
+
+&lt;p&gt;The key stories that came out of the 2nd and 3rd stages above were:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How does Agile handle dramatic shifts and changes? (1.5 points)&lt;/li&gt;
+&lt;li&gt;How does Agile work with other non-Agile organisations? (3 points)&lt;/li&gt;
+&lt;li&gt;How does Agile work with fluid staffing? (2 points)&lt;/li&gt;
+&lt;li&gt;Agile Logistics (how to scrums and standups work) (1 point)&lt;/li&gt;
+&lt;li&gt;Is Agile a good fit for non-profits and charities (3 points)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Our three teams of two each chose one of the above and completed the 4th and 5th stages before presenting their thoughts to the whole group.  It all seemed to work pretty well, particularly with a group number of 6 sitting round a large table with the cards organised in front of us.  Everyone said they felt they understood Agile better and there were a lot of productive and interesting discussions.  One participant summed up Agile as an integration of strategy and operations, and I concurred.  Agile is not an absence of planning; it is a commitment to ongoing planning and reflection.  One confusion was that we were using the Agile process to understand the Agile process, and it was all rather meta.  How would you use it to solve specific problems and implement the solutions?  I proposed that after a session like this, one could do a full day inception event with a team where the story tickets would be actual challenges to the organisation, and the retrospective component would take place 2 weeks later.&lt;/p&gt;
+
+&lt;p&gt;Anyway, first up we&amp;rsquo;ll be running a full version of this &amp;ldquo;Understanding the Agile Process&amp;rdquo; with frontline charity and non-profit folks in a group of 10-20 people.  Stay tuned to this blog to find out how that goes!&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Microservices Question</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/18/microservices-question/"/>
     <id>http://blog.url.com/2016/11/18/microservices-question/</id>
     <published>2016-11-18T00:00:00+00:00</published>
-    <updated>2016-11-18T12:13:08+00:00</updated>
+    <updated>2016-11-21T10:37:39+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -43,13 +149,13 @@
 
 &lt;p&gt;&lt;img alt="WSO channel vote" src="https://www.dropbox.com/s/5v6ii9lrpox5pi5/Screenshot%202016-11-18%2009.25.31.png?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;It was clear that when the votes came on thick and fast that the messages were a bit overwhelming.  certainly room for some tuning.  Also running two votes in a row, we had confusion about what was being voted on from one user who hadn&amp;rsquo;t quite got caught up with their slack feed.  I have to say it is so nice to work with a small project where you&amp;rsquo;ve written all the code yourself, and you can tweak the interface as you please.  I can also see how without tests the whole thing could become a complete monster.  I also notice that unlike Ruby/RSpec I don&amp;rsquo;t have throwing together a node test rig memorised; I need to do some reps on setting those ups so that I can&amp;rsquo;t use that as an excuse for continuing the spike indefinitely.&lt;/p&gt;
+&lt;p&gt;It was clear that when the votes came on thick and fast that the messages were a bit overwhelming.  certainly room for some tuning.  Also running two votes in a row, we had confusion about what was being voted on from one user who hadn&amp;rsquo;t quite got caught up with their slack feed.  I have to say it is so nice to work with a small project where you&amp;rsquo;ve written all the code yourself, and you can tweak the interface as you please.  I can also see how without tests the whole thing could become a complete monster.  I also notice that unlike Ruby/RSpec I don&amp;rsquo;t have &amp;ldquo;throwing together a node test rig&amp;rdquo; memorised; I need to do some reps on setting those up so that I can&amp;rsquo;t use lack of familiarity there as an excuse for continuing the spike indefinitely.&lt;/p&gt;
 
-&lt;p&gt;In the background we got the latest version of the AsyncVoter RESTful API running on &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; servers.  It seemed like the failing POST operation was just me not having pushed the right code out, and then getting confused about which endpoints were up and which weren&amp;rsquo;t.  In response I started a vote on documenting the AsyncVoter API, and I think Arreche got started on that.  It occurred to me that we might have moved faster by focusing on the Slack interface initially, but it is good to have a RESTful API up to try and avoid the worst spiky impulses.  It does feel that we&amp;rsquo;ve spent a while building something that could be generated in minutes by a Rails scaffold, or possibly even and Sails or MEAN scaffolding operation.  That said this low level work is great for everyone to appreciate the core of a RESTful API.&lt;/p&gt;
+&lt;p&gt;In the background we got the latest version of the AsyncVoter RESTful API running on &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; servers.  It seemed like the failing POST operation was just me not having pushed the right code out, and then getting confused about which endpoints were up and which weren&amp;rsquo;t.  In response I started a vote on documenting the AsyncVoter API, and Arreche got started on that.  It occurred to me that we might have moved faster by focusing on the Slack interface initially, but it is good to have a RESTful API up to try and avoid the worst spiky impulses.  It does feel that we&amp;rsquo;ve spent a while building something that could be generated in minutes by a Rails scaffold, or possibly even with Sails or a MEAN scaffolding operation.  That said this low level work is great for everyone to appreciate the core of a RESTful API.&lt;/p&gt;
 
-&lt;p&gt;The question is now about architecture going forward and where the slack bot gets hosted.  I paired with Ben from &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; and looked at his analysis of our Harrow Community Network logs where he tried to work out how frequently the &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; apps should be sleeping in order to give us the best performance.  We ended up identifying the different needs of the final deployed app versus the developer experience during creating it.  It also seemed like it might be problematic to host the slack bot on the &amp;ldquo;&lt;a href="http://push.drie.co"&gt;drie push&lt;/a&gt;&amp;rdquo; offering since it uses an always on web socket and it&amp;rsquo;s not clear whether traffic from slack on the socket will be sufficient to wake up the instance.  I started to think about whether to just host the bot on AWS.  We host the auto graders on AWS and I&amp;rsquo;m pretty familiar with the interface &amp;hellip;&lt;/p&gt;
+&lt;p&gt;The question is now about architecture going forward and where the slack bot gets hosted.  I paired with Ben from &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; and looked at his analysis of our Harrow Community Network logs where he tried to work out how frequently the &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; apps should be sleeping in order to give us the best performance.  We ended up identifying the different needs of the final deployed app versus the developer experience during creating it.  It also seemed like it might be problematic to host the slack bot on the &amp;ldquo;&lt;a href="http://push.drie.co"&gt;drie push&lt;/a&gt;&amp;rdquo; offering since it uses an &amp;ldquo;always-on&amp;rdquo; web socket and it&amp;rsquo;s not clear whether traffic from slack on the socket will be sufficient to wake up the instance.  I started to think about whether to just host the bot on AWS.  We host the auto graders on AWS and I&amp;rsquo;m pretty familiar with the interface &amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;In principle the slack bot could talk directly to the MongoDB in order to persist the details of the vote.  This would mean that it wouldn&amp;rsquo;t be easy to interrogate the bot about the vote other than outside the slack interface.  It would certainly nice to have a web dashboard of all the ongoing votes and get statistics and all.  I guess we have the question of whether the micro services architecture gives us a short term win here.  By making the RESTful API and starting work on two different clients we&amp;rsquo;ve gone for a more distributed architecture that might make the development of any individual client slower, but will give us more flexibility in the long run?&lt;/p&gt;
+&lt;p&gt;In principle the slack bot could talk directly to the MongoDB in order to persist the details of the vote.  This would mean that it wouldn&amp;rsquo;t be easy to interrogate the bot about the vote other than outside the slack interface.  It would certainly be nice to have a web dashboard of all the ongoing votes and get statistics and all.  I guess we have the question of whether the micro services architecture gives us a short term win here?  By making the RESTful API and starting work on two different clients we&amp;rsquo;ve gone for a more distributed architecture that might make the development of any individual client slower, but will give us more flexibility in the long run?&lt;/p&gt;
 
 &lt;p&gt;In the background I&amp;rsquo;m talking to possible new sponsors of AgileVentures and getting ready for our first mob programming sessions on Avdi Grimm&amp;rsquo;s &amp;ldquo;Confident Ruby&amp;rdquo; for those who&amp;rsquo;ve upgraded their Premium memberships.   I think we need the asynchronous voting to keep the individual projects ticking over, but we need more money coming in from sponsors and premiums if we&amp;rsquo;re going to be able to continue to offering all our services, both free and premium.  There&amp;rsquo;s a new feeling of momentum to the community, but as I was saying the other day, it&amp;rsquo;s not just a question of sitting around and waiting for the growth.  Each bit of growth still has to be fought for at this stage, although perhaps the battle is getting easier - until we start coasting after we achieve that fabled critical mass? :-)&lt;/p&gt;
 
@@ -338,159 +444,6 @@ Percentage of the requests served within a certain time (ms)
 &lt;p&gt;That done the bank manager had to re-type the entire PDF application form that I had filled out and sent in.  I was hoping that a recently setup modern bank would be just the sort to avoid this sort of ridiculousness.  Rachel and I caught up and I supported the AV slack channels in the background as we ground through the process.  We were just about to give up and leave when it was all done.  We got bank cards, and I got the online banking hooked up, and the all important sort code and account number that would allow me to issue new invoices and sort out the AgileVentures finances.&lt;/p&gt;
 
 &lt;p&gt;I still like what MetroBank is trying to do.  I think the UK banking industry is ripe for disruption.  Maybe it being difficult to open an account is in some sense a feature.  Convoluted and unnecessary steps discourage all those but the truly serious.  Maybe one day the decentralised cryptocurrencies will replace all this, but I&amp;rsquo;m not holding my breath &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Naming and Cucumber</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/11/naming-and-cucumber/"/>
-    <id>http://blog.url.com/2016/11/11/naming-and-cucumber/</id>
-    <published>2016-11-11T00:00:00+00:00</published>
-    <updated>2016-11-17T09:42:37+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;In a series of disjointed solo sessions I managed to fix the bug whereby manual hangout edits were making subsequent events live.  Michael and I had wrapped this bug in a cucumber scenario the day previously.  The manual hangout edit interface looks like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="manual hangout edit interface" src="https://www.dropbox.com/s/4xbad7ddniesyo7/Screenshot%202016-10-18%2017.00.20.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Originally the manual edit had not worked at all on repeating events with lots of history; which had been a big problem when the automatic updates failed for two weeks while the Google Hangout API was in flux.  We&amp;rsquo;d got manual updates working on recurring events by adjusting the way that an event searched for recent hangouts, replacing a sort and filter on &lt;code&gt;created_at&lt;/code&gt; with one on &lt;code&gt;updated_at&lt;/code&gt;.  The problem had been that with a long series of event instances, manual updates were clobbering old ones started by the same user, and so the &lt;code&gt;created_at&lt;/code&gt; date would lag very far behind the &lt;code&gt;updated_at&lt;/code&gt; date.  The recent_hangouts method became:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;recent_hangouts&lt;/span&gt;
-    &lt;span class="n"&gt;event_instances&lt;/span&gt;
-      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'updated_at BETWEEN ? AND ?'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;days&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;beginning_of_day&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;end_of_day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;updated_at: :desc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I&amp;rsquo;d also added a flag on the EventInstance model to indicate whether an EventInstance had been manually set.  This manual setting meant that subsequent Events would also report themselves live, as they were all sharing a single EventInstance.  I considered briefly switching the boolean flag to a datetime, but demurred and adjusted the way we create the unique id for manually edited hangout EventInstances.  I wanted to ensure that every manual edit was recorded as a separate EventInstance instance!  I added a SecureRandom unique id to the EventInstancesHelper method that gets used during a manual update:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'securerandom'&lt;/span&gt;
-
-&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;EventInstancesHelper&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_event_instance_id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;project_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="si"&gt;}#{&lt;/span&gt;&lt;span class="n"&gt;project_id&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="s1"&gt;'00'&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;-&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;SecureRandom&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;uuid&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;By itself this didn&amp;rsquo;t fix the problem, so I also adjusted the &lt;code&gt;recent_hangouts&lt;/code&gt; method further such that it only looked in a time window starting from the same time on the previous day, plus the duration of the event:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;recent_hangouts&lt;/span&gt;
-    &lt;span class="n"&gt;event_instances&lt;/span&gt;
-      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'updated_at BETWEEN ? AND ?'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;days&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;end_of_day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;updated_at: :desc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The cukes went green and I had to fix up a few specs for the EventInstanceHelper and the Event class.  I wasn&amp;rsquo;t sure if the fully unique id was actually necessary, but when I saw the specs for EventInstanceHelper that were saying a unique id should be returned, I felt I really wanted to stick with the change.  Arguably it could be the subject of a completely separate pull request, driven by a different cucumber scenario.  I&amp;rsquo;ve been being harsh with the AsyncVoter folks to keep out any functionality not related to the feature being worked on.  It&amp;rsquo;s easy to give myself slack when I&amp;rsquo;m on the other side of the barrier; but in my defence this is a bug fix, and I&amp;rsquo;m trying to make sure we aren&amp;rsquo;t losing valuable data about user activity.  I did try to get the feature to wrap this with limited success.  In the process I did do major refactoring of the cukes, which relates to a &lt;a href="https://github.com/AgileVentures/LocalSupport/pull/391"&gt;PR from John on LocalSupport&lt;/a&gt; where he&amp;rsquo;s using a lot of nested steps, which I&amp;rsquo;m not such a big fan of.&lt;/p&gt;
-
-&lt;p&gt;On WSO the editing a hangout url on a repeating event cuke scenario had gotten really long:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Edit Hangout URL on repeating event and ensure event stays live
-    &lt;span class="err"&gt;Given the date is "2014-02-06 07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt;
-    &lt;span class="c"&gt;# manually setting the hangout link&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I open the Edit URL controls
-    &lt;span class="err"&gt;And I fill in "hangout_url" with "https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&amp;amp;authuser=0"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I click on the Save button
-    &lt;span class="c"&gt;# checking that event shows live and that link&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
-    &lt;span class="err"&gt;Then I should see link "Join now" with "https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&amp;amp;authuser=0"&lt;/span&gt;
-    &lt;span class="c"&gt;# checking that the event stays live for the specified duration (as no pings coming from hangout plugin)&lt;/span&gt;
-    &lt;span class="err"&gt;And I jump to one minute before the end of the event at "2014-02-06 07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;14&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
-    &lt;span class="err"&gt;Then I should see link "Join now" with "https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&amp;amp;authuser=0"&lt;/span&gt;
-    &lt;span class="c"&gt;# Check that the event the following day is not automatically taken live&lt;/span&gt;
-    &lt;span class="err"&gt;And I jump to one minute before the end of the event at "2014-02-07 07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;01&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt; &lt;span class="c"&gt;# actually a week later&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I navigate to the show page for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"This event is now live!"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The previous day with Michael I&amp;rsquo;d inserted comments about what each section was doing.  I resolved to turn those into steps.  The quick and dirty path would be to take each set of steps and turn them into nested steps, but the approach I prefer is to make new steps that are collections of ruby statements to avoid multiple levels of redirection.  The steps I generated yesterday were:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;And&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I manually set a hangout link for event "([^"]*)"$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="vi"&gt;@hangout_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'https://hangouts.google.com/hangouts/_/ytl/HEuWPSol0vcSmwrkLzR4Wy4mkrNxNUxVmqHMmCIjEZ8=?hl=en_US&amp;amp;authuser=0'&lt;/span&gt;
-  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-  &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute_script&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;  &lt;span class="sx"&gt;%q{$('li[role="edit_hoa_link"] &amp;gt; a').trigger('click')}&lt;/span&gt;  &lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'hangout_url'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;with: &lt;/span&gt;&lt;span class="vi"&gt;@hangout_url&lt;/span&gt;
-  &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:css&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="sx"&gt;%q{input[id="hoa_link_save"]}&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;trigger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'click'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^"([^"]*)" shows live for that hangout link for the event duration$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Join now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;href: &lt;/span&gt;&lt;span class="vi"&gt;@hangout_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@jump_date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minutes&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minute&lt;/span&gt;
-  &lt;span class="no"&gt;Delorean&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;time_travel_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Join now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;href: &lt;/span&gt;&lt;span class="vi"&gt;@hangout_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;And&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^"([^"]*)" is not live the following day$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="no"&gt;Delorean&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;time_travel_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@jump_date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;not_to&lt;/span&gt; &lt;span class="n"&gt;have_content&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'This event is now live!'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which allowed that long convoluted scenario above to be boiled down to the following:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Edit Hangout URL on repeating event and ensure event stays live
-    &lt;span class="err"&gt;Given the date is "2014-02-06 07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I manually set a hangout link for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
-    &lt;span class="nf"&gt;Then&lt;/span&gt; &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt; shows live for that hangout link for the event duration
-    &lt;span class="nf"&gt;And&lt;/span&gt; &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt; is not live the following day
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Maybe I&amp;rsquo;m crazy, not re-using the steps, but my goal is to make it transparent for me in the future (and other developers), to get from the English description straight to the description at the Ruby/RSpec/Capybara level.  What I find again and again in WSO and LS, where the steps are deeply nested, is that I get tripped up because the English descriptions can be slightly misleading.  This is actually a facet of a more general problem for coding, in that wherever an abstraction (e.g. cuke step, or method name, or API interface) fails to accurately reflect what&amp;rsquo;s going on under the hood, you can easily be misled.  Of course it all comes back to humans.  What&amp;rsquo;s transparently clear for one person might not be for another.  But take a look at this background step from the same Cuke file:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="err"&gt;And the following event instances exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
- &lt;span class="err"&gt;...&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;table&lt;/span&gt; &lt;span class="err"&gt;of&lt;/span&gt; &lt;span class="err"&gt;dat&lt;/span&gt;&lt;span class="nf"&gt;a&lt;/span&gt;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We&amp;rsquo;d created this to replace the original setup step that referred to hangouts (for which there was no corresponding domain model). The original setup step had also scarily used RSpec factories that were shared with the specs and did a fair amount of data massaging in the process.  Having made the change we realised that to keep things working we would also need a chunk of complex participant data.  It was trivial to adjust our new background step to add that data, but now that was hidden from someone working at the level of the feature file, so we adjusted our step name as follows:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="err"&gt;And the following event instances (with default participants) exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
- &lt;span class="err"&gt;...&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;table&lt;/span&gt; &lt;span class="err"&gt;of&lt;/span&gt; &lt;span class="err"&gt;dat&lt;/span&gt;&lt;span class="nf"&gt;a&lt;/span&gt;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Too much perhaps?  But the intention is to give someone else who wants to use that step (or method) a heads up about what&amp;rsquo;s going on under the hood.  The ruby contents of the cuke steps above are a bit long and need some DRYing out, but I think I&amp;rsquo;d rather have them DRYed out into other ruby methods that are well named.  There&amp;rsquo;s perhaps almost too much room for nuance with the English descriptions of pure Cucumber steps.  So for example the following:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^"([^"]*)" shows live for that hangout link for the event duration$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Join now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;href: &lt;/span&gt;&lt;span class="vi"&gt;@hangout_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@jump_date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minutes&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minute&lt;/span&gt;
-  &lt;span class="no"&gt;Delorean&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;time_travel_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Join now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;href: &lt;/span&gt;&lt;span class="vi"&gt;@hangout_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;might become&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;
-&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^"([^"]*)" shows live for that hangout link for the event duration$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="vi"&gt;@event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@jump_date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minutes&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minute&lt;/span&gt;
-  &lt;span class="n"&gt;check_event_live&lt;/span&gt;
-  &lt;span class="no"&gt;Delorean&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;time_travel_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;check_event_live&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check_event_live&lt;/span&gt;
-  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Join now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;href: &lt;/span&gt;&lt;span class="vi"&gt;@hangout_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Perhaps that&amp;rsquo;s no different to:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Then(/^"([^"]*)" shows live for that hangout link for the event duration$/) do |event_name|
-  @event = Event.find_by_name(event_name)
-  time = Time.parse(@jump_date) + event.duration.minutes - 1.minute
-  step 'I check event is live '
-  Delorean.time_travel_to(time)
-  check_live(event)
-end
-
-Then(/^I check event is live$/) do
-  visit event_path(@event)
-  expect(page).to have_link('Join now', href: @hangout_url)
-end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which allows that nested step to be re-used in other cucumber scenarios, but the debugging support for nested steps is not as good in my experience.  Maybe this is just bike-shedding (i.e. focusing on trivialities).  The big-picture critical thing seems likely to be a constant general refining to a consistent domain model and methods/steps that are not too long and not too short and do a best effort to have a description that doesn&amp;rsquo;t leave too many surprises under the hood.&lt;/p&gt;
-
-&lt;p&gt;I made sure that the refactored cukes did actually break (when the app functionality was removed), which took a combination of adjusting the Event#recent&lt;em&gt;hangouts method back to use `created&lt;/em&gt;at&lt;code&gt;AND removing the secure random id from the EventsInstanceHelper, indicating that both were needed to get the desired behaviour at the user level; so I didn&amp;#39;t need to feel a total hypocrite for pushing on the AsyncVoter folks to remove all extraneous code :-)  That didn&amp;#39;t stop me waking up in the middle of the night thinking, &amp;quot;we don&amp;#39;t even need to search for recent_hangouts!&amp;quot; - we just grab the latest one, reverse sorted by updated_at, and check if it&amp;#39;s live, can&amp;#39;t we?  That&lt;/code&gt;recent_hangouts` method is used nowhere else in the code base.  The method name makes no sense in terms of what we want really.  What we want to know is whether the most recently updated event instance is still live, isn&amp;rsquo;t it?  More refactoring awaits!&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=QMvJADMRpo0"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ntvRINA66UM"&gt;Solo on WebSiteOne&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=xM-QeSOiHqA"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>
