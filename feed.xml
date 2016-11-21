@@ -120,7 +120,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/11/18/microservices-question/"/>
     <id>http://blog.url.com/2016/11/18/microservices-question/</id>
     <published>2016-11-18T00:00:00+00:00</published>
-    <updated>2016-11-21T10:37:39+00:00</updated>
+    <updated>2016-11-21T10:41:36+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -158,6 +158,8 @@
 &lt;p&gt;In principle the slack bot could talk directly to the MongoDB in order to persist the details of the vote.  This would mean that it wouldn&amp;rsquo;t be easy to interrogate the bot about the vote other than outside the slack interface.  It would certainly be nice to have a web dashboard of all the ongoing votes and get statistics and all.  I guess we have the question of whether the micro services architecture gives us a short term win here?  By making the RESTful API and starting work on two different clients we&amp;rsquo;ve gone for a more distributed architecture that might make the development of any individual client slower, but will give us more flexibility in the long run?&lt;/p&gt;
 
 &lt;p&gt;In the background I&amp;rsquo;m talking to possible new sponsors of AgileVentures and getting ready for our first mob programming sessions on Avdi Grimm&amp;rsquo;s &amp;ldquo;Confident Ruby&amp;rdquo; for those who&amp;rsquo;ve upgraded their Premium memberships.   I think we need the asynchronous voting to keep the individual projects ticking over, but we need more money coming in from sponsors and premiums if we&amp;rsquo;re going to be able to continue to offering all our services, both free and premium.  There&amp;rsquo;s a new feeling of momentum to the community, but as I was saying the other day, it&amp;rsquo;s not just a question of sitting around and waiting for the growth.  Each bit of growth still has to be fought for at this stage, although perhaps the battle is getting easier - until we start coasting after we achieve that fabled critical mass? :-)&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m still not sure on the microservices question.  Will breaking things up help us avoid a monolith, and follow the single responsibility principle of having one app for each separate function?  It&amp;rsquo;s worked out well for Amazon, but then they&amp;rsquo;re at a completely different scale.  Right now I feel like I&amp;rsquo;m maintaining three different monoliths (LocalSupport, WebSiteOne and AutoGraders) and it always feels precarious when adding a new element.  I guess it&amp;rsquo;s ant colonies versus large vertebrates; single celled, versus multi-cellular organisms.  There&amp;rsquo;s pros and cons to each degree of organisational coupling.  As Kent Beck would say, it depends &amp;hellip; :-) &lt;/p&gt;
 
 &lt;h3&gt;Related Video:&lt;/h3&gt;
 
