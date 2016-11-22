@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Levels of Focus</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_11 x2016_11_22 x2016_11_22_levels-of-focus x2016_11_22_levels-of-focus_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/11/22/levels-of-focus/">Levels of Focus</a></h2>
+        <h5 class='date'>22 Nov 2016</h5>
+    <p>It was a busy weekend.  That was partly the kids birthday parties and coaching under eights football, but also because of my last Mentive mentoring session and two Premium Plus pairing sessions.  I usually prefer not to work at the weekend, but I really want to make AgileVentures sustainable and for people who work during the week, it&rsquo;s often convenient to get support from their mentor at the weekend.  The Mentive experience has been interesting to try out GotoMeeting, which is okay, and more powerful than Google Hangouts, but the ability to share a URL with a hangout to anyone, and stream/record live to YouTube, makes me prefer Hangouts.  </p>
+
+<p>As the Mentive chats have become more abstract the Premium Plus pairing sessions have been very code focused. On Sunday I worked with Adrian through a Cross Origin Resource Sharing issue on AsyncVoter so that the new React client could read data off the &ldquo;<a href="http://push.drie.co">drie push</a>&rdquo; hosted app.  We got a spiky <a href="https://github.com/AgileVentures/AsyncVoter/pull/77">Work in Progress(WIP) PR</a> in and I deployed the branch to the drie staging instance so that Adrian could proceed to work on the <a href="https://github.com/AgileVentures/asyncvoter-ui">React UI</a>.  We&rsquo;d used the <a href="https://www.npmjs.com/package/cors">cors package</a> to ensure that we would accept incoming AJAX requests from all sources for the time being.</p>
+
+<p>I had a quick break and was then working on a <a href="https://www.hackerrank.com/challenges/find-the-running-median">running median problem</a> which involved writing some min and max heaps in Ruby.  Simple sort was deemed to inefficient and we needed a custom data structure to allow fast access to the median.  This was just part of looking at algorithms in general, but I was already thinking about how we could be linking this to useful stats from data-feeds we have on voting and pairing sessions.  We didn&rsquo;t get as far as I would have liked into the analysis portion and we&rsquo;ll hit that next weekend.</p>
+
+<p>There hadn&rsquo;t been programming or pairing of note either side of the weekend on Friday or Monday, Friday having been taking up with an Agile Projects workshop and then some brainstorming with Michael and Ashley.  There&rsquo;d been sporadic async slack bot hacking, and we got most of the way of pushing a version of LocalSupport onto <a href="http://push.drie.co">drie push</a>. Brainstorming finished up the day as Michael and I digested the new PRs and issue comment from Ashley on the generic <a href="https://github.com/AgileVentures/AgileVentures">AgileVentures</a> repo.  Ashley had created some great diagrams, and was pushing us to be thinking in terms of more specific user models and big vision statements:</p>
+
+<p><img alt="Strategy, Goals and Impacting Users" src="https://cloud.githubusercontent.com/assets/673794/20459697/54701236-ae7f-11e6-9fe1-0e968a7581e2.png" /></p>
+
+<p>There&rsquo;ll be enormous value if the big picture vision of AgileVentures can be communicated effectively in a compelling and visually attractive manner.  I find myself torn between all the small admin tasks that are ever increasing, smoothing off the rough edges on aspects of the paid premium user experience, delivering on our commitments to the premium users and conducting bigger planning and vision generation efforts.</p>
+
+<p>It&rsquo;s clear that the onboarding experience is bumpy and could be vastly improved at each stage of our funnel, from becoming aware of us, to browsing our website, signing up, joining slack, joining a hangout, participating in a project and starting a project; not to mention signing up for one of the paid plans, and upgrading to get even more professional development support.  Michael and I spent an hour kicking ideas about.  I was reminded of Pavel&rsquo;s point from a couple of years ago about the importance of measuring things.  That if we were going to make changes like having the popups on the site encouraging people to join slack, or join hangouts then we wanted to know if these were having measurable impacts.  However I keep thinking that some things are no brainers, but then I&rsquo;m a complete hypocrite.  The whole point of small simple PRs is not assuming that you know how things are going to work.</p>
+
+<p>At the same time, perhaps I am justifiably caution about efforts to pull out lots of data, where it&rsquo;s unclear what that data is telling us.  We could have a super active slack and super active hangouts, but without enough income it doesn&rsquo;t really mean anything.  I need to get the income past a certain threshold soon.  That&rsquo;s not the best place to be coming from, not the best place to be doing decision making.  It feels difficult to devote time to big picture planning that could be spent on, say, making sure that all the different premium plan options were available for upgrade on each user page.   I do want to make it easier for people to onboard and understand what we&rsquo;re doing, and how they can get involved and derive the most possible benefit from the AV experience.  That said it feels counterproductive to focus on that when there are directly income related things to fix.  It&rsquo;s so difficult to know.  Will fixing the plan upgrade issue generate more revenue in the short term?  One user encountered a problem related to it, which we fixed through the Stripe interface.  Will others experience it soon?</p>
+
+<p>We&rsquo;re planning our first Premium Mob session on Thursday.  That feels like it might have legs.  If that goes well and generates good energy it could be a powerful incentive for upgrading.  Coming full circle I think it comes back to Eliminate, Simplify, Delegate, Automate.  The mounting admin tasks are not helping me focus on the big picture.  Michael and I started looking at setting up a greeter bot to replace some of my AV slack greeting activities.  It seems on the Slack free tier we can only have one integrated bot, so any greeter bot would have to be merged with the AsyncVoting bot &hellip; ultimately I resolved that the key thing to do today was to profile where I was spending my time and focus the lens of Eliminate, Simplify, Delegate, Automate on it.  I guess I have to measure as well &hellip;</p>
+
+<h3>Related Videos:</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=YGl5BA6o43Y">Premium Plus with Adrian</a></li>
+<li><a href="https://youtu.be/Mcm_uYE1vFM">&ldquo;Martin Fowler&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=u-g16rhSBUo">Bug Hunt on WSO</a></li>
+<li><a href="https://www.youtube.com/watch?v=OudkpuKQ7Aw">Deploying LocalSupport to drie</a></li>
+<li><a href="https://www.youtube.com/watch?v=kNOigf5jLYI">&ldquo;Kent Beck&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=uvOFUDRbEmM">AgileBot Deploy and BrainStorming on WSO</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

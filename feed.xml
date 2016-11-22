@@ -5,16 +5,55 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-21T00:00:00+00:00</updated>
+  <updated>2016-11-22T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Levels of Focus</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/22/levels-of-focus/"/>
+    <id>http://blog.url.com/2016/11/22/levels-of-focus/</id>
+    <published>2016-11-22T00:00:00+00:00</published>
+    <updated>2016-11-22T10:13:22+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;It was a busy weekend.  That was partly the kids birthday parties and coaching under eights football, but also because of my last Mentive mentoring session and two Premium Plus pairing sessions.  I usually prefer not to work at the weekend, but I really want to make AgileVentures sustainable and for people who work during the week, it&amp;rsquo;s often convenient to get support from their mentor at the weekend.  The Mentive experience has been interesting to try out GotoMeeting, which is okay, and more powerful than Google Hangouts, but the ability to share a URL with a hangout to anyone, and stream/record live to YouTube, makes me prefer Hangouts.  &lt;/p&gt;
+
+&lt;p&gt;As the Mentive chats have become more abstract the Premium Plus pairing sessions have been very code focused. On Sunday I worked with Adrian through a Cross Origin Resource Sharing issue on AsyncVoter so that the new React client could read data off the &amp;ldquo;&lt;a href="http://push.drie.co"&gt;drie push&lt;/a&gt;&amp;rdquo; hosted app.  We got a spiky &lt;a href="https://github.com/AgileVentures/AsyncVoter/pull/77"&gt;Work in Progress(WIP) PR&lt;/a&gt; in and I deployed the branch to the drie staging instance so that Adrian could proceed to work on the &lt;a href="https://github.com/AgileVentures/asyncvoter-ui"&gt;React UI&lt;/a&gt;.  We&amp;rsquo;d used the &lt;a href="https://www.npmjs.com/package/cors"&gt;cors package&lt;/a&gt; to ensure that we would accept incoming AJAX requests from all sources for the time being.&lt;/p&gt;
+
+&lt;p&gt;I had a quick break and was then working on a &lt;a href="https://www.hackerrank.com/challenges/find-the-running-median"&gt;running median problem&lt;/a&gt; which involved writing some min and max heaps in Ruby.  Simple sort was deemed to inefficient and we needed a custom data structure to allow fast access to the median.  This was just part of looking at algorithms in general, but I was already thinking about how we could be linking this to useful stats from data-feeds we have on voting and pairing sessions.  We didn&amp;rsquo;t get as far as I would have liked into the analysis portion and we&amp;rsquo;ll hit that next weekend.&lt;/p&gt;
+
+&lt;p&gt;There hadn&amp;rsquo;t been programming or pairing of note either side of the weekend on Friday or Monday, Friday having been taking up with an Agile Projects workshop and then some brainstorming with Michael and Ashley.  There&amp;rsquo;d been sporadic async slack bot hacking, and we got most of the way of pushing a version of LocalSupport onto &lt;a href="http://push.drie.co"&gt;drie push&lt;/a&gt;. Brainstorming finished up the day as Michael and I digested the new PRs and issue comment from Ashley on the generic &lt;a href="https://github.com/AgileVentures/AgileVentures"&gt;AgileVentures&lt;/a&gt; repo.  Ashley had created some great diagrams, and was pushing us to be thinking in terms of more specific user models and big vision statements:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Strategy, Goals and Impacting Users" src="https://cloud.githubusercontent.com/assets/673794/20459697/54701236-ae7f-11e6-9fe1-0e968a7581e2.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;ll be enormous value if the big picture vision of AgileVentures can be communicated effectively in a compelling and visually attractive manner.  I find myself torn between all the small admin tasks that are ever increasing, smoothing off the rough edges on aspects of the paid premium user experience, delivering on our commitments to the premium users and conducting bigger planning and vision generation efforts.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s clear that the onboarding experience is bumpy and could be vastly improved at each stage of our funnel, from becoming aware of us, to browsing our website, signing up, joining slack, joining a hangout, participating in a project and starting a project; not to mention signing up for one of the paid plans, and upgrading to get even more professional development support.  Michael and I spent an hour kicking ideas about.  I was reminded of Pavel&amp;rsquo;s point from a couple of years ago about the importance of measuring things.  That if we were going to make changes like having the popups on the site encouraging people to join slack, or join hangouts then we wanted to know if these were having measurable impacts.  However I keep thinking that some things are no brainers, but then I&amp;rsquo;m a complete hypocrite.  The whole point of small simple PRs is not assuming that you know how things are going to work.&lt;/p&gt;
+
+&lt;p&gt;At the same time, perhaps I am justifiably caution about efforts to pull out lots of data, where it&amp;rsquo;s unclear what that data is telling us.  We could have a super active slack and super active hangouts, but without enough income it doesn&amp;rsquo;t really mean anything.  I need to get the income past a certain threshold soon.  That&amp;rsquo;s not the best place to be coming from, not the best place to be doing decision making.  It feels difficult to devote time to big picture planning that could be spent on, say, making sure that all the different premium plan options were available for upgrade on each user page.   I do want to make it easier for people to onboard and understand what we&amp;rsquo;re doing, and how they can get involved and derive the most possible benefit from the AV experience.  That said it feels counterproductive to focus on that when there are directly income related things to fix.  It&amp;rsquo;s so difficult to know.  Will fixing the plan upgrade issue generate more revenue in the short term?  One user encountered a problem related to it, which we fixed through the Stripe interface.  Will others experience it soon?&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;re planning our first Premium Mob session on Thursday.  That feels like it might have legs.  If that goes well and generates good energy it could be a powerful incentive for upgrading.  Coming full circle I think it comes back to Eliminate, Simplify, Delegate, Automate.  The mounting admin tasks are not helping me focus on the big picture.  Michael and I started looking at setting up a greeter bot to replace some of my AV slack greeting activities.  It seems on the Slack free tier we can only have one integrated bot, so any greeter bot would have to be merged with the AsyncVoting bot &amp;hellip; ultimately I resolved that the key thing to do today was to profile where I was spending my time and focus the lens of Eliminate, Simplify, Delegate, Automate on it.  I guess I have to measure as well &amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=YGl5BA6o43Y"&gt;Premium Plus with Adrian&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://youtu.be/Mcm_uYE1vFM"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=u-g16rhSBUo"&gt;Bug Hunt on WSO&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=OudkpuKQ7Aw"&gt;Deploying LocalSupport to drie&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=kNOigf5jLYI"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=uvOFUDRbEmM"&gt;AgileBot Deploy and BrainStorming on WSO&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Agile Workshop</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/21/agile-workshop/"/>
     <id>http://blog.url.com/2016/11/21/agile-workshop/</id>
     <published>2016-11-21T00:00:00+00:00</published>
-    <updated>2016-11-21T10:21:20+00:00</updated>
+    <updated>2016-11-22T10:52:57+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -22,7 +61,7 @@
 
 &lt;p&gt;&lt;img alt="Harrow Community Network Website" src="https://www.dropbox.com/s/j1n566aoa7hregq/Screenshot%202016-11-21%2009.36.51.png?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;Over those three years we&amp;rsquo;ve been using an Agile project management approach to developing the software and coordinating the efforts and contributions of over 30 volunteers from &lt;a href="https://www.harrowcn.org.uk/contributors"&gt;all around the world&lt;/a&gt;.  We&amp;rsquo;ve been following the principles of behind the Agile Manifesto:&lt;/p&gt;
+&lt;p&gt;Over those three years we&amp;rsquo;ve been using an Agile project management approach to developing the software and coordinating the efforts and contributions of over 30 volunteers from &lt;a href="https://www.harrowcn.org.uk/contributors"&gt;all around the world&lt;/a&gt;.  We&amp;rsquo;ve been following the principles behind the Agile Manifesto:&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Our highest priority is to satisfy the customer through early and continuous delivery of valuable software.&lt;/p&gt;
@@ -46,13 +85,13 @@
 &lt;p&gt;Business people and developers must work together daily throughout the project&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;This can be challenging with a distributed team of developers all around the world.  We broadcast the client meetings via YouTube, and run a google hangout that developers are encouraged to join.  Any developer can participate in a client meeting, and can communicate with the client via email.  However as project manager I tend to funnel questions from developers through to the client, and bring them up in the client meeting.  Given the part time volunteer nature of our project it is difficult to support daily interaction between client and developers; and since we are all developers our &amp;ldquo;business people&amp;rdquo; are arguably the client, although we make no strong distinction between devs and non-devs in our distributed team.  Everyone is learning, everyone is participating.&lt;/p&gt;
+&lt;p&gt;This can be challenging with a distributed team of developers all around the world.  We broadcast the client meetings via YouTube, and run it in a google hangout that developers are encouraged to join.  Any developer can participate in a client meeting, and can communicate with the client via email.  However as project manager I tend to funnel questions from developers through to the client, and bring them up in the client meeting.  Given the part-time volunteer nature of our project it is difficult to support daily interaction between client and developers; and since we are all developers our &amp;ldquo;business people&amp;rdquo; are arguably the client, although we make no strong distinction between devs and non-devs in our distributed team.  Everyone is learning, everyone is participating.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Every developer is free to work on what they are interested in.  The client&amp;rsquo;s preferred priorities are expressed through the priority ordering on the backlog, but developers can start any story that takes their interest.  We do strongly encourage all developers to put any unestimated story to a vote (either synchronous in a scrum, or asynchronous in a text vote) before starting work on it just to help increase awareness that they are interested in working on something.  They don&amp;rsquo;t need to wait for the vote to complete in order to start a spike or some experiments.  However it makes strong sense to let others know what you are thinking about so you can benefit from their thoughts and suggestions.  Even so this is not a hard and fast rule.  The software is open source and anyone can submit a pull request at any time, but getting involved in the voting and estimation process is a great way of staying on top of any information relevant to the task and increases the chance of a smooth merge of code later on, while reducing the chance of duplicated effort.&lt;/p&gt;
+&lt;p&gt;Every developer is free to work on what they are interested in.  The client&amp;rsquo;s preferred priorities are expressed through the priority ordering on the backlog, but developers can start any story that takes their interest.  We do strongly encourage all developers to put any unestimated story to a vote (either synchronous in a scrum, or asynchronous in a text vote) before starting work on it; just to help increase awareness that they are interested in working on something.  They don&amp;rsquo;t need to wait for the vote to complete in order to start a spike or some experiments.  However it makes strong sense to let others know what you are thinking about so you can benefit from their thoughts and suggestions.  Even so this is not a hard and fast rule.  The software is open source and anyone can submit a pull request at any time, but getting involved in the voting and estimation process is a great way of staying on top of any information relevant to the task and increases the chance of a smooth merge of code later on, while reducing the chance of duplicated effort.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;The most efficient and effective method of conveying information to and within a development team is face-to-face conversation.&lt;/p&gt;
@@ -61,7 +100,7 @@
 &lt;p&gt;We agree, but we can&amp;rsquo;t afford to fly all the developers into the same location for this purpose.  Google hangouts gives us a close second to a face to face conversation, and I try to meet with the client in person where possible.&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;Agile processes promote sustainable development. The sponsors, developers, and users should be able  to maintain a constant pace indefinitely.&lt;/p&gt;
+&lt;p&gt;Agile processes promote sustainable development. The sponsors, developers, and users should be able to maintain a constant pace indefinitely.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;We&amp;rsquo;ve been maintaining a slow and steady pace for the last three years.&lt;/p&gt;
@@ -70,27 +109,27 @@
 &lt;p&gt;Continuous attention to technical excellence and good design enhances agility.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;All code is submitted to the project via Pull Request for open review.  We encourage everyone to use google hangouts to pair program online in order to get more immediate ongoing feedback as code is developed, although the logistics of time zones and lives don&amp;rsquo;t always support pairing.  Even with paired code, everything coming into the project is automatically checked for merge conflicts, tests passing, and style/coding guidelines.  Any developer can comment on any pull request, which we try to either close or merge within a week to avoid widely diverging branches.  The ultimate decision for merging rests with myself as project manager, and I try to maintain a match between any code coming in and the domain model that we have developed over the last three years.&lt;/p&gt;
+&lt;p&gt;All code is submitted to the project via Pull Request for open review.  We encourage everyone to use Google hangouts to pair program online in order to get more immediate ongoing feedback as code is developed, although the logistics of time zones and lives don&amp;rsquo;t always support pairing.  Even with paired code, everything coming into the project is automatically checked for merge conflicts, tests passing, and style/coding guidelines.  Any developer can comment on any pull request, which we try to either close or merge within a week to avoid widely diverging branches.  The ultimate decision for merging rests with myself as project manager, and I try to maintain a match between any code coming in and the domain model that we have developed over the last three years.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Simplicity&amp;ndash;the art of maximizing the amount of work not done&amp;ndash;is essential.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;I strongly encourage all developers, whether working on a chore, a bug fix or a feature, to submit the absolute minimum of code.  Only things related the specific ticket being worked on should be in the pull request.  The smaller the code changes in the pull request, the happier I am.  Small pull requests are easier to review, easier to merge, can often be done faster, and provide a more frequent sense of completion and progress for everyone involved.  Seeing something else that needs to be fixed? Open a refactoring ticket and submit a separate pull request for that.  There are always new folks coming into the project who will love a really simple refactoring ticket to allow them to get started on something where they don&amp;rsquo;t have to generate new tests. &lt;/p&gt;
+&lt;p&gt;I strongly encourage all developers, whether working on a chore, a bug fix or a feature, to submit the absolute minimum of code.  Only things related the specific ticket being worked on should be in the pull request.  The smaller the code changes in the pull request, the happier I am.  Small pull requests are easier to review, easier to merge, can often be done faster, and provide a more frequent sense of completion and progress for everyone involved.  See something else that needs to be fixed?  Open a refactoring ticket and submit a separate pull request for that.  There are always new folks coming into the project who will love a really simple refactoring ticket to allow them to get started on something where they don&amp;rsquo;t have to generate new tests. &lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;The best architectures, requirements, and designs emerge from self-organizing teams.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;I&amp;rsquo;m a single point of failure in this project, although two or three others have access to all the necessary to continue merging and deploying if I was removed.  Other AgileVenture&amp;rsquo;s projects have more self-organising structures where PRs can be merged with the agreement of any 2 or 3 devs.  All structures are subject to revision.  Maybe ultimately the LocalSupport project management structure needs to evolve and change.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m a single point of failure in this project, although two or three others have access to all the necessary to continue merging and deploying if I was removed.  Other AgileVenture&amp;rsquo;s projects have more self-organising structures where PRs can be merged with the agreement of any 2 or 3 devs.  All structures are subject to revision.  Sensibly the LocalSupport project management structure will evolve and change.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Earlier in the project we had weekly retrospectives, but with few dedicated full timers these have fallen away.  We&amp;rsquo;ve switched from many synchronous standups to more asynchronous voting in group text channels on Slack. The Agile principles are written around the idea of a full time co-located team, and we have adapted them to a volunteer part-time distributed team.  Our adaptations certainly need ongoing review and adjustment.  It&amp;rsquo;s not yet clear how best to ensure reflection, tuning and adjustment happens frequently enough.&lt;/p&gt;
+&lt;p&gt;Earlier in the project we had weekly retrospectives, but with few dedicated full timers, these have fallen away.  We&amp;rsquo;ve switched from many synchronous standups to more asynchronous voting in group text channels on Slack. The Agile principles are written around the idea of a full time co-located team, and we have adapted them to a volunteer part-time distributed team.  Our adaptations certainly need ongoing review and adjustment.  It&amp;rsquo;s not yet clear how best to ensure reflection, tuning and adjustment happens frequently enough.&lt;/p&gt;
 
-&lt;p&gt;The workshop dry run (remember that?) involved a 90minute session in which we used the Agile process itself to try to answer the general challenge of better understanding Agile.  I initially presented the Agile Manifesto and talked about related concepts such as scrum and XP for a few minutes.  The overall structure, which compressed a two week sprint into 90 minutes was as follows:&lt;/p&gt;
+&lt;p&gt;Now, getting back to the workshop we dry ran last week; that involved a 90 minute co-located session which a non-technical charity group in which we used the Agile process itself to try to answer the general challenge of better understanding Agile.  I initially presented the Agile Manifesto and talked about related concepts such as scrum, XP and Kanban for a few minutes.  The overall structure, which compressed a two week sprint into 90 minutes was as follows:&lt;/p&gt;
 
 &lt;p&gt;1) Present concept of Agile
 2) Generate stories relating to Agile, and how it can be used in non-profits
@@ -100,19 +139,19 @@
 6) Each team presents their conclusions
 7) Retrospective: each individual looks back on what went well, what could be improved&lt;/p&gt;
 
-&lt;p&gt;The key stories that came out of the 2nd and 3rd stages above were:&lt;/p&gt;
+&lt;p&gt;The key stories that came out of the 2nd and 3rd stages were:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;How does Agile handle dramatic shifts and changes? (1.5 points)&lt;/li&gt;
 &lt;li&gt;How does Agile work with other non-Agile organisations? (3 points)&lt;/li&gt;
 &lt;li&gt;How does Agile work with fluid staffing? (2 points)&lt;/li&gt;
-&lt;li&gt;Agile Logistics (how to scrums and standups work) (1 point)&lt;/li&gt;
-&lt;li&gt;Is Agile a good fit for non-profits and charities (3 points)&lt;/li&gt;
+&lt;li&gt;Agile Logistics (how do scrums and standups work) (1 point)&lt;/li&gt;
+&lt;li&gt;Is Agile a good fit for non-profits and charities? (3 points)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Our three teams of two each chose one of the above and completed the 4th and 5th stages before presenting their thoughts to the whole group.  It all seemed to work pretty well, particularly with a group number of 6 sitting round a large table with the cards organised in front of us.  Everyone said they felt they understood Agile better and there were a lot of productive and interesting discussions.  One participant summed up Agile as an integration of strategy and operations, and I concurred.  Agile is not an absence of planning; it is a commitment to ongoing planning and reflection.  One confusion was that we were using the Agile process to understand the Agile process, and it was all rather meta.  How would you use it to solve specific problems and implement the solutions?  I proposed that after a session like this, one could do a full day inception event with a team where the story tickets would be actual challenges to the organisation, and the retrospective component would take place 2 weeks later.&lt;/p&gt;
+&lt;p&gt;Our three teams of two each chose one of the above and completed the 4th and 5th stages before presenting their thoughts to the whole group.  It all seemed to work pretty well, particularly with a group number of 6 sitting round a large table with the cards organised in front of us.  Everyone said they felt they understood Agile better and there were a lot of productive and interesting discussions.  One participant summed up Agile as an integration of strategy and operations, and I concurred.  Agile is not an absence of planning; it is a commitment to ongoing planning and reflection.  One confusion was that we were using the Agile process itself to understand the Agile process, and it was all rather meta.  A key concern was how would you use it to solve specific problems and implement the solutions?  I proposed that after a session like this, one could do a full day inception event with a team where the story tickets would be actual challenges to the organisation, and the retrospective component would take place 2 weeks later, after the team had done a sprint.&lt;/p&gt;
 
-&lt;p&gt;Anyway, first up we&amp;rsquo;ll be running a full version of this &amp;ldquo;Understanding the Agile Process&amp;rdquo; with frontline charity and non-profit folks in a group of 10-20 people.  Stay tuned to this blog to find out how that goes!&lt;/p&gt;
+&lt;p&gt;Anyway, next up we&amp;rsquo;ll be running a full version of this &amp;ldquo;Understanding the Agile Process&amp;rdquo; with frontline charity and non-profit folks in a group of 10-20 people.  Stay tuned to this blog to find out how that goes!&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -120,7 +159,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/11/18/microservices-question/"/>
     <id>http://blog.url.com/2016/11/18/microservices-question/</id>
     <published>2016-11-18T00:00:00+00:00</published>
-    <updated>2016-11-21T10:43:32+00:00</updated>
+    <updated>2016-11-22T10:12:06+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -150,17 +189,17 @@
 
 &lt;p&gt;&lt;img alt="WSO channel vote" src="https://www.dropbox.com/s/5v6ii9lrpox5pi5/Screenshot%202016-11-18%2009.25.31.png?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;It was clear that when the votes came on thick and fast that the messages were a bit overwhelming.  certainly room for some tuning.  Also running two votes in a row, we had confusion about what was being voted on from one user who hadn&amp;rsquo;t quite got caught up with their slack feed.  I have to say it is so nice to work with a small project where you&amp;rsquo;ve written all the code yourself, and you can tweak the interface as you please.  I can also see how without tests the whole thing could become a complete monster.  I also notice that unlike Ruby/RSpec I don&amp;rsquo;t have &amp;ldquo;throwing together a node test rig&amp;rdquo; memorised; I need to do some reps on setting those up so that I can&amp;rsquo;t use lack of familiarity there as an excuse for continuing the spike indefinitely.&lt;/p&gt;
+&lt;p&gt;It was clear that when the votes came on thick and fast that the messages were a bit overwhelming; certainly room for some tuning.  Also running two votes in a row, we had confusion about what was being voted on from one user who hadn&amp;rsquo;t quite got caught up with their slack feed.  I have to say it is so nice to work with a small project where you&amp;rsquo;ve written all the code yourself, and you can tweak the interface as you please.  I can also see how without tests the whole thing could become a complete monster.  I also notice that unlike Ruby/RSpec I don&amp;rsquo;t have &amp;ldquo;throwing together a node test rig&amp;rdquo; memorised; I need to do some reps on setting those up so that I can&amp;rsquo;t use lack of familiarity there as an excuse for continuing the spike indefinitely.&lt;/p&gt;
 
-&lt;p&gt;In the background we got the latest version of the AsyncVoter RESTful API running on &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; servers.  It seemed like the failing POST operation was just me not having pushed the right code out, and then getting confused about which endpoints were up and which weren&amp;rsquo;t.  In response I started a vote on documenting the AsyncVoter API, and Arreche got started on that.  It occurred to me that we might have moved faster by focusing on the Slack interface initially, but it is good to have a RESTful API up to try and avoid the worst spiky impulses.  It does feel that we&amp;rsquo;ve spent a while building something that could be generated in minutes by a Rails scaffold, or possibly even with Sails or a MEAN scaffolding operation.  That said this low level work is great for everyone to appreciate the core of a RESTful API.&lt;/p&gt;
+&lt;p&gt;In the background we got the latest version of the AsyncVoter RESTful API running on &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; servers.  It seemed like the failing POST operation was just me not having pushed the right code out, and then getting confused about which endpoints were up and which weren&amp;rsquo;t.  In response I started a vote on documenting the AsyncVoter API, and Arreche got started on that.  It occurred to me that we might have moved faster by focusing on the Slack interface initially, but it is good to have a RESTful API up to try and avoid the worst spiky impulses.  It does feel that we&amp;rsquo;ve spent a while building something that could be generated in minutes by a Rails scaffold, or possibly even with Sails or a MEAN scaffolding operation.  That said, this low level work is great for everyone to appreciate the core of a RESTful API.&lt;/p&gt;
 
-&lt;p&gt;The question is now about architecture going forward and where the slack bot gets hosted.  I paired with Ben from &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; and looked at his analysis of our Harrow Community Network logs where he tried to work out how frequently the &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; apps should be sleeping in order to give us the best performance.  We ended up identifying the different needs of the final deployed app versus the developer experience during creating it.  It also seemed like it might be problematic to host the slack bot on the &amp;ldquo;&lt;a href="http://push.drie.co"&gt;drie push&lt;/a&gt;&amp;rdquo; offering since it uses an &amp;ldquo;always-on&amp;rdquo; web socket and it&amp;rsquo;s not clear whether traffic from slack on the socket will be sufficient to wake up the instance.  I started to think about whether to just host the bot on AWS.  We host the auto graders on AWS and I&amp;rsquo;m pretty familiar with the interface &amp;hellip;&lt;/p&gt;
+&lt;p&gt;The question is now about architecture going forward and where the slack bot gets hosted.  I paired with Ben from &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; and looked at his analysis of our Harrow Community Network logs where he tried to work out how frequently the &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; apps should be sleeping in order to give us the best performance.  We ended up identifying the different needs of the final deployed app versus the developer experience while creating it.  It also seemed like it might be problematic to host the slack bot on the &amp;ldquo;&lt;a href="http://push.drie.co"&gt;drie push&lt;/a&gt;&amp;rdquo; offering since it uses an &amp;ldquo;always-on&amp;rdquo; web socket and it&amp;rsquo;s not clear whether traffic from slack on the socket will be sufficient to wake up the instance.  I started to think about whether to just host the bot on AWS.  We host the auto graders on AWS and I&amp;rsquo;m pretty familiar with the interface &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;In principle the slack bot could talk directly to the MongoDB in order to persist the details of the vote.  This would mean that it wouldn&amp;rsquo;t be easy to interrogate the bot about the vote other than outside the slack interface.  It would certainly be nice to have a web dashboard of all the ongoing votes and get statistics and all.  I guess we have the question of whether the micro services architecture gives us a short term win here?  By making the RESTful API and starting work on two different clients we&amp;rsquo;ve gone for a more distributed architecture that might make the development of any individual client slower, but will give us more flexibility in the long run?&lt;/p&gt;
 
 &lt;p&gt;In the background I&amp;rsquo;m talking to possible new sponsors of AgileVentures and getting ready for our first mob programming sessions on Avdi Grimm&amp;rsquo;s &amp;ldquo;Confident Ruby&amp;rdquo; for those who&amp;rsquo;ve upgraded their Premium memberships.   I think we need the asynchronous voting to keep the individual projects ticking over, but we need more money coming in from sponsors and premiums if we&amp;rsquo;re going to be able to continue to offering all our services, both free and premium.  There&amp;rsquo;s a new feeling of momentum to the community, but as I was saying the other day, it&amp;rsquo;s not just a question of sitting around and waiting for the growth.  Each bit of growth still has to be fought for at this stage, although perhaps the battle is getting easier - until we start coasting after we achieve that fabled critical mass? :-)&lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;m still not sure on the microservices question.  Will breaking things up help us avoid a monolith, and follow the single responsibility principle of having one app for each separate function?  It&amp;rsquo;s worked out well for Amazon, but then they&amp;rsquo;re at a completely different scale.  Right now I feel like I&amp;rsquo;m maintaining three different monoliths (LocalSupport, WebSiteOne and AutoGraders) and it always feels precarious when adding a new element.  I guess it&amp;rsquo;s ant colonies versus large vertebrates; single celled, versus multi-cellular organisms.  There&amp;rsquo;s pros and cons to each degree of organisational coupling.  As Kent Beck would say, it depends &amp;hellip; :-) &lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m still not sure on the microservices question.  Will breaking things up help us avoid a monolith, and follow the single responsibility principle of having one app for each separate function?  It&amp;rsquo;s worked out well for Amazon, but then they&amp;rsquo;re at a completely different scale.  Right now I feel like I&amp;rsquo;m maintaining three different monoliths (LocalSupport, WebSiteOne and AutoGraders) and it always feels precarious when adding a new element.  I guess it&amp;rsquo;s ant colonies versus large vertebrates; single celled versus multi-cellular organisms.  There are pros and cons to each degree of organisational coupling.  As Kent Beck would say, it depends &amp;hellip; :-) &lt;/p&gt;
 
 &lt;h3&gt;Related Video:&lt;/h3&gt;
 
@@ -421,32 +460,6 @@ Percentage of the requests served within a certain time (ms)
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=eNfi_j6BT0k"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=qjfV2_DFG18"&gt;Bug Hunt on BURideShare&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Banking Disruption</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/14/banking-disruption/"/>
-    <id>http://blog.url.com/2016/11/14/banking-disruption/</id>
-    <published>2016-11-14T00:00:00+00:00</published>
-    <updated>2016-11-15T09:58:02+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;My main achievement on Friday was opening a bank account for the AgileVentures charity.  This has been a long time coming.  I originally started with Lloyds bank and spent an hour or so on the phone explaining the whole concept of &amp;ldquo;in context learning on charity IT projects&amp;rdquo; to them, before receiving a lot of self-contradictory paperwork that they didn&amp;rsquo;t respond to my email queries about.  The need for a bank account has become more pressing as we start to have a non-trivial Premium payments coming through Stripe.  It&amp;rsquo;s still a small trickle, but with our new sponsor drie, we&amp;rsquo;re on the road to becoming sustainable early next year if we can keep up our current rate of growth.  That might make it sound like we can just wait for that growth to happen, but every little bit of growth requires a lot of hard graft on my part, as well as lots of generous donations of time and effort from our AV mentors.  I also have to make sure that in the process of bringing in new sponsors and premium members that we keep supporting our existing sponsors and premium members.  Simplify, Eliminate, Delegate, Automate!&lt;/p&gt;
-
-&lt;p&gt;Having given up on making progress with Lloyds, I heard that the new UK bank &amp;ldquo;Metro&amp;rdquo; had a reasonable charity account, and that some other local charities had got set up with them before official UK charity status approval (which we are still waiting for - no updates since July &amp;hellip;), and seeing their neat, open-plan branch in my local town centre, and their modern looking website I thought I&amp;rsquo;d give them a try.  I&amp;rsquo;ve also received advice that the Coop bank and Triodos were good options.  Metro had an email link for charities and I emailed them and got an email back within a day.  Responsivity by email is a big plus. Looking back I probably should have mailed all three possible banks to see how fast a response came. I did notice that with Metro I was emailing a specific person at rather than a &lt;code&gt;charities@metrobank.co.uk&lt;/code&gt;, but I pressed on.  We needed to provide the charity constitution, signed minutes of a trustees meeting agreeing to open the bank account, various ID for the bank account signatories, and fill out an application form.  &lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/8f0kxo94ckkaz3d/Screenshot%202016-11-14%2009.25.52.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Over the course of several weeks we assembled all the different components and sent them off to my contact at the head office.  We had a good back and forth in email with my contact checking electronic copies of the documents before I mailed in signed versions.  It seemed to be going well.  I got the last package of documents together and sent them of, paying extra for a verified delivery.  Then nothing.  No communication.  My emails unanswered.  My contact also had a cellphone number on their email signature.  I texted, I left messages, nothing.  After a few days I started calling the head office and trying to get them to contact me.  It turned out that my contact was on annual leave.  Fair enough, although it would have been nice to be getting annual leave notification messages against the emails I was sending.  I was starting to get frustrated.&lt;/p&gt;
-
-&lt;p&gt;It turns out that another person was trying to contact me via email, but they had my email address mis-spelt from the operators I&amp;rsquo;d been speaking to when I was calling the bank.  Eventually we got that figured out, but I didn&amp;rsquo;t manage to make a connection with this person.  They kept on asking me to send in additional paperwork that I believed I had already sent.  I held off as presumably my original contact would soon be back from annual leave and could sort it out.  It stretched out and it seemed that annual leave had become leaving.  I finally managed to speak to the new contact in real time on the phone and established that we had sent in all the paperwork, but that we would have to go into the bank to confirm our identities.&lt;/p&gt;
-
-&lt;p&gt;My plan to save time by doing this all online had backfired.  I&amp;rsquo;d been trying to prefer email but that had caused delays.  Finally on Friday Rachel and I went into the bank and got our identities confirmed, and started working through the other paperwork.  Ultimately it took over 2 hours, first because the bank was saying the accounts they provided couldn&amp;rsquo;t support the detailed finance policy we&amp;rsquo;d put in the minutes.  I was fuming.  I called up the other trustees and on speaker phone allowed the bank manager to hear their approval for an account without detailed support for the finance policy which we would be implementing ourselves rather than relying on bank restrictions.&lt;/p&gt;
-
-&lt;p&gt;That done the bank manager had to re-type the entire PDF application form that I had filled out and sent in.  I was hoping that a recently setup modern bank would be just the sort to avoid this sort of ridiculousness.  Rachel and I caught up and I supported the AV slack channels in the background as we ground through the process.  We were just about to give up and leave when it was all done.  We got bank cards, and I got the online banking hooked up, and the all important sort code and account number that would allow me to issue new invoices and sort out the AgileVentures finances.&lt;/p&gt;
-
-&lt;p&gt;I still like what MetroBank is trying to do.  I think the UK banking industry is ripe for disruption.  Maybe it being difficult to open an account is in some sense a feature.  Convoluted and unnecessary steps discourage all those but the truly serious.  Maybe one day the decentralised cryptocurrencies will replace all this, but I&amp;rsquo;m not holding my breath &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
