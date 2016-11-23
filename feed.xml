@@ -5,24 +5,156 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-22T00:00:00+00:00</updated>
+  <updated>2016-11-23T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Profiling My Day</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/23/profiling-my-day/"/>
+    <id>http://blog.url.com/2016/11/23/profiling-my-day/</id>
+    <published>2016-11-23T00:00:00+00:00</published>
+    <updated>2016-11-23T18:23:01+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;I profiled my day yesterday in an attempt to apply the Simplify, Eliminate, Delegate, Automate mantra and create space for the important things :-)  Here&amp;rsquo;s my rough profile of the day:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;09:00 - 10:00 writing blog (5mins on getting that up and in slack #blog_drafts)
+
+10:15 - 10:40 reviewing slack and email - starting a WSO vote
+
+10:40 - 11:00 reviewing previous days blog and pushing out
+
+11:00 - 11:30 rebuilding slack client after creation and renaming of teams
+
+11:30 - 12:15 scrum and debugging with Premium Mob Member
+
+12:30 - 13:30 edX emailing, AV emailing, Social Media update, negotiating with company about a paid project, editing and promoting blog for Kenyan Bootcamp code9ty
+
+14:45 - 15:00 rebooking physic appt
+
+15:00 - 15:45 reviewing asyncvoterUI and LS PRs (starting hangout 2nd time adding my AV banner)
+
+15:45 - 16:15 scrum - catch up with co-founder Thomas, voting with Rose and student
+
+16:15 - 17:00 meeting with heroku about our charges
+
+17:00 - 17:30 chatting with sponsor drie about hosting services
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So let&amp;rsquo;s apply the SEDA criteria to each in turn.  I don&amp;rsquo;t know that there&amp;rsquo;s anyway to simplify the process of actually writing the blog.  I could make them shorter, or even eliminate them, perhaps doing them less frequently.  I&amp;rsquo;m reluctant to do that as I find them a nice grounding start to the day, the prevents me from just sitting down and reacting to whichever seems the most urgent message on Slack or in email.  Intuitively the feedback I&amp;rsquo;m getting on the blogs is that they are often too long, have too much code, not enough images, but also that they&amp;rsquo;ve helped others understand my perspectives and what we are trying to achieve with AgileVentures.  I can&amp;rsquo;t really delegate them (although I&amp;rsquo;d love to have more in the community blogging), and the only place for automating them would be to work on the final portion of pushing them to GitHub and Slack where each day I have to do the following:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Copy from TextEdit to Sublime&lt;/li&gt;
+&lt;li&gt;Save in correct location and format for middleman blog (e.g. 2016-11-03-pithy-title.html.markdown)&lt;/li&gt;
+&lt;li&gt;Add middleman blog header, edit date there, edit title and edit keywords&lt;/li&gt;
+&lt;li&gt;Navigate to my av-static-website terminal&lt;/li&gt;
+&lt;li&gt;Type &lt;code&gt;git add .&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Type &lt;code&gt;git commit -am &amp;#39;new blog&amp;#39;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Type &lt;code&gt;git push&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Open a browser in the blogs directory of the av-static-website: i.e. https://github.com/AgileVentures/av-static-website/tree/master/source/blog_articles&lt;/li&gt;
+&lt;li&gt;Navigate to the link for the days blog and copy it&lt;/li&gt;
+&lt;li&gt;Switch to slack and paste to the #blog_drafts channel with &lt;code&gt;@channel new blog draft &amp;lt;link&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now this only takes a minute or two, but I am doing it every day, and having written it out I think several parts could be automated or simplified.  It might take 30-60 minutes to get automated in the way I want, so I&amp;rsquo;d need to feel sure that I was going to write another 15-30 blogs before I&amp;rsquo;d start to see time savings.  Possibly I could write a bash script &amp;hellip; there are also things that can go wrong if I have to deal with merge conflicts (I should always &lt;code&gt;git pull&lt;/code&gt; first).  I could just blog on medium and be done with it.  I&amp;rsquo;ve avoided that partly because I want to share drafts with anyone who joins #blog_drafts and have them able to submit PRs, although perhaps a better solution is to just make everyone interested a members of the AgileVentures organisation on Medium.&lt;/p&gt;
+
+&lt;p&gt;I start to think about whether there are some existing automations, like setting up pure PR notifications on the #blog_drafts channel, and submitting my blog as a PR from a branch.  That might seem like crazy extra work, but it connects to something else I&amp;rsquo;d like to automate further; the process of submitting a PR from the command line, which seems to involve me re-typing the same thing several times over, e.g. &lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;git checkout -b #waffle_id_exciting_feature_name&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;doing and committing the work (commit message often includes &amp;lsquo;exciting feature name&amp;rsquo;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hub pull-request -b develop&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;editing the PR description in vim to include the text &lt;code&gt;fixes #waffle_id&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I keep thinking here that if I could get something like a default commit message based on the branch name, then I could avoid typing the waffle_id and feature name twice.  In the blog case there are no waffle ticket ids to link up, but I guess I&amp;rsquo;m looking at being able to type something like the following from the command line:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ blog_draft &amp;lt;blog title&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which would do the following steps:&lt;/p&gt;
+
+&lt;p&gt;a) &lt;code&gt;git pull&lt;/code&gt;
+b) &lt;code&gt;git checkout -b new_blog&amp;lt;blog_title&amp;gt;&lt;/code&gt;
+b) &lt;code&gt;git add source/blog_articles&lt;/code&gt;
+c) &lt;code&gt;git commit -m &amp;#39;new blog on &amp;lt;blog title&amp;gt;&amp;#39;&lt;/code&gt;
+d) &lt;code&gt;hub pull-request -b develop&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;and with the right notifications a bash script doing the above could ping the #blog&lt;em&gt;drafts channel.  With a Ruby script I could probably get finer tweaks so that it actually sent  &lt;code&gt;@channel new blog draft &amp;lt;link&amp;gt;&lt;/code&gt; to #blog&lt;/em&gt;drafts.&lt;/p&gt;
+
+&lt;p&gt;So I could clearly do the above analysis on all the sections of the day.  Blog getting too long?  Quick review.  Daily review of Slack and Email?  Can&amp;rsquo;t really avoid, just have to avoid getting sucked in to low priority things.  I try to pull each question or request into my action plan document and order and then take passes through my action plan to work out what order to do things in.  The asynchronous voting is already the subject of ongoing automation.  &lt;/p&gt;
+
+&lt;p&gt;Reviewing the previous days blog and pushing that out requires some more automatable steps e.g.&lt;/p&gt;
+
+&lt;p&gt;a) merge any PRs
+b) &lt;code&gt;git pull&lt;/code&gt;
+c) read through and make minor corrections (10mins?)
+d) &lt;code&gt;git add&lt;/code&gt;
+e) &lt;code&gt;git commit -m &amp;#39;tweaks&amp;#39;&lt;/code&gt;
+f) &lt;code&gt;git push&lt;/code&gt;
+g) &lt;code&gt;rake publish&lt;/code&gt;
+h) checking http://nonprofits.agileventures.org/blog/
+i) adjusting image sizes, making sure blog looks okay&lt;/p&gt;
+
+&lt;p&gt;The issue with both the initial blog generation and publishing the previous days draft is that the bulk of the time is not automatable without a serious AI.  I guess the question is whether the surrounding command line cruft is worth automating.  Even if it&amp;rsquo;s not, it could be fun, and possibly beneficial if the automation can make PRs from the command line slightly less work &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;The Slack rebuild was (hopefully) a one off.  The scrums - I do two a day, and they are capped at 15 mins, but I often end up doing another 15 mins after the scrum - today the first scrum was followed by 15 mins debugging with a Premium Mob member, which was fun and worth it.  The second scrum 15 min follow was a catch up with my Co-Founder so pretty important I think.  Although scrums can certainly serve to break up flow on a longer more complex piece of work; it&amp;rsquo;s also critical to coordinate with the team, and these Scrums are our welcome mat and showcase.  I am still conflicted about whether they are worth the effort to maintain.  Google Hangouts on Air and our plugin seem stable-ish again after our outage of a couple of weeks back, although I am needing to re-start hangouts occasionally, and the fact that my lower third banner is not saved means I&amp;rsquo;m re-adding that for every scrum and hangout - which burns 30 seconds every time, although it&amp;rsquo;s helped me memorise the AV colour code (#ee7335).&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m unclear if the &lt;a href="https://www.hangouttoolbox.com/"&gt;google hangout toolbox&lt;/a&gt; is still being maintained.  I just posted the following to their G+ support group:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The lower third still works for me, but I can&amp;rsquo;t save it - I have to re-enter the details every time.  Is the code for this open source?  Is there someone actively maintaining it?&lt;/p&gt;
+
+&lt;p&gt;Here are some more details - I can set up my lower third like so:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/nz4gwqb0pbfhfwc/Screenshot%202016-11-23%2010.04.34.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;I have the setting to enable auto load and autoload last used lower:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/8zr12w8e7sf4wtu/Screenshot%202016-11-23%2010.05.34.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;and here&amp;rsquo;s me having reloaded the hangout and the saved presets have gone :-(&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/24ik2p5qauunua6/Screenshot%202016-11-23%2010.07.36.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Any ideas?&lt;/p&gt;
+
+&lt;p&gt;Many thanks in advance&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So I can see the names of the developers on the site.  I&amp;rsquo;ll leave that &lt;a href="https://plus.google.com/+SamJoseph/posts/QyAdAzTXPuG"&gt;G+ post&lt;/a&gt; for a couple of days and then maybe reach out to the maintainers.&lt;/p&gt;
+
+&lt;p&gt;Michael wasn&amp;rsquo;t around so I reviewed PRs instead of pairing.  Felt good to get into the details of the new React client and get to some other outstanding PRs.  PR review is what Premium members get priority on.  I&amp;rsquo;m still not sure if this is the key thing that Premium&amp;rsquo;s want, but reviewing PRs takes a lot of work and time, and I believe it is very beneficial for learning.  Other meetings in the day were one offs and can&amp;rsquo;t really be ESADed.  Other key area for ESADing is the edX and AV emailings.  I think I&amp;rsquo;ve got the Social Media update fairly automated.  It involves reviewing an older blog, tweaking and then pushing to Medium, which automatically pushes to Twitter and Facebook, although with boring &amp;ldquo;I just published&amp;rdquo; text.  I push to LinkedIn manually, but it&amp;rsquo;s the edX and AV emailings that are time consuming.  The edX ones go through mail chimp, but they don&amp;rsquo;t give me enough access to automate them.  For the AV mailings, I really need to look into the Amazon SES service.  I&amp;rsquo;m just finishing a run of mailing all the AV members individually through my Thunderbird client.  I have a couple of scripts to semi-automate this, but I am trying to reach out personally to everyone.&lt;/p&gt;
+
+&lt;p&gt;I do feel a bit like a spammer, but it&amp;rsquo;s a one off, and I&amp;rsquo;m responding individually to every email back, and we&amp;rsquo;ve signed up about ten new premium members as a direct result of these personal mailings over the last two months.  Longer term we need some way of enabling people to opt-in/out of emails.  Lots to do there.  I&amp;rsquo;m going to try profiling a few more days to see if I can find some sweet spots to ESAD, and if you have suggestions about how I can operate more efficiently I&amp;rsquo;m all ears! :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=OiBuIltBooM"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4rRIwgGasKI"&gt;Solo work on Async Voter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=-Sn4r03hNL4"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Levels of Focus</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/22/levels-of-focus/"/>
     <id>http://blog.url.com/2016/11/22/levels-of-focus/</id>
     <published>2016-11-22T00:00:00+00:00</published>
-    <updated>2016-11-22T10:13:22+00:00</updated>
+    <updated>2016-11-23T18:23:01+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;It was a busy weekend.  That was partly the kids birthday parties and coaching under eights football, but also because of my last Mentive mentoring session and two Premium Plus pairing sessions.  I usually prefer not to work at the weekend, but I really want to make AgileVentures sustainable and for people who work during the week, it&amp;rsquo;s often convenient to get support from their mentor at the weekend.  The Mentive experience has been interesting to try out GotoMeeting, which is okay, and more powerful than Google Hangouts, but the ability to share a URL with a hangout to anyone, and stream/record live to YouTube, makes me prefer Hangouts.  &lt;/p&gt;
+    <content type="html">&lt;p&gt;It was a busy weekend.  That was partly the kids&amp;rsquo; birthday parties and coaching under eights football, but also because of my last Mentive mentoring session and two Premium Plus pairing sessions.  I usually prefer not to work at the weekend, but I really want to make AgileVentures sustainable, and for people who work during the week, it&amp;rsquo;s often convenient to get support from their mentor at the weekend.  The Mentive experience has been interesting to try out GotoMeeting, which is okay, and more powerful than Google Hangouts, but the ability to share a URL with a hangout to anyone, and stream/record live to YouTube, makes me prefer Hangouts.  &lt;/p&gt;
 
 &lt;p&gt;As the Mentive chats have become more abstract the Premium Plus pairing sessions have been very code focused. On Sunday I worked with Adrian through a Cross Origin Resource Sharing issue on AsyncVoter so that the new React client could read data off the &amp;ldquo;&lt;a href="http://push.drie.co"&gt;drie push&lt;/a&gt;&amp;rdquo; hosted app.  We got a spiky &lt;a href="https://github.com/AgileVentures/AsyncVoter/pull/77"&gt;Work in Progress(WIP) PR&lt;/a&gt; in and I deployed the branch to the drie staging instance so that Adrian could proceed to work on the &lt;a href="https://github.com/AgileVentures/asyncvoter-ui"&gt;React UI&lt;/a&gt;.  We&amp;rsquo;d used the &lt;a href="https://www.npmjs.com/package/cors"&gt;cors package&lt;/a&gt; to ensure that we would accept incoming AJAX requests from all sources for the time being.&lt;/p&gt;
 
-&lt;p&gt;I had a quick break and was then working on a &lt;a href="https://www.hackerrank.com/challenges/find-the-running-median"&gt;running median problem&lt;/a&gt; which involved writing some min and max heaps in Ruby.  Simple sort was deemed to inefficient and we needed a custom data structure to allow fast access to the median.  This was just part of looking at algorithms in general, but I was already thinking about how we could be linking this to useful stats from data-feeds we have on voting and pairing sessions.  We didn&amp;rsquo;t get as far as I would have liked into the analysis portion and we&amp;rsquo;ll hit that next weekend.&lt;/p&gt;
+&lt;p&gt;I had a quick break and was then working on a &lt;a href="https://www.hackerrank.com/challenges/find-the-running-median"&gt;running median problem&lt;/a&gt; which involved writing some min and max heaps in Ruby.  Simple sort was deemed too inefficient and we needed a custom data structure to allow fast access to the median.  This was just part of looking at algorithms in general, but I was already thinking about how we could be linking this to useful stats from data-feeds we have on voting and pairing sessions.  We didn&amp;rsquo;t get as far as I would have liked into the analysis portion and we&amp;rsquo;ll hit that next weekend.&lt;/p&gt;
 
 &lt;p&gt;There hadn&amp;rsquo;t been programming or pairing of note either side of the weekend on Friday or Monday, Friday having been taking up with an Agile Projects workshop and then some brainstorming with Michael and Ashley.  There&amp;rsquo;d been sporadic async slack bot hacking, and we got most of the way of pushing a version of LocalSupport onto &lt;a href="http://push.drie.co"&gt;drie push&lt;/a&gt;. Brainstorming finished up the day as Michael and I digested the new PRs and issue comment from Ashley on the generic &lt;a href="https://github.com/AgileVentures/AgileVentures"&gt;AgileVentures&lt;/a&gt; repo.  Ashley had created some great diagrams, and was pushing us to be thinking in terms of more specific user models and big vision statements:&lt;/p&gt;
 
@@ -30,9 +162,9 @@
 
 &lt;p&gt;There&amp;rsquo;ll be enormous value if the big picture vision of AgileVentures can be communicated effectively in a compelling and visually attractive manner.  I find myself torn between all the small admin tasks that are ever increasing, smoothing off the rough edges on aspects of the paid premium user experience, delivering on our commitments to the premium users and conducting bigger planning and vision generation efforts.&lt;/p&gt;
 
-&lt;p&gt;It&amp;rsquo;s clear that the onboarding experience is bumpy and could be vastly improved at each stage of our funnel, from becoming aware of us, to browsing our website, signing up, joining slack, joining a hangout, participating in a project and starting a project; not to mention signing up for one of the paid plans, and upgrading to get even more professional development support.  Michael and I spent an hour kicking ideas about.  I was reminded of Pavel&amp;rsquo;s point from a couple of years ago about the importance of measuring things.  That if we were going to make changes like having the popups on the site encouraging people to join slack, or join hangouts then we wanted to know if these were having measurable impacts.  However I keep thinking that some things are no brainers, but then I&amp;rsquo;m a complete hypocrite.  The whole point of small simple PRs is not assuming that you know how things are going to work.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s clear that the onboarding experience is bumpy and could be vastly improved at each stage of our funnel, from becoming aware of us, to browsing our website, signing up, joining slack, joining a hangout, participating in a project and starting a project; not to mention signing up for one of the paid plans, and upgrading to get even more professional development support.  Michael and I spent an hour kicking ideas about.  I was reminded of Pavel&amp;rsquo;s point from a couple of years ago about the importance of measuring things&amp;ndash;that if we were going to make changes like having the popups on the site encouraging people to join slack, or join hangouts, then we wanted to know if these were having measurable impacts.  However I keep thinking that some things are no-brainers, but then I&amp;rsquo;m a complete hypocrite.  The whole point of small simple PRs is not assuming that you know how things are going to work.&lt;/p&gt;
 
-&lt;p&gt;At the same time, perhaps I am justifiably caution about efforts to pull out lots of data, where it&amp;rsquo;s unclear what that data is telling us.  We could have a super active slack and super active hangouts, but without enough income it doesn&amp;rsquo;t really mean anything.  I need to get the income past a certain threshold soon.  That&amp;rsquo;s not the best place to be coming from, not the best place to be doing decision making.  It feels difficult to devote time to big picture planning that could be spent on, say, making sure that all the different premium plan options were available for upgrade on each user page.   I do want to make it easier for people to onboard and understand what we&amp;rsquo;re doing, and how they can get involved and derive the most possible benefit from the AV experience.  That said it feels counterproductive to focus on that when there are directly income related things to fix.  It&amp;rsquo;s so difficult to know.  Will fixing the plan upgrade issue generate more revenue in the short term?  One user encountered a problem related to it, which we fixed through the Stripe interface.  Will others experience it soon?&lt;/p&gt;
+&lt;p&gt;At the same time, perhaps I am justifiably cautious about efforts to pull out lots of data, where it&amp;rsquo;s unclear what that data is telling us.  We could have a super active slack and super active hangouts, but without enough income it doesn&amp;rsquo;t really mean anything.  I need to get the income past a certain threshold soon.  That&amp;rsquo;s not the best place to be coming from, not the best place to be doing decision making.  It feels difficult to devote time to big picture planning that could be spent on, say, making sure that all the different premium plan options were available for upgrade on each user page.   I do want to make it easier for people to onboard and understand what we&amp;rsquo;re doing, and how they can get involved and derive the most possible benefit from the AV experience.  That said, it feels counterproductive to focus on that when there are directly income related things to fix.  It&amp;rsquo;s so difficult to know.  Will fixing the plan upgrade issue generate more revenue in the short term?  One user encountered a problem related to it, which we fixed through the Stripe interface.  Will others experience it soon?&lt;/p&gt;
 
 &lt;p&gt;We&amp;rsquo;re planning our first Premium Mob session on Thursday.  That feels like it might have legs.  If that goes well and generates good energy it could be a powerful incentive for upgrading.  Coming full circle I think it comes back to Eliminate, Simplify, Delegate, Automate.  The mounting admin tasks are not helping me focus on the big picture.  Michael and I started looking at setting up a greeter bot to replace some of my AV slack greeting activities.  It seems on the Slack free tier we can only have one integrated bot, so any greeter bot would have to be merged with the AsyncVoting bot &amp;hellip; ultimately I resolved that the key thing to do today was to profile where I was spending my time and focus the lens of Eliminate, Simplify, Delegate, Automate on it.  I guess I have to measure as well &amp;hellip;&lt;/p&gt;
 
@@ -53,7 +185,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/11/21/agile-workshop/"/>
     <id>http://blog.url.com/2016/11/21/agile-workshop/</id>
     <published>2016-11-21T00:00:00+00:00</published>
-    <updated>2016-11-22T10:52:57+00:00</updated>
+    <updated>2016-11-23T18:23:01+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -77,7 +209,7 @@
 &lt;p&gt;Welcome changing requirements, even late in development. Agile processes harness change for the customer&amp;rsquo;s competitive advantage.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Every meeting we review the &lt;a href="https://www.pivotaltracker.com/n/projects/742821"&gt;project board on Pivotal Tracker&lt;/a&gt;, with a particular focus on the features in the backlog.  The backlog is maintained with higher priority items towards the top of the backlog.  As requirements change we follow the clients advice about moving things up and down in the backlog, and even move things back to the icebox if they suddenly become of low relevance.  For example the story on &amp;ldquo;&lt;a href="https://www.pivotaltracker.com/story/show/116028767"&gt;being able to override doit vol ops&lt;/a&gt;&amp;rdquo; was top of the backlog at one point, but got moved onto the icebox as circumstances changed.&lt;/p&gt;
+&lt;p&gt;Every meeting we review the &lt;a href="https://www.pivotaltracker.com/n/projects/742821"&gt;project board on Pivotal Tracker&lt;/a&gt;, with a particular focus on the features in the backlog.  The backlog is maintained with higher priority items towards the top of the backlog.  As requirements change we follow the client&amp;rsquo;s advice about moving things up and down in the backlog, and even move things back to the icebox if they suddenly become of low relevance.  For example the story on &amp;ldquo;&lt;a href="https://www.pivotaltracker.com/story/show/116028767"&gt;being able to override doit vol ops&lt;/a&gt;&amp;rdquo; was top of the backlog at one point, but got moved onto the icebox as circumstances changed.&lt;/p&gt;
 
 &lt;p&gt;Any new suggestions from the client are immediately added to the icebox and go through a voting process to estimate their technical complexity.  Once they are estimated they can be moved onto the backlog with the client&amp;rsquo;s consent and subject to the client&amp;rsquo;s preferences regarding priority.&lt;/p&gt;
 
@@ -121,15 +253,15 @@
 &lt;p&gt;The best architectures, requirements, and designs emerge from self-organizing teams.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;I&amp;rsquo;m a single point of failure in this project, although two or three others have access to all the necessary to continue merging and deploying if I was removed.  Other AgileVenture&amp;rsquo;s projects have more self-organising structures where PRs can be merged with the agreement of any 2 or 3 devs.  All structures are subject to revision.  Sensibly the LocalSupport project management structure will evolve and change.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m a single point of failure in this project, although two or three others have access to all the necessary to continue merging and deploying if I was removed.  Other AgileVentures projects have more self-organising structures where PRs can be merged with the agreement of any 2 or 3 devs.  All structures are subject to revision.  Sensibly the LocalSupport project management structure will evolve and change.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Earlier in the project we had weekly retrospectives, but with few dedicated full timers, these have fallen away.  We&amp;rsquo;ve switched from many synchronous standups to more asynchronous voting in group text channels on Slack. The Agile principles are written around the idea of a full time co-located team, and we have adapted them to a volunteer part-time distributed team.  Our adaptations certainly need ongoing review and adjustment.  It&amp;rsquo;s not yet clear how best to ensure reflection, tuning and adjustment happens frequently enough.&lt;/p&gt;
+&lt;p&gt;Earlier in the project we had weekly retrospectives, but with few dedicated full timers, these have fallen away.  We&amp;rsquo;ve switched from many synchronous standups to more asynchronous voting in group text channels on Slack. The Agile principles are written around the idea of a full time co-located team, and we have adapted them to a volunteer part-time distributed team.  Our adaptations certainly need ongoing review and adjustment.  It&amp;rsquo;s not yet clear how best to ensure reflection. Tuning and adjustment happens frequently enough.&lt;/p&gt;
 
-&lt;p&gt;Now, getting back to the workshop we dry ran last week; that involved a 90 minute co-located session which a non-technical charity group in which we used the Agile process itself to try to answer the general challenge of better understanding Agile.  I initially presented the Agile Manifesto and talked about related concepts such as scrum, XP and Kanban for a few minutes.  The overall structure, which compressed a two week sprint into 90 minutes was as follows:&lt;/p&gt;
+&lt;p&gt;Now, getting back to the workshop we dry ran last week; that involved a 90 minute co-located session with a non-technical charity group in which we used the Agile process itself to try to answer the general challenge of better understanding Agile.  I initially presented the Agile Manifesto and talked about related concepts such as scrum, XP and Kanban for a few minutes.  The overall structure, which compressed a two week sprint into 90 minutes was as follows:&lt;/p&gt;
 
 &lt;p&gt;1) Present concept of Agile
 2) Generate stories relating to Agile, and how it can be used in non-profits
@@ -351,114 +483,6 @@
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=qRCeF-IECaU"&gt;Pairing on AgileBot&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=1gMF_0oALyY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=tKqG-pSQcfU"&gt;Pairing on WebSiteOne&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Multiple Pull Request Learning</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/15/multiple-pull-request-learning/"/>
-    <id>http://blog.url.com/2016/11/15/multiple-pull-request-learning/</id>
-    <published>2016-11-15T00:00:00+00:00</published>
-    <updated>2016-11-18T12:13:35+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;I didn&amp;rsquo;t get much solo or pair time coding today. It was a day of helping Premium member&amp;rsquo;s with bug fixes and reviewing pull requests.  The &amp;ldquo;Martin Fowler&amp;rdquo; scrum was crowded and brought up various requests for help, support and review.  I started by creating a hangout to look at Sasha&amp;rsquo;s WSO pull request to check whether YouTube videos were valid before tweeting them.  Sasha was concerned whether he&amp;rsquo;d sandboxed correctly, and I explained the &lt;code&gt;@vcr&lt;/code&gt; tag we had that meant individual VCR cassettes weren&amp;rsquo;t necessary.  More interestingly we were seeing that the tweets going out were slightly out of sync with their messages.  Sasha was investigating the issue of invalid YouTube links going into the tweets:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="AV tweets" src="https://www.dropbox.com/s/845stvx878zuumo/Screenshot%202016-11-15%2009.23.27.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;What we were seeing was that the tweets to post the hangout link and the finished video were both going out as soon as the hangout started.  Sometimes the person starting the hangout wouldn&amp;rsquo;t press &amp;ldquo;Start Broadcast&amp;rdquo; so the YouTube video link would lead nowhere. There was no feature test covering this twitter functionality, and so I wrote one out:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Tweeting Live Events
-  As a site admin
-  In order to increase participation in events
-  I would like live events to generate twitter notifications
-
-  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nf"&gt;Given&lt;/span&gt; an event &lt;span class="s"&gt;"Scrum"&lt;/span&gt;
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Event going live causes tweet of hangout link to be sent
-    &lt;span class="nf"&gt;Given&lt;/span&gt; that the HangoutConnection has pinged to indicate the event start
-    &lt;span class="nf"&gt;Then&lt;/span&gt; an appropriate tweet has been sent  
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Event stream going live causes tweet of the youtube stream to be sent
-    &lt;span class="nf"&gt;Given&lt;/span&gt; that the HangoutConnection has pinged to indicate the event start
-    &lt;span class="nf"&gt;And&lt;/span&gt; youtube stream has gone live
-    &lt;span class="nf"&gt;Then&lt;/span&gt; an appropriate tweet has been sent &lt;span class="c"&gt;# e.g. see live stream&lt;/span&gt;
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Broadcast termination causes tweet of the youtube URL to be sent
-    &lt;span class="nf"&gt;Given&lt;/span&gt; that the HangoutConnection has pinged to indicate the event start
-    &lt;span class="nf"&gt;And&lt;/span&gt; youtube stream has gone live
-    &lt;span class="nf"&gt;And&lt;/span&gt; that recording has finished
-    &lt;span class="nf"&gt;Then&lt;/span&gt; an appropriate tweet has been sent &lt;span class="c"&gt;# e.g. see recording&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Sasha asked the important question of did we really want to be posting all this stuff to Twitter.  I guess the motivation is that by posting hangouts, live streams and videos to Twitter then we increase the chances that people will watch out videos and join our hangouts.  Looking at my YouTube traffic report for the last year I see that 5.3% of watch time on my video account comes from Twitter:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="pie chart" src="https://www.dropbox.com/s/z66n3h4046zp3oi/Screenshot%202016-11-15%2009.32.54.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="pie chart legend" src="https://www.dropbox.com/s/hjdtgfld0lph838/Screenshot%202016-11-15%2009.33.30.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;compared to 60% from edX, 8.3% from Google search and 6.6% from the AV site itself.  While social media traffic to our AV site (over the last year) was dominated by Google+, Meetup, StackOverflow, Facebook and LinkedIn.  Twitter came in 8th with only 3.46%.  Now maybe this is because of broken video links, or because the feed is almost entirely automated. Either way, what we were putting out there was inconsistent, and the simplest fix was to only tweet the video link once the broadcast went live, and Sasha and I saw there was an easy check we could make for that through the YT gem.   Sasha had to run off to do a tech test; which made me think it would be awesome if tech companies would take AV participation as a tech test equivalent!&lt;/p&gt;
-
-&lt;p&gt;After lunch I merged an &lt;a href="https://github.com/AgileVentures/LocalSupport/pull/396"&gt;exquisitely small and updated PR on LocalSupport&lt;/a&gt; from new contributor Kostas and then jumped on an AsyncVoter performance testing issue, running a profile of the AsyncVoter app running on &lt;a href="http://drie.co"&gt;drie&lt;/a&gt; and heroku.  &lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ ab -n 50 https://async-voter-production.herokuapp.com/stories
-
-Time per request:       381.987 [ms] (mean)
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:      257  280   7.4    284     288
-Processing:    92  102   7.3    100     130
-Waiting:       92  102   7.3    100     129
-Total:        353  382  11.8    384     414
-
-Percentage of the requests served within a certain time (ms)
-  50%    384
-  66%    385
-  75%    387
-  80%    389
-  90%    399
-  95%    401
-  98%    414
-  99%    414
- 100%    414 (longest request)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;drie&amp;rsquo;s average was slightly faster, but the variance was much larger:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ ab -n 50 http://master.async_voter_production.app.push.drieapp.co/stories
-
-Time per request:       355.193 [ms] (mean, across all concurrent requests)
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:       88   91   2.2     93      94
-Processing:    92  264 474.9    100    3093
-Waiting:       92  264 474.9    100    3093
-Total:        180  355 475.1    193    3186
-
-Percentage of the requests served within a certain time (ms)
-  50%    193
-  66%    196
-  75%    220
-  80%    486
-  90%    881
-  95%   1102
-  98%   3186
-  99%   3186
- 100%   3186 (longest request)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This was a very rough test and not really fair on drie since we&amp;rsquo;d just used both the apps, so Heroku was awake and didn&amp;rsquo;t suffer a start up cost.  But drie currently sleeps their &amp;ldquo;push&amp;rdquo; apps every 30 seconds, which explains the variance and means we would suffer the slow start up costs much more frequently.  I was able to take that data to discuss with the drie folks in our regular catch up meeting.  No sooner was that done that I was on a bug hunt with new Premium member Rose, identifying issues with seed files and cucumber tests.  After we got the BURideShare cukes green, I took a quick pass through an &lt;a href="https://github.com/strawberrycanyon/redeemify/pull/43"&gt;updated Redeemify pull request&lt;/a&gt; which had been updated really nicely.  &lt;/p&gt;
-
-&lt;p&gt;I was trying to get a handle also on the new SHF-project, reviewing the new &lt;a href="https://github.com/AgileVentures/shf-project/blob/develop/CONTRIBUTING.md"&gt;CONTRIBUTING.md&lt;/a&gt; from Ashley and then joining a hangout with Ashley and Susanna who were discussing a &lt;a href="https://github.com/AgileVentures/shf-project/pull/22"&gt;pull request&lt;/a&gt;.  Susanna was keen to get it pulled in after having followed one set of advice from one mentor, but Ashley was concerned that things were getting too complex, and I was inclined to agree with her.  I offered what advice I could and then had to go to supper.  Bottom line is that it&amp;rsquo;s okay to accrue technical debt from things like using non-RESTful controller methods, but it&amp;rsquo;s good to be aware that you&amp;rsquo;re doing that and that you&amp;rsquo;ll pay a price later on.  If you&amp;rsquo;ve got to move fast right now then guidelines can be ignored, but short term speed has to be balanced against long term progress.&lt;/p&gt;
-
-&lt;p&gt;In summary a productive day I think, although I didn&amp;rsquo;t spend much time focused on one thing.  Great to see so many active projects on AgileVentures, and so much learning arising from all the pull requests coming in.  We just need lots more of this and lots of processes in place to ensure my head doesn&amp;rsquo;t spin off trying to keep track of it all :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?feature=player_embedded&amp;amp;v=kkm2KdUDuC8"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=k4UrtG6Q0vw"&gt;WebSiteOne Code Review&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=rwc4luv4_6c"&gt;AsyncVoter Performance Testing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=eNfi_j6BT0k"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=qjfV2_DFG18"&gt;Bug Hunt on BURideShare&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
