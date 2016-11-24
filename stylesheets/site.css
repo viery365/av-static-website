@@ -652,39 +652,40 @@ section {
 #blog img {
   display: block;
   margin: 0 auto;
-  padding: 20px; }
-/* line 314, _agency.scss */
+  padding: 20px;
+  max-width: 700px; }
+/* line 315, _agency.scss */
 #blog li {
   font-size: 1.5em;
   line-height: 1.75; }
 
-/* line 323, _agency.scss */
+/* line 324, _agency.scss */
 .privacy h2, .terms h2 {
   text-align: center;
   padding: 1.5em 0em 0.7em 0em; }
-/* line 327, _agency.scss */
+/* line 328, _agency.scss */
 .privacy p, .terms p {
   text-align: justify; }
-/* line 330, _agency.scss */
+/* line 331, _agency.scss */
 .privacy section, .terms section {
   padding-bottom: 0px; }
 
-/* line 337, _agency.scss */
+/* line 338, _agency.scss */
 .service-heading {
   margin: 15px 0;
   text-transform: none; }
 
-/* line 345, _agency.scss */
+/* line 346, _agency.scss */
 #portfolio .portfolio-item {
   margin: 0 0 15px;
   right: 0; }
-  /* line 349, _agency.scss */
+  /* line 350, _agency.scss */
   #portfolio .portfolio-item .portfolio-link {
     display: block;
     margin: 0 auto;
     max-width: 400px;
     position: relative; }
-    /* line 355, _agency.scss */
+    /* line 356, _agency.scss */
     #portfolio .portfolio-item .portfolio-link .portfolio-hover {
       background: rgba(238, 115, 53, 0.9);
       height: 100%;
@@ -694,10 +695,10 @@ section {
       -webkit-transition: all ease .5s;
       transition: all ease .5s;
       width: 100%; }
-      /* line 365, _agency.scss */
+      /* line 366, _agency.scss */
       #portfolio .portfolio-item .portfolio-link .portfolio-hover:hover {
         opacity: 1; }
-      /* line 369, _agency.scss */
+      /* line 370, _agency.scss */
       #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content {
         color: #fff;
         font-size: 20px;
@@ -707,14 +708,14 @@ section {
         text-align: center;
         top: 50%;
         width: 100%; }
-        /* line 379, _agency.scss */
+        /* line 380, _agency.scss */
         #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content i {
           margin-top: -12px; }
-        /* line 383, _agency.scss */
+        /* line 384, _agency.scss */
         #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h3, #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content section div.nonprofits-contact, section #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content div.nonprofits-contact,
         #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h4 {
           margin: 0; }
-  /* line 391, _agency.scss */
+  /* line 392, _agency.scss */
   #portfolio .portfolio-item .portfolio-caption {
     background-color: #fff;
     margin: 0 auto;
@@ -722,30 +723,30 @@ section {
     padding: 25px;
     text-align: center;
     white-space: nowrap; }
-    /* line 399, _agency.scss */
+    /* line 400, _agency.scss */
     #portfolio .portfolio-item .portfolio-caption h4 {
       margin: 0;
       text-transform: none; }
-    /* line 404, _agency.scss */
+    /* line 405, _agency.scss */
     #portfolio .portfolio-item .portfolio-caption p {
       font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-style: italic;
       margin: 0; }
-/* line 413, _agency.scss */
+/* line 414, _agency.scss */
 #portfolio * {
   z-index: 2; }
 
 @media (min-width: 767px) {
-  /* line 420, _agency.scss */
+  /* line 421, _agency.scss */
   #portfolio .portfolio-item {
     margin: 0 0 30px; } }
-/* line 428, _agency.scss */
+/* line 429, _agency.scss */
 .timeline {
   list-style: none;
   padding: 0;
   position: relative; }
-  /* line 433, _agency.scss */
+  /* line 434, _agency.scss */
   .timeline:before {
     background-color: #f1f1f1;
     bottom: 0;
@@ -755,38 +756,38 @@ section {
     position: absolute;
     top: 0;
     width: 2px; }
-  /* line 444, _agency.scss */
+  /* line 445, _agency.scss */
   .timeline > li {
     margin-bottom: 50px;
     min-height: 50px;
     position: relative; }
-    /* line 449, _agency.scss */
+    /* line 450, _agency.scss */
     .timeline > li:before, .timeline > li:after {
       content: ' ';
       display: table; }
-    /* line 455, _agency.scss */
+    /* line 456, _agency.scss */
     .timeline > li:after {
       clear: both; }
-    /* line 459, _agency.scss */
+    /* line 460, _agency.scss */
     .timeline > li .timeline-panel {
       float: right;
       padding: 0 20px 0 100px;
       position: relative;
       text-align: left;
       width: 100%; }
-      /* line 466, _agency.scss */
+      /* line 467, _agency.scss */
       .timeline > li .timeline-panel:before {
         border-left-width: 0;
         border-right-width: 15px;
         left: -15px;
         right: auto; }
-      /* line 473, _agency.scss */
+      /* line 474, _agency.scss */
       .timeline > li .timeline-panel:after {
         border-left-width: 0;
         border-right-width: 14px;
         left: -14px;
         right: auto; }
-    /* line 481, _agency.scss */
+    /* line 482, _agency.scss */
     .timeline > li .timeline-image {
       background-color: #ee7335;
       border: 7px solid #f1f1f1;
@@ -799,245 +800,245 @@ section {
       text-align: center;
       width: 80px;
       z-index: 100; }
-      /* line 494, _agency.scss */
+      /* line 495, _agency.scss */
       .timeline > li .timeline-image h4 {
         font-size: 10px;
         line-height: 14px;
         margin-top: 12px; }
-    /* line 501, _agency.scss */
+    /* line 502, _agency.scss */
     .timeline > li.timeline-inverted > .timeline-panel {
       float: right;
       padding: 0 20px 0 100px;
       text-align: left; }
-      /* line 506, _agency.scss */
+      /* line 507, _agency.scss */
       .timeline > li.timeline-inverted > .timeline-panel:before {
         border-left-width: 0;
         border-right-width: 15px;
         left: -15px;
         right: auto; }
-      /* line 513, _agency.scss */
+      /* line 514, _agency.scss */
       .timeline > li.timeline-inverted > .timeline-panel:after {
         border-left-width: 0;
         border-right-width: 14px;
         left: -14px;
         right: auto; }
-    /* line 521, _agency.scss */
+    /* line 522, _agency.scss */
     .timeline > li:last-child {
       margin-bottom: 0; }
-  /* line 527, _agency.scss */
+  /* line 528, _agency.scss */
   .timeline .timeline-heading h4 {
     color: inherit;
     margin-top: 0; }
-    /* line 531, _agency.scss */
+    /* line 532, _agency.scss */
     .timeline .timeline-heading h4.subheading {
       text-transform: none; }
-  /* line 538, _agency.scss */
+  /* line 539, _agency.scss */
   .timeline .timeline-body > p,
   .timeline .timeline-body > ul {
     margin-bottom: 0; }
 
 @media (min-width: 768px) {
-  /* line 547, _agency.scss */
+  /* line 548, _agency.scss */
   .timeline:before {
     left: 50%; }
-  /* line 551, _agency.scss */
+  /* line 552, _agency.scss */
   .timeline > li {
     margin-bottom: 100px;
     min-height: 100px; }
-    /* line 555, _agency.scss */
+    /* line 556, _agency.scss */
     .timeline > li .timeline-panel {
       float: left;
       padding: 0 20px 20px 30px;
       text-align: right;
       width: 41%; }
-    /* line 562, _agency.scss */
+    /* line 563, _agency.scss */
     .timeline > li .timeline-image {
       height: 100px;
       left: 50%;
       margin-left: -50px;
       width: 100px; }
-      /* line 568, _agency.scss */
+      /* line 569, _agency.scss */
       .timeline > li .timeline-image h4 {
         font-size: 13px;
         line-height: 18px;
         margin-top: 16px; }
-    /* line 575, _agency.scss */
+    /* line 576, _agency.scss */
     .timeline > li.timeline-inverted > .timeline-panel {
       float: right;
       padding: 0 30px 20px 20px;
       text-align: left; } }
 @media (min-width: 992px) {
-  /* line 586, _agency.scss */
+  /* line 587, _agency.scss */
   .timeline > li {
     min-height: 150px; }
-    /* line 589, _agency.scss */
+    /* line 590, _agency.scss */
     .timeline > li .timeline-panel {
       padding: 0 20px 20px; }
-    /* line 593, _agency.scss */
+    /* line 594, _agency.scss */
     .timeline > li .timeline-image {
       height: 150px;
       margin-left: -75px;
       width: 150px; }
-      /* line 598, _agency.scss */
+      /* line 599, _agency.scss */
       .timeline > li .timeline-image h4 {
         font-size: 18px;
         line-height: 26px;
         margin-top: 30px; }
-    /* line 605, _agency.scss */
+    /* line 606, _agency.scss */
     .timeline > li.timeline-inverted > .timeline-panel {
       padding: 0 20px 20px; } }
 @media (min-width: 1200px) {
-  /* line 614, _agency.scss */
+  /* line 615, _agency.scss */
   .timeline > li {
     min-height: 170px; }
-    /* line 617, _agency.scss */
+    /* line 618, _agency.scss */
     .timeline > li .timeline-panel {
       padding: 0 20px 20px 100px; }
-    /* line 621, _agency.scss */
+    /* line 622, _agency.scss */
     .timeline > li .timeline-image {
       height: 170px;
       margin-left: -85px;
       width: 170px; }
-      /* line 626, _agency.scss */
+      /* line 627, _agency.scss */
       .timeline > li .timeline-image h4 {
         margin-top: 40px; }
-    /* line 631, _agency.scss */
+    /* line 632, _agency.scss */
     .timeline > li.timeline-inverted > .timeline-panel {
       padding: 0 100px 20px 20px; } }
-/* line 640, _agency.scss */
+/* line 641, _agency.scss */
 .team-member {
   margin-bottom: 50px;
   text-align: center; }
-  /* line 644, _agency.scss */
+  /* line 645, _agency.scss */
   .team-member img {
     border: 7px solid #fff;
     margin: 0 auto; }
-  /* line 649, _agency.scss */
+  /* line 650, _agency.scss */
   .team-member h4 {
     margin-bottom: 0;
     margin-top: 25px;
     text-transform: none; }
-  /* line 655, _agency.scss */
+  /* line 656, _agency.scss */
   .team-member p {
     margin-top: 0; }
 
-/* line 663, _agency.scss */
+/* line 664, _agency.scss */
 aside.clients img {
   margin: 50px auto; }
 
-/* line 670, _agency.scss */
+/* line 671, _agency.scss */
 section#subscribe {
   background-color: #222;
   background-image: url("../images/map-image.png");
   background-position: center;
   background-repeat: no-repeat; }
-  /* line 676, _agency.scss */
+  /* line 677, _agency.scss */
   section#subscribe .section-heading {
     color: #fff; }
-  /* line 680, _agency.scss */
+  /* line 681, _agency.scss */
   section#subscribe .form-group {
     margin-bottom: 25px; }
-    /* line 683, _agency.scss */
+    /* line 684, _agency.scss */
     section#subscribe .form-group input,
     section#subscribe .form-group textarea {
       padding: 20px; }
-    /* line 688, _agency.scss */
+    /* line 689, _agency.scss */
     section#subscribe .form-group input.form-control {
       height: auto; }
-    /* line 692, _agency.scss */
+    /* line 693, _agency.scss */
     section#subscribe .form-group textarea.form-control {
       height: 236px; }
-  /* line 697, _agency.scss */
+  /* line 698, _agency.scss */
   section#subscribe .form-control:focus {
     border-color: #ee7335;
     box-shadow: none; }
-  /* line 702, _agency.scss */
+  /* line 703, _agency.scss */
   section#subscribe ::-webkit-input-placeholder {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     color: #bbb;
     font-weight: 700; }
-  /* line 708, _agency.scss */
+  /* line 709, _agency.scss */
   section#subscribe :-moz-placeholder {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     color: #bbb;
     font-weight: 700; }
-  /* line 714, _agency.scss */
+  /* line 715, _agency.scss */
   section#subscribe ::-moz-placeholder {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     color: #bbb;
     font-weight: 700; }
-  /* line 720, _agency.scss */
+  /* line 721, _agency.scss */
   section#subscribe :-ms-input-placeholder {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     color: #bbb;
     font-weight: 700; }
-  /* line 726, _agency.scss */
+  /* line 727, _agency.scss */
   section#subscribe .text-danger {
     color: #34459e; }
 
-/* line 731, _agency.scss */
+/* line 732, _agency.scss */
 section#contact {
   padding: 75px 0px 0px 0px; }
 
-/* line 737, _agency.scss */
+/* line 738, _agency.scss */
 footer {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 25px 0;
   text-align: center; }
-  /* line 742, _agency.scss */
+  /* line 743, _agency.scss */
   footer span.copyright {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     line-height: 40px;
     text-transform: none; }
-  /* line 748, _agency.scss */
+  /* line 749, _agency.scss */
   footer ul.quicklinks {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     line-height: 40px;
     margin-bottom: 0;
     text-transform: none; }
-  /* line 755, _agency.scss */
+  /* line 756, _agency.scss */
   footer p.blurb {
     text-align: justify;
     font-size: 1.25em; }
-  /* line 760, _agency.scss */
+  /* line 761, _agency.scss */
   footer .list {
     padding-left: 20%;
     text-align: left;
     font-size: 1.2em;
     margin-bottom: 30px; }
-  /* line 767, _agency.scss */
+  /* line 768, _agency.scss */
   footer .contact-list {
     padding-left: 0%;
     text-align: center;
     font-size: 1.2em;
     margin-bottom: 50px; }
-    /* line 772, _agency.scss */
+    /* line 773, _agency.scss */
     footer .contact-list .mail {
       font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
       line-height: 1.15em; }
-  /* line 778, _agency.scss */
+  /* line 779, _agency.scss */
   footer h3, footer section div.nonprofits-contact, section footer div.nonprofits-contact {
     margin-bottom: 20px; }
-  /* line 782, _agency.scss */
+  /* line 783, _agency.scss */
   footer i.fa-text {
     margin-bottom: 10px;
     display: block; }
-  /* line 787, _agency.scss */
+  /* line 788, _agency.scss */
   footer .font-override {
     font-size: .9em;
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 110%; }
 
-/* line 797, _agency.scss */
+/* line 798, _agency.scss */
 ul.social-buttons {
   margin-bottom: 0; }
-  /* line 801, _agency.scss */
+  /* line 802, _agency.scss */
   ul.social-buttons li a {
     background-color: #222;
     border-radius: 100%;
@@ -1051,18 +1052,18 @@ ul.social-buttons {
     -webkit-transition: all .3s;
     transition: all .3s;
     width: 40px; }
-    /* line 815, _agency.scss */
+    /* line 816, _agency.scss */
     ul.social-buttons li a:hover, ul.social-buttons li a:focus, ul.social-buttons li a:active {
       background-color: #ee7335; }
 
-/* line 824, _agency.scss */
+/* line 825, _agency.scss */
 .btn:focus,
 .btn:active,
 .btn.active,
 .btn:active:focus {
   outline: none; }
 
-/* line 832, _agency.scss */
+/* line 833, _agency.scss */
 .portfolio-modal .modal-content {
   background-clip: border-box;
   border: 0;
@@ -1072,27 +1073,27 @@ ul.social-buttons {
   min-height: 100%;
   padding: 100px 0;
   text-align: center; }
-  /* line 842, _agency.scss */
+  /* line 843, _agency.scss */
   .portfolio-modal .modal-content h2 {
     font-size: 3em;
     margin-bottom: 15px; }
-  /* line 847, _agency.scss */
+  /* line 848, _agency.scss */
   .portfolio-modal .modal-content p {
     margin-bottom: 30px; }
-    /* line 850, _agency.scss */
+    /* line 851, _agency.scss */
     .portfolio-modal .modal-content p .item-intro {
       font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-style: italic;
       margin: 20px 0 30px; }
-  /* line 859, _agency.scss */
+  /* line 860, _agency.scss */
   .portfolio-modal .modal-content ul.list-inline {
     margin-bottom: 30px;
     margin-top: 0; }
-  /* line 864, _agency.scss */
+  /* line 865, _agency.scss */
   .portfolio-modal .modal-content img {
     margin-bottom: 30px; }
-/* line 869, _agency.scss */
+/* line 870, _agency.scss */
 .portfolio-modal .close-modal {
   background-color: transparent;
   cursor: pointer;
@@ -1101,10 +1102,10 @@ ul.social-buttons {
   right: 25px;
   top: 25px;
   width: 75px; }
-  /* line 878, _agency.scss */
+  /* line 879, _agency.scss */
   .portfolio-modal .close-modal:hover {
     opacity: .3; }
-  /* line 882, _agency.scss */
+  /* line 883, _agency.scss */
   .portfolio-modal .close-modal .lr {
     background-color: #222;
     height: 75px;
@@ -1114,7 +1115,7 @@ ul.social-buttons {
     transform: rotate(45deg);
     width: 1px;
     z-index: 1051; }
-    /* line 892, _agency.scss */
+    /* line 893, _agency.scss */
     .portfolio-modal .close-modal .lr .rl {
       background-color: #222;
       height: 75px;
@@ -1123,34 +1124,34 @@ ul.social-buttons {
       transform: rotate(90deg);
       width: 1px;
       z-index: 1052; }
-/* line 904, _agency.scss */
+/* line 905, _agency.scss */
 .portfolio-modal .modal-backdrop {
   display: none;
   opacity: 0; }
 
-/* line 912, _agency.scss */
+/* line 913, _agency.scss */
 ::-moz-selection {
   background: grey;
   text-shadow: none; }
 
-/* line 917, _agency.scss */
+/* line 918, _agency.scss */
 ::selection {
   background: grey;
   text-shadow: none; }
 
-/* line 922, _agency.scss */
+/* line 923, _agency.scss */
 img::selection {
   background: transparent; }
 
-/* line 926, _agency.scss */
+/* line 927, _agency.scss */
 img::-moz-selection {
   background: transparent; }
 
-/* line 930, _agency.scss */
+/* line 931, _agency.scss */
 body {
   webkit-tap-highlight-color: #ee7335; }
 
-/* line 934, _agency.scss */
+/* line 935, _agency.scss */
 .mc-response {
   padding-bottom: 10px;
   color: white; }
