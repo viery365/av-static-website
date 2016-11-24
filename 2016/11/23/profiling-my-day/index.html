@@ -82,7 +82,7 @@
       <div class="col-lg-8 text-left">
         <h2 class='title'><a href="/2016/11/23/profiling-my-day/">Profiling My Day</a></h2>
         <h5 class='date'>23 Nov 2016</h5>
-    <p>I profiled my day yesterday in an attempt to apply the Simplify, Eliminate, Delegate, Automate mantra and create space for the important things :-)  Here&rsquo;s my rough profile of the day:</p>
+    <p>I profiled my day yesterday in an attempt to apply the Eliminate, Simplify, Automate, Delegate (ESAD) mantra and create space for the important things :-)  Here&rsquo;s my rough profile of the day:</p>
 <pre class="highlight plaintext"><code>09:00 - 10:00 writing blog (5mins on getting that up and in slack #blog_drafts)
 
 10:15 - 10:40 reviewing slack and email - starting a WSO vote
@@ -105,7 +105,7 @@
 
 17:00 - 17:30 chatting with sponsor drie about hosting services
 </code></pre>
-<p>So let&rsquo;s apply the SEDA criteria to each in turn.  I don&rsquo;t know that there&rsquo;s anyway to simplify the process of actually writing the blog.  I could make them shorter, or even eliminate them, perhaps doing them less frequently.  I&rsquo;m reluctant to do that as I find them a nice grounding start to the day, the prevents me from just sitting down and reacting to whichever seems the most urgent message on Slack or in email.  Intuitively the feedback I&rsquo;m getting on the blogs is that they are often too long, have too much code, not enough images, but also that they&rsquo;ve helped others understand my perspectives and what we are trying to achieve with AgileVentures.  I can&rsquo;t really delegate them (although I&rsquo;d love to have more in the community blogging), and the only place for automating them would be to work on the final portion of pushing them to GitHub and Slack where each day I have to do the following:</p>
+<p>So let&rsquo;s apply the ESAD criteria to each in turn.  I don&rsquo;t know that there&rsquo;s anyway to simplify the process of actually writing the blog.  I could make them shorter, or even eliminate them, perhaps doing them less frequently.  I&rsquo;m reluctant to do that as I find them a nice grounding start to the day, the prevents me from just sitting down and reacting to whichever seems the most urgent message on Slack or in email.  Intuitively the feedback I&rsquo;m getting on the blogs is that they are often too long, have too much code, not enough images, but also that they&rsquo;ve helped others understand my perspectives and what we are trying to achieve with AgileVentures.  I can&rsquo;t really delegate them (although I&rsquo;d love to have more in the community blogging), and the only place for automating them would be to work on the final portion of pushing them to GitHub and Slack where each day I have to do the following:</p>
 
 <ol>
 <li>Copy from TextEdit to Sublime</li>
@@ -136,11 +136,11 @@
 </code></pre>
 <p>which would do the following steps:</p>
 
-<p>a) <code>git pull</code>
-b) <code>git checkout -b new_blog&lt;blog_title&gt;</code>
-b) <code>git add source/blog_articles</code>
-c) <code>git commit -m &#39;new blog on &lt;blog title&gt;&#39;</code>
-d) <code>hub pull-request -b develop</code></p>
+<p>a) <code>git pull</code><br>
+b) <code>git checkout -b new_blog&lt;blog_title&gt;</code><br>
+b) <code>git add source/blog_articles</code><br>
+c) <code>git commit -m &#39;new blog on &lt;blog title&gt;&#39;</code><br>
+d) <code>hub pull-request -b develop</code>  </p>
 
 <p>and with the right notifications a bash script doing the above could ping the #blog<em>drafts channel.  With a Ruby script I could probably get finer tweaks so that it actually sent  <code>@channel new blog draft &lt;link&gt;</code> to #blog</em>drafts.</p>
 
@@ -148,19 +148,19 @@ d) <code>hub pull-request -b develop</code></p>
 
 <p>Reviewing the previous days blog and pushing that out requires some more automatable steps e.g.</p>
 
-<p>a) merge any PRs
-b) <code>git pull</code>
-c) read through and make minor corrections (10mins?)
-d) <code>git add</code>
-e) <code>git commit -m &#39;tweaks&#39;</code>
-f) <code>git push</code>
-g) <code>rake publish</code>
-h) checking http://nonprofits.agileventures.org/blog/
-i) adjusting image sizes, making sure blog looks okay</p>
+<p>a) merge any PRs<br>
+b) <code>git pull</code><br>
+c) read through and make minor corrections (10mins?)<br>
+d) <code>git add</code><br>
+e) <code>git commit -m &#39;tweaks&#39;</code><br>
+f) <code>git push</code><br>
+g) <code>rake publish</code><br>
+h) checking http://nonprofits.agileventures.org/blog/<br>
+i) adjusting image sizes, making sure blog looks okay  </p>
 
 <p>The issue with both the initial blog generation and publishing the previous days draft is that the bulk of the time is not automatable without a serious AI.  I guess the question is whether the surrounding command line cruft is worth automating.  Even if it&rsquo;s not, it could be fun, and possibly beneficial if the automation can make PRs from the command line slightly less work &hellip;</p>
 
-<p>The Slack rebuild was (hopefully) a one off.  The scrums - I do two a day, and they are capped at 15 mins, but I often end up doing another 15 mins after the scrum - today the first scrum was followed by 15 mins debugging with a Premium Mob member, which was fun and worth it.  The second scrum 15 min follow was a catch up with my Co-Founder so pretty important I think.  Although scrums can certainly serve to break up flow on a longer more complex piece of work; it&rsquo;s also critical to coordinate with the team, and these Scrums are our welcome mat and showcase.  I am still conflicted about whether they are worth the effort to maintain.  Google Hangouts on Air and our plugin seem stable-ish again after our outage of a couple of weeks back, although I am needing to re-start hangouts occasionally, and the fact that my lower third banner is not saved means I&rsquo;m re-adding that for every scrum and hangout - which burns 30 seconds every time, although it&rsquo;s helped me memorise the AV colour code (#ee7335).</p>
+<p>The Slack rebuild was (hopefully) a one off.  The scrums - I do two a day, and they are capped at 15 mins, but I often end up doing another 15 mins after the scrum - today the first scrum was followed by 15 mins debugging with a Premium Mob member, which was fun and (I think) worth it.  The second scrum 15 min follow on was a catch up with my Co-Founder so pretty important &hellip;  Although scrums can certainly serve to break up flow on a longer more complex piece of work; it&rsquo;s also critical to coordinate with the team, and these Scrums are our welcome mat and showcase.  I am still conflicted about whether they are worth the effort to maintain.  Google Hangouts on Air and our plugin seem stable-ish again after our outage of a couple of weeks back, although I am needing to re-start hangouts occasionally, and the fact that my lower third banner is not saved means I&rsquo;m re-adding that for every scrum and hangout - which burns 30 seconds every time, although it&rsquo;s helped me memorise the AV colour code (#ee7335).</p>
 
 <p>I&rsquo;m unclear if the <a href="https://www.hangouttoolbox.com/">google hangout toolbox</a> is still being maintained.  I just posted the following to their G+ support group:</p>
 
@@ -170,19 +170,19 @@ i) adjusting image sizes, making sure blog looks okay</p>
 <p>Here are some more details - I can set up my lower third like so:</p>
 </blockquote>
 
-<p><img src="https://www.dropbox.com/s/nz4gwqb0pbfhfwc/Screenshot%202016-11-23%2010.04.34.png?dl=1" /></p>
+<p><img alt="setting up lower third" src="https://www.dropbox.com/s/nz4gwqb0pbfhfwc/Screenshot%202016-11-23%2010.04.34.png?dl=1" /></p>
 
 <blockquote>
 <p>I have the setting to enable auto load and autoload last used lower:</p>
 </blockquote>
 
-<p><img src="https://www.dropbox.com/s/8zr12w8e7sf4wtu/Screenshot%202016-11-23%2010.05.34.png?dl=1" /></p>
+<p><img alt="auto reload settings" src="https://www.dropbox.com/s/8zr12w8e7sf4wtu/Screenshot%202016-11-23%2010.05.34.png?dl=1" /></p>
 
 <blockquote>
 <p>and here&rsquo;s me having reloaded the hangout and the saved presets have gone :-(</p>
 </blockquote>
 
-<p><img src="https://www.dropbox.com/s/24ik2p5qauunua6/Screenshot%202016-11-23%2010.07.36.png?dl=1" /></p>
+<p><img alt="saved presets missing :-(" src="https://www.dropbox.com/s/24ik2p5qauunua6/Screenshot%202016-11-23%2010.07.36.png?dl=1" /></p>
 
 <blockquote>
 <p>Any ideas?</p>
@@ -192,7 +192,7 @@ i) adjusting image sizes, making sure blog looks okay</p>
 
 <p>So I can see the names of the developers on the site.  I&rsquo;ll leave that <a href="https://plus.google.com/+SamJoseph/posts/QyAdAzTXPuG">G+ post</a> for a couple of days and then maybe reach out to the maintainers.</p>
 
-<p>Michael wasn&rsquo;t around so I reviewed PRs instead of pairing.  Felt good to get into the details of the new React client and get to some other outstanding PRs.  PR review is what Premium members get priority on.  I&rsquo;m still not sure if this is the key thing that Premium&rsquo;s want, but reviewing PRs takes a lot of work and time, and I believe it is very beneficial for learning.  Other meetings in the day were one offs and can&rsquo;t really be ESADed.  Other key area for ESADing is the edX and AV emailings.  I think I&rsquo;ve got the Social Media update fairly automated.  It involves reviewing an older blog, tweaking and then pushing to Medium, which automatically pushes to Twitter and Facebook, although with boring &ldquo;I just published&rdquo; text.  I push to LinkedIn manually, but it&rsquo;s the edX and AV emailings that are time consuming.  The edX ones go through mail chimp, but they don&rsquo;t give me enough access to automate them.  For the AV mailings, I really need to look into the Amazon SES service.  I&rsquo;m just finishing a run of mailing all the AV members individually through my Thunderbird client.  I have a couple of scripts to semi-automate this, but I am trying to reach out personally to everyone.</p>
+<p>Michael wasn&rsquo;t around so I reviewed PRs instead of pairing.  Felt good to get into the details of the new AsyncVoter React client and get to some other outstanding PRs.  PR review is what Premium members get priority on.  I&rsquo;m still not sure if this is the key thing that Premium&rsquo;s want, but reviewing PRs takes a lot of work and time, and I believe it is very beneficial for learning.  Other meetings in the day were one offs and can&rsquo;t really be ESADed.  Other key area for ESADing is the edX and AV emailings.  I think I&rsquo;ve got the Social Media update fairly automated.  It involves reviewing an older blog, tweaking and then pushing to Medium, which automatically pushes to Twitter and Facebook, although with boring &ldquo;I just published&rdquo; text.  I push to LinkedIn manually, but it&rsquo;s the edX and AV emailings that are time consuming.  The edX ones go through mail chimp, but they don&rsquo;t give me enough access to automate them.  For the AV mailings, I really need to look into the Amazon SES service.  I&rsquo;m just finishing a run of mailing all the AV members individually through my Thunderbird client.  I have a couple of scripts to semi-automate this, but I am trying to reach out personally to everyone.</p>
 
 <p>I do feel a bit like a spammer, but it&rsquo;s a one off, and I&rsquo;m responding individually to every email back, and we&rsquo;ve signed up about ten new premium members as a direct result of these personal mailings over the last two months.  Longer term we need some way of enabling people to opt-in/out of emails.  Lots to do there.  I&rsquo;m going to try profiling a few more days to see if I can find some sweet spots to ESAD, and if you have suggestions about how I can operate more efficiently I&rsquo;m all ears! :-)</p>
 

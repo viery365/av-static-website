@@ -5,20 +5,105 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-23T00:00:00+00:00</updated>
+  <updated>2016-11-24T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>More Profiling of My Days</title>
+    <link rel="alternate" href="http://blog.url.com/2016/11/24/more-profiling/"/>
+    <id>http://blog.url.com/2016/11/24/more-profiling/</id>
+    <published>2016-11-24T00:00:00+00:00</published>
+    <updated>2016-11-24T10:11:09+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So I did a second day of profiling.  The details are as follows:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;09:15 - 10:15 writing blog draft (plus distribution)
+
+10:30 - 11:00 reviewing slack and email - promoting, handling mentors, premiums
+
+11:00 - 11:30 Writing emails to potential sponsors
+
+11:30 - 11:45 Scrum
+
+11:45 - 12:30 WSO hangout with Premium F2F member
+
+12:30 - 12:45 Negotiating with company on potential paid project
+
+12:45 - 13:00 getting CA and PayPal folks into new premium chat instance - notifying Premium Mobs, F2Fs and Pluses about mob programming session
+
+14:15 - 15:15 Fielding questions from Premiums on Slack (got an upgrade to F2F), co-founder 
+
+15:15 - 15:45 PR Review (AsyncVoter, LocalSupport)
+
+15:45 - 16:00 Scrum
+
+16:00 - 17:00 More PRs - fixed AsyncVoter - SHF comments, did AV mailing, updated and posted blog 
+
+18:15 - 18:45 Reviewing ProjectScope PRs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Reviewing this again with Eliminate, Simplify, Automate, Delegate an early insight was that I could automate the creation of the list or related videos that I drop into the end of each blog.  Reviewing Slack and Email - I feel like I really have to do that each day.  There was a chunk of stuff to do with setting up a new Premium member and a new Premium Mentor.  I created a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1300"&gt;ticket on WSO&lt;/a&gt; to cover the details of what might be automated there.  That looks promising, there&amp;rsquo;s a couple of relatively straightforward coding tasks there, although there is also my desire to refactor the charges controller &amp;hellip; my intuition is that there&amp;rsquo;s a double win for that sort of automation when we do it in a live pairing session in that it helps others see into our codebase, serves as a potential learning platform.   Not that many people pour over our videos, but it&amp;rsquo;s a chance for me to pair with other AV members and I think we all get value from that.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m trying to step up writing of emails to potential sponsors after Charles Max Wood of Ruby Rogues talked on the Freelancers show about how that was the critical task that could have the biggest impact that he often didn&amp;rsquo;t get around to.  Don&amp;rsquo;t think I can drop or delegate that yet.  After the scrum I got in a hangout with Matt to unblock him on WebSiteOne.  I burned some time explaining why I don&amp;rsquo;t like the UX of our status feature on WSO.  Maybe that&amp;rsquo;s wasting time, or maybe that&amp;rsquo;s important communication of my values regarding UX design to other team members.  I feel like at least some value was being derived both for WSO and for Matt as we unblocked him and cleared up ambiguity around the latest ticket he was working on.&lt;/p&gt;
+
+&lt;p&gt;Then I was negotiating in Slack with a company about a potential paid project.  Maybe that will come to nothing, but my intuition (which I think Michael and Marouen share) is that a few paid projects would make the whole Premium package so much more attractive to those on the fence about whether to sign up.  Then it was more Slack action getting the CA and Paypal Premiums into the new Premium chat instance.  I&amp;rsquo;d used the Stripe &amp;ldquo;customer&amp;rdquo; list to invite folks, so that had left out those not represented in Stripe.  That pushes me to want to improve domain model in WSO so we can properly represent all the current avenues that members can go Premium, so that I can a clear central place for a coherent list, although thinking about it I can see how I can extract that data from the console.  Still as the number of Premium users increases (which is a key goal) we&amp;rsquo;ve got to get better at consistency tracking who they are and how they&amp;rsquo;ve come to us.&lt;/p&gt;
+
+&lt;p&gt;I spent a little time notifying Premium Extras (new term - that&amp;rsquo;s Mob, F2F and Pluses, i.e. everyone eligible for Mob) about the Mob Programming session we&amp;rsquo;ll do later today.  That feels like it could be an important engine of growth.  After lunch Michael wasn&amp;rsquo;t around again and I dithered about throwing myself into programming tasks versus just catching up on admin and station keeping.  I was fielding questions on Slack for almost an hour.  I could argue that I should have been productively coding with that hour, however one Premium member did upgrade to F2F following our conversation.  I think there&amp;rsquo;s something critical in there.  Communicating with those consuming the services you provide is essential.  That doesn&amp;rsquo;t mean doing tech support for everyone on every tier all the time.  However, giving an ear to those who are already committed to support our charity financially and helping them find ways to derive more value &amp;hellip; that feels kind of core.  &lt;/p&gt;
+
+&lt;p&gt;I guess ultimately I need some full time programmers, some full time marketing people, some full time &amp;ldquo;sales&amp;rdquo; people &amp;hellip; :-) Well I hope we can stay small and friendly for the time being.  After that Slack binge I did get down to some PR review getting two PRs merged into AsyncVoter and a flurry of comments on LocalSupport.  We had another quick scrum and there was more admin, doing the AV mailing - 7 more 15 minute stabs at that and I&amp;rsquo;ll have emailed everyone in the community and then perhaps I can take a bigger picture look about how we stay in touch people in the long term.  Am I setting an artificial barrier for myself there?&lt;/p&gt;
+
+&lt;p&gt;I had forgotten to update and post my blog of the previous day, so I hit that and then grabbed some time later in the evening to review ProjectScope PRs for the Berkeley students.  Armando feels the ProjectScope project metric tracking system is going to be critical to managing his course in the future and the part 3 project course for the MOOC.  I was able to give a flurry of comments and agonise about whether I was pushing on the students too hard.  I need to spend some time deploying their branches and experimenting with real project data.&lt;/p&gt;
+
+&lt;p&gt;Also the bot shut down when I closed my computer so we may have lost attempted 3rd votes to the async vote we were trying to run in WSO.  Gotta get that bot deployed permanently.  So anyhow, what could I eliminate:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;posts on PRs that are too long&lt;/li&gt;
+&lt;li&gt;scrums running over time&lt;/li&gt;
+&lt;li&gt;me ranting&lt;/li&gt;
+&lt;li&gt;slow AV mailings&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;what could I simplify:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;PR posts&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;what could I automate:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Blog draft submission&lt;/li&gt;
+&lt;li&gt;Blog draft video lists&lt;/li&gt;
+&lt;li&gt;AV mailing process&lt;/li&gt;
+&lt;li&gt;Premium and Mentor upgrade&lt;/li&gt;
+&lt;li&gt;Tracking of current range of Premiums&lt;/li&gt;
+&lt;li&gt;Hosting of async bot&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and I don&amp;rsquo;t know what if anything I can delegate. Everyone&amp;rsquo;s a volunteer in our organisation, and I don&amp;rsquo;t think I can ask anyone to do anything.  I need to wait for people to ask for interesting things to do.  The most successful thing so far has been a process of making tickets of everything I can think of as important on the relevant repos and occasionally pointing to things when people ask :-)&lt;/p&gt;
+
+&lt;p&gt;Well, I think that&amp;rsquo;s enough profiling for now.  There&amp;rsquo;s some clear possibilities for automations, and I guess rather than agonise about which to do I should just start knocking them off in some order :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://youtu.be/aGjQ5N7nRfQ"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dPJqeBPFluc"&gt;WSO Huddle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4qn9b8MVbvg"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Profiling My Day</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/23/profiling-my-day/"/>
     <id>http://blog.url.com/2016/11/23/profiling-my-day/</id>
     <published>2016-11-23T00:00:00+00:00</published>
-    <updated>2016-11-23T18:23:01+00:00</updated>
+    <updated>2016-11-24T11:03:34+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;I profiled my day yesterday in an attempt to apply the Simplify, Eliminate, Delegate, Automate mantra and create space for the important things :-)  Here&amp;rsquo;s my rough profile of the day:&lt;/p&gt;
+    <content type="html">&lt;p&gt;I profiled my day yesterday in an attempt to apply the Eliminate, Simplify, Automate, Delegate (ESAD) mantra and create space for the important things :-)  Here&amp;rsquo;s my rough profile of the day:&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;09:00 - 10:00 writing blog (5mins on getting that up and in slack #blog_drafts)
 
 10:15 - 10:40 reviewing slack and email - starting a WSO vote
@@ -41,7 +126,7 @@
 
 17:00 - 17:30 chatting with sponsor drie about hosting services
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So let&amp;rsquo;s apply the SEDA criteria to each in turn.  I don&amp;rsquo;t know that there&amp;rsquo;s anyway to simplify the process of actually writing the blog.  I could make them shorter, or even eliminate them, perhaps doing them less frequently.  I&amp;rsquo;m reluctant to do that as I find them a nice grounding start to the day, the prevents me from just sitting down and reacting to whichever seems the most urgent message on Slack or in email.  Intuitively the feedback I&amp;rsquo;m getting on the blogs is that they are often too long, have too much code, not enough images, but also that they&amp;rsquo;ve helped others understand my perspectives and what we are trying to achieve with AgileVentures.  I can&amp;rsquo;t really delegate them (although I&amp;rsquo;d love to have more in the community blogging), and the only place for automating them would be to work on the final portion of pushing them to GitHub and Slack where each day I have to do the following:&lt;/p&gt;
+&lt;p&gt;So let&amp;rsquo;s apply the ESAD criteria to each in turn.  I don&amp;rsquo;t know that there&amp;rsquo;s anyway to simplify the process of actually writing the blog.  I could make them shorter, or even eliminate them, perhaps doing them less frequently.  I&amp;rsquo;m reluctant to do that as I find them a nice grounding start to the day, the prevents me from just sitting down and reacting to whichever seems the most urgent message on Slack or in email.  Intuitively the feedback I&amp;rsquo;m getting on the blogs is that they are often too long, have too much code, not enough images, but also that they&amp;rsquo;ve helped others understand my perspectives and what we are trying to achieve with AgileVentures.  I can&amp;rsquo;t really delegate them (although I&amp;rsquo;d love to have more in the community blogging), and the only place for automating them would be to work on the final portion of pushing them to GitHub and Slack where each day I have to do the following:&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Copy from TextEdit to Sublime&lt;/li&gt;
@@ -72,11 +157,11 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;which would do the following steps:&lt;/p&gt;
 
-&lt;p&gt;a) &lt;code&gt;git pull&lt;/code&gt;
-b) &lt;code&gt;git checkout -b new_blog&amp;lt;blog_title&amp;gt;&lt;/code&gt;
-b) &lt;code&gt;git add source/blog_articles&lt;/code&gt;
-c) &lt;code&gt;git commit -m &amp;#39;new blog on &amp;lt;blog title&amp;gt;&amp;#39;&lt;/code&gt;
-d) &lt;code&gt;hub pull-request -b develop&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;a) &lt;code&gt;git pull&lt;/code&gt;&lt;br&gt;
+b) &lt;code&gt;git checkout -b new_blog&amp;lt;blog_title&amp;gt;&lt;/code&gt;&lt;br&gt;
+b) &lt;code&gt;git add source/blog_articles&lt;/code&gt;&lt;br&gt;
+c) &lt;code&gt;git commit -m &amp;#39;new blog on &amp;lt;blog title&amp;gt;&amp;#39;&lt;/code&gt;&lt;br&gt;
+d) &lt;code&gt;hub pull-request -b develop&lt;/code&gt;  &lt;/p&gt;
 
 &lt;p&gt;and with the right notifications a bash script doing the above could ping the #blog&lt;em&gt;drafts channel.  With a Ruby script I could probably get finer tweaks so that it actually sent  &lt;code&gt;@channel new blog draft &amp;lt;link&amp;gt;&lt;/code&gt; to #blog&lt;/em&gt;drafts.&lt;/p&gt;
 
@@ -84,19 +169,19 @@ d) &lt;code&gt;hub pull-request -b develop&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Reviewing the previous days blog and pushing that out requires some more automatable steps e.g.&lt;/p&gt;
 
-&lt;p&gt;a) merge any PRs
-b) &lt;code&gt;git pull&lt;/code&gt;
-c) read through and make minor corrections (10mins?)
-d) &lt;code&gt;git add&lt;/code&gt;
-e) &lt;code&gt;git commit -m &amp;#39;tweaks&amp;#39;&lt;/code&gt;
-f) &lt;code&gt;git push&lt;/code&gt;
-g) &lt;code&gt;rake publish&lt;/code&gt;
-h) checking http://nonprofits.agileventures.org/blog/
-i) adjusting image sizes, making sure blog looks okay&lt;/p&gt;
+&lt;p&gt;a) merge any PRs&lt;br&gt;
+b) &lt;code&gt;git pull&lt;/code&gt;&lt;br&gt;
+c) read through and make minor corrections (10mins?)&lt;br&gt;
+d) &lt;code&gt;git add&lt;/code&gt;&lt;br&gt;
+e) &lt;code&gt;git commit -m &amp;#39;tweaks&amp;#39;&lt;/code&gt;&lt;br&gt;
+f) &lt;code&gt;git push&lt;/code&gt;&lt;br&gt;
+g) &lt;code&gt;rake publish&lt;/code&gt;&lt;br&gt;
+h) checking http://nonprofits.agileventures.org/blog/&lt;br&gt;
+i) adjusting image sizes, making sure blog looks okay  &lt;/p&gt;
 
 &lt;p&gt;The issue with both the initial blog generation and publishing the previous days draft is that the bulk of the time is not automatable without a serious AI.  I guess the question is whether the surrounding command line cruft is worth automating.  Even if it&amp;rsquo;s not, it could be fun, and possibly beneficial if the automation can make PRs from the command line slightly less work &amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;The Slack rebuild was (hopefully) a one off.  The scrums - I do two a day, and they are capped at 15 mins, but I often end up doing another 15 mins after the scrum - today the first scrum was followed by 15 mins debugging with a Premium Mob member, which was fun and worth it.  The second scrum 15 min follow was a catch up with my Co-Founder so pretty important I think.  Although scrums can certainly serve to break up flow on a longer more complex piece of work; it&amp;rsquo;s also critical to coordinate with the team, and these Scrums are our welcome mat and showcase.  I am still conflicted about whether they are worth the effort to maintain.  Google Hangouts on Air and our plugin seem stable-ish again after our outage of a couple of weeks back, although I am needing to re-start hangouts occasionally, and the fact that my lower third banner is not saved means I&amp;rsquo;m re-adding that for every scrum and hangout - which burns 30 seconds every time, although it&amp;rsquo;s helped me memorise the AV colour code (#ee7335).&lt;/p&gt;
+&lt;p&gt;The Slack rebuild was (hopefully) a one off.  The scrums - I do two a day, and they are capped at 15 mins, but I often end up doing another 15 mins after the scrum - today the first scrum was followed by 15 mins debugging with a Premium Mob member, which was fun and (I think) worth it.  The second scrum 15 min follow on was a catch up with my Co-Founder so pretty important &amp;hellip;  Although scrums can certainly serve to break up flow on a longer more complex piece of work; it&amp;rsquo;s also critical to coordinate with the team, and these Scrums are our welcome mat and showcase.  I am still conflicted about whether they are worth the effort to maintain.  Google Hangouts on Air and our plugin seem stable-ish again after our outage of a couple of weeks back, although I am needing to re-start hangouts occasionally, and the fact that my lower third banner is not saved means I&amp;rsquo;m re-adding that for every scrum and hangout - which burns 30 seconds every time, although it&amp;rsquo;s helped me memorise the AV colour code (#ee7335).&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;m unclear if the &lt;a href="https://www.hangouttoolbox.com/"&gt;google hangout toolbox&lt;/a&gt; is still being maintained.  I just posted the following to their G+ support group:&lt;/p&gt;
 
@@ -106,19 +191,19 @@ i) adjusting image sizes, making sure blog looks okay&lt;/p&gt;
 &lt;p&gt;Here are some more details - I can set up my lower third like so:&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/nz4gwqb0pbfhfwc/Screenshot%202016-11-23%2010.04.34.png?dl=1" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="setting up lower third" src="https://www.dropbox.com/s/nz4gwqb0pbfhfwc/Screenshot%202016-11-23%2010.04.34.png?dl=1" /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;I have the setting to enable auto load and autoload last used lower:&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/8zr12w8e7sf4wtu/Screenshot%202016-11-23%2010.05.34.png?dl=1" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="auto reload settings" src="https://www.dropbox.com/s/8zr12w8e7sf4wtu/Screenshot%202016-11-23%2010.05.34.png?dl=1" /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;and here&amp;rsquo;s me having reloaded the hangout and the saved presets have gone :-(&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/24ik2p5qauunua6/Screenshot%202016-11-23%2010.07.36.png?dl=1" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="saved presets missing :-(" src="https://www.dropbox.com/s/24ik2p5qauunua6/Screenshot%202016-11-23%2010.07.36.png?dl=1" /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Any ideas?&lt;/p&gt;
@@ -128,7 +213,7 @@ i) adjusting image sizes, making sure blog looks okay&lt;/p&gt;
 
 &lt;p&gt;So I can see the names of the developers on the site.  I&amp;rsquo;ll leave that &lt;a href="https://plus.google.com/+SamJoseph/posts/QyAdAzTXPuG"&gt;G+ post&lt;/a&gt; for a couple of days and then maybe reach out to the maintainers.&lt;/p&gt;
 
-&lt;p&gt;Michael wasn&amp;rsquo;t around so I reviewed PRs instead of pairing.  Felt good to get into the details of the new React client and get to some other outstanding PRs.  PR review is what Premium members get priority on.  I&amp;rsquo;m still not sure if this is the key thing that Premium&amp;rsquo;s want, but reviewing PRs takes a lot of work and time, and I believe it is very beneficial for learning.  Other meetings in the day were one offs and can&amp;rsquo;t really be ESADed.  Other key area for ESADing is the edX and AV emailings.  I think I&amp;rsquo;ve got the Social Media update fairly automated.  It involves reviewing an older blog, tweaking and then pushing to Medium, which automatically pushes to Twitter and Facebook, although with boring &amp;ldquo;I just published&amp;rdquo; text.  I push to LinkedIn manually, but it&amp;rsquo;s the edX and AV emailings that are time consuming.  The edX ones go through mail chimp, but they don&amp;rsquo;t give me enough access to automate them.  For the AV mailings, I really need to look into the Amazon SES service.  I&amp;rsquo;m just finishing a run of mailing all the AV members individually through my Thunderbird client.  I have a couple of scripts to semi-automate this, but I am trying to reach out personally to everyone.&lt;/p&gt;
+&lt;p&gt;Michael wasn&amp;rsquo;t around so I reviewed PRs instead of pairing.  Felt good to get into the details of the new AsyncVoter React client and get to some other outstanding PRs.  PR review is what Premium members get priority on.  I&amp;rsquo;m still not sure if this is the key thing that Premium&amp;rsquo;s want, but reviewing PRs takes a lot of work and time, and I believe it is very beneficial for learning.  Other meetings in the day were one offs and can&amp;rsquo;t really be ESADed.  Other key area for ESADing is the edX and AV emailings.  I think I&amp;rsquo;ve got the Social Media update fairly automated.  It involves reviewing an older blog, tweaking and then pushing to Medium, which automatically pushes to Twitter and Facebook, although with boring &amp;ldquo;I just published&amp;rdquo; text.  I push to LinkedIn manually, but it&amp;rsquo;s the edX and AV emailings that are time consuming.  The edX ones go through mail chimp, but they don&amp;rsquo;t give me enough access to automate them.  For the AV mailings, I really need to look into the Amazon SES service.  I&amp;rsquo;m just finishing a run of mailing all the AV members individually through my Thunderbird client.  I have a couple of scripts to semi-automate this, but I am trying to reach out personally to everyone.&lt;/p&gt;
 
 &lt;p&gt;I do feel a bit like a spammer, but it&amp;rsquo;s a one off, and I&amp;rsquo;m responding individually to every email back, and we&amp;rsquo;ve signed up about ten new premium members as a direct result of these personal mailings over the last two months.  Longer term we need some way of enabling people to opt-in/out of emails.  Lots to do there.  I&amp;rsquo;m going to try profiling a few more days to see if I can find some sweet spots to ESAD, and if you have suggestions about how I can operate more efficiently I&amp;rsquo;m all ears! :-)&lt;/p&gt;
 
@@ -423,67 +508,6 @@ i) adjusting image sizes, making sure blog looks okay&lt;/p&gt;
 &lt;p&gt;I also spiked this without tests.  I did manually test the code in a private channel before unleashing it on #async_voter, but I think this is a situation to spike, to get a tracer bullet in to see the round trip.   Of course the danger here is to get drunk with power and keep building on top of this untested code until it really is a total mess and impossible to change without breaking something.  We&amp;rsquo;ve got a nice tested RESTful core ready to start storing the data persistently.  I can run a few more test votes on other channels, and gradually refine the look and feel of the bot, ensuring along the way that it is having the positive effect on the projects and community that I am hoping for.&lt;/p&gt;
 
 &lt;p&gt;I think this is the core of the Agile process.  Apart from remembering to reflect on your process frequently, it&amp;rsquo;s getting some sort of working system in front of the end users as often as possible.  I&amp;rsquo;m also a big fan of this semi-automated approach.  I still had to intervene to stop and start the vote, but it saved me some time compared to a full manual run.  Having confirmed the partial utility of the system I can cautiously automate more and more.  What I really need to add next is to have the bot update the channel where the vote started when someone makes a vote.  Let&amp;rsquo;s see if I can add a little of that today &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Automating What To Do Next</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/16/automating-what-to-do-next/"/>
-    <id>http://blog.url.com/2016/11/16/automating-what-to-do-next/</id>
-    <published>2016-11-16T00:00:00+00:00</published>
-    <updated>2016-11-17T10:22:01+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;After the &amp;ldquo;Martin Fowler&amp;rdquo; scrum I caught up with Raphael to talk about the dynamic of the AsyncVoter project.  Raphael had been suggesting a team meeting.  Team meetings can be great.  I think if a team wants to move forward fast it&amp;rsquo;s great to get everyone in a room, and ideally match that with a shared working space that everyone can come to.  However that usually takes a lot of money to set up :-)  Although, having the team all distributed around the world might have advantages in terms of pulling in more influences and perspectives.  Of course you don&amp;rsquo;t need a shared space for a team meeting.  We&amp;rsquo;ve run them regularly on different projects at different times.  The ability to have them is a function of team members&amp;rsquo; availability.  Sometimes teams will form or dissipate based on whether there is sufficient overlap in their schedules. &lt;/p&gt;
-
-&lt;p&gt;Part of the idea behind the AsyncVoter project is to reduce the need for team meetings.  Not that a team shouldn&amp;rsquo;t get together if they want to, but in WSO at least I&amp;rsquo;d got the sense that people weren&amp;rsquo;t enjoying the meetings, which usually involved voting on tickets in the backlog.  In LocalSupport people were just not on at the same time, or couldn&amp;rsquo;t use hangouts.  I wondered if part of desire for a team meeting was related to the issue was understanding what to do next.  In a session with Raphael off the back of the &amp;ldquo;Martin Fowler&amp;rdquo; scrum I wrote up the following:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Using Waffle and GitHub to work out what to do next
----------------------------------------
-
-0) if there are any [open PRs](https://github.com/AgileVentures/AsyncVoter/pulls) then review them and if possible give feedback
-
-1) are there any tickets "in progress" on [waffle](https://waffle.io/AgileVentures/AsyncVoter)? If you'd like to help reach out to the assigned team member to see if you can help
-
-1) is there an estimated ticket in the ready column on waffle that I am interested in working on?
-1a) yes --&amp;gt; then start work on it, pairing or not
-
-1b) no --&amp;gt; find a ticket from the backlog (on waffle) that I'm interested in and start a vote (in a scrum, or async)
-
-2) throughout process rather than adding new features, new elements or major refactoring to the existing ticket, freely make new tickets to go on to the backlog (on waffle)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Hopefully that was some help.  It seems transparent in my mind as a way of doing distributed Agile work, but there&amp;rsquo;s no reason why others should have that pattern in their minds.  Would be great to have one of those animated videos showing the flow.&lt;/p&gt;
-
-&lt;p&gt;Michael and I started off following the above pattern for WSO after lunch.  We went through the open pull requests, &amp;ldquo;in progress&amp;rdquo; tickets, the &amp;ldquo;ready&amp;rdquo; column and the &amp;ldquo;estimated&amp;rdquo; column.  We have an additional column in WSO called estimated for those tickets we have voted on but yet to prioritise:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="WSO waffle board" src="https://www.dropbox.com/s/o2kc9kx6gimfmx0/Screenshot%202016-11-16%2009.31.25.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;As usual, I agonised about all the different things we seemed to need to get done on WSO, but ultimately followed the &amp;ldquo;drive by&amp;rdquo; or &amp;ldquo;whistle-stop&amp;rdquo; approach that says finish things that are in the rightmost columns on the board, and if there isn&amp;rsquo;t easy progress move back across the board from right to left so that columns get cleared out (assuming &amp;ldquo;done&amp;rdquo; is rightmost).  I&amp;rsquo;m a terrible person for leaving stuff lying around.  I&amp;rsquo;ve also noticed that as you clear stuff up you make more space to think about new things.  We attacked a ticket in the ready column related to AgileBot that looked simple.  Michael drove for an hour, and we got the functionality we needed, but identified &amp;ldquo;oh so many&amp;rdquo; &lt;a href="https://github.com/AgileVentures/agile-bot/issues/45"&gt;refactoring&lt;/a&gt; needs.  I&amp;rsquo;m still intimidated by the apparent brittleness of the Hubot stack we have on AgileBot.  We followed the drive-by pattern and moved on to pastures new after the &amp;ldquo;Kent Beck&amp;rdquo; scrum.&lt;/p&gt;
-
-&lt;p&gt;Raoul had joined us in the scrum, which gave us a chance to talk about whether we were missing team meetings on WSO and whether the AsyncVoting was replacing the team meetings effectively.  Michael reflected that there were a few people who attended those meetings who weren&amp;rsquo;t around now.  Neither Michael nor Raoul seemed passionate about re-instating regular long meetings voting on tickets, and I reflected that what I really wanted was the AsyncVoter bot to kick in and keep us regularly voting on tickets.  We&amp;rsquo;ve built a little RESTful core, and I&amp;rsquo;m worried that we have to hook up fast to something that actually benefits the community.  I&amp;rsquo;ve got to get a slack bot shell working even if it&amp;rsquo;s only semi-automated!&lt;/p&gt;
-
-&lt;p&gt;After the scrum I drove on a ticket addressing missing video links on the main WSO site.  That was fairly straightforward, and although there&amp;rsquo;s still lots of technical debt to pay down on both WSO and AgileBot, we managed to get a feature out and a bug fix in place while not making the code any worse.  In fact I think we improved the test config for AgileBot and reduced the numbers of line in the app code for both projects.   In the ideal world we&amp;rsquo;d have a bigger team of folks helping us knock off these additional refactoring tickets we keep generating.  In slack Mikael was making some great suggestions about AgileVentures letting people know what they could do to help, given the amount of time they have to spare, e.g. &lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&amp;lt;15 minutes to spare?  Review a pull request, vote on a ticket, or even start a new vote&lt;/li&gt;
-&lt;li&gt;&amp;lt;30 minutes to spare? join a scrum and say hi, give us an update on what you&amp;rsquo;re doing, read a project&amp;rsquo;s documentation; observe a pairing session&lt;/li&gt;
-&lt;li&gt;&amp;lt;60 minutes to spare? Start getting set up with a code base for a new project&lt;/li&gt;
-&lt;li&gt;&amp;lt;90 minutes to spare? Start working on a ticket, join a pairing session&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;What I&amp;rsquo;d really love is a performant version of WSO that could give every user a feed of things to do with associated time commitments.  Almost like the feed of unanswered questions from StackOverflow, but a feed of chunks of work to be done on tickets, voting on things, reviewing code:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="StackOverflows unanswered question feed" src="https://www.dropbox.com/s/pvp2i3q3d3xkpmm/Screenshot%202016-11-16%2009.48.54.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Maybe that will be easier to achieve than the wall of pairing/meeting live stream video feeds I keep imagining.&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=aYCGCegwjvY"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=qRCeF-IECaU"&gt;Pairing on AgileBot&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=1gMF_0oALyY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=tKqG-pSQcfU"&gt;Pairing on WebSiteOne&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>
