@@ -53,7 +53,7 @@
     <link rel="alternate" href="http://blog.url.com/2016/11/25/mob-programming/"/>
     <id>http://blog.url.com/2016/11/25/mob-programming/</id>
     <published>2016-11-25T00:00:00+00:00</published>
-    <updated>2016-11-28T09:33:29+00:00</updated>
+    <updated>2016-11-29T15:28:58+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -89,7 +89,7 @@
 &lt;p&gt;The hash is more flexible. We can add arbitrary additional key/value pairs to the individual hash objects, e.g.&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:amount&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That flexibility is extra power, that we maybe don&amp;rsquo;t need at this stage.  You can argue we might need it later, but the hashes are also rather unDRY in that the key names have to be repeated over and over, and if we need an &lt;code&gt;:amount&lt;/code&gt; key we can add it to the Struct, which is arguably DRYer than the long form hashes.  The Struct also provides us a nicer syntax for accessing its key/value contents:&lt;/p&gt;
+&lt;p&gt;That flexibility is extra power, that maybe we don&amp;rsquo;t need at this stage.  You can argue we might need it later, but the hashes are also rather unDRY in that the key names have to be repeated over and over, and if we need an &lt;code&gt;:amount&lt;/code&gt; key we can add it to the Struct, which is arguably DRYer than the long form hashes.  The Struct also provides us a nicer syntax for accessing its key/value contents:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;index&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;There are pros and cons to both approaches.  DRYing out the keys into the Struct means that we have increased the dependency between the three entities, so that if we add an &lt;code&gt;:amount&lt;/code&gt; to the Struct, all the instances of the Struct will also sprout an &lt;code&gt;:amount&lt;/code&gt; key.  Maybe we want that and maybe we don&amp;rsquo;t; it all depends on the domain model and the behaviours we are trying to support.  Ruby Structs and Hashes differ in various ways, and the real challenge when choosing one over the other is getting the right match, from the various features of Struct and Hash, to the problem we are trying to solve.  It&amp;rsquo;s also sensible to avoid agonising and choose whatever seems simplest to start with and then change to more powerful or complex entities as the required behaviour starts to generate pain points in the code.&lt;/p&gt;
@@ -102,7 +102,6 @@
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=5rQ-SLPjKVs"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=L_jdimj1l3E"&gt;Mob Programming Session&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dordkH0qlF0"&gt;AsyncVoter Coding&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=TI3JhhZHmyo"&gt;Kent Beck&amp;quot; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;

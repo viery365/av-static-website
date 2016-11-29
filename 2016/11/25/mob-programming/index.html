@@ -114,7 +114,7 @@
 <p>The hash is more flexible. We can add arbitrary additional key/value pairs to the individual hash objects, e.g.</p>
 <pre class="highlight ruby"><code><span class="n">first</span><span class="p">[</span><span class="ss">:amount</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
 </code></pre>
-<p>That flexibility is extra power, that we maybe don&rsquo;t need at this stage.  You can argue we might need it later, but the hashes are also rather unDRY in that the key names have to be repeated over and over, and if we need an <code>:amount</code> key we can add it to the Struct, which is arguably DRYer than the long form hashes.  The Struct also provides us a nicer syntax for accessing its key/value contents:</p>
+<p>That flexibility is extra power, that maybe we don&rsquo;t need at this stage.  You can argue we might need it later, but the hashes are also rather unDRY in that the key names have to be repeated over and over, and if we need an <code>:amount</code> key we can add it to the Struct, which is arguably DRYer than the long form hashes.  The Struct also provides us a nicer syntax for accessing its key/value contents:</p>
 <pre class="highlight ruby"><code><span class="n">first</span><span class="p">.</span><span class="nf">index</span>
 </code></pre>
 <p>There are pros and cons to both approaches.  DRYing out the keys into the Struct means that we have increased the dependency between the three entities, so that if we add an <code>:amount</code> to the Struct, all the instances of the Struct will also sprout an <code>:amount</code> key.  Maybe we want that and maybe we don&rsquo;t; it all depends on the domain model and the behaviours we are trying to support.  Ruby Structs and Hashes differ in various ways, and the real challenge when choosing one over the other is getting the right match, from the various features of Struct and Hash, to the problem we are trying to solve.  It&rsquo;s also sensible to avoid agonising and choose whatever seems simplest to start with and then change to more powerful or complex entities as the required behaviour starts to generate pain points in the code.</p>
@@ -127,7 +127,6 @@
 
 <ul>
 <li><a href="https://www.youtube.com/watch?v=5rQ-SLPjKVs">&ldquo;Martin Fowler&rdquo; scrum</a></li>
-<li><a href="https://www.youtube.com/watch?v=L_jdimj1l3E">Mob Programming Session</a></li>
 <li><a href="https://www.youtube.com/watch?v=dordkH0qlF0">AsyncVoter Coding</a></li>
 <li><a href="https://www.youtube.com/watch?v=TI3JhhZHmyo">Kent Beck&quot; scrum</a></li>
 </ul>
