@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Mob Programming</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_11 x2016_11_25 x2016_11_25_mob-programming x2016_11_25_mob-programming_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/11/25/mob-programming/">Mob Programming</a></h2>
+        <h5 class='date'>25 Nov 2016</h5>
+    <p>We ran our first AV Premium Mob Programming session looking at code from the book &ldquo;Confident Ruby&rdquo; by Avdi Grimm.  We created a Cloud9 workspace and gave everyone access to the enviroment.   We had four Premium members join the hangout, and I introduced some of the concepts from &ldquo;Confident Ruby&rdquo; before playing with some of the code samples.  All the members in the hangout had read and write access to the Cloud9 workspace, but on this first occasion I did most of the typing.  Most of the members had Avdi&rsquo;s book or had been listening to the Ruby Book Club podcasts that cover it, but it was the first time mob programming for all of them, and hopefully we&rsquo;ll get them doing more typing in future sessions.</p>
+
+<p>We focused on Avdi&rsquo;s &ldquo;Use built-in conversion protocols&rdquo; <em>Collecting Input</em> pattern with chats about the use of Structs in Ruby, monkey patching (duck punching), duck typing and whether the implicit and explicit conversion operators (e.g. <code>to_int</code> vs <code>to_i</code>) should be more actively documented in the Ruby core classes.  I also touched on the concept of &ldquo;Power Level&rdquo; in response to the question of when to use Structs vs using Classes.  In my experience Structs are an often over-looked aspect of Ruby that allow a developer to create a data structure that has less power than a full blown class.  In parallel with the security guideline that you should only ever provide the minimum level of access necessary to get a job done, there&rsquo;s a similar argument to say that you should only ever use the minimally flexible data structure or entity in order to acheive a given task.</p>
+
+<p>Flexibility sounds great, but it actually equates with complexity.  More powerful entities can do more things, and they are more complex to interact with as a result.  I often write out a simplified power sequence for Ruby as follows from low power to high power:</p>
+
+<ol>
+<li>nil</li>
+<li>boolean ( true/false )</li>
+<li>integer</li>
+<li>float</li>
+<li>string</li>
+<li>array</li>
+<li>struct</li>
+<li>hash</li>
+<li>class</li>
+</ol>
+
+<p>This is a massive over simplification as the functionality of each of these entities varies along many different dimensions.  However in general we should prefer to use, say, a boolean (true/false) to represent something that has two possible values (e.g. receive email updates preference), rather than using a String to store the values &ldquo;true&rdquo; and &ldquo;false&rdquo;.  The Struct in Avdi&rsquo;s example looks like this:</p>
+<pre class="highlight ruby"><code><span class="no">Place</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:prize</span><span class="p">)</span>
+<span class="n">first</span> <span class="o">=</span> <span class="no">Place</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"first"</span><span class="p">,</span> <span class="s2">"Peasant's Quest game"</span><span class="p">)</span>
+<span class="n">second</span> <span class="o">=</span> <span class="no">Place</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"second"</span><span class="p">,</span> <span class="s2">"Limozeen Album"</span><span class="p">)</span>
+<span class="n">third</span> <span class="o">=</span> <span class="no">Place</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"third"</span><span class="p">,</span> <span class="s2">"Butter-da"</span><span class="p">)</span>
+</code></pre>
+<p>although he could have used hashes:</p>
+<pre class="highlight ruby"><code><span class="n">first</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">index: </span><span class="mi">0</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"first"</span><span class="p">,</span> <span class="ss">prize: </span><span class="s2">"Peasant's Quest game"</span> <span class="p">}</span>
+<span class="n">second</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">index: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"second"</span><span class="p">,</span> <span class="ss">prize: </span><span class="s2">"Limozeen Album"</span> <span class="p">}</span>
+<span class="n">third</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">index: </span><span class="mi">2</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"third"</span><span class="p">,</span> <span class="ss">prize: </span><span class="s2">"Butter-da"</span> <span class="p">}</span> 
+</code></pre>
+<p>The hash is more flexible. We can add arbitrary additional key/value pairs to the individual hash objects, e.g.</p>
+<pre class="highlight ruby"><code><span class="n">first</span><span class="p">[</span><span class="ss">:amount</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
+</code></pre>
+<p>That flexibility is extra power, that we maybe don&rsquo;t need at this stage.  You can argue we might need it later, but the hashes are also rather unDRY in that the key names have to be repeated over and over, and if we need an <code>:amount</code> key we can add it to the Struct, which is arguably DRYer than the long form hashes.  The Struct also provides us a nicer syntax for accessing its key/value contents:</p>
+<pre class="highlight ruby"><code><span class="n">first</span><span class="p">.</span><span class="nf">index</span>
+</code></pre>
+<p>There are pros and cons to both approaches.  DRYing out the keys into the Struct means that we have increased the dependency between the three entities, so that if we add an <code>:amount</code> to the Struct, all the instances of the Struct will also sprout an <code>:amount</code> key.  Maybe we want that and maybe we don&rsquo;t; it all depends on the domain model and the behaviours we are trying to support.  Ruby Structs and Hashes differ in various ways, and the real challenge when choosing one over the other is getting the right match, from the various features of Struct and Hash, to the problem we are trying to solve.  It&rsquo;s also sensible to avoid agonising and choose whatever seems simplest to start with and then change to more powerful or complex entities as the required behaviour starts to generate pain points in the code.</p>
+
+<p>The feedback from the mob session was positive, and we had great suggestions for more group problem solving in the future to get everyone&rsquo;s fingers dirty with the code.  It was a good day, and after lunch I started knocking off the automation tasks identified from the previous couple of days profiling.  I started by pushing the slack bot code onto <code>drie push</code> where remarkably the bot stayed live, and so I ran some votes.  Michael joined me in a hangout as I updated the static website so that blog images would have a max-width of 700px (to save me re-sizing), and then worked on WebSiteOne to have members&rsquo; titles update when they upgrade to Premium.  That was a nice set of three things to automate small tasks that are leaching away at my time.</p>
+
+<p>Going forward I hope to keep iterating on automating away simple tasks so I can have more time for interacting with Premium members in Mob, F2F and Plus programming sessions!</p>
+
+<h3>Related Videos</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=5rQ-SLPjKVs">&ldquo;Martin Fowler&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=L_jdimj1l3E">Mob Programming Session</a></li>
+<li><a href="https://www.youtube.com/watch?v=dordkH0qlF0">AsyncVoter Coding</a></li>
+<li><a href="https://www.youtube.com/watch?v=TI3JhhZHmyo">Kent Beck&quot; scrum</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
