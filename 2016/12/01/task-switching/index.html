@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Agile Ventures</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_12 x2016_12_01 x2016_12_01_task-switching x2016_12_01_task-switching_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/12/01/task-switching/"></a></h2>
+        <h5 class='date'> 1 Dec 2016</h5>
+    <p>Tuesday was a day of much task switching.  It started with putting my office back together after new windows had been put in.  That took a while.  I managed to quickly stamp out a blog on the Agile Project Workshop before the &ldquo;Martin Fowler&rdquo; scrum.  My attempts at changing the flow for blog drafts were getting a little out of hand as the process of squashing and merging between the <code>new_blog_drafts</code> branch and master seemed to be leaving stray commits that were then making the subsequent new blog draft PRs rather messy.  In frustration I deleted the branch and re-created it this morning.  I think we need to go with Arreche&rsquo;s suggestion of a webhook, and to do that I&rsquo;ll need to move the blog_draft notifications into the new AV Premium Slack instance; or at least some where with spare Slack integration capacity.</p>
+
+<p>In the scrum I was advising one Premium member about the perils of task switching, or more accurately about the perils of spreading oneself too thin over many projects.  Talk about the pot calling the kettle black! :-)  After the scrum I joined Matt for an hour pairing on WebSiteOne and Redeemify, and I managed to restrain myself from immediately diving in to individual problems and talked to Matt about the bigger picture of trying to make progress with all of AgileVentures and WebsiteOne in particular.  We reviewed the open PRs and board and I unblocked Matt on two issues, and then helped him with another on Redeemify where the presence of a legacy Rails 3 <code>asset</code> group in the Gemfile was breaking the system on Heroku.</p>
+
+<p>After lunch I scaffolded a mentoring session for a private company on a paid project.  I used google hangouts to connect up an experienced developer from the US with a London based educational company to get advice on their legacy Rails codebase.  That all seemed to go very well, and more sessions like those could go a long way to making my own financial situation a lot more stable.  We&rsquo;ll see if we can&rsquo;t do a lot more of that; there&rsquo;s the hint of other interesting possibilities.  I had been hoping to bring in some large paid projects for the benefit of a group of AV Premium members, but maybe slivers of small consulting work will ultimately serve the same purpose.</p>
+
+<p>While I was monitoring the paid session I was managing Slack and getting my own company&rsquo;s corporation tax paid.  30 minutes on the phone to discover that they aren&rsquo;t sending paper letters with reference ids any more.  I caught up with Thomas and Michael in the &ldquo;Kent Beck&rdquo; scrum, and we talked more about the task switching issue.  Michael called out Thomas and myself as being heavy task switchers, and we clarified that although there was lots of room for us to be more task focused, heavy task switching can be particularly challenging for junior developers.  While there&rsquo;s lots to learn from different code bases, Thomas and I agreed that sticking with one for a couple of weeks to really get to know it well is important for someone just learning the ropes.  Actually I&rsquo;m starting to think that I&rsquo;d really like to have a coding binge on a single project.  I&rsquo;ve started looking at the calender to see when I will get to the one year mark for my blogs.  Blogging every day is great, but I&rsquo;m thinking wistfully about other setups, for example where I do nothing but code for four days and then do blogging and admin on a Friday &hellip;  do my commitments to help people get coordinated on slack prevent me from getting any really focused coding done?</p>
+
+<p>I believe it was June when I started blogging daily.  Will I keep myself to my committment of doing it every day for a year?  That&rsquo;s another six months &hellip; I&rsquo;m also wondering if I can do a blog that&rsquo;s almost purely code.  Personal time management strategy aside I jumped into a quick session with Michael.  I was totally torn between working on the premium upgrade interface on WSO and the slack bot.  It certainly feels like the async slack bot could be a real engine of activity for many projects.  What I&rsquo;m really hoping is that it can start to partly take over some of the project managment admin roles that I&rsquo;m doing on multiple projects.  I&rsquo;d also love it to take over some of the greeting and orienting admin.  Of course it might all backfire if all the projects get really active and my workload spikes! :-)</p>
+
+<p>We&rsquo;re not measuring quantiatively, but from the slack messages pinging about, I get the sense we have more active projects in AgileVentures now than ever before.  I resolved to try and get some testing code into the async slack bot spike to give us a framework going forward.  This was the repping on node testing setup I&rsquo;d been talking about needing to do for some time.  I followed the mocha docs to produce this test with Michael and Arreche&rsquo;s input:</p>
+<pre class="highlight shell"><code>var assert <span class="o">=</span> require<span class="o">(</span><span class="s1">'assert'</span><span class="o">)</span>;
+var vote_text <span class="o">=</span> require<span class="o">(</span><span class="s1">'../src/utils'</span><span class="o">)</span>;
+
+describe<span class="o">(</span><span class="s1">'Server'</span>, <span class="k">function</span><span class="o">(){</span>
+  describe<span class="o">(</span><span class="s1">'vote_text'</span>, <span class="k">function</span><span class="o">(){</span>
+    it<span class="o">(</span><span class="s1">'should format vote text correctly for no votes'</span>, <span class="k">function</span><span class="o">(){</span>
+      assert.equal<span class="o">(</span>vote_text<span class="o">([])</span>, <span class="s1">'0 vote so far []'</span><span class="o">)</span>
+    <span class="o">})</span>;
+  <span class="o">})</span>;
+<span class="o">})</span>;
+</code></pre>
+<p>here&rsquo;s the contents of the utils file under test</p>
+<pre class="highlight shell"><code>module.exports <span class="o">=</span> <span class="k">function</span><span class="o">(</span>votes<span class="o">){</span>
+  var text <span class="o">=</span> votes.length +<span class="s1">' vote'</span>;
+  <span class="k">if</span><span class="o">(</span>votes.length &gt; 1<span class="o">){</span>
+    text +<span class="o">=</span> <span class="s1">'s'</span>;
+  <span class="o">}</span>
+  text +<span class="o">=</span> <span class="s1">' so far ['</span>
+  votes.forEach<span class="o">(</span><span class="k">function</span><span class="o">(</span>vote<span class="o">)</span> <span class="o">{</span>
+     text +<span class="o">=</span> <span class="s1">'&lt;@'</span> + vote.user + <span class="s1">'&gt; '</span>;
+  <span class="o">})</span>;
+  text +<span class="o">=</span> <span class="s1">']'</span>
+  <span class="k">return </span>text;
+<span class="o">}</span>;
+</code></pre>
+<p>We got a spike of a unit testing setup.  I had to run off to take my sons to football academy and so I didn&rsquo;t get to fix up the awful naming in the above.  Do we really want a <code>utils</code> file, or should we be creating a <code>vote_text</code> function in the utils file, or should we be creating objects?  Michael pointed out that as the Slack bot, this code would have a different domain from the RESTful API we had built separately, revolving more around channels and users than votes and stories.  We left it on the note of could we get a good end-to-end acceptance testing framework in there.  My experiences with testing Stripe have soured me a little to sandboxing systems like VCR, and our attempt to use the node equivalent of sepia on the AgileBot project had been met with failure.  I found a <a href="https://github.com/gratifychat/BotMock">BotMock</a> framework that would in principle allow us to do to botkit what we had done with the Stripe Ruby mock on WebsiteOne.  BotKit really had been a gorgeous experience in terms of getting the spike of the bot up and running.  What I wanted now most of all was a good way to get the high level user stories of the slack bot defined and driving the code.  At the moment they live implicitly in the spiked code and some Slack interactions.</p>
+
+<p>The needle we really want to thread is the one that allows us to expose clearly the features that the system supports, so that we don&rsquo;t get all snarled as we add new features and evolve the domain model; and that new developers coming onto the project can easily orient themselves.  What we don&rsquo;t want is to get bogged down in crazy bugs arising from mis-matches between our mental models of the software and testing components.  If we can thread that needle, perhaps we can support many active projects without my brain being levered out of my ears, and possibly enough space for a coding binge without too much task switching.  Now that would be a great Christmas present! :-)</p>
+
+<h3>Related Videos:</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=3wPmyLfRwxY">&ldquo;Martin Fowler&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=1rwVM5uuFR4">Pairing on WebsiteOne</a></li>
+<li><a href="https://www.youtube.com/watch?v=JrIeqF5y9pU">&ldquo;Kent Beck&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=ll91NnqwRZs">Coding on AsyncSlackBot</a></li>
+</ul>
+
+        <h2 class='author'>by </h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

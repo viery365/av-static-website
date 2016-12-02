@@ -5,16 +5,75 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-11-30T00:00:00+00:00</updated>
+  <updated>2016-12-01T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title/>
+    <link rel="alternate" href="http://blog.url.com/2016/12/01/task-switching/"/>
+    <id>http://blog.url.com/2016/12/01/task-switching/</id>
+    <published>2016-12-01T00:00:00+00:00</published>
+    <updated>2016-12-02T09:24:28+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Tuesday was a day of much task switching.  It started with putting my office back together after new windows had been put in.  That took a while.  I managed to quickly stamp out a blog on the Agile Project Workshop before the &amp;ldquo;Martin Fowler&amp;rdquo; scrum.  My attempts at changing the flow for blog drafts were getting a little out of hand as the process of squashing and merging between the &lt;code&gt;new_blog_drafts&lt;/code&gt; branch and master seemed to be leaving stray commits that were then making the subsequent new blog draft PRs rather messy.  In frustration I deleted the branch and re-created it this morning.  I think we need to go with Arreche&amp;rsquo;s suggestion of a webhook, and to do that I&amp;rsquo;ll need to move the blog_draft notifications into the new AV Premium Slack instance; or at least some where with spare Slack integration capacity.&lt;/p&gt;
+
+&lt;p&gt;In the scrum I was advising one Premium member about the perils of task switching, or more accurately about the perils of spreading oneself too thin over many projects.  Talk about the pot calling the kettle black! :-)  After the scrum I joined Matt for an hour pairing on WebSiteOne and Redeemify, and I managed to restrain myself from immediately diving in to individual problems and talked to Matt about the bigger picture of trying to make progress with all of AgileVentures and WebsiteOne in particular.  We reviewed the open PRs and board and I unblocked Matt on two issues, and then helped him with another on Redeemify where the presence of a legacy Rails 3 &lt;code&gt;asset&lt;/code&gt; group in the Gemfile was breaking the system on Heroku.&lt;/p&gt;
+
+&lt;p&gt;After lunch I scaffolded a mentoring session for a private company on a paid project.  I used google hangouts to connect up an experienced developer from the US with a London based educational company to get advice on their legacy Rails codebase.  That all seemed to go very well, and more sessions like those could go a long way to making my own financial situation a lot more stable.  We&amp;rsquo;ll see if we can&amp;rsquo;t do a lot more of that; there&amp;rsquo;s the hint of other interesting possibilities.  I had been hoping to bring in some large paid projects for the benefit of a group of AV Premium members, but maybe slivers of small consulting work will ultimately serve the same purpose.&lt;/p&gt;
+
+&lt;p&gt;While I was monitoring the paid session I was managing Slack and getting my own company&amp;rsquo;s corporation tax paid.  30 minutes on the phone to discover that they aren&amp;rsquo;t sending paper letters with reference ids any more.  I caught up with Thomas and Michael in the &amp;ldquo;Kent Beck&amp;rdquo; scrum, and we talked more about the task switching issue.  Michael called out Thomas and myself as being heavy task switchers, and we clarified that although there was lots of room for us to be more task focused, heavy task switching can be particularly challenging for junior developers.  While there&amp;rsquo;s lots to learn from different code bases, Thomas and I agreed that sticking with one for a couple of weeks to really get to know it well is important for someone just learning the ropes.  Actually I&amp;rsquo;m starting to think that I&amp;rsquo;d really like to have a coding binge on a single project.  I&amp;rsquo;ve started looking at the calender to see when I will get to the one year mark for my blogs.  Blogging every day is great, but I&amp;rsquo;m thinking wistfully about other setups, for example where I do nothing but code for four days and then do blogging and admin on a Friday &amp;hellip;  do my commitments to help people get coordinated on slack prevent me from getting any really focused coding done?&lt;/p&gt;
+
+&lt;p&gt;I believe it was June when I started blogging daily.  Will I keep myself to my committment of doing it every day for a year?  That&amp;rsquo;s another six months &amp;hellip; I&amp;rsquo;m also wondering if I can do a blog that&amp;rsquo;s almost purely code.  Personal time management strategy aside I jumped into a quick session with Michael.  I was totally torn between working on the premium upgrade interface on WSO and the slack bot.  It certainly feels like the async slack bot could be a real engine of activity for many projects.  What I&amp;rsquo;m really hoping is that it can start to partly take over some of the project managment admin roles that I&amp;rsquo;m doing on multiple projects.  I&amp;rsquo;d also love it to take over some of the greeting and orienting admin.  Of course it might all backfire if all the projects get really active and my workload spikes! :-)&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;re not measuring quantiatively, but from the slack messages pinging about, I get the sense we have more active projects in AgileVentures now than ever before.  I resolved to try and get some testing code into the async slack bot spike to give us a framework going forward.  This was the repping on node testing setup I&amp;rsquo;d been talking about needing to do for some time.  I followed the mocha docs to produce this test with Michael and Arreche&amp;rsquo;s input:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;var assert &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'assert'&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;;
+var vote_text &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'../src/utils'&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;;
+
+describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Server'&lt;/span&gt;, &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+  describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'vote_text'&lt;/span&gt;, &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+    it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'should format vote text correctly for no votes'&lt;/span&gt;, &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
+      assert.equal&lt;span class="o"&gt;(&lt;/span&gt;vote_text&lt;span class="o"&gt;([])&lt;/span&gt;, &lt;span class="s1"&gt;'0 vote so far []'&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;})&lt;/span&gt;;
+  &lt;span class="o"&gt;})&lt;/span&gt;;
+&lt;span class="o"&gt;})&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;here&amp;rsquo;s the contents of the utils file under test&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;module.exports &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;votes&lt;span class="o"&gt;){&lt;/span&gt;
+  var text &lt;span class="o"&gt;=&lt;/span&gt; votes.length +&lt;span class="s1"&gt;' vote'&lt;/span&gt;;
+  &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;votes.length &amp;gt; 1&lt;span class="o"&gt;){&lt;/span&gt;
+    text +&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'s'&lt;/span&gt;;
+  &lt;span class="o"&gt;}&lt;/span&gt;
+  text +&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;' so far ['&lt;/span&gt;
+  votes.forEach&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;vote&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+     text +&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;@'&lt;/span&gt; + vote.user + &lt;span class="s1"&gt;'&amp;gt; '&lt;/span&gt;;
+  &lt;span class="o"&gt;})&lt;/span&gt;;
+  text +&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;']'&lt;/span&gt;
+  &lt;span class="k"&gt;return &lt;/span&gt;text;
+&lt;span class="o"&gt;}&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We got a spike of a unit testing setup.  I had to run off to take my sons to football academy and so I didn&amp;rsquo;t get to fix up the awful naming in the above.  Do we really want a &lt;code&gt;utils&lt;/code&gt; file, or should we be creating a &lt;code&gt;vote_text&lt;/code&gt; function in the utils file, or should we be creating objects?  Michael pointed out that as the Slack bot, this code would have a different domain from the RESTful API we had built separately, revolving more around channels and users than votes and stories.  We left it on the note of could we get a good end-to-end acceptance testing framework in there.  My experiences with testing Stripe have soured me a little to sandboxing systems like VCR, and our attempt to use the node equivalent of sepia on the AgileBot project had been met with failure.  I found a &lt;a href="https://github.com/gratifychat/BotMock"&gt;BotMock&lt;/a&gt; framework that would in principle allow us to do to botkit what we had done with the Stripe Ruby mock on WebsiteOne.  BotKit really had been a gorgeous experience in terms of getting the spike of the bot up and running.  What I wanted now most of all was a good way to get the high level user stories of the slack bot defined and driving the code.  At the moment they live implicitly in the spiked code and some Slack interactions.&lt;/p&gt;
+
+&lt;p&gt;The needle we really want to thread is the one that allows us to expose clearly the features that the system supports, so that we don&amp;rsquo;t get all snarled as we add new features and evolve the domain model; and that new developers coming onto the project can easily orient themselves.  What we don&amp;rsquo;t want is to get bogged down in crazy bugs arising from mis-matches between our mental models of the software and testing components.  If we can thread that needle, perhaps we can support many active projects without my brain being levered out of my ears, and possibly enough space for a coding binge without too much task switching.  Now that would be a great Christmas present! :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=3wPmyLfRwxY"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=1rwVM5uuFR4"&gt;Pairing on WebsiteOne&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=JrIeqF5y9pU"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ll91NnqwRZs"&gt;Coding on AsyncSlackBot&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Agile Project Management for NonProfits</title>
     <link rel="alternate" href="http://blog.url.com/2016/11/30/agile-project-workshop/"/>
     <id>http://blog.url.com/2016/11/30/agile-project-workshop/</id>
     <published>2016-11-30T00:00:00+00:00</published>
-    <updated>2016-11-30T11:48:57+00:00</updated>
+    <updated>2016-12-02T09:25:43+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -28,25 +87,33 @@
 
 &lt;p&gt;This session will provide an insight into how you can effectively instigate agile project management into your nonprofit. &lt;/p&gt;
 
-&lt;p&gt;Training content:
- - What Agile is and where it came from
- - The Agile Manifesto, principles and practises
- - The value of Agile to your nonprofit
- - Implementing Agile in your nonprofit
- - Communication, collaboration and culture
- - Risk management and pitfalls
- - Technologies to help
- - Further resources&lt;/p&gt;
+&lt;p&gt;Training content:&lt;/p&gt;
+&lt;/blockquote&gt;
 
+&lt;ul&gt;
+&lt;li&gt;What Agile is and where it came from&lt;/li&gt;
+&lt;li&gt;The Agile Manifesto, principles and practises&lt;/li&gt;
+&lt;li&gt;The value of Agile to your nonprofit&lt;/li&gt;
+&lt;li&gt;Implementing Agile in your nonprofit&lt;/li&gt;
+&lt;li&gt;Communication, collaboration and culture&lt;/li&gt;
+&lt;li&gt;Risk management and pitfalls&lt;/li&gt;
+&lt;li&gt;Technologies to help&lt;/li&gt;
+&lt;li&gt;Further resources&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
 &lt;p&gt;Participants will leave the course having gone through a small scale agile process learning first hand how it can be implemented into your organisation.&lt;/p&gt;
 
 &lt;p&gt;Trainer: Agile Ventures&lt;/p&gt;
 
-&lt;p&gt;Cost (Per Person):
-  - Free - Harrow Voluntary, Community &amp;amp; Social Enterprise Sector
-  - £30 - Voluntary, Community &amp;amp; Social Enterprise Sector (Not working or based in Harrow)
-  - £40 - Public &amp;amp; Private Sector&lt;/p&gt;
+&lt;p&gt;Cost (Per Person):&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Free - Harrow Voluntary, Community &amp;amp; Social Enterprise Sector&lt;/li&gt;
+&lt;li&gt;£30 - Voluntary, Community &amp;amp; Social Enterprise Sector (Not working or based in Harrow)&lt;/li&gt;
+&lt;li&gt;£40 - Public &amp;amp; Private Sector&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;There were eight attendees from different charity groups based in Harrow and some of the adjoining boroughs.  Including Alex and myself that made 10 which worked pretty well I think.  We&amp;rsquo;d done a &lt;a href="http://nonprofits.agileventures.org/2016/11/21/agile-workshop/"&gt;dry run of the event&lt;/a&gt; a couple of weeks back with the VAHC staff in a group of six including myself.  That dry run had followed this pattern:&lt;/p&gt;
 
@@ -61,7 +128,7 @@
 &lt;li&gt;&amp;ldquo;retrospective&amp;rdquo; looking back over the process and how it could be improved &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Excluding breaks being 6 ten minute chunks.  The full workshop followed the same model but each section lasted 25 minutes.  The key things I&amp;rsquo;d learned from the dry run was &lt;/p&gt;
+&lt;p&gt;Excluding breaks, being 6 ten minute chunks.  The full workshop followed the same model but each section lasted 25 minutes.  The key things I&amp;rsquo;d learned from the dry run was &lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;I needed to bring a mac VGA connector to use the projector&lt;/li&gt;
@@ -72,13 +139,13 @@
 &lt;li&gt;Using the Agile process to understand the Agile process might be confusing &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I got the simple logistical issues sorted, and started the main workshop by having the eight attendees do pairwise introductions.  I started the workshop as before by explaining the six part structure of the workshop and added the new element of stating the workshop objective &amp;ldquo;To understand Agile Project Management&amp;rdquo;.  I tried to highlight how ultimately the Agile processs could be applied to any project, but that our project in the three hour workshop was to &amp;ldquo;To understand Agile Project Management&amp;rdquo; and we would be compressing what might be done in an 2 week sprint into those three hours.  I talked briefly about the background of Agile, and how it derives from the &lt;a href="http://agilemanifesto.org/"&gt;Agile Software Manifesto&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I got the simple logistical issues sorted, and started the main workshop by having the eight attendees do pairwise introductions.  I started the workshop as before by explaining the six part structure of the workshop and added the new element of stating the workshop objective &amp;ldquo;To understand Agile Project Management&amp;rdquo;.  I tried to highlight how ultimately the Agile processs could be applied to any project, but that our project in the three hour workshop was &amp;ldquo;To understand Agile Project Management&amp;rdquo; and we would be compressing what might be done in an 2 week sprint into those three hours.  I talked briefly about the background of Agile, and how it derives from the &lt;a href="http://agilemanifesto.org/"&gt;Agile Software Manifesto&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;This time around I showed an image to represent a sprint:&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="scrum overiew" src="http://www.agilenutshell.com/assets/methods/scrum/scrum-overview.png" /&gt;&lt;/p&gt;
 
-&lt;p&gt;and then we got into the process of starting to generate stories.  This time around I didn&amp;rsquo;t contribute any stories myself but with 9 others writing away we quickly had loads to work with.  I lead the process of trying to organise the stories into themes.  The stories were pretty much all questions.  I guess in a future workshop I could ask for all the stories to be in the stakeholder, objective, desire format, but things seemed to go okay without it.  We went through a process of consolidation and generated five &amp;ldquo;epics&amp;rdquo;, which we voted ongiving us the following set of ready items:&lt;/p&gt;
+&lt;p&gt;and then we got into the process of starting to generate stories.  This time around I didn&amp;rsquo;t contribute any stories myself but with 9 others writing away we quickly had loads to work with.  I lead the process of trying to organise the stories into themes.  The stories were pretty much all questions.  I guess in a future workshop I could ask for all the stories to be in the stakeholder, objective, desire format, but things seemed to go okay without it.  We went through a process of consolidation and generated five &amp;ldquo;epics&amp;rdquo;, which we voted on, giving us the following set of ready items:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;How does Agile affect funding and reporting to funders? (2 points)&lt;/li&gt;
@@ -88,13 +155,13 @@
 &lt;li&gt;What are the Pros &amp;amp; Cons of Agile vs other methodologies (2 points)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;which we prioritised and then worked on the first three in three teams of three, with me moving between the teams to give help and support.  The really interesting things to come out of the process was to see the attendees answering their own questions and inferring from the overall Agile process that we were using how Agile might work for them.  As usual the voting and voting discussion was a critical learning period as we distinguished what we were voting on (complexity/ambiguity rather than priority or delegation), and I think the attendees were getting insights into how just having that discussion could help surface and resolve conflicts.  While the teams were working I got their tickets up on a makeshift Kanban layout on the wall:&lt;/p&gt;
+&lt;p&gt;which we prioritised and then worked on the first three in three teams of three, with me moving between the teams to give help and support.  The really interesting things to come out of the process was to see the attendees answering their own questions and inferring, from the overall Agile process that we were using, how Agile might work for them.  As usual the voting and voting discussion was a critical learning period as we distinguished what we were voting on (complexity/ambiguity rather than priority or delegation), and I think the attendees were getting insights into how just having that discussion could help surface and resolve conflicts.  While the teams were working I got their tickets up on a makeshift Kanban layout on the wall:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src="https://www.dropbox.com/s/tp01dj0jtxdwvfy/non-proft-kanban.jpg?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;The teams presented their findings to each other and I saw the time had run away with us.  There was only five minutes left for the retrospective.  This was a shame since as I was at pains to point out, all the other mechanics of scrums, sprints, standups, kanban charts etc. were all optional variables, and the key element that made a process Agile was reflection on how different aspects of the process were working.  We did quick retro going round the tablewith each person saying briefly what had been positive and could be improved on about the workshop.  Not ideal since those going first would bias those talking after, but the general theme was that the attendees had found actually working through the Agile process very informative, but that many of them would like more specific examples about usage of the techniques in the non-profit sector.  There was also interest in a more advanced workshop and I mentioned Alex and my idea about a 2 day workshop, with the 2 days being separated by 2 weeks, and effectively running an inception/kick-off and retrospective for an organisation.  It would certainly be interesting to run something like that although Alex was skeptical about people coming back for the second day 2 weeks later.  I think if people were paying for it that might make all the difference :-)&lt;/p&gt;
+&lt;p&gt;The teams presented their findings to each other and I saw the time had run away with us.  There was only five minutes left for the retrospective.  This was a shame since as I was at pains to point out that all the other mechanics of scrums, sprints, standups, kanban charts etc. were all optional variables, and the key element that made a process Agile was reflection on how different aspects of the process were working.  We did a quick retro going round the table with each person saying briefly what had been positive and could be improved on about the workshop.  Not ideal since those going first would bias those talking after, but the general theme was that the attendees had found actually working through the Agile process very informative, but that many of them would like more specific examples about usage of the techniques in the non-profit sector.  There was also interest in a more advanced workshop and I mentioned Alex&amp;rsquo;s and my idea about a 2 day workshop, with the 2 days being separated by 2 weeks, and effectively running an inception/kick-off and retrospective for an organisation.  It would certainly be interesting to run something like that although Alex was skeptical about people coming back for the second day 2 weeks later.  I think if people were paying for it that might make all the difference :-)&lt;/p&gt;
 
-&lt;p&gt;Overall a great experience, and I&amp;rsquo;ll be very interested to hear what people say in the privacy of the feedback forms.  I don&amp;rsquo;t know that I&amp;rsquo;d want to spend every day doing workshops like this, but it was great to be meeting all these hard-working charity/non-profit folks, and what I&amp;rsquo;d really love to be doing it more implementation of Agile methods in their organisations to see if we could really help them improve their outcomes.  Perhaps this will be a stepping stone to that &amp;hellip;&lt;/p&gt;
+&lt;p&gt;Overall a great experience, and I&amp;rsquo;ll be very interested to hear what people say in the privacy of the feedback forms.  I don&amp;rsquo;t know that I&amp;rsquo;d want to spend every day doing workshops like this, but it was great to be meeting all these hard-working charity/non-profit folks, and what I&amp;rsquo;d really love to be doing is more implementation of Agile methods in their organisations to see if we could really help them improve their outcomes.  Perhaps this will be a stepping stone to that &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;Related Videos:&lt;/p&gt;
 
@@ -329,138 +396,6 @@ $ nodejs server.js &amp;amp;
 &lt;li&gt;&lt;a href="https://youtu.be/aGjQ5N7nRfQ"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dPJqeBPFluc"&gt;WSO Huddle&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4qn9b8MVbvg"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Profiling My Day</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/23/profiling-my-day/"/>
-    <id>http://blog.url.com/2016/11/23/profiling-my-day/</id>
-    <published>2016-11-23T00:00:00+00:00</published>
-    <updated>2016-11-24T11:03:34+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;I profiled my day yesterday in an attempt to apply the Eliminate, Simplify, Automate, Delegate (ESAD) mantra and create space for the important things :-)  Here&amp;rsquo;s my rough profile of the day:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;09:00 - 10:00 writing blog (5mins on getting that up and in slack #blog_drafts)
-
-10:15 - 10:40 reviewing slack and email - starting a WSO vote
-
-10:40 - 11:00 reviewing previous days blog and pushing out
-
-11:00 - 11:30 rebuilding slack client after creation and renaming of teams
-
-11:30 - 12:15 scrum and debugging with Premium Mob Member
-
-12:30 - 13:30 edX emailing, AV emailing, Social Media update, negotiating with company about a paid project, editing and promoting blog for Kenyan Bootcamp code9ty
-
-14:45 - 15:00 rebooking physic appt
-
-15:00 - 15:45 reviewing asyncvoterUI and LS PRs (starting hangout 2nd time adding my AV banner)
-
-15:45 - 16:15 scrum - catch up with co-founder Thomas, voting with Rose and student
-
-16:15 - 17:00 meeting with heroku about our charges
-
-17:00 - 17:30 chatting with sponsor drie about hosting services
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So let&amp;rsquo;s apply the ESAD criteria to each in turn.  I don&amp;rsquo;t know that there&amp;rsquo;s anyway to simplify the process of actually writing the blog.  I could make them shorter, or even eliminate them, perhaps doing them less frequently.  I&amp;rsquo;m reluctant to do that as I find them a nice grounding start to the day, the prevents me from just sitting down and reacting to whichever seems the most urgent message on Slack or in email.  Intuitively the feedback I&amp;rsquo;m getting on the blogs is that they are often too long, have too much code, not enough images, but also that they&amp;rsquo;ve helped others understand my perspectives and what we are trying to achieve with AgileVentures.  I can&amp;rsquo;t really delegate them (although I&amp;rsquo;d love to have more in the community blogging), and the only place for automating them would be to work on the final portion of pushing them to GitHub and Slack where each day I have to do the following:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Copy from TextEdit to Sublime&lt;/li&gt;
-&lt;li&gt;Save in correct location and format for middleman blog (e.g. 2016-11-03-pithy-title.html.markdown)&lt;/li&gt;
-&lt;li&gt;Add middleman blog header, edit date there, edit title and edit keywords&lt;/li&gt;
-&lt;li&gt;Navigate to my av-static-website terminal&lt;/li&gt;
-&lt;li&gt;Type &lt;code&gt;git add .&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Type &lt;code&gt;git commit -am &amp;#39;new blog&amp;#39;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Type &lt;code&gt;git push&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Open a browser in the blogs directory of the av-static-website: i.e. https://github.com/AgileVentures/av-static-website/tree/master/source/blog_articles&lt;/li&gt;
-&lt;li&gt;Navigate to the link for the days blog and copy it&lt;/li&gt;
-&lt;li&gt;Switch to slack and paste to the #blog_drafts channel with &lt;code&gt;@channel new blog draft &amp;lt;link&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Now this only takes a minute or two, but I am doing it every day, and having written it out I think several parts could be automated or simplified.  It might take 30-60 minutes to get automated in the way I want, so I&amp;rsquo;d need to feel sure that I was going to write another 15-30 blogs before I&amp;rsquo;d start to see time savings.  Possibly I could write a bash script &amp;hellip; there are also things that can go wrong if I have to deal with merge conflicts (I should always &lt;code&gt;git pull&lt;/code&gt; first).  I could just blog on medium and be done with it.  I&amp;rsquo;ve avoided that partly because I want to share drafts with anyone who joins #blog_drafts and have them able to submit PRs, although perhaps a better solution is to just make everyone interested a members of the AgileVentures organisation on Medium.&lt;/p&gt;
-
-&lt;p&gt;I start to think about whether there are some existing automations, like setting up pure PR notifications on the #blog_drafts channel, and submitting my blog as a PR from a branch.  That might seem like crazy extra work, but it connects to something else I&amp;rsquo;d like to automate further; the process of submitting a PR from the command line, which seems to involve me re-typing the same thing several times over, e.g. &lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;git checkout -b #waffle_id_exciting_feature_name&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;doing and committing the work (commit message often includes &amp;lsquo;exciting feature name&amp;rsquo;)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;hub pull-request -b develop&lt;/code&gt; &lt;/li&gt;
-&lt;li&gt;editing the PR description in vim to include the text &lt;code&gt;fixes #waffle_id&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;I keep thinking here that if I could get something like a default commit message based on the branch name, then I could avoid typing the waffle_id and feature name twice.  In the blog case there are no waffle ticket ids to link up, but I guess I&amp;rsquo;m looking at being able to type something like the following from the command line:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ blog_draft &amp;lt;blog title&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which would do the following steps:&lt;/p&gt;
-
-&lt;p&gt;a) &lt;code&gt;git pull&lt;/code&gt;&lt;br&gt;
-b) &lt;code&gt;git checkout -b new_blog&amp;lt;blog_title&amp;gt;&lt;/code&gt;&lt;br&gt;
-b) &lt;code&gt;git add source/blog_articles&lt;/code&gt;&lt;br&gt;
-c) &lt;code&gt;git commit -m &amp;#39;new blog on &amp;lt;blog title&amp;gt;&amp;#39;&lt;/code&gt;&lt;br&gt;
-d) &lt;code&gt;hub pull-request -b develop&lt;/code&gt;  &lt;/p&gt;
-
-&lt;p&gt;and with the right notifications a bash script doing the above could ping the #blog&lt;em&gt;drafts channel.  With a Ruby script I could probably get finer tweaks so that it actually sent  &lt;code&gt;@channel new blog draft &amp;lt;link&amp;gt;&lt;/code&gt; to #blog&lt;/em&gt;drafts.&lt;/p&gt;
-
-&lt;p&gt;So I could clearly do the above analysis on all the sections of the day.  Blog getting too long?  Quick review.  Daily review of Slack and Email?  Can&amp;rsquo;t really avoid, just have to avoid getting sucked in to low priority things.  I try to pull each question or request into my action plan document and order and then take passes through my action plan to work out what order to do things in.  The asynchronous voting is already the subject of ongoing automation.  &lt;/p&gt;
-
-&lt;p&gt;Reviewing the previous days blog and pushing that out requires some more automatable steps e.g.&lt;/p&gt;
-
-&lt;p&gt;a) merge any PRs&lt;br&gt;
-b) &lt;code&gt;git pull&lt;/code&gt;&lt;br&gt;
-c) read through and make minor corrections (10mins?)&lt;br&gt;
-d) &lt;code&gt;git add&lt;/code&gt;&lt;br&gt;
-e) &lt;code&gt;git commit -m &amp;#39;tweaks&amp;#39;&lt;/code&gt;&lt;br&gt;
-f) &lt;code&gt;git push&lt;/code&gt;&lt;br&gt;
-g) &lt;code&gt;rake publish&lt;/code&gt;&lt;br&gt;
-h) checking http://nonprofits.agileventures.org/blog/&lt;br&gt;
-i) adjusting image sizes, making sure blog looks okay  &lt;/p&gt;
-
-&lt;p&gt;The issue with both the initial blog generation and publishing the previous days draft is that the bulk of the time is not automatable without a serious AI.  I guess the question is whether the surrounding command line cruft is worth automating.  Even if it&amp;rsquo;s not, it could be fun, and possibly beneficial if the automation can make PRs from the command line slightly less work &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;The Slack rebuild was (hopefully) a one off.  The scrums - I do two a day, and they are capped at 15 mins, but I often end up doing another 15 mins after the scrum - today the first scrum was followed by 15 mins debugging with a Premium Mob member, which was fun and (I think) worth it.  The second scrum 15 min follow on was a catch up with my Co-Founder so pretty important &amp;hellip;  Although scrums can certainly serve to break up flow on a longer more complex piece of work; it&amp;rsquo;s also critical to coordinate with the team, and these Scrums are our welcome mat and showcase.  I am still conflicted about whether they are worth the effort to maintain.  Google Hangouts on Air and our plugin seem stable-ish again after our outage of a couple of weeks back, although I am needing to re-start hangouts occasionally, and the fact that my lower third banner is not saved means I&amp;rsquo;m re-adding that for every scrum and hangout - which burns 30 seconds every time, although it&amp;rsquo;s helped me memorise the AV colour code (#ee7335).&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m unclear if the &lt;a href="https://www.hangouttoolbox.com/"&gt;google hangout toolbox&lt;/a&gt; is still being maintained.  I just posted the following to their G+ support group:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The lower third still works for me, but I can&amp;rsquo;t save it - I have to re-enter the details every time.  Is the code for this open source?  Is there someone actively maintaining it?&lt;/p&gt;
-
-&lt;p&gt;Here are some more details - I can set up my lower third like so:&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img alt="setting up lower third" src="https://www.dropbox.com/s/nz4gwqb0pbfhfwc/Screenshot%202016-11-23%2010.04.34.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;I have the setting to enable auto load and autoload last used lower:&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img alt="auto reload settings" src="https://www.dropbox.com/s/8zr12w8e7sf4wtu/Screenshot%202016-11-23%2010.05.34.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;and here&amp;rsquo;s me having reloaded the hangout and the saved presets have gone :-(&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img alt="saved presets missing :-(" src="https://www.dropbox.com/s/24ik2p5qauunua6/Screenshot%202016-11-23%2010.07.36.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Any ideas?&lt;/p&gt;
-
-&lt;p&gt;Many thanks in advance&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So I can see the names of the developers on the site.  I&amp;rsquo;ll leave that &lt;a href="https://plus.google.com/+SamJoseph/posts/QyAdAzTXPuG"&gt;G+ post&lt;/a&gt; for a couple of days and then maybe reach out to the maintainers.&lt;/p&gt;
-
-&lt;p&gt;Michael wasn&amp;rsquo;t around so I reviewed PRs instead of pairing.  Felt good to get into the details of the new AsyncVoter React client and get to some other outstanding PRs.  PR review is what Premium members get priority on.  I&amp;rsquo;m still not sure if this is the key thing that Premium&amp;rsquo;s want, but reviewing PRs takes a lot of work and time, and I believe it is very beneficial for learning.  Other meetings in the day were one offs and can&amp;rsquo;t really be ESADed.  Other key area for ESADing is the edX and AV emailings.  I think I&amp;rsquo;ve got the Social Media update fairly automated.  It involves reviewing an older blog, tweaking and then pushing to Medium, which automatically pushes to Twitter and Facebook, although with boring &amp;ldquo;I just published&amp;rdquo; text.  I push to LinkedIn manually, but it&amp;rsquo;s the edX and AV emailings that are time consuming.  The edX ones go through mail chimp, but they don&amp;rsquo;t give me enough access to automate them.  For the AV mailings, I really need to look into the Amazon SES service.  I&amp;rsquo;m just finishing a run of mailing all the AV members individually through my Thunderbird client.  I have a couple of scripts to semi-automate this, but I am trying to reach out personally to everyone.&lt;/p&gt;
-
-&lt;p&gt;I do feel a bit like a spammer, but it&amp;rsquo;s a one off, and I&amp;rsquo;m responding individually to every email back, and we&amp;rsquo;ve signed up about ten new premium members as a direct result of these personal mailings over the last two months.  Longer term we need some way of enabling people to opt-in/out of emails.  Lots to do there.  I&amp;rsquo;m going to try profiling a few more days to see if I can find some sweet spots to ESAD, and if you have suggestions about how I can operate more efficiently I&amp;rsquo;m all ears! :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=OiBuIltBooM"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4rRIwgGasKI"&gt;Solo work on Async Voter&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=-Sn4r03hNL4"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
