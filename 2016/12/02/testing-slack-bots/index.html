@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Testing Slack Bots and Project Metrics</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_12 x2016_12_02 x2016_12_02_testing-slack-bots x2016_12_02_testing-slack-bots_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/12/02/testing-slack-bots/">Testing Slack Bots and Project Metrics</a></h2>
+        <h5 class='date'> 2 Dec 2016</h5>
+    <p>Wednesday saw me firing off a few emails to potential sponsors, which felt like a good start, since landing another sponsor would make all the difference to us over the coming months.  We had our second mob programming session, and I got a preview copy of the new RSpec book, so things were humming along.  What wasn&rsquo;t humming along was invites to Slack.  We still seemed to be having an email every day or two saying that the automated Slack invite was not showing up after a sign up on the main AV site.  Michael and I had put in an email system to supposedly alert us when the Slack invites failed, as they sometimes did when the API key expired.  Those email alerts had only ever triggered for failures on the develop system.  And looking back through the logs it seemed that invites really weren&rsquo;t going out for the last month or so and our fail-safe wasn&rsquo;t even triggering; so frustrating!  The challenge with this kind of issue is that every time someone says they didn&rsquo;t receive the invite, it could be because of a spam filter issue.  </p>
+
+<p>I do get cc&rsquo;d all the welcome emails when people join AV so I can see the flow of people coming in.  I just wish I could get cc&rsquo;d on the Slack invite emails.  I&rsquo;d refreshed the API keys recently.  The Slack invite thing would clearly require another detailed look. Doubly frustrating was the hacked up env settings for test that meant the full Slack invite pathway was not properly tested.  I didn&rsquo;t want to dive into debugging the Slack issue as I was feeling the AsyncVoter project was blocked due to a lack of test harness on the AsyncSlack bot; so I took a temporary measure and grabbed the emails for the most recently signed up 150 AV members and did a bulk invite in Slack.  It told me that at least 80 people had never been invited.  It was gratifying to see the 15 or so new members enter slack over the next 12 hours with several of them mentioning the Ruby Rogues podcast.</p>
+
+<p>Having put in the short term fix I could focus a couple of hours coding on getting a test harness into the AsyncSlackBot.  I refactored the simple unit test from the day before so the naming of the files and methods was more consistent, and started on checking out the BotMock project.  Installing it involved building it locally and copying over a couple of mock files.  Not ideal, and I start to think we could just as quickly build our own mocking system, as we did in the agile-bot project.  The BotMock project is new and not even on npm, and I wonder if we&rsquo;re really gaining much from it.  I stamped out a few controller tests using their approach, which involved coding in ES6 and I had to adjust the callback operations to get working tests like these:</p>
+<pre class="highlight javascript"><code>  <span class="nx">it</span><span class="p">(</span><span class="s1">'should acknowledge vote if users direct messages `vote #`'</span><span class="p">,</span> <span class="p">()</span><span class="o">=&gt;</span><span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="s1">'vote 1'</span>
+    <span class="kd">var</span> <span class="nx">response</span> <span class="o">=</span> <span class="s2">"I received your vote: 1 &lt;@test&gt;"</span>
+    <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">controller</span><span class="p">.</span><span class="nx">usersInput</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="nx">text</span><span class="p">))</span>
+               <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">text</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+                 <span class="nx">expect</span><span class="p">(</span><span class="nx">text</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+               <span class="p">})</span>
+  <span class="p">});</span>
+</code></pre>
+<p>Working with this sort of test had involved pulling the body of the bot out of the server.js file and dropping it into a controller file from which it would be exported.  I was getting critical practice with breaking up my node apps.  Not that it&rsquo;s so hard, but when something is slighltly less familiar it&rsquo;s easy to put off doing it.  I ended up with a pull request that did a bit of testing on each of the canned bot responses, but didn&rsquo;t achieve a full test of the full voting sequence as it was unclear how to check a series of interactions.  The BotMock had some example conversation tests, but they weren&rsquo;t working for me. </p>
+
+<p>This is a good start over the initial spike, but it&rsquo;s frustrating that the high level character of the app can&rsquo;t easily be read from the mocha tests, in the same way that it can be difficult to read them in RSpec.  Both Mocha and RSpec can give verbose test output that provides a nice summary of what&rsquo;s going on like so:</p>
+<pre class="highlight plaintext"><code>  controller tests
+    ✓ should return `help message` if user types `help` (208ms)
+    ✓ should return `hello yourself` if user types `hello` (204ms)
+    ✓ should return vote announcement if user types `start new vote` (202ms)
+    ✓ should acknowledge vote if users direct messages `vote #` (208ms)
+    ✓ should return results if users types `results` (205ms)
+    - should summarise results after a vote
+
+  Bot
+    Controller
+      ✓ should receive message
+
+  summary_text
+    ✓ should format vote text correctly for no votes
+
+
+  7 passing (1s)
+  1 pending
+</code></pre>
+<p>but I personally find it difficult to digest that output.  What I mean is that when I&rsquo;m working on the code, usually with the spec on one half of the screen and the app code on the other half like so:</p>
+
+<p><img alt="code layout" src="https://www.dropbox.com/s/vkcavhglz2kkadq/Screenshot%202016-12-02%2009.59.23.png?dl=1" /></p>
+
+<p>most of the mocha/rspec code is taken up with boilerplate that is specific to the testing framework and not the app itself.  The high level English language description is scattered in comments.  I really do love Cucumber for giving me that description in the editor and not in the separate terminal output.  So perhaps it&rsquo;s time to try out Yada (cucumber nodejs alternative) in this project, but I think I can&rsquo;t get too sucked in to testing frameworks without pushing more functionality to actually help automate me away from tedious admin tasks.  We&rsquo;ll see.</p>
+
+<p>What is exciting is that it seems that if we feed the bot an API token rather than a bot token, we can get the bot to behave as me (as Thomas and I found testing another bot).  So potentially I can augment myself on Slack directly.  Dangerous perhaps; in a test with Arreche I already tripped an infinite loop in a private channel.  Lots of testing required to avoid more mishaps like that :-)  I got the PR in and managed a separate flurry of coding/devops on ProjectScope later in the evening.  The new month meant my Heroku quotas had been reset and so I could get this overview of how the different AV projects were proceeding:</p>
+
+<p><img alt="Project metrics on AV projects" src="https://www.dropbox.com/s/emvw7cujo777itx/Screenshot%202016-12-01%2018.41.42.png?dl=1" /></p>
+
+<p>The graphics are interactive and when you mouse over them you get some explanations and pop-ups of who&rsquo;s got what level of activity in Slack:</p>
+
+<p><img alt="showing who's active in slack" src="https://www.dropbox.com/s/assku0q6ptxhp7r/Screenshot%202016-12-01%2018.52.19.png?dl=1" /></p>
+
+<p>I think this really is the way forward; automation of project management via Slack bot and breaking our monolith into microservices, e.g. metrics on all the projects in one service, manangement of hangouts/events in another service; so that we can grow to more and more projects supported, in following Agile principles to keep them all delivering value to the end users and the individual team members participating in order to level up in the chosen skill sets.  Can we get into that sweet spot where all the effort and automation and reflection results in a great user experience all round without overwhelming the support staff?  Stay tuned to this blog to find out!</p>
+
+<h3>Related Videos</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=X3mWPUN4TC4">&ldquo;Martin Fowler&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=gK96bxINM88">Solo on AsyncVote part 1</a></li>
+<li><a href="https://www.youtube.com/watch?v=XP3lyx0zZZY">&ldquo;Kent Beck&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=RYRugWUmv74">Solo on AsyncVote part 2</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

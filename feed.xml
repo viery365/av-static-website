@@ -5,30 +5,102 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-12-01T00:00:00+00:00</updated>
+  <updated>2016-12-02T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Testing Slack Bots and Project Metrics</title>
+    <link rel="alternate" href="http://blog.url.com/2016/12/02/testing-slack-bots/"/>
+    <id>http://blog.url.com/2016/12/02/testing-slack-bots/</id>
+    <published>2016-12-02T00:00:00+00:00</published>
+    <updated>2016-12-05T18:24:31+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Wednesday saw me firing off a few emails to potential sponsors, which felt like a good start, since landing another sponsor would make all the difference to us over the coming months.  We had our second mob programming session, and I got a preview copy of the new RSpec book, so things were humming along.  What wasn&amp;rsquo;t humming along was invites to Slack.  We still seemed to be having an email every day or two saying that the automated Slack invite was not showing up after a sign up on the main AV site.  Michael and I had put in an email system to supposedly alert us when the Slack invites failed, as they sometimes did when the API key expired.  Those email alerts had only ever triggered for failures on the develop system.  And looking back through the logs it seemed that invites really weren&amp;rsquo;t going out for the last month or so and our fail-safe wasn&amp;rsquo;t even triggering; so frustrating!  The challenge with this kind of issue is that every time someone says they didn&amp;rsquo;t receive the invite, it could be because of a spam filter issue.  &lt;/p&gt;
+
+&lt;p&gt;I do get cc&amp;rsquo;d all the welcome emails when people join AV so I can see the flow of people coming in.  I just wish I could get cc&amp;rsquo;d on the Slack invite emails.  I&amp;rsquo;d refreshed the API keys recently.  The Slack invite thing would clearly require another detailed look. Doubly frustrating was the hacked up env settings for test that meant the full Slack invite pathway was not properly tested.  I didn&amp;rsquo;t want to dive into debugging the Slack issue as I was feeling the AsyncVoter project was blocked due to a lack of test harness on the AsyncSlack bot; so I took a temporary measure and grabbed the emails for the most recently signed up 150 AV members and did a bulk invite in Slack.  It told me that at least 80 people had never been invited.  It was gratifying to see the 15 or so new members enter slack over the next 12 hours with several of them mentioning the Ruby Rogues podcast.&lt;/p&gt;
+
+&lt;p&gt;Having put in the short term fix I could focus a couple of hours coding on getting a test harness into the AsyncSlackBot.  I refactored the simple unit test from the day before so the naming of the files and methods was more consistent, and started on checking out the BotMock project.  Installing it involved building it locally and copying over a couple of mock files.  Not ideal, and I start to think we could just as quickly build our own mocking system, as we did in the agile-bot project.  The BotMock project is new and not even on npm, and I wonder if we&amp;rsquo;re really gaining much from it.  I stamped out a few controller tests using their approach, which involved coding in ES6 and I had to adjust the callback operations to get working tests like these:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;  &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'should acknowledge vote if users direct messages `vote #`'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;self&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'vote 1'&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"I received your vote: 1 &amp;lt;@test&amp;gt;"&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;usersInput&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;text&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+               &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;then&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+                 &lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;text&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;to&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;equal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;response&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+               &lt;span class="p"&gt;})&lt;/span&gt;
+  &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Working with this sort of test had involved pulling the body of the bot out of the server.js file and dropping it into a controller file from which it would be exported.  I was getting critical practice with breaking up my node apps.  Not that it&amp;rsquo;s so hard, but when something is slighltly less familiar it&amp;rsquo;s easy to put off doing it.  I ended up with a pull request that did a bit of testing on each of the canned bot responses, but didn&amp;rsquo;t achieve a full test of the full voting sequence as it was unclear how to check a series of interactions.  The BotMock had some example conversation tests, but they weren&amp;rsquo;t working for me. &lt;/p&gt;
+
+&lt;p&gt;This is a good start over the initial spike, but it&amp;rsquo;s frustrating that the high level character of the app can&amp;rsquo;t easily be read from the mocha tests, in the same way that it can be difficult to read them in RSpec.  Both Mocha and RSpec can give verbose test output that provides a nice summary of what&amp;rsquo;s going on like so:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  controller tests
+    ✓ should return `help message` if user types `help` (208ms)
+    ✓ should return `hello yourself` if user types `hello` (204ms)
+    ✓ should return vote announcement if user types `start new vote` (202ms)
+    ✓ should acknowledge vote if users direct messages `vote #` (208ms)
+    ✓ should return results if users types `results` (205ms)
+    - should summarise results after a vote
+
+  Bot
+    Controller
+      ✓ should receive message
+
+  summary_text
+    ✓ should format vote text correctly for no votes
+
+
+  7 passing (1s)
+  1 pending
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but I personally find it difficult to digest that output.  What I mean is that when I&amp;rsquo;m working on the code, usually with the spec on one half of the screen and the app code on the other half like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="code layout" src="https://www.dropbox.com/s/vkcavhglz2kkadq/Screenshot%202016-12-02%2009.59.23.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;most of the mocha/rspec code is taken up with boilerplate that is specific to the testing framework and not the app itself.  The high level English language description is scattered in comments.  I really do love Cucumber for giving me that description in the editor and not in the separate terminal output.  So perhaps it&amp;rsquo;s time to try out Yada (cucumber nodejs alternative) in this project, but I think I can&amp;rsquo;t get too sucked in to testing frameworks without pushing more functionality to actually help automate me away from tedious admin tasks.  We&amp;rsquo;ll see.&lt;/p&gt;
+
+&lt;p&gt;What is exciting is that it seems that if we feed the bot an API token rather than a bot token, we can get the bot to behave as me (as Thomas and I found testing another bot).  So potentially I can augment myself on Slack directly.  Dangerous perhaps; in a test with Arreche I already tripped an infinite loop in a private channel.  Lots of testing required to avoid more mishaps like that :-)  I got the PR in and managed a separate flurry of coding/devops on ProjectScope later in the evening.  The new month meant my Heroku quotas had been reset and so I could get this overview of how the different AV projects were proceeding:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Project metrics on AV projects" src="https://www.dropbox.com/s/emvw7cujo777itx/Screenshot%202016-12-01%2018.41.42.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The graphics are interactive and when you mouse over them you get some explanations and pop-ups of who&amp;rsquo;s got what level of activity in Slack:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="showing who's active in slack" src="https://www.dropbox.com/s/assku0q6ptxhp7r/Screenshot%202016-12-01%2018.52.19.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I think this really is the way forward; automation of project management via Slack bot and breaking our monolith into microservices, e.g. metrics on all the projects in one service, manangement of hangouts/events in another service; so that we can grow to more and more projects supported, in following Agile principles to keep them all delivering value to the end users and the individual team members participating in order to level up in the chosen skill sets.  Can we get into that sweet spot where all the effort and automation and reflection results in a great user experience all round without overwhelming the support staff?  Stay tuned to this blog to find out!&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=X3mWPUN4TC4"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=gK96bxINM88"&gt;Solo on AsyncVote part 1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=XP3lyx0zZZY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=RYRugWUmv74"&gt;Solo on AsyncVote part 2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Task Switching</title>
     <link rel="alternate" href="http://blog.url.com/2016/12/01/task-switching/"/>
     <id>http://blog.url.com/2016/12/01/task-switching/</id>
     <published>2016-12-01T00:00:00+00:00</published>
-    <updated>2016-12-02T15:20:30+00:00</updated>
+    <updated>2016-12-05T18:24:31+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;Tuesday was a day of much task switching.  It started with putting my office back together after new windows had been put in.  That took a while.  I managed to quickly stamp out a blog on the Agile Project Workshop before the &amp;ldquo;Martin Fowler&amp;rdquo; scrum.  My attempts at changing the flow for blog drafts were getting a little out of hand as the process of squashing and merging between the &lt;code&gt;new_blog_drafts&lt;/code&gt; branch and master seemed to be leaving stray commits that were then making the subsequent new blog draft PRs rather messy.  In frustration I deleted the branch and re-created it this morning.  I think we need to go with Arreche&amp;rsquo;s suggestion of a webhook, and to do that I&amp;rsquo;ll need to move the blog_draft notifications into the new AV Premium Slack instance; or at least some where with spare Slack integration capacity.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Tuesday was a day of much task switching.  It started with putting my office back together after new windows had been put in.  That took a while.  I managed to quickly stamp out a blog on the Agile Project Workshop before the &amp;ldquo;Martin Fowler&amp;rdquo; scrum.  My attempts at changing the flow for blog drafts were getting a little out of hand as the process of squashing and merging between the &lt;code&gt;new_blog_drafts&lt;/code&gt; branch and master seemed to be leaving stray commits that were then making the subsequent new blog draft PRs rather messy.  In frustration I deleted the branch and re-created it.  I think we need to go with Arreche&amp;rsquo;s suggestion of a webhook, and to do that I&amp;rsquo;ll need to move the blog_draft notifications into the new AV Premium Slack instance; or at least some where with spare Slack integration capacity.&lt;/p&gt;
 
 &lt;p&gt;In the scrum I was advising one Premium member about the perils of task switching, or more accurately about the perils of spreading oneself too thin over many projects.  Talk about the pot calling the kettle black! :-)  After the scrum I joined Matt for an hour pairing on WebSiteOne and Redeemify, and I managed to restrain myself from immediately diving in to individual problems and talked to Matt about the bigger picture of trying to make progress with all of AgileVentures and WebsiteOne in particular.  We reviewed the open PRs and board and I unblocked Matt on two issues, and then helped him with another on Redeemify where the presence of a legacy Rails 3 &lt;code&gt;asset&lt;/code&gt; group in the Gemfile was breaking the system on Heroku.&lt;/p&gt;
 
-&lt;p&gt;After lunch I scaffolded a mentoring session for a private company on a paid project.  I used google hangouts to connect up an experienced developer from the US with a London based educational company to get advice on their legacy Rails codebase.  That all seemed to go very well, and more sessions like those could go a long way to making my own financial situation a lot more stable.  We&amp;rsquo;ll see if we can&amp;rsquo;t do a lot more of that; there&amp;rsquo;s the hint of other interesting possibilities.  I had been hoping to bring in some large paid projects for the benefit of a group of AV Premium members, but maybe slivers of small consulting work will ultimately serve the same purpose.&lt;/p&gt;
+&lt;p&gt;After lunch I scaffolded a mentoring session for a private company on a paid project.  I used google hangouts to connect up an experienced developer from the US with a London based educational company, so they could get advice on their legacy Rails codebase.  That all seemed to go reasonably well, and more sessions like those could go a long way to making my own financial situation a lot more stable.  We&amp;rsquo;ll see if we can&amp;rsquo;t do a lot more of that.  I had been hoping to bring in some large paid projects for the benefit of a group of AV Premium members, but maybe slivers of small consulting work will ultimately serve the same purpose.&lt;/p&gt;
 
-&lt;p&gt;While I was monitoring the paid session I was managing Slack and getting my own company&amp;rsquo;s corporation tax paid.  30 minutes on the phone to discover that they aren&amp;rsquo;t sending paper letters with reference ids any more.  I caught up with Thomas and Michael in the &amp;ldquo;Kent Beck&amp;rdquo; scrum, and we talked more about the task switching issue.  Michael called out Thomas and myself as being heavy task switchers, and we clarified that although there was lots of room for us to be more task focused, heavy task switching can be particularly challenging for junior developers.  While there&amp;rsquo;s lots to learn from different code bases, Thomas and I agreed that sticking with one for a couple of weeks to really get to know it well is important for someone just learning the ropes.  Actually I&amp;rsquo;m starting to think that I&amp;rsquo;d really like to have a coding binge on a single project.  I&amp;rsquo;ve started looking at the calender to see when I will get to the one year mark for my blogs.  Blogging every day is great, but I&amp;rsquo;m thinking wistfully about other setups, for example where I do nothing but code for four days and then do blogging and admin on a Friday &amp;hellip;  do my commitments to help people get coordinated on slack prevent me from getting any really focused coding done?&lt;/p&gt;
+&lt;p&gt;While I was monitoring the paid session I was managing Slack and getting my own company&amp;rsquo;s corporation tax paid.  30 minutes on the phone to discover that Her Majesties Revenue &amp;amp; Customs (HMRC) aren&amp;rsquo;t sending paper letters with reference ids any more. Next I caught up with Thomas and Michael in the &amp;ldquo;Kent Beck&amp;rdquo; scrum, and we talked more about the task switching issue.  Michael called out Thomas and myself as being heavy task switchers, and we clarified that although there was lots of room for us to be more task focused, heavy task switching can be particularly challenging for junior developers.  While there&amp;rsquo;s lots to learn from different projects, Thomas and I agreed that sticking with one codebase for a couple of weeks to really get to know it well is important for someone just learning the ropes.  Actually I&amp;rsquo;m starting to think that I&amp;rsquo;d really like to have a coding binge on a single project.  I&amp;rsquo;ve started looking at the calender to see when I will get to the one year mark for my blogs.  Blogging every day is great, but I&amp;rsquo;m thinking wistfully about other setups, for example where I do nothing but code for four days and then do blogging and admin on a Friday &amp;hellip;  I wonder if my commitments to help people get coordinated on Slack prevent me from getting any really focused coding done?&lt;/p&gt;
 
-&lt;p&gt;I believe it was June when I started blogging daily.  Will I keep myself to my committment of doing it every day for a year?  That&amp;rsquo;s another six months &amp;hellip; I&amp;rsquo;m also wondering if I can do a blog that&amp;rsquo;s almost purely code.  Personal time management strategy aside I jumped into a quick session with Michael.  I was totally torn between working on the premium upgrade interface on WSO and the slack bot.  It certainly feels like the async slack bot could be a real engine of activity for many projects.  What I&amp;rsquo;m really hoping is that it can start to partly take over some of the project managment admin roles that I&amp;rsquo;m doing on multiple projects.  I&amp;rsquo;d also love it to take over some of the greeting and orienting admin.  Of course it might all backfire if all the projects get really active and my workload spikes! :-)&lt;/p&gt;
+&lt;p&gt;I believe it was June when I started blogging daily.  Will I keep myself to my committment of doing it every day for a year?  That&amp;rsquo;s another six months &amp;hellip; I&amp;rsquo;m also wondering if I can do a blog that&amp;rsquo;s almost purely code?  Personal time management strategy aside I jumped into a quick session with Michael.  I was totally torn between working on the Premium upgrade interface on WSO and the slack bot.  It certainly feels like the async slack bot could be a real engine of activity for many projects.  What I&amp;rsquo;m really hoping is that it can start to partly take over some of the project managment admin roles that I&amp;rsquo;m doing on various projects.  I&amp;rsquo;d also love it to take over some of the greeting and orienting admin.  Of course it might all backfire if all the projects get really active and my workload spikes! :-)&lt;/p&gt;
 
-&lt;p&gt;We&amp;rsquo;re not measuring quantiatively, but from the slack messages pinging about, I get the sense we have more active projects in AgileVentures now than ever before.  I resolved to try and get some testing code into the async slack bot spike to give us a framework going forward.  This was the repping on node testing setup I&amp;rsquo;d been talking about needing to do for some time.  I followed the mocha docs to produce this test with Michael and Arreche&amp;rsquo;s input:&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;re not measuring quantiatively, but from the Slack messages pinging about, I get the sense we have more active projects now in AgileVentures than ever before.  I resolved to try and get some testing code into the async Slack bot spike to give us a framework going forward.  This was the repping on node testing setup I&amp;rsquo;d been talking about needing to do for some time.  I followed the mocha docs to produce this test with Michael and Arreche&amp;rsquo;s input:&lt;/p&gt;
 &lt;pre class="highlight shell"&gt;&lt;code&gt;var assert &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'assert'&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;;
 var vote_text &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'../src/utils'&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;;
 
@@ -54,7 +126,7 @@ describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Server'&lt;/
   &lt;span class="k"&gt;return &lt;/span&gt;text;
 &lt;span class="o"&gt;}&lt;/span&gt;;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We got a spike of a unit testing setup.  I had to run off to take my sons to football academy and so I didn&amp;rsquo;t get to fix up the awful naming in the above.  Do we really want a &lt;code&gt;utils&lt;/code&gt; file, or should we be creating a &lt;code&gt;vote_text&lt;/code&gt; function in the utils file, or should we be creating objects?  Michael pointed out that as the Slack bot, this code would have a different domain from the RESTful API we had built separately, revolving more around channels and users than votes and stories.  We left it on the note of could we get a good end-to-end acceptance testing framework in there.  My experiences with testing Stripe have soured me a little to sandboxing systems like VCR, and our attempt to use the node equivalent of sepia on the AgileBot project had been met with failure.  I found a &lt;a href="https://github.com/gratifychat/BotMock"&gt;BotMock&lt;/a&gt; framework that would in principle allow us to do to botkit what we had done with the Stripe Ruby mock on WebsiteOne.  BotKit really had been a gorgeous experience in terms of getting the spike of the bot up and running.  What I wanted now most of all was a good way to get the high level user stories of the slack bot defined and driving the code.  At the moment they live implicitly in the spiked code and some Slack interactions.&lt;/p&gt;
+&lt;p&gt;We got a spike of a unit testing setup.  I had to run off to take my sons to football academy and so I didn&amp;rsquo;t get to fix up the awful naming conventions in the above.  Do we really want a &lt;code&gt;utils&lt;/code&gt; file, or should we be creating a &lt;code&gt;vote_text&lt;/code&gt; function in the utils file, or should we be creating objects?  Michael pointed out that as the Slack bot, this code would have a different domain from the RESTful API we had built separately, revolving more around channels and users than votes and stories.  We left it on the note of could we get a good end-to-end acceptance testing framework in there.  My experiences with testing Stripe have soured me a little to sandboxing systems like VCR, and our attempt to use the node equivalent of sepia on the AgileBot project had been met with failure.  I found a &lt;a href="https://github.com/gratifychat/BotMock"&gt;BotMock&lt;/a&gt; framework that would in principle allow us to do to botkit what we had done with the Stripe Ruby mock on WebsiteOne.  BotKit really had been a gorgeous experience in terms of getting the spike of the bot up and running.  What I wanted now most of all was a good way to get the high level user stories of the slack bot defined and driving the code.  At the moment they live implicitly in the spiked code and some Slack interactions.&lt;/p&gt;
 
 &lt;p&gt;The needle we really want to thread is the one that allows us to expose clearly the features that the system supports, so that we don&amp;rsquo;t get all snarled as we add new features and evolve the domain model; and that new developers coming onto the project can easily orient themselves.  What we don&amp;rsquo;t want is to get bogged down in crazy bugs arising from mis-matches between our mental models of the software and testing components.  If we can thread that needle, perhaps we can support many active projects without my brain being levered out of my ears, and possibly enough space for a coding binge without too much task switching.  Now that would be a great Christmas present! :-)&lt;/p&gt;
 
@@ -309,91 +381,6 @@ $ nodejs server.js &amp;amp;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=5rQ-SLPjKVs"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dordkH0qlF0"&gt;AsyncVoter Coding&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=TI3JhhZHmyo"&gt;Kent Beck&amp;quot; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>More Profiling of My Days</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/24/more-profiling/"/>
-    <id>http://blog.url.com/2016/11/24/more-profiling/</id>
-    <published>2016-11-24T00:00:00+00:00</published>
-    <updated>2016-11-28T09:34:24+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So I did a second day of profiling.  The details are as follows:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;09:15 - 10:15 writing blog draft (plus distribution)
-
-10:30 - 11:00 reviewing slack and email - promoting mentors and premiums
-
-11:00 - 11:30 Writing emails to potential sponsors
-
-11:30 - 11:45 Scrum
-
-11:45 - 12:30 WSO hangout with Premium F2F member
-
-12:30 - 12:45 Negotiating with company on potential paid project
-
-12:45 - 13:00 Getting CraftAcademy and PayPal folks into new premium chat instance - notifying Premium Mobs, F2Fs and Pluses about mob programming session
-
-14:15 - 15:15 Fielding questions from Premiums on Slack (got an upgrade to F2F), co-founder 
-
-15:15 - 15:45 PR Review (AsyncVoter, LocalSupport)
-
-15:45 - 16:00 Scrum
-
-16:00 - 17:00 More PRs - fixed AsyncVoter - SHF comments, did AV mailing, updated and posted blog 
-
-18:15 - 18:45 Reviewing ProjectScope PRs
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Reviewing this again with Eliminate, Simplify, Automate, Delegate (ESAD) an early insight was that I could automate the creation of the list or related videos that I drop into the end of each blog.  A tiny saving, but maybe worth it.  Reviewing other elements in turn: Slack and Email - I feel like I really have to do that each day to stay in touch with sponsors, premiums and mentors.  Promoting a new Premium member and a new Premium Mentor involved some manual work on the database, so I created a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1300"&gt;ticket on WSO&lt;/a&gt; to cover the details of what might be automated there.  That looks promising. There&amp;rsquo;s a couple of relatively straightforward coding tasks there, although there is also my desire to refactor the charges controller &amp;hellip; my intuition is that there&amp;rsquo;s a double win for that sort of automation when we do it in a live pairing session.  I think it can help when others see into our codebase, and can serve as a potential learning platform.   Not that thousands of people will ever pour over our videos, but it&amp;rsquo;s a chance for me to pair with other AV members and I think we all get value from that.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m trying to step up writing of emails to potential sponsors after Charles Max Wood of Ruby Rogues talked on the Freelancers show about how that was the critical task that could have the biggest impact that he often didn&amp;rsquo;t get around to.  Don&amp;rsquo;t think I can drop or delegate that yet.  After the scrum I got in a hangout with Matt to unblock him on WebSiteOne.  I burned some time explaining why I don&amp;rsquo;t like the UX of our status feature on WSO.  Maybe that&amp;rsquo;s wasting time, or maybe that&amp;rsquo;s important communication of my values regarding UX design to other team members?  I feel like at least some value was being derived both for WSO and for Matt as we unblocked him and cleared up ambiguity around the latest ticket he was working on.&lt;/p&gt;
-
-&lt;p&gt;Then I was negotiating in Slack with a company about a potential paid project.  Maybe that will come to nothing, but my intuition (which I think Michael and Marouen share) is that a few paid projects would make the whole Premium package so much more attractive to those on the fence about whether to sign up.  Then it was more Slack action getting the CA and Paypal Premiums into the new Premium chat instance.  I&amp;rsquo;d used the Stripe &amp;ldquo;customer&amp;rdquo; list to invite folks, so that had left out those who had not signed up directly through Stripe.  That pushes me to want to improve the domain model in WSO so we can properly represent all the current avenues members use to go Premium, so that I have a clear central place for a coherent list, although thinking about it I can see how I can extract that data from the console &amp;hellip;  Still as the number of Premium users increases (which is a key goal) we&amp;rsquo;ve got to get better at consistently tracking who they are and how they&amp;rsquo;ve come to us.&lt;/p&gt;
-
-&lt;p&gt;I spent a little time notifying Premium Extras (a new term - that&amp;rsquo;s Mob, F2F and Pluses, i.e. everyone eligible for Mob) about the Mob Programming session we&amp;rsquo;ll do later today.  Mob programming sessions feel like they could be an important engine of growth.  After lunch Michael wasn&amp;rsquo;t around again and I dithered about throwing myself into programming tasks versus just catching up on admin and station keeping.  I was fielding questions on Slack for almost an hour.  I could argue that I should have been productively coding with that hour, however one Premium member did upgrade to F2F following our conversation.  I think that&amp;rsquo;s something critical there.  Communicating with those consuming the services you provide is essential.  That doesn&amp;rsquo;t mean doing tech support for everyone on every tier all the time.  However, giving an ear to those who are already committed to support our charity financially and helping them find ways to derive more value &amp;hellip; that feels kind of core.  &lt;/p&gt;
-
-&lt;p&gt;I guess ultimately I need some full time programmers, some full time marketing people, some full time &amp;ldquo;sales&amp;rdquo; people &amp;hellip; :-) Well I hope we can stay small and friendly for some time to come.  After that Slack binge I did get down to some PR review, getting two PRs merged into AsyncVoter and a flurry of comments on LocalSupport PRs.  We had another quick scrum and there was more admin, doing the AV mailing - 7 more 15 minute stabs at that and I&amp;rsquo;ll have emailed everyone in the community and then perhaps I can take a bigger picture look about how we stay in touch people in the long term.  Or am I setting an artificial barrier for myself there?&lt;/p&gt;
-
-&lt;p&gt;I had forgotten to update and post my blog of the previous day, so I hit that and then grabbed some time later in the evening to review ProjectScope PRs for the Berkeley students.  Armando feels the ProjectScope project metric tracking system is going to be critical to managing his course in the future and the part 3 project course for the MOOC.  I was able to give a flurry of comments and agonise about whether I was pushing on the students too hard.  I need to spend some time deploying their branches and experimenting with real project data.&lt;/p&gt;
-
-&lt;p&gt;Also the bot shut down when I closed my computer so we may have lost attempted 3rd votes to the async vote we were trying to run in WSO.  Gotta get that bot deployed permanently.  So anyhow, what could I eliminate:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;posts on PRs that are too long&lt;/li&gt;
-&lt;li&gt;scrums running over time&lt;/li&gt;
-&lt;li&gt;me ranting&lt;/li&gt;
-&lt;li&gt;slow AV mailings&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;what could I simplify:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;PR posts&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;what could I automate:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Blog draft submission&lt;/li&gt;
-&lt;li&gt;Blog draft video lists&lt;/li&gt;
-&lt;li&gt;AV mailing process&lt;/li&gt;
-&lt;li&gt;Premium and Mentor upgrade&lt;/li&gt;
-&lt;li&gt;Tracking of current range of Premiums&lt;/li&gt;
-&lt;li&gt;Hosting of async bot&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;and I don&amp;rsquo;t know what, if anything, I can delegate. Everyone&amp;rsquo;s a volunteer in our organisation, and I don&amp;rsquo;t think I can ask anyone to do anything.  I need to wait for people to ask for interesting things to do.  The most successful thing so far has been a process of making tickets of everything I can think of as important on the relevant repos and occasionally pointing to things when people ask :-)&lt;/p&gt;
-
-&lt;p&gt;Well, I think that&amp;rsquo;s enough profiling for now.  There&amp;rsquo;s some clear possibilities for automations, and I guess rather than agonise about which to do I should just start knocking them off in some order :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://youtu.be/aGjQ5N7nRfQ"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dPJqeBPFluc"&gt;WSO Huddle&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4qn9b8MVbvg"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
