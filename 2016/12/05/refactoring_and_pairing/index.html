@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Refactoring and Pairing</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_12 x2016_12_05 x2016_12_05_refactoring_and_pairing x2016_12_05_refactoring_and_pairing_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/12/05/refactoring_and_pairing/">Refactoring and Pairing</a></h2>
+        <h5 class='date'> 5 Dec 2016</h5>
+    <p>So hot on the heels of our first AV member sponsoring other AV members for Premium support, another Premium member was talking about sponsoring some of their co-workers for Premium membership.  Now this particular Premium member prefers to pay through Paypal, which we had set up previously.  The Paypal endpoint in the AgileVentures site is just a custom button from the Paypal toolkit, on a custom method in the charges controller.  We&rsquo;d just thrown that in, unlinked to the rest of the site, to serve as a quick check that the functionality would work and that the individuals requesting Paypal payment would actually use it.  That purpose was served admirably and was used by two Premium members, so tracer-bullet success.</p>
+
+<p>Now if we wanted to allow more folks to sign up with Paypal, and indeed sponsor other members via Paypal, we had some integration to do.  Not only that, it was clear that the charges controller needed some serious refactoring.  I had originally created the charges controller on a spike, following the instructions in the Stripe documentation for creating a charge on a user credit card.  I&rsquo;d immediately hooked things up to ensure that the user would be paying for a subscription to a plan.  We&rsquo;d wrapped that whole functionality in VCR/PuffingBilly sandbox tests and then evolved that to RubyStripeMock, as well as adding the ability to sponsor others, and change credit card details.  We&rsquo;d also evolved a domain model that started to capture some of our &ldquo;business&rdquo; logic, relating to the different kinds of Subscriptions and PaymentSources that we were supporting.  What we hadn&rsquo;t managed to refactor was the ChargesController itself which was breaking the Rails convention of having controllers manipulate resources of the corresponding name.</p>
+
+<p>Our ChargesController was actually manipulating Subscriptions and CreditCards.  Over the weeks I felt pretty certain we wanted to rename our ChargesController to SubscriptionController, since that was the key resource that most of the controller methods were manipulating.  The CreditCard stuff should ultimately be moved to a different controller and the Paypal endpoint integrated into some RESTful manipulation of Subscription resources.  Michael and I started off driving the change by creating a <code>subscribe_self_to_premium.feature</code> file.  The main cucumber feature file was inappropriately named <code>charge_activity.feature</code>.  Again this was all part of my initial rush to spike out some charge pathway and demonstrate that revenue could be generated.  Having demonstrated that it was clearly time to clean up the name space.  The new feature file took inspiration from the scenarios in the existing <code>charge_activity</code> file and looked like this:</p>
+<pre class="highlight gherkin"><code><span class="kd">Feature</span><span class="p">:</span> Subscribe Self to Premium
+  As a developer
+  So that I can get recurring professsional development support and code review
+  I would like to take out an AV Premium Subscription
+
+  <span class="kn">Scenario</span><span class="p">:</span> Pay by card
+    <span class="nf">Given</span> I visit <span class="s">"subscriptions/new"</span>
+    <span class="nf">And</span> I click <span class="s">"subscribe"</span> within the card_section
+    <span class="nf">When</span> I fill in appropriate card details for premium
+    <span class="nf">Then</span> I should see <span class="s">"Thanks, you're now an AgileVentures Premium Member!"</span>
+    <span class="nf">And</span> the user should receive a <span class="s">"Welcome to AgileVentures Premium"</span> email
+    <span class="nf">And</span> my member page should show premium details
+
+  <span class="kn">Scenario</span><span class="p">:</span> Pay by Paypal
+    <span class="nf">Given</span> I visit <span class="s">"subscriptions/new"</span>
+    <span class="nf">And</span> I click <span class="s">"subscribe"</span> within the paypal_section
+    <span class="nf">Then</span> I should be redirected to Paypal's payment screens
+    <span class="nf">And</span> the user should receive a <span class="s">"Welcome to AgileVentures Premium"</span> email
+    <span class="nf">And</span> my member page should show premium details
+</code></pre>
+<p>These are still a little imperative, but it&rsquo;s generally too challenging to try and fix too many issues at once.  Right here we were trying to get the name space fixed up.  Tweaking Cucumber scenarios to be more declarative could come later.  As it happened, we did already have a paypal feature test:</p>
+<pre class="highlight gherkin"><code><span class="kd">Feature</span><span class="p">:</span> Charge Users Money
+  As a site admin
+  So that users can pay for premium services via paypal
+  I would like to be able to sign them up for a recurring plan via paypal
+
+  <span class="kn">Scenario</span><span class="p">:</span> Sign up for premium membership via paypal
+    <span class="nf">Given</span> I visit <span class="s">"/charges/paypal"</span>
+    <span class="nf">And</span> I should see <span class="s">"Agile Ventures Premium Membership"</span>
+    <span class="nf">Then</span> I should see a paypal form
+</code></pre>
+<p>My hope was that ultimately we&rsquo;d be replacing this feature and the contents of <code>charge_activity.feature</code> with this new file, that had a stronger indication of the high level goal in its name, i.e. Subscribe Self to Premium.  Of course that didn&rsquo;t stop me from agonizing whether the <code>Given I visit &quot;subscriptions/new&quot;</code> step was too high level, or whether writing it to force us to code a new URL endpoint and thus controller was the wrong thing to be doing at that stage.  I do believe strongly that the URLs are part of the end user interface experience for both developers and users.  The counter-argument in my mind was that we should get the cukes green before doing a refactoring, but really this entire activity was a refactoring of both tests and application code to consolidate the two payment methods (that both worked independently) into a single coherent entity.  Perhaps we should have only been refactoring tests and app separately?  </p>
+
+<p>You might also be wondering what happened to the feature to sponsor other members via Paypal.  Discussing it, we&rsquo;d decided that we needed to consolidate the existing functionality first before taking on that more complex task.  Either which way, the missing <code>/subscriptions/new</code> endpoint prompted a refactoring of the ChargesController to SubscriptionsController, which we executed automatically through RubyMine. RubyMine got most of the changes for us, but there was some mopping up to do with additional changes in the Cucumber files, and a few of the views.  Then we got stuck on a regression test failure for a while.  We weren&rsquo;t making any progress on the high level integration of Paypal and Stripe payments:</p>
+<pre class="highlight plaintext"><code>  Scenario: User decides to change card details                                                                     # features/premium/charge_activity.feature:60
+    Given I am logged in as a premium user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234" # features/step_definitions/user_steps.rb:5
+    And I visit "subscriptions/tansaku/edit"                                                                        # features/step_definitions/basic_steps.rb:65
+    And I click "Update Card Details"                                                                               # features/step_definitions/basic_steps.rb:74
+    When I fill in updated card details for premium for user with email "tansaku+stripe@gmail.com"                  # features/step_definitions/charge_steps.rb:18
+    Then I should see "Your card details have been successfully updated"                                            # features/step_definitions/basic_steps.rb:182
+      No route matches [PUT] "/subscriptions.tansaku-rodriguez" (ActionController::RoutingError)
+      features/premium/charge_activity.feature:65:in `Then I should see "Your card details have been successfully updated"'
+
+Failing Scenarios:
+cucumber features/premium/charge_activity.feature:60 # Scenario: User decides to change card details
+</code></pre>
+<p>There was some kind of routing issue.  It was frustrating to be blogged, but also, this is what all these tests are here for.  We&rsquo;d refactored the core controller of the payment framework, and it seemed we&rsquo;d broken the credit card details update in the process.  Without the tests we&rsquo;d have pushed this out to production and not known until a user encountered a problem.  Eventually we tracked the issue down.  It was a pluralization error in one of the views.  Our routes now looked like this:</p>
+<pre class="highlight ruby"><code>  <span class="n">match</span> <span class="s1">'/subscriptions/paypal'</span> <span class="o">=&gt;</span> <span class="s1">'subscriptions#paypal'</span><span class="p">,</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:get</span><span class="p">]</span>
+  <span class="n">match</span> <span class="s1">'/subscriptions/upgrade'</span> <span class="o">=&gt;</span> <span class="s1">'subscriptions#upgrade'</span><span class="p">,</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:put</span><span class="p">]</span>
+  <span class="n">resources</span> <span class="ss">:subscriptions</span>
+</code></pre>
+<p>giving us this set of endpoints:</p>
+<pre class="highlight plaintext"><code>           subscriptions_paypal GET         /subscriptions/paypal(.:format)                             subscriptions#paypal
+          subscriptions_upgrade PUT         /subscriptions/upgrade(.:format)                            subscriptions#upgrade
+                  subscriptions GET         /subscriptions(.:format)                                    subscriptions#index
+                                POST        /subscriptions(.:format)                                    subscriptions#create
+               new_subscription GET         /subscriptions/new(.:format)                                subscriptions#new
+              edit_subscription GET         /subscriptions/:id/edit(.:format)                           subscriptions#edit
+                   subscription GET         /subscriptions/:id(.:format)                                subscriptions#show
+                                PATCH       /subscriptions/:id(.:format)                                subscriptions#update
+                                PUT         /subscriptions/:id(.:format)                                subscriptions#update
+                                DELETE      /subscriptions/:id(.:format)                                subscriptions#destroy
+</code></pre>
+<p>We had both <code>subscription_upgrade</code> and <code>subscriptions_upgrade</code>.  It was frustrating to have been stuck on this issue, but it was also an interesting lesson about how the custom <code>upgrade</code> endpoint was technical debt that we were having to pay off here.  We&rsquo;d thrown in that custom endpoint to enable a member to change their credit card in a hurry, but the presence of the custom endpoint had confused us during a refactoring.  If we&rsquo;d refactored that out earlier to a CardController we probbaly wouldn&rsquo;t have got stuck here.  So overall not a bad object lesson on the value of tests and of refactoring to a clean domain model!</p>
+
+<p>While we were doing all this (and waiting for test suites to run etc.) Michael and I were discussing work on the project in general.  Michael was commenting that he had felt more motivated in the longer running work on LocalSupport.  It sounded like aspects of the &ldquo;drive-by&rdquo; coding style we had been employing recently were frustrating him, i.e. that we were only working on things that could be done in a hour or two.  Also, he said he didn&rsquo;t feel like doing additional work on the project at the weekend as he anticipated I would be too critical of decisions he might make.  This was great feedback for me, as the last thing I want to be doing is de-motivating people to work on the project.  I&rsquo;d like to think of my criticism of design decisions as constructive, but it&rsquo;s a delicate matter.</p>
+
+<p>I guess Michael has sensed my frustration at earlier phases of the WebSiteOne project which seemed to have involved long running large pull requests and the addition of more features than I was comfortable with.  I&rsquo;ve definitely been burnt by this in the past; pushing on people too hard over the approach that I think is right.  It seems sensible to me that we don&rsquo;t just merge in code to a project when concerned over the future maintainability of that code, but then again if our push back is too strong then no one will want to work on the project with us.  Where do we draw the line?  Everyone is going to have a different level of tolerance for criticism, constructive or otherwise.   And we&rsquo;re all going to have variable abilities to detect whether what we are saying is making others uncomfortable or de-motivating them.  Perhaps I&rsquo;m coming from a place of too much tension for the entire AgileVentures undertaking?  In the past it was a part-time fun activity, and I was more relaxed about my future income from HPU or MakersAcademy.  Ironically at that point I was less sensitive about whether others might feel negative about discussion of the pros and cons of code or design.  Now I like to think I&rsquo;ve become more sensitive but the stakes are higher, and I really want to create codebases that will enhance our processes rather than be a burden in future.</p>
+
+<p>Gosh, what a complex thing to try and get right.  I thought managing a VCR/PuffingBilly cache was hard, but getting that inter-personal teamwork balance right &hellip; well that&rsquo;s the real trick, ain&rsquo;t it? &hellip; :-)</p>
+
+<h3>Related Videos</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=OfvuX1rNtu0">&ldquo;Martin Fowler&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=Q36xbc8pUZ4">Pair Programming on WSO</a></li>
+<li><a href="https://www.youtube.com/watch?v=3BVth-ZXJk8">Kent Beck Scrum</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>

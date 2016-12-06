@@ -5,10 +5,104 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-12-02T00:00:00+00:00</updated>
+  <updated>2016-12-05T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Refactoring and Pairing</title>
+    <link rel="alternate" href="http://blog.url.com/2016/12/05/refactoring_and_pairing/"/>
+    <id>http://blog.url.com/2016/12/05/refactoring_and_pairing/</id>
+    <published>2016-12-05T00:00:00+00:00</published>
+    <updated>2016-12-06T10:54:20+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So hot on the heels of our first AV member sponsoring other AV members for Premium support, another Premium member was talking about sponsoring some of their co-workers for Premium membership.  Now this particular Premium member prefers to pay through Paypal, which we had set up previously.  The Paypal endpoint in the AgileVentures site is just a custom button from the Paypal toolkit, on a custom method in the charges controller.  We&amp;rsquo;d just thrown that in, unlinked to the rest of the site, to serve as a quick check that the functionality would work and that the individuals requesting Paypal payment would actually use it.  That purpose was served admirably and was used by two Premium members, so tracer-bullet success.&lt;/p&gt;
+
+&lt;p&gt;Now if we wanted to allow more folks to sign up with Paypal, and indeed sponsor other members via Paypal, we had some integration to do.  Not only that, it was clear that the charges controller needed some serious refactoring.  I had originally created the charges controller on a spike, following the instructions in the Stripe documentation for creating a charge on a user credit card.  I&amp;rsquo;d immediately hooked things up to ensure that the user would be paying for a subscription to a plan.  We&amp;rsquo;d wrapped that whole functionality in VCR/PuffingBilly sandbox tests and then evolved that to RubyStripeMock, as well as adding the ability to sponsor others, and change credit card details.  We&amp;rsquo;d also evolved a domain model that started to capture some of our &amp;ldquo;business&amp;rdquo; logic, relating to the different kinds of Subscriptions and PaymentSources that we were supporting.  What we hadn&amp;rsquo;t managed to refactor was the ChargesController itself which was breaking the Rails convention of having controllers manipulate resources of the corresponding name.&lt;/p&gt;
+
+&lt;p&gt;Our ChargesController was actually manipulating Subscriptions and CreditCards.  Over the weeks I felt pretty certain we wanted to rename our ChargesController to SubscriptionController, since that was the key resource that most of the controller methods were manipulating.  The CreditCard stuff should ultimately be moved to a different controller and the Paypal endpoint integrated into some RESTful manipulation of Subscription resources.  Michael and I started off driving the change by creating a &lt;code&gt;subscribe_self_to_premium.feature&lt;/code&gt; file.  The main cucumber feature file was inappropriately named &lt;code&gt;charge_activity.feature&lt;/code&gt;.  Again this was all part of my initial rush to spike out some charge pathway and demonstrate that revenue could be generated.  Having demonstrated that it was clearly time to clean up the name space.  The new feature file took inspiration from the scenarios in the existing &lt;code&gt;charge_activity&lt;/code&gt; file and looked like this:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Subscribe Self to Premium
+  As a developer
+  So that I can get recurring professsional development support and code review
+  I would like to take out an AV Premium Subscription
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Pay by card
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit &lt;span class="s"&gt;"subscriptions/new"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"subscribe"&lt;/span&gt; within the card_section
+    &lt;span class="nf"&gt;When&lt;/span&gt; I fill in appropriate card details for premium
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Thanks, you're now an AgileVentures Premium Member!"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; the user should receive a &lt;span class="s"&gt;"Welcome to AgileVentures Premium"&lt;/span&gt; email
+    &lt;span class="nf"&gt;And&lt;/span&gt; my member page should show premium details
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Pay by Paypal
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit &lt;span class="s"&gt;"subscriptions/new"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"subscribe"&lt;/span&gt; within the paypal_section
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should be redirected to Paypal's payment screens
+    &lt;span class="nf"&gt;And&lt;/span&gt; the user should receive a &lt;span class="s"&gt;"Welcome to AgileVentures Premium"&lt;/span&gt; email
+    &lt;span class="nf"&gt;And&lt;/span&gt; my member page should show premium details
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;These are still a little imperative, but it&amp;rsquo;s generally too challenging to try and fix too many issues at once.  Right here we were trying to get the name space fixed up.  Tweaking Cucumber scenarios to be more declarative could come later.  As it happened, we did already have a paypal feature test:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Charge Users Money
+  As a site admin
+  So that users can pay for premium services via paypal
+  I would like to be able to sign them up for a recurring plan via paypal
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Sign up for premium membership via paypal
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit &lt;span class="s"&gt;"/charges/paypal"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I should see &lt;span class="s"&gt;"Agile Ventures Premium Membership"&lt;/span&gt;
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see a paypal form
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;My hope was that ultimately we&amp;rsquo;d be replacing this feature and the contents of &lt;code&gt;charge_activity.feature&lt;/code&gt; with this new file, that had a stronger indication of the high level goal in its name, i.e. Subscribe Self to Premium.  Of course that didn&amp;rsquo;t stop me from agonizing whether the &lt;code&gt;Given I visit &amp;quot;subscriptions/new&amp;quot;&lt;/code&gt; step was too high level, or whether writing it to force us to code a new URL endpoint and thus controller was the wrong thing to be doing at that stage.  I do believe strongly that the URLs are part of the end user interface experience for both developers and users.  The counter-argument in my mind was that we should get the cukes green before doing a refactoring, but really this entire activity was a refactoring of both tests and application code to consolidate the two payment methods (that both worked independently) into a single coherent entity.  Perhaps we should have only been refactoring tests and app separately?  &lt;/p&gt;
+
+&lt;p&gt;You might also be wondering what happened to the feature to sponsor other members via Paypal.  Discussing it, we&amp;rsquo;d decided that we needed to consolidate the existing functionality first before taking on that more complex task.  Either which way, the missing &lt;code&gt;/subscriptions/new&lt;/code&gt; endpoint prompted a refactoring of the ChargesController to SubscriptionsController, which we executed automatically through RubyMine. RubyMine got most of the changes for us, but there was some mopping up to do with additional changes in the Cucumber files, and a few of the views.  Then we got stuck on a regression test failure for a while.  We weren&amp;rsquo;t making any progress on the high level integration of Paypal and Stripe payments:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  Scenario: User decides to change card details                                                                     # features/premium/charge_activity.feature:60
+    Given I am logged in as a premium user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234" # features/step_definitions/user_steps.rb:5
+    And I visit "subscriptions/tansaku/edit"                                                                        # features/step_definitions/basic_steps.rb:65
+    And I click "Update Card Details"                                                                               # features/step_definitions/basic_steps.rb:74
+    When I fill in updated card details for premium for user with email "tansaku+stripe@gmail.com"                  # features/step_definitions/charge_steps.rb:18
+    Then I should see "Your card details have been successfully updated"                                            # features/step_definitions/basic_steps.rb:182
+      No route matches [PUT] "/subscriptions.tansaku-rodriguez" (ActionController::RoutingError)
+      features/premium/charge_activity.feature:65:in `Then I should see "Your card details have been successfully updated"'
+
+Failing Scenarios:
+cucumber features/premium/charge_activity.feature:60 # Scenario: User decides to change card details
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There was some kind of routing issue.  It was frustrating to be blogged, but also, this is what all these tests are here for.  We&amp;rsquo;d refactored the core controller of the payment framework, and it seemed we&amp;rsquo;d broken the credit card details update in the process.  Without the tests we&amp;rsquo;d have pushed this out to production and not known until a user encountered a problem.  Eventually we tracked the issue down.  It was a pluralization error in one of the views.  Our routes now looked like this:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;match&lt;/span&gt; &lt;span class="s1"&gt;'/subscriptions/paypal'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'subscriptions#paypal'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:via&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:get&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="n"&gt;match&lt;/span&gt; &lt;span class="s1"&gt;'/subscriptions/upgrade'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'subscriptions#upgrade'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:via&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:put&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="n"&gt;resources&lt;/span&gt; &lt;span class="ss"&gt;:subscriptions&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;giving us this set of endpoints:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;           subscriptions_paypal GET         /subscriptions/paypal(.:format)                             subscriptions#paypal
+          subscriptions_upgrade PUT         /subscriptions/upgrade(.:format)                            subscriptions#upgrade
+                  subscriptions GET         /subscriptions(.:format)                                    subscriptions#index
+                                POST        /subscriptions(.:format)                                    subscriptions#create
+               new_subscription GET         /subscriptions/new(.:format)                                subscriptions#new
+              edit_subscription GET         /subscriptions/:id/edit(.:format)                           subscriptions#edit
+                   subscription GET         /subscriptions/:id(.:format)                                subscriptions#show
+                                PATCH       /subscriptions/:id(.:format)                                subscriptions#update
+                                PUT         /subscriptions/:id(.:format)                                subscriptions#update
+                                DELETE      /subscriptions/:id(.:format)                                subscriptions#destroy
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We had both &lt;code&gt;subscription_upgrade&lt;/code&gt; and &lt;code&gt;subscriptions_upgrade&lt;/code&gt;.  It was frustrating to have been stuck on this issue, but it was also an interesting lesson about how the custom &lt;code&gt;upgrade&lt;/code&gt; endpoint was technical debt that we were having to pay off here.  We&amp;rsquo;d thrown in that custom endpoint to enable a member to change their credit card in a hurry, but the presence of the custom endpoint had confused us during a refactoring.  If we&amp;rsquo;d refactored that out earlier to a CardController we probbaly wouldn&amp;rsquo;t have got stuck here.  So overall not a bad object lesson on the value of tests and of refactoring to a clean domain model!&lt;/p&gt;
+
+&lt;p&gt;While we were doing all this (and waiting for test suites to run etc.) Michael and I were discussing work on the project in general.  Michael was commenting that he had felt more motivated in the longer running work on LocalSupport.  It sounded like aspects of the &amp;ldquo;drive-by&amp;rdquo; coding style we had been employing recently were frustrating him, i.e. that we were only working on things that could be done in a hour or two.  Also, he said he didn&amp;rsquo;t feel like doing additional work on the project at the weekend as he anticipated I would be too critical of decisions he might make.  This was great feedback for me, as the last thing I want to be doing is de-motivating people to work on the project.  I&amp;rsquo;d like to think of my criticism of design decisions as constructive, but it&amp;rsquo;s a delicate matter.&lt;/p&gt;
+
+&lt;p&gt;I guess Michael has sensed my frustration at earlier phases of the WebSiteOne project which seemed to have involved long running large pull requests and the addition of more features than I was comfortable with.  I&amp;rsquo;ve definitely been burnt by this in the past; pushing on people too hard over the approach that I think is right.  It seems sensible to me that we don&amp;rsquo;t just merge in code to a project when concerned over the future maintainability of that code, but then again if our push back is too strong then no one will want to work on the project with us.  Where do we draw the line?  Everyone is going to have a different level of tolerance for criticism, constructive or otherwise.   And we&amp;rsquo;re all going to have variable abilities to detect whether what we are saying is making others uncomfortable or de-motivating them.  Perhaps I&amp;rsquo;m coming from a place of too much tension for the entire AgileVentures undertaking?  In the past it was a part-time fun activity, and I was more relaxed about my future income from HPU or MakersAcademy.  Ironically at that point I was less sensitive about whether others might feel negative about discussion of the pros and cons of code or design.  Now I like to think I&amp;rsquo;ve become more sensitive but the stakes are higher, and I really want to create codebases that will enhance our processes rather than be a burden in future.&lt;/p&gt;
+
+&lt;p&gt;Gosh, what a complex thing to try and get right.  I thought managing a VCR/PuffingBilly cache was hard, but getting that inter-personal teamwork balance right &amp;hellip; well that&amp;rsquo;s the real trick, ain&amp;rsquo;t it? &amp;hellip; :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=OfvuX1rNtu0"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Q36xbc8pUZ4"&gt;Pair Programming on WSO&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=3BVth-ZXJk8"&gt;Kent Beck Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Testing Slack Bots and Project Metrics</title>
     <link rel="alternate" href="http://blog.url.com/2016/12/02/testing-slack-bots/"/>
@@ -322,65 +416,6 @@ $ nodejs server.js &amp;amp;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=w6iiaACBfWk"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dV0zpULNXHQ"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Mob Programming</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/25/mob-programming/"/>
-    <id>http://blog.url.com/2016/11/25/mob-programming/</id>
-    <published>2016-11-25T00:00:00+00:00</published>
-    <updated>2016-11-30T11:37:19+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;We ran our first AV Premium Mob Programming session looking at code from the book &amp;ldquo;Confident Ruby&amp;rdquo; by Avdi Grimm.  We created a Cloud9 workspace and gave everyone access to the enviroment.   We had four Premium members join the hangout, and I introduced some of the concepts from &amp;ldquo;Confident Ruby&amp;rdquo; before playing with some of the code samples.  All the members in the hangout had read and write access to the Cloud9 workspace, but on this first occasion I did most of the typing.  Most of the members had Avdi&amp;rsquo;s book or had been listening to the Ruby Book Club podcasts that cover it, but it was the first time mob programming for all of them, and hopefully we&amp;rsquo;ll get them doing more typing in future sessions.&lt;/p&gt;
-
-&lt;p&gt;We focused on Avdi&amp;rsquo;s &amp;ldquo;Use built-in conversion protocols&amp;rdquo; &lt;em&gt;Collecting Input&lt;/em&gt; pattern with chats about the use of Structs in Ruby, monkey patching (duck punching), duck typing and whether the implicit and explicit conversion operators (e.g. &lt;code&gt;to_int&lt;/code&gt; vs &lt;code&gt;to_i&lt;/code&gt;) should be more actively documented in the Ruby core classes.  I also touched on the concept of &amp;ldquo;Power Level&amp;rdquo; in response to the question of when to use Structs vs using Classes.  In my experience Structs are an often over-looked aspect of Ruby that allow a developer to create a data structure that has less power than a full blown class.  In parallel with the security guideline that you should only ever provide the minimum level of access necessary to get a job done, there&amp;rsquo;s a similar argument to say that you should only ever use the minimally flexible data structure or entity in order to acheive a given task.&lt;/p&gt;
-
-&lt;p&gt;Flexibility sounds great, but it actually equates with complexity.  More powerful entities can do more things, and they are more complex to interact with as a result.  I often write out a simplified power sequence for Ruby as follows from low power to high power:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;nil&lt;/li&gt;
-&lt;li&gt;boolean ( true/false )&lt;/li&gt;
-&lt;li&gt;integer&lt;/li&gt;
-&lt;li&gt;float&lt;/li&gt;
-&lt;li&gt;string&lt;/li&gt;
-&lt;li&gt;array&lt;/li&gt;
-&lt;li&gt;struct&lt;/li&gt;
-&lt;li&gt;hash&lt;/li&gt;
-&lt;li&gt;class&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This is a massive over simplification as the functionality of each of these entities varies along many different dimensions.  However in general we should prefer to use, say, a boolean (true/false) to represent something that has two possible values (e.g. receive email updates preference), rather than using a String to store the values &amp;ldquo;true&amp;rdquo; and &amp;ldquo;false&amp;rdquo;.  The Struct in Avdi&amp;rsquo;s example looks like this:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Place&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Struct&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:index&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:prize&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Place&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"first"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"Peasant's Quest game"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;second&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Place&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"second"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"Limozeen Album"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;third&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Place&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"third"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"Butter-da"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;although he could have used hashes:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;index: &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;name: &lt;/span&gt;&lt;span class="s2"&gt;"first"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;prize: &lt;/span&gt;&lt;span class="s2"&gt;"Peasant's Quest game"&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="n"&gt;second&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;index: &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;name: &lt;/span&gt;&lt;span class="s2"&gt;"second"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;prize: &lt;/span&gt;&lt;span class="s2"&gt;"Limozeen Album"&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="n"&gt;third&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;index: &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;name: &lt;/span&gt;&lt;span class="s2"&gt;"third"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;prize: &lt;/span&gt;&lt;span class="s2"&gt;"Butter-da"&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The hash is more flexible. We can add arbitrary additional key/value pairs to the individual hash objects, e.g.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:amount&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That flexibility is extra power, that maybe we don&amp;rsquo;t need at this stage.  You can argue we might need it later, but the hashes are also rather unDRY in that the key names have to be repeated over and over, and if we need an &lt;code&gt;:amount&lt;/code&gt; key we can add it to the Struct, which is arguably DRYer than the long form hashes.  The Struct also provides us a nicer syntax for accessing its key/value contents:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;index&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There are pros and cons to both approaches.  DRYing out the keys into the Struct means that we have increased the dependency between the three entities, so that if we add an &lt;code&gt;:amount&lt;/code&gt; to the Struct, all the instances of the Struct will also sprout an &lt;code&gt;:amount&lt;/code&gt; key.  Maybe we want that and maybe we don&amp;rsquo;t; it all depends on the domain model and the behaviours we are trying to support.  Ruby Structs and Hashes differ in various ways, and the real challenge when choosing one over the other is getting the right match, from the various features of Struct and Hash, to the problem we are trying to solve.  It&amp;rsquo;s also sensible to avoid agonising and choose whatever seems simplest to start with and then change to more powerful or complex entities as the required behaviour starts to generate pain points in the code.&lt;/p&gt;
-
-&lt;p&gt;The feedback from the mob session was positive, and we had great suggestions for more group problem solving in the future to get everyone&amp;rsquo;s fingers dirty with the code.  It was a good day, and after lunch I started knocking off the automation tasks identified from the previous couple of days profiling.  I started by pushing the slack bot code onto &lt;code&gt;drie push&lt;/code&gt; where remarkably the bot stayed live, and so I ran some votes.  Michael joined me in a hangout as I updated the static website so that blog images would have a max-width of 700px (to save me re-sizing), and then worked on WebSiteOne to have members&amp;rsquo; titles update when they upgrade to Premium.  That was a nice set of three things to automate small tasks that are leaching away at my time.&lt;/p&gt;
-
-&lt;p&gt;Going forward I hope to keep iterating on automating away simple tasks so I can have more time for interacting with Premium members in Mob, F2F and Plus programming sessions!&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=5rQ-SLPjKVs"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dordkH0qlF0"&gt;AsyncVoter Coding&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=TI3JhhZHmyo"&gt;Kent Beck&amp;quot; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
