@@ -5,16 +5,76 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-12-05T00:00:00+00:00</updated>
+  <updated>2016-12-06T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Speed Coding and Blogging</title>
+    <link rel="alternate" href="http://blog.url.com/2016/12/06/speed-coding-blogging/"/>
+    <id>http://blog.url.com/2016/12/06/speed-coding-blogging/</id>
+    <published>2016-12-06T00:00:00+00:00</published>
+    <updated>2016-12-07T10:34:31+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Monday was the usual fight against torpor, but did get an hour&amp;rsquo;s pairing in with Michael on WSO where Michael drove a finish to putting the Paypal payment button on the same page as the Stripe credit card payment.  Before he started on that I got him to pull out the refactoring of the ChargesController to SubscriptionController into a separate pull request.  In the background I had half an eye on the builds of that which were failing due to some regressions on changes to cucumber steps.  We pared down the feature for putting the Paypal element front and center to:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="nt"&gt;@stripe_javascript&lt;/span&gt; &lt;span class="nt"&gt;@javascript&lt;/span&gt;
+&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Subscribe Self to Premium
+  As a developer
+  So that I can get recurring professsional development support and code review
+  I would like to take out an AV Premium Subscription
+
+  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nf"&gt;Given&lt;/span&gt; the following plans exist
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Premium&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;premium&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt;
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Pay by card
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit &lt;span class="s"&gt;"subscriptions/new"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"Subscribe"&lt;/span&gt; within the card_section
+    &lt;span class="nf"&gt;When&lt;/span&gt; I fill in appropriate card details for premium
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Thanks, you're now an AgileVentures Premium Member!"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; the user should receive a &lt;span class="s"&gt;"Welcome to AgileVentures Premium"&lt;/span&gt; email
+    &lt;span class="c"&gt;# And my member page should show premium details # TODO IMPORTANT - require login?&lt;/span&gt;
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Pay by Paypal
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit &lt;span class="s"&gt;"subscriptions/new"&lt;/span&gt;
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see a paypal form within the paypal_section
+    &lt;span class="c"&gt;# And the user should receive a "Welcome to AgileVentures Premium" email&lt;/span&gt;
+    &lt;span class="c"&gt;# And my member page should show premium details # TODO IMPORTANT - will need hookup&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Leaving in a few comments pointing at important future work.  Feel a bit messy about that - would it be better to be pointing to tickets as part of the bigger premium epic there?  Over lunch I left Michael pairing with Matt who&amp;rsquo;d been observing our pairing session.  They were looking at the feature on preventing tweets of dud videos that Sasha had left, and rather than get involved in a complex refactoring I suggested that the way forward was a new branch that wrapped the existing Twitter functionality in acceptance tests.  &amp;ldquo;Characterisation tests&amp;rdquo; of legacy code as Michael reminded us.  We&amp;rsquo;ll see if all this breaking out of smaller PRs bites us with merge conflicts or makes review easier.  Raoul&amp;rsquo;s been really busy recently so we might have to look at our PR review and deploy process to take account.&lt;/p&gt;
+
+&lt;p&gt;After lunch I solo&amp;rsquo;d to add a sad path to the refactoring of the Premium branch that we&amp;rsquo;d identified since one missing part of the refactoring wasn&amp;rsquo;t caught by the tests.  I got that green and then started on tweaking the CSS for the Premium payment page now that it included both Paypal and Stripe buttons.  Working with the CSS was frustrating, as our controller specific stylesheets don&amp;rsquo;t load automatically on WSO, and even though I identified the code in the layout that would, turning that on produced &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1445"&gt;weird breakages throughout the cucumber tests&lt;/a&gt;.  There&amp;rsquo;s definitely something a little strange going on with the layout - which I think is also affecting performance on my local machine when running in develop mode.  Could this be affecting performance on the main system?  Perhaps a review of our layouts is in order.&lt;/p&gt;
+
+&lt;p&gt;I hacked out a reasonable solution pulling in the controller specific stylesheet directly in the view:&lt;/p&gt;
+&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= stylesheet_link_tag params[:controller], 'data-turbolinks-track' =&amp;gt; true  %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and found that the bootstrap &lt;code&gt;well&lt;/code&gt; class produced the sort of effect I wanted:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="payment buttons" src="https://www.dropbox.com/s/eelk7vro2owibuv/Screenshot%202016-12-06%2009.40.56.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The missing piece going forward is getting the Paypal payment to hit a webhook and update our WSO backend when payment completes.  From the Paypal documentation this looks not too hard.  It makes me think that there might have been a simpler way to get set up with Stripe buttons.  Do we actually have to hit Stripe&amp;rsquo;s server from our server to sign someone up to a subscription?  Could there be a pure button equivalent?  Although all the docs I&amp;rsquo;m looking at suggest that you still have to explicitly create the customer with a server side call.  Anyhow, further Paypal integration is the priority if we are going to support Paypal based sponsoring of other members.&lt;/p&gt;
+
+&lt;p&gt;Tinkering with the CSS all burnt a lot of time and I reflected that I&amp;rsquo;m behind on sending out emails to AV members, pushing older blogs to medium and social media, and there are a lot of Premium pull requests to review, let alone project management for LocalSupport, AsyncVoter and making sure we are delivering to are commitments to Sponsors.  Short of making more time in the day I think I have to limit the time I spend writing the daily blog to a tight 20 minutes.  People keep telling me I&amp;rsquo;m too verbose generally so perhaps that will be an improvement :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://youtu.be/KqT5XWirMRg"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=y7bHXz0kCQA"&gt;Pairing on WSO&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=EOlcarJgn8s"&gt;Soloing on WSO&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=RQc_9isrGJY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Refactoring and Pairing</title>
     <link rel="alternate" href="http://blog.url.com/2016/12/05/refactoring_and_pairing/"/>
     <id>http://blog.url.com/2016/12/05/refactoring_and_pairing/</id>
     <published>2016-12-05T00:00:00+00:00</published>
-    <updated>2016-12-06T10:54:20+00:00</updated>
+    <updated>2016-12-07T10:34:31+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -377,45 +437,6 @@ $ nodejs server.js &amp;amp;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://youtu.be/WWesZmC_BRU"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=AmREoIUHw4c"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Fighting to Make a Difference</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/28/local-charities/"/>
-    <id>http://blog.url.com/2016/11/28/local-charities/</id>
-    <published>2016-11-28T00:00:00+00:00</published>
-    <updated>2016-11-30T11:47:12+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Friday was full of meetings.  I started off heading down to the &lt;a href="https://www.harrowcn.org.uk/organisations/carramea-community-resource"&gt;Carramea Community Resource Center&lt;/a&gt; (formerly the Consortium of Anti-Racist Refugee and Minority-Ethnic Associations). Carramea has been operating in South Harrow for over 12 years, and provides affordable office solutions for small charities and voluntary groups; as well as IT and Language classes.  I&amp;rsquo;d met the head honcho Tony O&amp;#39;Hara at local WoodCraft and other charity events, and that morning Rachel from Voluntary Action Harrow Cooperative was running a training session to show some of the staff how to work with Harrow Community Network (HCN), Do-It and SurveyMonkey.&lt;/p&gt;
-
-&lt;p&gt;I was there to observe and took notes as Rachel guided three staff through the mechanisms to update directory information in HCN, and to post volunteer opportunities.  Tony dropped in and out as he covered the reception desk while the training session was underway.  Rachel then went on to show how to post opportunities on Do-It and give pro-tips.  Carramea already had an opportunity up on Do-It (for volunteer receptionists) and it was already showing in our system, having been pulled in automatically from the Do-It database.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Carramea volunteer opportunity on HCN" src="https://www.dropbox.com/s/aa2o2g87b23z98p/Screenshot%202016-11-28%2009.42.00.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;We may have been projecting, but it seemed clear that there was not much incentive for the Carramea staff to add volunteer opportunities directly through our interface unless it would also post them to Do-It.  And even then, it would probably take a superlative user experience, and posting to other sites such as TeamLondon and ReachSkills in order for it to be worth their while.  This sort of system does seem to be Rachel&amp;rsquo;s vision for Harrow Community Network going forward.  No one wants to be entering the same information over and over, and if we can create a seamless experience that allows posting to multiple volunteer sites we really might start to see usage of the HCN site go up.&lt;/p&gt;
-
-&lt;p&gt;As Rachel went on to train the staff on SurveyMonkey one of the main things that seemed to be causing a drag was password management, and at the end when asked, I suggested that perhaps 1password or LastPass might be something that the Carramea might like to try internally.   It had been great to see a local charity being shown the HCN site.  As a training session we didn&amp;rsquo;t get to see usability problems that might come up when the staff use it independently, but that pushes me to get better at monitoring and interpreting the site usage.&lt;/p&gt;
-
-&lt;p&gt;Then I dashed back to my home office to get the days blog up, try out a new process of editing blogs directly on GitHub and do pull requests from a branch to auto notify the #blog_drafts channel, then lunch and a Premium Plus pairing on P vs NP and classic problems like Travelling Salesman, Knapsack and 3-SAT.  I must dig out the paper I wrote on 3-Sat &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;There wasn&amp;rsquo;t much chance to reflect though, I was immediately off to another local charity event.  Rachel had suggested I come along to the Youth First event, an initiative being funded by Harrow Council through the &lt;a href="https://youngharrowfoundation.org"&gt;Young Harrow Foundation&lt;/a&gt;, which seems to center around creating a platform for Youth services, resources and opportunities in Harrow.  In particular an app which young people could use on their phones to find out about activities and resources local to them in the hope that this would help those who might otherwise fall in with gangs or fall out of the system due to challenges such as mental health problems.  I got there early and did a quick on-location &amp;ldquo;Kent Beck Scrum&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;At the event itself there were moving speeches by a former gang member, and another youth who&amp;rsquo;d faced mental health challenges, about the paths they&amp;rsquo;d ended up taking and how they&amp;rsquo;d turned things around.  There was enthusiastic applause for both, and I was particularly struck by the former gang member who&amp;rsquo;d turned to crime to get money to pay for things like going to football training.  I&amp;rsquo;m coach of an under eight soccer team, and it makes me think about ways in which we can make things more affordable for disadvantaged youths and their families.  I also met Lynne who works with former gang members and told me there are free football sessions being run in Harrow, so there&amp;rsquo;s definitely room for connecting young people with the resources available to them.&lt;/p&gt;
-
-&lt;p&gt;There was concern voiced at the event about the longevity of the project.  Apparently a well-intentioned website had previously tried to do something similar in the past, but had fallen by the wayside.  We heard that the council had already selected an IT firm to deliver on the project for the next five years, but I worry that this will go the way of similar large projects where the feedback from the community and end-users do not reach the developers.  Or does not reach them quickly enough to have an impact.  Clearly disadvantaged youths are not going to always have cellphones, but care-worker and other support folks will, and in round table discussions we talked about how just having that information to hand could be very useful.  At the same time it&amp;rsquo;s another dangerous &amp;ldquo;technology to the rescue&amp;rdquo; setup.  Another member of the round table pointed out that even with the information about what&amp;rsquo;s available locally there&amp;rsquo;s actually getting individuals to the take the step towards attending events, and reaching out for support.&lt;/p&gt;
-
-&lt;p&gt;Similarly it occurred to me on the way home that part of the challenge is the increasing population in Harrow, with many single family occupancy houses being turned into bedsits for 5 or 6, and the building of low-rise flats in almost every available free space.  Harrow might seem to be a privileged borough in North West London, but it&amp;rsquo;s not without its problems.  The Youth Offer event was taking place the day after a &lt;a href="http://www.standard.co.uk/news/crime/student-stabbed-outside-south-harrow-tube-station-loses-fight-for-life-a3403541.html"&gt;19 year old died&lt;/a&gt; from an apparently unprovoked knife attack outside South Harrow tube station, just down the road from the Carremea offices.&lt;/p&gt;
-
-&lt;p&gt;It was a packed day, but great to see the connection between our work and members of the community.  The difficulty with being charity and non-profit focused is that money is scarce, and everything&amp;rsquo;s being run on a shoestring.  And let&amp;rsquo;s not fool ourselves that we&amp;rsquo;ll have a positive impact by throwing technology at the problem; let&amp;rsquo;s keep everything on the table and try to have an impact first and foremost and worry about which tools and technology we use second.  That said these are projects that you can really put your heart and soul into, because they are fighting to make a positive difference in people&amp;rsquo;s lives, not just fighting to make a buck.  If you believe there&amp;rsquo;s more to life than money then come join us and put your heart and soul into projects that can make a difference worth fighting for.&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=w6iiaACBfWk"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dV0zpULNXHQ"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
