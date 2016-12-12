@@ -31,8 +31,9 @@
     <link href="/images/favicon.ico" rel="icon" type="image/ico" />
 
 </head>
-<body class="blog blog_page blog_page_7 blog_page_7_index">
-    <!-- Navigation -->
+<body class="x2016 x2016_12 x2016_12_07 x2016_12_07_meetings-vs-coding x2016_12_07_meetings-vs-coding_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -73,58 +74,63 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/12/07/meetings-vs-coding/"></a></h2>
+        <h5 class='date'> 7 Dec 2016</h5>
+    <p>Tuesday suddenly sprouted a couple of meetings.  Well, the WikiEDU meeting had been planned from the week before, and gave WikiEDU developer Sage Ross the chance to tell AV about the WikiEDU project, which helps instructors set editing Wikipedia articles as assignments in class.  Sage heard about AgileVentures on RubyRogues and liked the idea and is bringing the open source non-profit project to AgileVentures.  WikiEDU is a Rails/React app that was developed by an agency and now needs maintainenance and also the development of new features.  See the full meeting in the <a href="https://www.youtube.com/watch?v=nfsWSIXbHRc">video of that session</a>.</p>
 
-          <p>Page 7 of 8</p>
+<p>The meeting with sponsor, drie, to review where we were with deploying to drie push came up more suddenly, but was definitely half an hour well spent as we got more of the desired workflow and endpoints for migrating the LocalSupport project ironed out.</p>
+<pre class="highlight plaintext"><code>https://www.harrowcn.org.uk --&gt; drie instance (production)
+https://staging.harrowcn.org.uk --&gt; drie instance (staging)
+https://develop.harrowcn.org.uk --&gt; drie instance (develop)
+</code></pre>
+<p>There wasn&rsquo;t much time left in the day for coding.  Matt, Michael and I got in a hangout that Matt started to look at the new characterization test for the legacy Twitter functionality on WebsiteOne.  Matt had issues with the hangout (YouTube not hooked up) that meant that it wasn&rsquo;t recorded - we&rsquo;ll need to debug that.  We got VCR sandboxing the test with a new Twitter developer account for Matt. The cuke for the current functionality looks like this:</p>
+<pre class="highlight gherkin"><code><span class="nt">@vcr</span>
+<span class="kd">Feature</span><span class="p">:</span> Tweeting Live Events
+  As a site admin
+  In order to increase participation in events
+  I would like live events to generate twitter notifications
 
-            <p><a href="/blog/page/6/">Previous page</a></p>
+  <span class="kn">Background</span><span class="p">:</span>
+    <span class="err">Given following events exist</span><span class="p">:</span>
+      <span class="p">|</span> <span class="nv">name</span>       <span class="p">|</span> <span class="nv">description</span>             <span class="p">|</span> <span class="nv">category</span>        <span class="p">|</span> <span class="nv">start_datetime</span>          <span class="p">|</span> <span class="nv">duration</span> <span class="p">|</span> <span class="nv">repeats</span> <span class="p">|</span> <span class="nv">time_zone</span> <span class="p">|</span> <span class="nv">project</span> <span class="p">|</span> <span class="nv">repeats_weekly_each_days_of_the_week_mask</span> <span class="p">|</span> <span class="nv">repeats_every_n_weeks</span> <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Scrum</span>      <span class="p">|</span> <span class="n">Daily</span> <span class="n">scrum</span> <span class="n">meeting</span>     <span class="p">|</span> <span class="n">Scrum</span>           <span class="p">|</span> <span class="n">2014/02/03</span> <span class="n">07:00:00</span> <span class="n">UTC</span> <span class="p">|</span> <span class="n">150</span>      <span class="p">|</span> <span class="n">never</span>   <span class="p">|</span> <span class="n">UTC</span>       <span class="p">|</span>         <span class="p">|</span> <span class="n">And</span> <span class="n">an</span> <span class="n">event</span> <span class="n">"Scrum"</span>                      <span class="p">|</span>                       <span class="p">|</span>
+    <span class="nf">And</span> an event <span class="s">"Scrum"</span>
 
-          <h2><a href="/2016/09/14/production-staging-similarity/">Production and Staging Similarity</a></h2>
-          <h3>Sep 14</h3>
-          <p>So Michael and I finished up an important piece of work on the <a href="https://github.com/AgileVentures/agile-bot">AgileBot</a> yesterday.  At least we completed something we had started working on a while ago, which was getting the AgileBot legacy code wrapped in tests, and refactoring the config out of...</p>
-          <h2><a href="/2016/09/13/eye-on-the-ball/">Eye on the Ball</a></h2>
-          <h3>Sep 13</h3>
-          <p>My last few days have been taken up a lot with transferring data between iPhones.  This has been precipitated by the gradually faltering abilities of my 2 year old iPhone 5S:  Trickle charge not working, normal charging intermittent except with specific...</p>
-          <h2><a href="/2016/09/12/people-are-strange-i-mean-me/">People Are Strange, I Mean Me</a></h2>
-          <h3>Sep 12</h3>
-          <p>Okay, so I feel like a bit of a social klutz.  Often there are ideas that seem really important and well-formed in my head, and then I say them and it comes out as a mess.  Also, I think I’m not so good about reading the mood-music of the social group...</p>
-          <h2><a href="/2016/09/09/patience/">Patience</a></h2>
-          <h3>Sep  9</h3>
-          <p>Following on from yesterday’s <a href="http://nonprofits.agileventures.org/2016/09/08/where-to-change/">post</a> on working with the node stack in AgileBot, Michael had overnight addressed two of my concerns.  He’d upgraded from jasmine-node to jasmine-npm, which was allowing our tests to fail in the correct way, i.e. not with...</p>
-          <h2><a href="/2016/09/08/where-to-change/">Where to Change?</a></h2>
-          <h3>Sep  8</h3>
-          <p>Trying to improve the test harness on the agile-bot yesterday was rather frustrating.  AgileBot is written in CoffeeScript and runs in the Hubot framework, which runs in Node.  It was originally spiked with no tests as a way of providing a service...</p>
-          <h2><a href="/2016/09/06/eliminate-automate-delegate/">Eliminate, Automate, Delegate</a></h2>
-          <h3>Sep  6</h3>
-          <p><a href="https://devchat.tv/ruby-rogues">Ruby Rogues</a> is a stream of interesting ideas.  One I heard recently was a mention of the importance of “Eliminate, Automate, Delegate”.  Everything you’re doing, check does it need to be done? Could it be done automatically, or could you get someone...</p>
-          <h2><a href="/2016/09/02/more-sandboxing/">More Sandboxing</a></h2>
-          <h3>Sep  2</h3>
-          <p>So, following up on yesterday’s <a href="http://nonprofits.agileventures.org/2016/09/01/how-much-sandboxing/">post on sandboxing</a> acceptance tests of Stripe’s credit card functionality in Rails, Michael and I did another pairing session.  In a couple of hours we had the tests passing, and the basic card update functionality in...</p>
-          <h2><a href="/2016/09/01/how-much-sandboxing/">How Much Sandboxing?</a></h2>
-          <h3>Sep  1</h3>
-          <p>Michael and I were pairing on a new feature for the AgileVentures Stripe integration.  As the number of premium members paying recurring subscriptions via credit card is increasing we come to issues such as wanting to edit credit card details.  Stripe...</p>
-          <h2><a href="/2016/08/31/new-projects/">New Projects</a></h2>
-          <h3>Aug 31</h3>
-          <p>Yesterday Chris Manna joined us at the AgileVentures “Kent Beck” scrum.  Chris apparently found out about us from Columbia business school.  Thanks Columbia business school!  Chris has a charity project idea to help prison inmates through an education...</p>
-          <h2><a href="/2016/08/30/speeding-up-page-loading/">Speeding Up Page Loading</a></h2>
-          <h3>Aug 30</h3>
-          <p>Having got back from break Michael and I paired on improving the performance on the AgileVentures’ user page.  Performance on the user page, also referred to as the members page, or volunteer directory, had been deteriorating for a while as it was...</p>
+  <span class="kn">Scenario</span><span class="p">:</span> Event going live causes tweet of hangout link to be sent
+    <span class="nf">When</span> the HangoutConnection has pinged to indicate the event start, an appropriate tweet will be sent
 
-            <p><a href="/blog/page/8/">Next page</a></p>
+  <span class="kn">Scenario</span><span class="p">:</span> Event stream going live causes tweet of the youtube stream to be sent
+    <span class="nf">Given</span> that the HangoutConnection has pinged to indicate the event start
+    <span class="nf">And</span> youtube stream has gone live
+    <span class="nf">Then</span> an appropriate tweet has been sent <span class="c"># e.g. see live stream</span>
+</code></pre>
+<p>And we uncovered various corner sad cases, such as when the tweet is too long.  I&rsquo;m still desperate to de-couple the cukes from the steps that use the same factory girl elements as RSpec, but one thing at a time.  Michael and I took a stab at making progress on LocalSupport, but the drie https was flaking out and we didn&rsquo;t make much progress.  After the dust from all the meetings settled we did spend a chunk on AsyncVoter trying to move the tests to a point where we could support simultaneous voting in multiple channels.  It was short and we didn&rsquo;t introduce any new functionality, but we saw how Arreche had laid out an example Yada (Cucumber) test for us to play with, and we worked out how to use BotMock to check for messages in multiple channels.  I think I&rsquo;ve convinced myself to stick with BotMock, particularly how Arreche has it loading through npm.  It&rsquo;s so interesting to see the parallel evolution of the same functionality in the npm and bundle stacks.</p>
 
+<p>We were still left with could we get all the botmock stuff working with Yada, but I had to take my kids out to their evening&rsquo;s activity.  I managed to review the ProjectScope pull requests while they played and looked back on a day in which I&rsquo;d kept my blogging to 20 minutes, managed to get out an AV emailing, push an old blog to social media and get a few things done.  I&rsquo;ve got a stopwatch running to keep this blog time under 20 minutes!  And I&rsquo;m going to see if I can&rsquo;t get Zapier to automate pinging Slack for me.  Another meeting today with a potential sponsor.  I&rsquo;d rather be coding, but seems these meeting things are important to bring the money in &hellip;</p>
+
+<h3>Related Videos:</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=xROu2SNKXmM">&ldquo;Martin Fowler&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=DxuOMwiv2p4">LocalSupport devops</a></li>
+<li><a href="https://www.youtube.com/watch?v=nfsWSIXbHRc">edu.wiki.dashboard project kickoff</a></li>
+<li><a href="https://www.youtube.com/watch?v=VL0ZO1uLZuo">&ldquo;Kent Beck&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=w02Ey4Z8xvA">Pairing on AsyncVoter</a></li>
+</ul>
+
+        <h2 class='author'>by </h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -183,5 +189,6 @@
     </div>
     </section>
 </footer>
+
 </body>
 </html>
