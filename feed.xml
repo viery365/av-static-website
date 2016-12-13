@@ -5,16 +5,197 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-12-07T00:00:00+00:00</updated>
+  <updated>2016-12-09T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Making Progress (for the Greater Good)</title>
+    <link rel="alternate" href="http://blog.url.com/2016/12/09/making-progress/"/>
+    <id>http://blog.url.com/2016/12/09/making-progress/</id>
+    <published>2016-12-09T00:00:00+00:00</published>
+    <updated>2016-12-13T21:44:33+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So I went over time for yesterday&amp;rsquo;s blogging.  I&amp;rsquo;d tried to cap it at 20 minutes, but I got into a fair bit of detail about the options for testing/mocking the Twitter API before getting on to the meat of the matter I was trying to focus on; Agile DevOps.  I guess there are two kinds of blogs, those with a succinct focus on a particular topic and those that are a mixed bag.  The process of profiling my days in blogs recently have probably tipped me more towards the latter, with the blog being a reflection of all the things I did on the previous day.  I&amp;rsquo;m acutely aware that the length, lack of focus, lack of images and high code content probably make my blogs less readable for many.  I am writing these things partly for others to read, but also partly just to get my thoughts straight, and stop them from being lost in an ever dissappearing slack history.&lt;/p&gt;
+
+&lt;p&gt;Maybe writing one really focused blog a week would have more impact in terms of creating content that drew people into AgileVentures, that got across key concepts about Agile Development and Software Engineering.  However I&amp;rsquo;m also testing myself.  Can I document my process every day for a year?  Are people&amp;rsquo;s diaries not meant for publication?  I committed to doing a year of this and I like to keep my commitments.  Maybe after that year I&amp;rsquo;ll switch to doing one blog a week, still writing every morning and revising the following day, but doing at least five revisions where I delete stuff and increase focus. Let&amp;rsquo;s see.&lt;/p&gt;
+
+&lt;p&gt;Despite running over on the previous day&amp;rsquo;s blog, I got a fair bit of admin work done, although it was clear that the Zapier automation wasn&amp;rsquo;t working as expected.  The attempt to get it to post as non-bot had failed, so I&amp;rsquo;ve set it up for a simpler bot post today, although it&amp;rsquo;s clear that it can&amp;rsquo;t easily post the link to the precise blog file - the closest it can get to that is the pull request URL.  I&amp;rsquo;m also not sure how much I&amp;rsquo;ll get charged &amp;hellip; It&amp;rsquo;s just one thing in my list of &amp;ldquo;automate to create time&amp;rdquo; that I generated from profiling my days a week or so back:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[ ] Automation
+
+&lt;ul&gt;
+&lt;li&gt;[ ] try to fix up lower 3rd thing &amp;ndash;&amp;gt; no response from github repo post &amp;hellip;&lt;/li&gt;
+&lt;li&gt;[ ] automate more of blogging TRYing Zapier&lt;/li&gt;
+&lt;li&gt;[ ] automate greeters&lt;/li&gt;
+&lt;li&gt;[ ] automate project management (slackbot)&lt;/li&gt;
+&lt;li&gt;[ ] automate twitter connections&lt;/li&gt;
+&lt;li&gt;[x] automatically resize blog images for fixed width&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There&amp;rsquo;s a lot outstanding.  At least the css image settings in the blog meant I wasn&amp;rsquo;t having to resize images I put in the blog.  Getting my hangout lower third banner fixed seems like we&amp;rsquo;d have to create our own hangout tool box and release it as a hangout plugin, assuming we can even get some working source code.  That doesn&amp;rsquo;t seems appealing since we&amp;rsquo;re unclear about the future of Google&amp;rsquo;s support for hangout plugins.   That said, sponsors keep commenting positively on my lower third banner when I have it on the hangouts, and I kind of feel naked without it :-)&lt;/p&gt;
+
+&lt;p&gt;The Slack is hotting up and there are lots of people to greet, so need to automate that.  At the moment I&amp;rsquo;m just doing in snatches of time between other things. Most of the day was taken up with pull request reviews and our third premium mob programming session.  We&amp;rsquo;re getting deeper into Avdi Grimm&amp;rsquo;s Confident Ruby and the Premium Mob members are starting to get more confident about typing out code in the shared C9 space, although it&amp;rsquo;s still early days.  I&amp;rsquo;ve assigned &amp;ldquo;homeworks&amp;rdquo; for each member to develop their own domain models that use techniques from the sessions.&lt;/p&gt;
+
+&lt;p&gt;We had pull requests from several premium members on LocalSupport and WebSiteOne, as well as from some MOOC students.  Off the back of the &amp;ldquo;Martin Fowler&amp;rdquo; scrum we reviewed a pull request relating to search engine optimization (SEO).  It seemed a little convoluted and we fixed it up with the Rails &lt;code&gt;prepend_before_action&lt;/code&gt; method, and then the PR author jumped in to a later LocalSupport session that Michael and I ran to review the other PRs.  That was a great example of AgileVentures working as I imagined.  The MOOC student hadn&amp;rsquo;t been in the original scrum, but had seen our comments on the PR and I&amp;rsquo;d posted a link to the video of the scrum.  I don&amp;rsquo;t know if they had watched it, but they saw the LocalSupport pairing session link ping into the #localsupport channel when I started that, and we were able to have a nice connect up and resolve some other outstanding issues on the pull request.  If I&amp;rsquo;d just started a private session with Michael, or if our AgileBot hadn&amp;rsquo;t worked the student would not have so easily been able to drop in to chat.&lt;/p&gt;
+
+&lt;p&gt;This makes me think we really want to get the slack channel settings on the AgileBot sorted so that every project channel gets notifications of appropriate pairing sessions.  Michael and I discussed that in an overview session on WebSiteOne, and we could automate most of the thing with calls to the slack API to get project managers to select their project channel from a dropdown when setting up a project, or just ensure that the project slugs on WSO exactly matched the channel names on Slack.  That&amp;rsquo;d be another epic and I deemed further PayPal integration to be the thing we should focus on first.  All the project support goes into the free tier, and while we want project managers and teams to have the best support possible, I&amp;rsquo;m going to be no use to them next year if I can&amp;rsquo;t get us on a stable financial footing.&lt;/p&gt;
+
+&lt;p&gt;Before we&amp;rsquo;d got on to WSO, Michael and I had spent some time bashing out a refactoring of another PR that was addressing complexity issues flagged by Code Climate on LocalSupport.  We maybe spent too much time wrestling out the code together, but I was pretty pleased with the solution we came up with.  We worked out that the complexity was due to a combination of nested and non-nested routes in the Volunteer Opportunities controller:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;resources&lt;/span&gt; &lt;span class="ss"&gt;:volunteer_ops&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:only&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:index&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:edit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:show&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:update&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:destroy&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s1"&gt;'search'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;on: :collection&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="n"&gt;resources&lt;/span&gt; &lt;span class="ss"&gt;:organisations&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;resources&lt;/span&gt; &lt;span class="ss"&gt;:volunteer_ops&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:only&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:new&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:create&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This had lead to code like this:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  def org_owner?
+    if params[:organisation_id].present? &amp;amp;&amp;amp; current_user_has_organisation?
+      current_user.organisation.friendly_id == params[:organisation_id]
+    elsif current_user_has_organisation?
+      current_user.organisation == VolunteerOp.find(params[:id]).organisation
+    end
+  end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now I know that maybe we should be using the pundit or cancan gems to manage roles and persmissions, but we staying focused on the refactoring. The proposed alternate had ended up creating overlap between two &lt;code&gt;before_action&lt;/code&gt;s, which we unravelled with a set of method names that tried to connect up with the reasons for the split:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;org_owner?&lt;/span&gt;
+    &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;can_edit?&lt;/span&gt; &lt;span class="n"&gt;org_independent_of_route&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;org_independent_of_route&lt;/span&gt;
+    &lt;span class="n"&gt;organisation_set_for_nested_route?&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;organisation_for_simple_route&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;organisation_set_for_nested_route?&lt;/span&gt;
+    &lt;span class="vi"&gt;@organisation&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;organisation_for_simple_route&lt;/span&gt;
+    &lt;span class="no"&gt;VolunteerOp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nf"&gt;organisation&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;organisation_for_nested_route&lt;/span&gt;
+    &lt;span class="no"&gt;Organisation&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;friendly&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:organisation_id&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;set_organisation&lt;/span&gt;
+    &lt;span class="vi"&gt;@organisation&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_organisation_for_nested_route&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;At least the next folks in might have a fighting chance of seeing the relation to the routes up front.  Although maybe they&amp;rsquo;ll tear their hair out in the multiple steps of redirection in the code.  Probably the better thing in the long term will be to unwind the routes.  We could remove the nesting if we insisted that all the other controller methods moved into the nesting (i.e. :edit, :show, :update, :destroy), but that would be a bigger refactoring for another time.&lt;/p&gt;
+
+&lt;p&gt;Anar who&amp;rsquo;d been working on this PR dropped in to our planning session and was able to participate in a manual vote on the further paypal integration, and in the background I used the Async slack bot to run three other votes in sequence in LocalSupport, WebsiteOne and AsyncVoter itself.  Gotta get multi-channel parallel voting enabled!  But again that&amp;rsquo;s free tier &amp;hellip; hmm although maybe we should be offering extras like that as part of premium project support plans?&lt;/p&gt;
+
+&lt;p&gt;In summary&amp;ndash;if there can be a summary for a mixed bag blog like this&amp;ndash;it feels like there&amp;rsquo;s progress. The whole concept of Premium members paying for priority code reviews on pull requests is that there&amp;rsquo;s huge learning value from that process, and the quicker you get the PR review the more valuable it potentially is.  Also, our mentors&amp;rsquo; time is a limited resource.  Probably the individual features and bug-fixes could be delivered faster if our most experienced mentors just worked on the code themselves rather than reviewing submissions from less experienced developers.  However the hope, or the gamble, is that the slow-down on delivery can be compensated for by the Premium payments that allow the whole enterprise to sustain itself, and that the projects move forward and deliver value through the process.  Also that once people are paying/sponsoring/donating to something, that they become more invested in it, and we can ride the win-win cyle up to a scale where more and more people are compensated for their time, and they are all working on worthwhile projects for the greater good!&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=PjpUk3fBBDs"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=-PeG-5Egd2E"&gt;Pull Request Reviews on LocalSupport&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=m4uOCp6ZfyE"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=kpk5yNiQox8"&gt;WebsiteOne project planning&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Agile Dev Ops</title>
+    <link rel="alternate" href="http://blog.url.com/2016/12/08/agile-dev-ops/"/>
+    <id>http://blog.url.com/2016/12/08/agile-dev-ops/</id>
+    <published>2016-12-08T00:00:00+00:00</published>
+    <updated>2016-12-13T21:35:51+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So my project manager partner for WebsiteOne Raoul has got really busy recently, so we negotiated that I would take on some of the PR merging and release responsibility this week.  After the usual blogging and admin and &amp;ldquo;Martin Fowler&amp;rdquo; scrum I jumped into a hangout with Matt and Michael, and tried to use the opportunity to debug the YouTube hookup problems Matt had been having the day before.  This time Matt was getting a new error that he couldn&amp;rsquo;t even start a Hangout On Air, so we couldn&amp;rsquo;t get far.  Burned 20 minutes on that, although it&amp;rsquo;s a fairly common issue our users have, and if we could fix it then we could get more video broadcasts and streaming of other pairing sessions.  Then again I don&amp;rsquo;t know that our YouTube activity is driving much traffic to our site; it doesn&amp;rsquo;t register in Google analytics.  Although people might just be typing in searches direct for &amp;ldquo;AgileVentures&amp;rdquo;, but I&amp;rsquo;ve yet to hear anyone say &amp;ldquo;Oh, I saw your pairing video on YouTube and wanted to get involved&amp;rdquo;.  The viewing figures on our videos are spiking (the pair programming session I started with Matt and Michael has 333 views today, 5 thumbs up AND 5 thumbs down!).  However, even anecdotally the Ruby Rogues podcast has generated more traffic than all our YouTube activity combined.  Still the YouTube recordings are at least partly for the benefit of the existing community, to allow them to refer back to previous pairing sessions.&lt;/p&gt;
+
+&lt;p&gt;Alot of the WebsiteOne infrastructure is set up around supporting Google Hangouts and YouTube streams.  Matt and Michael had got in a Work in Progress pull request that added a characterisation test to the tweeting of YouTube links that was missing an acceptance test.  This was related to trying to fix a long standing issue that our system tweets video links even when the videos are missing.  We&amp;rsquo;d previously backed off the bigger fix to ensure the current functionality was described in an acceptance test.  I needed to get on to WSO devops and needed to give Matt and Michael feedback without jumping in and trying to fix lots of things.  At least that was my strategy as I reviewed their code.  They had filtered the sensitive Twitter tokens from the VCR cache, which was great, but I had two concerns with the new acceptance test below:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="nt"&gt;@vcr&lt;/span&gt;
+&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Tweeting Live Events
+  As a site admin
+  In order to increase participation in events
+  I would like live events to generate twitter notifications
+
+  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="err"&gt;Given following events exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt;             &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;category&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;start_datetime&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;duration&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;time_zone&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;project&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats_weekly_each_days_of_the_week_mask&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats_every_n_weeks&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Daily&lt;/span&gt; &lt;span class="n"&gt;scrum&lt;/span&gt; &lt;span class="n"&gt;meeting&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;           &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014/02/03&lt;/span&gt; &lt;span class="n"&gt;07:00:00&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;150&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;never&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;And&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="n"&gt;"Scrum"&lt;/span&gt;                      &lt;span class="p"&gt;|&lt;/span&gt;                       &lt;span class="p"&gt;|&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; an event &lt;span class="s"&gt;"Scrum"&lt;/span&gt;
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Event going live causes tweets of hangout link and youtube link to be sent
+    &lt;span class="nf"&gt;When&lt;/span&gt; the HangoutConnection has pinged to indicate the event start, appropriate tweets will be sent
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;One was that we had all the work being done in a single Cucumber step, which was also bound quite tightly to the underlying implementation:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^the HangoutConnection has pinged to indicate the event start, appropriate tweets will be sent$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;yt_tweet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"Alejandro just hosted an online #scrum Missed it? Catch the recording at youtu.be/11 #CodeForGood #opensource"&lt;/span&gt;
+  &lt;span class="n"&gt;hangout_tweet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"#Scrum meeting with our #distributedteam is live on http://hangout.test Join in and learn about our #opensource #projects!"&lt;/span&gt;
+   &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;TwitterService&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;twitter_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:update&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hangout_tweet&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_call_original&lt;/span&gt;
+  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;TwitterService&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;twitter_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:update&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;yt_tweet&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_call_original&lt;/span&gt;
+
+  &lt;span class="n"&gt;participants&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"0"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"hangout2750757B_ephemeral.id.google.com^a85dcb4670"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"hasMicrophone"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"hasCamera"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"hasAppEnabled"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"isBroadcaster"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"isInBroadcast"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"displayIndex"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"0"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"person"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"108533475599002820142"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"displayName"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"Alejandro Babio"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"image"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"url"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="s2"&gt;"na"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="s2"&gt;"locale"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"en"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"na"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
+  &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="s1"&gt;'ORIGIN'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'a-hangout-opensocial.googleusercontent.com'&lt;/span&gt;
+  &lt;span class="n"&gt;put&lt;/span&gt; &lt;span class="s2"&gt;"/hangouts/@google_id"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;title: &lt;/span&gt;&lt;span class="vi"&gt;@event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;host_id: &lt;/span&gt;&lt;span class="s1"&gt;'3'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;event_id: &lt;/span&gt;&lt;span class="vi"&gt;@event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                               &lt;span class="ss"&gt;participants: &lt;/span&gt;&lt;span class="n"&gt;participants&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;hangout_url: &lt;/span&gt;&lt;span class="s1"&gt;'http://hangout.test'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                               &lt;span class="ss"&gt;hoa_status: &lt;/span&gt;&lt;span class="s1"&gt;'live'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;project_id: &lt;/span&gt;&lt;span class="s1"&gt;'1'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;category: &lt;/span&gt;&lt;span class="s1"&gt;'Scrum'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                               &lt;span class="ss"&gt;yt_video_id: &lt;/span&gt;&lt;span class="s1"&gt;'11'&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The challenge we had here was that we wanted to check the Tweets were sent, but that we were locking our acceptance test to the specific implementation of our TwitterService object.  A reasonable compromise for the time being perhaps, but could we use an RSpec spy on TwitterService to allow us to break the step into two and into a readable order?  Or was there some way to assert that the VCR cache had been hit in the appropriate fashion?  Both, things that could be investigated immediately.  I almost had the Rails console out, but pulled myself back, suggested to Matt and Michael that they just clean up some stray steps and scenarios and get this PR in.  We didn&amp;rsquo;t have unlimited time right now to look for a perfect test.  Some test was better than no test, which was the state we had been in before.&lt;/p&gt;
+
+&lt;p&gt;Matt and Michael went off to another hangout and I got on with WSO devops.  I had been hoping to review the waffle board (project management) but only got so far as reviewing all the outstanding PRs.  I merged in the Premium controller refactoring PR that Michael and I had worked on, and checked that on the develop server - all good.  I looked to see what was in the hopper for deploying to production, and it wasn&amp;rsquo;t so much, so I decided to try and pull in the new PayPal integration as well.  I fell foul of merge conflicts and clobberings that I had anticipated when we broke out the separate PR for the refacotoring.  Frustrating, although I think I only burned an additional 30 minutes there.   Not sure if that was time well spent.&lt;/p&gt;
+
+&lt;p&gt;I was making a mess on my local system, but the CI was passing, and it looked like we were ready to go, but then the controller specific stylesheets that I had been struggling with the day before were not working on production.  It seemed like they were not playing well with the asset pipeline.  All I was trying to do was to isolate the style for centering and add margin to the payment option wells.  Without they looked like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/3juob156frv89te/Screenshot%202016-12-08%2010.09.19.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;With they looked like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/o2tgyq1df0bls9y/Screenshot%202016-12-08%2010.09.57.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;d spent an hour struggling to get that to work the previous day.  What should I do?  Just push out what we had?  Burn time fixing them up? I tried to recreate the issue locally by running the local server in production mode, fighting through the nest of environment variables that production needed to run: &lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;SECRET_KEY_BASE=asdfggfhdgs SECRET_TOKEN=12342ewwefdsaf AIRBRAKE_API_KEY=asdffgfhdgsf AIRBRAKE_PROJECT_ID=2342 be rails s -e production
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but even then the local stylesheets wouldn&amp;rsquo;t load at all.  I&amp;rsquo;d spent 20 minutes and couldn&amp;rsquo;t replicate the bug locally.  In frustration I shiv&amp;rsquo;d in the necessary styles, because I anticipated the debug cycle checking for fixes in production mode on the develop server would be prohibitive:&lt;/p&gt;
+&lt;pre class="highlight html"&gt;&lt;code&gt;  &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"card_section"&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"col-lg-5 well"&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"margin: 10px; text-align: center;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450--&amp;gt;&lt;/span&gt;
+
+    &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"margin-bottom: 15px;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Get Premium via Credit/Debit Card:&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= form_tag subscriptions_path(plan: 'premium') do %&amp;gt;
+        &lt;span class="nt"&gt;&amp;lt;script &lt;/span&gt;&lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"https://checkout.stripe.com/checkout.js"&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"stripe-button"&lt;/span&gt;
+                &lt;span class="na"&gt;data-key=&lt;/span&gt;&lt;span class="s"&gt;"&amp;lt;%= Rails.configuration.stripe[:publishable_key] %&amp;gt;"&lt;/span&gt;
+                &lt;span class="na"&gt;data-description=&lt;/span&gt;&lt;span class="s"&gt;"A month's subscription"&lt;/span&gt;
+                &lt;span class="na"&gt;data-amount=&lt;/span&gt;&lt;span class="s"&gt;"1000"&lt;/span&gt;
+                &lt;span class="na"&gt;data-currency=&lt;/span&gt;&lt;span class="s"&gt;"GBP"&lt;/span&gt;
+                &lt;span class="na"&gt;data-locale=&lt;/span&gt;&lt;span class="s"&gt;"en-US"&lt;/span&gt;
+                &lt;span class="na"&gt;data-name=&lt;/span&gt;&lt;span class="s"&gt;"Premium Membership"&lt;/span&gt;
+                &lt;span class="na"&gt;data-label=&lt;/span&gt;&lt;span class="s"&gt;"Subscribe"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
+
+  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;At least I linked the ticket in to the comment, and hope we can circle back to fix that properly, although what it really inspires me to do is move the whole system to a static middleman app where we take a fresh start on the styling.  I pushed on.  There were still some &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1451"&gt;problems on staging&lt;/a&gt; that I think are related to the data there, and brittleness in parts of the app.  That needs fixing, since it interferes with our ability to do manual checks on staging; but I pushed on and was ultimately rewarded with the newly styled PayPal endpoint on production, and I hurredly fixed up all the static pages to ensure that they pointed to the new &amp;lsquo;subscriptions&amp;rsquo; endpoint.&lt;/p&gt;
+
+&lt;p&gt;Agile DevOps?  I&amp;rsquo;d managed to negotiate a handover from my project-manager pair and get the first part of a bigger epic of PayPal integration out onto production.  I&amp;rsquo;d had to make several compromises along the way, but at least I&amp;rsquo;d flagged them with tickets, and thought I&amp;rsquo;d got a good insight into some of the problems facing us.  I still wonder if we really have performance issues?  The site feels sluggish, but perhaps the 150% memory error warnings from Heroku are just part of their sales strategy.  I am leaning towards an alternate approach where we have a middleman site for the main system, and things like events and projects can be pulled in via JavaScript of separate RESTful API endpoints.  This would mean that heavy load in one part of the site would not affect simple loading of about pages, and also allow the back ends of the different elements of the site to be compartmentalized and chopped and changed as necessary.  It would be a big change, but we&amp;rsquo;re already creating the individual microservices - let&amp;rsquo;s see how we go.  If we can move to the real model I think we really will have done Agile DevOps!&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dxImOJLvadE"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=VK9qIJwXG1g"&gt;Pair Programming and DevOps on WSO&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=uQErOajwgt4"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Meetings vs Coding</title>
     <link rel="alternate" href="http://blog.url.com/2016/12/07/meetings-vs-coding/"/>
     <id>http://blog.url.com/2016/12/07/meetings-vs-coding/</id>
     <published>2016-12-07T00:00:00+00:00</published>
-    <updated>2016-12-12T21:18:14+00:00</updated>
+    <updated>2016-12-12T21:19:00+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -284,165 +465,6 @@ cucumber features/premium/charge_activity.feature:60 # Scenario: User decides to
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=gK96bxINM88"&gt;Solo on AsyncVote part 1&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=XP3lyx0zZZY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=RYRugWUmv74"&gt;Solo on AsyncVote part 2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Task Switching</title>
-    <link rel="alternate" href="http://blog.url.com/2016/12/01/task-switching/"/>
-    <id>http://blog.url.com/2016/12/01/task-switching/</id>
-    <published>2016-12-01T00:00:00+00:00</published>
-    <updated>2016-12-12T21:03:33+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Tuesday was a day of much task switching.  It started with putting my office back together after new windows had been put in.  That took a while.  I managed to quickly stamp out a blog on the Agile Project Workshop before the &amp;ldquo;Martin Fowler&amp;rdquo; scrum.  My attempts at changing the flow for blog drafts were getting a little out of hand as the process of squashing and merging between the &lt;code&gt;new_blog_drafts&lt;/code&gt; branch and master seemed to be leaving stray commits that were then making the subsequent new blog draft PRs rather messy.  In frustration I deleted the branch and re-created it.  I think we need to go with Arreche&amp;rsquo;s suggestion of a webhook, and to do that I&amp;rsquo;ll need to move the blog_draft notifications into the new AV Premium Slack instance; or at least some where with spare Slack integration capacity.&lt;/p&gt;
-
-&lt;p&gt;In the scrum I was advising one Premium member about the perils of task switching, or more accurately about the perils of spreading oneself too thin over many projects.  Talk about the pot calling the kettle black! :-)  After the scrum I joined Matt for an hour pairing on WebSiteOne and Redeemify, and I managed to restrain myself from immediately diving in to individual problems and talked to Matt about the bigger picture of trying to make progress with all of AgileVentures and WebsiteOne in particular.  We reviewed the open PRs and board and I unblocked Matt on two issues, and then helped him with another on Redeemify where the presence of a legacy Rails 3 &lt;code&gt;asset&lt;/code&gt; group in the Gemfile was breaking the system on Heroku.&lt;/p&gt;
-
-&lt;p&gt;After lunch I scaffolded a mentoring session for a private company on a paid project.  I used google hangouts to connect up an experienced developer from the US with a London based educational company, so they could get advice on their legacy Rails codebase.  That all seemed to go reasonably well, and more sessions like those could go a long way to making my own financial situation a lot more stable.  We&amp;rsquo;ll see if we can&amp;rsquo;t do a lot more of that.  I had been hoping to bring in some large paid projects for the benefit of a group of AV Premium members, but maybe slivers of small consulting work will ultimately serve the same purpose.&lt;/p&gt;
-
-&lt;p&gt;While I was monitoring the paid session I was managing Slack and getting my own company&amp;rsquo;s corporation tax paid.  30 minutes on the phone to discover that Her Majesties Revenue &amp;amp; Customs (HMRC) aren&amp;rsquo;t sending paper letters with reference ids any more. Next I caught up with Thomas and Michael in the &amp;ldquo;Kent Beck&amp;rdquo; scrum, and we talked more about the task switching issue.  Michael called out Thomas and myself as being heavy task switchers, and we clarified that although there was lots of room for us to be more task focused, heavy task switching can be particularly challenging for junior developers.  While there&amp;rsquo;s lots to learn from different projects, Thomas and I agreed that sticking with one codebase for a couple of weeks to really get to know it well is important for someone just learning the ropes.  Actually I&amp;rsquo;m starting to think that I&amp;rsquo;d really like to have a coding binge on a single project.  I&amp;rsquo;ve started looking at the calender to see when I will get to the one year mark for my blogs.  Blogging every day is great, but I&amp;rsquo;m thinking wistfully about other setups, for example where I do nothing but code for four days and then do blogging and admin on a Friday &amp;hellip;  I wonder if my commitments to help people get coordinated on Slack prevent me from getting any really focused coding done?&lt;/p&gt;
-
-&lt;p&gt;I believe it was June when I started blogging daily.  Will I keep myself to my committment of doing it every day for a year?  That&amp;rsquo;s another six months &amp;hellip; I&amp;rsquo;m also wondering if I can do a blog that&amp;rsquo;s almost purely code?  Personal time management strategy aside I jumped into a quick session with Michael.  I was totally torn between working on the Premium upgrade interface on WSO and the slack bot.  It certainly feels like the async slack bot could be a real engine of activity for many projects.  What I&amp;rsquo;m really hoping is that it can start to partly take over some of the project managment admin roles that I&amp;rsquo;m doing on various projects.  I&amp;rsquo;d also love it to take over some of the greeting and orienting admin.  Of course it might all backfire if all the projects get really active and my workload spikes! :-)&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;re not measuring quantiatively, but from the Slack messages pinging about, I get the sense we have more active projects now in AgileVentures than ever before.  I resolved to try and get some testing code into the async Slack bot spike to give us a framework going forward.  This was the repping on node testing setup I&amp;rsquo;d been talking about needing to do for some time.  I followed the mocha docs to produce this test with Michael and Arreche&amp;rsquo;s input:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;var assert &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'assert'&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;;
-var vote_text &lt;span class="o"&gt;=&lt;/span&gt; require&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'../src/utils'&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;;
-
-describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Server'&lt;/span&gt;, &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
-  describe&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'vote_text'&lt;/span&gt;, &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
-    it&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'should format vote text correctly for no votes'&lt;/span&gt;, &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(){&lt;/span&gt;
-      assert.equal&lt;span class="o"&gt;(&lt;/span&gt;vote_text&lt;span class="o"&gt;([])&lt;/span&gt;, &lt;span class="s1"&gt;'0 vote so far []'&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
-    &lt;span class="o"&gt;})&lt;/span&gt;;
-  &lt;span class="o"&gt;})&lt;/span&gt;;
-&lt;span class="o"&gt;})&lt;/span&gt;;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;here&amp;rsquo;s the contents of the utils file under test&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;module.exports &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;votes&lt;span class="o"&gt;){&lt;/span&gt;
-  var text &lt;span class="o"&gt;=&lt;/span&gt; votes.length +&lt;span class="s1"&gt;' vote'&lt;/span&gt;;
-  &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;votes.length &amp;gt; 1&lt;span class="o"&gt;){&lt;/span&gt;
-    text +&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'s'&lt;/span&gt;;
-  &lt;span class="o"&gt;}&lt;/span&gt;
-  text +&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;' so far ['&lt;/span&gt;
-  votes.forEach&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;vote&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-     text +&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;@'&lt;/span&gt; + vote.user + &lt;span class="s1"&gt;'&amp;gt; '&lt;/span&gt;;
-  &lt;span class="o"&gt;})&lt;/span&gt;;
-  text +&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;']'&lt;/span&gt;
-  &lt;span class="k"&gt;return &lt;/span&gt;text;
-&lt;span class="o"&gt;}&lt;/span&gt;;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We got a spike of a unit testing setup.  I had to run off to take my sons to football academy and so I didn&amp;rsquo;t get to fix up the awful naming conventions in the above.  Do we really want a &lt;code&gt;utils&lt;/code&gt; file, or should we be creating a &lt;code&gt;vote_text&lt;/code&gt; function in the utils file, or should we be creating objects?  Michael pointed out that as the Slack bot, this code would have a different domain from the RESTful API we had built separately, revolving more around channels and users than votes and stories.  We left it on the note of could we get a good end-to-end acceptance testing framework in there.  My experiences with testing Stripe have soured me a little to sandboxing systems like VCR, and our attempt to use the node equivalent of sepia on the AgileBot project had been met with failure.  I found a &lt;a href="https://github.com/gratifychat/BotMock"&gt;BotMock&lt;/a&gt; framework that would in principle allow us to do to botkit what we had done with the Stripe Ruby mock on WebsiteOne.  BotKit really had been a gorgeous experience in terms of getting the spike of the bot up and running.  What I wanted now most of all was a good way to get the high level user stories of the slack bot defined and driving the code.  At the moment they live implicitly in the spiked code and some Slack interactions.&lt;/p&gt;
-
-&lt;p&gt;The needle we really want to thread is the one that allows us to expose clearly the features that the system supports, so that we don&amp;rsquo;t get all snarled as we add new features and evolve the domain model; and that new developers coming onto the project can easily orient themselves.  What we don&amp;rsquo;t want is to get bogged down in crazy bugs arising from mis-matches between our mental models of the software and testing components.  If we can thread that needle, perhaps we can support many active projects without my brain being levered out of my ears, and possibly enough space for a coding binge without too much task switching.  Now that would be a great Christmas present! :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=3wPmyLfRwxY"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=1rwVM5uuFR4"&gt;Pairing on WebsiteOne&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=JrIeqF5y9pU"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ll91NnqwRZs"&gt;Coding on AsyncSlackBot&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Agile Project Management for NonProfits</title>
-    <link rel="alternate" href="http://blog.url.com/2016/11/30/agile-project-workshop/"/>
-    <id>http://blog.url.com/2016/11/30/agile-project-workshop/</id>
-    <published>2016-11-30T00:00:00+00:00</published>
-    <updated>2016-12-12T21:03:33+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Most of Tuesday was taken up with running a workshop on Agile Project Development for non-profits at the Volunteer Services Center up the road.  This was for Voluntary Action Harrow Cooperative (VAHC), who are the client for the Harrow Community Network site, which uses the LocalSupport software.  Here was the description of the event:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;A new approach to project management, Agile Project Management, attempts to create a different model.
-&amp;ldquo;Most nonprofits are interested in process improvements that will better enable them to accomplish their respective missions. However, major change can be intimidating and complicated to implement, especially if the organisation isn’t quite sure what it needs to do differently or lacks the expertise to make it happen across the organisation.&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;The Agile project management approach aims to address the needs of those working in a project-focused environment who want to be agile.&lt;/p&gt;
-
-&lt;p&gt;This session will provide an insight into how you can effectively instigate Agile project management into your nonprofit. &lt;/p&gt;
-
-&lt;p&gt;Training content:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;What Agile is and where it came from&lt;/li&gt;
-&lt;li&gt;The Agile Manifesto, principles and practises&lt;/li&gt;
-&lt;li&gt;The value of Agile to your nonprofit&lt;/li&gt;
-&lt;li&gt;Implementing Agile in your nonprofit&lt;/li&gt;
-&lt;li&gt;Communication, collaboration and culture&lt;/li&gt;
-&lt;li&gt;Risk management and pitfalls&lt;/li&gt;
-&lt;li&gt;Technologies to help&lt;/li&gt;
-&lt;li&gt;Further resources&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Participants will leave the course having gone through a small scale Agile process learning first hand how it can be implemented into your organisation.&lt;/p&gt;
-
-&lt;p&gt;Trainer: Agile Ventures&lt;/p&gt;
-
-&lt;p&gt;Cost (Per Person):&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Free - Harrow Voluntary, Community &amp;amp; Social Enterprise Sector&lt;/li&gt;
-&lt;li&gt;£30 - Voluntary, Community &amp;amp; Social Enterprise Sector (Not working or based in Harrow)&lt;/li&gt;
-&lt;li&gt;£40 - Public &amp;amp; Private Sector&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;There were eight attendees from different charity groups based in Harrow and some of the adjoining boroughs.  Including Alex and myself that made 10 which worked pretty well I think.  We&amp;rsquo;d done a &lt;a href="http://nonprofits.agileventures.org/2016/11/21/agile-workshop/"&gt;dry run of the event&lt;/a&gt; a couple of weeks back with the VAHC staff in a group of six including myself.  That dry run had followed this pattern:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Intro &amp;ldquo;What is Agile? How this workshop will run&amp;rdquo; &lt;/li&gt;
-&lt;li&gt;&amp;ldquo;Kickoff&amp;rdquo; &amp;ndash;&amp;gt; generate a series of stories about what to do in the workshop, e.g. &amp;ldquo;How do we motivate people?  What&amp;rsquo;s a scrum?&amp;rdquo; write on cards, arrange on whiteboard &lt;/li&gt;
-&lt;li&gt;BREAK &lt;/li&gt;
-&lt;li&gt;&amp;ldquo;Voting&amp;rdquo; on stories &amp;ndash;&amp;gt; identify common stories and vote on their difficulty, work out their priority &lt;/li&gt;
-&lt;li&gt;Go into small teams each working on a different story &lt;/li&gt;
-&lt;li&gt;BREAK &lt;/li&gt;
-&lt;li&gt;Small teams each presenting their work on their story &lt;/li&gt;
-&lt;li&gt;&amp;ldquo;Retrospective&amp;rdquo; looking back over the process and how it could be improved &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Excluding breaks, that was 6 ten minute chunks; running for an hour.  The full workshop followed the same model but each chunk lasted 25 minutes.  The key things I&amp;rsquo;d learned from the dry run were: &lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;I needed to bring a mac VGA connector to use the projector&lt;/li&gt;
-&lt;li&gt;A sprint diagram would be helpful&lt;/li&gt;
-&lt;li&gt;We might need a way to intro people&amp;rsquo;s names &lt;/li&gt;
-&lt;li&gt;It could be good to arrange all the tickets onto a kanban board on the wall&lt;/li&gt;
-&lt;li&gt;We&amp;rsquo;d need better pens&lt;/li&gt;
-&lt;li&gt;Using the Agile process to understand the Agile process might be confusing &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I got the simple logistical issues sorted, and started the main workshop by having the eight attendees do pairwise introductions.  I started the workshop as before by explaining the six part structure of the workshop and added the new element of emphasizing the workshop objective &amp;ldquo;To understand Agile Project Management&amp;rdquo;.  I tried to highlight how ultimately the Agile processs could be applied to any project, but that our project in the three hour workshop was &amp;ldquo;To understand Agile Project Management&amp;rdquo; and we would be compressing what might be done in an 2 week sprint into those three hours.  I talked briefly about the background of Agile, and how it derives from the &lt;a href="http://agilemanifesto.org/"&gt;Agile Software Manifesto&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;This time around I also showed an image representing a sprint:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="scrum overiew" src="http://www.agilenutshell.com/assets/methods/scrum/scrum-overview.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and then we got into the process of starting to generate stories.  This time around I didn&amp;rsquo;t contribute any stories myself but with 9 others writing away we quickly had loads to work with.  I lead the process of trying to organise the stories into themes.  The stories were pretty much all questions.  I guess in a future workshop I could ask for all the stories to be in the stakeholder, objective, desire format, but things seemed to go okay without it.  We went through a process of consolidation and generated five &amp;ldquo;epics&amp;rdquo;, which we voted on, giving us the following set of ready items:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;How does Agile affect funding and reporting to funders? (2 points)&lt;/li&gt;
-&lt;li&gt;How does Agile handle financial planning and management (3 points)&lt;/li&gt;
-&lt;li&gt;How does Agile handle conflict (2 points)&lt;/li&gt;
-&lt;li&gt;How does Agile planning cope with changing timeframes (1 point)&lt;/li&gt;
-&lt;li&gt;What are the Pros &amp;amp; Cons of Agile vs other methodologies (2 points)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;which we prioritised and then worked on each of the first three in separate three teams of three, with me moving between the teams to give help and support.  The really interesting things to come out of the process was to see the attendees answering their own questions and inferring, from the overall Agile process that we were using, how Agile might work for them.  As usual the voting and voting discussion was a critical learning period as we distinguished what we were voting on (complexity/ambiguity rather than priority or delegation), and I think the attendees were getting insights into how just having that discussion could help surface and resolve conflicts.  While the teams were working I got their tickets up on a makeshift Kanban layout on the wall:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="kanban layout on wall of meeting room" src="https://www.dropbox.com/s/tp01dj0jtxdwvfy/non-proft-kanban.jpg?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The teams presented their findings to each other and I saw the time had run away with us.  There was only five minutes left for the retrospective.  This was a shame since as I was at pains to point out that all the other mechanics of scrums, sprints, standups, Kanban charts etc. were all optional aspects of Agile, and the key element that made a process Agile was reflection on how different aspects of the process were working.  We did a quick retro going round the table with each person saying briefly what had been positive and what could be improved on about the workshop.  Not ideal since those going first would bias those talking after, but the general theme was that the attendees had found actually working through the Agile process very informative; although many of them would like more specific examples about usage of the techniques in the non-profit sector.  There was also interest in a more advanced workshop and I mentioned Alex&amp;rsquo;s and my idea about a 2 day workshop, with the 2 days being separated by 2 weeks, and effectively running an inception/kick-off and retrospective for an organisation.  It would certainly be interesting to run something like that although Alex was skeptical about people coming back for the second day 2 weeks later.  I think if people were paying for it that might make all the difference :-)&lt;/p&gt;
-
-&lt;p&gt;Overall a great experience, and I&amp;rsquo;ll be very interested to hear what people say in the privacy of the feedback forms.  I don&amp;rsquo;t know that I&amp;rsquo;d want to spend every day doing workshops like this, but it was great to be meeting all these hard-working charity/non-profit folks, and what I&amp;rsquo;d really love to be doing is more implementation of Agile methods in their organisations to see if we could really help them improve their outcomes.  Perhaps this will be a stepping stone to that &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Related Videos:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=3wPmyLfRwxY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
