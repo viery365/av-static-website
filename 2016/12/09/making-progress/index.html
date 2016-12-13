@@ -110,46 +110,46 @@
 <p>This makes me think we really want to get the slack channel settings on the AgileBot sorted so that every project channel gets notifications of appropriate pairing sessions.  Michael and I discussed that in an overview session on WebSiteOne, and we could automate most of the thing with calls to the slack API to get project managers to select their project channel from a dropdown when setting up a project, or just ensure that the project slugs on WSO exactly matched the channel names on Slack.  That&rsquo;d be another epic and I deemed further PayPal integration to be the thing we should focus on first.  All the project support goes into the free tier, and while we want project managers and teams to have the best support possible, I&rsquo;m going to be no use to them next year if I can&rsquo;t get us on a stable financial footing.</p>
 
 <p>Before we&rsquo;d got on to WSO, Michael and I had spent some time bashing out a refactoring of another PR that was addressing complexity issues flagged by Code Climate on LocalSupport.  We maybe spent too much time wrestling out the code together, but I was pretty pleased with the solution we came up with.  We worked out that the complexity was due to a combination of nested and non-nested routes in the Volunteer Opportunities controller:</p>
-<pre class="highlight ruby"><code>  <span class="n">resources</span> <span class="ss">:volunteer_ops</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">]</span> <span class="k">do</span>
-    <span class="n">get</span> <span class="s1">'search'</span><span class="p">,</span> <span class="ss">on: :collection</span>
-  <span class="k">end</span>
-  <span class="n">resources</span> <span class="ss">:organisations</span> <span class="k">do</span>
-    <span class="n">resources</span> <span class="ss">:volunteer_ops</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:new</span><span class="p">,</span> <span class="ss">:create</span><span class="p">]</span>
-  <span class="k">end</span>
+<pre class="highlight ruby"><code><span class="n">resources</span> <span class="ss">:volunteer_ops</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:show</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">]</span> <span class="k">do</span>
+  <span class="n">get</span> <span class="s1">'search'</span><span class="p">,</span> <span class="ss">on: :collection</span>
+<span class="k">end</span>
+<span class="n">resources</span> <span class="ss">:organisations</span> <span class="k">do</span>
+  <span class="n">resources</span> <span class="ss">:volunteer_ops</span><span class="p">,</span> <span class="ss">:only</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:new</span><span class="p">,</span> <span class="ss">:create</span><span class="p">]</span>
+<span class="k">end</span>
 </code></pre>
 <p>This had lead to code like this:</p>
-<pre class="highlight plaintext"><code>  def org_owner?
-    if params[:organisation_id].present? &amp;&amp; current_user_has_organisation?
-      current_user.organisation.friendly_id == params[:organisation_id]
-    elsif current_user_has_organisation?
-      current_user.organisation == VolunteerOp.find(params[:id]).organisation
-    end
-  end
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">org_owner?</span>
+  <span class="k">if</span> <span class="n">params</span><span class="p">[</span><span class="ss">:organisation_id</span><span class="p">].</span><span class="nf">present?</span> <span class="o">&amp;&amp;</span> <span class="n">current_user_has_organisation?</span>
+    <span class="n">current_user</span><span class="p">.</span><span class="nf">organisation</span><span class="p">.</span><span class="nf">friendly_id</span> <span class="o">==</span> <span class="n">params</span><span class="p">[</span><span class="ss">:organisation_id</span><span class="p">]</span>
+  <span class="k">elsif</span> <span class="n">current_user_has_organisation?</span>
+    <span class="n">current_user</span><span class="p">.</span><span class="nf">organisation</span> <span class="o">==</span> <span class="no">VolunteerOp</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">]).</span><span class="nf">organisation</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 <p>Now I know that maybe we should be using the pundit or cancan gems to manage roles and persmissions, but we staying focused on the refactoring. The proposed alternate had ended up creating overlap between two <code>before_action</code>s, which we unravelled with a set of method names that tried to connect up with the reasons for the split:</p>
-<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">org_owner?</span>
-    <span class="n">current_user</span><span class="p">.</span><span class="nf">present?</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">current_user</span><span class="p">.</span><span class="nf">can_edit?</span> <span class="n">org_independent_of_route</span><span class="p">)</span>
-  <span class="k">end</span>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">org_owner?</span>
+  <span class="n">current_user</span><span class="p">.</span><span class="nf">present?</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">current_user</span><span class="p">.</span><span class="nf">can_edit?</span> <span class="n">org_independent_of_route</span><span class="p">)</span>
+<span class="k">end</span>
 
-  <span class="k">def</span> <span class="nf">org_independent_of_route</span>
-    <span class="n">organisation_set_for_nested_route?</span> <span class="o">||</span> <span class="n">organisation_for_simple_route</span>
-  <span class="k">end</span>
+<span class="k">def</span> <span class="nf">org_independent_of_route</span>
+  <span class="n">organisation_set_for_nested_route?</span> <span class="o">||</span> <span class="n">organisation_for_simple_route</span>
+<span class="k">end</span>
 
-  <span class="k">def</span> <span class="nf">organisation_set_for_nested_route?</span>
-    <span class="vi">@organisation</span>
-  <span class="k">end</span>
+<span class="k">def</span> <span class="nf">organisation_set_for_nested_route?</span>
+  <span class="vi">@organisation</span>
+<span class="k">end</span>
 
-  <span class="k">def</span> <span class="nf">organisation_for_simple_route</span>
-    <span class="no">VolunteerOp</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">]).</span><span class="nf">organisation</span>
-  <span class="k">end</span>
+<span class="k">def</span> <span class="nf">organisation_for_simple_route</span>
+  <span class="no">VolunteerOp</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">]).</span><span class="nf">organisation</span>
+<span class="k">end</span>
 
-  <span class="k">def</span> <span class="nf">organisation_for_nested_route</span>
-    <span class="no">Organisation</span><span class="p">.</span><span class="nf">friendly</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:organisation_id</span><span class="p">])</span>
-  <span class="k">end</span>
+<span class="k">def</span> <span class="nf">organisation_for_nested_route</span>
+  <span class="no">Organisation</span><span class="p">.</span><span class="nf">friendly</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:organisation_id</span><span class="p">])</span>
+<span class="k">end</span>
 
-  <span class="k">def</span> <span class="nf">set_organisation</span>
-    <span class="vi">@organisation</span> <span class="o">=</span> <span class="n">get_organisation_for_nested_route</span>
-  <span class="k">end</span>
+<span class="k">def</span> <span class="nf">set_organisation</span>
+  <span class="vi">@organisation</span> <span class="o">=</span> <span class="n">get_organisation_for_nested_route</span>
+<span class="k">end</span>
 </code></pre>
 <p>At least the next folks in might have a fighting chance of seeing the relation to the routes up front.  Although maybe they&rsquo;ll tear their hair out in the multiple steps of redirection in the code.  Probably the better thing in the long term will be to unwind the routes.  We could remove the nesting if we insisted that all the other controller methods moved into the nesting (i.e. :edit, :show, :update, :destroy), but that would be a bigger refactoring for another time.</p>
 
