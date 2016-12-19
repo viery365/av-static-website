@@ -5,10 +5,51 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-12-09T00:00:00+00:00</updated>
+  <updated>2016-12-12T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Semi-Automated Bots, or Augmented Humans?</title>
+    <link rel="alternate" href="http://blog.url.com/2016/12/12/semi-automated-bots/"/>
+    <id>http://blog.url.com/2016/12/12/semi-automated-bots/</id>
+    <published>2016-12-12T00:00:00+00:00</published>
+    <updated>2016-12-19T21:34:05+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Friday included a lot of meetings, pull request review, and bug fixing.  I didn&amp;rsquo;t get much fresh coding down, which was somewhat frustrating, but I did have a bit of a breakthrough on the greeter bot side, with this code:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;Botkit&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'botkit'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;controller&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Botkit&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;slackbot&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+  &lt;span class="na"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;bot&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;spawn&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+  &lt;span class="na"&gt;token&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;process&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;env&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ASYNC_VOTER_SLACK_BOT_TOKEN&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="na"&gt;retry&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;
+&lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;startRTM&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;greet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"Welcome and great to have you with us! Please do introduce yourself in #new_members (if you haven't already), and if you have any general technical thoughts/issues/questions please ask in #techtalk - #random is for everything else :slightly_smiling_face:"&lt;/span&gt;
+
+&lt;span class="nx"&gt;greet&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;"\n\n\nsee https://github.com/AgileVentures/AgileVentures/blob/master/JOINING_A_PROJECT.md for more on joining a project"&lt;/span&gt;
+
+&lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'team_join'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;say&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="na"&gt;channel&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;text&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A simple script using botkit to detect anyone joining a Slack instance.  I had been burning time, and falling behind on, greeting people individually as they joined the AgileVentures Slack instance.  I think people really appreciate individual greetings when they join a community, and it&amp;rsquo;s really helpful to point them to some documentation etc.  It can be a bit impersonal coming from a bot.  I&amp;rsquo;ve joined some other Slack communities where a bot greets me and immediately apologises about being a bot. &lt;/p&gt;
+
+&lt;p&gt;The interesting thing we&amp;rsquo;ve found is that if you set the BOT_TOKEN to be the Slack general API token (rather than a custom bot token), then it appears to interact as the admin of the Slack instance.  At least that&amp;rsquo;s my working hypothesis.  Now you could say I&amp;rsquo;m being a bit dishonest with people having a bot doing the greeting, but the message looks like it is directly from me.  However the beauty of the above script is that it opens a dialogue in a DM between myself and the new member on Slack.  So when the new member responds to me, thanking me for the introduction, I get the message and can respond in the DM to have a conversation.   I call this a semi-automated bot.  A bot is doing part of the work, but then I am assisting with the really hard AI-complete aspects.  I do the same with emails to the community, automating part of the work of assembling an email template in Thunderbird, but then visually reviewing the email before it goes out, adjusting it to use the correct first name or abbreviation, and add elements to the template that are specific to my interaction with that AgileVentures member.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m hoping that people will ultimately see this as ingenious rather than deceptive.   I want to augment myself so that I can maintain conversations with as many people as possible, not so that we can make a profit for some group of shareholders, but so that we can help more people with their professional development and more deserving causes around the world with their IT and non-profit process challenges.  Over the weekend the bot greeted three new folks while I was spending time with my family and I got the new members&amp;rsquo; follow up DMs on my phone and was able to respond to their questions about AgileVentures individually.  It feels like a good development.  The next thing will be to host this bot on an Amazon instance so it can be always up, and perhaps have it monitor for channel join events as well, so it (or rather I) can greet people coming into project channels with a welcome and a pointer to documentation for getting set up with the project.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ll be tempted to see if I can gradually add more augmentation to myself on Slack so that that bot can start taking over parts of my conversation, but I&amp;rsquo;ll do that very slowly and steadily.  In the first instance it seems to me that the bot is much, much better than me at detecting Slack events, and so that&amp;rsquo;s where I should focus to begin with.  Particularly because Slack doesn&amp;rsquo;t alert me to channel and team join events and I tend only to notice the little italics telling me about a change some time after it actually happened.&lt;/p&gt;
+
+&lt;p&gt;In summary I think this approach where I adjust the behaviour of my own Slack instance is different from the semi-automated approach I&amp;rsquo;ve espoused in the past.  Semi-automation is a better term for when something that is clearly a bot, is prompted to act by a human, such as we have for starting and finishing votes in the AsyncVoter bot.  There&amp;rsquo;s nothing new under the sun, and I&amp;rsquo;m sure I&amp;rsquo;ll find others who&amp;rsquo;ve done this bot augmentation before, but I start to see what I&amp;rsquo;ve got here in the greeter-bot as a form of conversation augmentation.  I&amp;rsquo;m pretty excited about augmenting myself further :-)&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Making Progress (for the Greater Good)</title>
     <link rel="alternate" href="http://blog.url.com/2016/12/09/making-progress/"/>
@@ -395,78 +436,6 @@ cucumber features/premium/charge_activity.feature:60 # Scenario: User decides to
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=OfvuX1rNtu0"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Q36xbc8pUZ4"&gt;Pair Programming on WSO&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=3BVth-ZXJk8"&gt;Kent Beck Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Testing Slack Bots and Project Metrics</title>
-    <link rel="alternate" href="http://blog.url.com/2016/12/02/testing-slack-bots/"/>
-    <id>http://blog.url.com/2016/12/02/testing-slack-bots/</id>
-    <published>2016-12-02T00:00:00+00:00</published>
-    <updated>2016-12-12T21:03:33+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Wednesday saw me firing off a few emails to potential sponsors, which felt like a good start, since landing another sponsor would make all the difference to us over the coming months.  We had our second mob programming session, and I got a preview copy of the new RSpec book, so things were humming along.  What wasn&amp;rsquo;t humming along was invites to Slack.  We still seemed to be having an email every day or two saying that the automated Slack invite was not showing up after a sign up on the main AV site.  Michael and I had put in an email system to supposedly alert us when the Slack invites failed, as they sometimes did when the API key expired.  Those email alerts had only ever triggered for failures on the develop system.  And looking back through the logs it seemed that invites really weren&amp;rsquo;t going out for the last month or so and our fail-safe wasn&amp;rsquo;t even triggering; so frustrating!  The challenge with this kind of issue is that every time someone says they didn&amp;rsquo;t receive the invite, it could be because of a spam filter issue.  &lt;/p&gt;
-
-&lt;p&gt;I do get cc&amp;rsquo;d all the welcome emails when people join AV so I can see the flow of people coming in.  I just wish I could get cc&amp;rsquo;d on the Slack invite emails.  I&amp;rsquo;d refreshed the API keys recently.  The Slack invite thing would clearly require another detailed look. Doubly frustrating was the hacked up env settings for test that meant the full Slack invite pathway was not properly tested.  I didn&amp;rsquo;t want to dive into debugging the Slack issue as I was feeling the AsyncVoter project was blocked due to a lack of test harness on the AsyncSlack bot; so I took a temporary measure and grabbed the emails for the most recently signed up 150 AV members and did a bulk invite in Slack.  It told me that at least 80 people had never been invited.  It was gratifying to see the 15 or so new members enter slack over the next 12 hours with several of them mentioning the Ruby Rogues podcast.&lt;/p&gt;
-
-&lt;p&gt;Having put in the short term fix I could focus a couple of hours coding on getting a test harness into the AsyncSlackBot.  I refactored the simple unit test from the day before so the naming of the files and methods was more consistent, and started on checking out the BotMock project.  Installing it involved building it locally and copying over a couple of mock files.  Not ideal, and I start to think we could just as quickly build our own mocking system, as we did in the agile-bot project.  The BotMock project is new and not even on npm, and I wonder if we&amp;rsquo;re really gaining much from it.  I stamped out a few controller tests using their approach, which involved coding in ES6 and I had to adjust the callback operations to get working tests like these:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;  &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'should acknowledge vote if users direct messages `vote #`'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;self&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'vote 1'&lt;/span&gt;
-    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"I received your vote: 1 &amp;lt;@test&amp;gt;"&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;usersInput&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;text&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-               &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;then&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-                 &lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;text&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;to&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;equal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;response&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-               &lt;span class="p"&gt;})&lt;/span&gt;
-  &lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Working with this sort of test had involved pulling the body of the bot out of the server.js file and dropping it into a controller file from which it would be exported.  I was getting critical practice with breaking up my node apps.  Not that it&amp;rsquo;s so hard, but when something is slighltly less familiar it&amp;rsquo;s easy to put off doing it.  I ended up with a pull request that did a bit of testing on each of the canned bot responses, but didn&amp;rsquo;t achieve a full test of the full voting sequence as it was unclear how to check a series of interactions.  The BotMock had some example conversation tests, but they weren&amp;rsquo;t working for me. &lt;/p&gt;
-
-&lt;p&gt;This is a good start over the initial spike, but it&amp;rsquo;s frustrating that the high level character of the app can&amp;rsquo;t easily be read from the mocha tests, in the same way that it can be difficult to read them in RSpec.  Both Mocha and RSpec can give verbose test output that provides a nice summary of what&amp;rsquo;s going on like so:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  controller tests
-    ✓ should return `help message` if user types `help` (208ms)
-    ✓ should return `hello yourself` if user types `hello` (204ms)
-    ✓ should return vote announcement if user types `start new vote` (202ms)
-    ✓ should acknowledge vote if users direct messages `vote #` (208ms)
-    ✓ should return results if users types `results` (205ms)
-    - should summarise results after a vote
-
-  Bot
-    Controller
-      ✓ should receive message
-
-  summary_text
-    ✓ should format vote text correctly for no votes
-
-
-  7 passing (1s)
-  1 pending
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;but I personally find it difficult to digest that output.  What I mean is that when I&amp;rsquo;m working on the code, usually with the spec on one half of the screen and the app code on the other half like so:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="code layout" src="https://www.dropbox.com/s/vkcavhglz2kkadq/Screenshot%202016-12-02%2009.59.23.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;most of the mocha/rspec code is taken up with boilerplate that is specific to the testing framework and not the app itself.  The high level English language description is scattered in comments.  I really do love Cucumber for giving me that description in the editor and not in the separate terminal output.  So perhaps it&amp;rsquo;s time to try out Yada (cucumber nodejs alternative) in this project, but I think I can&amp;rsquo;t get too sucked in to testing frameworks without pushing more functionality to actually help automate me away from tedious admin tasks.  We&amp;rsquo;ll see.&lt;/p&gt;
-
-&lt;p&gt;What is exciting is that it seems that if we feed the bot an API token rather than a bot token, we can get the bot to behave as me (as Thomas and I found testing another bot).  So potentially I can augment myself on Slack directly.  Dangerous perhaps; in a test with Arreche I already tripped an infinite loop in a private channel.  Lots of testing required to avoid more mishaps like that :-)  I got the PR in and managed a separate flurry of coding/devops on ProjectScope later in the evening.  The new month meant my Heroku quotas had been reset and so I could get this overview of how the different AV projects were proceeding:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Project metrics on AV projects" src="https://www.dropbox.com/s/emvw7cujo777itx/Screenshot%202016-12-01%2018.41.42.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The graphics are interactive and when you mouse over them you get some explanations and pop-ups of who&amp;rsquo;s got what level of activity in Slack:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="showing who's active in slack" src="https://www.dropbox.com/s/assku0q6ptxhp7r/Screenshot%202016-12-01%2018.52.19.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I think this really is the way forward; automation of project management via Slack bot and breaking our monolith into microservices, e.g. metrics on all the projects in one service, manangement of hangouts/events in another service; so that we can grow to more and more projects supported, in following Agile principles to keep them all delivering value to the end users and the individual team members participating in order to level up in the chosen skill sets.  Can we get into that sweet spot where all the effort and automation and reflection results in a great user experience all round without overwhelming the support staff?  Stay tuned to this blog to find out!&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=X3mWPUN4TC4"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=gK96bxINM88"&gt;Solo on AsyncVote part 1&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=XP3lyx0zZZY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=RYRugWUmv74"&gt;Solo on AsyncVote part 2&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
