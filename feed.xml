@@ -5,10 +5,45 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-12-12T00:00:00+00:00</updated>
+  <updated>2016-12-13T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Cross-Pairing</title>
+    <link rel="alternate" href="http://blog.url.com/2016/12/13/cross-pairing/"/>
+    <id>http://blog.url.com/2016/12/13/cross-pairing/</id>
+    <published>2016-12-13T00:00:00+00:00</published>
+    <updated>2016-12-19T21:42:09+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Over the weekend, in conflict with my general rule about working on Saturdays and Sundays, I lead a couple of &amp;ldquo;Bob Martin&amp;rdquo; scrums.  My standards about not working at the weekend for health and sanity have been chipped away at by me leading a Mentive class on Saturday evenings and doing Premium Plus pairing sessions on Sundays.  A few AsyncVoter folks have availability at the weekend but had been having trouble coordinating.  We moved the weekend scrums from 10am to 2pm but it still wasn&amp;rsquo;t quite clicking.  2pm on Saturday and Sunday is when I&amp;rsquo;d usually nap to allow me to recover from the rigors of the week.  And the rigors of the weekend!  As soccer coach for Harrow St. Marys under-eights I run a training session every Saturday morning from 10:30am to noon.  I need to get to the local park at 9:45am to get everything set up.  No drinking or late Friday nights - you really don&amp;rsquo;t want to be coaching twenty kids with a hangover, or even on a slight sleep deficit.  Post lunch I need to do team selection for the Sunday morning league game, and then get my eldest son to guitar practise before a run to the supermarket and making supper.  &lt;/p&gt;
+
+&lt;p&gt;Pushing myself to run weekend scrums is not without a cost, but I really want AgileVentures to survive and to thrive.  In some ways starting a weekend scrum is a stop gap for interface, training and documentation deficiencies on the part of the AgileVentures community and software.  Having run countless online scrums with hangouts I can pretty much ensure that the scrum starts on time, that the appropriate channels are pinged etc.  For other developers focusing on getting their bit of code done this can sometimes not happen, e.g. the scrum doesn&amp;rsquo;t start, or there&amp;rsquo;s a technical problem or what have you.  Despite enthusiasm during the week for my running of the weekend scrums, no one from the AsyncVoter project showed up.  Life happens, there are things to do, but it will probably take a few weekends of me regularly running the scrums before people &amp;ldquo;trust&amp;rdquo; that I&amp;rsquo;ll be there.  I&amp;rsquo;m a strong believer in doing things repeatedly at the same time to get people into the habit :-)&lt;/p&gt;
+
+&lt;p&gt;Still Michael was there, and on Saturday we had Arbaz from Pakistan who admitted to being very nervous about joining a scrum for his MOOC assignment, but said it was awesome when we voted together on a LocalSupport story, and he submitted several pull requests over the weekend.  On Sunday it was just Michael and myself, but it gave me the opportunity to suggest to Michael that we do some &amp;ldquo;cross-pairing&amp;rdquo; on Monday.  I&amp;rsquo;d been concerned on Thursday and Friday that we&amp;rsquo;d ended up in triples with Michael and I stepping on each others toes trying to help people.  We wanted to make progress on both AsyncVoter and WebSiteOne fronts and I felt like we might move faster if we split our forces and created separate hangouts, pairing with others where possible.  Michael said this might work with sufficient support and organisation.&lt;/p&gt;
+
+&lt;p&gt;We tried this out Monday and I think it went quite well.  I ended up pairing with Matt on the PayPal integration, and Michael paired with Arreche on the AsyncVoter slack bot testing framework.   Matt was largely watching me work on PayPal as it was all related to the AgileVentures paypal account which only I had access to.  Although we created a PayPal sandbox account which in principle I could give other team-members access to.  It took a couple of solid hours either side of lunch to get a custom PayPal form (we had to drop the hosted button) to get a variable passed back at the end of the transaction that would allow us to know which user had signed up to Premium using PayPal.  However the return to the AgileVentures site at the end of the PayPal transaction was not automatic.  The user had to press a rather in-obtrusive button and that seemed unreliable to me.&lt;/p&gt;
+
+&lt;p&gt;Michael broke from pairing with Arreche and dropped in to our sessions to hear the issue and came up with a StackOverflow hit about a setting for PayPal that would make the redirection automatic.  I&amp;rsquo;d ended up napping after lunch (witness lack of naps on the weekend) so our hangout was broken over the &amp;ldquo;Kent Beck&amp;rdquo; scrum, although I ran it in a different browser to keep both going.  Then a sponsor meeting cropped up, we (me and the sponsor) had confused the times, so we had to break anyway.  Michael went back to pairing with Arreche.  I finished up the PayPal round trip, getting the automatic return set up (not without drowning in the PayPal interfaces), and helping Matt debug issues with starting hangouts and slack pinging.  He needed to enable Hangouts at http://youtube.com/my&lt;em&gt;live&lt;/em&gt;events and I had either broken the Slack pings when I disabled hubot (or our Slack token had expired).  Michael called me into his hangout with Arreche to help them on a block with using the Cucumber Yada JS framework with BotMock.  I noticed they were pairing in the broadcast finished WebSiteOne hangout.  I tried to encourage Michael to start a new AsyncVoter hangout and take it live, but he said he was focusing on this problem.  I thought that was ironic because I&amp;rsquo;d just interrupted my work on the PayPal problem to come over and help him.&lt;/p&gt;
+
+&lt;p&gt;I talked through some of the related issues I&amp;rsquo;d encountered using BotMock in the integration tests which may or may not have helped, but it seemed to give them a lead.  I totally understand about wanting to be task focused.  I notice that a significant number of folks don&amp;rsquo;t start the broadcasts in their AV hangouts.  I guess I&amp;rsquo;ve always got part of my mind on the bigger picture that I want the AgileVentures video library to be increasing, that we&amp;rsquo;re always providing raw material for others to watch and review and potentially learn.  I also want pairing sessions to be announced in the relevant channels so that folks can see the activity and potentially join so we can build.  I don&amp;rsquo;t expect everyone else to understand or believe in those higher goals.  However when you are using the free aspects of a system it&amp;rsquo;s nice to consider how others benefit.  It&amp;rsquo;s the same mentality as open source.  Others have made something available for you to freely use, so it&amp;rsquo;s good to think about contributing your improvements or insights back to the community.&lt;/p&gt;
+
+&lt;p&gt;I started back to my PayPal work and told Michael that I&amp;rsquo;d be happy to interrupt it and drop back in again if he started a fresh AsyncVoter hangout.  At the end of the day Michael and Arreche had gotten something working and I had the PayPal round trip validated and pushed into GitHub.  Michael was saying how their solution was kind of hard coded and my PayPal spike would need testing and refactoring.  Overnight though it seems that Arreche made more progress, and I&amp;rsquo;m looking forward to more days of cross-pairing and making progress on multiple fronts at the same time :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://youtu.be/HvjP8OnJelg"&gt;&amp;ldquo;Bob Martin&amp;rdquo; Saturday Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://youtu.be/NSZ0my-DWmQ"&gt;&amp;ldquo;Bob Martin&amp;rdquo; Sunday Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://youtu.be/44lvtYeIPDU"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=gCAzF2s2uYs"&gt;Pairing on WSO&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=GK0qPZnYi84"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=VunzjidNLrk"&gt;Pairing on WSO&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Semi-Automated Bots, or Augmented Humans?</title>
     <link rel="alternate" href="http://blog.url.com/2016/12/12/semi-automated-bots/"/>
@@ -342,100 +377,6 @@ https://develop.harrowcn.org.uk --&amp;gt; drie instance (develop)
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=y7bHXz0kCQA"&gt;Pairing on WSO&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=EOlcarJgn8s"&gt;Soloing on WSO&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=RQc_9isrGJY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Refactoring and Pairing</title>
-    <link rel="alternate" href="http://blog.url.com/2016/12/05/refactoring_and_pairing/"/>
-    <id>http://blog.url.com/2016/12/05/refactoring_and_pairing/</id>
-    <published>2016-12-05T00:00:00+00:00</published>
-    <updated>2016-12-12T21:08:09+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So hot on the heels of our first AV member sponsoring other AV members for Premium support, another Premium member was talking about sponsoring some of their co-workers for Premium membership as Xmas gifts!  Now this particular Premium member prefers to pay through Paypal, which we had set up previously.  The Paypal endpoint in the AgileVentures site is just a custom button from the Paypal toolkit, on a custom method in the charges controller.  We&amp;rsquo;d just thrown that in, unlinked to the rest of the site, to serve as a quick check that the functionality would work and that the individual requesting Paypal payment would actually use it.  That purpose was served admirably and was used by two Premium members; tracer-bullet success!&lt;/p&gt;
-
-&lt;p&gt;Now if we wanted to allow more folks to sign up with Paypal, and indeed sponsor other members via Paypal, we had some integration to do.  Not only that, it was clear that the Premium charges controller needed some serious refactoring.  I had originally created the charges controller on a spike, following the instructions in the Stripe documentation for creating a charge on a user credit card.  I&amp;rsquo;d immediately hooked things up to ensure that the user would be paying for a subscription to a plan.  We&amp;rsquo;d wrapped that whole functionality in VCR/PuffingBilly sandbox tests and then evolved that to RubyStripeMock, as well as adding the ability to sponsor others, and change credit card details.  We&amp;rsquo;d also evolved a domain model that started to capture some of our &amp;ldquo;business&amp;rdquo; logic, relating to the different kinds of Subscriptions and PaymentSources that we were supporting.  What we hadn&amp;rsquo;t managed to refactor was the ChargesController itself which was breaking the Rails convention of having controllers manipulate resources of the corresponding name.&lt;/p&gt;
-
-&lt;p&gt;Our ChargesController was actually manipulating Subscriptions and CreditCards.  Over the weeks I felt pretty certain we wanted to rename our ChargesController to SubscriptionController, since that was the key resource that most of the controller methods were manipulating.  The CreditCard stuff should ultimately be moved to a different controller and the Paypal endpoint integrated into some RESTful manipulation of Subscription resources.  Michael and I started off driving the change by creating a &lt;code&gt;subscribe_self_to_premium.feature&lt;/code&gt; file.  The main cucumber feature file was inappropriately named &lt;code&gt;charge_activity.feature&lt;/code&gt;.  Again this was all part of my initial rush to spike out some charge pathway and demonstrate that revenue could be generated.  Having demonstrated that it was clearly time to clean up the name space.  The new feature file took inspiration from the scenarios in the existing &lt;code&gt;charge_activity&lt;/code&gt; file and looked like this:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Subscribe Self to Premium
-  As a developer
-  So that I can get recurring professsional development support and code review
-  I would like to take out an AV Premium Subscription
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Pay by card
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit &lt;span class="s"&gt;"subscriptions/new"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"subscribe"&lt;/span&gt; within the card_section
-    &lt;span class="nf"&gt;When&lt;/span&gt; I fill in appropriate card details for premium
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Thanks, you're now an AgileVentures Premium Member!"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; the user should receive a &lt;span class="s"&gt;"Welcome to AgileVentures Premium"&lt;/span&gt; email
-    &lt;span class="nf"&gt;And&lt;/span&gt; my member page should show premium details
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Pay by Paypal
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit &lt;span class="s"&gt;"subscriptions/new"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"subscribe"&lt;/span&gt; within the paypal_section
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should be redirected to Paypal's payment screens
-    &lt;span class="nf"&gt;And&lt;/span&gt; the user should receive a &lt;span class="s"&gt;"Welcome to AgileVentures Premium"&lt;/span&gt; email
-    &lt;span class="nf"&gt;And&lt;/span&gt; my member page should show premium details
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;These are still a little imperative, but it&amp;rsquo;s generally too challenging to try and fix too many issues at once.  Right here we were trying to get the name space fixed up.  Tweaking Cucumber scenarios to be more declarative could come later.  As it happened, we did already have a paypal feature test:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Charge Users Money
-  As a site admin
-  So that users can pay for premium services via paypal
-  I would like to be able to sign them up for a recurring plan via paypal
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Sign up for premium membership via paypal
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit &lt;span class="s"&gt;"/charges/paypal"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should see &lt;span class="s"&gt;"Agile Ventures Premium Membership"&lt;/span&gt;
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see a paypal form
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;My hope was that ultimately we&amp;rsquo;d be replacing this feature and the contents of &lt;code&gt;charge_activity.feature&lt;/code&gt; with this new file, that had a stronger indication of the high level goal in its name, i.e. Subscribe Self to Premium.  Of course that didn&amp;rsquo;t stop me from agonizing whether the &lt;code&gt;Given I visit &amp;quot;subscriptions/new&amp;quot;&lt;/code&gt; step was too high level, or whether writing it to force us to code a new URL endpoint and thus controller was the wrong thing to be doing at that stage.  I do believe strongly that the URLs are part of the end user interface experience for both developers and users.  The counter-argument in my mind was that we should get the cukes green before doing a refactoring, but really this entire activity was a refactoring of both tests and application code to consolidate the two payment methods (that both worked independently) into a single coherent entity.  Perhaps we should have only been refactoring tests and app separately?  &lt;/p&gt;
-
-&lt;p&gt;You might also be wondering what happened to the feature to sponsor other members via Paypal.  Discussing it, we&amp;rsquo;d decided that we needed to consolidate the existing functionality first before taking on that more complex task.  Either which way, the missing &lt;code&gt;/subscriptions/new&lt;/code&gt; endpoint prompted a refactoring of the ChargesController to SubscriptionsController, which we executed automatically through RubyMine. RubyMine got most of the changes for us, but there was some mopping up to do with additional changes in the Cucumber files, and a few of the views.  Then we got stuck on a regression test failure for a while.  We weren&amp;rsquo;t making any progress on the high level integration of Paypal and Stripe payments:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  Scenario: User decides to change card details                                                                     # features/premium/charge_activity.feature:60
-    Given I am logged in as a premium user with name "tansaku", email "tansaku@gmail.com", with password "asdf1234" # features/step_definitions/user_steps.rb:5
-    And I visit "subscriptions/tansaku/edit"                                                                        # features/step_definitions/basic_steps.rb:65
-    And I click "Update Card Details"                                                                               # features/step_definitions/basic_steps.rb:74
-    When I fill in updated card details for premium for user with email "tansaku+stripe@gmail.com"                  # features/step_definitions/charge_steps.rb:18
-    Then I should see "Your card details have been successfully updated"                                            # features/step_definitions/basic_steps.rb:182
-      No route matches [PUT] "/subscriptions.tansaku-rodriguez" (ActionController::RoutingError)
-      features/premium/charge_activity.feature:65:in `Then I should see "Your card details have been successfully updated"'
-
-Failing Scenarios:
-cucumber features/premium/charge_activity.feature:60 # Scenario: User decides to change card details
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There was some kind of routing issue.  It was frustrating to be blogged, but also, this is what all these tests are here for.  We&amp;rsquo;d refactored the core controller of the payment framework, and it seemed we&amp;rsquo;d broken the credit card details update in the process.  Without the tests we&amp;rsquo;d have pushed this out to production and not known until a user encountered a problem.  Eventually we tracked the issue down.  It was a pluralization error in one of the views.  Our routes now looked like this:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;match&lt;/span&gt; &lt;span class="s1"&gt;'/subscriptions/paypal'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'subscriptions#paypal'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:via&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:get&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-  &lt;span class="n"&gt;match&lt;/span&gt; &lt;span class="s1"&gt;'/subscriptions/upgrade'&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'subscriptions#upgrade'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:via&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:put&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-  &lt;span class="n"&gt;resources&lt;/span&gt; &lt;span class="ss"&gt;:subscriptions&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;giving us this set of endpoints:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;           subscriptions_paypal GET         /subscriptions/paypal(.:format)                             subscriptions#paypal
-          subscriptions_upgrade PUT         /subscriptions/upgrade(.:format)                            subscriptions#upgrade
-                  subscriptions GET         /subscriptions(.:format)                                    subscriptions#index
-                                POST        /subscriptions(.:format)                                    subscriptions#create
-               new_subscription GET         /subscriptions/new(.:format)                                subscriptions#new
-              edit_subscription GET         /subscriptions/:id/edit(.:format)                           subscriptions#edit
-                   subscription GET         /subscriptions/:id(.:format)                                subscriptions#show
-                                PATCH       /subscriptions/:id(.:format)                                subscriptions#update
-                                PUT         /subscriptions/:id(.:format)                                subscriptions#update
-                                DELETE      /subscriptions/:id(.:format)                                subscriptions#destroy
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We had both &lt;code&gt;subscription_upgrade&lt;/code&gt; and &lt;code&gt;subscriptions_upgrade&lt;/code&gt;.  It was frustrating to have been stuck on this issue, but it was also an interesting lesson about how the custom &lt;code&gt;upgrade&lt;/code&gt; endpoint was technical debt that we were having to pay off here.  We&amp;rsquo;d thrown in that custom endpoint to enable a member to change their credit card in a hurry, but the presence of the custom endpoint had confused us during a refactoring.  If we&amp;rsquo;d refactored that out earlier to a CardController we probbaly wouldn&amp;rsquo;t have got stuck here.  So overall not a bad object lesson on the value of tests and of refactoring to a clean domain model!&lt;/p&gt;
-
-&lt;p&gt;While we were doing all this (and waiting for test suites to run etc.) Michael and I were discussing work on the project in general.  Michael was commenting that he had felt more motivated in the longer running work on LocalSupport.  It sounded like aspects of the &amp;ldquo;drive-by&amp;rdquo; coding style we had been employing recently were frustrating him, i.e. that we were only working on things that could be done in a hour or two.  Also, he said he didn&amp;rsquo;t feel like doing additional work on the project at the weekend as he anticipated I would be too critical of decisions he might make.  This was great feedback for me, as the last thing I want to be doing is de-motivating people to work on the project.  I&amp;rsquo;d like to think of my criticism of design decisions as constructive, but it&amp;rsquo;s a delicate matter.&lt;/p&gt;
-
-&lt;p&gt;I guess Michael has sensed my frustration at earlier phases of the WebSiteOne project which seemed to have involved long running, large pull requests and the addition of more features than I was comfortable with.  I&amp;rsquo;ve definitely been burnt by this in the past; pushing on people too hard over the approach that I think is right.  It seems sensible to me that we don&amp;rsquo;t just merge in code to a project when concerned over the future maintainability of that code, but then again if our push back is too strong then no one will want to work on the project with us.  Where do we draw the line?  Everyone is going to have a different level of tolerance for criticism, constructive or otherwise.   And we&amp;rsquo;re all going to have variable abilities to detect whether what we are saying is making others uncomfortable or de-motivating them.  Perhaps I&amp;rsquo;m coming from a place of too much tension for the entire AgileVentures undertaking?  In the past it was a part-time fun activity, and I was more relaxed about my future income from HPU or MakersAcademy.  Ironically at that point I was less sensitive about whether others might feel negative about discussion of the pros and cons of code or design.  Now I like to think I&amp;rsquo;ve become more sensitive but the stakes are higher, and I really want to create codebases that will enhance our processes rather than be a burden in future.&lt;/p&gt;
-
-&lt;p&gt;Gosh, what a complex thing to try and get right.  I thought managing a VCR/PuffingBilly cache was hard, but getting that inter-personal teamwork balance right &amp;hellip; well that&amp;rsquo;s the real trick, isn&amp;rsquo;t it? &amp;hellip; :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=OfvuX1rNtu0"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Q36xbc8pUZ4"&gt;Pair Programming on WSO&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=3BVth-ZXJk8"&gt;Kent Beck Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
