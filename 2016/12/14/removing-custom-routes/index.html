@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Removing Custom Routes</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_12 x2016_12_14 x2016_12_14_removing-custom-routes x2016_12_14_removing-custom-routes_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/12/14/removing-custom-routes/">Removing Custom Routes</a></h2>
+        <h5 class='date'>14 Dec 2016</h5>
+    <p>In a day with little time for coding on WebsiteOne I think I made a bit of a breakthrough in terms of removing custom routes on Rails controllers.  Time got sucked away in the usual admin, reviewing pull requests, scrums and having Michael update me on the great work he and Arreche had done getting the Yada Cucumber setup working for AsyncVoter.  Interesting discussion there about whether we should switch tech stack and, if we don&rsquo;t, how we handle the rather raw test and mock architecture.  Also, should I be focusing more on infrastructure for the projects?  I&rsquo;m still convinced I&rsquo;ve got to prioritise getting AgileVentures into the black, and right now that means sorting out our payment frameworks.</p>
+
+<p>The previous day Matt and I had spiked the PayPal redirection to our site after a successful payment, and using that base I was able to fill in the rest of the cucumber steps that Michael and I had sketched out the week previously:</p>
+<pre class="highlight gherkin"><code><span class="kd">Feature</span><span class="p">:</span> Subscribe Self to Premium
+  As a developer
+  So that I can get recurring professsional development support and code review
+  I would like to take out an AV Premium Subscription
+
+  <span class="kn">Background</span><span class="p">:</span>
+    <span class="nf">Given</span> the following plans exist
+      <span class="p">|</span> <span class="nv">name</span>        <span class="p">|</span> <span class="nv">id</span>          <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Premium</span>     <span class="p">|</span> <span class="n">premium</span>     <span class="p">|</span>
+
+  <span class="kn">Scenario</span><span class="p">:</span> Pay by card
+    <span class="nf">Given</span> I visit <span class="s">"subscriptions/new"</span>
+    <span class="nf">And</span> I click <span class="s">"Subscribe"</span> within the card_section
+    <span class="nf">When</span> I fill in appropriate card details for premium
+    <span class="nf">Then</span> I should see <span class="s">"Thanks, you're now an AgileVentures Premium Member!"</span>
+    <span class="nf">And</span> the user should receive a <span class="s">"Welcome to AgileVentures Premium"</span> email
+
+  <span class="kn">Scenario</span><span class="p">:</span> Pay by PayPal
+    <span class="nf">Given</span> I visit <span class="s">"subscriptions/new"</span>
+    <span class="nf">Then</span> I should see a paypal form within the paypal_section
+    <span class="nf">When</span> Paypal updates our endpoint
+    <span class="nf">Then</span> the user should receive a <span class="s">"Welcome to AgileVentures Premium"</span> email
+    <span class="nf">And</span> I should see <span class="s">"Thanks, you're now an AgileVentures Premium Member!"</span> in last_response
+</code></pre>
+<p>The key new elements were in the PayPal section, where I introduced a step to simulate the process initiated by PayPal after a successful payment:</p>
+<pre class="highlight ruby"><code><span class="no">And</span><span class="p">(</span><span class="sr">/^Paypal updates our endpoint$/</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">body</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"CONTEXT"</span><span class="o">=&gt;</span><span class="s2">"wtgSziM4C5x0SI-9CmKcv2vkSeTLK5P_g6HqzC__YTYkcqziFNcB84p79Ja"</span><span class="p">,</span> <span class="s2">"txn_type"</span><span class="o">=&gt;</span><span class="s2">"subscr_signup"</span><span class="p">,</span> <span class="s2">"subscr_id"</span><span class="o">=&gt;</span><span class="s2">"I-PEG1KSWM8TBU"</span><span class="p">,</span> <span class="s2">"last_name"</span><span class="o">=&gt;</span><span class="s2">"buyer"</span><span class="p">,</span> <span class="s2">"residence_country"</span><span class="o">=&gt;</span><span class="s2">"GB"</span><span class="p">,</span> <span class="s2">"mc_currency"</span><span class="o">=&gt;</span><span class="s2">"GBP"</span><span class="p">,</span> <span class="s2">"item_name"</span><span class="o">=&gt;</span><span class="s2">"Premium"</span><span class="p">,</span> <span class="s2">"business"</span><span class="o">=&gt;</span><span class="s2">"sam-facilitator@agileventures.org"</span><span class="p">,</span> <span class="s2">"recurring"</span><span class="o">=&gt;</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"payer_status"</span><span class="o">=&gt;</span><span class="s2">"verified"</span><span class="p">,</span> <span class="s2">"payer_email"</span><span class="o">=&gt;</span><span class="s2">"sam-buyer@agileventures.org"</span><span class="p">,</span> <span class="s2">"first_name"</span><span class="o">=&gt;</span><span class="s2">"test"</span><span class="p">,</span> <span class="s2">"receiver_email"</span><span class="o">=&gt;</span><span class="s2">"sam-facilitator@agileventures.org"</span><span class="p">,</span> <span class="s2">"payer_id"</span><span class="o">=&gt;</span><span class="s2">"9EG5X4H5DJJW4"</span><span class="p">,</span> <span class="s2">"reattempt"</span><span class="o">=&gt;</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"item_number"</span><span class="o">=&gt;</span><span class="s2">"not logged in"</span><span class="p">,</span> <span class="s2">"subscr_date"</span><span class="o">=&gt;</span><span class="s2">"10:07:19 Dec 12, 2016 PST"</span><span class="p">,</span> <span class="s2">"charset"</span><span class="o">=&gt;</span><span class="s2">"windows-1252"</span><span class="p">,</span> <span class="s2">"period1"</span><span class="o">=&gt;</span><span class="s2">"7 D"</span><span class="p">,</span> <span class="s2">"mc_amount1"</span><span class="o">=&gt;</span><span class="s2">"0.00"</span><span class="p">,</span> <span class="s2">"period3"</span><span class="o">=&gt;</span><span class="s2">"1 M"</span><span class="p">,</span> <span class="s2">"mc_amount3"</span><span class="o">=&gt;</span><span class="s2">"10.00"</span><span class="p">,</span> <span class="s2">"auth"</span><span class="o">=&gt;</span><span class="s2">"A31jSI5vY44zpPcQlAUk8WdibsJJT72rGx6ptiGPil6MG30OuCoFtHJ38.CJmmBQ.NNbZg.XEaWj298bVa5FZIw"</span><span class="p">,</span> <span class="s2">"form_charset"</span><span class="o">=&gt;</span><span class="s2">"UTF-8"</span><span class="p">}</span>
+
+  <span class="n">post</span> <span class="n">subscriptions_path</span><span class="p">,</span> <span class="n">body</span>
+<span class="k">end</span>
+</code></pre>
+<p>In the above I&rsquo;d copied and pasted in the set of params I&rsquo;d seen from a sandbox test of PayPal when I hooked it on the debugger locally.  I couldn&rsquo;t use Capybara to simulate a POST request so I used a rack test method instead.  I also deleted the old custom PayPal endpoint; the one we&rsquo;d used to validate that anyone would actually sign up by PayPal.  This custom endpoint had confused us when refactoring the Premium Rails controller, so it was good to see the back of it.  Our routes for subscriptions went from this:</p>
+<pre class="highlight ruby"><code>  <span class="n">match</span> <span class="s1">'/subscriptions/paypal'</span> <span class="o">=&gt;</span> <span class="s1">'subscriptions#paypal'</span><span class="p">,</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:get</span><span class="p">]</span>
+  <span class="n">match</span> <span class="s1">'/subscriptions/upgrade'</span> <span class="o">=&gt;</span> <span class="s1">'subscriptions#upgrade'</span><span class="p">,</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:put</span><span class="p">]</span>
+  <span class="n">resources</span> <span class="ss">:subscriptions</span>
+</code></pre>
+<p>to this:</p>
+<pre class="highlight ruby"><code>  <span class="n">match</span> <span class="s1">'/subscriptions/upgrade'</span> <span class="o">=&gt;</span> <span class="s1">'subscriptions#upgrade'</span><span class="p">,</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:put</span><span class="p">]</span>
+  <span class="n">resources</span> <span class="ss">:subscriptions</span>
+</code></pre>
+<p>The response from PayPal, simulated by <code>post subscriptions_path, body</code>, was now going to hit the <code>create</code> route generated by the <code>resources :subscriptions</code> command.  The key thing here is trying to have the app be RESTful; to try and coordinate everything in terms of the basic CRUD actions on a &ldquo;resource&rdquo;.  Custom endpoints like the <code>paypal</code> one I just removed and the <code>upgrade</code> one that I want to remove next are all well and good for a quick fix, but they are technical debt, as was made clear recently.  It might seem more complicated in this case to have both Stripe and PayPal work through a single <code>subscription#create</code> method, but it helps get our business entities in our domain model clear.  What&rsquo;s happening here, independently of the financial mechanism that our members contribute through, is that our users are setting up a Subscription.  There are a set of common things we want to happen when a member starts a Subscription, so it makes sense for it to be done in a coherent way through the CRUD C (&lsquo;Create&rsquo;) on the SubscriptionsController.  The consistency of this is important for navigation of the codebase by future coders, including ourselves.</p>
+
+<p>Not that there wasn&rsquo;t some short term pain to be had here in the form of taking the existing Stripe specific controller method and having it support both PayPal and Stripe.  To start with it looked like this:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">create</span>
+    <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find_by_slug</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:user</span><span class="p">])</span>
+    <span class="vi">@plan</span> <span class="o">=</span> <span class="no">Plan</span><span class="p">.</span><span class="nf">new</span> <span class="n">params</span><span class="p">[</span><span class="ss">:plan</span><span class="p">]</span>
+    <span class="vi">@sponsored_user</span> <span class="o">=</span> <span class="n">sponsored_user?</span>
+
+    <span class="n">update_user_to_premium</span><span class="p">(</span><span class="n">create_customer</span><span class="p">,</span> <span class="vi">@user</span><span class="p">)</span>
+    <span class="n">send_acknowledgement_email</span>
+
+  <span class="k">rescue</span> <span class="no">Stripe</span><span class="o">::</span><span class="no">StripeError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+    <span class="n">flash</span><span class="p">[</span><span class="ss">:error</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
+    <span class="n">redirect_to</span> <span class="n">new_subscription_path</span>
+  <span class="k">end</span>
+</code></pre>
+<p>I poked through it with the debugger, driving from the new cucumber step that simulated the completed PayPal payment.  It required quite a few changes, but eventually I got to:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">create</span>
+    <span class="vi">@user</span> <span class="o">=</span> <span class="n">detect_user</span>
+    <span class="vi">@plan</span> <span class="o">=</span> <span class="n">detect_plan</span>
+    <span class="vi">@sponsored_user</span> <span class="o">=</span> <span class="n">sponsored_user?</span>
+
+    <span class="n">create_stripe_customer</span> <span class="k">unless</span> <span class="n">paypal?</span>
+
+    <span class="n">update_user_to_premium</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
+    <span class="n">send_acknowledgement_email</span>
+
+  <span class="k">rescue</span> <span class="no">Stripe</span><span class="o">::</span><span class="no">StripeError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+    <span class="n">flash</span><span class="p">[</span><span class="ss">:error</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
+    <span class="n">redirect_to</span> <span class="n">new_subscription_path</span>
+  <span class="k">end</span>
+</code></pre>
+<p>It was not ideal and ripe for extraction into a service object that could be tested separately.  However it was working despite the distractions of having to do a PostgreSQL db upgrade, and set up a custom mechanism for checking the contents of the page after the PayPal rack test post since Capybara could no longer see the output.  The method above didn&rsquo;t look too bad, but I was now left with messy <code>if/else</code> statements in private methods throughout the controller, e.g. </p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">update_user_to_premium</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="n">user</span> <span class="o">||=</span> <span class="n">current_user</span>
+    <span class="k">return</span> <span class="k">unless</span> <span class="n">user</span>
+    <span class="k">if</span> <span class="n">paypal?</span>
+      <span class="no">UpgradeUserToPremium</span><span class="p">.</span><span class="nf">with</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s1">'payer_id'</span><span class="p">],</span> <span class="no">PaymentSource</span><span class="o">::</span><span class="no">PayPal</span><span class="p">,</span> <span class="n">plan_class</span><span class="p">)</span>
+    <span class="k">else</span>
+      <span class="no">UpgradeUserToPremium</span><span class="p">.</span><span class="nf">with</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">,</span> <span class="vi">@stripe_customer</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span> <span class="no">PaymentSource</span><span class="o">::</span><span class="no">Stripe</span><span class="p">,</span> <span class="n">plan_class</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre>
+<p>I could see a pattern here.  I could avoid all these checks for PayPal, with an adaptor or facade that wrapped the params something like this:</p>
+<pre class="highlight ruby"><code>
+<span class="k">class</span> <span class="nc">ThirdPartyPaymentCompletionResults</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="vi">@params</span> <span class="o">=</span> <span class="n">params</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">paypal?</span>
+    <span class="vi">@params</span><span class="p">[</span><span class="s1">'item_number'</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span> 
+
+<span class="k">class</span> <span class="nc">StripePaymentCompletionResults</span> <span class="o">&lt;</span> <span class="no">ThirdPartyPaymentCompletionResults</span>
+
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">PaypalPaymentCompletionResults</span> <span class="o">&lt;</span> <span class="no">ThirdPartyPaymentCompletionResults</span>
+
+  <span class="k">def</span> <span class="nf">id</span>
+    <span class="n">params</span><span class="p">[</span><span class="s1">'payer_id'</span><span class="p">]</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre>
+<p>Although looking at the above sketch I can see that I want to put this in a module and maybe use a factory method to have an entity of the correct type created, e.g. </p>
+<pre class="highlight ruby"><code>
+<span class="k">module</span> <span class="nn">ThirdPartyPayment</span>
+
+  <span class="k">class</span> <span class="nc">Result</span>
+    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">process_results</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="vi">@params</span> <span class="o">=</span> <span class="n">params</span>
+      <span class="k">return</span> <span class="no">PayPal</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="k">if</span> <span class="n">paypal?</span>
+      <span class="no">Stripe</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="kp">private</span>
+
+    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">paypal?</span>
+      <span class="vi">@params</span><span class="p">[</span><span class="s1">'item_number'</span><span class="p">]</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">class</span> <span class="nc">Stripe</span> <span class="o">&lt;</span> <span class="no">Result</span>
+    <span class="k">def</span> <span class="nf">intialize</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="vi">@params</span> <span class="o">=</span> <span class="n">params</span>
+      <span class="vi">@stripe_customer</span> <span class="o">=</span> <span class="n">create_stripe_customer</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">id</span>
+      <span class="vi">@stripe_customer</span><span class="p">.</span><span class="nf">id</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">payment_source</span>
+      <span class="no">PaymentSource</span><span class="o">::</span><span class="no">Stripe</span>
+    <span class="k">end</span>
+
+  <span class="k">end</span>
+
+  <span class="k">class</span> <span class="nc">Paypal</span> <span class="o">&lt;</span> <span class="no">Result</span>
+    <span class="k">def</span> <span class="nf">intialize</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="vi">@params</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">id</span>
+      <span class="vi">@params</span><span class="p">[</span><span class="s1">'payer_id'</span><span class="p">]</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">payment_source</span>
+      <span class="no">PaymentSource</span><span class="o">::</span><span class="no">PayPal</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+<span class="k">end</span> 
+</code></pre>
+<p>and then the <code>update_user_to_premium</code> method and others could collapse back to something like:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">update_user_to_premium</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">user</span> <span class="o">||=</span> <span class="n">current_user</span>
+    <span class="k">return</span> <span class="k">unless</span> <span class="n">user</span>
+    <span class="no">UpgradeUserToPremium</span><span class="p">.</span><span class="nf">with</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">,</span> <span class="n">result</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span> <span class="n">result</span><span class="p">.</span><span class="nf">payment_source</span><span class="p">,</span> <span class="n">plan_class</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre>
+<p>Now that was a rough code sketch above - I&rsquo;ll have to work out the kinks, but I can see how it might clean up the controller.  There are other domain entities in play here such as the set of PaymentSources that we already created and the UpgradeUserToPremium service.  It&rsquo;s tempting to jump in and start refactoring away, but I heed Sandi Metz&rsquo;s advice about looking ahead to what other refactorings are coming.  I plan to immediately follow this work with a series of tests to check that all the sad paths work, that we can have PayPal supported sponsorships, and support generic types of plans.  All these are going to put pressure on the controller and the domain model that I don&rsquo;t necessarily understand as well as I like.  I don&rsquo;t want to be caught burning a lot of time prematurely refactoring in one way only to discover that I need to fall back.</p>
+
+<p>This is a point of agony where I&rsquo;m embarressed by the <code>if/else</code> statements and I want to clean them up as quickly as possible, but I also want to deliver all the payment features as quickly as possible.  I&rsquo;m carefully watching the level of technical debt &hellip;  At least the routes got a little cleaner with these changes.  My belief in the the RESTful CRUD manipulation of resources has re-doubled and I&rsquo;m looking to a future vista where we have a robust domain model with entities like Subscriptions and Plans and PaymentSource matches the needs of our charity enterprise, and our technology is in the service of our process rather than the other way round :-)</p>
+
+<h3>Related Videos:</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=t1A_hI7-X0c">&ldquo;Martin Fowler&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=W3_ISEYsTUA">&ldquo;Kent Beck&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=Ky49eCl_7EA">Solo on WebSiteOne</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
