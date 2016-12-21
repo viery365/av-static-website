@@ -5,10 +5,106 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2016-12-15T00:00:00+00:00</updated>
+  <updated>2016-12-16T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Mobbing and Face 2 Face</title>
+    <link rel="alternate" href="http://blog.url.com/2016/12/16/mobbing-f2f/"/>
+    <id>http://blog.url.com/2016/12/16/mobbing-f2f/</id>
+    <published>2016-12-16T00:00:00+00:00</published>
+    <updated>2016-12-21T21:37:17+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Thursday was taken at quite a rush.  I moved the Premium Mob programming session forward half an hour so I could attend my twin boys carol concert.  We got deeper into Avdi Grimm&amp;rsquo;s Confident Ruby, where the patterns were starting to combine to create code like this:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;Graphics&lt;/span&gt;
+  &lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;Conversions&lt;/span&gt;
+    &lt;span class="kp"&gt;module_function&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;
+      &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="no"&gt;Integer&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="no"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="no"&gt;String&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="no"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;':'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="ss"&gt;:to_i&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+      &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt; &lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;respond_to?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:to_point&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_point&lt;/span&gt;  
+      &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt; &lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;respond_to?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:to_ary&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="no"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_ary&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+      &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"Cannot convert &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;inspect&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; to Point"&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="no"&gt;Point&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Struct&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;inspect&lt;/span&gt;
+        &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="si"&gt;}#{&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+      &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;to_point&lt;/span&gt;
+        &lt;span class="nb"&gt;self&lt;/span&gt; 
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="no"&gt;Pair&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Struct&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;to_ary&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Flag&lt;/span&gt;
+      &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;flag_color&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="vi"&gt;@x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="vi"&gt;@y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="vi"&gt;@flag_color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;flag_color&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+      &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;to_point&lt;/span&gt;
+        &lt;span class="no"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="vi"&gt;@y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="kp"&gt;include&lt;/span&gt; &lt;span class="no"&gt;Graphics&lt;/span&gt;
+&lt;span class="kp"&gt;include&lt;/span&gt; &lt;span class="no"&gt;Graphics&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Conversions&lt;/span&gt;
+
+&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="no"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;([])&lt;/span&gt;
+&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="no"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"1:2"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="no"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="no"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="no"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Pair&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="no"&gt;Point&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Flag&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:red&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The mobbers seemed pretty happy with the concepts of Idempotency, the splat argument (&lt;code&gt;*args&lt;/code&gt;) and the lambdas (&lt;code&gt;-&amp;gt;(arg)&lt;/code&gt;) in the case statements.  The big discussion was about the use of Structs vs Classes, and Matt was able to use the shared C9 workspace to good effect to show me the alternatives he was thinking about.  I&amp;rsquo;m not sure that we&amp;rsquo;re yet truely mobbing, but I think the others are gaining in confidence and we&amp;rsquo;ll get there.  Mobbing completed, it was time for a carol service, and I was hardly back from that before it was time for the Kent Beck scrum.  I had managed to review a few LocalSupport pull requests, prioritising input for the Premium members who&amp;rsquo;d submitted code or questions.&lt;/p&gt;
+
+&lt;p&gt;Ed had booked me for a Premium F2F session immediately after the Kent Beck and we dived into user stories and cucumber to drive the creation of a new EventManager project in Rails 5.   Within the hour we got everything set up and had out first feature/scenario failing at the point where it would need ActionCable working in order to pass:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Joining the Event
+  As a busy AV member
+  So that I can work out if I want to join an event
+  I'd like to see who is present in the event, updated in real time
+
+  As a new member
+  So that I can join the event on time
+  I would like to have a real time view of whether the hangout is live
+
+  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nf"&gt;Given&lt;/span&gt; an event exists
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; see event status
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit the page for an event
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"event not live"&lt;/span&gt;
+    &lt;span class="nf"&gt;When&lt;/span&gt; the event goes live
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"event live"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That was pretty satsifying, and I was riding high on possible nibbles from a few prospective AgileVentures sponsors.  In terms of financial stability we&amp;rsquo;re about half way there.  If I can land another sponsor and double the number of Premium members it will be a very happy 2017 indeed.  My dream is a sustainable framework for open education for all, where we&amp;rsquo;re all learning through the process of trying to make the world a better place.   The mob sessions are private at the moment, but I get permission from the F2F and Plus members to make their sessions available in the project channels to help the open source projects we work on, and of course all the resulting code is open.  We will need to throw the right sort of licenses in there.  Is it too crazy a dream that we could all be learning and growing without fear?  All benefiting from each other&amp;rsquo;s courage to share the learning experience and process with each other?  And splitting our objective of personal growth with that of helping others?  Call me a dreamer, but I&amp;rsquo;m not the only one &amp;hellip; :-)&lt;/p&gt;
+
+&lt;p&gt;Anyhow I&amp;rsquo;m take a two week break from blogging now, like I did over the summer so I can calm down a bit and catch up with admin, coding and polishing and distributing some of the older blogs.  Hope you all have a very cool yule and I&amp;rsquo;ll look forward to seeing you all in the New Year! :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=lrw0R8YbxXU"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=LkagGRnOorI"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;F2F pairing on Rails 5?  Navigate to the #event_manager channel on AgileVentures slack to catch the link before we lose the slack history :-)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>To Pair or Not to Pair</title>
     <link rel="alternate" href="http://blog.url.com/2016/12/15/to-pair-or-not-to-pair/"/>
@@ -417,95 +513,6 @@
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=-PeG-5Egd2E"&gt;Pull Request Reviews on LocalSupport&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=m4uOCp6ZfyE"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=kpk5yNiQox8"&gt;WebsiteOne project planning&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Agile Dev Ops</title>
-    <link rel="alternate" href="http://blog.url.com/2016/12/08/agile-dev-ops/"/>
-    <id>http://blog.url.com/2016/12/08/agile-dev-ops/</id>
-    <published>2016-12-08T00:00:00+00:00</published>
-    <updated>2016-12-13T21:47:00+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So my project manager partner for WebsiteOne Raoul has got really busy recently, so we negotiated that I would take on some of the PR merging and release responsibility this week.  After the usual blogging and admin and &amp;ldquo;Martin Fowler&amp;rdquo; scrum I jumped into a hangout with Matt and Michael, and tried to use the opportunity to debug the YouTube hookup problems Matt had been having the day before.  This time Matt was getting a new error that he couldn&amp;rsquo;t even start a Hangout On Air, so we couldn&amp;rsquo;t get far.  Burned 20 minutes on that, although it&amp;rsquo;s a fairly common issue our users have, and if we could fix it then we could get more video broadcasts and streaming of other pairing sessions.  Then again I don&amp;rsquo;t know that our YouTube activity is driving much traffic to our site; it doesn&amp;rsquo;t register in Google analytics.  Although people might just be typing in searches direct for &amp;ldquo;AgileVentures&amp;rdquo;, but I&amp;rsquo;ve yet to hear anyone say &amp;ldquo;Oh, I saw your pairing video on YouTube and wanted to get involved&amp;rdquo;.  The viewing figures on our videos are spiking (the pair programming session I started with Matt and Michael has 333 views today, 5 thumbs up AND 5 thumbs down!).  However, even anecdotally the Ruby Rogues podcast has generated more traffic than all our YouTube activity combined.  Still the YouTube recordings are at least partly for the benefit of the existing community, to allow them to refer back to previous pairing sessions.&lt;/p&gt;
-
-&lt;p&gt;Alot of the WebsiteOne infrastructure is set up around supporting Google Hangouts and YouTube streams.  Matt and Michael had got in a Work in Progress pull request that added a characterisation test to the tweeting of YouTube links that was missing an acceptance test.  This was related to trying to fix a long standing issue that our system tweets video links even when the videos are missing.  We&amp;rsquo;d previously backed off the bigger fix to ensure the current functionality was described in an acceptance test.  I needed to get on to WSO devops and needed to give Matt and Michael feedback without jumping in and trying to fix lots of things.  At least that was my strategy as I reviewed their code.  They had filtered the sensitive Twitter tokens from the VCR cache, which was great, but I had two concerns with the new acceptance test below:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="nt"&gt;@vcr&lt;/span&gt;
-&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Tweeting Live Events
-  As a site admin
-  In order to increase participation in events
-  I would like live events to generate twitter notifications
-
-  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nf"&gt;Given&lt;/span&gt; an event exists
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Event going live causes tweets of hangout link and youtube link to be sent
-    &lt;span class="nf"&gt;When&lt;/span&gt; the HangoutConnection has pinged to indicate the event start, appropriate tweets will be sent
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;One was that we had all the work being done in a single Cucumber step, which was also bound quite tightly to the underlying implementation:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^the HangoutConnection has pinged to indicate the event start, appropriate tweets will be sent$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;yt_tweet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"Alejandro just hosted an online #scrum Missed it? Catch the recording at youtu.be/11 #CodeForGood #opensource"&lt;/span&gt;
-  &lt;span class="n"&gt;hangout_tweet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"#Scrum meeting with our #distributedteam is live on http://hangout.test Join in and learn about our #opensource #projects!"&lt;/span&gt;
-   &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;TwitterService&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;twitter_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:update&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hangout_tweet&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_call_original&lt;/span&gt;
-  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;TwitterService&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;twitter_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:update&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;yt_tweet&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_call_original&lt;/span&gt;
-
-  &lt;span class="n"&gt;participants&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"0"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"hangout2750757B_ephemeral.id.google.com^a85dcb4670"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"hasMicrophone"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"hasCamera"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"hasAppEnabled"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"isBroadcaster"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"isInBroadcast"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"displayIndex"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"0"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"person"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"id"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"108533475599002820142"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"displayName"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"Alejandro Babio"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"image"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"url"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="s2"&gt;"na"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="s2"&gt;"locale"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"en"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"na"&lt;/span&gt;&lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;"false"&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
-  &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="s1"&gt;'ORIGIN'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'a-hangout-opensocial.googleusercontent.com'&lt;/span&gt;
-  &lt;span class="n"&gt;put&lt;/span&gt; &lt;span class="s2"&gt;"/hangouts/@google_id"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;title: &lt;/span&gt;&lt;span class="vi"&gt;@event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
-                               &lt;span class="ss"&gt;host_id: &lt;/span&gt;&lt;span class="s1"&gt;'3'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
-                               &lt;span class="ss"&gt;event_id: &lt;/span&gt;&lt;span class="vi"&gt;@event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                               &lt;span class="ss"&gt;participants: &lt;/span&gt;&lt;span class="n"&gt;participants&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
-                               &lt;span class="ss"&gt;hangout_url: &lt;/span&gt;&lt;span class="s1"&gt;'http://hangout.test'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                               &lt;span class="ss"&gt;hoa_status: &lt;/span&gt;&lt;span class="s1"&gt;'live'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
-                               &lt;span class="ss"&gt;project_id: &lt;/span&gt;&lt;span class="s1"&gt;'1'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
-                               &lt;span class="ss"&gt;category: &lt;/span&gt;&lt;span class="s1"&gt;'Scrum'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                               &lt;span class="ss"&gt;yt_video_id: &lt;/span&gt;&lt;span class="s1"&gt;'11'&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The challenge we had here was that we wanted to check the Tweets were sent, but that we were locking our acceptance test to the specific implementation of our TwitterService object.  A reasonable compromise for the time being perhaps, but could we use an RSpec spy on TwitterService to allow us to break the step into two and into a readable order?  Or was there some way to assert that the VCR cache had been hit in the appropriate fashion?  Both, things that could be investigated immediately.  I almost had the Rails console out, but pulled myself back, suggested to Matt and Michael that they just clean up some stray steps and scenarios and get this PR in.  We didn&amp;rsquo;t have unlimited time right now to look for a perfect test.  Some test was better than no test, which was the state we had been in before.&lt;/p&gt;
-
-&lt;p&gt;Matt and Michael went off to another hangout and I got on with WSO devops.  I had been hoping to review the waffle board (project management) but only got so far as reviewing all the outstanding PRs.  I merged in the Premium controller refactoring PR that Michael and I had worked on, and checked that on the develop server - all good.  I looked to see what was in the hopper for deploying to production, and it wasn&amp;rsquo;t so much, so I decided to try and pull in the new PayPal integration as well.  I fell foul of merge conflicts and clobberings that I had anticipated when we broke out the separate PR for the refacotoring.  Frustrating, although I think I only burned an additional 30 minutes there.   Not sure if that was time well spent.&lt;/p&gt;
-
-&lt;p&gt;I was making a mess on my local system, but the CI was passing, and it looked like we were ready to go, but then the controller specific stylesheets that I had been struggling with the day before were not working on production.  It seemed like they were not playing well with the asset pipeline.  All I was trying to do was to isolate the style for centering and add margin to the payment option wells.  Without they looked like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/3juob156frv89te/Screenshot%202016-12-08%2010.09.19.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;With they looked like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/o2tgyq1df0bls9y/Screenshot%202016-12-08%2010.09.57.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d spent an hour struggling to get that to work the previous day.  What should I do?  Just push out what we had?  Burn time fixing them up? I tried to recreate the issue locally by running the local server in production mode, fighting through the nest of environment variables that production needed to run: &lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;SECRET_KEY_BASE=asdfggfhdgs SECRET_TOKEN=12342ewwefdsaf AIRBRAKE_API_KEY=asdffgfhdgsf AIRBRAKE_PROJECT_ID=2342 be rails s -e production
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;but even then the local stylesheets wouldn&amp;rsquo;t load at all.  I&amp;rsquo;d spent 20 minutes and couldn&amp;rsquo;t replicate the bug locally.  In frustration I shiv&amp;rsquo;d in the necessary styles, because I anticipated the debug cycle checking for fixes in production mode on the develop server would be prohibitive:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;  &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"card_section"&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"col-lg-5 well"&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"margin: 10px; text-align: center;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt; &lt;span class="c"&gt;&amp;lt;!-- shiv because controller stylesheets now working in production mode see https://github.com/AgileVentures/WebsiteOne/issues/1450--&amp;gt;&lt;/span&gt;
-
-    &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"margin-bottom: 15px;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Get Premium via Credit/Debit Card:&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;%= form_tag subscriptions_path(plan: 'premium') do %&amp;gt;
-        &lt;span class="nt"&gt;&amp;lt;script &lt;/span&gt;&lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"https://checkout.stripe.com/checkout.js"&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"stripe-button"&lt;/span&gt;
-                &lt;span class="na"&gt;data-key=&lt;/span&gt;&lt;span class="s"&gt;"&amp;lt;%= Rails.configuration.stripe[:publishable_key] %&amp;gt;"&lt;/span&gt;
-                &lt;span class="na"&gt;data-description=&lt;/span&gt;&lt;span class="s"&gt;"A month's subscription"&lt;/span&gt;
-                &lt;span class="na"&gt;data-amount=&lt;/span&gt;&lt;span class="s"&gt;"1000"&lt;/span&gt;
-                &lt;span class="na"&gt;data-currency=&lt;/span&gt;&lt;span class="s"&gt;"GBP"&lt;/span&gt;
-                &lt;span class="na"&gt;data-locale=&lt;/span&gt;&lt;span class="s"&gt;"en-US"&lt;/span&gt;
-                &lt;span class="na"&gt;data-name=&lt;/span&gt;&lt;span class="s"&gt;"Premium Membership"&lt;/span&gt;
-                &lt;span class="na"&gt;data-label=&lt;/span&gt;&lt;span class="s"&gt;"Subscribe"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;% end %&amp;gt;
-
-  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;At least I linked the ticket in to the comment, and hope we can circle back to fix that properly, although what it really inspires me to do is move the whole system to a static middleman app where we take a fresh start on the styling.  I pushed on.  There were still some &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1451"&gt;problems on staging&lt;/a&gt; that I think are related to the data there, and brittleness in parts of the app.  That needs fixing, since it interferes with our ability to do manual checks on staging; but I pushed on and was ultimately rewarded with the newly styled PayPal endpoint on production, and I hurredly fixed up all the static pages to ensure that they pointed to the new &amp;lsquo;subscriptions&amp;rsquo; endpoint.&lt;/p&gt;
-
-&lt;p&gt;Agile DevOps?  I&amp;rsquo;d managed to negotiate a handover from my project-manager pair and get the first part of a bigger epic of PayPal integration out onto production.  I&amp;rsquo;d had to make several compromises along the way, but at least I&amp;rsquo;d flagged them with tickets, and thought I&amp;rsquo;d got a good insight into some of the problems facing us.  I still wonder if we really have performance issues?  The site feels sluggish, but perhaps the 150% memory error warnings from Heroku are just part of their sales strategy.  I am leaning towards an alternate approach where we have a middleman site for the main system, and things like events and projects can be pulled in via JavaScript of separate RESTful API endpoints.  This would mean that heavy load in one part of the site would not affect simple loading of about pages, and also allow the back ends of the different elements of the site to be compartmentalized and chopped and changed as necessary.  It would be a big change, but we&amp;rsquo;re already creating the individual microservices - let&amp;rsquo;s see how we go.  If we can move to the real model I think we really will have done Agile DevOps!&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dxImOJLvadE"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=VK9qIJwXG1g"&gt;Pair Programming and DevOps on WSO&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=uQErOajwgt4"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

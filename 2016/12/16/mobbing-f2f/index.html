@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Mobbing and Face 2 Face</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2016 x2016_12 x2016_12_16 x2016_12_16_mobbing-f2f x2016_12_16_mobbing-f2f_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2016/12/16/mobbing-f2f/">Mobbing and Face 2 Face</a></h2>
+        <h5 class='date'>16 Dec 2016</h5>
+    <p>Thursday was taken at quite a rush.  I moved the Premium Mob programming session forward half an hour so I could attend my twin boys carol concert.  We got deeper into Avdi Grimm&rsquo;s Confident Ruby, where the patterns were starting to combine to create code like this:</p>
+<pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">Graphics</span>
+  <span class="k">module</span> <span class="nn">Conversions</span>
+    <span class="kp">module_function</span>
+
+    <span class="k">def</span> <span class="nf">Point</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+      <span class="k">case</span> <span class="n">args</span><span class="p">.</span><span class="nf">first</span>
+      <span class="k">when</span> <span class="no">Integer</span> <span class="k">then</span> <span class="no">Point</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+      <span class="k">when</span> <span class="no">String</span> <span class="k">then</span> <span class="no">Point</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">':'</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:to_i</span><span class="p">))</span>
+      <span class="k">when</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">arg</span><span class="p">){</span> <span class="n">arg</span><span class="p">.</span><span class="nf">respond_to?</span><span class="p">(</span><span class="ss">:to_point</span><span class="p">)</span> <span class="p">}</span> <span class="k">then</span> <span class="n">args</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">to_point</span>  
+      <span class="k">when</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">arg</span><span class="p">){</span> <span class="n">arg</span><span class="p">.</span><span class="nf">respond_to?</span><span class="p">(</span><span class="ss">:to_ary</span><span class="p">)</span> <span class="p">}</span> <span class="k">then</span> <span class="no">Point</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">to_ary</span><span class="p">)</span>
+
+      <span class="k">else</span>
+        <span class="k">raise</span> <span class="no">TypeError</span><span class="p">,</span> <span class="s2">"Cannot convert </span><span class="si">#{</span><span class="n">args</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2"> to Point"</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="no">Point</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:x</span><span class="p">,</span> <span class="ss">:y</span><span class="p">)</span> <span class="k">do</span>
+      <span class="k">def</span> <span class="nf">inspect</span>
+        <span class="s2">"</span><span class="si">#{</span><span class="n">x</span><span class="si">}#{</span><span class="n">y</span><span class="si">}</span><span class="s2">"</span>
+      <span class="k">end</span>
+      <span class="k">def</span> <span class="nf">to_point</span>
+        <span class="nb">self</span> 
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="no">Pair</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">)</span> <span class="k">do</span>
+      <span class="k">def</span> <span class="nf">to_ary</span>
+        <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">]</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">class</span> <span class="nc">Flag</span>
+      <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">flag_color</span><span class="p">)</span>
+        <span class="vi">@x</span><span class="p">,</span> <span class="vi">@y</span><span class="p">,</span> <span class="vi">@flag_color</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">flag_color</span>
+      <span class="k">end</span>
+      <span class="k">def</span> <span class="nf">to_point</span>
+        <span class="no">Point</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="vi">@x</span><span class="p">,</span><span class="vi">@y</span><span class="p">)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="kp">include</span> <span class="no">Graphics</span>
+<span class="kp">include</span> <span class="no">Graphics</span><span class="o">::</span><span class="no">Conversions</span>
+
+<span class="nb">puts</span> <span class="no">Point</span><span class="p">([])</span>
+<span class="nb">puts</span> <span class="no">Point</span><span class="p">(</span><span class="s2">"1:2"</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="no">Point</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">puts</span> <span class="no">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="no">Point</span><span class="p">(</span><span class="no">Pair</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span><span class="mi">32</span><span class="p">))</span>
+<span class="nb">puts</span> <span class="no">Point</span><span class="p">(</span><span class="no">Flag</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="ss">:red</span><span class="p">))</span>
+</code></pre>
+<p>The mobbers seemed pretty happy with the concepts of Idempotency, the splat argument (<code>*args</code>) and the lambdas (<code>-&gt;(arg)</code>) in the case statements.  The big discussion was about the use of Structs vs Classes, and Matt was able to use the shared C9 workspace to good effect to show me the alternatives he was thinking about.  I&rsquo;m not sure that we&rsquo;re yet truely mobbing, but I think the others are gaining in confidence and we&rsquo;ll get there.  Mobbing completed, it was time for a carol service, and I was hardly back from that before it was time for the Kent Beck scrum.  I had managed to review a few LocalSupport pull requests, prioritising input for the Premium members who&rsquo;d submitted code or questions.</p>
+
+<p>Ed had booked me for a Premium F2F session immediately after the Kent Beck and we dived into user stories and cucumber to drive the creation of a new EventManager project in Rails 5.   Within the hour we got everything set up and had out first feature/scenario failing at the point where it would need ActionCable working in order to pass:</p>
+<pre class="highlight gherkin"><code><span class="kd">Feature</span><span class="p">:</span> Joining the Event
+  As a busy AV member
+  So that I can work out if I want to join an event
+  I'd like to see who is present in the event, updated in real time
+
+  As a new member
+  So that I can join the event on time
+  I would like to have a real time view of whether the hangout is live
+
+  <span class="kn">Background</span><span class="p">:</span>
+    <span class="nf">Given</span> an event exists
+
+  <span class="kn">Scenario</span><span class="p">:</span> see event status
+    <span class="nf">Given</span> I visit the page for an event
+    <span class="nf">Then</span> I should see <span class="s">"event not live"</span>
+    <span class="nf">When</span> the event goes live
+    <span class="nf">Then</span> I should see <span class="s">"event live"</span>
+</code></pre>
+<p>That was pretty satsifying, and I was riding high on possible nibbles from a few prospective AgileVentures sponsors.  In terms of financial stability we&rsquo;re about half way there.  If I can land another sponsor and double the number of Premium members it will be a very happy 2017 indeed.  My dream is a sustainable framework for open education for all, where we&rsquo;re all learning through the process of trying to make the world a better place.   The mob sessions are private at the moment, but I get permission from the F2F and Plus members to make their sessions available in the project channels to help the open source projects we work on, and of course all the resulting code is open.  We will need to throw the right sort of licenses in there.  Is it too crazy a dream that we could all be learning and growing without fear?  All benefiting from each other&rsquo;s courage to share the learning experience and process with each other?  And splitting our objective of personal growth with that of helping others?  Call me a dreamer, but I&rsquo;m not the only one &hellip; :-)</p>
+
+<p>Anyhow I&rsquo;m take a two week break from blogging now, like I did over the summer so I can calm down a bit and catch up with admin, coding and polishing and distributing some of the older blogs.  Hope you all have a very cool yule and I&rsquo;ll look forward to seeing you all in the New Year! :-)</p>
+
+<h3>Related Videos</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=lrw0R8YbxXU">&ldquo;Martin Fowler&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=LkagGRnOorI">&ldquo;Kent Beck&rdquo; scrum</a></li>
+<li>F2F pairing on Rails 5?  Navigate to the #event_manager channel on AgileVentures slack to catch the link before we lose the slack history :-)</li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
