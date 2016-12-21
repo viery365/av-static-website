@@ -82,7 +82,7 @@
       <div class="col-lg-8 text-left">
         <h2 class='title'><a href="/2016/09/26/confident-coding/">Confident Coding</a></h2>
         <h5 class='date'>26 Sep 2016</h5>
-    <p>Friday I tried to improve on Thursday.  I proposed to Michael that we try to rotate driver/navigator roles more frequently and that we put aside the work on the Karma calculation; instead focusing on the domain model for the Premium members.  Michael had solo&rsquo;d the creation of a cuke for a new Karma calculation rake task that would complement removing the <code>after_validation</code> hook from the User object.  Part of me was desperate to continue battling with the Karma calculation, but I convinced myself it would be better to leave that as a PR, get feedback from Raoul in the meantime, and not continue building on that part of the system until the PR was merged.</p>
+    <p>Friday I tried to improve on Thursday&rsquo;s performance.  I proposed to Michael that we try to rotate driver/navigator roles more frequently and that we put aside the work on the Karma calculation; instead focusing on the domain model for the Premium members.  Michael had solo&rsquo;d the creation of a cuke for a new Karma calculation rake task that would complement removing the <code>after_validation</code> hook from the User object.  Part of me was desperate to continue battling with the Karma calculation, but I convinced myself it would be better to leave that as a PR, get feedback from Raoul in the meantime, and not continue building on that part of the system until the PR was merged.</p>
 
 <p>I think I was slowly <a href="https://blog.craftacademy.se/let-go-of-the-banana/">letting go of a banana</a> which is sometimes very challenging when you are a simple monkey like me; but I was coming to the conclusion I should put down that banana containing coconut and get some distance from it.  That coming back to it in a few days might yield some better approaches.  Or at least the realisation that the path I thought was the good one, really was a good one; or that something more important might come up in the meantime :-)</p>
 
@@ -146,7 +146,6 @@
     <span class="n">t</span><span class="p">.</span><span class="nf">string</span>  <span class="s1">'payment_id'</span> <span class="c1"># stripe =&gt; stripe id ; craft_academy =&gt; ??</span>
     <span class="n">t</span><span class="p">.</span><span class="nf">datetime</span> <span class="s1">'expires_at'</span>
   <span class="k">end</span>
-
 </code></pre>
 <p>See the video to follow how this evolved from one model to three models and then back to two.  However I did feel uncomfortable that we were being too specific at this level of ruby database instructions, so I pulled that snippet into a text document and re-framed it in terms of Ruby objects:</p>
 <pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Subscription</span> <span class="o">&gt;</span> <span class="no">AR</span><span class="ss">:Base</span>
