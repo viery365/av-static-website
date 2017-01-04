@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Downtime</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2017 x2017_01 x2017_01_03 x2017_01_03_downtime x2017_01_03_downtime_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/01/03/downtime/">Downtime</a></h2>
+        <h5 class='date'> 3 Jan 2017</h5>
+    <p>Right then, back from a two week blogging break.  I was still working the week before Xmas, but thought I&rsquo;d put down the blogging baton to try and catch up on other things.  I had fantasies of making a lot of coding progress, but while there was some coding done, I think it was more admin catchup.  I had a couple of Premium pairing sessions, meetings with UCBerkeley to sort out the next run of the Agile Development using Ruby on Rails MOOC and got Xmas cards sent off to the premium members.  I got complimentary textbooks sent out to several instructors (yay automation!) and got set up for making the new SPOC versions of the MOOC for our beta gold instructors.</p>
+
+<p>There was some coding being done.  I continued work on the support for <a href="https://github.com/AgileVentures/WebsiteOne/pull/1465">making the different kinds of subscription generic</a> that I&rsquo;d started with Marian in a Premium Plus session.  Michael and Marian had done some more work but had come up against some road blocks.  Matt was also trying to make progress on <a href="https://github.com/AgileVentures/WebsiteOne/pull/1469">checking that a video exists before tweeting the YouTube link</a>.  I pushed Michael to pair with Matt while I worked solo on the generic subscription refactoring.  In a break Michael was telling me that he saw a problem with the logic in the events instance controller where the tweets were only being sent out when the youtube id changed.  The new EventInstance object would have a nil YouTube id, and the first incoming ping from our Google Hangout plugin would update the EventInstance to have a YouTube id.  However, the current logic would only tweet when the YouTube id changed, meaning that although we could now check whether the stream associated with the YouTube id was live, we wouldn&rsquo;t be able to tweet to that effect.</p>
+
+<p>Part of the problem here was exposing the flaw, given the current single step cucumber tests that were relying on both VCR and RSpec <code>receive</code> expectations (with follow through) of specifics in our system.  I&rsquo;d been uncomfortable with this arrangement and <a href="http://nonprofits.agileventures.org/2016/12/08/agile-dev-ops/">blogged about it previously</a>, but had held off from diving into the possible solutions I could imagine:</p>
+
+<p>a) using RSpec spies to check the tweet had gone out afterwards, e.g. <code>have_received</code>
+b) somehow checking that the VCR cache had been hit in the way we expected
+c) switching to WebMock</p>
+
+<p>I&rsquo;d held off to avoid the previous pull request getting too large and force myself to stay focused on a different (financial) feature.  Michael said Matt had spent several hours investigating spies and not getting anywhere.  Now maybe I should again have been focusing on the (possibly) more important financial features, but I dived into this with Michael while Matt was on a break.  I was very interested to see whether RSpec spies would do the job allowing us to unwind the Cucumber step so that we could have the Hangout plugin ping as one step, and then a second step check that the tweet had gone out.  At the same time my deep discomfort about having an acceptance test checking our system internals (with spy or expectation) made me start looking through the WebMock documentation.  A complete switch from VCR to WebMock would be a huge pain, but VCR was using WebMock under the hood anyway, so wasn&rsquo;t there some way to use WebMock to check what elements in the VCR cache had been hit?</p>
+
+<p>That was it!  A couple of step definitions like so:</p>
+<pre class="highlight ruby"><code><span class="no">Then</span><span class="p">(</span><span class="sr">/^the youtube link will not be sent$/</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">expect</span><span class="p">(</span><span class="no">WebMock</span><span class="p">).</span><span class="nf">not_to</span> <span class="n">have_requested</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="s1">'https://api.twitter.com/1.1/statuses/update.json'</span><span class="p">).</span><span class="nf">twice</span><span class="p">.</span>
+      <span class="nf">with</span> <span class="p">{</span> <span class="o">|</span><span class="n">req</span><span class="o">|</span> <span class="n">req</span><span class="p">.</span><span class="nf">body</span> <span class="o">=~</span> <span class="sr">/youtu\.be\/11/</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+<p>and our scenarios became appropriately sequential:</p>
+<pre class="highlight gherkin"><code>  <span class="kn">Scenario</span><span class="p">:</span> Event going live without valid live stream does not cause youtube link to be tweeted
+    <span class="nf">Given</span> the live stream has not started
+    <span class="nf">When</span> the HangoutConnection has pinged to indicate the event start
+    <span class="nf">Then</span> the youtube link will not be sent
+</code></pre>
+<p>I left Michael to explain the new setup to Matt and got back to the Generic Subscription feature where I crashed through the road blocks and got something working before the complete coding/blogging/admin break I took between Xmas and New Year.  The Generic Subscription feature involves deleting a lot of replicated templates and making the Plan class a full ActiveRecord Model, with the idea that when we want to deploy a new plan, we just add the appropriate items on the PayPal and Stripe sides, and don&rsquo;t have to push any code to our own site; just add the new plan to the database.  I had been hoping to deploy that before Xmas, but it was not to be, and I&rsquo;ll get into the refactoring I did there in another blog post.</p>
+
+<p>I had been thinking to do some work between Xmas and New Year, but I found myself needing some more serious downtime.  I kept up with email and very occasional Slack in case there were any emergencies, but the kids were off school and it had been a busy year.  I needed some serious downtime where I wasn&rsquo;t pushing myself to get things done every day.  It was pretty damn pleasant, but all good things come to an end. Now I&rsquo;m just getting myself back into the saddle for another busy year.  New Year&rsquo;s resolutions?  Take more time off before I burn out :-)</p>
+
+<p>Related Blogs:</p>
+
+<ul>
+<li>http://nonprofits.agileventures.org/2016/11/15/multiple-pull-request-learning/</li>
+<li>http://nonprofits.agileventures.org/2016/12/07/meetings-vs-coding/</li>
+<li>http://nonprofits.agileventures.org/2016/12/08/agile-dev-ops/</li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3> 
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are awaiting approval of our application to become a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2016</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+</body>
+</html>
