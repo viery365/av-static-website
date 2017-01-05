@@ -5,10 +5,83 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-01-03T00:00:00+00:00</updated>
+  <updated>2017-01-04T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>We Are Charity!</title>
+    <link rel="alternate" href="http://blog.url.com/2017/01/04/we-are-charity/"/>
+    <id>http://blog.url.com/2017/01/04/we-are-charity/</id>
+    <published>2017-01-04T00:00:00+00:00</published>
+    <updated>2017-01-05T21:10:15+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;It finally happened!  The UK government&amp;rsquo;s charity commission approved AgileVentures as an official UK charity.  About 9 months from our original submission, a few emails back and forth, and an apology from the charity commission for accidentally closing our case, we are now a UK registered charity.  A great way to start 2017, and hopefully something that will make our mission a whole load easier.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="announcing charity status on slack" src="https://www.dropbox.com/s/13vldre5edvledp/Screenshot%202017-01-04%2010.10.10.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Our official charity number is 1170963, and my next tasks will be to go round email signatures and websites adding that.  I can re-apply to Slack to get their non-profit tier, however I&amp;rsquo;m not sure we can afford the per user fees even after the nonprofit discount given we have over 1500 in our Slack instance.  Worth a discussion though.  I&amp;rsquo;ll reach out to all our sponsors and pass on the news and the possibility for tax relief on their contributions.  Same for our Premium members.  Will have to check how all that works. &lt;/p&gt;
+
+&lt;p&gt;The charity approval capped a big day of admin yesterday, shaking off the holiday cobwebs.  I caught up with my email and Slack and reviewed all the open pull requests from premium members on WebSiteOne and LocalSupport.  The big things to sort out are the new Agile Development using Ruby on Rails MOOC, a grant application with the Wikimedia edu dashboard folks, and the pricing and support package for the MetPlus project.  MetPlus is nearing the release stage and that links in to our new &lt;a href="http://www.agileventures.org/nonprofit-basic-support"&gt;non-profit support plans&lt;/a&gt;, which themselves need fleshing out and some payment endpoints merged into the generic plan support code we were working on before the break.  I&amp;rsquo;d also love to make more progress on the AsyncVoter bot code, to help projects chug through voting on their ticket backlog, but one thing at a time :-)&lt;/p&gt;
+
+&lt;p&gt;The non-profit support plans are an idea from Armando, since he often has non-profit groups wanting codebases maintained after student teams have built things for non-profits in his class and then moved on.  I have a slightly nervous feeling that this is the way to have me spending even more and more time supporting legacy codebases with serious shortcomings, when what I&amp;rsquo;d really like to be doing is be more involved in the creation of maintainable codebases; but perhaps supporting legacy codebases is actually what I&amp;rsquo;m destined to do, and we can&amp;rsquo;t fight out destiny :-)&lt;/p&gt;
+
+&lt;p&gt;Speaking of legacy codebases the current PR for supporting generic plans includes a feature to allow subscription to the NonProfit Basic Support plan:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="nt"&gt;@stripe_javascript&lt;/span&gt; &lt;span class="nt"&gt;@javascript&lt;/span&gt;
+&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Subscribe to NonProfit Basic Support
+  As a nontechincal admin of a nonprofit or charity
+  So that we can maintain our technical offerings
+  I would like to subscribe to AV NonProfit Basic Support for charities
+
+  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nf"&gt;Given&lt;/span&gt; the following plans exist
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;                    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;             &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;amount&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;free_trial_length_days&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;NonProfit&lt;/span&gt; &lt;span class="n"&gt;Basic&lt;/span&gt; &lt;span class="n"&gt;Support&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;nonprofitbasic&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2000&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;0&lt;/span&gt;                      &lt;span class="p"&gt;|&lt;/span&gt;
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Sign up for nonprofitbasic  support
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I visit &lt;span class="s"&gt;"subscriptions/new?plan=nonprofitbasic"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"Subscribe"&lt;/span&gt; within the card_section
+    &lt;span class="nf"&gt;When&lt;/span&gt; I fill in appropriate card details for nonprofitbasic
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Thanks, you're now an AgileVentures NonProfit Basic Support Member!"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The background step is an indicator of how this PR is evolving the simple Plan class (that was hidden at the end of the &lt;code&gt;SubscriptionsController&lt;/code&gt;) and has changed into a full Active Record model.  Initially I had resisted this change as I was thinking that plan information stored in the Stripe database (and accessible via API) would be our single source of information about Plan data.  However the inclusion of PayPal support made it clear that the concept of a Plan was something firmly in our AgileVentures WebSiteOne domain model.  It seems like PayPal may be sufficiently flexible that plan details such as price and trial length etc. don&amp;rsquo;t need to be stored on PayPal, but the idea of us being dependent on the Stripe API to display information about our Plan pricing etc. seemed unappealing.  Stripe have good servers, but we don&amp;rsquo;t want to wait for a response from them to have authorative information about our Plans.&lt;/p&gt;
+
+&lt;p&gt;This actually highlights one odd thing about the Stripe setup.  You can display any number in the Stripe popup, but what actually gets charged depends on the data stored on the Stripe servers.  We&amp;rsquo;ve been bitten by this when one Stripe plan had the wrong value and one Premium member was charged incorrectly.  It was quickly fixed, but it&amp;rsquo;s not ideal.  Another issue with Stripe is the pro-rated payment when members upgrade from one plan to another.  This leads to an unexpectedly large payment at the beginning of the next month.   I feel like it would be better to have a single payment at the point of upgrade, at least from a customer surprise point of view.    &lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m not sure that there&amp;rsquo;s any easy fix for either of these two, but some possible solutions to the first might be:&lt;/p&gt;
+
+&lt;p&gt;a) have the checkout popup grab the amount displayed from the Stripe server rather than from the local system&lt;br&gt;
+b) have our system lookup the amount on the stripe servers and then fill into the checkout (something we could do ourselves)&lt;br&gt;
+c) allow local systems to specify plan details dynamically rather than via an id lookup (paypal seems to do this)  &lt;/p&gt;
+
+&lt;p&gt;As regards the second issue, it would be great if we had a third option (as an alternative to two current two options of either prorating, or upgrading the next month), which would be to charge the customer the cost of the upgrade for the rest of the month now, and then just charge the normal amount of the upgraded amount at the beginning of the next cycle.&lt;/p&gt;
+
+&lt;p&gt;So I sent Stripe the above section of this blog, and we&amp;rsquo;ll see what they say.  Getting back to the current PR on WebSiteOne, the refactoring of Plan from &amp;ldquo;cyst class&amp;rdquo; to AR model has shrunk the SubscriptionsController down to a more manageable level, and allowed us to delete a number of views and mailer endpoints, so that signing up for a Plan involves a single template for both mailing and web pages, modified according to the plan being subscribed to.  Beautiful DRYness.  We&amp;rsquo;re also dropping &lt;a href="http://nonprofits.agileventures.org/2016/09/26/confident-coding/"&gt;Single Table Inheritance (STI)&lt;/a&gt; from the Subscription model, since having plans be different sub-classes implies changes to the codebase to support them, which is not as flexible as we need at this point.  PaymentSources still use STI (PaymentSource::PayPal and PaymentSource::Stripe) and that seems reasonable for the moment as the number of Payment sources will likely expand more slowly and each new one will probably need new code.  So Subscriptions now belong to plans.  I&amp;rsquo;d love to dash off a quick UML diagram but maybe I&amp;rsquo;ll save that for my book on Agile Project management :-)  I&amp;rsquo;m already over time on this blog!&lt;/p&gt;
+
+&lt;p&gt;So the PR is pretty much good to go. I even added a rake task to migrate the data from the old to the new structure.  Only thing is that the language of the templates for the individual premium users doesn&amp;rsquo;t make so much sense for the organisations that would be signing up for NonProfit Basic Support, so I think we need another field on the Plan model to indicate whether it&amp;rsquo;s a plan for an individual or an organisation and then we can modify the template language correctly, but I&amp;rsquo;ll save those details for another PR.  Also the crossover on templates means we now in principle support Paypal payment for the higher level plans, although that emergent feature isn&amp;rsquo;t covered by feature tests, and we still don&amp;rsquo;t have good upgrade paths, but this PR is already large and needs testing on staging.  Could we hide part of it behind feature flags?   I think at this point we just need to get it out there.&lt;/p&gt;
+
+&lt;p&gt;It feels like if we can get this out, add the org/personal element, test all the payment options, and do the upgrade functionality (i.e. make it generic), we&amp;rsquo;ll have most of what we need on the payment side and perhaps we can move on to other features and systems.  Fingers crossed! :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=OUeZEoN_JbY"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=n1Xn5_qBFJE"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Related Blogs:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;http://nonprofits.agileventures.org/2016/09/26/confident-coding/&lt;/li&gt;
+&lt;li&gt;http://nonprofits.agileventures.org/2016/10/27/red-green-refactor/&lt;/li&gt;
+&lt;li&gt;http://nonprofits.agileventures.org/2016/11/03/frustratingly-slow-debug-cycle/&lt;/li&gt;
+&lt;li&gt;http://nonprofits.agileventures.org/2016/11/04/light-at-the-end-of-the-tunnel/&lt;/li&gt;
+&lt;li&gt;http://nonprofits.agileventures.org/2016/11/07/refactoring-ftw/&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Downtime</title>
     <link rel="alternate" href="http://blog.url.com/2017/01/03/downtime/"/>
@@ -425,47 +498,6 @@ c) switching to WebMock&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=GK0qPZnYi84"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=VunzjidNLrk"&gt;Pairing on WSO&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Semi-Automated Bots, or Augmented Humans?</title>
-    <link rel="alternate" href="http://blog.url.com/2016/12/12/semi-automated-bots/"/>
-    <id>http://blog.url.com/2016/12/12/semi-automated-bots/</id>
-    <published>2016-12-12T00:00:00+00:00</published>
-    <updated>2016-12-19T21:34:05+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Friday included a lot of meetings, pull request review, and bug fixing.  I didn&amp;rsquo;t get much fresh coding down, which was somewhat frustrating, but I did have a bit of a breakthrough on the greeter bot side, with this code:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;Botkit&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'botkit'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;controller&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Botkit&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;slackbot&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
-  &lt;span class="na"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
-&lt;span class="p"&gt;});&lt;/span&gt;
-
-&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;bot&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;spawn&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
-  &lt;span class="na"&gt;token&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;process&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;env&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ASYNC_VOTER_SLACK_BOT_TOKEN&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="na"&gt;retry&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;
-&lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;startRTM&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-
-&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;greet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"Welcome and great to have you with us! Please do introduce yourself in #new_members (if you haven't already), and if you have any general technical thoughts/issues/questions please ask in #techtalk - #random is for everything else :slightly_smiling_face:"&lt;/span&gt;
-
-&lt;span class="nx"&gt;greet&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;"\n\n\nsee https://github.com/AgileVentures/AgileVentures/blob/master/JOINING_A_PROJECT.md for more on joining a project"&lt;/span&gt;
-
-&lt;span class="nx"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'team_join'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="nx"&gt;bot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;say&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="na"&gt;channel&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;text&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;});&lt;/span&gt;
-&lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A simple script using botkit to detect anyone joining a Slack instance.  I had been burning time, and falling behind on, greeting people individually as they joined the AgileVentures Slack instance.  I think people really appreciate individual greetings when they join a community, and it&amp;rsquo;s really helpful to point them to some documentation etc.  It can be a bit impersonal coming from a bot.  I&amp;rsquo;ve joined some other Slack communities where a bot greets me and immediately apologises about being a bot. &lt;/p&gt;
-
-&lt;p&gt;The interesting thing we&amp;rsquo;ve found is that if you set the BOT_TOKEN to be the Slack general API token (rather than a custom bot token), then it appears to interact as the admin of the Slack instance.  At least that&amp;rsquo;s my working hypothesis.  Now you could say I&amp;rsquo;m being a bit dishonest with people having a bot doing the greeting, but the message looks like it is directly from me.  However the beauty of the above script is that it opens a dialogue in a DM between myself and the new member on Slack.  So when the new member responds to me, thanking me for the introduction, I get the message and can respond in the DM to have a conversation.   I call this a semi-automated bot.  A bot is doing part of the work, but then I am assisting with the really hard AI-complete aspects.  I do the same with emails to the community, automating part of the work of assembling an email template in Thunderbird, but then visually reviewing the email before it goes out, adjusting it to use the correct first name or abbreviation, and add elements to the template that are specific to my interaction with that AgileVentures member.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m hoping that people will ultimately see this as ingenious rather than deceptive.   I want to augment myself so that I can maintain conversations with as many people as possible, not so that we can make a profit for some group of shareholders, but so that we can help more people with their professional development and more deserving causes around the world with their IT and non-profit process challenges.  Over the weekend the bot greeted three new folks while I was spending time with my family and I got the new members&amp;rsquo; follow up DMs on my phone and was able to respond to their questions about AgileVentures individually.  It feels like a good development.  The next thing will be to host this bot on an Amazon instance so it can be always up, and perhaps have it monitor for channel join events as well, so it (or rather I) can greet people coming into project channels with a welcome and a pointer to documentation for getting set up with the project.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ll be tempted to see if I can gradually add more augmentation to myself on Slack so that that bot can start taking over parts of my conversation, but I&amp;rsquo;ll do that very slowly and steadily.  In the first instance it seems to me that the bot is much, much better than me at detecting Slack events, and so that&amp;rsquo;s where I should focus to begin with.  Particularly because Slack doesn&amp;rsquo;t alert me to channel and team join events and I tend only to notice the little italics telling me about a change some time after it actually happened.&lt;/p&gt;
-
-&lt;p&gt;In summary I think this approach where I adjust the behaviour of my own Slack instance is different from the semi-automated approach I&amp;rsquo;ve espoused in the past.  Semi-automation is a better term for when something that is clearly a bot, is prompted to act by a human, such as we have for starting and finishing votes in the AsyncVoter bot.  There&amp;rsquo;s nothing new under the sun, and I&amp;rsquo;m sure I&amp;rsquo;ll find others who&amp;rsquo;ve done this bot augmentation before, but I start to see what I&amp;rsquo;ve got here in the greeter-bot as a form of conversation augmentation.  I&amp;rsquo;m pretty excited about augmenting myself further :-)&lt;/p&gt;
 </content>
   </entry>
 </feed>
