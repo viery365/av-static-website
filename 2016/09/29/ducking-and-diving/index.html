@@ -166,7 +166,8 @@ layouts/application.html.erb should return 200 for all link visits
 
 <iframe style="display: block; margin: auto;" align="center" width="560" height="315" src="https://www.youtube.com/embed/tg3YjMqWNj0" frameborder="0" allowfullscreen></iframe>
 
-<p>and I&rsquo;m starting to see nil as evil.  Well at least something to address by avoiding passing it around rather than using <code>try</code> or ampersand-dot which screws with our readability.  Anyhow we&rsquo;d managed to follow a drive-by methodology, doing the minimum work necessary to get our pull request out.  We&rsquo;d fixed the Demeter violation for &ldquo;getting&rdquo; Karma where it was breaking our feature tests, but we left the Demeter violation for &ldquo;setting&rdquo; Karma in the KarmaCalculation service, which we were planning to refactor in the next ticket.</p>
+<p><br/>
+and I&rsquo;m starting to see nil as evil.  Well at least something to address by avoiding passing it around rather than using <code>try</code> or ampersand-dot which screws with our readability.  Anyhow we&rsquo;d managed to follow a drive-by methodology, doing the minimum work necessary to get our pull request out.  We&rsquo;d fixed the Demeter violation for &ldquo;getting&rdquo; Karma where it was breaking our feature tests, but we left the Demeter violation for &ldquo;setting&rdquo; Karma in the KarmaCalculation service, which we were planning to refactor in the next ticket.</p>
 
 <p>We&rsquo;d finished early so we got in some quick PRs to upgrade to Ruby 2.3.1, remove some old Vagrant scripts and started on a new ticket for improving hangout telemetry.  A reasonable afternoon&rsquo;s work.  We&rsquo;d ducked and dived and at the end of it I felt we&rsquo;d taken a reasonable middle road down the profusion of coding and project heuristics that infest my mind.  Let&rsquo;s see what tomorrow brings :-)</p>
 
