@@ -5,10 +5,85 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-01-06T00:00:00+00:00</updated>
+  <updated>2017-01-09T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>drie GitHub integration</title>
+    <link rel="alternate" href="http://blog.url.com/2017/01/09/drie-github/"/>
+    <id>http://blog.url.com/2017/01/09/drie-github/</id>
+    <published>2017-01-09T00:00:00+00:00</published>
+    <updated>2017-01-13T21:02:46+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Friday I took a trip down to the drie offices in Hammersmith.  We&amp;rsquo;d agreed before the break that we needed to coordinate our collaboration for the new year.  We&amp;rsquo;d previously agreed a sliding scale of sponsorship support based on outcomes for drie in terms of the number of users adopting drie.  In preparation for the meeting I prepared the following list:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;What I need
+
+&lt;ul&gt;
+&lt;li&gt;ability to track the number of people using drie&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;What I need to do
+
+&lt;ul&gt;
+&lt;li&gt;check whether moving drie servers to Ireland is getting the performance increase we hoped for&lt;/li&gt;
+&lt;li&gt;migrate more of LocalSupport to drie&lt;/li&gt;
+&lt;li&gt;prepare for the devops conference talk&lt;/li&gt;
+&lt;li&gt;improve on the document outlining the needs of the different AgileVentures projects&lt;/li&gt;
+&lt;li&gt;get budget details for drie hosting MetPlus&lt;/li&gt;
+&lt;li&gt;detailed technical plan for the following year&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Talking through the above with Ben and Tom at drie and the things they wanted to get through we came up with the following agenda:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;drie to show new features for drie-push
+
+&lt;ul&gt;
+&lt;li&gt;GitHub Integration&lt;/li&gt;
+&lt;li&gt;versioned config&lt;/li&gt;
+&lt;li&gt;appdirect&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;look at drie pricing models&lt;/li&gt;
+&lt;li&gt;look at performance&lt;/li&gt;
+&lt;li&gt;conference talk&lt;/li&gt;
+&lt;li&gt;generate clear features to de-risk the collaboration going forward
+
+&lt;ul&gt;
+&lt;li&gt;acceptance criteria&lt;/li&gt;
+&lt;li&gt;roadmap&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;geek out about the new proxy model (to help understand drie push startup times)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Working through the agenda it became clear that at the moment there wasn&amp;rsquo;t an easy way to track which AgileVentures members were using drie, as all that drie records of drie-push users is ssh keys.  However this would change with the introduction of a new GitHub integration which was the first thing Ben and Tom showed me.  Rather than building an entire team&amp;rsquo;s management framework to compete with Heroku and others, Tom came up with the idea of using a &lt;a href="https://github.com/integrations"&gt;GitHub integration&lt;/a&gt; to leverage the existing GitHub teams framework.  &lt;/p&gt;
+
+&lt;p&gt;AgileVentures already uses a lot of Github integrations such as TravisCI, Semaphore and CodeClimate.  GitHub themselves are &lt;a href="https://github.com/blog/2226-build-an-integration-for-github"&gt;encouraging more and more developers to create integrations&lt;/a&gt;, and the drie GitHub integration looks very similar in that it can be configured and installed via a GitHub interface, and little ticks and crosses are added to the GitHub interface when operations succeed and fail.  &lt;a href="https://github.com/integrations/heroku-review-apps"&gt;Heroku Review Apps&lt;/a&gt; are also a GitHub integration and work in a similar fashion, albeit requiring a complete separate Heroku app set up for them to riff off.  However, we&amp;rsquo;ve had to turn off Heroku review apps as being too expensive.&lt;/p&gt;
+
+&lt;p&gt;drie push GitHub integration goes one step beyond Heroku review apps, by making it possible to set up a repository to just deploy on any push to GitHub.  It&amp;rsquo;s like Heroku Review apps without the overhead of having to deal with Heroku or their new pricing model.  Tom was also showing me other tricks on the backend such as versioned config and reverse proxy tricks that will allow their system to scale effectively.&lt;/p&gt;
+
+&lt;p&gt;We went through the new drie pricing models which I need to pass on to the MetPlus project who are talking with their client today, and today I&amp;rsquo;m torn between trying to spend the whole day on pushing the LocalSupport app further onto drie (still haven&amp;rsquo;t checked the new performance data), reviewing material for my upcoming devops conference talk, and generating this new roadmap for our drie collaboration, which we did at least agree should follow this format:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Dates #free-users #paid-users
+
+include features ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The danger that Ben kept us focused on was whether developing the drie push GitHub integration would suck up time that could be spent polishing the ssh only access to drie push, and slow down our overall timeframe.  It&amp;rsquo;s almost certain that that will happen to some extent, but the problem with the ssh only approach is that the main differentiation from Heroku is on price which will be difficult to compete on in the long term.  Other drie push features such as deployment per branch won&amp;rsquo;t make much of an impact unless the configuration model is sorted out, and to be honest the big win for AgileVentures members will come from ease of use.  Avoiding the need to go to the command line at all, and just make your app deploy directly from GitHub, will remove a major stumbling block. &lt;/p&gt;
+
+&lt;p&gt;Related Videos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=MrUF68V4WMw"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=SttRB9A2bQ0"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=YPtN3dQd6Z4"&gt;&amp;ldquo;Bob Martin&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;p.s. this blog took 33 minutes to write&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Getting Organised</title>
     <link rel="alternate" href="http://blog.url.com/2017/01/06/getting-organised/"/>
@@ -312,57 +387,6 @@ c) switching to WebMock&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=lrw0R8YbxXU"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=LkagGRnOorI"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;F2F pairing on Rails 5?  Navigate to the #event_manager channel on AgileVentures slack to catch the link before we lose the slack history :-)&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>To Pair or Not to Pair</title>
-    <link rel="alternate" href="http://blog.url.com/2016/12/15/to-pair-or-not-to-pair/"/>
-    <id>http://blog.url.com/2016/12/15/to-pair-or-not-to-pair/</id>
-    <published>2016-12-15T00:00:00+00:00</published>
-    <updated>2016-12-20T21:06:56+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;My objective on Wednesday was to make further progress on the Paypal integration.  Things getting in the way of that included blogging, sending out emails, scrums, coordination sessions, and needing to pick the kids up from school at short notice.  Bit of scrappy day, but now that I&amp;rsquo;m running Premium Plus pairing sessions on Sundays, I need to be able to help my wife out in a fix during the week.&lt;/p&gt;
-
-&lt;p&gt;I did manage to complete my process of sending emails one by one manually to every AgileVentures member.  There were 2920 of them before I was on the Ruby Rogues podcast, and that&amp;rsquo;s more than a free-tier mailchimp account can handle.  I resolved to grit my teeth and email each person individually to tell them about how our new Premium plans are taking us on the road to financial stability and my commitment to blogging about the process.  I did semi-automate the process as I&amp;rsquo;ve blogged about before, using a script that takes an email template and lanches a Thunderbird editor, filling in email, subject, first name etc.  I then review the email visually, adding personal notes, potentially even changing it completely depending on my relationship with the individual.&lt;/p&gt;
-
-&lt;p&gt;It takes me about 20 minutes each day to send 100 emails.  So I guestimate that I&amp;rsquo;ve burned about 10 hours in the process.  I&amp;rsquo;m sending the emails directly from my personal account so I end up with the message in my sent folder, so I can easily refer back to whoever I&amp;rsquo;ve sent to, and responses from AV members come straight back to me.  I&amp;rsquo;ve had 50 or so productive email conversations from these emails that have gone out, 2 unsubscribe requests, and at least 10 people sign up as premium members; so overall I&amp;rsquo;d say it&amp;rsquo;s probably been worth it.  That said I&amp;rsquo;m glad to finish it and create more time for coding.  Having completed the run, I used the new User deactiviation functionality to delete the two users who requested to unsubscribe, and then I took the entire set of remaining users and invited them to Slack to ensure that everyone had got an invite, because there had been periods where the invitation system was offline.  The slack client slowed under the strain of processing nearly 3000 invites, but to its credit it all worked, and it looks like 150 or so folks who&amp;rsquo;d never been invited got invitations finally. Yay!&lt;/p&gt;
-
-&lt;p&gt;As the new greeter bot welcomed them into Slack, I did a coordination session with Matt and Michael where we helped Matt sort out Redeemify Heroku issues using Heroku fork, and sorted node weirdness as Michael applied some fixes to the botmock framework.  We had a bit of a review of the WSO board, but I didn&amp;rsquo;t make any progress on the PayPal side.  In my lunch break I did manage to complete chapter 5 of the code samples in the new RSpec book that I&amp;rsquo;m reviewing.  Maybe I should ask the guys at Pragmatic Programmers if they&amp;rsquo;re interested in a book on &amp;ldquo;Agile Software Project Management with Volunteer Contributions&amp;rdquo;, or maybe it should be &amp;ldquo;Open Source Agile Software Project Management&amp;rdquo;?&lt;/p&gt;
-
-&lt;p&gt;So then I was dragged away from the computer to pick up my twin boys.  I managed to get back in time for the Kent Beck scrum, where it was great to see Susanna reporting in on the SHF project.  I told Michael and Matt that I really had to focus on the PayPal integration in the final programming hour of my day, and that I was going to be moving fast and so there wouldn&amp;rsquo;t be much room for participative pair programming.  Matt went off to experiment with the drie free tier and Michael joined me in the hangout.  I managed to write out a list of all the stuff that needed doing (in approximate priority and dependency order), filling Michael in to where Matt and I had got to:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;[ ] add sad path for paypal&lt;/li&gt;
-&lt;li&gt;[ ] sponsor via paypal&lt;/li&gt;
-&lt;li&gt;[ ] have generic support for plans&lt;/li&gt;
-&lt;li&gt;[ ] make Paypal work for all plans&lt;/li&gt;
-&lt;li&gt;[ ] refactoring our domain model to store plan entities and represent everything properly and consistently&lt;/li&gt;
-&lt;li&gt;[ ] allowing users to upgrade themselves through the WSO interface&lt;/li&gt;
-&lt;li&gt;[ ] displaying all the plan options and upgrades effectively&lt;/li&gt;
-&lt;li&gt;[ ] refactoring card details update to different controller&lt;/li&gt;
-&lt;li&gt;[ ] move SubscriptionsController#upgrade to SubscriptionsController#update&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In the background I was being distracted by all the new people coming into Slack, but I managed to add a sad path for PayPal and get that PR in, but not much else.  Michael and I ended up having a detailed conversation about the relative merits of him and I pairing.  It was an opporutnity to say some things I&amp;rsquo;d been thinking recently like, how when we used to pair on the LocalSupport project a couple of years back (when I was teaching at HPU) it had been lots of fun.  More recently we seemed to be more in conflict and more irritated with each other.  It&amp;rsquo;s entirely possible that it&amp;rsquo;s me that&amp;rsquo;s changed.  I&amp;rsquo;m watching savings that could go on my children&amp;rsquo;s future University education being gradually wittled down as I try to get AgileVentures to financial stability.  I am not necessarily coming from the most relaxed place at the moment.  Unlike when we used to pair on LocalSupport and I had a stable income from HPU and the whole thing was a learning project, I really want to move fast to the point where the code in WSO is bringing home the bacon.&lt;/p&gt;
-
-&lt;p&gt;I mean, I&amp;rsquo;m skeptical about the value of a University education for my kids (maybe I should send them to a bootcamp?), but I&amp;rsquo;ve got a lot on the line here.  It&amp;rsquo;s a strange setup in some ways with both Michael and I being volunteers.  If we were both salaried employees at a company I&amp;rsquo;d see ensuring that we were pairing with a certain frequency was critical.  We&amp;rsquo;ve had frank and open discussions before.  I have three monitors at home which means I can easily be looking at documentation while Michael drives on code, but he has a single laptop, so if I&amp;rsquo;m driving he only sees my screen, and if I flip back and forth between code and terminal and browser too fast, it can be very difficult for him to follow what I&amp;rsquo;m doing, particularly with hangout lag.  We&amp;rsquo;ve talked about Michael getting another monitor, but we are of course very resource constrained.  In a company context I&amp;rsquo;d have ordered him an additional monitor several weeks back.  I can get frustrated when Michael is driving in that he&amp;rsquo;s not using keyboard shortcuts, or not laying out his screen so that he can see tests, app code and terminal output at the same time, and I often feel like it&amp;rsquo;s a struggle to get him to change his approach.  I think we&amp;rsquo;ve both adjusted and compromised our styles over the process of working together, but my fear is that we&amp;rsquo;re not pairing as productively as we could at the moment.&lt;/p&gt;
-
-&lt;p&gt;Also in a company of any size I&amp;rsquo;d be pushing towards heavy pair rotation so we were both learning and growing from our interaction with multiple others.  I really do believe in the benefits of pairing for spreading knowledge across a team, for providing additional perspectives, and for quickly leveling up junior developers.  That doesn&amp;rsquo;t mean that every pairing session is productive, and it doesn&amp;rsquo;t mean that every pairing match is right for the task at hand.  Michael was then very reasonably asking what I wanted him to do?  And my response was that I wasn&amp;rsquo;t asking him to do anything.  He&amp;rsquo;d already committed several weeks back to try to be more patient, and I committed yesterday to try to be less sensitive, but neither of us can magically change our personalities or situations.  I wasn&amp;rsquo;t sure if I had a coherent point, but was glad we were able to have the discussion so that I could tell Michael how I was feeling.  I said that the key thing was that I thought there would be times in the coming weeks where I didn&amp;rsquo;t have the mental space for a long debate about the relative merits of one approach over another, and where I would need to move fast and so drive in more of a solo mode.&lt;/p&gt;
-
-&lt;p&gt;Is that me shooting myself in the foot?  Maybe the solution is an alternative like rotating more frequently, say every 10 minutes?  What I feel at the moment is that I&amp;rsquo;ve got a pretty clear idea of what needs to get done and I can do it fast, and sometimes I feel like I&amp;rsquo;m fighting to get Michael to understand my point of view, and he&amp;rsquo;s getting irritated and angry with me in the process and I end up feeling quite unpleasant and don&amp;rsquo;t look forward to our next session.  Conversely Michael was saying yesterday that I don&amp;rsquo;t give ground easily enough.  Clearly in any relationship there&amp;rsquo;s always room for both sides to make concessions.  Relationships and pair programming are all about making compromises. &lt;/p&gt;
-
-&lt;p&gt;It feels like there are two extremes of pairing.  There&amp;rsquo;s coding with a partner where you&amp;rsquo;re totally focused on the learning, and there&amp;rsquo;s coding where you&amp;rsquo;re totally focused on making progress.  In the Premium Plus and F2F sessions I can feel like I can be totally focused on the learning and if we get some progress that&amp;rsquo;s great, but I&amp;rsquo;m totally relaxed about it.  Outside of those sessions, and at the moment, I feel like the progress on WSO has to take priority, particularly when I&amp;rsquo;m burning £1000&amp;rsquo;s a month in this undertaking.  AgileVentures started as a utopian free pairing framework, and maybe the introduction of Premium pairing is spoiling that. Or maybe we&amp;rsquo;re growing up?  Or maybe it&amp;rsquo;s just like life generally is; just messy.&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=9cBaF5WWTg4"&gt;&amp;ldquo;Marting Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Ky49eCl_7EA"&gt;Coordination Session&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=VVaAeLjwPZc"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=1hL-aACQquY"&gt;Sam Driving on WSO&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
