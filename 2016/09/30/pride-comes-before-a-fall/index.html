@@ -148,29 +148,27 @@ irb(main):005:1&gt;   end
     <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="n">attributes</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
+</code></pre>
+<p>and it seems that our Cucumber steps are using the same factories as our RSpecs, hmmm.  Let&rsquo;s look at that factory:</p>
+<pre class="highlight ruby"><code><span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">define</span> <span class="k">do</span>
+  <span class="n">factory</span> <span class="ss">:user</span><span class="p">,</span> <span class="ss">aliases: </span><span class="p">[</span><span class="ss">:whodunnit</span><span class="p">]</span> <span class="k">do</span>
+    <span class="n">transient</span> <span class="k">do</span>
+      <span class="n">gplus</span> <span class="s1">'youtube_id_1'</span>
+    <span class="k">end</span>
 
-<span class="n">and</span> <span class="n">it</span> <span class="n">seems</span> <span class="n">that</span> <span class="n">our</span> <span class="no">Cucumber</span> <span class="n">steps</span> <span class="n">are</span> <span class="n">using</span> <span class="n">the</span> <span class="n">same</span> <span class="n">factories</span> <span class="n">as</span> <span class="n">our</span> <span class="no">RSpecs</span><span class="p">,</span> <span class="n">hmmm</span><span class="o">.</span>  <span class="no">Let</span><span class="s1">'s look at that factory:
+    <span class="n">first_name</span> <span class="p">{</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">first_name</span> <span class="p">}</span>
+    <span class="n">last_name</span> <span class="p">{</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">last_name</span> <span class="p">}</span>
+    <span class="n">email</span> <span class="p">{</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Internet</span><span class="p">.</span><span class="nf">email</span> <span class="p">}</span>
+    <span class="n">password</span> <span class="s1">'12345678'</span>
+    <span class="n">password_confirmation</span> <span class="p">{</span> <span class="n">password</span> <span class="p">}</span>
+    <span class="n">display_profile</span> <span class="kp">true</span>
+    <span class="n">slug</span> <span class="p">{</span> <span class="s2">"</span><span class="si">#{</span><span class="n">first_name</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">last_name</span><span class="si">}</span><span class="s2">"</span><span class="p">.</span><span class="nf">parameterize</span> <span class="p">}</span>
+    <span class="n">bio</span> <span class="p">{</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Lorem</span><span class="p">.</span><span class="nf">sentence</span> <span class="p">}</span>
+    <span class="n">skill_list</span> <span class="p">{</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Lorem</span><span class="p">.</span><span class="nf">words</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">karma</span> <span class="p">{</span> <span class="no">Karma</span><span class="p">.</span><span class="nf">new</span> <span class="p">}</span>
 
-```rb
-FactoryGirl.define do
-  factory :user, aliases: [:whodunnit] do
-    transient do
-      gplus '</span><span class="n">youtube_id_1</span><span class="s1">'
-    end
-
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
-    email { Faker::Internet.email }
-    password '</span><span class="mi">12345678</span><span class="s1">'
-    password_confirmation { password }
-    display_profile true
-    slug { "#{first_name} #{last_name}".parameterize }
-    bio { Faker::Lorem.sentence }
-    skill_list { Faker::Lorem.words(4) }
-    karma { Karma.new }
-
-    after(:create) do |user, evaluator|
-      create(:authentication, provider: '</span><span class="n">gplus</span><span class="err">'</span><span class="p">,</span> <span class="ss">uid: </span><span class="n">evaluator</span><span class="p">.</span><span class="nf">gplus</span><span class="p">,</span> <span class="ss">user_id: </span><span class="n">user</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
+    <span class="n">after</span><span class="p">(</span><span class="ss">:create</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="p">,</span> <span class="n">evaluator</span><span class="o">|</span>
+      <span class="n">create</span><span class="p">(</span><span class="ss">:authentication</span><span class="p">,</span> <span class="ss">provider: </span><span class="s1">'gplus'</span><span class="p">,</span> <span class="ss">uid: </span><span class="n">evaluator</span><span class="p">.</span><span class="nf">gplus</span><span class="p">,</span> <span class="ss">user_id: </span><span class="n">user</span><span class="p">.</span><span class="nf">id</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
