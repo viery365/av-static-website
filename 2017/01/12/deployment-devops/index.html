@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Delpoyment DevOps</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2017 x2017_01 x2017_01_12 x2017_01_12_deployment-devops x2017_01_12_deployment-devops_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/01/12/deployment-devops/">Delpoyment DevOps</a></h2>
+        <h5 class='date'>12 Jan 2017</h5>
+    <p>I&rsquo;m thinking alot about DevOps at the moment.  Partly because I&rsquo;m giving a talk titled &ldquo;DevOps on a Budget&rdquo; a week from today at the remote DevOps conference.  I&rsquo;m talking to folks on Slack about it, listening to the Ruby Rogues talk about it, listening to talks by some of the other presenters at the conference as preparation.  I&rsquo;m also doing more DevOps &hellip;, I think.  My sense was that DevOps was all about breaking down the barriers between the sometimes isolated areas of development and operations.  In large organisations developers would &ldquo;hand off&rdquo; their code to operations for deployment.  Naturally these areas are likely to be merged in smaller organisations, but the DevOps movement seems to be about joining things up so that development isn&rsquo;t considered in a vacuum, and developers are involved in the operations processes of deploying and maintaining.</p>
+
+<p>That said, the term &ldquo;DevOps&rdquo; is perhaps being used casually to apply to operations, so that one starts thinking of developers and devops folks?  We use Continuous Integration (CI) systems (such as Travis and Semaphore) in our AgileVentures projects, so that anyone submitting a pull request kicks off a completely fresh build on a fresh virtual machine which involves installing all the libraries and running all the tests.   This means that every individual developer cannot escape the effects of the code they wrote on the test suites, because a tick or cross is added to their pull request.   Does this make every developer a DevOps person?  Not quite.  Nothing forces the developer to care about those tests, except that we won&rsquo;t merge their PR until they pass.  There&rsquo;s also the point that the code is building on a fresh Linux box, so in order to get their PR merged, the developer has to operate as if their code is being deployed in a another location, because it is.</p>
+
+<p>It seems to me that running the tests in a virtual machine in the cloud doesn&rsquo;t quite constitute deployment, because there&rsquo;s the additional step of getting the app running in production mode on a machine that&rsquo;s accessible to the stakeholders.  Raoul had been focusing on the deployment and release role in our pairing on the project management of WebSiteOne.  Last year I had been focused more on coding and PR review, and Raoul had been taking the code from the develop server (where features get merged to) on to staging and then into production.  Despite fairly comprehensive acceptance tests there&rsquo;s always still room for something to go wrong on one of the Heroku servers in &ldquo;production&rdquo; mode.  Note the potential linguistic confusion there.  Rails apps can run in &ldquo;production mode&rdquo;, but when we talk about the &ldquo;production server&rdquo;, that&rsquo;s the one the main stakeholders are using.  The &ldquo;staging server&rdquo; will also be running in &ldquo;production mode&rdquo;, but it won&rsquo;t be &ldquo;production&rdquo; if that makes sense? :-)</p>
+
+<p>We have it set up so that whenever a pull request is merged in, this will kick off a deployment to the relevant servers.  So merging to develop kicks of a run of the tests and if they pass, the code is deployed to the develop server.  Similarly for the staging branch (merge will deploy to staging) and the master branch (merge will deploy to production); in each case the deployment depends on all the tests passing.  As Raoul has got busier with Craft Academy I&rsquo;ve taken the lead on merging PRs to the develop (branch and server) and then doing manual tests on the develop server, followed by pushing the code from develop to staging, and then staging to production, with manual tests on each.</p>
+
+<p>This process seems to be strongly operations-ish to me.  I&rsquo;m calling it DevOps because it certainly involves some development skills.  For AgileVentures to fully embrace DevOps, we&rsquo;d have more folks involved with this DevOps process, as we do with development, but I think it does take a higher level of committment.  There&rsquo;s also more to go wrong here.  Now that I write out the details in preparation for the presentation I see that each individual AV project does have its own DevOps component, so there are a healthy number of AV members getting a strong taste of DevOps experience.  It might be even stronger if we could afford Heroku&rsquo;s deploy PR feature that has every submitted PR lead to a deploy based on a default set of environment variables. This would potentially connect every dev with a full deploy.  We&rsquo;re working with our sponsor drie on a more affordable version that will deploy every PR.</p>
+
+<p>Anyhow, after a crazy and distracted start to the week I finally managed to get down to some WebSiteOne DevOps done.  I took the latest code on develop and merged it into staging, after doing some preliminary manual tests on the development server.  The development server has less realistic code and settings on it, so there was only so much I could check there.  Note that while I am doing a sanity check on the site in general there, as well as a more detailed look at the new features, I&rsquo;m still relying on our acceptance test suite to catch more complex issues that might arise from interactions between old and new code.</p>
+
+<p>On the staging server I was able to see the new sorting of projects by Github update recency feature was working, and also that starting a hangout would still ping Slack for us, despite the changes we&rsquo;d made to the EventInstances Controller.  However the feature I wanted to test was preventing Twitter posts of the YouTube stream link before it had gone live.  That was broken on staging.  I saw this in the log:</p>
+<pre class="highlight plaintext"><code>2017-01-11T15:01:10.165957+00:00 app[web.1]: Request waited 5ms, then ran for longer than 20000ms
+2017-01-11T15:01:10.166341+00:00 app[web.1]: /app/vendor/bundle/ruby/2.3.0/gems/yt-0.28.1/lib/yt/request.rb:237:in `sleep'
+2017-01-11T15:01:10.166385+00:00 app[web.1]: /app/vendor/bundle/ruby/2.3.0/gems/yt-0.28.1/lib/yt/request.rb:237:in `sleep_and_retry?'
+2017-01-11T15:01:10.166388+00:00 app[web.1]: /app/vendor/bundle/ruby/2.3.0/gems/yt-0.28.1/lib/yt/request.rb:201:in `run_again?'
+2017-01-11T15:01:10.166422+00:00 app[web.1]: /app/vendor/bundle/ruby/2.3.0/gems/yt-0.28.1/lib/yt/request.rb:80:in `run'
+2017-01-11T15:01:10.166458+00:00 app[web.1]: /app/vendor/bundle/ruby/2.3.0/gems/yt-0.28.1/lib/yt/request.rb:81:in `run'
+2017-01-11T15:01:10.166489+00:00 app[web.1]: /app/vendor/bundle/ruby/2.3.0/gems/yt-0.28.1/lib/yt/request.rb:81:in `run'`
+</code></pre>
+<p>Getting to this point had involved sorting out an enviroment variable for the Yt gem to contact the YouTube servers. On develop I had checked that it worked from the Rails console, but I did have to reload the Yt gem config, which seemed odd.  On staging I dropped into the Rails console and found the same thing; this timeout error occurring if I didn&rsquo;t re-apply the Yt gem config.  I became suspicious that the main Rails app was not loading the config.  I had advised the developer (Matt) to drop the Yt config into the rails <code>config</code> folder, thinking it would be auto-loaded from there like the <code>puma.rb</code> file in the same location.  I had mis-remembered and advised poorly.  The file needed to be in the <code>config/intializers</code> folder.  I made that change on the staging branch and deployed it directly to confirm my suspicion.  I was correct, so I pushed that change back down from staging to develop.</p>
+
+<p>Clearly my involvement in both the operations and development sides had helped us resolve this issue, but we weren&rsquo;t out of the woods yet.  Next I started the broadcast on the hangout I had started from the staging site.  No twitter posts.  I could now use the Yt gem functionality from the Rails console to check the duration of the livestream associated with the hangout.  It was showing the duration as zero.  It seemed like one of our assumptions was false, i.e. that the livestream starting would lead to an increasing duration reported by the gem.  I&rsquo;d been experimenting with that with another developer (Sasha) several months previously.  Using the interactive console, and with a live streaming hangout in progress I was able to determine that what in order to check whether the livestream had actually started, we in fact needed to be checking was that the <code>live_stream_details.actual_start_time</code> was not nil,.</p>
+
+<p>We&rsquo;d missed this in the development phase, where our tests were green because we&rsquo;d stubbed the Yt gem to return a non-zero duration for a live streaming video.  If we&rsquo;d used VCR to capture the full network interaction we might have encountered this problem earlier, but the Twitter tokens being used had expired and testing the full network interaction had been left out.  I could have gone on and deployed to production.  I didn&rsquo;t, but if I had the code in its current state would technically have fixed the underlying problem (tweeting unrecorded videos), but in a rather aggressive fashion by never tweeting any video links, unless a user finished the broadcast and left the hangout running.</p>
+
+<p>I left the code on staging and opened a <a href="https://github.com/AgileVentures/WebsiteOne/issues/1489">ticket</a> for the problem.  I&rsquo;d had the original developer (Matt) in several of the hangouts associated with this DevOps work so I think I have a reasonable claim to the idea that we are doing joined up &ldquo;Development&rdquo; and &ldquo;Operations&rdquo; in this particular project :-)  Following through it occurred to me that we could have a DevOps acceptance test to check for the presence of the YT gem configuration, and we had the alternatives of just updating our mocks or a full VCR test for the tests covering the action of the YT gem.  A DevOps acceptance test might look like this:</p>
+<pre class="highlight gherkin"><code><span class="kd">Feature</span><span class="p">:</span> Able to access YouTube API via Yt gem
+  As the admin
+  So that we have information about videos generated by our members
+  I would like the Yt gem to be configured correctly
+
+  <span class="kn">Scenario</span><span class="p">:</span> check Yt gem configuration
+    <span class="nf">When</span> the app is running
+    <span class="nf">Then</span> I would like the Yt gem to have it's api_key set to the GOOGLE_PROJECT_API_KEY environment variable
+</code></pre>
+<p>I&rsquo;ve got a few &ldquo;devops&rdquo; cucumber tests in both WebSiteOne and LocalSupport relating to things like rake tasks that might need to be run in production etc.  Perhaps I&rsquo;m completely crazy here.  Total overkill when this bug is very unlikely to recur?  Or is this actually nice executable documentation that wraps a bug we encountered on staging and provides a clear readable representation of our experience here?</p>
+
+<p>What we&rsquo;ve got here is a configuration bug that wasn&rsquo;t caught by our tests.  Perhaps it should be an integration test at the RSpec level?  As long as I&rsquo;m reviewing future PRs, I should notice if anyone jiggles with the Yt project config, but then again I won&rsquo;t always be around to check things &hellip; or perhaps switching to a VCR acceptance test would cover all this?  It might not check for the presense of the key (which WebMock might), but then again, we may completely lose the ability to get updates from Hangout plugins on April 25th (which this all relies on), so burning time here might be counter-productive compared to spending time on other potentially revenue producing code.</p>
+
+<p>At least I&rsquo;ve blogged all this and I&rsquo;ll make some tickets.  We want to get these changes deployed.  Adjusting the mock is the quick fix, given that we&rsquo;ve checked the behaviour.  Is all of this DevOps?  Or is it only DevOps if you&rsquo;re using Chef, Docker and Kubernetes?  These are the kinds of questions I&rsquo;ll be pondering in my DevOps conference talk &hellip;</p>
+
+<h3>Related Videos:</h3>
+
+<ul>
+<li><a href="#">&ldquo;Martin Fowler&rdquo; scrum</a>https://youtu.be/_GBJLaKbTxo</li>
+<li><a href="https://youtu.be/1_Zkh4JsBik">DevOps on WSO part 1</a></li>
+<li><a href="https://www.youtube.com/watch?v=8q4RBgjzijY">DevOps on WSO part 2</a></li>
+<li><a href="https://www.youtube.com/watch?v=39I9UXJizCY">&ldquo;Kent Beck&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=xAPWS7PKprc">DevOps on LocalSupport</a></li>
+</ul>
+
+<p>p.s. this blog took 51 minutes to write</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
