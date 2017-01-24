@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Legacy Maintenance Plans</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2017 x2017_01 x2017_01_13 x2017_01_13_legacy-maintenance-plans x2017_01_13_legacy-maintenance-plans_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/01/13/legacy-maintenance-plans/">Legacy Maintenance Plans</a></h2>
+        <h5 class='date'>13 Jan 2017</h5>
+    <p>When does an app become legacy?  I&rsquo;d say pretty much as soon as you have anything deployed that anyone is using.  In my experience development on projects can stall and restart, but as long as people are deriving value from the application it needs to be maintained.  We hear things like 60% of the effort in a project is during the maintenance phase.  We have various projects in AgileVentures that could make the claim to be legacy codebases that need to be maintained.  Let me list them in the order of their creation:</p>
+
+<ul>
+<li><a href="https://github.com/saasbook/rag">AutoGraders</a></li>
+<li><a href="https://github.com/AgileVentures/LocalSupport">LocalSupport</a></li>
+<li><a href="https://github.com/AgileVentures/WebsiteOne">WebSiteOne</a></li>
+<li><a href="https://github.com/AgileVentures/OSRA">OSRA</a></li>
+<li><a href="https://github.com/AgileVentures/MetPlus_PETS">MetPlus</a></li>
+<li><a href="https://github.com/AgileVentures/ProjectScope">ProjectScope</a></li>
+<li>AsyncVoter</li>
+<li>SHF</li>
+</ul>
+
+<p>Apologies for any I&rsquo;m missing here.  There are other projects like VisitMeet and WikiEduDashboard which might also be put in the same set, but let&rsquo;s use the above set to think about the ongoing dance between development and maintanence.  The AutoGraders system was originally developed by Armando Fox and his students at UCBerkeley.  It continues to be used several years after its creation supporting the grading functionality in the &ldquo;Agile Development using Ruby on Rails&rdquo; MOOC.  Over the last five years there&rsquo;ve been some periods of development work interspersed with longer periods of maintenance only:</p>
+
+<p><img alt="Graph of AutoGraders GitHub commits" src="https://www.dropbox.com/s/xrvi8kz6fcb22o8/Screenshot%202017-01-13%2010.04.12.png?dl=1" /></p>
+
+<p>In contrast, development on (or at least commits to) LocalSupport has been steadier:</p>
+
+<p><img alt="Graph of LocalSupport GitHub commits" src="https://www.dropbox.com/s/ro02xadm97z56q1/Screenshot%202017-01-13%2010.05.43.png?dl=1" /></p>
+
+<p>WebSiteOne on the other hand started with a very high number of commits and has gone through a couple of periods of development inactivity through its lifetime:</p>
+
+<p><img alt="Graph of WebSiteOne GitHub commits" src="https://www.dropbox.com/s/rmk1xa5p17jcjse/Screenshot%202017-01-13%2010.06.44.png?dl=1" /></p>
+
+<p>OSRA has seen a recent resurgence:</p>
+
+<p><img alt="Graph of OSRA GitHub commits" src="https://www.dropbox.com/s/lzqb77smnux7hc8/Screenshot%202017-01-13%2010.08.13.png?dl=1" /></p>
+
+<p>While MetPlus has seen some spikes, but has been pretty consistently active:</p>
+
+<p><img alt="Graph of MetPlus GitHub commits" src="https://www.dropbox.com/s/fj2a6hk0a0esliz/Screenshot%202017-01-13%2010.09.39.png?dl=1" /></p>
+
+<p>Note that the range of the above graphs is changing as we go through these projects, having started with the oldest.  </p>
+
+<p>AutoGraders, LocalSupport and WebSiteOne have been in near constant use since they were created.  They all have ongoing maintanence burdens, as well as the need for ongoing development.  They all have lots of room for improvement, but are arguably serving at least some people&rsquo;s needs.  MetPlus is the odd one out in that even after eighteen months of development the proposed end users are not yet using the system.  The client has insisted he wants the MVP ready before he can put users on it.  The client has been giving regular feedback on the developing system, but it&rsquo;s a slightly odd set up from an Agile development point of view.</p>
+
+<p>We&rsquo;re into interesting territory with all the projects, particularly given the charges they incur in terms of hosting.  AutoGraders is hosted on AWS and UCBerkeley picks up the bills there.  LocalSupport is hosted on Heroku and Voluntary Action Harrow Cooperative pays those bills.  WebSiteOne is also on Heroku and our AgileVentures charity is picking up the increasing bills there.  OSRA and MetPlus are also on Heroku, but the free tier appears to be sufficient for the moment.  Every year, Armando Fox at UCBerkeley has 100&rsquo;s of students generating systems that charities start to use, but the students are usually not available later to maintain the applications.  Armando suggested AgileVentures could charge maintanence plans and so I put together a <a href="http://www.agileventures.org/nonprofit-basic-support">draft landing page</a>, which outlines some different levels of support that a non-profit could get for having AgileVentures maintain their application.</p>
+
+<p>The costs in there are based on time of AgileVentures folks restarting apps, responding to issues and so forth.  The interesting discussion we&rsquo;re now having with the MetPlus project team as they look to take their system live (and potentially incurring costs) is bundling the costs of hosting (on Heroku, drie, AWS etc.) as part of AV maintenance plans.  We&rsquo;re imagining that non-profit administrators would rather pay a single bill to AgileVentures for maintainenance and hosting rather than several separate bills for different hosting charges.  The big unknown is what sort of traffic MetPlus will incur.  Yesterday we agreed to offer the client everything free for the first three months, with all the systems on free infrastructure, with the indication that hosting/maintanence would cost on the order of $200 a month going forward, as an all-in, where we would do our best to use the most affordable hosting packages and provide the best level of maintanence support.</p>
+
+<p>There are lots of details to work out here; lots of unknowns.  Small non-profits and charities generally don&rsquo;t seem to be in a position to pay for development work, but they seem to have some limited funds for maintenance and hosting.  Being able to pay AgileVentures for maintanence and hosting in a single package sounds appealing in principle, but there&rsquo;s the opportunity for us to lose money if performance spikes and we don&rsquo;t have the right agreements and expectations set up.</p>
+
+<p>We&rsquo;ll just keep applying the Agile process of pushing out ideas, getting feedback from our clients, modifying our offering slightly, and keep trying to improve.  Keep following that path to sustainability.</p>
+
+<h3>Related Videos:</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=MvMgbBya2Bk">&ldquo;Martin Fowler&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=Olz0s99GhVQ">MetPlus Planning meeting </a></li>
+<li><a href="https://www.youtube.com/watch?v=dEanyrCUjOQ">&ldquo;Kent Beck&rdquo; Scrum</a></li>
+</ul>
+
+<p>p.s. this blog took 38 minutes to write.</p>
+
+<p>p.p.s. managed to clear several things off my desk today</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>

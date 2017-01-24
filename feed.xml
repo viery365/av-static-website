@@ -5,16 +5,83 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-01-12T00:00:00+00:00</updated>
+  <updated>2017-01-13T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Legacy Maintenance Plans</title>
+    <link rel="alternate" href="http://blog.url.com/2017/01/13/legacy-maintenance-plans/"/>
+    <id>http://blog.url.com/2017/01/13/legacy-maintenance-plans/</id>
+    <published>2017-01-13T00:00:00+00:00</published>
+    <updated>2017-01-24T21:32:48+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;When does an app become legacy?  I&amp;rsquo;d say pretty much as soon as you have anything deployed that anyone is using.  In my experience development on projects can stall and restart, but as long as people are deriving value from the application it needs to be maintained.  We hear things like 60% of the effort in a project is during the maintenance phase.  We have various projects in AgileVentures that could make the claim to be legacy codebases that need to be maintained.  Let me list them in the order of their creation:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/saasbook/rag"&gt;AutoGraders&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/LocalSupport"&gt;LocalSupport&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne"&gt;WebSiteOne&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/OSRA"&gt;OSRA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/MetPlus_PETS"&gt;MetPlus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/ProjectScope"&gt;ProjectScope&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;AsyncVoter&lt;/li&gt;
+&lt;li&gt;SHF&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Apologies for any I&amp;rsquo;m missing here.  There are other projects like VisitMeet and WikiEduDashboard which might also be put in the same set, but let&amp;rsquo;s use the above set to think about the ongoing dance between development and maintanence.  The AutoGraders system was originally developed by Armando Fox and his students at UCBerkeley.  It continues to be used several years after its creation supporting the grading functionality in the &amp;ldquo;Agile Development using Ruby on Rails&amp;rdquo; MOOC.  Over the last five years there&amp;rsquo;ve been some periods of development work interspersed with longer periods of maintenance only:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Graph of AutoGraders GitHub commits" src="https://www.dropbox.com/s/xrvi8kz6fcb22o8/Screenshot%202017-01-13%2010.04.12.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;In contrast, development on (or at least commits to) LocalSupport has been steadier:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Graph of LocalSupport GitHub commits" src="https://www.dropbox.com/s/ro02xadm97z56q1/Screenshot%202017-01-13%2010.05.43.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;WebSiteOne on the other hand started with a very high number of commits and has gone through a couple of periods of development inactivity through its lifetime:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Graph of WebSiteOne GitHub commits" src="https://www.dropbox.com/s/rmk1xa5p17jcjse/Screenshot%202017-01-13%2010.06.44.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;OSRA has seen a recent resurgence:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Graph of OSRA GitHub commits" src="https://www.dropbox.com/s/lzqb77smnux7hc8/Screenshot%202017-01-13%2010.08.13.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;While MetPlus has seen some spikes, but has been pretty consistently active:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Graph of MetPlus GitHub commits" src="https://www.dropbox.com/s/fj2a6hk0a0esliz/Screenshot%202017-01-13%2010.09.39.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note that the range of the above graphs is changing as we go through these projects, having started with the oldest.  &lt;/p&gt;
+
+&lt;p&gt;AutoGraders, LocalSupport and WebSiteOne have been in near constant use since they were created.  They all have ongoing maintanence burdens, as well as the need for ongoing development.  They all have lots of room for improvement, but are arguably serving at least some people&amp;rsquo;s needs.  MetPlus is the odd one out in that even after eighteen months of development the proposed end users are not yet using the system.  The client has insisted he wants the MVP ready before he can put users on it.  The client has been giving regular feedback on the developing system, but it&amp;rsquo;s a slightly odd set up from an Agile development point of view.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;re into interesting territory with all the projects, particularly given the charges they incur in terms of hosting.  AutoGraders is hosted on AWS and UCBerkeley picks up the bills there.  LocalSupport is hosted on Heroku and Voluntary Action Harrow Cooperative pays those bills.  WebSiteOne is also on Heroku and our AgileVentures charity is picking up the increasing bills there.  OSRA and MetPlus are also on Heroku, but the free tier appears to be sufficient for the moment.  Every year, Armando Fox at UCBerkeley has 100&amp;rsquo;s of students generating systems that charities start to use, but the students are usually not available later to maintain the applications.  Armando suggested AgileVentures could charge maintanence plans and so I put together a &lt;a href="http://www.agileventures.org/nonprofit-basic-support"&gt;draft landing page&lt;/a&gt;, which outlines some different levels of support that a non-profit could get for having AgileVentures maintain their application.&lt;/p&gt;
+
+&lt;p&gt;The costs in there are based on time of AgileVentures folks restarting apps, responding to issues and so forth.  The interesting discussion we&amp;rsquo;re now having with the MetPlus project team as they look to take their system live (and potentially incurring costs) is bundling the costs of hosting (on Heroku, drie, AWS etc.) as part of AV maintenance plans.  We&amp;rsquo;re imagining that non-profit administrators would rather pay a single bill to AgileVentures for maintainenance and hosting rather than several separate bills for different hosting charges.  The big unknown is what sort of traffic MetPlus will incur.  Yesterday we agreed to offer the client everything free for the first three months, with all the systems on free infrastructure, with the indication that hosting/maintanence would cost on the order of $200 a month going forward, as an all-in, where we would do our best to use the most affordable hosting packages and provide the best level of maintanence support.&lt;/p&gt;
+
+&lt;p&gt;There are lots of details to work out here; lots of unknowns.  Small non-profits and charities generally don&amp;rsquo;t seem to be in a position to pay for development work, but they seem to have some limited funds for maintenance and hosting.  Being able to pay AgileVentures for maintanence and hosting in a single package sounds appealing in principle, but there&amp;rsquo;s the opportunity for us to lose money if performance spikes and we don&amp;rsquo;t have the right agreements and expectations set up.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ll just keep applying the Agile process of pushing out ideas, getting feedback from our clients, modifying our offering slightly, and keep trying to improve.  Keep following that path to sustainability.&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=MvMgbBya2Bk"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Olz0s99GhVQ"&gt;MetPlus Planning meeting &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dEanyrCUjOQ"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;p.s. this blog took 38 minutes to write.&lt;/p&gt;
+
+&lt;p&gt;p.p.s. managed to clear several things off my desk today&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Deployment DevOps</title>
     <link rel="alternate" href="http://blog.url.com/2017/01/12/deployment-devops/"/>
     <id>http://blog.url.com/2017/01/12/deployment-devops/</id>
     <published>2017-01-12T00:00:00+00:00</published>
-    <updated>2017-01-19T15:43:21+00:00</updated>
+    <updated>2017-01-18T21:36:23+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -79,7 +146,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/01/11/dazed-and-confused/"/>
     <id>http://blog.url.com/2017/01/11/dazed-and-confused/</id>
     <published>2017-01-11T00:00:00+00:00</published>
-    <updated>2017-01-19T15:43:21+00:00</updated>
+    <updated>2017-01-17T21:31:21+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -112,7 +179,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/01/10/tired-but-pushing-on/"/>
     <id>http://blog.url.com/2017/01/10/tired-but-pushing-on/</id>
     <published>2017-01-10T00:00:00+00:00</published>
-    <updated>2017-01-17T09:32:06+00:00</updated>
+    <updated>2017-01-16T21:04:26+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -147,7 +214,7 @@ p.p.s managed to clear another small set of items off my desk&lt;/p&gt;
     <link rel="alternate" href="http://blog.url.com/2017/01/09/drie-github/"/>
     <id>http://blog.url.com/2017/01/09/drie-github/</id>
     <published>2017-01-09T00:00:00+00:00</published>
-    <updated>2017-01-17T09:31:49+00:00</updated>
+    <updated>2017-01-13T21:03:41+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -222,7 +289,7 @@ include features ...
     <link rel="alternate" href="http://blog.url.com/2017/01/08/generalizing-pair-concept/"/>
     <id>http://blog.url.com/2017/01/08/generalizing-pair-concept/</id>
     <published>2017-01-08T00:00:00+00:00</published>
-    <updated>2017-01-17T09:31:49+00:00</updated>
+    <updated>2017-01-13T21:10:34+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -272,52 +339,6 @@ on his terminal, the quality of streaming is correct and it offers tools to inte
 &lt;li&gt;&lt;a href="http://nonprofits.agileventures.org/2016/10/25/solo-coding/"&gt;http://nonprofits.agileventures.org/2016/10/25/solo-coding/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://nonprofits.agileventures.org/2016/11/25/mob-programming/"&gt;http://nonprofits.agileventures.org/2016/11/25/mob-programming/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Getting Organised</title>
-    <link rel="alternate" href="http://blog.url.com/2017/01/06/getting-organised/"/>
-    <id>http://blog.url.com/2017/01/06/getting-organised/</id>
-    <published>2017-01-06T00:00:00+00:00</published>
-    <updated>2017-01-17T09:31:49+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Recently we had new windows put in the front of the house, which included replacing my home office windows.  This forced me to have a bit of a clear up in the office to allow the builders access.  I&amp;rsquo;m not a big fan of having to clear up in the physical world, although it&amp;rsquo;s always great to enjoy the results.  There always seems to be more clearing up than can be fit into a day.  Maybe it&amp;rsquo;s my personality or something about how demanding (or fun?) computers are in terms of getting things working on them.  I&amp;rsquo;d so much rather spend three hours of the afternoon working on code than sorting through my old filing cabinet.&lt;/p&gt;
-
-&lt;p&gt;The process of clearing out the office actually involved moving a lot of stuff up to the spare room.  This at least created a tidier office, and a few things did get thrown out.  Then we had relatives staying over the holiday and the spare room had to be sorted for them, so the stuff displaced from my office got moved down to my bedroom, and with help from my wife I&amp;rsquo;ve been doing some sorting over the last few days.  Some more stuff has been thrown out, some has been organised a little.  Over the break I did get a new filing cabinet installed in my office, and have begun the slow process of moving over stuff from the old broken plastic cabinet we brought with us from Hawaii.&lt;/p&gt;
-
-&lt;p&gt;The obsessive in me wants to go through every piece of paper in the old filing cabinet, throwing out what is not needed and classifying everything correctly.  The difficulty is knowing what is actually needed and that many things don&amp;rsquo;t necessarily fit into simple classifications.  It&amp;rsquo;s easy, for me at least, to burn hours dithering on these kinds of things.  And it becomes even more problematic if the materials being sorted include stuff that my kids made or I inherited from my parents.  I just managed to shred a load of my mother&amp;rsquo;s old payslips, although I kept two or three as mementos in a file folder that I discovered in the cleanup.  Now what does that say about me? :-)&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve backed down from trying to do a full re-filing session from old cabinet to new.  I do really want to throw the old one out to create more space in my office to get stuff out of the bedroom! However I don&amp;rsquo;t have the emotional energy to devote a day to doing that, and I feel bad about just dumping everything across.  I&amp;rsquo;ve gone for a compromise (?) approach where I try to become more proactive about filing things day to day.  Part of the problem in my office is that each day I&amp;rsquo;ll get a few things through the mail at a random point in the morning.  More often than not I am in the middle of working on some coding problem or set of admin tasks.  I&amp;rsquo;ll go down to get tea or coffee, will open the letters (depending on my mood) and will be tempted just to dump them on my desk rather than file them because I&amp;rsquo;m more interested in the coding or admin task.&lt;/p&gt;
-
-&lt;p&gt;As you might imagine this can lead to a situation where my desk surfaces are obscured by piles of stuff.  It&amp;rsquo;s not too bad at the moment in that, following the new window installation, I can see perhaps 35% of the desk surface clearly.  If I carried on as usual this year, that might drop to 5% before too long.  However, one of my many new year&amp;rsquo;s resolutions is to process one item on my desk every morning.  This morning it was sending an RSVP to my cousin&amp;rsquo;s wedding.  While I was in the moment I also texted my sister to check arrangements at the half term break so I can get to the point of booking my sons&amp;rsquo; dentists appointments for when they are off school.  The letter from the dentist is another item sitting on my desk to the left.  Yesterday a bank statement arrived and since that required filing, I used it as an opportunity to move the bank-related files from old filing cabinet to the new.&lt;/p&gt;
-
-&lt;p&gt;The plan here is to ruthlessly and relentlessly reduce the number of items on my desk, and to gradually move the items from old filing cabinet to new, but to do it as part of the ongoing sorting.  I&amp;rsquo;m hoping this might make everything a little less painful, and introduce a new rhythmn of filing and organising things as I get them, rather than allowing them to build up.  We&amp;rsquo;ll see how it goes. &lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m also measuring the time it takes me blog, in an attempt to keep it under 20 minutes, but so far this year it&amp;rsquo;s still stretching to 40 minutes each day.  Trying to be more organised in my office is part of an ongoing attempt to be more organised in my work generally.  It&amp;rsquo;s very easy to get distracted by whoever is sending the latest email or the latest Slack message.  The blogging itself is part of trying to give me space to get stuff done proactively rather than doing everything reactively.  Other things I&amp;rsquo;m trying to make regular are:&lt;/p&gt;
-
-&lt;p&gt;1) reviewing my action plan daily&lt;br&gt;
-2) creating a blog draft in under 20 mins daily&lt;br&gt;
-3) reviewing and posting the previous days blog&lt;br&gt;
-4) reviewing and sending an older blog to Medium/Twitter/FB/LinkedIn&lt;br&gt;
-5) reviewing PRs for LocalSupport, WebSiteOne and the AsyncVoter projects&lt;br&gt;
-6) listening to, and Slacking, a podcast  &lt;/p&gt;
-
-&lt;p&gt;Although maybe I should be dropping this obsession with chipping away at things, clear my desk (metaphorically at least) and focus on coding the key things that I think will bring in more revenue to AgileVentures; and there really needs to be more revenue if I want to continue my current lifestyle.  I didn&amp;rsquo;t do any focused coding yesterday.  It was all scrums, code review, comments in pull requests, scripts for merging edX courses, responding to email from instructors using the ESaaS textbook, sorting out the meetup group, and trying to get registered as a charity with TechSoup, which is what Slack is asking us to do to be confirmed as a non-profit.  That last seems to involve us having to submit accounts, and so I have to make a financial projection for the year &amp;hellip;?!&lt;/p&gt;
-
-&lt;p&gt;When I look back at the last year it feels like the efforts that brought in revenue were reaching out to AV members via email, many of whom converted to Premium plans, and hooking up with a Sponsor through my personal network.  So far all my attempts to gain additional sponsors through emails have produced some interesting leads, but no results.  At the moment my mind is buzzing with the idea of reaching out to all the AV Slack members in DM to let them know that now AgileVentures is an official charity, Premium plan payments are tax deductible, hoping that this will be good news for those who are already signed up, and might encourage a few more to consider the option; as well as get feedback on the offering.  Doing that sounds like a lot more interesting and productive than sorting out my filing cabinet &amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=LPb6K9oksxI"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=mARKUGnA4Pc"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;p.s. there were also a lot of interesting technical things that came up yesterday, such as the Avdi Grimm code we looked at in Mob Programming, all the stuff I was putting in PR review about managing project work that I should be writing in my book proposal, the MongoDB security issue we talked about in the &amp;ldquo;Kent Beck&amp;rdquo; scrum and the twitter disabling hook in the twitter PR for WebSiteOne to name a few &amp;hellip; and I have to restrict myself to one blog a day?!?&lt;/p&gt;
-
-&lt;p&gt;p.p.s this blog took 33 minutes to write&lt;/p&gt;
 </content>
   </entry>
 </feed>
