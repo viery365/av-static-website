@@ -82,11 +82,11 @@
       <div class="col-lg-8 text-left">
         <h2 class='title'><a href="/2016/10/06/non-invasive-programming/">Non Invasive Programming</a></h2>
         <h5 class='date'> 6 Oct 2016</h5>
-    <p>So I was back in shape for a bit of pair programming again and Michael and I continued what we&rsquo;d been working on last week, which was allowing <a href="https://github.com/AgileVentures/WebsiteOne/issues/1303">Premium members to upgrade to PremiumPlus</a>.  It took us 15 minutes or so to get up to speed, closing out a few experimental PRs, checking that some airbrake errors weren&rsquo;t anything serious etc.  I had been assuming we&rsquo;d have to focus on other things, so I was pleased when we could continue with a task related to premium.  I was speculating that the small spike in new sign ups we had might have been related to rolling out the &ldquo;Upgrade to Premium&rdquo; button on all the individual user profile pages.</p>
+    <p>So I was back in shape for a bit of pair programming again and Michael and I continued what we&rsquo;d been working on last week, which was allowing <a href="https://github.com/AgileVentures/WebsiteOne/issues/1303">Premium members to upgrade to PremiumPlus</a>.  It took us 15 minutes or so to get up to speed, closing out a few experimental PRs, checking that some airbrake errors weren&rsquo;t anything serious etc.  I had been assuming we&rsquo;d have to focus on other things, so I was pleased when we could continue with a task related to Premium.  I was speculating that the small spike in new sign ups we had might have been related to rolling out the &ldquo;Upgrade to Premium&rdquo; button on all the individual user profile pages.</p>
 
-<p>I was half tempted to start ferreting through our Google Analytics data and checking with the new premium members about this, but put a pin in that and tried to make progress on the outstanding task.  DriveBy heuristic, finish what you started, and find the shortest path to completion.  Hmm, maybe it should be called &ldquo;WhistleStop&rdquo;, or &ldquo;non-invasive&rdquo;, anyhow &hellip; it was an interesting operation because what we were hoping was to pull in the new domain objects we&rsquo;d created the week before (Subscription and PaymentSource).  We had a failing acceptance test that was expecting a premium user&rsquo;s profile page to now show an &ldquo;upgrade to Premium Plus&rdquo; button: </p>
-<pre class="highlight gherkin"><code>  <span class="kn">Scenario</span><span class="p">:</span> User upgrades to premium plus from premium
-    <span class="nf">Given</span> I am logged in as a premium user with name <span class="s">"John"</span>, email <span class="s">"john@john.com"</span>, with password <span class="s">"asdf1234"</span>
+<p>I was half tempted to start ferreting through our Google Analytics data and checking with the new Premium members about this, but I put a pin in that and tried to make progress on the outstanding task.  DriveBy heuristic, finish what you started, and find the shortest path to completion.  Hmm, maybe it should be called &ldquo;WhistleStop&rdquo;, or &ldquo;non-invasive&rdquo;, anyhow &hellip; it was an interesting operation because what we were hoping was to pull in the new domain objects we&rsquo;d created the week before (Subscription and PaymentSource).  We had a failing acceptance test that was expecting a Premium user&rsquo;s profile page to now show an &ldquo;upgrade to Premium Plus&rdquo; button: </p>
+<pre class="highlight gherkin"><code>  <span class="kn">Scenario</span><span class="p">:</span> User upgrades to Premium plus from Premium
+    <span class="nf">Given</span> I am logged in as a Premium user with name <span class="s">"John"</span>, email <span class="s">"john@john.com"</span>, with password <span class="s">"asdf1234"</span>
     <span class="nf">And</span> I am on my profile page
     <span class="nf">And</span> I click <span class="s">"Upgrade to Premium Plus"</span>  <span class="c"># failing step</span>
     <span class="nf">Then</span> I should see <span class="s">"Premium PLUS Member"</span>
@@ -102,7 +102,7 @@
   <span class="nt">&lt;li&gt;</span><span class="err">&lt;</span>%= render 'users/profile/premium_upgrade' %&gt;<span class="nt">&lt;/li&gt;</span>
 <span class="err">&lt;</span>% end
 </code></pre>
-<p>Not that we wanted logic in our views.  In the previous session we had already extracted the premium upgrade button into a partial <code>_premium_upgrade.html.erb</code>:</p>
+<p>Not that we wanted logic in our views.  In the previous session we had already extracted the Premium upgrade button into a partial <code>_premium_upgrade.html.erb</code>:</p>
 <pre class="highlight html"><code><span class="err">&lt;</span>%= form_tag charges_path(plan: 'premium') do %&gt;
     <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://checkout.stripe.com/checkout.js"</span> <span class="na">class=</span><span class="s">"stripe-button"</span>
             <span class="na">data-key=</span><span class="s">"&lt;%= Rails.configuration.stripe[:publishable_key] %&gt;"</span>
@@ -137,7 +137,7 @@
     <span class="err">&lt;</span>%= submit_tag "Upgrade to Premium Plus", class:"stripe-button"%&gt;
 <span class="err">&lt;</span>% end %&gt;
 </code></pre>
-<p>We&rsquo;d decided to create a new action on the charges controller.  What was really interesting here, reflecting on our piecemeal work on the charges controller, is that we realised we&rsquo;d got our RESTfulness totally out of whack.  We&rsquo;d originally put our subscription sign-up in a &ldquo;charges&rdquo; controller from one Stripe example that was all about making single one off charges.  What we had would be more accurately called a &ldquo;Subscription&rdquo; controller.  Let&rsquo;s look at all the code that&rsquo;s accumulated there:</p>
+<p>We&rsquo;d decided to create a new action on the charges controller.  What was really interesting here, reflecting on our piecemeal work on the charges controller, is that we realised we&rsquo;d got our RESTfulness totally out of whack.  We&rsquo;d originally put our subscription sign-up in a &ldquo;Charges&rdquo; controller from one Stripe example that was all about making single one off charges.  What we had would be more accurately called a &ldquo;Subscription&rdquo; controller.  Let&rsquo;s look at all the code that&rsquo;s accumulated there:</p>
 <pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">ChargesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
 
   <span class="n">before_filter</span> <span class="ss">:authenticate_user!</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">]</span>
@@ -190,7 +190,7 @@
     <span class="n">subscription</span><span class="p">.</span><span class="nf">save</span>
   <span class="k">end</span>
 </code></pre>
-<p>It took us a while to get to that logic in the upgrade action. It was failing silently and we had to drop into the debugger where the error message from the Stripe API told us to do something different from their docs; weird.  And total Demeter violation territory. <code>customer.subscriptions.retrieve(customer.subscriptions.first.id)</code> in particular was looking very brittle.  Surely there would be something like customer.subscriptions.first that we could use instead?  We&rsquo;d circle back - this was working and I had an eye on whether we couldn&rsquo;t get this feature green without using any of our new domain objects.  Was that crazy?  I was thinking that it would give us a safe green space to reflect, and improve our understanding of the Stripe API.  With the upgrade code in place the only thing we needed was for the user object to be able to correctly report its membership type.  It currently did this:</p>
+<p>It took us a while to get to that logic in the upgrade action. It was failing silently and we had to drop into the debugger where the error message from the Stripe API told us to do something different from their docs; weird.  And total Demeter violation territory. In particular <code>customer.subscriptions.retrieve(customer.subscriptions.first.id)</code> was looking very brittle.  Surely there would be something like customer.subscriptions.first that we could use instead?  We&rsquo;d circle back - this was working and I had an eye on whether we couldn&rsquo;t get this feature green without using any of our new domain objects.  Was that crazy?  I was thinking that it would give us a safe green space to reflect, and improve our understanding of the Stripe API.  With the upgrade code in place the only thing we needed was for the user object to be able to correctly report its membership type.  It currently did this:</p>
 <pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">membership_type</span>
     <span class="k">return</span> <span class="s2">"Basic"</span> <span class="k">unless</span> <span class="n">stripe_customer</span>
     <span class="s2">"Premium Plus"</span>
@@ -236,7 +236,7 @@ false
     <span class="n">subscription</span><span class="p">.</span><span class="nf">type</span>
   <span class="k">end</span>
 </code></pre>
-<p>but we were running out of time, and we had to finish pairing without getting the acceptance tests green, because the cuke steps were going to need a whole load of refactoring to be creating premium users in terms of setting up these new domain objects like subscription and payment source.  I had several places of discomfort that I hope we can address in future sessions:</p>
+<p>but we were running out of time, and we had to finish pairing without getting the acceptance tests green, because the cuke steps were going to need a whole load of refactoring to be creating Premium users in terms of setting up these new domain objects like Subscription and PaymentSource.  I had several places of discomfort that I hope we can address in future sessions:</p>
 
 <ol>
 <li>Cukes using the same factories as specs</li>
@@ -248,7 +248,7 @@ false
 
 <p>But which are the ones that we can address &ldquo;non-invasively&rdquo; to stay focused on getting this single feature green?  So much going on here.  Just how many refactoring tickets will we generate? All to be revealed in the next pair programming session!</p>
 
-<p>Related Videos:</p>
+<h3>Related Videos:</h3>
 
 <ul>
 <li><a href="https://www.youtube.com/watch?v=bKu3e_jLrQw">Pair Programming</a></li>
