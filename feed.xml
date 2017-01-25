@@ -5,10 +5,70 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-01-13T00:00:00+00:00</updated>
+  <updated>2017-01-16T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Hosting Costs</title>
+    <link rel="alternate" href="http://blog.url.com/2017/01/16/hosting-costs/"/>
+    <id>http://blog.url.com/2017/01/16/hosting-costs/</id>
+    <published>2017-01-16T00:00:00+00:00</published>
+    <updated>2017-01-25T21:34:53+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;There&amp;rsquo;s lots I&amp;rsquo;d like to talk about.  Premium pairing on new non-profit IT support plans, &lt;a href="https://www.youtube.com/watch?v=P66oJafqqng"&gt;helping Kenyan students get started with LocalSupport&lt;/a&gt;, &lt;a href="https://www.youtube.com/watch?v=zrz6ct9wIUs"&gt;meeting with the LocalSupport client&lt;/a&gt;, deploying LocalSupport via the new drie push Github interface, mob programming on the Hash#fetch method, but I&amp;rsquo;m presenting my talk on &amp;ldquo;DevOps on a Budget&amp;rdquo; on Thursday, so things have got to be DevOps pricing focused :-)&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m torn between focusing the presentation on the costings and the actual process of DevOps I&amp;rsquo;m doing on AV projects that I blogged about last week.  The talk summary is as follows:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This talk will cover how we&amp;rsquo;ve been keeping our hosting costs down at the AgileVentures online IT and Education charity over the last 4 years, touching on how we&amp;rsquo;ve been using Heroku, AWS and other less well known services like NineFold and drie. In particular we&amp;rsquo;ll look at how we manage DevOps in an ever changing team of volunteer participants. We&amp;rsquo;ll also cover our migration from Heroku to Ninefold and back again when Ninefold went bust, and our most recent ongoing migration from Heroku to drie.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I guess the key thing is to get down some of that narrative about how our longest running project has been managed from a DevOps point of view over the years.  A quick trip to to Google Analytics showed me a slightly perplexing view of the traffic to the site over the last 2 years that we&amp;rsquo;ve been tracking:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Harrow Community Network users" src="https://www.dropbox.com/s/zrhi3tit04i44s0/Screenshot%202017-01-16%2009.42.25.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The site traffic was an order of magnitude heavier in 2015, and I can&amp;rsquo;t really think of an explanation other than some sort of error relating to analytics of some service pinging the site that shut down.  Throughout 2016 we&amp;rsquo;ve had about 300 visitors a month, which seems about right.  I can&amp;rsquo;t imagine why 2015 would have seen such high traffic.  In contrast WebSiteOne has been much more consistent:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="AgileVentures site users" src="https://www.dropbox.com/s/p5inkiun3j1993r/Screenshot%202017-01-16%2009.45.43.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The extra challenge with the Harrow Community Network site has generally stemmed from needing https for logins to ensure they are secure.  Arguably this is an issue for every site, but the AgileVentures site handles login via GitHub and G+ which have their own security.  As a cash strapped NonProfit with clients who also have limited resources we were looking at ways of affording the extra fees for setting up SSL certificates.&lt;/p&gt;
+
+&lt;p&gt;Our Slack archive and meeting notes shows me that we had got prototypes of the main site on Heroku in early February 2014.  It wasn&amp;rsquo;t long before we&amp;rsquo;d realised that Heroku SSL suport would lead to a recurring monthly fee, and so the site was only very briefly on Heroku (3 months) before we&amp;rsquo;d switched to NineFold. &lt;/p&gt;
+
+&lt;p&gt;We started investigating &lt;a href="http://ninefold.com/"&gt;NineFold&lt;/a&gt; as an alternative to Heroku in April 2014, when a member of our community working for NineFold indicated we might be able to get a grant from NineFold to cover the hosting costs.  We went live on NineFold in May 2014, but it was less than a year before we were forced to switch back to Heroku due to NineFold sunsetted their Rails hosting solution in March 2015.  We&amp;rsquo;d gotten almost a years free SSL support from NineFold, although that did inadvertently charge my credit card a couple of times.  Talking it through with them I got a refund.&lt;/p&gt;
+
+&lt;p&gt;I have emails from April 2015 about moving our data back from NineFold to Heroku, and getting SSL certificates set up.  At that point Heroku gave us a $100 grant towards the costs of the SSL certificates.  Importing the data back was problematic, and ultimately fixed by using a binary dump with schema AND data and reseting the db before doing the restore operation.&lt;/p&gt;
+
+&lt;p&gt;NineFold&amp;rsquo;s command line interface had been slightly different to Heroku&amp;rsquo;s and had taken a little getting used to.  The deployment was not too difficult, and we had a NineFold person giving us technical support directly in our Slack instance. There had been a fair amount of fiddling around to create valid SSL certificates through a third party provider. Overall it was an interesting experience to have migrated a site from one provider to another; which mainly involved being familiar with PostGres import and export tools.&lt;/p&gt;
+
+&lt;p&gt;Moving back to Heroku, the free SSL certificate provider I&amp;rsquo;d used for NineFold was no longer operating, and the client was now willing to take on some hosting costs.  At the time I was also just contributing to AgileVentures part time and so the Heroku Expedited SSL solution was very attractive, so we went for that and have been billing the client $35 a month since then.  Ironically SSL is now free on custom domains on Heroku, but to get off the limited hours free tier we need to pay $7 a month, and we need to keep the staging and develop instances running so we could switch over to the new dynos and take the costs down to $21 a month.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;re also looking seriously at moving to drie, who have a low cost hosting service called &amp;ldquo;drie push&amp;rdquo;.  One of the advantages of drie is automatic availability of hosted versions of all the branches in ones&amp;rsquo; git repo.  Early on we linked things up for HarrowCN like so:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;master branch &amp;ndash;&amp;gt; https://www.harrowcn.org.uk&lt;/li&gt;
+&lt;li&gt;staging branch &amp;ndash;&amp;gt; http://staging.harrowcn.org.uk&lt;/li&gt;
+&lt;li&gt;develop branch &amp;ndash;&amp;gt; http://develop.harrowcn.org.uk&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Having that kind of mapping automatically available from the start of the project is very appealing, but after the experience with NineFold we are cautious about moving to a new service provider.  However drie also has a tighter GitHub integration than Heroku allowing us to add drie as a GitHub integration and deploy directly by pushing to any repo branch.  Heroku can be set up to do this, but their &amp;ldquo;build on PRs&amp;rdquo; functionality creates more instances that we have to pay for.  drie has a different model that sleeps apps more aggressively and so their free tier goes further than that of Heroku.  We&amp;rsquo;re also excited about being able to use GitHub&amp;rsquo;s team interface system rather than Heroku&amp;rsquo;s; since Heroku is also charging extra for the use of the team interface.&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=NiXjhjaTTCk"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=zrz6ct9wIUs"&gt;LocalSupport Client Meeting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ToV8wt9sr8w"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=VOnol6QAaeg"&gt;Saturday &amp;ldquo;Bob Martin&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=P66oJafqqng"&gt;Sunday &amp;ldquo;Bob Martin&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;p.s. Full disclosure, AgileVentures has received financial grants from Heroku and NineFold in the past, and drie is an ongoing sponsor of the AgileVentures charity. &lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Legacy Maintenance Plans</title>
     <link rel="alternate" href="http://blog.url.com/2017/01/13/legacy-maintenance-plans/"/>
@@ -282,63 +342,6 @@ include features ...
 &lt;/ul&gt;
 
 &lt;p&gt;p.s. this blog took 33 minutes to write&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>From pair programming to pair working</title>
-    <link rel="alternate" href="http://blog.url.com/2017/01/08/generalizing-pair-concept/"/>
-    <id>http://blog.url.com/2017/01/08/generalizing-pair-concept/</id>
-    <published>2017-01-08T00:00:00+00:00</published>
-    <updated>2017-01-13T21:10:34+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Pair programming - as any relatively new programming methodology, such as BDD, TDD - is a controversial matter. The controversy is good. It helps define the relevant applications of the methodology. In their books &amp;ldquo;better, faster and lighter java&amp;rdquo;, Bruce Tate and Justin Gehtland explain that, when you have a new drill, any problem relates to drilling a hole. You may end up trying to open a bottle of beer with a drill. And obviously, with any new technology or methodology, you go through skepticism, enthusiasm and disappointment.  Eventually, after drilling holes anywhere in your house, you grasp the reasonable use cases. &lt;/p&gt;
-
-&lt;p&gt;Controversies about pair programming arise at Agile Ventures, too. Well, even if many members are very experienced pair programming practitioners, many others - including me - are still looking for their pair programming comfort or efficiency zone. We sometimes discuss this topic with Sam - we might bore him with our wavering and he might think &amp;ldquo;why the hell do they spend time talking rather than coding? :-)&amp;rdquo;. We finally agree on at least four cases where pair programming is a good fit :&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;When we start to code a functionality : because getting up in the morning is always a challenge&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;When we&amp;rsquo;re stuck : because it&amp;rsquo;s good to have someone that tells you to look at the top when we keep on looking for an exit at the bottom without finding it&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;When we want to complete a task :  because a pair programming buddy will help you to overcome your obsession of perfectionism or your fear to put things to an end, so that deadlines are met&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;When we need to improve our skills : Programming is often like a shared secret. Everybody has got a piece of the whole puzzle.&lt;br&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Starting a task, being stuck, achieving things, improving our skills are not specific to progamming. I gradually notice that there are many other professional circumstances where pairing is a valuable way to get things done :&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;System administration : Configuring or troubleshooting a system&lt;/li&gt;
-&lt;li&gt;Document, presentation : Writing a presentation or a document&lt;/li&gt;
-&lt;li&gt;Project management : ordering ideas, prioritizing tasks&lt;/li&gt;
-&lt;li&gt;Problem solving : Trying to describe / figure out the nature of a question by gathering figures and facts in a spreadsheet&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Before I began to practice remote pair programming with Agile Ventures, I felt that working remotely was quite a challenge. For instance, proof-reading 
-a document with your team on a conference call is not easy. You have to tell everybody which page you&amp;rsquo;re working on, and once you modified the document,
-the page numbering is not consistent anymore. You spend more time synchronizing people than working on the document.&lt;/p&gt;
-
-&lt;p&gt;Synchronizing the context between participants in a distant meeting is a key aspect. If interactions are limited to only a channel, whatever it is, audio, chat, email, slack, synchronization is not possible. As soon as you add a second channel, for instance screen sharing + audio, the sync problem disappears. There are many tools available to sync people. It took me time to find the right combinations, depending on the task at stake and the work habits.  Sometimes, we work with teamviewer on the phone. Sometimes, we use online tools like zoom.us, or webex. Sometimes, we use videoconference tools  like Skype or hangouts. Sometimes, we work with mobile tools, like WhatsApp. The tool is not a great barrier as long as every participant can install it
-on his terminal, the quality of streaming is correct and it offers tools to interact with others to every participant, chatting, writing on the displayed document, talking.&lt;/p&gt;
-
-&lt;p&gt;Distance, that was detrimental when working on a conference call, becomes an advantage :&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The shared screen becomes everybody&amp;rsquo;s screen. Anyone can participate, correct, add his own contribution to the work.&lt;/li&gt;
-&lt;li&gt;Some basic physical constraints such as finding a layout of the room so that every participant can watch the screen and participate disappears.&lt;/li&gt;
-&lt;li&gt;Various barriers like psychology, hierarchy, physical proximity or language barriers are lowered. People can choose to ask questions by chat or on the voice channel for instance, depending on their favorite way of communicating.&lt;/li&gt;
-&lt;li&gt;Participants can be more focused on the real goal at stake&lt;/li&gt;
-&lt;li&gt;And last but not least, it costs much less than a physical meeting&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Pair-programming may be a controversial topic but my experience of using the methodology to work on other subjects such as sys admin or document writing has been very profitable. I hope my post inspires you to begin pair-working or even mob-working! &lt;/p&gt;
-
-&lt;h3&gt;Related Blogs:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://nonprofits.agileventures.org/2016/10/20/to-pair-or-not-to-pair/"&gt;http://nonprofits.agileventures.org/2016/10/20/to-pair-or-not-to-pair/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://nonprofits.agileventures.org/2016/10/25/solo-coding/"&gt;http://nonprofits.agileventures.org/2016/10/25/solo-coding/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://nonprofits.agileventures.org/2016/11/25/mob-programming/"&gt;http://nonprofits.agileventures.org/2016/11/25/mob-programming/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>

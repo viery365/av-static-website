@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Hosting Costs</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+
+</head>
+<body class="x2017 x2017_01 x2017_01_16 x2017_01_16_hosting-costs x2017_01_16_hosting-costs_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#services">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#portfolio">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/01/16/hosting-costs/">Hosting Costs</a></h2>
+        <h5 class='date'>16 Jan 2017</h5>
+    <p>There&rsquo;s lots I&rsquo;d like to talk about.  Premium pairing on new non-profit IT support plans, <a href="https://www.youtube.com/watch?v=P66oJafqqng">helping Kenyan students get started with LocalSupport</a>, <a href="https://www.youtube.com/watch?v=zrz6ct9wIUs">meeting with the LocalSupport client</a>, deploying LocalSupport via the new drie push Github interface, mob programming on the Hash#fetch method, but I&rsquo;m presenting my talk on &ldquo;DevOps on a Budget&rdquo; on Thursday, so things have got to be DevOps pricing focused :-)</p>
+
+<p>I&rsquo;m torn between focusing the presentation on the costings and the actual process of DevOps I&rsquo;m doing on AV projects that I blogged about last week.  The talk summary is as follows:</p>
+
+<blockquote>
+<p>This talk will cover how we&rsquo;ve been keeping our hosting costs down at the AgileVentures online IT and Education charity over the last 4 years, touching on how we&rsquo;ve been using Heroku, AWS and other less well known services like NineFold and drie. In particular we&rsquo;ll look at how we manage DevOps in an ever changing team of volunteer participants. We&rsquo;ll also cover our migration from Heroku to Ninefold and back again when Ninefold went bust, and our most recent ongoing migration from Heroku to drie.</p>
+</blockquote>
+
+<p>I guess the key thing is to get down some of that narrative about how our longest running project has been managed from a DevOps point of view over the years.  A quick trip to to Google Analytics showed me a slightly perplexing view of the traffic to the site over the last 2 years that we&rsquo;ve been tracking:</p>
+
+<p><img alt="Harrow Community Network users" src="https://www.dropbox.com/s/zrhi3tit04i44s0/Screenshot%202017-01-16%2009.42.25.png?dl=1" /></p>
+
+<p>The site traffic was an order of magnitude heavier in 2015, and I can&rsquo;t really think of an explanation other than some sort of error relating to analytics of some service pinging the site that shut down.  Throughout 2016 we&rsquo;ve had about 300 visitors a month, which seems about right.  I can&rsquo;t imagine why 2015 would have seen such high traffic.  In contrast WebSiteOne has been much more consistent:</p>
+
+<p><img alt="AgileVentures site users" src="https://www.dropbox.com/s/p5inkiun3j1993r/Screenshot%202017-01-16%2009.45.43.png?dl=1" /></p>
+
+<p>The extra challenge with the Harrow Community Network site has generally stemmed from needing https for logins to ensure they are secure.  Arguably this is an issue for every site, but the AgileVentures site handles login via GitHub and G+ which have their own security.  As a cash strapped NonProfit with clients who also have limited resources we were looking at ways of affording the extra fees for setting up SSL certificates.</p>
+
+<p>Our Slack archive and meeting notes shows me that we had got prototypes of the main site on Heroku in early February 2014.  It wasn&rsquo;t long before we&rsquo;d realised that Heroku SSL suport would lead to a recurring monthly fee, and so the site was only very briefly on Heroku (3 months) before we&rsquo;d switched to NineFold. </p>
+
+<p>We started investigating <a href="http://ninefold.com/">NineFold</a> as an alternative to Heroku in April 2014, when a member of our community working for NineFold indicated we might be able to get a grant from NineFold to cover the hosting costs.  We went live on NineFold in May 2014, but it was less than a year before we were forced to switch back to Heroku due to NineFold sunsetted their Rails hosting solution in March 2015.  We&rsquo;d gotten almost a years free SSL support from NineFold, although that did inadvertently charge my credit card a couple of times.  Talking it through with them I got a refund.</p>
+
+<p>I have emails from April 2015 about moving our data back from NineFold to Heroku, and getting SSL certificates set up.  At that point Heroku gave us a $100 grant towards the costs of the SSL certificates.  Importing the data back was problematic, and ultimately fixed by using a binary dump with schema AND data and reseting the db before doing the restore operation.</p>
+
+<p>NineFold&rsquo;s command line interface had been slightly different to Heroku&rsquo;s and had taken a little getting used to.  The deployment was not too difficult, and we had a NineFold person giving us technical support directly in our Slack instance. There had been a fair amount of fiddling around to create valid SSL certificates through a third party provider. Overall it was an interesting experience to have migrated a site from one provider to another; which mainly involved being familiar with PostGres import and export tools.</p>
+
+<p>Moving back to Heroku, the free SSL certificate provider I&rsquo;d used for NineFold was no longer operating, and the client was now willing to take on some hosting costs.  At the time I was also just contributing to AgileVentures part time and so the Heroku Expedited SSL solution was very attractive, so we went for that and have been billing the client $35 a month since then.  Ironically SSL is now free on custom domains on Heroku, but to get off the limited hours free tier we need to pay $7 a month, and we need to keep the staging and develop instances running so we could switch over to the new dynos and take the costs down to $21 a month.</p>
+
+<p>We&rsquo;re also looking seriously at moving to drie, who have a low cost hosting service called &ldquo;drie push&rdquo;.  One of the advantages of drie is automatic availability of hosted versions of all the branches in ones&rsquo; git repo.  Early on we linked things up for HarrowCN like so:</p>
+
+<ul>
+<li>master branch &ndash;&gt; https://www.harrowcn.org.uk</li>
+<li>staging branch &ndash;&gt; http://staging.harrowcn.org.uk</li>
+<li>develop branch &ndash;&gt; http://develop.harrowcn.org.uk</li>
+</ul>
+
+<p>Having that kind of mapping automatically available from the start of the project is very appealing, but after the experience with NineFold we are cautious about moving to a new service provider.  However drie also has a tighter GitHub integration than Heroku allowing us to add drie as a GitHub integration and deploy directly by pushing to any repo branch.  Heroku can be set up to do this, but their &ldquo;build on PRs&rdquo; functionality creates more instances that we have to pay for.  drie has a different model that sleeps apps more aggressively and so their free tier goes further than that of Heroku.  We&rsquo;re also excited about being able to use GitHub&rsquo;s team interface system rather than Heroku&rsquo;s; since Heroku is also charging extra for the use of the team interface.</p>
+
+<h3>Related Videos:</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=NiXjhjaTTCk">&ldquo;Martin Fowler&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=zrz6ct9wIUs">LocalSupport Client Meeting</a></li>
+<li><a href="https://www.youtube.com/watch?v=ToV8wt9sr8w">&ldquo;Kent Beck&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=VOnol6QAaeg">Saturday &ldquo;Bob Martin&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=P66oJafqqng">Sunday &ldquo;Bob Martin&rdquo; Scrum</a></li>
+</ul>
+
+<p>p.s. Full disclosure, AgileVentures has received financial grants from Heroku and NineFold in the past, and drie is an ongoing sponsor of the AgileVentures charity. </p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
