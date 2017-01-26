@@ -5,10 +5,40 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-01-16T00:00:00+00:00</updated>
+  <updated>2017-01-17T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Server Monitoring</title>
+    <link rel="alternate" href="http://blog.url.com/2017/01/17/server-monitoring/"/>
+    <id>http://blog.url.com/2017/01/17/server-monitoring/</id>
+    <published>2017-01-17T00:00:00+00:00</published>
+    <updated>2017-01-26T21:40:51+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So I&amp;rsquo;m still forcing myself to think about DevOps in preparation for my talk on Thursday.  Other things being equal I&amp;rsquo;d be blogging about our new marketing activities and how Google will potentially give us $10,000 a month of AdWords, and how there might be similar, if less generous, offers from other social media sites.  However, it felt great yesterday when I managed to complete a first draft of the slides for the talk.  There&amp;rsquo;s still a little something missing though; the performance requirements for the different systems.  &lt;/p&gt;
+
+&lt;p&gt;What I do know from the metrics we get from Heroku on WebSiteOne is that we regularly exceed our 500MB memory allowance, although the site performance doesn&amp;rsquo;t seem too horrible.  We&amp;rsquo;ve gone in and fixed particularly slow loads on the users, projects and event pages, as well as had a stab at removing gems that seem to be eating up a lot of memory.  We&amp;rsquo;ve improved page load times, but not managed to get the memory usage down.  We could pay to upgrade to the next Heroku tier to get 1GB of memory, but the site performance seems superficially okay - and no one is explicitly complaining about it.  We know that pages need to load as fast as possible in order for people to spend any time on the site. Greater than 4 seconds is likely a big turnoff these days.  The front page appears in about 1.2 seconds when I refresh in Chrome.  Of course it would be slower if not cached.  In incognito mode the entire front page loads in about 2.6 seconds.  That seems acceptable, but I do have a reasonably fast mac.  It might be the case that other folks around the world are experiencing poor performance and we&amp;rsquo;re not aware of it &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;It seems like NewRelic wasn&amp;rsquo;t actually enabled on WebSiteOne production.  The code was all set up, but the NEW RELIC key wasn&amp;rsquo;t in the production settings.  I&amp;rsquo;ve added that now so perhaps we&amp;rsquo;ll see some interesting data.  NewRelic is all set up for LocalSupport, where we can see an overview of the web transaction times:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="NewRelic data from HarrowCN production" src="https://www.dropbox.com/s/myb72nmofhmm7lg/Screenshot%202017-01-17%2010.22.04.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ping requests haven&amp;rsquo;t been working for the last 12 days, and aren&amp;rsquo;t working from the command line either, but the site is up and it looks like pages are being served okay.  I can see a couple of page loads that failed in the last seven days, which is probably acceptable for this low traffic site.  Even if it wasn&amp;rsquo;t, I&amp;rsquo;m not sure how to go from that failure to a fix.  Superficially it would just mean provisioning more dyno or more memory.  At the moment LocalSupport is on a legacy dyno from Heroku, meaning we aren&amp;rsquo;t getting metrics on memory usage as we are for WebSiteOne.&lt;/p&gt;
+
+&lt;p&gt;While I&amp;rsquo;ve been writing this, the NewRelic data on WebSiteOne has started coming in:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="NewRelic data from WSO production" src="https://www.dropbox.com/s/s5x799dlbdx4l7z/Screenshot%202017-01-17%2010.28.42.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;This makes it look like there was at least one frustrated request in the last half an hour at least.  That makes me think fixing our memory issues on WSO might be higher priority.  Looks like some kind of active record lookup was getting stuck &amp;hellip; Going back to HarrowCN, it seems like I can embed a &lt;a href="https://rpm.newrelic.com/public/charts/7odyrRrzsqR"&gt;feed of the throughput&lt;/a&gt; in an iframe:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="HarrowCN throughput" src="https://www.dropbox.com/s/zzyev88mr4orwbn/Screenshot%202017-01-17%2010.33.07.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The baseline requests look like some sort of healthcheck is going on, rather than it being representative of human users &amp;hellip; more investigation required.  I wonder if that&amp;rsquo;s a side effect of NewRelic or some other pinging service we&amp;rsquo;ve forgotten about?  Anyhow, I want to get deeper into this for both WSO and HarrowCN (and AutoGraders/MetPlus) to flesh out what I can say about the usage of our systems in my talk on Thursday.  Let&amp;rsquo;s see how far I get &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Hosting Costs</title>
     <link rel="alternate" href="http://blog.url.com/2017/01/16/hosting-costs/"/>
@@ -267,81 +297,6 @@
 
 &lt;p&gt;p.s. this blog took 26 minutes
 p.p.s managed to clear another small set of items off my desk&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>drie GitHub integration</title>
-    <link rel="alternate" href="http://blog.url.com/2017/01/09/drie-github/"/>
-    <id>http://blog.url.com/2017/01/09/drie-github/</id>
-    <published>2017-01-09T00:00:00+00:00</published>
-    <updated>2017-01-13T21:03:41+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Friday I took a trip down to the &lt;a href="https://drie.co/"&gt;drie&lt;/a&gt; offices in Hammersmith.  We&amp;rsquo;d agreed before the break that we needed to coordinate our collaboration for the new year.  We&amp;rsquo;d previously agreed a sliding scale of sponsorship support based on outcomes for drie in terms of the number of users adopting drie.  In preparation for the meeting I prepared the following list:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;What I need
-
-&lt;ul&gt;
-&lt;li&gt;ability to track the number of people using drie&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;What I need to do
-
-&lt;ul&gt;
-&lt;li&gt;check whether moving drie servers to Ireland is getting the performance increase we hoped for&lt;/li&gt;
-&lt;li&gt;migrate more of LocalSupport to drie&lt;/li&gt;
-&lt;li&gt;prepare for the devops conference talk&lt;/li&gt;
-&lt;li&gt;improve on the document outlining the needs of the different AgileVentures projects&lt;/li&gt;
-&lt;li&gt;get budget details for drie hosting MetPlus&lt;/li&gt;
-&lt;li&gt;detailed technical plan for the following year&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Talking through the above with Ben and Tom at drie and the things they wanted to get through we came up with the following agenda:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;drie to show new features for drie-push
-
-&lt;ul&gt;
-&lt;li&gt;GitHub Integration&lt;/li&gt;
-&lt;li&gt;versioned config&lt;/li&gt;
-&lt;li&gt;appdirect&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;look at drie pricing models&lt;/li&gt;
-&lt;li&gt;look at performance&lt;/li&gt;
-&lt;li&gt;conference talk&lt;/li&gt;
-&lt;li&gt;generate clear features to de-risk the collaboration going forward
-
-&lt;ul&gt;
-&lt;li&gt;acceptance criteria&lt;/li&gt;
-&lt;li&gt;roadmap&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;geek out about the new proxy model (to help understand drie push startup times)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Working through the agenda it became clear that at the moment there wasn&amp;rsquo;t an easy way to track which AgileVentures members were using drie, as all that drie records of drie-push users is ssh keys.  However this would change with the introduction of a new GitHub integration which was the first thing Ben and Tom showed me.  Rather than building an entire team&amp;rsquo;s management framework to compete with Heroku and others, Tom came up with the idea of using a &lt;a href="https://github.com/integrations"&gt;GitHub integration&lt;/a&gt; to leverage the existing GitHub teams framework.  &lt;/p&gt;
-
-&lt;p&gt;AgileVentures already uses a lot of Github integrations such as TravisCI, Semaphore and CodeClimate.  GitHub themselves are &lt;a href="https://github.com/blog/2226-build-an-integration-for-github"&gt;encouraging more and more developers to create integrations&lt;/a&gt;, and the drie GitHub integration looks very similar in that it can be configured and installed via a GitHub interface, and little ticks and crosses are added to the GitHub interface when operations succeed and fail.  &lt;a href="https://github.com/integrations/heroku-review-apps"&gt;Heroku Review Apps&lt;/a&gt; are also a GitHub integration and work in a similar fashion, albeit requiring a complete separate Heroku app set up for them to riff off.  However, we&amp;rsquo;ve had to turn off Heroku review apps as being too expensive.&lt;/p&gt;
-
-&lt;p&gt;drie push GitHub integration goes one step beyond Heroku review apps, by making it possible to set up a repository to just deploy on any push to GitHub.  It&amp;rsquo;s like Heroku Review apps without the overhead of having to deal with Heroku or their new pricing model.  Tom was also showing me other tricks on the backend such as versioned config and reverse proxy tricks that will allow their system to scale effectively.&lt;/p&gt;
-
-&lt;p&gt;We went through the new drie pricing models which I need to pass on to the MetPlus project who are talking with their client today, and today I&amp;rsquo;m torn between trying to spend the whole day on pushing the LocalSupport app further onto drie (still haven&amp;rsquo;t checked the new performance data), reviewing material for my upcoming devops conference talk, and generating this new roadmap for our drie collaboration, which we did at least agree should follow this format:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Dates #free-users #paid-users
-
-include features ...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The danger that Ben kept us focused on was whether developing the drie push GitHub integration would suck up time that could be spent polishing the ssh only access to drie push, and slow down our overall timeframe.  It&amp;rsquo;s almost certain that that will happen to some extent, but the problem with the ssh only approach is that the main differentiation from Heroku is on price which will be difficult to compete on in the long term.  Other drie push features such as deployment per branch won&amp;rsquo;t make much of an impact unless the configuration model is sorted out, and to be honest the big win for AgileVentures members will come from ease of use.  Avoiding the need to go to the command line at all, and just make your app deploy directly from GitHub, will remove a major stumbling block. &lt;/p&gt;
-
-&lt;p&gt;Related Videos:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=MrUF68V4WMw"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=SttRB9A2bQ0"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=YPtN3dQd6Z4"&gt;&amp;ldquo;Bob Martin&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;p.s. this blog took 33 minutes to write&lt;/p&gt;
 </content>
   </entry>
 </feed>

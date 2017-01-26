@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>Server Monitoring</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -31,8 +31,9 @@
     <link href="/images/favicon.ico" rel="icon" type="image/ico" />
 
 </head>
-<body class="blog blog_page blog_page_10 blog_page_10_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_01 x2017_01_17 x2017_01_17_server-monitoring x2017_01_17_server-monitoring_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -73,48 +74,41 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/01/17/server-monitoring/">Server Monitoring</a></h2>
+        <h5 class='date'>17 Jan 2017</h5>
+    <p>So I&rsquo;m still forcing myself to think about DevOps in preparation for my talk on Thursday.  Other things being equal I&rsquo;d be blogging about our new marketing activities and how Google will potentially give us $10,000 a month of AdWords, and how there might be similar, if less generous, offers from other social media sites.  However, it felt great yesterday when I managed to complete a first draft of the slides for the talk.  There&rsquo;s still a little something missing though; the performance requirements for the different systems.  </p>
 
-          <p>Page 10 of 10</p>
+<p>What I do know from the metrics we get from Heroku on WebSiteOne is that we regularly exceed our 500MB memory allowance, although the site performance doesn&rsquo;t seem too horrible.  We&rsquo;ve gone in and fixed particularly slow loads on the users, projects and event pages, as well as had a stab at removing gems that seem to be eating up a lot of memory.  We&rsquo;ve improved page load times, but not managed to get the memory usage down.  We could pay to upgrade to the next Heroku tier to get 1GB of memory, but the site performance seems superficially okay - and no one is explicitly complaining about it.  We know that pages need to load as fast as possible in order for people to spend any time on the site. Greater than 4 seconds is likely a big turnoff these days.  The front page appears in about 1.2 seconds when I refresh in Chrome.  Of course it would be slower if not cached.  In incognito mode the entire front page loads in about 2.6 seconds.  That seems acceptable, but I do have a reasonably fast mac.  It might be the case that other folks around the world are experiencing poor performance and we&rsquo;re not aware of it &hellip;</p>
 
-            <p><a href="/blog/page/9/">Previous page</a></p>
+<p>It seems like NewRelic wasn&rsquo;t actually enabled on WebSiteOne production.  The code was all set up, but the NEW RELIC key wasn&rsquo;t in the production settings.  I&rsquo;ve added that now so perhaps we&rsquo;ll see some interesting data.  NewRelic is all set up for LocalSupport, where we can see an overview of the web transaction times:</p>
 
-          <h2><a href="/2016/08/25/did-we-boil-a-frog/">Did we Boil a Frog?</a></h2>
-          <h3>Aug 25</h3>
-          <p>So there’s a story about boiling frogs.  I have no idea if this is true and it doesn’t really matter because it’s just a metaphor, but apparently you can’t just stick a frog in boiling water.  The frog will allegedly leap right out.  However if you...</p>
-          <h2><a href="/2016/08/23/pair-programming-robots-and-having-fun/">Pair Programming Robots and having Fun</a></h2>
-          <h3>Aug 23</h3>
-          <p>I’ve had this idea for a lightweight pair programming app for a while now.  One of the main inspirations is the <a href="https://itunes.apple.com/gb/app/letterpress-word-game/id526619424?mt=8">iOS letterpress app</a>.  If you don’t know the game it’s a letter square, and you try to make the longest word you can from the letters in...</p>
-          <h2><a href="/2016/07/17/unexpected-progress/">Unexpected Progress and Twin Stakeholder Strategies</a></h2>
-          <h3>Jul 17</h3>
-          <p>Yesterday was one of those relatively rare days when implementing a feature turned out to be less work than expected.  More often than not what seems like it should be simple to achieve, ends up taking 10 times longer than expected (VCR, I’m looking...</p>
-          <h2><a href="/2016/07/15/grading-the-world/">Grading the World</a></h2>
-          <h3>Jul 15</h3>
-          <p>I spent a day looking at some issues coming up from the “Agile Development using Ruby on Rails” MOOC autograder.  The MOOC autograder takes code submissions from learners through the edX framework, grades then against specs and other more complex things...</p>
-          <h2><a href="/2016/07/05/extreme-agile-and-coding-paranoia/">Extreme Agile and Coding Paranoia</a></h2>
-          <h3>Jul  5</h3>
-          <p>So Michael was enjoying independence day and I got into some solo programming on the premium payment pathways for the AgileVentures site.  We’d now had two different premium users express slight surprise with the rather spartan payment complete page...</p>
-          <h2><a href="/2016/06/21/agile-approach-to-login-signup-problems/">Agile Approach to Login/SignUp Problems</a></h2>
-          <h3>Jun 21</h3>
-          <p>Nobody likes passwords.  Nobody enjoys signing up and logging in, but we need authentication, don’t we?  The AgileVentures site is actually very open as regards who can edit what, the site is really one giant wiki; not that many people actually notice...</p>
-          <h2><a href="/2016/05/17/collaborating-in-software-teams/">Collaborating in Software Teams</a></h2>
-          <h3>May 17</h3>
-          <p>Collaborating and communicating effectively can be particularly challenging under certain circumstances.  Effective “soft skills” are critical in many professions, but especially for groups of programmers collaborating with project managers, designers...</p>
+<p><img alt="NewRelic data from HarrowCN production" src="https://www.dropbox.com/s/myb72nmofhmm7lg/Screenshot%202017-01-17%2010.22.04.png?dl=1" /></p>
 
+<p>Ping requests haven&rsquo;t been working for the last 12 days, and aren&rsquo;t working from the command line either, but the site is up and it looks like pages are being served okay.  I can see a couple of page loads that failed in the last seven days, which is probably acceptable for this low traffic site.  Even if it wasn&rsquo;t, I&rsquo;m not sure how to go from that failure to a fix.  Superficially it would just mean provisioning more dyno or more memory.  At the moment LocalSupport is on a legacy dyno from Heroku, meaning we aren&rsquo;t getting metrics on memory usage as we are for WebSiteOne.</p>
 
+<p>While I&rsquo;ve been writing this, the NewRelic data on WebSiteOne has started coming in:</p>
+
+<p><img alt="NewRelic data from WSO production" src="https://www.dropbox.com/s/s5x799dlbdx4l7z/Screenshot%202017-01-17%2010.28.42.png?dl=1" /></p>
+
+<p>This makes it look like there was at least one frustrated request in the last half an hour at least.  That makes me think fixing our memory issues on WSO might be higher priority.  Looks like some kind of active record lookup was getting stuck &hellip; Going back to HarrowCN, it seems like I can embed a <a href="https://rpm.newrelic.com/public/charts/7odyrRrzsqR">feed of the throughput</a> in an iframe:</p>
+
+<p><img alt="HarrowCN throughput" src="https://www.dropbox.com/s/zzyev88mr4orwbn/Screenshot%202017-01-17%2010.33.07.png?dl=1" /></p>
+
+<p>The baseline requests look like some sort of healthcheck is going on, rather than it being representative of human users &hellip; more investigation required.  I wonder if that&rsquo;s a side effect of NewRelic or some other pinging service we&rsquo;ve forgotten about?  Anyhow, I want to get deeper into this for both WSO and HarrowCN (and AutoGraders/MetPlus) to flesh out what I can say about the usage of our systems in my talk on Thursday.  Let&rsquo;s see how far I get &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -173,6 +167,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
