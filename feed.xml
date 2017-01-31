@@ -5,10 +5,55 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-01-17T00:00:00+00:00</updated>
+  <updated>2017-01-18T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Coding vs. Admin</title>
+    <link rel="alternate" href="http://blog.url.com/2017/01/18/coding-vs-admin/"/>
+    <id>http://blog.url.com/2017/01/18/coding-vs-admin/</id>
+    <published>2017-01-18T00:00:00+00:00</published>
+    <updated>2017-01-31T21:31:53+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Pat was commenting that my recent blogs don&amp;rsquo;t have so many technical deep dives and are more admin focused.  That&amp;rsquo;s probably a reflection that I&amp;rsquo;m doing less coding and more admin recently.  I&amp;rsquo;ve spent a couple of hours over the last few days trying to hook up the Google NonProfits AdWords grant, which will apparently give us up to $10,000 a month in AdWords funding.  An exciting prospect, but it&amp;rsquo;s taken me several admin hours to file the application on the right email address - go round the houses with Google online help suppport etc.  This week I&amp;rsquo;m also trying to get ready for a presentation at the DevOps conference, which sucks up time, but at least it&amp;rsquo;s enabled me to get the NewRelic monitoring setup on WebSiteOne correctly, and identify the source of strange health check activity on the LocalSupport servers.  The latter seems to be an artifact of using legacy NewRelic monitoring tools - time to upgrade!&lt;/p&gt;
+
+&lt;p&gt;I did however manage to snatch a chunk of time to do WebSiteOne devops.  The bug fix to prevent un-recorded YouTube links being tweeted was stuck on staging since we had stubbed the mock incorrectly.  While we waited for that fix some other PRs had piled up and I&amp;rsquo;d merged in our refactoring the Premium plans to support easier creation of new plans.  I rebased all the latest code from develop into staging, which finally worked smoothly since I&amp;rsquo;d previously merged the production fixes from last year back down to develop.  All the new functionality worked as expected on staging with me running the set of rake tasks that went along with the various new bits of code:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ heroku run rake fetch_github_commits -r production
+$ heroku run rake db:create_plans -r production
+$ heroku run rake db:migrate_plans -r production
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I still had to manually test the Hangouts/Twitter interaction.  It occurs to me that we might be better off with things that are being merged into develop following a faster cycle into staging and production, rather than allowing them to bunch up.  I guess the difficulty is the complexity of setting up individual developers to be able to manually test all the 3rd party hookups.  Perhaps with automated deploy from drie that will change.&lt;/p&gt;
+
+&lt;p&gt;What I did immediately notice was that the language in the tweets coming from the staging server was odd:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="odd language in tweets" src="https://www.dropbox.com/s/6s33zipjbpj1e8o/Screenshot%202017-01-17%2015.34.10.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;As a result of the latest changes we now only tweeted a link to the YouTube once the host had clicked the &amp;ldquo;start broadcast&amp;rdquo; button in the hangout and the YouTube video was reporting a non-nil &lt;code&gt;actual_start_time&lt;/code&gt; via the API.  However the language in the tweet said that the session had finished, when clearly it was potentially still ongoing.  I groaned as I thought about needing to make another change before we could push this out, but talking it over with Michael in the scrum I realised that this was an existing bug.  That&amp;rsquo;s not to say we don&amp;rsquo;t need to fix it, just that we don&amp;rsquo;t have to hold things up to get the original bug fix out.&lt;/p&gt;
+
+&lt;p&gt;The original setup (as had been running for the last year or so) is that as soon as the server receives a notification from the Hangout plugin that the hangout has successfully started, the server automatically tweets both a link to the hangout (with text saying the session has started) and a link to the YouTube video saying the session has finished.  The original bug-report from Thomas was that some of the YouTube links were duds.  We&amp;rsquo;re pretty sure that this is due either to those situations where no one starts the broadcast/recording, or there&amp;rsquo;s a technical fail on YouTube.  So we have fixed the bug where we would tweet unrecorded sessions, but in the process highlighted other inconsistencies in the user experience.&lt;/p&gt;
+
+&lt;p&gt;I guess it&amp;rsquo;s not such a big deal, because as soon as the recordings do finish the wording will be correct for the rest of the lifetime of the tweets.  Not that anyone is necessarily paying attention to our Twitter feed (although I do notice more and more followers stacking up recently), but anyone paying close attention would think that all scrums and pairing sessions shut down pretty soon after they start.  At least with our latest fix, anyone reviewing the tweets a few hours after the fact will encounter fewer dead YouTube links so that&amp;rsquo;s probably a good thing.  Having said that we&amp;rsquo;ve got no evidence that our Twitter feed is a source of any value for our organisation, specifically we only get a couple of click throughs to the site and from Twitter a month (that said, perhaps we should more closely check out YouTube referrals, and maybe auto add a shortened AV link to all our tweets - maybe rather than redirecting to YouTube we should post links to the videos embedded in our site?)&lt;/p&gt;
+
+&lt;p&gt;Working on this bug has been an interesting learning experience.  It&amp;rsquo;s included myself, Sasha, Matt, and Michael and we&amp;rsquo;ve covered all sorts of interesting topics related to BDD, 3rd party APIs, mocking, caching, testing etc.  However since we may lose the entire Hangout plugin in April, it does make me wonder if we&amp;rsquo;ve just been rearranging the deckchairs on a tiny portion of the system that&amp;rsquo;s unlikely to have any significant impact on our sustainability.  My mind leans towards adjusting the site to have a stronger call to action on the front page, e.g. to sign up as a member and then ultimately upgrade to Premium, as being something that might have stronger chance of impacting our sustainability.&lt;/p&gt;
+
+&lt;p&gt;When Matt started looking at a new feature the other day I suggested that maybe we should look at some bug-fixes first.  Together we managed to get to the bottom of the Slack invite bug, which strangely seemed to be just a missing setting on production, which in principle saves me a few minutes each week spent inviting new users into Slack.  Anyhow, given that we&amp;rsquo;ve got all this tweeting code adjusted through strenuous effort, the priority must be to get these latest changes to out onto production.  There&amp;rsquo;s one other minor fix that could be done first, but I&amp;rsquo;ve created a ticket for it.  I think we need to experience any pain from the collection of new changes rather than holding off.&lt;/p&gt;
+
+&lt;p&gt;Maybe it&amp;rsquo;s smoothing the upgrade process to the different levels of Premium that&amp;rsquo;s really going to make the difference to sustainability?  Or the next admin task that will unlock some more funding?  I guess I just keep swapping between coding and admin-ing in turn until it all becomes sustainable.&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=V2KfoeCcp-o"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Yc4c0QL8Efg"&gt;WSO DevOps&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=h3b5Og-umnU"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;p.s. this blog took 20 minutes to write&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Server Monitoring</title>
     <link rel="alternate" href="http://blog.url.com/2017/01/17/server-monitoring/"/>
@@ -262,41 +307,6 @@
 &lt;/ul&gt;
 
 &lt;p&gt;p.s. this blog took 18 minutes to write&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Tired but Pushing On</title>
-    <link rel="alternate" href="http://blog.url.com/2017/01/10/tired-but-pushing-on/"/>
-    <id>http://blog.url.com/2017/01/10/tired-but-pushing-on/</id>
-    <published>2017-01-10T00:00:00+00:00</published>
-    <updated>2017-01-16T21:04:26+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;I&amp;rsquo;m tired today.  Busy weekend.  Back to coaching kids football Saturday morning, &amp;ldquo;Bob Martin&amp;rdquo; scrum, taking eldest to guitar practice and round the supermarket and making supper.  Relatively calm Saturday evening, but then a frantic Sunday, with my youngests&amp;rsquo; first football match in a higher division, and then a dash across London to a relative&amp;rsquo;s house before a surprise holiday treat for the boys; a trip to see a live game.  Back late, and didn&amp;rsquo;t get to sleep till late working through the muddy clearup from the morning&amp;rsquo;s football.&lt;/p&gt;
-
-&lt;p&gt;Monday fairly full on with all the boys back at school, so doing the school run in the morning for the twins, and then a full day.  Some reasonable progress.  New marketing intern welcomed to Slack and introduced to some other team members, new SPOCs made for instructors, performance testing on drie&amp;rsquo;s new EU servers (not as fast as we&amp;rsquo;d like) and drie catchup meeting, now scheduled for every Monday to push things forward.  Managed to watch an episode of &lt;a href="https://scaleyourcode.com/interviews/interview/13"&gt;ScaleYourCode&lt;/a&gt; where Nathan Harvey of Chef showed how to manage deployment to ec2 via the hosted Chef system.  Suddenly I understand what Chef, Puppet, Ansible etc. do and how they&amp;rsquo;re different from Docker and Vagrant.  All great prep for the DevOps conference talk I&amp;rsquo;m giving next week.&lt;/p&gt;
-
-&lt;p&gt;Spent the evening reviewing the videos from the kids football and writing up the match report and all the areas we can improve, and got to bed later than I&amp;rsquo;d hoped.  Last two nights I had to use audio standup comedy on spotify to help me get to sleep because I can&amp;rsquo;t stop thinking and planning for the football or for AgileVentures.  Two cups of real coffee got me through yesterday.  Hoping to drop back to one today.  We&amp;rsquo;ll see.  Part of the problem was checking email just before bed - really must stop doing that.  I used to be better, but since working at home for the last year, there&amp;rsquo;s an extra desire to keep checking.  I really want to get myself into the black financially, i.e. compensating myself for all the hours I&amp;rsquo;m putting into AgileVentures.  I want to be able to keep being able to pay for my kids activities, music, gym, football, karate, and take them on trips.&lt;/p&gt;
-
-&lt;p&gt;Funny thing is that getting stressed about it all really doesn&amp;rsquo;t seem to help.  I definitely suffer from pushing too hard.  I want to squeeze every last second out of the day.  I&amp;rsquo;m writing out Japanese language quizzes for my kids during breakfast, listening to technical podcasts on the walk back from dropping them off at school, fitting in physio on my knee during my breaks from coding, reviewing the new RSpec book during my lunch break, catching up with Slack/Email while waiting for my kids to do their activities in the evenings, and then finally trying to publish blogs from the previous day just before I go to bed.&lt;/p&gt;
-
-&lt;p&gt;If I&amp;rsquo;m on top of my game I can manage it all.  Under the weather or taking on too much at the weekend it becomes a grind; difficult to focus.  It just requires a careful balance.  I&amp;rsquo;ve gotten pretty good at not booking too many things, but sometimes the long range planning will lead to a jam, e.g. the football season starts a week earlier than I anticipated.  The football coaching is a big commitment; logistics during the week, and 30+ Sat/Sun mornings throughout the year, but the boys love it!  And I enjoy having an activity at the weekend that gets me out in the open air communicating with others.  Although it can all get pretty emotional too :-)&lt;/p&gt;
-
-&lt;p&gt;What I&amp;rsquo;d really like is a consistent pattern of hibernation in the UK.  Like the countries closer to the equator to us have a siesta in the heat of midday, I think those closer to the poles should have a hibernation period when the days are shortest.  After Xmas/NewYear, I&amp;rsquo;d like two weeks where I was allowed to just sleep.  Another 10 years.  Get the kids off to university and I might be able to MVP a mid-winter hibernation.  At least the daily blog writing gives me a calm thirty minutes to pull myself together after the school run.  Although I&amp;rsquo;m not sure to what extent publishing these is helping us achieve our AgileVentures goals.  Maybe the focus on marketing with the new intern will help us work out the best process.  The daily blogging is an experiment I intend to see through till June.  I&amp;rsquo;ve just got to make sure that we don&amp;rsquo;t have too many things booked at the weekend and that I find a good way to calm myself before bed so I can get enough sleep!&lt;/p&gt;
-
-&lt;p&gt;The big question on my mind is would I be better off taking a nap in order to catch up on my sleep, as opposed to drinking a coffee and working through my Slacks/Emails? Taking a nap in the day (unless post-lunch) feels like slacking (being lazy or under-committed) if I&amp;rsquo;m not actually ill &amp;hellip; and I&amp;rsquo;ve already made the coffee &amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=YPtN3dQd6Z4"&gt;&amp;ldquo;Bob Martin&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=aywVGFGImEY"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dyJnqLfP6u0"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;p.s. this blog took 26 minutes
-p.p.s managed to clear another small set of items off my desk&lt;/p&gt;
 </content>
   </entry>
 </feed>
