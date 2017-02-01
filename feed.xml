@@ -5,10 +5,42 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-01-18T00:00:00+00:00</updated>
+  <updated>2017-01-19T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Punch Drunk</title>
+    <link rel="alternate" href="http://blog.url.com/2017/01/19/punch-drunk/"/>
+    <id>http://blog.url.com/2017/01/19/punch-drunk/</id>
+    <published>2017-01-19T00:00:00+00:00</published>
+    <updated>2017-02-01T20:59:08+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Feeling pretty rough today, like someone&amp;rsquo;s been punching me in the head for a while.  Reasonably productive day yesterday.  Got to bed 10:30pm, but my &amp;ldquo;good&amp;rdquo; knee was starting to ache from the new physio exercises I&amp;rsquo;m doing for my &amp;ldquo;bad&amp;rdquo; knee.  I couldn&amp;rsquo;t sleep - eventually I was listening to Todd Barry standup on Spotify to get me off to sleep.  Ideally of course I&amp;rsquo;d be using my powers of meditation to effortlessly drift off to sleep, but when my mind gets stuck on money worries, or re-hashing the complexities of past social interactions that haven&amp;rsquo;t gone so well, I run out of patience and reach for audio comedy.  &lt;/p&gt;
+
+&lt;p&gt;In the background the remote DevOps conference started, and since I was trying to multi-task with all the usual family and AgileVentures activities I only managed to attend one talk.  That was in the waiting room in a leisure centre while my boys did an academy football (soccer) class.  I love the concept of remote conferences.  This one would be easier for me if the schedule was in UTC; DevOps RemoteConf is running seven hours behind me in US mountain time.  It also makes me reflect on the value of a physical face to face conference in that it takes you out of your day to day routine and clears some space to focus on other stuff.&lt;/p&gt;
+
+&lt;p&gt;I was really pleased to see Chuck had set up a Slack instance for the conference, and I joined all the channels for each talk.  The activity in the Slack instance so far has&amp;rsquo;t been high - it&amp;rsquo;s frustrating that Slack isn&amp;rsquo;t also the chat used in the sessions themselves.  I think that if everyone watching the talk was automatically in the Slack channel it would help connect people, and then there&amp;rsquo;d be a stored history of any questions that got asked in the session themselves.  I was pleased to be able to use the Slack channel to ask Arthur Hicken about his talk &amp;ldquo;Evolving from Automated to Continuous Testing for Agile and DevOps&amp;rdquo;.  I asked him if he had any thoughts on how we can make sure that tests are really testing the right thing, rather than being tests that would pass even if the functionality was removed?  Having the slack meant that I continue to have the transcript of the conversation to refer back to:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="chat with Arthur" src="https://www.dropbox.com/s/r1mqm9j3crvdmtl/Screenshot%202017-01-19%2009.59.39.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Arthur was suggesting having comments like @PR12345 to associate bits of code with a requirement.  I felt that might introduce a linkage between test and code that wouldn&amp;rsquo;t give us the implementation flexibility we might want, but even just having the conversation I found some Ruby mutation apps that might be interesting to use.   The round-table discussion that I would really like to have joined was taking place at midnight my time, so it wasn&amp;rsquo;t really practical given my schedule and how badly I perform on little sleep :-/&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve got my talk coming up later today at 9:15pm my time.  Hopefully I can stay awake for it :-)  I&amp;rsquo;ve had some good feedback on the draft version.  Giving the talk into a YouTube live stream and then sharing the video link really makes so much sense.  One suggestion was to write out the transcript and then read it back.  That has been the way I have slowed myself down and made myself comprehensible in the past.  Not sure that I have the luxury of doing that today.  I have done it with the half hour chunks of stuff in the AV102 course.  Reading my own edited monologue back from a teleprompter really is the way to make myself understandble to a wider range of folks, let&amp;rsquo;s see &amp;hellip; maybe some coffee can get me over this punch-drunk feeling &amp;hellip;?&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=J7EycNcfH3A"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=HMcU42Jy8X4"&gt;Draft talk on DevOps&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=kqTSgFLLaEw"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;p.s. this blog took 21 minutes to write&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Coding vs. Admin</title>
     <link rel="alternate" href="http://blog.url.com/2017/01/18/coding-vs-admin/"/>
@@ -274,39 +306,6 @@ $ heroku run rake db:migrate_plans -r production
 &lt;/ul&gt;
 
 &lt;p&gt;p.s. this blog took 51 minutes to write&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Dazed and Confused</title>
-    <link rel="alternate" href="http://blog.url.com/2017/01/11/dazed-and-confused/"/>
-    <id>http://blog.url.com/2017/01/11/dazed-and-confused/</id>
-    <published>2017-01-11T00:00:00+00:00</published>
-    <updated>2017-01-17T21:31:21+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;I did not manage to catch up on my sleep yesterday and I was up late fixing some coding mistakes, but somehow I don&amp;rsquo;t feel quite as washed out as yesterday.  I still feel like I&amp;rsquo;m chess boxing.  Which of the many different things on my list should I be trying to knock off next?  I think my body is fighting off assaults from different winter bugs.  There&amp;rsquo;s no way to avoid coming into contact with kids in two different schools.  I am also beginning to feel an elation at having got our main AgileVentures Slack instance upgraded to the standard tier, now that we have been recognized by Slack as a NonProfit organisation.&lt;/p&gt;
-
-&lt;p&gt;This was a plan that I&amp;rsquo;d almost forgotten about making, buried so deep in the layers of yak-shaving needed to achieve the actual goal.  We&amp;rsquo;d been talking about it during Xmas 2015.  In Jan/Feb last year I&amp;rsquo;d started pushing towards making AgileVentures an official charity, because that seemed like the only way we&amp;rsquo;d be able to afford the Slack standard tier.  Slack wouldn&amp;rsquo;t recognise us a charity until the whole process with the UK government had completed.  By April we had a charity constitution, application proposal and a board of trustees set up.  The UK charity commission replied in July with a series of questions requiring clarification.  We responded swiftly, but still hadn&amp;rsquo;t heard anything back in November.  Actually we did get automated emails explaining how terribly busy they were.  At the beginning of December I filed a follow up through their website feedback forms, and just before the Xmas break I got an email apologising that they had accidentally closed our case!&lt;/p&gt;
-
-&lt;p&gt;They re-opened it and said they would expedite things going forward if we could re-submit the constitution with a few minor changes, and have it ratified by the trustees.  I was anticipating another month or two before we would be ratified, but almost as soon as I had emailed an updated version of the constitution (cc&amp;rsquo;d to the trustees) I got a slew of automated emails indicating the charity was created.  Great stuff, but not enough for Slack!  Apparently we also needed to be ratified by a 3rd party called TechSoup.  &lt;/p&gt;
-
-&lt;p&gt;During the course of last year as the Slack instance hotted up we became more and more constrained by the limits on history and app integration in the free tier.  Also I was hearing that the NonProfit version was limited to 250 members and beyond that, we&amp;rsquo;d be paying 85% of the standard Slack fees.  Something we would not be able to afford given over 1500 folks in our Slack instance.  I started the application process with TechSoup without particularly high hopes.  They required a projection of our annual income, which I pieced together, and actually we were approved in short order. So at the beginning of this week Slack approved our NonProfit status and moved our main Slack instance to the standard tier.  &lt;/p&gt;
-
-&lt;p&gt;Now the wrinkle is that the 250 user limit for Slack&amp;rsquo;s free NonProfit access to the standard tier is that it applies to active users, not total users.  According to my Slack contact we are at 130 or so active users, and to my delight I can now see the entire history of all the DM&amp;rsquo;s, private groups, etc.; in fact everything we&amp;rsquo;ve ever typed into our Slack instance.  We might start incurring charges at 250 users, but then again if we can get to 250 active users perhaps we&amp;rsquo;ll be at the stage to be able to afford Slack&amp;rsquo;s rates?  Certainly we&amp;rsquo;ve got some breathing room before then.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;re in a little of a quandry about what to do with the separate Slack instances we created for Premium members and Mentors.  I created those in the course of last year to provide a place where the history wasn&amp;rsquo;t disappearing so fast.  Slack&amp;rsquo;s upgrade for a NonProfit will only apply to one instance.  Should we move the upgrade to the Premium or Mentor instance? On the other hand having multiple instances has probably been slightly confusing and may actually have been a dissipative force for those groups, even if it has allowed a space where we can create multiple Premium channels for jobs, tech tests and paid projects etc. for Premiums to browse. &lt;/p&gt;
-
-&lt;p&gt;Still, getting Slack NonProfit status is a major step forward.  Whatever happens from hereon in, I think we&amp;rsquo;ve gotten AgileVentures to a major milestone.  I&amp;rsquo;m behind on my station-keeping tasks such as blogging, social media-ing, preparing my DevOps talk, project management on WebSiteOne, LocalSupport and AsyncVoter.  Not to mention trying to write this book on Open Source Agile Project Management &amp;hellip;!  That said I feel like I have renewed vigor to take this fight to the next level!   Just trying to ride that and not feel too dazed and confused by the twists and turns on the journey &amp;hellip;!&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=cWhEDaGEW3w"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=RPeYx4_WZ0E"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;p.s. this blog took 18 minutes to write&lt;/p&gt;
 </content>
   </entry>
 </feed>
