@@ -679,17 +679,17 @@ section {
   text-transform: none; }
 
 /* line 349, _agency.scss */
-#portfolio .portfolio-item {
+#case-studies .portfolio-item {
   margin: 0 0 15px;
   right: 0; }
   /* line 353, _agency.scss */
-  #portfolio .portfolio-item .portfolio-link {
+  #case-studies .portfolio-item .portfolio-link {
     display: block;
     margin: 0 auto;
     max-width: 400px;
     position: relative; }
     /* line 359, _agency.scss */
-    #portfolio .portfolio-item .portfolio-link .portfolio-hover {
+    #case-studies .portfolio-item .portfolio-link .portfolio-hover {
       background: rgba(238, 115, 53, 0.9);
       height: 100%;
       opacity: 0;
@@ -699,10 +699,10 @@ section {
       transition: all ease .5s;
       width: 100%; }
       /* line 369, _agency.scss */
-      #portfolio .portfolio-item .portfolio-link .portfolio-hover:hover {
+      #case-studies .portfolio-item .portfolio-link .portfolio-hover:hover {
         opacity: 1; }
       /* line 373, _agency.scss */
-      #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content {
+      #case-studies .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content {
         color: #fff;
         font-size: 20px;
         height: 20px;
@@ -712,14 +712,14 @@ section {
         top: 50%;
         width: 100%; }
         /* line 383, _agency.scss */
-        #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content i {
+        #case-studies .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content i {
           margin-top: -12px; }
         /* line 387, _agency.scss */
-        #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h3, #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content section div.nonprofits-contact, section #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content div.nonprofits-contact,
-        #portfolio .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h4 {
+        #case-studies .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h3, #case-studies .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content section div.nonprofits-contact, section #case-studies .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content div.nonprofits-contact,
+        #case-studies .portfolio-item .portfolio-link .portfolio-hover .portfolio-hover-content h4 {
           margin: 0; }
   /* line 395, _agency.scss */
-  #portfolio .portfolio-item .portfolio-caption {
+  #case-studies .portfolio-item .portfolio-caption {
     background-color: #fff;
     margin: 0 auto;
     max-width: 400px;
@@ -727,22 +727,22 @@ section {
     text-align: center;
     white-space: nowrap; }
     /* line 403, _agency.scss */
-    #portfolio .portfolio-item .portfolio-caption h4 {
+    #case-studies .portfolio-item .portfolio-caption h4 {
       margin: 0;
       text-transform: none; }
     /* line 408, _agency.scss */
-    #portfolio .portfolio-item .portfolio-caption p {
+    #case-studies .portfolio-item .portfolio-caption p {
       font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-style: italic;
       margin: 0; }
 /* line 417, _agency.scss */
-#portfolio * {
+#case-studies * {
   z-index: 2; }
 
 @media (min-width: 767px) {
   /* line 424, _agency.scss */
-  #portfolio .portfolio-item {
+  #case-studies .portfolio-item {
     margin: 0 0 30px; } }
 /* line 432, _agency.scss */
 .timeline {
