@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Always in Production</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_01 x2017_01_24 x2017_01_24_always-in-production x2017_01_24_always-in-production_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/01/24/always-in-production/">Always in Production</a></h2>
+        <h5 class='date'>24 Jan 2017</h5>
+    <p>My cold is receding.  Does that justify me pushing myself through activities and work over the last three days?  Maybe I&rsquo;d be better quicker or not feeling quite so exhausted if I&rsquo;d rested the last three days, but my boys got their football matches, I had a great Premium pairing session with Michael where we scoped out a new data-analysis project in Python, and I managed to get the Google AdWords grant accepted, and we&rsquo;re live with our first campaign, which has apparently put our advert into 5400 search results and led to 221 click throughs:</p>
+
+<p><img alt="this mornings adwords stats" src="https://www.dropbox.com/s/3lbx4vbpqz3kn8x/Screenshot%202017-01-24%2009.51.59.png?dl=1" /></p>
+
+<p>I can see the spike in the traffic in the Google Analytics dashboard:</p>
+
+<p><img alt="increasing numbers of sessions in site according to Google Analytics" src="https://www.dropbox.com/s/a1b7miuiwzjnm28/Screenshot%202017-01-24%2010.05.59.png?dl=1" /></p>
+
+<p>Exciting stuff! Yesterday was a lot of meetings, but also a fair amount of DevOps on WebsiteOne.  Seeing this traffic spike makes me wonder whether we&rsquo;ll have to start throwing more resources (i.e. money) at the WebsiteOne servers?  Or can we switch to drie in time? I&rsquo;d love to get the main site set up with more of a funnel encouraging folks to sign up for a newsletter, membership and premium/sponsorship packages.  One thing at a time.</p>
+
+<p>The main technical <a href="https://github.com/AgileVentures/WebsiteOne/issues/1517">issue</a> yesterday was that scrums were staying live too long on the homepage and navbar popup.  This was frustrating as the previously live scrum was blocking the next upcoming one.  Not that we have huge evidence that large numbers of people join our scrums through the links in the website, but it&rsquo;s one of those things like the broken youtube links in the AgileVentures tweets that just feels wrong.  I at least am also using the front page and pop-up scrum reminders to navigate to the right place to actually start the scrums.  Particularly if we are just directing more and more folks to our site, we&rsquo;d like to avoid glaring inaccuracies.</p>
+
+<p><img alt="scrum countdown popup" src="https://www.dropbox.com/s/c8sq020s1kc2ww9/Screenshot%202017-01-23%2014.38.51.png?dl=1" /></p>
+
+<p>I&rsquo;d just pushed out a fix for the PayPal currency, but that didn&rsquo;t seem like that would cause this problem.  I could have broken out git bisect, but I had a hunch that this might be related to a recent change that was intended to keep events that were live in the upcoming events list so that they were more discoverable.  A quick review of the code in that pull request and the code that manages what is shown in the countdown popup made it look like my suspicion was correct.  The partial for the popup is as follows:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">event</span><span class="p">.</span><span class="nf">present?</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">event</span><span class="p">[</span><span class="s1">'name'</span><span class="p">],</span> <span class="n">event_path</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s1">'id'</span><span class="p">])</span> <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%</span> <span class="n">start_time</span> <span class="o">=</span> <span class="n">event</span><span class="p">.</span><span class="nf">next_occurrence_time_attr</span><span class="p">.</span><span class="nf">to_datetime</span> <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span> <span class="cp">%&gt;</span>
+      is live!
+      <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">event</span><span class="p">.</span><span class="nf">last_hangout</span><span class="p">.</span><span class="nf">try!</span><span class="p">(</span><span class="ss">:live?</span><span class="p">)</span> <span class="cp">%&gt;</span>
+        <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">'Click to join!'</span><span class="p">,</span> <span class="n">event</span><span class="p">.</span><span class="nf">last_hangout</span><span class="p">.</span><span class="nf">hangout_url</span> <span class="cp">%&gt;</span>
+      <span class="cp">&lt;%</span> <span class="k">end</span>  <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%</span> <span class="k">elsif</span> <span class="n">start_time</span> <span class="o">-</span> <span class="mi">1</span><span class="p">.</span><span class="nf">minute</span> <span class="o">&lt;</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span> <span class="cp">%&gt;</span>
+      about to start...
+    <span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span>
+      in <span class="cp">&lt;%=</span> <span class="n">display_countdown</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/p&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+<p>that event entity comes from the application controller so the popup can be displayed throughout the site:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">get_next_scrum</span>
+    <span class="vi">@next_event</span> <span class="o">=</span> <span class="no">Event</span><span class="p">.</span><span class="nf">next_occurrence</span><span class="p">(</span><span class="ss">:Scrum</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre>
+<p>which in turn is relying on this method:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">next_occurrence</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="n">begin_time</span> <span class="o">=</span> <span class="no">COLLECTION_TIME_PAST</span><span class="p">.</span><span class="nf">ago</span><span class="p">)</span>
+    <span class="n">events_with_times</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">events_with_times</span> <span class="o">=</span> <span class="no">Event</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">category: </span><span class="n">event_type</span><span class="p">).</span><span class="nf">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">event</span><span class="o">|</span>
+      <span class="n">event</span><span class="p">.</span><span class="nf">next_event_occurrence_with_time</span><span class="p">(</span><span class="n">begin_time</span><span class="p">)</span>
+    <span class="p">}.</span><span class="nf">compact</span>
+<span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+</code></pre>
+<p>The pull request to adjust how long the live events stayed in the upcoming events page had modified the COLLECTION<em>TIME</em>PAST constant.  The constant was used in another place, where it affected what would be in the upcoming events page.  It had been modified to influence things there, but had this knock on effect in the other place where it was used.</p>
+
+<p>I didn&rsquo;t have proof, but now a very strong hunch.  It&rsquo;s also a great example of how every time you DRY something out, you are also introducing a dependency.  This was perhaps a variable that might have been better off not becoming a constant?  And we clearly didn&rsquo;t have any acceptance tests covering this situation, since everything had had to be green to get into production. Of course we&rsquo;ve had a trouble free couple of years with the popup working and hindsight here is 2020.  This felt like a bleed on the site, and while I&rsquo;d pinged the developer who worked on the recent pull request, he might not be available to address the issue soon.</p>
+
+<p>I took the slightly risky step of generating a hotfix to push straight into production.  Specifically creating a second constant for the method that the popup and home page were relying on:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">next_occurrence</span><span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="n">begin_time</span> <span class="o">=</span> <span class="no">FRONT_PAGE_COLLECTION_TIME_PAST</span><span class="p">.</span><span class="nf">ago</span><span class="p">)</span>
+</code></pre>
+<p>Hacky as hell, but I wanted the site to be displaying sensible defaults overnight.  I got the hotfix on staging, but didn&rsquo;t try to replicate.  The site was still approximately working.  I wanted to know if this hotfix would work to solve our issue on production so I could go and have supper with the family.  The tests were green, so I pushed it out and it fixed everything without apparently introducing any catastrophic side effects.  I pulled the hotfix back into develop so others could work against it and discussed in the ticket how we wanted proper tests wrapping this and perhaps ultimately a whole different approach to the solution.</p>
+
+<p>The site seems to be operating normally today and the developer has submitted a PR with a more comprehensive fix.  Why is it that there still seems to be things that we only encounter in production?  I think the acceptance tests do have some of our back, but we need to thoroughly follow up to wrap every end-user bug in an acceptance test, and keep reviewing the existing tests to purge vacuous ones and keep them up to date with the rest of the codebase, AND remove unecessary dependencies.  Even then I have a feeling that there&rsquo;s still always some issues that we&rsquo;ll only ever encounter in production &hellip; :-)</p>
+
+<h3>Related Videos:</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=E89Eo-k2rE8">&ldquo;Martin Fowler&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=NiVvxJuo8ik">&ldquo;Kent Beck&rdquo; scrum</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>

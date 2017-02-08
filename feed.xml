@@ -5,16 +5,89 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-01-23T00:00:00+00:00</updated>
+  <updated>2017-01-24T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Always in Production</title>
+    <link rel="alternate" href="http://blog.url.com/2017/01/24/always-in-production/"/>
+    <id>http://blog.url.com/2017/01/24/always-in-production/</id>
+    <published>2017-01-24T00:00:00+00:00</published>
+    <updated>2017-02-08T21:17:13+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;My cold is receding.  Does that justify me pushing myself through activities and work over the last three days?  Maybe I&amp;rsquo;d be better quicker or not feeling quite so exhausted if I&amp;rsquo;d rested the last three days, but my boys got their football matches, I had a great Premium pairing session with Michael where we scoped out a new data-analysis project in Python, and I managed to get the Google AdWords grant accepted, and we&amp;rsquo;re live with our first campaign, which has apparently put our advert into 5400 search results and led to 221 click throughs:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="this mornings adwords stats" src="https://www.dropbox.com/s/3lbx4vbpqz3kn8x/Screenshot%202017-01-24%2009.51.59.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I can see the spike in the traffic in the Google Analytics dashboard:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="increasing numbers of sessions in site according to Google Analytics" src="https://www.dropbox.com/s/a1b7miuiwzjnm28/Screenshot%202017-01-24%2010.05.59.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Exciting stuff! Yesterday was a lot of meetings, but also a fair amount of DevOps on WebsiteOne.  Seeing this traffic spike makes me wonder whether we&amp;rsquo;ll have to start throwing more resources (i.e. money) at the WebsiteOne servers?  Or can we switch to drie in time? I&amp;rsquo;d love to get the main site set up with more of a funnel encouraging folks to sign up for a newsletter, membership and premium/sponsorship packages.  One thing at a time.&lt;/p&gt;
+
+&lt;p&gt;The main technical &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1517"&gt;issue&lt;/a&gt; yesterday was that scrums were staying live too long on the homepage and navbar popup.  This was frustrating as the previously live scrum was blocking the next upcoming one.  Not that we have huge evidence that large numbers of people join our scrums through the links in the website, but it&amp;rsquo;s one of those things like the broken youtube links in the AgileVentures tweets that just feels wrong.  I at least am also using the front page and pop-up scrum reminders to navigate to the right place to actually start the scrums.  Particularly if we are just directing more and more folks to our site, we&amp;rsquo;d like to avoid glaring inaccuracies.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="scrum countdown popup" src="https://www.dropbox.com/s/c8sq020s1kc2ww9/Screenshot%202017-01-23%2014.38.51.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;d just pushed out a fix for the PayPal currency, but that didn&amp;rsquo;t seem like that would cause this problem.  I could have broken out git bisect, but I had a hunch that this might be related to a recent change that was intended to keep events that were live in the upcoming events list so that they were more discoverable.  A quick review of the code in that pull request and the code that manages what is shown in the countdown popup made it look like my suspicion was correct.  The partial for the popup is as follows:&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'name'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'id'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="n"&gt;start_time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_occurrence_time_attr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_datetime&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;start_time&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+      is live!
+      &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;last_hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;try!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:live?&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+        &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to&lt;/span&gt; &lt;span class="s1"&gt;'Click to join!'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;last_hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hangout_url&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+      &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt;  &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;elsif&lt;/span&gt; &lt;span class="n"&gt;start_time&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minute&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+      about to start...
+    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+      in &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;display_countdown&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+  &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;that event entity comes from the application controller so the popup can be displayed throughout the site:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_next_scrum&lt;/span&gt;
+    &lt;span class="vi"&gt;@next_event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_occurrence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:Scrum&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which in turn is relying on this method:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_occurrence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_type&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;begin_time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;COLLECTION_TIME_PAST&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;events_with_times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="n"&gt;events_with_times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;category: &lt;/span&gt;&lt;span class="n"&gt;event_type&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_event_occurrence_with_time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;begin_time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;}.&lt;/span&gt;&lt;span class="nf"&gt;compact&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The pull request to adjust how long the live events stayed in the upcoming events page had modified the COLLECTION&lt;em&gt;TIME&lt;/em&gt;PAST constant.  The constant was used in another place, where it affected what would be in the upcoming events page.  It had been modified to influence things there, but had this knock on effect in the other place where it was used.&lt;/p&gt;
+
+&lt;p&gt;I didn&amp;rsquo;t have proof, but now a very strong hunch.  It&amp;rsquo;s also a great example of how every time you DRY something out, you are also introducing a dependency.  This was perhaps a variable that might have been better off not becoming a constant?  And we clearly didn&amp;rsquo;t have any acceptance tests covering this situation, since everything had had to be green to get into production. Of course we&amp;rsquo;ve had a trouble free couple of years with the popup working and hindsight here is 2020.  This felt like a bleed on the site, and while I&amp;rsquo;d pinged the developer who worked on the recent pull request, he might not be available to address the issue soon.&lt;/p&gt;
+
+&lt;p&gt;I took the slightly risky step of generating a hotfix to push straight into production.  Specifically creating a second constant for the method that the popup and home page were relying on:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_occurrence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_type&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;begin_time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;FRONT_PAGE_COLLECTION_TIME_PAST&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Hacky as hell, but I wanted the site to be displaying sensible defaults overnight.  I got the hotfix on staging, but didn&amp;rsquo;t try to replicate.  The site was still approximately working.  I wanted to know if this hotfix would work to solve our issue on production so I could go and have supper with the family.  The tests were green, so I pushed it out and it fixed everything without apparently introducing any catastrophic side effects.  I pulled the hotfix back into develop so others could work against it and discussed in the ticket how we wanted proper tests wrapping this and perhaps ultimately a whole different approach to the solution.&lt;/p&gt;
+
+&lt;p&gt;The site seems to be operating normally today and the developer has submitted a PR with a more comprehensive fix.  Why is it that there still seems to be things that we only encounter in production?  I think the acceptance tests do have some of our back, but we need to thoroughly follow up to wrap every end-user bug in an acceptance test, and keep reviewing the existing tests to purge vacuous ones and keep them up to date with the rest of the codebase, AND remove unecessary dependencies.  Even then I have a feeling that there&amp;rsquo;s still always some issues that we&amp;rsquo;ll only ever encounter in production &amp;hellip; :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=E89Eo-k2rE8"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=NiVvxJuo8ik"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Passing a Threshold</title>
     <link rel="alternate" href="http://blog.url.com/2017/01/23/passing_a_threshold/"/>
     <id>http://blog.url.com/2017/01/23/passing_a_threshold/</id>
     <published>2017-01-23T00:00:00+00:00</published>
-    <updated>2017-02-08T12:02:21+00:00</updated>
+    <updated>2017-02-07T22:03:32+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -62,7 +135,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/01/20/under-the-weather/"/>
     <id>http://blog.url.com/2017/01/20/under-the-weather/</id>
     <published>2017-01-20T00:00:00+00:00</published>
-    <updated>2017-02-07T13:28:11+00:00</updated>
+    <updated>2017-02-02T21:16:01+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -108,7 +181,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/01/19/punch-drunk/"/>
     <id>http://blog.url.com/2017/01/19/punch-drunk/</id>
     <published>2017-01-19T00:00:00+00:00</published>
-    <updated>2017-02-07T13:28:11+00:00</updated>
+    <updated>2017-02-02T21:00:15+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -140,7 +213,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/01/18/coding-vs-admin/"/>
     <id>http://blog.url.com/2017/01/18/coding-vs-admin/</id>
     <published>2017-01-18T00:00:00+00:00</published>
-    <updated>2017-02-07T13:28:11+00:00</updated>
+    <updated>2017-01-31T21:31:53+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -185,7 +258,7 @@ $ heroku run rake db:migrate_plans -r production
     <link rel="alternate" href="http://blog.url.com/2017/01/17/server-monitoring/"/>
     <id>http://blog.url.com/2017/01/17/server-monitoring/</id>
     <published>2017-01-17T00:00:00+00:00</published>
-    <updated>2017-02-07T13:28:11+00:00</updated>
+    <updated>2017-01-26T21:40:51+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -208,66 +281,6 @@ $ heroku run rake db:migrate_plans -r production
 &lt;p&gt;&lt;img alt="HarrowCN throughput" src="https://www.dropbox.com/s/zzyev88mr4orwbn/Screenshot%202017-01-17%2010.33.07.png?dl=1" /&gt;&lt;/p&gt;
 
 &lt;p&gt;The baseline requests look like some sort of healthcheck is going on, rather than it being representative of human users &amp;hellip; more investigation required.  I wonder if that&amp;rsquo;s a side effect of NewRelic or some other pinging service we&amp;rsquo;ve forgotten about?  Anyhow, I want to get deeper into this for both WSO and HarrowCN (and AutoGraders/MetPlus) to flesh out what I can say about the usage of our systems in my talk on Thursday.  Let&amp;rsquo;s see how far I get &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Hosting Costs</title>
-    <link rel="alternate" href="http://blog.url.com/2017/01/16/hosting-costs/"/>
-    <id>http://blog.url.com/2017/01/16/hosting-costs/</id>
-    <published>2017-01-16T00:00:00+00:00</published>
-    <updated>2017-02-07T13:28:11+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;There&amp;rsquo;s lots I&amp;rsquo;d like to talk about.  Premium pairing on new non-profit IT support plans, &lt;a href="https://www.youtube.com/watch?v=P66oJafqqng"&gt;helping Kenyan students get started with LocalSupport&lt;/a&gt;, &lt;a href="https://www.youtube.com/watch?v=zrz6ct9wIUs"&gt;meeting with the LocalSupport client&lt;/a&gt;, deploying LocalSupport via the new drie push Github interface, mob programming on the Hash#fetch method, but I&amp;rsquo;m presenting my talk on &amp;ldquo;DevOps on a Budget&amp;rdquo; on Thursday, so things have got to be DevOps pricing focused :-)&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m torn between focusing the presentation on the costings and the actual process of DevOps I&amp;rsquo;m doing on AV projects that I blogged about last week.  The talk summary is as follows:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;This talk will cover how we&amp;rsquo;ve been keeping our hosting costs down at the AgileVentures online IT and Education charity over the last 4 years, touching on how we&amp;rsquo;ve been using Heroku, AWS and other less well known services like NineFold and drie. In particular we&amp;rsquo;ll look at how we manage DevOps in an ever changing team of volunteer participants. We&amp;rsquo;ll also cover our migration from Heroku to Ninefold and back again when Ninefold went bust, and our most recent ongoing migration from Heroku to drie.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I guess the key thing is to get down some of that narrative about how our longest running project has been managed from a DevOps point of view over the years.  A quick trip to to Google Analytics showed me a slightly perplexing view of the traffic to the site over the last 2 years that we&amp;rsquo;ve been tracking:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Harrow Community Network users" src="https://www.dropbox.com/s/zrhi3tit04i44s0/Screenshot%202017-01-16%2009.42.25.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The site traffic was an order of magnitude heavier in 2015, and I can&amp;rsquo;t really think of an explanation other than some sort of error relating to analytics of some service pinging the site that shut down.  Throughout 2016 we&amp;rsquo;ve had about 300 visitors a month, which seems about right.  I can&amp;rsquo;t imagine why 2015 would have seen such high traffic.  In contrast WebSiteOne has been much more consistent:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="AgileVentures site users" src="https://www.dropbox.com/s/p5inkiun3j1993r/Screenshot%202017-01-16%2009.45.43.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The extra challenge with the Harrow Community Network site has generally stemmed from needing https for logins to ensure they are secure.  Arguably this is an issue for every site, but the AgileVentures site handles login via GitHub and G+ which have their own security.  As a cash strapped NonProfit with clients who also have limited resources we were looking at ways of affording the extra fees for setting up SSL certificates.&lt;/p&gt;
-
-&lt;p&gt;Our Slack archive and meeting notes shows me that we had got prototypes of the main site on Heroku in early February 2014.  It wasn&amp;rsquo;t long before we&amp;rsquo;d realised that Heroku SSL suport would lead to a recurring monthly fee, and so the site was only very briefly on Heroku (3 months) before we&amp;rsquo;d switched to NineFold. &lt;/p&gt;
-
-&lt;p&gt;We started investigating &lt;a href="http://ninefold.com/"&gt;NineFold&lt;/a&gt; as an alternative to Heroku in April 2014, when a member of our community working for NineFold indicated we might be able to get a grant from NineFold to cover the hosting costs.  We went live on NineFold in May 2014, but it was less than a year before we were forced to switch back to Heroku due to NineFold sunsetted their Rails hosting solution in March 2015.  We&amp;rsquo;d gotten almost a years free SSL support from NineFold, although that did inadvertently charge my credit card a couple of times.  Talking it through with them I got a refund.&lt;/p&gt;
-
-&lt;p&gt;I have emails from April 2015 about moving our data back from NineFold to Heroku, and getting SSL certificates set up.  At that point Heroku gave us a $100 grant towards the costs of the SSL certificates.  Importing the data back was problematic, and ultimately fixed by using a binary dump with schema AND data and reseting the db before doing the restore operation.&lt;/p&gt;
-
-&lt;p&gt;NineFold&amp;rsquo;s command line interface had been slightly different to Heroku&amp;rsquo;s and had taken a little getting used to.  The deployment was not too difficult, and we had a NineFold person giving us technical support directly in our Slack instance. There had been a fair amount of fiddling around to create valid SSL certificates through a third party provider. Overall it was an interesting experience to have migrated a site from one provider to another; which mainly involved being familiar with PostGres import and export tools.&lt;/p&gt;
-
-&lt;p&gt;Moving back to Heroku, the free SSL certificate provider I&amp;rsquo;d used for NineFold was no longer operating, and the client was now willing to take on some hosting costs.  At the time I was also just contributing to AgileVentures part time and so the Heroku Expedited SSL solution was very attractive, so we went for that and have been billing the client $35 a month since then.  Ironically SSL is now free on custom domains on Heroku, but to get off the limited hours free tier we need to pay $7 a month, and we need to keep the staging and develop instances running so we could switch over to the new dynos and take the costs down to $21 a month.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;re also looking seriously at moving to drie, who have a low cost hosting service called &amp;ldquo;drie push&amp;rdquo;.  One of the advantages of drie is automatic availability of hosted versions of all the branches in ones&amp;rsquo; git repo.  Early on we linked things up for HarrowCN like so:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;master branch &amp;ndash;&amp;gt; https://www.harrowcn.org.uk&lt;/li&gt;
-&lt;li&gt;staging branch &amp;ndash;&amp;gt; http://staging.harrowcn.org.uk&lt;/li&gt;
-&lt;li&gt;develop branch &amp;ndash;&amp;gt; http://develop.harrowcn.org.uk&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Having that kind of mapping automatically available from the start of the project is very appealing, but after the experience with NineFold we are cautious about moving to a new service provider.  However drie also has a tighter GitHub integration than Heroku allowing us to add drie as a GitHub integration and deploy directly by pushing to any repo branch.  Heroku can be set up to do this, but their &amp;ldquo;build on PRs&amp;rdquo; functionality creates more instances that we have to pay for.  drie has a different model that sleeps apps more aggressively and so their free tier goes further than that of Heroku.  We&amp;rsquo;re also excited about being able to use GitHub&amp;rsquo;s team interface system rather than Heroku&amp;rsquo;s; since Heroku is also charging extra for the use of the team interface.&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=NiXjhjaTTCk"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=zrz6ct9wIUs"&gt;LocalSupport Client Meeting&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ToV8wt9sr8w"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=VOnol6QAaeg"&gt;Saturday &amp;ldquo;Bob Martin&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=P66oJafqqng"&gt;Sunday &amp;ldquo;Bob Martin&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;p.s. Full disclosure, AgileVentures has received financial grants from Heroku and NineFold in the past, and drie is an ongoing sponsor of the AgileVentures charity. &lt;/p&gt;
 </content>
   </entry>
 </feed>
