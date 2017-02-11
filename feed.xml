@@ -5,10 +5,59 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-01-25T00:00:00+00:00</updated>
+  <updated>2017-01-26T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>NonInvasive Progress</title>
+    <link rel="alternate" href="http://blog.url.com/2017/01/26/non-invasive-progress/"/>
+    <id>http://blog.url.com/2017/01/26/non-invasive-progress/</id>
+    <published>2017-01-26T00:00:00+00:00</published>
+    <updated>2017-02-11T08:09:27+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;My cold last week meant there&amp;rsquo;s a delay between the first publication of my daily blogs and the reviews I get from the AV community (particularly Federico).  I&amp;rsquo;m still going though.  My current routine is knock out a blog in the morning, and review a blog from the week before in the evening and push it to our nonprofits site.  Also in the evening I do a second review on a blog from a couple of months previously and re-publish on medium with edits and changes.  One I just pushed out was on a concept I call &lt;a href="https://medium.com/agileventures/noninvasive-programming-9821bc3c3f45#.gfps0rbmn"&gt;NonInvasive Programming&lt;/a&gt;.  I was calling it &amp;ldquo;DriveBy&amp;rdquo; coding for a while, but I decided I didn&amp;rsquo;t like the violent connotations.&lt;/p&gt;
+
+&lt;p&gt;Things are coming full circle here, with me working on the same area of the codebase, again in a NonInvasive fashion, and this time with tiny solo efforts in between admin tasks.  By NonInvasive I am probably just channeling Kent Beck&amp;rsquo;s:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Do the simplest thing that could possibly work&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Maybe I&amp;rsquo;m not adding anything to that, but I usually associated Kent&amp;rsquo;s &lt;a href="http://wiki.c2.com/?DoTheSimplestThingThatCouldPossiblyWork"&gt;&amp;ldquo;Simplist first&amp;rdquo; assertion&lt;/a&gt; with test driven design and creating things from scratch.  In my mind NonInvasive Programming is all about dealing with legacy code like that in WebsiteOne.  It&amp;rsquo;s clearly a kindred spirit.  Am I adding any value by breaking out a new term?  Let&amp;rsquo;s see.  The phrase is making sense in my head: to describe the process of handling the overwhelming sets of changes it seems we need to get us to a sustainable system.&lt;/p&gt;
+
+&lt;p&gt;My goal is to make it possible for Premium members to upgrade themselves from one Premium plan to another.  At the moment this is something I do manually through the Stripe dashboard for Premium members when they reach out to me through Slack.  That process is just fine at the moment, and really valuable as I get a little dialogue with the member about their needs and so on.  However it won&amp;rsquo;t scale up if and when the number of Premiums ramps up, and I also want the interface to help make it clear to Premiums that they can upgrade.  It&amp;rsquo;s funny, when you&amp;rsquo;re working on something really intensely and talking to several folks about it each day, and blogging about it, and streaming your sessions talking about it on YouTube, it&amp;rsquo;s easy to slip into assuming that everyone&amp;rsquo;s following along :-)&lt;/p&gt;
+
+&lt;p&gt;Of course everyone has their own busy lives to take care of and the vast majority of them really don&amp;rsquo;t have the time to follow all your blogging and video-casting, even if you could magically get it down into really pithy bytes of marketing content (although maybe that would help).  In one recent Slack conversation with a Premium, I nervously mentioned that we were doing mob programming sessions on Avdi Grimm&amp;rsquo;s Confident Ruby.  I was nervous because I&amp;rsquo;m nervous about promoting our services to folks who might not want them.  The response was enthusiastic.  &amp;ldquo;I didn&amp;rsquo;t know about that, where do I sign up?&amp;rdquo;.  Perhaps I need to be a little more confident reaching out.&lt;/p&gt;
+
+&lt;p&gt;Maybe I should keep things purely manual until we get into the black (financially), but my intuition is that folks will feel more comfortable if they can press the upgrade button themselves; and if the upgrade button is there, then it&amp;rsquo;s discoverable and that should help; and we also have some unsightly bugs in the system as we try to handle corner cases like some Premium members sponsoring others, and providing the ability for a sponsor to upgrade someone&amp;rsquo;s plan, versus the individual doing it themselves.  So there&amp;rsquo;s a lot to handle.  The previous NonInvasive sessions had been about just making it possible to upgrade from Premium to PremiumPlus.  The process uncovered various smells in the code, and also since then, we introduced a series of intermediate plans, and upgrading to them first makes loads more sense.&lt;/p&gt;
+
+&lt;p&gt;This next round of NonInvasive activity has involved splitting out several tickets:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1524"&gt;Support generic Premium upgrade&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1526"&gt;Refactor card update out of subscriptions controller&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1521"&gt;Confusion about subscription vs single monthly payment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1253"&gt;Stripe images and logos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1437"&gt;Existing Premium users can be upgraded by anyone, but that leads to failure&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The bigger picture here is the ongoing &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/936"&gt;Premium Epic&lt;/a&gt; which actually shows the significant progress we&amp;rsquo;ve made in the last 6 months knocking off tickets and setting up a system that is currently covering half our running costs.  Now we&amp;rsquo;ve just got to cover the other half!  I think the key ticket is this &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1524"&gt;support generic Premium upgrade&lt;/a&gt; and the other three are bugs in the same general area, and a refactoring task to pay down some technical debt that I&amp;rsquo;m guessing will make progress on the main &amp;ldquo;upgrade&amp;rdquo; task simpler in the long run.  &lt;/p&gt;
+
+&lt;p&gt;Over the last two days I started punching out work on tiny slices of the bigger problem; little NonInvasive solo shots.  Desperately trying to avoid getting distracted by other little gremlins in the code, or at least making refactoring or bug tickets to record my ideas rather than diving in and fixing things.   I managed to adjust the upgrade so it upgrades to Mob from Premium, rather than to Plus, as a first round of improvement.  It doesn&amp;rsquo;t address much of what we want to do, but it&amp;rsquo;s a critical minor improvement as Plus is not highlighted as an available plan any more, so one user gripe is removed.  Additionally we&amp;rsquo;ve had many more Mob upgrades so having a button for this is more useful, and it serves to advertise the existence of mob a little more.  That gives me an idea &amp;ndash;&amp;gt; &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1530"&gt;tooltips ticket&lt;/a&gt;.  Am I shooting myself in the foot writing out all the tiny thoughts when I could be putting the time into programming?&lt;/p&gt;
+
+&lt;p&gt;The blogging about the whole process over the last six months is allowing me to look back and confirm the shape of the bigger picture I think I am seeing.  Yesterday I finally pulled the credit card components out of the subscriptions controller, paying down the technical debt that I hope will make upgrading smoother, and our controllers have a more maintainable RESTful sheen.  It&amp;rsquo;s all so subjective - what&amp;rsquo;s a simple change, vs. a trivial change.  I&amp;rsquo;m going to keep slicing and kicking out tiny PRs in between admin tasks.  Let&amp;rsquo;s see if we can&amp;rsquo;t get AgileVentures into the black one PR at a time!&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=20PkAsAs46I"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=gh283SIP7pI"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Browser Tabs and Procrastination</title>
     <link rel="alternate" href="http://blog.url.com/2017/01/25/browser-tabs-and-procrastination/"/>
@@ -252,51 +301,6 @@
 &lt;/ul&gt;
 
 &lt;p&gt;p.s. this blog took 21 minutes to write&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Coding vs. Admin</title>
-    <link rel="alternate" href="http://blog.url.com/2017/01/18/coding-vs-admin/"/>
-    <id>http://blog.url.com/2017/01/18/coding-vs-admin/</id>
-    <published>2017-01-18T00:00:00+00:00</published>
-    <updated>2017-01-31T21:31:53+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Pat was commenting that my recent blogs don&amp;rsquo;t have so many technical deep dives and are more admin focused.  That&amp;rsquo;s probably a reflection that I&amp;rsquo;m doing less coding and more admin recently.  I&amp;rsquo;ve spent a couple of hours over the last few days trying to hook up the Google NonProfits AdWords grant, which will apparently give us up to $10,000 a month in AdWords funding.  An exciting prospect, but it&amp;rsquo;s taken me several admin hours to file the application on the right email address - go round the houses with Google online help suppport etc.  This week I&amp;rsquo;m also trying to get ready for a presentation at the DevOps conference, which sucks up time, but at least it&amp;rsquo;s enabled me to get the NewRelic monitoring setup on WebSiteOne correctly, and identify the source of strange health check activity on the LocalSupport servers.  The latter seems to be an artifact of using legacy NewRelic monitoring tools - time to upgrade!&lt;/p&gt;
-
-&lt;p&gt;I did however manage to snatch a chunk of time to do WebSiteOne devops.  The bug fix to prevent un-recorded YouTube links being tweeted was stuck on staging since we had stubbed the mock incorrectly.  While we waited for that fix some other PRs had piled up and I&amp;rsquo;d merged in our refactoring the Premium plans to support easier creation of new plans.  I rebased all the latest code from develop into staging, which finally worked smoothly since I&amp;rsquo;d previously merged the production fixes from last year back down to develop.  All the new functionality worked as expected on staging with me running the set of rake tasks that went along with the various new bits of code:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ heroku run rake fetch_github_commits -r production
-$ heroku run rake db:create_plans -r production
-$ heroku run rake db:migrate_plans -r production
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I still had to manually test the Hangouts/Twitter interaction.  It occurs to me that we might be better off with things that are being merged into develop following a faster cycle into staging and production, rather than allowing them to bunch up.  I guess the difficulty is the complexity of setting up individual developers to be able to manually test all the 3rd party hookups.  Perhaps with automated deploy from drie that will change.&lt;/p&gt;
-
-&lt;p&gt;What I did immediately notice was that the language in the tweets coming from the staging server was odd:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="odd language in tweets" src="https://www.dropbox.com/s/6s33zipjbpj1e8o/Screenshot%202017-01-17%2015.34.10.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;As a result of the latest changes we now only tweeted a link to the YouTube once the host had clicked the &amp;ldquo;start broadcast&amp;rdquo; button in the hangout and the YouTube video was reporting a non-nil &lt;code&gt;actual_start_time&lt;/code&gt; via the API.  However the language in the tweet said that the session had finished, when clearly it was potentially still ongoing.  I groaned as I thought about needing to make another change before we could push this out, but talking it over with Michael in the scrum I realised that this was an existing bug.  That&amp;rsquo;s not to say we don&amp;rsquo;t need to fix it, just that we don&amp;rsquo;t have to hold things up to get the original bug fix out.&lt;/p&gt;
-
-&lt;p&gt;The original setup (as had been running for the last year or so) is that as soon as the server receives a notification from the Hangout plugin that the hangout has successfully started, the server automatically tweets both a link to the hangout (with text saying the session has started) and a link to the YouTube video saying the session has finished.  The original bug-report from Thomas was that some of the YouTube links were duds.  We&amp;rsquo;re pretty sure that this is due either to those situations where no one starts the broadcast/recording, or there&amp;rsquo;s a technical fail on YouTube.  So we have fixed the bug where we would tweet unrecorded sessions, but in the process highlighted other inconsistencies in the user experience.&lt;/p&gt;
-
-&lt;p&gt;I guess it&amp;rsquo;s not such a big deal, because as soon as the recordings do finish the wording will be correct for the rest of the lifetime of the tweets.  Not that anyone is necessarily paying attention to our Twitter feed (although I do notice more and more followers stacking up recently), but anyone paying close attention would think that all scrums and pairing sessions shut down pretty soon after they start.  At least with our latest fix, anyone reviewing the tweets a few hours after the fact will encounter fewer dead YouTube links so that&amp;rsquo;s probably a good thing.  Having said that we&amp;rsquo;ve got no evidence that our Twitter feed is a source of any value for our organisation, specifically we only get a couple of click throughs to the site and from Twitter a month (that said, perhaps we should more closely check out YouTube referrals, and maybe auto add a shortened AV link to all our tweets - maybe rather than redirecting to YouTube we should post links to the videos embedded in our site?)&lt;/p&gt;
-
-&lt;p&gt;Working on this bug has been an interesting learning experience.  It&amp;rsquo;s included myself, Sasha, Matt, and Michael and we&amp;rsquo;ve covered all sorts of interesting topics related to BDD, 3rd party APIs, mocking, caching, testing etc.  However since we may lose the entire Hangout plugin in April, it does make me wonder if we&amp;rsquo;ve just been rearranging the deckchairs on a tiny portion of the system that&amp;rsquo;s unlikely to have any significant impact on our sustainability.  My mind leans towards adjusting the site to have a stronger call to action on the front page, e.g. to sign up as a member and then ultimately upgrade to Premium, as being something that might have stronger chance of impacting our sustainability.&lt;/p&gt;
-
-&lt;p&gt;When Matt started looking at a new feature the other day I suggested that maybe we should look at some bug-fixes first.  Together we managed to get to the bottom of the Slack invite bug, which strangely seemed to be just a missing setting on production, which in principle saves me a few minutes each week spent inviting new users into Slack.  Anyhow, given that we&amp;rsquo;ve got all this tweeting code adjusted through strenuous effort, the priority must be to get these latest changes to out onto production.  There&amp;rsquo;s one other minor fix that could be done first, but I&amp;rsquo;ve created a ticket for it.  I think we need to experience any pain from the collection of new changes rather than holding off.&lt;/p&gt;
-
-&lt;p&gt;Maybe it&amp;rsquo;s smoothing the upgrade process to the different levels of Premium that&amp;rsquo;s really going to make the difference to sustainability?  Or the next admin task that will unlock some more funding?  I guess I just keep swapping between coding and admin-ing in turn until it all becomes sustainable.&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=V2KfoeCcp-o"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Yc4c0QL8Efg"&gt;WSO DevOps&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=h3b5Og-umnU"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;p.s. this blog took 20 minutes to write&lt;/p&gt;
 </content>
   </entry>
 </feed>
