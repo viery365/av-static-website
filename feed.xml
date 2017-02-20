@@ -5,10 +5,51 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-01-26T00:00:00+00:00</updated>
+  <updated>2017-01-30T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Sponsoring Resource Challenged Developer</title>
+    <link rel="alternate" href="http://blog.url.com/2017/01/30/sponsoring-resource-challenged-developers/"/>
+    <id>http://blog.url.com/2017/01/30/sponsoring-resource-challenged-developers/</id>
+    <published>2017-01-30T00:00:00+00:00</published>
+    <updated>2017-02-20T21:41:09+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;It was an exciting Friday as our first sponsored Premium member made their first pull request against the LocalSupport open source project.  We&amp;rsquo;d onboarded a Kenyan student before the break having received sponsorship for a single AgileVentures Premium support plan from an anonymous US based donor.  The Kenyan student had completed a coding bootcamp, but was still looking for experience on some real world projects.  They were unfortunately unwell with malaria over the break and couldn&amp;rsquo;t get started until the new year.  A couple of weeks back we&amp;rsquo;d managed to get them set up with the LocalSupport code base on their linux machine, which was a great step forward.&lt;/p&gt;
+
+&lt;p&gt;Onboarding to our open source projects in AgileVentures is still much more complicated than we&amp;rsquo;d like.  In the ideal world, perhaps, we&amp;rsquo;d be able to drop folks directly into a working environment with all the tests passing, ready to start coding on a bug, chore or feature.  We&amp;rsquo;ve tried things like vagrant and docker to have developers start from a virtual machine with everything set up already, but while that puts all the needed components in one place, there&amp;rsquo;s then having new folks understand the vagrant/docker virtual machine concept.   Although maybe we just haven&amp;rsquo;t put enough energy and ingenuity into getting to the bottom of the problem?  &lt;/p&gt;
+
+&lt;p&gt;The virtual machine that the MOOC used to distribute created a standard default, but lead to the code running more slowly on the developer machine and was difficult to download in one big chunk over spotty internet connections.  That said, I don&amp;rsquo;t have firm data on that.  The vagrant/docker approaches made the downloads lighter weight, but then there were wrinkles regarding being able to edit the code in editors on the host machine.  Where possible we&amp;rsquo;d love for developers to be able to stay with their preferred developing environment.  That said, C9 is an interesting alternative that some have used with success, although there are space limitations there.&lt;/p&gt;
+
+&lt;p&gt;Maybe I&amp;rsquo;m at fault for having a fast machine and not experiencing the pain of setup and install frequently enough.  Maybe the pain of the install experience has an important filtering effect on those with lower levels of commitment, and maybe seeing how the sets of connected libraries get installed is useful for understanding the project dependencies?  I really don&amp;rsquo;t know.  I know my kids (8, 8 and 11) would have no patience for it, and they are learning to code using CodeCombat, where all coding takes place in the browser like CodeSchool, Codecademy and CodeWars.&lt;/p&gt;
+
+&lt;p&gt;Maybe there&amp;rsquo;s a shortcut that I&amp;rsquo;m missing, or maybe I&amp;rsquo;ve just been mis-directing my efforts over the last 3 years on LocalSupport and other projects.  I am not sure.  What we did just do was create a separate #localsuppport-install channel on Slack specifically for giving support on the install process.  There we have managed to help folks through ruby/gem versioning and postgres permission issues.  Those two seem to be common stumbling blocks.  I&amp;rsquo;m hoping we can keep improving the docs.  Has trying to migrate from GitHub wiki to docs in the repo helped or hindered? I&amp;rsquo;m not sure.&lt;/p&gt;
+
+&lt;p&gt;So the first breakthrough was getting the sponsored Kenyan student (and a few others) through the install process.  However having got everything installed and all the tests passing, the question was what next?  I&amp;rsquo;m trying to write more and more about how we work with Pivotal Tracker to manage the work on the project.  There&amp;rsquo;s a clear flow evolving in my mind of the appropriate strategy to really engage with the project:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Look through all the existing pull requests (commenting if so inclined)&lt;/li&gt;
+&lt;li&gt;Look through all the current tickets (reaching out to those working on them to offer help if so inclined)&lt;/li&gt;
+&lt;li&gt;Look through all the backlog tickets (posting questions about any you are interested in working on)&lt;/li&gt;
+&lt;li&gt;Looking through the icebox tickets (starting votes on any that you are interested in)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This may not be the best process for every individual.  Perhaps some people would better start by slowly familiarizing themselves with the codebase, reading all the documentation, and maybe similarly for the technology stack and any components used.  The idea behind the pattern described above is that this is the &amp;ldquo;rinse-and-repeat&amp;rdquo; that one would use to again and again to make ongoing contributions to a project.  Reading code and documentation can be interleaved anywhere, but it seems to me that interaction with the existing project team is critical to avoid duplicated effort, and being able to benefit from the team&amp;rsquo;s existing knowledge.  In each of the above, if you don&amp;rsquo;t find a hook with an existing team member&amp;rsquo;s work, you move on to the next step, where eventually you&amp;rsquo;ll end up starting a vote and alerting the rest of the team to your interest in working on something.&lt;/p&gt;
+
+&lt;p&gt;Of course looking through the chunks of code in pull-requests may be disorienting and confusing for the new developer, but this is a critical skill.  Maybe in aggregate, just looking at other folks submitted slivers of code and comments on them from the rest of the team will put more folks off than pull them into the process?  I&amp;rsquo;m not sure :-) I just keep following my personal maxim that the learning should replicate the actual doing as closely as possible.  Scaffolding and support, yes!  Simplification, yes!  But still as realistic as possible, and in bite sized chunks for quick feedback and the feeling of progress.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;d outlined the above in various fashions (docs and Slack posts) but there wasn&amp;rsquo;t any activity for a while from our new folks.  Here&amp;rsquo;s where the Premium support made the difference.  Under other circumstances I couldn&amp;rsquo;t really justify additional outreach for those who weren&amp;rsquo;t taking the initiative.  I reached out to the sponsored member and suggested a low-complexity ticket that might be a good place to start.  That seemed to do the trick.  We had a vote in the main #localsupport channel on the ticket, which involved some refactoring of Cucumber step definitions to make their meaning more explicit.  Most of us voted 1, while the sponsored member voted 2, putting them on the spot to explain their reasoning.  That was perhaps unfortunate.  New folks will often want to remain in the background of the process, but that&amp;rsquo;s partly what the voting is about, to identify differences in assumptions which we might miss without the explicit vote.&lt;/p&gt;
+
+&lt;p&gt;It was also highlighting failures on my part to really explain the details of the chore in the ticket.  Fortunately the Slack allowed me to explain, and I quickly updated the ticket and got us to the point where we were all agreeing on a 1 and we now had a voted chore for the sponsored member to work on.  And yes, I know that Pivotal doesn&amp;rsquo;t recommend voting on chores and bugs, but we realized a while ago that in an open source project with high churn that velocity measurements are less important than highlighting the complexity levels of chores and bugs to new team members.  Anyhow, with some help from a mentor the sponsored member got an initial pull request in, on which we were able to give feedback, and was then improved upon to get the CI green and handle merge conflicts and so on.&lt;/p&gt;
+
+&lt;p&gt;Only time will truely tell, but from the chat in group and private channels it seemed like it was all a huge confidence boosting experience.  Just making a pull-request itself and handling things like CI and merge conflicts is more than task enough itself in the first instance; let alone trying to BDD a new feature from scratch or fix a complex bug.  By taking one of our relatively simple refactoring tickets we were able to get a new person understanding our project flow, and in relatively short order getting the satisfaction of having contributed to an open source project.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ll see how it goes, but I&amp;rsquo;d love to keep rinsing and repeating this with the sponsored member, helping building their confidence up on gradually more complex tasks.  And then at the bigger scale I&amp;rsquo;d love to be doing this for more and more folks around the world.  Think you could spare £10 (~$12.50) a month to help a developer in a resource-challenged part of the world get the help and support I describe above?  See &lt;a href="http://www.agileventures.org/sponsorship"&gt;http://www.agileventures.org/sponsorship&lt;/a&gt; to find out more about how you can help us help a resource challenged developer in another country learn modern Open Source development skills on real projects and make a real difference in the world!&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>NonInvasive Progress</title>
     <link rel="alternate" href="http://blog.url.com/2017/01/26/non-invasive-progress/"/>
@@ -269,38 +310,6 @@
 &lt;p&gt;from &lt;a href="http://www.katinkahesselink.net/tibet/zen.html"&gt;http://www.katinkahesselink.net/tibet/zen.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;And the question Steve Hagen (author of &amp;ldquo;Buddhism Plain and Simple&amp;rdquo;) asks is when do we think the story ends &amp;hellip; &lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Punch Drunk</title>
-    <link rel="alternate" href="http://blog.url.com/2017/01/19/punch-drunk/"/>
-    <id>http://blog.url.com/2017/01/19/punch-drunk/</id>
-    <published>2017-01-19T00:00:00+00:00</published>
-    <updated>2017-02-02T21:00:15+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Feeling pretty rough today, like someone&amp;rsquo;s been punching me in the head for a while.  Reasonably productive day yesterday.  Got to bed at 10:30pm, but my &amp;ldquo;good&amp;rdquo; knee was starting to ache from the new physio exercises I&amp;rsquo;m doing for my &amp;ldquo;bad&amp;rdquo; knee.  I couldn&amp;rsquo;t sleep - eventually I was listening to Todd Barry standup on Spotify to get me off to sleep.  Ideally of course I&amp;rsquo;d be using my powers of meditation to effortlessly drift off to sleep, but when my mind gets stuck on money worries, or re-hashing the complexities of past social interactions that haven&amp;rsquo;t gone so well, I run out of patience and reach for audio comedy.  &lt;/p&gt;
-
-&lt;p&gt;In the background the remote DevOps conference started, and since I was trying to multi-task with all the usual family and AgileVentures activities I only managed to attend one talk.  That was in the waiting room in a leisure centre while my boys did an academy football (soccer) class.  I love the concept of remote conferences.  This one would be easier for me if the schedule was in UTC; DevOps RemoteConf is running seven hours behind me in US mountain time.  It also makes me reflect on the value of a physical face to face conference in that it takes you out of your day to day routine and clears some space to focus on other stuff.&lt;/p&gt;
-
-&lt;p&gt;I was really pleased to see Chuck had set up a Slack instance for the conference, and I joined all the channels for each talk.  The activity in the Slack instance so far hasn&amp;rsquo;t been high - it&amp;rsquo;s frustrating that Slack isn&amp;rsquo;t also the chat used in the sessions themselves.  I think that if everyone watching the talk was automatically in the Slack channel it would help connect people, and then there&amp;rsquo;d be a stored history of any questions that got asked in the session themselves.  I was pleased to be able to use the Slack channel to ask Arthur Hicken about his talk &amp;ldquo;Evolving from Automated to Continuous Testing for Agile and DevOps&amp;rdquo;.  I asked him if he had any thoughts on how we can make sure that tests are really testing the right thing, rather than being tests that would pass even if the functionality was removed.  Having the slack meant that I continue to have the transcript of the conversation to refer back to:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="chat with Arthur" src="https://www.dropbox.com/s/r1mqm9j3crvdmtl/Screenshot%202017-01-19%2009.59.39.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Arthur was suggesting having comments like @PR12345 to associate bits of code with a requirement.  I felt that might introduce a linkage between test and code that wouldn&amp;rsquo;t give us the implementation flexibility we might want, but even just having the conversation I found some Ruby mutation apps that might be interesting to use.   The round-table discussion that I would really like to have joined was taking place at midnight my time, so it wasn&amp;rsquo;t really practical given my schedule and how badly I perform on little sleep :-/&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve got my talk coming up later today at 9:15pm my time.  Hopefully I can stay awake for it :-)  I&amp;rsquo;ve had some good feedback on the draft version.  Giving the talk into a YouTube live stream and then sharing the video link really makes so much sense.  One suggestion was to write out the transcript and then read it back.  That has been the way I have slowed myself down and made myself comprehensible in the past.  Not sure that I have the luxury of doing that today.  I have done it with the half hour chunks of stuff in the AV102 course.  Reading my own edited monologue back from a teleprompter really is the way to make myself understandble to a wider range of folks, let&amp;rsquo;s see &amp;hellip; maybe some coffee can get me over this punch-drunk feeling &amp;hellip;?&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=J7EycNcfH3A"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=HMcU42Jy8X4"&gt;Draft talk on DevOps&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=kqTSgFLLaEw"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;p.s. this blog took 21 minutes to write&lt;/p&gt;
 </content>
   </entry>
 </feed>
