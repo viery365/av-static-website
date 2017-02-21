@@ -5,10 +5,61 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-01-30T00:00:00+00:00</updated>
+  <updated>2017-01-31T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Paid Projects</title>
+    <link rel="alternate" href="http://blog.url.com/2017/01/31/paid-projects/"/>
+    <id>http://blog.url.com/2017/01/31/paid-projects/</id>
+    <published>2017-01-31T00:00:00+00:00</published>
+    <updated>2017-02-21T21:56:43+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;It was a busy Monday with us recording the first of our &amp;ldquo;Agile Book Club&amp;rdquo; podcasts, and other back to back meetings.  There&amp;rsquo;s lots to discuss and plan on the marketing front, now that the Google AdWords grant is driving five times the usual traffic to our site.  However the biggest news of the day was a proposed paid project from our sponsor, drie.  drie wants to move fast to get their products onto the AWS Marketplace and they need a dashboard to go with their GitHub integration to allow users to manage their deployments to the drie cloud.&lt;/p&gt;
+
+&lt;p&gt;Paid projects have been a core concept of the AgileVentures Premium plans strategy since their inception. The idea is that signing up for a Premium plan subscription makes a member eligible for consideration for a paid project.  It&amp;rsquo;s intended as an incentive to sign up for Premium plans, and also a demonstration of commitment on the part of the member.  We&amp;rsquo;ve had a couple of small paid projects in the past, and including eligibility for those projects as part of the Premium package is motivated by the experience on some of those earlier projects.&lt;/p&gt;
+
+&lt;p&gt;In an unpaid project it&amp;rsquo;s easy for the learning experience of the participants to be first and foremost.  They are after all putting in their time voluntarily.  In a paid project the situation changes; additional funds are being contributed by the client to ensure that some functionality is available in a particular timeframe.  There&amp;rsquo;s clearly little motivation for a client to contribute those funds if the sole objective is the learning experience for the developers.  There&amp;rsquo;s a tension here.  If the objective was simply learning and not on the product being generated, then perhaps those funds might be better contributed to a university or other institution which has learning as the sole objective?  Perhaps, but what about when the objective on the part of the learners is to become proficient at delivering products in the real world?&lt;/p&gt;
+
+&lt;p&gt;Unpaid projects in AgileVentures still have real clients and real requirements to simulate a real paid project, but with much less pressure.  In a paid project that pressure is there.  It&amp;rsquo;s a fantastic learning opportuniry and an important resume addition; that you are a developer who has been paid to produce some code.  Maybe that shouldn&amp;rsquo;t make much difference, but it seems to be important to many employers and recruiters.&lt;/p&gt;
+
+&lt;p&gt;drie have generated a backlog of stories for us, of which six have been given top priority:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="err"&gt;As&lt;/span&gt; &lt;span class="err"&gt;as&lt;/span&gt; &lt;span class="err"&gt;user&lt;/span&gt; 
+&lt;span class="nf"&gt;I&lt;/span&gt; want to see which of my repos drie would build and tell drie which it should build. 
+&lt;span class="err"&gt;So&lt;/span&gt; &lt;span class="err"&gt;that,&lt;/span&gt; &lt;span class="err"&gt;drie&lt;/span&gt; &lt;span class="err"&gt;builds&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;repos&lt;/span&gt; &lt;span class="nf"&gt;I&lt;/span&gt; want built and not the ones I dont want built
+
+&lt;span class="err"&gt;As&lt;/span&gt; &lt;span class="err"&gt;someone&lt;/span&gt; &lt;span class="err"&gt;who&lt;/span&gt; &lt;span class="err"&gt;pushed&lt;/span&gt; &lt;span class="nf"&gt;a&lt;/span&gt; change
+&lt;span class="nf"&gt;I&lt;/span&gt; want to see if it built successfully and if there are changes that failed.
+
+&lt;span class="err"&gt;As&lt;/span&gt; &lt;span class="err"&gt;someone&lt;/span&gt; &lt;span class="err"&gt;who&lt;/span&gt; &lt;span class="err"&gt;built&lt;/span&gt; &lt;span class="nf"&gt;a&lt;/span&gt; branch 
+&lt;span class="nf"&gt;I&lt;/span&gt; want to see the build logs 
+&lt;span class="err"&gt;so&lt;/span&gt; &lt;span class="err"&gt;that&lt;/span&gt; &lt;span class="nf"&gt;I&lt;/span&gt; can debug why the build failed
+
+&lt;span class="err"&gt;As&lt;/span&gt; &lt;span class="nf"&gt;a&lt;/span&gt; user
+&lt;span class="nf"&gt;I&lt;/span&gt; want to be able to access the URL to my running app
+
+&lt;span class="err"&gt;As&lt;/span&gt; &lt;span class="err"&gt;someone&lt;/span&gt; &lt;span class="err"&gt;running&lt;/span&gt; &lt;span class="nf"&gt;an&lt;/span&gt; app, 
+&lt;span class="nf"&gt;I&lt;/span&gt; want to see the applications logs 
+&lt;span class="err"&gt;so&lt;/span&gt; &lt;span class="err"&gt;that&lt;/span&gt; &lt;span class="nf"&gt;I&lt;/span&gt; can debug why its not working
+
+&lt;span class="err"&gt;As&lt;/span&gt; &lt;span class="nf"&gt;a&lt;/span&gt; user 
+&lt;span class="nf"&gt;I&lt;/span&gt; want to log into my dashboard using github
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In our meeting yesterday we talked through these top six stories and I made additional notes in the Trello cards to do my best to capture the nuances of what the client wanted.  I also pulled in screenshots from other existing systems that have parallel with the kinds of things they want.  drie has committed to making the whole project open source, which ticks important boxes for us at AgileVentures, where one of our twin goals is learning.  We avoid working on closed-source projects because of the difficulty this presents in terms of sharing the learning experience with the rest of the community.&lt;/p&gt;
+
+&lt;p&gt;Now we need to come up with a budget for getting this done, and getting it done within a 2 to 3 week timeframe.  We have a pool of 30 premium members who are eligible to be involved with the project.  I&amp;rsquo;ve got to perform a complex series of calculations to ensure that drie gets value for money, that we have the right number of sufficiently experienced folks on the team, and that I get compensated for my own time while simultaneously not driving myself into the ground AND keeping all the other different parts of AgileVentures ticking along.  No pressure then :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=it8sThsoI-8"&gt;&amp;ldquo;Martin Fowler Scrum&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=jcqq-_DNun8"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Sponsoring Resource Challenged Developers</title>
     <link rel="alternate" href="http://blog.url.com/2017/01/30/sponsoring-resource-challenged-developers/"/>
@@ -264,52 +315,6 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=pxYvATQy2lo"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Under the Weather</title>
-    <link rel="alternate" href="http://blog.url.com/2017/01/20/under-the-weather/"/>
-    <id>http://blog.url.com/2017/01/20/under-the-weather/</id>
-    <published>2017-01-20T00:00:00+00:00</published>
-    <updated>2017-02-02T21:16:01+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Today I have mixed feelings.  I&amp;rsquo;m frustrated to be &amp;ldquo;under the weather&amp;rdquo;; my throat has swollen up and I feel exhausted.  A cold I guess.  I&amp;rsquo;m chewing my way through a ton of raw ginger.  I keep chunks in a little plastic pot so that I can pretty much chew it continuously.  Chewing the ginger releases a kind of juice that runs down my throat and takes the sting out of the soreness.  I have half a theory that the Zinc in the ginger also gives the cold virus a hard time, but perhaps that&amp;rsquo;s just my imagination :-)&lt;/p&gt;
-
-&lt;p&gt;I felt the sore throat coming on last night as I sat hacking away at a couple of WebSiteOne pull requests on my laptop while my kids were doing their Karate class.  I&amp;rsquo;d finished a couple of days of talk prep for the remote DevOps conference, and it was nice to get back to some coding. The DevOps talk was at 9:15pm that evening.  I managed to get the kids to bed, and gave the talk despite starting to lose my voice.  It seemed to go off reasonably well - some good questions and a nice chat with some attendees in Slack afterwards.  Such a relief to have it all done, particularly given that I&amp;rsquo;m now propped up in bed, chewing more ginger; a scarf wrapped around my neck.  I&amp;rsquo;ve managed to postpone the one real world meeting I have today, so in principle I can take it easy and give my body a chance to fight the cold.&lt;/p&gt;
-
-&lt;p&gt;I suck pretty badly at &amp;ldquo;taking it easy&amp;rdquo;.  Given the laptop I can work from my sick bed, as I&amp;rsquo;ve done many times in the past.  A logical part of my brain might be reasoning that if I just rest and do no work all day then I might get back to full health sooner, but I find it really difficult to let go of my personal commitments, such as writing a blog post like this every work day.  In my experience it pretty much takes me a week to get over a cold, once I&amp;rsquo;ve been hit by that wall of lethargy.  I haven&amp;rsquo;t had a really nasty cold this last year if memory serves, and the last couple in early Autumn were pretty mild, so all in all I shouldn&amp;rsquo;t complain too much :-)&lt;/p&gt;
-
-&lt;p&gt;I seem to remember reading something about how sometimes your immune system will tip over and force the body to rest by flooding it with certain chemicals.  I can&amp;rsquo;t find the reference right now, but that seems to explain my experience of colds.  Sometimes I just have a blocked nose and a scratchy throat, but I can basically keep going; unpleasant as I find the symptoms.  Other times I just feel like I&amp;rsquo;ve been knocked down.  I&amp;rsquo;ve always found those latter types of colds and flus frustrating, as there&amp;rsquo;s always plenty I want to get done.  I could have given my DevOps talk a miss last night in order to get to bed earlier, but after all the work I&amp;rsquo;d done to push myself to get the slides sorted, and videos of draft runs of the talk circulated so I could get feedback; I couldn&amp;rsquo;t bear the thought of putting that off.&lt;/p&gt;
-
-&lt;p&gt;Maybe it&amp;rsquo;ll take a little longer for me to recover from the cold as a result, difficult to tell.  More frustrating in some ways will be if I&amp;rsquo;m not well enough to run the football coaching session I have for my Under 8 soccer team tomorrow.  My hope is that by getting some rest today, I&amp;rsquo;ll be up for that tomorrow.  I&amp;rsquo;ve managed those on a cold before, if I have a sufficient supply of ginger.  I&amp;rsquo;m also struggling with my supposed healthy left knee i.e. not the one that was operated on. The new physio exercises I&amp;rsquo;ve been doing seemed to first put my back out and then my left knee.  Hopefully they did do some good to my right knee, recovering as it is from ACL surgery;  I&amp;rsquo;m probably doing the physio too vigorously as usual.  However listening to &lt;a href="https://www.greaterthancode.com/podcast/episode-009-travis-b-hartwell/"&gt;GreaterThanCode&lt;/a&gt; this morning put all my minor troubles into perspective as Travis Hartell talked about his coding career and managing his chronic kidney condition with ongoing dialysis.  In the podcast they mentioned &lt;a href="https://butyoudontlooksick.com/articles/written-by-christine/the-spoon-theory/"&gt;Spoon Theory&lt;/a&gt; as a metaphor for explaining how people living with disabilities or chronic conditions might have less spoonfuls of energy to get through their day.  There was further talk about the appropriateness of other groups using the same term to talk about their experience of energy in daily life independently of any chronic conditions.&lt;/p&gt;
-
-&lt;p&gt;It all seems pretty tricky to work out what might and might not cause offence.  I certainly have days where I have more and less energy. It feels really tricky to compare how difficult life is for different people on a daily basis.  There are so many different types of struggle; mental health issues, diseases, chronic conditions, trying to pay the rent, prejudice, trying to raise a family.  Might someone be offended by one of the items in that list?  Is an economic struggle harder or easier than a mental health struggle?  Is that comparing apples and oranges?  For some reason I&amp;rsquo;m often thinking about how in London the rents are so expensive that for many people the majority of their salary goes on their accomodation costs and how hard that must be for those commuting into the center each day to keep a roof over their heads.  &lt;/p&gt;
-
-&lt;p&gt;On reflection I think we all have privileged insight into our own pain.  It&amp;rsquo;s maybe generally true that we are much more closely acquainted with how difficult our own struggle is, compared to the struggles of others.  It&amp;rsquo;s probably a good step to admit that others may well be struggling harder than ourselves.  Ironically, while we may acknowledge that intellectually, day to day we still have special access into the intensity of our own struggle.  I&amp;rsquo;m a big fan of this quote:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Be kind because everyone is fighting a great battle&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Attributed to the Scottish thelogian &lt;a href="https://en.wikipedia.org/wiki/Ian_Maclaren"&gt;Ian Mclaren&lt;/a&gt;.  It&amp;rsquo;s often quite unpleasant when a conversation tips into a struggle to demonstrate who is struggling most.  However hard we feel that our own struggle is, I think we need to keep bringing ourselves back to acknowledging that ultimately we don&amp;rsquo;t know, and will never truely know, just how hard a struggle others are facing.  We can imagine, speculate, guess, but things that are hard for some people are a joy for others and vice versa.  Maybe there are some things like bereavement, illness etc. that would be universally acknowledged as unpleasant but this brings me back to the parable of &amp;ldquo;Maybe &amp;hellip;&amp;rdquo;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;There is a Taoist story of an old farmer who had worked his crops for many years. One day his horse ran away. Upon hearing the news, his neighbors came to visit. &amp;ldquo;Such bad luck,&amp;rdquo; they said sympathetically. &lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;Maybe,&amp;rdquo; the farmer replied. The next morning the horse returned, bringing with it three other wild horses. &amp;ldquo;How wonderful,&amp;rdquo; the neighbors exclaimed.&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;Maybe,&amp;rdquo; replied the old man. The following day, his son tried to ride one of the untamed horses, was thrown, and broke his leg. The neighbors again came to offer their sympathy on his misfortune.  &lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;Maybe,&amp;rdquo; answered the farmer.The day after, military officials came to the village to draft young men into the army. Seeing that the son&amp;rsquo;s leg was broken, they passed him by. The neighbors congratulated the farmer on how well things had turned out. &lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;Maybe,&amp;rdquo; said the farmer.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;from &lt;a href="http://www.katinkahesselink.net/tibet/zen.html"&gt;http://www.katinkahesselink.net/tibet/zen.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;And the question Steve Hagen (author of &amp;ldquo;Buddhism Plain and Simple&amp;rdquo;) asks is when do we think the story ends &amp;hellip; &lt;/p&gt;
 </content>
   </entry>
 </feed>
