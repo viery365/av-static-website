@@ -5,10 +5,43 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-02-01T00:00:00+00:00</updated>
+  <updated>2017-02-02T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Negotiating and Estimating</title>
+    <link rel="alternate" href="http://blog.url.com/2017/02/02/negotiating-and-estimating/"/>
+    <id>http://blog.url.com/2017/02/02/negotiating-and-estimating/</id>
+    <published>2017-02-02T00:00:00+00:00</published>
+    <updated>2017-02-23T20:39:53+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Thomas asked a great question to DHH during our chat with him on Tuesday.  The question was:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;What are the biggest challenges of running a large scale open source project over time?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;DHH answered in some detail, but the point that&amp;rsquo;s stuck in my mind is that he said how difficult it was to be discussing absolutely everything in the full public spotlight on open mailing lists.  He said that over time they have evolved towards having private groups where discussion can move a bit faster.  I strongly believe in transparency as being a great enabler of trust and learning, but I would have to concur that doing absolutely everything in the open raises its own challenges.  For better or worse people will express different opinions in private and 121 discussions versus what they will say in public.&lt;/p&gt;
+
+&lt;p&gt;DHH also brought up the point that when the discussion is open to everyone, it creates the situation where anyone can bring their opinion, and that opinion might be well-informed and considered or it might be reactionary, or not so well-informed, or some combination.  I&amp;rsquo;m fascinated about the difference between people.  Some will be ultra-cautious about expressing an opinion, while others will have an opinion on everything and will express it regardless of the consequences.  Those are extremes and different people occupy different positions along the spectrum, varying over the course of their lives and sometimes even over the course of a day or a conversation.  I&amp;rsquo;m not casting judgement on others here.  I totally include my own behaviour in this reflection.&lt;/p&gt;
+
+&lt;p&gt;Anyhow, so the thing blotting out my sun at the moment is the process of negotiating and estimating for the drie dashboard project.  I&amp;rsquo;m really excited that drie have agreed to go with an open-source project as this massively increases the learning opportunities for our community, but since they are a for-profit company I have to think carefully about how we are structuring this.  I&amp;rsquo;m currently running this as a project for my own for-profit company, NeuroGrid, and will sub-contract out components of it to individuals wanting to work on it.  What I&amp;rsquo;d also like to do is have a public channel for the project on the AgileVentures Slack so that everyone in AgileVentures can learn from the process and the experience.&lt;/p&gt;
+
+&lt;p&gt;In the past when we&amp;rsquo;ve had paid projects from Non-Profit groups I was keen to share and make public the full estimating and negotiating process as a learning experience for all.  In this case I&amp;rsquo;ve demurred.  Perhaps I&amp;rsquo;m being too conservative, but I&amp;rsquo;m keeping the negotiating and estimating portion as a private conversation between NeuroGrid and drie.  While I&amp;rsquo;m sure there&amp;rsquo;s lots that everyone could learn from making that process transparent, it&amp;rsquo;s already a big leap for drie to agree to our open source, open development model, and I&amp;rsquo;d hate to jeopardize that by pushing for further transparency.  Hopefully once we&amp;rsquo;ve established the work model for all this we can go even further, but&amp;ndash;bottom line&amp;ndash;I&amp;rsquo;ve got to trust my intuition for what will work here.&lt;/p&gt;
+
+&lt;p&gt;What&amp;rsquo;s really exciting is the opportunity to have AgileVentures members compensated for the skills they&amp;rsquo;ve been so dilligently developing on all the volunteer non-profit projects we&amp;rsquo;ve been working on over the last few years.  I ardently hope that an injection of income will invigorate rather than corrupt our community.  More news here as soon as we make it :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=6abj04BjwJc"&gt;&amp;ldquo;Martin Fowler&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=JrdD1NXjLeY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Microservices vs Monolith</title>
     <link rel="alternate" href="http://blog.url.com/2017/02/01/microservice-vs-monolith/"/>
@@ -266,79 +299,6 @@ But this doesn&amp;rsquo;t mean that we cannot learn and experiment with microse
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=M599bZzEAkw"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=li0wQC1LQ3Y"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Always in Production</title>
-    <link rel="alternate" href="http://blog.url.com/2017/01/24/always-in-production/"/>
-    <id>http://blog.url.com/2017/01/24/always-in-production/</id>
-    <published>2017-01-24T00:00:00+00:00</published>
-    <updated>2017-02-08T21:17:13+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;My cold is receding.  Does that justify me pushing myself through activities and work over the last three days?  Maybe I&amp;rsquo;d be better quicker or not feeling quite so exhausted if I&amp;rsquo;d rested the last three days, but my boys got their football matches, I had a great Premium pairing session with Michael where we scoped out a new data-analysis project in Python, and I managed to get the Google AdWords grant accepted, and we&amp;rsquo;re live with our first campaign, which has apparently put our advert into 5400 search results and led to 221 click throughs:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="this mornings adwords stats" src="https://www.dropbox.com/s/3lbx4vbpqz3kn8x/Screenshot%202017-01-24%2009.51.59.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I can see the spike in the traffic in the Google Analytics dashboard:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="increasing numbers of sessions in site according to Google Analytics" src="https://www.dropbox.com/s/a1b7miuiwzjnm28/Screenshot%202017-01-24%2010.05.59.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Exciting stuff! Yesterday was a lot of meetings, but also a fair amount of DevOps on WebsiteOne.  Seeing this traffic spike makes me wonder whether we&amp;rsquo;ll have to start throwing more resources (i.e. money) at the WebsiteOne servers?  Or can we switch to drie in time? I&amp;rsquo;d love to get the main site set up with more of a funnel encouraging folks to sign up for a newsletter, membership and premium/sponsorship packages.  One thing at a time.&lt;/p&gt;
-
-&lt;p&gt;The main technical &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1517"&gt;issue&lt;/a&gt; yesterday was that scrums were staying live too long on the homepage and navbar popup.  This was frustrating as the previously live scrum was blocking the next upcoming one.  Not that we have huge evidence that large numbers of people join our scrums through the links in the website, but it&amp;rsquo;s one of those things like the broken youtube links in the AgileVentures tweets that just feels wrong.  I at least am also using the front page and pop-up scrum reminders to navigate to the right place to actually start the scrums.  Particularly if we are just directing more and more folks to our site, we&amp;rsquo;d like to avoid glaring inaccuracies.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="scrum countdown popup" src="https://www.dropbox.com/s/c8sq020s1kc2ww9/Screenshot%202017-01-23%2014.38.51.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d just pushed out a fix for the PayPal currency, but that didn&amp;rsquo;t seem like that would cause this problem.  I could have broken out git bisect, but I had a hunch that this might be related to a recent change that was intended to keep events that were live in the upcoming events list so that they were more discoverable.  A quick review of the code in that pull request and the code that manages what is shown in the countdown popup made it look like my suspicion was correct.  The partial for the popup is as follows:&lt;/p&gt;
-&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'name'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'id'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="n"&gt;start_time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_occurrence_time_attr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_datetime&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;start_time&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-      is live!
-      &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;last_hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;try!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:live?&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-        &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to&lt;/span&gt; &lt;span class="s1"&gt;'Click to join!'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;last_hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hangout_url&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-      &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt;  &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;elsif&lt;/span&gt; &lt;span class="n"&gt;start_time&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minute&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-      about to start...
-    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-      in &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;display_countdown&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-  &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;that event entity comes from the application controller so the popup can be displayed throughout the site:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_next_scrum&lt;/span&gt;
-    &lt;span class="vi"&gt;@next_event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_occurrence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:Scrum&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which in turn is relying on this method:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_occurrence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_type&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;begin_time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;COLLECTION_TIME_PAST&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;events_with_times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
-    &lt;span class="n"&gt;events_with_times&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;category: &lt;/span&gt;&lt;span class="n"&gt;event_type&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-      &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_event_occurrence_with_time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;begin_time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="p"&gt;}.&lt;/span&gt;&lt;span class="nf"&gt;compact&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The pull request to adjust how long the live events stayed in the upcoming events page had modified the COLLECTION&lt;em&gt;TIME&lt;/em&gt;PAST constant.  The constant was used in another place, where it affected what would be in the upcoming events page.  It had been modified to influence things there, but had this knock on effect in the other place where it was used.&lt;/p&gt;
-
-&lt;p&gt;I didn&amp;rsquo;t have proof, but now a very strong hunch.  It&amp;rsquo;s also a great example of how every time you DRY something out, you are also introducing a dependency.  This was perhaps a variable that might have been better off not becoming a constant?  And we clearly didn&amp;rsquo;t have any acceptance tests covering this situation, since everything had had to be green to get into production. Of course we&amp;rsquo;ve had a trouble free couple of years with the popup working and hindsight here is 2020.  This felt like a bleed on the site, and while I&amp;rsquo;d pinged the developer who worked on the recent pull request, he might not be available to address the issue soon.&lt;/p&gt;
-
-&lt;p&gt;I took the slightly risky step of generating a hotfix to push straight into production.  Specifically creating a second constant for the method that the popup and home page were relying on:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_occurrence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_type&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;begin_time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;FRONT_PAGE_COLLECTION_TIME_PAST&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Hacky as hell, but I wanted the site to be displaying sensible defaults overnight.  I got the hotfix on staging, but didn&amp;rsquo;t try to replicate.  The site was still approximately working.  I wanted to know if this hotfix would work to solve our issue on production so I could go and have supper with the family.  The tests were green, so I pushed it out and it fixed everything without apparently introducing any catastrophic side effects.  I pulled the hotfix back into develop so others could work against it and discussed in the ticket how we wanted proper tests wrapping this and perhaps ultimately a whole different approach to the solution.&lt;/p&gt;
-
-&lt;p&gt;The site seems to be operating normally today and the developer has submitted a PR with a more comprehensive fix.  Why is it that there still seems to be things that we only encounter in production?  I think the acceptance tests do have some of our back, but we need to thoroughly follow up to wrap every end-user bug in an acceptance test, and keep reviewing the existing tests to purge vacuous ones and keep them up to date with the rest of the codebase, AND remove unecessary dependencies.  Even then I have a feeling that there&amp;rsquo;s still always some issues that we&amp;rsquo;ll only ever encounter in production &amp;hellip; :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=E89Eo-k2rE8"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=NiVvxJuo8ik"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
