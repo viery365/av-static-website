@@ -148,10 +148,10 @@
   <span class="k">end</span>
 </code></pre>
 <p>There were certainly opportunities for refactoring, but I ignored them and pushed on to get the acceptance green.  I was a little disturbed that my creation of a new class <code>PremiumMob</code> was not throwing an error.  I turned aside to create specs for that:</p>
-<pre class="highlight plaintext"><code>describe PremiumMob, type: :model do
-  let(:type) { 'PremiumMob' }
-  it_behaves_like 'a subscription'
-end
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="no">PremiumMob</span><span class="p">,</span> <span class="ss">type: :model</span> <span class="k">do</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:type</span><span class="p">)</span> <span class="p">{</span> <span class="s1">'PremiumMob'</span> <span class="p">}</span>
+  <span class="n">it_behaves_like</span> <span class="s1">'a subscription'</span>
+<span class="k">end</span>
 </code></pre>
 <p>And knowing that implementing the next end point would highlight the places for refactoring I did the same as above for the PremiumF2F plan.  I now had the two key endpoints that I wanted, and I could refactor with some security.  I actually started the refactoring in the Cucumber steps (see the PR for details) and held off against using the Scenario Outline as the RubyMine automated refactoring was failing and I had 20 minutes left.  The Cucumber steps were cleaner and I focused my attention on the charges controller.  I was feeling uncomfortable about these <code>plan_name</code> and <code>plan_class</code> methods that were effectively case statements.  I needed to keep <code>plan_name</code> as it was doing a not easily automatable mapping from the ids of the plans in the Stripe side to the snake_case versions in use on the Rails side:</p>
 <pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">plan_name</span>
