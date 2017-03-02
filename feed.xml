@@ -5,10 +5,58 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-02-06T00:00:00+00:00</updated>
+  <updated>2017-02-07T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Mixed Bag</title>
+    <link rel="alternate" href="http://blog.url.com/2017/02/07/mixed-bag/"/>
+    <id>http://blog.url.com/2017/02/07/mixed-bag/</id>
+    <published>2017-02-07T00:00:00+00:00</published>
+    <updated>2017-03-02T21:21:36+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;I was pleased to be back blogging about code yesterday, but Monday didn&amp;rsquo;t see any further focus on code.  I replied to all the incoming Slack queries, but not all the emails, and fitted in a fair few meetings.  It had been a few weeks since we had a LocalSupport client meeting and we managed to sneak one in between the &amp;ldquo;Martin Fowler&amp;rdquo; scrum and the marketing meeting.  We were able to get five or six stories, chores and bug fixes accepted, and confirm the pivot from organization lising to volunteering; a thread that was picked up again in the Agile Book Club podcast later that day.&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s a slew of new action items there for me to follow up on, and reminds me I&amp;rsquo;d love an automated bot to help me do project board review.  We&amp;rsquo;ve lost any structure to LocalSupport and WebSiteOne sprints since we&amp;rsquo;ve dropped explicit kick-off and retrospective meetings.  Maybe that means we&amp;rsquo;re just failing at Agile, but I feel rock-bottom in terms of motivation for those kinds of meetings given the low level of enthusiasm for them in the past.  Both projects are seeing a resurgence of activity recently so maybe we should bring them back in at some point, but I&amp;rsquo;m also enamoured with the idea of doing everything in a distributed asynchronous fashion using voting bots and project management bots.  &lt;/p&gt;
+
+&lt;p&gt;Overnight we managed a vote in WebSiteOne, and I started getting set up with Arreche&amp;rsquo;s reworked slack integration bot that will hopefully provide a simpler interface and support multiple votes in parallel.   One step at a time, but I can&amp;rsquo;t help speculating about a project bot that would automate, or semi-automate working through the project boards.  I think the boards need to be reviewed once a week and every &amp;ldquo;in progress&amp;rdquo; or &amp;ldquo;current&amp;rdquo; ticket needs to be checked on.  The heuristic I use is to check if there&amp;rsquo;s been any activity in the last couple of days from the person taking the lead on the ticket.  If they&amp;rsquo;ve pushed commits to a PR, added comments to the tickets then it can be left, but if there&amp;rsquo;s been no activity of a while they need to be pinged to check on the status, see if the item can be re-assigned.&lt;/p&gt;
+
+&lt;p&gt;Full automation would be hard, but a semi-automated approach that presented each ticket in turn with its &amp;ldquo;state of decay&amp;rdquo; would be something to help reduce effort on the part of the project manager.  Even just a repeating alert to make sure the review was performed weekly would be helpful.  Maybe I should have had a quiet half hour to do that after the the client meeting, but I was straight into the marketing meeting as we reviewed our Google AdWords campaign performance, draft newsletter and content marketing strategy. &lt;/p&gt;
+
+&lt;p&gt;I had to leave marketing early to pair with Corey on a sticky point on WebSiteOne, where we&amp;rsquo;d been going back in forth in a pull request to little apparent progress.  Once again the magic of the realtime hangout got us sorted.  I properly understood the problem that Corey was facing, which was writing an acceptance test for the the pop-up countdown timer.  Corey had been able to make it work by switching the Capybara driver from poltergeist to webkit, but that had the unfortunate side-effect of breaking a lot of other tests.  I was pretty sure we didn&amp;rsquo;t need to switch the driver to get this to work, or at least pretty much anything else would be less effort than fixing all the other mercury editor related tests.&lt;/p&gt;
+
+&lt;p&gt;We used the debugger to see that the event countdown was present in the code being returned by the poltergeist driver:&lt;/p&gt;
+&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"hidden-sm hidden-xs hidden-md"&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"next-event"&lt;/span&gt; &lt;span class="na"&gt;data-event-time=&lt;/span&gt;&lt;span class="s"&gt;"2014-02-03T07:00:00+00:00"&lt;/span&gt; &lt;span class="na"&gt;data-event-url=&lt;/span&gt;&lt;span class="s"&gt;"/events/scrum"&lt;/span&gt; &lt;span class="na"&gt;data-event-name=&lt;/span&gt;&lt;span class="s"&gt;"Scrum"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;"/events/scrum"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Scrum&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt; is live!&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Getting the clean output was the usual pain that made me think there must be a better way to get formatted HTML output on the irb/byebug prompt.  So much so that I just took a blog break to file an &lt;a href="https://github.com/deivid-rodriguez/byebug/issues/327"&gt;issue on byebug&lt;/a&gt; and research the matter.  Corey wondered if the screen width might be an issue and a quick google got us to the solution which was a step to increase the width of the virtual browser so that the popup would be shown:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;And&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^the window size is wide$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current_window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;resize_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1300&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;400&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So I guess I lied, there was a tiny chunk of coding focus in the middle of the day. Then it was lunch and &amp;ldquo;Kent Beck&amp;rdquo; scrum and drie meeting catch up (they&amp;rsquo;ve decided to build the dashboard themselves), and Agile Book Club podcast episode 2, which was great fun.  I bought the three pack of e-books:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fifty Quick Ideas to Improve your User Stories&lt;/li&gt;
+&lt;li&gt;Fifty Quick Ideas to Improve your Tests&lt;/li&gt;
+&lt;li&gt;Fifty Quick Ideas to Improve your Retrospectives&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Great day really.  Now I just have to make sure that I follow up with the LocalSupport project elements, and get out some code to start tracking the sign ups that are coming in through the Google AdWords campaign.  I&amp;rsquo;m trying to stay focused on the moment and not worry too much about how every little step adds up to any particular long term goal. Let&amp;rsquo;s see what today brings :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=uzpJp9YlBwU"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=GlZn27yOhGU"&gt;LocalSupport Client Meeting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=k_x6DByoiNk"&gt;Pairing with Corey&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Y43CuqQuWLo"&gt;Marketing Meeting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=x5ksyXWhedk"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Doing the Right Thing</title>
     <link rel="alternate" href="http://blog.url.com/2017/02/06/doing-the-right-thing/"/>
@@ -317,47 +365,6 @@ But this doesn&amp;rsquo;t mean that we cannot learn and experiment with microse
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=it8sThsoI-8"&gt;&amp;ldquo;Martin Fowler Scrum&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=jcqq-_DNun8"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Sponsoring Resource Challenged Developers</title>
-    <link rel="alternate" href="http://blog.url.com/2017/01/30/sponsoring-resource-challenged-developers/"/>
-    <id>http://blog.url.com/2017/01/30/sponsoring-resource-challenged-developers/</id>
-    <published>2017-01-30T00:00:00+00:00</published>
-    <updated>2017-02-22T21:51:23+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;It was an exciting Friday as our first sponsored Premium member made their first pull request against the LocalSupport open source project.  We&amp;rsquo;d onboarded a Kenyan student before the break having received sponsorship for a single AgileVentures Premium support plan from an anonymous US based donor.  The Kenyan student had completed a coding bootcamp, but was still looking for experience on some real world projects.  They were unfortunately unwell with malaria over the break and couldn&amp;rsquo;t get started until the new year.  A couple of weeks back we&amp;rsquo;d managed to get them set up with the LocalSupport code base on their linux machine, which was a great step forward.&lt;/p&gt;
-
-&lt;p&gt;Onboarding to our open source projects in AgileVentures is still much more complicated than we&amp;rsquo;d like.  In the ideal world, perhaps, we&amp;rsquo;d be able to drop folks directly into a working environment with all the tests passing, ready to start coding on a bug, chore or feature.  We&amp;rsquo;ve tried things like vagrant and docker to have developers start from a virtual machine with everything set up already, but while that puts all the needed components in one place, there&amp;rsquo;s then having new folks understand the vagrant/docker virtual machine concept.   Although maybe we just haven&amp;rsquo;t put enough energy and ingenuity into getting to the bottom of the problem?  &lt;/p&gt;
-
-&lt;p&gt;The virtual machine that the MOOC used to distribute created a standard default, but lead to the code running more slowly on the developer machine and was difficult to download in one big chunk over spotty internet connections.  That said, I don&amp;rsquo;t have firm data on that.  The vagrant/docker approaches made the downloads lighter weight, but then there were wrinkles regarding being able to edit the code in editors on the host machine.  Where possible we&amp;rsquo;d love for developers to be able to stay with their preferred developing environment.  That said, C9 is an interesting alternative that some have used with success, although there are space limitations there.&lt;/p&gt;
-
-&lt;p&gt;Maybe I&amp;rsquo;m at fault for having a fast machine and not experiencing the pain of setup and install frequently enough.  Maybe the pain of the install experience has an important filtering effect on those with lower levels of commitment, and maybe seeing how the sets of connected libraries get installed is useful for understanding the project dependencies?  I really don&amp;rsquo;t know.  I know my kids (8, 8 and 11) would have no patience for it, and they are learning to code using CodeCombat, where all coding takes place in the browser like CodeSchool, Codecademy and CodeWars.&lt;/p&gt;
-
-&lt;p&gt;Maybe there&amp;rsquo;s a shortcut that I&amp;rsquo;m missing, or maybe I&amp;rsquo;ve just been mis-directing my efforts over the last 3 years on LocalSupport and other projects.  I am not sure.  What we did just do was create a separate #localsuppport-install channel on Slack specifically for giving support on the install process.  There we have managed to help folks through ruby/gem versioning and postgres permission issues.  Those two seem to be common stumbling blocks.  I&amp;rsquo;m hoping we can keep improving the docs.  Has trying to migrate from GitHub wiki to docs in the repo helped or hindered? I&amp;rsquo;m not sure.&lt;/p&gt;
-
-&lt;p&gt;So the first breakthrough was getting the sponsored Kenyan student (and a few others) through the install process.  However having got everything installed and all the tests passing, the question was what next?  I&amp;rsquo;m trying to write more and more about how we work with Pivotal Tracker to manage the work on the project.  There&amp;rsquo;s a clear flow evolving in my mind of the appropriate strategy to really engage with the project:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Look through all the existing pull requests (commenting if so inclined)&lt;/li&gt;
-&lt;li&gt;Look through all the current tickets (reaching out to those working on them to offer help if so inclined)&lt;/li&gt;
-&lt;li&gt;Look through all the backlog tickets (posting questions about any you are interested in working on)&lt;/li&gt;
-&lt;li&gt;Looking through the icebox tickets (starting votes on any that you are interested in)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This may not be the best process for every individual.  Perhaps some people would better start by slowly familiarizing themselves with the codebase, reading all the documentation, and maybe similarly for the technology stack and any components used.  The idea behind the pattern described above is that this is the &amp;ldquo;rinse-and-repeat&amp;rdquo; that one would use to again and again to make ongoing contributions to a project.  Reading code and documentation can be interleaved anywhere, but it seems to me that interaction with the existing project team is critical to avoid duplicated effort, and being able to benefit from the team&amp;rsquo;s existing knowledge.  In each of the above, if you don&amp;rsquo;t find a hook with an existing team member&amp;rsquo;s work, you move on to the next step, where eventually you&amp;rsquo;ll end up starting a vote and alerting the rest of the team to your interest in working on something.&lt;/p&gt;
-
-&lt;p&gt;Of course looking through the chunks of code in pull-requests may be disorienting and confusing for the new developer, but this is a critical skill.  Maybe in aggregate, just looking at other folks submitted slivers of code and comments on them from the rest of the team will put more folks off than pull them into the process?  I&amp;rsquo;m not sure :-) I just keep following my personal maxim that the learning should replicate the actual doing as closely as possible.  Scaffolding and support, yes!  Simplification, yes!  But still as realistic as possible, and in bite sized chunks for quick feedback and the feeling of progress.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d outlined the above in various fashions (docs and Slack posts) but there wasn&amp;rsquo;t any activity for a while from our new folks.  Here&amp;rsquo;s where the Premium support made the difference.  Under other circumstances I couldn&amp;rsquo;t really justify additional outreach for those who weren&amp;rsquo;t taking the initiative.  I reached out to the sponsored member and suggested a low-complexity ticket that might be a good place to start.  That seemed to do the trick.  We had a vote in the main #localsupport channel on the ticket, which involved some refactoring of Cucumber step definitions to make their meaning more explicit.  Most of us voted 1, while the sponsored member voted 2, putting them on the spot to explain their reasoning.  That was perhaps unfortunate.  New folks will often want to remain in the background of the process, but that&amp;rsquo;s partly what the voting is about, to identify differences in assumptions which we might miss without the explicit vote.&lt;/p&gt;
-
-&lt;p&gt;It was also highlighting failures on my part to really explain the details of the chore in the ticket.  Fortunately the Slack allowed me to explain, and I quickly updated the ticket and got us to the point where we were all agreeing on a 1 and we now had a voted chore for the sponsored member to work on.  And yes, I know that Pivotal doesn&amp;rsquo;t recommend voting on chores and bugs, but we realized a while ago that in an open source project with high churn that velocity measurements are less important than highlighting the complexity levels of chores and bugs to new team members.  Anyhow, with some help from a mentor the sponsored member got an initial pull request in, on which we were able to give feedback, and was then improved upon to get the CI green and handle merge conflicts and so on.&lt;/p&gt;
-
-&lt;p&gt;Only time will truely tell, but from the chat in group and private channels it seemed like it was all a huge confidence boosting experience.  Just making a pull-request itself and handling things like CI and merge conflicts is more than task enough itself in the first instance; let alone trying to BDD a new feature from scratch or fix a complex bug.  By taking one of our relatively simple refactoring tickets we were able to get a new person understanding our project flow, and in relatively short order getting the satisfaction of having contributed to an open source project.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ll see how it goes, but I&amp;rsquo;d love to keep rinsing and repeating this with the sponsored member, helping building their confidence up on gradually more complex tasks.  And then at the bigger scale I&amp;rsquo;d love to be doing this for more and more folks around the world.  Think you could spare £10 (~$12.50) a month to help a developer in a resource-challenged part of the world get the help and support I describe above?  See &lt;a href="http://www.agileventures.org/sponsorship"&gt;http://www.agileventures.org/sponsorship&lt;/a&gt; to find out more about how you can help us help a resource challenged developer in another country learn modern OS development skills on real projects and make a real difference in the world!&lt;/p&gt;
 </content>
   </entry>
 </feed>
