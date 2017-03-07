@@ -5,10 +5,49 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-02-08T00:00:00+00:00</updated>
+  <updated>2017-02-09T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Pivoting or Not</title>
+    <link rel="alternate" href="http://blog.url.com/2017/02/09/pivoting-or-not/"/>
+    <id>http://blog.url.com/2017/02/09/pivoting-or-not/</id>
+    <published>2017-02-09T00:00:00+00:00</published>
+    <updated>2017-03-07T20:49:21+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;There was an interesting response to one of &lt;a href="http://nonprofits.agileventures.org/2017/01/23/passing_a_threshold/"&gt;recent blog posts&lt;/a&gt; from an AV community member.  They posted the following in our community #random channel (where I had shared my blog post):&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;As an additional source of income for AV, why not offer pairing sessions for payment for those who may be reluctant to commit to a monthly fee? These sessions could be given to mentors who would be paid a proportion of the fee, thus perhaps incentivising more mentor-type people to join as well. A bit similar to what AirPair used to do although perhaps more from a learning point of view rather than a professional problem solving one as that was. So perhaps a student could pay for a session on a particularly difficult piece of homework, or a private project they are doing, or to better learn some concept or technique they are having problems with, or even just to practice coding and pair programming but without having to commit themselves to working on a project, which might be intimidating to some (and pairing not always available). These students might also in future be drawn into collaborating on actual AV projects. But in any case the pairing sessions themselves would bring in additional income.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And another community member responded, soon after, that they would pay for individual mentoring sessions, and we spent a little time discussing things in the &amp;ldquo;Martin Fowler&amp;rdquo; scrum.  I&amp;rsquo;m not sure what happened to AirPair.  According to their &lt;a href="https://en.wikipedia.org/wiki/AirPair"&gt;wikipedia page&lt;/a&gt; they raised over $1M after a Y Combinator presentation, but the site currently has some authentication errors and I&amp;rsquo;m not seeing any activity on the site or social media since mid-2016.  However, similar sites such as HackHands and CodeMentor seem to be &amp;hellip; oops, got distracted there.  I just went through the sign up processes for CodeMentor and HackHands.  Thought it would only take a couple of minutes, but CodeMentor included a timed assessment involving a pop quiz and a programming assignment.  Fortunately it was very similar to a kata I had completed not so long ago on Codewars, so I was able to polish it off pretty quickly.&lt;/p&gt;
+
+&lt;p&gt;Anyhow, talk about being easily distracted! :-) At least I&amp;rsquo;ve now got a good insight into the sign up experiences of those two companies.  So what our community member is suggesting is a lot like what I think CodeMentor and HackHands are offering.  What&amp;rsquo;s not clear is how beneficial it would be for AgileVentures.  It feels like it will be difficult for us to compete with venture-backed companies in the same space, although as suggested, perhaps we focus more on the learning side? I was originally tempted to respond in #random with my philosophy of openness in AgileVentures, but thought I&amp;rsquo;d save it for this blog.  One thing I&amp;rsquo;ve learned is that when people are giving you suggestions, they are generally not interested in hearing that you thought about them already, or why you haven&amp;rsquo;t taken them up.  Far better to thank them for the great suggestions and ask simple follow up questions to find more about what they are thinking.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;d love to bring in more money to AgileVentures, but I find helping individuals on their specific closed-source issues somewhat challenging.  Specifically because you often can&amp;rsquo;t get the whole code system on your own machine quickly.  Perhaps I&amp;rsquo;m a deeply flawed and impatient person, but I find it difficult to cope with making suggestions verbally and then having someone stumble around in their own interface, mis-interpreting what I&amp;rsquo;ve said.  I guess that&amp;rsquo;s what ScreenHero is for &amp;hellip; And maybe even uttering my honest thoughts here is self-destructive.  My hope with AgileVentures is to be doing the mentoring in the open, to enable more learners to learn from the contributions to open source projects.  Although I&amp;rsquo;ve come to see clearly that many learners crave privacy and are deeply embarrassed about asking questions in public, or in front of more than just a single mentor.  I assume this is all related to fear of failure, fear of being seen as less than competent etc.  I feel it to, but repeated practice has got me comfortable(-ish) with failing in public :-)&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s interesting that our community member mentions not having to commit to a project.  From my point of view if you just make one comment in one of our PRs, or just get the code set up and then never do anything, it&amp;rsquo;s still a contribution.  It&amp;rsquo;s what a lot of people seem to do; but perhaps many more are put off by the perception of needing to commit to a project.   I guess my big worry is that for all the time I spend helping other individuals on their private projects and homeworks, I&amp;rsquo;m not getting any multiplier for the community.  I can&amp;rsquo;t share the code solution we discover, and I can&amp;rsquo;t share the video of the techniques we used to discover the solution; but then again how many others actually benefit from all the AV videos we&amp;rsquo;ve shared?  How many others are really following the support given in psuedo-public in Slack?  Maybe the majority are all just hideously embarrassed by all this and that&amp;rsquo;s why we keep struggling to achieve any sustained critical mass.&lt;/p&gt;
+
+&lt;p&gt;My mind does come round to feeling that the majority of people want polished content that they can consume in private.  There&amp;rsquo;s so much less pressure, it&amp;rsquo;s so much more convenient.  The cynic in me moans that so much of the polished content is not true to life, but then these days there are great screencasters out there (mainly outside of academia) showing folks how to actually do stuff, and maybe that&amp;rsquo;s always going to be more successful than a system that attempts to get the majority to overcome their fear of learning, of failing, in front of others &amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?feature=player_embedded&amp;amp;v=zBP6d2a0Rcc"&gt;&amp;ldquo;Martin Fowler&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=1nqdZoqlH7A"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Related Blog Posts:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://nonprofits.agileventures.org/2017/01/23/passing_a_threshold/"&gt;Passing a Threshold&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Motivation Barrier</title>
     <link rel="alternate" href="http://blog.url.com/2017/02/08/motivation-barrier/"/>
@@ -274,79 +313,6 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=6abj04BjwJc"&gt;&amp;ldquo;Martin Fowler&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=JrdD1NXjLeY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Microservices vs Monolith</title>
-    <link rel="alternate" href="http://blog.url.com/2017/02/01/microservice-vs-monolith/"/>
-    <id>http://blog.url.com/2017/02/01/microservice-vs-monolith/</id>
-    <published>2017-02-01T00:00:00+00:00</published>
-    <updated>2017-02-22T22:00:50+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Full on day yesterday with Rails creator David Heinemeier Hansson (DHH) dropping by to chat to AgileVentures and CraftAcademy, as well as other wall to wall meetings and DevOps.  Big shout-out to AgileVentures CoFounder and CraftAcademy boss, Thomas Ochman, for arranging and chairing the session.  It was great to hear from DHH in person and he was on form with his usual colorful language.  Thomas pointed us recently to a &lt;a href="http://journals.sagepub.com/doi/full/10.1177/1948550616681055"&gt;paper that indicated a positive correlation between profanity and honesty&lt;/a&gt;. DHH said things like:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;everyone starts out being a shitty programmer writing shitty code, but the great thing is that you don&amp;rsquo;t have to stop there&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;and went on to tell us about how he looks back disfavourably at code he wrote in the past.  I believe the point that DHH is making is that it&amp;rsquo;s okay to start slow and make mistakes and that&amp;rsquo;s just part of the process.  To his great credit he elaborated about that eloquently and effectively, and I think despairingly about my own public speaking skills.  I guess I should think that everyone starts out being a shitty public speaker giving shitty speeches, but the great thing is that you don&amp;rsquo;t have to stop there.  What worries me is how I&amp;rsquo;ve been talking too fast and cutting myself off in the middle of sentences for years :-)&lt;/p&gt;
-
-&lt;p&gt;If we believe the academic study mentioned above, perhaps the use of profanity indicates there&amp;rsquo;s greater honesty in statements involving profanity, or by those who frequently profane, but if I&amp;rsquo;m honest I have to admit that profanity makes me uncomfortable.  I think that says more about me than it does about anything else.  I associate profanity with anger.  I swear when I&amp;rsquo;m angry, as my father did when he was angry.  I avoid it otherwise, as did he.  I find intense anger unpleasant and very sticky mentally.  If someone gets angry at me I find I am thinking about it for days.  DHH did not come across at all angry and was making a great point that I heartily agree with; even if I might have chosen slightly different words :-)&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s fascinating to look at how the authors of the academic study were measuring honesty in the facebook posts they were analyzing:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The honesty &amp;hellip; was assessed following the approach &amp;hellip; that liars use fewer first person pronouns (e.g., I, me), fewer third-person pronouns (e.g., she, their), fewer exclusive words (e.g., but, exclude), more motion verbs (e.g., arrive, go), and more negative words (e.g., worried, fearful). &lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This apparently comes from liars trying to dissociate themselves from the lie and so avoiding self-reference; preferring concrete over abstract language; using simpler language to reduce the mental load from generating the lie and using more negative terms because they are feeling uncomfortable about the lie.  Particularly interesting is that this entire analysis is entirely about expressions that people make on facebook, but enough of that rabbit hole.  Even more interesting to me was that DHH said:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;only use micro services when no one person can understand the single app - don&amp;rsquo;t use micro services until you are ready to declare that &amp;ldquo;intellectual bankruptcy&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Which is a great point, but I wondered if that still applies when you have lots of part time, volunteer folks rather than a full time team, where everyone can devote themselves full time to understanding the entire system.  After the meeting, I posed that question to the AV community in Slack.  Long time AV contributer and software magician, Bryan Yap, responded that:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;every project still has a project lead, I imagine the project lead would know a considerable amount about the app. I think it is more for when the app grows too complicated for any one person to comprehend&lt;/p&gt;
-
-&lt;p&gt;it seems to be a common misconception that micro-services would solve a lot of the problems in an app, speaking to people more experienced than I am suggests the opposite :-) micro services only amplify the issues that already exist within an application. Micro services are good at solving the organisational issues as DHH mentioned, but technically it is much more difficult to manage&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Bryan went on to say that he didn&amp;rsquo;t see any benefit from moving from a clean monolith to micro services, because you just distribute your system and start to introduce consistency problems.  Of course that assumes you have a clean monolith, which can sometimes be a big ask. To me the biggest danger would be to say a priori that either a monolith or microservices is necessarily better. There are pros and cons for both, but what I was really trying to explore was DHH&amp;rsquo;s statement about not breaking the monolith until one person can&amp;rsquo;t fit it in their head. I think individuals have different capacities to fit things in their head depending on how much time they can devote to a project &amp;hellip;  As the conversation continued, Arreche chimed in with:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Wise people coincide that it is safer starting with monolithic and move later to microservices when and if it is needed.
-But this doesn&amp;rsquo;t mean that we cannot learn and experiment with microservices building not critical things. The AV community is a great place to have this kind of experiences indeed :slightly&lt;em&gt;smiling&lt;/em&gt;face: (edited)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;To which Bryan responded: &lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;yeah experimentation is good :slightly&lt;em&gt;smiling&lt;/em&gt;face: but from experience, moving to a micro service when you are not ready is very painful. Having them in a single database is not necessarily a bad thing, it&amp;rsquo;s much faster to manage updates across the entire system because it is all in one place. When you need to make changes that span multiple projects with different teams… thats when all the problems kick in :disappointed: so having a good domain model and setting the right domain boundaries is necessary before moving to micro services&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I replied to Bryan that that was good advice, and that single databases are great in the right circumstances and getting that good domain model is key.  In my experience the difficulty is working out that domain model, since it requires a process of exploration.  In addition, if you have a project with a lot of part-time occasional folks who don&amp;rsquo;t necessarily have the time or inclination to understand the domain model, then it maybe makes sense to have a series of smaller services, each with a simpler model that they&amp;rsquo;re more likely to grasp.&lt;/p&gt;
-
-&lt;p&gt;I think Bryan&amp;rsquo;s point that there is usually one full-time maintainer who has the whole app in their head, but even if they do, I don&amp;rsquo;t think that&amp;rsquo;s necessarily the best criteria to make the decision to start splitting out some microservices. The key distinction I was trying to draw is that the best approach for a project where you have 6 full-time programmers on staff, may not work quite so well when you have one part-time person and 30 volunteers putting in bits of code here and there.  Sometimes splitting those 30 folks up into 6 teams of 5 each working on a different microservice might actually be simpler.  Of course as Kent Beck says, it depends :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=dtr_Um8J0XU"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=-dQWAbjr7pc"&gt;Marketing meeting&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=I0LJTMgEomM"&gt;Chat with DHH&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=RZf-mhm20gk"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Related Links:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://journals.sagepub.com/doi/full/10.1177/1948550616681055"&gt;Frankly, We Do Give a Damn: The Relationship Between Profanity and Honesty&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://martinfowler.com/bliki/MonolithFirst.html"&gt;Martin Fowler on MonolithFirst&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
