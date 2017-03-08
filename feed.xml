@@ -5,16 +5,59 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-02-09T00:00:00+00:00</updated>
+  <updated>2017-02-10T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Tech Tests</title>
+    <link rel="alternate" href="http://blog.url.com/2017/02/10/tech-tests/"/>
+    <id>http://blog.url.com/2017/02/10/tech-tests/</id>
+    <published>2017-02-10T00:00:00+00:00</published>
+    <updated>2017-03-08T21:42:52+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So I&amp;rsquo;m doing a tech test for FutureLearn and they&amp;rsquo;ve very kindly said that I can post my work publicly on GitHub, which I have promptly done:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/tansaku/tictactoe"&gt;https://github.com/tansaku/tictactoe&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I think I&amp;rsquo;ve spent about 3 hours on it so far, mostly in different leisure centers, churches and halls waiting for my children to finish sporting activities.   I get 45 minutes on Tuesdays, Wednesdays and Thursdays while I wait for them to finish WoodCraft, football and Karate respectively; during which I can focus on my laptop without too many interruptions.  In a bit of tech test flurry I created a calculator in Ruby for CodeMentor yesterday, which got approved this morning, and I was reminded of the period last year where I got pneumonia and spent three weeks in bed doing almost nothing but kata on &lt;a href="http://www.codewars.com/"&gt;CodeWars&lt;/a&gt;. Interestingly, I&amp;rsquo;d encountered variations on the CodeMentor tech test in CodeWars.  If you want to get good at TechTests you could do worse than spending a while hacking through the kata on CodeWars and other sites like HackerRank.&lt;/p&gt;
+
+&lt;p&gt;Other Makers folks were overtaking my CodeWars score recently, but I think CodeWars just adjusted their calculations and I seem to have jumped back to the top of the list:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="codewars ranking for my allies" src="https://www.dropbox.com/s/xzq8o3mdiyqawmh/Screenshot%202017-02-10%2009.49.57.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;which gives me ridiculous childish pleasure.  I&amp;rsquo;m so shallow &amp;hellip; (hangs head).  I&amp;rsquo;m still frustrated not to get to 1-kyu on CodeWars, even after I solved all the 1-kyu katas (1-kyus are the hardest).  Looks like there are now some new 1-kyu and 2-kyu katas that would allow me to get to 1-kyu without doing umpteen easier katas.  Maybe I&amp;rsquo;ll get to that if I have another major illness :-)  Anyhow, tech tests are a strange beast - little coding puzzles that companies hand out to potential hires to test their coding skills.&lt;/p&gt;
+
+&lt;p&gt;I got into CodeWars because it was being recommended when I was a coach at MakersAcademy, and at the bootcamp we were focused on helping training folks up to be able to handle the tech tests that companies would give them after they graduated.  I previously did a worked tech test for the students there, the code for which you can see here:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/tansaku/vending-machine-kata"&gt;https://github.com/tansaku/vending-machine-kata&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I also recorded screencasts of myself doing the entire thing to try and reveal the thought processes I was having as I went through it.  I didn&amp;rsquo;t have such fantastic feedback about it.  One junior staff member told me he thought the code made him &amp;ldquo;sad&amp;rdquo; and despite many other disucssions, I never got to discover what made him sad about it.  Another more senior staff member said that one student listening to the videos felt that it was too stop/start with me saying &amp;ldquo;umm&amp;rdquo; to much, which I can totally believe.  I think that lead to some scripted coding screencasts for the weekly challenges at Makers that ultimately were much more appreciated by the students.  &lt;/p&gt;
+
+&lt;p&gt;So it&amp;rsquo;d been fun to do this TicTacToe tech test for FutureLearn, and I took an Outside-In approach, driving the code with acceptance tests, dropping down to some integration and unit tests. I got something that works more or less, in a single monolithic file, just pushing Sandi Metz&amp;rsquo; 100 line limit.  There&amp;rsquo;s something nerve-wracking for me, an academic by training, working with these industry tech tests.  I keep seeking that industry &amp;ldquo;special-sauce&amp;rdquo;.  The thing that makes the great coders.  My best guess at the moment is that actually it&amp;rsquo;s giving ground rather than fighting for a particular code style that is the key skill.&lt;/p&gt;
+
+&lt;p&gt;The thing that confuses me is that we have directions like &amp;ldquo;do the simplest thing possible&amp;rdquo;, &amp;ldquo;always write your test first&amp;rdquo;, &amp;ldquo;red-green-refactor&amp;rdquo;, &amp;ldquo;you ain&amp;rsquo;t gonna need it&amp;rdquo; and others, but when you take any of these to their logical extremes people seem to get uncomfortable.  This TicTacToe problem is clearly highly constrained, so an alternate approach to take would be to build a TicTacToe engine, driving the design with unit tests, and then wrapping acceptance tests around later (if at all).  I&amp;rsquo;ve never been a big fan of that sort of approach as I worry I&amp;rsquo;m going to burn too much time writing stuff I don&amp;rsquo;t need, and they&amp;rsquo;d said only spend a couple of hours on this.&lt;/p&gt;
+
+&lt;p&gt;I chose to do the whole thing driven from RSpec to avoid burning time on Cucumber, and was interested to see if I could write complete acceptance tests for the input/output on the command line, so I drove in that way and got my single monolithic class.  At the moment I have a roughly working system, but only for a few hard-coded games.  The computer&amp;rsquo;s current strategy is fixed and I don&amp;rsquo;t handle collisions for markers, so the game is not fully generic.  The tech test is currently a reasonable demonstration of my ability to craft different kind of tests, get a roughly working system, but I&amp;rsquo;m suddenly paranoid about whether this code is going to make more people &amp;ldquo;sad&amp;rdquo; in some indeterminate way and I still won&amp;rsquo;t be able to get an example of a version that would make people &amp;ldquo;happy&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;I can imagine doing it again, driving from unit tests (with the benefit of the initial experience) to make a nicely factored engine.  I could also layer on some acceptance tests to make sure the other high level failures are addressed, e.g. collisions handled etc., or I could continue refactoring the code with the existing tests.  I&amp;rsquo;ve used the existing test suite to eliminate some unneeded code and make the method names more self-explanatory.  But how will people feel about the lack of comments?  I like to focus on making the method and variable names self-documenting.  Having got this far I feel like I won&amp;rsquo;t be happy until it plays a fully generic game.  I know I&amp;rsquo;ll be spending more time on it today before I send FutureLearn the link :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=eUhIV1c9CpU"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=yFIOYN8SisA"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Pivoting or Not</title>
     <link rel="alternate" href="http://blog.url.com/2017/02/09/pivoting-or-not/"/>
     <id>http://blog.url.com/2017/02/09/pivoting-or-not/</id>
     <published>2017-02-09T00:00:00+00:00</published>
-    <updated>2017-03-07T20:49:21+00:00</updated>
+    <updated>2017-03-08T21:37:17+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -280,39 +323,6 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=1NzXE_BBAwk"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4m9l8cwoHY8"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Negotiating and Estimating</title>
-    <link rel="alternate" href="http://blog.url.com/2017/02/02/negotiating-and-estimating/"/>
-    <id>http://blog.url.com/2017/02/02/negotiating-and-estimating/</id>
-    <published>2017-02-02T00:00:00+00:00</published>
-    <updated>2017-02-23T20:39:53+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Thomas asked a great question to DHH during our chat with him on Tuesday.  The question was:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;What are the biggest challenges of running a large scale open source project over time?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;DHH answered in some detail, but the point that&amp;rsquo;s stuck in my mind is that he said how difficult it was to be discussing absolutely everything in the full public spotlight on open mailing lists.  He said that over time they have evolved towards having private groups where discussion can move a bit faster.  I strongly believe in transparency as being a great enabler of trust and learning, but I would have to concur that doing absolutely everything in the open raises its own challenges.  For better or worse people will express different opinions in private and 121 discussions versus what they will say in public.&lt;/p&gt;
-
-&lt;p&gt;DHH also brought up the point that when the discussion is open to everyone, it creates the situation where anyone can bring their opinion, and that opinion might be well-informed and considered or it might be reactionary, or not so well-informed, or some combination.  I&amp;rsquo;m fascinated about the difference between people.  Some will be ultra-cautious about expressing an opinion, while others will have an opinion on everything and will express it regardless of the consequences.  Those are extremes and different people occupy different positions along the spectrum, varying over the course of their lives and sometimes even over the course of a day or a conversation.  I&amp;rsquo;m not casting judgement on others here.  I totally include my own behaviour in this reflection.&lt;/p&gt;
-
-&lt;p&gt;Anyhow, so the thing blotting out my sun at the moment is the process of negotiating and estimating for the drie dashboard project.  I&amp;rsquo;m really excited that drie have agreed to go with an open-source project as this massively increases the learning opportunities for our community, but since they are a for-profit company I have to think carefully about how we are structuring this.  I&amp;rsquo;m currently running this as a project for my own for-profit company, NeuroGrid, and will sub-contract out components of it to individuals wanting to work on it.  What I&amp;rsquo;d also like to do is have a public channel for the project on the AgileVentures Slack so that everyone in AgileVentures can learn from the process and the experience.&lt;/p&gt;
-
-&lt;p&gt;In the past when we&amp;rsquo;ve had paid projects from Non-Profit groups I was keen to share and make public the full estimating and negotiating process as a learning experience for all.  In this case I&amp;rsquo;ve demurred.  Perhaps I&amp;rsquo;m being too conservative, but I&amp;rsquo;m keeping the negotiating and estimating portion as a private conversation between NeuroGrid and drie.  While I&amp;rsquo;m sure there&amp;rsquo;s lots that everyone could learn from making that process transparent, it&amp;rsquo;s already a big leap for drie to agree to our open source, open development model, and I&amp;rsquo;d hate to jeopardize that by pushing for further transparency.  Hopefully once we&amp;rsquo;ve established the work model for all this we can go even further, but&amp;ndash;bottom line&amp;ndash;I&amp;rsquo;ve got to trust my intuition for what will work here.&lt;/p&gt;
-
-&lt;p&gt;What&amp;rsquo;s really exciting is the opportunity to have AgileVentures members compensated for the skills they&amp;rsquo;ve been so dilligently developing on all the volunteer non-profit projects we&amp;rsquo;ve been working on over the last few years.  I ardently hope that an injection of income will invigorate rather than corrupt our community.  More news here as soon as we make it :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=6abj04BjwJc"&gt;&amp;ldquo;Martin Fowler&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=JrdD1NXjLeY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
