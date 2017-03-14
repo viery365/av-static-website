@@ -5,10 +5,107 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-02-21T00:00:00+00:00</updated>
+  <updated>2017-02-22T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Second Interview</title>
+    <link rel="alternate" href="http://blog.url.com/2017/02/22/second-interview/"/>
+    <id>http://blog.url.com/2017/02/22/second-interview/</id>
+    <published>2017-02-22T00:00:00+00:00</published>
+    <updated>2017-03-14T21:52:10+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So yesterday I found myself in a second interview for a &amp;ldquo;Ruby developer&amp;rdquo; job at the UK MOOC provider, FutureLearn.  I&amp;rsquo;ve been applying for jobs here and there over the last six months as it&amp;rsquo;s nice to keep one&amp;rsquo;s options open.  Having surrendered to the idea that AgileVentures won&amp;rsquo;t provide a sustainable income for me anytime soon, it was nice to get a first interview (over Skype) at FutureLearn and then a tech test, and then a second interview.  I was looking forward to the afternoon which was going to be broken up into a discussion of my tech test, a pair programming session and a meeting with some client and frontend specialists.&lt;/p&gt;
+
+&lt;p&gt;The tech test was on writing a game of TicTacToe, which I think I&amp;rsquo;ve blogged about before, and I used an outside-in approach as I&amp;rsquo;d done with the VendingMachine tech test example at Makers Academy.  This approach had not produced code that I was wonderfully proud of, but I was pleased with parts of my hand rolled acceptance tests, and how one could generate new ones from written descriptions of game play that matched the user experience.  I felt I&amp;rsquo;d done a reasonable job of method naming, and had started on refactoring out some different classes.  Late on Friday evening during my week off I&amp;rsquo;d done another version of TicTacToe starting from inside-out, and on the train on the way into the meeting I pushed that a little further, as I was thinking I was starting to more clearly grasp how these two different approaches intermixed.&lt;/p&gt;
+
+&lt;p&gt;In my second version I&amp;rsquo;d driven from unit-tests focused on domain entities such as board, cell and player.  I was at the point of starting to have these entities communicate with each other to play a turn of TicTacToe, or at least update the board representation to reflect a players move.  In the first session with the various methods of the different objects at the forefront of my mind I had written the following: &lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;move&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;player&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;choose_move&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;TicTacToe&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;valid_moves&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; 
+&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;contents_of&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;move&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;hold&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;player&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;symbol&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;dropping that into the README in the first instance, as a rough sketch of how the domain entities might communicate.  I read that back to myself on the train and felt like I wanted to move the &lt;code&gt;valid_moves&lt;/code&gt; check into the player object, giving me:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;move&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;player&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;choose_move&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;contents_of&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;move&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;hold&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;player&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;symbol&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;My reasoning being that a player entity might well want to be able to review the state of the rest of the board, rather than just the valid moves, before choosing what to do next.  I got the player spec set up to handle that, and after a couple of rounds of changes, and with a dash of dependency injection I had the player spec like so:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;Player&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+
+  &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:player&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;described_class&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rules_klass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:board&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt; &lt;span class="ss"&gt;:board&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:rules_klass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt; &lt;span class="ss"&gt;:rules_klass&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'can choose a move'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rules_klass&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:valid_moves&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:A1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;player&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;choose_move&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;)).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="ss"&gt;:A1&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and the player thus:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Player&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rules_klass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;TicTacToe&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="vi"&gt;@rules_klass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rules_klass&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;choose_move&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="no"&gt;Array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rules_klass&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;valid_moves&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;)).&lt;/span&gt;&lt;span class="nf"&gt;sample&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="kp"&gt;private&lt;/span&gt; 
+
+  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:rules_klass&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;before I moved on to being able to update the board.  Now the &lt;code&gt;board.contents_of(move).hold(player.symbol)&lt;/code&gt; line reflected the properties of the board and cell objects that I had created before.  What would the context be for such a statement?  I created a game class that would have a &lt;code&gt;handle_move(player)&lt;/code&gt; method that would house this code.  The spec ended up looking like this:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;Game&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+
+  &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:game&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;described_class&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board_klass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:board_klass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:board_klass&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:player&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:player&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;symbol: &lt;/span&gt;&lt;span class="s1"&gt;'X'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:board&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:board&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:cell&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:cell&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'handles player moves by updating board with player move'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board_klass&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:new&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;player&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:choose_move&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_return&lt;/span&gt; &lt;span class="ss"&gt;:A1&lt;/span&gt;
+    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:contents_of&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:A1&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_return&lt;/span&gt; &lt;span class="n"&gt;cell&lt;/span&gt;
+    &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cell&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:hold&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'X'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;game&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;handle_move&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;player&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I think what I was seeing here was a mock train wreck that reflected a possible Demeter violation in the way I had initially written the code.  I had all the tests passing with the Game class set up like this:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Game&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board_klass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Board&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="vi"&gt;@board&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;board_klass&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;handle_move&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;player&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;move&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;player&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;choose_move&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;contents_of&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;move&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;hold&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;player&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;symbol&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="kp"&gt;private&lt;/span&gt;
+
+  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:board&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The train journey ended before I could get any further, but I sensed that the way the test was pointing me would look something like this:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;board&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;move&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;by: &lt;/span&gt;&lt;span class="n"&gt;player&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Not sure about that &lt;code&gt;by:&lt;/code&gt; key - just trying to make things as close to an English sentence as possible, which is always a little tricky when a method takes more than one argument.  What I thought the convolution in the test was telling me was that game knew a little too much (a Demeter violation) about the relations that board had with the Cell class.  Changing the code to this last example would mean that the Game class didn&amp;rsquo;t need to have any knowledge of the Cell class, and so testing it would be much simpler, and my domain entities would be more loosely coupled.  I think this is the point that&amp;rsquo;s made in the book &amp;ldquo;Test Driving Object Oriented Design&amp;rdquo;, and it strikes me that this is one of the potential benefits of unit tests, which is to help one evolve one&amp;rsquo;s domain entities into a more loosely coupled configuration.&lt;/p&gt;
+
+&lt;p&gt;Ironically this didn&amp;rsquo;t really come up in the discussion of the tech test at FutureLearn, although we did talk a lot about how most folks attempted the TicTacToe test by creating a series of small classes (as I had done in this second attempt) and I quoted Sandi Metz&amp;rsquo;s 100 line class limit and noted on the dangers of refactoring before one is clear what the next round of changes are likely to be. That latter being my justification for refactoring out a board class, but not yet a player class, in my initial outside-in approach.&lt;/p&gt;
+
+&lt;p&gt;It strikes me that being sufficiently familiar with RSpec to be able to mock effectively and to be aware how the presence of excessive mocking (or mocking things you don&amp;rsquo;t own) is quite a tall order for the beginning programmer.  Furthermore, this benefit is lost, to a degree, when working in a framework like Rails, where the system architecture is laid out for you.  Immediately after the tech test discussion, I was pairing with a different FutureLearn person on adding a feature to a slimmed down version of their site.  We used an interesting style of &amp;lsquo;Given/When/Then&amp;rsquo; within an RSpec/Capybara feature test and then dropped to controller and model specs to get the job done.  It was a smooth pairing experience, switching driver/navigator roles when we got the error message to change significantly.  It just underlined how different it is working with Rails as opposed to Plain Old Ruby Objects (PORO).&lt;/p&gt;
+
+&lt;p&gt;I could go on about the final section of the day, but with code snippets this blog has already gotten quite lengthy, but suffice to say that I was impressed with FutureLearn&amp;rsquo;s interview process and the effort to which they were going to have the interview be a reflection of what it was like to work in their team. &lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>A Little Less Conversation</title>
     <link rel="alternate" href="http://blog.url.com/2017/02/21/a-little-less-conversation/"/>
@@ -168,54 +265,6 @@
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=2K-Rt8y2_Hk"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=bUtVHE5mJW8"&gt;Marketing meeting&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=zOCxl7D1LeM"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Mixed Bag</title>
-    <link rel="alternate" href="http://blog.url.com/2017/02/07/mixed-bag/"/>
-    <id>http://blog.url.com/2017/02/07/mixed-bag/</id>
-    <published>2017-02-07T00:00:00+00:00</published>
-    <updated>2017-03-02T21:21:36+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;I was pleased to be back blogging about code yesterday, but Monday didn&amp;rsquo;t see any further focus on code.  I replied to all the incoming Slack queries, but not all the emails, and fitted in a fair few meetings.  It had been a few weeks since we had a LocalSupport client meeting and we managed to sneak one in between the &amp;ldquo;Martin Fowler&amp;rdquo; scrum and the marketing meeting.  We were able to get five or six stories, chores and bug fixes accepted, and confirm the pivot from organization lising to volunteering; a thread that was picked up again in the Agile Book Club podcast later that day.&lt;/p&gt;
-
-&lt;p&gt;There&amp;rsquo;s a slew of new action items there for me to follow up on, and reminds me I&amp;rsquo;d love an automated bot to help me do project board review.  We&amp;rsquo;ve lost any structure to LocalSupport and WebSiteOne sprints since we&amp;rsquo;ve dropped explicit kick-off and retrospective meetings.  Maybe that means we&amp;rsquo;re just failing at Agile, but I feel rock-bottom in terms of motivation for those kinds of meetings given the low level of enthusiasm for them in the past.  Both projects are seeing a resurgence of activity recently so maybe we should bring them back in at some point, but I&amp;rsquo;m also enamoured with the idea of doing everything in a distributed asynchronous fashion using voting bots and project management bots.  &lt;/p&gt;
-
-&lt;p&gt;Overnight we managed a vote in WebSiteOne, and I started getting set up with Arreche&amp;rsquo;s reworked slack integration bot that will hopefully provide a simpler interface and support multiple votes in parallel.   One step at a time, but I can&amp;rsquo;t help speculating about a project bot that would automate, or semi-automate working through the project boards.  I think the boards need to be reviewed once a week and every &amp;ldquo;in progress&amp;rdquo; or &amp;ldquo;current&amp;rdquo; ticket needs to be checked on.  The heuristic I use is to check if there&amp;rsquo;s been any activity in the last couple of days from the person taking the lead on the ticket.  If they&amp;rsquo;ve pushed commits to a PR, added comments to the tickets then it can be left, but if there&amp;rsquo;s been no activity of a while they need to be pinged to check on the status, see if the item can be re-assigned.&lt;/p&gt;
-
-&lt;p&gt;Full automation would be hard, but a semi-automated approach that presented each ticket in turn with its &amp;ldquo;state of decay&amp;rdquo; would be something to help reduce effort on the part of the project manager.  Even just a repeating alert to make sure the review was performed weekly would be helpful.  Maybe I should have had a quiet half hour to do that after the the client meeting, but I was straight into the marketing meeting as we reviewed our Google AdWords campaign performance, draft newsletter and content marketing strategy. &lt;/p&gt;
-
-&lt;p&gt;I had to leave marketing early to pair with Corey on a sticky point on WebSiteOne, where we&amp;rsquo;d been going back in forth in a pull request to little apparent progress.  Once again the magic of the realtime hangout got us sorted.  I properly understood the problem that Corey was facing, which was writing an acceptance test for the the pop-up countdown timer.  Corey had been able to make it work by switching the Capybara driver from poltergeist to webkit, but that had the unfortunate side-effect of breaking a lot of other tests.  I was pretty sure we didn&amp;rsquo;t need to switch the driver to get this to work, or at least pretty much anything else would be less effort than fixing all the other mercury editor related tests.&lt;/p&gt;
-
-&lt;p&gt;We used the debugger to see that the event countdown was present in the code being returned by the poltergeist driver:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"hidden-sm hidden-xs hidden-md"&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"next-event"&lt;/span&gt; &lt;span class="na"&gt;data-event-time=&lt;/span&gt;&lt;span class="s"&gt;"2014-02-03T07:00:00+00:00"&lt;/span&gt; &lt;span class="na"&gt;data-event-url=&lt;/span&gt;&lt;span class="s"&gt;"/events/scrum"&lt;/span&gt; &lt;span class="na"&gt;data-event-name=&lt;/span&gt;&lt;span class="s"&gt;"Scrum"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;"/events/scrum"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Scrum&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt; is live!&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Getting the clean output was the usual pain that made me think there must be a better way to get formatted HTML output on the irb/byebug prompt.  So much so that I just took a blog break to file an &lt;a href="https://github.com/deivid-rodriguez/byebug/issues/327"&gt;issue on byebug&lt;/a&gt; and research the matter.  Corey wondered if the screen width might be an issue and a quick google got us to the solution which was a step to increase the width of the virtual browser so that the popup would be shown:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;And&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^the window size is wide$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current_window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;resize_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1300&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;400&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So I guess I lied, there was a tiny chunk of coding focus in the middle of the day. Then it was lunch and &amp;ldquo;Kent Beck&amp;rdquo; scrum and drie meeting catch up (they&amp;rsquo;ve decided to build the dashboard themselves), and Agile Book Club podcast episode 2, which was great fun.  I bought the three pack of e-books:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Fifty Quick Ideas to Improve your User Stories&lt;/li&gt;
-&lt;li&gt;Fifty Quick Ideas to Improve your Tests&lt;/li&gt;
-&lt;li&gt;Fifty Quick Ideas to Improve your Retrospectives&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Great day really.  Now I just have to make sure that I follow up with the LocalSupport project elements, and get out some code to start tracking the sign ups that are coming in through the Google AdWords campaign.  I&amp;rsquo;m trying to stay focused on the moment and not worry too much about how every little step adds up to any particular long term goal. Let&amp;rsquo;s see what today brings :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=uzpJp9YlBwU"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=GlZn27yOhGU"&gt;LocalSupport Client Meeting&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=k_x6DByoiNk"&gt;Pairing with Corey&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Y43CuqQuWLo"&gt;Marketing Meeting&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=x5ksyXWhedk"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
