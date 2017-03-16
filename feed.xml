@@ -5,10 +5,63 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-02-23T00:00:00+00:00</updated>
+  <updated>2017-02-24T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Not Much Programming</title>
+    <link rel="alternate" href="http://blog.url.com/2017/02/24/not-much-programming/"/>
+    <id>http://blog.url.com/2017/02/24/not-much-programming/</id>
+    <published>2017-02-24T00:00:00+00:00</published>
+    <updated>2017-03-16T20:51:38+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;As I review and publish blogs from several months ago to medium, it&amp;rsquo;s clear I&amp;rsquo;m doing a lot less programming than I was.  I&amp;rsquo;ve been doing more charity admin and, I guess, &amp;ldquo;business development&amp;rdquo;.  I&amp;rsquo;ve stopped pair programming regularly with Michael at least partly so that I can easily switch tasks through the day, but it is meaning that I won&amp;rsquo;t do a big chunk of coding unless I really clear space for it.  I am still reviewing a lot of code, looking at a lot of pull-requests, tech-tests, deploying code (devops?), running mob sessions and other bits and pieces.  I think the main things we&amp;rsquo;ve managed to achieve over the last year with the AgileVentures site is that it now looks better on mobile, the event creation process is more streamlined, and we have the Premium payment frameworks in place.&lt;/p&gt;
+
+&lt;p&gt;I guess that&amp;rsquo;s reasonable progress, but it feels like we&amp;rsquo;ve plateaued in terms of income from Premium members, for the moment at least.  Official approval as a Charity has unlocked Google&amp;rsquo;s AdWords grant which has quadrupled traffic to our site, and is slowly pushing up our free members, but not leading directly to any increase in income so far.  We did land a small grant from the WikiMedia EDU group which is now paying for project management for the WikiEduDashboard project, which is a significant step forward in terms of sustainability, and that seemed to come almost directly from my appearing on the Ruby Rogues podcast.  We have corporate sponsorship from drie, but further collaboration with drie and the edX MOOC collaboration are both held up by negotiations between UCBerkeley and edX about technicalities related to the re-release of the course.&lt;/p&gt;
+
+&lt;p&gt;For all my effort reaching out to potential sponsors online I&amp;rsquo;ve generated nothing concrete outside of introductions through friends.  Maybe it&amp;rsquo;s time to withdraw from all this online networking and focus on coding again?  The marketing team is looking like they are going to be perfectly capable of making great progress with just occasional input from me.  The first round of Premium signups came largely, I think, through me reaching out to people via email.  Alot of the upgrades have come through me reaching out to folks on Slack.  The things blocking the marketing team are coding and infrastructure issues, so me coding is probably going to be the thing that helps the most.&lt;/p&gt;
+
+&lt;p&gt;Of course, I&amp;rsquo;m also trying to write a book and start a podcast as long term &amp;ldquo;lead generation&amp;rdquo;, but I feel like it might be time for a coding binge &amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=fV1JYPRXCiw"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=x14sVgrKeoc"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Learn by sweeping</title>
+    <link rel="alternate" href="http://blog.url.com/2017/02/24/learn-by-sweeping/"/>
+    <id>http://blog.url.com/2017/02/24/learn-by-sweeping/</id>
+    <published>2017-02-24T00:00:00+00:00</published>
+    <updated>2017-03-16T20:56:07+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="ship" src="https://lh4.googleusercontent.com/wUfixHxCb6H4v09sDX31zz-ZAnyl9ejX5z161WAqjMYm836qYOOm5QHXW7V2BZYX05O7OKiNxxNyw6k=w956-h947" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Life is full of apprenticeship, eating, walking, talking, dealing with our social environment, reading, writing, counting, programming. We have learnt, discovered or invented anything we do. Pedagogy is everywhere and everybody is a teacher.&lt;/p&gt;
+
+&lt;p&gt;If anyone is both a trainee and a trainer, if learning is so common and widespread, why is pedagogy so controversial?  Probably because learning is vital.  Moreover, because we think that the way we think, the way we grasp our environment and the world strongly depends on the way we have learnt and what we know. Knowledge is power and many people in the Valley could sing &amp;ldquo;I&amp;rsquo;ve got the Power, I&amp;rsquo;ve got your Data, I&amp;rsquo;m gonna mimic your Brain, you&amp;rsquo;ll be another clone of my computers :-)&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;TMTOWTDI, training, learning, teaching, educating, discovering, inventing are a few verbs that describe very different ways to learn. A coach differs from a trainer, a trainer from a teacher. A school is not a research lab&amp;hellip; &lt;/p&gt;
+
+&lt;p&gt;You may learn to do, to perform, to make, to build, to design, to invent or to understand, you may even learn to learn, and learn to teach. And learning is not confined to human beings.  Animals learn too.  And your computer will soon begin to learn too.&lt;/p&gt;
+
+&lt;p&gt;There are many lessons out of computers learning, possibly because computer scientists try to mimic the way we learn : program (acquire knowledge), test (assess and improve), supervised (mimetic), unsupervised (exploratory), reinforcement (learn by doing).  But there are some caveats too.  Take reinforcement learning.  The computer is &amp;ldquo;punished&amp;rdquo; for wrong answers and &amp;ldquo;rewarded&amp;rdquo; for good answers.  Have you ever seen a computer sulking a a corner?  It&amp;rsquo;s a grim perspective.  I hope that, in the future, a global initiative will ban computer bullying.  Well, computers are things.  They don&amp;rsquo;t care about bullying. &lt;/p&gt;
+
+&lt;p&gt;A recent article in ACM Communications magazine, that traces the intellectual itinerary of JH.Holland, gives me a better hint.  Learning is all about exploration, selection and exploitation.  No more punishing, we exploit things our ancesters tested.  We explore new things.  We select things that work and forget things that don&amp;rsquo;t - well, we may store it somewhere to prevent us from trying again. After all, learning consists in forgetting your failures and magnifying your successes.&lt;/p&gt;
+
+&lt;p&gt;Sometimes, forgetting is not easy.  My hobby includes restoring wooden boats.  In shipyards, apprentices learn by doing.  Doing is a great word for tidying up the shopfloor, gathering tools, sweeping sawdust.  So why does the yard master punish apprentices before they try and fail?  In a shipyard, you will find no version control system, no revert button, no rollback procedure and no backup and restoration tools.  People do their best to prevent wrong cuts in expensive wood.  And people do their best too to prevent injuries while working in a hazardous environment.  Participating in peripheral tasks is a great way to accustom with the shop and to grasp the big picture of the trade.  You gain confidence, trust and responsibilities as you get involved in the team. &lt;/p&gt;
+
+&lt;p&gt;If sweeping is not your cup of tea, I may suggest you alternatives.  The first one is to learn the hard way by establishing your own shop.  As long as you pay for the wood, you are free to cut.  I followed this path and I definitely end up sweeping my own sawdust. Achievments are (sometimes) very rewarding &amp;hellip; and failures are quite punishing.  The second one is to read Richard Feynman&amp;rsquo;s book, &amp;ldquo;the pleasure of finding things out&amp;rdquo;.  I don&amp;rsquo;t try to mislead you.  Richard Feynman was probably a very hard worker and a very demanding teacher.  But he put the stress on what really matters : the freedom to explore, and the wonder that we feel for sciences and natural world are more important than a few bad cuts in an oak timber.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Asking Questions</title>
     <link rel="alternate" href="http://blog.url.com/2017/02/23/asking-questions/"/>
@@ -170,88 +223,6 @@
 &lt;p&gt;In order to sustain my family I&amp;rsquo;m going to need to take other paying work for a while.  If I&amp;rsquo;m lucky then the meeting I have with FutureLearn on Tuesday will generate a framework where I can get paid for some of my time, and still have some spare time for the charity, which can chug along until I&amp;rsquo;ve rebuilt our savings again.  If I&amp;rsquo;m really lucky over the course of months (or possibly years) I can help the FutureLearn folks take their project open source and get some real synergy with the AgileVentures community, but I shouldn&amp;rsquo;t be too focused on any particular outcome.  The FutureLearn thing might not come off.  If it doesn&amp;rsquo;t, I think that I&amp;rsquo;ll need to sink a load of my time into CodeMentor and HackHands to see if that can generate enough income, and if it doesn&amp;rsquo;t, then look for something else.&lt;/p&gt;
 
 &lt;p&gt;Thinking in terms of surrendering myself to my fate is helping me feel calmer about it all.  I also want to be listening more carefully to folks.  My insistent drive for efficiency and getting stuff done means that I am usually only half-concentrating when people are talking to me in meetings and scrums.  I&amp;rsquo;d like to see if I can change that; put the relationships with the other individuals in the community at higher value than getting things done.  Although I&amp;rsquo;m still terribly interested in the tweaks we can make that will make the community more sustainable.  The philosophy that I see through what I will currently call the Hagen/Tolle nexus is about detaching yourself from any outcome, and focusing on fully experiencing the current moment as much as possible.  It doesn&amp;rsquo;t mean not seeking outcomes, but the more wrapped up you become in achieving a particular outcome the more you can end up pushing it away from you.  The universe flows around us and in us and through us and who knows what will crop up next.  I&amp;rsquo;m going to surrender to it and see where the flow takes me.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Tech Tests</title>
-    <link rel="alternate" href="http://blog.url.com/2017/02/10/tech-tests/"/>
-    <id>http://blog.url.com/2017/02/10/tech-tests/</id>
-    <published>2017-02-10T00:00:00+00:00</published>
-    <updated>2017-03-08T21:42:52+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So I&amp;rsquo;m doing a tech test for FutureLearn and they&amp;rsquo;ve very kindly said that I can post my work publicly on GitHub, which I have promptly done:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/tansaku/tictactoe"&gt;https://github.com/tansaku/tictactoe&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I think I&amp;rsquo;ve spent about 3 hours on it so far, mostly in different leisure centers, churches and halls waiting for my children to finish sporting activities.   I get 45 minutes on Tuesdays, Wednesdays and Thursdays while I wait for them to finish WoodCraft, football and Karate respectively; during which I can focus on my laptop without too many interruptions.  In a bit of tech test flurry I created a calculator in Ruby for CodeMentor yesterday, which got approved this morning, and I was reminded of the period last year where I got pneumonia and spent three weeks in bed doing almost nothing but kata on &lt;a href="http://www.codewars.com/"&gt;CodeWars&lt;/a&gt;. Interestingly, I&amp;rsquo;d encountered variations on the CodeMentor tech test in CodeWars.  If you want to get good at TechTests you could do worse than spending a while hacking through the kata on CodeWars and other sites like HackerRank.&lt;/p&gt;
-
-&lt;p&gt;Other Makers folks were overtaking my CodeWars score recently, but I think CodeWars just adjusted their calculations and I seem to have jumped back to the top of the list:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="codewars ranking for my allies" src="https://www.dropbox.com/s/xzq8o3mdiyqawmh/Screenshot%202017-02-10%2009.49.57.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;which gives me ridiculous childish pleasure.  I&amp;rsquo;m so shallow &amp;hellip; (hangs head).  I&amp;rsquo;m still frustrated not to get to 1-kyu on CodeWars, even after I solved all the 1-kyu katas (1-kyus are the hardest).  Looks like there are now some new 1-kyu and 2-kyu katas that would allow me to get to 1-kyu without doing umpteen easier katas.  Maybe I&amp;rsquo;ll get to that if I have another major illness :-)  Anyhow, tech tests are a strange beast - little coding puzzles that companies hand out to potential hires to test their coding skills.&lt;/p&gt;
-
-&lt;p&gt;I got into CodeWars because it was being recommended when I was a coach at MakersAcademy, and at the bootcamp we were focused on helping training folks up to be able to handle the tech tests that companies would give them after they graduated.  I previously did a worked tech test for the students there, the code for which you can see here:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/tansaku/vending-machine-kata"&gt;https://github.com/tansaku/vending-machine-kata&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I also recorded screencasts of myself doing the entire thing to try and reveal the thought processes I was having as I went through it.  I didn&amp;rsquo;t have such fantastic feedback about it.  One junior staff member told me he thought the code made him &amp;ldquo;sad&amp;rdquo; and despite many other disucssions, I never got to discover what made him sad about it.  Another more senior staff member said that one student listening to the videos felt that it was too stop/start with me saying &amp;ldquo;umm&amp;rdquo; to much, which I can totally believe.  I think that lead to some scripted coding screencasts for the weekly challenges at Makers that ultimately were much more appreciated by the students.  &lt;/p&gt;
-
-&lt;p&gt;So it&amp;rsquo;d been fun to do this TicTacToe tech test for FutureLearn, and I took an Outside-In approach, driving the code with acceptance tests, dropping down to some integration and unit tests. I got something that works more or less, in a single monolithic file, just pushing Sandi Metz&amp;rsquo; 100 line limit.  There&amp;rsquo;s something nerve-wracking for me, an academic by training, working with these industry tech tests.  I keep seeking that industry &amp;ldquo;special-sauce&amp;rdquo;.  The thing that makes the great coders.  My best guess at the moment is that actually it&amp;rsquo;s giving ground rather than fighting for a particular code style that is the key skill.&lt;/p&gt;
-
-&lt;p&gt;The thing that confuses me is that we have directions like &amp;ldquo;do the simplest thing possible&amp;rdquo;, &amp;ldquo;always write your test first&amp;rdquo;, &amp;ldquo;red-green-refactor&amp;rdquo;, &amp;ldquo;you ain&amp;rsquo;t gonna need it&amp;rdquo; and others, but when you take any of these to their logical extremes people seem to get uncomfortable.  This TicTacToe problem is clearly highly constrained, so an alternate approach to take would be to build a TicTacToe engine, driving the design with unit tests, and then wrapping acceptance tests around later (if at all).  I&amp;rsquo;ve never been a big fan of that sort of approach as I worry I&amp;rsquo;m going to burn too much time writing stuff I don&amp;rsquo;t need, and they&amp;rsquo;d said only spend a couple of hours on this.&lt;/p&gt;
-
-&lt;p&gt;I chose to do the whole thing driven from RSpec to avoid burning time on Cucumber, and was interested to see if I could write complete acceptance tests for the input/output on the command line, so I drove in that way and got my single monolithic class.  At the moment I have a roughly working system, but only for a few hard-coded games.  The computer&amp;rsquo;s current strategy is fixed and I don&amp;rsquo;t handle collisions for markers, so the game is not fully generic.  The tech test is currently a reasonable demonstration of my ability to craft different kind of tests, get a roughly working system, but I&amp;rsquo;m suddenly paranoid about whether this code is going to make more people &amp;ldquo;sad&amp;rdquo; in some indeterminate way and I still won&amp;rsquo;t be able to get an example of a version that would make people &amp;ldquo;happy&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;I can imagine doing it again, driving from unit tests (with the benefit of the initial experience) to make a nicely factored engine.  I could also layer on some acceptance tests to make sure the other high level failures are addressed, e.g. collisions handled etc., or I could continue refactoring the code with the existing tests.  I&amp;rsquo;ve used the existing test suite to eliminate some unneeded code and make the method names more self-explanatory.  But how will people feel about the lack of comments?  I like to focus on making the method and variable names self-documenting.  Having got this far I feel like I won&amp;rsquo;t be happy until it plays a fully generic game.  I know I&amp;rsquo;ll be spending more time on it today before I send FutureLearn the link :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=eUhIV1c9CpU"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=yFIOYN8SisA"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Pivoting or Not</title>
-    <link rel="alternate" href="http://blog.url.com/2017/02/09/pivoting-or-not/"/>
-    <id>http://blog.url.com/2017/02/09/pivoting-or-not/</id>
-    <published>2017-02-09T00:00:00+00:00</published>
-    <updated>2017-03-08T21:37:17+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;There was an interesting response to one of &lt;a href="http://nonprofits.agileventures.org/2017/01/23/passing_a_threshold/"&gt;recent blog posts&lt;/a&gt; from an AV community member.  They posted the following in our community #random channel (where I had shared my blog post):&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;As an additional source of income for AV, why not offer pairing sessions for payment for those who may be reluctant to commit to a monthly fee? These sessions could be given to mentors who would be paid a proportion of the fee, thus perhaps incentivising more mentor-type people to join as well. A bit similar to what AirPair used to do although perhaps more from a learning point of view rather than a professional problem solving one as that was. So perhaps a student could pay for a session on a particularly difficult piece of homework, or a private project they are doing, or to better learn some concept or technique they are having problems with, or even just to practice coding and pair programming but without having to commit themselves to working on a project, which might be intimidating to some (and pairing not always available). These students might also in future be drawn into collaborating on actual AV projects. But in any case the pairing sessions themselves would bring in additional income.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;And another community member responded, soon after, that they would pay for individual mentoring sessions, and we spent a little time discussing things in the &amp;ldquo;Martin Fowler&amp;rdquo; scrum.  I&amp;rsquo;m not sure what happened to AirPair.  According to their &lt;a href="https://en.wikipedia.org/wiki/AirPair"&gt;wikipedia page&lt;/a&gt; they raised over $1M after a Y Combinator presentation, but the site currently has some authentication errors and I&amp;rsquo;m not seeing any activity on the site or social media since mid-2016.  However, similar sites such as HackHands and CodeMentor seem to be &amp;hellip; oops, got distracted there.  I just went through the sign up processes for CodeMentor and HackHands.  Thought it would only take a couple of minutes, but CodeMentor included a timed assessment involving a pop quiz and a programming assignment.  Fortunately it was very similar to a kata I had completed not so long ago on Codewars, so I was able to polish it off pretty quickly.&lt;/p&gt;
-
-&lt;p&gt;Anyhow, talk about being easily distracted! :-) At least I&amp;rsquo;ve now got a good insight into the sign up experiences of those two companies.  So what our community member is suggesting is a lot like what I think CodeMentor and HackHands are offering.  What&amp;rsquo;s not clear is how beneficial it would be for AgileVentures.  It feels like it will be difficult for us to compete with venture-backed companies in the same space, although as suggested, perhaps we focus more on the learning side? I was originally tempted to respond in #random with my philosophy of openness in AgileVentures, but thought I&amp;rsquo;d save it for this blog.  One thing I&amp;rsquo;ve learned is that when people are giving you suggestions, they are generally not interested in hearing that you thought about them already, or why you haven&amp;rsquo;t taken them up.  Far better to thank them for the great suggestions and ask simple follow up questions to find more about what they are thinking.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d love to bring in more money to AgileVentures, but I find helping individuals on their specific closed-source issues somewhat challenging.  Specifically because you often can&amp;rsquo;t get the whole code system on your own machine quickly.  Perhaps I&amp;rsquo;m a deeply flawed and impatient person, but I find it difficult to cope with making suggestions verbally and then having someone stumble around in their own interface, mis-interpreting what I&amp;rsquo;ve said.  I guess that&amp;rsquo;s what ScreenHero is for &amp;hellip; And maybe even uttering my honest thoughts here is self-destructive.  My hope with AgileVentures is to be doing the mentoring in the open, to enable more learners to learn from the contributions to open source projects.  Although I&amp;rsquo;ve come to see clearly that many learners crave privacy and are deeply embarrassed about asking questions in public, or in front of more than just a single mentor.  I assume this is all related to fear of failure, fear of being seen as less than competent etc.  I feel it to, but repeated practice has got me comfortable(-ish) with failing in public :-)&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s interesting that our community member mentions not having to commit to a project.  From my point of view if you just make one comment in one of our PRs, or just get the code set up and then never do anything, it&amp;rsquo;s still a contribution.  It&amp;rsquo;s what a lot of people seem to do; but perhaps many more are put off by the perception of needing to commit to a project.   I guess my big worry is that for all the time I spend helping other individuals on their private projects and homeworks, I&amp;rsquo;m not getting any multiplier for the community.  I can&amp;rsquo;t share the code solution we discover, and I can&amp;rsquo;t share the video of the techniques we used to discover the solution; but then again how many others actually benefit from all the AV videos we&amp;rsquo;ve shared?  How many others are really following the support given in psuedo-public in Slack?  Maybe the majority are all just hideously embarrassed by all this and that&amp;rsquo;s why we keep struggling to achieve any sustained critical mass.&lt;/p&gt;
-
-&lt;p&gt;My mind does come round to feeling that the majority of people want polished content that they can consume in private.  There&amp;rsquo;s so much less pressure, it&amp;rsquo;s so much more convenient.  The cynic in me moans that so much of the polished content is not true to life, but then these days there are great screencasters out there (mainly outside of academia) showing folks how to actually do stuff, and maybe that&amp;rsquo;s always going to be more successful than a system that attempts to get the majority to overcome their fear of learning, of failing, in front of others &amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?feature=player_embedded&amp;amp;v=zBP6d2a0Rcc"&gt;&amp;ldquo;Martin Fowler&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=1nqdZoqlH7A"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Related Blog Posts:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://nonprofits.agileventures.org/2017/01/23/passing_a_threshold/"&gt;Passing a Threshold&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>
