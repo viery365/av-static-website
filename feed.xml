@@ -5,10 +5,56 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-02-27T00:00:00+00:00</updated>
+  <updated>2017-03-01T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Commmunication and Coding</title>
+    <link rel="alternate" href="http://blog.url.com/2017/03/01/communication-and-coding/"/>
+    <id>http://blog.url.com/2017/03/01/communication-and-coding/</id>
+    <published>2017-03-01T00:00:00+00:00</published>
+    <updated>2017-03-22T22:22:04+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="feedback" src="/images/feedback.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I got some great feedback from FutureLearn after I&amp;rsquo;d followed up to say how much I enjoyed their technical test and interview process (which included discussion and pair programming).  Here&amp;rsquo;s what they said:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Thanks again for coming in — I’m glad you enjoyed the process.  We really liked your technical skills, initiative and enthusiasm. You obviously have a lot of programming and agile experience, and have a lot to offer the team in terms of coaching, mentoring and supporting other developers. Ultimately we didn’t make you an offer because we had concerns about your communication skills. Your interviewers sometimes found it difficult to follow the conversation and get direct answers to the questions they asked; there was a general sense that your answers were sometimes circuitous or unclear, and that you didn’t express very much curiosity about what exactly the job would entail or what working at FutureLearn more generally would be like. In the end it was a very difficult decision given your high level of technical skill, but overall we felt it was unlikely to work out given the difficulties that your interviewers had in communicating comfortably with you&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;to which I responded:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Thanks for coming back to me - that&amp;rsquo;s wonderful feedback, and I really appreciate you sharing.&lt;/p&gt;
+
+&lt;p&gt;It gives me great food for thought, and I think the concern about communication is a valid one.  It&amp;rsquo;s something I definitely need to work on.  I tend to think out loud, and so going forward I&amp;rsquo;m going to try some experiments with different layers of filtering on how I respond to questions.&lt;/p&gt;
+
+&lt;p&gt;As regards curiousity for what the job would entail and what working at FutureLearn would be like, I thought I was getting a really clear idea from the interview process itself.  Having taken courses on FutureLearn in the past, as well as having developed software and courses for edX as well as serving as a community manager for groups of edX instructors, everything I was hearing in the interview process gelled with how I imagined things would be, but it sounds like I could have worked harder to confirm my impressions.&lt;/p&gt;
+
+&lt;p&gt;Either way I can certainly understand how a perceived lack of curiosity would impact your decision.  Thanks again for taking the time to interview me and sorry it didn&amp;rsquo;t work out.&lt;/p&gt;
+
+&lt;p&gt;Best of luck with everything at FutureLearn.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So I was disappointed not to have been made an offer, particularly since it would have helped address some of the financial concerns I have at the moment, and it would have been exciting to explore the codebase of the FutureLearn MOOC platform.  That said, I really am extraordinarily grateful for the extra feedback from FutureLearn.  In the absence of those specifics I might have imagined that the code that I wrote as part of the technical test, or something about my pair programming style might have been at fault.  However the concern about my communication skills in the technical interview fits in rather well with feedback and comments that I&amp;rsquo;ve got from other quarters.&lt;/p&gt;
+
+&lt;p&gt;The interesting question now is how to go about leveling up my communication skills. It sounds like it wouldn&amp;rsquo;t hurt to try a period where I spent additional time constructing answers before starting to speak.  It&amp;rsquo;s funny, there are so many online resources to help one learn to code, but level up your communication skills?  Well I googled for &amp;ldquo;improve your communication skills&amp;rdquo; and Google immediately highlighted:&lt;/p&gt;
+
+&lt;h3&gt;5 Ways to Improve Your Communication Skills&lt;/h3&gt;
+
+&lt;p&gt;1) Never talk over people&lt;br&gt;
+2) Don&amp;rsquo;t finish other people&amp;rsquo;s sentences&lt;br&gt;
+3) Paraphrase&lt;br&gt;
+4) Listen actively&lt;br&gt;
+5) Maintain eye contact  &lt;/p&gt;
+
+&lt;p&gt;from &lt;a href="www.lifehack.org/articles/communication/improve-communication-skills.html"&gt;www.lifehack.org/articles/communication/improve-communication-skills.html&lt;/a&gt; which is fairly clear.  Maybe not too hard then :-)  Stay tuned to this blog to hear about the results of my attempt to level up my communication skills &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Commitment</title>
     <link rel="alternate" href="http://blog.url.com/2017/02/27/commitment/"/>
@@ -251,32 +297,6 @@ Instead of the current variation in messaging
 &lt;p&gt;It strikes me that being sufficiently familiar with RSpec to be able to mock effectively and to be aware how the presence of excessive mocking (or mocking things you don&amp;rsquo;t own) is quite a tall order for the beginning programmer.  Furthermore, this benefit is lost, to a degree, when working in a framework like Rails, where the system architecture is laid out for you.  Immediately after the tech test discussion, I was pairing with a different FutureLearn person on adding a feature to a slimmed down version of their site.  We used an interesting style of &amp;lsquo;Given/When/Then&amp;rsquo; within an RSpec/Capybara feature test and then dropped to controller and model specs to get the job done.  It was a smooth pairing experience, switching driver/navigator roles when we got the error message to change significantly.  It just underlined how different it is working with Rails as opposed to Plain Old Ruby Objects (PORO).&lt;/p&gt;
 
 &lt;p&gt;I could go on about the final section of the day, but with code snippets this blog has already gotten quite lengthy, but suffice to say that I was impressed with FutureLearn&amp;rsquo;s interview process and the effort to which they were going to have the interview be a reflection of what it was like to work in their team. &lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>A Little Less Conversation</title>
-    <link rel="alternate" href="http://blog.url.com/2017/02/21/a-little-less-conversation/"/>
-    <id>http://blog.url.com/2017/02/21/a-little-less-conversation/</id>
-    <published>2017-02-21T00:00:00+00:00</published>
-    <updated>2017-03-21T21:35:42+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Yesterday was basically coming back up to speed after a week away from digital communication, gradually transfering the various items from Email and Slack into my TODO list.  I managed to deploy the latest agile-bot config changes to production, do a marketing meeting and record an Agile Book Club podcast.  What was great to see was how active folks had been while I was away, greeting new members in the Slack, running the marketing meetings in my absence.  Lara has got in there and reconfigured the Google AdWords campaign; running experiments on different ads. We now have over 11,000 unique users visiting the site over the last month.  The AdWords signup tracking appears to be working, indicating 31 new member sign-ups after clicking on a Google ad.  Marufa came up with new designs for the pricing pages and Lara&amp;rsquo;s taking the lead on making the first round of tweaks there.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;re also starting to see more traffic to the non-profit static site, although it&amp;rsquo;s not clear what conversions we should be tracking there.  Michael is telling me that we should do a little less talking and focus on getting more things done.  Although I sometimes feel close to paralysis in terms of what to do next, or what to prioritise.  The Agile Book Club podcast is a great excuse for more conversation, which I do enjoy, and in yesterday&amp;rsquo;s episode I think we provided a forum for Michael to express various feelings he has about how AgileVentures projects don&amp;rsquo;t focus on the high level stories enough.  In the post-show chat our discussion honed those feelings into a plan of action.  Michael said that the reason he didn&amp;rsquo;t like the WSO team meetings of a few months back were that we were working through any and all tickets in the board.  That meant that issues raised by anyone could take the floor.  He&amp;rsquo;d be much more interested in a meeting where someone had reviewed all the tickets in advance of the meeting and then a set of the most important were pre-selected to be the subject of a sprint.&lt;/p&gt;
-
-&lt;p&gt;A great idea, but a lot of up-front work for someone, so I suggested how about we have a meeting where we each bring a maximum of three tickets that we care about to plan for a sprint; and with luck we&amp;rsquo;ll do that on Friday.   It&amp;rsquo;s funny, because sometimes it seems that talking is what&amp;rsquo;s needed to help people get their feelings out, and then collaboratively work out a course of action.  As with all things it&amp;rsquo;s a balance.  What was also clear to me was a variation of my maxim of being careful when &amp;ldquo;blocking&amp;rdquo; people; which is that feedback can be mis-interpreted as a block, and the more people there are in a meeting, the less likely that feedback will be able to be constructively received.  By blocking I mean anything that contradicts what a person is saying, be it correcting their grammar, querying their choice of phrase, or disagreeing with their point.&lt;/p&gt;
-
-&lt;p&gt;I won&amp;rsquo;t go into the details, as interested parties can get that from the recording of the marketing meeting and the podcast etc., but I do keep coming back to advice I got from Ruben at Makers Academy that it&amp;rsquo;s far better to ask people questions than to make assertions.  For some reason I find it so hard to do that.  My M.O. is so ingrained that when someone makes an assertion that doesn&amp;rsquo;t fit my mental model, my knee-jerk reaction is the make a counter-assertion.  I enjoy the mental interplay, but so many other people don&amp;rsquo;t seem to.  Of course asking too many questions can also be a block.  Let&amp;rsquo;s see, I&amp;rsquo;m going to try to either shut up or just ask single questions for the rest of the week, if I can!  A little less conversation, a little more action maybe :-)&lt;/p&gt;
-
-&lt;h4&gt;Related Videos:&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=5vx3BstpDuo"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://youtu.be/7jCej7JVpkM"&gt;Marketing Meeting&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=jpsIcZ5pTkQ"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>
