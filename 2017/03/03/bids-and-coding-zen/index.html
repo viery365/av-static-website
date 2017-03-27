@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>Bids and Coding Zen</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_7 blog_page_7_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_03 x2017_03_03 x2017_03_03_bids-and-coding-zen x2017_03_03_bids-and-coding-zen_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,76 +83,51 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/03/03/bids-and-coding-zen/">Bids and Coding Zen</a></h2>
+        <h5 class='date'> 3 Mar 2017</h5>
+    <p><img alt="zen stones" src="/images/zen.jpg" /></p>
 
-          <p>Page 7 of 13</p>
+<p>One of the reasons I got disenchanted with academia was the process of writing grant applications for research funds.  It seemed to involve a huge amount of work to describe the work you would do if someone gave you some money.  There&rsquo;d be several weeks&rsquo; work writing a 10 or 20 page document followed by an all-nighter to get it all together for the deadline and then submit through some complex web interface.  Then wait six months to get three or four paragraphs of feedback about why the proposal hadn&rsquo;t been accepted.  While some people in academia were successful recipients of government grants, I was much more successful in bringing in industry money where I could talk to someone face to face.  The problem with industry grants is that they would dry up when the market turned.</p>
 
-            <p><a href="/blog/page/6/">Previous page</a></p>
+<p>Anyhow, fast forward to my current focus on charities and freelancing.  It&rsquo;s grant writing all over again, although the turn-around time is a bit faster.  I&rsquo;ve been receiving a lot of support from lovely people in the charity sector regarding fund-raising, but I seem to be back in this situation of asking for money and getting turned down for one reason or another.  I wonder if the problem is that I&rsquo;m always hedging my bets.  Being completely unable to quantify the chances of receiving a grant, it&rsquo;s almost impossible to work out how much effort to put into the application process.  I just went through one where the person guiding me was saying we were pretty much guaranteed to get the contract, just to be phoned late last night and told that another bidder had unexpectedly been able to come in and offer an existing solution and point to a much stronger background in the area the grant was focused on.</p>
 
-          <h2><a href="/2016/11/17/semi-automatic/">Semi Automatic Asynchronous Planning Poker Bot</a></h2>
-          <h3>Nov 17</h3>
-          <p>The AsyncVoter project has been humming recently.  A lot of people interested in coding in Node, putting a React front end together and so on.  They say that JavaScript is hot.  We’ve also had new folks come in and start to understand some of the Agile...</p>
-          <h2><a href="/2016/11/16/automating-what-to-do-next/">Automating What To Do Next</a></h2>
-          <h3>Nov 16</h3>
-          <p>After the “Martin Fowler” scrum I caught up with Raphael to talk about the dynamic of the AsyncVoter project.  Raphael had been suggesting a team meeting.  Team meetings can be great.  I think if a team wants to move forward fast it’s great to get...</p>
-          <h2><a href="/2016/11/15/multiple-pull-request-learning/">Multiple Pull Request Learning</a></h2>
-          <h3>Nov 15</h3>
-          <p>I didn’t get much solo or pair time coding today. It was a day of helping Premium member’s with bug fixes and reviewing pull requests.  The “Martin Fowler” scrum was crowded and brought up various requests for help, support and review.  I started by...</p>
-          <h2><a href="/2016/11/14/banking-disruption/">Banking Disruption</a></h2>
-          <h3>Nov 14</h3>
-          <p><img alt="bank account" src="/images/bank-account.jpg"></p>
+<p>Going forward I&rsquo;ll have to make it clear that phoning me late at night is not on.  I&rsquo;m involved in a couple of other bids for freelance work at the moment.  All of them difficult to quantify in terms of how much money they&rsquo;ll bring in and the likelihood of actually landing them.  I&rsquo;ll give it till April and then I&rsquo;ll have to put the search for income into a higher gear &hellip;</p>
 
-<p>My main achievement on Friday was opening a bank account for the AgileVentures charity.  This has been a long time coming.  I originally started a year ago with Lloyds bank and spent an hour or so on the phone explaining the whole concept of “in...</p>
-          <h2><a href="/2016/11/11/naming-and-cucumber/">Naming and Cucumber</a></h2>
-          <h3>Nov 11</h3>
-          <p><img alt="Cucumbers" src="/images/cucumber.jpg"></p>
+<p>All that speculative bidding process juxtaposes with moments of coding zen I&rsquo;ve felt this week.  I was tidying up the three WSO PRs I made this week while my twin boys were doing their Karate class, and starting to add comments about issues I was seeing.  I managed to pull some logic out of a view into a helper, so that the following:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%</span> <span class="n">event_name</span> <span class="o">=</span> <span class="n">current_user</span> <span class="p">?</span> <span class="n">event</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span> <span class="p">:</span> <span class="s1">'Want to learn more? Listen in. Next projects review meeting '</span><span class="cp">%&gt;</span>
+</code></pre>
+<p>became</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">event_name_or_invitation_to_guest_user</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+    <span class="n">current_user</span> <span class="p">?</span> <span class="n">event</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span> <span class="p">:</span> <span class="s1">'Want to learn more? Listen in. Next projects review meeting '</span>
+  <span class="k">end</span>
+</code></pre>
+<p>in <code>layout_helper</code></p>
 
-<p>In a series of disjointed solo sessions I managed to fix the bug whereby manual hangout edits were making subsequent events live.  Michael and I had wrapped this bug in a cucumber scenario the day previously.  The manual hangout edit interface looks...</p>
-          <h2><a href="/2016/11/10/mix-and-match/">Mixing and Matching Guidelines</a></h2>
-          <h3>Nov 10</h3>
-          <p><img alt="mixing and matching food" src="/images/mix_and_match.jpg"></p>
+<p>making the original erb become:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">event_name_or_invitation_to_guest_user</span><span class="p">(</span><span class="n">event</span><span class="p">),</span> <span class="n">event_path</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s1">'id'</span><span class="p">])</span> <span class="cp">%&gt;</span>
+</code></pre>
+<p>which I think is an improvement.  I think the intent is conveyed a little more succinctly now, although I&rsquo;m not sure that LayoutHelper is necessarily the best place for the code, but one thing at a time.  Getting that in place and adding a few <a href="https://github.com/AgileVentures/WebsiteOne/pull/1566">inline comments on my own PR</a> I experienced a moment of coding zen.  My concerns about a couple of places in the code were addressed with changes, and I was recording other concerns.  Next step&ndash;refactoring tickets.  The Zen feeling came from a brief sensation of wholeness - that it was okay for the code to have issues, but that we have a mechanism for addressing those issues over time.  Now if only there was some way to achieve a similar Zen state as regards funding applications :-)</p>
 
-<p>It was another mix of the AsyncVoter and WebSiteOne projects today.  Overnight Arreche had come up with a <a href="https://github.com/AgileVentures/AsyncVoter/compare/master...arreche:7_cast_vote_feature_mvp">slimmed down version</a> of Raphael’s <a href="https://github.com/AgileVentures/AsyncVoter/pull/50">pull request</a> on vote casting, so I focused on João’s <a href="https://github.com/AgileVentures/AsyncVoter/pull/45">pull request</a> for listing currently voting stories.  ...</p>
-          <h2><a href="/2016/11/09/resilience/">Resilient Code Bases</a></h2>
-          <h3>Nov  9</h3>
-          <p><img alt="white water rafting" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Resilience_160416-F-GP610-002.jpg/1280px-Resilience_160416-F-GP610-002.jpg"></p>
-
-<p>How to create a resilient code base?  I wrestle daily with the legacy code base of WebsiteOne, wanting to make more changes but being afraid of tests with strange dependencies.  Sometimes they don’t test the right thing; while others lock in low...</p>
-          <h2><a href="/2016/11/08/discombobulated/">Discombobulated (by Google)</a></h2>
-          <h3>Nov  8</h3>
-          <p>We spent a good hour analysing our options to cope with the changes in the Google Hangout API.  The key issue is that the Google Hangout on Air (HOA) button no longer starts a Hangout directly.  We have the the HOA button throughout our AgileVentures...</p>
-          <h2><a href="/2016/11/07/refactoring-ftw/">Refactoring FTW!</a></h2>
-          <h3>Nov  7</h3>
-          <p>Friday was full of pull request reviews.  I’m currently trying to keep tabs on pull requests coming in on the following projects:</p>
+<h3>Related Videos:</h3>
 
 <ul>
-<li><a href="https://github.com/AgileVentures/AsyncVoter/pulls">AsyncVoter</a></li>
-<li><a href="https://github.com/AgileVentures/LocalSupport/pulls">LocalSupport</a></li>
-<li><a href="https://github.com/AgileVentures/projectscope/pulls">ProjectScope</a></li>
-<li><a href="https://github.com/StrawberryCanyon/redeemify/pulls">Redeemify</a></li>
-<li><a href="https://github.com/AgileVentures/WebsiteOne/pulls">WebSiteOne</a></li>
+<li><a href="https://www.youtube.com/watch?v=XbbTJQYNMeQ">&ldquo;Martin Fowler&rdquo; Scrum</a></li>
+<li><a href="https://www.youtube.com/watch?v=fsHiZG2_UjQ">&ldquo;Kent Beck&rdquo; Scrum</a></li>
 </ul>
 
-<p>I’ve started adding extra notifications to the main Slack...</p>
-          <h2><a href="/2016/11/04/light-at-the-end-of-the-tunnel/">Light at the End of the Stripe Tunnel</a></h2>
-          <h3>Nov  4</h3>
-          <p>My hopes for a less than frustrating day were dashed as I worked through the ongoing Stripe test failures.  Michael wasn’t around and I solo’d through some different alternatives.  Rather than just burn time repeatedly in the long debug cycle of seeing...</p>
-
-            <p><a href="/blog/page/8/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -210,6 +186,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

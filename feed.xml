@@ -5,10 +5,50 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-03-02T00:00:00+00:00</updated>
+  <updated>2017-03-03T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Bids and Coding Zen</title>
+    <link rel="alternate" href="http://blog.url.com/2017/03/03/bids-and-coding-zen/"/>
+    <id>http://blog.url.com/2017/03/03/bids-and-coding-zen/</id>
+    <published>2017-03-03T00:00:00+00:00</published>
+    <updated>2017-03-27T21:58:09+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="zen stones" src="/images/zen.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;One of the reasons I got disenchanted with academia was the process of writing grant applications for research funds.  It seemed to involve a huge amount of work to describe the work you would do if someone gave you some money.  There&amp;rsquo;d be several weeks&amp;rsquo; work writing a 10 or 20 page document followed by an all-nighter to get it all together for the deadline and then submit through some complex web interface.  Then wait six months to get three or four paragraphs of feedback about why the proposal hadn&amp;rsquo;t been accepted.  While some people in academia were successful recipients of government grants, I was much more successful in bringing in industry money where I could talk to someone face to face.  The problem with industry grants is that they would dry up when the market turned.&lt;/p&gt;
+
+&lt;p&gt;Anyhow, fast forward to my current focus on charities and freelancing.  It&amp;rsquo;s grant writing all over again, although the turn-around time is a bit faster.  I&amp;rsquo;ve been receiving a lot of support from lovely people in the charity sector regarding fund-raising, but I seem to be back in this situation of asking for money and getting turned down for one reason or another.  I wonder if the problem is that I&amp;rsquo;m always hedging my bets.  Being completely unable to quantify the chances of receiving a grant, it&amp;rsquo;s almost impossible to work out how much effort to put into the application process.  I just went through one where the person guiding me was saying we were pretty much guaranteed to get the contract, just to be phoned late last night and told that another bidder had unexpectedly been able to come in and offer an existing solution and point to a much stronger background in the area the grant was focused on.&lt;/p&gt;
+
+&lt;p&gt;Going forward I&amp;rsquo;ll have to make it clear that phoning me late at night is not on.  I&amp;rsquo;m involved in a couple of other bids for freelance work at the moment.  All of them difficult to quantify in terms of how much money they&amp;rsquo;ll bring in and the likelihood of actually landing them.  I&amp;rsquo;ll give it till April and then I&amp;rsquo;ll have to put the search for income into a higher gear &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;All that speculative bidding process juxtaposes with moments of coding zen I&amp;rsquo;ve felt this week.  I was tidying up the three WSO PRs I made this week while my twin boys were doing their Karate class, and starting to add comments about issues I was seeing.  I managed to pull some logic out of a view into a helper, so that the following:&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="n"&gt;event_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;current_user&lt;/span&gt; &lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'name'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'Want to learn more? Listen in. Next projects review meeting '&lt;/span&gt;&lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;became&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;event_name_or_invitation_to_guest_user&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;current_user&lt;/span&gt; &lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'name'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'Want to learn more? Listen in. Next projects review meeting '&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;in &lt;code&gt;layout_helper&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;making the original erb become:&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to&lt;/span&gt; &lt;span class="n"&gt;event_name_or_invitation_to_guest_user&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'id'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which I think is an improvement.  I think the intent is conveyed a little more succinctly now, although I&amp;rsquo;m not sure that LayoutHelper is necessarily the best place for the code, but one thing at a time.  Getting that in place and adding a few &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1566"&gt;inline comments on my own PR&lt;/a&gt; I experienced a moment of coding zen.  My concerns about a couple of places in the code were addressed with changes, and I was recording other concerns.  Next step&amp;ndash;refactoring tickets.  The Zen feeling came from a brief sensation of wholeness - that it was okay for the code to have issues, but that we have a mechanism for addressing those issues over time.  Now if only there was some way to achieve a similar Zen state as regards funding applications :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=XbbTJQYNMeQ"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=fsHiZG2_UjQ"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Distracted</title>
     <link rel="alternate" href="http://blog.url.com/2017/03/02/distracted/"/>
@@ -236,26 +276,6 @@ Instead of the current variation in messaging
 &lt;p&gt;Sometimes, forgetting is not easy.  My hobby includes restoring wooden boats.  In shipyards, apprentices learn by doing.  Doing is a great word for tidying up the shopfloor, gathering tools, sweeping sawdust.  So why does the yard master punish apprentices before they try and fail?  In a shipyard, you will find no version control system, no revert button, no rollback procedure and no backup and restoration tools.  People do their best to prevent wrong cuts in expensive wood.  And people do their best too to prevent injuries while working in a hazardous environment.  Participating in peripheral tasks is a great way to accustom with the shop and to grasp the big picture of the trade.  You gain confidence, trust and responsibilities as you get involved in the team. &lt;/p&gt;
 
 &lt;p&gt;If sweeping is not your cup of tea, I may suggest you alternatives.  The first one is to learn the hard way by establishing your own shop.  As long as you pay for the wood, you are free to cut.  I followed this path and I definitely end up sweeping my own sawdust. Achievments are (sometimes) very rewarding &amp;hellip; and failures are quite punishing.  The second one is to read Richard Feynman&amp;rsquo;s book, &amp;ldquo;the pleasure of finding things out&amp;rdquo;.  I don&amp;rsquo;t try to mislead you.  Richard Feynman was probably a very hard worker and a very demanding teacher.  But he put the stress on what really matters : the freedom to explore, and the wonder that we feel for sciences and natural world are more important than a few bad cuts in an oak timber.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Asking Questions</title>
-    <link rel="alternate" href="http://blog.url.com/2017/02/23/asking-questions/"/>
-    <id>http://blog.url.com/2017/02/23/asking-questions/</id>
-    <published>2017-02-23T00:00:00+00:00</published>
-    <updated>2017-03-15T21:34:35+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;The final part of the FutureLearn interview was a chat with a client specialist and front end developer, with questions about my experiences in teams and working with clients.  I enjoyed the conversation, and it allowed me to articulate something that I&amp;rsquo;ve been thinking over and over again and still have trouble putting into practice.  It&amp;rsquo;s this process of avoiding blocking people, and what to do instead.  I use the term blocking to mean disagreeing, correcting grammar/pronunciation, ignoring suggestions.  A whole range of things.  Now sometimes it&amp;rsquo;s important to block.  I don&amp;rsquo;t think one should never block, but that blocking always come with a cost.  Generally when people are speaking they are trying to get something across, some idea or opinion or what have you.  Maybe some enlightened folks are really not bothered to be blocked, but many of us, if we are making the effort to say something, would probably prefer to be allowed to fully express our thought.&lt;/p&gt;
-
-&lt;p&gt;Some might relish being blocked in that they enjoy a heated argument, and all power to them; but the danger is that the heated discussion that two people are enjoying (at some level) is not much fun for other people who are present at the same time.  Anyway, so one of the FutureLearn folks asked me &amp;ldquo;so you don&amp;rsquo;t mean to say you should never disagree with anything?&amp;rdquo;, and I replied that I almost did.  Not that I&amp;rsquo;ve been much good at this, but the process for deciding whether to bring up a block should include some consideration of the number of people involved.  Are you talking one on one, or is this a group meeting with 15?  Also, how important is it really?  Is the building on fire and if people don&amp;rsquo;t stop talking and leave now they&amp;rsquo;re all going to die?  Also, are you in a position of some seniority and tasked with, or simply feel responsible for, helping a group or individual feel good about at least some aspects of what they are doing, and empowered to take on challenges; learn from their own mistakes etc.?&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m not sure if it&amp;rsquo;s my academic background, but my tendency for a long time has been to treat any problem like a mathematical or logical statement.  It&amp;rsquo;s as if people are coming up to me and saying &amp;ldquo;2+2=4&amp;rdquo; and I&amp;rsquo;ll say &amp;ldquo;go on &amp;hellip;&amp;rdquo;, or they&amp;rsquo;re saying &amp;ldquo;1+1=3&amp;rdquo; and I&amp;rsquo;ll say &amp;ldquo;actually I think you mean &amp;hellip;&amp;rdquo;, with little consideration for anything other than my perception of the logical coherence of what they&amp;rsquo;re saying.  The clear problem with this approach is that my mental model of the world is just that, mine.  I have no monopoly on logically coherent views of the universe, and indeed how important is logical coherence anyway?  Furthermore I&amp;rsquo;m not usually thinking about how people might feel about being blocked.  I&amp;rsquo;d like to think I am slowly getting better at this, but who knows? :-) What I&amp;rsquo;m starting to come round to thinking is that, in the majority of situations, how people feel is far more important than whether what they are saying is objectively correct or not.  Of course this should naturally follow from my own basic assumption that there is no objective correctness.  I belive everything is subjective.&lt;/p&gt;
-
-&lt;p&gt;My own sense that everything is subjective should in principle prepare me for the great differences between people&amp;rsquo;s mental models of the world.  The faulty assumption on my part seems to be that the majority of people are interested in investing time in getting to the bottom of these differences.  I really enjoy pulling apart what I&amp;rsquo;m thinking about to try and work out what assumptions I&amp;rsquo;m working on; debating the relative merits of different approaches, but I&amp;rsquo;m a bit of an outlier there, maybe &amp;hellip; or maybe that all depends on who I&amp;rsquo;m hanging out with on a particular week?&lt;/p&gt;
-
-&lt;p&gt;Anyhow, Ruben at Makers Academy recommmended to me that it&amp;rsquo;s better to ask questions than contradict people, and I laugh at myself for how difficult this seems to be for me to do.  Recently however, I&amp;rsquo;ve been reformulating in my head that the key thing is questioning rather than asserting.  As I said to the FutureLearn people, it&amp;rsquo;s all about assessing how important your own concern is, and then working out whether it&amp;rsquo;s actually important to make a block.  If someone is trying to convince your friend to jump off a cliff, perhaps it is critical to jump in with a block, but even then perhaps a question about consequences is better?  And is it vital that the question is now in front of the group, or is it better to ask the question one on one?  My new resolution is stop making assertions, ask more questions and prefer to ask those questions to the smallest subset of people possible &amp;hellip; we&amp;rsquo;ll see how that goes :-)&lt;/p&gt;
 </content>
   </entry>
 </feed>
