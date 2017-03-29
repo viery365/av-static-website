@@ -91,7 +91,9 @@
       <div class="col-lg-8 text-left">
         <h2 class='title'><a href="/2016/11/17/semi-automatic/">Semi Automatic Asynchronous Planning Poker Bot</a></h2>
         <h5 class='date'>17 Nov 2016</h5>
-    <p>The AsyncVoter project has been humming recently.  A lot of people interested in coding in Node, putting a React front end together and so on.  They say that JavaScript is hot.  We&rsquo;ve also had new folks come in and start to understand some of the Agile development approach, self-organise to get a series of basic RESTful endpoints in place.  All great, but I was starting to worry that our little RESTful MVP was not really making enough contact with end users.  I was getting antsy that we needed to start automating some of the tedious and error-prone parts of running asynchronous votes manually in project slack channels.</p>
+    <p><img alt="semi automated agricultural process" src="/images/semi-automated.png" /></p>
+
+<p>The AsyncVoter project has been humming recently.  A lot of people interested in coding in Node, putting a React front end together and so on.  They say that JavaScript is hot.  We&rsquo;ve also had new folks come in and start to understand some of the Agile development approach, self-organise to get a series of basic RESTful endpoints in place.  All great, but I was starting to worry that our little RESTful MVP was not really making enough contact with end users.  I was getting antsy that we needed to start automating some of the tedious and error-prone parts of running asynchronous votes manually in project slack channels.</p>
 
 <p>I felt that Slack integration was key.  We had another vote on refactoring test support code so couldn&rsquo;t start another vote on Slack integration if I was to follow my own guidelines of no voting on multiple stories in parallel.  I settled for moving the Slack integration ticket to the top of the backlog and searching for integration mechanisms.  Several of our systems ping messages to Slack, but I wanted more.  Custom slash commands for Slack looked like they might work, but they had custom payloads that our RESTful endpoint wasn&rsquo;t set up to process.  I didn&rsquo;t like the idea of customising endpoint specifically for Slack, since it would be nice to support other clients as well.  I also wanted to be able to have a personal bot that our community members could interact with.  I went ahead and made a <a href="https://api.slack.com/bot-users">custom bot integration</a>:</p>
 
@@ -124,8 +126,7 @@
 <p><img alt="async bot results" src="https://www.dropbox.com/s/4s2pjly2u2emsaf/Screenshot%202016-11-17%2009.28.58.png?dl=1" /></p>
 
 <p>Here&rsquo;s the complete code for the bot:</p>
-<pre class="highlight javascript"><code>
-<span class="kd">var</span> <span class="nx">Botkit</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'botkit'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">Botkit</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'botkit'</span><span class="p">);</span>
 
 <span class="kd">var</span> <span class="nx">controller</span> <span class="o">=</span> <span class="nx">Botkit</span><span class="p">.</span><span class="nx">slackbot</span><span class="p">({</span>
   <span class="na">debug</span><span class="p">:</span> <span class="kc">false</span>
