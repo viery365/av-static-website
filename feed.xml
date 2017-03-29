@@ -5,10 +5,55 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-03-06T00:00:00+00:00</updated>
+  <updated>2017-03-07T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Analytics Visualization</title>
+    <link rel="alternate" href="http://blog.url.com/2017/03/07/analytics-visualization/"/>
+    <id>http://blog.url.com/2017/03/07/analytics-visualization/</id>
+    <published>2017-03-07T00:00:00+00:00</published>
+    <updated>2017-03-29T21:59:18+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="balance" src="/images/visualization.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I pushed out some changes to the main AgileVentures landing page last night.  I&amp;rsquo;d had a set ready from last week&amp;rsquo;s sprint on Friday, but rather than push them straight out I&amp;rsquo;d held them on staging and posted an image of them to the #websiteone channel on Slack:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="reworked home page" src="https://www.dropbox.com/s/1em05z5kzqdk0ln/Screenshot%202017-03-06%2013.13.56.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m glad that I did, as I got lots of great feedback.  I&amp;rsquo;d got a round of feedback in the &amp;ldquo;Kent Beck&amp;rdquo; scrum on Friday, but I wasn&amp;rsquo;t feeling entirely comfortable with the result, and the reaction from several in the #websiteone channel was that it didn&amp;rsquo;t look great and was a bit too wordy, so I held off to review things in Monday&amp;rsquo;s marketing meeting.  Lara asked, why move the button when it was already &amp;ldquo;working&amp;rdquo;. Marufa concurred there was too much text, and I was thinking maybe reduce the font size and add more whitespace padding/margin around it to make it all less busy.&lt;/p&gt;
+
+&lt;p&gt;However Lara also recommended an analytics plugin for Chrome which made me think rather differently.  The &lt;a href="https://chrome.google.com/webstore/detail/page-analytics-by-google/fnbdnhhicmebfgdgglcdacdapkcihcoh?hl=en"&gt;Page Analytics&lt;/a&gt; plugin by Google annotates a site with information about where users are clicking based on Google Analytics tracking.  It looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="page analytics plugin on AV.org" src="https://www.dropbox.com/s/5huv3vgkftr50wc/Screenshot%202017-03-07%2009.52.42.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is just a fantastic example of how data visualization can make all the difference.  All the other different displays of data and flow through the site in Google Analytics had so far failed to help me feel I was understanding what was going on as people browsed the site.  The main thing that really popped out of this visualization is that 13% of those arriving at the page did click through on the round &amp;ldquo;code&amp;rdquo; banner, followed by ~5% on the &amp;ldquo;learn&amp;rdquo; banner.  We&amp;rsquo;d had feedback from at least one user that they hadn&amp;rsquo;t realised the round banners were clickable, but clearly a non-trivial portion of recent visitors (the graphic above is from the last month&amp;rsquo;s traffic) are clicking through.&lt;/p&gt;
+
+&lt;p&gt;Now that might reflect the preponderence of those keywords being used in our AdWords campaigns.  Lara was saying the &amp;ldquo;Get started now to begin coding&amp;rdquo; button was working because we had 23% click through.  Although the way this plugin works, it can&amp;rsquo;t distinguish where a user is clicking; rather it seems it just checks which URL they land on next, as I see the &amp;ldquo;Sign up&amp;rdquo; link in the top right corner is also marked up with a 23%.  Now I assume that people are probably clicking through on the large visible button, but seeing that we clearly did have some non-trivial level of click through on the round banners, and that we had some questions about the proposed text only change, made me roll back the text change and just push out two other minor changes for guest users:&lt;/p&gt;
+
+&lt;p&gt;1) Change main call to action button text from &amp;ldquo;Sign up now to start coding&amp;rdquo; to &amp;ldquo;Get started now to begin coding&amp;rdquo;
+2) Change scrum link from title of scrum to &amp;ldquo;Want to learn more? Listen in. Next projects review meeting in x hours&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;These are less controversial and I hypothesize that the second might conceivably bring some more folks into hangouts, and we&amp;rsquo;ll be able to tell intuitively over the course of the week if there are any new faces showing up.  Maybe we should be A/B testing the change to the button text, but I can justify that quick fix in terms of making the text consistent with other changes we&amp;rsquo;ve been making on the other pricing and Premium pages.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m left conflicted about the next steps.  It seems sensible to see how the small changes impact things.  For bigger changes to the landing page it feels like we need 4 or 5 variations which could be kicked around by the various interested teams, and then perhaps we could A/B test a couple of alternatives if we can narrow down to two that we like.  The concern that Pat raised is that the landing page doesn&amp;rsquo;t immediately communicate our value proposition, and I tend to agree with him.  I think there are also a great number of other tweaks that could be made in other places to make the whole site look more pleasing and professional - things like the disabled direct signup component, the excessive and small font size text in several places.&lt;/p&gt;
+
+&lt;p&gt;Based on our sprint kick off on Friday I&amp;rsquo;m adjusting the site so that newly signed up users will be redirected to the getting started page.  That feels like a survivable experiment that might deliver some value.  However for all this tweaking I don&amp;rsquo;t have much evidence that any of the AdWords activity will actually lead to revenue generation.  Clearly if we can get the site into the shape where it does act as a funnel for those who might really derive value from AgileVentures, then that would be fantastic.  However I suspect that most who are coming in through our &amp;ldquo;learning to code&amp;rdquo; related keywords might be better served by CodeCademy and FreeCodeCamp.  Presumably if we carefully tweak our AdWords, over time we might be able to hit a seams of developers at junior, mid and senior level who&amp;rsquo;d want to get involved and take out Premium plans &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Anyhow it&amp;rsquo;s clear to me that so far the income we have has been generated by me reaching out directly to people via Email and Slack.  Getting people to sign up on our site of course swells the number we can email to, but then again if they are not the ones who&amp;rsquo;ll benefit from AgileVentures then it&amp;rsquo;s effort in vain.  Clearly the email newsletter needs to go out and we need to see what interest it generates.  I&amp;rsquo;m inclined to think that making some mobbing session videos available as examples of the benefits of Premium Mob might have more impact at the moment &amp;hellip; I guess we keep experimenting and analyzing AND visualizing&amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://youtu.be/rMgERi4w8W0"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=QzR72HpWaQk"&gt;Marketing meeting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=-CMIoFYLuqI"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Balance</title>
     <link rel="alternate" href="http://blog.url.com/2017/03/06/balance/"/>
@@ -252,33 +297,6 @@ Instead of the current variation in messaging
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://youtu.be/-MeZJ3-Vy6o"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=2lXoxNzX2Cw"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum and Kickoff meeting&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Not Much Programming</title>
-    <link rel="alternate" href="http://blog.url.com/2017/02/24/not-much-programming/"/>
-    <id>http://blog.url.com/2017/02/24/not-much-programming/</id>
-    <published>2017-02-24T00:00:00+00:00</published>
-    <updated>2017-03-21T21:35:42+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="typing at keyboard" src="/images/coding.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;As I review and publish blogs from several months ago to medium, it&amp;rsquo;s clear I&amp;rsquo;m doing a lot less programming than I was.  I&amp;rsquo;ve been doing more charity admin and, I guess, &amp;ldquo;business development&amp;rdquo;.  I&amp;rsquo;ve stopped pair programming regularly with Michael at least partly so that I can easily switch tasks through the day, but it is meaning that I won&amp;rsquo;t do a big chunk of coding unless I really clear space for it.  I am still reviewing a lot of code, looking at a lot of pull-requests, tech-tests, deploying code (devops?), running mob sessions and other bits and pieces.  I think the main things we&amp;rsquo;ve managed to achieve over the last year with the AgileVentures site is that it now looks better on mobile, the event creation process is more streamlined, and we have the Premium payment frameworks in place.&lt;/p&gt;
-
-&lt;p&gt;I guess that&amp;rsquo;s reasonable progress, but it feels like we&amp;rsquo;ve plateaued in terms of income from Premium members, for the moment at least.  Official approval as a Charity has unlocked Google&amp;rsquo;s AdWords grant which has quadrupled traffic to our site, and is slowly pushing up our free members, but not leading directly to any increase in income so far.  We did land a small grant from the WikiMedia EDU group which is now paying for project management for the WikiEduDashboard project, which is a significant step forward in terms of sustainability, and that seemed to come almost directly from my appearing on the Ruby Rogues podcast.  We have corporate sponsorship from drie, but further collaboration with drie and the edX MOOC collaboration are both held up by negotiations between UCBerkeley and edX about technicalities related to the re-release of the course.&lt;/p&gt;
-
-&lt;p&gt;For all my effort reaching out to potential sponsors online I&amp;rsquo;ve generated nothing concrete outside of introductions through friends.  Maybe it&amp;rsquo;s time to withdraw from all this online networking and focus on coding again?  The marketing team is looking like they are going to be perfectly capable of making great progress with just occasional input from me.  The first round of Premium signups came largely, I think, through me reaching out to people via email.  Alot of the upgrades have come through me reaching out to folks on Slack.  The things blocking the marketing team are coding and infrastructure issues, so me coding is probably going to be the thing that helps the most.&lt;/p&gt;
-
-&lt;p&gt;Of course, I&amp;rsquo;m also trying to write a book and start a podcast as long term &amp;ldquo;lead generation&amp;rdquo;, but I feel like it might be time for a coding binge &amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=fV1JYPRXCiw"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=x14sVgrKeoc"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
