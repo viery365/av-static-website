@@ -5,10 +5,55 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-03-08T00:00:00+00:00</updated>
+  <updated>2017-03-09T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Sprinting</title>
+    <link rel="alternate" href="http://blog.url.com/2017/03/09/sprinting/"/>
+    <id>http://blog.url.com/2017/03/09/sprinting/</id>
+    <published>2017-03-09T00:00:00+00:00</published>
+    <updated>2017-04-03T22:28:30+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="sprinting" src="/images/sprinting.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Well I totally failed to avoid Slack and Email before blogging this AM.  Again it was posting the update about the podcast that I&amp;rsquo;d listened to.  I&amp;rsquo;d had this idea to post to Twitter and then leave posting it to Slack till after the blog, but going into #techtalk on Slack I see a post by another community member, reply to that, post my podcast update and then I just don&amp;rsquo;t have the self-control not to look through the other channels.  And once I&amp;rsquo;ve done that, hell, I might as well look at my email :-) Perhaps, fortunately there was not too much going on, so I&amp;rsquo;m back at the blog pretty quickly.  I have found a Slack command line interface (&lt;a href="https://github.com/rlister/slackcat"&gt;SlackCat&lt;/a&gt;) that allows me to post an update without looking at the rest of the Slack.  Maybe I&amp;rsquo;ll use that tomorrow.&lt;/p&gt;
+
+&lt;p&gt;Of course just firing off to #techtalk without going in there to check if there&amp;rsquo;s an ongoing conversation might be a little inconsiderate.  Could I have some mechanism that would hold the update ready to go until the previous update didn&amp;rsquo;t have a question mark on the end?  Gosh, what a convoluted train of thought! :-) The structure I&amp;rsquo;m building to try and deal with a lack of willpower &amp;hellip; Maybe I need the willpower workout, or maybe it doesn&amp;rsquo;t matter if I don&amp;rsquo;t get straight to the blog &amp;hellip; just why are Slack and Email so addictive?&lt;/p&gt;
+
+&lt;p&gt;Anyway, I was going to try and link this all tangentially to the subject of Sprints, an important part of the Agile Scrum process whereby work is timeboxed into multi-week sprints.  I&amp;rsquo;ve been pretty lax on formal Sprints in the projects I&amp;rsquo;m managing recently.  We used to do them regularly on LocalSupport and WebSiteOne with a weekly meeting that tried to combine retrospective and planning elements.  As I&amp;rsquo;ve mentioned before, it seemed like there wasn&amp;rsquo;t much enthusiasm for the meetings, and it was quite de-motivating to go to the effort of arranging them when not many people would show up.  Or even more so if they would say they would turn up and then cancel at the last minute, or not even send word that they couldn&amp;rsquo;t make it.&lt;/p&gt;
+
+&lt;p&gt;However, reading more about Sprint philosophy for the book I&amp;rsquo;m writing on &amp;ldquo;Agile Methods in Open Source Projects&amp;rdquo; and Pat Bolger&amp;rsquo;s effective use of Sprints in the MetPlus and WikiEduDashboard projects, AND Michael&amp;rsquo;s enthusiasm for a new kind of structure to planning meetings in WebSiteOne, has got me all gung-ho for Sprints now.  It&amp;rsquo;s interesting how different areas of Agile, Scrum and XP overlap.  Pair programming is great for keeping focused on a task.  As I&amp;rsquo;ve dialled back the amount of pairing I do, I&amp;rsquo;ve been spending less time coding.  There are lots of admin things to do, and that&amp;rsquo;s partly why I&amp;rsquo;ve gone for more solo sessions, since they can be organised more easily at the last minute.  However in absence of pairing and a sprint structure, it&amp;rsquo;s easy for things to just drift.&lt;/p&gt;
+
+&lt;p&gt;Making a committment as part of a Sprint that a certain amount of work will get done during that Sprint is no guarantee that the work will get done.  However we&amp;rsquo;re now in our second week-long Sprint in the new WebSiteOne flow and I&amp;rsquo;m finding that committing to complete a certain number of tickets in a &amp;ldquo;formal&amp;rdquo; meeting is proving reasonably effective at keeping me on task in the absence of pairing.  It&amp;rsquo;s inspired me to start more formal Sprints for the LocalSupport, AsyncVoter and Redeemify projects.&lt;/p&gt;
+
+&lt;p&gt;We had a AsyncVoter kick off yesterday involving Arreche and myself in which we found ourselves a little early to vote on new features, but we both made commitments to sorting out certain infrastructure issues.  It&amp;rsquo;s too early to say whether this will all have a big long-term impact, but particuarly since the afternoon (UTC) Kent Beck scrums have been relatively slow recently, I&amp;rsquo;m going for making each one a &amp;ldquo;Sprint kick-off&amp;rdquo;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Monday (LocalSupport)&lt;/li&gt;
+&lt;li&gt;Tuesday ?&lt;/li&gt;
+&lt;li&gt;Wednesday (AsyncVoter&lt;/li&gt;
+&lt;li&gt;Thursday (Redeemify)&lt;/li&gt;
+&lt;li&gt;Friday (WebSiteOne)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I think maybe Redeemify should be on Tuesday.  Perhaps the daily scrums should be renamed after their project focus, instead of &amp;ldquo;Kent Beck&amp;rdquo;.  What I don&amp;rsquo;t want to do is give the impression that other project business couldn&amp;rsquo;t be discussed there &amp;hellip; maybe the thing to do is set up a repeating event that takes place after the &amp;ldquo;Kent Beck&amp;rdquo; scrum of scrums?  Rather than just letting the scrum event bleed over as I&amp;rsquo;m currently doing &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Maybe I should be going to take Agile and Scrum certification, but I&amp;rsquo;m not inspired by what feels to me like a rubber stamping process.  I feel like true learning comes from doing things in the trenches.  Trying out one technique, tweaking it, reflecting and so forth.  Not that I couldn&amp;rsquo;t learn something from seeing the inside of the &amp;ldquo;corporate&amp;rdquo; Agile/Scrum certification, but at arond £1000 a pop, I&amp;rsquo;ll need to sort my financial situation first.  Then again do you need to speculate to accumulate?  Should we perhaps be using the limited AV funds to pay for Agile certification for people like myself, Pat and Lara, so that we could advertise that projects brought to AV would have a dedicated certified scrum master?&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t know.  There is infinite flexibility.  I hate having to nail things down and saying we&amp;rsquo;ll do this or that.  I&amp;rsquo;d much rather let things evolve and see what happens; hear what people want then offer it, but I guess it&amp;rsquo;s exhausting for people to explain what they want.  You need to work out what they want through some other mechanism and then communicate to them that you have just what they need, so they can find it there all laid out for them &amp;hellip; maybe &amp;hellip; :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://youtu.be/QP1S5Tp4-TA"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=bI5sC-s1-Eo"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum and AsyncVoter kick off&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Grants and Prototyping</title>
     <link rel="alternate" href="http://blog.url.com/2017/03/08/grants-and-prototyping/"/>
@@ -212,52 +257,6 @@
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=1nWmG1f529c"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=29Y3Chv8WjE"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Commmunication and Coding</title>
-    <link rel="alternate" href="http://blog.url.com/2017/03/01/communication-and-coding/"/>
-    <id>http://blog.url.com/2017/03/01/communication-and-coding/</id>
-    <published>2017-03-01T00:00:00+00:00</published>
-    <updated>2017-03-22T22:23:33+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="feedback" src="/images/feedback.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I got some great feedback from FutureLearn after I&amp;rsquo;d followed up to say how much I enjoyed their technical test and interview process (which included discussion and pair programming).  Here&amp;rsquo;s what they said:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Thanks again for coming in — I’m glad you enjoyed the process.  We really liked your technical skills, initiative and enthusiasm. You obviously have a lot of programming and agile experience, and have a lot to offer the team in terms of coaching, mentoring and supporting other developers. Ultimately we didn’t make you an offer because we had concerns about your communication skills. Your interviewers sometimes found it difficult to follow the conversation and get direct answers to the questions they asked; there was a general sense that your answers were sometimes circuitous or unclear, and that you didn’t express very much curiosity about what exactly the job would entail or what working at FutureLearn more generally would be like. In the end it was a very difficult decision given your high level of technical skill, but overall we felt it was unlikely to work out given the difficulties that your interviewers had in communicating comfortably with you&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;to which I responded:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Thanks for coming back to me - that&amp;rsquo;s wonderful feedback, and I really appreciate you sharing.&lt;/p&gt;
-
-&lt;p&gt;It gives me great food for thought, and I think the concern about communication is a valid one.  It&amp;rsquo;s something I definitely need to work on.  I tend to think out loud, and so going forward I&amp;rsquo;m going to try some experiments with different layers of filtering on how I respond to questions.&lt;/p&gt;
-
-&lt;p&gt;As regards curiousity for what the job would entail and what working at FutureLearn would be like, I thought I was getting a really clear idea from the interview process itself.  Having taken courses on FutureLearn in the past, as well as having developed software and courses for edX as well as serving as a community manager for groups of edX instructors, everything I was hearing in the interview process gelled with how I imagined things would be, but it sounds like I could have worked harder to confirm my impressions.&lt;/p&gt;
-
-&lt;p&gt;Either way I can certainly understand how a perceived lack of curiosity would impact your decision.  Thanks again for taking the time to interview me and sorry it didn&amp;rsquo;t work out.&lt;/p&gt;
-
-&lt;p&gt;Best of luck with everything at FutureLearn.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So I was disappointed not to have been made an offer, particularly since it would have helped address some of the financial concerns I have at the moment, and it would have been exciting to explore the codebase of the FutureLearn MOOC platform.  That said, I really am extraordinarily grateful for the extra feedback from FutureLearn.  In the absence of those specifics I might have imagined that the code that I wrote as part of the technical test, or something about my pair programming style might have been at fault.  However the concern about my communication skills in the technical interview fits in rather well with feedback and comments that I&amp;rsquo;ve got from other quarters.  &lt;/p&gt;
-
-&lt;p&gt;The interesting question now is how to go about leveling up my communication skills. It sounds like it wouldn&amp;rsquo;t hurt to try a period where I spent additional time constructing answers before starting to speak.  It&amp;rsquo;s funny, there are so many online resources to help one learn to code, but level up your communication skills?  Well I googled for &amp;ldquo;improve your communication skills&amp;rdquo; and Google immediately highlighted:&lt;/p&gt;
-
-&lt;h3&gt;5 Ways to Improve Your Communication Skills&lt;/h3&gt;
-
-&lt;p&gt;1) Never talk over people&lt;br&gt;
-2) Don&amp;rsquo;t finish other people&amp;rsquo;s sentences&lt;br&gt;
-3) Paraphrase&lt;br&gt;
-4) Listen actively&lt;br&gt;
-5) Maintain eye contact  &lt;/p&gt;
-
-&lt;p&gt;from &lt;a href="www.lifehack.org/articles/communication/improve-communication-skills.html"&gt;www.lifehack.org/articles/communication/improve-communication-skills.html&lt;/a&gt; which is fairly clear.  Maybe not too hard then :-)  Stay tuned to this blog to hear about the results of my attempt to level up my communication skills &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
