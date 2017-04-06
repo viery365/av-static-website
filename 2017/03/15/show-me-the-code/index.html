@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Show me the Code</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_03 x2017_03_15 x2017_03_15_show-me-the-code x2017_03_15_show-me-the-code_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/03/15/show-me-the-code/">Show me the Code</a></h2>
+        <h5 class='date'>15 Mar 2017</h5>
+    <p><img alt="sprinting" src="/images/code.jpg" /></p>
+
+<p>Federico made a comment on one of my recent blogs:</p>
+
+<blockquote>
+<p>code<em>in</em>blog == good</p>
+</blockquote>
+
+<p>I wish I was coding more.  I am getting to do some code in the Premium mobbing sessions.  My productive coding efforts are snatched between meetings with me throwing up spikes to give myself bugs (in my feature branches) to fix and drive myself forward.  I have got quite excited about starting to code in Elixir.  Stephen Grider very kindly made his Udemy course available to Premium Mob members, and it&rsquo;s super high quality.   It&rsquo;s what I would love to see more MOOCs evolving towards.  Stephen has all the code in his <a href="https://github.com/StephenGrider/ElixirCode">repo on GitHub</a>, where we can see code like this from his initial example Elixir app for playing Cards:</p>
+<pre class="highlight viml"><code>  def <span class="k">load</span><span class="p">(</span>filename<span class="p">)</span> <span class="k">do</span>
+    case File<span class="p">.</span>read<span class="p">(</span>filename<span class="p">)</span> <span class="k">do</span>
+      <span class="p">{:</span>ok<span class="p">,</span> binary<span class="p">}</span> <span class="p">-&gt;</span> <span class="p">:</span>erlang<span class="p">.</span>binary_to_term binary
+      <span class="p">{:</span>error<span class="p">,</span> _reason<span class="p">}</span> <span class="p">-&gt;</span> <span class="s2">"That file does not exist"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre>
+<p>The snippet is a little chunk that will load a deck of cards from a file.  I was struck by some parallels with a pattern in Avdi Grimm&rsquo;s &ldquo;Confident Ruby&rdquo; that we are covering in our Ruby Mob:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">delete_files</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{})</span>
+  <span class="n">error_policy</span> <span class="o">=</span> <span class="n">options</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:on_error</span><span class="p">)</span> <span class="p">{</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="p">{</span> <span class="k">raise</span> <span class="n">error</span> <span class="p">}</span> <span class="p">}</span>
+  <span class="n">symlink_policy</span> <span class="o">=</span> <span class="n">options</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="ss">:on_symlink</span><span class="p">)</span> <span class="p">{</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="p">{</span> <span class="no">File</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+
+  <span class="n">files</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
+    <span class="k">begin</span>
+      <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">symlink?</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="n">symlink_policy</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+      <span class="k">else</span>
+        <span class="no">File</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+      <span class="k">end</span>
+    <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">error</span>
+      <span class="n">error_policy</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code>delete_files</code> method about is doing something more complex than the Elixir snippet.  Here we&rsquo;re seeing a method that has some default &ldquo;policies&rdquo;, that can be called in such a way that new policies are passed in on the fly:</p>
+<pre class="highlight ruby"><code><span class="n">delete_files</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> 
+             <span class="ss">on_error: </span><span class="o">-&gt;</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="p">{</span> <span class="p">},</span> 
+             <span class="ss">on_symlink: </span><span class="o">-&gt;</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="p">{</span> <span class="no">File</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">realpath</span><span class="p">(</span><span class="n">file</span><span class="p">))</span> <span class="p">})</span>
+</code></pre>
+<p>The interesting thing was that having refactored this far in his &ldquo;receive policies instread of data&rdquo; pattern Avdi said:</p>
+
+<blockquote>
+<p>At this point this example is clearly getting a little bit strained. And in general, code like this is probably a smell. There are some programming languages in which it is perfectly normal to pass lots of lambdas into methods, but in Ruby we typically try to Wnd more object-oriented approaches to composing behavior.</p>
+</blockquote>
+
+<p>Now admittedly the connection I&rsquo;m making between the Elixir and Ruby code is strained.  In some ways I was just picking up on what looks like a similarity in some of the symbols in the two languages.  Actually here what might seem like a similarity is in fact two different things.  Elixir&rsquo;s <code>case</code> statement is using <code>-&gt;</code> to indicate the cases, whereas Ruby is using it to specify anonymous lambdas.  That said, elements of case statements are perhaps best described as anonymous lambdas?  Confused, well, let me transcribe the Elixir code into Ruby:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> 
+    <span class="n">binary</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">binary</span><span class="p">.</span><span class="nf">unpack</span>
+  <span class="k">rescue</span>
+    <span class="s2">"That file does not exist"</span>
+  <span class="k">end</span>
+</code></pre>
+<p>Let&rsquo;s look at that side by side with the Elixir snippet again:</p>
+<pre class="highlight viml"><code>  def <span class="k">load</span><span class="p">(</span>filename<span class="p">)</span> <span class="k">do</span>
+    case File<span class="p">.</span>read<span class="p">(</span>filename<span class="p">)</span> <span class="k">do</span>
+      <span class="p">{:</span>ok<span class="p">,</span> binary<span class="p">}</span> <span class="p">-&gt;</span> <span class="p">:</span>erlang<span class="p">.</span>binary_to_term binary
+      <span class="p">{:</span>error<span class="p">,</span> _reason<span class="p">}</span> <span class="p">-&gt;</span> <span class="s2">"That file does not exist"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre>
+<p>Elixir is using some interesting techniques like &ldquo;pattern matching&rdquo; here.  There&rsquo;s a <a href="http://katafrakt.me/2016/02/13/quest-for-pattern-matching-in-ruby/">great blog on getting pattern matching in Ruby</a> with <a href="https://github.com/katafrakt/noaidi">noaidi</a>.  The pattern matching in use here is that the case statement is checking for matches returned from <code>File.read(filename)</code> to see if they are either in the form <code>{:ok, binary}</code> or <code>{:error, _reason}</code> with the bonus that if part of the pattern is an undeclared variable, then it gets assigned so that we can then refer to that variable in the body of the individual case condition, e.g. <code>:erlang.binary_to_term binary</code>.</p>
+
+<p>Part of what got me connecting all this up was that Ruby was throwing some of the same error types that Elixir returns, e.g.</p>
+<pre class="highlight plaintext"><code>2.3.1 :004 &gt; f = File.read('.gitignoreasda')
+Errno::ENOENT: No such file or directory @ rb_sysopen - .gitignoreasda
+</code></pre>
+<p>When we were playing with the Elixir code in the mob, I was seeing that the unused <code>_reason</code> variable was being set to :enoent when the file didn&rsquo;t exist, which gave me an idea for refactoring this snippet of Elixir code like so:</p>
+<pre class="highlight viml"><code>  def <span class="k">load</span><span class="p">(</span>filename<span class="p">)</span> <span class="k">do</span>
+    case File<span class="p">.</span>read<span class="p">(</span>filename<span class="p">)</span> <span class="k">do</span>
+      <span class="p">{:</span>ok<span class="p">,</span> binary<span class="p">}</span> <span class="p">-&gt;</span> <span class="p">:</span>erlang<span class="p">.</span>binary_to_term binary
+      <span class="p">{:</span>error<span class="p">,</span> <span class="p">:</span>enonet<span class="p">}</span> <span class="p">-&gt;</span> <span class="s2">"The file named '#{filename}' does not exist"</span>
+      <span class="p">{:</span>error<span class="p">,</span> reason<span class="p">}</span> <span class="p">-&gt;</span> <span class="s2">"Trying to load the file we got stuck with: #{reason}"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre>
+<p>which in Ruby would be:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> 
+    <span class="n">binary</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">binary</span><span class="p">.</span><span class="nf">unpack</span>
+  <span class="k">rescue</span> <span class="no">Errno</span><span class="o">::</span><span class="no">ENOENT</span>
+    <span class="s2">"The file named '</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="s2">' does not exist"</span>
+  <span class="k">rescue</span>
+    <span class="s2">"Trying to load the file we got stuck with: </span><span class="si">#{</span><span class="vg">$!</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+</code></pre>
+<p>Anyway, all good fun, but the thing that my brain is really grooving to is Avdi&rsquo;s comment about Ruby having better OO ways to manage anonymous lambdas and the thought that Elixir has eschewed the setup of having objects associating state with methods/functions, so that what might be a code smell in Ruby, might actually be the way to go in Elixir.  The really strange mental nexus for me is the next example from Stephen&rsquo;s course where he introduces Elixir structs, which are data structures of the type I am familiar from my C days - just structures of data, not associated with any methods/functions, e.g.</p>
+<pre class="highlight viml"><code>defmodule Identicon<span class="p">.</span>Image <span class="k">do</span>
+  defstruct hex<span class="p">:</span> nil<span class="p">,</span> <span class="k">color</span><span class="p">:</span> nil<span class="p">,</span> grid<span class="p">:</span> nil<span class="p">,</span> pixel_map<span class="p">:</span> nil
+<span class="k">end</span>
+</code></pre>
+<p>in almost the inverse fashion that Ruby modules are collections of methods divorced from any object state; although they can manipulate state when they get mixed in, but still &hellip; anyhow, we get Elixir methods in a different module like so:</p>
+<pre class="highlight viml"><code>  def build_grid<span class="p">(</span>%Identicon<span class="p">.</span>Image<span class="p">{</span>hex<span class="p">:</span> hex<span class="p">}</span> <span class="p">=</span> image<span class="p">)</span> <span class="k">do</span>
+    grid <span class="p">=</span>
+      hex
+      <span class="p">|&gt;</span> Enum<span class="p">.</span>chunk<span class="p">(</span><span class="m">3</span><span class="p">)</span>
+      <span class="p">|&gt;</span> Enum<span class="p">.</span>map<span class="p">(</span>&amp;mirror_row/<span class="m">1</span><span class="p">)</span>
+      <span class="p">|&gt;</span> List<span class="p">.</span>flatten
+      <span class="p">|&gt;</span> Enum<span class="p">.</span>with_index
+
+    %Identicon<span class="p">.</span>Image<span class="p">{</span>image <span class="p">|</span> grid<span class="p">:</span> grid<span class="p">}</span>
+  <span class="k">end</span>
+</code></pre>
+<p>This Elixir method is designed to work with a particular Elixir struct; specifically the Identicon.Image defined above, but there are no instance variables in Elixir so all data comes in from the method arguments and then gets passed out the return statement.  I know there&rsquo;s lots of strange new syntax here if you&rsquo;re not familiar with Elixir, in which case I strongly recommend Stephen&rsquo;s course, but the thing I want to focus on here is the the process of assignment from the argument struct to a local method variable:</p>
+<pre class="highlight viml"><code>%Identicon<span class="p">.</span>Image<span class="p">{</span>hex<span class="p">:</span> hex<span class="p">}</span> <span class="p">=</span> image
+</code></pre>
+<p>where we&rsquo;re using pattern matching to extract the hex part of the struct (the <code>image</code> argument) and assign it to the <code>hex</code> variable.  After processing and generating the <code>grid</code> variable in the body of the method, we then combine that with a copy of the incoming image argument to return a new struct that is the incoming struct plus some additional data:</p>
+<pre class="highlight viml"><code>%Identicon<span class="p">.</span>Image<span class="p">{</span>image <span class="p">|</span> grid<span class="p">:</span> grid<span class="p">}</span>
+</code></pre>
+<p>What really strikes me here (apart from a possible refactoring) that I&rsquo;ll go into in another blog, is that instance variables just seem completely unecessary.  I&rsquo;ve known for a while that the functional programmers eschew them, and we have heuristics in OO languages to avoid allowing unecessary state manipulation (e.g. preferring instance variables set up in an initializer rather than via accessors), but the breakthrough for me here is to see that we can still do all the OO domain modelling with structs.  We can even create a set of methods and procedures that are tied to working with those structs, but we don&rsquo;t seem to lose anything we really need as a result of losing instance variables.  This does seem extraordinarily powerful.  Maybe I&rsquo;m drinking the Kool-Aid, but I can&rsquo;t now think of a circumstance where we have to use an instance variable.</p>
+
+<p>Also, the fact that in Rails, active record models have this complexity, where they can get out of sync with the database due to their instance state, is tricky and hugely confusing for learning developers.  I suspect that problem completely disappears in Elixir/Phoenix.  Not that Rails isn&rsquo;t great in so many ways, but I&rsquo;d love someone to show me a real world coding problem that couldn&rsquo;t be addressed without instance variables (assuming no memory constraints).  It also seems to be you could code the Elixir way in Ruby by just refraining from using instance variables.  I start to wonder if parts of our CS educational OO edifice are just completely unnecessary and surplus to requirement, specifically &ldquo;instance variables&rdquo;.  <a href="https://twitter.com/tansakuu">Tweet me</a> with counter examples!   Let&rsquo;s get to the bottom of this! :-)</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>

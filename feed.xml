@@ -5,16 +5,139 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-03-14T00:00:00+00:00</updated>
+  <updated>2017-03-15T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Show me the Code</title>
+    <link rel="alternate" href="http://blog.url.com/2017/03/15/show-me-the-code/"/>
+    <id>http://blog.url.com/2017/03/15/show-me-the-code/</id>
+    <published>2017-03-15T00:00:00+00:00</published>
+    <updated>2017-04-06T22:14:25+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="sprinting" src="/images/code.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Federico made a comment on one of my recent blogs:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;code&lt;em&gt;in&lt;/em&gt;blog == good&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I wish I was coding more.  I am getting to do some code in the Premium mobbing sessions.  My productive coding efforts are snatched between meetings with me throwing up spikes to give myself bugs (in my feature branches) to fix and drive myself forward.  I have got quite excited about starting to code in Elixir.  Stephen Grider very kindly made his Udemy course available to Premium Mob members, and it&amp;rsquo;s super high quality.   It&amp;rsquo;s what I would love to see more MOOCs evolving towards.  Stephen has all the code in his &lt;a href="https://github.com/StephenGrider/ElixirCode"&gt;repo on GitHub&lt;/a&gt;, where we can see code like this from his initial example Elixir app for playing Cards:&lt;/p&gt;
+&lt;pre class="highlight viml"&gt;&lt;code&gt;  def &lt;span class="k"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;filename&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    case File&lt;span class="p"&gt;.&lt;/span&gt;read&lt;span class="p"&gt;(&lt;/span&gt;filename&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="p"&gt;{:&lt;/span&gt;ok&lt;span class="p"&gt;,&lt;/span&gt; binary&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;erlang&lt;span class="p"&gt;.&lt;/span&gt;binary_to_term binary
+      &lt;span class="p"&gt;{:&lt;/span&gt;error&lt;span class="p"&gt;,&lt;/span&gt; _reason&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;"That file does not exist"&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The snippet is a little chunk that will load a deck of cards from a file.  I was struck by some parallels with a pattern in Avdi Grimm&amp;rsquo;s &amp;ldquo;Confident Ruby&amp;rdquo; that we are covering in our Ruby Mob:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;delete_files&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{})&lt;/span&gt;
+  &lt;span class="n"&gt;error_policy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;fetch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:on_error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;symlink_policy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;fetch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:on_symlink&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="k"&gt;begin&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;symlink?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;symlink_policy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;
+      &lt;span class="n"&gt;error_policy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;delete_files&lt;/code&gt; method about is doing something more complex than the Elixir snippet.  Here we&amp;rsquo;re seeing a method that has some default &amp;ldquo;policies&amp;rdquo;, that can be called in such a way that new policies are passed in on the fly:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;delete_files&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+             &lt;span class="ss"&gt;on_error: &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt; 
+             &lt;span class="ss"&gt;on_symlink: &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;realpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The interesting thing was that having refactored this far in his &amp;ldquo;receive policies instread of data&amp;rdquo; pattern Avdi said:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;At this point this example is clearly getting a little bit strained. And in general, code like this is probably a smell. There are some programming languages in which it is perfectly normal to pass lots of lambdas into methods, but in Ruby we typically try to Wnd more object-oriented approaches to composing behavior.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now admittedly the connection I&amp;rsquo;m making between the Elixir and Ruby code is strained.  In some ways I was just picking up on what looks like a similarity in some of the symbols in the two languages.  Actually here what might seem like a similarity is in fact two different things.  Elixir&amp;rsquo;s &lt;code&gt;case&lt;/code&gt; statement is using &lt;code&gt;-&amp;gt;&lt;/code&gt; to indicate the cases, whereas Ruby is using it to specify anonymous lambdas.  That said, elements of case statements are perhaps best described as anonymous lambdas?  Confused, well, let me transcribe the Elixir code into Ruby:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+    &lt;span class="n"&gt;binary&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;binary&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;unpack&lt;/span&gt;
+  &lt;span class="k"&gt;rescue&lt;/span&gt;
+    &lt;span class="s2"&gt;"That file does not exist"&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let&amp;rsquo;s look at that side by side with the Elixir snippet again:&lt;/p&gt;
+&lt;pre class="highlight viml"&gt;&lt;code&gt;  def &lt;span class="k"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;filename&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    case File&lt;span class="p"&gt;.&lt;/span&gt;read&lt;span class="p"&gt;(&lt;/span&gt;filename&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="p"&gt;{:&lt;/span&gt;ok&lt;span class="p"&gt;,&lt;/span&gt; binary&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;erlang&lt;span class="p"&gt;.&lt;/span&gt;binary_to_term binary
+      &lt;span class="p"&gt;{:&lt;/span&gt;error&lt;span class="p"&gt;,&lt;/span&gt; _reason&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;"That file does not exist"&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Elixir is using some interesting techniques like &amp;ldquo;pattern matching&amp;rdquo; here.  There&amp;rsquo;s a &lt;a href="http://katafrakt.me/2016/02/13/quest-for-pattern-matching-in-ruby/"&gt;great blog on getting pattern matching in Ruby&lt;/a&gt; with &lt;a href="https://github.com/katafrakt/noaidi"&gt;noaidi&lt;/a&gt;.  The pattern matching in use here is that the case statement is checking for matches returned from &lt;code&gt;File.read(filename)&lt;/code&gt; to see if they are either in the form &lt;code&gt;{:ok, binary}&lt;/code&gt; or &lt;code&gt;{:error, _reason}&lt;/code&gt; with the bonus that if part of the pattern is an undeclared variable, then it gets assigned so that we can then refer to that variable in the body of the individual case condition, e.g. &lt;code&gt;:erlang.binary_to_term binary&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Part of what got me connecting all this up was that Ruby was throwing some of the same error types that Elixir returns, e.g.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;2.3.1 :004 &amp;gt; f = File.read('.gitignoreasda')
+Errno::ENOENT: No such file or directory @ rb_sysopen - .gitignoreasda
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When we were playing with the Elixir code in the mob, I was seeing that the unused &lt;code&gt;_reason&lt;/code&gt; variable was being set to :enoent when the file didn&amp;rsquo;t exist, which gave me an idea for refactoring this snippet of Elixir code like so:&lt;/p&gt;
+&lt;pre class="highlight viml"&gt;&lt;code&gt;  def &lt;span class="k"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;filename&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    case File&lt;span class="p"&gt;.&lt;/span&gt;read&lt;span class="p"&gt;(&lt;/span&gt;filename&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="p"&gt;{:&lt;/span&gt;ok&lt;span class="p"&gt;,&lt;/span&gt; binary&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;erlang&lt;span class="p"&gt;.&lt;/span&gt;binary_to_term binary
+      &lt;span class="p"&gt;{:&lt;/span&gt;error&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;enonet&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;"The file named '#{filename}' does not exist"&lt;/span&gt;
+      &lt;span class="p"&gt;{:&lt;/span&gt;error&lt;span class="p"&gt;,&lt;/span&gt; reason&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;"Trying to load the file we got stuck with: #{reason}"&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which in Ruby would be:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+    &lt;span class="n"&gt;binary&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;binary&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;unpack&lt;/span&gt;
+  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="no"&gt;Errno&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ENOENT&lt;/span&gt;
+    &lt;span class="s2"&gt;"The file named '&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;' does not exist"&lt;/span&gt;
+  &lt;span class="k"&gt;rescue&lt;/span&gt;
+    &lt;span class="s2"&gt;"Trying to load the file we got stuck with: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="vg"&gt;$!&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Anyway, all good fun, but the thing that my brain is really grooving to is Avdi&amp;rsquo;s comment about Ruby having better OO ways to manage anonymous lambdas and the thought that Elixir has eschewed the setup of having objects associating state with methods/functions, so that what might be a code smell in Ruby, might actually be the way to go in Elixir.  The really strange mental nexus for me is the next example from Stephen&amp;rsquo;s course where he introduces Elixir structs, which are data structures of the type I am familiar from my C days - just structures of data, not associated with any methods/functions, e.g.&lt;/p&gt;
+&lt;pre class="highlight viml"&gt;&lt;code&gt;defmodule Identicon&lt;span class="p"&gt;.&lt;/span&gt;Image &lt;span class="k"&gt;do&lt;/span&gt;
+  defstruct hex&lt;span class="p"&gt;:&lt;/span&gt; nil&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; nil&lt;span class="p"&gt;,&lt;/span&gt; grid&lt;span class="p"&gt;:&lt;/span&gt; nil&lt;span class="p"&gt;,&lt;/span&gt; pixel_map&lt;span class="p"&gt;:&lt;/span&gt; nil
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;in almost the inverse fashion that Ruby modules are collections of methods divorced from any object state; although they can manipulate state when they get mixed in, but still &amp;hellip; anyhow, we get Elixir methods in a different module like so:&lt;/p&gt;
+&lt;pre class="highlight viml"&gt;&lt;code&gt;  def build_grid&lt;span class="p"&gt;(&lt;/span&gt;%Identicon&lt;span class="p"&gt;.&lt;/span&gt;Image&lt;span class="p"&gt;{&lt;/span&gt;hex&lt;span class="p"&gt;:&lt;/span&gt; hex&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; image&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    grid &lt;span class="p"&gt;=&lt;/span&gt;
+      hex
+      &lt;span class="p"&gt;|&amp;gt;&lt;/span&gt; Enum&lt;span class="p"&gt;.&lt;/span&gt;chunk&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;|&amp;gt;&lt;/span&gt; Enum&lt;span class="p"&gt;.&lt;/span&gt;map&lt;span class="p"&gt;(&lt;/span&gt;&amp;amp;mirror_row/&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;|&amp;gt;&lt;/span&gt; List&lt;span class="p"&gt;.&lt;/span&gt;flatten
+      &lt;span class="p"&gt;|&amp;gt;&lt;/span&gt; Enum&lt;span class="p"&gt;.&lt;/span&gt;with_index
+
+    %Identicon&lt;span class="p"&gt;.&lt;/span&gt;Image&lt;span class="p"&gt;{&lt;/span&gt;image &lt;span class="p"&gt;|&lt;/span&gt; grid&lt;span class="p"&gt;:&lt;/span&gt; grid&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This Elixir method is designed to work with a particular Elixir struct; specifically the Identicon.Image defined above, but there are no instance variables in Elixir so all data comes in from the method arguments and then gets passed out the return statement.  I know there&amp;rsquo;s lots of strange new syntax here if you&amp;rsquo;re not familiar with Elixir, in which case I strongly recommend Stephen&amp;rsquo;s course, but the thing I want to focus on here is the the process of assignment from the argument struct to a local method variable:&lt;/p&gt;
+&lt;pre class="highlight viml"&gt;&lt;code&gt;%Identicon&lt;span class="p"&gt;.&lt;/span&gt;Image&lt;span class="p"&gt;{&lt;/span&gt;hex&lt;span class="p"&gt;:&lt;/span&gt; hex&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; image
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;where we&amp;rsquo;re using pattern matching to extract the hex part of the struct (the &lt;code&gt;image&lt;/code&gt; argument) and assign it to the &lt;code&gt;hex&lt;/code&gt; variable.  After processing and generating the &lt;code&gt;grid&lt;/code&gt; variable in the body of the method, we then combine that with a copy of the incoming image argument to return a new struct that is the incoming struct plus some additional data:&lt;/p&gt;
+&lt;pre class="highlight viml"&gt;&lt;code&gt;%Identicon&lt;span class="p"&gt;.&lt;/span&gt;Image&lt;span class="p"&gt;{&lt;/span&gt;image &lt;span class="p"&gt;|&lt;/span&gt; grid&lt;span class="p"&gt;:&lt;/span&gt; grid&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What really strikes me here (apart from a possible refactoring) that I&amp;rsquo;ll go into in another blog, is that instance variables just seem completely unecessary.  I&amp;rsquo;ve known for a while that the functional programmers eschew them, and we have heuristics in OO languages to avoid allowing unecessary state manipulation (e.g. preferring instance variables set up in an initializer rather than via accessors), but the breakthrough for me here is to see that we can still do all the OO domain modelling with structs.  We can even create a set of methods and procedures that are tied to working with those structs, but we don&amp;rsquo;t seem to lose anything we really need as a result of losing instance variables.  This does seem extraordinarily powerful.  Maybe I&amp;rsquo;m drinking the Kool-Aid, but I can&amp;rsquo;t now think of a circumstance where we have to use an instance variable.&lt;/p&gt;
+
+&lt;p&gt;Also, the fact that in Rails, active record models have this complexity, where they can get out of sync with the database due to their instance state, is tricky and hugely confusing for learning developers.  I suspect that problem completely disappears in Elixir/Phoenix.  Not that Rails isn&amp;rsquo;t great in so many ways, but I&amp;rsquo;d love someone to show me a real world coding problem that couldn&amp;rsquo;t be addressed without instance variables (assuming no memory constraints).  It also seems to be you could code the Elixir way in Ruby by just refraining from using instance variables.  I start to wonder if parts of our CS educational OO edifice are just completely unnecessary and surplus to requirement, specifically &amp;ldquo;instance variables&amp;rdquo;.  &lt;a href="https://twitter.com/tansakuu"&gt;Tweet me&lt;/a&gt; with counter examples!   Let&amp;rsquo;s get to the bottom of this! :-)&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Hangouts Filling Up</title>
     <link rel="alternate" href="http://blog.url.com/2017/03/14/hangouts-filling-up/"/>
     <id>http://blog.url.com/2017/03/14/hangouts-filling-up/</id>
     <published>2017-03-14T00:00:00+00:00</published>
-    <updated>2017-04-05T22:22:19+01:00</updated>
+    <updated>2017-04-05T22:23:36+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -203,38 +326,6 @@
 &lt;li&gt;&lt;a href="http://youtu.be/rMgERi4w8W0"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=QzR72HpWaQk"&gt;Marketing meeting&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=-CMIoFYLuqI"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Balance</title>
-    <link rel="alternate" href="http://blog.url.com/2017/03/06/balance/"/>
-    <id>http://blog.url.com/2017/03/06/balance/</id>
-    <published>2017-03-06T00:00:00+00:00</published>
-    <updated>2017-03-28T22:05:58+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="balance" src="/images/balance.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I didn&amp;rsquo;t have any Premium pairing this Sunday, and my twin boys&amp;rsquo; football match was rained off, so I had a relatively calm day, staying completely off Slack and Email.  I collapsed after lunch and slept for three hours - catching up lost sleep from the week where I&amp;rsquo;d been up in the night a few times.  The last couple of weeks haven&amp;rsquo;t been great sleep-wise.  A sudden alertness at 4am and then an inability to get back to sleep without listening to an hour of audio comedy.  Not that I don&amp;rsquo;t try just relaxing back into sleep, but after an hour of the same work and relationship thoughts going round in my head I get sick of it, and find audio comedy is a reasonably pleasant way of changing my internal dialogue.&lt;/p&gt;
-
-&lt;p&gt;I do end up feeling a bit of a failure when Steve Hagen and Eckhart Tolle say that there&amp;rsquo;s a simple step to enlightenment or awakeness available in every moment, and that we&amp;rsquo;re all supposed to be equipped to realise it. I had lots of moments of awareness/self-observation over the weekend, but that didn&amp;rsquo;t stop me from blowing up in a rage at my kids on two or three occasions.  I&amp;rsquo;ve got to balance that against the points when I didn&amp;rsquo;t blow up in a rage, or didn&amp;rsquo;t resist the moment and wrestle it forcefully into something that it currently wasn&amp;rsquo;t.  It&amp;rsquo;s funny, but I see an analogy with the Empire Strikes Back where Yoda tells Luke that he shouldn&amp;rsquo;t go off to help his friends (Han and Leia), because by turning aside from his main task he&amp;rsquo;ll threaten what they fight for.  Ironically Luke rushes to save his friends, but they save themselves and he isn&amp;rsquo;t the one who effects their escape.&lt;/p&gt;
-
-&lt;p&gt;I loved Star Wars growing up, but with the subsequent movies and a jaundiced adult eye it all seems rather trite and very militaristic; sort of glorifying a sanitised violence where no one actually bleeds.  Still I can&amp;rsquo;t help but notice that when I try to resist my children&amp;rsquo;s moods directly; when I try to prevent one from screaming their displeasure at another, that I seem to make the situation worse and not better.  Far more effective recently is not to resist their upset.  Naturally I still physically intervene if it&amp;rsquo;s actually coming to blows; but what I&amp;rsquo;m reducing is my protestations of &amp;ldquo;of course if you scream at him he&amp;rsquo;s not going to let you have it&amp;rdquo;, and so the reactions that I would get to those statements, e.g. &amp;ldquo;well he&amp;rsquo;s being rude to me and has made me upset!!&amp;rdquo; don&amp;rsquo;t fly back at me.  If I try to control my kids behaviours too strongly what I get is lots of justifications from each child about why their own bad behaviour is inevitable as a result of the poor behaviour of other parties.&lt;/p&gt;
-
-&lt;p&gt;Interestingly a lot of adult conversations can go the same way, and I&amp;rsquo;ve been guilty in the past of making justification after justification, when I&amp;rsquo;m starting to realise that &amp;ldquo;defending your corner&amp;rdquo;, so to speak, has a tendency to provoke additional attack.  I still have huge trouble with statements I disagree with.  I really find it difficult not to respond to them.  I feel like not responding is somehow tacit agreement.  That letting a statement stand unopposed is tantamount to conceding that it is the truth.   That&amp;rsquo;s just my perception - is there any truth in it?  Do other people think that the last unopposed statement reflects the group concensus? I&amp;rsquo;d be interested to know &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;On Friday we had various meetings, and what I&amp;rsquo;m grudgingly realising more and more is that my tendency to challenge statements I disagree with can make for longer and longer meetings.  I think I actually did a better job than usual.  I stayed in the moment in one meeting, frustrated that someone had said something that contradicted my own assertion, but realising to confront it would be to drag out part of the meeting, when I was judging that actually it was more important to move on to other things.  Who knows if that was the right decision?  Like the foolish(?) neighbour who keeps congratulating the wise(?) farmer in the Zen riddle, when does the story ever end?  When do we find out the true extent of all the consequences of every decision?  Never?&lt;/p&gt;
-
-&lt;p&gt;So the most important thing is not being taken over by the &amp;ldquo;unconscious&amp;rdquo; reaction to any situation?  Let the situation be; give yourself time to observe your internal mental state and then allow a &amp;ldquo;conscious&amp;rdquo; reaction to emerge?  Will that allow things to get better?  Let&amp;rsquo;s not attach ourselves to outcomes.  Let&amp;rsquo;s focus on being conscious in the current moment.  Maybe that&amp;rsquo;s the way to achieve true balance &amp;hellip; but then life&amp;rsquo;s such a complex puzzle, could managing it really be that simple?&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=drjxg5Gc_tQ"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=3OZx8NrT2FA"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum and WSO Kick Off&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=8tY4Tvew9Xs"&gt;BetaSaaSers AutoGraders meeting&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
