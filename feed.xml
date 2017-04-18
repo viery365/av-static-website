@@ -5,10 +5,76 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-03-15T00:00:00+00:00</updated>
+  <updated>2017-03-16T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Who Needs Frameworks</title>
+    <link rel="alternate" href="http://blog.url.com/2017/03/16/who-needs-frameworks/"/>
+    <id>http://blog.url.com/2017/03/16/who-needs-frameworks/</id>
+    <published>2017-03-16T00:00:00+00:00</published>
+    <updated>2017-04-18T22:11:39+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="sprinting" src="/images/frameworks.JPG" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I listen to a different podcast every morning.  Last Friday it was &lt;a href="http://www.greaterthancode.com/podcast/episode-014-rashaun-stovall-snuggs/"&gt;&amp;ldquo;Greater than Code&amp;rdquo; with Ra’Shaun Stovall (Snuggs)&lt;/a&gt;.  It was pretty mind expanding with quotes and questions like the following:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;seniors often try to hold on to the complexity they love&lt;/p&gt;
+
+&lt;p&gt;if you are presenting a problem and not suggesting a solution then you are part of the problem&lt;/p&gt;
+
+&lt;p&gt;why is open source so closed?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Snuggs comes from a US college football background and brings huge energy and lots of analogies.  Another idea he was introducing was that maybe we didn&amp;rsquo;t need so many front end frameworks.  I posted to that effect in the GreaterThanCode Slack and got a response that was worthy of a short blog post from Snuggs.  To paraphrase his response, Snuggs thinks no one is being accountable for hand holding the huge numbers of bootcamp grads from bootcamp to junior.  I&amp;rsquo;d certainly love to see AgileVentures fulfilling that role by having teams of bootcamp grads working on open source projects for charities and non-profits around the world.  We do have graduates from a number of bootcamps involved, but there&amp;rsquo;s a way to go, to perfect that support process.  It would be great if we could collaborate more with NYC.rb and RailsLink.  &lt;/p&gt;
+
+&lt;p&gt;Snuggs runs NYC.rb and that group have colonised the RailsLink Slack which just reached it&amp;rsquo;s 5000&amp;#39;th member.  He says:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;It&amp;rsquo;s to the point now where they are all teaching themselves and truth be told 3 juniors pairing with the proper guidance will become senior in months not years. I&amp;rsquo;ve seen it with my own eyes. And they are relentless at learning best practices. &lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I&amp;rsquo;m trying to get my head round the DevPunks and RailsLink communities that Snuggs is at the heart of.  I&amp;rsquo;ve been in the RailsLink Slack, but so far it seems like lots of Q&amp;amp;A.  I&amp;rsquo;m not quite following where to see the pairing and mentoring that Snuggs talks about, but I&amp;rsquo;m going to keep asking there.  I just watched Snuggs&amp;rsquo; video on &lt;a href="https://youtu.be/A5ad52AogJ8"&gt;&amp;ldquo;Why is Open Source so Closed?&amp;rdquo;&lt;/a&gt;.  He makes a great call out to travel and opening your mind.  Snuggs is so full of ideas and energy that I sometimes find it difficult to follow, but the way I&amp;rsquo;m hearing it is that Snuggs was surprised how there are so many cool things going on outside the Ruby world, e.g. in the JavaScript world, and is railing against the cliques that develop around individual programming languages, where for example Ruby devs might look down on JavaScript and PHP developers.  That&amp;rsquo;s a great message.&lt;/p&gt;
+
+&lt;p&gt;And I think that&amp;rsquo;s where the idea that maybe we don&amp;rsquo;t need quite so many frontend frameworks comes from.  I couldn&amp;rsquo;t find a blog post expressing the same sentiment as Snuggs, but I posted this &lt;a href="https://hackernoon.com/you-might-not-need-react-e5fd54611111#.ywyol38o9"&gt;&amp;ldquo;You might not need React&amp;rdquo;&lt;/a&gt; post, and we had some discussion there, but I wasn&amp;rsquo;t sure that I was properly articulating Snuggs&amp;rsquo; point.  In his &amp;gt;Code post, Snuggs referred me to his repo &lt;a href="https://github.com/snuggs/snuggsi"&gt;https://github.com/snuggs/snuggsi&lt;/a&gt; which includes polyfills that mirror parts of jQuery, e.g. &lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// Polyfill for Sizzle CSS selection&lt;/span&gt;
+
+&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;selector&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;// always returns a collection. Just like jQuery&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'string'&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="k"&gt;typeof&lt;/span&gt; &lt;span class="nx"&gt;selector&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;querySelectorAll&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;selector&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;selector&lt;/span&gt; &lt;span class="c1"&gt;// identity function&lt;/span&gt;
+
+&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'body'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt; &lt;span class="c1"&gt;// 1&lt;/span&gt;
+
+&lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;element&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;
+&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;element&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;  &lt;span class="c1"&gt;// true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What I&amp;rsquo;m hearing here is that modern JavaScript is evolving to the point that some parts of some frontend frameworks might be redundant.  It would be great to see some open source projects developed using that approach.  Of course there&amp;rsquo;s fear with change.  &amp;ldquo;If it&amp;rsquo;s not broken don&amp;rsquo;t fix it&amp;rdquo; can be a powerful mantra when you&amp;rsquo;ve been burnt by complex coding dependencies in the past &amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://youtu.be/A5ad52AogJ8"&gt;Snuggs on &amp;ldquo;Why is Open Source so Closed?&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;My Podcast Playlist:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://devchat.tv/ruby-rogues"&gt;Ruby Rogues&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://softskills.audio/"&gt;Soft Skills Engineering&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://devchat.tv/js-jabber"&gt;JavaScript Jabber&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://changelog.com/podcast"&gt;The Changelog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://devchat.tv/freelancers"&gt;Freelancer Show&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://softwareengineeringdaily.com/"&gt;Software Engineering Daily&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.greaterthancode.com/"&gt;Greater than Code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://rubybookclub.com/"&gt;Ruby Book Club&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Show me the Code</title>
     <link rel="alternate" href="http://blog.url.com/2017/03/15/show-me-the-code/"/>
@@ -281,51 +347,6 @@ Errno::ENOENT: No such file or directory @ rb_sysopen - .gitignoreasda
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Uqs3P_-sWfY"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=Zg9s5KCFlU8"&gt;Marketing Meeting&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=o-Z8uK2H-Sk"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Analytics Visualization</title>
-    <link rel="alternate" href="http://blog.url.com/2017/03/07/analytics-visualization/"/>
-    <id>http://blog.url.com/2017/03/07/analytics-visualization/</id>
-    <published>2017-03-07T00:00:00+00:00</published>
-    <updated>2017-03-29T22:04:14+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="balance" src="/images/visualization.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I pushed out some changes to the main AgileVentures landing page last night.  I&amp;rsquo;d had a set ready from last week&amp;rsquo;s sprint on Friday, but rather than push them straight out I&amp;rsquo;d held them on staging and posted an image of them to the #websiteone channel on Slack:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="reworked home page" src="https://www.dropbox.com/s/1em05z5kzqdk0ln/Screenshot%202017-03-06%2013.13.56.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m glad that I did, as I got lots of great feedback.  I&amp;rsquo;d got a round of feedback in the &amp;ldquo;Kent Beck&amp;rdquo; scrum on Friday, but I wasn&amp;rsquo;t feeling entirely comfortable with the result, and the reaction from several in the #websiteone channel was that it didn&amp;rsquo;t look great and was a bit too wordy, so I held off to review things in Monday&amp;rsquo;s marketing meeting.  Lara asked, why move the button when it was already &amp;ldquo;working&amp;rdquo;. Marufa concurred there was too much text, and I was thinking maybe reduce the font size and add more whitespace padding/margin around it to make it all less busy.&lt;/p&gt;
-
-&lt;p&gt;However Lara also recommended an analytics plugin for Chrome which made me think rather differently.  The &lt;a href="https://chrome.google.com/webstore/detail/page-analytics-by-google/fnbdnhhicmebfgdgglcdacdapkcihcoh?hl=en"&gt;Page Analytics&lt;/a&gt; plugin by Google annotates a site with information about where users are clicking based on Google Analytics tracking.  It looks like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="page analytics plugin on AV.org" src="https://www.dropbox.com/s/5huv3vgkftr50wc/Screenshot%202017-03-07%2009.52.42.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;This is just a fantastic example of how data visualization can make all the difference.  All the other different displays of data and flow through the site in Google Analytics had so far failed to help me feel I was understanding what was going on as people browsed the site.  The main thing that really popped out of this visualization is that 13% of those arriving at the page did click through on the round &amp;ldquo;code&amp;rdquo; banner, followed by ~5% on the &amp;ldquo;learn&amp;rdquo; banner.  We&amp;rsquo;d had feedback from at least one user that they hadn&amp;rsquo;t realised the round banners were clickable, but clearly a non-trivial portion of recent visitors (the graphic above is from the last month&amp;rsquo;s traffic) are clicking through.&lt;/p&gt;
-
-&lt;p&gt;Now that might reflect the preponderence of those keywords being used in our AdWords campaigns.  Lara was saying the &amp;ldquo;Get started now to begin coding&amp;rdquo; button was working because we had 23% click through.  Although the way this plugin works, it can&amp;rsquo;t distinguish where a user is clicking; rather it seems it just checks which URL they land on next, as I see the &amp;ldquo;Sign up&amp;rdquo; link in the top right corner is also marked up with a 23%.  Now I assume that people are probably clicking through on the large visible button, but seeing that we clearly did have some non-trivial level of click through on the round banners, and that we had some questions about the proposed text only change, made me roll back the text change and just push out two other minor changes for guest users:&lt;/p&gt;
-
-&lt;p&gt;1) Change main call to action button text from &amp;ldquo;Sign up now to start coding&amp;rdquo; to &amp;ldquo;Get started now to begin coding&amp;rdquo;
-2) Change scrum link from title of scrum to &amp;ldquo;Want to learn more? Listen in. Next projects review meeting in x hours&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;These are less controversial and I hypothesize that the second might conceivably bring some more folks into hangouts, and we&amp;rsquo;ll be able to tell intuitively over the course of the week if there are any new faces showing up.  Maybe we should be A/B testing the change to the button text, but I can justify that quick fix in terms of making the text consistent with other changes we&amp;rsquo;ve been making on the other pricing and Premium pages.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m left conflicted about the next steps.  It seems sensible to see how the small changes impact things.  For bigger changes to the landing page it feels like we need 4 or 5 variations which could be kicked around by the various interested teams, and then perhaps we could A/B test a couple of alternatives if we can narrow down to two that we like.  The concern that Pat raised is that the landing page doesn&amp;rsquo;t immediately communicate our value proposition, and I tend to agree with him.  I think there are also a great number of other tweaks that could be made in other places to make the whole site look more pleasing and professional - things like the disabled direct signup component, the excessive and small font size text in several places.&lt;/p&gt;
-
-&lt;p&gt;Based on our sprint kick off on Friday I&amp;rsquo;m adjusting the site so that newly signed up users will be redirected to the getting started page.  That feels like a survivable experiment that might deliver some value.  However for all this tweaking I don&amp;rsquo;t have much evidence that any of the AdWords activity will actually lead to revenue generation.  Clearly if we can get the site into the shape where it does act as a funnel for those who might really derive value from AgileVentures, then that would be fantastic.  However I suspect that most who are coming in through our &amp;ldquo;learning to code&amp;rdquo; related keywords might be better served by CodeCademy and FreeCodeCamp.  Presumably if we carefully tweak our AdWords, over time we might be able to hit a seams of developers at junior, mid and senior level who&amp;rsquo;d want to get involved and take out Premium plans &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Anyhow it&amp;rsquo;s clear to me that so far the income we have has been generated by me reaching out directly to people via Email and Slack.  Getting people to sign up on our site of course swells the number we can email to, but then again if they are not the ones who&amp;rsquo;ll benefit from AgileVentures then it&amp;rsquo;s effort in vain.  Clearly the email newsletter needs to go out and we need to see what interest it generates.  I&amp;rsquo;m inclined to think that making some mobbing session videos available as examples of the benefits of Premium Mob might have more impact at the moment &amp;hellip; I guess we keep experimenting and analyzing AND visualizing&amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://youtu.be/rMgERi4w8W0"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=QzR72HpWaQk"&gt;Marketing meeting&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=-CMIoFYLuqI"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
