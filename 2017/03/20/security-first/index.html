@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Security First</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_03 x2017_03_20 x2017_03_20_security-first x2017_03_20_security-first_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/03/20/security-first/">Security First</a></h2>
+        <h5 class='date'>20 Mar 2017</h5>
+    <p><img alt="security" src="/images/security.png" /></p>
+
+<p>We&rsquo;re in the process of rolling out &ldquo;https&rdquo; support on the main AgileVentures site.  We&rsquo;ve had &ldquo;https&rdquo; or &ldquo;ssl&rdquo; encoding set up on the LocalSupport project for a couple of years.  LocalSupport users are not a technical community so we don&rsquo;t have facebook, twitter or GitHub login.  We&rsquo;re storing a lot of personal address and phone number details there, and it was clear that without the right security we&rsquo;d be sending user passwords and data back and forth in the clear.  During the initial launch of LocalSupport we switched from where we had been developing (Heroku) to another service provider (NineFold) who offered us SSL free.  So the initial LocalSupport launch was fully secure.</p>
+
+<p>NineFold eventually folded and we moved back to Heroku where we now pay for the expedited SSL package for LocalSupport.  The AgileVentures site (WebSiteOne) was, and is, targeted at a more technical crowd.  We&rsquo;ve had GitHub and Google login via OAuth since close to the start.  By their nature these are secure.  We used to offer email signup, but shut that down a couple of years back, due to a proliferation of spam accounts, and haven&rsquo;t re-opened it.  In principle, users can still log in insecurely via emails they signed up with at the start, but I&rsquo;m not sure if anyone still does this, and new users all register via OAuth.  AgileVentures, the site, maintains all its data open for sharing, so security has seemed less of an issue, and the cost of setting up the SSL security always seemed to push its priority down the to-do list.</p>
+
+<p>In the last year we added payment support for Premium plans, first via Stripe and then via PayPal.  These are both secure in that user credit card details never touch our server - going instead directly to secure Stripe and PayPal servers.  So while in some ways that is sufficient security, Federico pointed out recently that the perception of a lack of security could be damaging.  We discussed in a WSO kickoff and got an <a href="https://github.com/AgileVentures/WebsiteOne/issues/1584">issue ticket</a> and I started working on it.  Federico provided a great screen shot of what a user might see while making a Stripe payment:</p>
+
+<p><img alt="insecure http in backdrop of stripe payment" src="https://camo.githubusercontent.com/8a1104bf54461a478267e35477ec4cd24e8af3b6/68747470733a2f2f7777772e64726f70626f782e636f6d2f732f7034363764347773686833616276322f696e7365637572652d41562d7072656d69756d2d7369676e75702d66697265666f782e706e673f646c3d31" /></p>
+
+<p>Now no potential Premium member has complained about this, but then again you wouldn&rsquo;t expect that kind of feedback.  Will fixing this unleash a wave of subscriptions? Probably not :-)  But it should get sorted, and while our whole community is based on openness, there are users who choose to de-activiate their accounts, and we need to respect their wishes, ensuring their data is secure when they want it to be hidden.</p>
+
+<p>Also, there&rsquo;s now LetsEcrypt, which promises us the ability to generate SSL certs that can be used in tandem with the SSL endpoints that are now bundled with Heroku&rsquo;s paid plans.  We have to have the AV site servers on Heroku paid plans for resources and also to have them part of Heroku&rsquo;s group plan.  Maybe one day we can migrate to Dokku on Azure as part of a cost saving exercise &hellip; we&rsquo;ll see how that goes with the AsynVoter project first.  In the meantime it seems sensible to get SSL all set up, and last week I managed to get it working on both the develop and staging servers.  I was initially distracted by the <a href="https://github.com/substrakt/letsencrypt-heroku">letsencrypt-heroku</a> project, but that only works for certain domain hosting solutions.  However a couple of blog posts set me straight:</p>
+
+<ul>
+<li>https://collectiveidea.com/blog/archives/2016/01/12/lets-encrypt-with-a-rails-app-on-heroku</li>
+<li>https://medium.com/@franxyzxyz/setting-up-free-https-with-heroku-ssl-and-lets-encrypt-80cf6eac108e#.gx52z5rvt</li>
+</ul>
+
+<p>Even if I had to combine elements of both to get us sorted.  The process was to install a program called <code>certbot</code>:</p>
+<pre class="highlight plaintext"><code>$ brew install certbot
+</code></pre>
+<p>Then I needed to generate a certificate manually:</p>
+<pre class="highlight plaintext"><code>$ sudo certbot certonly --manual
+</code></pre>
+<p>agree to have my IP logged and then adjust WSO so that it could respond to a security challenge.  I had to leave the certbot operation hanging while I deployed the following code:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">StaticPagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="n">before_filter</span> <span class="ss">:authenticate_user!</span><span class="p">,</span> <span class="ss">except: </span><span class="p">[</span><span class="ss">:show</span><span class="p">,</span> <span class="ss">:letsencrypt</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="nf">letsencrypt</span>
+    <span class="n">render</span> <span class="ss">text: </span><span class="s2">"</span><span class="si">#{</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">]</span><span class="si">}</span><span class="s2">.ENV['CERTBOT_SSL_CHALLENGE']"</span><span class="p">,</span> <span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+  <span class="k">end</span>
+</code></pre>
+<p>which then allowed the certbot challenge to be answered and various keys to be generated locally on my computer.  In the background I had also set the Rails config to force SSL:</p>
+<pre class="highlight ruby"><code><span class="n">config</span><span class="p">.</span><span class="nf">force_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+</code></pre>
+<p>and now I could deploy the locally generated keys via the Heroku CLI:</p>
+<pre class="highlight plaintext"><code>$ sudo heroku certs:add /etc/letsencrypt/live/develop.agileventures.org/fullchain.pem /etc/letsencrypt/live/develop.agileventures.org/privkey.pem -r develop
+</code></pre>
+<p>and we had SSL working!  There was more work though, as our Google and GitHub OAuth redirect URLs had to be updated to now refer to the HTTPS versions.  Once that was done, login and signup were working again, although I am slighltly suspicious that we may still encounter some problems.  Michael and I both experienced some issues on staging trying to log in, to get redirected to a sign up page indicating that our email already existed.  I have an intuition that previously generated OAuths may get invalidated and there may be something else we need to do.  I&rsquo;m not clear how seriously this will affect production &hellip; I can imagine that existing users may require resets.  I think the error message is a Devise one:</p>
+
+<p><img src="https://www.dropbox.com/s/eb2b4453pjo8mpc/Screenshot%202017-03-20%2010.23.52.png?dl=1" /></p>
+
+<p>Looking at the code, it&rsquo;s not clear what set of circumstances causes that.  Just reviewing on staging, I see I can log in via GitHub, but if I try to log in using Google with my tansaku email then I get an &ldquo;email already taken&rsquo; message (with a redirect to sign up page) and if I try with my NeuroGrid email I get &quot;csrf detected&rdquo; first time around (nothing in the JS console), but then second time it works.  I guess I could be trying to wrap tests around this, but I doubt my ability to fully replicate the actual production instance and I&rsquo;m just not sure how many others will experience this.  I held off deploying over the weekend - I guess I should ask more folks to try it out on staging &hellip;</p>
+
+<p>Either way I didn&rsquo;t actually manage to complete any of the WSO tickets I committed to in the last sprint, partly because of the SSL but also because I think I overcommitted.  I&rsquo;ve not taken on any new ones this week and am committing to trying to finish the ones I&rsquo;ve already started; even though there are loads of new exciting ones we have voted on.  Let&rsquo;s see how this week goes.  I really hope I can get the new security setup on production.</p>
+
+<h3>Related Videos:</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/edit?o=U&amp;video_id=bjbdQ9L-KHw">&ldquo;Martin Fowler&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/edit?o=U&amp;video_id=bi85l56Tcqg">&ldquo;Kent Beck&rdquo; scrum and WSO kickoff</a></li>
+<li><a href="https://www.youtube.com/edit?o=U&amp;video_id=Egf8LH_pRK0">&ldquo;Bob Martin&rdquo; scrum</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>

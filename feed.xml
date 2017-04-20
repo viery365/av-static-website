@@ -5,10 +5,75 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-03-17T00:00:00+00:00</updated>
+  <updated>2017-03-20T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Security First</title>
+    <link rel="alternate" href="http://blog.url.com/2017/03/20/security-first/"/>
+    <id>http://blog.url.com/2017/03/20/security-first/</id>
+    <published>2017-03-20T00:00:00+00:00</published>
+    <updated>2017-04-20T21:28:10+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="security" src="/images/security.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;re in the process of rolling out &amp;ldquo;https&amp;rdquo; support on the main AgileVentures site.  We&amp;rsquo;ve had &amp;ldquo;https&amp;rdquo; or &amp;ldquo;ssl&amp;rdquo; encoding set up on the LocalSupport project for a couple of years.  LocalSupport users are not a technical community so we don&amp;rsquo;t have facebook, twitter or GitHub login.  We&amp;rsquo;re storing a lot of personal address and phone number details there, and it was clear that without the right security we&amp;rsquo;d be sending user passwords and data back and forth in the clear.  During the initial launch of LocalSupport we switched from where we had been developing (Heroku) to another service provider (NineFold) who offered us SSL free.  So the initial LocalSupport launch was fully secure.&lt;/p&gt;
+
+&lt;p&gt;NineFold eventually folded and we moved back to Heroku where we now pay for the expedited SSL package for LocalSupport.  The AgileVentures site (WebSiteOne) was, and is, targeted at a more technical crowd.  We&amp;rsquo;ve had GitHub and Google login via OAuth since close to the start.  By their nature these are secure.  We used to offer email signup, but shut that down a couple of years back, due to a proliferation of spam accounts, and haven&amp;rsquo;t re-opened it.  In principle, users can still log in insecurely via emails they signed up with at the start, but I&amp;rsquo;m not sure if anyone still does this, and new users all register via OAuth.  AgileVentures, the site, maintains all its data open for sharing, so security has seemed less of an issue, and the cost of setting up the SSL security always seemed to push its priority down the to-do list.&lt;/p&gt;
+
+&lt;p&gt;In the last year we added payment support for Premium plans, first via Stripe and then via PayPal.  These are both secure in that user credit card details never touch our server - going instead directly to secure Stripe and PayPal servers.  So while in some ways that is sufficient security, Federico pointed out recently that the perception of a lack of security could be damaging.  We discussed in a WSO kickoff and got an &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1584"&gt;issue ticket&lt;/a&gt; and I started working on it.  Federico provided a great screen shot of what a user might see while making a Stripe payment:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="insecure http in backdrop of stripe payment" src="https://camo.githubusercontent.com/8a1104bf54461a478267e35477ec4cd24e8af3b6/68747470733a2f2f7777772e64726f70626f782e636f6d2f732f7034363764347773686833616276322f696e7365637572652d41562d7072656d69756d2d7369676e75702d66697265666f782e706e673f646c3d31" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now no potential Premium member has complained about this, but then again you wouldn&amp;rsquo;t expect that kind of feedback.  Will fixing this unleash a wave of subscriptions? Probably not :-)  But it should get sorted, and while our whole community is based on openness, there are users who choose to de-activiate their accounts, and we need to respect their wishes, ensuring their data is secure when they want it to be hidden.&lt;/p&gt;
+
+&lt;p&gt;Also, there&amp;rsquo;s now LetsEcrypt, which promises us the ability to generate SSL certs that can be used in tandem with the SSL endpoints that are now bundled with Heroku&amp;rsquo;s paid plans.  We have to have the AV site servers on Heroku paid plans for resources and also to have them part of Heroku&amp;rsquo;s group plan.  Maybe one day we can migrate to Dokku on Azure as part of a cost saving exercise &amp;hellip; we&amp;rsquo;ll see how that goes with the AsynVoter project first.  In the meantime it seems sensible to get SSL all set up, and last week I managed to get it working on both the develop and staging servers.  I was initially distracted by the &lt;a href="https://github.com/substrakt/letsencrypt-heroku"&gt;letsencrypt-heroku&lt;/a&gt; project, but that only works for certain domain hosting solutions.  However a couple of blog posts set me straight:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;https://collectiveidea.com/blog/archives/2016/01/12/lets-encrypt-with-a-rails-app-on-heroku&lt;/li&gt;
+&lt;li&gt;https://medium.com/@franxyzxyz/setting-up-free-https-with-heroku-ssl-and-lets-encrypt-80cf6eac108e#.gx52z5rvt&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Even if I had to combine elements of both to get us sorted.  The process was to install a program called &lt;code&gt;certbot&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ brew install certbot
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then I needed to generate a certificate manually:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ sudo certbot certonly --manual
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;agree to have my IP logged and then adjust WSO so that it could respond to a security challenge.  I had to leave the certbot operation hanging while I deployed the following code:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;StaticPagesController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
+  &lt;span class="n"&gt;before_filter&lt;/span&gt; &lt;span class="ss"&gt;:authenticate_user!&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;except: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:show&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:letsencrypt&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;letsencrypt&lt;/span&gt;
+    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;text: &lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.ENV['CERTBOT_SSL_CHALLENGE']"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:layout&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="kp"&gt;false&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which then allowed the certbot challenge to be answered and various keys to be generated locally on my computer.  In the background I had also set the Rails config to force SSL:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;force_ssl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and now I could deploy the locally generated keys via the Heroku CLI:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ sudo heroku certs:add /etc/letsencrypt/live/develop.agileventures.org/fullchain.pem /etc/letsencrypt/live/develop.agileventures.org/privkey.pem -r develop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and we had SSL working!  There was more work though, as our Google and GitHub OAuth redirect URLs had to be updated to now refer to the HTTPS versions.  Once that was done, login and signup were working again, although I am slighltly suspicious that we may still encounter some problems.  Michael and I both experienced some issues on staging trying to log in, to get redirected to a sign up page indicating that our email already existed.  I have an intuition that previously generated OAuths may get invalidated and there may be something else we need to do.  I&amp;rsquo;m not clear how seriously this will affect production &amp;hellip; I can imagine that existing users may require resets.  I think the error message is a Devise one:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/eb2b4453pjo8mpc/Screenshot%202017-03-20%2010.23.52.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Looking at the code, it&amp;rsquo;s not clear what set of circumstances causes that.  Just reviewing on staging, I see I can log in via GitHub, but if I try to log in using Google with my tansaku email then I get an &amp;ldquo;email already taken&amp;rsquo; message (with a redirect to sign up page) and if I try with my NeuroGrid email I get &amp;quot;csrf detected&amp;rdquo; first time around (nothing in the JS console), but then second time it works.  I guess I could be trying to wrap tests around this, but I doubt my ability to fully replicate the actual production instance and I&amp;rsquo;m just not sure how many others will experience this.  I held off deploying over the weekend - I guess I should ask more folks to try it out on staging &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Either way I didn&amp;rsquo;t actually manage to complete any of the WSO tickets I committed to in the last sprint, partly because of the SSL but also because I think I overcommitted.  I&amp;rsquo;ve not taken on any new ones this week and am committing to trying to finish the ones I&amp;rsquo;ve already started; even though there are loads of new exciting ones we have voted on.  Let&amp;rsquo;s see how this week goes.  I really hope I can get the new security setup on production.&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=bjbdQ9L-KHw"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=bi85l56Tcqg"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum and WSO kickoff&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=Egf8LH_pRK0"&gt;&amp;ldquo;Bob Martin&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Private Pairing</title>
     <link rel="alternate" href="http://blog.url.com/2017/03/17/private-pairing/"/>
@@ -332,51 +397,6 @@ Errno::ENOENT: No such file or directory @ rb_sysopen - .gitignoreasda
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=70T6fa4Tdck"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=MQBHqiJE5B4"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Sprinting</title>
-    <link rel="alternate" href="http://blog.url.com/2017/03/09/sprinting/"/>
-    <id>http://blog.url.com/2017/03/09/sprinting/</id>
-    <published>2017-03-09T00:00:00+00:00</published>
-    <updated>2017-04-03T22:28:30+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="sprinting" src="/images/sprinting.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Well I totally failed to avoid Slack and Email before blogging this AM.  Again it was posting the update about the podcast that I&amp;rsquo;d listened to.  I&amp;rsquo;d had this idea to post to Twitter and then leave posting it to Slack till after the blog, but going into #techtalk on Slack I see a post by another community member, reply to that, post my podcast update and then I just don&amp;rsquo;t have the self-control not to look through the other channels.  And once I&amp;rsquo;ve done that, hell, I might as well look at my email :-) Perhaps, fortunately there was not too much going on, so I&amp;rsquo;m back at the blog pretty quickly.  I have found a Slack command line interface (&lt;a href="https://github.com/rlister/slackcat"&gt;SlackCat&lt;/a&gt;) that allows me to post an update without looking at the rest of the Slack.  Maybe I&amp;rsquo;ll use that tomorrow.&lt;/p&gt;
-
-&lt;p&gt;Of course just firing off to #techtalk without going in there to check if there&amp;rsquo;s an ongoing conversation might be a little inconsiderate.  Could I have some mechanism that would hold the update ready to go until the previous update didn&amp;rsquo;t have a question mark on the end?  Gosh, what a convoluted train of thought! :-) The structure I&amp;rsquo;m building to try and deal with a lack of willpower &amp;hellip; Maybe I need the willpower workout, or maybe it doesn&amp;rsquo;t matter if I don&amp;rsquo;t get straight to the blog &amp;hellip; just why are Slack and Email so addictive?&lt;/p&gt;
-
-&lt;p&gt;Anyway, I was going to try and link this all tangentially to the subject of Sprints, an important part of the Agile Scrum process whereby work is timeboxed into multi-week sprints.  I&amp;rsquo;ve been pretty lax on formal Sprints in the projects I&amp;rsquo;m managing recently.  We used to do them regularly on LocalSupport and WebSiteOne with a weekly meeting that tried to combine retrospective and planning elements.  As I&amp;rsquo;ve mentioned before, it seemed like there wasn&amp;rsquo;t much enthusiasm for the meetings, and it was quite de-motivating to go to the effort of arranging them when not many people would show up.  Or even more so if they would say they would turn up and then cancel at the last minute, or not even send word that they couldn&amp;rsquo;t make it.&lt;/p&gt;
-
-&lt;p&gt;However, reading more about Sprint philosophy for the book I&amp;rsquo;m writing on &amp;ldquo;Agile Methods in Open Source Projects&amp;rdquo; and Pat Bolger&amp;rsquo;s effective use of Sprints in the MetPlus and WikiEduDashboard projects, AND Michael&amp;rsquo;s enthusiasm for a new kind of structure to planning meetings in WebSiteOne, has got me all gung-ho for Sprints now.  It&amp;rsquo;s interesting how different areas of Agile, Scrum and XP overlap.  Pair programming is great for keeping focused on a task.  As I&amp;rsquo;ve dialled back the amount of pairing I do, I&amp;rsquo;ve been spending less time coding.  There are lots of admin things to do, and that&amp;rsquo;s partly why I&amp;rsquo;ve gone for more solo sessions, since they can be organised more easily at the last minute.  However in absence of pairing and a sprint structure, it&amp;rsquo;s easy for things to just drift.&lt;/p&gt;
-
-&lt;p&gt;Making a committment as part of a Sprint that a certain amount of work will get done during that Sprint is no guarantee that the work will get done.  However we&amp;rsquo;re now in our second week-long Sprint in the new WebSiteOne flow and I&amp;rsquo;m finding that committing to complete a certain number of tickets in a &amp;ldquo;formal&amp;rdquo; meeting is proving reasonably effective at keeping me on task in the absence of pairing.  It&amp;rsquo;s inspired me to start more formal Sprints for the LocalSupport, AsyncVoter and Redeemify projects.&lt;/p&gt;
-
-&lt;p&gt;We had a AsyncVoter kick off yesterday involving Arreche and myself in which we found ourselves a little early to vote on new features, but we both made commitments to sorting out certain infrastructure issues.  It&amp;rsquo;s too early to say whether this will all have a big long-term impact, but particuarly since the afternoon (UTC) Kent Beck scrums have been relatively slow recently, I&amp;rsquo;m going for making each one a &amp;ldquo;Sprint kick-off&amp;rdquo;:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Monday (LocalSupport)&lt;/li&gt;
-&lt;li&gt;Tuesday ?&lt;/li&gt;
-&lt;li&gt;Wednesday (AsyncVoter&lt;/li&gt;
-&lt;li&gt;Thursday (Redeemify)&lt;/li&gt;
-&lt;li&gt;Friday (WebSiteOne)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I think maybe Redeemify should be on Tuesday.  Perhaps the daily scrums should be renamed after their project focus, instead of &amp;ldquo;Kent Beck&amp;rdquo;.  What I don&amp;rsquo;t want to do is give the impression that other project business couldn&amp;rsquo;t be discussed there &amp;hellip; maybe the thing to do is set up a repeating event that takes place after the &amp;ldquo;Kent Beck&amp;rdquo; scrum of scrums?  Rather than just letting the scrum event bleed over as I&amp;rsquo;m currently doing &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Maybe I should be going to take Agile and Scrum certification, but I&amp;rsquo;m not inspired by what feels to me like a rubber stamping process.  I feel like true learning comes from doing things in the trenches.  Trying out one technique, tweaking it, reflecting and so forth.  Not that I couldn&amp;rsquo;t learn something from seeing the inside of the &amp;ldquo;corporate&amp;rdquo; Agile/Scrum certification, but at arond £1000 a pop, I&amp;rsquo;ll need to sort my financial situation first.  Then again do you need to speculate to accumulate?  Should we perhaps be using the limited AV funds to pay for Agile certification for people like myself, Pat and Lara, so that we could advertise that projects brought to AV would have a dedicated certified scrum master?&lt;/p&gt;
-
-&lt;p&gt;I don&amp;rsquo;t know.  There is infinite flexibility.  I hate having to nail things down and saying we&amp;rsquo;ll do this or that.  I&amp;rsquo;d much rather let things evolve and see what happens; hear what people want then offer it, but I guess it&amp;rsquo;s exhausting for people to explain what they want.  You need to work out what they want through some other mechanism and then communicate to them that you have just what they need, so they can find it there all laid out for them &amp;hellip; maybe &amp;hellip; :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://youtu.be/QP1S5Tp4-TA"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=bI5sC-s1-Eo"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum and AsyncVoter kick off&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
