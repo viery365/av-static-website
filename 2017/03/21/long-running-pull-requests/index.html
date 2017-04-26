@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Long Running PRs</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_03 x2017_03_21 x2017_03_21_long-running-pull-requests x2017_03_21_long-running-pull-requests_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/03/21/long-running-pull-requests/">Long Running PRs</a></h2>
+        <h5 class='date'>21 Mar 2017</h5>
+    <p><img alt="security" src="/images/long_running.JPG" /></p>
+
+<p>So the SSL encryption is all now working on <a href="https://www.agileventures.org/">AgileVenture&rsquo;s production site</a>.  The slight login oddities on staging appear to have been just staging oddities.  I think maybe we could address them by re-cloning the production database to staging.  That would require upgrading the database plan there, but I guess we can afford that extra $9 a month to make sure our staging environment is closer to production.  Having staging replicate production as closely as possible is generally a good idea to increase the chances that production bugs can be solved on staging.  I took a risk yesterday pushing out to production, and it could have blown up in my face.  I followed a hunch and it seemed to work out.  I probably should pay fate back by doing that upgrade.</p>
+
+<p>Anyhow, so that means I completed 1 of the 4 story points that I committed to in last week&rsquo;s WebSiteOne sprint.  I haven&rsquo;t taken on any new points for this next sprint, and will see if I can close the others out this week.  We had the LocalSupport kick-off meeting yesterday and that&rsquo;s not quite following the same format as the WebSiteOne kick-off where the stakeholders bring tickets for discussion and voting.  The big difference is that any AgileVentures community member is a client for WebSiteOne.  For LocalSupport we have a specific charity client who I&rsquo;m now meeting every two weeks.  Maybe both sprints would be better off being two weeks long rather than a single week.  Although, with WebSiteOne I&rsquo;m still happy voting every week, even if we don&rsquo;t start on tickets.  That said, it seems like it&rsquo;s important to work on tickets soon after you vote on them, otherwise the voting goes stale and it becomes wasted effort.</p>
+
+<p>In the LocalSupport kick-off yesterday there were both new and old PRs that needed to be dealt with.  Rather than voting on new tickets, I suggested we focus on getting them sorted.  That gives me an idea for a model for the kick-off meetings going forward&ndash;that they could alternate between being voting sessions and board/PR clearing sessions.  I think the danger with fortnightly or bi-weekly meetings is that it&rsquo;s confusing to remember whether the meeting is on or not, and it&rsquo;s simpler and you get better attendance if the meeting is weekly.  Maybe the activity of the meeting can be determined as a function of the state of the project board.</p>
+
+<p>Anyhow, the state of the LocalSupport project was with five open pull-requests, three of which were long-running:</p>
+
+<ul>
+<li><a href="https://github.com/AgileVentures/LocalSupport/pull/427">Post our volunteer ops to Do-it via API key (Marouen)</a></li>
+<li><a href="https://github.com/AgileVentures/LocalSupport/pull/421">Incorporate reachskills volunteer opportunities (Zmago)</a></li>
+<li><a href="https://github.com/AgileVentures/LocalSupport/pull/424">Added unit test and a placeholder for integrated test (Marcelo)</a></li>
+</ul>
+
+<p>The last was a learning activity on a refactoring ticket from Marcelo, and I got his permission to close it and that we would work on it again when he was free.  Marcelo is busy with his day job, and that&rsquo;s totally fair enough.  It&rsquo;s a shame as I think there is a kind of critical mass for learning from pull-requests.  If the gaps between working on something are too great you end up forgeting pieces of the things you were focusing on and the results of earlier effort are lost.  Zmago&rsquo;s PR, related to ReachSkills integration, is stuck with a failure that&rsquo;s only happening on CI, and Marouen had just finished a big PR for posting volunteer opportunities to the DoIt API.  Marouen needs input and I know it will take me a run up to get into it and give good feedback.  Zmago&rsquo;s CI-only (JavaScript timing?) failure is one of the frustrating long debug cycle issues that&rsquo;s a real pain to fix.  I spent the first part of the kick-off outlining these PRs to Mahesh, Sigu, Cess and Stella.  As relative newcomers to the project it would be difficult for these four to move us forward on the outstanding PRs, but I encouraged them to take a look over and comment if they could.  Every little helps :-)</p>
+
+<p>Then the second half of the meeting we focused on the CodeClimate issues that were being flagged up on Cess and Stella&rsquo;s pull-requests.  They were mainly class length and method length issues.  Reducing class size on the relevant controller would involve pulling out a service; a refactoring that I judged too complicated to get into right there.  I focused on the class length issue and how we could refactor out new methods, and even use before/after actions in the Rails controller.  We wrapped up looking at Mahesh&rsquo;s proposal to add binding.pry support.  I wasn&rsquo;t convinced that binding.pry let us do anything we couldn&rsquo;t do with byebug, but Sigu pointed out that there was no harm in having both, and letting devs choose whichever they prefer.  I agreed, but I wonder if I&rsquo;d quashed Mahesh&rsquo;s enthusiasm.  That&rsquo;s the old Sam coming back.  I hear statements like &ldquo;binding.pry let&rsquo;s us step into methods and has code completion&rdquo;, and I know I can do both these things in byebug, so the academic in me wants to show that.  However showing that can be considered a block.  Perhaps better to just to express unalloyed enthusiasm for binding.pry to encourage Mahesh to submit a PR?</p>
+
+<p>I&rsquo;ve got another cold and I wasn&rsquo;t on the ball yesterday.  I don&rsquo;t know what the right thing is to do.  My natural flow of mind is just to say what I think, and if something seems unnecessary I say so, but that can quash people&rsquo;s enthusiasm.  Does it follow that learners need to be working on toy projects where it doesn&rsquo;t matter what code they add and an explosion of complexity is a learning experience that doesn&rsquo;t have any negative impact on the end-user?  At some point folks do need to graduate beyond toy projects if they want to increase the chances of building things of value to others; balancing the different needs of the different project stakeholders.  In this case I think I should have just expressed enthusiasm for the &ldquo;offer&rdquo;.  It wasn&rsquo;t worth making the point about byebug works.  It could have been an opportunity for me to learn more about binding.pry.  Instead of demo-ing byebug features, I could have had Mahesh work me through the binding.pry install locally and I could have started the PR with him in collaboration.  Oh well, we live and learn :-)</p>
+
+<p>But still, the critical thing that I should have been directing my attention to was Zmago and Marouen&rsquo;s pull-requests.  Zmago is a Premium Mob member and Marouen is a Premium mentor.  I&rsquo;m blogging about this all partly to force myself to analyze the issues more deeply. Zmago had tried adding some time-outs to his CI failing acceptance tests, but now the CI seemed to be stuck on an unrelated install error.  Zmago had previously given me access to his forked repo, so I thought I&rsquo;d try to roll back to the previous error and take a closer look.  In the process of doing that I realised I could grab the previous error from the older Travis logs.  What we were getting is this:</p>
+<pre class="highlight plaintext"><code> Scenario: See a list of current reachskills volunteer opportunities with a link to organisation page                        # features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:32
+    Given I visit the volunteer opportunities page                                                                            # features/step_definitions/navigation_steps.rb:49
+    Then the index should contain:                                                                                            # features/step_definitions/basic_steps.rb:521
+      | Fundraising Volunteer | The volunteer will be required to work with the fundraising consultant research trusts and corporate grant making foundations appropriate to the ... | Chalkhill Community Centre |
+      expected to find text "Fundraising Volunteer" in " ...
+
+cucumber -p first_try features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:32
+</code></pre>
+<p>and</p>
+<pre class="highlight plaintext"><code>Google Geocoding API error: over query limit.
+  Scenario: Reachskills volunteer opportunities are opened in a new page # features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:42
+    Given I visit the volunteer opportunities page                       # features/step_definitions/navigation_steps.rb:49
+    Then I should open "Fundraising Volunteer" in a new window           # features/step_definitions/volunteer_op_steps.rb:98
+      Unable to find link "Fundraising Volunteer" (Capybara::ElementNotFound) ...
+
+cucumber -p first_try features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:42      
+
+</code></pre>
+<p>I noticed a &ldquo;Google Geocoding API error: over query limit.&rdquo; message - I wondered what was happening with the cache.  The billy and vcr caches should be preventing the CI tests from hitting the real Google server. That lead me to notice that Piotr added the vcr and puffing billy caches to the .gitignore file last November. </p>
+<pre class="highlight plaintext"><code>features/vcr_cassettes
+features/req_cache
+</code></pre>
+<p>Probably as part of the bootstrap upgrade.  It&rsquo;s understandable - those changing caches make PRs and checking git status a pain.  I hadn&rsquo;t noticed that change.  Could that be a factor here?  A red herring - even with the timeout&rsquo;s removed, Zmago&rsquo;s CI was still stuck on installing a gem &hellip;</p>
+<pre class="highlight plaintext"><code>Installing eventmachine_httpserver 0.2.1 with native extensions
+</code></pre>
+<p>was that some other weird timeout unrelated?  CI was passing for Stella and Cess. I decided to remove the VCR and billy fixtures from .gitignore.  That showed me loads of local files in the caches on git status, arising from my local test runs.  I deleted all caches (labelled fixtures) locally and re-checked out from git, and then kicked off a full cucumber test run to bring the local caches up to date.  The plan being to get full caches from a complete test run checked in and then pushed up to CI.  Perhaps that would allow Zmago&rsquo;s PR to pass?  Actually it allowed me to replicate the error locally - now we were getting somewhere &hellip; to be continued tomorrow!</p>
+
+<h3>Related Videos:</h3>
+
+<ul>
+<li><a href="https://youtu.be/D62ZcBOnNsc">&ldquo;Kent Beck&rdquo; scrum and LocalSupport kick off</a></li>
+</ul>
+
+<p>p.s. for Cucumber and RSpec I&rsquo;d really like to adjust the output on CI so that it was progress dots for the passing tests, and full stack traces for the failure - I should investigate or open an <a href="https://github.com/cucumber/cucumber-ruby/issues/new">issue</a></p>
+
+<p>p.p.s. opened <a href="https://github.com/cucumber/cucumber-ruby/issues/1094">one</a></p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
