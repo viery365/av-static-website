@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Debugging by Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_03 x2017_03_22 x2017_03_22_debugging-by-blog x2017_03_22_debugging-by-blog_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/03/22/debugging-by-blog/">Debugging by Blog</a></h2>
+        <h5 class='date'>22 Mar 2017</h5>
+    <p><img alt="security" src="/images/debugging.png" /></p>
+
+<p>Right, on to part 2 of &ldquo;debugging by blog&rdquo;, my attempt to force myself to work through code blockers while debugging.  Currently it&rsquo;s LocalSupport, where we&rsquo;ve had a weird CI failure that wasn&rsquo;t replicated locally for myself or Zmago on our respective machines.  As I poked at it yesterday while &ldquo;blog debugging&rdquo; I found that the cached fixture files for VCR and PuffingBilly had been added to .gitignore.  This meant that the CI was hitting the 3rd party endpoints such as Google, Do-It, ReachSkills etc. as part of our CI test runs.  I can see why those folders would get added to .gitignore.  Whenever there is some change in the outgoing network connections from our code, those files will change.  Developers will see all these changes in their <code>git status</code> checks and not think them worth checking in.  They may even fully understand that they are creating a network sandbox around our code, but just not want to deal with the hassle of them.</p>
+
+<p>The danger of not checking them in is that when developing a new feature, the cached network responses will be saved on a local developers machine, and then subsequent code changes may not necessarily produce the same outputs if the system was actively connected to the network.  I suspect this is what has happened with Zmago&rsquo;s pull request.  Now that I removed those folders from the .gitignore file and reset the VCR/PuffingBilly fixture caches I am able to replicate the error locally.  Here is the error:</p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/LocalSupport (133663043_add_reachskills_vol_ops)]$ 
+→ cucumber features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:32
+[Coveralls] Using SimpleCov's 'rails' settings.
+[DEPRECATION] `require 'billy/cucumber'` is deprecated. Please use `require 'billy/capybara/cucumber'` instead.
+Using the default profile...
+@vcr @javascript @billy
+Feature: Reachskills volunteer opportunities
+  As a member of the public
+  So that I can see where organisations with volunteer opportunities are located
+  I would like to see a map of reachskills volunteer opportunities
+
+  Background:                                                          # features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:7
+    Given that the doit_volunteer_opportunities flag is enabled        # features/step_definitions/volunteer_op_steps.rb:60
+    Given that the reachskills_volunteer_opportunities flag is enabled # features/step_definitions/volunteer_op_steps.rb:60
+    And I run the import reachskills service                           # features/step_definitions/volunteer_op_steps.rb:35
+    And cookies are approved                                           # features/step_definitions/authentication_steps.rb:98
+
+  Scenario: See a list of current reachskills volunteer opportunities with a link to organisation page                        # features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:32
+    Given I visit the volunteer opportunities page                                                                            # features/step_definitions/navigation_steps.rb:49
+      #    And wait for 3 seconds
+    Then the index should contain:                                                                                            # features/step_definitions/basic_steps.rb:521
+      | Fundraising Volunteer | The volunteer will be required to work with the fundraising consultant research trusts and corporate grant making foundations appropriate to the ... | Chalkhill Community Centre |
+      expected to find text "Fundraising Volunteer" in "Search Text &lt;snip&gt; ..." (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/basic_steps.rb:525:in `block (3 levels) in &lt;top (required)&gt;'
+      ./features/step_definitions/basic_steps.rb:524:in `block (2 levels) in &lt;top (required)&gt;'
+      ./features/step_definitions/basic_steps.rb:523:in `each'
+      ./features/step_definitions/basic_steps.rb:523:in `/^the index should( not)? contain:$/'
+      features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:35:in `Then the index should contain:'
+    Then I should see a link to "Chalkhill Community Centre" page "https://reachskills.org.uk/org/chalkhill-community-centre" # features/step_definitions/volunteer_op_steps.rb:80
+
+Failing Scenarios:
+cucumber features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:32 # Scenario: See a list of current reachskills volunteer opportunities with a link to organisation page
+
+1 scenario (1 failed)
+7 steps (1 failed, 1 skipped, 5 passed)
+0m4.523s
+</code></pre>
+<p>The problem here is that this test is relying on some data from a ReachSkills opportunity that is no longer on the ReachSkills site.  The test passes if I update the details on the volunteer opportunity that is being checked for in the test.  Now the critical thing is to commit the relevant VCR files into git in along with the test and everything should pass on CI.  Irritatingly, failing test runs and runs of tests on other branches can generate a lot of noise in the VCR/PuffingBilly caches, so I use the following strategy to get ready for a commit:</p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/LocalSupport (133663043_add_reachskills_vol_ops)]$ 
+→ rm -rf features/req_cache
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/LocalSupport (133663043_add_reachskills_vol_ops)]$ 
+→ rm -rf features/vcr_cassettes
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/LocalSupport (133663043_add_reachskills_vol_ops)]$ 
+→ git checkout features/req_cache
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/LocalSupport (133663043_add_reachskills_vol_ops)]$ 
+→ git checkout features/vcr_cassettes
+</code></pre>
+<p>Although it does get more complicated than that if some files have already been added or committed.  Then I run the working tests to generate the VCR and PuffingBilly cache files which show up in git status like so:</p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/LocalSupport (133663043_add_reachskills_vol_ops)]$ 
+→ gst
+On branch 133663043_add_reachskills_vol_ops
+Your branch is up-to-date with 'zmago/133663043_add_reachskills_vol_ops'.
+Changes to be committed:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+
+    modified:   .gitignore
+
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+
+    modified:   db/schema.rb
+    modified:   features/volunteer_opportunities/reachskills_volunteer_opportunities.feature
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+
+    features/req_cache/get_maps.google.com_003bbc256d1363a112f914cfb75db8bfd1ba9186.yml
+    features/req_cache/get_maps.google.com_4907fe14430b7875f162d6a087ab9fe810cef4c4.yml
+    features/req_cache/get_maps.google.com_4b140e4c1e7dd61c9ed03042a6ea3173b0f93c21.yml
+    features/req_cache/get_maps.google.com_59e27d9935cf723e2f772afbbb6222428b8f7303.yml
+    features/req_cache/get_maps.google.com_903f013d4d1032501baea6f534b38e924321b4b6.yml
+    features/req_cache/get_maps.google.com_9bb449f46f323b9bb6bf3ffb8d4e3d1f4c0bdb9b.yml
+    features/req_cache/get_maps.google.com_b10b2089367dc41afe11f20775ff8cd4aad2f31e.yml
+    features/req_cache/get_maps.google.com_b43294d3c3efeaa9c1138646be862df98e08a75a.yml
+    features/req_cache/get_maps.google.com_d02253d8c9679439fe590dae8bf9b93cadefe83c.yml
+    features/req_cache/get_maps.googleapis.com_f0a259f6b2f5f73b6d54fa224b954d14213b7bc0.yml
+    features/req_cache/get_maps.gstatic.com_7b3f3d37460a085af155862dc94328ad3916985d.yml
+    features/vcr_cassettes/Reachskills_volunteer_opportunities/
+</code></pre>
+<p>which I can now add, and things should pass reliably on CI.  So my original diagnosis of a JavaScript timing issue was incorrect.  VCR/PuffingBilly are powerful tools, but it seems rather easy for developers of all skills levels to impale themselves on them.  I&rsquo;m not sure what the best way forward is.  It reminds me of Donald Norman&rsquo;s &ldquo;The Design of Everyday Things&rdquo; in which he points out how an incorrect mental model of something can make its use terribly problematic.  His example is from a fridge thermostat, but I can see exactly the same pattern here.</p>
+
+<p>The real difficulty in some ways is the interaction between the caching of network interaction and the git version management.  We&rsquo;ve got some similar issues on WebSiteOne.  More blogs to come on this I think.  I also wanted to get onto outstanding questions on other PRs from Marouen and Olena, but that will need to wait till tomorrow as it looks like the MOOC might be cranking up to go live and so I&rsquo;m needing to get alot of things in gear very quickly.  At least blogging about the debugging process is helping ensure that I actually get some sticky things unblocked, rather than just navel gazing about why all socio-technical processes seem so hard :-)</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
