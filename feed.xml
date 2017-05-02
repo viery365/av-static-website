@@ -5,10 +5,74 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-03-22T00:00:00+00:00</updated>
+  <updated>2017-03-23T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Pull Request Feedback by Blog</title>
+    <link rel="alternate" href="http://blog.url.com/2017/03/23/pullrequest-feedback-by-blog/"/>
+    <id>http://blog.url.com/2017/03/23/pullrequest-feedback-by-blog/</id>
+    <published>2017-03-23T00:00:00+00:00</published>
+    <updated>2017-05-02T21:38:27+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="feedback" src="/images/feedback2.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So in the blogs over the last two days I managed to get to the bottom of the problems on one LocalSupport pull request from a Premium member (Zmago).  It&amp;rsquo;s clear from that experience that I&amp;rsquo;ve got to adjust the develop branch so that VCR/PuffingBilly caches are all up to date and correct, or no other developers are going to get a correct read on what&amp;rsquo;s going on with network connections.  I&amp;rsquo;ve also got another pull request on a complex three point feature, that I need to spend some concentrated review time on.&lt;/p&gt;
+
+&lt;p&gt;Maybe I should have been opening another PR to fix up precisely that issue but I started by pulling down Marouen&amp;rsquo;s &amp;ldquo;Post Volunteer Opportunities to DoIt&amp;rdquo; branch locally and re-running it with the caches in place - I opened a PR on that basis - but it went to my old tansaku fork. I really need to disconnect that.&lt;/p&gt;
+
+&lt;p&gt;Then I got down to reviewing Marouen&amp;rsquo;s PR, file by file, using the &amp;ldquo;compare with develop branch&amp;rdquo; feature in RubyMine, which is maybe a funny way to review, but well - start at the beginning.  I made the following notes as I worked through:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;doit&lt;em&gt;volunteer&lt;/em&gt;ops.js file being loaded on every page&lt;/li&gt;
+&lt;li&gt;doit&lt;em&gt;volunteer&lt;/em&gt;ops.js hits local &lt;code&gt;/doit_organisations&lt;/code&gt; end point but does nothing with result?&lt;/li&gt;
+&lt;li&gt;bootstrap datepicker being incorporated&lt;/li&gt;
+&lt;li&gt;DoitOrganisationsController providing us local? endpoint to new service &lt;code&gt;Doit::GetManagedOrganisations.call&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;new DoitVolunteerOpsController to handle creation of new op on DoIt&lt;/li&gt;
+&lt;li&gt;VolunteerOpsController has check for whether to display publish button (could be in helper or separate method)&lt;/li&gt;
+&lt;li&gt;long running job PostToDoitJob&lt;/li&gt;
+&lt;li&gt;new model DoitTrace to store DoIt publication status (VolunteerOp has_one) (in db)&lt;/li&gt;
+&lt;li&gt;new model DoitVolunteerOp to store more data about doit op? (not in db - stored temporarily)&lt;/li&gt;
+&lt;li&gt;Doit::PostToDoit service to do posting&lt;/li&gt;
+&lt;li&gt;dropdown_list partial to allow for selection of doit orgs &amp;hellip;&lt;/li&gt;
+&lt;li&gt;doit_orgs index.js.erb - not sure how this fits in&lt;/li&gt;
+&lt;li&gt;new form for creating DoitVolunteerOps&lt;/li&gt;
+&lt;li&gt;volunteer ops show page broken up into more partials&lt;/li&gt;
+&lt;li&gt;sucker punch async job handling added&lt;/li&gt;
+&lt;li&gt;doit_volunteer ops nested in volop URL&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Marouen had a good summary in his PR description:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;add new model for tracing published vol ops to Doit&lt;/li&gt;
+&lt;li&gt;add 2 services to interact with Doit API&lt;/li&gt;
+&lt;li&gt;add form object to manage posting to Doit&lt;/li&gt;
+&lt;li&gt;implement active&lt;em&gt;job with sucker&lt;/em&gt;punch as backend to avoid extra cost from Heroku&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;but it took me going through the code, making my own notes, to really work out what was going on.  Then I ran the system locally to review how the UI looked:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="submitting a DoIt Volop" src="https://www.dropbox.com/s/90viie9yi9r7knu/Screenshot%202017-03-23%2014.20.56.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;It was great to see a complete solution from Marouen, but we hadn&amp;rsquo;t done a UI mockup of how this should all work in advance.  Marouen was pushing up the code and driving from tests, but I hadn&amp;rsquo;t given him wireframes, which should have been the first step.  I had just assumed that publishing a doit opportunity would be done through the existing volunteer op form with a checkbox.  A checkbox that when checked might reveal the other possible fields. Zmago had done something like that in the past, but of course Marouen hadn&amp;rsquo;t necessarily seen that.&lt;/p&gt;
+
+&lt;p&gt;I notice that we&amp;rsquo;ve lost some of the layout on the forms, presumably as a consequence of the bootstrap upgrade.  Gah!  I think the user experience would probably make more sense if we just had a single form.  I&amp;rsquo;m thinking about a user wanting to update the description at the point that they are published to DoIt:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="existing form" src="https://www.dropbox.com/s/g9rj5plfli4zz2o/Screenshot%202017-03-23%2014.28.05.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I made this scrappy mockup to show Marouen what I mean:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="mockup for merging two forms" src="https://www.dropbox.com/s/9a02yw28ypm7qte/Screenshot%202017-03-23%2018.24.47.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I guess I should get input from the client on this, but my intuition is that this will be simpler in terms of our URLs and the workflow for the end user.  The risk is that I&amp;rsquo;m pushing for changes that will just exhaust Marouen.  The buck stops with me here of course - I should have ensured we provided a mockup earlier, or made sure to check out the PR earlier.  So many PRs, so little time &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;p.s. we won the nhs-wiki contract!&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Debugging by Blog</title>
     <link rel="alternate" href="http://blog.url.com/2017/03/22/debugging-by-blog/"/>
@@ -369,129 +433,6 @@ features/req_cache
 &lt;li&gt;&lt;a href="https://www.greaterthancode.com/"&gt;Greater than Code&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://rubybookclub.com/"&gt;Ruby Book Club&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Show me the Code</title>
-    <link rel="alternate" href="http://blog.url.com/2017/03/15/show-me-the-code/"/>
-    <id>http://blog.url.com/2017/03/15/show-me-the-code/</id>
-    <published>2017-03-15T00:00:00+00:00</published>
-    <updated>2017-04-19T22:27:08+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="code" src="/images/code.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Federico made a comment on one of my recent blogs:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;code&lt;em&gt;in&lt;/em&gt;blog == good&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I wish I was coding more.  I am getting to do some code in the Premium mobbing sessions.  My productive coding efforts are snatched between meetings with me throwing up spikes to give myself bugs (in my feature branches) to fix and drive myself forward.  I have got quite excited about starting to code in Elixir.  Stephen Grider very kindly made his Udemy course available to Premium Mob members, and it&amp;rsquo;s super high quality.   It&amp;rsquo;s what I would love to see more MOOCs evolving towards.  Stephen has all the code in his &lt;a href="https://github.com/StephenGrider/ElixirCode"&gt;repo on GitHub&lt;/a&gt;, where we can see code like this from his initial example Elixir app for playing Cards:&lt;/p&gt;
-&lt;pre class="highlight viml"&gt;&lt;code&gt;  def &lt;span class="k"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;filename&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    case File&lt;span class="p"&gt;.&lt;/span&gt;read&lt;span class="p"&gt;(&lt;/span&gt;filename&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="p"&gt;{:&lt;/span&gt;ok&lt;span class="p"&gt;,&lt;/span&gt; binary&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;erlang&lt;span class="p"&gt;.&lt;/span&gt;binary_to_term binary
-      &lt;span class="p"&gt;{:&lt;/span&gt;error&lt;span class="p"&gt;,&lt;/span&gt; _reason&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;"That file does not exist"&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The snippet is a little chunk that will load a deck of cards from a file.  I was struck by some parallels with a pattern in Avdi Grimm&amp;rsquo;s &amp;ldquo;Confident Ruby&amp;rdquo; that we are covering in our Ruby Mob:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;delete_files&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{})&lt;/span&gt;
-  &lt;span class="n"&gt;error_policy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;fetch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:on_error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;symlink_policy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;fetch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:on_symlink&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="k"&gt;begin&lt;/span&gt;
-      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;symlink?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;symlink_policy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;else&lt;/span&gt;
-        &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;
-      &lt;span class="n"&gt;error_policy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;delete_files&lt;/code&gt; method about is doing something more complex than the Elixir snippet.  Here we&amp;rsquo;re seeing a method that has some default &amp;ldquo;policies&amp;rdquo;, that can be called in such a way that new policies are passed in on the fly:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;delete_files&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
-             &lt;span class="ss"&gt;on_error: &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt; 
-             &lt;span class="ss"&gt;on_symlink: &lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;realpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The interesting thing was that having refactored this far in his &amp;ldquo;receive policies instread of data&amp;rdquo; pattern Avdi said:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;At this point this example is clearly getting a little bit strained. And in general, code like this is probably a smell. There are some programming languages in which it is perfectly normal to pass lots of lambdas into methods, but in Ruby we typically try to Wnd more object-oriented approaches to composing behavior.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Now admittedly the connection I&amp;rsquo;m making between the Elixir and Ruby code is strained.  In some ways I was just picking up on what looks like a similarity in some of the symbols in the two languages.  Actually here what might seem like a similarity is in fact two different things.  Elixir&amp;rsquo;s &lt;code&gt;case&lt;/code&gt; statement is using &lt;code&gt;-&amp;gt;&lt;/code&gt; to indicate the cases, whereas Ruby is using it to specify anonymous lambdas.  That said, elements of case statements are perhaps best described as anonymous lambdas?  Confused, well, let me transcribe the Elixir code into Ruby:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
-    &lt;span class="n"&gt;binary&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;binary&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;unpack&lt;/span&gt;
-  &lt;span class="k"&gt;rescue&lt;/span&gt;
-    &lt;span class="s2"&gt;"That file does not exist"&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Let&amp;rsquo;s look at that side by side with the Elixir snippet again:&lt;/p&gt;
-&lt;pre class="highlight viml"&gt;&lt;code&gt;  def &lt;span class="k"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;filename&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    case File&lt;span class="p"&gt;.&lt;/span&gt;read&lt;span class="p"&gt;(&lt;/span&gt;filename&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="p"&gt;{:&lt;/span&gt;ok&lt;span class="p"&gt;,&lt;/span&gt; binary&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;erlang&lt;span class="p"&gt;.&lt;/span&gt;binary_to_term binary
-      &lt;span class="p"&gt;{:&lt;/span&gt;error&lt;span class="p"&gt;,&lt;/span&gt; _reason&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;"That file does not exist"&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Elixir is using some interesting techniques like &amp;ldquo;pattern matching&amp;rdquo; here.  There&amp;rsquo;s a &lt;a href="http://katafrakt.me/2016/02/13/quest-for-pattern-matching-in-ruby/"&gt;great blog on getting pattern matching in Ruby&lt;/a&gt; with &lt;a href="https://github.com/katafrakt/noaidi"&gt;noaidi&lt;/a&gt;.  The pattern matching in use here is that the case statement is checking for matches returned from &lt;code&gt;File.read(filename)&lt;/code&gt; to see if they are either in the form &lt;code&gt;{:ok, binary}&lt;/code&gt; or &lt;code&gt;{:error, _reason}&lt;/code&gt; with the bonus that if part of the pattern is an undeclared variable, then it gets assigned so that we can then refer to that variable in the body of the individual case condition, e.g. &lt;code&gt;:erlang.binary_to_term binary&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Part of what got me connecting all this up was that Ruby was throwing some of the same error types that Elixir returns, e.g.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;2.3.1 :004 &amp;gt; f = File.read('.gitignoreasda')
-Errno::ENOENT: No such file or directory @ rb_sysopen - .gitignoreasda
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;When we were playing with the Elixir code in the mob, I was seeing that the unused &lt;code&gt;_reason&lt;/code&gt; variable was being set to :enoent when the file didn&amp;rsquo;t exist, which gave me an idea for refactoring this snippet of Elixir code like so:&lt;/p&gt;
-&lt;pre class="highlight viml"&gt;&lt;code&gt;  def &lt;span class="k"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;filename&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    case File&lt;span class="p"&gt;.&lt;/span&gt;read&lt;span class="p"&gt;(&lt;/span&gt;filename&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="p"&gt;{:&lt;/span&gt;ok&lt;span class="p"&gt;,&lt;/span&gt; binary&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;erlang&lt;span class="p"&gt;.&lt;/span&gt;binary_to_term binary
-      &lt;span class="p"&gt;{:&lt;/span&gt;error&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;enonet&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;"The file named '#{filename}' does not exist"&lt;/span&gt;
-      &lt;span class="p"&gt;{:&lt;/span&gt;error&lt;span class="p"&gt;,&lt;/span&gt; reason&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;"Trying to load the file we got stuck with: #{reason}"&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which in Ruby would be:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
-    &lt;span class="n"&gt;binary&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;binary&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;unpack&lt;/span&gt;
-  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="no"&gt;Errno&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;ENOENT&lt;/span&gt;
-    &lt;span class="s2"&gt;"The file named '&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;' does not exist"&lt;/span&gt;
-  &lt;span class="k"&gt;rescue&lt;/span&gt;
-    &lt;span class="s2"&gt;"Trying to load the file we got stuck with: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="vg"&gt;$!&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Anyway, all good fun, but the thing that my brain is really grooving to is Avdi&amp;rsquo;s comment about Ruby having better OO ways to manage anonymous lambdas and the thought that Elixir has eschewed the setup of having objects associating state with methods/functions, so that what might be a code smell in Ruby, might actually be the way to go in Elixir.  The really strange mental nexus for me is the next example from Stephen&amp;rsquo;s course where he introduces Elixir structs, which are data structures of the type I am familiar from my C days - just structures of data, not associated with any methods/functions, e.g.&lt;/p&gt;
-&lt;pre class="highlight viml"&gt;&lt;code&gt;defmodule Identicon&lt;span class="p"&gt;.&lt;/span&gt;Image &lt;span class="k"&gt;do&lt;/span&gt;
-  defstruct hex&lt;span class="p"&gt;:&lt;/span&gt; nil&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; nil&lt;span class="p"&gt;,&lt;/span&gt; grid&lt;span class="p"&gt;:&lt;/span&gt; nil&lt;span class="p"&gt;,&lt;/span&gt; pixel_map&lt;span class="p"&gt;:&lt;/span&gt; nil
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;in almost the inverse fashion that Ruby modules are collections of methods divorced from any object state; although they can manipulate state when they get mixed in, but still &amp;hellip; anyhow, we get Elixir methods in a different module like so:&lt;/p&gt;
-&lt;pre class="highlight viml"&gt;&lt;code&gt;  def build_grid&lt;span class="p"&gt;(&lt;/span&gt;%Identicon&lt;span class="p"&gt;.&lt;/span&gt;Image&lt;span class="p"&gt;{&lt;/span&gt;hex&lt;span class="p"&gt;:&lt;/span&gt; hex&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; image&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    grid &lt;span class="p"&gt;=&lt;/span&gt;
-      hex
-      &lt;span class="p"&gt;|&amp;gt;&lt;/span&gt; Enum&lt;span class="p"&gt;.&lt;/span&gt;chunk&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="p"&gt;|&amp;gt;&lt;/span&gt; Enum&lt;span class="p"&gt;.&lt;/span&gt;map&lt;span class="p"&gt;(&lt;/span&gt;&amp;amp;mirror_row/&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="p"&gt;|&amp;gt;&lt;/span&gt; List&lt;span class="p"&gt;.&lt;/span&gt;flatten
-      &lt;span class="p"&gt;|&amp;gt;&lt;/span&gt; Enum&lt;span class="p"&gt;.&lt;/span&gt;with_index
-
-    %Identicon&lt;span class="p"&gt;.&lt;/span&gt;Image&lt;span class="p"&gt;{&lt;/span&gt;image &lt;span class="p"&gt;|&lt;/span&gt; grid&lt;span class="p"&gt;:&lt;/span&gt; grid&lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This Elixir method is designed to work with a particular Elixir struct; specifically the Identicon.Image defined above, but there are no instance variables in Elixir so all data comes in from the method arguments and then gets passed out the return statement.  I know there&amp;rsquo;s lots of strange new syntax here if you&amp;rsquo;re not familiar with Elixir, in which case I strongly recommend Stephen&amp;rsquo;s course, but the thing I want to focus on here is the the process of assignment from the argument struct to a local method variable:&lt;/p&gt;
-&lt;pre class="highlight viml"&gt;&lt;code&gt;%Identicon&lt;span class="p"&gt;.&lt;/span&gt;Image&lt;span class="p"&gt;{&lt;/span&gt;hex&lt;span class="p"&gt;:&lt;/span&gt; hex&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; image
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;where we&amp;rsquo;re using pattern matching to extract the hex part of the struct (the &lt;code&gt;image&lt;/code&gt; argument) and assign it to the &lt;code&gt;hex&lt;/code&gt; variable.  After processing and generating the &lt;code&gt;grid&lt;/code&gt; variable in the body of the method, we then combine that with a copy of the incoming image argument to return a new struct that is the incoming struct plus some additional data:&lt;/p&gt;
-&lt;pre class="highlight viml"&gt;&lt;code&gt;%Identicon&lt;span class="p"&gt;.&lt;/span&gt;Image&lt;span class="p"&gt;{&lt;/span&gt;image &lt;span class="p"&gt;|&lt;/span&gt; grid&lt;span class="p"&gt;:&lt;/span&gt; grid&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;What really strikes me here (apart from a possible refactoring) that I&amp;rsquo;ll go into in another blog, is that instance variables just seem completely unecessary.  I&amp;rsquo;ve known for a while that the functional programmers eschew them, and we have heuristics in OO languages to avoid allowing unecessary state manipulation (e.g. preferring instance variables set up in an initializer rather than via accessors), but the breakthrough for me here is to see that we can still do all the OO domain modelling with structs.  We can even create a set of methods and procedures that are tied to working with those structs, but we don&amp;rsquo;t seem to lose anything we really need as a result of losing instance variables.  This does seem extraordinarily powerful.  Maybe I&amp;rsquo;m drinking the Kool-Aid, but I can&amp;rsquo;t now think of a circumstance where we have to use an instance variable.&lt;/p&gt;
-
-&lt;p&gt;Also, the fact that in Rails, active record models have this complexity, where they can get out of sync with the database due to their instance state, is tricky and hugely confusing for learning developers.  I suspect that problem completely disappears in Elixir/Phoenix.  Not that Rails isn&amp;rsquo;t great in so many ways, but I&amp;rsquo;d love someone to show me a real world coding problem that couldn&amp;rsquo;t be addressed without instance variables (assuming no memory constraints).  It also seems to be you could code the Elixir way in Ruby by just refraining from using instance variables.  I start to wonder if parts of our CS educational OO edifice are just completely unnecessary and surplus to requirement, specifically &amp;ldquo;instance variables&amp;rdquo;.  &lt;a href="https://twitter.com/tansakuu"&gt;Tweet me&lt;/a&gt; with counter examples!   Let&amp;rsquo;s get to the bottom of this! :-)&lt;/p&gt;
 </content>
   </entry>
 </feed>
