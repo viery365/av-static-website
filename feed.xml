@@ -5,10 +5,45 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-03-23T00:00:00+00:00</updated>
+  <updated>2017-03-24T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Conflicted</title>
+    <link rel="alternate" href="http://blog.url.com/2017/03/24/conflicted/"/>
+    <id>http://blog.url.com/2017/03/24/conflicted/</id>
+    <published>2017-03-24T00:00:00+00:00</published>
+    <updated>2017-05-03T21:40:59+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="conflicted" src="/images/conflicted.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;What a week!  So many developments and me so internally conflicted.  Let me summarise some of the developments:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The UK Health Service (NHS) awards the AgileVentures charity a small grant to develop, host and moderate a &amp;ldquo;Social Prescribing&amp;rdquo; wiki&lt;/li&gt;
+&lt;li&gt;I land a medium sized private closed-source contract for an educational site through my company NeuroGrid&lt;/li&gt;
+&lt;li&gt;edX gives us the all clear to start another run of the MOOC in April&lt;/li&gt;
+&lt;li&gt;With some success I used my last two blogging sessions to grapple with some sticky issues on the LocalSupport codebase&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So having the UK&amp;rsquo;s NHS as a client of the AgileVentures charity could be a big step forward.  It&amp;rsquo;s a small grant and I&amp;rsquo;m going into town today to get more details, but combine it with the small grant from WikiMedia EDU and we start to look like a respectable organisation that should be taken seriously :-)  I should be overjoyed, but I find myself conflicted because while it&amp;rsquo;s great news, I need to take better paying gigs now to pay the bills.  To that end, landing this medium-sized closed source contract is another fantastic breakthrough.  It&amp;rsquo;s a really interesting project, but the closed-source part of it makes me feel crestfallen.&lt;/p&gt;
+
+&lt;p&gt;I just love not having to be secretive about things.  I love the potential for everyone learning when we do all our coding out in the open.  Of course when people are putting money on the line for a business proposition they are not incentivized to share - they want to minimise the chance that others can capitalize on their breakthroughs.  And sometimes, at least superficially, closed-source is needed to close the deal, so to speak.  I feel crestfallen because I&amp;rsquo;d prefer to have 100% of my time spent on open-source code, open-access pairing with the AgileVentures community.  The new private project won&amp;rsquo;t stop that completely, but it&amp;rsquo;ll probably take up 50% of my time for a few months.  Of course that may be just what the community needs, me stepping back a bit in order to allow other community members to take the lead.  And based on my personality I know I&amp;rsquo;d carry on doing some things exactly the same way till I drove myself into the ground, so it&amp;rsquo;s good to mix things up a bit.&lt;/p&gt;
+
+&lt;p&gt;In parallel I&amp;rsquo;m caught slightly off guard by the MOOC being able to go live.  The pressure is on me to come up with start dates and my quandry at the moment is working out if/how we run the TA training course in advance of it.  Running the MOOC takes me away from what I love the most, which is just coding and pairing, and we still don&amp;rsquo;t have a great scalable framework for everyone doing that through the MOOC, or even via AgileVentures.  I managed to force myself to focus on unblocking some issues on the LocalSupport project this week by blogging about them, but I haven&amp;rsquo;t really wrapped up other jobs that I&amp;rsquo;m only part way through on WebsiteOne, AsyncVoter and Redeemify.  Managing too many projects? Me? Argh, we need some mechanism to scaffold folks into project management roles or something &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Could the combination of ongoing work by the marketing team and the start up of the MOOC take AgileVentures Premium subscriptions to the next level? At least I&amp;rsquo;m not going to be completely distracted by a new full time job.  I&amp;rsquo;m also doing remote pairing on toy-kata and other folks&amp;rsquo; personal projects just to mix things up, which is fun, but doesn&amp;rsquo;t move forward the devops blocks on our Agile projects for non-profits.  I just wish we had a seemless framework in place to let folks pair online.  Google have split Hangouts into separate chat and meetup which seems insanity to me in terms of the gamified pairing experience I keep imagining.  Of course Google has their eye on other things.  Maybe once I&amp;rsquo;ve finished this private project we can do a design sprint on how to build (and fund) such a thing &amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://youtu.be/QqMTSqux9Gs"&gt;Pairing on Tennis Kata&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Pull Request Feedback by Blog</title>
     <link rel="alternate" href="http://blog.url.com/2017/03/23/pullrequest-feedback-by-blog/"/>
@@ -366,72 +401,6 @@ features/req_cache
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://youtu.be/kYQP9sRgXRY"&gt;Elixir Pairing with Ryder&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Who Needs Frameworks?</title>
-    <link rel="alternate" href="http://blog.url.com/2017/03/16/who-needs-frameworks/"/>
-    <id>http://blog.url.com/2017/03/16/who-needs-frameworks/</id>
-    <published>2017-03-16T00:00:00+00:00</published>
-    <updated>2017-04-19T22:27:03+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="frameworks" src="/images/frameworks.JPG" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I listen to a different podcast every morning.  Last Friday it was &lt;a href="http://www.greaterthancode.com/podcast/episode-014-rashaun-stovall-snuggs/"&gt;&amp;ldquo;Greater than Code&amp;rdquo; with Ra’Shaun Stovall (Snuggs)&lt;/a&gt;.  It was pretty mind expanding with quotes and questions like the following:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;seniors often try to hold on to the complexity they love&lt;/p&gt;
-
-&lt;p&gt;if you are presenting a problem and not suggesting a solution then you are part of the problem&lt;/p&gt;
-
-&lt;p&gt;why is open source so closed?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Snuggs comes from a US college football background and brings huge energy and lots of analogies.  Another idea he was introducing was that maybe we didn&amp;rsquo;t need so many front end frameworks.  I posted to that effect in the GreaterThanCode Slack and got a response that was worthy of a short blog post from Snuggs.  To paraphrase his response, Snuggs thinks no one is being accountable for hand holding the huge numbers of bootcamp grads from bootcamp to junior.  I&amp;rsquo;d certainly love to see AgileVentures fulfilling that role by having teams of bootcamp grads working on open source projects for charities and non-profits around the world.  We do have graduates from a number of bootcamps involved, but there&amp;rsquo;s a way to go, to perfect that support process.  It would be great if we could collaborate more with NYC.rb and RailsLink.  &lt;/p&gt;
-
-&lt;p&gt;Snuggs runs NYC.rb and that group have colonised the RailsLink Slack which just reached it&amp;rsquo;s 5000&amp;#39;th member.  He says:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;It&amp;rsquo;s to the point now where they are all teaching themselves and truth be told 3 juniors pairing with the proper guidance will become senior in months not years. I&amp;rsquo;ve seen it with my own eyes. And they are relentless at learning best practices. &lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I&amp;rsquo;m trying to get my head round the DevPunks and RailsLink communities that Snuggs is at the heart of.  I&amp;rsquo;ve been in the RailsLink Slack, but so far it seems like lots of Q&amp;amp;A.  I&amp;rsquo;m not quite following where to see the pairing and mentoring that Snuggs talks about, but I&amp;rsquo;m going to keep asking there.  I just watched Snuggs&amp;rsquo; video on &lt;a href="https://youtu.be/A5ad52AogJ8"&gt;&amp;ldquo;Why is Open Source so Closed?&amp;rdquo;&lt;/a&gt;.  He makes a great call out to travel and opening your mind.  Snuggs is so full of ideas and energy that I sometimes find it difficult to follow, but the way I&amp;rsquo;m hearing it is that Snuggs was surprised how there are so many cool things going on outside the Ruby world, e.g. in the JavaScript world, and is railing against the cliques that develop around individual programming languages, where for example Ruby devs might look down on JavaScript and PHP developers.  That&amp;rsquo;s a great message.&lt;/p&gt;
-
-&lt;p&gt;And I think that&amp;rsquo;s where the idea that maybe we don&amp;rsquo;t need quite so many frontend frameworks comes from.  I couldn&amp;rsquo;t find a blog post expressing the same sentiment as Snuggs, but I posted this &lt;a href="https://hackernoon.com/you-might-not-need-react-e5fd54611111#.ywyol38o9"&gt;&amp;ldquo;You might not need React&amp;rdquo;&lt;/a&gt; post, and we had some discussion there, but I wasn&amp;rsquo;t sure that I was properly articulating Snuggs&amp;rsquo; point.  In his &amp;gt;Code post, Snuggs referred me to his repo &lt;a href="https://github.com/snuggs/snuggsi"&gt;https://github.com/snuggs/snuggsi&lt;/a&gt; which includes polyfills that mirror parts of jQuery, e.g. &lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// Polyfill for Sizzle CSS selection&lt;/span&gt;
-
-&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;selector&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="c1"&gt;// always returns a collection. Just like jQuery&lt;/span&gt;
-  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'string'&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="k"&gt;typeof&lt;/span&gt; &lt;span class="nx"&gt;selector&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;querySelectorAll&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;selector&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;selector&lt;/span&gt; &lt;span class="c1"&gt;// identity function&lt;/span&gt;
-
-&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'body'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt; &lt;span class="c1"&gt;// 1&lt;/span&gt;
-
-&lt;span class="kd"&gt;let&lt;/span&gt; &lt;span class="nx"&gt;element&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;
-&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;element&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;  &lt;span class="c1"&gt;// true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;What I&amp;rsquo;m hearing here is that modern JavaScript is evolving to the point that some parts of some frontend frameworks might be redundant.  It would be great to see some open source projects developed using that approach.  Of course there&amp;rsquo;s fear with change.  &amp;ldquo;If it&amp;rsquo;s not broken don&amp;rsquo;t fix it&amp;rdquo; can be a powerful mantra when you&amp;rsquo;ve been burnt by complex coding dependencies in the past &amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://youtu.be/A5ad52AogJ8"&gt;Snuggs on &amp;ldquo;Why is Open Source so Closed?&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;My Podcast Playlist:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://devchat.tv/ruby-rogues"&gt;Ruby Rogues&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://softskills.audio/"&gt;Soft Skills Engineering&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://devchat.tv/js-jabber"&gt;JavaScript Jabber&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://changelog.com/podcast"&gt;The Changelog&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://devchat.tv/freelancers"&gt;Freelancer Show&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://softwareengineeringdaily.com/"&gt;Software Engineering Daily&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.greaterthancode.com/"&gt;Greater than Code&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://rubybookclub.com/"&gt;Ruby Book Club&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
