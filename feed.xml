@@ -5,10 +5,69 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-03-24T00:00:00+00:00</updated>
+  <updated>2017-03-27T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>NHS Design Sprint Day One</title>
+    <link rel="alternate" href="http://blog.url.com/2017/03/27/nhs-design-sprint-day-one/"/>
+    <id>http://blog.url.com/2017/03/27/nhs-design-sprint-day-one/</id>
+    <published>2017-03-27T01:00:00+01:00</published>
+    <updated>2017-05-04T21:58:56+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="design sprint" src="/images/design_sprint.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;m heading in to central London again to work on this new UK National Health Service (NHS) wiki contract.  I&amp;rsquo;d already taken the train south of the river to meet with &amp;ldquo;Healthy London Partnership&amp;rdquo; (HLP) staff at NHS headquarters on Friday.  The AgileVentures charity (with support from AV Trustee Steve of Capable Communities and Mina of Enterprise Wellness) put in a proposal on an NHS &amp;ldquo;invitation to tender&amp;rdquo; a couple of weeks ago, and we&amp;rsquo;ve been awarded the contract.  The NHS headquarters is an imposing building just outside Elephant &amp;amp; Castle underground station, and the work comes from HLP itself which is is a collaborative enterprise of the 32 &lt;a href="https://en.wikipedia.org/wiki/Clinical_commissioning_group"&gt;Clinical Commissioning Groups (CCGs)&lt;/a&gt; in London and NHS England (London region), tasked with improving the health of Londoners.&lt;/p&gt;
+
+&lt;p&gt;The first thing I had to ask on Friday was what a &amp;ldquo;Clinical Commissioning Group&amp;rdquo; (or CCG) was, and apparently they are the management teams in charge of healthcare provision (and budget allocation) for a particular geographical region.  So, for example, if a new hospital was being built, or a new mental health care support framework was being rolled out, the local CCG would be choosing how to spend the money, and perhaps more importantly, what kind of services are being made available in a particular area. According to Wikipedia:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;CCGs are clinically led groups that include all of the GP groups in their geographical area. The aim of this is to give GPs and other clinicians the power to influence commissioning decisions for their patients&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;CCGs can be of different sizes, but usually (always?) have a director of commissioning who is the key decision maker.  The director receives recommendations from individual commissioners, of whom there might be 15-20.  In a given CCG one commissioner will have a brief that covers the self-care (SC) and social-prescribing (SP) that HLP believe can lead to better health and well-being for Londoners while avoiding rising costs.&lt;/p&gt;
+
+&lt;p&gt;HLP are trying to support the local CCG&amp;rsquo;s to make effective choices for improving Londoners&amp;rsquo; health care.  In the context of the current project they&amp;rsquo;ve produced two documents to help NHS commissioners develop social-prescribing and self-care in their local areas.  The &lt;a href="https://www.healthylondon.org/latest/publications/steps-towards-implementing-self-care"&gt;first document&lt;/a&gt; is already available online.  Social prescribing is about doctors providing patients with &amp;ldquo;prescriptions&amp;rdquo; for things other than drugs and medical treatment, such as activities with local volunteer groups; while self-care is all about empowering individuals to go out and take part in community activities.  There&amp;rsquo;s some evidence to suggest that volunteering and connection to the community are good for individual&amp;rsquo;s health and can lead to big cost savings for the health service.&lt;/p&gt;
+
+&lt;p&gt;HLP&amp;rsquo;s concern is that while they are getting good feedback on the documents they have produced, they are likely to go out of date quickly.  They have a vision for living documents that will be updated by the commissioners themselves and other stakeholders in the voluntary sector.  For example, they imagine one commissioner having developed their own model and sharing that back so that all commissioners can learn from it.&lt;/p&gt;
+
+&lt;p&gt;The commissioners who might recommend (and/or implement) SC and SP in their local areas may be working alone, or with a small team, and will recommend service provisions and changes to the director of commissioning who will make the ultimate decision.  HLP works with a number of NHS public champions, who are people with long term experience as a patient or a carer.  One of the public champions suggested a wiki as a possible way of managing all the documents.  HLP are excited about the idea of &amp;ldquo;open sourcing&amp;rdquo; their materials to allow for collaborative development of living documents.   They have a small amount of money for developing and hosting a wiki system and also for moderating it for the next couple of years.&lt;/p&gt;
+
+&lt;p&gt;They are concerned about possible legal issues around who can post to the wiki, and so it seems we need a careful process to tease out their needs, and to work out what kind of system could achieve the outcomes they are looking for.  In discussion on Friday we came up with this very rough timeline of outcomes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;2 weeks: live with collaborative solution&lt;/li&gt;
+&lt;li&gt;3 months: can see people are using the system - see that people are contributing - see that it works&lt;/li&gt;
+&lt;li&gt;6 months: starting to see online community - people are responding to each other&lt;/li&gt;
+&lt;li&gt;12 months: understand the broader impact this is having - and we&amp;rsquo;re seeing more SP and SC in London &lt;/li&gt;
+&lt;li&gt;36 months: see positive health and finance impacts&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;ve proposed doing a design sprint to try and ensure we pick a solution that will give them the outcomes they are looking for.  There isn&amp;rsquo;t sufficient money to build a custom solution, so we will need to go with an existing hosted wiki service, or an existing open source wiki that we can host for them.  It turns out that everyone on the HLP team is extraordinarily busy, so I&amp;rsquo;ll be working with their outgoing change officer this week for the design sprint.  He&amp;rsquo;s going to be the decider delegate and I&amp;rsquo;m going to be the facilitator, and while ideally we&amp;rsquo;d have many more people involved and more time in both our schedules, we&amp;rsquo;re going to do the best we can.  The change officer has already reached out to various stakeholders to participate as experts or test users during the course of the week.  Design sprints are organised along these approximate lines:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Monday: Frame and understand the problem&lt;/li&gt;
+&lt;li&gt;Tuesday: Diverge and consider multiple solutions&lt;/li&gt;
+&lt;li&gt;Wednesday: Converge on specific solutions&lt;/li&gt;
+&lt;li&gt;Thursday: Prototype a solution&lt;/li&gt;
+&lt;li&gt;Friday: Test with real users&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and I&amp;rsquo;m taking components of Google and Thoughtbot&amp;rsquo;s approaches to Design Sprints to create a week long process that handles the various constraints imposed by the context of the project.  Stay tuned to find out how it goes :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Links:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Clinical_commissioning_group"&gt;Wikipedia on Clinical Commissioning Groups (CCGs)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.healthylondon.org/latest/publications/steps-towards-implementing-self-care"&gt;HLPs document on Social Prescribing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.gv.com/sprint/"&gt;Google Design Sprints&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://thoughtbot.com/product-design-sprint/guide"&gt;ThoughtBot Design Sprints&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Conflicted</title>
     <link rel="alternate" href="http://blog.url.com/2017/03/24/conflicted/"/>
@@ -339,68 +398,6 @@ features/req_cache
 &lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=bjbdQ9L-KHw"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=bi85l56Tcqg"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum and WSO kickoff&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=Egf8LH_pRK0"&gt;&amp;ldquo;Bob Martin&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Private Pairing</title>
-    <link rel="alternate" href="http://blog.url.com/2017/03/17/private-pairing/"/>
-    <id>http://blog.url.com/2017/03/17/private-pairing/</id>
-    <published>2017-03-17T00:00:00+00:00</published>
-    <updated>2017-04-19T22:27:25+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="privacy" src="/images/private-keep-out.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Where to start? Intense week.  Just finished a one hour private pairing session on the &lt;a href="http://codingdojo.org/kata/Tennis/"&gt;tennis kata&lt;/a&gt; with a Ruby programmer I met on the &lt;a href="http://www.rubyonrails.link/"&gt;RailsLink Slack&lt;/a&gt;.  They were suggesting Vim/Tmux, but we ended up using Hangouts and GitHub pong.  It was a good session and I wish I&amp;rsquo;d recorded it.  It was very smooth ping pong back and forth, with some good discussion.  I&amp;rsquo;d asked my pair about recording, but they&amp;rsquo;d demurred and I didn&amp;rsquo;t push it.  I beat myself up internally, because I feel like it could have been a really great video for bootcamp grads and new AV members to watch.  Unlike other meandering sessions where we&amp;rsquo;re slogging through a legacy codebase, this was more likely something folks could get their head around&amp;ndash;a video we might have been able to promote.  However I think we&amp;rsquo;ve got to respect people&amp;rsquo;s preferences.  Not everyone wants their activities vidoed and played back, and perhaps that&amp;rsquo;s part of the crux of the issue at AgileVentures.  Maybe the Google Hangout plugins going offline on April 25th will be a blessing rather than a curse, as starting manually from YouTube live actually gives the Hangout creator control over whether to make the video private, unlisted, or public on YouTube.&lt;/p&gt;
-
-&lt;p&gt;Anyway, all the code from the session is in a &lt;a href="https://github.com/tansaku/tennis-kata"&gt;repo on github&lt;/a&gt; where you can see the nice git pong commit history:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="commit history" src="https://www.dropbox.com/s/ybsik7662m3dsg1/Screenshot%202017-03-17%2010.37.31.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I picked up some good tips from the pairing, using a &lt;code&gt;let&lt;/code&gt; instead of a named subject &lt;code&gt;subject(:tennis) {described_class.new}
-&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'tennis'&lt;/span&gt;
-
-&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;Tennis&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:tennis&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="n"&gt;specify&lt;/span&gt; &lt;span class="s2"&gt;"players are love-all when game starts"&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tennis&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;score&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="s2"&gt;"0:0"&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I was pulled back from excessive self-encapsulation, being referred to a &lt;a href="https://martinfowler.com/bliki/SelfEncapsulation.html"&gt;Martin Fowler article on the subject&lt;/a&gt;.  I&amp;rsquo;d worked hard with Ruby to work out how to use private &lt;code&gt;attr_writers&lt;/code&gt; internally&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Tennis&lt;/span&gt;
-
-  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:score&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;
-    &lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"0:0"&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="kp"&gt;private&lt;/span&gt;
-
-  &lt;span class="kp"&gt;attr_writer&lt;/span&gt; &lt;span class="ss"&gt;:score&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It&amp;rsquo;s interesting how a pairing session can be alot about how you give ground.  I think my problem in the past has been my tendency to love joining a good debate about going either way with a particular approach; and I get the sense that a lot of people would rather have much less talk and a lot more coding going on.  Fair enough.  I tried that in this session and in the Elixir pairing session with Ryder on Thursday that we did record.  That was great fun too.  I immediately want to try out this Tennis kata in Elixir, as the really interesting thing is that the first way we reach to do the kata in Ruby is to start introducing object state.&lt;/p&gt;
-
-&lt;p&gt;Pairing on Kata and other people&amp;rsquo;s personal projects (like Ryder&amp;rsquo;s text adventure game) is a new direction for me.  I&amp;rsquo;m usually so desparate to make every coding second count towards contributing to solving a charity or nonprofit problem.  Also, I&amp;rsquo;m running out of time and money and unless I land a contract very soon it&amp;rsquo;s going to be full time job search for me, and I won&amp;rsquo;t have the time to just do random pairing.  Gosh, I wish all this had been available before I had kids.  I could have learnt so many valuable lessons about coding and communicating with folks.&lt;/p&gt;
-
-&lt;p&gt;At least at the end of the Tennis Kata session I got the chance to show what AgileVentures was about, and at the end of the session with Ryder I was able to explain my still unrealized vision of a massive online pair programming community.  Games like LeagueOfLegends, Splatoon and OverWatch allow anyone around the world to log in and hang out in gaming lobbies, until they&amp;rsquo;ve got enough folks together for a team game.  It just seems like it&amp;rsquo;s totally possible to do the same thing for pair programming.  You could have a video wall of all the different ongoing sessions with people browsing what they&amp;rsquo;d like to focus on (à la twitch.tv) but actually able to participate.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve been wanting that for the last five years and channelled it through the MOOC, bootcamps, AgileVentures, but it still doesn&amp;rsquo;t exist in the form that I imagine.  Perhaps we have to build our own screensharing teleconferencing system.  As they say &amp;ldquo;Markets can stay irrational longer than you can stay solvent&amp;rdquo;.  I think once people get over their initial resistance to pairing with strangers online and being video&amp;rsquo;d, they&amp;rsquo;d get so much out of it.  If only we had a properly staggered system that allowed people to do some initial private pairing &amp;ldquo;free tasters&amp;rdquo; and then an escalator that introduced them to the possibilities of online pairing.&lt;/p&gt;
-
-&lt;p&gt;I think the interface has just got to be smooth.  Like playing a video game - just click a few buttons and you&amp;rsquo;re in.  None of these off-putting warning messages from Google Hangouts.  The interface updating in realtime as other people come on and offline.  Perhaps our new AgileVentures Electron project will help - or some other kind of Slack integration.  Slack seems like the perfect lobby system to me.  We just need the ability to have recordable pairing sessions launched from Slack and archived and then be browsable by tech stack.  Actually I think the streaming/recording is most useful as an activity trace for others to see what&amp;rsquo;s happening and see that it can happen and realise that they can do it themselves &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ll get there, although knowing reality, someone else will do it first.  FreeCodeCamp is part way there, but they&amp;rsquo;re JavaScript only and the pairing is adhoc (I think) - the online bootcamps have it for a select rich few - if you&amp;rsquo;re inspired come help us make it a reality.  I think it should be open for everyone in the world to participate, just like an online computer game.  Maybe we need a design sprint?&lt;/p&gt;
-
-&lt;h2&gt;Related Videos:&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://youtu.be/kYQP9sRgXRY"&gt;Elixir Pairing with Ryder&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
