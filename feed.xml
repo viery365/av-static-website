@@ -5,16 +5,99 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-03-29T01:00:00+01:00</updated>
+  <updated>2017-03-30T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>NHS Design Sprint Day Four</title>
+    <link rel="alternate" href="http://blog.url.com/2017/03/30/nhs-design-sprint-day-four/"/>
+    <id>http://blog.url.com/2017/03/30/nhs-design-sprint-day-four/</id>
+    <published>2017-03-30T01:00:00+01:00</published>
+    <updated>2017-05-10T21:55:39+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="design sprint" src="/images/design_sprint.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m getting a bit punch drunk keeping up with all the different AgileVentures projects and driving the NHS design sprint forward at the same time, as well as doing all the admin and legal stuff to get the NHS contracts all sorted before the end of the financial year, which is tomorrow.  I&amp;rsquo;ve just about managed to stay on top of the LocalSupport project, but my check ins on the AsyncVoter and Redeemify projects did little more than serve to remind me of the places we are blocked, or I am blocking things.&lt;/p&gt;
+
+&lt;p&gt;On Redeemify we&amp;rsquo;re stuck with CodeClimate not working on our pull requests, and no production environment setup.  On AsyncVoter we need to complete the move from Digital Ocean to Azure hosting.  I think I&amp;rsquo;m going to have to empower some new project managers with greater devops rights to move those projects forward.  On the NHS project we&amp;rsquo;d wrapped up Tuesday starting to work through with the change manager on some of the different hosted wiki platforms.  The idea is that this was part of the design sprint day two &amp;ldquo;lightning demos&amp;rdquo; where we look at great solutions from a range of companies.  Ideally every member of the sprint team would be bringing examples from a wide range of sources and industries.  I can ask the change manager to prepare some going forward, but here&amp;rsquo;s where the lack of members in our sprint team is a real handicap.&lt;/p&gt;
+
+&lt;p&gt;At least over the remainder of Tuesday and then during Wednesday morning on Skype we managed to review a good 10 or so hosted wiki solutions.  We paused briefly Wednesday morning to get the timeline straight for the project and the next few days.  The original &amp;ldquo;tender&amp;rdquo; had included an aggressive timeline, but our selection as vendor had been delayed.  The change manager and I came up with this adjusted timeline based on that delay and the upcoming public holidays:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;27th March - Work begins&lt;/li&gt;
+&lt;li&gt;5th April - Prototype developed&lt;/li&gt;
+&lt;li&gt;6th-7th; 18th April - Prototype tested&lt;/li&gt;
+&lt;li&gt;19th-27th April - User feedback incorporated into wiki&lt;/li&gt;
+&lt;li&gt;4th May - wiki is live with moderation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;m still not clear what the outside constraints are that are driving this timetable.  Talking with the decider it seems there is a need to deliver something fast to help the folks on the ground (commissioners, GPs, patients, carers).  I&amp;rsquo;m concerned that if one wants to grow a successful community around a technological solution like a wiki then one needs to grow it slowly.  Rushing forward to a public launch of something increases the risk of long-term failure, but these are apparently the time/resource constraints, and we are a &amp;ldquo;can-do&amp;rdquo; bunch of folks, so we will do our best.&lt;/p&gt;
+
+&lt;p&gt;We looked at eleven different wiki hosting services including:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Wikispaces&lt;/li&gt;
+&lt;li&gt;Wikidot&lt;/li&gt;
+&lt;li&gt;Wikia&lt;/li&gt;
+&lt;li&gt;Tettra&lt;/li&gt;
+&lt;li&gt;Socialtext&lt;/li&gt;
+&lt;li&gt;PBWorks&lt;/li&gt;
+&lt;li&gt;Ourproject.org&lt;/li&gt;
+&lt;li&gt;Nuclino&lt;/li&gt;
+&lt;li&gt;eXoCloud&lt;/li&gt;
+&lt;li&gt;Confluence Hosted&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We worked through the first few with the change manager driving.  We were able to create a wikispaces wiki, but for some reason our posted comments would not show up.   As we moved through the different solutions, I started to see a pattern emerging in terms of a kind of activity script.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Create a new page&lt;/li&gt;
+&lt;li&gt;Edit the page&lt;/li&gt;
+&lt;li&gt;Add a heading&lt;/li&gt;
+&lt;li&gt;Add a list&lt;/li&gt;
+&lt;li&gt;Add a document&lt;/li&gt;
+&lt;li&gt;Add (and resize) an image&lt;/li&gt;
+&lt;li&gt;Add a comment&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The discussions so far had made it clear to me that HLP staff were also key end-users of the imagined solution, so seeing the change manager (an HLP staff member) trying to navigate these wiki environments was very interesting.  We were getting blocked from signing up to some of the solutions as I couldn&amp;rsquo;t receive my email over the NHS wireless, but we were able to try Tettra, which had a really nice clean interface, reminiscent of the medium blogging tool:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Tettra's interface, reminiscent of the medium blogging tool" src="https://www.dropbox.com/s/88nk1nwpyvdc4lm/Screenshot%202017-03-30%2010.23.22.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The next day we continued with me remote at my home office over Skype with the change manager at NHS headquarters.  We tried wikidot where we found that the process of adding an image was somewhat laborious:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Trying to add images with wikidot" src="https://www.dropbox.com/s/fe5pw87f6bbf2ca/Screenshot%202017-03-31%2009.16.00.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;We went back to Tettra to see how adding an image was there and it was pretty straightforward.  Next we tried PbWorks, where the interface was a little busier than Tettra, but there was good support for re-sizing an image:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Resized image with PbWorks" src="https://www.dropbox.com/s/74xnvyany1dzhxm/Screenshot%202017-03-31%2009.22.30.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;We moved on to Atlassian&amp;rsquo;s wiki confluence, which I was familiar with from my programming background.  I quite liked it, but I sensed that the interface might be a bit busy, given its usual target audience of tech specialists and programmers.  The problem here was also that I was interacting with the interfaces, and the change manager was just watching over Skype, unlike the day before when I&amp;rsquo;d been seeing him trying to manage the interfaces himself.  I consoled myself that this was all still really just us doing lightning demos.  We were trying to bring some of the possible alternatives into our minds, rather than conducting usability tests per se:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Atlassian's Confluence wiki" src="https://www.dropbox.com/s/pbauj6vdnw45jy9/Screenshot%202017-03-31%2009.19.54.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;We also tried Nuclino which had a nice interface following the approach popularised by the Medium blog that Tettra also seemed to follow:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="the Nuclino wiki" src="https://www.dropbox.com/s/9wzt2ogq6xdqlpl/Screenshot%202017-03-31%2009.19.14.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;On the ExoPlatform system we got quite lost in the interface and couldn&amp;rsquo;t work out how to even make an editable wiki.  We tried iMeet and Wikia.  On iMeet we didn&amp;rsquo;t get past creating a workspace (I note they&amp;rsquo;ve been pinging me every couple of days since, with their best shots at drip emails).  And the sign up process in Wikia took a while and ended up getting left in the background. &lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s more we could be looking at.  It was frustrating that we lost half an hour to trying Skype and Hangouts at the beginning of my remote day.  The NHS firewall appears to block Skype and maybe hangouts.  When I saw Brendan&amp;rsquo;s laptop the next day, it seemed like it might just have been wifi connectivity issues that could have been solved by plugging into a hard LAN cable.  The setup at NHS headquarters is interesting.  Open plan offices with flat screen tvs showing the BBC news channel.  Lots of meeting rooms with no computers in.  Staff work at their computers in the open plan office, but then generally seem to leave their computers to go meet in rooms where they can have discucssions without disturbing their co-workers.  Or make phone calls where they can only talk, but not show.  I would find it extraordinarily frustratingto be in meetings and discussions in the absence of the digital tools (the laptops) where you can really show each other things or collaborate on specifics.  Some meeting rooms appear to have sophisticated remote meeting systems in them, which is ironic when they could be using Skype or Hangouts, although of course there will be security and support constraints that the the NHS must adhere to.&lt;/p&gt;
+
+&lt;p&gt;I can see that a large government organisation would be inclined to pay for a &amp;ldquo;it just works&amp;rdquo; secure remote meeting system, when Skype and Hangouts require a fair amount of technical know how and support.  Naturally NHS England will be very concerned about the security of all their systems.  It&amp;rsquo;s just a funnily different world than I&amp;rsquo;m used to where the computer is the primary conduit for both work and conversation.  The HLP team had been interested when I&amp;rsquo;d shown them Slack the previous day.  Perhaps through working together there can be some side-benefits via me introducing the team to some digital tools and practices that they aren&amp;rsquo;t yet familiar with.&lt;/p&gt;
+
+&lt;p&gt;The big question now of course is how to continue the Sprint?  We were getting out lightning demos done, which was supposed to by the morning of day two, but we hadn&amp;rsquo;t seen the majority of our experts, and we needed to make time for sketching possible solutions; although I was questioning whether that made sense since the budget constraints required us to pick from existing solutions &amp;hellip; find out how we handled it all in tomorrow&amp;rsquo;s blog!&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>NHS Design Sprint Day Three</title>
     <link rel="alternate" href="http://blog.url.com/2017/03/29/nhs-design-sprint-day-three/"/>
     <id>http://blog.url.com/2017/03/29/nhs-design-sprint-day-three/</id>
     <published>2017-03-29T01:00:00+01:00</published>
-    <updated>2017-05-09T22:03:41+01:00</updated>
+    <updated>2017-05-10T21:42:21+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -299,105 +382,6 @@
 &lt;p&gt;I guess I should get input from the client on this, but my intuition is that this will be simpler in terms of our URLs and the workflow for the end user.  The risk is that I&amp;rsquo;m pushing for changes that will just exhaust Marouen.  The buck stops with me here of course - I should have ensured we provided a mockup earlier, or made sure to check out the PR earlier.  So many PRs, so little time &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;p.s. we won the nhs-wiki contract!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Debugging by Blog</title>
-    <link rel="alternate" href="http://blog.url.com/2017/03/22/debugging-by-blog/"/>
-    <id>http://blog.url.com/2017/03/22/debugging-by-blog/</id>
-    <published>2017-03-22T00:00:00+00:00</published>
-    <updated>2017-04-27T21:51:22+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="debugging" src="/images/debugging.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Right, on to part 2 of &amp;ldquo;debugging by blog&amp;rdquo;, my attempt to force myself to work through code blockers while debugging.  Currently it&amp;rsquo;s LocalSupport, where we&amp;rsquo;ve had a weird CI failure that wasn&amp;rsquo;t replicated locally for myself or Zmago on our respective machines.  As I poked at it yesterday while &amp;ldquo;blog debugging&amp;rdquo; I found that the cached fixture files for VCR and PuffingBilly had been added to .gitignore.  This meant that the CI was hitting the 3rd party endpoints such as Google, Do-It, ReachSkills etc. as part of our CI test runs.  I can see why those folders would get added to .gitignore.  Whenever there is some change in the outgoing network connections from our code, those files will change.  Developers will see all these changes in their &lt;code&gt;git status&lt;/code&gt; checks and not think them worth checking in.  They may even fully understand that they are creating a network sandbox around our code, but just not want to deal with the hassle of them.&lt;/p&gt;
-
-&lt;p&gt;The danger of not checking them in is that when developing a new feature, the cached network responses will be saved on a local developers machine, and then subsequent code changes may not necessarily produce the same outputs if the system was actively connected to the network.  I suspect this is what has happened with Zmago&amp;rsquo;s pull request.  Now that I removed those folders from the .gitignore file and reset the VCR/PuffingBilly fixture caches I am able to replicate the error locally.  Here is the error:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/LocalSupport (133663043_add_reachskills_vol_ops)]$ 
-→ cucumber features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:32
-[Coveralls] Using SimpleCov's 'rails' settings.
-[DEPRECATION] `require 'billy/cucumber'` is deprecated. Please use `require 'billy/capybara/cucumber'` instead.
-Using the default profile...
-@vcr @javascript @billy
-Feature: Reachskills volunteer opportunities
-  As a member of the public
-  So that I can see where organisations with volunteer opportunities are located
-  I would like to see a map of reachskills volunteer opportunities
-
-  Background:                                                          # features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:7
-    Given that the doit_volunteer_opportunities flag is enabled        # features/step_definitions/volunteer_op_steps.rb:60
-    Given that the reachskills_volunteer_opportunities flag is enabled # features/step_definitions/volunteer_op_steps.rb:60
-    And I run the import reachskills service                           # features/step_definitions/volunteer_op_steps.rb:35
-    And cookies are approved                                           # features/step_definitions/authentication_steps.rb:98
-
-  Scenario: See a list of current reachskills volunteer opportunities with a link to organisation page                        # features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:32
-    Given I visit the volunteer opportunities page                                                                            # features/step_definitions/navigation_steps.rb:49
-      #    And wait for 3 seconds
-    Then the index should contain:                                                                                            # features/step_definitions/basic_steps.rb:521
-      | Fundraising Volunteer | The volunteer will be required to work with the fundraising consultant research trusts and corporate grant making foundations appropriate to the ... | Chalkhill Community Centre |
-      expected to find text "Fundraising Volunteer" in "Search Text &amp;lt;snip&amp;gt; ..." (RSpec::Expectations::ExpectationNotMetError)
-      ./features/step_definitions/basic_steps.rb:525:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'
-      ./features/step_definitions/basic_steps.rb:524:in `block (2 levels) in &amp;lt;top (required)&amp;gt;'
-      ./features/step_definitions/basic_steps.rb:523:in `each'
-      ./features/step_definitions/basic_steps.rb:523:in `/^the index should( not)? contain:$/'
-      features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:35:in `Then the index should contain:'
-    Then I should see a link to "Chalkhill Community Centre" page "https://reachskills.org.uk/org/chalkhill-community-centre" # features/step_definitions/volunteer_op_steps.rb:80
-
-Failing Scenarios:
-cucumber features/volunteer_opportunities/reachskills_volunteer_opportunities.feature:32 # Scenario: See a list of current reachskills volunteer opportunities with a link to organisation page
-
-1 scenario (1 failed)
-7 steps (1 failed, 1 skipped, 5 passed)
-0m4.523s
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The problem here is that this test is relying on some data from a ReachSkills opportunity that is no longer on the ReachSkills site.  The test passes if I update the details on the volunteer opportunity that is being checked for in the test.  Now the critical thing is to commit the relevant VCR files into git in along with the test and everything should pass on CI.  Irritatingly, failing test runs and runs of tests on other branches can generate a lot of noise in the VCR/PuffingBilly caches, so I use the following strategy to get ready for a commit:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/LocalSupport (133663043_add_reachskills_vol_ops)]$ 
-→ rm -rf features/req_cache
-[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/LocalSupport (133663043_add_reachskills_vol_ops)]$ 
-→ rm -rf features/vcr_cassettes
-[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/LocalSupport (133663043_add_reachskills_vol_ops)]$ 
-→ git checkout features/req_cache
-[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/LocalSupport (133663043_add_reachskills_vol_ops)]$ 
-→ git checkout features/vcr_cassettes
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Although it does get more complicated than that if some files have already been added or committed.  Then I run the working tests to generate the VCR and PuffingBilly cache files which show up in git status like so:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/LocalSupport (133663043_add_reachskills_vol_ops)]$ 
-→ gst
-On branch 133663043_add_reachskills_vol_ops
-Your branch is up-to-date with 'zmago/133663043_add_reachskills_vol_ops'.
-Changes to be committed:
-  (use "git reset HEAD &amp;lt;file&amp;gt;..." to unstage)
-
-    modified:   .gitignore
-
-Changes not staged for commit:
-  (use "git add &amp;lt;file&amp;gt;..." to update what will be committed)
-  (use "git checkout -- &amp;lt;file&amp;gt;..." to discard changes in working directory)
-
-    modified:   db/schema.rb
-    modified:   features/volunteer_opportunities/reachskills_volunteer_opportunities.feature
-
-Untracked files:
-  (use "git add &amp;lt;file&amp;gt;..." to include in what will be committed)
-
-    features/req_cache/get_maps.google.com_003bbc256d1363a112f914cfb75db8bfd1ba9186.yml
-    features/req_cache/get_maps.google.com_4907fe14430b7875f162d6a087ab9fe810cef4c4.yml
-    features/req_cache/get_maps.google.com_4b140e4c1e7dd61c9ed03042a6ea3173b0f93c21.yml
-    features/req_cache/get_maps.google.com_59e27d9935cf723e2f772afbbb6222428b8f7303.yml
-    features/req_cache/get_maps.google.com_903f013d4d1032501baea6f534b38e924321b4b6.yml
-    features/req_cache/get_maps.google.com_9bb449f46f323b9bb6bf3ffb8d4e3d1f4c0bdb9b.yml
-    features/req_cache/get_maps.google.com_b10b2089367dc41afe11f20775ff8cd4aad2f31e.yml
-    features/req_cache/get_maps.google.com_b43294d3c3efeaa9c1138646be862df98e08a75a.yml
-    features/req_cache/get_maps.google.com_d02253d8c9679439fe590dae8bf9b93cadefe83c.yml
-    features/req_cache/get_maps.googleapis.com_f0a259f6b2f5f73b6d54fa224b954d14213b7bc0.yml
-    features/req_cache/get_maps.gstatic.com_7b3f3d37460a085af155862dc94328ad3916985d.yml
-    features/vcr_cassettes/Reachskills_volunteer_opportunities/
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which I can now add, and things should pass reliably on CI.  So my original diagnosis of a JavaScript timing issue was incorrect.  VCR/PuffingBilly are powerful tools, but it seems rather easy for developers of all skills levels to impale themselves on them.  I&amp;rsquo;m not sure what the best way forward is.  It reminds me of Donald Norman&amp;rsquo;s &amp;ldquo;The Design of Everyday Things&amp;rdquo; in which he points out how an incorrect mental model of something can make its use terribly problematic.  His example is from a fridge thermostat, but I can see exactly the same pattern here.&lt;/p&gt;
-
-&lt;p&gt;The real difficulty in some ways is the interaction between the caching of network interaction and the git version management.  We&amp;rsquo;ve got some similar issues on WebSiteOne.  More blogs to come on this I think.  I also wanted to get onto outstanding questions on other PRs from Marouen and Olena, but that will need to wait till tomorrow as it looks like the MOOC might be cranking up to go live and so I&amp;rsquo;m needing to get alot of things in gear very quickly.  At least blogging about the debugging process is helping ensure that I actually get some sticky things unblocked, rather than just navel gazing about why all socio-technical processes seem so hard :-)&lt;/p&gt;
 </content>
   </entry>
 </feed>
