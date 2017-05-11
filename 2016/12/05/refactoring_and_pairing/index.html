@@ -150,16 +150,16 @@ cucumber features/premium/charge_activity.feature:60 # Scenario: User decides to
 <span class="n">resources</span> <span class="ss">:subscriptions</span>
 </code></pre>
 <p>giving us this set of endpoints:</p>
-<pre class="highlight plaintext"><code> subscriptions_paypal GET         /subscriptions/paypal(.:format)     subscriptions#paypal
-subscriptions_upgrade PUT         /subscriptions/upgrade(.:format)    subscriptions#upgrade
-        subscriptions GET         /subscriptions(.:format)            subscriptions#index
-                      POST        /subscriptions(.:format)            subscriptions#create
-     new_subscription GET         /subscriptions/new(.:format)        subscriptions#new
-    edit_subscription GET         /subscriptions/:id/edit(.:format)   subscriptions#edit
-         subscription GET         /subscriptions/:id(.:format)        subscriptions#show
-                      PATCH       /subscriptions/:id(.:format)        subscriptions#update
-                      PUT         /subscriptions/:id(.:format)        subscriptions#update
-                      DELETE      /subscriptions/:id(.:format)        subscriptions#destroy
+<pre class="highlight plaintext"><code> subscriptions_paypal GET     /subscriptions/paypal(.:format)   subscriptions#paypal
+subscriptions_upgrade PUT     /subscriptions/upgrade(.:format)  subscriptions#upgrade
+        subscriptions GET     /subscriptions(.:format)          subscriptions#index
+                      POST    /subscriptions(.:format)          subscriptions#create
+     new_subscription GET     /subscriptions/new(.:format)      subscriptions#new
+    edit_subscription GET     /subscriptions/:id/edit(.:format) subscriptions#edit
+         subscription GET     /subscriptions/:id(.:format)      subscriptions#show
+                      PATCH   /subscriptions/:id(.:format)      subscriptions#update
+                      PUT     /subscriptions/:id(.:format)      subscriptions#update
+                      DELETE  /subscriptions/:id(.:format)      subscriptions#destroy
 </code></pre>
 <p>We had both <code>subscription_upgrade</code> and <code>subscriptions_upgrade</code>.  It was frustrating to have been stuck on this issue, but it was also an interesting lesson about how the custom <code>upgrade</code> endpoint was technical debt that we were having to pay off here.  We&rsquo;d thrown in that custom endpoint to enable a member to change their credit card in a hurry, but the presence of the custom endpoint had confused us during a refactoring.  If we&rsquo;d refactored that out earlier to a CardController we probbaly wouldn&rsquo;t have got stuck here.  So overall not a bad object lesson on the value of tests and of refactoring to a clean domain model!</p>
 
