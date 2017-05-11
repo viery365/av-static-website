@@ -145,21 +145,21 @@ Failing Scenarios:
 cucumber features/premium/charge_activity.feature:60 # Scenario: User decides to change card details
 </code></pre>
 <p>There was some kind of routing issue.  It was frustrating to be blocked, but also, this is what all these tests are here for.  We&rsquo;d refactored the core controller of the payment framework, and it seemed we&rsquo;d broken the credit card details update in the process.  Without the tests we&rsquo;d have pushed this out to production and not known until a user encountered a problem.  Eventually we tracked the issue down.  It was a pluralization error in one of the views.  Our routes now looked like this:</p>
-<pre class="highlight ruby"><code>  <span class="n">match</span> <span class="s1">'/subscriptions/paypal'</span> <span class="o">=&gt;</span> <span class="s1">'subscriptions#paypal'</span><span class="p">,</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:get</span><span class="p">]</span>
-  <span class="n">match</span> <span class="s1">'/subscriptions/upgrade'</span> <span class="o">=&gt;</span> <span class="s1">'subscriptions#upgrade'</span><span class="p">,</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:put</span><span class="p">]</span>
-  <span class="n">resources</span> <span class="ss">:subscriptions</span>
+<pre class="highlight ruby"><code><span class="n">match</span> <span class="s1">'/subscriptions/paypal'</span> <span class="o">=&gt;</span> <span class="s1">'subscriptions#paypal'</span><span class="p">,</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:get</span><span class="p">]</span>
+<span class="n">match</span> <span class="s1">'/subscriptions/upgrade'</span> <span class="o">=&gt;</span> <span class="s1">'subscriptions#upgrade'</span><span class="p">,</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:put</span><span class="p">]</span>
+<span class="n">resources</span> <span class="ss">:subscriptions</span>
 </code></pre>
 <p>giving us this set of endpoints:</p>
-<pre class="highlight plaintext"><code>           subscriptions_paypal GET         /subscriptions/paypal(.:format)                             subscriptions#paypal
-          subscriptions_upgrade PUT         /subscriptions/upgrade(.:format)                            subscriptions#upgrade
-                  subscriptions GET         /subscriptions(.:format)                                    subscriptions#index
-                                POST        /subscriptions(.:format)                                    subscriptions#create
-               new_subscription GET         /subscriptions/new(.:format)                                subscriptions#new
-              edit_subscription GET         /subscriptions/:id/edit(.:format)                           subscriptions#edit
-                   subscription GET         /subscriptions/:id(.:format)                                subscriptions#show
-                                PATCH       /subscriptions/:id(.:format)                                subscriptions#update
-                                PUT         /subscriptions/:id(.:format)                                subscriptions#update
-                                DELETE      /subscriptions/:id(.:format)                                subscriptions#destroy
+<pre class="highlight plaintext"><code> subscriptions_paypal GET         /subscriptions/paypal(.:format)                             subscriptions#paypal
+subscriptions_upgrade PUT         /subscriptions/upgrade(.:format)                            subscriptions#upgrade
+        subscriptions GET         /subscriptions(.:format)                                    subscriptions#index
+                      POST        /subscriptions(.:format)                                    subscriptions#create
+     new_subscription GET         /subscriptions/new(.:format)                                subscriptions#new
+    edit_subscription GET         /subscriptions/:id/edit(.:format)                           subscriptions#edit
+         subscription GET         /subscriptions/:id(.:format)                                subscriptions#show
+                      PATCH       /subscriptions/:id(.:format)                                subscriptions#update
+                      PUT         /subscriptions/:id(.:format)                                subscriptions#update
+                      DELETE      /subscriptions/:id(.:format)                                subscriptions#destroy
 </code></pre>
 <p>We had both <code>subscription_upgrade</code> and <code>subscriptions_upgrade</code>.  It was frustrating to have been stuck on this issue, but it was also an interesting lesson about how the custom <code>upgrade</code> endpoint was technical debt that we were having to pay off here.  We&rsquo;d thrown in that custom endpoint to enable a member to change their credit card in a hurry, but the presence of the custom endpoint had confused us during a refactoring.  If we&rsquo;d refactored that out earlier to a CardController we probbaly wouldn&rsquo;t have got stuck here.  So overall not a bad object lesson on the value of tests and of refactoring to a clean domain model!</p>
 
