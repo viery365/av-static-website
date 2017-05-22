@@ -5,16 +5,75 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-04-20T01:00:00+01:00</updated>
+  <updated>2017-04-21T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Breakthough Anxiety</title>
+    <link rel="alternate" href="http://blog.url.com/2017/04/21/breakthrough-anxiety/"/>
+    <id>http://blog.url.com/2017/04/21/breakthrough-anxiety/</id>
+    <published>2017-04-21T01:00:00+01:00</published>
+    <updated>2017-05-22T22:15:28+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="breakthrough" src="/images/breakthrough.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I just burnt 15 minutes taking out the recycling, replenishing the water bottles on my desk and discussing with my wife about Japanese textbooks for my kids.  Well not burnt :-) Time spent - all needed to be done.  If I&amp;rsquo;d been slightly more organised I&amp;rsquo;d have gotten my eldest son to take out the recycling this morning.  The strange thing about being a parent is that getting time when you&amp;rsquo;re not being pestered or interrupted is quite hard.  All my boys are at school now - I get a certain amount of time in the day when I can focus on my computer in my home office where I have two external screens and I can work &amp;ldquo;efficiently&amp;rdquo;.  The &amp;ldquo;in the momment&amp;rdquo; philosophy suggests to me that it&amp;rsquo;s a little silly to consider time as burnt or lost; at the same time I do want to bring in money to feed my kids, and that seems to require focused time getting work done.  That said and despite my best efforts at prioritisiing, I&amp;rsquo;m still not sure if I&amp;rsquo;m really focusing properly on what will bring home the bacon.&lt;/p&gt;
+
+&lt;p&gt;Having used up a lot of my savings to work on AgileVentures full time for the last year I am definitely in a bit of an anxious state.  I did achieve a couple of breakthroughs yesterday that did help to lighten my mood.  One was to find a WYSIWYG editor that worked on the NHS laptops.  The other was to resurrect the autograders for the AV102 TA training course.  Both are good stories I&amp;rsquo;d like to blog out.  I also note that I&amp;rsquo;m well behind on reviewing LocalSupport pull requests and many other things.  I&amp;rsquo;m torn about whether to use the blogging time to force a focus on catching up with AgileVentures Premium related work (e.g. pull requests) and reporting on the breakthroughs.  Let&amp;rsquo;s focus on the breakthroughs for the purpose of self-documentation and I&amp;rsquo;ll get to the pull requests in the next chunk of my day and blog about them Monday.&lt;/p&gt;
+
+&lt;p&gt;So, I was at the NHS head office again yesterday for a meeting with a member of the communications team, which was a critical meeting and very positive.  The communications person was enthusiastic about the proposed social-prescription wiki, and naturally concerned that many of the stakeholders might find it difficult to contribute.  More on the details of that meeting soon, but just after the meeting I was able to sit down with an NHS laptop (with IE 11 on the NHS intranet) and review the problematic interface issues we&amp;rsquo;d seen in the usability sessions a fortnight before.  For the usability testing we&amp;rsquo;d selected three different wikis and tested them on NHS staff computers.  The wikis had worked, but the key problem across all three instances (PBwiki, XWiki, BlueSpice) was that certain key icons just didn&amp;rsquo;t show up:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="XWiki icons not showing up" src="https://www.dropbox.com/s/il7lzum1kbx6ev3/Screenshot%202017-04-21%2009.40.08.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the above image you can see how the login panel for XWiki looks on my Mac, and on the left you can see how it looks in IE11 on the NHS laptops.  The icons are missing.  Now that&amp;rsquo;s not the end of the world for this login panel, but it&amp;rsquo;s actually catastrophic in terms of usability for the rest of the XWiki, and not just XWiki, but also PBWorks and BlueSpice.   The XWiki &amp;ldquo;hamburger&amp;rdquo; drawer icon that serves to indicate where to open the login panel is not visible on the NHS laptops, so you can&amp;rsquo;t login without someone standing next to you telling you where to click.  On PBworks and BlueSpice the icons are used to indicate the place to click to start editing, or to use various text font and styling buttons.  Here&amp;rsquo;s an example from BlueSpice, which for some reason had also switched to Russian:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="BlueSpice text editing toolbar on the NHS laptop" src="https://www.dropbox.com/s/dpc9vqhyj0yzgl6/Screenshot%202017-04-21%2009.45.05.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Interestingly all these icons loaded correctly on a virtualized IE 11 on my laptop running over the NHS guest wifi.  The failure of the icons to show up was only happening on the NHS laptops hard linked to their internal network.  What I really should have done was tethered one of their laptops to my wifi hotspot on my phone to further isolate the problem, but I was out of time, and the suggestions from XWiki support, such as clearing the browser cache, were not possible on the sys-admin restricted NHS laptops.  I took lots of screenshots, dumped network interactions and noted that the failures for XWiki were for the Glyphicons, for PBwiki they were font-awesome icons, and for BlueSpice they were MCE Editor icons.  It was a dark moment - in my desparation I tried loading Wikipedia on the NHS laptop, and the icons in their basic editor showed up!&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="wikipedia basic editor working" src="https://www.dropbox.com/s/2kwtz5ebey0jmug/Screenshot%202017-04-21%2009.49.52.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I investigated the source and found that they were using background images rather than icons.  I&amp;rsquo;d initially ruled out a pure mediawiki offering, with the special mediawiki syntax as being too confusing for the majority of stakeholders, but I noticed that Wikipedia offered a visual editor solution that also worked on the NHS laptop:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="wikipedia visual editor" src="https://www.dropbox.com/s/5ltrfl1c0ha10cy/Screenshot%202017-04-21%2009.52.42.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Did we have a winner?  At least I had an angle of attack.  If MediaWiki actually worked on NHS laptops then it was streets ahead of any other solution we&amp;rsquo;d tested so far, regardless of any other shortcomings.  Still lots to work out, but light at the end of the tunnel, perhaps?&lt;/p&gt;
+
+&lt;p&gt;So that was one breakthrough.  The trip into London for the NHS meeting and then the laptop research, getting home, investigating options for MediaWiki hosting left me having spent no time on my other major blocker which was that the legacy autograders for the AV102 TA training course weren&amp;rsquo;t working.  I&amp;rsquo;d logged into the grader earlier in the week and got the following message:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;The queue name is BerkeleyX-cs169x
+/home/ubuntu/rag/lib/edx_controller.rb:74:in `get_queue_length': Bad queue length response:  (EdXController::BadStatusCodeError)
+        from /home/ubuntu/rag/lib/edx_client.rb:242:in `each_submission'
+        from /home/ubuntu/rag/lib/edx_client.rb:49:in `run'
+        from ./run_edx_client.rb:9:in `&amp;lt;main&amp;gt;'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Over and over.  The AV102 grader hadn&amp;rsquo;t been updated to the new version that UCBerkeley students created the summer before last.  I&amp;rsquo;d fixed the AV102 grader to keep running, about the same time last year, by hacking away at the authentication code, and I wasn&amp;rsquo;t optimistic that I could fix it again.  The &amp;ldquo;sensible&amp;rdquo; path would be taking all the AV102 assignments and converting their specifications to work with the new grader and then pointing the AV102 course on edX to a new grader instance.  The problem with that path is that it felt like it would be multiple hours work, with no guarantee of success.  In principle the new grader system is supposed to allow us to insert new assignments more easily - the assignment specification can be located in GitHub and be sent to the grader via the edX course itself.  I&amp;rsquo;m 90% sure that I could get it all working, but it feels like it would take a few hours, with bumps and starts, and I didn&amp;rsquo;t have a few hours.  Or at least didn&amp;rsquo;t feel like I could make space for them.&lt;/p&gt;
+
+&lt;p&gt;I prodded at the failing grader code for five minutes and saw that the problem on the legacy grader was again an authentication issue.  The initial authentication step was not working, causing the request to the edX queues to be redirected to login.  This was exactly the problem I&amp;rsquo;d fixed a couple of times before in under an hour of debugging, and the exciting thing in both those cases was that all the existing infrastructure would then start working.  No need to convert multiple assignments to a different format etc.  However the day was at an end, and my physio had now cleared me to join in my sons&amp;rsquo; karate classes.  What to do?  I took my laptop to Karate and sat out.  Fortuitously, just as the Karate class was finishing and I had to take my sons home, I&amp;rsquo;d done it again.  Analysing how mechanise (which the TAs had used in the new grader) was successfully authenticating on the new grader develop server, I saw that again we had a problem in the legacy code as to how the &amp;ldquo;Set-Cookie&amp;rdquo; operation was being interpreted.  Here&amp;rsquo;s what the edX queues was sending back in response to authentication requests:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;"set-cookie"=&amp;gt;"csrftoken=kFWOZK6FnT....eLAvMDsyi; expires=Thu, 19-Apr-2018 17:15:44 GMT; Max-Age=31449600; Path=/, sessionid=y4i9hip...j3x1i; expires=Thu, 04-May-2017 17:15:44 GMT; httponly; Max-Age=1209600; Path=/, AWSELB=E7E741EF08F209.....E1C1FA69F3B681EB87F2DFC9E7C01B23665183B022A6A8E876;PATH=/", "vary"=&amp;gt;"Accept-Encoding, Cookie", "content-length"=&amp;gt;"61", "connection"=&amp;gt;"keep-alive"}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With debugging hooks going down through a couple of gems, I determined that the working mechanise based grader was only setting the csrftoken, sessionid and AWSELB elements of the set cookie request.   I got the same effect on the legacy code with a really messy hack:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;@session_cookie = all_cookies.scan(/[\d\w]+\=[\d\w]+/).select{|str| str.start_with?('AWSELB') ||str.start_with?('csrftoken') || str.start_with?('sessionid')}.join('; ')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but it worked - suddenly the AV102 homeworks were grading successfully.  Such a mess, and it could have been concealing many other bugs behind the authentication failure, but I gambled and won on this occasion.  I&amp;rsquo;m not getting paid anything to work on this code or run the AV102 training course.  It would be hugely beneficial for the long term of the autograder project if I was regularly inserting new assignments into the new system, documenting the process and smoothing off the rough edges, but again, no one is paying for that.  Or at least, no one is paying me for that.  I do get a share of the proceeds of the sales of the relaeted textbook (since I&amp;rsquo;m the editor) and part of my responsibility is to keep the graders running on the main course and the SPOC, but the TA training course is my own separate initiative.  Ironically this messy hack in 45 minutes in my free time while my kids do Karate will keep the AV102 TA training course running for a little longer.  I haven&amp;rsquo;t even had time to take the debugger statements out of the develop grader (although a git checkout should sort that).&lt;/p&gt;
+
+&lt;p&gt;Two breakthroughs, but I&amp;rsquo;m still anxious.  Is this hack to keep AV102 running a wonderful piece of pragmatism, or is it the technical debt that breaks the camel&amp;rsquo;s back?  Can I find a good MediaWiki hosting provider or will we have to host ourselves?  Lots of deep breaths, nose to the grindstone, enjoy the moment! :-)&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=OFKKyZbJqlk"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Blogging</title>
     <link rel="alternate" href="http://blog.url.com/2017/04/20/blogging/"/>
     <id>http://blog.url.com/2017/04/20/blogging/</id>
     <published>2017-04-20T01:00:00+01:00</published>
-    <updated>2017-05-18T21:49:41+01:00</updated>
+    <updated>2017-05-22T22:07:55+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -246,89 +305,6 @@
 &lt;li&gt;&lt;a href="http://www.health.org.uk/programmes/shine-2014/projects/social-prescribing-integrating-gp-and-community-health-assets"&gt;independent evaluation of Hackney Social Prescribing&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Michael_Dixon_(doctor)"&gt;NHS Lead on Social Prescribing: Michael Dixon&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>NHS Design Sprint Day Four</title>
-    <link rel="alternate" href="http://blog.url.com/2017/03/30/nhs-design-sprint-day-four/"/>
-    <id>http://blog.url.com/2017/03/30/nhs-design-sprint-day-four/</id>
-    <published>2017-03-30T01:00:00+01:00</published>
-    <updated>2017-05-10T22:02:02+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="design sprint" src="/images/design_sprint.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m getting a bit punch drunk keeping up with all the different AgileVentures projects and driving the NHS design sprint forward at the same time, as well as doing all the admin and legal stuff to get the NHS contracts all sorted before the end of the financial year, which is tomorrow.  I&amp;rsquo;ve just about managed to stay on top of the LocalSupport project, but my check ins on the AsyncVoter and Redeemify projects did little more than serve to remind me of the places we are blocked, or I am blocking things.&lt;/p&gt;
-
-&lt;p&gt;On Redeemify we&amp;rsquo;re stuck with CodeClimate not working on our pull requests, and no production environment setup.  On AsyncVoter we need to complete the move from Digital Ocean to Azure hosting.  I think I&amp;rsquo;m going to have to empower some new project managers with greater devops rights to move those projects forward.  On the NHS project we&amp;rsquo;d wrapped up Tuesday starting to work through with the change manager on some of the different hosted wiki platforms.  The idea is that this was part of the design sprint day two &amp;ldquo;lightning demos&amp;rdquo; where we look at great solutions from a range of companies.  Ideally every member of the sprint team would be bringing examples from a wide range of sources and industries.  I can ask the change manager to prepare some going forward, but here&amp;rsquo;s where the lack of members in our sprint team is a real handicap.&lt;/p&gt;
-
-&lt;p&gt;At least over the remainder of Tuesday and then during Wednesday morning on Skype we managed to review a good 10 or so hosted wiki solutions.  We paused briefly Wednesday morning to get the timeline straight for the project and the next few days.  The original &amp;ldquo;tender&amp;rdquo; had included an aggressive timeline, but our selection as vendor had been delayed.  The change manager and I came up with this adjusted timeline based on that delay and the upcoming public holidays:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;27th March - Work begins&lt;/li&gt;
-&lt;li&gt;5th April - Prototype developed&lt;/li&gt;
-&lt;li&gt;6th-7th; 18th April - Prototype tested&lt;/li&gt;
-&lt;li&gt;19th-27th April - User feedback incorporated into wiki&lt;/li&gt;
-&lt;li&gt;4th May - wiki is live with moderation&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I&amp;rsquo;m still not clear what the outside constraints are that are driving this timetable.  Talking with the decider it seems there is a need to deliver something fast to help the folks on the ground (commissioners, GPs, patients, carers).  I&amp;rsquo;m concerned that if one wants to grow a successful community around a technological solution like a wiki then one needs to grow it slowly.  Rushing forward to a public launch of something increases the risk of long-term failure, but these are apparently the time/resource constraints, and we are a &amp;ldquo;can-do&amp;rdquo; bunch of folks, so we will do our best.&lt;/p&gt;
-
-&lt;p&gt;We looked at eleven different wiki hosting services including:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Wikispaces&lt;/li&gt;
-&lt;li&gt;Wikidot&lt;/li&gt;
-&lt;li&gt;Wikia&lt;/li&gt;
-&lt;li&gt;Tettra&lt;/li&gt;
-&lt;li&gt;Socialtext&lt;/li&gt;
-&lt;li&gt;PBWorks&lt;/li&gt;
-&lt;li&gt;Ourproject.org&lt;/li&gt;
-&lt;li&gt;Nuclino&lt;/li&gt;
-&lt;li&gt;eXoCloud&lt;/li&gt;
-&lt;li&gt;Confluence Hosted&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We worked through the first few with the change manager driving.  Here&amp;rsquo;s us trying to add comments to a wikispaces wiki:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="failing to see added comments on wikispaces wiki" src="https://www.dropbox.com/s/hn9zulbam61b4pp/Screenshot%202017-03-30%2010.19.20.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;where we were able to create a wiki, but for some reason our posted comments would not show up.   As we moved through the different solutions, I started to see a pattern emerging in terms of a kind of activity script.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Create a new page&lt;/li&gt;
-&lt;li&gt;Edit the page&lt;/li&gt;
-&lt;li&gt;Add a heading&lt;/li&gt;
-&lt;li&gt;Add a list&lt;/li&gt;
-&lt;li&gt;Add a document&lt;/li&gt;
-&lt;li&gt;Add (and resize) an image&lt;/li&gt;
-&lt;li&gt;Add a comment&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;The discussions so far had made it clear to me that HLP staff were also key end-users of the imagined solution, so seeing the change manager (an HLP staff member) trying to navigate these wiki environments was very interesting.  We were getting blocked from signing up to some of the solutions as I couldn&amp;rsquo;t receive my email over the NHS wireless, but we were able to try Tettra, which had a really nice clean interface, reminiscent of the medium blogging tool:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Tettra's interface, reminiscent of the medium blogging tool" src="https://www.dropbox.com/s/88nk1nwpyvdc4lm/Screenshot%202017-03-30%2010.23.22.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The next day we continued with me remote at my home office over Skype with the change manager at NHS headquarters.  We tried wikidot where we found that the process of adding an image was somewhat laborious.  We went back to Tettra to see how adding an image was there and it was pretty straightforward.  Next we tried PbWorks, where the interface was a little busier than Tettra, but there was good support for re-sizing an image:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Resized image with PbWorks" src="https://www.dropbox.com/s/74xnvyany1dzhxm/Screenshot%202017-03-31%2009.22.30.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;We moved on to Atlassian&amp;rsquo;s wiki confluence, which I was familiar with from my programming background.  I quite liked it, but I sensed that the interface might be a bit busy, given its usual target audience of tech specialists and programmers.  The problem here was also that I was interacting with the interfaces, and the change manager was just watching over Skype, unlike the day before when I&amp;rsquo;d been seeing him trying to manage the interfaces himself.  I consoled myself that this was all still really just us doing lightning demos.  We were trying to bring some of the possible alternatives into our minds, rather than conducting usability tests per se:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Atlassian's Confluence wiki" src="https://www.dropbox.com/s/pbauj6vdnw45jy9/Screenshot%202017-03-31%2009.19.54.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;We also tried Nuclino which had a nice interface following the approach popularised by the Medium blog that Tettra also seemed to follow:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="the Nuclino wiki" src="https://www.dropbox.com/s/9wzt2ogq6xdqlpl/Screenshot%202017-03-31%2009.19.14.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;On the ExoPlatform system we got quite lost in the interface and couldn&amp;rsquo;t work out how to even make an editable wiki.  We tried iMeet and Wikia.  On iMeet we didn&amp;rsquo;t get past creating a workspace (I note they&amp;rsquo;ve been pinging me every couple of days since, with their best shots at drip emails).  And the sign up process in Wikia took a while and ended up getting left in the background. &lt;/p&gt;
-
-&lt;p&gt;There&amp;rsquo;s more we could be looking at.  It was frustrating that we lost half an hour to trying Skype and Hangouts at the beginning of my remote day.  The NHS firewall appears to block Skype and maybe hangouts.  When I saw Brendan&amp;rsquo;s laptop the next day, it seemed like it might just have been wifi connectivity issues that could have been solved by plugging into a hard LAN cable.  The setup at NHS headquarters is interesting.  Open plan offices with flat screen tvs showing the BBC news channel.  Lots of meeting rooms with no computers in.  Staff work at their computers in the open plan office, but then generally seem to leave their computers to go meet in rooms where they can have discucssions without disturbing their co-workers.  Or make phone calls where they can only talk, but not show.  I would find it extraordinarily frustratingto be in meetings and discussions in the absence of the digital tools (the laptops) where you can really show each other things or collaborate on specifics.  Some meeting rooms appear to have sophisticated remote meeting systems in them, which is ironic when they could be using Skype or Hangouts, although of course there will be security and support constraints that the the NHS must adhere to.&lt;/p&gt;
-
-&lt;p&gt;I can see that a large government organisation would be inclined to pay for a &amp;ldquo;it just works&amp;rdquo; secure remote meeting system, when Skype and Hangouts require a fair amount of technical know how and support.  Naturally NHS England will be very concerned about the security of all their systems.  It&amp;rsquo;s just a funnily different world than I&amp;rsquo;m used to where the computer is the primary conduit for both work and conversation.  The HLP team had been interested when I&amp;rsquo;d shown them Slack the previous day.  Perhaps through working together there can be some side-benefits via me introducing the team to some digital tools and practices that they aren&amp;rsquo;t yet familiar with.&lt;/p&gt;
-
-&lt;p&gt;The big question now of course is how to continue the Sprint?  We were getting out lightning demos done, which was supposed to by the morning of day two, but we hadn&amp;rsquo;t seen the majority of our experts, and we needed to make time for sketching possible solutions; although I was questioning whether that made sense since the budget constraints required us to pick from existing solutions &amp;hellip; find out how we handled it all in tomorrow&amp;rsquo;s blog!&lt;/p&gt;
 </content>
   </entry>
 </feed>
