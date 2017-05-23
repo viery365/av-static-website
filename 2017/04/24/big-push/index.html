@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>Big Push</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_7 blog_page_7_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_04 x2017_04_24 x2017_04_24_big-push x2017_04_24_big-push_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,63 +83,61 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/04/24/big-push/">Big Push</a></h2>
+        <h5 class='date'>24 Apr 2017</h5>
+    <p><img alt="big push" src="/images/big_push.jpg" /></p>
 
-          <p>Page 7 of 15</p>
+<p>Over the weekend I spent a good couple of hours shutting down all the different browser tabs I had open (about 70) and adding relevant links to my action plan.  I got briefly distracted updating the Wikipedia pages for Social Prescribing, but that felt good to get done, and ultimately I was able to reboot my computer before doing a Premium pairing on EventManager with Marian, where we managed to tinker with the existing pull request. We had to change the styling on the event when it went live.  We managed to use an html data-attribute so that the styling and display of the event live status was always managed by JavaScript &hellip; Would love to pull the code into the blog, but in the meantime check out the <a href="https://github.com/AgileVentures/EventManager/pull/27">PR</a>.</p>
 
-            <p><a href="/blog/page/6/">Previous page</a></p>
+<p>Then it was an early Monday start to get down to NHS head offices to meet up with new and outgoing change managers.  It was the outgoing change manager&rsquo;s last day, so important to catch them to say goodbye and thank them for the work they&rsquo;d done so far.  On the way in on the train I sketched an agenda for the meeting:</p>
 
-          <h2><a href="/2017/01/06/getting-organised/">Getting Organised</a></h2>
-          <h3>Jan  6</h3>
-          <p>Recently we had new windows put in the front of the house, which included replacing my home office windows.  This forced me to have a bit of a clear up in the office to allow the builders access.  I’m not a big fan of having to clear up in the physical...</p>
-          <h2><a href="/2017/01/05/slow-but-steady/">Slow but Steady</a></h2>
-          <h3>Jan  5</h3>
-          <p>I’m finding my pace rather slow after the break.  At least I’m sleeping through my 6:30am alarms and not really rousing myself til 7:30am.  That’s fine this week as my two youngest don’t start school till next Monday so there’s not a hard “we’ll take...</p>
-          <h2><a href="/2017/01/04/we-are-charity/">We Are Charity!</a></h2>
-          <h3>Jan  4</h3>
-          <p>It finally happened!  The UK government’s charity commission approved AgileVentures as an official UK charity.  About 9 months from our original submission, a few emails back and forth, and an apology from the charity commission for accidentally closing...</p>
-          <h2><a href="/2017/01/03/downtime/">Downtime</a></h2>
-          <h3>Jan  3</h3>
-          <p>Right then, back from a two week blogging break.  I was still working the week before Xmas, but thought I’d put down the blogging baton to try and catch up on other things.  I had fantasies of making a lot of coding progress, but while there was some...</p>
-          <h2><a href="/2016/12/16/mobbing-f2f/">Mobbing and Face 2 Face</a></h2>
-          <h3>Dec 16</h3>
-          <p>Thursday was taken at quite a rush.  I moved the Premium Mob programming session forward half an hour so I could attend my twin boys’ carol concert.  We got deeper into Avdi Grimm’s Confident Ruby, where the patterns were starting to combine to create...</p>
-          <h2><a href="/2016/12/15/to-pair-or-not-to-pair/">To Pair or Not to Pair</a></h2>
-          <h3>Dec 15</h3>
-          <p>My objective on Wednesday was to make further progress on the Paypal integration.  Things getting in the way of that included blogging, sending out emails, scrums, coordination sessions, and needing to pick the kids up from school at short notice....</p>
-          <h2><a href="/2016/12/14/removing-custom-routes/">Removing Custom Routes</a></h2>
-          <h3>Dec 14</h3>
-          <p>In a day with little time for coding on WebsiteOne I think I made a bit of a breakthrough in terms of removing custom routes on Rails controllers.  Time got sucked away in the usual admin, reviewing pull requests, scrums and having Michael update me...</p>
-          <h2><a href="/2016/12/13/cross-pairing/">Cross-Pairing</a></h2>
-          <h3>Dec 13</h3>
-          <p>Over the weekend, in conflict with my general rule about working on Saturdays and Sundays, I lead a couple of “Bob Martin” scrums.  My standards about not working at the weekend for health and sanity have been chipped away at by me leading a Mentive...</p>
-          <h2><a href="/2016/12/12/semi-automated-bots/">Semi-Automated Bots, or Augmented Humans?</a></h2>
-          <h3>Dec 12</h3>
-          <p><img alt="bot" src="/images/bot.jpeg"></p>
+<ul>
+<li>Asking how things were going</li>
+<li>Double checking on what success looked like</li>
+<li>Getting approval for my plan going forward</li>
+<li>Getting the content from the PDFs into the wiki</li>
+<li>Clarifying the communication plan</li>
+</ul>
 
-<p>Friday included a lot of meetings, pull request review, and bug fixing.  I didn’t get much fresh coding down, which was somewhat frustrating, but I did have a bit of a breakthrough on the greeter bot side, with this code:</p>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">Botkit</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'botkit...</span></code></pre>
-          <h2><a href="/2016/12/09/making-progress/">Making Progress (for the Greater Good)</a></h2>
-          <h3>Dec  9</h3>
-          <p><img alt="progress" src="/images/progress.jpg"></p>
+<p>As it happened we jumped in in the middle and I ended up telling them the outcome of my testing with the NHS laptop on Friday, and how I&rsquo;d landed on MediaWiki as a solution to our problems there.  I also ended up showing them the Bitnami hosted MediaWiki I&rsquo;d set up and the Social Prescribing page on Wikipedia.  They seemed pleased to see the progress and a Social Prescribing page, and I talked them through how moderation works on Wikipedia.  In mentioning the Wikipedia page on the doctor, Michael Dixon, we discovered that there is an NHS wikiproject group within Wikipedia.  That seems like an important lead - folks that we might be able to reach out to.</p>
 
-<p>So I went over time for yesterday’s blogging.  I’d tried to cap it at 20 minutes, but I got into a fair bit of detail about the options for testing/mocking the Twitter API before getting on to the meat of the matter I was trying to focus on; Agile...</p>
+<p>We talked about the timeline, the communication strategy options, and setting up editing and moderation training for HLP staff and others to fit in with the idea of a soft launch on May 4th and hard launch on May 12th.  We also had a chance to double check that the Bitnami/Azure hosted MediaWiki worked on the NHS laptops.  I was pretty sure there wouldn&rsquo;t be any problems, but after the icon issue the previous week I wanted to double check.  The icons all loaded.  I note that I didn&rsquo;t actually check a successful edit operation - will follow up with the new change manager to make double sure.</p>
 
-            <p><a href="/blog/page/8/">Next page</a></p>
+<p>We also sat down with team lead, to check in that everything was solid.  Sounds like the conference they wants to present the system at, on May 18th, is a big deal, with VIPs etc. and they&rsquo;ll want to do a live demo if possible &hellip;</p>
 
+<p>I was glad that I asked the new change manager about how things were going generally as I heard about some of the other HLP activities, including that they were tendering for a social prescribing service to be set up in collaboration with a CCG.  I had assumed that HLP&rsquo;s activities were limited to researching social prescribing, rather than taking an active lead on setting it up, so that was good to know. </p>
+
+<p>It all left me with a good set of action items:</p>
+
+<ul>
+<li>getting the legal review of the terms &amp; conditions signed and sealed</li>
+<li>double check with the new change manager that they can complete a mediawiki edit on their laptop</li>
+<li>arranging meetings with the remaining stakeholders</li>
+<li>reviewing all the MediaWiki hosting options</li>
+<li>ensuring we have the right kind of moderation options</li>
+<li>creating editing and moderation training</li>
+<li>get us a URL </li>
+</ul>
+
+<p>I wrote these up on the train home, where I saw an interesting health care related advertisement:</p>
+
+<p><img alt="UNISON tube advert" src="https://www.dropbox.com/s/xkam0b5hthm8hu8/unison-advert.JPG?dl=1" /></p>
+
+<p>Is everything connected?  I&rsquo;m steeling myself for the big push to get this all live &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -197,6 +196,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
