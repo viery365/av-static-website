@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>End of the Line</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_2 blog_page_2_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_04 x2017_04_25 x2017_04_25_end-of-the-line x2017_04_25_end-of-the-line_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,92 +83,58 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/04/25/end-of-the-line/">End of the Line</a></h2>
+        <h5 class='date'>25 Apr 2017</h5>
+    <p><img alt="end of the line" src="/images/end_of_the_line.jpg" /></p>
 
-          <p>Page 2 of 15</p>
+<p>Today is April 25th, the day that Google shuts down its Hangout API.  We&rsquo;ve been watching this coming for several months, with Google enterprise support hinting at a replacement.  Yesterday (April 24th) all the hangout apps stopped functioning and our scrum hosts were forced back to taking the hangout URLs and pasting them into the site to update the site link and notify Slack (as we had done during a previous Google Hangout API outage).  The &ldquo;Start a Hangout on Air&rdquo; buttons were still working, but are now mainly serving to cause the disabled hangout apps to load into the hangout, which requires (all?) users to click &ldquo;cancel&rdquo; a couple of times before the hangout will start sharing video or screen.</p>
 
-            <p><a href="/blog/">Previous page</a></p>
+<p>Maybe I&rsquo;ve been derelict in my duty by failing to spend the last three months thoroughly researching and implementing an alternate solution.  The approach I&rsquo;ve taken is to wait and see what&rsquo;s left after the Hangout API is retired.  It&rsquo;s frustrating.  We&rsquo;ve poured hundreds of hours into the Google Hangout plugins, and the data we get from them underpins a lot of our site&rsquo;s Karma metric and our ability to analyse and track pairing and scrumming in the AgileVentures site and the edX MOOC.  The MOOC is just about to start again and realistically we&rsquo;ll have no telemetry on any pairing.  That said, I&rsquo;ve just got an email saying that the whole AgileVentures site will have to be overhauled for accessibility if it&rsquo;s going to be linked to the edX MOOC.  Maybe going forward we just won&rsquo;t be able to have a direct link pointing our MOOC students to pair using our system.  Early days - lots to review and work out.</p>
 
-          <h2><a href="/2017/03/28/nhs-design-sprint-day-two/">NHS Design Sprint Day Two</a></h2>
-          <h3>Mar 28</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
+<p>For the purpose of continuing the day to day business of AgileVentures: scrums, meetings and the occasional pairing session, we are still in principle able to use the hangouts.  It&rsquo;s a usability pain, but regular members will be able to learn how to update the events in the AV site manually.  It generates a series of action items:</p>
 
-<p>So I was heading into London for the second day in a row to continue our impromptu design sprint with the Healthy London Partnership (HLP).  According to the Google Ventures book on the subject, “Day One” of a design sprint consists of the following...</p>
-          <h2><a href="/2017/03/27/nhs-design-sprint-day-one/">NHS Design Sprint Day One</a></h2>
-          <h3>Mar 27</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
+<ul>
+<li>[ ] Inform members individually</li>
+<li>[ ] Update documentation in AV to indicate new approach to taking hangouts live</li>
+<li>[ ] Update documentation in edX MOOC about new strategy (or remove entirely)</li>
+</ul>
 
-<p>So I’m heading in to central London again to work on this new UK National Health Service (NHS) wiki contract.  I’d already taken the train south of the river to meet with “Healthy London Partnership” (HLP) staff at NHS headquarters on Friday.  The...</p>
-          <h2><a href="/2017/03/24/conflicted/">Conflicted</a></h2>
-          <h3>Mar 24</h3>
-          <p><img alt="conflicted" src="/images/conflicted.jpg"></p>
+<p>Here&rsquo;s a screenshot of the interface element that allows anyone to update an event hangout link:</p>
 
-<p>What a week!  So many developments and me so internally conflicted.  Let me summarise some of the developments:</p>
+<p><img alt="interface element that allows anyone to update an event hangout link" src="https://www.dropbox.com/s/m6soei7ibumpmym/Screenshot%202017-04-24%2016.16.49.png?dl=1" /></p>
 
-<ol>
-<li>The UK Health Service (NHS) awards the AgileVentures charity a small grant to develop, host and moderate a “Social Prescribing” wiki</li>
-</ol>
-          <h2><a href="/2017/03/23/pullrequest-feedback-by-blog/">Pull Request Feedback by Blog</a></h2>
-          <h3>Mar 23</h3>
-          <p><img alt="feedback" src="/images/feedback2.jpg"></p>
+<p>At the moment we don&rsquo;t support a manual function for distributing the video link, which is something we might want to add.  That and the manual mechanism might make sharing the meeting links less arduous, but they don&rsquo;t address the tracking/telemetry elements that we&rsquo;re losing, or the awareness components that show who is in a meeting and whether it is still live. </p>
 
-<p>So in the blogs over the last two days I managed to get to the bottom of the problems on one LocalSupport pull request from a Premium member (Zmago).  It’s clear from that experience that I’ve got to adjust the develop branch so that VCR/PuffingBilly...</p>
-          <h2><a href="/2017/03/22/debugging-by-blog/">Debugging by Blog</a></h2>
-          <h3>Mar 22</h3>
-          <p><img alt="debugging" src="/images/debugging.png"></p>
+<p>Google appears to be splitting Hangouts into two separate products, &ldquo;meet&rdquo; and &ldquo;chat&rdquo;.  I can now start Google &ldquo;meets&rdquo; through my enterprise account.  They appear to be hangouts with all the apps and chat removed:</p>
 
-<p>Right, on to part 2 of “debugging by blog”, my attempt to force myself to work through code blockers while debugging.  Currently it’s LocalSupport, where we’ve had a weird CI failure that wasn’t replicated locally for myself or Zmago on our respective...</p>
-          <h2><a href="/2017/03/21/long-running-pull-requests/">Long Running PRs</a></h2>
-          <h3>Mar 21</h3>
-          <p><img alt="security" src="/images/long_running.JPG"></p>
+<p><img alt="Google Meet" src="https://www.dropbox.com/s/xd8bp268seota88/Screenshot%202017-04-25%2009.50.08.png?dl=1" /></p>
 
-<p>So the SSL encryption is all now working on <a href="https://www.agileventures.org/">AgileVenture’s production site</a>.  The slight login oddities on staging appear to have been just staging oddities.  I think maybe we could address them by re-cloning the production database to staging.  That...</p>
-          <h2><a href="/2017/03/20/security-first/">Security First</a></h2>
-          <h3>Mar 20</h3>
-          <p><img alt="security" src="/images/security.png"></p>
+<p>As yet I can find no mention of an API.   I&rsquo;ve applied for the Early Adopter Program (EAP) for chat, but haven&rsquo;t gained access yet.  I can guess some of Google&rsquo;s motivation for splitting the two products in terms of simpler offerings, but it goes in a completely different direction from what we want.  We&rsquo;d like more tightly integrated chat and videoconferencing.</p>
 
-<p>We’re in the process of rolling out “https” support on the main AgileVentures site.  We’ve had “https” or “ssl” encoding set up on the LocalSupport project for a couple of years.  LocalSupport users are not a technical community so we don’t have...</p>
-          <h2><a href="/2017/03/17/private-pairing/">Private Pairing</a></h2>
-          <h3>Mar 17</h3>
-          <p><img alt="privacy" src="/images/private-keep-out.jpg"></p>
+<p>Maybe we need to back up and work out what&rsquo;s really mission critical for AgileVentures.  What&rsquo;s mission critical for me is delivering on the NHS project so I can feed my kids.  My intuition is that being able to start video events from Slack would be much more convenient and comprehensible for everyone.  It&rsquo;s possible and the de-motivator for me in the past is that those hangouts haven&rsquo;t been recordable; but maybe we need to drop that recording aspect?  The pros are that it&rsquo;s great for learning, openneess, accessibilty, catching up etc., but knowing you&rsquo;ll be recorded is a big barrier for some folks.  We&rsquo;ve got some different technology options to pursue such as seeing whether we could use Zoom, or a hand-rolled WebRTC solution, but we&rsquo;ve got limited development resources.  Before we start spending them I&rsquo;d like to do a full week design sprint to prototype and test the next solution.</p>
 
-<p>Where to start? Intense week.  Just finished a one hour private pairing session on the <a href="http://codingdojo.org/kata/Tennis/">tennis kata</a> with a Ruby programmer I met on the <a href="http://www.rubyonrails.link/">RailsLink Slack</a>.  They were suggesting Vim/Tmux, but we ended up using Hangouts and GitHub pong.  It was a good...</p>
-          <h2><a href="/2017/03/16/who-needs-frameworks/">Who Needs Frameworks?</a></h2>
-          <h3>Mar 16</h3>
-          <p><img alt="frameworks" src="/images/frameworks.JPG"></p>
+<p>It feels a bit like the end of the line for the moment.  The AgileVentures events page <a href="https://github.com/AgileVentures/WebsiteOne/issues/1635">wasn&rsquo;t loading at all yesterday</a> due to a 500 error we couldn&rsquo;t understand (some 3rd party service timing out perhaps?), but seems to be working today.  I guess change is the only certainty.  We&rsquo;ve built a community using the free offerings that companies like Slack and Google have provided us, but it was always without guarantees.  Relationships with partners change, and everyone will have mixed feelings when those relationships change, but change they must.</p>
 
-<p>I listen to a different podcast every morning.  Last Friday it was <a href="http://www.greaterthancode.com/podcast/episode-014-rashaun-stovall-snuggs/">“Greater than Code” with Ra’Shaun Stovall (Snuggs)</a>.  It was pretty mind expanding with quotes and questions like the following:</p>
+<h3>Related Videos</h3>
 
-<blockquote>
-<p>seniors often try to hold on to the complexity they...</p>
-</blockquote>
-          <h2><a href="/2017/03/15/show-me-the-code/">Show me the Code</a></h2>
-          <h3>Mar 15</h3>
-          <p><img alt="code" src="/images/code.jpg"></p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=4pS97UiieBg">&ldquo;Martin Fowler&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/edit?o=U&amp;video_id=vomDvVEfw_k">&ldquo;Kent Beck&rdquo; Scrum</a></li>
+</ul>
 
-<p>Federico made a comment on one of my recent blogs:</p>
-
-<blockquote>
-<p>code<em>in</em>blog == good</p>
-</blockquote>
-
-<p>I wish I was coding more.  I am getting to do some code in the Premium mobbing sessions.  My productive coding efforts are snatched between meetings with me throwing up spikes...</p>
-
-            <p><a href="/blog/page/3/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -226,6 +193,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

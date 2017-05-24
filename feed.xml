@@ -5,10 +5,57 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-04-24T01:00:00+01:00</updated>
+  <updated>2017-04-25T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>End of the Line</title>
+    <link rel="alternate" href="http://blog.url.com/2017/04/25/end-of-the-line/"/>
+    <id>http://blog.url.com/2017/04/25/end-of-the-line/</id>
+    <published>2017-04-25T01:00:00+01:00</published>
+    <updated>2017-05-24T22:04:32+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="end of the line" src="/images/end_of_the_line.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Today is April 25th, the day that Google shuts down its Hangout API.  We&amp;rsquo;ve been watching this coming for several months, with Google enterprise support hinting at a replacement.  Yesterday (April 24th) all the hangout apps stopped functioning and our scrum hosts were forced back to taking the hangout URLs and pasting them into the site to update the site link and notify Slack (as we had done during a previous Google Hangout API outage).  The &amp;ldquo;Start a Hangout on Air&amp;rdquo; buttons were still working, but are now mainly serving to cause the disabled hangout apps to load into the hangout, which requires (all?) users to click &amp;ldquo;cancel&amp;rdquo; a couple of times before the hangout will start sharing video or screen.&lt;/p&gt;
+
+&lt;p&gt;Maybe I&amp;rsquo;ve been derelict in my duty by failing to spend the last three months thoroughly researching and implementing an alternate solution.  The approach I&amp;rsquo;ve taken is to wait and see what&amp;rsquo;s left after the Hangout API is retired.  It&amp;rsquo;s frustrating.  We&amp;rsquo;ve poured hundreds of hours into the Google Hangout plugins, and the data we get from them underpins a lot of our site&amp;rsquo;s Karma metric and our ability to analyse and track pairing and scrumming in the AgileVentures site and the edX MOOC.  The MOOC is just about to start again and realistically we&amp;rsquo;ll have no telemetry on any pairing.  That said, I&amp;rsquo;ve just got an email saying that the whole AgileVentures site will have to be overhauled for accessibility if it&amp;rsquo;s going to be linked to the edX MOOC.  Maybe going forward we just won&amp;rsquo;t be able to have a direct link pointing our MOOC students to pair using our system.  Early days - lots to review and work out.&lt;/p&gt;
+
+&lt;p&gt;For the purpose of continuing the day to day business of AgileVentures: scrums, meetings and the occasional pairing session, we are still in principle able to use the hangouts.  It&amp;rsquo;s a usability pain, but regular members will be able to learn how to update the events in the AV site manually.  It generates a series of action items:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[ ] Inform members individually&lt;/li&gt;
+&lt;li&gt;[ ] Update documentation in AV to indicate new approach to taking hangouts live&lt;/li&gt;
+&lt;li&gt;[ ] Update documentation in edX MOOC about new strategy (or remove entirely)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a screenshot of the interface element that allows anyone to update an event hangout link:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="interface element that allows anyone to update an event hangout link" src="https://www.dropbox.com/s/m6soei7ibumpmym/Screenshot%202017-04-24%2016.16.49.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;At the moment we don&amp;rsquo;t support a manual function for distributing the video link, which is something we might want to add.  That and the manual mechanism might make sharing the meeting links less arduous, but they don&amp;rsquo;t address the tracking/telemetry elements that we&amp;rsquo;re losing, or the awareness components that show who is in a meeting and whether it is still live. &lt;/p&gt;
+
+&lt;p&gt;Google appears to be splitting Hangouts into two separate products, &amp;ldquo;meet&amp;rdquo; and &amp;ldquo;chat&amp;rdquo;.  I can now start Google &amp;ldquo;meets&amp;rdquo; through my enterprise account.  They appear to be hangouts with all the apps and chat removed:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Google Meet" src="https://www.dropbox.com/s/xd8bp268seota88/Screenshot%202017-04-25%2009.50.08.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;As yet I can find no mention of an API.   I&amp;rsquo;ve applied for the Early Adopter Program (EAP) for chat, but haven&amp;rsquo;t gained access yet.  I can guess some of Google&amp;rsquo;s motivation for splitting the two products in terms of simpler offerings, but it goes in a completely different direction from what we want.  We&amp;rsquo;d like more tightly integrated chat and videoconferencing.&lt;/p&gt;
+
+&lt;p&gt;Maybe we need to back up and work out what&amp;rsquo;s really mission critical for AgileVentures.  What&amp;rsquo;s mission critical for me is delivering on the NHS project so I can feed my kids.  My intuition is that being able to start video events from Slack would be much more convenient and comprehensible for everyone.  It&amp;rsquo;s possible and the de-motivator for me in the past is that those hangouts haven&amp;rsquo;t been recordable; but maybe we need to drop that recording aspect?  The pros are that it&amp;rsquo;s great for learning, openneess, accessibilty, catching up etc., but knowing you&amp;rsquo;ll be recorded is a big barrier for some folks.  We&amp;rsquo;ve got some different technology options to pursue such as seeing whether we could use Zoom, or a hand-rolled WebRTC solution, but we&amp;rsquo;ve got limited development resources.  Before we start spending them I&amp;rsquo;d like to do a full week design sprint to prototype and test the next solution.&lt;/p&gt;
+
+&lt;p&gt;It feels a bit like the end of the line for the moment.  The AgileVentures events page &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1635"&gt;wasn&amp;rsquo;t loading at all yesterday&lt;/a&gt; due to a 500 error we couldn&amp;rsquo;t understand (some 3rd party service timing out perhaps?), but seems to be working today.  I guess change is the only certainty.  We&amp;rsquo;ve built a community using the free offerings that companies like Slack and Google have provided us, but it was always without guarantees.  Relationships with partners change, and everyone will have mixed feelings when those relationships change, but change they must.&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4pS97UiieBg"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=vomDvVEfw_k"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Big Push</title>
     <link rel="alternate" href="http://blog.url.com/2017/04/24/big-push/"/>
@@ -274,48 +321,6 @@
 &lt;/ul&gt;
 
 &lt;p&gt;I&amp;rsquo;d love to improve the whole onboarding for new members, but if we do have a spike in Premiums we will need mentors ready to handle it.  I&amp;rsquo;m getting to my limit of being able to keep up, particularly if I&amp;rsquo;m taking the lead on delivering contracts like the one we have with the NHS.  Let&amp;rsquo;s see what we can get done in the next six week chunk before my next &amp;lsquo;rest&amp;rsquo; :-)&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>NHS Design Sprint Day Six</title>
-    <link rel="alternate" href="http://blog.url.com/2017/03/31/nhs-design-sprint-day-six/"/>
-    <id>http://blog.url.com/2017/03/31/nhs-design-sprint-day-six/</id>
-    <published>2017-03-31T01:00:00+01:00</published>
-    <updated>2017-05-15T22:20:35+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="design sprint" src="/images/design_sprint.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So Friday I had an intense day of meetings at NHS headquarters.  At the beginning of the week I had been suggesting to the change manager that Friday would be a day of prototype testing.  They&amp;rsquo;d arranged a series of meetings&amp;ndash;three in person, two phone calls.  Skype wasn&amp;rsquo;t working behind the NHS firewall, and due to the stop/start part-time nature of the whole thing it was clear that we were not going to have completed all the parts of the design sprint and got to testable prototypes for Friday.  The reality was that we were still doing expert interviews, and so I used the Friday to continue that process with five different stakeholders; specifically an NHS public champion, a CCG meta-commissioner, an HLP staff member, a service provider and an academic researcher.&lt;/p&gt;
-
-&lt;p&gt;I took notes on all and recorded the in person meetings, but there wasn&amp;rsquo;t time to really digest in between sessions, which had a max 30 minutes intervals; during which time we were usually required to switch to a different room in the building due to the complicated NHS room booking system.  In small gaps in between the meetings, I started to get the change manager set up with a Slack for Healthy London Partnership (HLP), added HLP to the Wikipedia page on London Health Care, discovered there is no wikipedia page on Social Prescribing, failed to follow up with the lawyers on pro bono legal advice, and discovered that HLP is not a registered charity.  We also got a sketch of the following week&amp;rsquo;s plan in place, but the preponderance of phone offers made it look like if we were doing any usability studies it would be with HLP staff members rather than the other stakeholders.&lt;/p&gt;
-
-&lt;p&gt;I continued the process of showing the experts our A3 sheets with the long term goal, how we might fail and implementation maps.  The public champion added the phrase &amp;ldquo;Self Informing Community Commissioning&amp;rdquo; to our long term goal, and I took notes on a new A3 sheet of all the additional ways they suggested we might fail, e.g.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;All the different stakeholders operating in silos, and so we lose information that might help us achieve critical mass&lt;/li&gt;
-&lt;li&gt;Small pilots with artificial communities difficult to get to work&lt;/li&gt;
-&lt;li&gt;Commissioners scared of (funding?) groups without governance and insurance&lt;/li&gt;
-&lt;li&gt;(NHS?) System not set up to commission self prescribing/social brokering&lt;/li&gt;
-&lt;li&gt;Fear from existing workforce that their jobs will go&lt;/li&gt;
-&lt;li&gt;Voluntary sector scared by austerity and so avoid collaboration&lt;/li&gt;
-&lt;li&gt;That we don&amp;rsquo;t learn from the social care (social brokering) experiment&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;One things that&amp;rsquo;s becoming very clear is that it&amp;rsquo;s difficult to get people to focus exclusively on how we might fail without them suggesting possible solutions, such as using wiki coordination to provide umbrellas for governance.  The public champion also pointed out that social prescription could be seen as just a re-branding of social brokering, something that had been promoted in the local authority context, but had been cut due to austerity measures over the last 10 years.  There&amp;rsquo;s a narrative here that suggests cuts to what could be considered &amp;ldquo;preventative&amp;rdquo; services have lead to increasing demand on frontline health care services that the NHS supports.  I showed the champion our implementation maps, indicating some of the different funding frameworks, and they explained the different &amp;ldquo;funding trousers&amp;rdquo; of health care and social care, and then drew their own map with a different funding model:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Public champion funding map" src="https://www.dropbox.com/s/8nq3xdyv9027kaw/PublicChampion-map.JPG?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Where &amp;ldquo;IAGs&amp;rdquo; are &amp;ldquo;Information, Advice and Guidance&amp;rdquo; services.  The public champion had built their own social brokering site using DotNetNuke called the &lt;a href="http://www.londonbrokeragenetwork.com/"&gt;&amp;ldquo;London Brokerage Network&amp;rdquo;&lt;/a&gt;.  The site is a paid members site which contains listings of different organisations providing advice and support services in London.  No sooner than we&amp;rsquo;d finished talking to the public champion, we were off to a new room.&lt;/p&gt;
-
-&lt;p&gt;In our new location we settled down for a phone call with a Senior Strategy Manager (Out of Hospital and Primary Care) for the SouthWest London region.  This was a new kind of stakeholder that I wasn&amp;rsquo;t familiar with, someone with a remit over multiple CCGs, who told us that in SW London the different CCGs were very interested in social prescribing and self-care, but they were currently using ad hoc programs derived from disparate funding initiatives.  The different SW London CCGs were apparently very interested to know more about what funding models were available to support social prescribing.  I asked about methods for information sharing and knowledge gathering and heard how the focus was on meetings and discussions at monthly intervals.  The tools used for sharing digitally tend to be the MS Office usual suspects, and Sharepoint.&lt;/p&gt;
-
-&lt;p&gt;No sooner were we off the phone than I was talking with another HLP staff member who was going to take over as the new &amp;ldquo;change manager&amp;rdquo;.  We looked together at the various implementation maps that we&amp;rsquo;d generated and they reacted strongly saying that we could look at a different model with lots of new stakeholders:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="HLP change manager funding map" src="https://www.dropbox.com/s/167lb2jnu59vbig/HLP-change-manager-map.JPG?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I was interested to get input on online services that HLP staff used and/or liked.  The new change manager told me that they quite liked the &lt;a href="http://clashofclans.wikia.com/wiki/Clash_of_Clans_Wiki"&gt;Clash of Clans wiki&lt;/a&gt;.  The outgoing change manager said that they personaly liked the BBC news web site.  After lunch we met a social prescribing service provider who was running an active social prescribing service in 8 G.P.&amp;rsquo;s offices.  The SP service provider was less interested in the funding, but gave us great specifics about the program taking place in their area and how they brokered between individual patients and community resources; from which I drew another map, but I think that will have to go in the next blog along with what I heard from the change manager about the &amp;ldquo;social prescribing network&amp;rdquo; and what we learnt speaking to an academic researcher who had been involved in running the evaluation study for the Hackney Social Prescribing system.  &lt;/p&gt;
 </content>
   </entry>
 </feed>
