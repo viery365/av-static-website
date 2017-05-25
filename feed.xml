@@ -5,10 +5,71 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-04-25T01:00:00+01:00</updated>
+  <updated>2017-04-26T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>MediaWiki</title>
+    <link rel="alternate" href="http://blog.url.com/2017/04/26/mediawiki/"/>
+    <id>http://blog.url.com/2017/04/26/mediawiki/</id>
+    <published>2017-04-26T01:00:00+01:00</published>
+    <updated>2017-05-25T22:10:38+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="mediawiki" src="/images/MediaWiki.svg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Having estsablished that MediaWiki&amp;rsquo;s default and visual editors both worked smoothly on the NHS laptops on the NHS intranet, it seemed pretty much wrapped up that we&amp;rsquo;d be using MediaWiki for the NHS Social Prescribing project.  The question then became whether we should host it ourselves or use a third party hosting service.  The main MediaWiki site provides a &lt;a href="https://www.mediawiki.org/wiki/Hosting_services"&gt;list of hosting services&lt;/a&gt; which are sortable in terms of different features.  I pulled out all the offerings that included visual editor support:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://meta.miraheze.org/"&gt;Miraheze&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.mywikis.com/"&gt;MyWikis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki-valley.com/"&gt;Wiki Valley&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.wikibase.nl/Diensten/Managed_hosting"&gt;Wikibase solutions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The list also included Wikia and Gamepedia, both free with advertising and both targeting the video-game/entertainment market.  Possible, but long shots I thought; for healthcare we&amp;rsquo;d want a more serious tone.  I contacted all four of the above organisations to try and get set up with a test wiki with a visual editor installed.  Miraheze&amp;rsquo;s site didn&amp;rsquo;t immediately load so I got on to the others.&lt;/p&gt;
+
+&lt;p&gt;MyWikis gave me access to their testing wiki sandbox which had the visual editor; but it got stuck loading on all the browsers I tried and although they responded to my help request reasonably promptly, their suggestion that I should try browser refreshes until it worked was not very helpful.  Wiki Valley responded to my request to say they would create a dedicated demo wiki for us as well as giving us access to a sandbox, but I still haven&amp;rsquo;t managed to edit a page anywhere despite several attempts.  The notification emails and the site are in French and they&amp;rsquo;re not filling me with confidence.&lt;/p&gt;
+
+&lt;p&gt;Wikibase didn&amp;rsquo;t want to provide a demo environment and said that they only minimally support the visual editor. Instead they focus on semantic wiki and page forms as that&amp;rsquo;s what they&amp;rsquo;re saying their users want.  Sounds like an interesting future possibility (submitting data to wikis via forms) but not the best short term option.  Conversely, Miraheze is a volunteer-run system receiving donations to pay for hosting and have no guarantees of service in their terms and conditions, but they have actually been the fastest to set up a working test site for us and the only MediaWiki hosting service to get us a working visual editor so far.  I had to log into a separate feature requesting system (Phabricator) to get the visual editor enabled, and their site has been responsive all week since that outage I experienced the first time I went to their main site.&lt;/p&gt;
+
+&lt;p&gt;In parallel I used &lt;a href="https://bitnami.com/stack/mediawiki"&gt;Bitnami&lt;/a&gt; which allowed a very simple deploy to our own MediaWiki instance on Azure where we can config the MediaWiki directly, and I was able to adjust the main logo and do some preliminary testing.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m honing in on a set of technical features we need to support the higher level project requirements:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;WYSIWYG editor (optional initially, but might be crucial down the line &amp;hellip;)&lt;/li&gt;
+&lt;li&gt;Can disable anonymous edits&lt;/li&gt;
+&lt;li&gt;File upload&lt;/li&gt;
+&lt;li&gt;Custom domain&lt;/li&gt;
+&lt;li&gt;Can we insert custom HLP header to make it look like part of HLP site &amp;hellip;?&lt;/li&gt;
+&lt;li&gt;HTTPS &amp;hellip;&lt;/li&gt;
+&lt;li&gt;moderation support&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I think my next priority must be to request all the additional features enabled we need in the hlptest.miraheze.org MediaWiki, and then see how quickly I can set them up in parallel on our own server.  I started by &lt;a href="https://phabricator.miraheze.org/T1720"&gt;requesting the disabling of anonymous edits&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="requesting disabling of anonymous edits on miraheze via phabricator" src="https://www.dropbox.com/s/ecfs2s49des8xmj/Screenshot%202017-04-26%2009.46.45.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So let&amp;rsquo;s see how quickly I can do this on our Bitnami/Azure system.  First I need to log in to azure.bitnami.com, which gives me a screen showing both the link to our running instance, and the ssh credentials I need to ssh directly into the box where I can edit the mediawiki settings.  I&amp;rsquo;d previously updated the logo by editing &lt;code&gt;/apps/mediawiki/htdocs/LocalSettings.php&lt;/code&gt;.  So I went back there to try to disable anonymous edits:&lt;/p&gt;
+
+&lt;p&gt;https://www.mediawiki.org/wiki/Manual:Preventing&lt;em&gt;access#Restrict&lt;/em&gt;anonymous_editing&lt;/p&gt;
+
+&lt;p&gt;This time I needed to go to &lt;code&gt;includes/DefaultSettings.php&lt;/code&gt; and set the following:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$wgGroupPermissions['*']['edit'] = false;
+$wgGroupPermissions['*']['createpage'] = false;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and I had successfully disabled the ability of anonymous users to edit existing pages or create new pages.  Meanwhile I&amp;rsquo;m waiting for Miraheze to process my request.  I might rue the day since it may well be a total pain to set up the visual editor or SSL on our Bitnami/Azure hosted system, but I don&amp;rsquo;t think we can use Miraheze for anything other than testing purposes, since we&amp;rsquo;ll need server side access to fix things ourselves in a hurry if we have a specific request from the NHS team.&lt;/p&gt;
+
+&lt;p&gt;Maybe ideally I&amp;rsquo;d now spend the rest of the day working through all the other features in turn.  In the first instance I think I&amp;rsquo;ll just request them all from Miraheze and then see if I can knock off a couple of other low hanging fruit.  Although as I look I see that file upload appears to be enabled by default, and there are just restrictions about which sorts of files can be uploaded.  HLP is asking about uploading Excel files, which sounds like something we can easily add later as needed.&lt;/p&gt;
+
+&lt;p&gt;Miraheze has a &lt;a href="https://meta.miraheze.org/wiki/Custom_domains"&gt;whole page on how to request custom domains&lt;/a&gt;.  I don&amp;rsquo;t know when an HLP subdomain will be created for us, so it&amp;rsquo;s expedient to see if we can set up subdomains on av.org and see if we can get our Bitnami/Azure box hooked up like that.  That reminds me we will really need SSL (something Miraheze has out of the box), and in general we need to improve our Azure admin skills.  If only AWS or DO had given us similar nonprofit credit schemes &amp;hellip; guess I could try a Bitnami deploy to AWS and taking the financial hit, but we do need to skill up in Azure admin for the AsyncVoter project and to take advantage of the credits from MicroSoft.&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;ve set up http://hlp-wiki.agileventures.org to point to our Azure/Bitnami system, and we&amp;rsquo;ll see if that works, but we&amp;rsquo;ll have to wait for the zone file to propagate.  For stability we&amp;rsquo;ll need to reserve the IP address which requires powershell installation.  I also see an article for &lt;a href="https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-configure-ssl-certificate"&gt;ssl setup&lt;/a&gt;.  It might be painful but I think we can get all that done.  The other things to impale ourselves on are setting up the WYSIWYG editor, working out the moderation strategy and whether/how we can have an HLP banner across the top of the wiki &amp;hellip; stay tuned for all those fun and frolics in the coming days.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>End of the Line</title>
     <link rel="alternate" href="http://blog.url.com/2017/04/25/end-of-the-line/"/>
@@ -218,109 +279,6 @@
 &lt;li&gt;&lt;a href="https://youtu.be/lhGfHh67VnA"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://youtu.be/oggJPzo7k_U"&gt;Redeemify Planning&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Rest as Good as a Change</title>
-    <link rel="alternate" href="http://blog.url.com/2017/04/18/rest-as-good-as-a-change/"/>
-    <id>http://blog.url.com/2017/04/18/rest-as-good-as-a-change/</id>
-    <published>2017-04-18T01:00:00+01:00</published>
-    <updated>2017-05-16T21:58:02+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="rest" src="/images/rest.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I took a week off over Easter.  I definitely needed it.  Particularly after the time change and the intensity of the NHS project, I just had to step away.  I seem to remember working through Easter and school half terms in the past, but it seems counter-productive now.  Quite an effort to get back into the swing of things today though.  We had a public holiday yesterday (Monday) and I ended up doing a half day on this and that, mainly writing up my phone meeting with a G.P. (UK doctor), planning, putting in a couple of funding requests and writing a draft business plan for the charity.&lt;/p&gt;
-
-&lt;p&gt;My knee has been approved for jogging again, so I&amp;rsquo;m getting back into my morning run, and have switched round with my wife so she&amp;rsquo;s taking the twins to school in the morning.  If we&amp;rsquo;re going to deliver effectively on the NHS project and ensure we put in enough other funding requests for the long term then I need more work time.  Ironically it didn&amp;rsquo;t generate any more work time this morning as I fell asleep again after the alarm and I&amp;rsquo;m still sitting down to blog at the usual time.  Hopefully my body clock will be back to normal soon and I can squeeze out a few more work hours.&lt;/p&gt;
-
-&lt;p&gt;I really did appreciate having a Monday without any meetings - it gave me time to sort out some goals for the week:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;[ ] apply for other funding &amp;hellip;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;[x] City Bridge Trust - follow up would be electronic&lt;/li&gt;
-&lt;li&gt;[x] Diana and Allan Morgenthau Charitable Trust - follow up would be by surface email&lt;/li&gt;
-&lt;li&gt;[ ] apply for others in list&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;[ ] generate next kind of solution for NHS&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;[ ] get as much of their drupal site as we can &amp;ndash;&amp;gt; Communications contact (phone? change manager?)&lt;/li&gt;
-&lt;li&gt;[ ] we need to move towards a new round of testing&lt;/li&gt;
-&lt;li&gt;[ ] finish writing up/distributing notes&lt;/li&gt;
-&lt;li&gt;[ ] legal support &amp;ndash;&amp;gt; business plan?&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;[ ] follow up with Simon (after another review of the design sprint book)&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;[ ] release next week of AV102 (fixes needed?)&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;[ ] some framework for premiums and mentors in AV &lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;[x] ask each mentor individually &amp;hellip;&lt;/li&gt;
-&lt;li&gt;[ ] ask each mentor individually about getting more involved following up with individual mentees &amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;[ ] sort timings of scrums and weekly meetings &amp;hellip;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;With Slack and email there are always a 1001 little admin things to do and questions to be answered.  My suspicion is that if I want AgileVentures to be something I can keep putting the majority of my time into, I have to prioritise doing those things that only I am in a position to do, e.g. taking the initiative putting in funding applications.  Our marketing intern Marufa took the initiative to find a site called &lt;a href="http://www.fundingcentral.org.uk/"&gt;Funding Central&lt;/a&gt; that lists potential funding opportunities for charities.  Before my break I did their guided search and came up with a handful of options.  On the last Friday of work I&amp;rsquo;d put together another funding proposal for an EU fund, but stupidly missed the deadline due to miscalculating the time difference with Europe.  They wouldn&amp;rsquo;t accept it after the deadline.  Here&amp;rsquo;s the proposal:&lt;/p&gt;
-
-&lt;h4&gt;1. Project title (10 words max).&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Sponsored IT &amp;amp; Software Development Mentorship for the Underprivileged&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4&gt;2. One-line introduction to your idea (140 characters max).&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Donors provide sponsorship funds to support the mentorship of underprivileged individuals to improve their IT &amp;amp; software development skills.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4&gt;3. Provide a summary of your idea highlighting how it relates to the theme ‘Equality Rebooted’, how it aims to make technological change/digital transformation more inclusive (100 words max).&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Technological change and digital transformation relies on individuals from all walks of life having access to training and professional development in the skills of the new digital economy. Not everyone can afford professional mentorship, however a coordinated donor/sponsorship program can bring these benefits to anyone with an internet connection.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4&gt;4. Explain why your idea is innovative in the country or context where it will be implemented. If your idea is based on an existing concept, explain what is different about it (250 words max).&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Our idea is innovative in as much as we are relying on the bare minimum of resources from the under-privileged individuals we are trying to support; simply time and internet connection. Mentorship and professional development are existing approaches used in industry, but are often unavailable to those with limited resources. Our idea works with funds from those more privileged individuals who want to give back to the community to help others get a leg up, and uses those funds to provide mentorship and professional development support to the under-privileged who are trying to make their way in the new digital economy.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4&gt;5. Describe clearly what impact you expect your idea to have and how you will achieve this (250 words max).&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The impact of our idea is a larger number of under-privileged individuals from a wider variety of backgrounds taking their place in the digital economy. Our approach will redress some of the inequalities currently seen in the digital workforce and will do so by pairing experienced mentors and professionals with under-privileged individuals to provide them with support and guidance on making use of the latest digital tools, and honing their skills according to a coherent professional development plan.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4&gt;6. Indicate at what scale your idea will operate initially and how it could be transferred to another area in Europe or scaled up at a national and/or European level in the future (200 words max).&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;We are currently working with U.S. based funders to provide mentorship and professional development support from U.K. based mentors to under-privileged individuals in Kenya and India. We also currently have volunteer U.S. and U.K. based mentors working with individuals in Slovenia, Sweden, Ukraine, Tunisia and various other countries. We would very much like funds to reach out to more potential sponsors and donors to put more of our volunteer efforts on a more sustainable footing. So far we have a 3000 member organisation being supported by a dozen professional mentors. In principle there is no limit to the scale at which we can operate.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4&gt;7. Outline how your idea could become financially sustainable over the next three years (200 words max).&lt;/h4&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Our operation relies on input from donors, corporate sponsorship, premium membership and contracts with non-profits, charities, government and businesses with a commitment to social responsibility. We are currently covering costs, but relying heavily on volunteer input. We currently have three donors, three corporate sponsors and fifty premium members, which is covering all our IT hosting and support costs, but not any staff costs. Our plan is to double the current income through these various methods in the next 6 months in order to start to employ staff to ensure there is consistent and reliable support for all our mentors and mentees. Funding from Equality Rebooted would very much increase the chances of us succeeding in our sustainability goals.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I knocked out the above on the train into London for a day of wiki usability testing at NHS headquarters.  I&amp;rsquo;m not saying it&amp;rsquo;s of any serious quality, but I can generate text like that to order.  All the plans and ideas for AgileVentures bubble in my mind.  It was disappointing to miss the deadline by 30 minutes, but that energized me to take some of the above prose and use that to make a couple of email submissions to funding bodies I had found in the &lt;a href="http://www.fundingcentral.org.uk/"&gt;Funding Central&lt;/a&gt; site.  Doing that allowed me to tick off a couple of items on the weekly todo list, and I pushed forward to create a &lt;a href="https://www.agileventures.org/business-plan"&gt;draft business plan&lt;/a&gt; that might help us unlock pro-bono legal support, and maybe serve as a banner to rally the team around.  I also started reaching out to our mentors to see if they were interested in AV sponsoring their training for Agile/Scrum certificates. The Premium subscriptions seem to have plateaued, although they may start to rise again with the new MOOC and change in season, and there&amp;rsquo;s already some upgrades going on.  I suspect that I need to engage the other mentors more directly with the larger body of Premium members, and then focus my resources on supporting the mentors &amp;hellip; maybe?&lt;/p&gt;
-
-&lt;p&gt;At the moment the business plan has this list of opportunities:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Pay for mentors to receive additional training&lt;/li&gt;
-&lt;li&gt;Pay mentors explicitly for time mentoring&lt;/li&gt;
-&lt;li&gt;Improve onboarding experience to increase numbers signing up for Premium membership (CRM)&lt;/li&gt;
-&lt;li&gt;Additional outreach for contracts&lt;/li&gt;
-&lt;li&gt;Additional outreach for grants&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I&amp;rsquo;d love to improve the whole onboarding for new members, but if we do have a spike in Premiums we will need mentors ready to handle it.  I&amp;rsquo;m getting to my limit of being able to keep up, particularly if I&amp;rsquo;m taking the lead on delivering contracts like the one we have with the NHS.  Let&amp;rsquo;s see what we can get done in the next six week chunk before my next &amp;lsquo;rest&amp;rsquo; :-)&lt;/p&gt;
 </content>
   </entry>
 </feed>
