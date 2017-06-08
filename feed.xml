@@ -5,10 +5,72 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-04-27T01:00:00+01:00</updated>
+  <updated>2017-04-28T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title/>
+    <link rel="alternate" href="http://blog.url.com/2017/04/28/bringing-it-all-together/"/>
+    <id>http://blog.url.com/2017/04/28/bringing-it-all-together/</id>
+    <published>2017-04-28T01:00:00+01:00</published>
+    <updated>2017-06-08T22:24:39+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;hr&gt;
+
+&lt;p&gt;title: Bringing It All Together
+date: 2017-04-28
+tags: Bitnami, Azure, MyWikis, VisualEditor, SSL, training, wiki, Miraheze, moderation&lt;/p&gt;
+
+&lt;h2&gt;author: Sam Joseph&lt;/h2&gt;
+
+&lt;p&gt;&lt;img alt="wave" src="/images/wave.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The last two days have been blog driven NHS wiki flurries in the morning followed by mobbing and AgileVenturing in the afternoon.  In the Elixir mob on Wednesday we made further headway into Phoenix and I really start to question whether we&amp;rsquo;ve all been suffering through an instance variable nightmare.  Yesterday I caught up with the marketing team, the Ruby mob (where we got confident with some of our legacy code) and then spent an hour bashing away at AsyncVoter&amp;rsquo;s Azure/Dokku setup with Matt and Raphael.&lt;/p&gt;
+
+&lt;p&gt;I think there are certain critical things that I need to do upfront this morning, i.e. as part of the blogging process, and some others that need to be done before lunch.  At the end of yesterday I was starting to feel calmer that we were bringing together all the things we needed for the NHS wiki project.  I&amp;rsquo;d emailed all the remaining stakeholders for additional meetings, the HLP team was getting the training dates set, I&amp;rsquo;d made an outline of the training materials, and we&amp;rsquo;d made contact with the Communications team.  Furthermore we&amp;rsquo;d also worked with the trustees to get the paperwork done for me to be paid this month, so that&amp;rsquo;s a relief.  The key things that need to happen before lunch today are then:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Process my payment&lt;/li&gt;
+&lt;li&gt;Reach out to the HLP communication team (as main contact is off sick)&lt;/li&gt;
+&lt;li&gt;Reply to NHS/Voluntary Sector stakeholder emails to confirm meetings for the week after next&lt;/li&gt;
+&lt;li&gt;Reach out to enterprise wellness related to moderation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So I&amp;rsquo;m thinking that the first two have to be knocked off quickly. However in even trying to reach out to the HLP communications team I got lost in LinkedIn for 10 minutes reviewing the HLP organistaion there and connecting up to the NHS staff I&amp;rsquo;ve already met.  That was helpful, but (reality check) I&amp;rsquo;ve got to process this payment for my own personal finances.  It should be simple, but anything done for the first time can encounter issues, so let me just pause the blog to get that done &amp;hellip; done - had to do a text authorisation on my mobile, but couldn&amp;rsquo;t have taken more than a minute in total.  I also see that the NHS payment for the first part of our work came through, so that&amp;rsquo;s a relief to have that all sorted.  I think my heart-rate has slowed slightly :-)&lt;/p&gt;
+
+&lt;p&gt;Now I have to think about how best to communicate with the communications team &amp;hellip; an email to all the contacts, or a separate email to each one &amp;hellip;?  I demurred from emailing the three contact emails I had separately, and decided to email all three, cc-ing my existing contacts.  There&amp;rsquo;s a danger that asking a group of people that everyone assumes that someone else can deal with it.  Here&amp;rsquo;s a draft of the email I sent:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Sorry to email you out of the blue, but I'm working with NAME and NAME in HLP, and our charity AgileVentures is developing the new HLP Social Prescription wiki.
+
+I met with NAME to discuss last week and everything is looking good.
+
+This week I was following up with NAME about a URL subdomain for our wiki, but unfortunately NAME is off sick and I was wondering if you, or someone else on your team might be able to help us out. We're planning for a soft launch on May 4th and a hard launch on May 12th so we're on a bit of a short fuse.
+
+One piece of feedback we've had from many stakeholders is that any new wiki system should not be a "new" location, so we were hoping to set up a subdomain under the http://healthylondon.org domain, e.g.
+
+http://wiki.healthylondon.org
+
+We assume that someone in your communications team, or some of your sub-contracted developers, will control the domain name records for healthylondon.org, and would be able to set up the "wiki" subdomain to point to our system.
+
+Please let me know if any of you might be able to help with this, or if you could put us in touch with whichever controls the domain name.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I did add delivery tracking and a return receipt.  Some might consider a return receipt a little aggressive, but there&amp;rsquo;s a time crunch here and I&amp;rsquo;m hoping to quickly get to the person who can help us with this sub-domain, or discover that we can&amp;rsquo;t have a sub-domain ASAP.  So sending a group email with a &amp;ldquo;return receipt&amp;rdquo; request was my middle ground.&lt;/p&gt;
+
+&lt;p&gt;So with that done I should double check that the funds got transfered from before &amp;hellip; and it has. Yay! So while I&amp;rsquo;m in that bank interface I should update things for the new tax year &amp;hellip; and &amp;hellip; that&amp;rsquo;s all done. Phew.  So that let&amp;rsquo;s me check a few more outstanding things off my todo lists.  So now I need to send out an email to Enterprise Wellness to find a good time for a phone call.&lt;/p&gt;
+
+&lt;p&gt;It pains me that blogs about what we did in the Elixir and Ruby mobs this week might be more interesting to the coders among this blogs readership, and to you I apologise, but I&amp;rsquo;ve got to feed my kids, and that&amp;rsquo;s what the NHS contract is enabling at the moment.  If you&amp;rsquo;re really, really keen to have more blogs about how Elixir is changing the programming world, and how Ruby gets confident, then vote with your wallet.  Sign up for AgileVentures Premium Mob membership (if you haven&amp;rsquo;t already) and get your friends, family and neighbours to do so as well! :-)  In the meantime it&amp;rsquo;ll probably be more blogs about communication and mediawiki. Sorry &amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=BW21_enHixI"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=nH0wPOZ9Ryk"&gt;Marketing meeting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=tU7lTV99tYY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>More MediaWiki</title>
     <link rel="alternate" href="http://blog.url.com/2017/04/27/more-mediawiki/"/>
@@ -290,33 +352,6 @@ $wgGroupPermissions['*']['createpage'] = false;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=OFKKyZbJqlk"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Blogging</title>
-    <link rel="alternate" href="http://blog.url.com/2017/04/20/blogging/"/>
-    <id>http://blog.url.com/2017/04/20/blogging/</id>
-    <published>2017-04-20T01:00:00+01:00</published>
-    <updated>2017-05-22T22:07:55+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="blogging" src="/images/blog.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Blogging helps me get my thoughts straight in the morning.  Well, I say blogging&amp;ndash;I&amp;rsquo;m just doing the morning pages exercise that some writers apparently use.  I don&amp;rsquo;t think there&amp;rsquo;s any particular requirement to blog them; but it&amp;rsquo;s somehow painful for me not to publish whatever I&amp;rsquo;m generating.  That&amp;rsquo;s maybe part of my problem, in that I suspect that I might connect with more folks if I spent more time revising and polishing before sharing, but who knows?  I got some good feedback off the &lt;a href="http://nonprofits.agileventures.org/2017/03/17/private-pairing/"&gt;blog post&lt;/a&gt; I shared in Slack last night.  At the moment I&amp;rsquo;m trying to hold the course till June when I&amp;rsquo;ll have been compulsively blogging for a year.  I&amp;rsquo;ve previously thought that after that I might switch to one blog a week. In the shower this morning I thought about whether it would be interesting to do one private pairing session a day rather than blogging.  I&amp;rsquo;ve also had an idea that maybe a series of pair programming videos with relatively well-known programmers might be fun and help towards the vision of a more active pair programming community.&lt;/p&gt;
-
-&lt;p&gt;So I just had a strange brain fork (or trident?) experience where my mind went in three different directions at almost the same time - or at least kept switching back and forth between three or more different topics.  Partly there&amp;rsquo;s this process before blogging in the morning where I start to think about what I want to blog about, and then sometimes I sit down and the text goes off in a different direction, and sometimes I want to go with the flow, and sometimes I can&amp;rsquo;t bear to leave things out.  On this occasion I couldn&amp;rsquo;t bear to leave anything out and so I make four sets of notes in draft below that I now plan to turn into four separate paragraphs - here are (hopefully) those four paragraphs:&lt;/p&gt;
-
-&lt;p&gt;On the subject of compulsive blogging, I was relieved to hear &lt;a href="https://www.greaterthancode.com/podcast/episode-016-julia-evans/"&gt;Julan Evans talking on GreaterThanCode&lt;/a&gt; about how she &lt;a href="https://jvns.ca/"&gt;blogs intensively&lt;/a&gt; on all sorts of tech topics, and makes me feel that I&amp;rsquo;m not such an insane blogging hermit that I sometimes deride myself internally for.  Looking over her blogs like &lt;a href="https://jvns.ca/blog/2014/08/05/pair-programming-is-amazing-except-when-its-not/"&gt;&amp;ldquo;Pair programming is amazing! Except&amp;hellip; when it&amp;rsquo;s not.&amp;rdquo;&lt;/a&gt; I see a higher quality that I can aspire to. &lt;/p&gt;
-
-&lt;p&gt;After blogging, myself, about &lt;a href="http://nonprofits.agileventures.org/2017/03/17/private-pairing/"&gt;private pairing sessions&lt;/a&gt; I wondered if after June I should spend my blogging time on private pairing.  I&amp;rsquo;m currently spending over an hour on blog activities each day with at least 30 minutes writing in the morning (plus research) and then another 30 in the evening (reviewing a blog from one month back to push to AV nonprofit site and AV slack, and one blog from 3 months back to push to Medium, Twitter, Facebook and LinkedIn).  Of course private pairing sessions wouldn&amp;rsquo;t include videos to blog, but perhaps I could tweet who I was pairing with?  To be honest I&amp;rsquo;d prefer to spend almost all my day blogging and pairing with different folks, private, public and everywhere in-between.  In some ways, on a mission to work out a framework that will allow that activity to feed my kids as well, although I am really enjoying design sprints and talking to clients.  Design sprints online, now there&amp;rsquo;s a thought &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;But anyway, if I want to be blogging about pairing sessions in more detail, one model could be to reach out to well-known programmers and produce a series of video blogs more like 
-&lt;a href="https://www.driftingruby.com/"&gt;https://www.driftingruby.com/&lt;/a&gt;, &lt;a href="https://sub.watchmecode.net/"&gt;https://sub.watchmecode.net/&lt;/a&gt; or &lt;a href="https://scaleyourcode.com/"&gt;https://scaleyourcode.com/&lt;/a&gt;&amp;rsquo;s interviews with experts.  All of these seem much more accessible and polished than the blizzard of adhoc pairing sessions we&amp;rsquo;ve recorded at AgileVentures.  Maybe we just need a load of venture capital to build the perfect system to support the different levels of public and private pairing?  Of course we&amp;rsquo;re a charity &amp;hellip; perhaps there&amp;rsquo;s a venture philanthropist out there who can help us make it happen? :-)  Or is it just too much to try and build a new social-technical collaboration framework AND try and direct its engine towards charitable goals?&lt;/p&gt;
-
-&lt;p&gt;Of course the orphaned blog topic that I had wanted to get into today was the great Elixir mobbing session that we had yesterday.  I&amp;rsquo;d been away for a week, and was really pleased to see the mob continue in my absence and the team get Elixir Phoenix set up on C9.  We carried on through Stephen Grider&amp;rsquo;s Phoenix tutorial and completed a new route and controller.  The mobbing is private, and only for AgileVentures Premium Mob members.  Of course my internal extrovert just wants to share and share the videos, but part of AgileVentures&amp;rsquo; sustainability is trying to create something that folks will put down some money for so we can ultimately pay staff to cover the gaps that appear when volunteers turn over.  AgileVentures Premium F2F is private pairing sessions, although I&amp;rsquo;ve tried to make that all about working on AgileVentures open source charity projects.  Maybe that needs to change? Or the pairing community should be at least slighltly de-coupled from the charity projects?  It&amp;rsquo;s agonising.  People are so much more comfortable pairing privately on their own projects, but there&amp;rsquo;s so much great learning for them and for others if they paired publicly on charity projects.  I guess the trick will be to build a nice pathway from one to the other that people can move along at their preferred pace &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;In the meantime I&amp;rsquo;ll keep blogging &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
