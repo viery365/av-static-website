@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Downtime</title>
+    <title>Downtime (and using WebMock to double check VCR)</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -89,13 +89,15 @@
       <div class="col-lg-2">
       </div>
       <div class="col-lg-8 text-left">
-        <h2 class='title'><a href="/2017/01/03/downtime/">Downtime</a></h2>
+        <h2 class='title'><a href="/2017/01/03/downtime/">Downtime (and using WebMock to double check VCR)</a></h2>
         <h5 class='date'> 3 Jan 2017</h5>
-    <p>Right then, back from a two week blogging break.  I was still working the week before Xmas, but thought I&rsquo;d put down the blogging baton to try and catch up on other things.  I had fantasies of making a lot of coding progress, but while there was some coding done, I think it was more admin catchup.  I had a couple of Premium pairing sessions, meetings with UCBerkeley to sort out the next run of the Agile Development using Ruby on Rails MOOC and got Xmas cards sent off to the premium members.  I got complimentary textbooks sent out to several instructors (yay automation!) and got set up for making the new SPOC versions of the MOOC for our beta gold instructors.</p>
+    <p><img alt="no time" src="/images/notime.jpg" /></p>
+
+<p>Right then, back from a two week blogging break.  I was still working the week before Xmas, but thought I&rsquo;d put down the blogging baton to try and catch up on other things.  I had fantasies of making a lot of coding progress, but while there was some coding done, I think it was more admin catchup.  I had a couple of Premium pairing sessions, meetings with UCBerkeley to sort out the next run of the Agile Development using Ruby on Rails MOOC and got Xmas cards sent off to the Premium members.  I got complimentary textbooks sent out to several instructors (yay automation!) and got set up for making the new SPOC versions of the MOOC for our beta gold instructors.</p>
 
 <p>There was some coding being done.  I continued work on the support for <a href="https://github.com/AgileVentures/WebsiteOne/pull/1465">making the different kinds of subscription generic</a> that I&rsquo;d started with Marian in a Premium Plus session.  Michael and Marian had done some more work but had come up against some road blocks.  Matt was also trying to make progress on <a href="https://github.com/AgileVentures/WebsiteOne/pull/1469">checking that a video exists before tweeting the YouTube link</a>.  I pushed Michael to pair with Matt while I worked solo on the generic subscription refactoring.  In a break Michael was telling me that he saw a problem with the logic in the events instance controller where the tweets were only being sent out when the youtube id changed.  The new EventInstance object would have a nil YouTube id, and the first incoming ping from our Google Hangout plugin would update the EventInstance to have a YouTube id.  However, the current logic would only tweet when the YouTube id changed, meaning that although we could now check whether the stream associated with the YouTube id was live, we wouldn&rsquo;t be able to tweet to that effect.</p>
 
-<p>Part of the problem here was exposing the flaw, given the current single step cucumber tests that were relying on both VCR and RSpec <code>receive</code> expectations (with follow through) of specifics in our system.  I&rsquo;d been uncomfortable with this arrangement and <a href="http://nonprofits.agileventures.org/2016/12/08/agile-dev-ops/">blogged about it previously</a>, but had held off from diving into the possible solutions I could imagine:</p>
+<p>Part of the problem here was exposing the flaw, given the current single step Cucumber tests that were relying on both VCR and RSpec <code>receive</code> expectations (with follow through) of specifics in our system.  I&rsquo;d been uncomfortable with this arrangement and <a href="http://nonprofits.agileventures.org/2016/12/08/agile-dev-ops/">blogged about it previously</a>, but had held off from diving into the possible solutions I could imagine:</p>
 
 <p>a) using RSpec spies to check the tweet had gone out afterwards, e.g. <code>have_received</code>
 b) somehow checking that the VCR cache had been hit in the way we expected
@@ -115,7 +117,7 @@ c) switching to WebMock</p>
     <span class="nf">When</span> the HangoutConnection has pinged to indicate the event start
     <span class="nf">Then</span> the youtube link will not be sent
 </code></pre>
-<p>I left Michael to explain the new setup to Matt and got back to the Generic Subscription feature where I crashed through the road blocks and got something working before the complete coding/blogging/admin break I took between Xmas and New Year.  The Generic Subscription feature involves deleting a lot of replicated templates and making the Plan class a full ActiveRecord Model, with the idea that when we want to deploy a new plan, we just add the appropriate items on the PayPal and Stripe sides, and don&rsquo;t have to push any code to our own site; just add the new plan to the database.  I had been hoping to deploy that before Xmas, but it was not to be, and I&rsquo;ll get into the refactoring I did there in another blog post.</p>
+<p>I left Michael to explain the new setup to Matt and got back to the &ldquo;Generic Subscription&rdquo; feature where I crashed through the road blocks and got something working before the complete coding/blogging/admin break I took between Xmas and New Year.  The Generic Subscription feature involves deleting a lot of replicated templates and making the Plan class a full ActiveRecord Model, with the idea that when we want to deploy a new plan, we just add the appropriate items on the PayPal and Stripe sides, and don&rsquo;t have to push any code to our own site; just add the new plan to the database.  I had been hoping to deploy that before Xmas, but it was not to be, and I&rsquo;ll get into the refactoring I did there in another blog post.</p>
 
 <p>I had been thinking to do some work between Xmas and New Year, but I found myself needing some more serious downtime.  I kept up with email and very occasional Slack in case there were any emergencies, but the kids were off school and it had been a busy year.  I needed some serious downtime where I wasn&rsquo;t pushing myself to get things done every day.  It was pretty damn pleasant, but all good things come to an end. Now I&rsquo;m just getting myself back into the saddle for another busy year.  New Year&rsquo;s resolutions?  Take more time off before I burn out :-)</p>
 
