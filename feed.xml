@@ -5,10 +5,61 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-05-02T01:00:00+01:00</updated>
+  <updated>2017-05-03T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>One Step Forward</title>
+    <link rel="alternate" href="http://blog.url.com/2017/05/03/one-step-forward/"/>
+    <id>http://blog.url.com/2017/05/03/one-step-forward/</id>
+    <published>2017-05-03T01:00:00+01:00</published>
+    <updated>2017-06-13T21:57:44+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="distractions" src="/images/one_step.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I got distracted by Slack and email again this morning.  Wanting to post my last podcast listen into #av&lt;em&gt;community&lt;/em&gt;talk I ended up replying to freerangers last post.  At least today I think I was calmer, and there wasn&amp;rsquo;t so much to catch up with in all the incoming communication channels.  I&amp;rsquo;m definitely struggling with anxiety about getting everything done.  I&amp;rsquo;m less anxious this morning after completing the first round of wiki training with some of the HLP core team yesterday.  The big thing was that the MediaWiki visual editor ultimately loaded on three different NHS laptops and networks, and all the trainees succesfully created edited pages as well as got set up with moderation permissions.&lt;/p&gt;
+
+&lt;p&gt;We never managed to really complete important parts of the design sprint we started a month ago.  The project time and budget wasn&amp;rsquo;t ever going to allow for custom development of a particular solution, so we were reduced to a process of reflecting over the existing solutions.  We&amp;rsquo;ve &amp;ldquo;sneaked&amp;rdquo; in the customer testing phase as part of training everyone in the use of the system.  We&amp;rsquo;ve also failed to &amp;ldquo;prototype&amp;rdquo; in the pure design sprint fashion by using a real software package (MediaWiki) and having that set up and working.  I think the design sprint concept assumes that there&amp;rsquo;s budget and time, following the sprint, to properly deliver the solution to the end users.  A critical part of the overall question for us was whether we could get &lt;em&gt;any&lt;/em&gt; reasonable solution working on the NHS laptops and networks, and the result from yesterday appears to be yes.&lt;/p&gt;
+
+&lt;p&gt;I ran an hour long training session and had the trainees try things out for themselves (as we might do in a usability test) before reviewing how things should be done (if they got stuck).  I learned a lot, including:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;initial sign up confirmation emails were going into some junk mail folders&lt;/li&gt;
+&lt;li&gt;the sign up process with the ConfirmAccount module was rather burdensome&lt;/li&gt;
+&lt;li&gt;the visual editor was working in our custom instance on NHS laptops/network&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That last element might seem trivial.  One might be tempted to say, well Wikipedia&amp;rsquo;s visual editor worked fine on NHS laptops/network, so of course the same visual editor on our own server will work fine, but if working with computers has taught me anything it&amp;rsquo;s that you really musn&amp;rsquo;t assume that things work as you expect.  Particularly since we moved to MediaWiki after a selection of other high profile enterprise and open source wikis completely failed to load critical icons on the NHS laptops/network, which rendered them completely unusable.&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;ve got a series of additional training events to run next week, and in the meantime we&amp;rsquo;ve got a soft launch scheduled for tomorrow.  To support that we need to get a good subset of the following sorted:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;backups on our MediaWiki instance&lt;/li&gt;
+&lt;li&gt;ensure we have a fixed IP -&amp;gt; okay because we are CNAMing to the bitnami name &amp;hellip;&lt;/li&gt;
+&lt;li&gt;get SSL set up on our MediaWiki instance&lt;/li&gt;
+&lt;li&gt;consider whether we remove the ConfirmAccount plugin (is Moderation sufficient?)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Other things we will need to do before next week include&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;getting the watch list email notifications working&lt;/li&gt;
+&lt;li&gt;create a training video&lt;/li&gt;
+&lt;li&gt;consider whether to add Wikipedia style moderation templates&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I could easily spend the whole rest of the week completely focused on this, but I&amp;rsquo;ve also got to re-record AV102 videos to reflect the changes to the Google Hangout API, and ensure we&amp;rsquo;ve made all the final accessibility changes on the MOOC which goes live next week.  There&amp;rsquo;s also reviewing all the pull requests for the different AgileVentures projects, and the process of following up with Premiums. I have finally started creating individual private Premium channels to try and distribute the load of supporting the increasing numbers of Premium members.  We can do it, yes we can!&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=4oBrjn-9S3o"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Distracted Operations</title>
     <link rel="alternate" href="http://blog.url.com/2017/05/02/distracted-operations/"/>
@@ -283,56 +334,6 @@ $wgGroupPermissions['*']['createpage'] = false;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4pS97UiieBg"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=vomDvVEfw_k"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Big Push</title>
-    <link rel="alternate" href="http://blog.url.com/2017/04/24/big-push/"/>
-    <id>http://blog.url.com/2017/04/24/big-push/</id>
-    <published>2017-04-24T01:00:00+01:00</published>
-    <updated>2017-05-23T21:54:47+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="big push" src="/images/big_push.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Over the weekend I spent a good couple of hours shutting down all the different browser tabs I had open (about 70) and adding relevant links to my action plan.  I got briefly distracted updating the Wikipedia pages for Social Prescribing, but that felt good to get done, and ultimately I was able to reboot my computer before doing a Premium pairing on EventManager with Marian, where we managed to tinker with the existing pull request. We had to change the styling on the event when it went live.  We managed to use an html data-attribute so that the styling and display of the event live status was always managed by JavaScript &amp;hellip; Would love to pull the code into the blog, but in the meantime check out the &lt;a href="https://github.com/AgileVentures/EventManager/pull/27"&gt;PR&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Then it was an early Monday start to get down to NHS head offices to meet up with new and outgoing change managers.  It was the outgoing change manager&amp;rsquo;s last day, so important to catch them to say goodbye and thank them for the work they&amp;rsquo;d done so far.  On the way in on the train I sketched an agenda for the meeting:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Asking how things were going&lt;/li&gt;
-&lt;li&gt;Double checking on what success looked like&lt;/li&gt;
-&lt;li&gt;Getting approval for my plan going forward&lt;/li&gt;
-&lt;li&gt;Getting the content from the PDFs into the wiki&lt;/li&gt;
-&lt;li&gt;Clarifying the communication plan&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;As it happened we jumped in in the middle and I ended up telling them the outcome of my testing with the NHS laptop on Friday, and how I&amp;rsquo;d landed on MediaWiki as a solution to our problems there.  I also ended up showing them the Bitnami hosted MediaWiki I&amp;rsquo;d set up and the Social Prescribing page on Wikipedia.  They seemed pleased to see the progress and a Social Prescribing page, and I talked them through how moderation works on Wikipedia.  In mentioning the Wikipedia page on the doctor, Michael Dixon, we discovered that there is an NHS wikiproject group within Wikipedia.  That seems like an important lead - folks that we might be able to reach out to.&lt;/p&gt;
-
-&lt;p&gt;We talked about the timeline, the communication strategy options, and setting up editing and moderation training for HLP staff and others to fit in with the idea of a soft launch on May 4th and hard launch on May 12th.  We also had a chance to double check that the Bitnami/Azure hosted MediaWiki worked on the NHS laptops.  I was pretty sure there wouldn&amp;rsquo;t be any problems, but after the icon issue the previous week I wanted to double check.  The icons all loaded.  I note that I didn&amp;rsquo;t actually check a successful edit operation - will follow up with the new change manager to make double sure.&lt;/p&gt;
-
-&lt;p&gt;We also sat down with team lead, to check in that everything was solid.  Sounds like the conference they wants to present the system at, on May 18th, is a big deal, with VIPs etc. and they&amp;rsquo;ll want to do a live demo if possible &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I was glad that I asked the new change manager about how things were going generally as I heard about some of the other HLP activities, including that they were tendering for a social prescribing service to be set up in collaboration with a CCG.  I had assumed that HLP&amp;rsquo;s activities were limited to researching social prescribing, rather than taking an active lead on setting it up, so that was good to know. &lt;/p&gt;
-
-&lt;p&gt;It all left me with a good set of action items:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;getting the legal review of the terms &amp;amp; conditions signed and sealed&lt;/li&gt;
-&lt;li&gt;double check with the new change manager that they can complete a mediawiki edit on their laptop&lt;/li&gt;
-&lt;li&gt;arranging meetings with the remaining stakeholders&lt;/li&gt;
-&lt;li&gt;reviewing all the MediaWiki hosting options&lt;/li&gt;
-&lt;li&gt;ensuring we have the right kind of moderation options&lt;/li&gt;
-&lt;li&gt;creating editing and moderation training&lt;/li&gt;
-&lt;li&gt;get us a URL &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I wrote these up on the train home, where I saw an interesting health care related advertisement:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="UNISON tube advert" src="https://www.dropbox.com/s/xkam0b5hthm8hu8/unison-advert.JPG?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Is everything connected?  I&amp;rsquo;m steeling myself for the big push to get this all live &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
