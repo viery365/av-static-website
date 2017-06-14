@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>The Harder I Try</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_05 x2017_05_04 x2017_05_04_the-harder-I-try x2017_05_04_the-harder-I-try_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/05/04/the-harder-I-try/">The Harder I Try</a></h2>
+        <h5 class='date'> 4 May 2017</h5>
+    <p><img alt="dream catcher" src="/images/dream-catcher.jpg" /></p>
+
+<p>Sometimes it feels like my life is one of those dreams where you&rsquo;re running as hard as you can, but you&rsquo;re not moving forward.  Yesterday I fixed two sticky technical issues that have been bugging us for a while, I got out an updated video for the AV102 course and enjoyed an Elixir mob run by two of our Premium Mob members, but still didn&rsquo;t feel like I&rsquo;d made much of a dent in the old ToDo list.  Let me tell you about the first bug in our AgileVentures WebsiteOne Rails code.  Ideally I wouldn&rsquo;t be spending two hours tracking down and fixing that bug, as the impending release of the MOOC next week meant that the final week of the AV102 TA training course needed to go live sharpish.  However one of the videos in the final week was still talking about the Hangout plugins and they&rsquo;ve been discontinued and there really needed to be an explanation of how to take AV events live manually.</p>
+
+<p>However, for the past couple of weeks on the odd day here and there we&rsquo;d been getting 500 errors on the main events listing page.  It tended to come and go, and seemed more likely to occur on Mondays and Tuesdays.  Part of re-recording the video involved showing things appearing in the event list, and it seemed to me that not having the events index page working was a block on recording the video which should probably show that event list working.  That&rsquo;s not to say that the events list bug wasn&rsquo;t also a priority fix, but I&rsquo;m kind of drowning in high priority items at the moment.  Anyway, I resolved to have a good stab at getting the bug fixed.</p>
+
+<p>I&rsquo;d previously hypothesized that the bug might be related to some third party website we were relying on for timezone conversions, based on some of the different error messages we were seeing in the logs associated with the 500 errors.  We were getting different errors in different parts of the code base, but they all seemed to be related to time conversion:</p>
+<pre class="highlight plaintext"><code>/app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.7.1/lib/active_support/core_ext/time/zones.rb:56:in `find_zone!'
+</code></pre>
+<p>and:</p>
+<pre class="highlight plaintext"><code>/app/vendor/bundle/ruby/2.3.0/gems/activerecord-4.2.7.1/lib/active_record/attribute_methods/time_zone_conversion.rb:24:in `convert_time_to_time_zone'`
+</code></pre>
+<p>The fact that they were intermittent and changing started to make me think (as Michael had suggested) that this was a resource issue.  I wasn&rsquo;t getting any Google hits for these kinds of errors, so I tried upgrading our plan on Heroku, but that didn&rsquo;t have much impact.   We&rsquo;d just cloned the production data to staging and I saw we were getting similar errors there, but not on develop.  I was considering cloning to develop, when I ran locally against an older version of the production data - things were okay.  I cloned the production data locally and the events page was taking &gt;20 seconds to load.  Whatever the issue was, something about the data was influencing the problem.  We have 20-second timeouts on Heroku, after which web queries are just shut down.  I speculated that some individual events might have corrupt timezones or something, but deleting a few had no impact on the time locally.</p>
+
+<p>I thought maybe I should do more to replicate the production setup locally, but I knew that was a pain, and I had basically the same issue locally, although without the error being thrown, since I have longer timeouts for http requests on my local machine.  The Rails logs on my local machine were showing that lots of time was being spent in the request, but actually the time spent constructing the view and doing activerecord queries were relatively small:</p>
+<pre class="highlight plaintext"><code>Completed 200 OK in 35596ms (Views: 359.4ms | ActiveRecord: 80.0ms)
+</code></pre>
+<p>Looking more closely I could see that there appeared to be a 2 to 3 second wait after every query on the event instances table, which I traced into this method:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">remove_past_events</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>
+    <span class="n">events</span><span class="p">.</span><span class="nf">delete_if</span> <span class="p">{</span><span class="o">|</span><span class="n">event</span><span class="o">|</span> <span class="o">!</span><span class="n">event</span><span class="p">[</span><span class="ss">:event</span><span class="p">].</span><span class="nf">event_instances</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">try</span><span class="p">(</span><span class="ss">:live?</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+                           <span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="ss">:time</span><span class="p">]</span> <span class="o">+</span> <span class="n">event</span><span class="p">[</span><span class="ss">:event</span><span class="p">].</span><span class="nf">duration</span><span class="p">.</span><span class="nf">minutes</span><span class="p">)</span> <span class="o">&lt;</span> <span class="no">Time</span><span class="p">.</span><span class="nf">current</span><span class="p">}</span>
+  <span class="k">end</span>
+</code></pre>
+<p>Playing with the query on the console I saw that as the number of <code>event_instances</code> increased for an individual event, this method would get slower and slower. Some of the scrums had over 400 <code>event_instances</code>, and the daily scrums appear multiple times in the list so we were repeating many slow operations.  I experimented with replacing <code>delete_if</code> with <code>reject</code> but the method just got slower.  Then, looking more closely at the boolean statement I saw that the db query was in the first portion, and not the second, and actually the time check in the second half of the boolean would probably be false most of the time.  I tried switching the order of the boolean like so:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">remove_past_events</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>
+    <span class="n">events</span><span class="p">.</span><span class="nf">delete_if</span> <span class="p">{</span><span class="o">|</span><span class="n">event</span><span class="o">|</span> <span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="ss">:time</span><span class="p">]</span> <span class="o">+</span> <span class="n">event</span><span class="p">[</span><span class="ss">:event</span><span class="p">].</span><span class="nf">duration</span><span class="p">.</span><span class="nf">minutes</span><span class="p">)</span> <span class="o">&lt;</span> <span class="no">Time</span><span class="p">.</span><span class="nf">current</span> <span class="o">&amp;&amp;</span>
+                           <span class="o">!</span><span class="n">event</span><span class="p">[</span><span class="ss">:event</span><span class="p">].</span><span class="nf">event_instances</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">try</span><span class="p">(</span><span class="ss">:live?</span><span class="p">)}</span>
+  <span class="k">end</span>
+</code></pre>
+<p>and suddenly the problem evaporated.  Now the majority of queries were not checking for event instances at all, and in relatively short order I had the fix deployed and the main site event lists page was loading in just a few seconds.  It&rsquo;s still not as fast as I would like, but it got us out of the woods and unblocked me for re-recording the AV102 video.</p>
+
+<p>Then I was into an Elixir mob, and since two Premium Mobbers had taken the lead on running the session it was less intense effort from me and I&rsquo;d been able to skip preparation the previous day.  We talked about starting a React Mob the following day and the question came up about whether Premium Mob membership covers attending more than one Mob per week.  My response that we&rsquo;ve been somewhat flexible with that perhaps shows that I&rsquo;m not really cut out for being a businessperson.  I just want everyone to have access to all materials :-(  It&rsquo;s weird, because even with payment not every Premium Mob member shows up to the sessions they have in principle paid for.  There seems like a higher level of committment from the Premium Mobbers than overall in the rest of the community, but we have the conundrum that their activity is less visible as we&rsquo;re running the Mobs in private events.  Gosh, just what is the model that will make this all work and be sustainable?  Having Premium Mob events show in our events stream, but only be accessible by those who&rsquo;ve paid, with the stream of every fifth session being available for others to see what goes on?</p>
+
+<p>So after lunch (and React Mob prep with Stephen Grider&rsquo;s kindly donated React/Redux course) and besides the AV102 pivotal tracker voting sessions (which is another blog post), I was impaling myself on the set up for the Slack slash command for AsyncVoter on Azure/Dokku.  We&rsquo;d spent multiple sessions struggling with this and kept hitting a 503 error with no extra information.  The system was all working fine on Digital Ocean with dokku (where Arreche had set it up), but even after getting SSL working on the Azure/Dokku system we were still stuck.  No one showed up for the AsyncVoter kick off, so I spent the half hour quietly deleting the previous app in Slack and creating a new one.  The whole setup is rather involved, and I think I got it fully documented at <a href="https://github.com/AgileVentures/asyncvoter-slack-command/wiki">https://github.com/AgileVentures/asyncvoter-slack-command/wiki</a> but I think ultimately the sticking point was how many layers you have to dig down to find the key URL for a slack app.  Here&rsquo;s the first screen:</p>
+
+<p><img alt="Slack App basic information" src="https://www.dropbox.com/s/2eveqtmb4waywis/Screenshot%202017-05-04%2010.13.48.png?dl=1" />  </p>
+
+<p>Now previously I&rsquo;d worked out that we need to click on things like &ldquo;interactive messages&rdquo;, &ldquo;OAuth &amp; Permissions&rdquo; etc. on the left nav bar.  I find it odd that there is configuration hidden behind those links, that look like to me like they would just be descriptions of the &ldquo;features&rdquo;.  I usually expect configuration to be across the vertical nav, or to look more like buttons, but anyway, we&rsquo;d previously ensured all the &ldquo;interactive messages&rdquo;, &ldquo;OAuth &amp; Permissions&rdquo; URLs were updated to SSL, but there&rsquo;s another.  Clicking on the &ldquo;Building Apps for Slack&rdquo;, reveals another control panel:</p>
+
+<p><img alt="revealed control panel" src="https://www.dropbox.com/s/9zqr9ncli5umymu/Screenshot%202017-05-04%2010.17.07.png?dl=1" /></p>
+
+<p>And all of this is with wording about doing things, not configuring them.  It was through the process of recreating the app from scratch that I discovered the other place that the URL needed to be updated.  Inside the slash command setting:</p>
+
+<p><img alt="slash commands" src="https://www.dropbox.com/s/ay2gjyn4sfvuidg/Screenshot%202017-05-04%2010.18.36.png?dl=1" /></p>
+
+<p>There&rsquo;s the option to edit, which reveals another URL that needed to be edited:</p>
+
+<p><img alt="additional url edit" src="https://www.dropbox.com/s/qzbwmqxiprjz2wq/Screenshot%202017-05-04%2010.19.13.png?dl=1" /></p>
+
+<p>Unless you know it&rsquo;s there, it&rsquo;s not very discoverable.  Just writing this blog I see I can navigate to the top page via the &ldquo;Slash Commands&rdquo; on the left &ldquo;Features&rdquo; navigation links.  In our previous group sessions I think we&rsquo;d been to that page repeatedly, but never realised that by editing the slash command we&rsquo;d reveal another URL that needed updating.  I&rsquo;d say the key usability issue here is that the summary of the slash command, before you edit, does not show that there are another three variables open for editing there, i.e. the RequestURL, ShortDescription and UsageHint.</p>
+
+<p>Of course now I know and I&rsquo;ve blogged about it, but there we go.  The next step is now to ensure we can set up subdomains so that we can have a staging instance and a production instance; I have an idea about how to do that, but it might take 5 minutes, or I might get stuck on it for two hours.  I have to say that, moment to moment, I do prefer coding and debugging to trying to record videos for courses, or even just setting up and organising courses.  Now it&rsquo;s May 4th and soft launch for the NHS wiki and I&rsquo;ve got to work out which of the list of fixes and changes to prioritise:</p>
+
+<ul>
+<li>SSL setup for Azure with bitnami mediawiki stack</li>
+<li>Getting the Watchlist emails working</li>
+<li>Getting the full banner/logo in there</li>
+</ul>
+
+<p>While fighting for my attention are</p>
+
+<ul>
+<li>Getting the rest of the MOOC accessibility fixes done</li>
+<li>Getting all the AV102 TA trainees access to the course as betatesters</li>
+</ul>
+
+<p>and further follow up on WebsiteOne, LocalSupport, AsyncVoter; catching up with our sponsor drie etc. etc.  Like I say, the harder I try to run, the more it feels like I&rsquo;m just staying in the same place :-)</p>
+
+<h3>Related Videos</h3>
+
+<ul>
+<li><a href="https://www.youtube.com/edit?o=U&amp;video_id=4DAU-nFUP-U">&ldquo;Martin Fowler&rdquo; scrum</a></li>
+<li><a href="https://www.youtube.com/edit?o=U&amp;video_id=kS3ttK6Wuxw">Starting Hangouts via AV</a></li>
+<li><a href="https://www.youtube.com/edit?o=U&amp;video_id=JK9i1NCuHno">&ldquo;Kent Beck&rdquo; scrum</a></li>
+</ul>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
