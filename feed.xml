@@ -5,10 +5,54 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-05-04T01:00:00+01:00</updated>
+  <updated>2017-05-05T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Breathing Room</title>
+    <link rel="alternate" href="http://blog.url.com/2017/05/05/breathing-room/"/>
+    <id>http://blog.url.com/2017/05/05/breathing-room/</id>
+    <published>2017-05-05T01:00:00+01:00</published>
+    <updated>2017-06-19T21:33:54+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="breathe" src="/images/breathe.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I felt like I was in a bit of pressure cooker yesterday with so many different tasks piling up.  I&amp;rsquo;ve managed to relieve the pressure slighlty by requesting that the start date of the edX MOOC get put back by a week.  UCBerkeley and edX seem just fine with that, and it&amp;rsquo;s done, and it brings the operation of the TA training course AV102 into line so that the TAs can help with the review of the course material.  This was the mistake that I made last year&amp;ndash;that the final assigninment in the main 4 week body of the AV102 course is pair programming and it&amp;rsquo;s in the following week that the learners start getting credit for contributing to supporting learners in the main MOOC and reviewing the course material.  I think part of the key problem, and probably the reason I made the SAME mistake this year (despite trying hard not too) is that my schedule spreadsheet didn&amp;rsquo;t include the fourth assignment and the first level 2 certificate items for the AV102, screwing up my estimates for when that course ends.  So I&amp;rsquo;ve fixed that now, and hopefully I can avoid the same mistake again, although I&amp;rsquo;m not sure how many times we&amp;rsquo;ll be running this course again in this form.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s been nice to meet learners from the course coming into the AgileVentures hangouts this week.  I&amp;rsquo;ve had them participating in votes on the LocalSupport project, which is probably a good learning experience for them, but other LocalSupport contributors haven&amp;rsquo;t been around.  I think the voting on stories makes a lot more sense for people who are maintaining a certain level of involvement with the project, naturally; which turns me back to thinking that the bootcamp model has a lot going for it in that respect.  Not that I ever saw creating user stories or voting on them in any bootcamp I&amp;rsquo;ve been involved with, but the opportunity is there.  I think the difficulty is that both for the individual learner and the project outcomes you need a certain base level of commitment; a certain number of hours a week that are going into the coding and project managment.  That&amp;rsquo;s really difficult to get from a group of volunteers.&lt;/p&gt;
+
+&lt;p&gt;Most of the recent regulars in LocalSupport don&amp;rsquo;t usually make the kick-offs, which have been quite well attended by Sigu, Cess and Stella, but they weren&amp;rsquo;t around yesterday for kick-off.  Admittedly it was the first time we moved it to Thursday.  Michael showed up and we talked about the direction of the overall project and the apparent low use of the system.  We spent 45 minutes chewing the fat, and I&amp;rsquo;m not sure how much we achieved, apart from me bringing Michael up to date with how the project has pivoted from being a directory of organisations to focusing on listing volunteer opportunities.  I&amp;rsquo;m not sure it was a very productive discussion.  Maybe I should have been doing more listening.  I have trouble when I&amp;rsquo;m in the pressure cooker and I think people are telling me things I already know.  Then again, maybe it&amp;rsquo;s more important to allow someone to express what they want to say.  Michael was telling me I had to understand that lots of MOOC participants are just taking MOOCs to blast through 30 MOOCs in a year, just get a taste of things.  Totally.  Lots of people are just looking to get a taster of what&amp;rsquo;s going on in a particular subject area; and I do feel pleased that the AV folks can get to participate in scrums and vote on stories.&lt;/p&gt;
+
+&lt;p&gt;More the difficulty for me is that I&amp;rsquo;m behind on reviewing the PRs for LocalSupport and regular meetings with the client have gone out of the window with my overload on the NHS wiki project.  That could change in a week or two, but realistically I have to work on things that will pay for my time, as I&amp;rsquo;m out of spare cash.  I can see what I think would help the LocalSupport project thrive, i.e. active reviewing and integration of pull requests.  After meeting with Michael I did spend some time reviewing and see to my pleasure that Marouen had been reviewing and giving feedback on several.  That leaves Marouen&amp;rsquo;s Pull Request which needs a detailed review and planning; but I don&amp;rsquo;t think I can devote time to that unless there&amp;rsquo;s some sort of funding for it.  I did manage to get Zmago&amp;rsquo;s new ReachSkills volunteer integration out, and we could have that onto production soon.  That&amp;rsquo;s the new vision for the site, that if the site were a one-stop shop for all the different sources of volunteering opportunities in Harrow then that might give people a reason to visit it regularly.&lt;/p&gt;
+
+&lt;p&gt;To be honest I think part of the problem is that the project hasn&amp;rsquo;t included us meeting and interacting with the intended end users.  At least in the NHS wiki project I&amp;rsquo;ve been out to talk and interact with lots of different stakeholders.  The LocalSupport client is in contact with lots of different charity groups in Harrow, but it feels like we&amp;rsquo;re just guessing about what the Harrow voluntary sector might actually want.  It&amp;rsquo;s like we&amp;rsquo;ve spent nearly five years doing what design sprints are supposed to help us avoid, i.e. we keep building different versions of a full system, to discover that people aren&amp;rsquo;t so interested.  Not that we haven&amp;rsquo;t had lots of great learning experiences along the way for the client, for me, for the different folks in AgileVentures who are contributing.  That said maybe recently I&amp;rsquo;ve drunk too much design sprint Kool-Aid, and I&amp;rsquo;m starting to see the need for them everywhere.&lt;/p&gt;
+
+&lt;p&gt;In the NHS wiki project we haven&amp;rsquo;t had any money or resources for development, but we&amp;rsquo;ve substituted off-the-shelf platforms, and we&amp;rsquo;re doing high level usability tweaking much faster and getting quick feedback through testing with stakeholders.  I think that&amp;rsquo;s the kind of thing that we need to supercharge our AgileVenture projects.  Of course I&amp;rsquo;m supposed to be turning myself from a hero to a host and not driving forward on these things.  The AV community has been coming up with their own ideas and have arranged a meeting for next Monday where I think it&amp;rsquo;s important I take a back seat and allow others to craft ideas, and then help empower them to try them out, fail and reflect and improve.&lt;/p&gt;
+
+&lt;p&gt;Gosh, well this blog went off in a different direction.  I was planning to focus on how most of yesterday morning was spent on configuring SSL certificates on Apache in our Bitnami/Azure setup and how I was just about to give up and then it started working after this incantation:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;./letsencrypt-auto --apache --apache-server-root /opt/bitnami/apache2 --apache-challenge-location /opt/bitnami/apache2 --apache-handle-sites FALSE --apache-vhost-root /opt/bitnami/apache2/conf/bitnami -d &amp;lt;domain-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Although I did also have to set up &lt;code&gt;sites-enabled&lt;/code&gt; and &lt;code&gt;sites-available&lt;/code&gt; directories with symlinks like so:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;ln -s /opt/bitnami/apache2/conf/bitnami/bitnami.conf /opt/bitnami/apache2/sites-available/&amp;lt;domain-name&amp;gt;.conf
+ln -s /opt/bitnami/apache2/conf/bitnami/bitnami.conf /opt/bitnami/apache2/sites-enabled/&amp;lt;domain-name&amp;gt;.conf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And it also involved splitting the VirtualHosts files up, and then merging them back together after the SSL cert was installed, in order to get the redirect from http to https working properly.  That was pretty much the soft launch of https://wiki.healthylondon.org but there are so many other things to tidy up.  I may live to regret that we are hosting the wiki ourselves.  I feel like I&amp;rsquo;m back in the early 2000&amp;rsquo;s managing &lt;code&gt;LocalSettings.php&lt;/code&gt; and &lt;code&gt;apache.conf&lt;/code&gt;, but it seemed the only way to get the thing set up on schedule.  Go with the flow!  I worry slightly that this will bite me when we need to renew the certificates as I&amp;rsquo;ll have to decompose the VirtualHosts file, but then again, maybe the auto certbot will be able to handle that then.  One thing at a time!&lt;/p&gt;
+
+&lt;p&gt;At least with the MOOC put back a week I feel like I have space to implement some delegation in AgileVentures, finish up this round of the NHS wiki project, and get the MOOC prep done.  I&amp;rsquo;ve got just a little breathing room &amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;Related Videos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=DeIhzvdGO28"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=Lw79fDuia3Q"&gt;AV Marketing Meeting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=veCjZQEJLJk"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=h9d0_Cjen6o"&gt;LocalSupport &amp;ldquo;Kick Off&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>The Harder I Try</title>
     <link rel="alternate" href="http://blog.url.com/2017/05/04/the-harder-I-try/"/>
@@ -312,67 +356,6 @@ Please let me know if any of you might be able to help with this, or if you coul
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4Kp6RPci8pM"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>MediaWiki</title>
-    <link rel="alternate" href="http://blog.url.com/2017/04/26/mediawiki/"/>
-    <id>http://blog.url.com/2017/04/26/mediawiki/</id>
-    <published>2017-04-26T01:00:00+01:00</published>
-    <updated>2017-05-25T22:10:38+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="mediawiki" src="/images/MediaWiki.svg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Having estsablished that MediaWiki&amp;rsquo;s default and visual editors both worked smoothly on the NHS laptops on the NHS intranet, it seemed pretty much wrapped up that we&amp;rsquo;d be using MediaWiki for the NHS Social Prescribing project.  The question then became whether we should host it ourselves or use a third party hosting service.  The main MediaWiki site provides a &lt;a href="https://www.mediawiki.org/wiki/Hosting_services"&gt;list of hosting services&lt;/a&gt; which are sortable in terms of different features.  I pulled out all the offerings that included visual editor support:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://meta.miraheze.org/"&gt;Miraheze&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://www.mywikis.com/"&gt;MyWikis&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://wiki-valley.com/"&gt;Wiki Valley&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.wikibase.nl/Diensten/Managed_hosting"&gt;Wikibase solutions&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The list also included Wikia and Gamepedia, both free with advertising and both targeting the video-game/entertainment market.  Possible, but long shots I thought; for healthcare we&amp;rsquo;d want a more serious tone.  I contacted all four of the above organisations to try and get set up with a test wiki with a visual editor installed.  Miraheze&amp;rsquo;s site didn&amp;rsquo;t immediately load so I got on to the others.&lt;/p&gt;
-
-&lt;p&gt;MyWikis gave me access to their testing wiki sandbox which had the visual editor; but it got stuck loading on all the browsers I tried and although they responded to my help request reasonably promptly, their suggestion that I should try browser refreshes until it worked was not very helpful.  Wiki Valley responded to my request to say they would create a dedicated demo wiki for us as well as giving us access to a sandbox, but I still haven&amp;rsquo;t managed to edit a page anywhere despite several attempts.  The notification emails and the site are in French and they&amp;rsquo;re not filling me with confidence.&lt;/p&gt;
-
-&lt;p&gt;Wikibase didn&amp;rsquo;t want to provide a demo environment and said that they only minimally support the visual editor. Instead they focus on semantic wiki and page forms as that&amp;rsquo;s what they&amp;rsquo;re saying their users want.  Sounds like an interesting future possibility (submitting data to wikis via forms) but not the best short term option.  Conversely, Miraheze is a volunteer-run system receiving donations to pay for hosting and have no guarantees of service in their terms and conditions, but they have actually been the fastest to set up a working test site for us and the only MediaWiki hosting service to get us a working visual editor so far.  I had to log into a separate feature requesting system (Phabricator) to get the visual editor enabled, and their site has been responsive all week since that outage I experienced the first time I went to their main site.&lt;/p&gt;
-
-&lt;p&gt;In parallel I used &lt;a href="https://bitnami.com/stack/mediawiki"&gt;Bitnami&lt;/a&gt; which allowed a very simple deploy to our own MediaWiki instance on Azure where we can config the MediaWiki directly, and I was able to adjust the main logo and do some preliminary testing.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m honing in on a set of technical features we need to support the higher level project requirements:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;WYSIWYG editor (optional initially, but might be crucial down the line &amp;hellip;)&lt;/li&gt;
-&lt;li&gt;Can disable anonymous edits&lt;/li&gt;
-&lt;li&gt;File upload&lt;/li&gt;
-&lt;li&gt;Custom domain&lt;/li&gt;
-&lt;li&gt;Can we insert custom HLP header to make it look like part of HLP site &amp;hellip;?&lt;/li&gt;
-&lt;li&gt;HTTPS &amp;hellip;&lt;/li&gt;
-&lt;li&gt;moderation support&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I think my next priority must be to request all the additional features enabled we need in the hlptest.miraheze.org MediaWiki, and then see how quickly I can set them up in parallel on our own server.  I started by &lt;a href="https://phabricator.miraheze.org/T1720"&gt;requesting the disabling of anonymous edits&lt;/a&gt;:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="requesting disabling of anonymous edits on miraheze via phabricator" src="https://www.dropbox.com/s/ecfs2s49des8xmj/Screenshot%202017-04-26%2009.46.45.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So let&amp;rsquo;s see how quickly I can do this on our Bitnami/Azure system.  First I need to log in to azure.bitnami.com, which gives me a screen showing both the link to our running instance, and the ssh credentials I need to ssh directly into the box where I can edit the mediawiki settings.  I&amp;rsquo;d previously updated the logo by editing &lt;code&gt;/apps/mediawiki/htdocs/LocalSettings.php&lt;/code&gt;.  So I went back there to try to disable anonymous edits:&lt;/p&gt;
-
-&lt;p&gt;https://www.mediawiki.org/wiki/Manual:Preventing&lt;em&gt;access#Restrict&lt;/em&gt;anonymous_editing&lt;/p&gt;
-
-&lt;p&gt;This time I needed to go to &lt;code&gt;includes/DefaultSettings.php&lt;/code&gt; and set the following:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$wgGroupPermissions['*']['edit'] = false;
-$wgGroupPermissions['*']['createpage'] = false;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and I had successfully disabled the ability of anonymous users to edit existing pages or create new pages.  Meanwhile I&amp;rsquo;m waiting for Miraheze to process my request.  I might rue the day since it may well be a total pain to set up the visual editor or SSL on our Bitnami/Azure hosted system, but I don&amp;rsquo;t think we can use Miraheze for anything other than testing purposes, since we&amp;rsquo;ll need server side access to fix things ourselves in a hurry if we have a specific request from the NHS team.&lt;/p&gt;
-
-&lt;p&gt;Maybe ideally I&amp;rsquo;d now spend the rest of the day working through all the other features in turn.  In the first instance I think I&amp;rsquo;ll just request them all from Miraheze and then see if I can knock off a couple of other low hanging fruit.  Although as I look I see that file upload appears to be enabled by default, and there are just restrictions about which sorts of files can be uploaded.  HLP is asking about uploading Excel files, which sounds like something we can easily add later as needed.&lt;/p&gt;
-
-&lt;p&gt;Miraheze has a &lt;a href="https://meta.miraheze.org/wiki/Custom_domains"&gt;whole page on how to request custom domains&lt;/a&gt;.  I don&amp;rsquo;t know when an HLP subdomain will be created for us, so it&amp;rsquo;s expedient to see if we can set up subdomains on av.org and see if we can get our Bitnami/Azure box hooked up like that.  That reminds me we will really need SSL (something Miraheze has out of the box), and in general we need to improve our Azure admin skills.  If only AWS or DO had given us similar nonprofit credit schemes &amp;hellip; guess I could try a Bitnami deploy to AWS and taking the financial hit, but we do need to skill up in Azure admin for the AsyncVoter project and to take advantage of the credits from MicroSoft.&lt;/p&gt;
-
-&lt;p&gt;So I&amp;rsquo;ve set up http://hlp-wiki.agileventures.org to point to our Azure/Bitnami system, and we&amp;rsquo;ll see if that works, but we&amp;rsquo;ll have to wait for the zone file to propagate.  For stability we&amp;rsquo;ll need to reserve the IP address which requires powershell installation.  I also see an article for &lt;a href="https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-configure-ssl-certificate"&gt;ssl setup&lt;/a&gt;.  It might be painful but I think we can get all that done.  The other things to impale ourselves on are setting up the WYSIWYG editor, working out the moderation strategy and whether/how we can have an HLP banner across the top of the wiki &amp;hellip; stay tuned for all those fun and frolics in the coming days.&lt;/p&gt;
 </content>
   </entry>
 </feed>
