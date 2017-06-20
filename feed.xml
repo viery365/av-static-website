@@ -5,10 +5,40 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-05-05T01:00:00+01:00</updated>
+  <updated>2017-05-08T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Rich Tapestry</title>
+    <link rel="alternate" href="http://blog.url.com/2017/05/08/rich-tapestry/"/>
+    <id>http://blog.url.com/2017/05/08/rich-tapestry/</id>
+    <published>2017-05-08T01:00:00+01:00</published>
+    <updated>2017-06-20T22:21:36+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="rich_tapestry" src="/images/rich_tapestry.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;My brain was grabbling at titles for the blog/branch&amp;ndash;&amp;ldquo;webs we weave&amp;rdquo;, &amp;ldquo;elephants all the way down&amp;rdquo;.  After nearly a year of blogging there&amp;rsquo;s a haze about which expressions I&amp;rsquo;ve used already and how well they express what I&amp;rsquo;ll end up blogging about.  Not that titles can&amp;rsquo;t or don&amp;rsquo;t change through the subsequent editing process.  Last week was characterised by a series of edge of the seat devops activities.  Do I mean DevOps?  I guess I just mean installation of different components of the NHS wiki software.  One could characterise them as just part of the MediaWiki install process.  Looking back at them being all done it can be laid out as fairly straightforward, but any one of them could have turned out to be insoluble in the time available; and really I was pulling time out of other activities to sort the Apache, Parsoid and SSL configurations.&lt;/p&gt;
+
+&lt;p&gt;The system is live at &lt;a href="https://wiki.healthylondon.org"&gt;https://wiki.healthylondon.org&lt;/a&gt; and it loaded a bit sluggishly this morning, reloads were pretty prompt, and the Visual Editor is still working with the SSL.  After previous forays to get the Visual Editor working (Monday?) and SSL installed (Thursday?), it turned out that the Visual Editor wouldn&amp;rsquo;t play well with the SSL.  It&amp;rsquo;s difficult to say whether the Visual Editor is a &amp;ldquo;nice to have&amp;rdquo; or a &amp;ldquo;must have&amp;rdquo;, but losing it would have been a shame.  In total it took only about forty minutes to fix the Visual Editor to work with SSL on Friday.  It works with SSL on the main Wikipedia site, so my efforts were heartened by the idea that it was at least in principle possible to get it working.  However, hosting on Azure could have made it arbitrarily difficult to come up with a solution in a reasonable amount of time, and indeed I found several plaintive posts from people getting stuck on this, and those posts had no solution responses.&lt;/p&gt;
+
+&lt;p&gt;Again being with MediaWiki means we have an extensive online community and googling error messages gives leads pretty readily, but there was no &amp;ldquo;out of the box&amp;rdquo; solution that I could easily find.  In the end it took a reasoned analysis of the way the Parsoid system works.  The Visual Editor is a plugin that works within MediaWiki, but it needs to be able to translate pages from its own format to the MediaWiki syntax.  This used to be done via PHP script, but is now a stand alone node service (microservice).  Parsoid needs to be able to talk to the MediaWiki API and MediaWiki needs to be able to talk to the Parsoid service when starting up the Visual Editor.  The new SSL endpoints meant that the MediaWiki could no longer reach the Parsoid service.  I&amp;rsquo;d like to give a more detailed walkthrough of the errors encountered etc., but I&amp;rsquo;m feeling pretty run down today and there&amp;rsquo;s a lot to get on to.  The executive summary is that I had to configure an additional virtual host in Apache to redirect through the security layer so that the Mediawiki Visual Editor pages could access Parsoid.  It also required opening an additional port in the Azure system.&lt;/p&gt;
+
+&lt;p&gt;What I&amp;rsquo;d really like to do now is spend a full day re-creating the whole installation on a fresh Azure/Bitnami installation - documenting as I go.  However I&amp;rsquo;ve got a meeting today and most days this week, getting together with other stakeholders the NHS has put me in touch with.  This is going to be, sort of, the final section of the design sprint, where I try to observe end user reactions to the &amp;ldquo;prototype&amp;rdquo; we&amp;rsquo;ve created.  On the technical side I need to check on the backup solution we&amp;rsquo;ve implemented, and it occurs to me that we could get the MediaWiki edits we&amp;rsquo;re making into git or some other versioning system.  There&amp;rsquo;s also replying to the lawyers about the updates to the terms &amp;amp; conditions, preparing for a revised training session tomorrow (do we drop the ConfirmAccount plugin?), etc., etc.  From the design sprint perspective I guess I should focus on getting the look and feel finished to see end user reactions to that.&lt;/p&gt;
+
+&lt;p&gt;Okay, so the plan is:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Check the backups are working&lt;/li&gt;
+&lt;li&gt;Focus on the look and feel&lt;/li&gt;
+&lt;li&gt;Start seeing the stakeholders&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Hopefully I can follow up with a full documentation of the install process, which might also make me less of a single point of failure if we have an issue with the configuration.  That said, I would ideally be doing the look and feel update on a staging instance; so maybe I can&amp;rsquo;t get out of replicating the setup?  Of course the faster option is to just try design changes on the existing out of step staging instance we currently have.  Gah!  Life&amp;rsquo;s rich tapestry indeed &amp;hellip; I&amp;rsquo;m going to make some coffee &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Breathing Room</title>
     <link rel="alternate" href="http://blog.url.com/2017/05/05/breathing-room/"/>
@@ -289,72 +319,6 @@ Please let me know if any of you might be able to help with this, or if you coul
 &lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=BW21_enHixI"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=nH0wPOZ9Ryk"&gt;Marketing meeting&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=tU7lTV99tYY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>More MediaWiki</title>
-    <link rel="alternate" href="http://blog.url.com/2017/04/27/more-mediawiki/"/>
-    <id>http://blog.url.com/2017/04/27/more-mediawiki/</id>
-    <published>2017-04-27T01:00:00+01:00</published>
-    <updated>2017-06-07T21:55:06+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="mediawiki" src="/images/MediaWiki.svg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So the zone file propagated and we can now access our bitnami/azure instance at http://hlp-wiki.agileventures.org.  MyWikis support got back to me having fixed their VisualEditor which is now working for me on my Mac.  That means that MyWikis might actually be a good option for us.  I&amp;rsquo;m agonizing about whether I burn time on setting up SSL, VisualEditor and other things on our Bitnami/Azure system, against the other less technical things I need to do such as work out a training plan for the NHS staff, a communications/marketing strategy for the wiki release and a moderation plan.  I guess I&amp;rsquo;ve got to look carefully at the time that&amp;rsquo;s available over the next 10 days or so.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;May 2nd Tues 2:30pm - HLP Staff training (editing and moderating)&lt;/li&gt;
-&lt;li&gt;May 4th Thu - Soft Launch of wiki&lt;/li&gt;
-&lt;li&gt;May 8th Mon - Meeting voluntary sector group to talk about wiki&lt;/li&gt;
-&lt;li&gt;May 12th Fri - Hard Launch of wiki&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;MyWiki&amp;rsquo;s pricing seems pretty reasonable, and under the circumstances it seems like we should at least sign up for one of their solutions and pay $15 or $35 for the first month to see if we can get the feature set that we need.  Things that I need to fit into the schedule include:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Reaching out to 8 other stakeholders that the NHS has recommended I speak to (arrange for week of May 8th?)&lt;/li&gt;
-&lt;li&gt;Going back to earlier stakeholders who said they were interested to see what we&amp;rsquo;d created&lt;/li&gt;
-&lt;li&gt;Coordinating with Enterprise Wellness on the moderation (invite Mina to HLP staff training)&lt;/li&gt;
-&lt;li&gt;Coordinating with HLP communications on the URL and the launch of the wiki&lt;/li&gt;
-&lt;li&gt;Updating the content in the wiki itself &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The gap that I&amp;rsquo;m really feeling at the moment is knowing whether we need a separate moderation package that the moderators will need extra instruction in, or if the basic elements of MediaWiki will be sufficient.  There appears to be a &lt;a href="https://www.mediawiki.org/wiki/Extension:Moderation"&gt;moderation extension&lt;/a&gt;, but will it be more complex than we need?&lt;/p&gt;
-
-&lt;p&gt;After being distracted by Slack station-keeping for half an hour, I&amp;rsquo;ve texted the communications manager to see if she can make the training, and asked about getting wiki.healthylondon.org set up. I&amp;rsquo;ve emailed all the remaining stakeholders to ask what their availability is during the week of May 8th, and so I think the critical thing for me to work on now is a training script for Tuesday, and from that I can drive the sets of technical requirements we&amp;rsquo;ll need by each stage.&lt;/p&gt;
-
-&lt;p&gt;So the training will need to consist of:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Where to go to access the wiki&lt;/li&gt;
-&lt;li&gt;How to create (request?) an account&lt;/li&gt;
-&lt;li&gt;How to search to find a page&lt;/li&gt;
-&lt;li&gt;How to edit a page&lt;/li&gt;
-&lt;li&gt;How to add a link to another wiki page&lt;/li&gt;
-&lt;li&gt;How to upload an image&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;A big decision is whether we require an approval process for people requesting accounts.  There does appear to be a &lt;a href="https://www.mediawiki.org/wiki/Extension:ConfirmAccount"&gt;stable extension for confirming accounts&lt;/a&gt;, which I&amp;rsquo;ve requested on Miraheze to see how it works.  For the purposes of the Tuesday training, simple creating of accounts is sufficient to have people practicing editing, but if the moderators are going to be approving requests for accounts, then we need that set up for them to see the process.  There&amp;rsquo;s also the moderation part of the training which will include at least some of the following:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Approving account requests?&lt;/li&gt;
-&lt;li&gt;Receiving change notifications&lt;/li&gt;
-&lt;li&gt;Approving changes?&lt;/li&gt;
-&lt;li&gt;Reverting inappropriate changes&lt;/li&gt;
-&lt;li&gt;Blocking/Banning repeat offenders&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;There&amp;rsquo;s a reasonable MediaWiki training video https://www.youtube.com/watch?v=F8irbbwNo2E that talks about the basics and setting up categories and talk pages, but making the above list makes it seem like a critical thing to check for is the email notification support.  I set &lt;code&gt;$wgUsersNotifiedOnAllChanges&lt;/code&gt; to an array with my email address on our Bitnami/Azure instance but didn&amp;rsquo;t yet receive an update.  I guess I&amp;rsquo;ll request the same from miraheze and maybe ask them how they did it. &lt;/p&gt;
-
-&lt;p&gt;So in summary there&amp;rsquo;s still a lot of little details to work out, both in technical and policy terms.  I really wish I could parallelize all this - I guess making lists is the first step.&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4Kp6RPci8pM"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

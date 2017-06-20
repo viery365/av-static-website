@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>Rich Tapestry</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_3 blog_page_3_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_05 x2017_05_08 x2017_05_08_rich-tapestry x2017_05_08_rich-tapestry_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,92 +83,41 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/05/08/rich-tapestry/">Rich Tapestry</a></h2>
+        <h5 class='date'> 8 May 2017</h5>
+    <p><img alt="rich_tapestry" src="/images/rich_tapestry.jpg" /></p>
 
-          <p>Page 3 of 16</p>
+<p>My brain was grabbling at titles for the blog/branch&ndash;&ldquo;webs we weave&rdquo;, &ldquo;elephants all the way down&rdquo;.  After nearly a year of blogging there&rsquo;s a haze about which expressions I&rsquo;ve used already and how well they express what I&rsquo;ll end up blogging about.  Not that titles can&rsquo;t or don&rsquo;t change through the subsequent editing process.  Last week was characterised by a series of edge of the seat devops activities.  Do I mean DevOps?  I guess I just mean installation of different components of the NHS wiki software.  One could characterise them as just part of the MediaWiki install process.  Looking back at them being all done it can be laid out as fairly straightforward, but any one of them could have turned out to be insoluble in the time available; and really I was pulling time out of other activities to sort the Apache, Parsoid and SSL configurations.</p>
 
-            <p><a href="/blog/page/2/">Previous page</a></p>
+<p>The system is live at <a href="https://wiki.healthylondon.org">https://wiki.healthylondon.org</a> and it loaded a bit sluggishly this morning, reloads were pretty prompt, and the Visual Editor is still working with the SSL.  After previous forays to get the Visual Editor working (Monday?) and SSL installed (Thursday?), it turned out that the Visual Editor wouldn&rsquo;t play well with the SSL.  It&rsquo;s difficult to say whether the Visual Editor is a &ldquo;nice to have&rdquo; or a &ldquo;must have&rdquo;, but losing it would have been a shame.  In total it took only about forty minutes to fix the Visual Editor to work with SSL on Friday.  It works with SSL on the main Wikipedia site, so my efforts were heartened by the idea that it was at least in principle possible to get it working.  However, hosting on Azure could have made it arbitrarily difficult to come up with a solution in a reasonable amount of time, and indeed I found several plaintive posts from people getting stuck on this, and those posts had no solution responses.</p>
 
-          <h2><a href="/2017/03/24/conflicted/">Conflicted</a></h2>
-          <h3>Mar 24</h3>
-          <p><img alt="conflicted" src="/images/conflicted.jpg"></p>
+<p>Again being with MediaWiki means we have an extensive online community and googling error messages gives leads pretty readily, but there was no &ldquo;out of the box&rdquo; solution that I could easily find.  In the end it took a reasoned analysis of the way the Parsoid system works.  The Visual Editor is a plugin that works within MediaWiki, but it needs to be able to translate pages from its own format to the MediaWiki syntax.  This used to be done via PHP script, but is now a stand alone node service (microservice).  Parsoid needs to be able to talk to the MediaWiki API and MediaWiki needs to be able to talk to the Parsoid service when starting up the Visual Editor.  The new SSL endpoints meant that the MediaWiki could no longer reach the Parsoid service.  I&rsquo;d like to give a more detailed walkthrough of the errors encountered etc., but I&rsquo;m feeling pretty run down today and there&rsquo;s a lot to get on to.  The executive summary is that I had to configure an additional virtual host in Apache to redirect through the security layer so that the Mediawiki Visual Editor pages could access Parsoid.  It also required opening an additional port in the Azure system.</p>
 
-<p>What a week!  So many developments and me so internally conflicted.  Let me summarise some of the developments:</p>
+<p>What I&rsquo;d really like to do now is spend a full day re-creating the whole installation on a fresh Azure/Bitnami installation - documenting as I go.  However I&rsquo;ve got a meeting today and most days this week, getting together with other stakeholders the NHS has put me in touch with.  This is going to be, sort of, the final section of the design sprint, where I try to observe end user reactions to the &ldquo;prototype&rdquo; we&rsquo;ve created.  On the technical side I need to check on the backup solution we&rsquo;ve implemented, and it occurs to me that we could get the MediaWiki edits we&rsquo;re making into git or some other versioning system.  There&rsquo;s also replying to the lawyers about the updates to the terms &amp; conditions, preparing for a revised training session tomorrow (do we drop the ConfirmAccount plugin?), etc., etc.  From the design sprint perspective I guess I should focus on getting the look and feel finished to see end user reactions to that.</p>
+
+<p>Okay, so the plan is:</p>
 
 <ol>
-<li>The UK Health Service (NHS) awards the AgileVentures charity a small grant to develop, host and moderate a “Social Prescribing” wiki</li>
+<li>Check the backups are working</li>
+<li>Focus on the look and feel</li>
+<li>Start seeing the stakeholders</li>
 </ol>
-          <h2><a href="/2017/03/23/pullrequest-feedback-by-blog/">Pull Request Feedback by Blog</a></h2>
-          <h3>Mar 23</h3>
-          <p><img alt="feedback" src="/images/feedback2.jpg"></p>
 
-<p>So in the blogs over the last two days I managed to get to the bottom of the problems on one LocalSupport pull request from a Premium member (Zmago).  It’s clear from that experience that I’ve got to adjust the develop branch so that VCR/PuffingBilly...</p>
-          <h2><a href="/2017/03/22/debugging-by-blog/">Debugging by Blog</a></h2>
-          <h3>Mar 22</h3>
-          <p><img alt="debugging" src="/images/debugging.png"></p>
+<p>Hopefully I can follow up with a full documentation of the install process, which might also make me less of a single point of failure if we have an issue with the configuration.  That said, I would ideally be doing the look and feel update on a staging instance; so maybe I can&rsquo;t get out of replicating the setup?  Of course the faster option is to just try design changes on the existing out of step staging instance we currently have.  Gah!  Life&rsquo;s rich tapestry indeed &hellip; I&rsquo;m going to make some coffee &hellip;</p>
 
-<p>Right, on to part 2 of “debugging by blog”, my attempt to force myself to work through code blockers while debugging.  Currently it’s LocalSupport, where we’ve had a weird CI failure that wasn’t replicated locally for myself or Zmago on our respective...</p>
-          <h2><a href="/2017/03/21/long-running-pull-requests/">Long Running PRs</a></h2>
-          <h3>Mar 21</h3>
-          <p><img alt="security" src="/images/long_running.JPG"></p>
-
-<p>So the SSL encryption is all now working on <a href="https://www.agileventures.org/">AgileVenture’s production site</a>.  The slight login oddities on staging appear to have been just staging oddities.  I think maybe we could address them by re-cloning the production database to staging.  That...</p>
-          <h2><a href="/2017/03/20/security-first/">Security First</a></h2>
-          <h3>Mar 20</h3>
-          <p><img alt="security" src="/images/security.png"></p>
-
-<p>We’re in the process of rolling out “https” support on the main AgileVentures site.  We’ve had “https” or “ssl” encoding set up on the LocalSupport project for a couple of years.  LocalSupport users are not a technical community so we don’t have...</p>
-          <h2><a href="/2017/03/17/private-pairing/">Private Pairing</a></h2>
-          <h3>Mar 17</h3>
-          <p><img alt="privacy" src="/images/private-keep-out.jpg"></p>
-
-<p>Where to start? Intense week.  Just finished a one hour private pairing session on the <a href="http://codingdojo.org/kata/Tennis/">tennis kata</a> with a Ruby programmer I met on the <a href="http://www.rubyonrails.link/">RailsLink Slack</a>.  They were suggesting Vim/Tmux, but we ended up using Hangouts and GitHub pong.  It was a good...</p>
-          <h2><a href="/2017/03/16/who-needs-frameworks/">Who Needs Frameworks?</a></h2>
-          <h3>Mar 16</h3>
-          <p><img alt="frameworks" src="/images/frameworks.JPG"></p>
-
-<p>I listen to a different podcast every morning.  Last Friday it was <a href="http://www.greaterthancode.com/podcast/episode-014-rashaun-stovall-snuggs/">“Greater than Code” with Ra’Shaun Stovall (Snuggs)</a>.  It was pretty mind expanding with quotes and questions like the following:</p>
-
-<blockquote>
-<p>seniors often try to hold on to the complexity they...</p>
-</blockquote>
-          <h2><a href="/2017/03/15/show-me-the-code/">Show me the Code</a></h2>
-          <h3>Mar 15</h3>
-          <p><img alt="code" src="/images/code.jpg"></p>
-
-<p>Federico made a comment on one of my recent blogs:</p>
-
-<blockquote>
-<p>code<em>in</em>blog == good</p>
-</blockquote>
-
-<p>I wish I was coding more.  I am getting to do some code in the Premium mobbing sessions.  My productive coding efforts are snatched between meetings with me throwing up spikes...</p>
-          <h2><a href="/2017/03/14/hangouts-filling-up/">Hangouts Filling Up</a></h2>
-          <h3>Mar 14</h3>
-          <p><img alt="full" src="/images/full.jpg"></p>
-
-<p>Monday saw full hangouts for the “Martin Fowler” and “Kent Beck” scrums.  It was at least partly because SUNY Binghamton students were coming in to vote as part of their class assignment, but also the return of previous regulars such as Tong Wei...</p>
-          <h2><a href="/2017/03/10/day-by-day/">Day by Day</a></h2>
-          <h3>Mar 10</h3>
-          <p><img alt="day" src="/images/day.jpg"></p>
-
-<p>Day by day I’m getting one item off my desk.  I’m not sure why it’s so painful.  Over the last 10 days I’ve got off new passport applications for myself and my eldest son, sent off tax liability statements for the AgileVentures bank, and put various...</p>
-
-            <p><a href="/blog/page/4/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -226,6 +176,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
