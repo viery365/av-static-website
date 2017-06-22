@@ -5,10 +5,64 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-05-08T01:00:00+01:00</updated>
+  <updated>2017-05-09T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>All in One Day</title>
+    <link rel="alternate" href="http://blog.url.com/2017/05/09/all-in-one-day/"/>
+    <id>http://blog.url.com/2017/05/09/all-in-one-day/</id>
+    <published>2017-05-09T01:00:00+01:00</published>
+    <updated>2017-06-22T22:12:48+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="four seasons" src="/images/four_seasons_one_day.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;m struggling with what each blog should be.  Should it be a focused dive on one thing?  Should I be trying to cover everything that happened since the last blog?  Yesterday was pretty intense.  I could spend the whole blog on the AV community meeting we had at the end of the day yesterday.  There&amp;rsquo;d been a spurt of conversation in the #av&lt;em&gt;community&lt;/em&gt;talk channel triggered by Mikael&amp;rsquo;s reaction to my blog of a month ago about having to switch my focus away from AgileVentures.  The discussion was all around trying to understand how we could make AV sustainable.  It was Joao, Matt and myself in the meeting, which we could probably have publicized better, but then who takes the lead on these things?  I&amp;rsquo;m close to drowning trying to attend to the NHS project, ramping up the new run of the MOOC and keeping AV ticking over.  Perhaps we can repeat weekly &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;d really liked all the independent conversation taking place in the #av&lt;em&gt;community&lt;/em&gt;talk channel and had resolved to stay in the background in the meeting.  I started off well and we went round trying to answer Joao&amp;rsquo;s question about what the AV product is.  We had a good chat, but I noticed that by the end it was me doing most of the talking :-( Joao had to go, but Matt and I carried on a little as I evangelised the design sprint concept.  We didn&amp;rsquo;t end up trying the &amp;ldquo;Market and Product Validation Checklist&amp;rdquo; that Matt had mentioned in the chat &amp;hellip; well, anyway, Matt got quite enthused about the idea of doing a design sprint so we&amp;rsquo;ll see.&lt;/p&gt;
+
+&lt;p&gt;That all came at the end of a full day, where I was just hanging in there to get emails out to move forward on the private contract that will hopefully sustain me for the rest of year, and the communication with the lawyers about the NHS wiki terms &amp;amp; conditions.  The majority of the day had been taken up getting ready for a usability/outreach session with the &lt;a href="https://www.kcsc.org.uk/"&gt;Kensington &amp;amp; Chelsea Social Council&lt;/a&gt;; an umbrella group supporting the non-profit sector in the London borough of Kensington &amp;amp; Chelsea.  I have the feeling they are the equivalent entity to the Voluntary Action Harrow (VAH) group who we&amp;rsquo;ve built the Harrow Community Network for through the LocalSupport project.  I&amp;rsquo;d been put in touch with folks at the Kensington &amp;amp; Chelsea Social Council via NHS HLP as a group that were implementing Self Care in their area and might have interest in the wiki project we&amp;rsquo;ve developed.  Our NHS design sprint has sprawled out from its initial week (a few weeks back), and I&amp;rsquo;ve got a meeting with a different stakeholder each day this week, and I&amp;rsquo;m using those meetings to get further usability feedback on the MediaWiki system we&amp;rsquo;ve deployed.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m just about hanging on, making the arrangements to meet everyone, fitting in the travel etc.  I say just about because I had to push the marketing meeting back an hour yesterday at the last minute when I realised that I couldn&amp;rsquo;t be back in time for it.  Not ideal.  I could have tried to do it in a coffee shop in Kensington &amp;amp; Chelsea, but I felt back at the home office would be more efficient.  I&amp;rsquo;ve got an extra meetup to fit in this week and I&amp;rsquo;m not sure where my lunch breaks are going to fit in through the week!  Maybe I need to move the Martin Fowler scrum.  Pat has just said he can&amp;rsquo;t commit to share the hosting of the meeting.  I could move it earlier or even just put it on hold for while &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Anyhow, we got the marketing meeting done.  At least I&amp;rsquo;m remembering to review the outstanding action items.  I feel like there must be some better meeting management system somewhere in between Trello and the text notes I&amp;rsquo;m pasting into Slack, but then again.  The main technical challenge for the day was seeing if I could get the HLP banner into the wiki.  I was getting stuck on it, and managed to hand off the task briefly to Lara, who played with a few settings and came up with a solution.  I had been adding the MediaWiki vector skin to insert a div for the HLP banner/navigation from their main site; but certain mediawiki elements would not move down.   Thanks to Lara&amp;rsquo;s input we got a great mockup editing the common.css for the site:&lt;/p&gt;
+&lt;pre class="highlight css"&gt;&lt;code&gt;&lt;span class="nf"&gt;#hlp-banner&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nl"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="sx"&gt;url('https://www.dropbox.com/s/2yokso0fkd3bivt/Screenshot%202017-05-08%2010.40.18.png?dl=1')&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nl"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;100%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nl"&gt;min-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;123px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nf"&gt;#mw-head&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nl"&gt;margin-top&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;123px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="nc"&gt;.mw-wiki-logo&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nl"&gt;background-image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;none&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I had just taken a quick screen shot of the HLP site banner to play with.  I just got this into the main site on the train on the way into meeting Kensington &amp;amp; Chelsea Social Council, and then I also managed to make emails required in the site.  All a bit skin of the teeth, but it allowed me to get valuable feedback at the stakeholders&amp;rsquo; offices.&lt;/p&gt;
+
+&lt;p&gt;I sat down with their strategic health lead and the manager of their Self-care program, and we could have easily been continuing the expert interviews of the previous weeks.  I could tell that there would be lots of great stuff to learn about how K&amp;amp;C was implementing self care, but I couldn&amp;rsquo;t afford to burn all the time on that.  We had to move on to a more testing footing.  We had our working &amp;ldquo;prototype&amp;rdquo;.  After understanding a bit more about how things worked at KCSC, I convinced them to try out our wiki on their systems.  Simply having them navigate to the site and seeing that it appeared correctly was already useful, particularly given the problems we&amp;rsquo;d had with some wikis on the NHS laptops/network.&lt;/p&gt;
+
+&lt;p&gt;I encouraged the Self-care manager to navigate through the site, try some searches and then some editing.  It was all rather slap-dash from an academic usability standpoint, but there were some clear knowledge gains:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If you weren&amp;rsquo;t logged in, searching for things did not suggest page creation&lt;/li&gt;
+&lt;li&gt;Searches for multiple terms were not matching anything in our system (not much content in there)&lt;/li&gt;
+&lt;li&gt;The combination of required email confirmation and the visual editor could lead to a confusing user flow &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Two reasonably high priority items are now to see if we can make the banner fully dynamic, and also whether we can drop the email confirmation requirement, since the moderation step still catches anything a user tries to post.  I&amp;rsquo;m definitely leaning towards having almost no requirements for becoming a user and push the burden onto the moderation queue - at least at the beginnning when there are few users.  If the moderation burden becomes too heavy, then we can start imposing additional constraints on user sign up; which makes me think I need to get the moderation plan and budget out of my head and onto paper.  Of course the ongoing interaction testing (training?) is what&amp;rsquo;s helping us understand how the moderation will actually work with this system.   We&amp;rsquo;re doing our hard launch on Friday.  I&amp;rsquo;ll take a deep breath; say to myself that we&amp;rsquo;ll address each issue in turn each day of this week and next week will be calmer :-) Taking it one day at a time &amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;Related Videos:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=_JPjZvDJ2VQ"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4gqu79SLxRc"&gt;AV Community meeting&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Rich Tapestry</title>
     <link rel="alternate" href="http://blog.url.com/2017/05/08/rich-tapestry/"/>
@@ -266,60 +320,6 @@ ln -s /opt/bitnami/apache2/conf/bitnami/bitnami.conf /opt/bitnami/apache2/sites-
 &lt;p&gt;And I&amp;rsquo;d managed to tweak the wiki to change the name of the homepage, get references working and add a fair bit of additional content.  Basically ready for today&amp;rsquo;s hour long training session with a few core NHS HLP staff.  There are a set of other things I&amp;rsquo;d like to do, such as getting the whole thing on SSL (will that play well with VisualEditor/Parsoid?), installing Wikipedia moderation templates and replicating more of the HLP website look and feel.  MyWiki&amp;rsquo;s set up a VisualEditor enabled instance for us and said they&amp;rsquo;d look at getting the Moderation and ConfirmAccount extensions set up.  Maybe they&amp;rsquo;re ultimately going to be faster and easier, but if I hadn&amp;rsquo;t set up our own system I wounldn&amp;rsquo;t have been able to work through and generate training documentation on the moderation process, so I think that&amp;rsquo;s time well spent :-)&lt;/p&gt;
 
 &lt;p&gt;Then I spent an hour updating the pair programming functionality in the AV102 and first part of the MOOC to switch back to our older optional style and start to work through some of the accessibility issues.  There&amp;rsquo;s still more to do, but that&amp;rsquo;s progress there.  The critical thing today is to record some new videos about the way that hangouts and events are working on AV.  Need to get that done before I head off for this training event.  More on that in tomorrow&amp;rsquo;s blog :-)  Unless I get distracted by Slack &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Bringing It All Together</title>
-    <link rel="alternate" href="http://blog.url.com/2017/04/28/bringing-it-all-together/"/>
-    <id>http://blog.url.com/2017/04/28/bringing-it-all-together/</id>
-    <published>2017-04-28T01:00:00+01:00</published>
-    <updated>2017-06-08T22:26:33+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="wave" src="/images/wave.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The last two days have been blog driven NHS wiki flurries in the morning followed by mobbing and AgileVenturing in the afternoon.  In the Elixir mob on Wednesday we made further headway into Phoenix and I really start to question whether we&amp;rsquo;ve all been suffering through an instance variable nightmare.  Yesterday I caught up with the marketing team, the Ruby mob (where we got confident with some of our legacy code) and then spent an hour bashing away at AsyncVoter&amp;rsquo;s Azure/Dokku setup with Matt and Raphael.&lt;/p&gt;
-
-&lt;p&gt;I think there are certain critical things that I need to do upfront this morning, i.e. as part of the blogging process, and some others that need to be done before lunch.  At the end of yesterday I was starting to feel calmer that we were bringing together all the things we needed for the NHS wiki project.  I&amp;rsquo;d emailed all the remaining stakeholders for additional meetings, the HLP team was getting the training dates set, I&amp;rsquo;d made an outline of the training materials, and we&amp;rsquo;d made contact with the Communications team.  Furthermore we&amp;rsquo;d also worked with the trustees to get the paperwork done for me to be paid this month, so that&amp;rsquo;s a relief.  The key things that need to happen before lunch today are then:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Process my payment&lt;/li&gt;
-&lt;li&gt;Reach out to the HLP communication team (as main contact is off sick)&lt;/li&gt;
-&lt;li&gt;Reply to NHS/Voluntary Sector stakeholder emails to confirm meetings for the week after next&lt;/li&gt;
-&lt;li&gt;Reach out to enterprise wellness related to moderation&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;So I&amp;rsquo;m thinking that the first two have to be knocked off quickly. However in even trying to reach out to the HLP communications team I got lost in LinkedIn for 10 minutes reviewing the HLP organistaion there and connecting up to the NHS staff I&amp;rsquo;ve already met.  That was helpful, but (reality check) I&amp;rsquo;ve got to process this payment for my own personal finances.  It should be simple, but anything done for the first time can encounter issues, so let me just pause the blog to get that done &amp;hellip; done - had to do a text authorisation on my mobile, but couldn&amp;rsquo;t have taken more than a minute in total.  I also see that the NHS payment for the first part of our work came through, so that&amp;rsquo;s a relief to have that all sorted.  I think my heart-rate has slowed slightly :-)&lt;/p&gt;
-
-&lt;p&gt;Now I have to think about how best to communicate with the communications team &amp;hellip; an email to all the contacts, or a separate email to each one &amp;hellip;?  I demurred from emailing the three contact emails I had separately, and decided to email all three, cc-ing my existing contacts.  There&amp;rsquo;s a danger that asking a group of people that everyone assumes that someone else can deal with it.  Here&amp;rsquo;s a draft of the email I sent:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Sorry to email you out of the blue, but I'm working with NAME and NAME in HLP, and our charity AgileVentures is developing the new HLP Social Prescription wiki.
-
-I met with NAME to discuss last week and everything is looking good.
-
-This week I was following up with NAME about a URL subdomain for our wiki, but unfortunately NAME is off sick and I was wondering if you, or someone else on your team might be able to help us out. We're planning for a soft launch on May 4th and a hard launch on May 12th so we're on a bit of a short fuse.
-
-One piece of feedback we've had from many stakeholders is that any new wiki system should not be a "new" location, so we were hoping to set up a subdomain under the http://healthylondon.org domain, e.g.
-
-http://wiki.healthylondon.org
-
-We assume that someone in your communications team, or some of your sub-contracted developers, will control the domain name records for healthylondon.org, and would be able to set up the "wiki" subdomain to point to our system.
-
-Please let me know if any of you might be able to help with this, or if you could put us in touch with whichever controls the domain name.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I did add delivery tracking and a return receipt.  Some might consider a return receipt a little aggressive, but there&amp;rsquo;s a time crunch here and I&amp;rsquo;m hoping to quickly get to the person who can help us with this sub-domain, or discover that we can&amp;rsquo;t have a sub-domain ASAP.  So sending a group email with a &amp;ldquo;return receipt&amp;rdquo; request was my middle ground.&lt;/p&gt;
-
-&lt;p&gt;So with that done I should double check that the funds got transfered from before &amp;hellip; and it has. Yay! So while I&amp;rsquo;m in that bank interface I should update things for the new tax year &amp;hellip; and &amp;hellip; that&amp;rsquo;s all done. Phew.  So that let&amp;rsquo;s me check a few more outstanding things off my todo lists.  So now I need to send out an email to Enterprise Wellness to find a good time for a phone call.&lt;/p&gt;
-
-&lt;p&gt;It pains me that blogs about what we did in the Elixir and Ruby mobs this week might be more interesting to the coders among this blogs readership, and to you I apologise, but I&amp;rsquo;ve got to feed my kids, and that&amp;rsquo;s what the NHS contract is enabling at the moment.  If you&amp;rsquo;re really, really keen to have more blogs about how Elixir is changing the programming world, and how Ruby gets confident, then vote with your wallet.  Sign up for AgileVentures Premium Mob membership (if you haven&amp;rsquo;t already) and get your friends, family and neighbours to do so as well! :-)  In the meantime it&amp;rsquo;ll probably be more blogs about communication and mediawiki. Sorry &amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=BW21_enHixI"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=nH0wPOZ9Ryk"&gt;Marketing meeting&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=tU7lTV99tYY"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>
