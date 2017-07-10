@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/07/04/all-good-things/"/>
     <id>http://blog.url.com/2017/07/04/all-good-things/</id>
     <published>2017-07-04T01:00:00+01:00</published>
-    <updated>2017-07-04T22:27:03+01:00</updated>
+    <updated>2017-07-10T21:54:43+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -38,11 +38,53 @@
 </content>
   </entry>
   <entry>
+    <title>Hard Launch</title>
+    <link rel="alternate" href="http://blog.url.com/2017/05/12/hard-launch/"/>
+    <id>http://blog.url.com/2017/05/12/hard-launch/</id>
+    <published>2017-05-12T01:00:00+01:00</published>
+    <updated>2017-07-10T21:54:43+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="launch" src="/images/launch.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So it&amp;rsquo;s May 12th, the hard launch date for the wiki.  We talked about a soft launch on May 4th, and we had the basic system up for then.  The hard launch is now to have everything in place.  I&amp;rsquo;ve spent the week getting usability feedback from different stakeholders across London and now we&amp;rsquo;ve got to knuckle down and make sure everything is in place.  My personal action plan document has sprouted a whole section of stuff for the wiki:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[ ] wiki launch 
+
+&lt;ul&gt;
+&lt;li&gt;[ ] adding t&amp;amp;c, privacy policy into the system &lt;/li&gt;
+&lt;li&gt;[ ] moderation notification to more than one user&lt;/li&gt;
+&lt;li&gt;[ ] usability issues&lt;/li&gt;
+&lt;li&gt;[ ] default to visual editor on creating pages (or wikieditor?)&lt;/li&gt;
+&lt;li&gt;[x] save at bottom of page can be confusing in text editor &amp;ndash;&amp;gt;  use wikieditor&lt;/li&gt;
+&lt;li&gt;[ ] help pages - upload all my training materials &amp;hellip;&lt;/li&gt;
+&lt;li&gt;[ ] moderation notice fails to load when using text editor?&lt;/li&gt;
+&lt;li&gt;[ ] can we make the search do an OR rather than an AND?&lt;/li&gt;
+&lt;li&gt;[ ] I&amp;rsquo;m worried the first page has far too much text &amp;hellip;&lt;/li&gt;
+&lt;li&gt;[ ] spaces on end of email address causing problems&lt;/li&gt;
+&lt;li&gt;[ ] creating an account does not log you in, or even guide you to log in or lead you towards what to do next&lt;/li&gt;
+&lt;li&gt;[ ] hide the bitnami management corner element&lt;/li&gt;
+&lt;li&gt;[ ] help pages&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;ve got open support tickets with various of these items.  I&amp;rsquo;d also like to be doing a full documentation of the entire wiki setup from scratch and practising recovery drills on another box, but it feels like I must focus the morning on triaging all the usability issues that came up this week and either fixing, working around or leaving as future work.  The danger is that any individual item could be dived in too deep, at the expense of getting a slew of other items sorted.  It&amp;rsquo;s maybe time to break out a Pivotal Tracker, or perhaps a Trello instance to start tracking everything that&amp;rsquo;s going on.  So I went ahead and did that.  Trello made more sense as I can&amp;rsquo;t immediately see us voting on the complexity of the issues (although maybe we should), and Waffle doesn&amp;rsquo;t make so much sense as we&amp;rsquo;re not tightly integrated with GitHub for this project:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="trello for hlp wiki" src="https://www.dropbox.com/s/e55gki5ir4aeq4o/Screenshot%202017-05-12%2010.30.23.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I made this Trello private to the team rather than public as this is a paid project, and we&amp;rsquo;ve got the double concern of our client sensitivity and also having some motivation for people to pay our Premium fees to get access to extra material.  I was also distracted from blogging, helping an HLP staff member sort out a table in one of the wiki pages.  Again the NHS firewall prevents us doing screenshare via Hangouts or Skype with anyone there, so a series of screenshots in Slack let me show the change manager what I had done, but I&amp;rsquo;m not confident that I&amp;rsquo;ve been able to transfer the skill of doing the task itself.&lt;/p&gt;
+
+&lt;p&gt;Anyhow, getting the Trello up has paid down my day&amp;rsquo;s anxiety debt a little.  There&amp;rsquo;s still lots to do, but at least I&amp;rsquo;ve got a better way of coordinating what we&amp;rsquo;re doing.  The frustrating thing here is that the budget is on a scale that has prevented me from financially incentivizing more Premium members to get involved.  This project is actually a perfect microcosm of all the issues that Agile is supposed to handle.  It just doesn&amp;rsquo;t have large tracts of programming activity.  Is that the fundamental mismatch here?  That I&amp;rsquo;m really interested in the problem solving and how the coding relates to project managment and delivering on client needs, when the majority of others are much more interested in just the code?&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Handling Anxiety</title>
     <link rel="alternate" href="http://blog.url.com/2017/05/10/handling-anxiety/"/>
     <id>http://blog.url.com/2017/05/10/handling-anxiety/</id>
     <published>2017-05-10T01:00:00+01:00</published>
-    <updated>2017-07-06T22:01:57+01:00</updated>
+    <updated>2017-07-10T21:54:43+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -83,7 +125,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/05/09/all-in-one-day/"/>
     <id>http://blog.url.com/2017/05/09/all-in-one-day/</id>
     <published>2017-05-09T01:00:00+01:00</published>
-    <updated>2017-06-22T22:12:48+01:00</updated>
+    <updated>2017-07-10T21:54:43+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -137,7 +179,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/05/08/rich-tapestry/"/>
     <id>http://blog.url.com/2017/05/08/rich-tapestry/</id>
     <published>2017-05-08T01:00:00+01:00</published>
-    <updated>2017-06-20T22:21:36+01:00</updated>
+    <updated>2017-07-10T21:54:43+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -167,7 +209,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/05/05/breathing-room/"/>
     <id>http://blog.url.com/2017/05/05/breathing-room/</id>
     <published>2017-05-05T01:00:00+01:00</published>
-    <updated>2017-06-19T21:33:54+01:00</updated>
+    <updated>2017-07-10T21:54:43+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -203,92 +245,6 @@ ln -s /opt/bitnami/apache2/conf/bitnami/bitnami.conf /opt/bitnami/apache2/sites-
 &lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=Lw79fDuia3Q"&gt;AV Marketing Meeting&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=veCjZQEJLJk"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=h9d0_Cjen6o"&gt;LocalSupport &amp;ldquo;Kick Off&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>The Harder I Try</title>
-    <link rel="alternate" href="http://blog.url.com/2017/05/04/the-harder-I-try/"/>
-    <id>http://blog.url.com/2017/05/04/the-harder-I-try/</id>
-    <published>2017-05-04T01:00:00+01:00</published>
-    <updated>2017-06-14T21:37:30+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="dream catcher" src="/images/dream-catcher.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Sometimes it feels like my life is one of those dreams where you&amp;rsquo;re running as hard as you can, but you&amp;rsquo;re not moving forward.  Yesterday I fixed two sticky technical issues that have been bugging us for a while, I got out an updated video for the AV102 course and enjoyed an Elixir mob run by two of our Premium Mob members, but still didn&amp;rsquo;t feel like I&amp;rsquo;d made much of a dent in the old ToDo list.  Let me tell you about the first bug in our AgileVentures WebsiteOne Rails code.  Ideally I wouldn&amp;rsquo;t be spending two hours tracking down and fixing that bug, as the impending release of the MOOC next week meant that the final week of the AV102 TA training course needed to go live sharpish.  However one of the videos in the final week was still talking about the Hangout plugins and they&amp;rsquo;ve been discontinued and there really needed to be an explanation of how to take AV events live manually.&lt;/p&gt;
-
-&lt;p&gt;However, for the past couple of weeks on the odd day here and there we&amp;rsquo;d been getting 500 errors on the main events listing page.  It tended to come and go, and seemed more likely to occur on Mondays and Tuesdays.  Part of re-recording the video involved showing things appearing in the event list, and it seemed to me that not having the events index page working was a block on recording the video which should probably show that event list working.  That&amp;rsquo;s not to say that the events list bug wasn&amp;rsquo;t also a priority fix, but I&amp;rsquo;m kind of drowning in high priority items at the moment.  Anyway, I resolved to have a good stab at getting the bug fixed.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d previously hypothesized that the bug might be related to some third party website we were relying on for timezone conversions, based on some of the different error messages we were seeing in the logs associated with the 500 errors.  We were getting different errors in different parts of the code base, but they all seemed to be related to time conversion:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.7.1/lib/active_support/core_ext/time/zones.rb:56:in `find_zone!'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/app/vendor/bundle/ruby/2.3.0/gems/activerecord-4.2.7.1/lib/active_record/attribute_methods/time_zone_conversion.rb:24:in `convert_time_to_time_zone'`
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The fact that they were intermittent and changing started to make me think (as Michael had suggested) that this was a resource issue.  I wasn&amp;rsquo;t getting any Google hits for these kinds of errors, so I tried upgrading our plan on Heroku, but that didn&amp;rsquo;t have much impact.   We&amp;rsquo;d just cloned the production data to staging and I saw we were getting similar errors there, but not on develop.  I was considering cloning to develop, when I ran locally against an older version of the production data - things were okay.  I cloned the production data locally and the events page was taking &amp;gt;20 seconds to load.  Whatever the issue was, something about the data was influencing the problem.  We have 20-second timeouts on Heroku, after which web queries are just shut down.  I speculated that some individual events might have corrupt timezones or something, but deleting a few had no impact on the time locally.&lt;/p&gt;
-
-&lt;p&gt;I thought maybe I should do more to replicate the production setup locally, but I knew that was a pain, and I had basically the same issue locally, although without the error being thrown, since I have longer timeouts for http requests on my local machine.  The Rails logs on my local machine were showing that lots of time was being spent in the request, but actually the time spent constructing the view and doing activerecord queries were relatively small:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Completed 200 OK in 35596ms (Views: 359.4ms | ActiveRecord: 80.0ms)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Looking more closely I could see that there appeared to be a 2 to 3 second wait after every query on the event instances table, which I traced into this method:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;remove_past_events&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delete_if&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:event&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;event_instances&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;last&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;try&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:live?&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
-                           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:time&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:event&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minutes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Playing with the query on the console I saw that as the number of &lt;code&gt;event_instances&lt;/code&gt; increased for an individual event, this method would get slower and slower. Some of the scrums had over 400 &lt;code&gt;event_instances&lt;/code&gt;, and the daily scrums appear multiple times in the list so we were repeating many slow operations.  I experimented with replacing &lt;code&gt;delete_if&lt;/code&gt; with &lt;code&gt;reject&lt;/code&gt; but the method just got slower.  Then, looking more closely at the boolean statement I saw that the db query was in the first portion, and not the second, and actually the time check in the second half of the boolean would probably be false most of the time.  I tried switching the order of the boolean like so:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;remove_past_events&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delete_if&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:time&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:event&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minutes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;
-                           &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:event&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;event_instances&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;last&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;try&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:live?&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and suddenly the problem evaporated.  Now the majority of queries were not checking for event instances at all, and in relatively short order I had the fix deployed and the main site event lists page was loading in just a few seconds.  It&amp;rsquo;s still not as fast as I would like, but it got us out of the woods and unblocked me for re-recording the AV102 video.&lt;/p&gt;
-
-&lt;p&gt;Then I was into an Elixir mob, and since two Premium Mobbers had taken the lead on running the session it was less intense effort from me and I&amp;rsquo;d been able to skip preparation the previous day.  We talked about starting a React Mob the following day and the question came up about whether Premium Mob membership covers attending more than one Mob per week.  My response that we&amp;rsquo;ve been somewhat flexible with that perhaps shows that I&amp;rsquo;m not really cut out for being a businessperson.  I just want everyone to have access to all materials :-(  It&amp;rsquo;s weird, because even with payment not every Premium Mob member shows up to the sessions they have in principle paid for.  There seems like a higher level of committment from the Premium Mobbers than overall in the rest of the community, but we have the conundrum that their activity is less visible as we&amp;rsquo;re running the Mobs in private events.  Gosh, just what is the model that will make this all work and be sustainable?  Having Premium Mob events show in our events stream, but only be accessible by those who&amp;rsquo;ve paid, with the stream of every fifth session being available for others to see what goes on?&lt;/p&gt;
-
-&lt;p&gt;So after lunch (and React Mob prep with Stephen Grider&amp;rsquo;s kindly donated React/Redux course) and besides the AV102 pivotal tracker voting sessions (which is another blog post), I was impaling myself on the set up for the Slack slash command for AsyncVoter on Azure/Dokku.  We&amp;rsquo;d spent multiple sessions struggling with this and kept hitting a 503 error with no extra information.  The system was all working fine on Digital Ocean with dokku (where Arreche had set it up), but even after getting SSL working on the Azure/Dokku system we were still stuck.  No one showed up for the AsyncVoter kick off, so I spent the half hour quietly deleting the previous app in Slack and creating a new one.  The whole setup is rather involved, and I think I got it fully documented at &lt;a href="https://github.com/AgileVentures/asyncvoter-slack-command/wiki"&gt;https://github.com/AgileVentures/asyncvoter-slack-command/wiki&lt;/a&gt; but I think ultimately the sticking point was how many layers you have to dig down to find the key URL for a slack app.  Here&amp;rsquo;s the first screen:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Slack App basic information" src="https://www.dropbox.com/s/2eveqtmb4waywis/Screenshot%202017-05-04%2010.13.48.png?dl=1" /&gt;  &lt;/p&gt;
-
-&lt;p&gt;Now previously I&amp;rsquo;d worked out that we need to click on things like &amp;ldquo;interactive messages&amp;rdquo;, &amp;ldquo;OAuth &amp;amp; Permissions&amp;rdquo; etc. on the left nav bar.  I find it odd that there is configuration hidden behind those links, that look like to me like they would just be descriptions of the &amp;ldquo;features&amp;rdquo;.  I usually expect configuration to be across the vertical nav, or to look more like buttons, but anyway, we&amp;rsquo;d previously ensured all the &amp;ldquo;interactive messages&amp;rdquo;, &amp;ldquo;OAuth &amp;amp; Permissions&amp;rdquo; URLs were updated to SSL, but there&amp;rsquo;s another.  Clicking on the &amp;ldquo;Building Apps for Slack&amp;rdquo;, reveals another control panel:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="revealed control panel" src="https://www.dropbox.com/s/9zqr9ncli5umymu/Screenshot%202017-05-04%2010.17.07.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;And all of this is with wording about doing things, not configuring them.  It was through the process of recreating the app from scratch that I discovered the other place that the URL needed to be updated.  Inside the slash command setting:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="slash commands" src="https://www.dropbox.com/s/ay2gjyn4sfvuidg/Screenshot%202017-05-04%2010.18.36.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;There&amp;rsquo;s the option to edit, which reveals another URL that needed to be edited:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="additional url edit" src="https://www.dropbox.com/s/qzbwmqxiprjz2wq/Screenshot%202017-05-04%2010.19.13.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Unless you know it&amp;rsquo;s there, it&amp;rsquo;s not very discoverable.  Just writing this blog I see I can navigate to the top page via the &amp;ldquo;Slash Commands&amp;rdquo; on the left &amp;ldquo;Features&amp;rdquo; navigation links.  In our previous group sessions I think we&amp;rsquo;d been to that page repeatedly, but never realised that by editing the slash command we&amp;rsquo;d reveal another URL that needed updating.  I&amp;rsquo;d say the key usability issue here is that the summary of the slash command, before you edit, does not show that there are another three variables open for editing there, i.e. the RequestURL, ShortDescription and UsageHint.&lt;/p&gt;
-
-&lt;p&gt;Of course now I know and I&amp;rsquo;ve blogged about it, but there we go.  The next step is now to ensure we can set up subdomains so that we can have a staging instance and a production instance; I have an idea about how to do that, but it might take 5 minutes, or I might get stuck on it for two hours.  I have to say that, moment to moment, I do prefer coding and debugging to trying to record videos for courses, or even just setting up and organising courses.  Now it&amp;rsquo;s May 4th and soft launch for the NHS wiki and I&amp;rsquo;ve got to work out which of the list of fixes and changes to prioritise:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;SSL setup for Azure with bitnami mediawiki stack&lt;/li&gt;
-&lt;li&gt;Getting the Watchlist emails working&lt;/li&gt;
-&lt;li&gt;Getting the full banner/logo in there&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;While fighting for my attention are&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Getting the rest of the MOOC accessibility fixes done&lt;/li&gt;
-&lt;li&gt;Getting all the AV102 TA trainees access to the course as betatesters&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;and further follow up on WebsiteOne, LocalSupport, AsyncVoter; catching up with our sponsor drie etc. etc.  Like I say, the harder I try to run, the more it feels like I&amp;rsquo;m just staying in the same place :-)&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=4DAU-nFUP-U"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=kS3ttK6Wuxw"&gt;Starting Hangouts via AV&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=JK9i1NCuHno"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
