@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Debugging MediaWiki</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_05 x2017_05_16 x2017_05_16_debugging-mediawiki x2017_05_16_debugging-mediawiki_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/05/16/debugging-mediawiki/">Debugging MediaWiki</a></h2>
+        <h5 class='date'>16 May 2017</h5>
+    <p><img alt="mediawiki" src="/images/MediaWiki.svg" /></p>
+
+<p>Yesterday I finally got a clear shot at resolving some of our MediaWiki technical issues.  A key one was users getting loggged out after they create new accounts.  I had had some feedback from MediaWiki support that our cookies weren&rsquo;t being set correctly on production.  So I created a new account for mediawiki on our staging box.  It created the following cookies:</p>
+
+<p><img alt="cookies created for new user account" src="https://www.dropbox.com/s/f73wmvq1g31uh6o/Screenshot%202017-05-15%2010.56.38.png?dl=1" /></p>
+
+<p>Three of these were reported created on the main wiki: cpPosTime, UseDC, UseCDNCache. I navigated to the main page and was logged out, although now there was just one cookie:</p>
+
+<p><img alt="single cookie after redirect" src="https://www.dropbox.com/s/mha525jx20y2yow/Screenshot%202017-05-15%2011.00.21.png?dl=1" /></p>
+
+<p>Navigating around I stayed logged out, and then tried logging on, which worked and generated a couple more cookies:</p>
+
+<p><img alt="more cookies after login" src="https://www.dropbox.com/s/h68yx9n2tz9jpv5/Screenshot%202017-05-15%2011.01.59.png?dl=1" /></p>
+
+<p>So the fact that this was happening on our staging box made it seem like this was a Bitnami MediaWiki issue, or possibly something to do with the extensions we had configured on both.  So far the only extensions configured on the staging site are the moderation extension and the wikieditor.  I could try disabling these two to see if we get the same effect, or I could even try a completely fresh Bitnami MediaWiki deploy &hellip; but faster might be to search the Bitnami forums.  A few searches didn&rsquo;t reveal anything:</p>
+
+<ul>
+<li><a href="https://community.bitnami.com/search?q=mediawiki%20logged%20out">https://community.bitnami.com/search?q=mediawiki%20logged%20out</a></li>
+<li><a href="https://community.bitnami.com/search?q=mediawiki%20create%20account">https://community.bitnami.com/search?q=mediawiki%20create%20account</a></li>
+<li><a href="https://community.bitnami.com/search?q=mediawiki%20cookies">https://community.bitnami.com/search?q=mediawiki%20cookies</a></li>
+<li><a href="https://community.bitnami.com/search?q=mediawiki_session">https://community.bitnami.com/search?q=mediawiki_session</a></li>
+</ul>
+
+<p>I was about to post to the Bitnami forum, when I tried disabling the wikieditor and the Moderation extension, and then create account maintained a login.  I re-enabled the wikieditor appearing to confirm that the Moderation extension was the culprit.  I did a few extra tests and opened a <a href="https://github.com/edwardspec/mediawiki-moderation/issues/11">ticket on the mediawiki-moderation github repo</a>.</p>
+
+<p>That kicked off a variety of interactions with the Moderation extension maintainer over the course of the day.  First up they asked me to try out a fix involving disabling a php function called <code>onLocalUserCreated</code> in <code>hooks/ModerationPreload.php</code>.  That fixed the issue and the maintainer almost immediately released a fix, which I pulled into staging which now worked fine. The master branch of the extension now included that fix, and another fix that was supposed to resolve another key issue we were having; the failure of the moderation notice to display.  The set up we have is the Moderation extension sitting in an extensions directory within MediaWiki on the Azure/Bitnami instance, and we got it there via git.  So upgrading it involves just pulling down the latest code from GitHub.  This makes me a little nervous.  I&rsquo;m more comfortable with upgrading libraries via something like rubygems and having a full test suite to run to check that everything is still working.</p>
+
+<p>Actually this is not so different from what I do with the autograders on AWS, where we update from git; although there at least we have staging and master branches.  I see that we do have some tests associated with both MediaWiki and the Moderation extension.  I&rsquo;d like to have these running, ideally in CI.  At the moment everything is relying on time-consuming manual tests.  Argh! I&rsquo;d love to have space to re-create a box from scratch, checking what tests we can run on the way and also do a step by step performance review.</p>
+
+<p>For the moment I upgraded the Moderation extension via git and things seemed to be fine.  Two important bugs fixed, but then I noticed that although the Moderation notice was showing up on staging, it wasn&rsquo;t there on production where we had SSL and the VisualEditor installed.  I added notes to the GitHub issue, and also reviewed all my comments to the VisualEditor team.  Nothing back on the IE, iPad and usability issues there and it had been a week.</p>
+
+<ul>
+<li><a href="https://www.mediawiki.org/wiki/Topic:Tqcoy1d9m5sbtf1e">Asking about iPad</a></li>
+<li><a href="https://www.mediawiki.org/wiki/Topic:Tql1dw7a2muih6ma">Usability</a></li>
+<li><a href="https://www.mediawiki.org/wiki/Topic:Tqcpj4g11oe3b2ht">graceful failures on IE</a></li>
+</ul>
+
+<p>I&rsquo;ve still had no responses there, but I managed to track down the VisualEditor team on IRC, where I got some great feedback.  Looking at our production site MatmaRex was able to identify the Moderation extension as the culprit for the IE fails, and it looked like several related issues could be solved in one go if the Moderation extension could be adjusted to work with VisualEditor and IE11 in combination.  I got this input on trying to fail gracefully:</p>
+
+<blockquote>
+<p>19:05] <tansaku> on a more general note, is there a way to have things fail more gracefully? so that if something like this happens the editor switches over to basic?
+[19:07] &lt;+MatmaRex&gt; tansaku: no. if you have a syntax error in your script (and effectively, that&rsquo;s how IE11 treats this), the whole MediaWiki script loading system goes out of whack. we really assume you don&rsquo;t have syntax errors.</p>
+</blockquote>
+
+<p>I also got a lead about how to work better on mobile:</p>
+
+<blockquote>
+<p>19:15] &lt;+MatmaRex&gt; tansaku: Wikimedia wikis use https://www.mediawiki.org/wiki/Extension:MobileFrontend to display a different skin for mobile views, and it has slightly different VisualEditor integration than normal</p>
+</blockquote>
+
+<p>So that&rsquo;s something we can look at later.  Right now we&rsquo;re stuck on getting VisualEditor and the Moderation extension to play well on IE11.  The moderator is telling me that IE11 doesn&rsquo;t support the JavaScript <code>for ( A of B )</code> syntax and more importantly that it doesn&rsquo;t support <code>FormData.entries()</code>:</p>
+
+<blockquote>
+<p>This looks bad. In IE11, there is no way to read the contents of FormData at all.
+https://msdn.microsoft.com/library/Hh772723#methods</p>
+
+<p>In the current implementation, reading FormData is essential for ajaxhook (VisualEditor support in Moderation) to work. Need to think of some way to workaround that.</p>
+</blockquote>
+
+<p>but they&rsquo;ve had an idea:</p>
+
+<blockquote>
+<p>What we currently get from FormData, can be obtained by wrapping around mw.Api.prototype.api(). This should work in IE.</p>
+</blockquote>
+
+<p>So the maintainer is investigating that, and in the meantime I guess I&rsquo;ll try and complete adding our training materials to the wiki.  I think I also found the <a href="https://www.mediawiki.org/wiki/Extension:VisualEditor#Complete_list_of_configuration_options">settings</a> to remove some of the annoying VisualEditor popups in.  Back to the grindstone &hellip; at least I&rsquo;ve managed to document some of the process of debugging a MediaWiki bug.</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>

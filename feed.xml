@@ -38,6 +38,83 @@
 </content>
   </entry>
   <entry>
+    <title>Debugging MediaWiki</title>
+    <link rel="alternate" href="http://blog.url.com/2017/05/16/debugging-mediawiki/"/>
+    <id>http://blog.url.com/2017/05/16/debugging-mediawiki/</id>
+    <published>2017-05-16T01:00:00+01:00</published>
+    <updated>2017-07-12T21:01:40+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="mediawiki" src="/images/MediaWiki.svg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Yesterday I finally got a clear shot at resolving some of our MediaWiki technical issues.  A key one was users getting loggged out after they create new accounts.  I had had some feedback from MediaWiki support that our cookies weren&amp;rsquo;t being set correctly on production.  So I created a new account for mediawiki on our staging box.  It created the following cookies:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="cookies created for new user account" src="https://www.dropbox.com/s/f73wmvq1g31uh6o/Screenshot%202017-05-15%2010.56.38.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Three of these were reported created on the main wiki: cpPosTime, UseDC, UseCDNCache. I navigated to the main page and was logged out, although now there was just one cookie:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="single cookie after redirect" src="https://www.dropbox.com/s/mha525jx20y2yow/Screenshot%202017-05-15%2011.00.21.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Navigating around I stayed logged out, and then tried logging on, which worked and generated a couple more cookies:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="more cookies after login" src="https://www.dropbox.com/s/h68yx9n2tz9jpv5/Screenshot%202017-05-15%2011.01.59.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So the fact that this was happening on our staging box made it seem like this was a Bitnami MediaWiki issue, or possibly something to do with the extensions we had configured on both.  So far the only extensions configured on the staging site are the moderation extension and the wikieditor.  I could try disabling these two to see if we get the same effect, or I could even try a completely fresh Bitnami MediaWiki deploy &amp;hellip; but faster might be to search the Bitnami forums.  A few searches didn&amp;rsquo;t reveal anything:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://community.bitnami.com/search?q=mediawiki%20logged%20out"&gt;https://community.bitnami.com/search?q=mediawiki%20logged%20out&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://community.bitnami.com/search?q=mediawiki%20create%20account"&gt;https://community.bitnami.com/search?q=mediawiki%20create%20account&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://community.bitnami.com/search?q=mediawiki%20cookies"&gt;https://community.bitnami.com/search?q=mediawiki%20cookies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://community.bitnami.com/search?q=mediawiki_session"&gt;https://community.bitnami.com/search?q=mediawiki_session&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I was about to post to the Bitnami forum, when I tried disabling the wikieditor and the Moderation extension, and then create account maintained a login.  I re-enabled the wikieditor appearing to confirm that the Moderation extension was the culprit.  I did a few extra tests and opened a &lt;a href="https://github.com/edwardspec/mediawiki-moderation/issues/11"&gt;ticket on the mediawiki-moderation github repo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;That kicked off a variety of interactions with the Moderation extension maintainer over the course of the day.  First up they asked me to try out a fix involving disabling a php function called &lt;code&gt;onLocalUserCreated&lt;/code&gt; in &lt;code&gt;hooks/ModerationPreload.php&lt;/code&gt;.  That fixed the issue and the maintainer almost immediately released a fix, which I pulled into staging which now worked fine. The master branch of the extension now included that fix, and another fix that was supposed to resolve another key issue we were having; the failure of the moderation notice to display.  The set up we have is the Moderation extension sitting in an extensions directory within MediaWiki on the Azure/Bitnami instance, and we got it there via git.  So upgrading it involves just pulling down the latest code from GitHub.  This makes me a little nervous.  I&amp;rsquo;m more comfortable with upgrading libraries via something like rubygems and having a full test suite to run to check that everything is still working.&lt;/p&gt;
+
+&lt;p&gt;Actually this is not so different from what I do with the autograders on AWS, where we update from git; although there at least we have staging and master branches.  I see that we do have some tests associated with both MediaWiki and the Moderation extension.  I&amp;rsquo;d like to have these running, ideally in CI.  At the moment everything is relying on time-consuming manual tests.  Argh! I&amp;rsquo;d love to have space to re-create a box from scratch, checking what tests we can run on the way and also do a step by step performance review.&lt;/p&gt;
+
+&lt;p&gt;For the moment I upgraded the Moderation extension via git and things seemed to be fine.  Two important bugs fixed, but then I noticed that although the Moderation notice was showing up on staging, it wasn&amp;rsquo;t there on production where we had SSL and the VisualEditor installed.  I added notes to the GitHub issue, and also reviewed all my comments to the VisualEditor team.  Nothing back on the IE, iPad and usability issues there and it had been a week.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.mediawiki.org/wiki/Topic:Tqcoy1d9m5sbtf1e"&gt;Asking about iPad&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.mediawiki.org/wiki/Topic:Tql1dw7a2muih6ma"&gt;Usability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.mediawiki.org/wiki/Topic:Tqcpj4g11oe3b2ht"&gt;graceful failures on IE&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;ve still had no responses there, but I managed to track down the VisualEditor team on IRC, where I got some great feedback.  Looking at our production site MatmaRex was able to identify the Moderation extension as the culprit for the IE fails, and it looked like several related issues could be solved in one go if the Moderation extension could be adjusted to work with VisualEditor and IE11 in combination.  I got this input on trying to fail gracefully:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;19:05] &lt;tansaku&gt; on a more general note, is there a way to have things fail more gracefully? so that if something like this happens the editor switches over to basic?
+[19:07] &amp;lt;+MatmaRex&amp;gt; tansaku: no. if you have a syntax error in your script (and effectively, that&amp;rsquo;s how IE11 treats this), the whole MediaWiki script loading system goes out of whack. we really assume you don&amp;rsquo;t have syntax errors.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I also got a lead about how to work better on mobile:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;19:15] &amp;lt;+MatmaRex&amp;gt; tansaku: Wikimedia wikis use https://www.mediawiki.org/wiki/Extension:MobileFrontend to display a different skin for mobile views, and it has slightly different VisualEditor integration than normal&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So that&amp;rsquo;s something we can look at later.  Right now we&amp;rsquo;re stuck on getting VisualEditor and the Moderation extension to play well on IE11.  The moderator is telling me that IE11 doesn&amp;rsquo;t support the JavaScript &lt;code&gt;for ( A of B )&lt;/code&gt; syntax and more importantly that it doesn&amp;rsquo;t support &lt;code&gt;FormData.entries()&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This looks bad. In IE11, there is no way to read the contents of FormData at all.
+https://msdn.microsoft.com/library/Hh772723#methods&lt;/p&gt;
+
+&lt;p&gt;In the current implementation, reading FormData is essential for ajaxhook (VisualEditor support in Moderation) to work. Need to think of some way to workaround that.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;but they&amp;rsquo;ve had an idea:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;What we currently get from FormData, can be obtained by wrapping around mw.Api.prototype.api(). This should work in IE.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So the maintainer is investigating that, and in the meantime I guess I&amp;rsquo;ll try and complete adding our training materials to the wiki.  I think I also found the &lt;a href="https://www.mediawiki.org/wiki/Extension:VisualEditor#Complete_list_of_configuration_options"&gt;settings&lt;/a&gt; to remove some of the annoying VisualEditor popups in.  Back to the grindstone &amp;hellip; at least I&amp;rsquo;ve managed to document some of the process of debugging a MediaWiki bug.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Never Enough</title>
     <link rel="alternate" href="http://blog.url.com/2017/05/15/never-enough/"/>
     <id>http://blog.url.com/2017/05/15/never-enough/</id>
@@ -236,36 +313,6 @@
 &lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=_JPjZvDJ2VQ"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4gqu79SLxRc"&gt;AV Community meeting&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Rich Tapestry</title>
-    <link rel="alternate" href="http://blog.url.com/2017/05/08/rich-tapestry/"/>
-    <id>http://blog.url.com/2017/05/08/rich-tapestry/</id>
-    <published>2017-05-08T01:00:00+01:00</published>
-    <updated>2017-07-10T21:54:43+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="rich_tapestry" src="/images/rich_tapestry.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;My brain was grabbling at titles for the blog/branch&amp;ndash;&amp;ldquo;webs we weave&amp;rdquo;, &amp;ldquo;elephants all the way down&amp;rdquo;.  After nearly a year of blogging there&amp;rsquo;s a haze about which expressions I&amp;rsquo;ve used already and how well they express what I&amp;rsquo;ll end up blogging about.  Not that titles can&amp;rsquo;t or don&amp;rsquo;t change through the subsequent editing process.  Last week was characterised by a series of edge of the seat devops activities.  Do I mean DevOps?  I guess I just mean installation of different components of the NHS wiki software.  One could characterise them as just part of the MediaWiki install process.  Looking back at them being all done it can be laid out as fairly straightforward, but any one of them could have turned out to be insoluble in the time available; and really I was pulling time out of other activities to sort the Apache, Parsoid and SSL configurations.&lt;/p&gt;
-
-&lt;p&gt;The system is live at &lt;a href="https://wiki.healthylondon.org"&gt;https://wiki.healthylondon.org&lt;/a&gt; and it loaded a bit sluggishly this morning, reloads were pretty prompt, and the Visual Editor is still working with the SSL.  After previous forays to get the Visual Editor working (Monday?) and SSL installed (Thursday?), it turned out that the Visual Editor wouldn&amp;rsquo;t play well with the SSL.  It&amp;rsquo;s difficult to say whether the Visual Editor is a &amp;ldquo;nice to have&amp;rdquo; or a &amp;ldquo;must have&amp;rdquo;, but losing it would have been a shame.  In total it took only about forty minutes to fix the Visual Editor to work with SSL on Friday.  It works with SSL on the main Wikipedia site, so my efforts were heartened by the idea that it was at least in principle possible to get it working.  However, hosting on Azure could have made it arbitrarily difficult to come up with a solution in a reasonable amount of time, and indeed I found several plaintive posts from people getting stuck on this, and those posts had no solution responses.&lt;/p&gt;
-
-&lt;p&gt;Again being with MediaWiki means we have an extensive online community and googling error messages gives leads pretty readily, but there was no &amp;ldquo;out of the box&amp;rdquo; solution that I could easily find.  In the end it took a reasoned analysis of the way the Parsoid system works.  The Visual Editor is a plugin that works within MediaWiki, but it needs to be able to translate pages from its own format to the MediaWiki syntax.  This used to be done via PHP script, but is now a stand alone node service (microservice).  Parsoid needs to be able to talk to the MediaWiki API and MediaWiki needs to be able to talk to the Parsoid service when starting up the Visual Editor.  The new SSL endpoints meant that the MediaWiki could no longer reach the Parsoid service.  I&amp;rsquo;d like to give a more detailed walkthrough of the errors encountered etc., but I&amp;rsquo;m feeling pretty run down today and there&amp;rsquo;s a lot to get on to.  The executive summary is that I had to configure an additional virtual host in Apache to redirect through the security layer so that the Mediawiki Visual Editor pages could access Parsoid.  It also required opening an additional port in the Azure system.&lt;/p&gt;
-
-&lt;p&gt;What I&amp;rsquo;d really like to do now is spend a full day re-creating the whole installation on a fresh Azure/Bitnami installation - documenting as I go.  However I&amp;rsquo;ve got a meeting today and most days this week, getting together with other stakeholders the NHS has put me in touch with.  This is going to be, sort of, the final section of the design sprint, where I try to observe end user reactions to the &amp;ldquo;prototype&amp;rdquo; we&amp;rsquo;ve created.  On the technical side I need to check on the backup solution we&amp;rsquo;ve implemented, and it occurs to me that we could get the MediaWiki edits we&amp;rsquo;re making into git or some other versioning system.  There&amp;rsquo;s also replying to the lawyers about the updates to the terms &amp;amp; conditions, preparing for a revised training session tomorrow (do we drop the ConfirmAccount plugin?), etc., etc.  From the design sprint perspective I guess I should focus on getting the look and feel finished to see end user reactions to that.&lt;/p&gt;
-
-&lt;p&gt;Okay, so the plan is:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Check the backups are working&lt;/li&gt;
-&lt;li&gt;Focus on the look and feel&lt;/li&gt;
-&lt;li&gt;Start seeing the stakeholders&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Hopefully I can follow up with a full documentation of the install process, which might also make me less of a single point of failure if we have an issue with the configuration.  That said, I would ideally be doing the look and feel update on a staging instance; so maybe I can&amp;rsquo;t get out of replicating the setup?  Of course the faster option is to just try design changes on the existing out of step staging instance we currently have.  Gah!  Life&amp;rsquo;s rich tapestry indeed &amp;hellip; I&amp;rsquo;m going to make some coffee &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
