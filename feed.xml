@@ -38,6 +38,30 @@
 </content>
   </entry>
   <entry>
+    <title>Full Monty</title>
+    <link rel="alternate" href="http://blog.url.com/2017/05/17/full-monty/"/>
+    <id>http://blog.url.com/2017/05/17/full-monty/</id>
+    <published>2017-05-17T01:00:00+01:00</published>
+    <updated>2017-07-13T20:53:38+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="full monty" src="/images/full_monty.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;d made a plan for this morning.  I was going to quickly check if we had progress on our IE11 VisualEditor/Moderation problems, get the final report written up for the NHS folks, and then try to get into rebuilding our complete wiki stack on a staging instance to have it all documented and somewhere to test changes before they go into production.  I&amp;rsquo;m still hoping that&amp;rsquo;ll all get done.  There was an &lt;a href="https://github.com/edwardspec/mediawiki-moderation/issues/9#issuecomment-301893840"&gt;update on our IE11 VisualEditor/Moderation problem&lt;/a&gt; which seemed like it could be the final fix, so I pushed it into production to find it was a partial fix.  The moderation messages now shows up on IE11, but the visual editor still wouldn&amp;rsquo;t fully load, argh!&lt;/p&gt;
+
+&lt;p&gt;It took 30 minutes or so of fiddling on my Windows machine to get all the errors recorded and noted in the GitHub issue, and now I&amp;rsquo;m finally at my blog, and the plan basically seems sound.  It&amp;rsquo;s frustrating that it&amp;rsquo;s not the &amp;lsquo;final&amp;rsquo; fix, because if the VisualEditor had just loaded, then that would have been our last major technical hurdle out of the way, and it would have made it easy to make decisions about which editor to default to.  Actually for all the effort to get the moderation messages to show up on IE11, it&amp;rsquo;s clear from the lastest round of usability-testing/training at the NHS, that even when the moderation message is present, users just don&amp;rsquo;t read it.  I&amp;rsquo;m guessing that the addition of some kind of icon might be helpful and I opened an &lt;a href="https://github.com/edwardspec/mediawiki-moderation/issues/12"&gt;issue on the moderation extension&lt;/a&gt; to discuss that.&lt;/p&gt;
+
+&lt;p&gt;The final NHS training session went well yesterday, and it turned out that part of this was because the trainee was using Chrome.  Still it&amp;rsquo;s clear to me that most users will just think their edit is lost, or the system is somehow broken, because just going in to edit they won&amp;rsquo;t have any mental model of the moderation process and they won&amp;rsquo;t read the moderation message, which has a green tick next to it and so they will just assume their edit has been saved.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="popup" src="https://www.dropbox.com/s/6o6w0elykokw0zh/Screenshot%202017-05-11%2017.46.02.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;What continues to shock me is that more people aren&amp;rsquo;t more interested in these usability issues.  Maybe being in a community that is all about learning to code, learning to be Agile is the wrong place.  There was a point a few years ago where I was trying to help start a community around Scott Klemmer&amp;rsquo;s HCI usability course.  There clearly are people really interested in usability, but so often the coding conversations go towards code beauty, or database consistency, and those critical steps of building something that people can fit into their existing workflow and derive value from get lost in the cracks.  Maybe I&amp;rsquo;m delusional but we all seem to be labouring under the assumption that other people basically understand what we understand.  I&amp;rsquo;m often going on about how that is such a hard assumption to break, so I guess I shouldn&amp;rsquo;t be surprised.&lt;/p&gt;
+
+&lt;p&gt;What is exciting is the enthusiasm for design sprints that we&amp;rsquo;re starting to have in the AV community.  I&amp;rsquo;m starting to see the design sprint as a tool for lasering in on breaking down those assumptions.  Let&amp;rsquo;s see.  Right, a little less conversation, a little more action; sort of.  Do my Email/Slack check, get final draft of final report for NHS and get that staging stack set up before I end up breaking something on the production system.  Again, why aren&amp;rsquo;t more of the community interested in the devops for this paid NHS project?  It&amp;rsquo;s the usability and the devops that&amp;rsquo;s key. Can&amp;rsquo;t deliver the system in the fashion intended and fit it into the user&amp;rsquo;s daily workflow and you might as well be throwing all your code in a dumpster.  Great if you&amp;rsquo;re into abstract art - insane if your intention is to help people or change anything.  Maybe I&amp;rsquo;m failing to communicate the value, or perhaps it&amp;rsquo;s just that people won&amp;rsquo;t want to get more involved until we&amp;rsquo;re paying them bigger bucks &amp;hellip;?  In the meantime I&amp;rsquo;m going to keep focusing on what I call the &amp;ldquo;Full Monty&amp;rdquo; - trying to build things that people can fit into their working life to get things done more efficiently.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Debugging MediaWiki</title>
     <link rel="alternate" href="http://blog.url.com/2017/05/16/debugging-mediawiki/"/>
     <id>http://blog.url.com/2017/05/16/debugging-mediawiki/</id>
@@ -259,60 +283,6 @@ https://msdn.microsoft.com/library/Hh772723#methods&lt;/p&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;I&amp;rsquo;d love to be digitizing everything I&amp;rsquo;ve learned from the ongoing NHS design sprint and working with all the different stakeholders to get their materials into the system, but I have to put that to one side in order to get the two above items done.  I&amp;rsquo;ve got three more stakeholder meetings (usability testings) over the next two days which play merry havoc with my ability to make progress on technical issues due to intermittent connectivity as I commute around on trains.  Well I have some time this morning.  Time to get it done &amp;hellip; and lots of deep breathing to manage the anxiety :-)&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>All in One Day</title>
-    <link rel="alternate" href="http://blog.url.com/2017/05/09/all-in-one-day/"/>
-    <id>http://blog.url.com/2017/05/09/all-in-one-day/</id>
-    <published>2017-05-09T01:00:00+01:00</published>
-    <updated>2017-07-10T21:54:43+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="four seasons" src="/images/four_seasons_one_day.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I&amp;rsquo;m struggling with what each blog should be.  Should it be a focused dive on one thing?  Should I be trying to cover everything that happened since the last blog?  Yesterday was pretty intense.  I could spend the whole blog on the AV community meeting we had at the end of the day yesterday.  There&amp;rsquo;d been a spurt of conversation in the #av&lt;em&gt;community&lt;/em&gt;talk channel triggered by Mikael&amp;rsquo;s reaction to my blog of a month ago about having to switch my focus away from AgileVentures.  The discussion was all around trying to understand how we could make AV sustainable.  It was Joao, Matt and myself in the meeting, which we could probably have publicized better, but then who takes the lead on these things?  I&amp;rsquo;m close to drowning trying to attend to the NHS project, ramping up the new run of the MOOC and keeping AV ticking over.  Perhaps we can repeat weekly &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d really liked all the independent conversation taking place in the #av&lt;em&gt;community&lt;/em&gt;talk channel and had resolved to stay in the background in the meeting.  I started off well and we went round trying to answer Joao&amp;rsquo;s question about what the AV product is.  We had a good chat, but I noticed that by the end it was me doing most of the talking :-( Joao had to go, but Matt and I carried on a little as I evangelised the design sprint concept.  We didn&amp;rsquo;t end up trying the &amp;ldquo;Market and Product Validation Checklist&amp;rdquo; that Matt had mentioned in the chat &amp;hellip; well, anyway, Matt got quite enthused about the idea of doing a design sprint so we&amp;rsquo;ll see.&lt;/p&gt;
-
-&lt;p&gt;That all came at the end of a full day, where I was just hanging in there to get emails out to move forward on the private contract that will hopefully sustain me for the rest of year, and the communication with the lawyers about the NHS wiki terms &amp;amp; conditions.  The majority of the day had been taken up getting ready for a usability/outreach session with the &lt;a href="https://www.kcsc.org.uk/"&gt;Kensington &amp;amp; Chelsea Social Council&lt;/a&gt;; an umbrella group supporting the non-profit sector in the London borough of Kensington &amp;amp; Chelsea.  I have the feeling they are the equivalent entity to the Voluntary Action Harrow (VAH) group who we&amp;rsquo;ve built the Harrow Community Network for through the LocalSupport project.  I&amp;rsquo;d been put in touch with folks at the Kensington &amp;amp; Chelsea Social Council via NHS HLP as a group that were implementing Self Care in their area and might have interest in the wiki project we&amp;rsquo;ve developed.  Our NHS design sprint has sprawled out from its initial week (a few weeks back), and I&amp;rsquo;ve got a meeting with a different stakeholder each day this week, and I&amp;rsquo;m using those meetings to get further usability feedback on the MediaWiki system we&amp;rsquo;ve deployed.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m just about hanging on, making the arrangements to meet everyone, fitting in the travel etc.  I say just about because I had to push the marketing meeting back an hour yesterday at the last minute when I realised that I couldn&amp;rsquo;t be back in time for it.  Not ideal.  I could have tried to do it in a coffee shop in Kensington &amp;amp; Chelsea, but I felt back at the home office would be more efficient.  I&amp;rsquo;ve got an extra meetup to fit in this week and I&amp;rsquo;m not sure where my lunch breaks are going to fit in through the week!  Maybe I need to move the Martin Fowler scrum.  Pat has just said he can&amp;rsquo;t commit to share the hosting of the meeting.  I could move it earlier or even just put it on hold for while &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Anyhow, we got the marketing meeting done.  At least I&amp;rsquo;m remembering to review the outstanding action items.  I feel like there must be some better meeting management system somewhere in between Trello and the text notes I&amp;rsquo;m pasting into Slack, but then again.  The main technical challenge for the day was seeing if I could get the HLP banner into the wiki.  I was getting stuck on it, and managed to hand off the task briefly to Lara, who played with a few settings and came up with a solution.  I had been adding the MediaWiki vector skin to insert a div for the HLP banner/navigation from their main site; but certain mediawiki elements would not move down.   Thanks to Lara&amp;rsquo;s input we got a great mockup editing the common.css for the site:&lt;/p&gt;
-&lt;pre class="highlight css"&gt;&lt;code&gt;&lt;span class="nf"&gt;#hlp-banner&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nl"&gt;background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="sx"&gt;url('https://www.dropbox.com/s/2yokso0fkd3bivt/Screenshot%202017-05-08%2010.40.18.png?dl=1')&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="nl"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;100%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="nl"&gt;min-height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;123px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="nf"&gt;#mw-head&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nl"&gt;margin-top&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="m"&gt;123px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="nc"&gt;.mw-wiki-logo&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nl"&gt;background-image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;none&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I had just taken a quick screen shot of the HLP site banner to play with.  I just got this into the main site on the train on the way into meeting Kensington &amp;amp; Chelsea Social Council, and then I also managed to make emails required in the site.  All a bit skin of the teeth, but it allowed me to get valuable feedback at the stakeholders&amp;rsquo; offices.&lt;/p&gt;
-
-&lt;p&gt;I sat down with their strategic health lead and the manager of their Self-care program, and we could have easily been continuing the expert interviews of the previous weeks.  I could tell that there would be lots of great stuff to learn about how K&amp;amp;C was implementing self care, but I couldn&amp;rsquo;t afford to burn all the time on that.  We had to move on to a more testing footing.  We had our working &amp;ldquo;prototype&amp;rdquo;.  After understanding a bit more about how things worked at KCSC, I convinced them to try out our wiki on their systems.  Simply having them navigate to the site and seeing that it appeared correctly was already useful, particularly given the problems we&amp;rsquo;d had with some wikis on the NHS laptops/network.&lt;/p&gt;
-
-&lt;p&gt;I encouraged the Self-care manager to navigate through the site, try some searches and then some editing.  It was all rather slap-dash from an academic usability standpoint, but there were some clear knowledge gains:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;If you weren&amp;rsquo;t logged in, searching for things did not suggest page creation&lt;/li&gt;
-&lt;li&gt;Searches for multiple terms were not matching anything in our system (not much content in there)&lt;/li&gt;
-&lt;li&gt;The combination of required email confirmation and the visual editor could lead to a confusing user flow &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Two reasonably high priority items are now to see if we can make the banner fully dynamic, and also whether we can drop the email confirmation requirement, since the moderation step still catches anything a user tries to post.  I&amp;rsquo;m definitely leaning towards having almost no requirements for becoming a user and push the burden onto the moderation queue - at least at the beginnning when there are few users.  If the moderation burden becomes too heavy, then we can start imposing additional constraints on user sign up; which makes me think I need to get the moderation plan and budget out of my head and onto paper.  Of course the ongoing interaction testing (training?) is what&amp;rsquo;s helping us understand how the moderation will actually work with this system.   We&amp;rsquo;re doing our hard launch on Friday.  I&amp;rsquo;ll take a deep breath; say to myself that we&amp;rsquo;ll address each issue in turn each day of this week and next week will be calmer :-) Taking it one day at a time &amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/edit?o=U&amp;amp;video_id=_JPjZvDJ2VQ"&gt;&amp;ldquo;Kent Beck&amp;rdquo; scrum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=4gqu79SLxRc"&gt;AV Community meeting&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>

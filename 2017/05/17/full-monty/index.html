@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>Full Monty</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_6 blog_page_6_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_05 x2017_05_17 x2017_05_17_full-monty x2017_05_17_full-monty_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,72 +83,35 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/05/17/full-monty/">Full Monty</a></h2>
+        <h5 class='date'>17 May 2017</h5>
+    <p><img alt="full monty" src="/images/full_monty.jpg" /></p>
 
-          <p>Page 6 of 17</p>
+<p>So I&rsquo;d made a plan for this morning.  I was going to quickly check if we had progress on our IE11 VisualEditor/Moderation problems, get the final report written up for the NHS folks, and then try to get into rebuilding our complete wiki stack on a staging instance to have it all documented and somewhere to test changes before they go into production.  I&rsquo;m still hoping that&rsquo;ll all get done.  There was an <a href="https://github.com/edwardspec/mediawiki-moderation/issues/9#issuecomment-301893840">update on our IE11 VisualEditor/Moderation problem</a> which seemed like it could be the final fix, so I pushed it into production to find it was a partial fix.  The moderation messages now shows up on IE11, but the visual editor still wouldn&rsquo;t fully load, argh!</p>
 
-            <p><a href="/blog/page/5/">Previous page</a></p>
+<p>It took 30 minutes or so of fiddling on my Windows machine to get all the errors recorded and noted in the GitHub issue, and now I&rsquo;m finally at my blog, and the plan basically seems sound.  It&rsquo;s frustrating that it&rsquo;s not the &lsquo;final&rsquo; fix, because if the VisualEditor had just loaded, then that would have been our last major technical hurdle out of the way, and it would have made it easy to make decisions about which editor to default to.  Actually for all the effort to get the moderation messages to show up on IE11, it&rsquo;s clear from the lastest round of usability-testing/training at the NHS, that even when the moderation message is present, users just don&rsquo;t read it.  I&rsquo;m guessing that the addition of some kind of icon might be helpful and I opened an <a href="https://github.com/edwardspec/mediawiki-moderation/issues/12">issue on the moderation extension</a> to discuss that.</p>
 
-          <h2><a href="/2017/02/20/i-surrender/">I Surrender</a></h2>
-          <h3>Feb 20</h3>
-          <p>I’ve just had a complete break from Slack and email for a week.  That was nice, although I was starting to get a bit jittery towards the end.  Ever since my knee operation last October I’ve been a mail/slack addict on my phone, checking for updates...</p>
-          <h2><a href="/2017/02/10/tech-tests/">Tech Tests</a></h2>
-          <h3>Feb 10</h3>
-          <p>So I’m doing a tech test for FutureLearn and they’ve very kindly said that I can post my work publicly on GitHub, which I have promptly done:</p>
+<p>The final NHS training session went well yesterday, and it turned out that part of this was because the trainee was using Chrome.  Still it&rsquo;s clear to me that most users will just think their edit is lost, or the system is somehow broken, because just going in to edit they won&rsquo;t have any mental model of the moderation process and they won&rsquo;t read the moderation message, which has a green tick next to it and so they will just assume their edit has been saved.</p>
 
-<p><a href="https://github.com/tansaku/tictactoe">https://github.com/tansaku/tictactoe</a></p>
+<p><img alt="popup" src="https://www.dropbox.com/s/6o6w0elykokw0zh/Screenshot%202017-05-11%2017.46.02.png?dl=1" /></p>
 
-<p>I think I’ve spent about 3 hours on it so far, mostly in different...</p>
-          <h2><a href="/2017/02/09/pivoting-or-not/">Pivoting or Not</a></h2>
-          <h3>Feb  9</h3>
-          <p>There was an interesting response to one of <a href="http://nonprofits.agileventures.org/2017/01/23/passing_a_threshold/">recent blog posts</a> from an AV community member.  They posted the following in our community #random channel (where I had shared my blog post):</p>
+<p>What continues to shock me is that more people aren&rsquo;t more interested in these usability issues.  Maybe being in a community that is all about learning to code, learning to be Agile is the wrong place.  There was a point a few years ago where I was trying to help start a community around Scott Klemmer&rsquo;s HCI usability course.  There clearly are people really interested in usability, but so often the coding conversations go towards code beauty, or database consistency, and those critical steps of building something that people can fit into their existing workflow and derive value from get lost in the cracks.  Maybe I&rsquo;m delusional but we all seem to be labouring under the assumption that other people basically understand what we understand.  I&rsquo;m often going on about how that is such a hard assumption to break, so I guess I shouldn&rsquo;t be surprised.</p>
 
-<blockquote>
-<p>As an additional source of income for AV, why not offer pairing...</p>
-</blockquote>
-          <h2><a href="/2017/02/08/motivation-barrier/">Motivation Barrier</a></h2>
-          <h3>Feb  8</h3>
-          <p>So I’m writing this blog while text chatting with an HMRC tax representative trying to work out how to pay my tax bill online.  This is my get one item off my desk a day activity.  Just after writing that sentence I got to the tax representative and...</p>
-          <h2><a href="/2017/02/07/mixed-bag/">Mixed Bag</a></h2>
-          <h3>Feb  7</h3>
-          <p>I was pleased to be back blogging about code yesterday, but Monday didn’t see any further focus on code.  I replied to all the incoming Slack queries, but not all the emails, and fitted in a fair few meetings.  It had been a few weeks since we had...</p>
-          <h2><a href="/2017/02/06/doing-the-right-thing/">Doing the Right Thing</a></h2>
-          <h3>Feb  6</h3>
-          <p>Over Thursday and Friday I pushed out what I’m calling an “escalating call to action” on the main AgileVentures site.  The idea had come up in a discussion with Michael in a scrum earlier in the week in which we’d been talking about what to display...</p>
-          <h2><a href="/2017/02/03/how-to-focus-on-the-right-thing/">Focusing on the Right Thing</a></h2>
-          <h3>Feb  3</h3>
-          <p>I keep trying to focus on the right thing.  From a Buddhist perspective maybe the right thing to focus on is the here and now, the precious moment of current perception, at least where possible.  Still I’m fascinated by this notion that one can use...</p>
-          <h2><a href="/2017/02/02/negotiating-and-estimating/">Negotiating and Estimating</a></h2>
-          <h3>Feb  2</h3>
-          <p>Thomas asked a great question to DHH during our chat with him on Tuesday.  The question was:</p>
+<p>What is exciting is the enthusiasm for design sprints that we&rsquo;re starting to have in the AV community.  I&rsquo;m starting to see the design sprint as a tool for lasering in on breaking down those assumptions.  Let&rsquo;s see.  Right, a little less conversation, a little more action; sort of.  Do my Email/Slack check, get final draft of final report for NHS and get that staging stack set up before I end up breaking something on the production system.  Again, why aren&rsquo;t more of the community interested in the devops for this paid NHS project?  It&rsquo;s the usability and the devops that&rsquo;s key. Can&rsquo;t deliver the system in the fashion intended and fit it into the user&rsquo;s daily workflow and you might as well be throwing all your code in a dumpster.  Great if you&rsquo;re into abstract art - insane if your intention is to help people or change anything.  Maybe I&rsquo;m failing to communicate the value, or perhaps it&rsquo;s just that people won&rsquo;t want to get more involved until we&rsquo;re paying them bigger bucks &hellip;?  In the meantime I&rsquo;m going to keep focusing on what I call the &ldquo;Full Monty&rdquo; - trying to build things that people can fit into their working life to get things done more efficiently.</p>
 
-<blockquote>
-<p>What are the biggest challenges of running a large scale open source project over time?</p>
-</blockquote>
-
-<p>DHH answered in some detail, but the point that’s stuck in my mind...</p>
-          <h2><a href="/2017/02/01/microservice-vs-monolith/">Microservices vs Monolith</a></h2>
-          <h3>Feb  1</h3>
-          <p>Full on day yesterday with Rails creator David Heinemeier Hansson (DHH) dropping by to chat to AgileVentures and CraftAcademy, as well as other wall to wall meetings and DevOps.  Big shout-out to AgileVentures CoFounder and CraftAcademy boss, Thomas...</p>
-          <h2><a href="/2017/01/31/paid-projects/">Paid Projects</a></h2>
-          <h3>Jan 31</h3>
-          <p>It was a busy Monday with us recording the first of our “Agile Book Club” podcasts, and other back to back meetings.  There’s lots to discuss and plan on the marketing front, now that the Google AdWords grant is driving five times the usual traffic...</p>
-
-            <p><a href="/blog/page/7/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -206,6 +170,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
