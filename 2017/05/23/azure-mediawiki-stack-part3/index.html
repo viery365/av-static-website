@@ -93,7 +93,7 @@
         <h5 class='date'>23 May 2017</h5>
     <p><img alt="mediawiki" src="/images/MediaWiki.svg" /></p>
 
-<p>Ahhh, so the rebuilding the mediawiki stack on azure leaks over three days and I suspect it may be more.  Yesterday I got stuck trying to open a port for the visual editor and I suspect there will be other blocks, but that&rsquo;s why I&rsquo;m forcing myself through this to have it all documented so it&rsquo;s not a pain when we are really short on time.  I also got distracted playing with inkscape this morning, but that&rsquo;s another story.</p>
+<p>Ahhh, so the rebuilding the MediaWiki stack on Azure leaks over three days and I suspect it may be more.  Yesterday I got stuck trying to open a port for the VisualEditor and I suspect there will be other blocks, but that&rsquo;s why I&rsquo;m forcing myself through this to have it all documented so it&rsquo;s not a pain when we are really short on time.  I also got distracted playing with inkscape this morning, but that&rsquo;s another story.</p>
 
 <p>I&rsquo;m not sure that I have time, but I couldn&rsquo;t help checking to see if removing the security rule would prevent the VisualEditor from working, and unless there&rsquo;s some kind of caching going on that I understand, it looks like the security rule really isn&rsquo;t necessary.  I certainly suspected that, since it isn&rsquo;t connected up to anything else in the system.  So in principle I can delete those security rules and that&rsquo;s one less thing to maintain and organise.  Confusing, because we definitely need security rules like that to work with AWS.  Presumably we&rsquo;d need them for some other kinds of configuration on Azure &hellip;</p>
 
@@ -231,7 +231,7 @@ $wgAllowSiteCSSOnRestrictedPages = true;
 
 <p>https://community.bitnami.com/t/installing-certbot-for-lets-encrypt-ssl-certificate/46431/2</p>
 
-<p>and I need to follow up with the developer there.  Let&rsquo;s try for that in part 4 and if I&rsquo;m lucky I&rsquo;ll also get to testing the backup stuff &hellip; and also test importing all the data from the production system into the backup system.</p>
+<p>and I need to follow up with the developer there.  Let&rsquo;s try for that in <a href="http://nonprofits.agileventures.org/2017/05/24/azure-mediawiki-stack-part4/">part 4</a> and if I&rsquo;m lucky I&rsquo;ll also get to testing the backup stuff &hellip; and also test importing all the data from the production system into the backup system.</p>
 
         <h2 class='author'>by Sam Joseph</h2>
       </div>  

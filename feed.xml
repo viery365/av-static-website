@@ -91,7 +91,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/05/24/azure-mediawiki-stack-part4/"/>
     <id>http://blog.url.com/2017/05/24/azure-mediawiki-stack-part4/</id>
     <published>2017-05-24T01:00:00+01:00</published>
-    <updated>2017-07-18T22:05:02+01:00</updated>
+    <updated>2017-07-18T22:11:28+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -221,7 +221,7 @@ $ sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/fullchain.
 $ sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/privkey.pem /opt/bitnami/apache2/conf/server.key
 $ sudo /opt/bitnami/ctlscript.sh restart apache
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and then it worked. So either I made it harder than it actually was last time, or something got easier, or I just found a different command that was easier to work with out of the box.  However the trick is now enforcing https and then making sure the VisualEditor can still work over https, but I think that will be for tomorrow&amp;rsquo;s blog &amp;hellip;&lt;/p&gt;
+&lt;p&gt;and then it worked. So either I made it harder than it actually was last time, or something got easier, or I just found a different command that was easier to work with out of the box.  However the trick is now enforcing https and then making sure the VisualEditor can still work over https, but I think that will be for tomorrow&amp;rsquo;s blog i.e. &lt;a href="http://nonprofits.agileventures.org/2017/05/25/azure-mediawiki-stack-part5/"&gt;part 5!&lt;/a&gt; &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -229,13 +229,13 @@ $ sudo /opt/bitnami/ctlscript.sh restart apache
     <link rel="alternate" href="http://blog.url.com/2017/05/23/azure-mediawiki-stack-part3/"/>
     <id>http://blog.url.com/2017/05/23/azure-mediawiki-stack-part3/</id>
     <published>2017-05-23T01:00:00+01:00</published>
-    <updated>2017-07-18T22:01:22+01:00</updated>
+    <updated>2017-07-18T22:10:59+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
     <content type="html">&lt;p&gt;&lt;img alt="mediawiki" src="/images/MediaWiki.svg" /&gt;&lt;/p&gt;
 
-&lt;p&gt;Ahhh, so the rebuilding the mediawiki stack on azure leaks over three days and I suspect it may be more.  Yesterday I got stuck trying to open a port for the visual editor and I suspect there will be other blocks, but that&amp;rsquo;s why I&amp;rsquo;m forcing myself through this to have it all documented so it&amp;rsquo;s not a pain when we are really short on time.  I also got distracted playing with inkscape this morning, but that&amp;rsquo;s another story.&lt;/p&gt;
+&lt;p&gt;Ahhh, so the rebuilding the MediaWiki stack on Azure leaks over three days and I suspect it may be more.  Yesterday I got stuck trying to open a port for the VisualEditor and I suspect there will be other blocks, but that&amp;rsquo;s why I&amp;rsquo;m forcing myself through this to have it all documented so it&amp;rsquo;s not a pain when we are really short on time.  I also got distracted playing with inkscape this morning, but that&amp;rsquo;s another story.&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;m not sure that I have time, but I couldn&amp;rsquo;t help checking to see if removing the security rule would prevent the VisualEditor from working, and unless there&amp;rsquo;s some kind of caching going on that I understand, it looks like the security rule really isn&amp;rsquo;t necessary.  I certainly suspected that, since it isn&amp;rsquo;t connected up to anything else in the system.  So in principle I can delete those security rules and that&amp;rsquo;s one less thing to maintain and organise.  Confusing, because we definitely need security rules like that to work with AWS.  Presumably we&amp;rsquo;d need them for some other kinds of configuration on Azure &amp;hellip;&lt;/p&gt;
 
@@ -373,7 +373,7 @@ $wgAllowSiteCSSOnRestrictedPages = true;
 
 &lt;p&gt;https://community.bitnami.com/t/installing-certbot-for-lets-encrypt-ssl-certificate/46431/2&lt;/p&gt;
 
-&lt;p&gt;and I need to follow up with the developer there.  Let&amp;rsquo;s try for that in part 4 and if I&amp;rsquo;m lucky I&amp;rsquo;ll also get to testing the backup stuff &amp;hellip; and also test importing all the data from the production system into the backup system.&lt;/p&gt;
+&lt;p&gt;and I need to follow up with the developer there.  Let&amp;rsquo;s try for that in &lt;a href="http://nonprofits.agileventures.org/2017/05/24/azure-mediawiki-stack-part4/"&gt;part 4&lt;/a&gt; and if I&amp;rsquo;m lucky I&amp;rsquo;ll also get to testing the backup stuff &amp;hellip; and also test importing all the data from the production system into the backup system.&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -381,7 +381,7 @@ $wgAllowSiteCSSOnRestrictedPages = true;
     <link rel="alternate" href="http://blog.url.com/2017/05/22/azure-mediawiki-stack-part2/"/>
     <id>http://blog.url.com/2017/05/22/azure-mediawiki-stack-part2/</id>
     <published>2017-05-22T01:00:00+01:00</published>
-    <updated>2017-07-18T22:01:08+01:00</updated>
+    <updated>2017-07-18T22:10:41+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -441,7 +441,7 @@ $wgVirtualRestConfig['modules']['parsoid'] = array(
 
 &lt;p&gt;&lt;img alt="adding an endpoint to the virtual machine on Azure" src="https://www.dropbox.com/s/ghzx10bnhbq7nbm/Screenshot%202017-05-22%2011.04.09.png?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;Ah, so it looks like we need BOTH the endpoint AND the security group; although I&amp;rsquo;m not 100% on that, and I think I&amp;rsquo;m out of time to really determine that &amp;hellip;&lt;/p&gt;
+&lt;p&gt;Ah, so it looks like we need BOTH the endpoint AND the security group; although I&amp;rsquo;m not 100% on that, and I think I&amp;rsquo;m out of time to really determine that &amp;hellip; on to &lt;a href="http://nonprofits.agileventures.org/2017/05/23/azure-mediawiki-stack-part3/"&gt;part 3&lt;/a&gt;&lt;/p&gt;
 </content>
   </entry>
   <entry>
