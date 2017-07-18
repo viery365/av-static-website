@@ -38,6 +38,413 @@
 </content>
   </entry>
   <entry>
+    <title>Azure MediaWiki Stack Part 5</title>
+    <link rel="alternate" href="http://blog.url.com/2017/05/25/azure-mediawiki-stack-part5/"/>
+    <id>http://blog.url.com/2017/05/25/azure-mediawiki-stack-part5/</id>
+    <published>2017-05-25T01:00:00+01:00</published>
+    <updated>2017-07-18T22:07:29+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="mediawiki" src="/images/MediaWiki.svg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So, after feeling lethargic and getting distracted by only a small amount of Slack and Email, it&amp;rsquo;s time to see if I can repeat the trick of getting the MediaWiki VisualEditor to work with https.  Maybe this is all just ridiculous yak-shaving.  I&amp;rsquo;m getting a steady flow of spam on the wiki and I need to try out some solutions without damaging the production server.  I want to try out various things on staging before they are in production.  So yes, coherent argument for getting the staging server setup, but then the newly deployed box is on a slightly different version of MediaWiki and installing the LetsEncrypt SSL all suddenly went more smoothly, so for all my efforts to create a clone of production, will there still be differences creeping in? With technology, trivial differences in versions can lead things to break; however, driving to get that 100% match can also suck up ever increasing amounts of time &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Heroku&amp;rsquo;s deploying via git with something like bundler to ensure that we have precisely the same set of libraries really does feel like a beautifully clear approach, and we can get the same from dokku.  I wonder if there&amp;rsquo;s some similar way to deploy MediaWiki that would allow us to version all our configuration.  And how long would it take to find it and set it up? :-)&lt;/p&gt;
+
+&lt;p&gt;Task in hand - let&amp;rsquo;s continue.  Got to log into four ssh terminals for start up &amp;hellip; so I got distracted there (for 15mins?) and I used &lt;code&gt;ssh-copy-id&lt;/code&gt; to set it up so I can log in with my private key rather than having to use the password every time.  That should save some time in the long run.&lt;/p&gt;
+
+&lt;p&gt;What I lack is a good record of exactly what changes I made to the Apache config on the production box, although comparing &lt;code&gt;/opt/bitnami/apache2/conf/httpd.conf&lt;/code&gt;, I don&amp;rsquo;t see any differences.  The version of certbot that I&amp;rsquo;ve used this second time around has put the server certificate and key in &lt;code&gt;/opt/bitnami/apache2/conf&lt;/code&gt;, but the main changes are in &lt;code&gt;/opt/bitnami/apache2/conf/bitnami&lt;/code&gt;, where I did make a copy of the file &lt;code&gt;bitnami.conf&lt;/code&gt;.  The initial change required is to ensure that the site is no longer served over insecure port 80:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;&amp;lt;IfVersion &amp;lt; 2.3 &amp;gt;
+  NameVirtualHost *:80 
+  NameVirtualHost *:443
+&amp;lt;/IfVersion&amp;gt;
+
+&amp;lt;VirtualHost _default_:80&amp;gt;
+  DocumentRoot "/opt/bitnami/apache2/htdocs"
+  Redirect permanent / https://hlp-wiki-develop.agileventures.org/ # &amp;lt;-- add this
+  # ... unchanged
+&amp;lt;/VirtualHost&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and that whenever anyone tries to access via http over port 80 that they are redirected to the secured https on port 443.  Then restart Apache:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ sudo /opt/bitnami/ctlscript.sh restart apache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and the site can only be accessed over https, but the problem is now that the VisualEditor won&amp;rsquo;t work, or at least it didn&amp;rsquo;t the first time around for me where I seemed to need to set up all sorts of port redirection, but something about this second install means I don&amp;rsquo;t seem to have encountered this issue.  Fascinating.  I don&amp;rsquo;t know if I screwed something up the first time around and made lots more work for myself, OR if the Bitnami stack/certbot I used has been updated.  Definitely there was a bump to the MediaWiki version and I have gone in with a different certbot command.&lt;/p&gt;
+
+&lt;p&gt;So where I&amp;rsquo;m confused now is how good a clone I have of the first box, and the best way to upgrade the first box.  I have another layer of indirection with the first box using the wiki.healthylondon.org domain name, but I don&amp;rsquo;t think that should affect things too seriously &amp;hellip; is it possible that I was completely misdiagnosing the VisualEditor failures?  It&amp;rsquo;s possible, because we had that very tricky bug where only pages with outstanding edits held in the moderation queue were blocking the editor, but I thought that was only on IE.&lt;/p&gt;
+
+&lt;p&gt;I checked the chrome developer tools network panel and all the requests to the VisualEditor are going across https.  I&amp;rsquo;ll check on IE and then I think its time to get down to work.  I want to:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;clone across the data from the production server&lt;/li&gt;
+&lt;li&gt;run backups&lt;/li&gt;
+&lt;li&gt;experiment with a restore from backup&lt;/li&gt;
+&lt;li&gt;experiment with the spam filters suggested by the moderation extension maintainer&lt;/li&gt;
+&lt;li&gt;use this as a base to test out other things like defaulting create page to the VisualEditor, etc.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;What I&amp;rsquo;d really like to do is have a mechanism for &amp;ldquo;switching&amp;rdquo; the production server to the newly created box and retiring the old one, so that I can avoid having to upgrade the boxes in place.  It seems like that switching would require DNS changes that take a long time to propagate.  I wonder if Azure has some mechanism for switching between virtual machines &amp;hellip;?  What I&amp;rsquo;d really like is a broader team to do this all with, but that&amp;rsquo;d require another level of funding &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Azure MediaWiki Stack Part 4</title>
+    <link rel="alternate" href="http://blog.url.com/2017/05/24/azure-mediawiki-stack-part4/"/>
+    <id>http://blog.url.com/2017/05/24/azure-mediawiki-stack-part4/</id>
+    <published>2017-05-24T01:00:00+01:00</published>
+    <updated>2017-07-18T22:05:02+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="mediawiki" src="/images/MediaWiki.svg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Well I totally failed to get down to my blogging today, checking Slack and Email first.  And blogging this week has become a series on getting the Azure MediaWiki stack up, which arguably should be a single document &amp;hellip; but then lots of people break complex things over multiple blogs.  It will need a lot of polishing back and forth as my stream of consciousness gets in the way of documenting things.  At least yesterday I managed to feel like I was making progress by getting the banner in there so that the cloned site looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="cloned site with banner" src="https://www.dropbox.com/s/cze89vat8f09xs5/Screenshot%202017-05-24%2009.50.00.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So the remaining hurdle is just setting up SSL, which as I was saying I&amp;rsquo;d partially documented in some comments in a post on the bitnami community:&lt;/p&gt;
+
+&lt;p&gt;https://community.bitnami.com/t/installing-certbot-for-lets-encrypt-ssl-certificate/46431/2&lt;/p&gt;
+
+&lt;p&gt;The original post points us to the bitnami documentation on using LetsEncrypt:&lt;/p&gt;
+
+&lt;p&gt;https://docs.bitnami.com/aws/components/apache/#how-to-install-the-lets-encrypt-client&lt;/p&gt;
+
+&lt;p&gt;Which walks us through installing something called certbot, during which I got/get the following error:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Failed to find executable apache2ctl in PATH: /opt/bitnami/sqlite/bin:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:/opt/bitnami/apache2/bin:/opt/bitnami/common/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and it was google searches for that error that lead me to the bitnami community post.  The post suggests the following fix:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;sudo ln -s /opt/bitnami/apache2/bin/apachectl /usr/bin/apache2ctl
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and that allowed me to generate a certificate:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;bitnami@bitnami-mediawiki-74f7:/tmp/certbot$ ./certbot-auto certonly --webroot -w /opt/bitnami/apps/mediawiki/htdocs/ -d hlp-wiki-develop.agileventures.org
+Requesting root privileges to run certbot...
+  /home/bitnami/.local/share/letsencrypt/bin/letsencrypt certonly --webroot -w /opt/bitnami/apps/mediawiki/htdocs/ -d hlp-wiki-develop.agileventures.org
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Enter email address (used for urgent renewal and security notices) (Enter 'c' to
+cancel):hlpwikiadmin@agileventures.org
+
+-------------------------------------------------------------------------------
+Please read the Terms of Service at
+https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf. You must agree
+in order to register with the ACME server at
+https://acme-v01.api.letsencrypt.org/directory
+-------------------------------------------------------------------------------
+(A)gree/(C)ancel: A
+
+-------------------------------------------------------------------------------
+Would you be willing to share your email address with the Electronic Frontier
+Foundation, a founding partner of the Let's Encrypt project and the non-profit
+organization that develops Certbot? We'd like to send you email about EFF and
+our work to encrypt the web, protect its users and defend digital rights.
+-------------------------------------------------------------------------------
+(Y)es/(N)o: Y
+Obtaining a new certificate
+Performing the following challenges:
+http-01 challenge for hlp-wiki-develop.agileventures.org
+Using the webroot path /opt/bitnami/apps/mediawiki/htdocs for all unmatched domains.
+Waiting for verification...
+Cleaning up challenges
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at
+   /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/fullchain.pem.
+   Your cert will expire on 2017-08-22. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot-auto
+   again. To non-interactively renew *all* of your certificates, run
+   "certbot-auto renew"
+ - Your account credentials have been saved in your Certbot
+   configuration directory at /etc/letsencrypt. You should make a
+   secure backup of this folder now. This configuration directory will
+   also contain certificates and private keys obtained by Certbot so
+   making regular backups of this folder is ideal.
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which then needs to be installed in the Apache webserver according to the docs, but when I try the next step:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/fullchain.pem /opt/bitnami/apache2/conf/server.crt
+sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/privkey.pem /opt/bitnami/apache2/conf/server.key
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;rsquo;m told that the files already exist:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;ln: failed to create symbolic link ‘/opt/bitnami/apache2/conf/server.key’: File exists
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and so I start to wonder if I&amp;rsquo;m following different instructions from last time.  I restarted the server&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;sudo /opt/bitnami/ctlscript.sh restart apache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but the https was not working.  My history from doing this the last time around shows me making various modifications to the Apache config&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  379  nano httpd.conf 
+  380  ls
+  381  ls bitnami/
+  382  cd ..
+  383  ls
+  384  sudo mkdir sites-available
+  385  ls sites-enabled/
+  386  ls -la
+  387  chown bitnami sites-available/
+  388  sudo chown bitnami sites-available/
+  389  sudo chown bitnami sites-enabled
+  390  more conf/bitnami/bitnami.conf 
+  391  cd conf/bitnami/
+  392  pwd
+  393  ls
+  394  more httpd.conf 
+  395  ls
+  396  pwd
+  397  more bitnami.conf 
+  398  more bitnami-apps-prefix.conf
+  399  more bitnami-apps-vhosts.conf
+  400  ls
+  401  more le-redirect-wiki.healthylondon.org.conf
+  402  nano le-redirect-wiki.healthylondon.org.conf 
+  403  sudo nano le-redirect-wiki.healthylondon.org.conf 
+  404  history | grep restart
+  405  history | grep apache
+  406  sudo /opt/bitnami/ctlscript.sh restart apache
+  407  sudo /opt/bitnami/ctlscript.sh restart
+  408  sudo nano le-redirect-wiki.healthylondon.org.conf 
+  409  sudo /opt/bitnami/ctlscript.sh restart
+  410  sudo /opt/bitnami/ctlscript.sh restart apache
+  411  sudo nano httpd.conf 
+  412  sudo bitnami.conf
+  413  sudo nano bitnami.conf 
+  414  sudo /opt/bitnami/ctlscript.sh restart apache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but I can tell I&amp;rsquo;m not getting the full history as I don&amp;rsquo;t see any reference to letsencrypt and I was definitely running the following at some point:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;./letsencrypt-auto --apache --apache-server-root /opt/bitnami/apache2 --apache-challenge-location /opt/bitnami/apache2 --apache-handle-sites FALSE --apache-vhost-root /opt/bitnami/apache2/conf/bitnami -d &amp;lt;domain-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I had a poke around in the Apache config and saw differences that made me wonder if the new Bitnami stack had changed, or if I had just run a different certbot command this time around.  Https wasn&amp;rsquo;t working, but I saw the cert was from example.com, so I backed up the existing cert and key files and got the link command to work:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ sudo mv  /opt/bitnami/apache2/conf/server.crt /opt/bitnami/apache2/conf/server-original.crt
+$ sudo mv  /opt/bitnami/apache2/conf/server.key /opt/bitnami/apache2/conf/server-original.key
+$ sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/fullchain.pem /opt/bitnami/apache2/conf/server.crt
+$ sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/privkey.pem /opt/bitnami/apache2/conf/server.key
+$ sudo /opt/bitnami/ctlscript.sh restart apache
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and then it worked. So either I made it harder than it actually was last time, or something got easier, or I just found a different command that was easier to work with out of the box.  However the trick is now enforcing https and then making sure the VisualEditor can still work over https, but I think that will be for tomorrow&amp;rsquo;s blog &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Azure MediaWiki Stack Part 3</title>
+    <link rel="alternate" href="http://blog.url.com/2017/05/23/azure-mediawiki-stack-part3/"/>
+    <id>http://blog.url.com/2017/05/23/azure-mediawiki-stack-part3/</id>
+    <published>2017-05-23T01:00:00+01:00</published>
+    <updated>2017-07-18T22:01:22+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="mediawiki" src="/images/MediaWiki.svg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ahhh, so the rebuilding the mediawiki stack on azure leaks over three days and I suspect it may be more.  Yesterday I got stuck trying to open a port for the visual editor and I suspect there will be other blocks, but that&amp;rsquo;s why I&amp;rsquo;m forcing myself through this to have it all documented so it&amp;rsquo;s not a pain when we are really short on time.  I also got distracted playing with inkscape this morning, but that&amp;rsquo;s another story.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m not sure that I have time, but I couldn&amp;rsquo;t help checking to see if removing the security rule would prevent the VisualEditor from working, and unless there&amp;rsquo;s some kind of caching going on that I understand, it looks like the security rule really isn&amp;rsquo;t necessary.  I certainly suspected that, since it isn&amp;rsquo;t connected up to anything else in the system.  So in principle I can delete those security rules and that&amp;rsquo;s one less thing to maintain and organise.  Confusing, because we definitely need security rules like that to work with AWS.  Presumably we&amp;rsquo;d need them for some other kinds of configuration on Azure &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;So the next thing to set up is the SSL, which I remember as somewhat complicated AND there&amp;rsquo;s making sure that the Visual Editor continues to work with the SSL on.  There&amp;rsquo;s also the moderation component, the wikieditor, and the banner.  Also I&amp;rsquo;d like to see if there&amp;rsquo;s some way to run MediaWiki&amp;rsquo;s cucumber tests&lt;/p&gt;
+
+&lt;p&gt;Although I see from the manual that we musn&amp;rsquo;t run the unit tests on a production wiki: https://www.mediawiki.org/wiki/Manual:PHP&lt;em&gt;unit&lt;/em&gt;testing/Running&lt;em&gt;the&lt;/em&gt;unit&lt;em&gt;tests  Perhaps the browser testing is safer: https://www.mediawiki.org/wiki/Browser&lt;/em&gt;testing but it looks like these might also make a mess of a production system.&lt;/p&gt;
+
+&lt;p&gt;Hmm, well maybe I go for the low hanging fruit first.  Let&amp;rsquo;s install the WikiEditor in LocalSettings.php:&lt;/p&gt;
+&lt;pre class="highlight php"&gt;&lt;code&gt;## Load WikiEditor
+
+wfLoadExtension('WikiEditor');
+
+# Enables use of WikiEditor by default but still allows users to disable it in preferences
+$wgDefaultUserOptions['usebetatoolbar'] = 1;
+
+# Enables link and table wizards by default but still allows users to disable them in preferences
+$wgDefaultUserOptions['usebetatoolbar-cgd'] = 1;
+
+# Displays the Preview and Changes tabs
+$wgDefaultUserOptions['wikieditor-preview'] = 1;
+
+# Displays the Publish and Cancel buttons on the top right side
+$wgDefaultUserOptions['wikieditor-publish'] = 1;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and the Moderation extension:&lt;/p&gt;
+&lt;pre class="highlight php"&gt;&lt;code&gt;## Moderation Extension
+
+wfLoadExtension( 'Moderation' );
+
+$wgGroupPermissions['sysop']['moderation'] = true; # Allow sysops to use Special:Moderation
+$wgGroupPermissions['sysop']['skip-moderation'] = true; # Allow sysops to skip moderation
+$wgGroupPermissions['bot']['skip-moderation'] = true; # Allow bots to skip moderation
+$wgGroupPermissions['checkuser']['moderation-checkuser'] = false; # Don't let checkusers see IPs on Special:Moderation
+
+$wgAddGroups['sysop'][] = 'automoderated'; # Allow sysops to assign "automoderated" flag
+$wgRemoveGroups['sysop'][] = 'automoderated'; # Allow sysops to remove "automoderated" flag
+
+$wgModerationNotificationEnable = true;
+$wgModerationNotificationNewOnly = false;
+$wgModerationEmail = $wgEmergencyContact;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which requires the code to be checked out of git into a &lt;code&gt;Moderation&lt;/code&gt; directory in the &lt;code&gt;extensions&lt;/code&gt; folder which also requires installing git:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ sudo apt-get install git
+$ git clone https://github.com/edwardspec/mediawiki-moderation
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;All the instructions for that are here: https://www.mediawiki.org/wiki/Extension:Moderation#Installation but note that we also need to ensure that the root git directory gets renamed from &lt;code&gt;mediawiki-moderation&lt;/code&gt; to &lt;code&gt;Moderation&lt;/code&gt;.  I can see that&amp;rsquo;s all working as expected on IE11 and also that the maintainer of the Moderation extension has pushed my suggested change to the moderation banner into the master branch of the Moderation GitHub repo.&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s also the CSS to set up, so that we can have our banner throughtout&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;## Allow Common.css to load on restricted pages 
+
+$wgAllowSiteCSSOnRestrictedPages = true;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and then drop the following into the Mediawiki:Common.css page:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/* CSS placed here will be applied to all skins */
+
+#mw-head{
+    margin-top:123px;
+}
+.mw-wiki-logo{
+    background-image: none;
+}
+
+#hlp-banner {
+   /* background:url('https://www.dropbox.com/s/2yokso0fkd3bivt/Screenshot%202017-05-08%2010.40.18.png?dl=1'); */
+    width:100%;
+    min-height:123px;
+}
+
+#block-mhl-hlp-mhl-hlp-logo {
+    background: #003992;
+}
+
+#block-mhl-hlp-mhl-hlp-logo .content {
+    position: relative;
+}
+
+#block-mhl-hlp-mhl-hlp-logo .block-inner {
+    margin: auto;
+    max-width: 1200px;
+    text-align: right;
+}
+
+#block-mhl-hlp-mhl-hlp-logo .content:before {
+    background: url(https://www.healthylondon.org/sites/all/themes/nhslondon/assets/img/hlp-people2.png) left bottom no-repeat;
+    background-size: 135px 115px;
+    float: left;
+}
+
+#block-mhl-hlp-mhl-hlp-logo .content:after {
+    background: url(https://www.healthylondon.org/sites/all/themes/nhslondon/assets/img/hlp-people1.png) right bottom no-repeat;
+    background-size: 130px 115px;
+    float: right;
+}
+
+#block-mhl-hlp-mhl-hlp-logo .content:before, #block-mhl-hlp-mhl-hlp-logo .content:after {
+    content: '';
+    display: inline-block;
+    height: 120px;
+    margin-top: 5px;
+    width: 140px;
+}
+
+@media (max-width: 767px) { 
+    #block-mhl-hlp-mhl-hlp-logo img {
+      width: 220px;
+    }
+}
+
+@media (max-width: 767px) {
+    #block-mhl-hlp-mhl-hlp-logo .content:after, #block-mhl-hlp-mhl-hlp-logo .content:before {
+        display: none;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If I recall I made some edits to the Vector template to get the HLP banner in there.  Here&amp;rsquo;s the diff of before and after:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;97,106d96
+&amp;lt;       &amp;lt;div id="hlp-banner"&amp;gt;
+&amp;lt;                   &amp;lt;div id="block-mhl-hlp-mhl-hlp-logo" class="block block-mhl-hlp"&amp;gt;
+&amp;lt;                     &amp;lt;div class="block-inner"&amp;gt;
+&amp;lt;                       &amp;lt;div class="content"&amp;gt;
+&amp;lt;                         &amp;lt;a href="https://www.healthylondon.org/" class=""&amp;gt;&amp;lt;img typeof="foaf:Image" src="https://www.healthylondon.org/sites/default/files/styles/large/public/healthlondon-logo-ncs1_0.png" alt=""&amp;gt;&amp;lt;/a&amp;gt;
+&amp;lt;                       &amp;lt;/div&amp;gt;
+&amp;lt;                     &amp;lt;/div&amp;gt;
+&amp;lt;                   &amp;lt;/div&amp;gt;
+&amp;lt;                 &amp;lt;/div&amp;gt;
+&amp;lt;                 &amp;lt;div id="hlp-wrapper"&amp;gt;
+248c238
+&amp;lt;             &amp;lt;/div&amp;gt;
+---
+&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which is enough to produce our nice resizable banner.  Okay time to get that SSL in there.  I had thought this was going to be a real pain on Azure, but actually it&amp;rsquo;s all pretty much Apache configuration.  Maybe I get into that tomorrow, as I suspect there will be some sticking points &amp;hellip; I&amp;rsquo;ve posted some notes about how I did it last time:&lt;/p&gt;
+
+&lt;p&gt;https://community.bitnami.com/t/installing-certbot-for-lets-encrypt-ssl-certificate/46431/2&lt;/p&gt;
+
+&lt;p&gt;and I need to follow up with the developer there.  Let&amp;rsquo;s try for that in part 4 and if I&amp;rsquo;m lucky I&amp;rsquo;ll also get to testing the backup stuff &amp;hellip; and also test importing all the data from the production system into the backup system.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Azure MediaWiki Stack Part 2</title>
+    <link rel="alternate" href="http://blog.url.com/2017/05/22/azure-mediawiki-stack-part2/"/>
+    <id>http://blog.url.com/2017/05/22/azure-mediawiki-stack-part2/</id>
+    <published>2017-05-22T01:00:00+01:00</published>
+    <updated>2017-07-18T22:01:08+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="mediawiki" src="/images/MediaWiki.svg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I wasn&amp;rsquo;t able to complete a re-run of the NHS HLP MediaWiki installation due partly to getting distracted by other work, but also because the Parsoid service (needed by the VisualEditor) wouldn&amp;rsquo;t install.  I was following the instructions in https://www.mediawiki.org/wiki/Parsoid/Setup but getting &amp;ldquo;E: Unable to locate package parsoid&amp;rdquo;.  I thrashed around, got distracted and then at the end of the day the command just worked.  I had a similar experience with letsencrypt on AsyncVoter, where the letsencrypt server was down, so maybe that was the issue with installing Parsoid, that the wikimedia releases site was down.  Anyway, next step is to configure the Parsoid service, which involved editing &lt;code&gt;/etc/mediawiki/parsoid/config.yaml&lt;/code&gt; and updating the uri, which defaults to &lt;code&gt;http://localhost/w/api.php&lt;/code&gt;.  After various trial and error I&amp;rsquo;d learnt from the previous install that we needed to drop the w, like so:  &lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt; # Configure Parsoid to point to your MediaWiki instances.
+        mwApis:
+        - # This is the only required parameter,
+          # the URL of you MediaWiki API endpoint.
+          uri: 'http://hlp-wiki-develop.agileventures.org/api.php'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Noting that we need to use &lt;code&gt;sudo&lt;/code&gt; to make adjustments to this file.  Then we&amp;rsquo;re supposed to adjust settings.js, but I could never find that file and so created it from scratch in the same directory like so:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="nx"&gt;parsoidConfig&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setMwApi&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'http://hlp-wiki-develop.agileventures.org/api.php'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'localhost'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;domain&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'localhost'&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The instructions make it look like &lt;code&gt;prefix&lt;/code&gt; and &lt;code&gt;domain&lt;/code&gt; need updating, but the above incantation with &amp;lsquo;localhost&amp;rsquo; was the one that worked for me last time around.  Looking at the live system I wonder if the Parsoid service needs to run over the live domain (&amp;#39;wiki.healthylondon.org&amp;rsquo;) or if it could go direct to &lt;code&gt;bitnami-mediawiki-8a65.cloudapp.net&lt;/code&gt;?  Maybe, maybe not, and could other configuration tweaks make the VisualEditor load a bit faster?&lt;/p&gt;
+
+&lt;p&gt;Anyhow, to get the basic VisualEditor up and running we probably need to restart the Parsoid service and add some configuration to the mediawiki instance to know where to talk to the Parsoid service.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="gp"&gt;$ &lt;/span&gt;sudo service parsoid restart
+ &lt;span class="k"&gt;*&lt;/span&gt; Restarting Parsoid HTTP service parsoid
+Started Parsoid server on port 8142
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;brings the Parsoid server back up on port 8142, and then the following in LocalSettings.php connects the two up:&lt;/p&gt;
+&lt;pre class="highlight php"&gt;&lt;code&gt;## Parsoid Config for Visual Editor
+
+$wgVirtualRestConfig['modules']['parsoid'] = array(
+        // URL to the Parsoid instance
+        // Use port 8142 if you use the Debian package
+        'url' =&amp;gt; 'http://hlp-wiki-develop.agileventures.org:8142',
+        // Parsoid "domain", see below (optional)
+        'domain' =&amp;gt; 'localhost',
+        // Parsoid "prefix", see below (optional)
+        'prefix' =&amp;gt; 'localhost'
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In principle this could all work, but we get errors like this when we try to use the VisualEditor:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="could not find server error" src="https://www.dropbox.com/s/xr1198z72jforf0/Screenshot%202017-05-22%2010.21.31.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;And I think the issue here is that the client JavaScript in Mediawiki is trying to contact back to the server on port 8142, which isn&amp;rsquo;t open on the Azure box, so we need to make a change there.  This involves adding a &amp;ldquo;Network Security Group&amp;rdquo;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="adding a &amp;quot;Network Security Group&amp;quot;" src="https://www.dropbox.com/s/w9sb7stbq88wams/Screenshot%202017-05-22%2010.26.37.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and then an &amp;ldquo;inbound security rule&amp;rdquo;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="an &amp;quot;inbound security rule&amp;quot;" src="https://www.dropbox.com/s/59o0krege5temk9/Screenshot%202017-05-22%2010.28.20.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;but then we still get errors like:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="timeout reached" src="https://www.dropbox.com/s/l810011weec2vef/Screenshot%202017-05-22%2010.34.32.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;in which case the Parsoid troubleshooting documentation is useful:&lt;/p&gt;
+
+&lt;p&gt;https://www.mediawiki.org/wiki/Parsoid/Troubleshooting#Configuration&lt;/p&gt;
+
+&lt;p&gt;Although I was stuck here for a while, but I think it comes back to the problem that it doesn&amp;rsquo;t involve adding a security group - at least the way I got it to work last time (which took a while to figure out) was to add an extra endpoint rule to the virtual machine.  Although maybe the security group IS needed.  Blurgh, some experimentation needed here, and this whole process of documenting the setup seems to be taking just as long as figuring out the setup in the first place &amp;hellip;!&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="adding an endpoint to the virtual machine on Azure" src="https://www.dropbox.com/s/ghzx10bnhbq7nbm/Screenshot%202017-05-22%2011.04.09.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ah, so it looks like we need BOTH the endpoint AND the security group; although I&amp;rsquo;m not 100% on that, and I think I&amp;rsquo;m out of time to really determine that &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Bayesian Decision Making</title>
     <link rel="alternate" href="http://blog.url.com/2017/05/19/bayesian-decision-making-blog/"/>
     <id>http://blog.url.com/2017/05/19/bayesian-decision-making-blog/</id>
@@ -116,213 +523,6 @@
 &lt;p&gt;And there&amp;rsquo;s a slew of other things.  I can&amp;rsquo;t get everything done, and each thing I have mentioned above only includes guesses of the time it takes and what the potential benefits will be.  It wouldn&amp;rsquo;t be such a big deal if I wasn&amp;rsquo;t relying on opening the right doors to bring in enough money to feed my kids.  &lt;/p&gt;
 
 &lt;p&gt;I kicked off the WebSiteOne deployment in the background as that requires a few background steps for CI to run on each of the develop, staging and production instances.  The Bayesian approach calls for prior probabilities to be assessed.  The likelihood that each thing was successful in the past, to help weigh which item to choose &amp;hellip; if I was calm I&amp;rsquo;d go and look up the formula, but I&amp;rsquo;m just too stressed at the moment.  I feel like the critical thing is to get the case-studies of our paid projects written up.  Even if they don&amp;rsquo;t unlock fudning for this Myanmar project it&amp;rsquo;s the kind of thing that&amp;rsquo;s going to be useful to trot out when people ask, and the write up should contribute to one of my highest priority items, which is a plan for the AgileVentures charity to regularly pay for my family and I to eat.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Full Monty</title>
-    <link rel="alternate" href="http://blog.url.com/2017/05/17/full-monty/"/>
-    <id>http://blog.url.com/2017/05/17/full-monty/</id>
-    <published>2017-05-17T01:00:00+01:00</published>
-    <updated>2017-07-13T20:53:38+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="full monty" src="/images/full_monty.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I&amp;rsquo;d made a plan for this morning.  I was going to quickly check if we had progress on our IE11 VisualEditor/Moderation problems, get the final report written up for the NHS folks, and then try to get into rebuilding our complete wiki stack on a staging instance to have it all documented and somewhere to test changes before they go into production.  I&amp;rsquo;m still hoping that&amp;rsquo;ll all get done.  There was an &lt;a href="https://github.com/edwardspec/mediawiki-moderation/issues/9#issuecomment-301893840"&gt;update on our IE11 VisualEditor/Moderation problem&lt;/a&gt; which seemed like it could be the final fix, so I pushed it into production to find it was a partial fix.  The moderation messages now shows up on IE11, but the visual editor still wouldn&amp;rsquo;t fully load, argh!&lt;/p&gt;
-
-&lt;p&gt;It took 30 minutes or so of fiddling on my Windows machine to get all the errors recorded and noted in the GitHub issue, and now I&amp;rsquo;m finally at my blog, and the plan basically seems sound.  It&amp;rsquo;s frustrating that it&amp;rsquo;s not the &amp;lsquo;final&amp;rsquo; fix, because if the VisualEditor had just loaded, then that would have been our last major technical hurdle out of the way, and it would have made it easy to make decisions about which editor to default to.  Actually for all the effort to get the moderation messages to show up on IE11, it&amp;rsquo;s clear from the lastest round of usability-testing/training at the NHS, that even when the moderation message is present, users just don&amp;rsquo;t read it.  I&amp;rsquo;m guessing that the addition of some kind of icon might be helpful and I opened an &lt;a href="https://github.com/edwardspec/mediawiki-moderation/issues/12"&gt;issue on the moderation extension&lt;/a&gt; to discuss that.&lt;/p&gt;
-
-&lt;p&gt;The final NHS training session went well yesterday, and it turned out that part of this was because the trainee was using Chrome.  Still it&amp;rsquo;s clear to me that most users will just think their edit is lost, or the system is somehow broken, because just going in to edit they won&amp;rsquo;t have any mental model of the moderation process and they won&amp;rsquo;t read the moderation message, which has a green tick next to it and so they will just assume their edit has been saved.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="popup" src="https://www.dropbox.com/s/6o6w0elykokw0zh/Screenshot%202017-05-11%2017.46.02.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;What continues to shock me is that more people aren&amp;rsquo;t more interested in these usability issues.  Maybe being in a community that is all about learning to code, learning to be Agile is the wrong place.  There was a point a few years ago where I was trying to help start a community around Scott Klemmer&amp;rsquo;s HCI usability course.  There clearly are people really interested in usability, but so often the coding conversations go towards code beauty, or database consistency, and those critical steps of building something that people can fit into their existing workflow and derive value from get lost in the cracks.  Maybe I&amp;rsquo;m delusional but we all seem to be labouring under the assumption that other people basically understand what we understand.  I&amp;rsquo;m often going on about how that is such a hard assumption to break, so I guess I shouldn&amp;rsquo;t be surprised.&lt;/p&gt;
-
-&lt;p&gt;What is exciting is the enthusiasm for design sprints that we&amp;rsquo;re starting to have in the AV community.  I&amp;rsquo;m starting to see the design sprint as a tool for lasering in on breaking down those assumptions.  Let&amp;rsquo;s see.  Right, a little less conversation, a little more action; sort of.  Do my Email/Slack check, get final draft of final report for NHS and get that staging stack set up before I end up breaking something on the production system.  Again, why aren&amp;rsquo;t more of the community interested in the devops for this paid NHS project?  It&amp;rsquo;s the usability and the devops that&amp;rsquo;s key. Can&amp;rsquo;t deliver the system in the fashion intended and fit it into the user&amp;rsquo;s daily workflow and you might as well be throwing all your code in a dumpster.  Great if you&amp;rsquo;re into abstract art - insane if your intention is to help people or change anything.  Maybe I&amp;rsquo;m failing to communicate the value, or perhaps it&amp;rsquo;s just that people won&amp;rsquo;t want to get more involved until we&amp;rsquo;re paying them bigger bucks &amp;hellip;?  In the meantime I&amp;rsquo;m going to keep focusing on what I call the &amp;ldquo;Full Monty&amp;rdquo; - trying to build things that people can fit into their working life to get things done more efficiently.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Debugging MediaWiki</title>
-    <link rel="alternate" href="http://blog.url.com/2017/05/16/debugging-mediawiki/"/>
-    <id>http://blog.url.com/2017/05/16/debugging-mediawiki/</id>
-    <published>2017-05-16T01:00:00+01:00</published>
-    <updated>2017-07-12T21:01:40+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="mediawiki" src="/images/MediaWiki.svg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Yesterday I finally got a clear shot at resolving some of our MediaWiki technical issues.  A key one was users getting loggged out after they create new accounts.  I had had some feedback from MediaWiki support that our cookies weren&amp;rsquo;t being set correctly on production.  So I created a new account for mediawiki on our staging box.  It created the following cookies:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="cookies created for new user account" src="https://www.dropbox.com/s/f73wmvq1g31uh6o/Screenshot%202017-05-15%2010.56.38.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Three of these were reported created on the main wiki: cpPosTime, UseDC, UseCDNCache. I navigated to the main page and was logged out, although now there was just one cookie:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="single cookie after redirect" src="https://www.dropbox.com/s/mha525jx20y2yow/Screenshot%202017-05-15%2011.00.21.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Navigating around I stayed logged out, and then tried logging on, which worked and generated a couple more cookies:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="more cookies after login" src="https://www.dropbox.com/s/h68yx9n2tz9jpv5/Screenshot%202017-05-15%2011.01.59.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So the fact that this was happening on our staging box made it seem like this was a Bitnami MediaWiki issue, or possibly something to do with the extensions we had configured on both.  So far the only extensions configured on the staging site are the moderation extension and the wikieditor.  I could try disabling these two to see if we get the same effect, or I could even try a completely fresh Bitnami MediaWiki deploy &amp;hellip; but faster might be to search the Bitnami forums.  A few searches didn&amp;rsquo;t reveal anything:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://community.bitnami.com/search?q=mediawiki%20logged%20out"&gt;https://community.bitnami.com/search?q=mediawiki%20logged%20out&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://community.bitnami.com/search?q=mediawiki%20create%20account"&gt;https://community.bitnami.com/search?q=mediawiki%20create%20account&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://community.bitnami.com/search?q=mediawiki%20cookies"&gt;https://community.bitnami.com/search?q=mediawiki%20cookies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://community.bitnami.com/search?q=mediawiki_session"&gt;https://community.bitnami.com/search?q=mediawiki_session&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I was about to post to the Bitnami forum, when I tried disabling the wikieditor and the Moderation extension, and then create account maintained a login.  I re-enabled the wikieditor appearing to confirm that the Moderation extension was the culprit.  I did a few extra tests and opened a &lt;a href="https://github.com/edwardspec/mediawiki-moderation/issues/11"&gt;ticket on the mediawiki-moderation github repo&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;That kicked off a variety of interactions with the Moderation extension maintainer over the course of the day.  First up they asked me to try out a fix involving disabling a php function called &lt;code&gt;onLocalUserCreated&lt;/code&gt; in &lt;code&gt;hooks/ModerationPreload.php&lt;/code&gt;.  That fixed the issue and the maintainer almost immediately released a fix, which I pulled into staging which now worked fine. The master branch of the extension now included that fix, and another fix that was supposed to resolve another key issue we were having; the failure of the moderation notice to display.  The set up we have is the Moderation extension sitting in an extensions directory within MediaWiki on the Azure/Bitnami instance, and we got it there via git.  So upgrading it involves just pulling down the latest code from GitHub.  This makes me a little nervous.  I&amp;rsquo;m more comfortable with upgrading libraries via something like rubygems and having a full test suite to run to check that everything is still working.&lt;/p&gt;
-
-&lt;p&gt;Actually this is not so different from what I do with the autograders on AWS, where we update from git; although there at least we have staging and master branches.  I see that we do have some tests associated with both MediaWiki and the Moderation extension.  I&amp;rsquo;d like to have these running, ideally in CI.  At the moment everything is relying on time-consuming manual tests.  Argh! I&amp;rsquo;d love to have space to re-create a box from scratch, checking what tests we can run on the way and also do a step by step performance review.&lt;/p&gt;
-
-&lt;p&gt;For the moment I upgraded the Moderation extension via git and things seemed to be fine.  Two important bugs fixed, but then I noticed that although the Moderation notice was showing up on staging, it wasn&amp;rsquo;t there on production where we had SSL and the VisualEditor installed.  I added notes to the GitHub issue, and also reviewed all my comments to the VisualEditor team.  Nothing back on the IE, iPad and usability issues there and it had been a week.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.mediawiki.org/wiki/Topic:Tqcoy1d9m5sbtf1e"&gt;Asking about iPad&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.mediawiki.org/wiki/Topic:Tql1dw7a2muih6ma"&gt;Usability&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.mediawiki.org/wiki/Topic:Tqcpj4g11oe3b2ht"&gt;graceful failures on IE&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I&amp;rsquo;ve still had no responses there, but I managed to track down the VisualEditor team on IRC, where I got some great feedback.  Looking at our production site MatmaRex was able to identify the Moderation extension as the culprit for the IE fails, and it looked like several related issues could be solved in one go if the Moderation extension could be adjusted to work with VisualEditor and IE11 in combination.  I got this input on trying to fail gracefully:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;19:05] &lt;tansaku&gt; on a more general note, is there a way to have things fail more gracefully? so that if something like this happens the editor switches over to basic?
-[19:07] &amp;lt;+MatmaRex&amp;gt; tansaku: no. if you have a syntax error in your script (and effectively, that&amp;rsquo;s how IE11 treats this), the whole MediaWiki script loading system goes out of whack. we really assume you don&amp;rsquo;t have syntax errors.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I also got a lead about how to work better on mobile:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;19:15] &amp;lt;+MatmaRex&amp;gt; tansaku: Wikimedia wikis use https://www.mediawiki.org/wiki/Extension:MobileFrontend to display a different skin for mobile views, and it has slightly different VisualEditor integration than normal&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So that&amp;rsquo;s something we can look at later.  Right now we&amp;rsquo;re stuck on getting VisualEditor and the Moderation extension to play well on IE11.  The moderator is telling me that IE11 doesn&amp;rsquo;t support the JavaScript &lt;code&gt;for ( A of B )&lt;/code&gt; syntax and more importantly that it doesn&amp;rsquo;t support &lt;code&gt;FormData.entries()&lt;/code&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;This looks bad. In IE11, there is no way to read the contents of FormData at all.
-https://msdn.microsoft.com/library/Hh772723#methods&lt;/p&gt;
-
-&lt;p&gt;In the current implementation, reading FormData is essential for ajaxhook (VisualEditor support in Moderation) to work. Need to think of some way to workaround that.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;but they&amp;rsquo;ve had an idea:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;What we currently get from FormData, can be obtained by wrapping around mw.Api.prototype.api(). This should work in IE.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So the maintainer is investigating that, and in the meantime I guess I&amp;rsquo;ll try and complete adding our training materials to the wiki.  I think I also found the &lt;a href="https://www.mediawiki.org/wiki/Extension:VisualEditor#Complete_list_of_configuration_options"&gt;settings&lt;/a&gt; to remove some of the annoying VisualEditor popups in.  Back to the grindstone &amp;hellip; at least I&amp;rsquo;ve managed to document some of the process of debugging a MediaWiki bug.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Never Enough</title>
-    <link rel="alternate" href="http://blog.url.com/2017/05/15/never-enough/"/>
-    <id>http://blog.url.com/2017/05/15/never-enough/</id>
-    <published>2017-05-15T01:00:00+01:00</published>
-    <updated>2017-07-11T22:38:29+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="never enough" src="/images/never_enough.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;However hard I work, it never seems like I&amp;rsquo;ve done enough.  We got the NHS Social Prescribing wiki &amp;ldquo;live&amp;rdquo; on Friday, and I also managed to do a round of updates and fixes on the MOOC.  Superficially I should be pleased at having gotten all that &amp;ldquo;done&amp;rdquo;, but there are a set of usability issues on the wiki that are bothering me.  Maybe the ultimate solution is the philosophical one of not being attached to any future outcome so that one can enjoy every moments inner peace and stillness.  More often that not I am agonizing about the things not done, or whether the things I am doing are having the effects I intend, e.g. blogging supposedly centering me in the morning, but potentially being wasteful navel gazing &amp;hellip; :-)&lt;/p&gt;
-
-&lt;p&gt;So let&amp;rsquo;s put this blog to work, and look at the issues that are bothering me about the wiki.  I had been hoping to work on them on Friday morning, but time seemed to get sucked into getting them into a trello board:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="HLP wiki trello board" src="https://www.dropbox.com/s/4nqawtimebrqe43/Screenshot%202017-05-15%2009.53.52.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and then in a Skype call with the new HLP change manager.  That in itself was a major breakthrough and involved getting one of the NHS tech staff to provide a separate laptop with Skype enabled.  Huge relief as I could now show the change manager various aspects of the wiki operation without having to commute across town.  As we were Skyping, the updated version of the terms &amp;amp; conditions and privacy policy came in, and by the time I&amp;rsquo;d gotten that approved by the communications manager, I added that to the website, sorted out some very basic help guides etc. I&amp;rsquo;d used up my allotted time in the day for work on the wiki.  On reflection I think it was the right focus.  While part of me yearned to be working on the technical issues, having the correct legal cover was crucial.  Also, connecting with the change manager was unblocking them to finish putting all the content from the HLP PDF document into the wiki, and the first (and possibly only) experience that most people were likely to have of the wiki were going to be the content and the viewable portions.  One thing that was clear from the previous week of testing was that we needed a lot more content in there for this to be of any use to anyone.&lt;/p&gt;
-
-&lt;p&gt;So going back to the Trello board I could move the legal work into the &amp;ldquo;completed&amp;rdquo; column.  Another &amp;lsquo;view&amp;rsquo; item I had created was about improving the landing page.  I&amp;rsquo;d put two items in that:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Linking all the key topics&lt;/li&gt;
-&lt;li&gt;Making all the useful links at the bottom go to our own internal pages&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;The change manager had been able to do the former after I&amp;rsquo;d reviewed the process of making links with them.  There were however another set relating to Self-Care that would be linked to pages created from the second HLP PDF document, but that hadn&amp;rsquo;t been signed off by the &amp;ldquo;decider&amp;rdquo; so I&amp;rsquo;m stuck here not being able to click the relevant checkbox.  Pedant?  I know from Friday&amp;rsquo;s experience that I could easily burn a lot of time just editing things around, so I decided to leave this ticket &amp;ldquo;in progress&amp;rdquo;.  It&amp;rsquo;s odd because there are lots of simple editing tasks, e.g. creating multiple new pages, that are relatively straightforward for me, particularly with my multi-monitor setup, that are quite time consuming for novice users.  At the same time, there are lots of more technical issues that those novice users can&amp;rsquo;t make progress on, so I must drag myself over to the more serious technical issues. &lt;/p&gt;
-
-&lt;p&gt;One of the particularly niggling ones is that creating an account seems to log folks in temporarily, but then they get logged out when they move off the page.  I had opened a &lt;a href="https://trello.com/invite/b/5J4lZIaT/53a4831a8f2f8dc0de936756c66e10d3/hlp-wiki"&gt;support ticket&lt;/a&gt; on the main mediawiki site about this, and got a response:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;definitively it&amp;rsquo;s not something I can reproduce on a local instance&lt;/p&gt;
-
-&lt;p&gt;On your wiki, after creating account, I see those cookies being set: cpPosTime, UseDC, UseCDNCache&lt;/p&gt;
-
-&lt;p&gt;On next page I&amp;rsquo;m logged out, and when logging in again, those cookies are being set: bitnami&lt;em&gt;mediawiki&lt;/em&gt;session, bitnami&lt;em&gt;mediawikiUserID, bitnami&lt;/em&gt;mediawikiUserName&lt;/p&gt;
-
-&lt;p&gt;However, on a local 1.28, I get all cookies set after creating the account. the _session cookie is set when loading the createaccount page, but then replaced with another after the account gets created. However it doesn&amp;rsquo;t get replaced on your wiki on creating an account, and I have no idea why&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I&amp;rsquo;m so tempted to dive in here.  My first action might be to replicate what the MediaWiki person is indicating.  I&amp;rsquo;m also tempted to do the complete setup and install of the whole system on a clean machine.  Although that smells slightly of procrastinating.  I could just start checking the behaviour on our staging instance that doesn&amp;rsquo;t have the visual editor and SSL as a way to attack this problem faster, but then again I have two more &amp;ldquo;in progress&amp;rdquo; tickets.  One is the side navigtation issue which I&amp;rsquo;ve got done, so stick that in completed.  However, the &amp;ldquo;Getting Started&amp;rdquo; and &amp;ldquo;Help&amp;rdquo; pages that I&amp;rsquo;ve created are still just basic stubs, and it has to be a priority to fill those out further &amp;hellip; and there might be other things to add to that side navigation.  Close the ticket, make a new one on help &amp;hellip; wait - I have a ticket on making the help pages and uploading my training materials there &amp;hellip; I added another ticket on the &amp;ldquo;Getting Started&amp;rdquo; page, and spent a few moments moving that into the backlog and moving more important items to the top of the backlog; closing out some other tickets that I&amp;rsquo;ve dealt with.&lt;/p&gt;
-
-&lt;p&gt;This brings me to the crux of my stalled decision-making process.  Filling out the help pages with my training materials feels like super high priority, but the training materials include the sign up process, which has this niggling bug, which if I can fix will change the way we document the site.  To cut this Gordian knot I think I&amp;rsquo;ll upload the training materials, documenting the current issue &amp;hellip; using that as a way to explore the issue, in the way that I sometimes work blog - so wiki work if you will.   I&amp;rsquo;ll hedge against being unable to fix the issue by documenting it.  In the same process I&amp;rsquo;ll be getting wiki usage documentation up.  Two birds, one stone?  Although I might be tempted just to check if we have the same issue on our staging wiki first &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Okay, so I have a plan, and the Trello board is updated.  I have a niggling doubt that I haven&amp;rsquo;t reviewed all the meetings from last week and that I&amp;rsquo;m missing some other critical issues that need fixing.  Other annoying ones that I do have in the Trello &amp;ldquo;icebox&amp;rdquo; include:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Create pages defaults to the basic editor which many find confusing&lt;/li&gt;
-&lt;li&gt;Moderation notices fail in some cases&lt;/li&gt;
-&lt;li&gt;The visual editor doesn&amp;rsquo;t fail gracefully&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;There is another knot in that if we can&amp;rsquo;t rely on the visual editor failing gracefully then it might not be such a good idea to make it the default for create pages &amp;hellip;  Anyway.  One knot at a time.  Plan is:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Get coffee&lt;/li&gt;
-&lt;li&gt;Work on first knot&lt;/li&gt;
-&lt;li&gt;Review&lt;/li&gt;
-&lt;li&gt;Work on second knot&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I&amp;rsquo;m sure once I&amp;rsquo;ve worked hard through these knots it will be more than enough :-) See you tomorrow :-) &lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Hard Launch</title>
-    <link rel="alternate" href="http://blog.url.com/2017/05/12/hard-launch/"/>
-    <id>http://blog.url.com/2017/05/12/hard-launch/</id>
-    <published>2017-05-12T01:00:00+01:00</published>
-    <updated>2017-07-10T21:54:43+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="launch" src="/images/launch.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So it&amp;rsquo;s May 12th, the hard launch date for the wiki.  We talked about a soft launch on May 4th, and we had the basic system up for then.  The hard launch is now to have everything in place.  I&amp;rsquo;ve spent the week getting usability feedback from different stakeholders across London and now we&amp;rsquo;ve got to knuckle down and make sure everything is in place.  My personal action plan document has sprouted a whole section of stuff for the wiki:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;[ ] wiki launch 
-
-&lt;ul&gt;
-&lt;li&gt;[ ] adding t&amp;amp;c, privacy policy into the system &lt;/li&gt;
-&lt;li&gt;[ ] moderation notification to more than one user&lt;/li&gt;
-&lt;li&gt;[ ] usability issues&lt;/li&gt;
-&lt;li&gt;[ ] default to visual editor on creating pages (or wikieditor?)&lt;/li&gt;
-&lt;li&gt;[x] save at bottom of page can be confusing in text editor &amp;ndash;&amp;gt;  use wikieditor&lt;/li&gt;
-&lt;li&gt;[ ] help pages - upload all my training materials &amp;hellip;&lt;/li&gt;
-&lt;li&gt;[ ] moderation notice fails to load when using text editor?&lt;/li&gt;
-&lt;li&gt;[ ] can we make the search do an OR rather than an AND?&lt;/li&gt;
-&lt;li&gt;[ ] I&amp;rsquo;m worried the first page has far too much text &amp;hellip;&lt;/li&gt;
-&lt;li&gt;[ ] spaces on end of email address causing problems&lt;/li&gt;
-&lt;li&gt;[ ] creating an account does not log you in, or even guide you to log in or lead you towards what to do next&lt;/li&gt;
-&lt;li&gt;[ ] hide the bitnami management corner element&lt;/li&gt;
-&lt;li&gt;[ ] help pages&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I&amp;rsquo;ve got open support tickets with various of these items.  I&amp;rsquo;d also like to be doing a full documentation of the entire wiki setup from scratch and practising recovery drills on another box, but it feels like I must focus the morning on triaging all the usability issues that came up this week and either fixing, working around or leaving as future work.  The danger is that any individual item could be dived in too deep, at the expense of getting a slew of other items sorted.  It&amp;rsquo;s maybe time to break out a Pivotal Tracker, or perhaps a Trello instance to start tracking everything that&amp;rsquo;s going on.  So I went ahead and did that.  Trello made more sense as I can&amp;rsquo;t immediately see us voting on the complexity of the issues (although maybe we should), and Waffle doesn&amp;rsquo;t make so much sense as we&amp;rsquo;re not tightly integrated with GitHub for this project:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="trello for hlp wiki" src="https://www.dropbox.com/s/e55gki5ir4aeq4o/Screenshot%202017-05-12%2010.30.23.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I made this Trello private to the team rather than public as this is a paid project, and we&amp;rsquo;ve got the double concern of our client sensitivity and also having some motivation for people to pay our Premium fees to get access to extra material.  I was also distracted from blogging, helping an HLP staff member sort out a table in one of the wiki pages.  Again the NHS firewall prevents us doing screenshare via Hangouts or Skype with anyone there, so a series of screenshots in Slack let me show the change manager what I had done, but I&amp;rsquo;m not confident that I&amp;rsquo;ve been able to transfer the skill of doing the task itself.&lt;/p&gt;
-
-&lt;p&gt;Anyhow, getting the Trello up has paid down my day&amp;rsquo;s anxiety debt a little.  There&amp;rsquo;s still lots to do, but at least I&amp;rsquo;ve got a better way of coordinating what we&amp;rsquo;re doing.  The frustrating thing here is that the budget is on a scale that has prevented me from financially incentivizing more Premium members to get involved.  This project is actually a perfect microcosm of all the issues that Agile is supposed to handle.  It just doesn&amp;rsquo;t have large tracts of programming activity.  Is that the fundamental mismatch here?  That I&amp;rsquo;m really interested in the problem solving and how the coding relates to project managment and delivering on client needs, when the majority of others are much more interested in just the code?&lt;/p&gt;
 </content>
   </entry>
 </feed>

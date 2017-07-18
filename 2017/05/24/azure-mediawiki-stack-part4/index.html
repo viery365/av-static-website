@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Azure MediaWiki Stack Part 4</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_05 x2017_05_24 x2017_05_24_azure-mediawiki-stack-part4 x2017_05_24_azure-mediawiki-stack-part4_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/05/24/azure-mediawiki-stack-part4/">Azure MediaWiki Stack Part 4</a></h2>
+        <h5 class='date'>24 May 2017</h5>
+    <p><img alt="mediawiki" src="/images/MediaWiki.svg" /></p>
+
+<p>Well I totally failed to get down to my blogging today, checking Slack and Email first.  And blogging this week has become a series on getting the Azure MediaWiki stack up, which arguably should be a single document &hellip; but then lots of people break complex things over multiple blogs.  It will need a lot of polishing back and forth as my stream of consciousness gets in the way of documenting things.  At least yesterday I managed to feel like I was making progress by getting the banner in there so that the cloned site looks like this:</p>
+
+<p><img alt="cloned site with banner" src="https://www.dropbox.com/s/cze89vat8f09xs5/Screenshot%202017-05-24%2009.50.00.png?dl=1" /></p>
+
+<p>So the remaining hurdle is just setting up SSL, which as I was saying I&rsquo;d partially documented in some comments in a post on the bitnami community:</p>
+
+<p>https://community.bitnami.com/t/installing-certbot-for-lets-encrypt-ssl-certificate/46431/2</p>
+
+<p>The original post points us to the bitnami documentation on using LetsEncrypt:</p>
+
+<p>https://docs.bitnami.com/aws/components/apache/#how-to-install-the-lets-encrypt-client</p>
+
+<p>Which walks us through installing something called certbot, during which I got/get the following error:</p>
+<pre class="highlight plaintext"><code>Failed to find executable apache2ctl in PATH: /opt/bitnami/sqlite/bin:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:/opt/bitnami/apache2/bin:/opt/bitnami/common/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+</code></pre>
+<p>and it was google searches for that error that lead me to the bitnami community post.  The post suggests the following fix:</p>
+<pre class="highlight plaintext"><code>sudo ln -s /opt/bitnami/apache2/bin/apachectl /usr/bin/apache2ctl
+</code></pre>
+<p>and that allowed me to generate a certificate:</p>
+<pre class="highlight plaintext"><code>bitnami@bitnami-mediawiki-74f7:/tmp/certbot$ ./certbot-auto certonly --webroot -w /opt/bitnami/apps/mediawiki/htdocs/ -d hlp-wiki-develop.agileventures.org
+Requesting root privileges to run certbot...
+  /home/bitnami/.local/share/letsencrypt/bin/letsencrypt certonly --webroot -w /opt/bitnami/apps/mediawiki/htdocs/ -d hlp-wiki-develop.agileventures.org
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Enter email address (used for urgent renewal and security notices) (Enter 'c' to
+cancel):hlpwikiadmin@agileventures.org
+
+-------------------------------------------------------------------------------
+Please read the Terms of Service at
+https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf. You must agree
+in order to register with the ACME server at
+https://acme-v01.api.letsencrypt.org/directory
+-------------------------------------------------------------------------------
+(A)gree/(C)ancel: A
+
+-------------------------------------------------------------------------------
+Would you be willing to share your email address with the Electronic Frontier
+Foundation, a founding partner of the Let's Encrypt project and the non-profit
+organization that develops Certbot? We'd like to send you email about EFF and
+our work to encrypt the web, protect its users and defend digital rights.
+-------------------------------------------------------------------------------
+(Y)es/(N)o: Y
+Obtaining a new certificate
+Performing the following challenges:
+http-01 challenge for hlp-wiki-develop.agileventures.org
+Using the webroot path /opt/bitnami/apps/mediawiki/htdocs for all unmatched domains.
+Waiting for verification...
+Cleaning up challenges
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at
+   /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/fullchain.pem.
+   Your cert will expire on 2017-08-22. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot-auto
+   again. To non-interactively renew *all* of your certificates, run
+   "certbot-auto renew"
+ - Your account credentials have been saved in your Certbot
+   configuration directory at /etc/letsencrypt. You should make a
+   secure backup of this folder now. This configuration directory will
+   also contain certificates and private keys obtained by Certbot so
+   making regular backups of this folder is ideal.
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+
+</code></pre>
+<p>which then needs to be installed in the Apache webserver according to the docs, but when I try the next step:</p>
+<pre class="highlight plaintext"><code>sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/fullchain.pem /opt/bitnami/apache2/conf/server.crt
+sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/privkey.pem /opt/bitnami/apache2/conf/server.key
+</code></pre>
+<p>I&rsquo;m told that the files already exist:</p>
+<pre class="highlight plaintext"><code>ln: failed to create symbolic link ‘/opt/bitnami/apache2/conf/server.key’: File exists
+</code></pre>
+<p>and so I start to wonder if I&rsquo;m following different instructions from last time.  I restarted the server</p>
+<pre class="highlight plaintext"><code>sudo /opt/bitnami/ctlscript.sh restart apache
+</code></pre>
+<p>but the https was not working.  My history from doing this the last time around shows me making various modifications to the Apache config</p>
+<pre class="highlight plaintext"><code>  379  nano httpd.conf 
+  380  ls
+  381  ls bitnami/
+  382  cd ..
+  383  ls
+  384  sudo mkdir sites-available
+  385  ls sites-enabled/
+  386  ls -la
+  387  chown bitnami sites-available/
+  388  sudo chown bitnami sites-available/
+  389  sudo chown bitnami sites-enabled
+  390  more conf/bitnami/bitnami.conf 
+  391  cd conf/bitnami/
+  392  pwd
+  393  ls
+  394  more httpd.conf 
+  395  ls
+  396  pwd
+  397  more bitnami.conf 
+  398  more bitnami-apps-prefix.conf
+  399  more bitnami-apps-vhosts.conf
+  400  ls
+  401  more le-redirect-wiki.healthylondon.org.conf
+  402  nano le-redirect-wiki.healthylondon.org.conf 
+  403  sudo nano le-redirect-wiki.healthylondon.org.conf 
+  404  history | grep restart
+  405  history | grep apache
+  406  sudo /opt/bitnami/ctlscript.sh restart apache
+  407  sudo /opt/bitnami/ctlscript.sh restart
+  408  sudo nano le-redirect-wiki.healthylondon.org.conf 
+  409  sudo /opt/bitnami/ctlscript.sh restart
+  410  sudo /opt/bitnami/ctlscript.sh restart apache
+  411  sudo nano httpd.conf 
+  412  sudo bitnami.conf
+  413  sudo nano bitnami.conf 
+  414  sudo /opt/bitnami/ctlscript.sh restart apache
+</code></pre>
+<p>but I can tell I&rsquo;m not getting the full history as I don&rsquo;t see any reference to letsencrypt and I was definitely running the following at some point:</p>
+<pre class="highlight plaintext"><code>./letsencrypt-auto --apache --apache-server-root /opt/bitnami/apache2 --apache-challenge-location /opt/bitnami/apache2 --apache-handle-sites FALSE --apache-vhost-root /opt/bitnami/apache2/conf/bitnami -d &lt;domain-name&gt;
+</code></pre>
+<p>I had a poke around in the Apache config and saw differences that made me wonder if the new Bitnami stack had changed, or if I had just run a different certbot command this time around.  Https wasn&rsquo;t working, but I saw the cert was from example.com, so I backed up the existing cert and key files and got the link command to work:</p>
+<pre class="highlight plaintext"><code>$ sudo mv  /opt/bitnami/apache2/conf/server.crt /opt/bitnami/apache2/conf/server-original.crt
+$ sudo mv  /opt/bitnami/apache2/conf/server.key /opt/bitnami/apache2/conf/server-original.key
+$ sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/fullchain.pem /opt/bitnami/apache2/conf/server.crt
+$ sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/privkey.pem /opt/bitnami/apache2/conf/server.key
+$ sudo /opt/bitnami/ctlscript.sh restart apache
+</code></pre>
+<p>and then it worked. So either I made it harder than it actually was last time, or something got easier, or I just found a different command that was easier to work with out of the box.  However the trick is now enforcing https and then making sure the VisualEditor can still work over https, but I think that will be for tomorrow&rsquo;s blog &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
