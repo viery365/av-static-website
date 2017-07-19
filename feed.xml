@@ -38,6 +38,28 @@
 </content>
   </entry>
   <entry>
+    <title>Year of Blogging</title>
+    <link rel="alternate" href="http://blog.url.com/2017/05/26/year-of-blogging/"/>
+    <id>http://blog.url.com/2017/05/26/year-of-blogging/</id>
+    <published>2017-05-26T01:00:00+01:00</published>
+    <updated>2017-07-19T22:06:03+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="blogging" src="/images/blog-i-am.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I think I&amp;rsquo;m coming up on a year of blogging.  I don&amp;rsquo;t actually know which was the day that I started blogging daily. I can see one that I posted on &lt;a href="http://linklens.blogspot.co.uk/2016/06/moving-beyond-toy-problems.html"&gt;June 20th 2016&lt;/a&gt;.  At the beginning I was posting in different locations each day.  But here&amp;rsquo;s another on &lt;a href="http://nonprofits.agileventures.org/2016/06/21/agile-approach-to-login-signup-problems/"&gt;June 21st 2016&lt;/a&gt; so although I did blog on &lt;a href="http://nonprofits.agileventures.org/2016/05/17/collaborating-in-software-teams/"&gt;May 17th 2016&lt;/a&gt; I didn&amp;rsquo;t get into the daily rhythm until later in June.  I&amp;rsquo;d almost convinced myself that I started in late May so that I could be wrapping up now, but my obsessive nature means I will probably force myself to go all the way to June 20th.  &lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s been an interesting thing to do for a year, but I think a change will also be welcome.  While I&amp;rsquo;ve demonstrated that I can blog daily and there&amp;rsquo;s been some value for me in organising my thoughts, I don&amp;rsquo;t think I&amp;rsquo;ve gained much of a following or inspired many people.  Part of the idea of blogging is to get all my ideas about the future of AgileVentures out of my head and accessible to others.  I&amp;rsquo;ve been aided by tireless review from Federico and I think there&amp;rsquo;s definitely some extent to which my blogging has distributed my ideas amongst the AgileVentures members, but at the same time my blogs are largely unpolished streams of consciousness and I&amp;rsquo;ve been more focused on cranking them out than I have on making them intelligible.&lt;/p&gt;
+
+&lt;p&gt;I think there&amp;rsquo;s also an extent to which the frenetic activity on my part drowns out other voices in the community.  We&amp;rsquo;d probably be in a much stronger state as a community if we had four or five different people each blogging weekly.  I sense that my voice is too strong.  I suspect that my too loud voice and my blogging about &amp;ldquo;Legacy Code&amp;rdquo; affected my co-founders decision to step back from the community.   I&amp;rsquo;m going to carry on to June 20th but I&amp;rsquo;m now itching to replace my daily blog with a daily focus on the AgileVentures website.  My latest hypothesis is that if I spent as much time on the tone of voice and content in the AV site as I did on my blogs we might be a bit further along to achieving financial stability.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ll see.  Right now I feel pretty low about the many areas that need fixing up to make the AV site and its value propositions comprehensible to the new members coming in from the MOOC, our Google Adwords grant and my appearances on Ruby Rogues.  I feel pretty down about the MOOC as well, where I would like to have upgraded to Rails 5 and have lots more improved content.  Juggling everything I&amp;rsquo;m just about managing to hold those two properties down to have basic consistency.  I feel a bit better about the NHS HLP wiki project, and of course we&amp;rsquo;re at that point that I have to focus on paid projects.  Yesterday I had a good, albeit cut off, chat with a person based in Myanmar about a non-profit project that might have some funding, and today is the deadline for a local non-profit project bid.  &lt;/p&gt;
+
+&lt;p&gt;The funny thing here is the ongoing decision making about putting in bids - too high and you don&amp;rsquo;t get anything, too low and you&amp;rsquo;re on a deathmarch trying to deliver the goods.  I start to see the attraction of the salaried 9-5 where someone tells you what to do and you get paid a consistent amount.  Still salaried jobs come and go as well.  At least I get to spend more time with my kids working on all this from home.   Time for a break for a week - I&amp;rsquo;m pleased we&amp;rsquo;ve got a design sprint planned for the week of June 12th.  I&amp;rsquo;m hoping we can all get on the same page regarding the AgileVentures experience.  What seems strange to me is that we can get 40 or so Premium members, but we seem to have plateaued.  We&amp;rsquo;re only growing very slowly, getting a few upgrades here and there.  We&amp;rsquo;re doing a lot of marketing activity but it doesn&amp;rsquo;t seem to be translating in converting members to Premium.  Hopefully the design sprint might help us get to the bottom of that conundrum.  I&amp;rsquo;m not sure what the year of blogging achieved - time to try out some alternatives &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Azure MediaWiki Stack Part 5</title>
     <link rel="alternate" href="http://blog.url.com/2017/05/25/azure-mediawiki-stack-part5/"/>
     <id>http://blog.url.com/2017/05/25/azure-mediawiki-stack-part5/</id>
@@ -229,7 +251,7 @@ $ sudo /opt/bitnami/ctlscript.sh restart apache
     <link rel="alternate" href="http://blog.url.com/2017/05/23/azure-mediawiki-stack-part3/"/>
     <id>http://blog.url.com/2017/05/23/azure-mediawiki-stack-part3/</id>
     <published>2017-05-23T01:00:00+01:00</published>
-    <updated>2017-07-18T22:10:59+01:00</updated>
+    <updated>2017-07-18T22:20:34+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -442,87 +464,6 @@ $wgVirtualRestConfig['modules']['parsoid'] = array(
 &lt;p&gt;&lt;img alt="adding an endpoint to the virtual machine on Azure" src="https://www.dropbox.com/s/ghzx10bnhbq7nbm/Screenshot%202017-05-22%2011.04.09.png?dl=1" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Ah, so it looks like we need BOTH the endpoint AND the security group; although I&amp;rsquo;m not 100% on that, and I think I&amp;rsquo;m out of time to really determine that &amp;hellip; on to &lt;a href="http://nonprofits.agileventures.org/2017/05/23/azure-mediawiki-stack-part3/"&gt;part 3&lt;/a&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Bayesian Decision Making</title>
-    <link rel="alternate" href="http://blog.url.com/2017/05/19/bayesian-decision-making-blog/"/>
-    <id>http://blog.url.com/2017/05/19/bayesian-decision-making-blog/</id>
-    <published>2017-05-19T01:00:00+01:00</published>
-    <updated>2017-07-17T21:25:11+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="Bayesian" src="/images/bayesian.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So my blog from yesterday isn&amp;rsquo;t finished.  I got stuck halfway trying to document the mediawiki setup process, and then loads of other things fell on me.  I can feel my decision making process creaking.  I got caught for twenty minutes in Slack and email before starting this blog.  I&amp;rsquo;m reminded of the Bayesian approach to making decisions which seems eminently sensible and is all about working out prior probabilities.  It&amp;rsquo;s been a while and I&amp;rsquo;m sure I&amp;rsquo;m mangling it, and anyway it&amp;rsquo;s impossible to get accurate probabilities, but there&amp;rsquo;s so many things I could work on, and it&amp;rsquo;s so difficult to work out the actual rewards that come from each thing.  I&amp;rsquo;ve got to just start listing them out.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Generate case studies of recent paid NHS and Wikimedia EDU projects (possibly even LocalSupport) &lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;time to complete: 2 hours?&lt;/li&gt;
-&lt;li&gt;potential benefit: could help unlock funding from new Myanmar project&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Create bid for Capable Communities&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;time to complete: 1 hour?&lt;/li&gt;
-&lt;li&gt;potential benefit: might unlock funding&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Review new first MOOC assignment proposal&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;time to complete: 1 hour?&lt;/li&gt;
-&lt;li&gt;potential benefit: unclear, but MOOC does drive traffic to our site&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Respond to email from &amp;ldquo;Code for Kindness&amp;rdquo;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;time to complete: 20 minutes&lt;/li&gt;
-&lt;li&gt;potential benefit: unclear, but could be good for collaboration&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Respond to email from Safecast&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;time to complete: 20 minutes&lt;/li&gt;
-&lt;li&gt;potential benefit: unclear, but could be good for collaboration&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Attending marketing meeting  &lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;time to complete: ~1hour&lt;/li&gt;
-&lt;li&gt;potential benefit: unlocks other folks trying to collaborate on marketing strategy &lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Releasing latest WSO updates&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;time to complete: ~1hour&lt;/li&gt;
-&lt;li&gt;potential benefit: releases changes to flow that might have more people understanding benefits of Premium and then signing up&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Further investigating AsyncVoter routing issues&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;time to complete: unknown&lt;/li&gt;
-&lt;li&gt;potential benefit: clarity about Azure routing, unblocks developers to focus on code&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Sorting LocalSupport repo relations&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;time to complete: 15 mins&lt;/li&gt;
-&lt;li&gt;potential benefit: makes AgileVentures clear owner; and opens route to testing drie deploy&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Completing MediaWiki install and config as clone of HLP wiki&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;time to complete: &amp;gt;2 hours?&lt;/li&gt;
-&lt;li&gt;potential benefit: gives us a much safer testing area for upgrades and changes&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And there&amp;rsquo;s a slew of other things.  I can&amp;rsquo;t get everything done, and each thing I have mentioned above only includes guesses of the time it takes and what the potential benefits will be.  It wouldn&amp;rsquo;t be such a big deal if I wasn&amp;rsquo;t relying on opening the right doors to bring in enough money to feed my kids.  &lt;/p&gt;
-
-&lt;p&gt;I kicked off the WebSiteOne deployment in the background as that requires a few background steps for CI to run on each of the develop, staging and production instances.  The Bayesian approach calls for prior probabilities to be assessed.  The likelihood that each thing was successful in the past, to help weigh which item to choose &amp;hellip; if I was calm I&amp;rsquo;d go and look up the formula, but I&amp;rsquo;m just too stressed at the moment.  I feel like the critical thing is to get the case-studies of our paid projects written up.  Even if they don&amp;rsquo;t unlock fudning for this Myanmar project it&amp;rsquo;s the kind of thing that&amp;rsquo;s going to be useful to trot out when people ask, and the write up should contribute to one of my highest priority items, which is a plan for the AgileVentures charity to regularly pay for my family and I to eat.&lt;/p&gt;
 </content>
   </entry>
 </feed>
