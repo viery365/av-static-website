@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Saddle Sore</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_06 x2017_06_06 x2017_06_06_saddle-sore x2017_06_06_saddle-sore_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/06/06/saddle-sore/">Saddle Sore</a></h2>
+        <h5 class='date'> 6 Jun 2017</h5>
+    <p><img alt="saddle sore" src="/images/saddle-sore.jpg" /></p>
+
+<p>Yesterday it was back in the saddle after a break and I&rsquo;m feeling a little saddle sore already :-) Fairly productive first day I guess - a lot of meetings and a few critical admin tasks taken care of.  Let&rsquo;s look back at those meetings:</p>
+
+<ul>
+<li>Noon Martin Fowler scrum - caught up with Matt and Lokesh, and talked through Lokesh&rsquo;s PR on LocalSupport</li>
+<li>1pm  Marketing meeting - caught up with Michael, Lara, Federico, Marufa, Blandine and Matt - managed to finish up in 45 mins</li>
+<li>4:15pm Kent Beck scrum - just me and Michael - just a quick catch up</li>
+<li>4:45pm Impromptu WSO coordination meeting - Michael, myself and Matt - talked through SSL certificate upgrade and github issues</li>
+<li>5:45pm AV Community meeting - Michael, JP, myself and Matt - talked about funding me and the upcoming design sprint</li>
+</ul>
+
+<p>The critical admin things I got done were revising the AV charity tender documents that will hopefully allow me to generate some income from all the work I put into AV, sending emails to a mix of charity and private clients (past, current and potential future), and deploying the latest code for WSO, which had the pleasing side-effect of re-directing all the MOOC student pairing sessions into the correct chat channels (rather than spamming Slack #general).  I also managed to go through another round of creating private premium chat channels and engaging with AV mentors.</p>
+
+<p>There&rsquo;s not much room for coding in all this.  There&rsquo;s a bit of talking about it.  I was able to just snatch at the security renewal issue between the WSO meeting and the AV Community meeting.  It seems like the following is enough to renew the certificate:</p>
+<pre class="highlight plaintext"><code>$ sudo certbot certonly --manual
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Please enter in your domain name(s) (comma and/or space separated)  (Enter 'c'
+to cancel):develop.agileventures.org
+Cert is due for renewal, auto-renewing...
+Renewing an existing certificate
+Performing the following challenges:
+http-01 challenge for develop.agileventures.org
+</code></pre>
+<p>assuming that one types in the correct domain.  Given that the challenge is replied to correctly from the server, one gets new certificates saved locally and they can be updated in heroku like so:</p>
+<pre class="highlight plaintext"><code>$ sudo heroku certs:update /etc/letsencrypt/live/develop.agileventures.org/fullchain.pem /etc/letsencrypt/live/develop.agileventures.org/privkey.pem -r develop
+</code></pre>
+<p>so I need to get that done for the staging and production servers.  It also seems that the fixed part of the challenge key is not changing and so we definitely need to move that into an environment variable (if not change it completely) and then also work out if there&rsquo;s some further way of automating this.  Apparently we can run <code>certbot renew</code> but when I tried a dry run, it indicates I need to configure an authentication script:</p>
+<pre class="highlight plaintext"><code>The error was: PluginError('An authentication script must be provided with --manual-auth-hook when using the manual plugin non-interactively.',). Skipping.
+</code></pre>
+<p>So I&rsquo;m tempted to punt on the automation and focus on this first renewal manually and the change that will pull the fixed part of our token into an environment variable.  Going to make that the priority after this blog is completed.</p>
+
+<p>Going back to yesterday&rsquo;s meetings, I had been feeling pretty good about the marketing meeting in that we had worked through all the business pretty efficiently and avoiding long and meandering discussions.  I was focusing on not &ldquo;blocking&rdquo; anyone.  Ideas and suggestions were celebrated.  That they might have been mentioned before, or that they might have logically inconsistencies was only subtly alluded to, if at all.  I had a strong sense of &ldquo;the more people in the meeting, the more important it is to avoid disagreement&rdquo;.  That might sound like awful group think, but meetings are a kind of trap that people often feel they can&rsquo;t leave.  Long discussions with point and counter-point should be moved into other meetings where everyone has &ldquo;opted-in&rdquo; specfically for that debate.  At least that&rsquo;s my best guess at the moment - the &ldquo;efficiently-run&rdquo; meeting seemed to go down well.</p>
+
+<p>There was confusion in my mind about whether the Agile Book Club podcast would go ahead since one member was suggesting a change of day.  Since we still hadn&rsquo;t mixed episodes 2-10 I was tempted to try and use that slot for mixing rather than recording more.  That didn&rsquo;t work out either and since I&rsquo;m off early on Friday I suggested we try and do an impromptu WebsiteOne meeting.  That backfired in that the podcast member who had suggested the change of day hadn&rsquo;t meant for this week, and my sense was that was frustrating for them.  Maybe I&rsquo;m imagining a more intense set of emotions from the person than was there.  We were only communicating in Slack.  I ended up feeling pretty bad about it with the incident going round and round in my mind all night and now this morning.  Why should I end up focusing on that negative in a day with several other positives?  Is that evolutionary?  Are hurt feelings the danger signs that paleolithic humans needed to pay attention and sort out?</p>
+
+<p>However, I think I&rsquo;ve projected/imagined higher emotional states in the past? Maybe, or perhaps it&rsquo;s that I&rsquo;ve just apologised too profusely to the point where I&rsquo;ve just added irritation to injury?  The podcast member was re-iterating that we should have just asked.  I had an outstanding question to them in Slack about the change of day.  We didn&rsquo;t have the previous week&rsquo;s Slack message confirming the topics that we&rsquo;d talked about having.  The member in question is in a distant timezone which seems to make having the podcasts on Monday somewhat precarious because it makes them first thing on Monday morning for that person, and so there&rsquo;s not much room to give alerts about potential changes of plan.</p>
+
+<p>I know that I find it difficult if something I&rsquo;m planning for gets changed at the last minute.  I had been hoping that the individual might have joined us for the WSO meeting or AV community meeting, but I didn&rsquo;t push things, sensing (or imagining) their frustration.  Why is this so sticky for me?  Similarly when my son&rsquo;s football team loses (I&rsquo;m the coach).  I think it&rsquo;s my &ldquo;hard ego shell&rdquo; as Eckhart Tolle and Steve Taylor might call it.  I&rsquo;m very attached to an image of myself as a punctual, reliable, organised, dedicated, effective, good and considerate person.  Things that appear to reflect on me as inconsiderate or ineffective are painful.  Logically what they reflect is that I&rsquo;m human and make mistakes.  The stickiness is me beating myself up about the damaged self-image &hellip; maybe :-)</p>
+
+<p>There&rsquo;s something else here I&rsquo;m grappling with.  Communication.  We&rsquo;ve got all these meetings going on, most of them being recorded and shared on YouTube, and that helps the wider team catch up sometimes, but realistically most people are not going to have time to watch the videos.  I think I (and others?) can end up with the false sense of having communicated something.  You say something in five meetings, maybe even to the same small group of people, and you unconciously think you&rsquo;ve communicated it.  That might work well in a paleolithic village where the process of collocated gossiping will mean pretty much everyone knows everything quickly.  Much as I want to spend more time coding, I think the real problem to crack is communication internally and externally.  I suspect most people coming into AgileVentures from outside are confused about what we offer, and I think we have poor information flow internally about things like the AV community meeting.</p>
+
+<p>That came up from a big chat in #av-community-talk and we added an event on the main site, but then there&rsquo;s still the occasional comment about &ldquo;how would I find out about this sort of thing?&rdquo; and I guess it&rsquo;s either accept that you browse your way to knowledge on things and that there&rsquo;s no reliable way of reaching out to everyone, or we solve that problem of working out what is the one correct way to communicate with all the of the people in our distributed team.  I suspect that people are getting their information from different sources &hellip; email, slack, their calender, meetings, private chats with friends etc.  Maybe the AV Community Talk meeting needs to go in the newsletter.  Maybe the site needs more popups to alert people to things in a drip campaign fashion.  There was a great feedback feature on an e-commerce site I was using last night.  When I paused on the payment page for a long time it asked me for quick feedback and I said the shipping prices were too high.  I guess that&rsquo;s the kind of information we&rsquo;ll be hoping to get from the design sprint, but if our site could be rigged to get ongoing quick impressions from people about joining up, making purchasing decisions etc &hellip; Interesting times.  I think the one thing I can be sure of is a few more saddle sores &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
