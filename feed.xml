@@ -38,6 +38,101 @@
 </content>
   </entry>
   <entry>
+    <title>Prioritization Motivation</title>
+    <link rel="alternate" href="http://blog.url.com/2017/06/23/prioritization-motivation/"/>
+    <id>http://blog.url.com/2017/06/23/prioritization-motivation/</id>
+    <published>2017-06-23T01:00:00+01:00</published>
+    <updated>2017-09-18T20:53:58+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="prioritization" src="/images/prioritization.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Prioritization and motivation is complicated.  Each day I&amp;rsquo;m sitting down and trying to have myself focus on the things that will actually generate revenue.  That said there are things that I&amp;rsquo;m motivated to do (or have fallen into a pattern of doing) that are several steps removed from any revenue generation.  Some things are a pattern that I at least partially enjoy, e.g. blogging, publishing blogs, jogging, listening to podcasts, preparing Japanese language tests for my kids.  Doing them makes me feel centered and organised, but none of them are likely to lead to any revenue generation.&lt;/p&gt;
+
+&lt;p&gt;The late night on Wednesday put paid to any jogging and podcast-listening on Thursday morning.  I thought I&amp;rsquo;d recover for Friday, but then I ended up staying up late after my regular late night blog publishing.  The thing that caught me was fixing up the InVision app that we&amp;rsquo;d created as part of the design sprint so that it would run on GitHub pages.  You can see it there now at &lt;a href="http://why.agileventures.org"&gt;http://why.agileventures.org&lt;/a&gt;.  We&amp;rsquo;d been redirecting the URL to the InvisionApp itself, but in the marketing meeting yesterday Lara raised the issue that Google Adwords might have a problem with the redirection and it might raise an issue of trust with our users.  She asked if we couldn&amp;rsquo;t export the app, but over lunch I googled and discovered that we could export a zip of the app in order to run it offline.  I&amp;rsquo;d quickly uploaded the app into the GitHub pages site &lt;a href="https://github.com/AgileVentures/why"&gt;https://github.com/AgileVentures/why&lt;/a&gt; and saw that we could host it directly, so no need to redirect away from the &lt;a href="http://why.agileventures.org"&gt;http://why.agileventures.org&lt;/a&gt; domain.&lt;/p&gt;
+
+&lt;p&gt;Great, but a half an hour of kicking things about at the end of the day hadn&amp;rsquo;t resolved one part of the app that didn&amp;rsquo;t work.  The final &amp;ldquo;sign up&amp;rdquo; button external link to the main AgileVentures sign up page at &lt;a href="https://www.agileventures.org/users/sign_up"&gt;https://www.agileventures.org/users/sign_up&lt;/a&gt; was attempting to load the following URL &lt;code&gt;/redirect?url=https%3A%2F%2Fwww.agileventures.org%2Fusers%2Fsign_up&lt;/code&gt;, which is presumably an endpoint on the InVision app, which doesn&amp;rsquo;t exist in our GitHub Pages app.  I tried a few tricks to get round this, such as just adding a file called &lt;code&gt;redirect&lt;/code&gt; with the contents &lt;code&gt;&amp;lt;meta http-equiv=&amp;quot;refresh&amp;quot; content=&amp;quot;0; url=https://www.agileventures.org/users/sign_up&amp;quot; /&amp;gt;&lt;/code&gt;.  That didn&amp;rsquo;t quite work, with clicking the sign up link leading to the browser downloading a file rather than redirecting.  The problem was that GitHub pages (Jekyll) wasn&amp;rsquo;t serving the file with the correct media type.  I tried using &lt;code&gt;redirect.html&lt;/code&gt; and some under the hood jekyll redirection, but it still suffered from the same problem.&lt;/p&gt;
+
+&lt;p&gt;I emailed InVision support and GitHub support, and InVision came back saying that the downloaded app didn&amp;rsquo;t support the full functionality, and GitHub were asking for clarification on what I was trying to achieve.  I tried MarvelApp (an Invision competitor) and saw that I could quickly recreate the app there, but couldn&amp;rsquo;t download without upgrading.  So I&amp;rsquo;d kind of given up for the time being, but after my late night blog publishing session I couldn&amp;rsquo;t help tinkering.  The late night blog publishing session is also a strange prioritization/motivation conundrum.  In days gone by I used to try and publish the previous days blog after having just written the new days one, i.e. in the morning each day.  That had the advantage of keeping all the blog action within my working day, but I was finding that having written one blog I was struggling to do another blog related activity, and the blog publishing was being put off and forgotten.  Then I started doing the publishing component late in the evening, often in parallel with giving my eldest son a little time on his iPad before I read him a story.  Then I decided it wasn&amp;rsquo;t so good for my eldest boy to be getting that iPad stimulation before bed (all the boys get 20 minutes iPad in the morning if they&amp;rsquo;ve finished getting completely ready), and so I ended up shifting to doing the blog publishing after all the boys were asleep, i.e. in my own winding time before going to sleep.&lt;/p&gt;
+
+&lt;p&gt;Reasonably efficient, but sometimes I am too tired to get to it, and on occasion I get distracted because I&amp;rsquo;ve opened up Slack to post my blog, or like last night where just thinking about work brings me back to a problem like this redirection issue.  As it happens, another thirty minutes of fiddling fixed things up.  The problem seems to be an issue in the Jekyll redirection syntax.  I&amp;rsquo;d been experimenting with Jekyll syntax in &lt;code&gt;redirect.html&lt;/code&gt; like so:&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="nn"&gt;---&lt;/span&gt;
+&lt;span class="na"&gt;redirect_from&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;/redirect&lt;/span&gt;
+&lt;span class="na"&gt;redirect_to&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;https://www.agileventures.org/users/sign_up&lt;/span&gt;
+&lt;span class="nn"&gt;---&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but it seems that trailing slashes are necessary to ensure that Jekyll serves things in the right media type, so the following worked:&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="nn"&gt;---&lt;/span&gt;
+&lt;span class="na"&gt;redirect_from&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;/redirect/&lt;/span&gt;
+&lt;span class="na"&gt;redirect_to&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;https://www.agileventures.org/users/sign_up/&lt;/span&gt;
+&lt;span class="nn"&gt;---&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It was finding issues like &lt;a href="https://github.com/jekyll/jekyll-redirect-from/issues/37"&gt;https://github.com/jekyll/jekyll-redirect-from/issues/37&lt;/a&gt; that helped me fix things up.  So now, whatever the shortcomings of the prototype app, we have all the functionality working at &lt;a href="http://why.agileventures.org"&gt;http://why.agileventures.org&lt;/a&gt;.  The question now was whether this was good enough to start testing, which prompted a little discussion on Slack:&lt;/p&gt;
+
+&lt;p&gt;Sam Joseph:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;question is whether this is good enough to start testing (@joaopereira @mtc2013 @mlindsey @lara-t)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Federico:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;@tansaku by “this” you mean what’s up now at http://why.agileventures.org ?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Sam Joseph:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;right - I downloaded the invisionapp and hosted it on github pages so the user stays on why.agileventures.org the whole time - that was the concern that @lara-t raised in the meeting - clearly the app could still be improved in many ways - I know you don&amp;rsquo;t like the font, the buttons could be more clickable etc.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Federico:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;the button colors, all the tester feedback. :grimacing:
+It’s good enough to test, but it’s serving one purpose: a larger sample size &lt;em&gt;test&lt;/em&gt; of the prototype.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Sam Joseph: &lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Traditionally the design sprint prototype is supposed to be thrown away, and a better one rebuilt&lt;/p&gt;
+
+&lt;p&gt;But we are operating on a shoestring and in principle the content test could redirect 10% of our clickthroughs to why.av.org&lt;/p&gt;
+
+&lt;p&gt;And we can increase as we improve it&lt;/p&gt;
+
+&lt;p&gt;But at the moment our clickthroughs are not driving any revenue so in principle there&amp;rsquo;s nothing too much to lose &amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Federico:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;It’ll just be additional data to reinforce the verbal feedback from the testers. &lt;em&gt;That’s obviously appealing. I’m not opposed to it.&lt;/em&gt; I’m excited, however, to help build a &lt;em&gt;slick coded version, that takes into account the tester feedback. Please let me know when that starts.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Matt:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;I think why.av.org looks pretty good now and we should start 50/50 A/B test whenever @lara-t is able to do it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Lara:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;@here great job, I will get everything setup this weekend for AdWords A/B Testing. Well done everyone I really love the new page :slightly&lt;em&gt;smiling&lt;/em&gt;face:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So there we go.  I failed to get up for my jog or podcast listening this morning :-( I got my kids Japanese tests written up, and I&amp;rsquo;m over time on my blogging.  Funny thing is about the moment that motivation seizes you.  It seized me several times yesterday trying to get this fixed up.  It&amp;rsquo;s slowly running out now as I spend too long on this blog and my motivation to make all the points I was originally thinking about gradually drains away.  I stopped to email GitHub to tell them how I solved the issue and how their redirection documentation needs updating.  I was trying to make a point about motivation and prioritization.  There are at least two items I should get to, now, that directly relate to getting paid and there&amp;rsquo;s the MOOV/AV102 emails I&amp;rsquo;ve been putting off all week.  I used to be motivated to do them and now &amp;hellip; I guess I&amp;rsquo;ve got sick of the little dance I do to get the old updates from the previous MOOC and put them into the new one.  There&amp;rsquo;s a fiddly updating of the links and no particular positive feedback - as opposed to the likes I get when I tweet about other people&amp;rsquo;s podcasts &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I think the thing I&amp;rsquo;m stuck on is that, given that I can&amp;rsquo;t automate these MOOC postings (due to the way that edX works), I should delegate them off to someone, but I recoil at the process of trying to get someone to understand how to do it, and that it will probably be screwed up a couple of times before it&amp;rsquo;s done right.  And then there&amp;rsquo;s the thought that we won&amp;rsquo;t even have the need for these emailings once the course goes self paced (from fall?).  Or maybe we will - or maybe no one cares if these things get sent or not.  We&amp;rsquo;re not measuring the impact of doing them or not - I&amp;rsquo;m just sending them because if I was doing a course I&amp;rsquo;d like to get a reminder when new material and assignments are released &amp;hellip; In previous runs I was in a solid pattern of getting the emails out and now I&amp;rsquo;m all over the place &amp;hellip; partly it&amp;rsquo;s my faltering motivation and also trying to prioritize things that have a more direct connection to revenue.&lt;/p&gt;
+
+&lt;p&gt;Motivation and prioritization.  Right, must finish up blog, leave the A/B testing to Lara and make sure that I get they key revenue generating work done this AM (mainly paperwork), get those MOOC posts out, and keep going with balancing what I have motivation for in the moment, and what really has to get done to pay the bills &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Summer Soltice</title>
     <link rel="alternate" href="http://blog.url.com/2017/06/22/summer-solstice/"/>
     <id>http://blog.url.com/2017/06/22/summer-solstice/</id>
@@ -242,154 +337,6 @@
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=rnyzabQkoAQ"&gt;Day four Video&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Design Sprint Day Three</title>
-    <link rel="alternate" href="http://blog.url.com/2017/06/15/av-design-sprint-day-three/"/>
-    <id>http://blog.url.com/2017/06/15/av-design-sprint-day-three/</id>
-    <published>2017-06-15T01:00:00+01:00</published>
-    <updated>2017-09-11T21:38:01+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="design sprint" src="/images/design_sprint.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s Thursday and I&amp;rsquo;m looking back at day three of our design sprint that we did on Wednesday.  I think all of our energy was down after having done two full days in a single hangout.  I&amp;rsquo;d been out in the morning to attend an NHS meeting and I think that was pushing it.  Hopefully we&amp;rsquo;ll all have got a good night&amp;rsquo;s sleep last night and be somewhat refreshed for day four.  But so what did we actually do in day three?  We started by taking a look at the four different prototypes that we had designed independently on day two.  We did heat map stickers to highlight aspects of the designs we liked, and then Matt nominated me to talk through each in speed critique mode while he took notes on the standout ideas:  &lt;/p&gt;
-
-&lt;h2&gt;1. Journey to Agile&lt;/h2&gt;
-
-&lt;p&gt;first image&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Journey to Agile first image" src="https://www.dropbox.com/s/inga2yiyziy6a4v/Screenshot%202017-06-15%2009.19.33.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Standout Ideas:
-* You are Here 
-* Benefits hilight list
-* Job Seeking Network
-* Scrum Bridge&lt;/p&gt;
-
-&lt;p&gt;second image&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="How long does it take" src="https://www.dropbox.com/s/8fc33tpapiec120/Screenshot%202017-06-15%2009.21.36.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Standout Ideas:
-* Start the journey (clickable)
-* The AV journey (graph showing faster progress)
-* Premium benefits indicated on graph (graph goes faster)&lt;/p&gt;
-
-&lt;h2&gt;2. Motivation&lt;/h2&gt;
-
-&lt;p&gt;First image&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/nwgr50a8fudg61m/Screenshot%202017-06-15%2009.22.50.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Standout Ideas:
-* Badges/Milestones
-* Profile rating (ambiguous)
-* Project rating&lt;/p&gt;
-
-&lt;p&gt;Second Image:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/ek4ctr1uzjlvf58/Screenshot%202017-06-15%2009.23.54.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Standout Ideas:
-* Link to verified Certificate
-* Certificate details right on certificate (appeals to companies) = Value to customer&lt;/p&gt;
-
-&lt;p&gt;Third Image:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/n8vv8wbgohxjruv/Screenshot%202017-06-15%2009.24.38.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Standout Ideas:
-* Project performance 
-* Most influential contributor&lt;/p&gt;
-
-&lt;h2&gt;3. Seeker on the Path&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/nsf052ds1usaqg3/Screenshot%202017-06-15%2009.25.57.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Standout Ideas:
-* Video Pitch (maybe put on top)
-* Different Paths (depending on …)
-* Guided Navigation with SubTasks
-* List of Projects
-* Badges/Certificates on the Path&lt;/p&gt;
-
-&lt;h2&gt;4. Guided Interactive Map&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/hk6o0hjcti7s7k5/Screenshot%202017-06-15%2009.28.14.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Standout Ideas:
-* Diagram (clickable) perhaps cold lacking motivation, needs video(?)
-* Description of value
-* Time per week, updates map focus
-* Popup of values
-* Value proposition
-* Multi-select of tech&lt;/p&gt;
-
-&lt;p&gt;It was relatively straightforward to allow us to put heat map stickers in the Google doc once all the images had been added to drawings where we could overlay dots.   Here&amp;rsquo;s the full sequence we were following:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Art museum. Tape the solution sketches to the wall in one long row.&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;Heat map. Have each person review the sketches silently and put one to three small dot stickers beside every part he or she likes.&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;Speed critique. Three minutes per sketch. As a group, discuss the highlights of each solution. Capture standout ideas and important objections. At the end, ask the sketcher if the group missed anything. &lt;/li&gt;
-&lt;li&gt;Straw poll. Each person silently chooses a favorite idea. All at once, each person places one large dot sticker to register his or her (nonbinding) vote.&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;Supervote. Give the Decider three large dot stickers and write her initials on the sticker. Explain that you’ll prototype and test the solutions the Decider chooses.&lt;br&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;In the above images you can also see some of the straw poll votes.  We were divided pretty evenly between the first and third. That&amp;rsquo;s &amp;ldquo;Journey to Agile&amp;rdquo; and &amp;ldquo;Seeker on the Path&amp;rdquo;.  So there was a decision to make, go with one or the other, or combine them in some fashion.  After some debate we narrowed it down to the following options:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Rumble (building two prototypes and two fake brand names)&lt;/li&gt;
-&lt;li&gt;Merge where click through on Agile Journey has pathways (multiple steps) (single prototype)&lt;/li&gt;
-&lt;li&gt;Merge where Seeker on the path has video or infographic of Agile Journey (single prototype)&lt;/li&gt;
-&lt;li&gt;Just do Agile Journey (single prototype) &lt;/li&gt;
-&lt;li&gt;Just do Seeker on path (single protoype)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;We took another poll on this, but as the decider the final decision was up to me.  We had votes for items 1 and 2, but I thought with a sprint team of four we didn&amp;rsquo;t have the resources to make two prototypes, and I thought that we needed a single clear idea to make most effective use of the time and energy we were putting in.  In the background Federico was sorting out the advert for testers, the screening form, and getting the ads up onto craigslist around the world.  This was outstandingly helpful as I think our whole sprint team was exhausted and the logistics of managing the testers just seemed beyond us.&lt;/p&gt;
-
-&lt;p&gt;Federico joined the hangout on a couple of occasions to get input and decisions.  We decided to go for remote usability testing, and the full $100 Amazon gift card as compensation.  That&amp;rsquo;s $500 which is a lot of money for our non-profit charity, but I thought we shouldn&amp;rsquo;t skimp here and that we should be trying to get outside, unbiased input on the AgileVentures concept that we were trying to get across.  Our sprint focus was on:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Ensure that developers understand how they will benefit from AgileVentures (before looking for projects)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Having made the decision, we moved on to making a storyboard to help structure the prototype we would build on Thursday.  I&amp;rsquo;ve noticed my computer getting slower and slower as these long hangouts run on with multiple large google doc windows open.  I&amp;rsquo;ve taken to quitting Slack and having that on another machine (if I need it) and even after a Chrome restart yesterday it was tough going trying to make the storyboard in a Google doc.  We got as far as this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/qoukd7h052vpko0/Screenshot%202017-06-15%2009.41.16.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;before I gave up, rebooted Chrome and started sketching on paper.  My memory is that shared editing of the Google drawing on day one had been a pretty efficient group operation.   I hadn&amp;rsquo;t rebooted my computer since then and I think we were all mentally flagging.  As the computer starts to lag it becomes increasingly frustrating.  I thought that, based on the concept we were working on, the storyboard was pretty straightforward.  I uploaded what I had drawn:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/ay5i33jehioui5m/Screenshot%202017-06-15%2009.44.23.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Either others were reasonably happy with it, or too tired to argue.  Matt said there weren&amp;rsquo;t many &amp;ldquo;call to actions&amp;rdquo; and I pointed out the four &amp;ldquo;Learn More&amp;rdquo; and &amp;ldquo;Sign me up&amp;rdquo; buttons.  I started pushing to say that we should do a little work on what goes into the map, so we moved the diagram into a fresh location and I went round each person asking if there were items they wanted to add or remove:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/ukgpl9zhv6bewm6/Screenshot%202017-06-15%2009.45.34.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and wrote up this list of tasks:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Finding Themed clipart&lt;/li&gt;
-&lt;li&gt;What goes in the map (ordering)&lt;/li&gt;
-&lt;li&gt;Making individual subtopic info sites&lt;/li&gt;
-&lt;li&gt;How does info popup (scroll, new page, popup)&lt;/li&gt;
-&lt;li&gt;Making map&lt;/li&gt;
-&lt;li&gt;Keynote vs Invision vs Middleman?&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Matt was telling us he was getting to the point that he could only do simple tasks.  I thought I might be able to write up some subtopic text, at least if I did it locally in Keynote.  We spent twenty minutes more with me going to each person and trying to ask what they would like to work on the list.  Maybe that was the wrong way to go.  It felt like we were moving in treacle.  Michael was talking through what each task involved.  I think there was confusion about whether we could work on things in parallel.  Ultimately Matt left, Lokesh started working on finding themed clipart, which Michael was doing in parallel.  I started on a Keynote with subtopics, but got distracted searching for clipart.  The remaining time was spent looking at Shutterstock and other images like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/623cie39vefg6p9/stock-vector-mountain-hiking-infographic-template-design-in-flat-style-386934532.jpg?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I don&amp;rsquo;t think any of us thought much of our artistic skills so the idea of having a pre-designed map showing a journey that we could put our own text into seemed pretty appealing.  The question was whether we had the software to edit the EPS files.  I played around with Sketch and Inkscape but ultimately made more progress downloading a free trial of illustrator.  Then we called it a day.  Now it&amp;rsquo;s Thursday and the Friday tests are looming.  Big day today to turn actually create our interactive infographic so that we can learn as much as possible from our randomly selected testers on Friday.  Stay tuned to this blog to find out how it all goes!&lt;/p&gt;
-
-&lt;h3&gt;Related Videos&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://youtu.be/0TKPezdmui0"&gt;Day Three Video&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
