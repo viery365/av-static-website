@@ -5,16 +5,110 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-07-04T01:00:00+01:00</updated>
+  <updated>2017-09-22T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Another free refill?</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/22/another-free-refill/"/>
+    <id>http://blog.url.com/2017/09/22/another-free-refill/</id>
+    <published>2017-09-22T01:00:00+01:00</published>
+    <updated>2017-09-27T21:07:18+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="free refill" src="/images/freerefill.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Earlier this year, I undertook a training session targeting small business manager to teach them how to improve profitability of business projects. The course instructor showed us a rather clear way to deal with profitabiliy. First, you estimate your break-even hourly rate, based on your history. Then, you don&amp;rsquo;t sell any project under the bottom line. After that, you prioritize your work to put the highest priority on the most profitable projects. Finally, you keep any accepted project above the bottom line. &lt;/p&gt;
+
+&lt;p&gt;The idea is quite simple. It&amp;rsquo;s all down to the execution. I began to schedule my workday according to business priorities preferably to a sense of urgency that overcame me before. Then, everytime I felt I was at risk to hit the bottom line, I shifted my attention towards what I really sold to the client annd I reduced my objectives accordingly. Finally, I was trying to become a project reviewer for a well known MOOC platform. But the hourly rate was much too low. I felt relief to drop my candidature. Paid projects management improved greatly. But, a significant part of my workday, dedicated to volunteer projects, was out of the scope of this effort.  &lt;/p&gt;
+
+&lt;p&gt;Too many commitments, workaholism, things we begin and we never achieve, any freelance worker faces these contradictions. The inherent contradiction is even stronger when you work on non-paid project. How to prioritize your volunteer works?&lt;/p&gt;
+
+&lt;p&gt;Ten working hours a day is my upper limit, considering that I&amp;rsquo;m not a computer nerd, I&amp;rsquo;ve got a family, hobbies, and a social life &amp;hellip; I was already busy ten hours a day. Adding anything to my schedule implied removing something else. I have been more or less active on professional social networks for three years. I first thought this commitment would improve my reputation and fuel my prospect pipeline. But in three years, the return was not very encouraging. I felt that my social network activity was fueled by bitterness or anxiety or ego or the three rather than by a clear sense of business opportunity! I decided to forget social networks. Two to three hours a week were freed thanks to this good resolution.&lt;/p&gt;
+
+&lt;p&gt;I chose to devote these hours to Agile Venture mob programming sessions. It&amp;rsquo;s a real community, with real developers. You can both learn by observing how skilled developers work and by doing things by yourself. &lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m still in the midstream of my prioritization effort. I&amp;rsquo;ve been very actively participating in MOOCs for five years. My skills greatly improved as a result of this effort.  But choosing which courses to invest on is not easy. Knowledge is a bit like indirects costs. You don&amp;rsquo;t really know how to assign it to your achievements. During the first years, the offer flourished. I tried many courses, from Economy to Computer Sciences. I progressively focused on Computer Science and left courses as they switched to paid offers. &lt;/p&gt;
+
+&lt;p&gt;As I was giving up, a prominent MOOC platform offers me to beta-test courses for free. Free refill is the end of resolution and the beginning of passive hyperactivity! You may begin your training week with a course on Embedded systems and end, on friday, with a course on PythonML on friday, without completing any. Does it make sense to participate in a mob programming session about RSPEC on monday, another one about phoenix on wednesday, on the last one about React on friday, when you only need to develop a small web app with React?&lt;/p&gt;
+
+&lt;p&gt;AgileVenture Premium Mob includes some kind of Professional Development Planning Support. I may ask the team to help me clean my training plan. But I&amp;rsquo;m still afraid they will tell me to stop learning Tensor Flow or the nitty gritty of Intel Parallel Architecture if I don&amp;rsquo;t have any prospect to work in these fields in the next year! &lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>AV Website Review Part 1</title>
+    <link rel="alternate" href="http://blog.url.com/2017/07/05/av-website-review-part-one/"/>
+    <id>http://blog.url.com/2017/07/05/av-website-review-part-one/</id>
+    <published>2017-07-05T01:00:00+01:00</published>
+    <updated>2017-09-27T21:12:10+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="new dawn" src="/images/new_dawn.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Right, new dawn.  I could be blogging about all the conversations we had about testing yesterday, but my new resolution is to get the AV website sorted out in terms of usability, readability and user flow one day at a time.  Immediately I&amp;rsquo;m torn between two sections.  There&amp;rsquo;s the &amp;ldquo;Getting Started&amp;rdquo; page that people either browse to, or get redirected to after sign in.  After discussions in the AV community meeting on Monday I removed the first two sections of that document:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-05%2009.29.00.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;These two sections are all things we&amp;rsquo;d like users to do, i.e. get set up with GitHub and Slack (and other things), but the danger is that the very first thing we are doing is directing folks away from our site.  The likelihood is that they signed up via GitHub and they&amp;rsquo;ve received a Slack invite.  It&amp;rsquo;s all very well asking folks to work through a set of administrative tasks when they are a &amp;ldquo;captive&amp;rdquo; audience, such as having already paid to take a class, but, really, we need to get people as quickly as possible to the higher engagement, fun activities, such as looking through the different active projects.  Anyway, I shouldn&amp;rsquo;t belabour the point, but it&amp;rsquo;s interesting to look at the flow through from Google Analytics for this page:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-04%2012.01.38.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;What we see there is a lot of drop offs and not many people clicking through on individual project pages.  The text associated with the first two &amp;ldquo;administrative&amp;rdquo; sections was forcing the table of active projects &amp;ldquo;below the fold&amp;rdquo;, i.e. making it something that people would have to scroll to get to.  Even so, the Google Analytics plugin for Chrome shows us what percentage of people are clicking through on which projects:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-05%2009.35.10.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So anyway, I removed the first two sections and we&amp;rsquo;ll see if there is any change.  I think there&amp;rsquo;s still room to reduce the amount of text, improve the layout and add graphics through this document, and so I&amp;rsquo;m torn about making more significant changes.  Particularly since it will take some weeks before we can really tell if there&amp;rsquo;s a difference.  We had 168 visits to the &amp;ldquo;Getting Started&amp;rdquo; page in the last month.  In addition I also want to make progress on the Premium page.  Previously Matt and I had worked on things so that when signed in users clicked on &amp;ldquo;Upgrade to Premium for additional support&amp;rdquo; on the home page, that instead of going to the payment page (with no information about Premium), it went to the description page for Premium, which made a lot more sense to me.&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s functionality in the Google Analytics Chrome plugin to compare a period with the previous month, and I can see that there&amp;rsquo;s been a small increase in people clicking on the &amp;ldquo;Upgrade to Premium for additional support&amp;rdquo;.  We just redesigned the banner, but that only just went live, so we don&amp;rsquo;t have a clear indication for that increase:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-05%2009.48.57.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Looking through at the Premium description page we can now see some changes.  We adjusted the flow on the &lt;a href="https://github.com/AgileVentures/WebsiteOne/commit/1af6bfe440133e4ade2b08e6fc7b8703825ec2b6"&gt;18th of May&lt;/a&gt;, and we can now see that the click through on &amp;ldquo;Get Started with Premium&amp;rdquo; has increased from 11% to 15% compared with the same period previously:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-05%2009.55.37.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now the difficulty is that that change could just be due to a trend that we would have seen anyway, and also we don&amp;rsquo;t know that all those clicks are coming in via the new flow.  Users can reach this page by coming in through the pricing page, but having more people click on &amp;ldquo;Getting started with Premium&amp;rdquo; certainly feels like we are going in the right direction.  What&amp;rsquo;s frustrating is that we don&amp;rsquo;t have more info about what&amp;rsquo;s happening on this page:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-05%2009.59.16.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The Google analytics plugin is silent on the numbers of folks clicking on the subscribe buttons.  PayPal redirects to another site, while Stripe uses JavaScript to popup a credit card form.  I spent a chunk of time trying to see if I could see the flow around that page in the main Google Analytics site, but this was as close as I got:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-05%2010.15.30.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Some of the exits could be people going to the PayPal page, but it&amp;rsquo;s unclear.  It makes me want to put the Chatlio &amp;ldquo;any questions&amp;rdquo; element in the site so that there&amp;rsquo;s an opportunity for people to tell us what they&amp;rsquo;re thinking as they browse the page.  Hmm, well I&amp;rsquo;ve burnt a lot of time reviewing the analytics and not a lot of time getting on to what I thought was my main thrust today, which is this rewording of the Premium description &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;d posted some thoughts on that into a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1583#issuecomment-310992734"&gt;WSO issue&lt;/a&gt; where Ashley had made a great point about how these new re-wordings didn&amp;rsquo;t include the term &amp;ldquo;Agile&amp;rdquo;.  What&amp;rsquo;s interesting is that in breaking out separate items to give support on, we lose sight of the bigger Agile picture.  Michael had mentioned that getting quick feedback on pull requests is crucial for Agile, but it&amp;rsquo;s also the case that the main &amp;ldquo;Agile&amp;rdquo; things that we offer, such as working with a team, doing scrums, retros, kick-offs, sprints etc. are not something that the Premium offering particularly supports - or at least not in its current form.&lt;/p&gt;
+
+&lt;p&gt;It makes me think about things like having specific features like Sprint or retrospective support.  Of course that&amp;rsquo;s not as easy to break out as something that can be offered to Premium&amp;rsquo;s on a 121 basis without the associated selection of a project, introduction to the team etc. etc.  I have ideas about people signing up for a one off &amp;ldquo;sprint support package&amp;rdquo; at some higher price point, but there&amp;rsquo;s a ways to go there for that to make sense &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;So anyhow, here&amp;rsquo;s another pass at questions for the Premium page:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Want to find great developer jobs? Get help on the job search process?&lt;/li&gt;
+&lt;li&gt;Want to ace technical tests required to get interviews?&lt;/li&gt;
+&lt;li&gt;Want to accelerate your professional development?&lt;/li&gt;
+&lt;li&gt;Want to improve your coding and development skills?&lt;/li&gt;
+&lt;li&gt;Want to really understand Agile software development?&lt;/li&gt;
+&lt;li&gt;Want to put paid coding projects on your resume?&lt;/li&gt;
+&lt;li&gt;Want to make the world the better place?&lt;/li&gt;
+&lt;li&gt;Want to feel confident asking technical questions online?&lt;/li&gt;
+&lt;li&gt;Want to get discounts on important software and services for developers?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and I&amp;rsquo;ve now gone ahead and updated the Premium page using them and reworded the descriptions to make sense.  I think I could also be adjusting the full details to be popping up like we have in the FAQ, but I think this is enough for today.  The interesting thing will be to see if this has any noticeable impact on the click through rates or the number of people signing up &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;p.s. Side note, since shortening the text in the &amp;ldquo;code&amp;rdquo; page and adding a call to action &amp;ldquo;get started now&amp;rdquo; button, we&amp;rsquo;ve seen a good third of the people landing on the page clicking through on the &amp;ldquo;get started now&amp;rdquo; button.  Not that that says very much - what would be good to be seeing is month by month stats of footfall and percentage of people on the site actually signing up &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>All Good Things ...</title>
     <link rel="alternate" href="http://blog.url.com/2017/07/04/all-good-things/"/>
     <id>http://blog.url.com/2017/07/04/all-good-things/</id>
     <published>2017-07-04T01:00:00+01:00</published>
-    <updated>2017-07-10T21:54:43+01:00</updated>
+    <updated>2017-09-27T21:07:14+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -42,7 +136,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/07/03/private-design-sprint-day-five/"/>
     <id>http://blog.url.com/2017/07/03/private-design-sprint-day-five/</id>
     <published>2017-07-03T01:00:00+01:00</published>
-    <updated>2017-09-26T21:48:06+01:00</updated>
+    <updated>2017-09-27T21:07:14+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -62,7 +156,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/06/30/private-design-sprint-day-four/"/>
     <id>http://blog.url.com/2017/06/30/private-design-sprint-day-four/</id>
     <published>2017-06-30T01:00:00+01:00</published>
-    <updated>2017-09-25T20:57:53+01:00</updated>
+    <updated>2017-09-27T21:07:14+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -78,7 +172,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/06/29/private-design-sprint-day-three/"/>
     <id>http://blog.url.com/2017/06/29/private-design-sprint-day-three/</id>
     <published>2017-06-29T01:00:00+01:00</published>
-    <updated>2017-09-22T21:21:28+01:00</updated>
+    <updated>2017-09-27T21:07:14+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -89,50 +183,6 @@
 &lt;p&gt;After lunch we started storyboarding and it was clear that there was some confusion.  There was the issue of the extent to which our small prototype would reflect the operation of the rest of the site.  It had seemed that we had agreed on a particular prototyping approach by selecting a particular prototype, but there was concern from one member that what we prototyped wouldn&amp;rsquo;t reflect the overall site experience.  As we went back and forth, the terms &amp;ldquo;press-pack&amp;rdquo; and &amp;ldquo;trailer&amp;rdquo; floated out.  It came down to distinguishing between sites where the experience before you signed in reflected what you got once you were signed up, and those where that wasn&amp;rsquo;t the case.  Both valid approaches and their effectiveness dependent on the nature of your target demographic.&lt;/p&gt;
 
 &lt;p&gt;There was a fairly long debate, but ultimately we settled on the prototype that was largely as I had envisioned.  Offering the user a small sense of one particular aspect of the site experience and seeing how they would react to that and to the idea that they&amp;rsquo;d need to sign up (and pay) to access more.  Ultimately we had our storyboard and agreement on our storyboard, and hopefully a shared understanding about what we would be achieving over the next two days.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Private Design Sprint Day Two</title>
-    <link rel="alternate" href="http://blog.url.com/2017/06/28/private-design-sprint-day-two/"/>
-    <id>http://blog.url.com/2017/06/28/private-design-sprint-day-two/</id>
-    <published>2017-06-28T01:00:00+01:00</published>
-    <updated>2017-09-21T21:31:32+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="design sprint" src="/images/design_sprint.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Day two of our design sprint was a slightly calmer affair.  One member had left us since they couldn&amp;rsquo;t stay the whole week, so we were down to three on the sprint team.  I&amp;rsquo;d also come down with a head cold that was making me move and talk slower; probably a good thing for all concerned, but not very pleasant for me.  We spent the morning doing lightning demos, and then the afternoon sketching interface designs, &amp;ldquo;working alone together&amp;rdquo; as they say in the sprint book.  I got my interface sketch done fairly quickly and decided to move on to sorting out the screening survey and putting up an ad on Craigslist and Indeed to recruit testers for Friday.  I&amp;rsquo;ve woken up this morning to see that four people have applied so far, and probably there&amp;rsquo;s only one that meets our testing criteria.&lt;/p&gt;
-
-&lt;p&gt;It occurs to me that recruiting people who have an hour free during the middle of a work day on Friday creates its own bias, in that one is unlikely to get lots of people who are in full time employment.  Challenging if you&amp;rsquo;re looking to test that demographic.  That&amp;rsquo;s not particularly the demographic we are looking for in this design sprint, but it seems inevitable that there&amp;rsquo;s some degree of skew there.  Maybe I&amp;rsquo;ll have to supplement this week by distributing the ad through some of my personal networks.&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s difficult to judge day two of the sprint, as we haven&amp;rsquo;t seen each other&amp;rsquo;s sketches yet; we&amp;rsquo;ll have to see if three is too small a number.  Certainly we had no shortage of lightning demos, and there was lots to learn from looking through all the different sites that the team members suggested.  Today we&amp;rsquo;ll be reviewing those sketch ideas and coming up with a storyboard for the prototype that we need to build on Thursday.  I wonder if I got into problem solving mode too early on day one, as my sketch is not wildly dissimilar from some of the components I was sketching on the map on Monday.  I guess rather than interface elements it would have been better to map interactions, drawing the person interacting with the computer, or talking to another person.  We&amp;rsquo;ll see.&lt;/p&gt;
-
-&lt;p&gt;Also, we&amp;rsquo;re changing location after today.  For logistical reasons we&amp;rsquo;re in one location Mon/Tues/Wed and then a different location Thu/Fri.  I&amp;rsquo;m quite pleased as Thu/Fri I&amp;rsquo;ll be closer to home, and I&amp;rsquo;m not particularly enjoying my current hotel-bound cold.  The cold is also making it difficult for me to focus on administrative matters that I&amp;rsquo;m trying to juggle around the design sprint, which pretty much blocks out the sun while it is running.  The nice thing about having a physical space and these table top flip charts is you can draw out large and then take them off and stick them on the wall, so we have the different sketches from our lightning demos etc. covering the walls of the room that we&amp;rsquo;re working in.  Perhaps ideally we&amp;rsquo;d still have these up on Thursday as we work on our prototype, but it doesn&amp;rsquo;t seem completely critical.&lt;/p&gt;
-
-&lt;p&gt;Doing the AV design sprint online I think it&amp;rsquo;s quite important to have multiple monitors so that one can put up the different digital documents in multiple locations and use one&amp;rsquo;s physical space management skills, but so many people don&amp;rsquo;t seem to have a second or third monitor &amp;hellip; anyway, fascinating to contrast the online and in-person sprint.  There&amp;rsquo;s certainly an aspect of this that feels very marketing orientated, but I guess for any organisation to be successful it has to have the right communication &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Private Design Sprint Day One</title>
-    <link rel="alternate" href="http://blog.url.com/2017/06/27/private-design-sprint-day-one/"/>
-    <id>http://blog.url.com/2017/06/27/private-design-sprint-day-one/</id>
-    <published>2017-06-27T01:00:00+01:00</published>
-    <updated>2017-09-20T20:01:45+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="design sprint" src="/images/design_sprint.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m in the Premier Inn restaurant again after day one of the sprint.  I&amp;rsquo;ve also come down with a cold which is not much fun.  Don&amp;rsquo;t really have time to write a blog, as I&amp;rsquo;m supposed to be updating part 2 of the MOOC, but I thought I&amp;rsquo;d just take a few minutes to get down some reflections on yesterday&amp;rsquo;s day one of the design sprint.  We had four of us in person in a lovely room with an ocean view, and we used a couple of flipboard markers and whiteboard rolls (that stick on windows and walls and allow you to draw on them).  It seemed to go pretty well.  This was probably the closest I&amp;rsquo;ve gotten so far to a day one of Design Sprint as intended, with the exception that we didn&amp;rsquo;t have any expert interviews joining us, for one logistic reason and another.  We improvised there by taking turns to be experts and have each of us present the concepts to the rest of the group, and then all ask questions of the &amp;ldquo;expert&amp;rdquo;.  I don&amp;rsquo;t think we got the full benefit of outside input, but there was definitely some benefit derived from re-articulation of the idea from different perspectives.&lt;/p&gt;
-
-&lt;p&gt;The first map we made was maybe too detailed.  I was almost drawing interface elements, and one of the other team members did a revised simpler map.  The maps in the book are really simple, but they look simplified for the purpose of the book compared with the whiteboards I&amp;rsquo;ve glimpsed in the videos from Google, but Pat did seem to criticise our overly complex map from the AV design sprint; so perhaps this is a pattern of poor behaviour on my part.  Looking back I think it might have been more effective to avoid interface elements completely and focus on interactions; drawing person at computer, person talking to other person as the elements of the map.&lt;/p&gt;
-
-&lt;p&gt;I used the slide deck from the GV site to introduce the sprint in the morning and that seemed to work quite well.  Everyone seemed happy with me as the facilitator and the main client being the decider.  My handwriting for the sprint questions was not outstanding, and I&amp;rsquo;m not sure how powerful they were for the rest of the sprint.  I guess they were re-articulated by the presenters in the afternoon.  Interestingly people started writing &amp;ldquo;how we might fail&amp;rdquo; questions on post-it notes and there was a process of integration as I re-wrote them.  The others didn&amp;rsquo;t join in the initial map drawing in the way that the AV folks did, collaborating in the drawing of the online map.  I did my best to map out what they were talking about, and it was great that they re-drew the map in simpler form.&lt;/p&gt;
-
-&lt;p&gt;It was interesting to see outbreaks of what might be called &amp;ldquo;argumentative&amp;rdquo; behaviour during the day.  Not in a negative sense, but more in a point and counterpoint, and point and counterpoint, that goes round and round.  I know I&amp;rsquo;ve been super guilty of this in the past, and it&amp;rsquo;s interesting being a facilitator and working out how to move on from those areas.  From one perspective when both people have made their points, the key thing is to record the positions and allow the process to move on to generate more ideas.  That can be derailed when both parties feel the need to explain their position further, falling into a kind of &amp;ldquo;No, but &amp;hellip;&amp;rdquo; where effectively the same point (with minor nuances) gets repeated.  Is it partly about having the last word.  Why do I (and many others) want that last word so much?  I&amp;rsquo;ve often felt that if someone makes a statement that I feel is incorrect, that if I don&amp;rsquo;t make the counterpoint then that&amp;rsquo;s the statement that&amp;rsquo;s being accepted by the room.  I guess I should trust people better that they won&amp;rsquo;t think just because someone said something last that it&amp;rsquo;s being accepted as truth.  Still it&amp;rsquo;s a difficult character flaw to let go of.  If someone makes a point and you have no comeback then it can seem like you are conceding the point.&lt;/p&gt;
-
-&lt;p&gt;Fascinating to look at it from a third person point of view.  I can see how others can get frustrated with the debate where they feel they&amp;rsquo;ve heard both points of view in painful detail and just want to move on.   And it&amp;rsquo;s clear how a debate can block the floor and prevent other issues being raised, other ideas being heard &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
