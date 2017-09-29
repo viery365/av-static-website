@@ -38,6 +38,40 @@
 </content>
   </entry>
   <entry>
+    <title>AV Website Review Part 3</title>
+    <link rel="alternate" href="http://blog.url.com/2017/07/07/av-website-review-part-three/"/>
+    <id>http://blog.url.com/2017/07/07/av-website-review-part-three/</id>
+    <published>2017-07-07T01:00:00+01:00</published>
+    <updated>2017-09-29T21:18:10+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Still struggling to get back to former health and energy levels.  Pleased to have reviewed and made some changes to the website.  Let&amp;rsquo;s continue.  Looking at &amp;ldquo;Getting Started&amp;rdquo; yesterday made me think about the projects page again.  Effectively the new &amp;ldquo;step 1&amp;rdquo; of &amp;ldquo;Getting Started&amp;rdquo; is a view of the projects that we don&amp;rsquo;t have, i.e. one with project maintainers, tech stacks and links to relevant Slack channels.  There have been recent improvements to the project page, specifically that the main list is now ordered by most recently active on Github, so there is a sense in which the main ordering of the projects is by most active (although it&amp;rsquo;s not clear that that&amp;rsquo;s the ordering) and we&amp;rsquo;ve adjusted the smaller list on the left to be alphabetical (and so consistently ordered), as well as filtering for inactive projects. &lt;/p&gt;
+
+&lt;p&gt;That said, I&amp;rsquo;m not sure that people arriving on the page have much clarity about what&amp;rsquo;s going on.  We also have the issue that projects with attached images have those images very large and overly dominate the page:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/3p6c4ginnxghgdo/Screenshot%202017-07-07%2010.13.22.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;It looks like just setting a smaller width on that could address that issue &amp;hellip; and yes, done that; added pull request.  Also noticed that actually we didn&amp;rsquo;t need to crimp the width per se - the bootstrap row/column setting was out of alignment - the column values adding up to 22 rather than 12.  So with a few changes the main project page for Wiki Edu now looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/873yfege210c0n0/Screenshot%202017-07-07%2010.31.40.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I guess what I really wanted to do while blogging this was to work through all the projects in the left hand list and de-activate those that aren&amp;rsquo;t really doing anything at the moment.  I guess I will just blast through that. The other thing I wanted to address was how this layout doesn&amp;rsquo;t really have much precedence in other sites.  I don&amp;rsquo;t know that we are using the layout language that people are familiar with from elsewhere on the web.  Ironically it was just when I took over the project management role that the previous maintainer was trying to get in the project page redesign that had been under way for a long time, but he backed out of that, getting busy with other things and perhaps frustrated that I was asking him to submit pull requests that were super-focused on specific changes, rather than rolling in a collection of things that were unrelated to the main ticket.&lt;/p&gt;
+
+&lt;p&gt;Perhaps that was a major mistake on my part.  I thought I was bringing in best-practices from other projects that I had worked on, but perhaps we lost a lot of work that could have leapt us forward in terms of the project page layout?  Michael and I chose to focus on the events pages for the main work we did when we first got involved.  To me there were screaming inconsistencies there that needed to be fixed first, but who knows what was the &amp;ldquo;right&amp;rdquo; thing to have done.  We did what we did, making our best judgements, given the information available at the time.&lt;/p&gt;
+
+&lt;p&gt;A layout that was a series of boxes, or rows in the table, would seem to make more sense than two separate lists where the ordering is somewhat unclear. Berkeley&amp;rsquo;s &lt;a href="http://projects.saas-class.org/projects"&gt;past project showcase&lt;/a&gt; has a more comprehensible layout in some ways:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/tzf8s3mfpeqzujc/Screenshot%202017-07-07%2010.02.14.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;They had another system for future projects that also had a layout that made more sense.  Just looking around I found a great &lt;a href="http://cs169.saas-class.org/faq/external-customer"&gt;guide they have for external &amp;ldquo;customers&amp;rdquo;&lt;/a&gt;, and a group of Berkeley students called &lt;a href="https://www.calblueprint.org/"&gt;&amp;ldquo;BluePrint&amp;rdquo;&lt;/a&gt; doing the same thing as AgileVentures.  Frustratingly I can&amp;rsquo;t find the portal that the CS169 class uses to allow students to select upcoming projects.  I&amp;rsquo;ve emailed Armando to ask if that&amp;rsquo;s still around.&lt;/p&gt;
+
+&lt;p&gt;I note we&amp;rsquo;ve got a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1089"&gt;project improvements epic ticket&lt;/a&gt;.  Lots of things to keep trying and improving &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;p.s. just went and set all projects to &amp;ldquo;inactive&amp;rdquo; and am working through re-activating the ones I know that have activity &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV Website Review Part 2</title>
     <link rel="alternate" href="http://blog.url.com/2017/07/06/av-website-review-part-two/"/>
     <id>http://blog.url.com/2017/07/06/av-website-review-part-two/</id>
@@ -215,22 +249,6 @@ Use this name to alert that person to a specific message when you post to the pr
 &lt;p&gt;It was a relief to get it all done.  I was exhausted, running all this while under the weather.  I had cancelled some of my Saturday activities (soccer coaching) to try and recover.  I fell asleep in a deck chair in the garden for two hours in the afternoon.  Even doing that is so slippery when you have a family.  It meant we ate supper late, I got indigestion and into a battle with my two youngest about completing their homework before playing computer games.  Sunday followed a somewhat similar pattern, with a dose of me stressing about online interactions with folks in AgileVentures.  I had hoped to start back into getting everything sorted out on Monday, but I woke up feeling like my cold had taken a retrograde step and ended up having to go back to bed for an hour; and even now am just easing myself back into the saddle.&lt;/p&gt;
 
 &lt;p&gt;In principle it&amp;rsquo;s time to end my year of blogging and focus on upgrades to the AV site, as well as getting on with the various administrative and paperwork tasks that are needed to get a grip on the financial situation.  One step at a time I guess.  I have to pay back the health debt from last week for having pushed on with the design sprint when my body was arguing for a time out &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Private Design Sprint Day Four</title>
-    <link rel="alternate" href="http://blog.url.com/2017/06/30/private-design-sprint-day-four/"/>
-    <id>http://blog.url.com/2017/06/30/private-design-sprint-day-four/</id>
-    <published>2017-06-30T01:00:00+01:00</published>
-    <updated>2017-09-27T21:07:14+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="design sprint" src="/images/design_sprint.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m heading in to London on the train for day 5 following a frenetic day in London yesterday.  We got access to our space a little late, but proceeded to make good progress on the prototype with the designer cranking out a landscape, logo and background; and I got MarvelApp going through the gears to auto-play videos and provide the interactivity we needed.  The main snag was that the audio quality in the room we were in was not great and we needed to record of the order of ten short videos to make the prototype work.&lt;/p&gt;
-
-&lt;p&gt;Ultimately we had to give up and head off to a different part of London where we could film quietly.  I was working illustrator in the back of a cab at one point.  There was debate about a change of approach, but ultimately we got it all done.  The editor got all the videos sorted out, and I linked them all in to the prototype.  I was up late, but woke early.  I&amp;rsquo;d also phoned and confirmed all the testers for the Friday, and knowing that we had real people showing up to use the app kept me going despite exhaustion and the tail end of my cold.  Design sprint Thursdays do seem to be the most frenetic and least pleasant.  The one in which tempers fray.  I wonder if the prototyping would be better off starting on Wednesday.&lt;/p&gt;
 </content>
   </entry>
 </feed>
