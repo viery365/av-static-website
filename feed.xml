@@ -38,6 +38,30 @@
 </content>
   </entry>
   <entry>
+    <title>AV Website Review Part 4</title>
+    <link rel="alternate" href="http://blog.url.com/2017/07/10/av-website-review-part-four/"/>
+    <id>http://blog.url.com/2017/07/10/av-website-review-part-four/</id>
+    <published>2017-07-10T01:00:00+01:00</published>
+    <updated>2017-10-02T20:00:17+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="conflicted" src="/images/conflicted.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m conflicted about what to review on the website next.  Part of me wants to start breaking the &amp;ldquo;Getting Started&amp;rdquo; page up into pieces, and showing animated gifs for each.  There&amp;rsquo;s also the &amp;ldquo;About Us&amp;rdquo; page and the need for privacy statement pages.  We&amp;rsquo;ve also got all the text in the &amp;ldquo;Learn&amp;rdquo;, &amp;ldquo;Code&amp;rdquo;, &amp;ldquo;Pair&amp;rdquo;, &amp;ldquo;Grow&amp;rdquo; sections, but I can also sense many other strands of the web attached there.  The presense of the &amp;ldquo;Email Registrations are temporarily disabled&amp;rdquo; on the &amp;ldquo;Sign up&amp;rdquo; page kind of bothers me.  It feels like it&amp;rsquo;s a bit of a running sore.  That said, no one has complained about it explicitly recently.  &lt;/p&gt;
+
+&lt;p&gt;We disabled the email registrations a couple of years ago when we were experiencing heavy spam sign ups.  In my &amp;ldquo;simplest first&amp;rdquo; doctrine I suggested just turning it off.  Others did suggest adding captchas and I wasn&amp;rsquo;t enthusiastic because I felt it was a kind of arms race and that we would be adding more functionality that we would have to maintain.  Maybe that was a mistake and I should have encouraged whoever was suggesting the captcha to implement one.  Recently my opinion is evolving I turned on a &lt;a href="https://www.google.com/recaptcha/intro/"&gt;captcha system&lt;/a&gt; to protect our NHS HLP wiki from spambot sign ups.  It was a pretty straightforward configuration and it seems to have been completely successful in blocking the spam bots.&lt;/p&gt;
+
+&lt;p&gt;The other thought I have for the sign up page is that by forcing people to sign up via either GitHub or Google, we ensure that more members have already completed the &amp;ldquo;Getting Started&amp;rdquo; step 1 (sign up for GitHub) that I recently removed from the &amp;ldquo;Getting Started&amp;rdquo; page.  Ironically the Google sign up is now sort of redundant since the main reason we wanted to offer that was to enable us to connect people&amp;rsquo;s Google profiles to the data coming back from the Google Hangout plugin.  Since Google retired the API for that plugin 3 months ago we&amp;rsquo;re not getting any telemetry on who starts or joins Hangouts, and we&amp;rsquo;re in the process of looking at how to move over to JitSi, which uses Gravatar rather than Google Plus.  So what direction does that push us in?&lt;/p&gt;
+
+&lt;p&gt;Should we drop the Google sign up?  Re-enable the email signup?  From a user point of view we should be providing the sign up options that are most convenient to the user.  We could be providing Twitter and Facebook login; it doesn&amp;rsquo;t feel like a priority, but having user accounts attached to their various social media identities might be useful.&lt;/p&gt;
+
+&lt;p&gt;The most glaring issue on the Sign up page is the reference to the &amp;ldquo;Privacy statement&amp;rdquo; when we don&amp;rsquo;t actually have one.  I think the priority has to be that privacy statement and then linking it up.  I&amp;rsquo;m also tempted to work on the captcha component so we can remove the increasingly erroneous &amp;ldquo;temporarily disabled&amp;rdquo; - apparently there&amp;rsquo;s a &lt;a href="https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise"&gt;gem&lt;/a&gt; that would allow us to integrate recaptcha with Devise.  Of course that&amp;rsquo;s all part of training Google&amp;rsquo;s AIs, but can we really fight that flow?  There&amp;rsquo;s also the concern that we&amp;rsquo;re not pushing people to get GitHub accounts, but I guess it&amp;rsquo;s better to get as many signed up as possible &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;ve created a &lt;a href="https://www.agileventures.org/privacy"&gt;privacy policy page&lt;/a&gt; based on the one we have for the NHS wiki.  Now I just need a pull request to link that into the footer and the Sign Up page &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV Website Review Part 3</title>
     <link rel="alternate" href="http://blog.url.com/2017/07/07/av-website-review-part-three/"/>
     <id>http://blog.url.com/2017/07/07/av-website-review-part-three/</id>
@@ -229,26 +253,6 @@ Use this name to alert that person to a specific message when you post to the pr
 &lt;p&gt;That said, I have a feeling I won&amp;rsquo;t be able to shake the blogging habit.  The process has become too solidly part of my daily routine.  The thing that actually gets me started and ready to work in the mornings.  So, anyhow, starting tomorrow, blogs that focus on parts of the main AgileVentures site.  I&amp;rsquo;m going to work through it one day at a time.&lt;/p&gt;
 
 &lt;p&gt;p.s. this blog released early for inclusion in our July newsletter, earlier blogs are all in draft form in GitHub and will be on this site soon&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Private Design Sprint Day Five</title>
-    <link rel="alternate" href="http://blog.url.com/2017/07/03/private-design-sprint-day-five/"/>
-    <id>http://blog.url.com/2017/07/03/private-design-sprint-day-five/</id>
-    <published>2017-07-03T01:00:00+01:00</published>
-    <updated>2017-09-27T21:07:14+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="design sprint" src="/images/design_sprint.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;It was a frenetic last day but we managed to run usability tests with five different people.  I had to reach out to my personal network to fill all the slots, as well as stretching out of the precise demographic range that we had targeted, but I think we managed to conduct five really meaningful sessions.  The tech setup also worked pretty well with FaceTime and YouTube streams from hangouts, although probably it would have been better to have the observers joining the hangouts - then again that could have just made things that little more complicated.  We started the interviews from 10am, and we definitely needed that 9am-10am period to get settled in.  In the book they suggest starting the interviews from 9am, but for that to work I think one really has to have had a run through session on the Thursday, and in my experience so far the tail end of Thursday is spent frantically working on the demo app itself.&lt;/p&gt;
-
-&lt;p&gt;Maybe even greater proficiency with the prototyping tools might address that, but there&amp;rsquo;s so much room for something not to work on the Thursday.  Maybe larger sprint teams are the key.  The sprints I&amp;rsquo;ve been involved in have had small teams.  There&amp;rsquo;s also the location issue.  I can see the whole thing really working best when you have a company that has a dedicated physical space that they&amp;rsquo;re comfortable working in and there aren&amp;rsquo;t a load of logistical issues to get sorted.  Starting the interviews at 10am meant that they ran back to back with 30 minute breaks.  Also most of the team needed to leave soon afterwards so we didn&amp;rsquo;t get time for the sort of review that I&amp;rsquo;d have liked.  There was lots of interesting discussion during the breaks, and the reactions to the demo system were pretty solidly positive.  The decider wasn&amp;rsquo;t so happy with the final design that emerged, but ultimately I think we all agreed that we&amp;rsquo;d been able to get good positive feedback on some of the key conceptual elements that we were planning for the app.&lt;/p&gt;
-
-&lt;p&gt;It was a relief to get it all done.  I was exhausted, running all this while under the weather.  I had cancelled some of my Saturday activities (soccer coaching) to try and recover.  I fell asleep in a deck chair in the garden for two hours in the afternoon.  Even doing that is so slippery when you have a family.  It meant we ate supper late, I got indigestion and into a battle with my two youngest about completing their homework before playing computer games.  Sunday followed a somewhat similar pattern, with a dose of me stressing about online interactions with folks in AgileVentures.  I had hoped to start back into getting everything sorted out on Monday, but I woke up feeling like my cold had taken a retrograde step and ended up having to go back to bed for an hour; and even now am just easing myself back into the saddle.&lt;/p&gt;
-
-&lt;p&gt;In principle it&amp;rsquo;s time to end my year of blogging and focus on upgrades to the AV site, as well as getting on with the various administrative and paperwork tasks that are needed to get a grip on the financial situation.  One step at a time I guess.  I have to pay back the health debt from last week for having pushed on with the design sprint when my body was arguing for a time out &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

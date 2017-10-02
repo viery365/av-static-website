@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV Website Review Part 4</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_11 blog_page_11_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_07 x2017_07_10 x2017_07_10_av-website-review-part-four x2017_07_10_av-website-review-part-four_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,76 +83,35 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/07/10/av-website-review-part-four/">AV Website Review Part 4</a></h2>
+        <h5 class='date'>10 Jul 2017</h5>
+    <p><img alt="conflicted" src="/images/conflicted.jpg" /></p>
 
-          <p>Page 11 of 20</p>
+<p>I&rsquo;m conflicted about what to review on the website next.  Part of me wants to start breaking the &ldquo;Getting Started&rdquo; page up into pieces, and showing animated gifs for each.  There&rsquo;s also the &ldquo;About Us&rdquo; page and the need for privacy statement pages.  We&rsquo;ve also got all the text in the &ldquo;Learn&rdquo;, &ldquo;Code&rdquo;, &ldquo;Pair&rdquo;, &ldquo;Grow&rdquo; sections, but I can also sense many other strands of the web attached there.  The presense of the &ldquo;Email Registrations are temporarily disabled&rdquo; on the &ldquo;Sign up&rdquo; page kind of bothers me.  It feels like it&rsquo;s a bit of a running sore.  That said, no one has complained about it explicitly recently.  </p>
 
-            <p><a href="/blog/page/10/">Previous page</a></p>
+<p>We disabled the email registrations a couple of years ago when we were experiencing heavy spam sign ups.  In my &ldquo;simplest first&rdquo; doctrine I suggested just turning it off.  Others did suggest adding captchas and I wasn&rsquo;t enthusiastic because I felt it was a kind of arms race and that we would be adding more functionality that we would have to maintain.  Maybe that was a mistake and I should have encouraged whoever was suggesting the captcha to implement one.  Recently my opinion is evolving I turned on a <a href="https://www.google.com/recaptcha/intro/">captcha system</a> to protect our NHS HLP wiki from spambot sign ups.  It was a pretty straightforward configuration and it seems to have been completely successful in blocking the spam bots.</p>
 
-          <h2><a href="/2017/01/17/server-monitoring/">Server Monitoring</a></h2>
-          <h3>Jan 17</h3>
-          <p><img alt="Server Monitoring" src="/images/server-monitoring.jpg"></p>
+<p>The other thought I have for the sign up page is that by forcing people to sign up via either GitHub or Google, we ensure that more members have already completed the &ldquo;Getting Started&rdquo; step 1 (sign up for GitHub) that I recently removed from the &ldquo;Getting Started&rdquo; page.  Ironically the Google sign up is now sort of redundant since the main reason we wanted to offer that was to enable us to connect people&rsquo;s Google profiles to the data coming back from the Google Hangout plugin.  Since Google retired the API for that plugin 3 months ago we&rsquo;re not getting any telemetry on who starts or joins Hangouts, and we&rsquo;re in the process of looking at how to move over to JitSi, which uses Gravatar rather than Google Plus.  So what direction does that push us in?</p>
 
-<p>So I’m still forcing myself to think about DevOps in preparation for my talk on Thursday.  Other things being equal I’d be blogging about our new marketing activities and how Google will potentially give us $10,000 a month of AdWords, and how there...</p>
-          <h2><a href="/2017/01/16/hosting-costs/">Hosting Costs</a></h2>
-          <h3>Jan 16</h3>
-          <p><img alt="hosting" src="/images/hosting.jpg"></p>
+<p>Should we drop the Google sign up?  Re-enable the email signup?  From a user point of view we should be providing the sign up options that are most convenient to the user.  We could be providing Twitter and Facebook login; it doesn&rsquo;t feel like a priority, but having user accounts attached to their various social media identities might be useful.</p>
 
-<p>There’s lots I’d like to talk about.  Premium pairing on new non-profit IT support plans, <a href="https://www.youtube.com/watch?v=P66oJafqqng">helping Kenyan students get started with LocalSupport</a>, <a href="https://www.youtube.com/watch?v=zrz6ct9wIUs">meeting with the LocalSupport client</a>, deploying LocalSupport via the new drie push Github interface,...</p>
-          <h2><a href="/2017/01/13/legacy-maintenance-plans/">Legacy Maintenance Plans</a></h2>
-          <h3>Jan 13</h3>
-          <p><img alt="legacy code" src="/images/legacy_code.jpg"></p>
+<p>The most glaring issue on the Sign up page is the reference to the &ldquo;Privacy statement&rdquo; when we don&rsquo;t actually have one.  I think the priority has to be that privacy statement and then linking it up.  I&rsquo;m also tempted to work on the captcha component so we can remove the increasingly erroneous &ldquo;temporarily disabled&rdquo; - apparently there&rsquo;s a <a href="https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise">gem</a> that would allow us to integrate recaptcha with Devise.  Of course that&rsquo;s all part of training Google&rsquo;s AIs, but can we really fight that flow?  There&rsquo;s also the concern that we&rsquo;re not pushing people to get GitHub accounts, but I guess it&rsquo;s better to get as many signed up as possible &hellip;</p>
 
-<p>When does an app become legacy?  I’d say pretty much as soon as you have anything deployed that anyone is using.  In my experience development on projects can stall and restart, but as long as people are deriving value from the application it needs...</p>
-          <h2><a href="/2017/01/12/deployment-devops/">Deployment DevOps</a></h2>
-          <h3>Jan 12</h3>
-          <p><img alt="devops" src="/images/devops.png"></p>
+<p>So I&rsquo;ve created a <a href="https://www.agileventures.org/privacy">privacy policy page</a> based on the one we have for the NHS wiki.  Now I just need a pull request to link that into the footer and the Sign Up page &hellip;</p>
 
-<p>I’m thinking alot about DevOps at the moment.  Partly because I’m giving a talk titled “DevOps on a Budget” a week from today at the remote DevOps conference.  I’m talking to folks on Slack about it, listening to the Ruby Rogues talk about it, listening...</p>
-          <h2><a href="/2017/01/11/dazed-and-confused/">Dazed and Confused</a></h2>
-          <h3>Jan 11</h3>
-          <p><img alt="dazed" src="/images/dazed.jpg"></p>
-
-<p>I did not manage to catch up on my sleep yesterday and I was up late fixing some coding mistakes, but somehow I don’t feel quite as washed out as yesterday.  I still feel like I’m chess boxing.  Which of the many different things on my list should...</p>
-          <h2><a href="/2017/01/10/tired-but-pushing-on/">Tired but Pushing On</a></h2>
-          <h3>Jan 10</h3>
-          <p><img alt="tired" src="/images/tired.jpg"></p>
-
-<p>I’m tired today.  Busy weekend.  Back to coaching kids football Saturday morning, “Bob Martin” scrum, taking eldest to guitar practice and round the supermarket and making supper.  Relatively calm Saturday evening, but then a frantic Sunday, with...</p>
-          <h2><a href="/2017/01/09/drie-github/">drie GitHub integration</a></h2>
-          <h3>Jan  9</h3>
-          <p><img alt="pool family" src="/images/pool_family.jpg"></p>
-
-<p>Friday I took a trip down to the <a href="https://drie.co/">drie</a> offices in Hammersmith.  We’d agreed before the break that we needed to coordinate our collaboration for the new year.  We’d previously agreed a sliding scale of sponsorship support based on outcomes for drie...</p>
-          <h2><a href="/2017/01/08/generalizing-pair-concept/">From pair programming to pair working</a></h2>
-          <h3>Jan  8</h3>
-          <p>Pair programming - as any relatively new programming methodology, such as BDD, TDD - is a controversial matter. The controversy is good. It helps define the relevant applications of the methodology. In their books “better, faster and lighter java”...</p>
-          <h2><a href="/2017/01/06/getting-organised/">Getting Organised</a></h2>
-          <h3>Jan  6</h3>
-          <p><img alt="organised" src="/images/organised.jpg"></p>
-
-<p>Recently we had new windows put in the front of the house, which included replacing my home office windows.  This forced me to have a bit of a clear up in the office to allow the builders access.  I’m not a big fan of having to clear up in the physical...</p>
-          <h2><a href="/2017/01/05/slow-but-steady/">Slow but Steady</a></h2>
-          <h3>Jan  5</h3>
-          <p><img alt="slow but steady" src="/images/slow_but_steady.jpg"></p>
-
-<p>I’m finding my pace rather slow after the break.  At least I’m sleeping through my 6:30am alarms and not really rousing myself til 7:30am.  That’s fine this week as my two youngest don’t start school till next Monday so there’s not a hard “we’ll...</p>
-
-            <p><a href="/blog/page/12/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -210,6 +170,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
