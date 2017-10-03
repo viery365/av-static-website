@@ -38,11 +38,86 @@
 </content>
   </entry>
   <entry>
+    <title>AV Website Review Part 5</title>
+    <link rel="alternate" href="http://blog.url.com/2017/07/11/av-website-review-part-five/"/>
+    <id>http://blog.url.com/2017/07/11/av-website-review-part-five/</id>
+    <published>2017-07-11T01:00:00+01:00</published>
+    <updated>2017-10-03T21:43:26+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So what I really meant to do yesterday was to look at the flows going through various pages in the site via Google Analytics.  Here&amp;rsquo;s a view that compares June with May this year:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="behaviour flow around sign up page, may vs jun" src="https://dl.dropbox.com/s/hf47so53v8lnhyw/Screenshot%202017-07-11%2009.23.15.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s perhaps even more revealing to compare June this year with June last year:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="behaviour flow around sign up page, jun 16 vs jun 17" src="https://dl.dropbox.com/s/j1yzvlujhm0qttm/Screenshot%202017-07-11%2009.27.31.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;What we can see clearly here is the big increase from those viewing &amp;rsquo;/code&amp;rsquo; and &amp;rsquo;/learn&amp;rsquo; (I shortened those and added sign up call to actions at the end of them recently) and the massize increase in those going to &amp;rsquo;/getting-started&amp;rsquo; (a few months back we adjusted it so that you go to &amp;ldquo;getting started&amp;rdquo; after signing in).&lt;/p&gt;
+
+&lt;p&gt;Of the 1200 people landing on the sign_up page in June, we had 380 just stop there and go no further.  I&amp;rsquo;m wondering if that figure could be improved by the deployment of a privacy policy and re-enabling email signups?  &lt;/p&gt;
+
+&lt;p&gt;What&amp;rsquo;s perhaps more concerning is the 299 drop offs out of the 793 sessions on the &amp;lsquo;getting started&amp;rsquo; page.  Of course maybe the reality is that we can&amp;rsquo;t change either of these drop off rates significantly.   I&amp;rsquo;ve just experiemented with changes to the &amp;#39;getting started&amp;rsquo; page and so it seems sensible to leave that for a while.  Although maybe we should be A/B testing rather than comparing longitudinally?  Anyhow, I&amp;rsquo;ve got the privacy statement all linked up into the sign up page:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="sign up page with privacy link" src="https://dl.dropbox.com/s/ggj4vgtqytlm5jp/Screenshot%202017-07-11%2009.34.22.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Overall I think the page looks pretty good.  We previously fixed up the icons and made both signup methods work, so the only garish thing remaining is this email signup disabled.  I found there&amp;rsquo;s a &lt;a href="https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise"&gt;plugin for devise to add Google&amp;rsquo;s re-captcha&lt;/a&gt;.  Working through it I got stuck with the configuration, but fixed it and put in a PR to the repo with the fix:&lt;/p&gt;
+
+&lt;p&gt;https://github.com/ambethia/recaptcha/pull/231&lt;/p&gt;
+
+&lt;p&gt;and so was rewarded with seeing the following in my local spike:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="first pass at adding recaptcha" src="https://dl.dropbox.com/s/fxj5vfx9wzj5sb3/Screenshot%202017-07-11%2009.54.23.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;but while I could click on the I&amp;rsquo;m not a robot, I got &amp;ldquo;verification failed&amp;rdquo; after signup:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="verification failed" src="https://dl.dropbox.com/s/bieuh1rayk3l9i7/Screenshot%202017-07-11%2009.55.37.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;All the log was telling me was: &lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Filter chain halted as :check_captcha rendered or redirected
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I added byebug to the check_captcha method I&amp;rsquo;d added to the registrations controller:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;prepend_before_action&lt;/span&gt; &lt;span class="ss"&gt;:check_captcha&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;only: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:create&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create&lt;/span&gt;
+    &lt;span class="k"&gt;super&lt;/span&gt;
+    &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="vi"&gt;@user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new_record?&lt;/span&gt;
+      &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:omniauth&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;
+      &lt;span class="n"&gt;flash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:user_signup&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Signed up successfully.'&lt;/span&gt;
+      &lt;span class="no"&gt;Mailer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;send_welcome_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@user&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;deliver_now&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;Features&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;enabled?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:welcome_email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+
+  &lt;span class="kp"&gt;private&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check_captcha&lt;/span&gt;
+    &lt;span class="n"&gt;byebug&lt;/span&gt;
+    &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;verify_recaptcha&lt;/span&gt;
+      &lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;resource&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;resource_class&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt; &lt;span class="n"&gt;sign_up_params&lt;/span&gt;
+      &lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;validate&lt;/span&gt; &lt;span class="c1"&gt;# Look for any other validation errors besides Recaptcha&lt;/span&gt;
+      &lt;span class="n"&gt;respond_with_navigational&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;:new&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Stepping through the code there made it look like the verification was failing - nothing else wrong.  The &lt;code&gt;verify_recaptcha&lt;/code&gt; method was returning false &amp;hellip; Not sure what&amp;rsquo;s going wrong there and I have the sinking feeling that adding the captcha as I have may screw up the other signup methods.  We&amp;rsquo;ll see.  First I just need proof positive that we can get it work at all &amp;hellip; It may be that I just can&amp;rsquo;t run it locally like this - I added the &lt;code&gt;localhost&lt;/code&gt; domain to the domains associated with keys to run locally, but maybe there&amp;rsquo;s more needed to run locally.  I can see that there&amp;rsquo;s a domain name verification setting in the reCaptcha settings:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="recaptcha settings" src="https://www.dropbox.com/s/53j9mi92omzrls9/Screenshot%202017-07-11%2010.04.42.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m just trying a re-start and another step through &amp;hellip; which seemed to work without any changes.  Hmm, maybe the restart did it &amp;hellip; I also played with the layout to make it all look a little better:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="new layout" src="https://www.dropbox.com/s/la5kden3qy8zsb1/Screenshot%202017-07-11%2010.12.41.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;which I assume didn&amp;rsquo;t actually change things.  Test again without the byebug &amp;hellip; and that works although I note I get two &amp;ldquo;signed up successfully messages&amp;rdquo; - tried to screen shot, but they fade out a little fast, would like to fix that.  Also I get nicely redirected to the &amp;ldquo;Getting Started&amp;rdquo; page.  Okay, well that&amp;rsquo;s the spike - sure it breaks lots of things, but might as well push that up as a spike PR so see how it all runs on CI.  Guess we&amp;rsquo;ll need sandboxing &amp;hellip;?  Look at that tomorrow.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV Website Review Part 4</title>
     <link rel="alternate" href="http://blog.url.com/2017/07/10/av-website-review-part-four/"/>
     <id>http://blog.url.com/2017/07/10/av-website-review-part-four/</id>
     <published>2017-07-10T01:00:00+01:00</published>
-    <updated>2017-10-02T20:00:17+01:00</updated>
+    <updated>2017-10-03T21:41:18+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -50,9 +125,9 @@
 
 &lt;p&gt;I&amp;rsquo;m conflicted about what to review on the website next.  Part of me wants to start breaking the &amp;ldquo;Getting Started&amp;rdquo; page up into pieces, and showing animated gifs for each.  There&amp;rsquo;s also the &amp;ldquo;About Us&amp;rdquo; page and the need for privacy statement pages.  We&amp;rsquo;ve also got all the text in the &amp;ldquo;Learn&amp;rdquo;, &amp;ldquo;Code&amp;rdquo;, &amp;ldquo;Pair&amp;rdquo;, &amp;ldquo;Grow&amp;rdquo; sections, but I can also sense many other strands of the web attached there.  The presense of the &amp;ldquo;Email Registrations are temporarily disabled&amp;rdquo; on the &amp;ldquo;Sign up&amp;rdquo; page kind of bothers me.  It feels like it&amp;rsquo;s a bit of a running sore.  That said, no one has complained about it explicitly recently.  &lt;/p&gt;
 
-&lt;p&gt;We disabled the email registrations a couple of years ago when we were experiencing heavy spam sign ups.  In my &amp;ldquo;simplest first&amp;rdquo; doctrine I suggested just turning it off.  Others did suggest adding captchas and I wasn&amp;rsquo;t enthusiastic because I felt it was a kind of arms race and that we would be adding more functionality that we would have to maintain.  Maybe that was a mistake and I should have encouraged whoever was suggesting the captcha to implement one.  Recently my opinion is evolving I turned on a &lt;a href="https://www.google.com/recaptcha/intro/"&gt;captcha system&lt;/a&gt; to protect our NHS HLP wiki from spambot sign ups.  It was a pretty straightforward configuration and it seems to have been completely successful in blocking the spam bots.&lt;/p&gt;
+&lt;p&gt;We disabled the email registrations a couple of years ago when we were experiencing heavy spam sign ups.  In my &amp;ldquo;simplest first&amp;rdquo; doctrine I suggested just turning it off.  Others did suggest adding captchas and I wasn&amp;rsquo;t enthusiastic because I felt it was a kind of arms race and that we would be adding more functionality that we would have to maintain.  Maybe that was a mistake and I should have encouraged whoever was suggesting the captcha to implement one.  Recently my opinion is evolving. I turned on a &lt;a href="https://www.google.com/recaptcha/intro/"&gt;captcha system&lt;/a&gt; to protect our NHS HLP wiki from spambot sign ups.  It was a pretty straightforward configuration and it seems to have been completely successful in blocking the spam bots.&lt;/p&gt;
 
-&lt;p&gt;The other thought I have for the sign up page is that by forcing people to sign up via either GitHub or Google, we ensure that more members have already completed the &amp;ldquo;Getting Started&amp;rdquo; step 1 (sign up for GitHub) that I recently removed from the &amp;ldquo;Getting Started&amp;rdquo; page.  Ironically the Google sign up is now sort of redundant since the main reason we wanted to offer that was to enable us to connect people&amp;rsquo;s Google profiles to the data coming back from the Google Hangout plugin.  Since Google retired the API for that plugin 3 months ago we&amp;rsquo;re not getting any telemetry on who starts or joins Hangouts, and we&amp;rsquo;re in the process of looking at how to move over to JitSi, which uses Gravatar rather than Google Plus.  So what direction does that push us in?&lt;/p&gt;
+&lt;p&gt;The other thought I have for the sign up page is that by forcing people to sign up via either GitHub or Google, we ensure that more members have already completed the &amp;ldquo;Getting Started&amp;rdquo; step 1 (sign up for GitHub) that I recently removed from the &amp;ldquo;Getting Started&amp;rdquo; page.  Ironically the Google sign up is now sort of redundant since the main reason we wanted to offer that was to enable us to connect people&amp;rsquo;s Google profiles to the data coming back from the Google Hangout plugin.  Since Google retired the API for that plugin 3 months ago we&amp;rsquo;re not getting any telemetry on who starts or joins Hangouts, and we&amp;rsquo;re in the process of looking at how to move over to Jitsi, which uses Gravatar rather than Google Plus.  So what direction does that push us in?&lt;/p&gt;
 
 &lt;p&gt;Should we drop the Google sign up?  Re-enable the email signup?  From a user point of view we should be providing the sign up options that are most convenient to the user.  We could be providing Twitter and Facebook login; it doesn&amp;rsquo;t feel like a priority, but having user accounts attached to their various social media identities might be useful.&lt;/p&gt;
 
@@ -225,34 +300,6 @@ Use this name to alert that person to a specific message when you post to the pr
 &lt;p&gt;and I&amp;rsquo;ve now gone ahead and updated the Premium page using them and reworded the descriptions to make sense.  I think I could also be adjusting the full details to be popping up like we have in the FAQ, but I think this is enough for today.  The interesting thing will be to see if this has any noticeable impact on the click through rates or the number of people signing up &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;p.s. Side note, since shortening the text in the &amp;ldquo;code&amp;rdquo; page and adding a call to action &amp;ldquo;get started now&amp;rdquo; button, we&amp;rsquo;ve seen a good third of the people landing on the page clicking through on the &amp;ldquo;get started now&amp;rdquo; button.  Not that that says very much - what would be good to be seeing is month by month stats of footfall and percentage of people on the site actually signing up &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>All Good Things ...</title>
-    <link rel="alternate" href="http://blog.url.com/2017/07/04/all-good-things/"/>
-    <id>http://blog.url.com/2017/07/04/all-good-things/</id>
-    <published>2017-07-04T01:00:00+01:00</published>
-    <updated>2017-09-27T21:07:14+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="good things" src="/images/good_things.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve been daily blogging for a year now.  Working day blogs that is.  I haven&amp;rsquo;t been blogging on weekends, or national holidays, or during my vacations.  I&amp;rsquo;ve been pretty consistent.  I think there&amp;rsquo;s been a couple of days where work was super busy due to the tail end of a design sprint or something, but I&amp;rsquo;ve managed to retro-actively blog and keep it one per work day.  I started blogging in June last year doing a blog on a different platform each day of the week, but fairly soon I fell into a pattern of blogging to our AgileVentures middleman site, and then re-releasing to Medium after I&amp;rsquo;d got a little distance from the blog itself.&lt;/p&gt;
-
-&lt;p&gt;What was the purpose of this blog frenzy?  My memory is that it was about trying to communicate more effectively.  I often end up assuming that people understand my thoughts and intentions and it turns out that actually they don&amp;rsquo;t.  Of course why would they?  There are few telepaths around.  I&amp;rsquo;m also a bit of a gabbler and my sense is that it&amp;rsquo;s not super easy to understand what I&amp;rsquo;m trying to communicate.  So blogging, get all the thoughts down in text, provide them in an accessible form for everyone to read, and maybe reduce my need to gabble on and on about things.  Win win, no?  There&amp;rsquo;s also the motivation that blogging at the start of each day is a kind of &amp;ldquo;morning pages&amp;rdquo; activity such as writers use to start off their days and clear their heads.  I don&amp;rsquo;t think writers usually publish their morning brain dump, but I have certainly found the process of starting each day with writing out my thoughts to be reassuring and relaxing.  &lt;/p&gt;
-
-&lt;p&gt;Earlier in the year when I was doing a lot more coding, the blogs tended to be all about the previous day&amp;rsquo;s coding.  As AgileVentures became an official charity and my admin load increased, they have tended to be about prioritization.  Starting the day with a blog is certainly less stressful than starting the day with a review of email and Slack conversations, which will generally lead to many adds to my ever-increasing todo list.  Has the time been well spent?  I&amp;rsquo;m not sure.  I&amp;rsquo;ve had positive reactions to some blogs, but my sense is that the blogs are too long, too stream-of-consciousness, too un-focused to gain much traction.  I think I may have even alienated some with my uncensored and unedited thought processes.&lt;/p&gt;
-
-&lt;p&gt;Ever since I was 17 I&amp;rsquo;ve never really had trouble just generating text, and from even earlier I was always a talker.  It&amp;rsquo;s like my internal thought wheel is hooked up directly to my mouth, and at will I can hook it up to a pen or a keyboard and just dump my thoughts straight out, for better or for worse.  So I rarely have writer&amp;rsquo;s block, but it leaves me with a different problem.  How to edit the thicket of thoughts and ideas, so as to more effectively communicate them?&lt;/p&gt;
-
-&lt;p&gt;Getting to the end of a year of blogging prompts thoughts of changing things going forward.  There&amp;rsquo;ve been times in the past when rising early I&amp;rsquo;ve done 3 hours of programming before breakfast.  After recent design sprints I think about doing coding sprints, or other activities that fill the week in different ways.  Should it be one blog a week with the blog being edited and revised each day, so that a single polished blog can be released on Friday?  I guess it all depends on what one wants to achieve, and hasn&amp;rsquo;t the Buddhist in me been trying to follow a path of consecrated action, where one is totally unattached to the outcomes of activities?&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d have loved my blogs to have provoked more positive responses of &amp;ldquo;yes, let&amp;rsquo;s build a solution to that together &amp;hellip;&amp;rdquo;, although there has been some of that.  What I really would like is for AgileVentures to be a healthy thriving community providing great learning experiences for many, while also helping charitable causes around the world.  The process of reflection over the last year does make me think that we&amp;rsquo;re far too text heavy in many, many parts of our interface with the world.  One of the most attractive ideas for me going forward is that I&amp;rsquo;d spend my blogging time each day focused on a part of the main AgileVentures site, converting it from text heavy to text light and adding images.  I have a hunch that, by doing this in strategic places throughout the site, we could improve the sign up rates, the number of members joining projects and the numbers signing up for Premium subscriptions, the source of our financial sustainability.&lt;/p&gt;
-
-&lt;p&gt;That said, I have a feeling I won&amp;rsquo;t be able to shake the blogging habit.  The process has become too solidly part of my daily routine.  The thing that actually gets me started and ready to work in the mornings.  So, anyhow, starting tomorrow, blogs that focus on parts of the main AgileVentures site.  I&amp;rsquo;m going to work through it one day at a time.&lt;/p&gt;
-
-&lt;p&gt;p.s. this blog released early for inclusion in our July newsletter, earlier blogs are all in draft form in GitHub and will be on this site soon&lt;/p&gt;
 </content>
   </entry>
 </feed>

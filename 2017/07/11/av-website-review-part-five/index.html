@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>AV Website Review Part 4</title>
+    <title>AV Website Review Part 5</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,7 +40,7 @@
 
     </script>
 </head>
-<body class="x2017 x2017_07 x2017_07_10 x2017_07_10_av-website-review-part-four x2017_07_10_av-website-review-part-four_index">
+<body class="x2017 x2017_07 x2017_07_11 x2017_07_11_av-website-review-part-five x2017_07_11_av-website-review-part-five_index">
     <link href="/stylesheets/highlighting.css" rel="stylesheet" />
 <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -89,21 +89,72 @@
       <div class="col-lg-2">
       </div>
       <div class="col-lg-8 text-left">
-        <h2 class='title'><a href="/2017/07/10/av-website-review-part-four/">AV Website Review Part 4</a></h2>
-        <h5 class='date'>10 Jul 2017</h5>
-    <p><img alt="conflicted" src="/images/conflicted.jpg" /></p>
+        <h2 class='title'><a href="/2017/07/11/av-website-review-part-five/">AV Website Review Part 5</a></h2>
+        <h5 class='date'>11 Jul 2017</h5>
+    <p>So what I really meant to do yesterday was to look at the flows going through various pages in the site via Google Analytics.  Here&rsquo;s a view that compares June with May this year:</p>
 
-<p>I&rsquo;m conflicted about what to review on the website next.  Part of me wants to start breaking the &ldquo;Getting Started&rdquo; page up into pieces, and showing animated gifs for each.  There&rsquo;s also the &ldquo;About Us&rdquo; page and the need for privacy statement pages.  We&rsquo;ve also got all the text in the &ldquo;Learn&rdquo;, &ldquo;Code&rdquo;, &ldquo;Pair&rdquo;, &ldquo;Grow&rdquo; sections, but I can also sense many other strands of the web attached there.  The presense of the &ldquo;Email Registrations are temporarily disabled&rdquo; on the &ldquo;Sign up&rdquo; page kind of bothers me.  It feels like it&rsquo;s a bit of a running sore.  That said, no one has complained about it explicitly recently.  </p>
+<p><img alt="behaviour flow around sign up page, may vs jun" src="https://dl.dropbox.com/s/hf47so53v8lnhyw/Screenshot%202017-07-11%2009.23.15.png?dl=1" /></p>
 
-<p>We disabled the email registrations a couple of years ago when we were experiencing heavy spam sign ups.  In my &ldquo;simplest first&rdquo; doctrine I suggested just turning it off.  Others did suggest adding captchas and I wasn&rsquo;t enthusiastic because I felt it was a kind of arms race and that we would be adding more functionality that we would have to maintain.  Maybe that was a mistake and I should have encouraged whoever was suggesting the captcha to implement one.  Recently my opinion is evolving. I turned on a <a href="https://www.google.com/recaptcha/intro/">captcha system</a> to protect our NHS HLP wiki from spambot sign ups.  It was a pretty straightforward configuration and it seems to have been completely successful in blocking the spam bots.</p>
+<p>It&rsquo;s perhaps even more revealing to compare June this year with June last year:</p>
 
-<p>The other thought I have for the sign up page is that by forcing people to sign up via either GitHub or Google, we ensure that more members have already completed the &ldquo;Getting Started&rdquo; step 1 (sign up for GitHub) that I recently removed from the &ldquo;Getting Started&rdquo; page.  Ironically the Google sign up is now sort of redundant since the main reason we wanted to offer that was to enable us to connect people&rsquo;s Google profiles to the data coming back from the Google Hangout plugin.  Since Google retired the API for that plugin 3 months ago we&rsquo;re not getting any telemetry on who starts or joins Hangouts, and we&rsquo;re in the process of looking at how to move over to Jitsi, which uses Gravatar rather than Google Plus.  So what direction does that push us in?</p>
+<p><img alt="behaviour flow around sign up page, jun 16 vs jun 17" src="https://dl.dropbox.com/s/j1yzvlujhm0qttm/Screenshot%202017-07-11%2009.27.31.png?dl=1" /></p>
 
-<p>Should we drop the Google sign up?  Re-enable the email signup?  From a user point of view we should be providing the sign up options that are most convenient to the user.  We could be providing Twitter and Facebook login; it doesn&rsquo;t feel like a priority, but having user accounts attached to their various social media identities might be useful.</p>
+<p>What we can see clearly here is the big increase from those viewing &rsquo;/code&rsquo; and &rsquo;/learn&rsquo; (I shortened those and added sign up call to actions at the end of them recently) and the massize increase in those going to &rsquo;/getting-started&rsquo; (a few months back we adjusted it so that you go to &ldquo;getting started&rdquo; after signing in).</p>
 
-<p>The most glaring issue on the Sign up page is the reference to the &ldquo;Privacy statement&rdquo; when we don&rsquo;t actually have one.  I think the priority has to be that privacy statement and then linking it up.  I&rsquo;m also tempted to work on the captcha component so we can remove the increasingly erroneous &ldquo;temporarily disabled&rdquo; - apparently there&rsquo;s a <a href="https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise">gem</a> that would allow us to integrate recaptcha with Devise.  Of course that&rsquo;s all part of training Google&rsquo;s AIs, but can we really fight that flow?  There&rsquo;s also the concern that we&rsquo;re not pushing people to get GitHub accounts, but I guess it&rsquo;s better to get as many signed up as possible &hellip;</p>
+<p>Of the 1200 people landing on the sign_up page in June, we had 380 just stop there and go no further.  I&rsquo;m wondering if that figure could be improved by the deployment of a privacy policy and re-enabling email signups?  </p>
 
-<p>So I&rsquo;ve created a <a href="https://www.agileventures.org/privacy">privacy policy page</a> based on the one we have for the NHS wiki.  Now I just need a pull request to link that into the footer and the Sign Up page &hellip;</p>
+<p>What&rsquo;s perhaps more concerning is the 299 drop offs out of the 793 sessions on the &lsquo;getting started&rsquo; page.  Of course maybe the reality is that we can&rsquo;t change either of these drop off rates significantly.   I&rsquo;ve just experiemented with changes to the &#39;getting started&rsquo; page and so it seems sensible to leave that for a while.  Although maybe we should be A/B testing rather than comparing longitudinally?  Anyhow, I&rsquo;ve got the privacy statement all linked up into the sign up page:</p>
+
+<p><img alt="sign up page with privacy link" src="https://dl.dropbox.com/s/ggj4vgtqytlm5jp/Screenshot%202017-07-11%2009.34.22.png?dl=1" /></p>
+
+<p>Overall I think the page looks pretty good.  We previously fixed up the icons and made both signup methods work, so the only garish thing remaining is this email signup disabled.  I found there&rsquo;s a <a href="https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise">plugin for devise to add Google&rsquo;s re-captcha</a>.  Working through it I got stuck with the configuration, but fixed it and put in a PR to the repo with the fix:</p>
+
+<p>https://github.com/ambethia/recaptcha/pull/231</p>
+
+<p>and so was rewarded with seeing the following in my local spike:</p>
+
+<p><img alt="first pass at adding recaptcha" src="https://dl.dropbox.com/s/fxj5vfx9wzj5sb3/Screenshot%202017-07-11%2009.54.23.png?dl=1" /></p>
+
+<p>but while I could click on the I&rsquo;m not a robot, I got &ldquo;verification failed&rdquo; after signup:</p>
+
+<p><img alt="verification failed" src="https://dl.dropbox.com/s/bieuh1rayk3l9i7/Screenshot%202017-07-11%2009.55.37.png?dl=1" /></p>
+
+<p>All the log was telling me was: </p>
+<pre class="highlight plaintext"><code>Filter chain halted as :check_captcha rendered or redirected
+</code></pre>
+<p>I added byebug to the check_captcha method I&rsquo;d added to the registrations controller:</p>
+<pre class="highlight ruby"><code>  <span class="n">prepend_before_action</span> <span class="ss">:check_captcha</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:create</span><span class="p">]</span> 
+
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="k">super</span>
+    <span class="k">unless</span> <span class="vi">@user</span><span class="p">.</span><span class="nf">new_record?</span>
+      <span class="n">session</span><span class="p">[</span><span class="ss">:omniauth</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
+      <span class="n">flash</span><span class="p">[</span><span class="ss">:user_signup</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Signed up successfully.'</span>
+      <span class="no">Mailer</span><span class="p">.</span><span class="nf">send_welcome_message</span><span class="p">(</span><span class="vi">@user</span><span class="p">).</span><span class="nf">deliver_now</span> <span class="k">if</span> <span class="no">Features</span><span class="p">.</span><span class="nf">enabled?</span><span class="p">(</span><span class="ss">:welcome_email</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">check_captcha</span>
+    <span class="n">byebug</span>
+    <span class="k">unless</span> <span class="n">verify_recaptcha</span>
+      <span class="nb">self</span><span class="p">.</span><span class="nf">resource</span> <span class="o">=</span> <span class="n">resource_class</span><span class="p">.</span><span class="nf">new</span> <span class="n">sign_up_params</span>
+      <span class="n">resource</span><span class="p">.</span><span class="nf">validate</span> <span class="c1"># Look for any other validation errors besides Recaptcha</span>
+      <span class="n">respond_with_navigational</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:new</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre>
+<p>Stepping through the code there made it look like the verification was failing - nothing else wrong.  The <code>verify_recaptcha</code> method was returning false &hellip; Not sure what&rsquo;s going wrong there and I have the sinking feeling that adding the captcha as I have may screw up the other signup methods.  We&rsquo;ll see.  First I just need proof positive that we can get it work at all &hellip; It may be that I just can&rsquo;t run it locally like this - I added the <code>localhost</code> domain to the domains associated with keys to run locally, but maybe there&rsquo;s more needed to run locally.  I can see that there&rsquo;s a domain name verification setting in the reCaptcha settings:</p>
+
+<p><img alt="recaptcha settings" src="https://www.dropbox.com/s/53j9mi92omzrls9/Screenshot%202017-07-11%2010.04.42.png?dl=1" /></p>
+
+<p>I&rsquo;m just trying a re-start and another step through &hellip; which seemed to work without any changes.  Hmm, maybe the restart did it &hellip; I also played with the layout to make it all look a little better:</p>
+
+<p><img alt="new layout" src="https://www.dropbox.com/s/la5kden3qy8zsb1/Screenshot%202017-07-11%2010.12.41.png?dl=1" /></p>
+
+<p>which I assume didn&rsquo;t actually change things.  Test again without the byebug &hellip; and that works although I note I get two &ldquo;signed up successfully messages&rdquo; - tried to screen shot, but they fade out a little fast, would like to fix that.  Also I get nicely redirected to the &ldquo;Getting Started&rdquo; page.  Okay, well that&rsquo;s the spike - sure it breaks lots of things, but might as well push that up as a spike PR so see how it all runs on CI.  Guess we&rsquo;ll need sandboxing &hellip;?  Look at that tomorrow.</p>
 
         <h2 class='author'>by Sam Joseph</h2>
       </div>  
