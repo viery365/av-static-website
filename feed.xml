@@ -5,10 +5,41 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-09-22T01:00:00+01:00</updated>
+  <updated>2017-10-02T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>The pilot+copilot organizational pattern</title>
+    <link rel="alternate" href="http://blog.url.com/2017/10/02/pilot-copilot-organizational-pattern/"/>
+    <id>http://blog.url.com/2017/10/02/pilot-copilot-organizational-pattern/</id>
+    <published>2017-10-02T01:00:00+01:00</published>
+    <updated>2017-10-04T21:52:30+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="pair flying" src="/images/pairflying.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;In 2002, I graduated a distance-learning masters in applied mathematics. Every month, the university mailed me an A4 enveloppe containing the course support. I was supposed to learn from the course material and returned the completed assignments within a month. A month later, I would receive an answer key. Should I have a question, I could mail it to the professor and wait for his reply. The whole process was cumbersome. I was often behind schedule. Interactivity was near to zero. &lt;/p&gt;
+
+&lt;p&gt;Later on, I participated in the MOOC endeavour. The video of the instructor gave a feeling of a one-to-one training session. Discussion forums, deadlines, follow-up mails, peer-reviews grounded the learning process. There were meetups too. And a MOOC about Agile Development using Ruby On Rails offered remote pair-programming sessions between participants. &lt;/p&gt;
+
+&lt;p&gt;Pair-programmming reuses the rather old organizational pattern of pilot+copilot : double-check, higher focusing, external view, and stronger engagement. You may object that programming is very different from flying. Yes, it is! &lt;/p&gt;
+
+&lt;p&gt;But programming requires a strong level of accuracy too. Your pairing fellow is both a watch dog that tells you not to call a library without checking how it works, not to cut and paste code across your work, and an inspiration to experiment with new ways of coding. As some aerobatic aircrafts don&amp;rsquo;t include a copilot seat, some programs are implemented by lone wolves in the wild.&lt;/p&gt;
+
+&lt;p&gt;Tools like teamviewer, logmein, skype, hangout or joinme have been instrumental to the success of remote pair working. There is still room for improvement:&lt;/p&gt;
+
+&lt;p&gt;1) In a face-to-face meeting, there is a desk between the two interlocutors. Webcams should recreate this confortable spacing. I&amp;rsquo;m neither a barber nor a dental professional!
+2) Remote working platforms lack of interoperability. Some only run on Windows, some require to install a software, others are more suitable for mobile use&amp;hellip; and don&amp;rsquo;t try to connect to hangout with skype
+3) Security is a weak point for all of these platforms. Choosing which window you share, which you don&amp;rsquo;t, masking your passwords or your personal information are not intuitive. In my earlier days, I remembered displaying my passwords on a recorded session. Not so good a security practice!
+4) Optimizing the screen definition so that everybody can watch comfortably is not supported either.&lt;/p&gt;
+
+&lt;p&gt;Every desktop application from IDE to word processors will probably include some kind of remote pair working feature sooner or later. C9 already includes some simple pair-programming features, for instance.  &lt;/p&gt;
+
+&lt;p&gt;Bugs in the code? Don&amp;rsquo;t blame me, it&amp;rsquo;s my pair programming partner who fooled around!&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Another free refill?</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/22/another-free-refill/"/>
@@ -38,11 +69,91 @@
 </content>
   </entry>
   <entry>
+    <title>AV Website Review Part 6</title>
+    <link rel="alternate" href="http://blog.url.com/2017/07/12/av-website-review-part-six/"/>
+    <id>http://blog.url.com/2017/07/12/av-website-review-part-six/</id>
+    <published>2017-07-12T01:00:00+01:00</published>
+    <updated>2017-10-04T21:50:59+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So my spike of adding ReCaptcha to the sign up page went pretty well.  It all seems to be passing in CI.  I was expecting lots of the sign up tests to break, but they all passed.  I guess because they don&amp;rsquo;t have javascript enabled?  It tempts me to get this merged in and into the flow.  Or should I be strict and get more detailed tests around them?  I switched on JavaScript and got this error:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    Given I am not logged in      # features/step_definitions/user_steps.rb:59
+      undefined method `submit' for #&amp;lt;Capybara::Poltergeist::Driver:0x007fc4b81becf0&amp;gt; (NoMethodError)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which appears to derive from Poltergeist not supporting the sign out step below&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt; &lt;span class="sr"&gt;/^I sign out$/&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;submit&lt;/span&gt; &lt;span class="ss"&gt;:delete&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;destroy_user_session_path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So one could spend time converting the tests for the logout, directly (at some test running time cost), and/or investigating how the Poltergeist driver might do the same thing.  It reminds me of a conversation I had with Lokesh the other day about what we want from our tests, that they:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;run fast&lt;/li&gt;
+&lt;li&gt;are reliable&lt;/li&gt;
+&lt;li&gt;catch bugs&lt;/li&gt;
+&lt;li&gt;are quick to put together&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The difficulty is getting all these four at the same time.  There&amp;rsquo;s also the question about getting testing at the different levels of acceptance, integration and unit, and the level of black-boxiness they operate with.  Of course my new resolution is to focus my mornings on actually making changes to the website (and surrounding ecosystem), rather than just blogging about the generalities.  I think there&amp;rsquo;s probably a concise blog post on the subject (and maybe I could generate it), but priorities.  Of course my mind is scattered from the intense discussions about microservices for the AsyncVoter project, and so I had resolved this morning to look at another part of the AgileVentures ecosystem, which is the little greeting bot that I have running in node on an Amazon EC2 instance.  Thinking about the funnel of folks coming into AgileVentures, we have something like:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;See Google AdWord or hear about us on podcast or through MOOC&lt;/li&gt;
+&lt;li&gt;Land on AV website home page&lt;/li&gt;
+&lt;li&gt;Some set of navigation steps&lt;/li&gt;
+&lt;li&gt;Land on the AV Sign up page (hopefully soon with captcha)&lt;/li&gt;
+&lt;li&gt;Sign up&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now after the sign up point, the member is redirected to the Getting Started page, which I just think should mention that a Slack invite has been sent.  Perhaps a flash notice to let them know to check their email for the Slack invite?  One that doesn&amp;rsquo;t dissappear too fast.  Maybe the sign up page itself should say that a slack invite will be sent?  I created an issue for that:&lt;/p&gt;
+
+&lt;p&gt;https://github.com/AgileVentures/WebsiteOne/issues/1724&lt;/p&gt;
+
+&lt;p&gt;But is that just re-arranging deck chairs?  So then there&amp;rsquo;s the ongoing flow of how and whether the member works through the &amp;ldquo;getting started&amp;rdquo; page.  There&amp;rsquo;s also the experience they have in Slack.  It&amp;rsquo;s frustrating that we can&amp;rsquo;t have an integrated experience where the Slack &amp;ldquo;chat&amp;rdquo; and website &amp;ldquo;documentation&amp;rdquo; are both available in parallel.  Anyhow, what we do have is this automated greeting when the user joins the Slack instance, which comes from my avatar and looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="automated greeting" src="https://dl.dropbox.com/s/uibnox5ijldnhz8/Screenshot%202017-07-12%2009.50.29.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now it&amp;rsquo;s not ideal that again we&amp;rsquo;re directing folks to a third party site (GitHub), but that partly reflected my frustration with editing in the Mercury editor in the main AV site.  Part of me wants to tear Mercury out of WSO and replace it with a markdown system, or have pages in WSO pull in from GitHub or something, but is the simpler thing to just try getting that page into Mercury?  Or would it be better to be pointing the new members directly to our AV &amp;ldquo;Getting Started&amp;rdquo; page?  So I did &lt;a href="https://www.agileventures.org/joining-a-project"&gt;that&lt;/a&gt;, and it looks okay, but the contents section still points to GitHub.  I don&amp;rsquo;t know how well we support &amp;ldquo;in page&amp;rdquo; anchors.  It&amp;rsquo;s these little things that make GitHub&amp;rsquo;s markdown so appealing.  Do we replicate?  Point to?  Not sure.  Either way, I&amp;rsquo;m struck by &amp;ldquo;LOTS OF TEXT&amp;rdquo; which is what our design sprint is pointing us away from &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Anyway, we&amp;rsquo;re also paying Amazon, monthly, a small amount for running this bot when we could be doing it cheaper on Azure, so I want to move that over.  Also Federico is keen for me to add the special offer about a free Mob session for liking us on Facebook or following us on Twitter.  I also want to get it set up so others can edit it &amp;hellip; let me at least try and remember how to access that code.  It&amp;rsquo;s in this repo:&lt;/p&gt;
+
+&lt;p&gt;https://github.com/AgileVentures/greeter_bot&lt;/p&gt;
+
+&lt;p&gt;Technically the bot is completely trivial.  I can&amp;rsquo;t immediately access it due to my IP address having changed - so it&amp;rsquo;s time to add the new one to EC2 security; and I&amp;rsquo;m in.  It&amp;rsquo;s just a git repo on a linux box and trivial to update.&lt;/p&gt;
+
+&lt;p&gt;What&amp;rsquo;s interesting is that this has been running for six months&amp;ndash;no trouble and no tests.  So anyway, I just ended up attempting to deploy the greeter bot on Azure/Dokku, which basically involved:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;git remote add azure-production dokku@agileventures.eastus.cloudapp.azure.com:greeterbot-production
+ssh dokku@agileventures.eastus.cloudapp.azure.com apps:create greeterbot-production
+ssh dokku@agileventures.eastus.cloudapp.azure.com config:set greeterbot-production GREETER_SLACK_BOT_TOKEN=XXXXXXX
+git remote 
+git pull origin master
+git push azure-production master
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;in the greeter bot directory locally. And maybe that&amp;rsquo;s working?  The logs look promising:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ ssh dokku@agileventures.eastus.cloudapp.azure.com logs greeterbot-production
+2017-07-12T09:14:08.250109458Z app[web.1]: 
+2017-07-12T09:14:08.250159913Z app[web.1]: &amp;gt; greeter_bot@1.0.0 start /app
+2017-07-12T09:14:08.250165992Z app[web.1]: &amp;gt; node server.js
+2017-07-12T09:14:08.250169031Z app[web.1]: 
+2017-07-12T09:14:08.938145069Z app[web.1]: info: ** No persistent storage method specified! Data may be lost when process shuts down.
+2017-07-12T09:14:08.964844990Z app[web.1]: info: ** Setting up custom handlers for processing Slack messages
+2017-07-12T09:14:08.978923602Z app[web.1]: info: ** API CALL: https://slack.com/api/rtm.start
+2017-07-12T09:14:09.788834373Z app[web.1]: notice: ** BOT ID: tansaku ...attempting to connect to RTM!
+2017-07-12T09:14:09.853519358Z app[web.1]: notice: RTM websocket opened
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;of course, we may have the same issue that we had on drie that the container sleeps and the websocket dies, and maybe I should have gone for the (simpler?) option of just deploying an ubuntu box on Azure and copying the thing over there &amp;hellip; I&amp;rsquo;ve shut down the EC2 bot and so we&amp;rsquo;ll run this experiment.  The greeter bot is just waiting for &lt;code&gt;team_join&lt;/code&gt; events, which I&amp;rsquo;m not sure how to simulate, and really the question is will Azure/Dokku work in full round trip with real users on Slack.   Of course I could do a direct test on a secondary Slack instance and create a new user to check it out - actually I could create a new user with some random email address on the main instance, although that means messy test users cluttering up the main Slack. &lt;/p&gt;
+
+&lt;p&gt;I guess I just wait for someone new to join - I can always post them the message myself if the Azure/Dokku deploy doesn&amp;rsquo;t work.  I&amp;rsquo;ve burned enough time this morning and it&amp;rsquo;s time to move on to admin/Slack/Emails.  Would have been cleaner to start in the test Slack instance, but now the experiment&amp;rsquo;s in progress &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;If it works Federico and others can submit PRs to change the greeter bot message and even deploy the changes themselves &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV Website Review Part 5</title>
     <link rel="alternate" href="http://blog.url.com/2017/07/11/av-website-review-part-five/"/>
     <id>http://blog.url.com/2017/07/11/av-website-review-part-five/</id>
     <published>2017-07-11T01:00:00+01:00</published>
-    <updated>2017-10-03T21:43:26+01:00</updated>
+    <updated>2017-10-04T20:32:06+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -54,7 +165,7 @@
 
 &lt;p&gt;&lt;img alt="behaviour flow around sign up page, jun 16 vs jun 17" src="https://dl.dropbox.com/s/j1yzvlujhm0qttm/Screenshot%202017-07-11%2009.27.31.png?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;What we can see clearly here is the big increase from those viewing &amp;rsquo;/code&amp;rsquo; and &amp;rsquo;/learn&amp;rsquo; (I shortened those and added sign up call to actions at the end of them recently) and the massize increase in those going to &amp;rsquo;/getting-started&amp;rsquo; (a few months back we adjusted it so that you go to &amp;ldquo;getting started&amp;rdquo; after signing in).&lt;/p&gt;
+&lt;p&gt;What we can see clearly here is the big increase from those viewing &amp;rsquo;/code&amp;rsquo; and &amp;rsquo;/learn&amp;rsquo; (I shortened those and added sign up call to actions at the end of them recently) and the massive increase in those going to &amp;rsquo;/getting-started&amp;rsquo; (a few months back we adjusted it so that you go to &amp;ldquo;getting started&amp;rdquo; after signing in).&lt;/p&gt;
 
 &lt;p&gt;Of the 1200 people landing on the sign_up page in June, we had 380 just stop there and go no further.  I&amp;rsquo;m wondering if that figure could be improved by the deployment of a privacy policy and re-enabling email signups?  &lt;/p&gt;
 
@@ -101,15 +212,15 @@
     &lt;span class="k"&gt;end&lt;/span&gt;
   &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Stepping through the code there made it look like the verification was failing - nothing else wrong.  The &lt;code&gt;verify_recaptcha&lt;/code&gt; method was returning false &amp;hellip; Not sure what&amp;rsquo;s going wrong there and I have the sinking feeling that adding the captcha as I have may screw up the other signup methods.  We&amp;rsquo;ll see.  First I just need proof positive that we can get it work at all &amp;hellip; It may be that I just can&amp;rsquo;t run it locally like this - I added the &lt;code&gt;localhost&lt;/code&gt; domain to the domains associated with keys to run locally, but maybe there&amp;rsquo;s more needed to run locally.  I can see that there&amp;rsquo;s a domain name verification setting in the reCaptcha settings:&lt;/p&gt;
+&lt;p&gt;Stepping through the code there made it look like the verification was failing - nothing else wrong.  The &lt;code&gt;verify_recaptcha&lt;/code&gt; method was returning false &amp;hellip; Not sure what&amp;rsquo;s going wrong there and I have the sinking feeling that adding the captcha, as I have, may screw up the other signup methods.  We&amp;rsquo;ll see.  First I just need proof positive that we can get it to work at all &amp;hellip; It may be that I just can&amp;rsquo;t run it locally like this - I added the &lt;code&gt;localhost&lt;/code&gt; domain to the domains associated with keys to run locally, but maybe there&amp;rsquo;s more needed to run locally.  I can see that there&amp;rsquo;s a domain name verification setting in the reCaptcha settings:&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="recaptcha settings" src="https://www.dropbox.com/s/53j9mi92omzrls9/Screenshot%202017-07-11%2010.04.42.png?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;m just trying a re-start and another step through &amp;hellip; which seemed to work without any changes.  Hmm, maybe the restart did it &amp;hellip; I also played with the layout to make it all look a little better:&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m just trying a restart &amp;hellip; and another step through &amp;hellip; which seemed to work without any changes.  Hmm, maybe the restart did it &amp;hellip; I also played with the layout to make it all look a little better:&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="new layout" src="https://www.dropbox.com/s/la5kden3qy8zsb1/Screenshot%202017-07-11%2010.12.41.png?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;which I assume didn&amp;rsquo;t actually change things.  Test again without the byebug &amp;hellip; and that works although I note I get two &amp;ldquo;signed up successfully messages&amp;rdquo; - tried to screen shot, but they fade out a little fast, would like to fix that.  Also I get nicely redirected to the &amp;ldquo;Getting Started&amp;rdquo; page.  Okay, well that&amp;rsquo;s the spike - sure it breaks lots of things, but might as well push that up as a spike PR so see how it all runs on CI.  Guess we&amp;rsquo;ll need sandboxing &amp;hellip;?  Look at that tomorrow.&lt;/p&gt;
+&lt;p&gt;which I assume didn&amp;rsquo;t actually change things.  Test again without the byebug &amp;hellip; and that works, although I note I get two &amp;ldquo;signed up successfully messages&amp;rdquo; - tried to screen shot, but they fade out a little fast; would like to fix that.  Also I get nicely redirected to the &amp;ldquo;Getting Started&amp;rdquo; page.  Okay, well that&amp;rsquo;s the spike - sure it breaks lots of things, but might as well push that up as a spike PR to see how it all runs on CI.  Guess we&amp;rsquo;ll need sandboxing &amp;hellip;?  Look at that tomorrow.&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -168,138 +279,6 @@
 &lt;p&gt;I note we&amp;rsquo;ve got a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1089"&gt;project improvements epic ticket&lt;/a&gt;.  Lots of things to keep trying and improving &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;p.s. just went and set all projects to &amp;ldquo;inactive&amp;rdquo; and am working through re-activating the ones I know that have activity &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV Website Review Part 2</title>
-    <link rel="alternate" href="http://blog.url.com/2017/07/06/av-website-review-part-two/"/>
-    <id>http://blog.url.com/2017/07/06/av-website-review-part-two/</id>
-    <published>2017-07-06T01:00:00+01:00</published>
-    <updated>2017-09-28T21:23:26+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So I&amp;rsquo;m deeply tempted to continue with the premium page review.  I think making all the new questions have their explanations in pop-out form would probably be an improvement, but I know that&amp;rsquo;s a sticky hour or so of manipulating HTML.  Very unDRY, something we could, or perhaps should, be doing with a DB backed loop through a template, but setting up (and deploying that) would be another few hours and days.  I&amp;rsquo;m leaning towards further review of the &amp;ldquo;Getting Started&amp;rdquo; page, although we did make a change to that on Monday.&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s too early to tell if those changes have had any impact.  We can look for changes via Google Analytics:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/yyyf9ykhy0tc68u/Screenshot%202017-07-06%2009.17.13.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and compare Monday to Wednesday last week, with Monday to Wednesday this week.  The number of clicks through WebSiteOne has gone down, although we can see it went up for some other projects:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/39tiao9ajhshqib/Screenshot%202017-07-06%2009.18.11.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Far too early to discern any trend.  I guess the question is whether to leave that single change (of removing the first two administrative steps) or to keep on &amp;ldquo;improving&amp;rdquo; the page.  Same quandry with the Premium page, I guess.  Just reviewing that now, I made some minor changes to the top of the page to remove the seemingly redundant link to &amp;ldquo;AgileVentures Premium&amp;rdquo; and an explanation text saying &amp;ldquo;the benefits are as follows&amp;rdquo; that seem to make no sense now that we have a list of questions.  Let&amp;rsquo;s at least do a sanity check on what we have in the &amp;ldquo;Getting Started&amp;rdquo; page.  So, step 1 currently says:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Browse the list of AgileVentures projects on agileventures.org, or the active projects listed in the table below, and learn more about the projects that interest you.&lt;/p&gt;
-
-&lt;p&gt;You can always set-up your own project, but we would recommend joining an existing one at first. This way you can meet other members, learn about our culture, principles and tools.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Now the odd thing is that we say browse the list of projects, but we don&amp;rsquo;t link there, and I could impulsively link that up, but would we rather the user focuses on the list of projects shown below?  The key thing we have in this list is the technologies used by the projects, the current maintainers and direct links to the relevant slack channels.  Of course it would be great if the main projects page showed all these things.  I&amp;rsquo;m thinking that a slimmed down more focused version of the above text would be:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Find a project that interests you from the table below:&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Then the table, and then notes on &amp;ldquo;can&amp;rsquo;t find a project you like, see our complete list&amp;rdquo; and &amp;ldquo;want to set up your own project&amp;rdquo; after the table itself and also we could improve the table formatting somehow &amp;hellip; so I pushed the width out to 100%, increased the font size, bolded the headings and added a couple of other active projects:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/66ss4bwklwf5may/Screenshot%202017-07-06%2009.52.21.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;as well as further cleaning up the text a little.  Reading through the rest of the getting started I feel like I&amp;rsquo;m reading a decsription of how some of the original developers intended the entire site to work.  There are cryptic references to WSO and other things that I think will make little sense.  Even after a few tidy ups what we have in step 2 is:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Learn how we communicate and coordinate projects:
-* source code is kept in Github repos
-* user stories (feature descriptions) are kept in project&amp;rsquo;s Pivotal Tracker (or other tracking systems)
-* other documentation and detailed feature descriptions are kept in project&amp;rsquo;s section on agileventures.org
-* real time discussion are done in Slack channels, in the specific channel for the project
-* long-term discussions (where it is important to preserve history) are done on Pivotal Tracker, or in Github pull requests/issues or by commenting under specific documents in project&amp;rsquo;s section on agileventures.org 
-* optionally recordings of PairProgramming sessions and standups are stored on YouTube. The list of videos for a specific project is under project&amp;rsquo;s section on agileventures.org
-* technical information on the project is kept in documents under project&amp;rsquo;s section on agileventures.org&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This is all information that we want new members to absorb, but I think it&amp;rsquo;s unlikely that many people will read and absorb.  We probably need to break this up into multiple steps (just like FreeCodeCamp) and have an activity associated with each.  Again it would be lovely to track people&amp;rsquo;s progress through this - I recall FreeCodeCamp has a separate page with an animated gif for each action, so they&amp;rsquo;ll be able to track with Google Analytics how far people are getting through the process.  Giving the user themselves a sense of progress through the task would also be great, as would having buttons that made it trivial to post a question to a project maintainer in the relevant slack channel (a bit like LinkedIn does to make it easy to send messages of a particular format).&lt;/p&gt;
-
-&lt;p&gt;Of course with all these different ideas there&amp;rsquo;s the question of which are the ones that are really worth pursuing.  I did get set up a few months back with being able to make nice animated gifs.   A nice animated gif of reaching out to a project maintainer and having them respond in a friendly fashion would probably be much more asorbable by lots of people than the current text of:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The &amp;ldquo;Contacts&amp;rdquo; column contains the &amp;ldquo;Slack name&amp;rdquo; of one or more people that can help orient you to the project.&lt;br&gt;
-Use this name to alert that person to a specific message when you post to the project slack channel.  For example, say you want to post a message to the MetPlus project channel, and make sure that &amp;ldquo;patrick&amp;rdquo; is aware of that message.  Here, you would go to the channel (and join the channel), and send a message like this:
-&amp;ldquo;@patrick - hi, I am new to agile ventures and I would like to learn more about this project.&amp;rdquo;
-&amp;ldquo;patrick&amp;rdquo; will then be alerted to your message and respond back.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I guess it&amp;rsquo;s all question of where to expend the effort &amp;hellip;?  Once people have left the getting started page will they come back to follow through the steps?  Perhaps not, unless they are marking off progress.  It makes me want to split the getting-started pages into Step 1 (of 5), Step 2 (of 5), &amp;hellip; Step 5 (of 5) so that there&amp;rsquo;s much less text per individual page, and so that we can see the flow of people from page to page.  Of course a lot of this points to the need for a re-design of the project page, which we&amp;rsquo;ve thought we&amp;rsquo;ve needed for a long time.  There&amp;rsquo;s also the automated greeter bot in Slack, which I need to move to Azure, and make sure others can deploy to and change.  That greeter bot would ideally point people back to the &amp;ldquo;Getting Started&amp;rdquo; page, rather than off to GitHub as it does currently &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Well, I think that&amp;rsquo;s the course I wanted to be on with these blogs.  Careful review of various pages in the site.  Set up an experiment on each, come back and review in a month to see what impact there&amp;rsquo;s been.  There&amp;rsquo;s certainly a good few other pages I can review over the course of the next month, e.g. the home page, the about page, the projects page, the event page, the opportunities page, the past scrums page, all the individual project pages &amp;hellip; the list goes on &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV Website Review Part 1</title>
-    <link rel="alternate" href="http://blog.url.com/2017/07/05/av-website-review-part-one/"/>
-    <id>http://blog.url.com/2017/07/05/av-website-review-part-one/</id>
-    <published>2017-07-05T01:00:00+01:00</published>
-    <updated>2017-09-27T21:12:10+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="new dawn" src="/images/new_dawn.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Right, new dawn.  I could be blogging about all the conversations we had about testing yesterday, but my new resolution is to get the AV website sorted out in terms of usability, readability and user flow one day at a time.  Immediately I&amp;rsquo;m torn between two sections.  There&amp;rsquo;s the &amp;ldquo;Getting Started&amp;rdquo; page that people either browse to, or get redirected to after sign in.  After discussions in the AV community meeting on Monday I removed the first two sections of that document:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-05%2009.29.00.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;These two sections are all things we&amp;rsquo;d like users to do, i.e. get set up with GitHub and Slack (and other things), but the danger is that the very first thing we are doing is directing folks away from our site.  The likelihood is that they signed up via GitHub and they&amp;rsquo;ve received a Slack invite.  It&amp;rsquo;s all very well asking folks to work through a set of administrative tasks when they are a &amp;ldquo;captive&amp;rdquo; audience, such as having already paid to take a class, but, really, we need to get people as quickly as possible to the higher engagement, fun activities, such as looking through the different active projects.  Anyway, I shouldn&amp;rsquo;t belabour the point, but it&amp;rsquo;s interesting to look at the flow through from Google Analytics for this page:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-04%2012.01.38.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;What we see there is a lot of drop offs and not many people clicking through on individual project pages.  The text associated with the first two &amp;ldquo;administrative&amp;rdquo; sections was forcing the table of active projects &amp;ldquo;below the fold&amp;rdquo;, i.e. making it something that people would have to scroll to get to.  Even so, the Google Analytics plugin for Chrome shows us what percentage of people are clicking through on which projects:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-05%2009.35.10.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So anyway, I removed the first two sections and we&amp;rsquo;ll see if there is any change.  I think there&amp;rsquo;s still room to reduce the amount of text, improve the layout and add graphics through this document, and so I&amp;rsquo;m torn about making more significant changes.  Particularly since it will take some weeks before we can really tell if there&amp;rsquo;s a difference.  We had 168 visits to the &amp;ldquo;Getting Started&amp;rdquo; page in the last month.  In addition I also want to make progress on the Premium page.  Previously Matt and I had worked on things so that when signed in users clicked on &amp;ldquo;Upgrade to Premium for additional support&amp;rdquo; on the home page, that instead of going to the payment page (with no information about Premium), it went to the description page for Premium, which made a lot more sense to me.&lt;/p&gt;
-
-&lt;p&gt;There&amp;rsquo;s functionality in the Google Analytics Chrome plugin to compare a period with the previous month, and I can see that there&amp;rsquo;s been a small increase in people clicking on the &amp;ldquo;Upgrade to Premium for additional support&amp;rdquo;.  We just redesigned the banner, but that only just went live, so we don&amp;rsquo;t have a clear indication for that increase:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-05%2009.48.57.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Looking through at the Premium description page we can now see some changes.  We adjusted the flow on the &lt;a href="https://github.com/AgileVentures/WebsiteOne/commit/1af6bfe440133e4ade2b08e6fc7b8703825ec2b6"&gt;18th of May&lt;/a&gt;, and we can now see that the click through on &amp;ldquo;Get Started with Premium&amp;rdquo; has increased from 11% to 15% compared with the same period previously:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-05%2009.55.37.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now the difficulty is that that change could just be due to a trend that we would have seen anyway, and also we don&amp;rsquo;t know that all those clicks are coming in via the new flow.  Users can reach this page by coming in through the pricing page, but having more people click on &amp;ldquo;Getting started with Premium&amp;rdquo; certainly feels like we are going in the right direction.  What&amp;rsquo;s frustrating is that we don&amp;rsquo;t have more info about what&amp;rsquo;s happening on this page:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-05%2009.59.16.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The Google analytics plugin is silent on the numbers of folks clicking on the subscribe buttons.  PayPal redirects to another site, while Stripe uses JavaScript to popup a credit card form.  I spent a chunk of time trying to see if I could see the flow around that page in the main Google Analytics site, but this was as close as I got:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/Screenshot%202017-07-05%2010.15.30.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Some of the exits could be people going to the PayPal page, but it&amp;rsquo;s unclear.  It makes me want to put the Chatlio &amp;ldquo;any questions&amp;rdquo; element in the site so that there&amp;rsquo;s an opportunity for people to tell us what they&amp;rsquo;re thinking as they browse the page.  Hmm, well I&amp;rsquo;ve burnt a lot of time reviewing the analytics and not a lot of time getting on to what I thought was my main thrust today, which is this rewording of the Premium description &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d posted some thoughts on that into a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1583#issuecomment-310992734"&gt;WSO issue&lt;/a&gt; where Ashley had made a great point about how these new re-wordings didn&amp;rsquo;t include the term &amp;ldquo;Agile&amp;rdquo;.  What&amp;rsquo;s interesting is that in breaking out separate items to give support on, we lose sight of the bigger Agile picture.  Michael had mentioned that getting quick feedback on pull requests is crucial for Agile, but it&amp;rsquo;s also the case that the main &amp;ldquo;Agile&amp;rdquo; things that we offer, such as working with a team, doing scrums, retros, kick-offs, sprints etc. are not something that the Premium offering particularly supports - or at least not in its current form.&lt;/p&gt;
-
-&lt;p&gt;It makes me think about things like having specific features like Sprint or retrospective support.  Of course that&amp;rsquo;s not as easy to break out as something that can be offered to Premium&amp;rsquo;s on a 121 basis without the associated selection of a project, introduction to the team etc. etc.  I have ideas about people signing up for a one off &amp;ldquo;sprint support package&amp;rdquo; at some higher price point, but there&amp;rsquo;s a ways to go there for that to make sense &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;So anyhow, here&amp;rsquo;s another pass at questions for the Premium page:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Want to find great developer jobs? Get help on the job search process?&lt;/li&gt;
-&lt;li&gt;Want to ace technical tests required to get interviews?&lt;/li&gt;
-&lt;li&gt;Want to accelerate your professional development?&lt;/li&gt;
-&lt;li&gt;Want to improve your coding and development skills?&lt;/li&gt;
-&lt;li&gt;Want to really understand Agile software development?&lt;/li&gt;
-&lt;li&gt;Want to put paid coding projects on your resume?&lt;/li&gt;
-&lt;li&gt;Want to make the world the better place?&lt;/li&gt;
-&lt;li&gt;Want to feel confident asking technical questions online?&lt;/li&gt;
-&lt;li&gt;Want to get discounts on important software and services for developers?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;and I&amp;rsquo;ve now gone ahead and updated the Premium page using them and reworded the descriptions to make sense.  I think I could also be adjusting the full details to be popping up like we have in the FAQ, but I think this is enough for today.  The interesting thing will be to see if this has any noticeable impact on the click through rates or the number of people signing up &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;p.s. Side note, since shortening the text in the &amp;ldquo;code&amp;rdquo; page and adding a call to action &amp;ldquo;get started now&amp;rdquo; button, we&amp;rsquo;ve seen a good third of the people landing on the page clicking through on the &amp;ldquo;get started now&amp;rdquo; button.  Not that that says very much - what would be good to be seeing is month by month stats of footfall and percentage of people on the site actually signing up &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

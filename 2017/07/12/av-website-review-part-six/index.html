@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV Website Review Part 6</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_07 x2017_07_12 x2017_07_12_av-website-review-part-six x2017_07_12_av-website-review-part-six_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/07/12/av-website-review-part-six/">AV Website Review Part 6</a></h2>
+        <h5 class='date'>12 Jul 2017</h5>
+    <p>So my spike of adding ReCaptcha to the sign up page went pretty well.  It all seems to be passing in CI.  I was expecting lots of the sign up tests to break, but they all passed.  I guess because they don&rsquo;t have javascript enabled?  It tempts me to get this merged in and into the flow.  Or should I be strict and get more detailed tests around them?  I switched on JavaScript and got this error:</p>
+<pre class="highlight plaintext"><code>    Given I am not logged in      # features/step_definitions/user_steps.rb:59
+      undefined method `submit' for #&lt;Capybara::Poltergeist::Driver:0x007fc4b81becf0&gt; (NoMethodError)
+</code></pre>
+<p>which appears to derive from Poltergeist not supporting the sign out step below</p>
+<pre class="highlight ruby"><code><span class="no">When</span> <span class="sr">/^I sign out$/</span> <span class="k">do</span>
+  <span class="n">page</span><span class="p">.</span><span class="nf">driver</span><span class="p">.</span><span class="nf">submit</span> <span class="ss">:delete</span><span class="p">,</span> <span class="n">destroy_user_session_path</span><span class="p">,</span> <span class="p">{}</span>
+<span class="k">end</span>
+</code></pre>
+<p>So one could spend time converting the tests for the logout, directly (at some test running time cost), and/or investigating how the Poltergeist driver might do the same thing.  It reminds me of a conversation I had with Lokesh the other day about what we want from our tests, that they:</p>
+
+<ol>
+<li>run fast</li>
+<li>are reliable</li>
+<li>catch bugs</li>
+<li>are quick to put together</li>
+</ol>
+
+<p>The difficulty is getting all these four at the same time.  There&rsquo;s also the question about getting testing at the different levels of acceptance, integration and unit, and the level of black-boxiness they operate with.  Of course my new resolution is to focus my mornings on actually making changes to the website (and surrounding ecosystem), rather than just blogging about the generalities.  I think there&rsquo;s probably a concise blog post on the subject (and maybe I could generate it), but priorities.  Of course my mind is scattered from the intense discussions about microservices for the AsyncVoter project, and so I had resolved this morning to look at another part of the AgileVentures ecosystem, which is the little greeting bot that I have running in node on an Amazon EC2 instance.  Thinking about the funnel of folks coming into AgileVentures, we have something like:</p>
+
+<ol>
+<li>See Google AdWord or hear about us on podcast or through MOOC</li>
+<li>Land on AV website home page</li>
+<li>Some set of navigation steps</li>
+<li>Land on the AV Sign up page (hopefully soon with captcha)</li>
+<li>Sign up</li>
+</ol>
+
+<p>Now after the sign up point, the member is redirected to the Getting Started page, which I just think should mention that a Slack invite has been sent.  Perhaps a flash notice to let them know to check their email for the Slack invite?  One that doesn&rsquo;t dissappear too fast.  Maybe the sign up page itself should say that a slack invite will be sent?  I created an issue for that:</p>
+
+<p>https://github.com/AgileVentures/WebsiteOne/issues/1724</p>
+
+<p>But is that just re-arranging deck chairs?  So then there&rsquo;s the ongoing flow of how and whether the member works through the &ldquo;getting started&rdquo; page.  There&rsquo;s also the experience they have in Slack.  It&rsquo;s frustrating that we can&rsquo;t have an integrated experience where the Slack &ldquo;chat&rdquo; and website &ldquo;documentation&rdquo; are both available in parallel.  Anyhow, what we do have is this automated greeting when the user joins the Slack instance, which comes from my avatar and looks like this:</p>
+
+<p><img alt="automated greeting" src="https://dl.dropbox.com/s/uibnox5ijldnhz8/Screenshot%202017-07-12%2009.50.29.png?dl=1" /></p>
+
+<p>Now it&rsquo;s not ideal that again we&rsquo;re directing folks to a third party site (GitHub), but that partly reflected my frustration with editing in the Mercury editor in the main AV site.  Part of me wants to tear Mercury out of WSO and replace it with a markdown system, or have pages in WSO pull in from GitHub or something, but is the simpler thing to just try getting that page into Mercury?  Or would it be better to be pointing the new members directly to our AV &ldquo;Getting Started&rdquo; page?  So I did <a href="https://www.agileventures.org/joining-a-project">that</a>, and it looks okay, but the contents section still points to GitHub.  I don&rsquo;t know how well we support &ldquo;in page&rdquo; anchors.  It&rsquo;s these little things that make GitHub&rsquo;s markdown so appealing.  Do we replicate?  Point to?  Not sure.  Either way, I&rsquo;m struck by &ldquo;LOTS OF TEXT&rdquo; which is what our design sprint is pointing us away from &hellip;</p>
+
+<p>Anyway, we&rsquo;re also paying Amazon, monthly, a small amount for running this bot when we could be doing it cheaper on Azure, so I want to move that over.  Also Federico is keen for me to add the special offer about a free Mob session for liking us on Facebook or following us on Twitter.  I also want to get it set up so others can edit it &hellip; let me at least try and remember how to access that code.  It&rsquo;s in this repo:</p>
+
+<p>https://github.com/AgileVentures/greeter_bot</p>
+
+<p>Technically the bot is completely trivial.  I can&rsquo;t immediately access it due to my IP address having changed - so it&rsquo;s time to add the new one to EC2 security; and I&rsquo;m in.  It&rsquo;s just a git repo on a linux box and trivial to update.</p>
+
+<p>What&rsquo;s interesting is that this has been running for six months&ndash;no trouble and no tests.  So anyway, I just ended up attempting to deploy the greeter bot on Azure/Dokku, which basically involved:</p>
+<pre class="highlight plaintext"><code>git remote add azure-production dokku@agileventures.eastus.cloudapp.azure.com:greeterbot-production
+ssh dokku@agileventures.eastus.cloudapp.azure.com apps:create greeterbot-production
+ssh dokku@agileventures.eastus.cloudapp.azure.com config:set greeterbot-production GREETER_SLACK_BOT_TOKEN=XXXXXXX
+git remote 
+git pull origin master
+git push azure-production master
+</code></pre>
+<p>in the greeter bot directory locally. And maybe that&rsquo;s working?  The logs look promising:</p>
+<pre class="highlight plaintext"><code>→ ssh dokku@agileventures.eastus.cloudapp.azure.com logs greeterbot-production
+2017-07-12T09:14:08.250109458Z app[web.1]: 
+2017-07-12T09:14:08.250159913Z app[web.1]: &gt; greeter_bot@1.0.0 start /app
+2017-07-12T09:14:08.250165992Z app[web.1]: &gt; node server.js
+2017-07-12T09:14:08.250169031Z app[web.1]: 
+2017-07-12T09:14:08.938145069Z app[web.1]: info: ** No persistent storage method specified! Data may be lost when process shuts down.
+2017-07-12T09:14:08.964844990Z app[web.1]: info: ** Setting up custom handlers for processing Slack messages
+2017-07-12T09:14:08.978923602Z app[web.1]: info: ** API CALL: https://slack.com/api/rtm.start
+2017-07-12T09:14:09.788834373Z app[web.1]: notice: ** BOT ID: tansaku ...attempting to connect to RTM!
+2017-07-12T09:14:09.853519358Z app[web.1]: notice: RTM websocket opened
+</code></pre>
+<p>of course, we may have the same issue that we had on drie that the container sleeps and the websocket dies, and maybe I should have gone for the (simpler?) option of just deploying an ubuntu box on Azure and copying the thing over there &hellip; I&rsquo;ve shut down the EC2 bot and so we&rsquo;ll run this experiment.  The greeter bot is just waiting for <code>team_join</code> events, which I&rsquo;m not sure how to simulate, and really the question is will Azure/Dokku work in full round trip with real users on Slack.   Of course I could do a direct test on a secondary Slack instance and create a new user to check it out - actually I could create a new user with some random email address on the main instance, although that means messy test users cluttering up the main Slack. </p>
+
+<p>I guess I just wait for someone new to join - I can always post them the message myself if the Azure/Dokku deploy doesn&rsquo;t work.  I&rsquo;ve burned enough time this morning and it&rsquo;s time to move on to admin/Slack/Emails.  Would have been cleaner to start in the test Slack instance, but now the experiment&rsquo;s in progress &hellip;</p>
+
+<p>If it works Federico and others can submit PRs to change the greeter bot message and even deploy the changes themselves &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
