@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV Website Review Part 7</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_13 blog_page_13_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_07 x2017_07_13 x2017_07_13_av-website-review-part-seven x2017_07_13_av-website-review-part-seven_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,79 +83,80 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/07/13/av-website-review-part-seven/">AV Website Review Part 7</a></h2>
+        <h5 class='date'>13 Jul 2017</h5>
+    <p>So overnight some new folks signed up for the AgileVentures slack.  It seems like the greeter bot on Azure/Dokku has succesfully greeted a handful of new members, so I&rsquo;ve turned off the greeter bot on EC2 and shut down the instance, which should save us $5 a month, or so.  Look after the pennies and the pounds will look after themselves they say.  Lots of pennies still to save methinks.  Anyhow, my calculated gamble seems to have worked.  We got one user having a double greeting in the changeover, but they&rsquo;ve actually responded positively and, otherwise, normal service has been restored.  So now in principle we can have simpler management of the greeter bot message.  Federico and others can submit PRs to update the message, and even deploy it themselves.  I guess I should just test that with a new message &hellip; so I put in a pull request:</p>
 
-          <p>Page 13 of 21</p>
+<p><a href="https://github.com/AgileVentures/greeter_bot/pull/3">https://github.com/AgileVentures/greeter_bot/pull/3</a></p>
 
-            <p><a href="/blog/page/12/">Previous page</a></p>
+<p>merged that and pushed that up to dokku from the command line:</p>
+<pre class="highlight plaintext"><code>→ git remote -v
+azure-production    dokku@agileventures.eastus.cloudapp.azure.com:greeterbot-production (fetch)
+azure-production    dokku@agileventures.eastus.cloudapp.azure.com:greeterbot-production (push)
+origin  git@github.com:tansaku/greeter_bot.git (fetch)
+origin  git@github.com:tansaku/greeter_bot.git (push)
+→ git push azure-production master
+Counting objects: 4, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (4/4), done.
+....
+-----&gt; Shutting down old containers in 60 seconds
+=====&gt; fc005e593ed37166e80f04c0b0093f367771bff7aa055e4bc2900fa8a9a2850b
+=====&gt; Application deployed:
+       http://greeterbot-production.agileventures.eastus.cloudapp.azure.com
 
-          <h2><a href="/2016/12/12/semi-automated-bots/">Semi-Automated Bots, or Augmented Humans?</a></h2>
-          <h3>Dec 12</h3>
-          <p><img alt="bot" src="/images/bot.jpeg"></p>
+To agileventures.eastus.cloudapp.azure.com:greeterbot-production
+   f7db8d3..53ef0fc  master -&gt; master
+</code></pre>
+<p>so of course ideally we&rsquo;d have a staging instance which was pointing at a different Slack instance to check that was all working and tests wrapping different parts of the system, but I&rsquo;m doing my usual &ldquo;get the round trip working first&rdquo;.  I took the liberty of pushing out the Premium Mob special offer on both twitter and facebook, and I&rsquo;ll now happily wait to see if the next person who joins Slack gets the updated message.  The code change is so small that it feels pretty safe.  There may be an issue with how it formats in Slack, but I quickly tested that by pasting the message in, and this slackbot seems to get it&rsquo;s hyperlinks auto linked in the way expected.</p>
 
-<p>Friday included a lot of meetings, pull request review, and bug fixing.  I didn’t get much fresh coding down, which was somewhat frustrating, but I did have a bit of a breakthrough on the greeter bot side, with this code:</p>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">Botkit</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'botkit...</span></code></pre>
-          <h2><a href="/2016/12/09/making-progress/">Making Progress (for the Greater Good)</a></h2>
-          <h3>Dec  9</h3>
-          <p><img alt="progress" src="/images/progress.jpg"></p>
+<p>So I guess that&rsquo;s a short one today.  In parallel we&rsquo;re starting to have some tiny traction from having added Chatlio to the site.  I&rsquo;m just talking in #new<em>projects to a new member who first contacted us on Chatlio &hellip; they were reaching out to me in DM and I got them to ask their questions in #new</em>projects:</p>
 
-<p>So I went over time for yesterday’s blogging.  I’d tried to cap it at 20 minutes, but I got into a fair bit of detail about the options for testing/mocking the Twitter API before getting on to the meat of the matter I was trying to focus on; Agile...</p>
-          <h2><a href="/2016/12/08/agile-dev-ops/">Agile DevOps</a></h2>
-          <h3>Dec  8</h3>
-          <p><img alt="devops" src="/images/devops.png"></p>
+<blockquote>
+<p>I am just curious to understand about Agile Ventures as an organisation like:</p>
 
-<p>So my project manager partner for WebsiteOne Raoul has got really busy recently, so we negotiated that I would take on some of the PR merging and release responsibility this week.  After the usual blogging and admin and “Martin Fowler” scrum I jumped...</p>
-          <h2><a href="/2016/12/07/meetings-vs-coding/">Meetings vs Coding</a></h2>
-          <h3>Dec  7</h3>
-          <p><img alt="meeting" src="/images/meeting.jpg"></p>
+<p>Who decides on whether a project would be accepted by Agile Ventures or not?</p>
 
-<p>Tuesday suddenly sprouted a couple of meetings.  Well, the WikiEDU meeting had been planned from the week before, and gave WikiEDU developer Sage Ross the chance to tell AV about the WikiEDU project, which helps instructors set editing Wikipedia...</p>
-          <h2><a href="/2016/12/06/speed-coding-blogging/">Speed Coding and Blogging</a></h2>
-          <h3>Dec  6</h3>
-          <p><img alt="hourglass" src="/images/hourglass.jpeg"></p>
+<p>Along with a charity aspect, can the project also have a commercial angle to it?</p>
 
-<p>Monday was the usual fight against torpor, but I did get an hour’s pairing in with Michael on WSO where Michael drove a finish to putting the Paypal payment button on the same page as the Stripe credit card payment.  Before he started on that I got...</p>
-          <h2><a href="/2016/12/05/refactoring_and_pairing/">Refactoring and Pairing</a></h2>
-          <h3>Dec  5</h3>
-          <p><img alt="refactoring" src="/images/refactoring.jpg"></p>
+<p>I had always felt a need for better products in education sector and obviously, technology is the enabler for it. I am just trying to think Loud and just wondering if I come up with some products which at present is just at an idea stage, will I be able to take that idea to product stage using a platform like yours?</p>
 
-<p>So hot on the heels of our first AV member sponsoring other AV members for Premium support, another Premium member was talking about sponsoring some of their co-workers for Premium membership as Xmas gifts!  Now this particular Premium member prefers...</p>
-          <h2><a href="/2016/12/02/testing-slack-bots/">Testing Slack Bots and Project Metrics</a></h2>
-          <h3>Dec  2</h3>
-          <p><img alt="metrics" src="/images/metrics.png"></p>
+<p>Once the idea reaches proof of concept, may be then we could use platforms like Kickstarter etc to raise funds?</p>
 
-<p>Wednesday saw me firing off a few emails to potential sponsors, which felt like a good start, since landing another sponsor would make all the difference to us over the coming months.  We had our second mob programming session, and I got a preview...</p>
-          <h2><a href="/2016/12/01/task-switching/">Task Switching</a></h2>
-          <h3>Dec  1</h3>
-          <p><img alt="task switching" src="/images/task_switching.png"></p>
+<p>Anyway thanking all of you in advance for taking time to read  this&mdash;&mdash;</p>
+</blockquote>
 
-<p>Tuesday was a day of much task switching.  It started with putting my office back together after new windows had been put in.  That took a while.  I managed to quickly stamp out a blog on the Agile Project Workshop before the “Martin Fowler” scrum...</p>
-          <h2><a href="/2016/11/30/agile-project-workshop/">Agile Project Management for NonProfits</a></h2>
-          <h3>Nov 30</h3>
-          <p><img alt="agile" src="/images/agile.png"></p>
+<p>I responded:</p>
 
-<p>Most of Tuesday was taken up with running a workshop on Agile Project Development for non-profits at the Volunteer Services Center up the road.  This was for Voluntary Action Harrow Cooperative (VAHC), who are the client for the Harrow Community...</p>
-          <h2><a href="/2016/11/29/hosting-slack-bots/">Hosting Slack Bots</a></h2>
-          <h3>Nov 29</h3>
-          <p><img alt="bots" src="/images/bots.png"></p>
+<blockquote>
+<p>Ultimately the decision about whether a project is accepted into AgileVentures is up to the charity trustees and charity members</p>
 
-<p>The slackbot had stayed live for most of the weekend on drie push, but on Monday morning it was unresponsive, and although we’d completed a vote or two, not all the notifications had come through.  The bot would not restart from fresh pushes of the...</p>
+<p>we have a charity constitution with objectives of 1) open education accessible to all AND 2) helping charities, non-profits and other socially beneficial causes</p>
 
-            <p><a href="/blog/page/14/">Next page</a></p>
+<p>the process usually starts with someone proposing a project here and us discussing whether it&rsquo;s appropriate - if you scroll up you can see some examples of that</p>
 
+<p>projects do occasionally have commercial angles to them - I believe #take<em>me</em>away was for a normal business where the owner had agreed to make the project completely open source for learning purposes</p>
+
+<p>where we&rsquo;d have difficulty is supporting a project that was for a for-profit business where the code was close-sourced.  It might still have educational benefit to the volunteer coders, but really developers should receive payment for that sort of work, and while we&rsquo;re happy to help our members make connections with private businesses, we can&rsquo;t really support those projects directly</p>
+
+<p>you&rsquo;re most welcome to brainstorm product and project ideas.  Our platform could certainly help you take that to the product stage given commitment to open source and open development so that all our members could benefit from the experience, and especially if you&rsquo;re committed to non-profit and charitable objectives</p>
+</blockquote>
+
+<p>I do wonder if we need a more formal route for project proposals.  That&rsquo;s another part of the website ecosystem - in the first instance I&rsquo;m going to keep focusing on the onboarding route for new members.</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -213,6 +215,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

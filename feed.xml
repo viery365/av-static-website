@@ -69,6 +69,75 @@
 </content>
   </entry>
   <entry>
+    <title>AV Website Review Part 7</title>
+    <link rel="alternate" href="http://blog.url.com/2017/07/13/av-website-review-part-seven/"/>
+    <id>http://blog.url.com/2017/07/13/av-website-review-part-seven/</id>
+    <published>2017-07-13T01:00:00+01:00</published>
+    <updated>2017-10-05T20:20:50+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So overnight some new folks signed up for the AgileVentures slack.  It seems like the greeter bot on Azure/Dokku has succesfully greeted a handful of new members, so I&amp;rsquo;ve turned off the greeter bot on EC2 and shut down the instance, which should save us $5 a month, or so.  Look after the pennies and the pounds will look after themselves they say.  Lots of pennies still to save methinks.  Anyhow, my calculated gamble seems to have worked.  We got one user having a double greeting in the changeover, but they&amp;rsquo;ve actually responded positively and, otherwise, normal service has been restored.  So now in principle we can have simpler management of the greeter bot message.  Federico and others can submit PRs to update the message, and even deploy it themselves.  I guess I should just test that with a new message &amp;hellip; so I put in a pull request:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/AgileVentures/greeter_bot/pull/3"&gt;https://github.com/AgileVentures/greeter_bot/pull/3&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;merged that and pushed that up to dokku from the command line:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ git remote -v
+azure-production    dokku@agileventures.eastus.cloudapp.azure.com:greeterbot-production (fetch)
+azure-production    dokku@agileventures.eastus.cloudapp.azure.com:greeterbot-production (push)
+origin  git@github.com:tansaku/greeter_bot.git (fetch)
+origin  git@github.com:tansaku/greeter_bot.git (push)
+→ git push azure-production master
+Counting objects: 4, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (4/4), done.
+....
+-----&amp;gt; Shutting down old containers in 60 seconds
+=====&amp;gt; fc005e593ed37166e80f04c0b0093f367771bff7aa055e4bc2900fa8a9a2850b
+=====&amp;gt; Application deployed:
+       http://greeterbot-production.agileventures.eastus.cloudapp.azure.com
+
+To agileventures.eastus.cloudapp.azure.com:greeterbot-production
+   f7db8d3..53ef0fc  master -&amp;gt; master
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;so of course ideally we&amp;rsquo;d have a staging instance which was pointing at a different Slack instance to check that was all working and tests wrapping different parts of the system, but I&amp;rsquo;m doing my usual &amp;ldquo;get the round trip working first&amp;rdquo;.  I took the liberty of pushing out the Premium Mob special offer on both twitter and facebook, and I&amp;rsquo;ll now happily wait to see if the next person who joins Slack gets the updated message.  The code change is so small that it feels pretty safe.  There may be an issue with how it formats in Slack, but I quickly tested that by pasting the message in, and this slackbot seems to get it&amp;rsquo;s hyperlinks auto linked in the way expected.&lt;/p&gt;
+
+&lt;p&gt;So I guess that&amp;rsquo;s a short one today.  In parallel we&amp;rsquo;re starting to have some tiny traction from having added Chatlio to the site.  I&amp;rsquo;m just talking in #new&lt;em&gt;projects to a new member who first contacted us on Chatlio &amp;hellip; they were reaching out to me in DM and I got them to ask their questions in #new&lt;/em&gt;projects:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;I am just curious to understand about Agile Ventures as an organisation like:&lt;/p&gt;
+
+&lt;p&gt;Who decides on whether a project would be accepted by Agile Ventures or not?&lt;/p&gt;
+
+&lt;p&gt;Along with a charity aspect, can the project also have a commercial angle to it?&lt;/p&gt;
+
+&lt;p&gt;I had always felt a need for better products in education sector and obviously, technology is the enabler for it. I am just trying to think Loud and just wondering if I come up with some products which at present is just at an idea stage, will I be able to take that idea to product stage using a platform like yours?&lt;/p&gt;
+
+&lt;p&gt;Once the idea reaches proof of concept, may be then we could use platforms like Kickstarter etc to raise funds?&lt;/p&gt;
+
+&lt;p&gt;Anyway thanking all of you in advance for taking time to read  this&amp;mdash;&amp;mdash;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I responded:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Ultimately the decision about whether a project is accepted into AgileVentures is up to the charity trustees and charity members&lt;/p&gt;
+
+&lt;p&gt;we have a charity constitution with objectives of 1) open education accessible to all AND 2) helping charities, non-profits and other socially beneficial causes&lt;/p&gt;
+
+&lt;p&gt;the process usually starts with someone proposing a project here and us discussing whether it&amp;rsquo;s appropriate - if you scroll up you can see some examples of that&lt;/p&gt;
+
+&lt;p&gt;projects do occasionally have commercial angles to them - I believe #take&lt;em&gt;me&lt;/em&gt;away was for a normal business where the owner had agreed to make the project completely open source for learning purposes&lt;/p&gt;
+
+&lt;p&gt;where we&amp;rsquo;d have difficulty is supporting a project that was for a for-profit business where the code was close-sourced.  It might still have educational benefit to the volunteer coders, but really developers should receive payment for that sort of work, and while we&amp;rsquo;re happy to help our members make connections with private businesses, we can&amp;rsquo;t really support those projects directly&lt;/p&gt;
+
+&lt;p&gt;you&amp;rsquo;re most welcome to brainstorm product and project ideas.  Our platform could certainly help you take that to the product stage given commitment to open source and open development so that all our members could benefit from the experience, and especially if you&amp;rsquo;re committed to non-profit and charitable objectives&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I do wonder if we need a more formal route for project proposals.  That&amp;rsquo;s another part of the website ecosystem - in the first instance I&amp;rsquo;m going to keep focusing on the onboarding route for new members.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV Website Review Part 6</title>
     <link rel="alternate" href="http://blog.url.com/2017/07/12/av-website-review-part-six/"/>
     <id>http://blog.url.com/2017/07/12/av-website-review-part-six/</id>
@@ -245,40 +314,6 @@ git push azure-production master
 &lt;p&gt;The most glaring issue on the Sign up page is the reference to the &amp;ldquo;Privacy statement&amp;rdquo; when we don&amp;rsquo;t actually have one.  I think the priority has to be that privacy statement and then linking it up.  I&amp;rsquo;m also tempted to work on the captcha component so we can remove the increasingly erroneous &amp;ldquo;temporarily disabled&amp;rdquo; - apparently there&amp;rsquo;s a &lt;a href="https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise"&gt;gem&lt;/a&gt; that would allow us to integrate recaptcha with Devise.  Of course that&amp;rsquo;s all part of training Google&amp;rsquo;s AIs, but can we really fight that flow?  There&amp;rsquo;s also the concern that we&amp;rsquo;re not pushing people to get GitHub accounts, but I guess it&amp;rsquo;s better to get as many signed up as possible &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;So I&amp;rsquo;ve created a &lt;a href="https://www.agileventures.org/privacy"&gt;privacy policy page&lt;/a&gt; based on the one we have for the NHS wiki.  Now I just need a pull request to link that into the footer and the Sign Up page &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV Website Review Part 3</title>
-    <link rel="alternate" href="http://blog.url.com/2017/07/07/av-website-review-part-three/"/>
-    <id>http://blog.url.com/2017/07/07/av-website-review-part-three/</id>
-    <published>2017-07-07T01:00:00+01:00</published>
-    <updated>2017-09-29T21:18:10+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Still struggling to get back to former health and energy levels.  Pleased to have reviewed and made some changes to the website.  Let&amp;rsquo;s continue.  Looking at &amp;ldquo;Getting Started&amp;rdquo; yesterday made me think about the projects page again.  Effectively the new &amp;ldquo;step 1&amp;rdquo; of &amp;ldquo;Getting Started&amp;rdquo; is a view of the projects that we don&amp;rsquo;t have, i.e. one with project maintainers, tech stacks and links to relevant Slack channels.  There have been recent improvements to the project page, specifically that the main list is now ordered by most recently active on Github, so there is a sense in which the main ordering of the projects is by most active (although it&amp;rsquo;s not clear that that&amp;rsquo;s the ordering) and we&amp;rsquo;ve adjusted the smaller list on the left to be alphabetical (and so consistently ordered), as well as filtering for inactive projects. &lt;/p&gt;
-
-&lt;p&gt;That said, I&amp;rsquo;m not sure that people arriving on the page have much clarity about what&amp;rsquo;s going on.  We also have the issue that projects with attached images have those images very large and overly dominate the page:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/3p6c4ginnxghgdo/Screenshot%202017-07-07%2010.13.22.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;It looks like just setting a smaller width on that could address that issue &amp;hellip; and yes, done that; added pull request.  Also noticed that actually we didn&amp;rsquo;t need to crimp the width per se - the bootstrap row/column setting was out of alignment - the column values adding up to 22 rather than 12.  So with a few changes the main project page for Wiki Edu now looks like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/873yfege210c0n0/Screenshot%202017-07-07%2010.31.40.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I guess what I really wanted to do while blogging this was to work through all the projects in the left hand list and de-activate those that aren&amp;rsquo;t really doing anything at the moment.  I guess I will just blast through that. The other thing I wanted to address was how this layout doesn&amp;rsquo;t really have much precedence in other sites.  I don&amp;rsquo;t know that we are using the layout language that people are familiar with from elsewhere on the web.  Ironically it was just when I took over the project management role that the previous maintainer was trying to get in the project page redesign that had been under way for a long time, but he backed out of that, getting busy with other things and perhaps frustrated that I was asking him to submit pull requests that were super-focused on specific changes, rather than rolling in a collection of things that were unrelated to the main ticket.&lt;/p&gt;
-
-&lt;p&gt;Perhaps that was a major mistake on my part.  I thought I was bringing in best-practices from other projects that I had worked on, but perhaps we lost a lot of work that could have leapt us forward in terms of the project page layout?  Michael and I chose to focus on the events pages for the main work we did when we first got involved.  To me there were screaming inconsistencies there that needed to be fixed first, but who knows what was the &amp;ldquo;right&amp;rdquo; thing to have done.  We did what we did, making our best judgements, given the information available at the time.&lt;/p&gt;
-
-&lt;p&gt;A layout that was a series of boxes, or rows in the table, would seem to make more sense than two separate lists where the ordering is somewhat unclear. Berkeley&amp;rsquo;s &lt;a href="http://projects.saas-class.org/projects"&gt;past project showcase&lt;/a&gt; has a more comprehensible layout in some ways:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/tzf8s3mfpeqzujc/Screenshot%202017-07-07%2010.02.14.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;They had another system for future projects that also had a layout that made more sense.  Just looking around I found a great &lt;a href="http://cs169.saas-class.org/faq/external-customer"&gt;guide they have for external &amp;ldquo;customers&amp;rdquo;&lt;/a&gt;, and a group of Berkeley students called &lt;a href="https://www.calblueprint.org/"&gt;&amp;ldquo;BluePrint&amp;rdquo;&lt;/a&gt; doing the same thing as AgileVentures.  Frustratingly I can&amp;rsquo;t find the portal that the CS169 class uses to allow students to select upcoming projects.  I&amp;rsquo;ve emailed Armando to ask if that&amp;rsquo;s still around.&lt;/p&gt;
-
-&lt;p&gt;I note we&amp;rsquo;ve got a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1089"&gt;project improvements epic ticket&lt;/a&gt;.  Lots of things to keep trying and improving &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;p.s. just went and set all projects to &amp;ldquo;inactive&amp;rdquo; and am working through re-activating the ones I know that have activity &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
