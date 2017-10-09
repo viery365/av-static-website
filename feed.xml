@@ -70,10 +70,56 @@
   </entry>
   <entry>
     <title>AV Website Review Part 8</title>
+    <link rel="alternate" href="http://blog.url.com/2017/07/17/av-website-review-part-nine/"/>
+    <id>http://blog.url.com/2017/07/17/av-website-review-part-nine/</id>
+    <published>2017-07-17T01:00:00+01:00</published>
+    <updated>2017-10-09T21:29:09+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="times up" src="/images/expired.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So no one joined the LocalSupport channel over the weekend and thus there&amp;rsquo;s no immediate chance to see the new project greeting bot in action.  Other project maintainers have come back to me with mixed responses.  Some enthusiastic, some more cautious.  I also saw there are some &lt;a href="https://developers.google.com/recaptcha/docs/faq"&gt;special keys for testing &amp;ldquo;reCaptcha&amp;rdquo;&lt;/a&gt;, which makes me feel like I should put some more effort into that spike.&lt;/p&gt;
+
+&lt;p&gt;I think what I really want though is to update the project greeting bot so that it supports multiple projects, mentions the person by name and even has a pause before it posts.  Force of habit&amp;ndash;I just dropped a load of issues in the repo for the bot:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/1"&gt;mention name of member who joins channel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/2"&gt;add pause to post so it&amp;rsquo;s not quite so fast&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/3"&gt;support multiple projects&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/4"&gt;could this all be done with a slash command?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/5"&gt;tests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/6"&gt;easier in ruby?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So it&amp;rsquo;s tempting when thinking about supporting multiple projects to put a database or caching system in there, but a hash in the code will do for now.  And I start to want to put a testing framework in there, but I know I won&amp;rsquo;t be able to easily round-trip the whole thing, so I do a manual test on the low level stuff in node, and on the high level stuff in a second Slack instance.  It all seems to work.  I could deploy.  I&amp;rsquo;ve got one free-tier member asking for a simple project to get set up on - it could be this one &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve got to get the autograders working on EC2 and so many other things.  I can&amp;rsquo;t allow myself more than another 15 minutes on this.  I think I deploy.  Again by force of habit I submit a PR:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/pull/7"&gt;https://github.com/tansaku/project&lt;em&gt;greeter&lt;/em&gt;bot/pull/7&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s no CI yet, but it allows me to attach the ticket to the issue.  I could deploy that branch directly &amp;hellip;?  That actually provides a great route for getting out of trouble.  Will do that.  While that builds I could quickly make a test for the reCaptcha stuff &amp;hellip;?  I satisfy myself with creating a ticket:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1735"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1735&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;and the new bot is deployed, and I&amp;rsquo;m thinking of other features:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/8"&gt;avoid re-posting to the same person&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/9"&gt;avoid posting if we&amp;rsquo;ve recently done so&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/10"&gt;should we prefer to DM people the intro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/11"&gt;allow people to request instructions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;so many things that might or might not be useful &amp;hellip; anyway, times up &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>AV Website Review Part 8</title>
     <link rel="alternate" href="http://blog.url.com/2017/07/14/av-website-review-part-eight/"/>
     <id>http://blog.url.com/2017/07/14/av-website-review-part-eight/</id>
     <published>2017-07-14T01:00:00+01:00</published>
-    <updated>2017-10-06T19:57:10+01:00</updated>
+    <updated>2017-10-09T21:19:01+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -97,9 +143,9 @@
 &lt;p&gt;If not something in main Slack is there any plugin that already addresses this issue?&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;I have to say I&amp;rsquo;ve very tempted to wrustle up a quick bot that will do some greetings for us.  I&amp;rsquo;m supposed to be reviewing the AV website, but this has turned into a review of the AV ecosystem and I think that makes sense.  I don&amp;rsquo;t think I should tinker more with the main website until I&amp;rsquo;ve got the results of the few experiments I&amp;rsquo;m running at the moment and in the flow through the site, that point when members join Slack channels seems pretty critical.  It&amp;rsquo;s also an opportunity to get set up with a deployment flow on the bot project.  Although, should it be part of the greeter bot, or a separate instance?  Either way I definitely want to test this on a separate Slack instance before dropping it on our main Slack.&lt;/p&gt;
+&lt;p&gt;I have to say I&amp;rsquo;ve been very tempted to rustle up a quick bot that will do some greetings for us.  I&amp;rsquo;m supposed to be reviewing the AV website, but this has turned into a review of the AV ecosystem and I think that makes sense.  I don&amp;rsquo;t think I should tinker more with the main website until I&amp;rsquo;ve got the results of the few experiments I&amp;rsquo;m running at the moment and in the flow through the site, that point when members join Slack channels seems pretty critical.  It&amp;rsquo;s also an opportunity to get set up with a deployment flow on the bot project.  Although, should it be part of the greeter bot, or a separate instance?  Either way I definitely want to test this on a separate Slack instance before dropping it on our main Slack.&lt;/p&gt;
 
-&lt;p&gt;The other thing I was thinking of last night was whether we coudl have a bot like AsyncVoter that was activated by a slash command, then project managers could add the greeter bot to their channel and then configure it themselves via Slack?  I&amp;rsquo;m not sure - I&amp;rsquo;ll have to enumerate all these different Slack integrations at some point.  Anyhow, I can&amp;rsquo;t help myself from quickly deploying another bot against a test Slack instance to see if I can get the basic channel greeting behaviour I want &amp;hellip; and thirty minutes later I have one deployed on Azure/Dokku, after a quick round of tests on separate slack instance to find the exact notification I want to match, getting stuck on the syntax for environment variables on dokku, but I now have it live on the #localsupport channel.  The code is just this:&lt;/p&gt;
+&lt;p&gt;The other thing I was thinking of last night was whether we could have a bot like AsyncVoter that was activated by a slash command; then project managers could add the greeter bot to their channel, and then configure it themselves via Slack?  I&amp;rsquo;m not sure - I&amp;rsquo;ll have to enumerate all these different Slack integrations at some point.  Anyhow, I can&amp;rsquo;t help myself from quickly deploying another bot against a test Slack instance to see if I can get the basic channel greeting behaviour I want &amp;hellip; and thirty minutes later I have one deployed on Azure/Dokku, after a quick round of tests on a separate slack instance to find the exact notification I want to match, getting stuck on the syntax for environment variables on dokku, but I now have it live on the #localsupport channel.  The code is just this:&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;var Botkit = require('botkit');
 
 var controller = Botkit.slackbot({
@@ -135,7 +181,7 @@ git push azure-production master
 
 &lt;p&gt;&lt;img src="https://www.dropbox.com/s/tunznnlxylbjteo/Screenshot%202017-07-14%2010.32.58.png?dl=1" /&gt;&lt;/p&gt;
 
-&lt;p&gt;should we label it more clearly as a bot?  I have mixed feelings - I&amp;rsquo;d like people to feel they could reply directly to me using @tansaku, but perhaps it degrades my credibility as a real person on Slack &amp;hellip;?&lt;/p&gt;
+&lt;p&gt;Should we label it more clearly as a bot?  I have mixed feelings - I&amp;rsquo;d like people to feel they could reply directly to me using @tansaku, but perhaps it degrades my credibility as a real person on Slack &amp;hellip;?&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -285,81 +331,6 @@ git push azure-production master
 &lt;p&gt;I guess I just wait for someone new to join - I can always post them the message myself if the Azure/Dokku deploy doesn&amp;rsquo;t work.  I&amp;rsquo;ve burned enough time this morning and it&amp;rsquo;s time to move on to admin/Slack/Emails.  Would have been cleaner to start in the test Slack instance, but now the experiment&amp;rsquo;s in progress &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;If it works Federico and others can submit PRs to change the greeter bot message and even deploy the changes themselves &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV Website Review Part 5</title>
-    <link rel="alternate" href="http://blog.url.com/2017/07/11/av-website-review-part-five/"/>
-    <id>http://blog.url.com/2017/07/11/av-website-review-part-five/</id>
-    <published>2017-07-11T01:00:00+01:00</published>
-    <updated>2017-10-04T20:32:06+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So what I really meant to do yesterday was to look at the flows going through various pages in the site via Google Analytics.  Here&amp;rsquo;s a view that compares June with May this year:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="behaviour flow around sign up page, may vs jun" src="https://dl.dropbox.com/s/hf47so53v8lnhyw/Screenshot%202017-07-11%2009.23.15.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s perhaps even more revealing to compare June this year with June last year:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="behaviour flow around sign up page, jun 16 vs jun 17" src="https://dl.dropbox.com/s/j1yzvlujhm0qttm/Screenshot%202017-07-11%2009.27.31.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;What we can see clearly here is the big increase from those viewing &amp;rsquo;/code&amp;rsquo; and &amp;rsquo;/learn&amp;rsquo; (I shortened those and added sign up call to actions at the end of them recently) and the massive increase in those going to &amp;rsquo;/getting-started&amp;rsquo; (a few months back we adjusted it so that you go to &amp;ldquo;getting started&amp;rdquo; after signing in).&lt;/p&gt;
-
-&lt;p&gt;Of the 1200 people landing on the sign_up page in June, we had 380 just stop there and go no further.  I&amp;rsquo;m wondering if that figure could be improved by the deployment of a privacy policy and re-enabling email signups?  &lt;/p&gt;
-
-&lt;p&gt;What&amp;rsquo;s perhaps more concerning is the 299 drop offs out of the 793 sessions on the &amp;lsquo;getting started&amp;rsquo; page.  Of course maybe the reality is that we can&amp;rsquo;t change either of these drop off rates significantly.   I&amp;rsquo;ve just experiemented with changes to the &amp;#39;getting started&amp;rsquo; page and so it seems sensible to leave that for a while.  Although maybe we should be A/B testing rather than comparing longitudinally?  Anyhow, I&amp;rsquo;ve got the privacy statement all linked up into the sign up page:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="sign up page with privacy link" src="https://dl.dropbox.com/s/ggj4vgtqytlm5jp/Screenshot%202017-07-11%2009.34.22.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Overall I think the page looks pretty good.  We previously fixed up the icons and made both signup methods work, so the only garish thing remaining is this email signup disabled.  I found there&amp;rsquo;s a &lt;a href="https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise"&gt;plugin for devise to add Google&amp;rsquo;s re-captcha&lt;/a&gt;.  Working through it I got stuck with the configuration, but fixed it and put in a PR to the repo with the fix:&lt;/p&gt;
-
-&lt;p&gt;https://github.com/ambethia/recaptcha/pull/231&lt;/p&gt;
-
-&lt;p&gt;and so was rewarded with seeing the following in my local spike:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="first pass at adding recaptcha" src="https://dl.dropbox.com/s/fxj5vfx9wzj5sb3/Screenshot%202017-07-11%2009.54.23.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;but while I could click on the I&amp;rsquo;m not a robot, I got &amp;ldquo;verification failed&amp;rdquo; after signup:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="verification failed" src="https://dl.dropbox.com/s/bieuh1rayk3l9i7/Screenshot%202017-07-11%2009.55.37.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;All the log was telling me was: &lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Filter chain halted as :check_captcha rendered or redirected
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I added byebug to the check_captcha method I&amp;rsquo;d added to the registrations controller:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;prepend_before_action&lt;/span&gt; &lt;span class="ss"&gt;:check_captcha&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;only: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:create&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create&lt;/span&gt;
-    &lt;span class="k"&gt;super&lt;/span&gt;
-    &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="vi"&gt;@user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new_record?&lt;/span&gt;
-      &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:omniauth&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;
-      &lt;span class="n"&gt;flash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:user_signup&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Signed up successfully.'&lt;/span&gt;
-      &lt;span class="no"&gt;Mailer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;send_welcome_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@user&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;deliver_now&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;Features&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;enabled?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:welcome_email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-
-  &lt;span class="kp"&gt;private&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check_captcha&lt;/span&gt;
-    &lt;span class="n"&gt;byebug&lt;/span&gt;
-    &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;verify_recaptcha&lt;/span&gt;
-      &lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;resource&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;resource_class&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt; &lt;span class="n"&gt;sign_up_params&lt;/span&gt;
-      &lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;validate&lt;/span&gt; &lt;span class="c1"&gt;# Look for any other validation errors besides Recaptcha&lt;/span&gt;
-      &lt;span class="n"&gt;respond_with_navigational&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;:new&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Stepping through the code there made it look like the verification was failing - nothing else wrong.  The &lt;code&gt;verify_recaptcha&lt;/code&gt; method was returning false &amp;hellip; Not sure what&amp;rsquo;s going wrong there and I have the sinking feeling that adding the captcha, as I have, may screw up the other signup methods.  We&amp;rsquo;ll see.  First I just need proof positive that we can get it to work at all &amp;hellip; It may be that I just can&amp;rsquo;t run it locally like this - I added the &lt;code&gt;localhost&lt;/code&gt; domain to the domains associated with keys to run locally, but maybe there&amp;rsquo;s more needed to run locally.  I can see that there&amp;rsquo;s a domain name verification setting in the reCaptcha settings:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="recaptcha settings" src="https://www.dropbox.com/s/53j9mi92omzrls9/Screenshot%202017-07-11%2010.04.42.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m just trying a restart &amp;hellip; and another step through &amp;hellip; which seemed to work without any changes.  Hmm, maybe the restart did it &amp;hellip; I also played with the layout to make it all look a little better:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="new layout" src="https://www.dropbox.com/s/la5kden3qy8zsb1/Screenshot%202017-07-11%2010.12.41.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;which I assume didn&amp;rsquo;t actually change things.  Test again without the byebug &amp;hellip; and that works, although I note I get two &amp;ldquo;signed up successfully messages&amp;rdquo; - tried to screen shot, but they fade out a little fast; would like to fix that.  Also I get nicely redirected to the &amp;ldquo;Getting Started&amp;rdquo; page.  Okay, well that&amp;rsquo;s the spike - sure it breaks lots of things, but might as well push that up as a spike PR to see how it all runs on CI.  Guess we&amp;rsquo;ll need sandboxing &amp;hellip;?  Look at that tomorrow.&lt;/p&gt;
 </content>
   </entry>
 </feed>
