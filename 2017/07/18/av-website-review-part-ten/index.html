@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV Website Review Part 10</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_3 blog_page_3_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_07 x2017_07_18 x2017_07_18_av-website-review-part-ten x2017_07_18_av-website-review-part-ten_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,78 +83,47 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/07/18/av-website-review-part-ten/">AV Website Review Part 10</a></h2>
+        <h5 class='date'>18 Jul 2017</h5>
+    <p>So I think I should step away from the project greeting bots and just check the new sign up flow as it gets deployed.  First thing is that I need reCaptcha keys on the heroku servers:</p>
 
-          <p>Page 3 of 21</p>
+<p><img src="https://dl.dropbox.com/s/9wti29f0ihs7s7e/Screenshot%202017-07-18%2009.39.37.png" /></p>
 
-            <p><a href="/blog/page/2/">Previous page</a></p>
+<p>Fixing that gives us the new reCaptcha sign up page:</p>
 
-          <h2><a href="/2017/06/22/summer-solstice/">Summer Soltice</a></h2>
-          <h3>Jun 22</h3>
-          <p><img alt="Summer Soltice" src="/images/summer_solstice.jpg"></p>
+<p><img src="https://dl.dropbox.com/s/hncj4kvhndkebst/Screenshot%202017-07-18%2009.44.07.png" /></p>
 
-<p>We’ve reached the mid-point of the year.  It’s been super hot in London for the last few days, although it seems like it’s calming down today.  I’ve been struggling with runaway CPU processes on my main development laptop, and conversations with...</p>
-          <h2><a href="/2017/06/21/av-design-sprint-aftermath/">Design Sprint Aftermath</a></h2>
-          <h3>Jun 21</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
+<p>which I manually test and it seems to work on develop and the rest of the site seems okay.  I notice that the new Jitsi button hasn&rsquo;t been deployed, which likely means we have another intermittent failure on the CI and indeed we do.  For reference here it is:</p>
+<pre class="highlight plaintext"><code>    Given that there are 25 past scrums # features/step_definitions/scrums_steps.rb:28
+      PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_slug"
+      DETAIL:  Key (slug)=(zella-lubowitz) already exists.
+      : INSERT INTO "users" ("first_name", "last_name", "email", "encrypted_password", "slug", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id" (ActiveRecord::RecordNotUnique)
+      ./features/step_definitions/scrums_steps.rb:29:in `/^that there are (\d+) past scrums$/'
+      features/scrums.feature:8:in `Given that there are 25 past scrums'
 
-<p>I had been looking forward to a normal week following the AV design sprint, getting back to having standups and project meetings.  Frustratingly Monday was scattered with problems with hangouts that seemed to be specific to me.  The “Martin Fowler...</p>
-          <h2><a href="/2017/06/20/av-design-sprint-day-five/">Design Sprint Day Five</a></h2>
-          <h3>Jun 20</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
 
-<p>So Friday morning was fairly frantic.  I’d gone to sleep thinking that the last day testing of the design sprint had been postponed, and woke to find we were “game on” with testers booked into slots and a half-finished prototype that needed completing...</p>
-          <h2><a href="/2017/06/19/av-design-sprint-day-four/">Design Sprint Day Four</a></h2>
-          <h3>Jun 19</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
+      Failing Scenarios:
+cucumber features/scrums.feature:10 # Scenario: Scrums index page renders a timeline of scrums for users to view in descending order
+</code></pre>
+<p>It&rsquo;s getting a bit ridiculous recently and it feels like we are back to having a couple of intermittent fails before any CI build will complete.  They are usually JavaScript issues, but the one above is odd because it appears database related, but I guess it could still be some sort of JavaScript race condition.  Michael and I spent a lot of time sandboxing and re-implementing the cukes to reduce variability, but while things got better for a while, the problem is still there.  A short term fix is adding more of the regular culprits to the don&rsquo;t run on CI list.   I wish there was a more consistent approach.  Maybe the Rails 5 upgrade might help, if we upgrade Capybara etc. &hellip;</p>
 
-<p>So I was about to write up the events of our day four design sprint on Friday morning, when it was suddenly all hands on deck.  Actually I had been anticipating a busy morning.  When we had finished the design sprint regular hours on Thursday we...</p>
-          <h2><a href="/2017/06/15/av-design-sprint-day-three/">Design Sprint Day Three</a></h2>
-          <h3>Jun 15</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
+<p>I cannot do further testing on the flow through the system (or the new Jitsi buttons) until the CI passes again and deploys to either staging or develop.  It&rsquo;s super frustrating when I want to stay focused at resolving usability issues in the interface that I&rsquo;m getting distracted by the deploy logistics.  I wonder if the better solution is to avoid JavaScript dependent acceptance tests &hellip; The difficulty with intermittent failures on CI is the feedback loop is so slow.  I guess we could start paying Semaphore for faster builds, but I think we&rsquo;d need to bring in more funds to be able to afford that.</p>
 
-<p>It’s Thursday and I’m looking back at day three of our design sprint that we did on Wednesday.  I think all of our energy was down after having done two full days in a single hangout.  I’d been out in the morning to attend an NHS meeting and I think...</p>
-          <h2><a href="/2017/06/14/av-design-sprint-day-two/">Design Sprint Day Two</a></h2>
-          <h3>Jun 14</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
+<p>Well in the meantime I can ask all the project maintainers what message they&rsquo;d like in their greeter bots &hellip;</p>
 
-<p>Squeezing in too much? Me? I’m just on the train coming back from a NorthWest London CCG meeting, where I had been invited to present the HLP Social Prescribing and Self Care wiki.  It was an all morning meeting and I couldn’t stay for the second...</p>
-          <h2><a href="/2017/06/13/av-design-sprint-day-one/">Design Sprint Day One</a></h2>
-          <h3>Jun 13</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
-
-<p>If I learned one thing from the NHS design sprint it’s get the sprint day blog numbering sorted! :-) I think I’m on top of it this time.  I started yesterday with a minus-one blog and so today’s day one blog looks back at day one that we had yesterday...</p>
-          <h2><a href="/2017/06/12/av-design-sprint-day-minus-one/">Design Sprint Day Minus One</a></h2>
-          <h3>Jun 12</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
-
-<p>I’m just back from a weekend wild camping in North Wales with by brother-in-law (who’s training as a mountain leader) and my eldest son.  We had a great wet and windy time climbing mountains and camping in the wild by lakes.  It was great to get...</p>
-          <h2><a href="/2017/06/09/sticky-feelings/">Sticky Feelings</a></h2>
-          <h3>Jun  9</h3>
-          <p><img alt="sticky" src="/images/sticky.jpg"></p>
-
-<p>So I’m heading south of the river again for an NHS meeting - I’ve just typed up my draft marketing/moderation report and got it into a PDF format that I can share with the NHS folks.  I’ve forgotten the bloody dongle I need for the old style projectors...</p>
-          <h2><a href="/2017/06/08/nhs-wiki-marketing/">NHS Wiki Marketing</a></h2>
-          <h3>Jun  8</h3>
-          <p><img alt="marketing" src="/images/marketing.jpg"></p>
-
-<p>Crazy day yesterday - felt pretty under attack.  I’d love to lay it all in text, but I don’t think I can indulge myself beyond what I typed up in private notes yesterday and I have a meeting with the NHS folks tomorrow, and I think highest priority...</p>
-
-            <p><a href="/blog/page/4/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -212,6 +182,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

@@ -69,6 +69,42 @@
 </content>
   </entry>
   <entry>
+    <title>AV Website Review Part 10</title>
+    <link rel="alternate" href="http://blog.url.com/2017/07/18/av-website-review-part-ten/"/>
+    <id>http://blog.url.com/2017/07/18/av-website-review-part-ten/</id>
+    <published>2017-07-18T01:00:00+01:00</published>
+    <updated>2017-10-10T21:33:36+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So I think I should step away from the project greeting bots and just check the new sign up flow as it gets deployed.  First thing is that I need reCaptcha keys on the heroku servers:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/9wti29f0ihs7s7e/Screenshot%202017-07-18%2009.39.37.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Fixing that gives us the new reCaptcha sign up page:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/hncj4kvhndkebst/Screenshot%202017-07-18%2009.44.07.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;which I manually test and it seems to work on develop and the rest of the site seems okay.  I notice that the new Jitsi button hasn&amp;rsquo;t been deployed, which likely means we have another intermittent failure on the CI and indeed we do.  For reference here it is:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    Given that there are 25 past scrums # features/step_definitions/scrums_steps.rb:28
+      PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_slug"
+      DETAIL:  Key (slug)=(zella-lubowitz) already exists.
+      : INSERT INTO "users" ("first_name", "last_name", "email", "encrypted_password", "slug", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id" (ActiveRecord::RecordNotUnique)
+      ./features/step_definitions/scrums_steps.rb:29:in `/^that there are (\d+) past scrums$/'
+      features/scrums.feature:8:in `Given that there are 25 past scrums'
+
+
+      Failing Scenarios:
+cucumber features/scrums.feature:10 # Scenario: Scrums index page renders a timeline of scrums for users to view in descending order
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It&amp;rsquo;s getting a bit ridiculous recently and it feels like we are back to having a couple of intermittent fails before any CI build will complete.  They are usually JavaScript issues, but the one above is odd because it appears database related, but I guess it could still be some sort of JavaScript race condition.  Michael and I spent a lot of time sandboxing and re-implementing the cukes to reduce variability, but while things got better for a while, the problem is still there.  A short term fix is adding more of the regular culprits to the don&amp;rsquo;t run on CI list.   I wish there was a more consistent approach.  Maybe the Rails 5 upgrade might help, if we upgrade Capybara etc. &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I cannot do further testing on the flow through the system (or the new Jitsi buttons) until the CI passes again and deploys to either staging or develop.  It&amp;rsquo;s super frustrating when I want to stay focused at resolving usability issues in the interface that I&amp;rsquo;m getting distracted by the deploy logistics.  I wonder if the better solution is to avoid JavaScript dependent acceptance tests &amp;hellip; The difficulty with intermittent failures on CI is the feedback loop is so slow.  I guess we could start paying Semaphore for faster builds, but I think we&amp;rsquo;d need to bring in more funds to be able to afford that.&lt;/p&gt;
+
+&lt;p&gt;Well in the meantime I can ask all the project maintainers what message they&amp;rsquo;d like in their greeter bots &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV Website Review Part 8</title>
     <link rel="alternate" href="http://blog.url.com/2017/07/17/av-website-review-part-nine/"/>
     <id>http://blog.url.com/2017/07/17/av-website-review-part-nine/</id>
@@ -115,11 +151,11 @@
 </content>
   </entry>
   <entry>
-    <title>AV Website Review Part 8</title>
+    <title>AV Website Review Part 9</title>
     <link rel="alternate" href="http://blog.url.com/2017/07/14/av-website-review-part-eight/"/>
     <id>http://blog.url.com/2017/07/14/av-website-review-part-eight/</id>
     <published>2017-07-14T01:00:00+01:00</published>
-    <updated>2017-10-09T21:19:01+01:00</updated>
+    <updated>2017-10-10T21:32:10+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -251,86 +287,6 @@ To agileventures.eastus.cloudapp.azure.com:greeterbot-production
 &lt;/blockquote&gt;
 
 &lt;p&gt;I do wonder if we need a more formal route for project proposals.  That&amp;rsquo;s another part of the website ecosystem - in the first instance I&amp;rsquo;m going to keep focusing on the onboarding route for new members.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV Website Review Part 6</title>
-    <link rel="alternate" href="http://blog.url.com/2017/07/12/av-website-review-part-six/"/>
-    <id>http://blog.url.com/2017/07/12/av-website-review-part-six/</id>
-    <published>2017-07-12T01:00:00+01:00</published>
-    <updated>2017-10-04T21:50:59+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So my spike of adding ReCaptcha to the sign up page went pretty well.  It all seems to be passing in CI.  I was expecting lots of the sign up tests to break, but they all passed.  I guess because they don&amp;rsquo;t have javascript enabled?  It tempts me to get this merged in and into the flow.  Or should I be strict and get more detailed tests around them?  I switched on JavaScript and got this error:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    Given I am not logged in      # features/step_definitions/user_steps.rb:59
-      undefined method `submit' for #&amp;lt;Capybara::Poltergeist::Driver:0x007fc4b81becf0&amp;gt; (NoMethodError)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which appears to derive from Poltergeist not supporting the sign out step below&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt; &lt;span class="sr"&gt;/^I sign out$/&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;submit&lt;/span&gt; &lt;span class="ss"&gt;:delete&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;destroy_user_session_path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So one could spend time converting the tests for the logout, directly (at some test running time cost), and/or investigating how the Poltergeist driver might do the same thing.  It reminds me of a conversation I had with Lokesh the other day about what we want from our tests, that they:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;run fast&lt;/li&gt;
-&lt;li&gt;are reliable&lt;/li&gt;
-&lt;li&gt;catch bugs&lt;/li&gt;
-&lt;li&gt;are quick to put together&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;The difficulty is getting all these four at the same time.  There&amp;rsquo;s also the question about getting testing at the different levels of acceptance, integration and unit, and the level of black-boxiness they operate with.  Of course my new resolution is to focus my mornings on actually making changes to the website (and surrounding ecosystem), rather than just blogging about the generalities.  I think there&amp;rsquo;s probably a concise blog post on the subject (and maybe I could generate it), but priorities.  Of course my mind is scattered from the intense discussions about microservices for the AsyncVoter project, and so I had resolved this morning to look at another part of the AgileVentures ecosystem, which is the little greeting bot that I have running in node on an Amazon EC2 instance.  Thinking about the funnel of folks coming into AgileVentures, we have something like:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;See Google AdWord or hear about us on podcast or through MOOC&lt;/li&gt;
-&lt;li&gt;Land on AV website home page&lt;/li&gt;
-&lt;li&gt;Some set of navigation steps&lt;/li&gt;
-&lt;li&gt;Land on the AV Sign up page (hopefully soon with captcha)&lt;/li&gt;
-&lt;li&gt;Sign up&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Now after the sign up point, the member is redirected to the Getting Started page, which I just think should mention that a Slack invite has been sent.  Perhaps a flash notice to let them know to check their email for the Slack invite?  One that doesn&amp;rsquo;t dissappear too fast.  Maybe the sign up page itself should say that a slack invite will be sent?  I created an issue for that:&lt;/p&gt;
-
-&lt;p&gt;https://github.com/AgileVentures/WebsiteOne/issues/1724&lt;/p&gt;
-
-&lt;p&gt;But is that just re-arranging deck chairs?  So then there&amp;rsquo;s the ongoing flow of how and whether the member works through the &amp;ldquo;getting started&amp;rdquo; page.  There&amp;rsquo;s also the experience they have in Slack.  It&amp;rsquo;s frustrating that we can&amp;rsquo;t have an integrated experience where the Slack &amp;ldquo;chat&amp;rdquo; and website &amp;ldquo;documentation&amp;rdquo; are both available in parallel.  Anyhow, what we do have is this automated greeting when the user joins the Slack instance, which comes from my avatar and looks like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="automated greeting" src="https://dl.dropbox.com/s/uibnox5ijldnhz8/Screenshot%202017-07-12%2009.50.29.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now it&amp;rsquo;s not ideal that again we&amp;rsquo;re directing folks to a third party site (GitHub), but that partly reflected my frustration with editing in the Mercury editor in the main AV site.  Part of me wants to tear Mercury out of WSO and replace it with a markdown system, or have pages in WSO pull in from GitHub or something, but is the simpler thing to just try getting that page into Mercury?  Or would it be better to be pointing the new members directly to our AV &amp;ldquo;Getting Started&amp;rdquo; page?  So I did &lt;a href="https://www.agileventures.org/joining-a-project"&gt;that&lt;/a&gt;, and it looks okay, but the contents section still points to GitHub.  I don&amp;rsquo;t know how well we support &amp;ldquo;in page&amp;rdquo; anchors.  It&amp;rsquo;s these little things that make GitHub&amp;rsquo;s markdown so appealing.  Do we replicate?  Point to?  Not sure.  Either way, I&amp;rsquo;m struck by &amp;ldquo;LOTS OF TEXT&amp;rdquo; which is what our design sprint is pointing us away from &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Anyway, we&amp;rsquo;re also paying Amazon, monthly, a small amount for running this bot when we could be doing it cheaper on Azure, so I want to move that over.  Also Federico is keen for me to add the special offer about a free Mob session for liking us on Facebook or following us on Twitter.  I also want to get it set up so others can edit it &amp;hellip; let me at least try and remember how to access that code.  It&amp;rsquo;s in this repo:&lt;/p&gt;
-
-&lt;p&gt;https://github.com/AgileVentures/greeter_bot&lt;/p&gt;
-
-&lt;p&gt;Technically the bot is completely trivial.  I can&amp;rsquo;t immediately access it due to my IP address having changed - so it&amp;rsquo;s time to add the new one to EC2 security; and I&amp;rsquo;m in.  It&amp;rsquo;s just a git repo on a linux box and trivial to update.&lt;/p&gt;
-
-&lt;p&gt;What&amp;rsquo;s interesting is that this has been running for six months&amp;ndash;no trouble and no tests.  So anyway, I just ended up attempting to deploy the greeter bot on Azure/Dokku, which basically involved:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;git remote add azure-production dokku@agileventures.eastus.cloudapp.azure.com:greeterbot-production
-ssh dokku@agileventures.eastus.cloudapp.azure.com apps:create greeterbot-production
-ssh dokku@agileventures.eastus.cloudapp.azure.com config:set greeterbot-production GREETER_SLACK_BOT_TOKEN=XXXXXXX
-git remote 
-git pull origin master
-git push azure-production master
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;in the greeter bot directory locally. And maybe that&amp;rsquo;s working?  The logs look promising:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ ssh dokku@agileventures.eastus.cloudapp.azure.com logs greeterbot-production
-2017-07-12T09:14:08.250109458Z app[web.1]: 
-2017-07-12T09:14:08.250159913Z app[web.1]: &amp;gt; greeter_bot@1.0.0 start /app
-2017-07-12T09:14:08.250165992Z app[web.1]: &amp;gt; node server.js
-2017-07-12T09:14:08.250169031Z app[web.1]: 
-2017-07-12T09:14:08.938145069Z app[web.1]: info: ** No persistent storage method specified! Data may be lost when process shuts down.
-2017-07-12T09:14:08.964844990Z app[web.1]: info: ** Setting up custom handlers for processing Slack messages
-2017-07-12T09:14:08.978923602Z app[web.1]: info: ** API CALL: https://slack.com/api/rtm.start
-2017-07-12T09:14:09.788834373Z app[web.1]: notice: ** BOT ID: tansaku ...attempting to connect to RTM!
-2017-07-12T09:14:09.853519358Z app[web.1]: notice: RTM websocket opened
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;of course, we may have the same issue that we had on drie that the container sleeps and the websocket dies, and maybe I should have gone for the (simpler?) option of just deploying an ubuntu box on Azure and copying the thing over there &amp;hellip; I&amp;rsquo;ve shut down the EC2 bot and so we&amp;rsquo;ll run this experiment.  The greeter bot is just waiting for &lt;code&gt;team_join&lt;/code&gt; events, which I&amp;rsquo;m not sure how to simulate, and really the question is will Azure/Dokku work in full round trip with real users on Slack.   Of course I could do a direct test on a secondary Slack instance and create a new user to check it out - actually I could create a new user with some random email address on the main instance, although that means messy test users cluttering up the main Slack. &lt;/p&gt;
-
-&lt;p&gt;I guess I just wait for someone new to join - I can always post them the message myself if the Azure/Dokku deploy doesn&amp;rsquo;t work.  I&amp;rsquo;ve burned enough time this morning and it&amp;rsquo;s time to move on to admin/Slack/Emails.  Would have been cleaner to start in the test Slack instance, but now the experiment&amp;rsquo;s in progress &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;If it works Federico and others can submit PRs to change the greeter bot message and even deploy the changes themselves &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
