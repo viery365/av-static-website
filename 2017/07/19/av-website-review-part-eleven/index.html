@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV Website Review Part 11</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_8 blog_page_8_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_07 x2017_07_19 x2017_07_19_av-website-review-part-eleven x2017_07_19_av-website-review-part-eleven_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,88 +83,41 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/07/19/av-website-review-part-eleven/">AV Website Review Part 11</a></h2>
+        <h5 class='date'>19 Jul 2017</h5>
+    <p>So I&rsquo;ve got some suggested channel greeter bot text from at least one project maintainer.  I&rsquo;m also running behind today, and I&rsquo;m trying to get the websiteone sign up changes deployed &hellip; I checked the recaptcha sign up works on staging, which it does and filed a bug report about the double sign up message:</p>
 
-          <p>Page 8 of 21</p>
+<p><a href="https://github.com/AgileVentures/WebsiteOne/issues/1743">https://github.com/AgileVentures/WebsiteOne/issues/1743</a></p>
 
-            <p><a href="/blog/page/7/">Previous page</a></p>
+<p>I stabbed around with the hangout and youtube notifications and am still not getting consistency, but the video play is still working in all the right places.  I&rsquo;m not seeing the jitsy buttons on develop, which makes it seems like we had a deploy fail, but I can&rsquo;t see that in the semaphore history:</p>
 
-          <h2><a href="/2017/03/21/long-running-pull-requests/">Long Running PRs</a></h2>
-          <h3>Mar 21</h3>
-          <p><img alt="security" src="/images/long_running.JPG"></p>
+<p><img src="https://www.dropbox.com/s/ssmcw84gzal6u43/Screenshot%202017-07-19%2010.02.41.png?dl=1" /></p>
 
-<p>So the SSL encryption is all now working on <a href="https://www.agileventures.org/">AgileVenture’s production site</a>.  The slight login oddities on staging appear to have been just staging oddities.  I think maybe we could address them by re-cloning the production database to staging.  That...</p>
-          <h2><a href="/2017/03/20/security-first/">Security First</a></h2>
-          <h3>Mar 20</h3>
-          <p><img alt="security" src="/images/security.png"></p>
+<p>ah, but they&rsquo;re visible on the events, not projects.  Okay, that looks good:</p>
 
-<p>We’re in the process of rolling out “https” support on the main AgileVentures site.  We’ve had “https” or “ssl” encoding set up on the LocalSupport project for a couple of years.  LocalSupport users are not a technical community so we don’t have...</p>
-          <h2><a href="/2017/03/17/private-pairing/">Private Pairing</a></h2>
-          <h3>Mar 17</h3>
-          <p><img alt="privacy" src="/images/private-keep-out.jpg"></p>
+<p><img src="https://www.dropbox.com/s/90dboy3bg5qmm82/Screenshot%202017-07-19%2010.01.29.png?dl=1" /></p>
 
-<p>Where to start? Intense week.  Just finished a one hour private pairing session on the <a href="http://codingdojo.org/kata/Tennis/">tennis kata</a> with a Ruby programmer I met on the <a href="http://www.rubyonrails.link/">RailsLink Slack</a>.  They were suggesting Vim/Tmux, but we ended up using Hangouts and GitHub pong.  It was a good...</p>
-          <h2><a href="/2017/03/16/who-needs-frameworks/">Who Needs Frameworks?</a></h2>
-          <h3>Mar 16</h3>
-          <p><img alt="frameworks" src="/images/frameworks.JPG"></p>
+<p>Well we might want to resize and/or provide some sort of flow here so that it&rsquo;s clear what people should do.  What we could have is detected the button press, and then we could ping Slack that someone&rsquo;s joining the hangout.  Okay, I think the plan should be to get the recaptcha stuff out onto production and tomorrow maybe I can review the site flow experience.  </p>
 
-<p>I listen to a different podcast every morning.  Last Friday it was <a href="http://www.greaterthancode.com/podcast/episode-014-rashaun-stovall-snuggs/">“Greater than Code” with Ra’Shaun Stovall (Snuggs)</a>.  It was pretty mind expanding with quotes and questions like the following:</p>
+<p>I&rsquo;m also tempted (though I&rsquo;m over time) to try and get the project greeter bot able to mention the new user name &hellip; and I did - thought not deployed - sent preview to project maintainer for approval:</p>
 
-<blockquote>
-<p>seniors often try to hold on to the complexity they...</p>
-</blockquote>
-          <h2><a href="/2017/03/15/show-me-the-code/">Show me the Code</a></h2>
-          <h3>Mar 15</h3>
-          <p><img alt="code" src="/images/code.jpg"></p>
+<p><img src="https://www.dropbox.com/s/41xijwjt9186nx0/Screenshot%202017-07-19%2010.28.18.png?dl=1" /></p>
 
-<p>Federico made a comment on one of my recent blogs:</p>
+<p>I&rsquo;m just worrying if it&rsquo;s a bit long &hellip;</p>
 
-<blockquote>
-<p>code<em>in</em>blog == good</p>
-</blockquote>
-
-<p>I wish I was coding more.  I am getting to do some code in the Premium mobbing sessions.  My productive coding efforts are snatched between meetings with me throwing up spikes...</p>
-          <h2><a href="/2017/03/14/hangouts-filling-up/">Hangouts Filling Up</a></h2>
-          <h3>Mar 14</h3>
-          <p><img alt="full" src="/images/full.jpg"></p>
-
-<p>Monday saw full hangouts for the “Martin Fowler” and “Kent Beck” scrums.  It was at least partly because SUNY Binghamton students were coming in to vote as part of their class assignment, but also the return of previous regulars such as Tong Wei...</p>
-          <h2><a href="/2017/03/10/day-by-day/">Day by Day</a></h2>
-          <h3>Mar 10</h3>
-          <p><img alt="day" src="/images/day.jpg"></p>
-
-<p>Day by day I’m getting one item off my desk.  I’m not sure why it’s so painful.  Over the last 10 days I’ve got off new passport applications for myself and my eldest son, sent off tax liability statements for the AgileVentures bank account, and...</p>
-          <h2><a href="/2017/03/09/sprinting/">Sprinting</a></h2>
-          <h3>Mar  9</h3>
-          <p><img alt="sprinting" src="/images/sprinting.jpg"></p>
-
-<p>Well I totally failed to avoid Slack and Email before blogging this AM.  Again I was sucked in to Slack by posting the update about the podcast that I’d listened to during my morning jog.  I’d had this idea to post to Twitter and then leave posting...</p>
-          <h2><a href="/2017/03/08/grants-and-prototyping/">Grants and Prototyping</a></h2>
-          <h3>Mar  8</h3>
-          <p><img alt="balance" src="/images/grants.jpg"></p>
-
-<p>So my process of taking one thing off my desk a day is at least keeping my desk in a steady state rather than becoming completely overwhelemed with pieces of paper.  I still haven’t thrown out my old filing cabinet, and I got caught by Slack/Email...</p>
-          <h2><a href="/2017/03/07/analytics-visualization/">Analytics Visualization</a></h2>
-          <h3>Mar  7</h3>
-          <p><img alt="balance" src="/images/visualization.png"></p>
-
-<p>I pushed out some changes to the main AgileVentures landing page last night.  I’d had a set ready from last week’s sprint on Friday, but rather than push them straight out I’d held them on staging and posted an image of them to the #websiteone channel...</p>
-
-            <p><a href="/blog/page/9/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -222,6 +176,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
