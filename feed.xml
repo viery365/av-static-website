@@ -69,31 +69,61 @@
 </content>
   </entry>
   <entry>
+    <title>AV Website Review Part 12</title>
+    <link rel="alternate" href="http://blog.url.com/2017/07/20/av-website-review-part-twelve/"/>
+    <id>http://blog.url.com/2017/07/20/av-website-review-part-twelve/</id>
+    <published>2017-07-20T01:00:00+01:00</published>
+    <updated>2017-10-12T21:10:32+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So I&amp;rsquo;ll be taking a blogging/reviewing break for my Japan trip - perhaps I can get up to date pushing out some old blogs.  Over the last couple of weeks of these &amp;ldquo;reviews&amp;rdquo; of the AV website (and associated ecosystem) I&amp;rsquo;ve managed to get some changes out to the main site.  I think it&amp;rsquo;s early to be assessing the changes - that should probably be the first thing to do in September when I plan to restart this series under the more accurate title &amp;ldquo;ecosystem review&amp;rdquo;.  The main changes I&amp;rsquo;ve enacted so far are getting a privacy statement linked up and reinstating email sign ups with a Google reCaptcha system to block the spambots signing up.&lt;/p&gt;
+
+&lt;p&gt;I also simplified the &amp;ldquo;Getting Started&amp;rdquo; page and rewrote parts of the Premium page.  I can see there&amp;rsquo;s lots more work to do there.  The Premium plan overview page is still very text heavy, as are the individual Premium pages.  The events page is loading really slowly at the moment.  Six seconds is not good. New Relic shows that the slowness is a split between the index method in the controller and the index.html.erb template itself:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/pue0dkn4373lcbb/Screenshot%202017-07-20%2009.37.31.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m conflicted about whether to investigate that further, or try to deploy the new greeting bot with the new functionality and updates for the other project maintainers &amp;hellip; and I&amp;rsquo;ve gone for deploying the new project greeting bot.  Here&amp;rsquo;s a maintainer testing it live in his main project channel:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ov99d3ogm4jq9lw/Screenshot%202017-07-20%2009.59.55.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;And so the thing I need, to profile the events controller, is to clone the production data locally again, which I also did after opening some more project greeter bot tickets:&lt;/p&gt;
+
+&lt;p&gt;https://github.com/AgileVentures/project&lt;em&gt;greeter&lt;/em&gt;bot/issues/15&lt;/p&gt;
+
+&lt;p&gt;I can&amp;rsquo;t immediately see a solution to the slow event page loading, but I&amp;rsquo;ve found our old open issue and added notes there:&lt;/p&gt;
+
+&lt;p&gt;https://github.com/AgileVentures/WebsiteOne/issues/1503&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve got other fish to fry today, e.g. getting the NHS HLP wiki ssl certs renewed.  Gosh I&amp;rsquo;d love to be paid at market rates for keeping the AgileVentures ecosystem running &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV Website Review Part 11</title>
     <link rel="alternate" href="http://blog.url.com/2017/07/19/av-website-review-part-eleven/"/>
     <id>http://blog.url.com/2017/07/19/av-website-review-part-eleven/</id>
     <published>2017-07-19T01:00:00+01:00</published>
-    <updated>2017-10-11T21:21:57+01:00</updated>
+    <updated>2017-10-12T21:09:14+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;So I&amp;rsquo;ve got some suggested channel greeter bot text from at least one project maintainer.  I&amp;rsquo;m also running behind today, and I&amp;rsquo;m trying to get the websiteone sign up changes deployed &amp;hellip; I checked the recaptcha sign up works on staging, which it does and filed a bug report about the double sign up message:&lt;/p&gt;
+    <content type="html">&lt;p&gt;So I&amp;rsquo;ve got some suggested channel greeter bot text from at least one project maintainer.  I&amp;rsquo;m also running behind today, and I&amp;rsquo;m trying to get the websiteone sign up changes deployed &amp;hellip; I checked that the recaptcha sign up works on staging, which it does and filed a bug report about the double sign up message:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1743"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1743&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;I stabbed around with the hangout and youtube notifications and am still not getting consistency, but the video play is still working in all the right places.  I&amp;rsquo;m not seeing the jitsy buttons on develop, which makes it seems like we had a deploy fail, but I can&amp;rsquo;t see that in the semaphore history:&lt;/p&gt;
+&lt;p&gt;I stabbed around with the hangout and youtube notifications and am still not getting consistency, but the video play is still working in all the right places.  I&amp;rsquo;m not seeing the Jitsi buttons on develop, which makes it seem like we had a deploy fail, but I can&amp;rsquo;t see that in the semaphore history:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/ssmcw84gzal6u43/Screenshot%202017-07-19%2010.02.41.png?dl=1" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ssmcw84gzal6u43/Screenshot%202017-07-19%2010.02.41.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;ah, but they&amp;rsquo;re visible on the events, not projects.  Okay, that looks good:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/90dboy3bg5qmm82/Screenshot%202017-07-19%2010.01.29.png?dl=1" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/90dboy3bg5qmm82/Screenshot%202017-07-19%2010.01.29.png" /&gt;&lt;/p&gt;
 
-&lt;p&gt;Well we might want to resize and/or provide some sort of flow here so that it&amp;rsquo;s clear what people should do.  What we could have is detected the button press, and then we could ping Slack that someone&amp;rsquo;s joining the hangout.  Okay, I think the plan should be to get the recaptcha stuff out onto production and tomorrow maybe I can review the site flow experience.  &lt;/p&gt;
+&lt;p&gt;Well we might want to resize and/or provide some sort of flow here so that it&amp;rsquo;s clear what people should do.  What we could have is detection of the button press, and then we could ping Slack that someone&amp;rsquo;s joining the hangout.  Okay, I think the plan should be to get the recaptcha stuff out onto production and tomorrow maybe I can review the site flow experience.  &lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;m also tempted (though I&amp;rsquo;m over time) to try and get the project greeter bot able to mention the new user name &amp;hellip; and I did - thought not deployed - sent preview to project maintainer for approval:&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m also tempted (though I&amp;rsquo;m over time) to try and get the project greeter bot able to mention the new user name &amp;hellip; and I did - though not deployed - sent preview to project maintainer for approval:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/41xijwjt9186nx0/Screenshot%202017-07-19%2010.28.18.png?dl=1" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/41xijwjt9186nx0/Screenshot%202017-07-19%2010.28.18.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;m just worrying if it&amp;rsquo;s a bit long &amp;hellip;&lt;/p&gt;
 </content>
@@ -178,76 +208,6 @@ cucumber features/scrums.feature:10 # Scenario: Scrums index page renders a time
 &lt;/ul&gt;
 
 &lt;p&gt;so many things that might or might not be useful &amp;hellip; anyway, times up &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV Website Review Part 9</title>
-    <link rel="alternate" href="http://blog.url.com/2017/07/14/av-website-review-part-eight/"/>
-    <id>http://blog.url.com/2017/07/14/av-website-review-part-eight/</id>
-    <published>2017-07-14T01:00:00+01:00</published>
-    <updated>2017-10-10T21:32:10+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="robots" src="/images/robots.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So the discussion in marketing was about adding a time limit to the message about the Premium Mob special offer, and any changes can now be submitted as a pull request.  There also seemed to be general agreement that we should avoid bots doing the greeting of new members in the #new_members channel.  There was interest though in the idea of having bots greet new members when they joined project channels.  I also reached out to a few project managers and got positive responses to the idea.&lt;/p&gt;
-
-&lt;p&gt;The issue is that new members joining a channel doesn&amp;rsquo;t generate any kind of notification on Slack (at least on default settings) - having explained it to a few people and everyone agreeing that it means that we miss when members join new channels I just sent Slack a question about it:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;I was wondering if there is any setting in Slack that will allow channel joins to show up as a stronger notification.&lt;/p&gt;
-
-&lt;p&gt;At the moment in our AgileVentures Slack, we get a little notice in the channel, e.g. Member name joined #general&lt;/p&gt;
-
-&lt;p&gt;but I notice that the member joining doesn&amp;rsquo;t cause the channel to get the bold highlight as there is with a new message, and not the number that&amp;rsquo;s associated with being mentioned.&lt;/p&gt;
-
-&lt;p&gt;I know I can write a bot that will detect new members joining and a channel and responding to them, but is there a setting that allows us to adjust the notifications status of channel joins?&lt;/p&gt;
-
-&lt;p&gt;We wouldn&amp;rsquo;t necessarily want to set it so that all members were bothered by channel joins, but it would be useful for admins, and perhaps nominated members of a channel who were focused on greeting activities.  Does that make sense?&lt;/p&gt;
-
-&lt;p&gt;If not something in main Slack is there any plugin that already addresses this issue?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I have to say I&amp;rsquo;ve been very tempted to rustle up a quick bot that will do some greetings for us.  I&amp;rsquo;m supposed to be reviewing the AV website, but this has turned into a review of the AV ecosystem and I think that makes sense.  I don&amp;rsquo;t think I should tinker more with the main website until I&amp;rsquo;ve got the results of the few experiments I&amp;rsquo;m running at the moment and in the flow through the site, that point when members join Slack channels seems pretty critical.  It&amp;rsquo;s also an opportunity to get set up with a deployment flow on the bot project.  Although, should it be part of the greeter bot, or a separate instance?  Either way I definitely want to test this on a separate Slack instance before dropping it on our main Slack.&lt;/p&gt;
-
-&lt;p&gt;The other thing I was thinking of last night was whether we could have a bot like AsyncVoter that was activated by a slash command; then project managers could add the greeter bot to their channel, and then configure it themselves via Slack?  I&amp;rsquo;m not sure - I&amp;rsquo;ll have to enumerate all these different Slack integrations at some point.  Anyhow, I can&amp;rsquo;t help myself from quickly deploying another bot against a test Slack instance to see if I can get the basic channel greeting behaviour I want &amp;hellip; and thirty minutes later I have one deployed on Azure/Dokku, after a quick round of tests on a separate slack instance to find the exact notification I want to match, getting stuck on the syntax for environment variables on dokku, but I now have it live on the #localsupport channel.  The code is just this:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;var Botkit = require('botkit');
-
-var controller = Botkit.slackbot({
-  debug: false
-});
-
-var bot = controller.spawn({
-  token: process.env.PROJECT_GREETER_SLACK_BOT_TOKEN,
-  retry: 20
-}).startRTM()
-
-var greet = "Welcome to LocalSupport! :slightly_smiling_face: To install the codebase see: https://github.com/AgileVentures/LocalSupport/blob/develop/docs/installation.md#installation and our #localsupport-install channel if you need help"
-
-greet += "\n\n\n see https://github.com/AgileVentures/LocalSupport/blob/develop/CONTRIBUTING.md for how to contribute to the project, but feel free to ask questions here too :-)"
-
-controller.on('member_joined_channel', function(bot, message){
-  // console.log('member_joined_channel')
-  // bot.say({channel: message.channel, text: greet});
-  if(message.channel === process.env.PROJECT_SLACK_CHANNEL_ID){
-    bot.reply(message, greet);
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and the deployment was just this:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;ssh dokku@agileventures.eastus.cloudapp.azure.com apps:create projectgreeterbot-production
-ssh dokku@agileventures.eastus.cloudapp.azure.com config:set projectgreeterbot-production PROJECT_GREETER_SLACK_BOT_TOKEN=XXXXX
-ssh dokku@agileventures.eastus.cloudapp.azure.com config projectgreeterbot-production set PROJECT_SLACK_CHANNEL_ID=C0KK907B5
-git push azure-production master
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;with all the code at: https://github.com/tansaku/project&lt;em&gt;greeter&lt;/em&gt;bot&lt;/p&gt;
-
-&lt;p&gt;and we get this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://www.dropbox.com/s/tunznnlxylbjteo/Screenshot%202017-07-14%2010.32.58.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Should we label it more clearly as a bot?  I have mixed feelings - I&amp;rsquo;d like people to feel they could reply directly to me using @tansaku, but perhaps it degrades my credibility as a real person on Slack &amp;hellip;?&lt;/p&gt;
 </content>
   </entry>
 </feed>

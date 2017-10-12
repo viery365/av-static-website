@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV Website Review Part 12</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_4 blog_page_4_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_07 x2017_07_20 x2017_07_20_av-website-review-part-twelve x2017_07_20_av-website-review-part-twelve_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,82 +83,41 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/07/20/av-website-review-part-twelve/">AV Website Review Part 12</a></h2>
+        <h5 class='date'>20 Jul 2017</h5>
+    <p>So I&rsquo;ll be taking a blogging/reviewing break for my Japan trip - perhaps I can get up to date pushing out some old blogs.  Over the last couple of weeks of these &ldquo;reviews&rdquo; of the AV website (and associated ecosystem) I&rsquo;ve managed to get some changes out to the main site.  I think it&rsquo;s early to be assessing the changes - that should probably be the first thing to do in September when I plan to restart this series under the more accurate title &ldquo;ecosystem review&rdquo;.  The main changes I&rsquo;ve enacted so far are getting a privacy statement linked up and reinstating email sign ups with a Google reCaptcha system to block the spambots signing up.</p>
 
-          <p>Page 4 of 21</p>
+<p>I also simplified the &ldquo;Getting Started&rdquo; page and rewrote parts of the Premium page.  I can see there&rsquo;s lots more work to do there.  The Premium plan overview page is still very text heavy, as are the individual Premium pages.  The events page is loading really slowly at the moment.  Six seconds is not good. New Relic shows that the slowness is a split between the index method in the controller and the index.html.erb template itself:</p>
 
-            <p><a href="/blog/page/3/">Previous page</a></p>
+<p><img src="https://dl.dropbox.com/s/pue0dkn4373lcbb/Screenshot%202017-07-20%2009.37.31.png" /></p>
 
-          <h2><a href="/2017/06/09/sticky-feelings/">Sticky Feelings</a></h2>
-          <h3>Jun  9</h3>
-          <p><img alt="sticky" src="/images/sticky.jpg"></p>
+<p>I&rsquo;m conflicted about whether to investigate that further, or try to deploy the new greeting bot with the new functionality and updates for the other project maintainers &hellip; and I&rsquo;ve gone for deploying the new project greeting bot.  Here&rsquo;s a maintainer testing it live in his main project channel:</p>
 
-<p>So I’m heading south of the river again for an NHS meeting - I’ve just typed up my draft marketing/moderation report and got it into a PDF format that I can share with the NHS folks.  I’ve forgotten the bloody dongle I need for the old style projectors...</p>
-          <h2><a href="/2017/06/08/nhs-wiki-marketing/">NHS Wiki Marketing</a></h2>
-          <h3>Jun  8</h3>
-          <p><img alt="marketing" src="/images/marketing.jpg"></p>
+<p><img src="https://dl.dropbox.com/s/ov99d3ogm4jq9lw/Screenshot%202017-07-20%2009.59.55.png" /></p>
 
-<p>Crazy day yesterday - felt pretty under attack.  I’d love to lay it all in text, but I don’t think I can indulge myself beyond what I typed up in private notes yesterday and I have a meeting with the NHS folks tomorrow, and I think highest priority...</p>
-          <h2><a href="/2017/06/07/life-is-complicated/">Life is Complicated</a></h2>
-          <h3>Jun  7</h3>
-          <p><img alt="life is complicated" src="/images/life_is_complicated.jpg"></p>
+<p>And so the thing I need, to profile the events controller, is to clone the production data locally again, which I also did after opening some more project greeter bot tickets:</p>
 
-<p>Well no surprise to anyone, but life appears to be rather complex :-) I try to listen to a tech podcast daily to keep up with techworld and I just listened to <a href="https://www.greaterthancode.com/podcast/episode-020-jenn-schiffer/">Jenn Schiffer on “&gt;Code”</a> which was a fascinating episode.  Of the many and complex thoughts...</p>
-          <h2><a href="/2017/06/06/saddle-sore/">Saddle Sore</a></h2>
-          <h3>Jun  6</h3>
-          <p><img alt="saddle sore" src="/images/saddle-sore.jpg"></p>
+<p>https://github.com/AgileVentures/project<em>greeter</em>bot/issues/15</p>
 
-<p>Yesterday it was back in the saddle after a break and I’m feeling a little saddle sore already :-) Fairly productive first day I guess - a lot of meetings and a few critical admin tasks taken care of.  Let’s look back at those meetings:</p>
+<p>I can&rsquo;t immediately see a solution to the slow event page loading, but I&rsquo;ve found our old open issue and added notes there:</p>
 
-<ul>
-<li>Noon Martin...</li>
-</ul>
-          <h2><a href="/2017/06/05/back-in-the-saddle/">Back in the Saddle</a></h2>
-          <h3>Jun  5</h3>
-          <p><img alt="saddle" src="/images/saddle.jpg"></p>
+<p>https://github.com/AgileVentures/WebsiteOne/issues/1503</p>
 
-<p>So I’m just coming off the back of another half-term that I (mostly) took off to spend time with my family.  Ever since my first son was born and money was a little tight, I’ve tried to squeeze every working moment out of a day, and I think I may...</p>
-          <h2><a href="/2017/05/26/year-of-blogging/">Year of Blogging</a></h2>
-          <h3>May 26</h3>
-          <p><img alt="blogging" src="/images/blog-i-am.jpg"></p>
+<p>I&rsquo;ve got other fish to fry today, e.g. getting the NHS HLP wiki ssl certs renewed.  Gosh I&rsquo;d love to be paid at market rates for keeping the AgileVentures ecosystem running &hellip;</p>
 
-<p>So I think I’m coming up on a year of blogging.  I don’t actually know which was the day that I started blogging daily. I can see one that I posted on <a href="http://linklens.blogspot.co.uk/2016/06/moving-beyond-toy-problems.html">June 20th 2016</a>.  At the beginning I was posting in different locations each day.  But here’s another...</p>
-          <h2><a href="/2017/05/25/azure-mediawiki-stack-part5/">Azure MediaWiki Stack Part 5</a></h2>
-          <h3>May 25</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
-
-<p>So, after feeling lethargic and getting distracted by only a small amount of Slack and Email, it’s time to see if I can repeat the trick of getting the MediaWiki VisualEditor to work with https.  Maybe this is all just ridiculous yak-shaving.  I...</p>
-          <h2><a href="/2017/05/24/azure-mediawiki-stack-part4/">Azure MediaWiki Stack Part 4</a></h2>
-          <h3>May 24</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
-
-<p>Well I totally failed to get down to my blogging today, checking Slack and Email first.  And blogging this week has become a series on getting the Azure MediaWiki stack up, which arguably should be a single document … but then lots of people break...</p>
-          <h2><a href="/2017/05/23/azure-mediawiki-stack-part3/">Azure MediaWiki Stack Part 3</a></h2>
-          <h3>May 23</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
-
-<p>Ahhh, so the rebuilding the MediaWiki stack on Azure leaks over three days and I suspect it may be more.  Yesterday I got stuck trying to open a port for the VisualEditor and I suspect there will be other blocks, but that’s why I’m forcing myself...</p>
-          <h2><a href="/2017/05/22/azure-mediawiki-stack-part2/">Azure MediaWiki Stack Part 2</a></h2>
-          <h3>May 22</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
-
-<p>I wasn’t able to complete a re-run of the NHS HLP MediaWiki installation due partly to getting distracted by other work, but also because the Parsoid service (needed by the VisualEditor) wouldn’t install.  I was following the instructions in https...</p>
-
-            <p><a href="/blog/page/5/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -216,6 +176,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
