@@ -69,6 +69,38 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Return</title>
+    <link rel="alternate" href="http://blog.url.com/2017/08/24/av-ecosystem-review-return/"/>
+    <id>http://blog.url.com/2017/08/24/av-ecosystem-review-return/</id>
+    <published>2017-08-24T01:00:00+01:00</published>
+    <updated>2017-10-13T20:39:05+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;I&amp;rsquo;m back from my travels and it&amp;rsquo;s time to get back to work, jet-lagged or not.  I was working on my travels but eschewed blogging and hangouts, as is my usual practice.  My plan now back is to keep focusing on the AgileVentures &amp;ldquo;ecosystem&amp;rdquo;, by which I mean the website, Slack, our Social Media and all parts of how AgileVentures interacts with members.&lt;/p&gt;
+
+&lt;p&gt;One thing I did manage to do while away was improve the performance on the events page, so it now loads in under two seconds rather than in more than five.  I think that&amp;rsquo;s an important step forward.  I&amp;rsquo;m very pleased with the changes wrought from my reviews in July, reinstating the password based signup (using Google&amp;rsquo;s ReCaptcha to fight spam bots), a &amp;ldquo;getting started&amp;rdquo; page that is shorter and emphasizes our key projects, and a more pointed Premium members page. &lt;/p&gt;
+
+&lt;p&gt;However, it feels like there is so much more to do on the getting started page before it really operates as a really scaffolded guide for those getting started in AgileVentures.  My hypothesis is that the majority of people take a look and see too much text, and don&amp;rsquo;t really have enough of a guide to help them really get started.  My hunch is something that could remember the user and scaffold them on their way towards submitting their first pull-request on a project could make a big difference.  A quick glance over the Premium membership page leaves me feeling it also has too much text.&lt;/p&gt;
+
+&lt;p&gt;Of course it&amp;rsquo;s easy to come up with hypotheses, move heaven and earth to change things around, only to discover there&amp;rsquo;s not actually much impact.  The other thing I&amp;rsquo;ve been committing myself to is to measuring changes and testing alternatives.  My memory is that I made a few changes in July that I should be able to get some data on now.  However I haven&amp;rsquo;t even managed to push those &amp;ldquo;blogs&amp;rdquo; out, so I need to dig back through my pull requests to find out what I was doing &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;There I notice that all my dropbox images are not showing up &amp;hellip; it looks like Dropbox has adjusted their file download so that images are served so that they won&amp;rsquo;t display in the browser.  Unfortunately this will mean that all my blogs on our nonprofit static site will be without embedded images &amp;hellip; or so I would have thought, but actually they show up there, meaning this may well be github markdown specific. Gah, talk about yak-shaving.   To see my previous blogs with images I need to move all the image files around in git.  Well, until if/when GitHub fixes then it will affect folks ability to review my drafts to let&amp;rsquo;s get it fixed &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Okay, so that took about five minutes and now I can see my first website review blog with images here:&lt;/p&gt;
+
+&lt;p&gt;https://github.com/AgileVentures/av-static-website/blob/av&lt;em&gt;website&lt;/em&gt;review&lt;em&gt;part&lt;/em&gt;one&lt;em&gt;blog/source/blog&lt;/em&gt;articles/2017-07-05-av-website-review-part-one.html.markdown&lt;/p&gt;
+
+&lt;p&gt;So the first thing I should be checking up on is what effect we had from the changes I made to the &amp;ldquo;Getting Started&amp;rdquo; page.  The drop-off from that page for the period Jul 3rd - Jul 31st 2017 is (222 vs 595) 37.3% of total traffic; compared to Jun 4th -Jul 2nd 2017 is (344 vs 500) 40.8% of total traffic, which is an improvement, but not conclusive.  That change could be due to seasonal or random fluctuations. If I compare with the same period last year (72 vs 156) 31.6% we se a lower dropoff rate, for a much smaller overall number of site visitors &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Frustratingly I can&amp;rsquo;t easily do comparisons in on the behaviour flow page in Google Analytics.  Conversely in the chrome plugin I can see these side by side, although I seem to be seeing PageView rather than session data. (Sessions = Unique PageViews?) The plugin shows that overall traffic to the page was down, but the bounce rate dropped by over 28% which is a big change &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Okay, I&amp;rsquo;ll need to go through all this again tomorrow when I&amp;rsquo;m not jet-lagged &amp;hellip; apparently bounce rate is not the same as drop off:&lt;/p&gt;
+
+&lt;p&gt;http://www.rankraiser.com/rankraiser/difference-between-google-bounce-rate-and-drop-offs/&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV Website Review Part 12</title>
     <link rel="alternate" href="http://blog.url.com/2017/07/20/av-website-review-part-twelve/"/>
     <id>http://blog.url.com/2017/07/20/av-website-review-part-twelve/</id>
@@ -162,52 +194,6 @@ cucumber features/scrums.feature:10 # Scenario: Scrums index page renders a time
 &lt;p&gt;I cannot do further testing on the flow through the system (or the new Jitsi buttons) until the CI passes again and deploys to either staging or develop.  It&amp;rsquo;s super frustrating when I want to stay focused at resolving usability issues in the interface that I&amp;rsquo;m getting distracted by the deploy logistics.  I wonder if the better solution is to avoid JavaScript dependent acceptance tests &amp;hellip; The difficulty with intermittent failures on CI is the feedback loop is so slow.  I guess we could start paying Semaphore for faster builds, but I think we&amp;rsquo;d need to bring in more funds to be able to afford that.&lt;/p&gt;
 
 &lt;p&gt;Well in the meantime I can ask all the project maintainers what message they&amp;rsquo;d like in their greeter bots &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV Website Review Part 8</title>
-    <link rel="alternate" href="http://blog.url.com/2017/07/17/av-website-review-part-nine/"/>
-    <id>http://blog.url.com/2017/07/17/av-website-review-part-nine/</id>
-    <published>2017-07-17T01:00:00+01:00</published>
-    <updated>2017-10-09T21:40:28+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="times up" src="/images/expired.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So no one joined the LocalSupport channel over the weekend and thus there&amp;rsquo;s no immediate chance to see the new project greeting bot in action.  Other project maintainers have come back to me with mixed responses.  Some enthusiastic, some more cautious.  I also saw there are some &lt;a href="https://developers.google.com/recaptcha/docs/faq"&gt;special keys for testing &amp;ldquo;reCaptcha&amp;rdquo;&lt;/a&gt;, which makes me feel like I should put some more effort into that spike.&lt;/p&gt;
-
-&lt;p&gt;I think what I really want though is to update the project greeting bot so that it supports multiple projects, mentions the person by name and even has a pause before it posts.  Force of habit&amp;ndash;I just dropped a load of issues in the repo for the bot:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/1"&gt;mention name of member who joins channel&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/2"&gt;add pause to post so it&amp;rsquo;s not quite so fast&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/3"&gt;support multiple projects&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/4"&gt;could this all be done with a slash command?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/5"&gt;tests&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/6"&gt;easier in ruby?&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;So it&amp;rsquo;s tempting when thinking about supporting multiple projects to put a database or caching system in there, but a hash in the code will do for now.  And I start to want to put a testing framework in there, but I know I won&amp;rsquo;t be able to easily round-trip the whole thing, so I do a manual test on the low level stuff in node, and on the high level stuff in a second Slack instance.  It all seems to work.  I could deploy.  I&amp;rsquo;ve got one free-tier member asking for a simple project to get set up on - it could be this one &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve got to get the autograders working on EC2 and so many other things.  I can&amp;rsquo;t allow myself more than another 15 minutes on this.  I think I deploy.  Again by force of habit I submit a PR:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/pull/7"&gt;https://github.com/tansaku/project_greeter_bot/pull/7&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;There&amp;rsquo;s no CI yet, but it allows me to attach the ticket to the issue.  I could deploy that branch directly &amp;hellip;?  That actually provides a great route for getting out of trouble.  Will do that.  While that builds I could quickly make a test for the reCaptcha stuff &amp;hellip;?  I satisfy myself with creating a ticket:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1735"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1735&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;and the new bot is deployed, and I&amp;rsquo;m thinking of other features:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/8"&gt;avoid re-posting to the same person&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/9"&gt;avoid posting if we&amp;rsquo;ve recently done so&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/10"&gt;should we prefer to DM people the intro&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/tansaku/project_greeter_bot/issues/11"&gt;allow people to request instructions&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;so many things that might or might not be useful &amp;hellip; anyway, times up &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
