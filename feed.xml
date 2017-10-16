@@ -69,6 +69,35 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Bounce Drop</title>
+    <link rel="alternate" href="http://blog.url.com/2017/08/25/ecosystem-review-bounce-drop/"/>
+    <id>http://blog.url.com/2017/08/25/ecosystem-review-bounce-drop/</id>
+    <published>2017-08-25T01:00:00+01:00</published>
+    <updated>2017-10-16T21:59:51+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="bounce rate" src="/images/bounce_rate.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Right, time to work out the difference between &amp;ldquo;bounce rate&amp;rdquo; and &amp;ldquo;drop off&amp;rdquo;.  Maybe it&amp;rsquo;s the jetlag or just me getting old, but reading &lt;a href="http://www.rankraiser.com/rankraiser/difference-between-google-bounce-rate-and-drop-offs/"&gt;this article&lt;/a&gt; I&amp;rsquo;m not immediately getting it.  Let&amp;rsquo;s dig in:&lt;/p&gt;
+
+&lt;p&gt;Bounce Rate is apparently the percentage of total visitors to a specific page in our site that saw only that page during their visit to our site.  Our getting started bounce rate was ~57% in July, and 80% in June, so that tells us that since we made the change at the beginning of July people have been hanging around a bit longer after visiting this page - at least more of them have been visiting at least one more page in our site.&lt;/p&gt;
+
+&lt;p&gt;Drop off (which gets shown in the Google Analytics visitor flow) is a combination of people leaving the site after having visited 1 or more pages.  In July we saw 37.3% of total traffic to the &amp;ldquo;Getting Started&amp;rdquo; page drop off there, compared to  40.8% in June.  &lt;/p&gt;
+
+&lt;p&gt;Hmmm. So of the, say, 100 folks (sessions?) who loaded the &amp;ldquo;Getting Started&amp;rdquo; page in June, 80 only saw that single page.  While just over 40% of all sessions (that included &amp;ldquo;Getting Started&amp;rdquo;?) ended there, while just under 60% carried on browsing.  All sessions must also be those 100 folks, and 40 ended there, but 60 went on &amp;hellip; that does not make sense.  I must be missing something, unless the drop-off is exluding the bounces, which on reflection it looks like it is.  That would imply that of the 20 folks who browsed through the &amp;ldquo;Getting Started&amp;rdquo; page, 8 ended their browsing journey there, while 12 of them carried on browsing &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;We can hypothesize that removing the links to GitHub, Pivotal Tracker and Google+ from the start of the &amp;ldquo;Getting Started&amp;rdquo; page could have had this sort of effect, but this all seems pretty inconclusive so far.  What we really want to be looking at is the numbers of people getting set up and contributing to projects, which the analytics is not telling us about.&lt;/p&gt;
+
+&lt;p&gt;The other thing to look at is how my change to the Premium page wording has affected things &amp;hellip; I can&amp;rsquo;t seem to pull the pricing or premium pages up in the behaviour flow graph since they are not showing up there (too few clicks perhaps?), although I notice the exit rate is shown in the plugin (but that&amp;rsquo;s different again from dropoff?).  The bounce rate as reported by the chrome plugin has dropped from 50% to 0%, which makes it seem like that&amp;rsquo;s a helpful change in terms of making the Premium page stickier &amp;hellip; Conversely for the same time period the bounce rate has increased from 20% to 50% on the Premium Mob page where we didn&amp;rsquo;t make any changes.  So that&amp;rsquo;s a reasonable argument for adjusting the language on the Premium Mob page too &amp;hellip; looks like I have more reading to do on what makes exit rate different from bounce rate &amp;hellip;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.axzm.com/google-analytics-exit-percentage/"&gt;https://www.axzm.com/google-analytics-exit-percentage/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://onlineoptimizers.eu/the-important-difference-between-exit-rate-and-bounce-rate/"&gt;http://onlineoptimizers.eu/the-important-difference-between-exit-rate-and-bounce-rate/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Return</title>
     <link rel="alternate" href="http://blog.url.com/2017/08/24/av-ecosystem-review-return/"/>
     <id>http://blog.url.com/2017/08/24/av-ecosystem-review-return/</id>
@@ -160,42 +189,6 @@
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/41xijwjt9186nx0/Screenshot%202017-07-19%2010.28.18.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;m just worrying if it&amp;rsquo;s a bit long &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV Website Review Part 10</title>
-    <link rel="alternate" href="http://blog.url.com/2017/07/18/av-website-review-part-ten/"/>
-    <id>http://blog.url.com/2017/07/18/av-website-review-part-ten/</id>
-    <published>2017-07-18T01:00:00+01:00</published>
-    <updated>2017-10-10T21:33:36+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So I think I should step away from the project greeting bots and just check the new sign up flow as it gets deployed.  First thing is that I need reCaptcha keys on the heroku servers:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/9wti29f0ihs7s7e/Screenshot%202017-07-18%2009.39.37.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Fixing that gives us the new reCaptcha sign up page:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/hncj4kvhndkebst/Screenshot%202017-07-18%2009.44.07.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;which I manually test and it seems to work on develop and the rest of the site seems okay.  I notice that the new Jitsi button hasn&amp;rsquo;t been deployed, which likely means we have another intermittent failure on the CI and indeed we do.  For reference here it is:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    Given that there are 25 past scrums # features/step_definitions/scrums_steps.rb:28
-      PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "index_users_on_slug"
-      DETAIL:  Key (slug)=(zella-lubowitz) already exists.
-      : INSERT INTO "users" ("first_name", "last_name", "email", "encrypted_password", "slug", "bio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id" (ActiveRecord::RecordNotUnique)
-      ./features/step_definitions/scrums_steps.rb:29:in `/^that there are (\d+) past scrums$/'
-      features/scrums.feature:8:in `Given that there are 25 past scrums'
-
-
-      Failing Scenarios:
-cucumber features/scrums.feature:10 # Scenario: Scrums index page renders a timeline of scrums for users to view in descending order
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It&amp;rsquo;s getting a bit ridiculous recently and it feels like we are back to having a couple of intermittent fails before any CI build will complete.  They are usually JavaScript issues, but the one above is odd because it appears database related, but I guess it could still be some sort of JavaScript race condition.  Michael and I spent a lot of time sandboxing and re-implementing the cukes to reduce variability, but while things got better for a while, the problem is still there.  A short term fix is adding more of the regular culprits to the don&amp;rsquo;t run on CI list.   I wish there was a more consistent approach.  Maybe the Rails 5 upgrade might help, if we upgrade Capybara etc. &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I cannot do further testing on the flow through the system (or the new Jitsi buttons) until the CI passes again and deploys to either staging or develop.  It&amp;rsquo;s super frustrating when I want to stay focused at resolving usability issues in the interface that I&amp;rsquo;m getting distracted by the deploy logistics.  I wonder if the better solution is to avoid JavaScript dependent acceptance tests &amp;hellip; The difficulty with intermittent failures on CI is the feedback loop is so slow.  I guess we could start paying Semaphore for faster builds, but I think we&amp;rsquo;d need to bring in more funds to be able to afford that.&lt;/p&gt;
-
-&lt;p&gt;Well in the meantime I can ask all the project maintainers what message they&amp;rsquo;d like in their greeter bots &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
