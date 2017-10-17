@@ -69,6 +69,30 @@
 </content>
   </entry>
   <entry>
+    <title/>
+    <link rel="alternate" href="http://blog.url.com/2017/08/29/av-ecosystem-review-yak-shaving/"/>
+    <id>http://blog.url.com/2017/08/29/av-ecosystem-review-yak-shaving/</id>
+    <published>2017-08-29T01:00:00+01:00</published>
+    <updated>2017-10-17T21:40:05+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Okay, I think I&amp;rsquo;m coming out of the jet-lag - still not sure things are making sense though, and there&amp;rsquo;s a lot of yak-shaving to get back to the workface.  I wrote two AV ecosystem review pieces on Thursday and Friday last week and I have to refer to them to remember what I worked out.  I was trying to review the changes I made to the &amp;ldquo;Getting Started&amp;rdquo; and Premium pages at the end of July.  A lot of that seems to be me poring over Google Analytics stats and being a little unclear about the difference between &amp;ldquo;bounce rate&amp;rdquo;, &amp;ldquo;exit rate&amp;rdquo; and &amp;ldquo;drop off&amp;rdquo;.  I&amp;rsquo;m starting to get clarity that the &amp;ldquo;bounce rate&amp;rdquo; only refers to &amp;ldquo;single visit sessions&amp;rdquo;, and is only calculated for visits that start on the page in question.  We saw a fairly substantial improvement in the bounce rate from the previous month and the same period the previous year, implying that more people landing on the &amp;ldquo;Getting Started&amp;rdquo; page are sticking around on our site.  The exit rate was also improving.  The exit rate is the percentage for all page views of a page that were the last in the users session.  So in summary: &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bounce rate - Of all the sessions that started on a page, how many did not click through to any other page in the site&lt;/li&gt;
+&lt;li&gt;Exit rate - Of all views of a page, what percentage were the last in the user&amp;rsquo;s session&lt;/li&gt;
+&lt;li&gt;Drop off - Of all the sessions including this page, in what percentage did the session end here?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;m thinking that the difference in exit rate and drop off is due to the calculations being based on page views and sessions including a page respectively; where sessions may include the same page more than once, hence the exit rate can be 29% and the drop off rate be 37% (222/595) for the same period (July &amp;lsquo;17).  So overall, all the stats are going in the right direction following the changes to the &amp;ldquo;Getting Started&amp;rdquo; page, and I&amp;rsquo;ve burned a chunk of time understanding the nuances of Google Analytics, which perhaps I should have been spending on my next wheeze, which is splitting up the &amp;ldquo;Getting Started&amp;rdquo; page into a series of pages so that we can track the approximate flow through it via Google Analytics.  I&amp;rsquo;m thinking this might be simpler and more incrementally testable than trying to build a tracking system for users that reports back their progress.  I suspect that could be very powerful and useful too, but I think that the content is critical too, and we can move faster making changes to the content first (given our limited resources) &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;The Yak-shaving I thought I was going to be doing this morning was following up with dropbox and GitHub about image embeds, but that&amp;rsquo;s because I thought I was going to have to reconstruct another July blog.  Ironically there was enough wrangling just working out what I was writing up last week! :-)&lt;/p&gt;
+
+&lt;p&gt;I guess it might still be a few days before I make any more explicit changes, as there&amp;rsquo;s the Premium page and other changes to review, but perhaps tomorrow I can take a quick stab at a sequence of getting started pages (one for each numbered element) and then leave that &amp;ldquo;in the oven&amp;rdquo; to come back in a month and review, assuming that I&amp;rsquo;ve really undertstood all these Google Analytic ideas.  That said, as long as things are going in approximately the right direction, perhaps perfect clarity is not as critical as I sometimes believe &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Bounce Drop</title>
     <link rel="alternate" href="http://blog.url.com/2017/08/25/ecosystem-review-bounce-drop/"/>
     <id>http://blog.url.com/2017/08/25/ecosystem-review-bounce-drop/</id>
@@ -159,36 +183,6 @@
 &lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1503"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1503&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;ve got other fish to fry today, e.g. getting the NHS HLP wiki ssl certs renewed.  Gosh I&amp;rsquo;d love to be paid at market rates for keeping the AgileVentures ecosystem running &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV Website Review Part 11</title>
-    <link rel="alternate" href="http://blog.url.com/2017/07/19/av-website-review-part-eleven/"/>
-    <id>http://blog.url.com/2017/07/19/av-website-review-part-eleven/</id>
-    <published>2017-07-19T01:00:00+01:00</published>
-    <updated>2017-10-12T21:09:14+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So I&amp;rsquo;ve got some suggested channel greeter bot text from at least one project maintainer.  I&amp;rsquo;m also running behind today, and I&amp;rsquo;m trying to get the websiteone sign up changes deployed &amp;hellip; I checked that the recaptcha sign up works on staging, which it does and filed a bug report about the double sign up message:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1743"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1743&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I stabbed around with the hangout and youtube notifications and am still not getting consistency, but the video play is still working in all the right places.  I&amp;rsquo;m not seeing the Jitsi buttons on develop, which makes it seem like we had a deploy fail, but I can&amp;rsquo;t see that in the semaphore history:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ssmcw84gzal6u43/Screenshot%202017-07-19%2010.02.41.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;ah, but they&amp;rsquo;re visible on the events, not projects.  Okay, that looks good:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/90dboy3bg5qmm82/Screenshot%202017-07-19%2010.01.29.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Well we might want to resize and/or provide some sort of flow here so that it&amp;rsquo;s clear what people should do.  What we could have is detection of the button press, and then we could ping Slack that someone&amp;rsquo;s joining the hangout.  Okay, I think the plan should be to get the recaptcha stuff out onto production and tomorrow maybe I can review the site flow experience.  &lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m also tempted (though I&amp;rsquo;m over time) to try and get the project greeter bot able to mention the new user name &amp;hellip; and I did - though not deployed - sent preview to project maintainer for approval:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/41xijwjt9186nx0/Screenshot%202017-07-19%2010.28.18.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m just worrying if it&amp;rsquo;s a bit long &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
