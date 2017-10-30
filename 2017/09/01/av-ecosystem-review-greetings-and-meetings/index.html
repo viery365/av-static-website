@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Greetings and Meetings</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_15 blog_page_15_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_09 x2017_09_01 x2017_09_01_av-ecosystem-review-greetings-and-meetings x2017_09_01_av-ecosystem-review-greetings-and-meetings_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,84 +83,66 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/01/av-ecosystem-review-greetings-and-meetings/">AV EcoSystem Review Greetings and Meetings</a></h2>
+        <h5 class='date'> 1 Sep 2017</h5>
+    <p><img alt="meeting" src="/images/meeting.jpg" /></p>
 
-          <p>Page 15 of 22</p>
+<p>Set the alarm this morning but still a late start as all my boys wanted help with their codecombat programming challenges, and they&rsquo;re still off school for the summer.  Anyhow, there are several niggling things about the various greeter bots we have for AgileVentures and individual channels.  I&rsquo;ve directed a few people to the #bots channel to get involved, but so far no one has gotten very far.  Is there some critical mass of activity on a project, or some critical level of support that&rsquo;s required before some people will start submitting code?  One comment I had was that these bots are just tiny nodejs projects.  I guess for those wanting to cut their teeth on open source node projects a challengingly complex project is appealing in some sense.  Personally I have had just about enough of complexity and the simpler the better.  The key metric for me continues to be can we deliver something of value to the end user?  It&rsquo;s whether the project delivers something of value to someone somewhere.</p>
 
-            <p><a href="/blog/page/14/">Previous page</a></p>
+<p>What was really simple this week was setting up Slack repeating reminders so that we get alerts about when the scrums are upcoming, some project meetings and some mobs.  The syntax is super simple, e.g. </p>
+<pre class="highlight plaintext"><code>/remind #localsupport to prepare for weekly meeting @here in 30 minutes at 4:00pm every Thursday 
+</code></pre>
+<p>The exciting thing with the new fixed URL videoconferencing from Jitsi is that the meeting ping, itself, can be set as a recurriung reminder:</p>
+<pre class="highlight plaintext"><code>/remind #localsupport to join the weekly meeting @here in http://meet.jit.si at 4:30pm every Thursday 
+</code></pre>
+<p>I&rsquo;m thinking to make my participation in the project meetings a biweekly thing, so that I can get private project work done on the &ldquo;off-weeks&rdquo; so to speak.  My only complaint is that the reminders aren&rsquo;t directly editable. However they are easily listable and deletable.  I also see that they can be controlled by API:</p>
 
-          <h2><a href="/2016/11/29/hosting-slack-bots/">Hosting Slack Bots</a></h2>
-          <h3>Nov 29</h3>
-          <p><img alt="bots" src="/images/bots.png"></p>
+<p><a href="https://api.slack.com/methods/reminders.list">https://api.slack.com/methods/reminders.list</a></p>
 
-<p>The slackbot had stayed live for most of the weekend on drie push, but on Monday morning it was unresponsive, and although we’d completed a vote or two, not all the notifications had come through.  The bot would not restart from fresh pushes of the...</p>
-          <h2><a href="/2016/11/28/local-charities/">Fighting to Make a Difference</a></h2>
-          <h3>Nov 28</h3>
-          <p><img alt="make a difference" src="/images/make_a_difference.jpg"></p>
+<p>That makes me think we could possibly take the agile-bot out of the equation by simply having our main site hit Slack directly to set reminders based on events created or updated through the Rails interface &hellip;  By having set up the LocalSupport meeting to rely on a permanent Jitsi URL, we take the need for a really experienced scrum master to start the videoconference out of the equation, and in principle anyone can stream the recording - although that is more fiddly in Jitsi.  It does seem like Jitsi performance might not be as good as Hangouts, particularly since they&rsquo;re offering their new low latency setting, but I guess we should experiment with our own Jitsi hosting on Azure.</p>
 
-<p>Friday was full of meetings.  I started off heading down to the <a href="https://www.harrowcn.org.uk/organisations/carramea-community-resource">Carramea Community Resource Center</a> (formerly the Consortium of Anti-Racist Refugee and Minority-Ethnic Associations). Carramea has been operating in South Harrow for over 12 years, and...</p>
-          <h2><a href="/2016/11/25/mob-programming/">Mob Programming</a></h2>
-          <h3>Nov 25</h3>
-          <p><img alt="mob" src="/images/mob.png"></p>
+<p>So that&rsquo;s all very well for maintaining the run of existing projects, but that&rsquo;s not going to immediately help with getting more folks involved in the greeter bots (or other new projects), or make the greeter bots seem a little more friendly.  Maybe I would be better off labelling them specifically as bots.  For the main project greeter, if I don&rsquo;t have the message come from me, then I don&rsquo;t get to see the response that people make to the bot.  In the group channels, it&rsquo;s kind of weird to have an automated message from me when I&rsquo;m inviting someone in for a vote.  What I really want to move towards is some kind of drip campaign that follows up with people who&rsquo;ve joined project channels (and our community) to ask them if they need help and support.  I notice that Slack follows up with multiple emails after the fact when you&rsquo;ve been invited to a Slack community, presumably to maximize the chances of getting new users into Slack.</p>
 
-<p>We ran our first AV Premium Mob Programming session looking at code from the book “Confident Ruby” by Avdi Grimm.  We created a Cloud9 workspace and gave everyone access to the enviroment.   We had four Premium members join the hangout, and I introduced...</p>
-          <h2><a href="/2016/11/24/more-profiling/">More Profiling of My Days</a></h2>
-          <h3>Nov 24</h3>
-          <p><img alt="measurement" src="/images/measurement.jpg"></p>
+<p>For the main greeter bot I&rsquo;ve got four little changes to tick off:</p>
 
-<p>So I did a second day of profiling.  The details are as follows:</p>
-<pre class="highlight plaintext"><code>09:15 - 10:15 Writing blog draft (plus distribution)
+<ol>
+<li>hyperlinking to our free premium mob page</li>
+<li>adding mention of our code of conduct</li>
+<li>referring to the new person by name</li>
+<li>hyperlinking to channel names</li>
+</ol>
 
-10:30 - 11:00 Reviewing slack and email - promoting mentors and Premiums
+<p>For the project greeter bot I&rsquo;ve got lots of issues, but my top ones are:</p>
 
-11:00 - 11:30 Writing emails to potential sponsors
+<ol>
+<li>names of folks in message not being linked</li>
+<li>channel names not being linked</li>
+<li>avoid reposting the intro if we&rsquo;ve recently done so</li>
+</ol>
 
-11...</code></pre>
-          <h2><a href="/2016/11/23/profiling-my-day/">Profiling My Day</a></h2>
-          <h3>Nov 23</h3>
-          <p><img alt="profile" src="/images/profile.jpg"></p>
+<p>This last would go a long way to making the bot seem more human, but it would also require the most complexity, i.e. some state would need to be held, or we&rsquo;d need to pull messages out of the channel to check for recent posts.  That latter seems simpler, but also something that we should try after wrapping all this in tests.</p>
 
-<p>I profiled my day yesterday in an attempt to apply the Eliminate, Simplify, Automate, Delegate (ESAD) mantra and create space for the important things :-)  Here’s my rough profile of the day:</p>
-<pre class="highlight plaintext"><code>09:00 - 10:00 writing blog (5mins on getting that up and...</code></pre>
-          <h2><a href="/2016/11/22/levels-of-focus/">Levels of Focus</a></h2>
-          <h3>Nov 22</h3>
-          <p><img alt="focus" src="/images/focus.png"></p>
+<p>I&rsquo;m conflicted here - maybe the thing that would get more people involved would be making super-polished documentation on all this, or creatingnew project channels - project placeholders in our main site and getting started pages; but the itch I want to scratch is a few formatting issues, and also ensuring we have a global code of conduct in place (which should go in the getting started as well &hellip;).  I guess I&rsquo;ll let myself hit those issues first &hellip;</p>
 
-<p>It was a busy weekend.  That was partly the kids’ birthday parties and coaching under eights football, but also because of my last Mentive mentoring session and two Premium Plus pairing sessions.  I usually prefer not to work at the weekend, but...</p>
-          <h2><a href="/2016/11/21/agile-workshop/">Agile Workshop</a></h2>
-          <h3>Nov 21</h3>
-          <p>Friday was mainly consumed with a dry run of an Agile Project management workshop for non-profits and charities.  I’ve been working closely with Voluntary Action Harrow Cooperative (VAHC) for the last three years on the <a href="https://www.harrowcn.org.uk">Harrow Community Network project</a></p>
-          <h2><a href="/2016/11/18/microservices-question/">Microservices Question</a></h2>
-          <h3>Nov 18</h3>
-          <p><img alt="microservices" src="/images/microservices.png"></p>
+<p>I&rsquo;ve just picked off hyperlinking channels in the main greeter bot, and pushed that branch to production - hmm, no staging set up there - not so easy to test even on the bot-test instance I created - unless creating new accounts - can do &hellip; should get set up with that properly.  Linking to channels and users from bot posts does seem like a relatively straightforward syntax fix:</p>
 
-<p>Michael was off sick and so I didn’t get back to WSO coding.  That’s one of the things about having a pair partner, they keep you focused on things.  The previous day we’d investigated the poor performance on the projects page, which had turned out...</p>
-          <h2><a href="/2016/11/17/semi-automatic/">Semi Automatic Asynchronous Planning Poker Bot</a></h2>
-          <h3>Nov 17</h3>
-          <p><img alt="semi automated agricultural process" src="/images/semi-automated.png"></p>
+<p><a href="https://api.slack.com/docs/message-formatting#linking_to_channels_and_users">https://api.slack.com/docs/message-formatting#linking<em>to</em>channels<em>and</em>users</a></p>
 
-<p>The AsyncVoter project has been humming recently.  A lot of people interested in coding in Node, putting a React front end together and so on.  They say that JavaScript is hot.  We’ve also had new folks come in and start to understand some of the...</p>
-          <h2><a href="/2016/11/16/automating-what-to-do-next/">Automating What To Do Next</a></h2>
-          <h3>Nov 16</h3>
-          <p><img alt="what's next?" src="/images/whatsnext.jpg"></p>
+<p>Gonna stop there today since I&rsquo;m behind and hopefully this will give me impetus to get the few other rough edges sorted before the big push, which is setting up some proper testing infrastructure on these projects &hellip;</p>
 
-<p>After the “Martin Fowler” scrum I caught up with Raphael to talk about the dynamic of the AsyncVoter project.  Raphael had been suggesting a team meeting.  Team meetings can be great.  I think if a team wants to move forward fast it’s great to get...</p>
-
-            <p><a href="/blog/page/16/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -218,6 +201,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

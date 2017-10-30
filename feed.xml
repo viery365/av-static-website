@@ -69,6 +69,61 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Greetings and Meetings</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/01/av-ecosystem-review-greetings-and-meetings/"/>
+    <id>http://blog.url.com/2017/09/01/av-ecosystem-review-greetings-and-meetings/</id>
+    <published>2017-09-01T01:00:00+01:00</published>
+    <updated>2017-10-30T21:00:35+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="meeting" src="/images/meeting.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Set the alarm this morning but still a late start as all my boys wanted help with their codecombat programming challenges, and they&amp;rsquo;re still off school for the summer.  Anyhow, there are several niggling things about the various greeter bots we have for AgileVentures and individual channels.  I&amp;rsquo;ve directed a few people to the #bots channel to get involved, but so far no one has gotten very far.  Is there some critical mass of activity on a project, or some critical level of support that&amp;rsquo;s required before some people will start submitting code?  One comment I had was that these bots are just tiny nodejs projects.  I guess for those wanting to cut their teeth on open source node projects a challengingly complex project is appealing in some sense.  Personally I have had just about enough of complexity and the simpler the better.  The key metric for me continues to be can we deliver something of value to the end user?  It&amp;rsquo;s whether the project delivers something of value to someone somewhere.&lt;/p&gt;
+
+&lt;p&gt;What was really simple this week was setting up Slack repeating reminders so that we get alerts about when the scrums are upcoming, some project meetings and some mobs.  The syntax is super simple, e.g. &lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind #localsupport to prepare for weekly meeting @here in 30 minutes at 4:00pm every Thursday 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The exciting thing with the new fixed URL videoconferencing from Jitsi is that the meeting ping, itself, can be set as a recurriung reminder:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind #localsupport to join the weekly meeting @here in http://meet.jit.si at 4:30pm every Thursday 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;rsquo;m thinking to make my participation in the project meetings a biweekly thing, so that I can get private project work done on the &amp;ldquo;off-weeks&amp;rdquo; so to speak.  My only complaint is that the reminders aren&amp;rsquo;t directly editable. However they are easily listable and deletable.  I also see that they can be controlled by API:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://api.slack.com/methods/reminders.list"&gt;https://api.slack.com/methods/reminders.list&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;That makes me think we could possibly take the agile-bot out of the equation by simply having our main site hit Slack directly to set reminders based on events created or updated through the Rails interface &amp;hellip;  By having set up the LocalSupport meeting to rely on a permanent Jitsi URL, we take the need for a really experienced scrum master to start the videoconference out of the equation, and in principle anyone can stream the recording - although that is more fiddly in Jitsi.  It does seem like Jitsi performance might not be as good as Hangouts, particularly since they&amp;rsquo;re offering their new low latency setting, but I guess we should experiment with our own Jitsi hosting on Azure.&lt;/p&gt;
+
+&lt;p&gt;So that&amp;rsquo;s all very well for maintaining the run of existing projects, but that&amp;rsquo;s not going to immediately help with getting more folks involved in the greeter bots (or other new projects), or make the greeter bots seem a little more friendly.  Maybe I would be better off labelling them specifically as bots.  For the main project greeter, if I don&amp;rsquo;t have the message come from me, then I don&amp;rsquo;t get to see the response that people make to the bot.  In the group channels, it&amp;rsquo;s kind of weird to have an automated message from me when I&amp;rsquo;m inviting someone in for a vote.  What I really want to move towards is some kind of drip campaign that follows up with people who&amp;rsquo;ve joined project channels (and our community) to ask them if they need help and support.  I notice that Slack follows up with multiple emails after the fact when you&amp;rsquo;ve been invited to a Slack community, presumably to maximize the chances of getting new users into Slack.&lt;/p&gt;
+
+&lt;p&gt;For the main greeter bot I&amp;rsquo;ve got four little changes to tick off:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;hyperlinking to our free premium mob page&lt;/li&gt;
+&lt;li&gt;adding mention of our code of conduct&lt;/li&gt;
+&lt;li&gt;referring to the new person by name&lt;/li&gt;
+&lt;li&gt;hyperlinking to channel names&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For the project greeter bot I&amp;rsquo;ve got lots of issues, but my top ones are:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;names of folks in message not being linked&lt;/li&gt;
+&lt;li&gt;channel names not being linked&lt;/li&gt;
+&lt;li&gt;avoid reposting the intro if we&amp;rsquo;ve recently done so&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This last would go a long way to making the bot seem more human, but it would also require the most complexity, i.e. some state would need to be held, or we&amp;rsquo;d need to pull messages out of the channel to check for recent posts.  That latter seems simpler, but also something that we should try after wrapping all this in tests.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m conflicted here - maybe the thing that would get more people involved would be making super-polished documentation on all this, or creatingnew project channels - project placeholders in our main site and getting started pages; but the itch I want to scratch is a few formatting issues, and also ensuring we have a global code of conduct in place (which should go in the getting started as well &amp;hellip;).  I guess I&amp;rsquo;ll let myself hit those issues first &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve just picked off hyperlinking channels in the main greeter bot, and pushed that branch to production - hmm, no staging set up there - not so easy to test even on the bot-test instance I created - unless creating new accounts - can do &amp;hellip; should get set up with that properly.  Linking to channels and users from bot posts does seem like a relatively straightforward syntax fix:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://api.slack.com/docs/message-formatting#linking_to_channels_and_users"&gt;https://api.slack.com/docs/message-formatting#linking&lt;em&gt;to&lt;/em&gt;channels&lt;em&gt;and&lt;/em&gt;users&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Gonna stop there today since I&amp;rsquo;m behind and hopefully this will give me impetus to get the few other rough edges sorted before the big push, which is setting up some proper testing infrastructure on these projects &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Behind Schedule</title>
     <link rel="alternate" href="http://blog.url.com/2017/08/31/av-ecosystem-review-behind-schedule/"/>
     <id>http://blog.url.com/2017/08/31/av-ecosystem-review-behind-schedule/</id>
@@ -161,35 +216,6 @@ f) clear calls to action &amp;hellip;&lt;/p&gt;
 &lt;p&gt;The Yak-shaving I thought I was going to be doing this morning was following up with dropbox and GitHub about image embeds, but that&amp;rsquo;s because I thought I was going to have to reconstruct another July blog.  Ironically there was enough wrangling just working out what I was writing up last week! :-)&lt;/p&gt;
 
 &lt;p&gt;I guess it might still be a few days before I make any more explicit changes, as there&amp;rsquo;s the Premium page and other changes to review, but perhaps tomorrow I can take a quick stab at a sequence of getting started pages (one for each numbered element) and then leave that &amp;ldquo;in the oven&amp;rdquo; to come back in a month and review, assuming that I&amp;rsquo;ve really undertstood all these Google Analytic ideas.  That said, as long as things are going in approximately the right direction, perhaps perfect clarity is not as critical as I sometimes believe &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Bounce Drop</title>
-    <link rel="alternate" href="http://blog.url.com/2017/08/25/ecosystem-review-bounce-drop/"/>
-    <id>http://blog.url.com/2017/08/25/ecosystem-review-bounce-drop/</id>
-    <published>2017-08-25T01:00:00+01:00</published>
-    <updated>2017-10-19T21:05:11+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="bounce rate" src="/images/bounce_rate.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Right, time to work out the difference between &amp;ldquo;bounce rate&amp;rdquo; and &amp;ldquo;drop off&amp;rdquo;.  Maybe it&amp;rsquo;s the jetlag or just me getting old, but reading &lt;a href="http://www.rankraiser.com/rankraiser/difference-between-google-bounce-rate-and-drop-offs/"&gt;this article&lt;/a&gt; I&amp;rsquo;m not immediately getting it.  Let&amp;rsquo;s dig in:&lt;/p&gt;
-
-&lt;p&gt;Bounce Rate is apparently the percentage of total visitors to a specific page in our site that saw only that page during their visit to our site.  Our getting started bounce rate was ~57% in July, and 80% in June, so that tells us that since we made the change at the beginning of July people have been hanging around a bit longer after visiting this page - at least more of them have been visiting at least one more page in our site.&lt;/p&gt;
-
-&lt;p&gt;Drop off (which gets shown in the Google Analytics visitor flow) is a combination of people leaving the site after having visited 1 or more pages.  In July we saw 37.3% of total traffic to the &amp;ldquo;Getting Started&amp;rdquo; page drop off there, compared to  40.8% in June.  &lt;/p&gt;
-
-&lt;p&gt;Hmmm. So of the, say, 100 folks (sessions?) who loaded the &amp;ldquo;Getting Started&amp;rdquo; page in June, 80 only saw that single page.  While just over 40% of all sessions (that included &amp;ldquo;Getting Started&amp;rdquo;?) ended there, while just under 60% carried on browsing.  All sessions must also be those 100 folks, and 40 ended there, but 60 went on &amp;hellip; that does not make sense.  I must be missing something, unless the drop-off is exluding the bounces, which on reflection it looks like it is.  That would imply that of the 20 folks who browsed through the &amp;ldquo;Getting Started&amp;rdquo; page, 8 ended their browsing journey there, while 12 of them carried on browsing &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;We can hypothesize that removing the links to GitHub, Pivotal Tracker and Google+ from the start of the &amp;ldquo;Getting Started&amp;rdquo; page could have had this sort of effect, but this all seems pretty inconclusive so far.  What we really want to be looking at is the numbers of people getting set up and contributing to projects, which the analytics is not telling us about.&lt;/p&gt;
-
-&lt;p&gt;The other thing to look at is how my change to the Premium page wording has affected things &amp;hellip; I can&amp;rsquo;t seem to pull the pricing or premium pages up in the behaviour flow graph since they are not showing up there (too few clicks perhaps?), although I notice the exit rate is shown in the plugin (but that&amp;rsquo;s different again from dropoff?).  The bounce rate as reported by the chrome plugin has dropped from 50% to 0%, which makes it seem like that&amp;rsquo;s a helpful change in terms of making the Premium page stickier &amp;hellip; Conversely for the same time period the bounce rate has increased from 20% to 50% on the Premium Mob page where we didn&amp;rsquo;t make any changes.  So that&amp;rsquo;s a reasonable argument for adjusting the language on the Premium Mob page too &amp;hellip; looks like I have more reading to do on what makes exit rate different from bounce rate &amp;hellip;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.axzm.com/google-analytics-exit-percentage/"&gt;https://www.axzm.com/google-analytics-exit-percentage/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://onlineoptimizers.eu/the-important-difference-between-exit-rate-and-bounce-rate/"&gt;http://onlineoptimizers.eu/the-important-difference-between-exit-rate-and-bounce-rate/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>
