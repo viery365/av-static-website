@@ -69,6 +69,32 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review More Greetings</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/04/av-ecosystem-review-more-greetings/"/>
+    <id>http://blog.url.com/2017/09/04/av-ecosystem-review-more-greetings/</id>
+    <published>2017-09-04T01:00:00+01:00</published>
+    <updated>2017-10-31T20:36:55+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Got my jogging and podcasting/tweeting done this AM, but kids still off school, which means I&amp;rsquo;m late to the keyboard.  Lots to do - low hanging fruit is probably other changes to the greeter bots.  The change I rolled out on Friday seems to be working; that&amp;rsquo;s the quick fix to ensure that channel names are hyperlinked in messages:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/Screenshot%202017-09-04%2010.16.25.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I guess I should get that merged into master, and I can probably kick through the other minor changes there &amp;hellip; I&amp;rsquo;ve merged the license and code of conduct pull requests that I had outstanding.  So I punted on the code of conduct in the greeter bot, posting the following to our AV community channel:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;we&amp;rsquo;ve been discussing codes of conduct before and I know that various projects have them now, following GitHub&amp;rsquo;s lead of making them really easy to add.  I haven&amp;rsquo;t heard any objections yet, and I just added them as a recommendation in our &amp;ldquo;Getting Started&amp;rdquo; documentation.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m planning to add mention of them to our Slack greeter bot https://github.com/AgileVentures/greeter&lt;em&gt;bot/issues/6 but I thought I&amp;rsquo;d just check in with the community again before moving on that.  Would be good to discuss in a community meeting - which perhaps we should move to Fridays &amp;hellip; anyhow more on meeting times soon, but very interested in any input anyone cares to share here, or feel free to DM me directly :slightly&lt;/em&gt;smiling_face:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And I got hyperlinks to our Premium mob offer and the user name in the main greeting bot, and pushed those live from a branch. I&amp;rsquo;m really promising myself that the next step is testing!&lt;/p&gt;
+
+&lt;p&gt;But before that I can&amp;rsquo;t help myself but try and get the names and channels linked up in the project greeter bot, so I went ahead and did that and ended up doing a quick manual test on the now un-used AV mentors slack instance, that allowed for a quick round of debugging.  Gosh I&amp;rsquo;m really not setting this up to allow for easy-onboarding of others - will need a big documentation effort to get folks into the new AV bot testing slack instance &amp;hellip; can&amp;rsquo;t help myself but get these quick fixes out first - actually make it so that there will be the equivalent of a ping to the project maintainers on channel join - or at least see if hyperlinking their name in the bot post has that effect &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Greetings and Meetings</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/01/av-ecosystem-review-greetings-and-meetings/"/>
     <id>http://blog.url.com/2017/09/01/av-ecosystem-review-greetings-and-meetings/</id>
@@ -190,32 +216,6 @@ f) clear calls to action &amp;hellip;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.agileventures.org/getting-started-1"&gt;https://www.agileventures.org/getting-started-1&lt;/a&gt; could be an alternate mockup that I could share with key members for feedback &amp;hellip; okay all done.  I don&amp;rsquo;t think I&amp;rsquo;ll release this live yet - let&amp;rsquo;s see what folks in #av&lt;em&gt;community&lt;/em&gt;talk say first &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="https://www.agileventures.org/getting-started-1"&gt;https://www.agileventures.org/getting-started-1&lt;/a&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Yak Shaving</title>
-    <link rel="alternate" href="http://blog.url.com/2017/08/29/av-ecosystem-review-yak-shaving/"/>
-    <id>http://blog.url.com/2017/08/29/av-ecosystem-review-yak-shaving/</id>
-    <published>2017-08-29T01:00:00+01:00</published>
-    <updated>2017-10-19T21:05:09+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="yak" src="/images/yak.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Okay, I think I&amp;rsquo;m coming out of the jet-lag - still not sure things are making sense though, and there&amp;rsquo;s a lot of yak-shaving to get back to the workface.  I wrote two AV ecosystem review pieces on Thursday and Friday last week and I have to refer to them to remember what I worked out.  I was trying to review the changes I made to the &amp;ldquo;Getting Started&amp;rdquo; and Premium pages at the end of July.  A lot of that seems to be me poring over Google Analytics stats and being a little unclear about the difference between &amp;ldquo;bounce rate&amp;rdquo;, &amp;ldquo;exit rate&amp;rdquo; and &amp;ldquo;drop off&amp;rdquo;.  I&amp;rsquo;m starting to get clarity that the &amp;ldquo;bounce rate&amp;rdquo; only refers to &amp;ldquo;single visit sessions&amp;rdquo;, and is only calculated for visits that start on the page in question.  We saw a fairly substantial improvement in the bounce rate from the previous month and the same period the previous year, implying that more people landing on the &amp;ldquo;Getting Started&amp;rdquo; page are sticking around on our site.  The exit rate was also improving.  The exit rate is the percentage for all page views of a page that were the last in the users session.  So in summary: &lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Bounce rate - Of all the sessions that started on a page, how many did not click through to any other page in the site&lt;/li&gt;
-&lt;li&gt;Exit rate - Of all views of a page, what percentage were the last in the user&amp;rsquo;s session&lt;/li&gt;
-&lt;li&gt;Drop off - Of all the sessions including this page, in what percentage did the session end here?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I&amp;rsquo;m thinking that the difference in exit rate and drop off is due to the calculations being based on page views and sessions including a page respectively; where sessions may include the same page more than once, hence the exit rate can be 29% and the drop off rate be 37% (222/595) for the same period (July &amp;lsquo;17).  So overall, all the stats are going in the right direction following the changes to the &amp;ldquo;Getting Started&amp;rdquo; page, and I&amp;rsquo;ve burned a chunk of time understanding the nuances of Google Analytics, which perhaps I should have been spending on my next wheeze, which is splitting up the &amp;ldquo;Getting Started&amp;rdquo; page into a series of pages so that we can track the approximate flow through it via Google Analytics.  I&amp;rsquo;m thinking this might be simpler and more incrementally testable than trying to build a tracking system for users that reports back their progress.  I suspect that could be very powerful and useful too, but I think that the content is critical too, and we can move faster making changes to the content first (given our limited resources) &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;The Yak-shaving I thought I was going to be doing this morning was following up with dropbox and GitHub about image embeds, but that&amp;rsquo;s because I thought I was going to have to reconstruct another July blog.  Ironically there was enough wrangling just working out what I was writing up last week! :-)&lt;/p&gt;
-
-&lt;p&gt;I guess it might still be a few days before I make any more explicit changes, as there&amp;rsquo;s the Premium page and other changes to review, but perhaps tomorrow I can take a quick stab at a sequence of getting started pages (one for each numbered element) and then leave that &amp;ldquo;in the oven&amp;rdquo; to come back in a month and review, assuming that I&amp;rsquo;ve really undertstood all these Google Analytic ideas.  That said, as long as things are going in approximately the right direction, perhaps perfect clarity is not as critical as I sometimes believe &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
