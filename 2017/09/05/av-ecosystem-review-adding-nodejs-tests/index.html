@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Adding NodeJS Tests</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_09 x2017_09_05 x2017_09_05_av-ecosystem-review-adding-nodejs-tests x2017_09_05_av-ecosystem-review-adding-nodejs-tests_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/05/av-ecosystem-review-adding-nodejs-tests/">AV EcoSystem Review Adding NodeJS Tests</a></h2>
+        <h5 class='date'> 5 Sep 2017</h5>
+    <p>Argh, so I got distracted by Slack and blogging and twitter and even though I sat down at the computer at 9am it&rsquo;s 10am.  At least I got a few important emails and things out of the way (I think), but so after making a slew of changes to the Slack greeter bots, I feel I can&rsquo;t put off adding test frameworks any longer.  There&rsquo;s some bugs going out that I can&rsquo;t catch with simple automated tests (the way messages get formatted in a real slack instance), but I&rsquo;ve definitely wasted a little time on some silly bugs that automated tests would have caught.  In the meantime I can see that the new changes to the syntax for the main greeter bot are all in place:</p>
+
+<p><img src="https://user-images.githubusercontent.com/30216/30053660-798a6e8c-9221-11e7-927d-ea20f462cc55.png" />)</p>
+
+<p>and similarly for usernames in the project greeter bot:</p>
+
+<p><img src="https://user-images.githubusercontent.com/30216/30053820-fc5adbee-9221-11e7-8287-2934a0cd501c.png" /></p>
+
+<p>although I note that even the bot mention of my own name in a channel does not appear to have created the kind of highlight I would like to see in the channel notifications (i.e. the number in the dot to indicate one mention of one&rsquo;s name)</p>
+
+<p><img src="https://user-images.githubusercontent.com/30216/30053947-5a4bb106-9222-11e7-96de-eb3a1b66fddc.png" /></p>
+
+<p>but at least we&rsquo;ve got an automated way of giving new users the message that they should flag the maintainer&rsquo;s name, in order to get attention.  I was hoping that simply mentioning the maintainer in the bot message might have this effect, but not so.  If the user follows the instruction to flag the maintainer in any question, it should be fine, but some people don&rsquo;t understand that part of flagging in Slack - I&rsquo;m looking to ensure that any question from a new person joining the channel gets noticed, but I guess I&rsquo;m pushing too hard on a corner case &hellip;</p>
+
+<p>Anyway, as the number of features increases the need for tests mounts, and I think part of the problem here is that I haven&rsquo;t yet mentally automatized the setup of tests in a NodeJS project.  I&rsquo;ve done it so many times for Ruby that I can set up an RSpec or Cucumber suite from scratch without referring to any docs.  I have done it for NodeJS, but not enough that it&rsquo;s second nature and it&rsquo;s funny how a small thing like that can get in the way of getting something done.  Maybe I&rsquo;ll need to athletic repeat that a few more times - I did do it every day for a couple of weeks in 2015, but not enough apparently &hellip; :-)</p>
+
+<p>What&rsquo;s so hard&ndash;where do I start?  Get a branch checked out for the issue I have on adding tests:</p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot <span class="o">(</span>master<span class="o">)]</span><span class="nv">$ </span>
+→ git checkout -b 4_add_tests
+Switched to a new branch <span class="s1">'4_add_tests'</span>
+</code></pre>
+<p>install mocha:</p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot <span class="o">(</span>4_add_tests<span class="o">)]</span><span class="nv">$ </span>
+→ npm install --save-dev mocha
+</code></pre>
+<p>make a test directory and create a test:</p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot <span class="o">(</span>4_add_tests<span class="o">)]</span><span class="nv">$ </span>
+→ mkdir <span class="nb">test</span>
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot <span class="o">(</span>4_add_tests<span class="o">)]</span><span class="nv">$ </span>
+→ touch <span class="nb">test</span>/server_test.js
+</code></pre>
+<p>create a test file:</p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">assert</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'assert'</span><span class="p">);</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s1">'Bot'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'should include channel names in message'</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre>
+<p>update package.json</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"greeter_bot"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"server.js"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"botkit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^0.4.3"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"mocha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^3.5.0"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mocha test/**/*.js"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISC"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>and that works:</p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot <span class="o">(</span>4_add_tests<span class="o">)]</span><span class="nv">$ </span>
+→ npm <span class="nb">test</span>
+
+<span class="gp">&gt; </span>greeter_bot@1.0.0 <span class="nb">test</span> /Users/tansaku/Documents/GitHub/AgileVentures/greeter_bot
+<span class="gp">&gt; </span>mocha <span class="nb">test</span>/<span class="k">**</span>/<span class="k">*</span>.js
+
+
+
+  Bot
+    ✓ should include channel names <span class="k">in </span>message
+
+
+  1 passing <span class="o">(</span>6ms<span class="o">)</span>
+
+</code></pre>
+<p>I know how to do this - why was I hesitating? :-) But so now there&rsquo;s not much to test in this project yet, at least not without some sophisticated mocking, which I&rsquo;ll leave for later.  Let me at least check some trivial thing about the message being sent with the following code:</p>
+<pre class="highlight plaintext"><code>var chai = require('chai');
+var expect = chai.expect;
+
+var greeting = require('./../lib/greeting');
+
+describe('Bot', function(){
+  it('should include linked techtalk channel in greeting',function(){
+    expect(greeting).to.include('&lt;#C02AA0ARR|techtalk&gt;');
+  });
+
+  it('should include linked new_members channel in greeting',function(){
+    expect(greeting).to.include('&lt;#C02G8J689|new_members&gt;');
+  });
+
+  it('should include linked random channel in greeting',function(){
+    expect(greeting).to.include('&lt;#C0285CSUH|random&gt;');
+  });
+});
+</code></pre>
+<p>Okay, so I got a bit fancy and installed chai so I could work with the expect/include syntax I like, and then I got all like &ldquo;this project needs a proper structure&rdquo; and moved things around.  I think it still works.  With only a couple of unit tests and no acceptance tests, I may have completely broken the project - my little local test that it starts up may conceal other issues &hellip; but at least I&rsquo;ve broken down some little mental barriers.  Starting node tests from scratch and reminding myself how we go through re-structuring a node app.  Some progress today - on to the continuing review tomorrow &hellip; or add tests to project<em>greeter</em>bot &hellip; jump from level to level, enjoy, code!</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
