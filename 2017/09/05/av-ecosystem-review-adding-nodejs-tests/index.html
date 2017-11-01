@@ -167,24 +167,24 @@ Switched to a new branch <span class="s1">'4_add_tests'</span>
 
 </code></pre>
 <p>I know how to do this - why was I hesitating? :-) But so now there&rsquo;s not much to test in this project yet, at least not without some sophisticated mocking, which I&rsquo;ll leave for later.  Let me at least check some trivial thing about the message being sent with the following code:</p>
-<pre class="highlight plaintext"><code>var chai = require('chai');
-var expect = chai.expect;
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">chai</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'chai'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">expect</span> <span class="o">=</span> <span class="nx">chai</span><span class="p">.</span><span class="nx">expect</span><span class="p">;</span>
 
-var greeting = require('./../lib/greeting');
+<span class="kd">var</span> <span class="nx">greeting</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./../lib/greeting'</span><span class="p">);</span>
 
-describe('Bot', function(){
-  it('should include linked techtalk channel in greeting',function(){
-    expect(greeting).to.include('&lt;#C02AA0ARR|techtalk&gt;');
-  });
+<span class="nx">describe</span><span class="p">(</span><span class="s1">'Bot'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'should include linked techtalk channel in greeting'</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">greeting</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="s1">'&lt;#C02AA0ARR|techtalk&gt;'</span><span class="p">);</span>
+  <span class="p">});</span>
 
-  it('should include linked new_members channel in greeting',function(){
-    expect(greeting).to.include('&lt;#C02G8J689|new_members&gt;');
-  });
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'should include linked new_members channel in greeting'</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">greeting</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="s1">'&lt;#C02G8J689|new_members&gt;'</span><span class="p">);</span>
+  <span class="p">});</span>
 
-  it('should include linked random channel in greeting',function(){
-    expect(greeting).to.include('&lt;#C0285CSUH|random&gt;');
-  });
-});
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'should include linked random channel in greeting'</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">greeting</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="s1">'&lt;#C0285CSUH|random&gt;'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
 </code></pre>
 <p>Okay, so I got a bit fancy and installed chai so I could work with the expect/include syntax I like, and then I got all like &ldquo;this project needs a proper structure&rdquo; and moved things around.  I think it still works.  With only a couple of unit tests and no acceptance tests, I may have completely broken the project - my little local test that it starts up may conceal other issues &hellip; but at least I&rsquo;ve broken down some little mental barriers.  Starting node tests from scratch and reminding myself how we go through re-structuring a node app.  Some progress today - on to the continuing review tomorrow &hellip; or add tests to project<em>greeter</em>bot &hellip; jump from level to level, enjoy, code!</p>
 

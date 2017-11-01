@@ -73,7 +73,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/09/05/av-ecosystem-review-adding-nodejs-tests/"/>
     <id>http://blog.url.com/2017/09/05/av-ecosystem-review-adding-nodejs-tests/</id>
     <published>2017-09-05T01:00:00+01:00</published>
-    <updated>2017-11-01T20:46:23+00:00</updated>
+    <updated>2017-11-01T20:46:52+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -153,24 +153,24 @@ Switched to a new branch &lt;span class="s1"&gt;'4_add_tests'&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;I know how to do this - why was I hesitating? :-) But so now there&amp;rsquo;s not much to test in this project yet, at least not without some sophisticated mocking, which I&amp;rsquo;ll leave for later.  Let me at least check some trivial thing about the message being sent with the following code:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;var chai = require('chai');
-var expect = chai.expect;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;chai&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'chai'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;expect&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;chai&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-var greeting = require('./../lib/greeting');
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;greeting&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./../lib/greeting'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
-describe('Bot', function(){
-  it('should include linked techtalk channel in greeting',function(){
-    expect(greeting).to.include('&amp;lt;#C02AA0ARR|techtalk&amp;gt;');
-  });
+&lt;span class="nx"&gt;describe&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Bot'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+  &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'should include linked techtalk channel in greeting'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+    &lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;greeting&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;to&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;#C02AA0ARR|techtalk&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="p"&gt;});&lt;/span&gt;
 
-  it('should include linked new_members channel in greeting',function(){
-    expect(greeting).to.include('&amp;lt;#C02G8J689|new_members&amp;gt;');
-  });
+  &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'should include linked new_members channel in greeting'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+    &lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;greeting&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;to&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;#C02G8J689|new_members&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="p"&gt;});&lt;/span&gt;
 
-  it('should include linked random channel in greeting',function(){
-    expect(greeting).to.include('&amp;lt;#C0285CSUH|random&amp;gt;');
-  });
-});
+  &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'should include linked random channel in greeting'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+    &lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;greeting&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;to&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;#C0285CSUH|random&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Okay, so I got a bit fancy and installed chai so I could work with the expect/include syntax I like, and then I got all like &amp;ldquo;this project needs a proper structure&amp;rdquo; and moved things around.  I think it still works.  With only a couple of unit tests and no acceptance tests, I may have completely broken the project - my little local test that it starts up may conceal other issues &amp;hellip; but at least I&amp;rsquo;ve broken down some little mental barriers.  Starting node tests from scratch and reminding myself how we go through re-structuring a node app.  Some progress today - on to the continuing review tomorrow &amp;hellip; or add tests to project&lt;em&gt;greeter&lt;/em&gt;bot &amp;hellip; jump from level to level, enjoy, code!&lt;/p&gt;
 </content>
