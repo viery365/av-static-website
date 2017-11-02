@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Athletic Reps</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_09 x2017_09_06 x2017_09_06_av-ecosystem-review-athletic-reps x2017_09_06_av-ecosystem-review-athletic-reps_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/06/av-ecosystem-review-athletic-reps/">AV EcoSystem Review Athletic Reps</a></h2>
+        <h5 class='date'> 6 Sep 2017</h5>
+    <p><img alt="meeting" src="/images/reps.jpg" /></p>
+
+<p>So I&rsquo;ve managed to get to the blog-face a little earlier today despite Slack/Twitter/Email distractions, but I&rsquo;m going to stick to the adding tests flow that I started yesterday as a way of getting some athletic reps in on node testing.  That said, we&rsquo;ve got a fairly serious bleed on our emails getting marked as spam that may prevent me from spending much more time on code in these sessions.  Can I afford a 15 minute rep on node tests every morning for the next two weeks?  So many regular station keeping activities that the days are packed!</p>
+
+<p>Anyhow, so at least from yesterday we have some tests in the <code>greeter_bot</code> project.  Let&rsquo;s get to the <code>project_greeter_bot</code> project.  Where would I start?  Grab the issue id for creating tests from the project itself, that&rsquo;s <a href="https://github.com/AgileVentures/project_greeter_bot/issues/5">https://github.com/AgileVentures/project<em>greeter</em>bot/issues/5</a> - funny how it feels like breaking the ice on something in order to push through the little &ldquo;I&rsquo;m not sure where to start&rdquo; feeling.  Bring up the terminal in the right directory.  No outstanding pull requests on the project, pull the latest code from master:</p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/project_greeter_bot <span class="o">(</span>master<span class="o">)]</span><span class="nv">$ </span>
+→ git pull origin master
+remote: Counting objects: 1, <span class="k">done</span>.
+remote: Total 1 <span class="o">(</span>delta 0<span class="o">)</span>, reused 1 <span class="o">(</span>delta 0<span class="o">)</span>, pack-reused 0
+Unpacking objects: 100% <span class="o">(</span>1/1<span class="o">)</span>, <span class="k">done</span>.
+From https://github.com/AgileVentures/project_greeter_bot
+ <span class="k">*</span> branch            master     -&gt; FETCH_HEAD
+   bc396db..46944ce  master     -&gt; origin/master
+Updating bc396db..46944ce
+Fast-forward
+ server.js | 14 +++++++-------
+ 1 file changed, 7 insertions<span class="o">(</span>+<span class="o">)</span>, 7 deletions<span class="o">(</span>-<span class="o">)</span>
+</code></pre>
+<p>create a branch for the new tests</p>
+<pre class="highlight shell"><code>→ git checkout -b 5_add_tests
+Switched to a new branch <span class="s1">'5_add_tests'</span>
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/project_greeter_bot <span class="o">(</span>5_add_tests<span class="o">)]</span><span class="nv">$ </span>
+</code></pre>
+<p>install mocha</p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/project_greeter_bot <span class="o">(</span>5_add_tests<span class="o">)]</span><span class="nv">$ </span>
+→ npm install mocha --save-dev
+project_greeter_bot@0.0.0 /Users/tansaku/Documents/GitHub/AgileVentures/project_greeter_bot
+└─┬ mocha@3.5.0 
+  ├── browser-stdout@1.3.0 
+  ├─┬ commander@2.9.0 
+  │ └── graceful-readlink@1.0.1 
+  ├── debug@2.6.8 
+  ├── diff@3.2.0 
+  ├─┬ glob@7.1.1 
+  │ ├── fs.realpath@1.0.0 
+  │ ├─┬ inflight@1.0.6 
+  │ │ └── wrappy@1.0.2 
+  │ ├─┬ minimatch@3.0.4 
+  │ │ └─┬ brace-expansion@1.1.8 
+  │ │   ├── balanced-match@1.0.0 
+  │ │   └── concat-map@0.0.1 
+  │ ├── once@1.4.0 
+  │ └── path-is-absolute@1.0.1 
+  ├── growl@1.9.2 
+  ├── json3@3.3.2 
+  ├─┬ lodash.create@3.1.1 
+  │ ├─┬ lodash._baseassign@3.2.0 
+  │ │ ├── lodash._basecopy@3.0.1 
+  │ │ └─┬ lodash.keys@3.1.2 
+  │ │   ├── lodash._getnative@3.9.1 
+  │ │   ├── lodash.isarguments@3.1.0 
+  │ │   └── lodash.isarray@3.0.4 
+  │ ├── lodash._basecreate@3.0.3 
+  │ └── lodash._isiterateecall@3.0.9 
+  └─┬ supports-color@3.1.2 
+    └── has-flag@1.0.0 
+</code></pre>
+<p>and chai, since I have trouble remembering the <code>assert</code> syntax:</p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/project_greeter_bot <span class="o">(</span>5_add_tests<span class="o">)]</span><span class="nv">$ </span>
+→ npm install chai --save-dev
+project_greeter_bot@0.0.0 /Users/tansaku/Documents/GitHub/AgileVentures/project_greeter_bot
+└─┬ chai@4.1.2 
+  ├── assertion-error@1.0.2 
+  ├── check-error@1.0.2 
+  ├── deep-eql@3.0.0 
+  ├── get-func-name@2.0.0 
+  ├── pathval@1.1.0 
+  └── <span class="nb">type</span>-detect@4.0.3 
+</code></pre>
+<p>So I searched for a <code>mocha init</code> commmand equivalent to <code>rspec --init</code> or <code>bundle init</code> and there is one, but it seems to generate a client side scaffold with html etc.&ndash;so not what we need here.  Feels like there&rsquo;s room for a little automation there &hellip; I&rsquo;ve opened a <a href="https://github.com/mochajs/mocha/issues/2989">feature suggestion</a> with Mocha, and in the meantime updated the projects package.json with:</p>
+<pre class="highlight shell"><code>  <span class="s2">"scripts"</span>: <span class="o">{</span>
+    <span class="s2">"test"</span>: <span class="s2">"mocha test/**/*.js"</span>
+  <span class="o">}</span>,
+</code></pre>
+<p>and dumped the following in <code>test/greeter_spec.js</code></p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/project_greeter_bot <span class="o">(</span>5_add_tests<span class="o">)]</span><span class="nv">$ </span>
+→ mkdir <span class="nb">test</span>
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/project_greeter_bot <span class="o">(</span>5_add_tests<span class="o">)]</span><span class="nv">$ </span>
+→ touch <span class="nb">test</span>/greeter_spec.js
+</code></pre><pre class="highlight javascript"><code><span class="nx">require</span> <span class="p">{</span> <span class="nx">expect</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'chai'</span><span class="p">;</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s1">'Project Greeter bot'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'should have greetings'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre>
+<p>and got this error:</p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/project_greeter_bot (5_add_tests)]$ 
+→ npm test
+
+&gt; project_greeter_bot@0.0.0 test /Users/tansaku/Documents/GitHub/AgileVentures/project_greeter_bot
+&gt; mocha test/**/*.js
+
+/Users/tansaku/Documents/GitHub/AgileVentures/project_greeter_bot/test/greeter_spec.js:1
+(function (exports, require, module, __filename, __dirname) { require { expect } from 'chai';
+                                                                      ^
+
+SyntaxError: Unexpected token {
+</code></pre>
+<p>I&rsquo;ve not remembered some of the syntax from yesterday.  This is the point of the rep - find the pain point that you would not otherwise find if you just copied and pasted the code.  Can I now solve this without resorting to looking up the solution &hellip; It&rsquo;s so tempting to just go look at the correct syntax, but I will force myself to slowly read the error message, <code>SyntaxError: Unexpected token {</code> so maybe just try dropping the curly braces &hellip; no both the following fail:</p>
+<pre class="highlight javascript"><code><span class="nx">require</span> <span class="nx">expect</span> <span class="nx">from</span> <span class="s1">'chai'</span><span class="p">;</span>
+</code></pre><pre class="highlight javascript"><code><span class="nx">require</span> <span class="p">{</span> <span class="s1">'expect'</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'chai'</span><span class="p">;</span>
+</code></pre>
+<p>Okay, going to look at yesterday&rsquo;s code &hellip; ah, here&rsquo;s what it should be:</p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">chai</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'chai'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">expect</span> <span class="o">=</span> <span class="nx">chai</span><span class="p">.</span><span class="nx">expect</span><span class="p">;</span>
+</code></pre>
+<p>hmm, have I been throwing in a mix of Python/React syntax there? :-)  Okay, hopefully this pain point will help me remember - would be great to repeat every day for a few to nail it down - now let&rsquo;s see if I can hook up the test to real code again.</p>
+
+<p>Took a bit of a big bite here - moved all the js code into a lib dir, moved all the greetings text/variables to a <code>greetings.js</code> file, renamed the test files, made loads of things consts, updated package.json with <code>&quot;start&quot;: &quot;node lib/server.js&quot;</code> and tried the following at the end of the <code>greetings.js</code> file in order for it to be pulled into both test and <code>server.js</code>:</p>
+<pre class="highlight javascript"><code><span class="nx">module</span><span class="p">.</span><span class="kr">export</span> <span class="o">=</span> <span class="nx">greetings</span><span class="p">;</span>
+</code></pre>
+<p>which did not work &hellip;</p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/project_greeter_bot <span class="o">(</span>5_add_tests<span class="o">)]</span><span class="nv">$ </span>
+→ npm <span class="nb">test</span>
+
+<span class="gp">&gt; </span>project_greeter_bot@0.0.0 <span class="nb">test</span> /Users/tansaku/Documents/GitHub/AgileVentures/project_greeter_bot
+<span class="gp">&gt; </span>mocha <span class="nb">test</span>/<span class="k">**</span>/<span class="k">*</span>.js
+
+module.js:471
+    throw err;
+    ^
+
+Error: Cannot find module <span class="s1">'greetings'</span>
+</code></pre>
+<p>so I&rsquo;m not remembering - try some alternatives?</p>
+<pre class="highlight javascript"><code><span class="k">default</span> <span class="nx">module</span> <span class="nx">greetings</span><span class="p">;</span>
+</code></pre><pre class="highlight javascript"><code><span class="kr">export</span><span class="p">.</span><span class="nx">module</span> <span class="o">=</span> <span class="nx">greetings</span><span class="p">;</span>
+</code></pre>
+<p>neither of these work - I think I&rsquo;m throwing in React syntax again - what&rsquo;s the solution?  Ah I was closer to start with, the export needs to be pluralized:</p>
+<pre class="highlight javascript"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">greetings</span><span class="p">;</span>
+</code></pre>
+<p>but still not working - ah path needed in test with:</p>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">chai</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'chai'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">expect</span> <span class="o">=</span> <span class="nx">chai</span><span class="p">.</span><span class="nx">expect</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">greetings</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/greetings'</span><span class="p">);</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s1">'Project Greeter bot'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'should have greetings'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">greetings</span><span class="p">.</span><span class="nx">greeter</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">include</span><span class="p">(</span><span class="s1">'something'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre>
+<p>Yes, that&rsquo;s it.  Okay, must remember the pluralization on <code>module exports = ...</code> and that this is different from React&rsquo;s <code>export default &lt;function&gt;</code>.  A quick update of the tests to something a little more meaningful, a check that things basically still work running the server locally against the old AV mentors instance and the pull request is in:</p>
+
+<p><a href="https://github.com/AgileVentures/project_greeter_bot/pull/23">https://github.com/AgileVentures/project<em>greeter</em>bot/pull/23</a></p>
+
+<p>and I start having thoughts about all the other little pieces to make this into a serious, accessible project:</p>
+
+<ol>
+<li>use of develop/production modes to avoid confusion over slack IDs</li>
+<li>coherent instructions about getting the project running for new developers</li>
+<li>checking this deploys to Azure</li>
+<li>setting up GitHub notifications on a #bot-notify channel</li>
+<li>adding projects to AV getting started and projects &hellip;</li>
+</ol>
+
+<p>For another day I guess - back to the grindstone &hellip;</p>
+
+<p>p.s. just wondering does the code of conduct hold the maintainers to treat all the contributors with respecting as well as the contributors treating each other with respect? looks like it does &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
