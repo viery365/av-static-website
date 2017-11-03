@@ -69,6 +69,73 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Email Failings</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/07/av-ecosystem-review-email-failings/"/>
+    <id>http://blog.url.com/2017/09/07/av-ecosystem-review-email-failings/</id>
+    <published>2017-09-07T01:00:00+01:00</published>
+    <updated>2017-11-03T21:23:40+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So I think the main bleed in the AV ecosystem may now be some of the problems we are having with sending emails and them ending up in spam filters.  Hold that thought for a moment and I&amp;rsquo;ll just do my node/mocha/chai &lt;a href="https://gist.github.com/tansaku/718547c89be1ef216dda4e973ea67075"&gt;athletic rep for the morning&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I guess I can afford to do that for a few mornings in a row and start exploring where I can speed up &amp;hellip;, but back to our email issues.  So we sent out 10 emails with a special offer (from support@agileventures.org) last week and as far as I can tell, every single one ended up in spam.  Annoyingly I have to go to slack to grab some info about it, but there&amp;rsquo;s not too much to distract me there today, phew.  So one person who got the email in their spam filter reported that they saw this message from Google:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/Screenshot_2017-09-05-16-59-32.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The message is &amp;ldquo;Why is this message in Spam? It is in violation of Google&amp;rsquo;s recommended email sender guidelines.&amp;rdquo;.  This week we had a new Premium Mob member sign up and so far none of the emails from me via sam@agileventures.org appears to have arrived with them.  I also get warnings of authentication failures from hotmail for several emails I&amp;rsquo;ve sent over the last 6 months.  We need to get to the bottom of this.  Can I replicate the failure above (from gmail) and get more info on what&amp;rsquo;s failing &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;So I re-send one of the free trial emails and I find it in my gmail spam folder.  I thought I sent a test of this email and it got through to my sam@neurogrid.com account.  It did.  Anyway, I can now click through to &amp;ldquo;learn more&amp;rdquo; on the email to see why the message got marked as spam.  It links to https://support.google.com/mail/answer/81126?hl=en#authentication&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Why is it important to authenticate your messages?
+
+Authentication ensures that your messages can be correctly classified. Emails that lack authentication are likely to be rejected or placed in the spam folder, given the high likelihood that they are forged messages used for phishing scams.
+
+In addition, unauthenticated emails with attachments may be outrightly rejected, for security reasons.
+
+To ensure that Gmail can identify you:
+
+* Use a consistent IP address to send bulk mail.
+* Keep valid reverse DNS records for the IP address(es) from which you send mail, pointing to your domain.
+* Use the same address in the 'From:' header on every bulk mail you send.
+
+We also recommend the following:
+
+* Sign messages with DKIM. We do not authenticate messages signed with keys using fewer than 1024 bits.
+* Publish an SPF record.
+* Publish a DMARC policy.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now one thing I did do with these 10 message was adjust the From address to be &lt;code&gt;support@agileventures.org&lt;/code&gt; which Thunderbird allows me to do, but maybe that triggered Gmail&amp;rsquo;s spam filter.  That said, I&amp;rsquo;ve had problems just sending from sam@agileventures.org as well, so can that be the whole story? &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;The hotmail failures I have had are like the following:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Feedback-Type: auth-failure
+User-Agent: XMR/2.2
+Version: 1.0
+Original-Mail-From: &amp;lt;sam@agileventures.org&amp;gt;
+Arrival-Date: Fri, 23 Jun 2017 10:02:07 -0700
+Message-ID: &amp;lt;b6a7803d-c6ff-16cd-ed5f-e37569ef4ba5@agileventures.org&amp;gt;
+Authentication-Results: hotmail.com; spf=softfail (sender IP is 217.70.183.196; identity alignment result is pass and alignment mode is relaxed) smtp.mailfrom=sam@agileventures.org; dkim=none (identity alignment result is pass and alignment mode is relaxed) header.d=agileventures.org; x-hmca=fail header.id=sam@agileventures.org
+Source-IP: 217.70.183.196
+Auth-Failure: spf
+Reported-Domain: agileventures.org
+DKIM-Domain: agileventures.org
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So I&amp;rsquo;ve sent off an email to Gandi:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Hi Gandi,
+
+We've been having trouble sending email from our domain agileventures.org, specifically from sam@agileventures.org which is a gandi mail account.  We are getting reports from hotmail (see below).  These are not bulk or spam email, but messages being sent to individual members of our charity from my Thunderbird email client.
+
+I also note that I cannot send email from sam@agileventures.org from my iPhone, although I can receive.
+
+Are there settings on Gandi's site, or even mail settings that we control that could be used to address these issues to ensure that email gets through?
+
+Many thanks in advance
+
+Best, Sam
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and I guess I will take another pass on this tomorrow, bring it up in the marketing meeting etc.  the funny thing is that hotmail failure messages have often been accompanied by delivery of the message as evidenced by sequences of replies and responses that I&amp;rsquo;m having with the people emailed &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Athletic Reps</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/06/av-ecosystem-review-athletic-reps/"/>
     <id>http://blog.url.com/2017/09/06/av-ecosystem-review-athletic-reps/</id>
@@ -372,61 +439,6 @@ Switched to a new branch &lt;span class="s1"&gt;'4_add_tests'&lt;/span&gt;
 &lt;p&gt;And I got hyperlinks to our Premium mob offer and the user name in the main greeting bot, and pushed those live from a branch. I&amp;rsquo;m really promising myself that the next step is testing!&lt;/p&gt;
 
 &lt;p&gt;But before that I can&amp;rsquo;t help myself but try and get the names and channels linked up in the project greeter bot, so I went ahead and did that and ended up doing a quick manual test on the now un-used AV mentors slack instance, that allowed for a quick round of debugging.  Gosh I&amp;rsquo;m really not setting this up to allow for easy-onboarding of others - will need a big documentation effort to get folks into the new AV bot testing slack instance &amp;hellip; can&amp;rsquo;t help myself but get these quick fixes out first - actually make it so that there will be the equivalent of a ping to the project maintainers on channel join - or at least see if hyperlinking their name in the bot post has that effect &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Greetings and Meetings</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/01/av-ecosystem-review-greetings-and-meetings/"/>
-    <id>http://blog.url.com/2017/09/01/av-ecosystem-review-greetings-and-meetings/</id>
-    <published>2017-09-01T01:00:00+01:00</published>
-    <updated>2017-10-30T21:00:35+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="meeting" src="/images/meeting.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Set the alarm this morning but still a late start as all my boys wanted help with their codecombat programming challenges, and they&amp;rsquo;re still off school for the summer.  Anyhow, there are several niggling things about the various greeter bots we have for AgileVentures and individual channels.  I&amp;rsquo;ve directed a few people to the #bots channel to get involved, but so far no one has gotten very far.  Is there some critical mass of activity on a project, or some critical level of support that&amp;rsquo;s required before some people will start submitting code?  One comment I had was that these bots are just tiny nodejs projects.  I guess for those wanting to cut their teeth on open source node projects a challengingly complex project is appealing in some sense.  Personally I have had just about enough of complexity and the simpler the better.  The key metric for me continues to be can we deliver something of value to the end user?  It&amp;rsquo;s whether the project delivers something of value to someone somewhere.&lt;/p&gt;
-
-&lt;p&gt;What was really simple this week was setting up Slack repeating reminders so that we get alerts about when the scrums are upcoming, some project meetings and some mobs.  The syntax is super simple, e.g. &lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind #localsupport to prepare for weekly meeting @here in 30 minutes at 4:00pm every Thursday 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The exciting thing with the new fixed URL videoconferencing from Jitsi is that the meeting ping, itself, can be set as a recurriung reminder:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind #localsupport to join the weekly meeting @here in http://meet.jit.si at 4:30pm every Thursday 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I&amp;rsquo;m thinking to make my participation in the project meetings a biweekly thing, so that I can get private project work done on the &amp;ldquo;off-weeks&amp;rdquo; so to speak.  My only complaint is that the reminders aren&amp;rsquo;t directly editable. However they are easily listable and deletable.  I also see that they can be controlled by API:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://api.slack.com/methods/reminders.list"&gt;https://api.slack.com/methods/reminders.list&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;That makes me think we could possibly take the agile-bot out of the equation by simply having our main site hit Slack directly to set reminders based on events created or updated through the Rails interface &amp;hellip;  By having set up the LocalSupport meeting to rely on a permanent Jitsi URL, we take the need for a really experienced scrum master to start the videoconference out of the equation, and in principle anyone can stream the recording - although that is more fiddly in Jitsi.  It does seem like Jitsi performance might not be as good as Hangouts, particularly since they&amp;rsquo;re offering their new low latency setting, but I guess we should experiment with our own Jitsi hosting on Azure.&lt;/p&gt;
-
-&lt;p&gt;So that&amp;rsquo;s all very well for maintaining the run of existing projects, but that&amp;rsquo;s not going to immediately help with getting more folks involved in the greeter bots (or other new projects), or make the greeter bots seem a little more friendly.  Maybe I would be better off labelling them specifically as bots.  For the main project greeter, if I don&amp;rsquo;t have the message come from me, then I don&amp;rsquo;t get to see the response that people make to the bot.  In the group channels, it&amp;rsquo;s kind of weird to have an automated message from me when I&amp;rsquo;m inviting someone in for a vote.  What I really want to move towards is some kind of drip campaign that follows up with people who&amp;rsquo;ve joined project channels (and our community) to ask them if they need help and support.  I notice that Slack follows up with multiple emails after the fact when you&amp;rsquo;ve been invited to a Slack community, presumably to maximize the chances of getting new users into Slack.&lt;/p&gt;
-
-&lt;p&gt;For the main greeter bot I&amp;rsquo;ve got four little changes to tick off:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;hyperlinking to our free premium mob page&lt;/li&gt;
-&lt;li&gt;adding mention of our code of conduct&lt;/li&gt;
-&lt;li&gt;referring to the new person by name&lt;/li&gt;
-&lt;li&gt;hyperlinking to channel names&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;For the project greeter bot I&amp;rsquo;ve got lots of issues, but my top ones are:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;names of folks in message not being linked&lt;/li&gt;
-&lt;li&gt;channel names not being linked&lt;/li&gt;
-&lt;li&gt;avoid reposting the intro if we&amp;rsquo;ve recently done so&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This last would go a long way to making the bot seem more human, but it would also require the most complexity, i.e. some state would need to be held, or we&amp;rsquo;d need to pull messages out of the channel to check for recent posts.  That latter seems simpler, but also something that we should try after wrapping all this in tests.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m conflicted here - maybe the thing that would get more people involved would be making super-polished documentation on all this, or creatingnew project channels - project placeholders in our main site and getting started pages; but the itch I want to scratch is a few formatting issues, and also ensuring we have a global code of conduct in place (which should go in the getting started as well &amp;hellip;).  I guess I&amp;rsquo;ll let myself hit those issues first &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve just picked off hyperlinking channels in the main greeter bot, and pushed that branch to production - hmm, no staging set up there - not so easy to test even on the bot-test instance I created - unless creating new accounts - can do &amp;hellip; should get set up with that properly.  Linking to channels and users from bot posts does seem like a relatively straightforward syntax fix:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://api.slack.com/docs/message-formatting#linking_to_channels_and_users"&gt;https://api.slack.com/docs/message-formatting#linking&lt;em&gt;to&lt;/em&gt;channels&lt;em&gt;and&lt;/em&gt;users&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Gonna stop there today since I&amp;rsquo;m behind and hopefully this will give me impetus to get the few other rough edges sorted before the big push, which is setting up some proper testing infrastructure on these projects &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

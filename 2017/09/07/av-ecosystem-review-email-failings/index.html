@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Email Failings</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_6 blog_page_6_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_09 x2017_09_07 x2017_09_07_av-ecosystem-review-email-failings x2017_09_07_av-ecosystem-review-email-failings_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,83 +83,78 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/07/av-ecosystem-review-email-failings/">AV EcoSystem Review Email Failings</a></h2>
+        <h5 class='date'> 7 Sep 2017</h5>
+    <p>So I think the main bleed in the AV ecosystem may now be some of the problems we are having with sending emails and them ending up in spam filters.  Hold that thought for a moment and I&rsquo;ll just do my node/mocha/chai <a href="https://gist.github.com/tansaku/718547c89be1ef216dda4e973ea67075">athletic rep for the morning</a></p>
 
-          <p>Page 6 of 22</p>
+<p>I guess I can afford to do that for a few mornings in a row and start exploring where I can speed up &hellip;, but back to our email issues.  So we sent out 10 emails with a special offer (from support@agileventures.org) last week and as far as I can tell, every single one ended up in spam.  Annoyingly I have to go to slack to grab some info about it, but there&rsquo;s not too much to distract me there today, phew.  So one person who got the email in their spam filter reported that they saw this message from Google:</p>
 
-            <p><a href="/blog/page/5/">Previous page</a></p>
+<p><img src="/images/Screenshot_2017-09-05-16-59-32.png" /></p>
 
-          <h2><a href="/2017/05/19/bayesian-decision-making-blog/">Bayesian Decision Making</a></h2>
-          <h3>May 19</h3>
-          <p><img alt="Bayesian" src="/images/bayesian.jpg"></p>
+<p>The message is &ldquo;Why is this message in Spam? It is in violation of Google&rsquo;s recommended email sender guidelines.&rdquo;.  This week we had a new Premium Mob member sign up and so far none of the emails from me via sam@agileventures.org appears to have arrived with them.  I also get warnings of authentication failures from hotmail for several emails I&rsquo;ve sent over the last 6 months.  We need to get to the bottom of this.  Can I replicate the failure above (from gmail) and get more info on what&rsquo;s failing &hellip;</p>
 
-<p>So my blog from yesterday isn’t finished.  I got stuck halfway trying to document the mediawiki setup process, and then loads of other things fell on me.  I can feel my decision making process creaking.  I got caught for twenty minutes in Slack and...</p>
-          <h2><a href="/2017/05/18/azure-mediawiki-stack/">Azure MediaWiki Stack Part 1</a></h2>
-          <h3>May 18</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
+<p>So I re-send one of the free trial emails and I find it in my gmail spam folder.  I thought I sent a test of this email and it got through to my sam@neurogrid.com account.  It did.  Anyway, I can now click through to &ldquo;learn more&rdquo; on the email to see why the message got marked as spam.  It links to https://support.google.com/mail/answer/81126?hl=en#authentication</p>
+<pre class="highlight plaintext"><code>Why is it important to authenticate your messages?
 
-<p>Okay, so how did we put this complete NHS HLP wiki instance together?  Let’s go through it step by step:</p>
+Authentication ensures that your messages can be correctly classified. Emails that lack authentication are likely to be rejected or placed in the spam folder, given the high likelihood that they are forged messages used for phishing scams.
 
-<ol>
-<li>Create a Bitnami account, and go to the console for “Azure Launchpad”</li>
-<li>Choose the Bitnami MediaWiki Stack which provides a one-click install...</li>
-</ol>
-          <h2><a href="/2017/05/17/full-monty/">Full Monty</a></h2>
-          <h3>May 17</h3>
-          <p><img alt="full monty" src="/images/full_monty.jpg"></p>
+In addition, unauthenticated emails with attachments may be outrightly rejected, for security reasons.
 
-<p>So I’d made a plan for this morning.  I was going to quickly check if we had progress on our IE11 VisualEditor/Moderation problems, get the final report written up for the NHS folks, and then try to get into rebuilding our complete wiki stack on...</p>
-          <h2><a href="/2017/05/16/debugging-mediawiki/">Debugging MediaWiki</a></h2>
-          <h3>May 16</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
+To ensure that Gmail can identify you:
 
-<p>Yesterday I finally got a clear shot at resolving some of our MediaWiki technical issues.  A key one was users getting loggged out after they create new accounts.  I had had some feedback from MediaWiki support that our cookies weren’t being set...</p>
-          <h2><a href="/2017/05/15/never-enough/">Never Enough</a></h2>
-          <h3>May 15</h3>
-          <p><img alt="never enough" src="/images/never_enough.jpg"></p>
+* Use a consistent IP address to send bulk mail.
+* Keep valid reverse DNS records for the IP address(es) from which you send mail, pointing to your domain.
+* Use the same address in the 'From:' header on every bulk mail you send.
 
-<p>However hard I work, it never seems like I’ve done enough.  We got the NHS Social Prescribing wiki “live” on Friday, and I also managed to do a round of updates and fixes on the MOOC.  Superficially I should be pleased at having gotten all that ...</p>
-          <h2><a href="/2017/05/12/hard-launch/">Hard Launch</a></h2>
-          <h3>May 12</h3>
-          <p><img alt="launch" src="/images/launch.jpg"></p>
+We also recommend the following:
 
-<p>So it’s May 12th, the hard launch date for the wiki.  We talked about a soft launch on May 4th, and we had the basic system up for then.  The hard launch is now to have everything in place.  I’ve spent the week getting usability feedback from different...</p>
-          <h2><a href="/2017/05/10/handling-anxiety/">Handling Anxiety</a></h2>
-          <h3>May 10</h3>
-          <p><img alt="anxiety" src="/images/anxiety.jpg"></p>
+* Sign messages with DKIM. We do not authenticate messages signed with keys using fewer than 1024 bits.
+* Publish an SPF record.
+* Publish a DMARC policy.
+</code></pre>
+<p>Now one thing I did do with these 10 message was adjust the From address to be <code>support@agileventures.org</code> which Thunderbird allows me to do, but maybe that triggered Gmail&rsquo;s spam filter.  That said, I&rsquo;ve had problems just sending from sam@agileventures.org as well, so can that be the whole story? &hellip;</p>
 
-<p>Recently I feel like I’m playing a game of anxiety managment.  This morning I slept through my alarm and failed to get up for my morning run.  Skipping it, I got on with the rest of the morning routine.  I’ve realised I can listen to a technical...</p>
-          <h2><a href="/2017/05/09/all-in-one-day/">All in One Day</a></h2>
-          <h3>May  9</h3>
-          <p><img alt="four seasons" src="/images/four_seasons_one_day.jpg"></p>
+<p>The hotmail failures I have had are like the following:</p>
+<pre class="highlight plaintext"><code>Feedback-Type: auth-failure
+User-Agent: XMR/2.2
+Version: 1.0
+Original-Mail-From: &lt;sam@agileventures.org&gt;
+Arrival-Date: Fri, 23 Jun 2017 10:02:07 -0700
+Message-ID: &lt;b6a7803d-c6ff-16cd-ed5f-e37569ef4ba5@agileventures.org&gt;
+Authentication-Results: hotmail.com; spf=softfail (sender IP is 217.70.183.196; identity alignment result is pass and alignment mode is relaxed) smtp.mailfrom=sam@agileventures.org; dkim=none (identity alignment result is pass and alignment mode is relaxed) header.d=agileventures.org; x-hmca=fail header.id=sam@agileventures.org
+Source-IP: 217.70.183.196
+Auth-Failure: spf
+Reported-Domain: agileventures.org
+DKIM-Domain: agileventures.org
+</code></pre>
+<p>So I&rsquo;ve sent off an email to Gandi:</p>
+<pre class="highlight plaintext"><code>Hi Gandi,
 
-<p>So I’m struggling with what each blog should be.  Should it be a focused dive on one thing?  Should I be trying to cover everything that happened since the last blog?  Yesterday was pretty intense.  I could spend the whole blog on the AV community...</p>
-          <h2><a href="/2017/05/08/rich-tapestry/">Rich Tapestry</a></h2>
-          <h3>May  8</h3>
-          <p><img alt="rich_tapestry" src="/images/rich_tapestry.jpg"></p>
+We've been having trouble sending email from our domain agileventures.org, specifically from sam@agileventures.org which is a gandi mail account.  We are getting reports from hotmail (see below).  These are not bulk or spam email, but messages being sent to individual members of our charity from my Thunderbird email client.
 
-<p>My brain was grabbling at titles for the blog/branch–“webs we weave”, “elephants all the way down”.  After nearly a year of blogging there’s a haze about which expressions I’ve used already and how well they express what I’ll end up blogging about...</p>
-          <h2><a href="/2017/05/05/breathing-room/">Breathing Room</a></h2>
-          <h3>May  5</h3>
-          <p><img alt="breathe" src="/images/breathe.jpg"></p>
+I also note that I cannot send email from sam@agileventures.org from my iPhone, although I can receive.
 
-<p>I felt like I was in a bit of pressure cooker yesterday with so many different tasks piling up.  I’ve managed to relieve the pressure slighlty by requesting that the start date of the edX MOOC get put back by a week.  UCBerkeley and edX seem just...</p>
+Are there settings on Gandi's site, or even mail settings that we control that could be used to address these issues to ensure that email gets through?
 
-            <p><a href="/blog/page/7/">Next page</a></p>
+Many thanks in advance
 
+Best, Sam
+</code></pre>
+<p>and I guess I will take another pass on this tomorrow, bring it up in the marketing meeting etc.  the funny thing is that hotmail failure messages have often been accompanied by delivery of the message as evidenced by sequences of replies and responses that I&rsquo;m having with the people emailed &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -217,6 +213,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
