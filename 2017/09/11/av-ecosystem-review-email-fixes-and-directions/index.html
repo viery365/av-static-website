@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_6 blog_page_6_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_09 x2017_09_11 x2017_09_11_av-ecosystem-review-email-fixes-and-directions x2017_09_11_av-ecosystem-review-email-fixes-and-directions_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,83 +83,93 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/11/av-ecosystem-review-email-fixes-and-directions/"></a></h2>
+        <h5 class='date'>11 Sep 2017</h5>
+    <p>So I&rsquo;m conflicted - what direction next?  On the table are:</p>
 
-          <p>Page 6 of 22</p>
+<p>1) review the process of people coming in from adwords
+2) fix the email SPF setting
+3) more work on greeter bots
+4) search for other areas of ecosystem that are blocked up
+5) preparing that video for dropbox to debug github image embeds</p>
 
-            <p><a href="/blog/page/5/">Previous page</a></p>
+<p>I finally managed to see one of our adverts that Lara shared:</p>
 
-          <h2><a href="/2017/05/23/azure-mediawiki-stack-part3/">Azure MediaWiki Stack Part 3</a></h2>
-          <h3>May 23</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
+<p><img src="/images/Screenshot%202017-09-11%2009.00.27.png" /></p>
 
-<p>Ahhh, so the rebuilding the MediaWiki stack on Azure leaks over three days and I suspect it may be more.  Yesterday I got stuck trying to open a port for the VisualEditor and I suspect there will be other blocks, but that’s why I’m forcing myself...</p>
-          <h2><a href="/2017/05/22/azure-mediawiki-stack-part2/">Azure MediaWiki Stack Part 2</a></h2>
-          <h3>May 22</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
+<p>and I&rsquo;m still concerned about the message we&rsquo;re sending, i.e. the absence of any mention of team skills or agile in that ad.  It&rsquo;s so frustrating that I can&rsquo;t immediately get a simple view of our actual ads from the Google Analytics interface.  We also got the concern that our ads seem to be showing up particularly heavily in India, and we&rsquo;re not sure why.</p>
 
-<p>I wasn’t able to complete a re-run of the NHS HLP MediaWiki installation due partly to getting distracted by other work, but also because the Parsoid service (needed by the VisualEditor) wouldn’t install.  I was following the instructions in https...</p>
-          <h2><a href="/2017/05/19/bayesian-decision-making-blog/">Bayesian Decision Making</a></h2>
-          <h3>May 19</h3>
-          <p><img alt="Bayesian" src="/images/bayesian.jpg"></p>
+<p>Over the weekend I got the following from Elastic Email:</p>
 
-<p>So my blog from yesterday isn’t finished.  I got stuck halfway trying to document the mediawiki setup process, and then loads of other things fell on me.  I can feel my decision making process creaking.  I got caught for twenty minutes in Slack and...</p>
-          <h2><a href="/2017/05/18/azure-mediawiki-stack/">Azure MediaWiki Stack Part 1</a></h2>
-          <h3>May 18</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
+<blockquote>
+<p>Your Account sam@agileventures.org has one or more domains that were validated at one time but are no longer for some reason. How the domains became invalidated is not known but it is likely a configuration issue on your DNS for the domain(s) in question. It is important to take this step to ensure your emails are sending directly from your domain. Below is the list of domains that are not currently validated anymore: </p>
 
-<p>Okay, so how did we put this complete NHS HLP wiki instance together?  Let’s go through it step by step:</p>
+<p>agileventures.org</p>
+</blockquote>
 
-<ol>
-<li>Create a Bitnami account, and go to the console for “Azure Launchpad”</li>
-<li>Choose the Bitnami MediaWiki Stack which provides a one-click install...</li>
-</ol>
-          <h2><a href="/2017/05/17/full-monty/">Full Monty</a></h2>
-          <h3>May 17</h3>
-          <p><img alt="full monty" src="/images/full_monty.jpg"></p>
+<p>So it seems like that the recent SPF change in the Gandi settings is the issue here.  I passed that on to Federico, who suggested the following:</p>
+<pre class="highlight plaintext"><code>@ 600 IN TXT "v=spf1 include:_mailcust.gandi.net include:_spf.elasticemail.com ~all”
+</code></pre>
+<blockquote>
+<p>Notice the change of Time To Live to 10 minutes instead of 3 hours, and the switch back to “~all”—the recommended policy statement. &ldquo;?all&rdquo; means neutral policy.</p>
+</blockquote>
 
-<p>So I’d made a plan for this morning.  I was going to quickly check if we had progress on our IE11 VisualEditor/Moderation problems, get the final report written up for the NHS folks, and then try to get into rebuilding our complete wiki stack on...</p>
-          <h2><a href="/2017/05/16/debugging-mediawiki/">Debugging MediaWiki</a></h2>
-          <h3>May 16</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
+<p>So I replaced the current:</p>
+<pre class="highlight plaintext"><code>@ 10800 IN TXT "v=spf1 include:_mailcust.gandi.net ?all"
+</code></pre>
+<p>with the suggested change, but I got this error</p>
 
-<p>Yesterday I finally got a clear shot at resolving some of our MediaWiki technical issues.  A key one was users getting loggged out after they create new accounts.  I had had some feedback from MediaWiki support that our cookies weren’t being set...</p>
-          <h2><a href="/2017/05/15/never-enough/">Never Enough</a></h2>
-          <h3>May 15</h3>
-          <p><img alt="never enough" src="/images/never_enough.jpg"></p>
+<blockquote>
+<p>Line 5: Error while parsing rdata: newline in quoted string</p>
+</blockquote>
 
-<p>However hard I work, it never seems like I’ve done enough.  We got the NHS Social Prescribing wiki “live” on Friday, and I also managed to do a round of updates and fixes on the MOOC.  Superficially I should be pleased at having gotten all that ...</p>
-          <h2><a href="/2017/05/12/hard-launch/">Hard Launch</a></h2>
-          <h3>May 12</h3>
-          <p><img alt="launch" src="/images/launch.jpg"></p>
+<p>which was due to a non-ascii quote - switching that out and the DNS file saved.  Federico had shortened the TTL, so in principle we could check sooner if it was having the effect we wanted.</p>
 
-<p>So it’s May 12th, the hard launch date for the wiki.  We talked about a soft launch on May 4th, and we had the basic system up for then.  The hard launch is now to have everything in place.  I’ve spent the week getting usability feedback from different...</p>
-          <h2><a href="/2017/05/10/handling-anxiety/">Handling Anxiety</a></h2>
-          <h3>May 10</h3>
-          <p><img alt="anxiety" src="/images/anxiety.jpg"></p>
+<p>While I wait for that the frustration of wanting to embed an image made me want to record the video for dropbox.  I did that using the preview tab for creating this blog.  Here&rsquo;s what I sent them:</p>
 
-<p>Recently I feel like I’m playing a game of anxiety managment.  This morning I slept through my alarm and failed to get up for my morning run.  Skipping it, I got on with the rest of the morning routine.  I’ve realised I can listen to a technical...</p>
-          <h2><a href="/2017/05/09/all-in-one-day/">All in One Day</a></h2>
-          <h3>May  9</h3>
-          <p><img alt="four seasons" src="/images/four_seasons_one_day.jpg"></p>
+<blockquote>
+<p>Hi Marco,</p>
 
-<p>So I’m struggling with what each blog should be.  Should it be a focused dive on one thing?  Should I be trying to cover everything that happened since the last blog?  Yesterday was pretty intense.  I could spend the whole blog on the AV community...</p>
+<p>Thanks for this - here&rsquo;s a video:</p>
 
-            <p><a href="/blog/page/7/">Next page</a></p>
+<p>https://www.dropbox.com/s/2rjda5vuqaj1b0g/DropboxLinksNotWorkingForImagesOnGithub.mov?dl=0</p>
 
+<p>It shows me trying to preview an image embed from the following dropbox link:</p>
+
+<p>https://www.dropbox.com/s/nmurrdqxj76oq07/Screenshot%202017-09-11%2009.00.27.png?dl=1</p>
+
+<p>You can see that the image does not show up in preview - also note that for the last year links like these were showing up fine as images, so something somewhere changed recently.  As you&#39;lls ee from the video GitHub grabs the image from you at dropbox and stores it on their own servers.  Here&rsquo;s what Steve Guntrip at GitHub said:</p>
+
+<blockquote>
+<p>When ?dl=1 is specified, we get redirected to the image file with a non-image Content-Type header, Content-Type: application/binary. For your image to load, this Content-Type should be an image, like Content-Type: image/png.</p>
+
+<p>In this case, I would suggest reaching out to Dropbox&rsquo;s support to see if they can maybe support embedding images if the user agent is github-camo (our service that downloads these images to githubusercontent.com), or if they have another solution.</p>
+</blockquote>
+
+<p>Many thanks in advance</p>
+
+<p>Best, Sam</p>
+</blockquote>
+
+<p>So it&rsquo;s almost time to test the email, but maybe time for a <a href="https://gist.github.com/tansaku/c311c996cc1521dceea0c0852849e9ca">quick node test rep</a> and then I can check the email stuff by going to http://tools.wordtothewise.com/spf/check/AgileVentures.org and clicking on the DNS tab (as Federico suggested), where I see:</p>
+
+<p><img src="/images/Screenshot%202017-09-11%2009.25.55.png" /></p>
+
+<p>which I guess is telling me it&rsquo;s working?  I can also send an email from my account that was previously marked as spam &hellip; and that&rsquo;s still coming through normally, so I guess that&rsquo;s sorted?  We&rsquo;ll see what happens with Elastic Email &hellip; I guess that&rsquo;s enough progress for one day.  If I&rsquo;m super lucky, I&rsquo;ll get back the easy image embed from dropbox/GitHub that&rsquo;ll make reviewing everything else a lot easier &hellip;</p>
+
+        <h2 class='author'>by </h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -217,6 +228,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

@@ -69,6 +69,151 @@
 </content>
   </entry>
   <entry>
+    <title/>
+    <link rel="alternate" href="http://blog.url.com/2017/09/11/av-ecosystem-review-email-fixes-and-directions/"/>
+    <id>http://blog.url.com/2017/09/11/av-ecosystem-review-email-fixes-and-directions/</id>
+    <published>2017-09-11T01:00:00+01:00</published>
+    <updated>2017-11-06T21:37:20+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So I&amp;rsquo;m conflicted - what direction next?  On the table are:&lt;/p&gt;
+
+&lt;p&gt;1) review the process of people coming in from adwords
+2) fix the email SPF setting
+3) more work on greeter bots
+4) search for other areas of ecosystem that are blocked up
+5) preparing that video for dropbox to debug github image embeds&lt;/p&gt;
+
+&lt;p&gt;I finally managed to see one of our adverts that Lara shared:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/Screenshot%202017-09-11%2009.00.27.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and I&amp;rsquo;m still concerned about the message we&amp;rsquo;re sending, i.e. the absence of any mention of team skills or agile in that ad.  It&amp;rsquo;s so frustrating that I can&amp;rsquo;t immediately get a simple view of our actual ads from the Google Analytics interface.  We also got the concern that our ads seem to be showing up particularly heavily in India, and we&amp;rsquo;re not sure why.&lt;/p&gt;
+
+&lt;p&gt;Over the weekend I got the following from Elastic Email:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Your Account sam@agileventures.org has one or more domains that were validated at one time but are no longer for some reason. How the domains became invalidated is not known but it is likely a configuration issue on your DNS for the domain(s) in question. It is important to take this step to ensure your emails are sending directly from your domain. Below is the list of domains that are not currently validated anymore: &lt;/p&gt;
+
+&lt;p&gt;agileventures.org&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So it seems like that the recent SPF change in the Gandi settings is the issue here.  I passed that on to Federico, who suggested the following:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;@ 600 IN TXT "v=spf1 include:_mailcust.gandi.net include:_spf.elasticemail.com ~all”
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Notice the change of Time To Live to 10 minutes instead of 3 hours, and the switch back to “~all”—the recommended policy statement. &amp;ldquo;?all&amp;rdquo; means neutral policy.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So I replaced the current:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;@ 10800 IN TXT "v=spf1 include:_mailcust.gandi.net ?all"
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;with the suggested change, but I got this error&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Line 5: Error while parsing rdata: newline in quoted string&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;which was due to a non-ascii quote - switching that out and the DNS file saved.  Federico had shortened the TTL, so in principle we could check sooner if it was having the effect we wanted.&lt;/p&gt;
+
+&lt;p&gt;While I wait for that the frustration of wanting to embed an image made me want to record the video for dropbox.  I did that using the preview tab for creating this blog.  Here&amp;rsquo;s what I sent them:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Hi Marco,&lt;/p&gt;
+
+&lt;p&gt;Thanks for this - here&amp;rsquo;s a video:&lt;/p&gt;
+
+&lt;p&gt;https://www.dropbox.com/s/2rjda5vuqaj1b0g/DropboxLinksNotWorkingForImagesOnGithub.mov?dl=0&lt;/p&gt;
+
+&lt;p&gt;It shows me trying to preview an image embed from the following dropbox link:&lt;/p&gt;
+
+&lt;p&gt;https://www.dropbox.com/s/nmurrdqxj76oq07/Screenshot%202017-09-11%2009.00.27.png?dl=1&lt;/p&gt;
+
+&lt;p&gt;You can see that the image does not show up in preview - also note that for the last year links like these were showing up fine as images, so something somewhere changed recently.  As you&amp;#39;lls ee from the video GitHub grabs the image from you at dropbox and stores it on their own servers.  Here&amp;rsquo;s what Steve Guntrip at GitHub said:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;When ?dl=1 is specified, we get redirected to the image file with a non-image Content-Type header, Content-Type: application/binary. For your image to load, this Content-Type should be an image, like Content-Type: image/png.&lt;/p&gt;
+
+&lt;p&gt;In this case, I would suggest reaching out to Dropbox&amp;rsquo;s support to see if they can maybe support embedding images if the user agent is github-camo (our service that downloads these images to githubusercontent.com), or if they have another solution.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Many thanks in advance&lt;/p&gt;
+
+&lt;p&gt;Best, Sam&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So it&amp;rsquo;s almost time to test the email, but maybe time for a &lt;a href="https://gist.github.com/tansaku/c311c996cc1521dceea0c0852849e9ca"&gt;quick node test rep&lt;/a&gt; and then I can check the email stuff by going to http://tools.wordtothewise.com/spf/check/AgileVentures.org and clicking on the DNS tab (as Federico suggested), where I see:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/Screenshot%202017-09-11%2009.25.55.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;which I guess is telling me it&amp;rsquo;s working?  I can also send an email from my account that was previously marked as spam &amp;hellip; and that&amp;rsquo;s still coming through normally, so I guess that&amp;rsquo;s sorted?  We&amp;rsquo;ll see what happens with Elastic Email &amp;hellip; I guess that&amp;rsquo;s enough progress for one day.  If I&amp;rsquo;m super lucky, I&amp;rsquo;ll get back the easy image embed from dropbox/GitHub that&amp;rsquo;ll make reviewing everything else a lot easier &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>AV EcoSystem Review Email Fix</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/08/av-ecosystem-review-email-fix/"/>
+    <id>http://blog.url.com/2017/09/08/av-ecosystem-review-email-fix/</id>
+    <published>2017-09-08T01:00:00+01:00</published>
+    <updated>2017-11-06T21:40:50+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;![fix(../images/fix.png)&lt;/p&gt;
+
+&lt;p&gt;So, following my blog and email of yesterday I got the following response from Gandi:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Normally, it is the recipient&amp;rsquo;s email server rules that play to deliver the message to the recipient&amp;rsquo;s box.&lt;/p&gt;
+
+&lt;p&gt;To decrease the chance to be considered as spam by the recipient mail server, you can add the SPF record in your zone file.&lt;/p&gt;
+
+&lt;p&gt;To do this, you can refer to the instructions page here:&lt;/p&gt;
+
+&lt;p&gt;https://doc.gandi.net/en/dns/zone&lt;/p&gt;
+
+&lt;p&gt;Please delete the current SPF record below :&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;@ 10799 IN TXT "v=spf1 a mx include:_spf.elasticemail.com ~all"
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The SPF records to be added is as below (please use edit mode : EXPERT):&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;@ 10800 IN TXT "v=spf1 include:_mailcust.gandi.net ?all"
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Above records indicate when mail is sent from the email server Gandi, normally, it is not spam.&lt;/p&gt;
+
+&lt;p&gt;Note that changes to your zone file will take around 3 hours to propagate on the Internet. Please wait for this propagation time before doing test.&lt;/p&gt;
+
+&lt;p&gt;For more information about the SPF record, please see the online documentation:&lt;/p&gt;
+
+&lt;p&gt;http://wiki.gandi.net/en/dns/zone/spf-record&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;and I had the following from Federico&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This is the step-by-step video tutorial that Zoho Mail provides: https://docs.zoho.com/embed/28z4w99ee43ded3f14b3182bf0041c35042b7&lt;/p&gt;
+
+&lt;p&gt;Ok. That one was purely SPF. This one is for DKIM &lt;em&gt;(3-min):&lt;/em&gt; https://docs.zoho.com/embed/281y6174f134d5f244817a38c7d32e4cd4c41&lt;/p&gt;
+
+&lt;p&gt;If you’d rather scan text (DKIM): https://www.zoho.com/mail/help/adminconsole/dkim-configuration.html
+SPF: https://www.zoho.com/mail/help/adminconsole/spf-configuration.html&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So there&amp;rsquo;s a lot to review here, and I&amp;rsquo;m going to calm myself with an &lt;a href="https://gist.github.com/tansaku/8e2ee25a007d9b706390513d53bbe191"&gt;athletic node test rep&lt;/a&gt;.  Ah, calming and I think 3 minutes to complete the rep.  So what&amp;rsquo;s the deal with this email?&lt;/p&gt;
+
+&lt;p&gt;Gandi is asking me to delete the spf1 record for elasticemail. Now this might have a negative impact on our newsletter sending but I guess I should just go ahead since we won&amp;rsquo;t be sending a newsletter for a while &amp;hellip; I scanned the text information on SPF and DKIM from Federico.  Not sure if we also need a DKIM but in the first instance I&amp;rsquo;ll do what Gandi instructs, removing:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;@ 10800 IN TXT "v=spf1 a mx include:_spf.elasticemail.com ~all"
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and replacing it with &lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;@ 10800 IN TXT "v=spf1 include:_mailcust.gandi.net ?all"
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;so this will take up to 3 hours to propagate, and I should try a test of email sending after that.  Ah delayed feedback debugging, how I loathe thee :-)  And in the meantime I could try and follow Gandi&amp;rsquo;s other instructions to try and fix sending from sam@agileventures.org from my iPhone &amp;hellip; and that&amp;rsquo;s fixed now too, yay!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Email Failings</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/07/av-ecosystem-review-email-failings/"/>
     <id>http://blog.url.com/2017/09/07/av-ecosystem-review-email-failings/</id>
@@ -306,139 +451,6 @@ Error: Cannot find module &lt;span class="s1"&gt;'greetings'&lt;/span&gt;
 &lt;p&gt;For another day I guess - back to the grindstone &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;p.s. just wondering does the code of conduct hold the maintainers to treat all the contributors with respecting as well as the contributors treating each other with respect? looks like it does &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Adding NodeJS Tests</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/05/av-ecosystem-review-adding-nodejs-tests/"/>
-    <id>http://blog.url.com/2017/09/05/av-ecosystem-review-adding-nodejs-tests/</id>
-    <published>2017-09-05T01:00:00+01:00</published>
-    <updated>2017-11-01T20:46:52+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Argh, so I got distracted by Slack and blogging and twitter and even though I sat down at the computer at 9am it&amp;rsquo;s 10am.  At least I got a few important emails and things out of the way (I think), but so after making a slew of changes to the Slack greeter bots, I feel I can&amp;rsquo;t put off adding test frameworks any longer.  There&amp;rsquo;s some bugs going out that I can&amp;rsquo;t catch with simple automated tests (the way messages get formatted in a real slack instance), but I&amp;rsquo;ve definitely wasted a little time on some silly bugs that automated tests would have caught.  In the meantime I can see that the new changes to the syntax for the main greeter bot are all in place:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/30216/30053660-798a6e8c-9221-11e7-927d-ea20f462cc55.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and similarly for usernames in the project greeter bot:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/30216/30053820-fc5adbee-9221-11e7-8287-2934a0cd501c.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;although I note that even the bot mention of my own name in a channel does not appear to have created the kind of highlight I would like to see in the channel notifications (i.e. the number in the dot to indicate one mention of one&amp;rsquo;s name)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/30216/30053947-5a4bb106-9222-11e7-96de-eb3a1b66fddc.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;but at least we&amp;rsquo;ve got an automated way of giving new users the message that they should flag the maintainer&amp;rsquo;s name, in order to get attention.  I was hoping that simply mentioning the maintainer in the bot message might have this effect, but not so.  If the user follows the instruction to flag the maintainer in any question, it should be fine, but some people don&amp;rsquo;t understand that part of flagging in Slack - I&amp;rsquo;m looking to ensure that any question from a new person joining the channel gets noticed, but I guess I&amp;rsquo;m pushing too hard on a corner case &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Anyway, as the number of features increases the need for tests mounts, and I think part of the problem here is that I haven&amp;rsquo;t yet mentally automatized the setup of tests in a NodeJS project.  I&amp;rsquo;ve done it so many times for Ruby that I can set up an RSpec or Cucumber suite from scratch without referring to any docs.  I have done it for NodeJS, but not enough that it&amp;rsquo;s second nature and it&amp;rsquo;s funny how a small thing like that can get in the way of getting something done.  Maybe I&amp;rsquo;ll need to athletic repeat that a few more times - I did do it every day for a couple of weeks in 2015, but not enough apparently &amp;hellip; :-)&lt;/p&gt;
-
-&lt;p&gt;What&amp;rsquo;s so hard&amp;ndash;where do I start?  Get a branch checked out for the issue I have on adding tests:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot &lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
-→ git checkout -b 4_add_tests
-Switched to a new branch &lt;span class="s1"&gt;'4_add_tests'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;install mocha:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot &lt;span class="o"&gt;(&lt;/span&gt;4_add_tests&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
-→ npm install --save-dev mocha
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;make a test directory and create a test:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot &lt;span class="o"&gt;(&lt;/span&gt;4_add_tests&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
-→ mkdir &lt;span class="nb"&gt;test&lt;/span&gt;
-&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot &lt;span class="o"&gt;(&lt;/span&gt;4_add_tests&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
-→ touch &lt;span class="nb"&gt;test&lt;/span&gt;/server_test.js
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;create a test file:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;assert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'assert'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-&lt;span class="nx"&gt;describe&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Bot'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-  &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'should include channel names in message'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-    &lt;span class="nx"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;equal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-  &lt;span class="p"&gt;});&lt;/span&gt;
-&lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;update package.json&lt;/p&gt;
-&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="nt"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"greeter_bot"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="nt"&gt;"version"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"1.0.0"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="nt"&gt;"description"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;""&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="nt"&gt;"main"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"server.js"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="nt"&gt;"dependencies"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"botkit"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"^0.4.3"&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="nt"&gt;"devDependencies"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"mocha"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"^3.5.0"&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="nt"&gt;"scripts"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"test"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"mocha test/**/*.js"&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="nt"&gt;"author"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;""&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="nt"&gt;"license"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"ISC"&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and that works:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot &lt;span class="o"&gt;(&lt;/span&gt;4_add_tests&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
-→ npm &lt;span class="nb"&gt;test&lt;/span&gt;
-
-&lt;span class="gp"&gt;&amp;gt; &lt;/span&gt;greeter_bot@1.0.0 &lt;span class="nb"&gt;test&lt;/span&gt; /Users/tansaku/Documents/GitHub/AgileVentures/greeter_bot
-&lt;span class="gp"&gt;&amp;gt; &lt;/span&gt;mocha &lt;span class="nb"&gt;test&lt;/span&gt;/&lt;span class="k"&gt;**&lt;/span&gt;/&lt;span class="k"&gt;*&lt;/span&gt;.js
-
-
-
-  Bot
-    ✓ should include channel names &lt;span class="k"&gt;in &lt;/span&gt;message
-
-
-  1 passing &lt;span class="o"&gt;(&lt;/span&gt;6ms&lt;span class="o"&gt;)&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I know how to do this - why was I hesitating? :-) But so now there&amp;rsquo;s not much to test in this project yet, at least not without some sophisticated mocking, which I&amp;rsquo;ll leave for later.  Let me at least check some trivial thing about the message being sent with the following code:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;chai&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'chai'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;expect&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;chai&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;greeting&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./../lib/greeting'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-&lt;span class="nx"&gt;describe&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Bot'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-  &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'should include linked techtalk channel in greeting'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-    &lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;greeting&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;to&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;#C02AA0ARR|techtalk&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-  &lt;span class="p"&gt;});&lt;/span&gt;
-
-  &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'should include linked new_members channel in greeting'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-    &lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;greeting&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;to&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;#C02G8J689|new_members&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-  &lt;span class="p"&gt;});&lt;/span&gt;
-
-  &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'should include linked random channel in greeting'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-    &lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;greeting&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;to&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;#C0285CSUH|random&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-  &lt;span class="p"&gt;});&lt;/span&gt;
-&lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Okay, so I got a bit fancy and installed chai so I could work with the expect/include syntax I like, and then I got all like &amp;ldquo;this project needs a proper structure&amp;rdquo; and moved things around.  I think it still works.  With only a couple of unit tests and no acceptance tests, I may have completely broken the project - my little local test that it starts up may conceal other issues &amp;hellip; but at least I&amp;rsquo;ve broken down some little mental barriers.  Starting node tests from scratch and reminding myself how we go through re-structuring a node app.  Some progress today - on to the continuing review tomorrow &amp;hellip; or add tests to project&lt;em&gt;greeter&lt;/em&gt;bot &amp;hellip; jump from level to level, enjoy, code!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review More Greetings</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/04/av-ecosystem-review-more-greetings/"/>
-    <id>http://blog.url.com/2017/09/04/av-ecosystem-review-more-greetings/</id>
-    <published>2017-09-04T01:00:00+01:00</published>
-    <updated>2017-10-31T20:36:55+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Got my jogging and podcasting/tweeting done this AM, but kids still off school, which means I&amp;rsquo;m late to the keyboard.  Lots to do - low hanging fruit is probably other changes to the greeter bots.  The change I rolled out on Friday seems to be working; that&amp;rsquo;s the quick fix to ensure that channel names are hyperlinked in messages:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/Screenshot%202017-09-04%2010.16.25.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I guess I should get that merged into master, and I can probably kick through the other minor changes there &amp;hellip; I&amp;rsquo;ve merged the license and code of conduct pull requests that I had outstanding.  So I punted on the code of conduct in the greeter bot, posting the following to our AV community channel:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;we&amp;rsquo;ve been discussing codes of conduct before and I know that various projects have them now, following GitHub&amp;rsquo;s lead of making them really easy to add.  I haven&amp;rsquo;t heard any objections yet, and I just added them as a recommendation in our &amp;ldquo;Getting Started&amp;rdquo; documentation.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m planning to add mention of them to our Slack greeter bot https://github.com/AgileVentures/greeter&lt;em&gt;bot/issues/6 but I thought I&amp;rsquo;d just check in with the community again before moving on that.  Would be good to discuss in a community meeting - which perhaps we should move to Fridays &amp;hellip; anyhow more on meeting times soon, but very interested in any input anyone cares to share here, or feel free to DM me directly :slightly&lt;/em&gt;smiling_face:&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;And I got hyperlinks to our Premium mob offer and the user name in the main greeting bot, and pushed those live from a branch. I&amp;rsquo;m really promising myself that the next step is testing!&lt;/p&gt;
-
-&lt;p&gt;But before that I can&amp;rsquo;t help myself but try and get the names and channels linked up in the project greeter bot, so I went ahead and did that and ended up doing a quick manual test on the now un-used AV mentors slack instance, that allowed for a quick round of debugging.  Gosh I&amp;rsquo;m really not setting this up to allow for easy-onboarding of others - will need a big documentation effort to get folks into the new AV bot testing slack instance &amp;hellip; can&amp;rsquo;t help myself but get these quick fixes out first - actually make it so that there will be the equivalent of a ping to the project maintainers on channel join - or at least see if hyperlinking their name in the bot post has that effect &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

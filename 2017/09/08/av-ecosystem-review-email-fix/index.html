@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Email Fix</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_6 blog_page_6_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_09 x2017_09_08 x2017_09_08_av-ecosystem-review-email-fix x2017_09_08_av-ecosystem-review-email-fix_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,83 +83,74 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/08/av-ecosystem-review-email-fix/">AV EcoSystem Review Email Fix</a></h2>
+        <h5 class='date'> 8 Sep 2017</h5>
+    <p>![fix(../images/fix.png)</p>
 
-          <p>Page 6 of 22</p>
+<p>So, following my blog and email of yesterday I got the following response from Gandi:</p>
 
-            <p><a href="/blog/page/5/">Previous page</a></p>
+<blockquote>
+<p>Normally, it is the recipient&rsquo;s email server rules that play to deliver the message to the recipient&rsquo;s box.</p>
 
-          <h2><a href="/2017/05/23/azure-mediawiki-stack-part3/">Azure MediaWiki Stack Part 3</a></h2>
-          <h3>May 23</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
+<p>To decrease the chance to be considered as spam by the recipient mail server, you can add the SPF record in your zone file.</p>
 
-<p>Ahhh, so the rebuilding the MediaWiki stack on Azure leaks over three days and I suspect it may be more.  Yesterday I got stuck trying to open a port for the VisualEditor and I suspect there will be other blocks, but that’s why I’m forcing myself...</p>
-          <h2><a href="/2017/05/22/azure-mediawiki-stack-part2/">Azure MediaWiki Stack Part 2</a></h2>
-          <h3>May 22</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
+<p>To do this, you can refer to the instructions page here:</p>
 
-<p>I wasn’t able to complete a re-run of the NHS HLP MediaWiki installation due partly to getting distracted by other work, but also because the Parsoid service (needed by the VisualEditor) wouldn’t install.  I was following the instructions in https...</p>
-          <h2><a href="/2017/05/19/bayesian-decision-making-blog/">Bayesian Decision Making</a></h2>
-          <h3>May 19</h3>
-          <p><img alt="Bayesian" src="/images/bayesian.jpg"></p>
+<p>https://doc.gandi.net/en/dns/zone</p>
 
-<p>So my blog from yesterday isn’t finished.  I got stuck halfway trying to document the mediawiki setup process, and then loads of other things fell on me.  I can feel my decision making process creaking.  I got caught for twenty minutes in Slack and...</p>
-          <h2><a href="/2017/05/18/azure-mediawiki-stack/">Azure MediaWiki Stack Part 1</a></h2>
-          <h3>May 18</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
+<p>Please delete the current SPF record below :</p>
+</blockquote>
+<pre class="highlight plaintext"><code>@ 10799 IN TXT "v=spf1 a mx include:_spf.elasticemail.com ~all"
+</code></pre>
+<blockquote>
+<p>The SPF records to be added is as below (please use edit mode : EXPERT):</p>
+</blockquote>
+<pre class="highlight plaintext"><code>@ 10800 IN TXT "v=spf1 include:_mailcust.gandi.net ?all"
+</code></pre>
+<blockquote>
+<p>Above records indicate when mail is sent from the email server Gandi, normally, it is not spam.</p>
 
-<p>Okay, so how did we put this complete NHS HLP wiki instance together?  Let’s go through it step by step:</p>
+<p>Note that changes to your zone file will take around 3 hours to propagate on the Internet. Please wait for this propagation time before doing test.</p>
 
-<ol>
-<li>Create a Bitnami account, and go to the console for “Azure Launchpad”</li>
-<li>Choose the Bitnami MediaWiki Stack which provides a one-click install...</li>
-</ol>
-          <h2><a href="/2017/05/17/full-monty/">Full Monty</a></h2>
-          <h3>May 17</h3>
-          <p><img alt="full monty" src="/images/full_monty.jpg"></p>
+<p>For more information about the SPF record, please see the online documentation:</p>
 
-<p>So I’d made a plan for this morning.  I was going to quickly check if we had progress on our IE11 VisualEditor/Moderation problems, get the final report written up for the NHS folks, and then try to get into rebuilding our complete wiki stack on...</p>
-          <h2><a href="/2017/05/16/debugging-mediawiki/">Debugging MediaWiki</a></h2>
-          <h3>May 16</h3>
-          <p><img alt="mediawiki" src="/images/MediaWiki.svg"></p>
+<p>http://wiki.gandi.net/en/dns/zone/spf-record</p>
+</blockquote>
 
-<p>Yesterday I finally got a clear shot at resolving some of our MediaWiki technical issues.  A key one was users getting loggged out after they create new accounts.  I had had some feedback from MediaWiki support that our cookies weren’t being set...</p>
-          <h2><a href="/2017/05/15/never-enough/">Never Enough</a></h2>
-          <h3>May 15</h3>
-          <p><img alt="never enough" src="/images/never_enough.jpg"></p>
+<p>and I had the following from Federico</p>
 
-<p>However hard I work, it never seems like I’ve done enough.  We got the NHS Social Prescribing wiki “live” on Friday, and I also managed to do a round of updates and fixes on the MOOC.  Superficially I should be pleased at having gotten all that ...</p>
-          <h2><a href="/2017/05/12/hard-launch/">Hard Launch</a></h2>
-          <h3>May 12</h3>
-          <p><img alt="launch" src="/images/launch.jpg"></p>
+<blockquote>
+<p>This is the step-by-step video tutorial that Zoho Mail provides: https://docs.zoho.com/embed/28z4w99ee43ded3f14b3182bf0041c35042b7</p>
 
-<p>So it’s May 12th, the hard launch date for the wiki.  We talked about a soft launch on May 4th, and we had the basic system up for then.  The hard launch is now to have everything in place.  I’ve spent the week getting usability feedback from different...</p>
-          <h2><a href="/2017/05/10/handling-anxiety/">Handling Anxiety</a></h2>
-          <h3>May 10</h3>
-          <p><img alt="anxiety" src="/images/anxiety.jpg"></p>
+<p>Ok. That one was purely SPF. This one is for DKIM <em>(3-min):</em> https://docs.zoho.com/embed/281y6174f134d5f244817a38c7d32e4cd4c41</p>
 
-<p>Recently I feel like I’m playing a game of anxiety managment.  This morning I slept through my alarm and failed to get up for my morning run.  Skipping it, I got on with the rest of the morning routine.  I’ve realised I can listen to a technical...</p>
-          <h2><a href="/2017/05/09/all-in-one-day/">All in One Day</a></h2>
-          <h3>May  9</h3>
-          <p><img alt="four seasons" src="/images/four_seasons_one_day.jpg"></p>
+<p>If you’d rather scan text (DKIM): https://www.zoho.com/mail/help/adminconsole/dkim-configuration.html
+SPF: https://www.zoho.com/mail/help/adminconsole/spf-configuration.html</p>
+</blockquote>
 
-<p>So I’m struggling with what each blog should be.  Should it be a focused dive on one thing?  Should I be trying to cover everything that happened since the last blog?  Yesterday was pretty intense.  I could spend the whole blog on the AV community...</p>
+<p>So there&rsquo;s a lot to review here, and I&rsquo;m going to calm myself with an <a href="https://gist.github.com/tansaku/8e2ee25a007d9b706390513d53bbe191">athletic node test rep</a>.  Ah, calming and I think 3 minutes to complete the rep.  So what&rsquo;s the deal with this email?</p>
 
-            <p><a href="/blog/page/7/">Next page</a></p>
+<p>Gandi is asking me to delete the spf1 record for elasticemail. Now this might have a negative impact on our newsletter sending but I guess I should just go ahead since we won&rsquo;t be sending a newsletter for a while &hellip; I scanned the text information on SPF and DKIM from Federico.  Not sure if we also need a DKIM but in the first instance I&rsquo;ll do what Gandi instructs, removing:</p>
+<pre class="highlight plaintext"><code>@ 10800 IN TXT "v=spf1 a mx include:_spf.elasticemail.com ~all"
+</code></pre>
+<p>and replacing it with </p>
+<pre class="highlight plaintext"><code>@ 10800 IN TXT "v=spf1 include:_mailcust.gandi.net ?all"
+</code></pre>
+<p>so this will take up to 3 hours to propagate, and I should try a test of email sending after that.  Ah delayed feedback debugging, how I loathe thee :-)  And in the meantime I could try and follow Gandi&rsquo;s other instructions to try and fix sending from sam@agileventures.org from my iPhone &hellip; and that&rsquo;s fixed now too, yay!</p>
 
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -217,6 +209,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
