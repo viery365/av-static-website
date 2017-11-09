@@ -69,6 +69,213 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Clearing the Backlog</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/13/av-ecosystem-review-clearing-the-backlog/"/>
+    <id>http://blog.url.com/2017/09/13/av-ecosystem-review-clearing-the-backlog/</id>
+    <published>2017-09-13T01:00:00+01:00</published>
+    <updated>2017-11-09T20:47:21+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="backlog" src="/images/backlog.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;m calling this clearing the backlog, but argh, I want to start on that new coding ticket rather than the older content ones in the WebSiteOne waffle board.  My heuristics for board review are check the &amp;ldquo;Please Check&amp;rdquo; tickets.  There I have a ticket from Matt where he hasn&amp;rsquo;t replied to my comments/queries - he&amp;rsquo;s moving house and has lots going on so no shock there.  That was also a request from Joao, so perhaps I should finish that up. &lt;/p&gt;
+
+&lt;p&gt;Ideally I&amp;rsquo;ll only have one ticket assigned to me in any one column at a time.  I&amp;rsquo;ve got a hanging ticket in &amp;ldquo;Please check&amp;rdquo; about providing a list of volunteer opportunities at AgileVentures &amp;hellip; I put that off as the priority dropped, but it&amp;rsquo;s in the way.  Okay, so let&amp;rsquo;s make this really about clearing the backlog, starting with that.  So I&amp;rsquo;ll update the branch there and kick of a build - hopefully it&amp;rsquo;ll be green before the end of this blog and I can merge it.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s pull Matt&amp;rsquo;s branch onto my local machine to check it out:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;1715_adjusting_premium_page_layout&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ git checkout develop
+Switched to branch &lt;span class="s1"&gt;'develop'&lt;/span&gt;
+Your branch is up-to-date with &lt;span class="s1"&gt;'origin/develop'&lt;/span&gt;.
+&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;develop&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ git pull origin develop
+From http://github.com/AgileVentures/WebsiteOne
+ &lt;span class="k"&gt;*&lt;/span&gt; branch              develop    -&amp;gt; FETCH_HEAD
+Already up-to-date.
+&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;develop&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ git checkout 1750_client_type
+Branch 1750_client_type &lt;span class="nb"&gt;set &lt;/span&gt;up to track remote branch 1750_client_type from origin.
+Switched to a new branch &lt;span class="s1"&gt;'1750_client_type'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I guess part of me leans on I should be leaving this for Matt. However, I think I have to put the project and the wider community first here.  Perhaps my comments/suggestions were too pernickety and that put Matt off.  Perhaps I was being remiss in not just merging it earlier - the build was green, but I&amp;rsquo;m also the devops person who has to pick up the pieces if it goes wrong.  I had Praveen test his own new feature and bug fix on staging before deploying code yesterday - that seems like a good plan, but I don&amp;rsquo;t think I can put pressure on Matt on this one at this time.  &lt;/p&gt;
+
+&lt;p&gt;The two things that I was asking Matt for were to pull the motivation for this feature into a separate feature file, although I note I didn&amp;rsquo;t do that myself in the opportunities link addition feature :-/  There was also checking the rest of the system about whether the introduction of a new event type would clash with other areas - doing a search over the codebase I see we do have checks for the two previous types in Twitter notifications, but we&amp;rsquo;ve turned those off, so that&amp;rsquo;s no biggy.  There&amp;rsquo;s something in the EventHelper module:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;EventHelper&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;cover_for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;category&lt;/span&gt;
+      &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="s1"&gt;'PairProgramming'&lt;/span&gt;
+        &lt;span class="n"&gt;image_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'event-pairwithme-cover.png'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+      &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="s1"&gt;'Scrum'&lt;/span&gt;
+        &lt;span class="n"&gt;image_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'event-scrum-cover.png'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+      &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="s1"&gt;''&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but all these places are looking like they have sensible defaults, so I think due dilligence is done.  The acceptance test, however, is only checking that if a client meeting exists that it will be shown correctly. It doesn&amp;rsquo;t check that a client meeting can actually be created.  So I think it&amp;rsquo;s time to pull out the feature I was thinking of.  Here&amp;rsquo;s my first pass:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="nt"&gt;@vcr&lt;/span&gt;
+&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Provide a ClientMeeting Category
+  As a project manager
+  In order to be able to distinguish between client meetings and other types of meeting
+  I would like to see and create "client meeting" events
+
+  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="err"&gt;Given following events exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt;             &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;category&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;start_datetime&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;duration&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;time_zone&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;project&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats_weekly_each_days_of_the_week_mask&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats_every_n_weeks&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;ClientMtg&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Daily&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="n"&gt;meeting&lt;/span&gt;    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;ClientMeeting&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014/02/03&lt;/span&gt; &lt;span class="n"&gt;11:00:00&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;150&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;never&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt;                                           &lt;span class="p"&gt;|&lt;/span&gt;                       &lt;span class="p"&gt;|&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I am logged in
+    &lt;span class="err"&gt;And the following projects exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;title&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;pitch&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;commit_count&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;WSO&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;greetings&lt;/span&gt; &lt;span class="n"&gt;earthlings&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2795&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;EdX&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;greetings&lt;/span&gt; &lt;span class="n"&gt;earthlings&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2795&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;AAA&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;for&lt;/span&gt; &lt;span class="n"&gt;roadists&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;              &lt;span class="p"&gt;|&lt;/span&gt;
+
+  &lt;span class="nt"&gt;@javascript&lt;/span&gt;
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Show Client Meeting event
+    &lt;span class="err"&gt;Given the date is "2014/02/03 07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;01&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt; &lt;span class="err"&gt;UTC"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I am on Events index page
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"ClientMtg"&lt;/span&gt;
+    &lt;span class="err"&gt;And I should see "11&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00-13&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;30&lt;/span&gt; &lt;span class="err"&gt;(UTC)"&lt;/span&gt;
+
+  &lt;span class="nt"&gt;@javascript&lt;/span&gt;
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Create Client Meeting event
+    &lt;span class="nf"&gt;Given&lt;/span&gt; I am on Events index page
+    &lt;span class="nf"&gt;When&lt;/span&gt; I click &lt;span class="s"&gt;"New Event"&lt;/span&gt;
+    &lt;span class="err"&gt;And I fill in event field&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;value&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Name&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Whatever&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Description&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;something&lt;/span&gt; &lt;span class="n"&gt;else&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Start&lt;/span&gt; &lt;span class="n"&gt;Date&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014-02-04&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Start&lt;/span&gt; &lt;span class="n"&gt;Time&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;09:00&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I select &lt;span class="s"&gt;"EdX"&lt;/span&gt; from the event project dropdown
+    &lt;span class="nf"&gt;And&lt;/span&gt; I select &lt;span class="s"&gt;"ClientMeeting"&lt;/span&gt; from the event category dropdown
+    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"End Date"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I click on the &lt;span class="s"&gt;"event_date"&lt;/span&gt; div
+    &lt;span class="nf"&gt;And&lt;/span&gt; I click the &lt;span class="s"&gt;"Save"&lt;/span&gt; button
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Event Created"&lt;/span&gt;
+    &lt;span class="nf"&gt;Given&lt;/span&gt; the event &lt;span class="s"&gt;"Whatever"&lt;/span&gt;
+    &lt;span class="nf"&gt;Then&lt;/span&gt; I should be on the event &lt;span class="s"&gt;"Show"&lt;/span&gt; page for &lt;span class="s"&gt;"Whatever"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; the event named &lt;span class="s"&gt;"Whatever"&lt;/span&gt; is associated with &lt;span class="s"&gt;"EdX"&lt;/span&gt;
+    &lt;span class="err"&gt;And I should see "09&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00-09&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;30&lt;/span&gt; &lt;span class="err"&gt;(UTC)"&lt;/span&gt;
+    &lt;span class="nf"&gt;And&lt;/span&gt; I should see &lt;span class="s"&gt;"ClientMtg"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;the first scenario passes, but I have an unimplemented step:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I select "([^"]*)" from the event category dropdown$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;pending&lt;/span&gt; &lt;span class="c1"&gt;# Write code here that turns the phrase above into concrete actions&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;so I implement that:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;When(/^I select "([^"]*)" from the event category dropdown$/) do |category|
+  page.select category, from: "event_category"
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;tweak the feature a little - test in dev mode, and get the two scenarios both green.  Then by stashing all the code so far, checking out develop, and running the tests I can check that they fail when the functionality is removed, thus ensuring that we are properly testing the feature:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;1750_client_type&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ git checkout develop
+error: Your &lt;span class="nb"&gt;local &lt;/span&gt;changes to the following files would be overwritten by checkout:
+    features/events/show_event.feature
+Please commit your changes or stash them before you switch branches.
+Aborting
+&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;1750_client_type&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ git stash
+Saved working directory and index state WIP on 1750_client_type: 3ce512a5 Merge branch &lt;span class="s1"&gt;'develop'&lt;/span&gt; into 1750_client_type
+HEAD is now at 3ce512a5 Merge branch &lt;span class="s1"&gt;'develop'&lt;/span&gt; into 1750_client_type
+&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;1750_client_type&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ git checkout develop
+Switched to branch &lt;span class="s1"&gt;'develop'&lt;/span&gt;
+Your branch is up-to-date with &lt;span class="s1"&gt;'origin/develop'&lt;/span&gt;.
+&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;develop&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ git stash pop
+Auto-merging features/events/show_event.feature
+CONFLICT &lt;span class="o"&gt;(&lt;/span&gt;content&lt;span class="o"&gt;)&lt;/span&gt;: Merge conflict &lt;span class="k"&gt;in &lt;/span&gt;features/events/show_event.feature
+&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;develop&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ be cucumber features/events/client_meetings.feature
+&lt;span class="o"&gt;[&lt;/span&gt;Coveralls] Using SimpleCov&lt;span class="s1"&gt;'s '&lt;/span&gt;rails&lt;span class="s1"&gt;' settings.
+Using the default profile...
+@vcr
+Feature: Provide a ClientMeeting Category
+  As a project manager
+  In order to be able to distinguish between client meetings and other types of meeting
+  I would like to see and create "client meeting" events
+
+  Background:                         # features/events/client_meetings.feature:7
+    Given following events exist:     # features/step_definitions/event_steps.rb:32
+      | name      | description          | category      | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
+      | ClientMtg | Daily client meeting | ClientMeeting | 2014/02/03 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
+    And I am logged in                # features/step_definitions/user_steps.rb:63
+    And the following projects exist: # features/step_definitions/projects_steps.rb:6
+      | title | description          | pitch | status | commit_count |
+      | WSO   | greetings earthlings |       | active | 2795         |
+      | EdX   | greetings earthlings |       | active | 2795         |
+      | AAA   | for roadists         |       | active |              |
+
+  @javascript
+  Scenario: Show Client Meeting event           # features/events/client_meetings.feature:19
+    Given the date is "2014/02/03 07:01:00 UTC" # features/step_definitions/event_steps.rb:94
+    And I am on Events index page               # features/step_definitions/event_steps.rb:15
+    Then I should see "ClientMtg"               # features/step_definitions/basic_steps.rb:200
+    And I should see "11:00-13:30 (UTC)"        # features/step_definitions/basic_steps.rb:200
+
+  @javascript
+  Scenario: Create Client Meeting event                           # features/events/client_meetings.feature:26
+    Given I am on Events index page                               # features/step_definitions/event_steps.rb:15
+    When I click "New Event"                                      # features/step_definitions/basic_steps.rb:88
+    And I fill in event field:                                    # features/step_definitions/basic_steps.rb:152
+      | name        | value          |
+      | Name        | Whatever       |
+      | Description | something else |
+      | Start Date  | 2014-02-04     |
+      | Start Time  | 09:00          |
+    And I select "EdX" from the event project dropdown            # features/step_definitions/event_steps.rb:110
+    And I select "ClientMeeting" from the event category dropdown # features/step_definitions/event_steps.rb:114
+      Unable to find option "ClientMeeting" (Capybara::ElementNotFound)
+      ./features/step_definitions/event_steps.rb:115:in `/^I select "([^"]*)" from the event category dropdown$/'&lt;/span&gt;
+      features/events/client_meetings.feature:36:in &lt;span class="sb"&gt;`&lt;/span&gt;And I &lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="s2"&gt;"ClientMeeting"&lt;/span&gt; from the event category dropdown&lt;span class="s1"&gt;'
+    And I should not see "End Date"                               # features/step_definitions/basic_steps.rb:200
+    And I click on the "event_date" div                           # features/step_definitions/event_steps.rb:106
+    And I click the "Save" button                                 # features/step_definitions/basic_steps.rb:96
+    Then I should see "Event Created"                             # features/step_definitions/basic_steps.rb:200
+    Given the event "Whatever"                                    # features/step_definitions/event_steps.rb:324
+    Then I should be on the event "Show" page for "Whatever"      # features/step_definitions/event_steps.rb:83
+    And the event named "Whatever" is associated with "EdX"       # features/step_definitions/event_steps.rb:126
+    And I should see "Event type: ClientMeeting"                  # features/step_definitions/basic_steps.rb:200
+
+Failing Scenarios:
+cucumber features/events/client_meetings.feature:26 # Scenario: Create Client Meeting event
+
+2 scenarios (1 failed, 1 passed)
+23 steps (1 failed, 8 skipped, 14 passed)
+0m11.677s
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then I pushed it up into the branch, and left Matt the following note:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;@mattlindsey I&amp;rsquo;ve gone ahead and done the checks and adjusted the acceptance tests as I was suggesting - apologies if you were hoping to work on this, but I thought that given that it&amp;rsquo;s been open in the PRs for a month I should just get it cleared up.&lt;/p&gt;
+
+&lt;p&gt;Very happy to go through it with you when you have more time :-)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I feel bad about missing the chance to work on it more closely with Matt, but now it&amp;rsquo;s building and hopefully I can merge it later today.  The opportunities link PR that I started a rebuild of at the beginning of this blog failed on what looks like one of our intermittent JS failures &amp;hellip;&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;
+Scenario: A user can insert an image  
+
+    Then the Mercury Editor modal window should be visible                                         # features/step_definitions/mercury_steps.rb:57
+      expected to find css ".mercury-modal" but there were no matches (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/mercury_steps.rb:58:in `/^the Mercury Editor modal window should (not |)be visible$/'
+      features/documents.feature:136:in `Then the Mercury Editor modal window should be visible'
+
+Failing Scenarios:
+cucumber features/documents.feature:130 # Scenario: A user can insert an image
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I could add that to the exceptions, but that approach is dangerous as it&amp;rsquo;s easy to forget which tests are omitted in CI - Jon&amp;rsquo;s approach on LocalSupport to re-run failing tests seems more sensible.  I&amp;rsquo;d also love to get it so that we only output the full test details when they fail, which would also be addressed by Jon&amp;rsquo;s approach.  I&amp;rsquo;ll add that chore to the WSO issues - actually I find I already &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1803"&gt;have one&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Maybe a vote on that is in order &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Email What Next</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/12/av-ecosystem-review-what-next/"/>
     <id>http://blog.url.com/2017/09/12/av-ecosystem-review-what-next/</id>
@@ -249,73 +456,6 @@ SPF: https://www.zoho.com/mail/help/adminconsole/spf-configuration.html&lt;/p&gt
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;@ 10800 IN TXT "v=spf1 include:_mailcust.gandi.net ?all"
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;so this will take up to 3 hours to propagate, and I should try a test of email sending after that.  Ah delayed feedback debugging, how I loathe thee :-)  And in the meantime I could try and follow Gandi&amp;rsquo;s other instructions to try and fix sending from sam@agileventures.org from my iPhone &amp;hellip; and that&amp;rsquo;s fixed now too, yay!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Email Failings</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/07/av-ecosystem-review-email-failings/"/>
-    <id>http://blog.url.com/2017/09/07/av-ecosystem-review-email-failings/</id>
-    <published>2017-09-07T01:00:00+01:00</published>
-    <updated>2017-11-03T21:23:40+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So I think the main bleed in the AV ecosystem may now be some of the problems we are having with sending emails and them ending up in spam filters.  Hold that thought for a moment and I&amp;rsquo;ll just do my node/mocha/chai &lt;a href="https://gist.github.com/tansaku/718547c89be1ef216dda4e973ea67075"&gt;athletic rep for the morning&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I guess I can afford to do that for a few mornings in a row and start exploring where I can speed up &amp;hellip;, but back to our email issues.  So we sent out 10 emails with a special offer (from support@agileventures.org) last week and as far as I can tell, every single one ended up in spam.  Annoyingly I have to go to slack to grab some info about it, but there&amp;rsquo;s not too much to distract me there today, phew.  So one person who got the email in their spam filter reported that they saw this message from Google:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/Screenshot_2017-09-05-16-59-32.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The message is &amp;ldquo;Why is this message in Spam? It is in violation of Google&amp;rsquo;s recommended email sender guidelines.&amp;rdquo;.  This week we had a new Premium Mob member sign up and so far none of the emails from me via sam@agileventures.org appears to have arrived with them.  I also get warnings of authentication failures from hotmail for several emails I&amp;rsquo;ve sent over the last 6 months.  We need to get to the bottom of this.  Can I replicate the failure above (from gmail) and get more info on what&amp;rsquo;s failing &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;So I re-send one of the free trial emails and I find it in my gmail spam folder.  I thought I sent a test of this email and it got through to my sam@neurogrid.com account.  It did.  Anyway, I can now click through to &amp;ldquo;learn more&amp;rdquo; on the email to see why the message got marked as spam.  It links to https://support.google.com/mail/answer/81126?hl=en#authentication&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Why is it important to authenticate your messages?
-
-Authentication ensures that your messages can be correctly classified. Emails that lack authentication are likely to be rejected or placed in the spam folder, given the high likelihood that they are forged messages used for phishing scams.
-
-In addition, unauthenticated emails with attachments may be outrightly rejected, for security reasons.
-
-To ensure that Gmail can identify you:
-
-* Use a consistent IP address to send bulk mail.
-* Keep valid reverse DNS records for the IP address(es) from which you send mail, pointing to your domain.
-* Use the same address in the 'From:' header on every bulk mail you send.
-
-We also recommend the following:
-
-* Sign messages with DKIM. We do not authenticate messages signed with keys using fewer than 1024 bits.
-* Publish an SPF record.
-* Publish a DMARC policy.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now one thing I did do with these 10 message was adjust the From address to be &lt;code&gt;support@agileventures.org&lt;/code&gt; which Thunderbird allows me to do, but maybe that triggered Gmail&amp;rsquo;s spam filter.  That said, I&amp;rsquo;ve had problems just sending from sam@agileventures.org as well, so can that be the whole story? &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;The hotmail failures I have had are like the following:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Feedback-Type: auth-failure
-User-Agent: XMR/2.2
-Version: 1.0
-Original-Mail-From: &amp;lt;sam@agileventures.org&amp;gt;
-Arrival-Date: Fri, 23 Jun 2017 10:02:07 -0700
-Message-ID: &amp;lt;b6a7803d-c6ff-16cd-ed5f-e37569ef4ba5@agileventures.org&amp;gt;
-Authentication-Results: hotmail.com; spf=softfail (sender IP is 217.70.183.196; identity alignment result is pass and alignment mode is relaxed) smtp.mailfrom=sam@agileventures.org; dkim=none (identity alignment result is pass and alignment mode is relaxed) header.d=agileventures.org; x-hmca=fail header.id=sam@agileventures.org
-Source-IP: 217.70.183.196
-Auth-Failure: spf
-Reported-Domain: agileventures.org
-DKIM-Domain: agileventures.org
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So I&amp;rsquo;ve sent off an email to Gandi:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Hi Gandi,
-
-We've been having trouble sending email from our domain agileventures.org, specifically from sam@agileventures.org which is a gandi mail account.  We are getting reports from hotmail (see below).  These are not bulk or spam email, but messages being sent to individual members of our charity from my Thunderbird email client.
-
-I also note that I cannot send email from sam@agileventures.org from my iPhone, although I can receive.
-
-Are there settings on Gandi's site, or even mail settings that we control that could be used to address these issues to ensure that email gets through?
-
-Many thanks in advance
-
-Best, Sam
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and I guess I will take another pass on this tomorrow, bring it up in the marketing meeting etc.  the funny thing is that hotmail failure messages have often been accompanied by delivery of the message as evidenced by sequences of replies and responses that I&amp;rsquo;m having with the people emailed &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Clearing the Backlog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_09 x2017_09_13 x2017_09_13_av-ecosystem-review-clearing-the-backlog x2017_09_13_av-ecosystem-review-clearing-the-backlog_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/13/av-ecosystem-review-clearing-the-backlog/">AV EcoSystem Review Clearing the Backlog</a></h2>
+        <h5 class='date'>13 Sep 2017</h5>
+    <p><img alt="backlog" src="/images/backlog.jpg" /></p>
+
+<p>So I&rsquo;m calling this clearing the backlog, but argh, I want to start on that new coding ticket rather than the older content ones in the WebSiteOne waffle board.  My heuristics for board review are check the &ldquo;Please Check&rdquo; tickets.  There I have a ticket from Matt where he hasn&rsquo;t replied to my comments/queries - he&rsquo;s moving house and has lots going on so no shock there.  That was also a request from Joao, so perhaps I should finish that up. </p>
+
+<p>Ideally I&rsquo;ll only have one ticket assigned to me in any one column at a time.  I&rsquo;ve got a hanging ticket in &ldquo;Please check&rdquo; about providing a list of volunteer opportunities at AgileVentures &hellip; I put that off as the priority dropped, but it&rsquo;s in the way.  Okay, so let&rsquo;s make this really about clearing the backlog, starting with that.  So I&rsquo;ll update the branch there and kick of a build - hopefully it&rsquo;ll be green before the end of this blog and I can merge it.</p>
+
+<p>Let&rsquo;s pull Matt&rsquo;s branch onto my local machine to check it out:</p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>1715_adjusting_premium_page_layout<span class="o">)]</span><span class="nv">$ </span>
+→ git checkout develop
+Switched to branch <span class="s1">'develop'</span>
+Your branch is up-to-date with <span class="s1">'origin/develop'</span>.
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>develop<span class="o">)]</span><span class="nv">$ </span>
+→ git pull origin develop
+From http://github.com/AgileVentures/WebsiteOne
+ <span class="k">*</span> branch              develop    -&gt; FETCH_HEAD
+Already up-to-date.
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>develop<span class="o">)]</span><span class="nv">$ </span>
+→ git checkout 1750_client_type
+Branch 1750_client_type <span class="nb">set </span>up to track remote branch 1750_client_type from origin.
+Switched to a new branch <span class="s1">'1750_client_type'</span>
+</code></pre>
+<p>I guess part of me leans on I should be leaving this for Matt. However, I think I have to put the project and the wider community first here.  Perhaps my comments/suggestions were too pernickety and that put Matt off.  Perhaps I was being remiss in not just merging it earlier - the build was green, but I&rsquo;m also the devops person who has to pick up the pieces if it goes wrong.  I had Praveen test his own new feature and bug fix on staging before deploying code yesterday - that seems like a good plan, but I don&rsquo;t think I can put pressure on Matt on this one at this time.  </p>
+
+<p>The two things that I was asking Matt for were to pull the motivation for this feature into a separate feature file, although I note I didn&rsquo;t do that myself in the opportunities link addition feature :-/  There was also checking the rest of the system about whether the introduction of a new event type would clash with other areas - doing a search over the codebase I see we do have checks for the two previous types in Twitter notifications, but we&rsquo;ve turned those off, so that&rsquo;s no biggy.  There&rsquo;s something in the EventHelper module:</p>
+<pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">EventHelper</span>
+  <span class="k">def</span> <span class="nf">cover_for</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+    <span class="k">case</span> <span class="n">event</span><span class="p">.</span><span class="nf">category</span>
+      <span class="k">when</span> <span class="s1">'PairProgramming'</span>
+        <span class="n">image_path</span><span class="p">(</span><span class="s1">'event-pairwithme-cover.png'</span><span class="p">)</span>
+
+      <span class="k">when</span> <span class="s1">'Scrum'</span>
+        <span class="n">image_path</span><span class="p">(</span><span class="s1">'event-scrum-cover.png'</span><span class="p">)</span>
+
+      <span class="k">else</span>
+        <span class="s1">''</span>
+    <span class="k">end</span>
+  <span class="k">end</span> 
+</code></pre>
+<p>but all these places are looking like they have sensible defaults, so I think due dilligence is done.  The acceptance test, however, is only checking that if a client meeting exists that it will be shown correctly. It doesn&rsquo;t check that a client meeting can actually be created.  So I think it&rsquo;s time to pull out the feature I was thinking of.  Here&rsquo;s my first pass:</p>
+<pre class="highlight gherkin"><code><span class="nt">@vcr</span>
+<span class="kd">Feature</span><span class="p">:</span> Provide a ClientMeeting Category
+  As a project manager
+  In order to be able to distinguish between client meetings and other types of meeting
+  I would like to see and create "client meeting" events
+
+  <span class="kn">Background</span><span class="p">:</span>
+    <span class="err">Given following events exist</span><span class="p">:</span>
+      <span class="p">|</span> <span class="nv">name</span>       <span class="p">|</span> <span class="nv">description</span>             <span class="p">|</span> <span class="nv">category</span>        <span class="p">|</span> <span class="nv">start_datetime</span>          <span class="p">|</span> <span class="nv">duration</span> <span class="p">|</span> <span class="nv">repeats</span> <span class="p">|</span> <span class="nv">time_zone</span> <span class="p">|</span> <span class="nv">project</span> <span class="p">|</span> <span class="nv">repeats_weekly_each_days_of_the_week_mask</span> <span class="p">|</span> <span class="nv">repeats_every_n_weeks</span> <span class="p">|</span>
+      <span class="p">|</span> <span class="n">ClientMtg</span>  <span class="p">|</span> <span class="n">Daily</span> <span class="n">client</span> <span class="n">meeting</span>    <span class="p">|</span> <span class="n">ClientMeeting</span>   <span class="p">|</span> <span class="n">2014/02/03</span> <span class="n">11:00:00</span> <span class="n">UTC</span> <span class="p">|</span> <span class="n">150</span>      <span class="p">|</span> <span class="n">never</span>   <span class="p">|</span> <span class="n">UTC</span>       <span class="p">|</span>         <span class="p">|</span>                                           <span class="p">|</span>                       <span class="p">|</span>
+    <span class="nf">And</span> I am logged in
+    <span class="err">And the following projects exist</span><span class="p">:</span>
+      <span class="p">|</span> <span class="nv">title</span> <span class="p">|</span> <span class="nv">description</span>          <span class="p">|</span> <span class="nv">pitch</span> <span class="p">|</span> <span class="nv">status</span> <span class="p">|</span> <span class="nv">commit_count</span> <span class="p">|</span>
+      <span class="p">|</span> <span class="n">WSO</span>   <span class="p">|</span> <span class="n">greetings</span> <span class="n">earthlings</span> <span class="p">|</span>       <span class="p">|</span> <span class="n">active</span> <span class="p">|</span> <span class="n">2795</span>         <span class="p">|</span>
+      <span class="p">|</span> <span class="n">EdX</span>   <span class="p">|</span> <span class="n">greetings</span> <span class="n">earthlings</span> <span class="p">|</span>       <span class="p">|</span> <span class="n">active</span> <span class="p">|</span> <span class="n">2795</span>         <span class="p">|</span>
+      <span class="p">|</span> <span class="n">AAA</span>   <span class="p">|</span> <span class="n">for</span> <span class="n">roadists</span>         <span class="p">|</span>       <span class="p">|</span> <span class="n">active</span> <span class="p">|</span>              <span class="p">|</span>
+
+  <span class="nt">@javascript</span>
+  <span class="kn">Scenario</span><span class="p">:</span> Show Client Meeting event
+    <span class="err">Given the date is "2014/02/03 07</span><span class="p">:</span><span class="err">01</span><span class="p">:</span><span class="err">00</span> <span class="err">UTC"</span>
+    <span class="nf">And</span> I am on Events index page
+    <span class="nf">Then</span> I should see <span class="s">"ClientMtg"</span>
+    <span class="err">And I should see "11</span><span class="p">:</span><span class="err">00-13</span><span class="p">:</span><span class="err">30</span> <span class="err">(UTC)"</span>
+
+  <span class="nt">@javascript</span>
+  <span class="kn">Scenario</span><span class="p">:</span> Create Client Meeting event
+    <span class="nf">Given</span> I am on Events index page
+    <span class="nf">When</span> I click <span class="s">"New Event"</span>
+    <span class="err">And I fill in event field</span><span class="p">:</span>
+      <span class="p">|</span> <span class="nv">name</span>        <span class="p">|</span> <span class="nv">value</span>          <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Name</span>        <span class="p">|</span> <span class="n">Whatever</span>       <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Description</span> <span class="p">|</span> <span class="n">something</span> <span class="n">else</span> <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Start</span> <span class="n">Date</span>  <span class="p">|</span> <span class="n">2014-02-04</span>     <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Start</span> <span class="n">Time</span>  <span class="p">|</span> <span class="n">09:00</span>          <span class="p">|</span>
+    <span class="nf">And</span> I select <span class="s">"EdX"</span> from the event project dropdown
+    <span class="nf">And</span> I select <span class="s">"ClientMeeting"</span> from the event category dropdown
+    <span class="nf">And</span> I should not see <span class="s">"End Date"</span>
+    <span class="nf">And</span> I click on the <span class="s">"event_date"</span> div
+    <span class="nf">And</span> I click the <span class="s">"Save"</span> button
+    <span class="nf">Then</span> I should see <span class="s">"Event Created"</span>
+    <span class="nf">Given</span> the event <span class="s">"Whatever"</span>
+    <span class="nf">Then</span> I should be on the event <span class="s">"Show"</span> page for <span class="s">"Whatever"</span>
+    <span class="nf">And</span> the event named <span class="s">"Whatever"</span> is associated with <span class="s">"EdX"</span>
+    <span class="err">And I should see "09</span><span class="p">:</span><span class="err">00-09</span><span class="p">:</span><span class="err">30</span> <span class="err">(UTC)"</span>
+    <span class="nf">And</span> I should see <span class="s">"ClientMtg"</span>
+</code></pre>
+<p>the first scenario passes, but I have an unimplemented step:</p>
+<pre class="highlight ruby"><code><span class="no">When</span><span class="p">(</span><span class="sr">/^I select "([^"]*)" from the event category dropdown$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">arg1</span><span class="o">|</span>
+  <span class="n">pending</span> <span class="c1"># Write code here that turns the phrase above into concrete actions</span>
+<span class="k">end</span>
+</code></pre>
+<p>so I implement that:</p>
+<pre class="highlight plaintext"><code>When(/^I select "([^"]*)" from the event category dropdown$/) do |category|
+  page.select category, from: "event_category"
+end
+</code></pre>
+<p>tweak the feature a little - test in dev mode, and get the two scenarios both green.  Then by stashing all the code so far, checking out develop, and running the tests I can check that they fail when the functionality is removed, thus ensuring that we are properly testing the feature:</p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>1750_client_type<span class="o">)]</span><span class="nv">$ </span>
+→ git checkout develop
+error: Your <span class="nb">local </span>changes to the following files would be overwritten by checkout:
+    features/events/show_event.feature
+Please commit your changes or stash them before you switch branches.
+Aborting
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>1750_client_type<span class="o">)]</span><span class="nv">$ </span>
+→ git stash
+Saved working directory and index state WIP on 1750_client_type: 3ce512a5 Merge branch <span class="s1">'develop'</span> into 1750_client_type
+HEAD is now at 3ce512a5 Merge branch <span class="s1">'develop'</span> into 1750_client_type
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>1750_client_type<span class="o">)]</span><span class="nv">$ </span>
+→ git checkout develop
+Switched to branch <span class="s1">'develop'</span>
+Your branch is up-to-date with <span class="s1">'origin/develop'</span>.
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>develop<span class="o">)]</span><span class="nv">$ </span>
+→ git stash pop
+Auto-merging features/events/show_event.feature
+CONFLICT <span class="o">(</span>content<span class="o">)</span>: Merge conflict <span class="k">in </span>features/events/show_event.feature
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>develop<span class="o">)]</span><span class="nv">$ </span>
+→ be cucumber features/events/client_meetings.feature
+<span class="o">[</span>Coveralls] Using SimpleCov<span class="s1">'s '</span>rails<span class="s1">' settings.
+Using the default profile...
+@vcr
+Feature: Provide a ClientMeeting Category
+  As a project manager
+  In order to be able to distinguish between client meetings and other types of meeting
+  I would like to see and create "client meeting" events
+
+  Background:                         # features/events/client_meetings.feature:7
+    Given following events exist:     # features/step_definitions/event_steps.rb:32
+      | name      | description          | category      | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
+      | ClientMtg | Daily client meeting | ClientMeeting | 2014/02/03 11:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
+    And I am logged in                # features/step_definitions/user_steps.rb:63
+    And the following projects exist: # features/step_definitions/projects_steps.rb:6
+      | title | description          | pitch | status | commit_count |
+      | WSO   | greetings earthlings |       | active | 2795         |
+      | EdX   | greetings earthlings |       | active | 2795         |
+      | AAA   | for roadists         |       | active |              |
+
+  @javascript
+  Scenario: Show Client Meeting event           # features/events/client_meetings.feature:19
+    Given the date is "2014/02/03 07:01:00 UTC" # features/step_definitions/event_steps.rb:94
+    And I am on Events index page               # features/step_definitions/event_steps.rb:15
+    Then I should see "ClientMtg"               # features/step_definitions/basic_steps.rb:200
+    And I should see "11:00-13:30 (UTC)"        # features/step_definitions/basic_steps.rb:200
+
+  @javascript
+  Scenario: Create Client Meeting event                           # features/events/client_meetings.feature:26
+    Given I am on Events index page                               # features/step_definitions/event_steps.rb:15
+    When I click "New Event"                                      # features/step_definitions/basic_steps.rb:88
+    And I fill in event field:                                    # features/step_definitions/basic_steps.rb:152
+      | name        | value          |
+      | Name        | Whatever       |
+      | Description | something else |
+      | Start Date  | 2014-02-04     |
+      | Start Time  | 09:00          |
+    And I select "EdX" from the event project dropdown            # features/step_definitions/event_steps.rb:110
+    And I select "ClientMeeting" from the event category dropdown # features/step_definitions/event_steps.rb:114
+      Unable to find option "ClientMeeting" (Capybara::ElementNotFound)
+      ./features/step_definitions/event_steps.rb:115:in `/^I select "([^"]*)" from the event category dropdown$/'</span>
+      features/events/client_meetings.feature:36:in <span class="sb">`</span>And I <span class="k">select</span> <span class="s2">"ClientMeeting"</span> from the event category dropdown<span class="s1">'
+    And I should not see "End Date"                               # features/step_definitions/basic_steps.rb:200
+    And I click on the "event_date" div                           # features/step_definitions/event_steps.rb:106
+    And I click the "Save" button                                 # features/step_definitions/basic_steps.rb:96
+    Then I should see "Event Created"                             # features/step_definitions/basic_steps.rb:200
+    Given the event "Whatever"                                    # features/step_definitions/event_steps.rb:324
+    Then I should be on the event "Show" page for "Whatever"      # features/step_definitions/event_steps.rb:83
+    And the event named "Whatever" is associated with "EdX"       # features/step_definitions/event_steps.rb:126
+    And I should see "Event type: ClientMeeting"                  # features/step_definitions/basic_steps.rb:200
+
+Failing Scenarios:
+cucumber features/events/client_meetings.feature:26 # Scenario: Create Client Meeting event
+
+2 scenarios (1 failed, 1 passed)
+23 steps (1 failed, 8 skipped, 14 passed)
+0m11.677s
+</span></code></pre>
+<p>Then I pushed it up into the branch, and left Matt the following note:</p>
+
+<blockquote>
+<p>@mattlindsey I&rsquo;ve gone ahead and done the checks and adjusted the acceptance tests as I was suggesting - apologies if you were hoping to work on this, but I thought that given that it&rsquo;s been open in the PRs for a month I should just get it cleared up.</p>
+
+<p>Very happy to go through it with you when you have more time :-)</p>
+</blockquote>
+
+<p>I feel bad about missing the chance to work on it more closely with Matt, but now it&rsquo;s building and hopefully I can merge it later today.  The opportunities link PR that I started a rebuild of at the beginning of this blog failed on what looks like one of our intermittent JS failures &hellip;</p>
+<pre class="highlight plaintext"><code>
+Scenario: A user can insert an image  
+
+    Then the Mercury Editor modal window should be visible                                         # features/step_definitions/mercury_steps.rb:57
+      expected to find css ".mercury-modal" but there were no matches (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/mercury_steps.rb:58:in `/^the Mercury Editor modal window should (not |)be visible$/'
+      features/documents.feature:136:in `Then the Mercury Editor modal window should be visible'
+
+Failing Scenarios:
+cucumber features/documents.feature:130 # Scenario: A user can insert an image
+</code></pre>
+<p>I could add that to the exceptions, but that approach is dangerous as it&rsquo;s easy to forget which tests are omitted in CI - Jon&rsquo;s approach on LocalSupport to re-run failing tests seems more sensible.  I&rsquo;d also love to get it so that we only output the full test details when they fail, which would also be addressed by Jon&rsquo;s approach.  I&rsquo;ll add that chore to the WSO issues - actually I find I already <a href="https://github.com/AgileVentures/WebsiteOne/issues/1803">have one</a>.</p>
+
+<p>Maybe a vote on that is in order &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
