@@ -69,6 +69,70 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Digging into the Multiple Project Repos</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/15/av-ecosystem-review-digging-in-to-multiple-project-repos-blog/"/>
+    <id>http://blog.url.com/2017/09/15/av-ecosystem-review-digging-in-to-multiple-project-repos-blog/</id>
+    <published>2017-09-15T01:00:00+01:00</published>
+    <updated>2017-11-14T21:19:19+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="digging" src="/images/digging.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So, struggling through tears for my father (just listened to a &amp;gt;Code episode on mental health) I&amp;rsquo;m bringing myself to focus on continuing this user rerequest feature about multiple repos for AV projects.  Let&amp;rsquo;s warm up by making sure all our local code is up to date:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (master)]$ 
+→ git checkout develop
+Switched to branch 'develop'
+Your branch is up-to-date with 'origin/develop'.
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (develop)]$ 
+→ git pull origin develop
+From http://github.com/AgileVentures/WebsiteOne
+ * branch              develop    -&amp;gt; FETCH_HEAD
+Already up-to-date.
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (develop)]$ 
+→ git checkout 761_multiple_source_repository 
+Switched to branch '761_multiple_source_repository'
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (761_multiple_source_repository)]$ 
+→ git pull origin 761_multiple_source_repository 
+From http://github.com/AgileVentures/WebsiteOne
+ * branch              761_multiple_source_repository -&amp;gt; FETCH_HEAD
+Already up-to-date.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;that process forced me to look at the waffle board, where I&amp;rsquo;m seeing that I have the changes to the Premium page in the &amp;ldquo;please check&amp;rdquo; column and that got approved by the marketing folks yesterday, so I have a chance to get that completed &amp;hellip; and it&amp;rsquo;s done.  I&amp;rsquo;m glad I did save a copy of the html text in source control as I think I blew away all record of it on the staging server yesterday when I cloned production to staging, phew.  So that&amp;rsquo;s deployed and the &amp;ldquo;please check&amp;rdquo; column is cleared.&lt;/p&gt;
+
+&lt;p&gt;Now I don&amp;rsquo;t have much time for working on the multiple repo feature, but perhaps I can get some kind of interface spike to allow the addition of extra form fields, and I managed to do just that.  I found the right place and bashed around with JavaScript for a bit, and I&amp;rsquo;ve now got the next step of the cucumber test passing.&lt;/p&gt;
+
+&lt;p&gt;The code is super messy, but I&amp;rsquo;ve used &lt;a href="http://api.jquery.com/insertafter/"&gt;jQuery &lt;code&gt;insertafter&lt;/code&gt;&lt;/a&gt; to give me the new form fields when I click an &amp;ldquo;Add repo&amp;rdquo; button:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="nx"&gt;WebsiteOne&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;define&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Projects'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="na"&gt;setupAddRepoButton&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#add_repo_field_button'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;click&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;event&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+        &lt;span class="nx"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;preventDefault&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;new_html&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;div class="form-group"&amp;gt; \
+            &amp;lt;label class="control-label" for="project_github_url"&amp;gt;GitHub link&amp;lt;/label&amp;gt;\
+            &amp;lt;input class="form-control" \
+                   placeholder="https://github.com/projectname" name="project[github_url]" id="project_github_url"&amp;gt;\
+              &amp;lt;/div&amp;gt;'&lt;/span&gt;
+        &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;new_html&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;insertAfter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#project_github_url'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;
+      &lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+
+&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'ready page:load'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;WebsiteOne&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Projects&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setupAddRepoButton&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;rsquo;m completely unsure about these &lt;code&gt;WebsiteOne.define(&amp;#39;Projects&amp;#39;&lt;/code&gt; things we have through the project.  Apparently that&amp;rsquo;s for managing module dependencies with requirejs.  Not sure if we are actually using that - good to have a consistent namespace though.  Anyhow I&amp;rsquo;m pleased to get something that kicks out a few new form fields:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://www.dropbox.com/s/yxf3kviciw5n4n2/Screenshot%202017-09-15%2010.14.00.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Although it feels like I&amp;rsquo;m handrolling javascript here for a feature that must have been built over and over again.  Aha &lt;a href="https://github.com/ncri/nested_form_fields"&gt;https://github.com/ncri/nested&lt;em&gt;form&lt;/em&gt;fields&lt;/a&gt; well perhaps I should have a go with that then :-)  Still good to refresh my understanding of this wiring &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s also &lt;a href="https://github.com/ryanb/nested_form"&gt;https://github.com/ryanb/nested_form&lt;/a&gt; but that hasn&amp;rsquo;t been updated since 2013 &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Clearing Waffle</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/14/av-ecosystem-review-clearing-waffle/"/>
     <id>http://blog.url.com/2017/09/14/av-ecosystem-review-clearing-waffle/</id>
@@ -402,90 +466,6 @@ cucumber features/documents.feature:130 # Scenario: A user can insert an image
 &lt;p&gt;I&amp;rsquo;m also thinking that ultimately we may need to make these pages slightly less editable, and more generated.  We&amp;rsquo;ll see.  I think other devs also need to have copies of them locally.  Either way I&amp;rsquo;ll get feedback on the staging server from the Marketing team before pushing live.&lt;/p&gt;
 
 &lt;p&gt;p.s. did a &lt;a href="https://gist.github.com/tansaku/6450f322f7505880872eb287c0ca36b0"&gt;node rep and included standardjs&lt;/a&gt; &lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Email Fixes and Directions</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/11/av-ecosystem-review-email-fixes-and-directions/"/>
-    <id>http://blog.url.com/2017/09/11/av-ecosystem-review-email-fixes-and-directions/</id>
-    <published>2017-09-11T01:00:00+01:00</published>
-    <updated>2017-11-08T20:10:44+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="directions" src="/images/directions.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I&amp;rsquo;m conflicted - what direction next?  On the table are:&lt;/p&gt;
-
-&lt;p&gt;1) review the process of people coming in from adwords&lt;br&gt;
-2) fix the email SPF setting&lt;br&gt;
-3) more work on greeter bots&lt;br&gt;
-4) search for other areas of ecosystem that are blocked up&lt;br&gt;
-5) preparing that video for dropbox to debug github image embeds  &lt;/p&gt;
-
-&lt;p&gt;I finally managed to see one of our adverts that Lara shared:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/Screenshot%202017-09-11%2009.00.27.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and I&amp;rsquo;m still concerned about the message we&amp;rsquo;re sending, i.e. the absence of any mention of team skills or agile in that ad.  It&amp;rsquo;s so frustrating that I can&amp;rsquo;t immediately get a simple view of our actual ads from the Google Analytics interface.  We also got the concern that our ads seem to be showing up particularly heavily in India, and we&amp;rsquo;re not sure why.&lt;/p&gt;
-
-&lt;p&gt;Over the weekend I got the following from Elastic Email:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Your Account sam@agileventures.org has one or more domains that were validated at one time but are no longer for some reason. How the domains became invalidated is not known but it is likely a configuration issue on your DNS for the domain(s) in question. It is important to take this step to ensure your emails are sending directly from your domain. Below is the list of domains that are not currently validated anymore: &lt;/p&gt;
-
-&lt;p&gt;agileventures.org&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So it seems like that the recent SPF change in the Gandi settings is the issue here.  I passed that on to Federico, who suggested the following:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;@ 600 IN TXT "v=spf1 include:_mailcust.gandi.net include:_spf.elasticemail.com ~all”
-&lt;/code&gt;&lt;/pre&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Notice the change of Time To Live to 10 minutes instead of 3 hours, and the switch back to “~all”—the recommended policy statement. &amp;ldquo;?all&amp;rdquo; means neutral policy.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So I replaced the current:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;@ 10800 IN TXT "v=spf1 include:_mailcust.gandi.net ?all"
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;with the suggested change, but I got this error&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Line 5: Error while parsing rdata: newline in quoted string&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;which was due to a non-ascii quote - switching that out and the DNS file saved.  Federico had shortened the TTL, so in principle we could check sooner if it was having the effect we wanted.&lt;/p&gt;
-
-&lt;p&gt;While I wait for that the frustration of wanting to embed an image made me want to record the video for dropbox.  I did that using the preview tab for creating this blog.  Here&amp;rsquo;s what I sent them:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Hi Marco,&lt;/p&gt;
-
-&lt;p&gt;Thanks for this - here&amp;rsquo;s a video:&lt;/p&gt;
-
-&lt;p&gt;https://www.dropbox.com/s/2rjda5vuqaj1b0g/DropboxLinksNotWorkingForImagesOnGithub.mov?dl=0&lt;/p&gt;
-
-&lt;p&gt;It shows me trying to preview an image embed from the following dropbox link:&lt;/p&gt;
-
-&lt;p&gt;https://www.dropbox.com/s/nmurrdqxj76oq07/Screenshot%202017-09-11%2009.00.27.png?dl=1&lt;/p&gt;
-
-&lt;p&gt;You can see that the image does not show up in preview - also note that for the last year links like these were showing up fine as images, so something somewhere changed recently.  As you&amp;#39;lls ee from the video GitHub grabs the image from you at dropbox and stores it on their own servers.  Here&amp;rsquo;s what Steve Guntrip at GitHub said:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;When ?dl=1 is specified, we get redirected to the image file with a non-image Content-Type header, Content-Type: application/binary. For your image to load, this Content-Type should be an image, like Content-Type: image/png.&lt;/p&gt;
-
-&lt;p&gt;In this case, I would suggest reaching out to Dropbox&amp;rsquo;s support to see if they can maybe support embedding images if the user agent is github-camo (our service that downloads these images to githubusercontent.com), or if they have another solution.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Many thanks in advance&lt;/p&gt;
-
-&lt;p&gt;Best, Sam&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So it&amp;rsquo;s almost time to test the email, but maybe time for a &lt;a href="https://gist.github.com/tansaku/c311c996cc1521dceea0c0852849e9ca"&gt;quick node test rep&lt;/a&gt; and then I can check the email stuff by going to http://tools.wordtothewise.com/spf/check/AgileVentures.org and clicking on the DNS tab (as Federico suggested), where I see:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/Screenshot%202017-09-11%2009.25.55.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;which I guess is telling me it&amp;rsquo;s working?  I can also send an email from my account that was previously marked as spam &amp;hellip; and that&amp;rsquo;s still coming through normally, so I guess that&amp;rsquo;s sorted?  We&amp;rsquo;ll see what happens with Elastic Email &amp;hellip; I guess that&amp;rsquo;s enough progress for one day.  If I&amp;rsquo;m super lucky, I&amp;rsquo;ll get back the easy image embed functionality from dropbox/GitHub that&amp;rsquo;ll make reviewing everything else a lot easier &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

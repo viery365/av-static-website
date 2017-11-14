@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Digging into the Multiple Project Repos</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_15 blog_page_15_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_09 x2017_09_15 x2017_09_15_av-ecosystem-review-digging-in-to-multiple-project-repos-blog x2017_09_15_av-ecosystem-review-digging-in-to-multiple-project-repos-blog_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,79 +83,75 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/15/av-ecosystem-review-digging-in-to-multiple-project-repos-blog/">AV EcoSystem Review Digging into the Multiple Project Repos</a></h2>
+        <h5 class='date'>15 Sep 2017</h5>
+    <p><img alt="digging" src="/images/digging.jpg" /></p>
 
-          <p>Page 15 of 23</p>
+<p>So, struggling through tears for my father (just listened to a &gt;Code episode on mental health) I&rsquo;m bringing myself to focus on continuing this user rerequest feature about multiple repos for AV projects.  Let&rsquo;s warm up by making sure all our local code is up to date:</p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (master)]$ 
+→ git checkout develop
+Switched to branch 'develop'
+Your branch is up-to-date with 'origin/develop'.
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (develop)]$ 
+→ git pull origin develop
+From http://github.com/AgileVentures/WebsiteOne
+ * branch              develop    -&gt; FETCH_HEAD
+Already up-to-date.
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (develop)]$ 
+→ git checkout 761_multiple_source_repository 
+Switched to branch '761_multiple_source_repository'
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (761_multiple_source_repository)]$ 
+→ git pull origin 761_multiple_source_repository 
+From http://github.com/AgileVentures/WebsiteOne
+ * branch              761_multiple_source_repository -&gt; FETCH_HEAD
+Already up-to-date.
+</code></pre>
+<p>that process forced me to look at the waffle board, where I&rsquo;m seeing that I have the changes to the Premium page in the &ldquo;please check&rdquo; column and that got approved by the marketing folks yesterday, so I have a chance to get that completed &hellip; and it&rsquo;s done.  I&rsquo;m glad I did save a copy of the html text in source control as I think I blew away all record of it on the staging server yesterday when I cloned production to staging, phew.  So that&rsquo;s deployed and the &ldquo;please check&rdquo; column is cleared.</p>
 
-            <p><a href="/blog/page/14/">Previous page</a></p>
+<p>Now I don&rsquo;t have much time for working on the multiple repo feature, but perhaps I can get some kind of interface spike to allow the addition of extra form fields, and I managed to do just that.  I found the right place and bashed around with JavaScript for a bit, and I&rsquo;ve now got the next step of the cucumber test passing.</p>
 
-          <h2><a href="/2016/12/13/cross-pairing/">Cross-Pairing</a></h2>
-          <h3>Dec 13</h3>
-          <p><img alt="cross pairing" src="/images/cross_pairing.jpg"></p>
+<p>The code is super messy, but I&rsquo;ve used <a href="http://api.jquery.com/insertafter/">jQuery <code>insertafter</code></a> to give me the new form fields when I click an &ldquo;Add repo&rdquo; button:</p>
+<pre class="highlight javascript"><code><span class="nx">WebsiteOne</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">'Projects'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">setupAddRepoButton</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">'#add_repo_field_button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
 
-<p>Over the weekend, in conflict with my general rule about working on Saturdays and Sundays, I lead a couple of “Bob Martin” scrums.  My standards about not working at the weekend for health and sanity have been chipped away at by me leading a Mentive...</p>
-          <h2><a href="/2016/12/12/semi-automated-bots/">Semi-Automated Bots, or Augmented Humans?</a></h2>
-          <h3>Dec 12</h3>
-          <p><img alt="bot" src="/images/bot.jpeg"></p>
+        <span class="kd">var</span> <span class="nx">new_html</span> <span class="o">=</span> <span class="s1">'&lt;div class="form-group"&gt; \
+            &lt;label class="control-label" for="project_github_url"&gt;GitHub link&lt;/label&gt;\
+            &lt;input class="form-control" \
+                   placeholder="https://github.com/projectname" name="project[github_url]" id="project_github_url"&gt;\
+              &lt;/div&gt;'</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nx">new_html</span><span class="p">).</span><span class="nx">insertAfter</span><span class="p">(</span><span class="s1">'#project_github_url'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">false</span>
+      <span class="p">})</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
 
-<p>Friday included a lot of meetings, pull request review, and bug fixing.  I didn’t get much fresh coding down, which was somewhat frustrating, but I did have a bit of a breakthrough on the greeter bot side, with this code:</p>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">Botkit</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'botkit...</span></code></pre>
-          <h2><a href="/2016/12/09/making-progress/">Making Progress (for the Greater Good)</a></h2>
-          <h3>Dec  9</h3>
-          <p><img alt="progress" src="/images/progress.jpg"></p>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'ready page:load'</span><span class="p">,</span> <span class="nx">WebsiteOne</span><span class="p">.</span><span class="nx">Projects</span><span class="p">.</span><span class="nx">setupAddRepoButton</span><span class="p">)</span>
+</code></pre>
+<p>I&rsquo;m completely unsure about these <code>WebsiteOne.define(&#39;Projects&#39;</code> things we have through the project.  Apparently that&rsquo;s for managing module dependencies with requirejs.  Not sure if we are actually using that - good to have a consistent namespace though.  Anyhow I&rsquo;m pleased to get something that kicks out a few new form fields:</p>
 
-<p>So I went over time for yesterday’s blogging.  I’d tried to cap it at 20 minutes, but I got into a fair bit of detail about the options for testing/mocking the Twitter API before getting on to the meat of the matter I was trying to focus on; Agile...</p>
-          <h2><a href="/2016/12/08/agile-dev-ops/">Agile DevOps</a></h2>
-          <h3>Dec  8</h3>
-          <p><img alt="devops" src="/images/devops.png"></p>
+<p><img src="https://www.dropbox.com/s/yxf3kviciw5n4n2/Screenshot%202017-09-15%2010.14.00.png?dl=1" /></p>
 
-<p>So my project manager partner for WebsiteOne Raoul has got really busy recently, so we negotiated that I would take on some of the PR merging and release responsibility this week.  After the usual blogging and admin and “Martin Fowler” scrum I jumped...</p>
-          <h2><a href="/2016/12/07/meetings-vs-coding/">Meetings vs Coding</a></h2>
-          <h3>Dec  7</h3>
-          <p><img alt="meeting" src="/images/meeting.jpg"></p>
+<p>Although it feels like I&rsquo;m handrolling javascript here for a feature that must have been built over and over again.  Aha <a href="https://github.com/ncri/nested_form_fields">https://github.com/ncri/nested<em>form</em>fields</a> well perhaps I should have a go with that then :-)  Still good to refresh my understanding of this wiring &hellip;</p>
 
-<p>Tuesday suddenly sprouted a couple of meetings.  Well, the WikiEDU meeting had been planned from the week before, and gave WikiEDU developer Sage Ross the chance to tell AV about the WikiEDU project, which helps instructors set editing Wikipedia...</p>
-          <h2><a href="/2016/12/06/speed-coding-blogging/">Speed Coding and Blogging</a></h2>
-          <h3>Dec  6</h3>
-          <p><img alt="hourglass" src="/images/hourglass.jpeg"></p>
+<p>There&rsquo;s also <a href="https://github.com/ryanb/nested_form">https://github.com/ryanb/nested_form</a> but that hasn&rsquo;t been updated since 2013 &hellip;</p>
 
-<p>Monday was the usual fight against torpor, but I did get an hour’s pairing in with Michael on WSO where Michael drove a finish to putting the Paypal payment button on the same page as the Stripe credit card payment.  Before he started on that I got...</p>
-          <h2><a href="/2016/12/05/refactoring_and_pairing/">Refactoring and Pairing</a></h2>
-          <h3>Dec  5</h3>
-          <p><img alt="refactoring" src="/images/refactoring.jpg"></p>
-
-<p>So hot on the heels of our first AV member sponsoring other AV members for Premium support, another Premium member was talking about sponsoring some of their co-workers for Premium membership as Xmas gifts!  Now this particular Premium member prefers...</p>
-          <h2><a href="/2016/12/02/testing-slack-bots/">Testing Slack Bots and Project Metrics</a></h2>
-          <h3>Dec  2</h3>
-          <p><img alt="metrics" src="/images/metrics.png"></p>
-
-<p>Wednesday saw me firing off a few emails to potential sponsors, which felt like a good start, since landing another sponsor would make all the difference to us over the coming months.  We had our second mob programming session, and I got a preview...</p>
-          <h2><a href="/2016/12/01/task-switching/">Task Switching</a></h2>
-          <h3>Dec  1</h3>
-          <p><img alt="task switching" src="/images/task_switching.png"></p>
-
-<p>Tuesday was a day of much task switching.  It started with putting my office back together after new windows had been put in.  That took a while.  I managed to quickly stamp out a blog on the Agile Project Workshop before the “Martin Fowler” scrum...</p>
-          <h2><a href="/2016/11/30/agile-project-workshop/">Agile Project Management for NonProfits</a></h2>
-          <h3>Nov 30</h3>
-          <p><img alt="agile" src="/images/agile.png"></p>
-
-<p>Most of Tuesday was taken up with running a workshop on Agile Project Development for non-profits at the Volunteer Services Center up the road.  This was for Voluntary Action Harrow Cooperative (VAHC), who are the client for the Harrow Community...</p>
-
-            <p><a href="/blog/page/16/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -213,6 +210,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
