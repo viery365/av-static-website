@@ -69,11 +69,123 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Inspecting Gems</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/18/av-ecosystem-review-inspecting-gems/"/>
+    <id>http://blog.url.com/2017/09/18/av-ecosystem-review-inspecting-gems/</id>
+    <published>2017-09-18T01:00:00+01:00</published>
+    <updated>2017-11-15T20:44:59+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="gems" src="/images/gems.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So my AV ecosystem reviews are getting further afield.  Here I am inspecting different gems for the purpose of completing a feature to support multiple project repositories.  What are the goals of this ongoing review? It&amp;rsquo;s to focus my blogging power onto making the AV ecosystem as welcoming and easy to use as possible.  That&amp;rsquo;s the flow of people from external sources to our website, to our Slack instance and to contributing to the projects we have hosted on GitHub.  This feature is a response to a request from a project maintainer, and that&amp;rsquo;s a stakeholder that we might have overlooked, so I&amp;rsquo;ll see what giving them focus can do.&lt;/p&gt;
+
+&lt;p&gt;Last Friday after spiking an interface component for dynamic form fields in rails, I found some gems that might provide a more coherent approach.  &lt;a href="https://github.com/ncri/nested_form_fields"&gt;https://github.com/ncri/nested&lt;em&gt;form&lt;/em&gt;fields&lt;/a&gt; is my current lead candidate.  243 stars suggests it has some popularity and I can see that it was updated as recently as five days ago.  There&amp;rsquo;s also &lt;a href="https://github.com/ryanb/nested_form"&gt;https://github.com/ryanb/nested_form&lt;/a&gt; with 1,769 stars, but hasn&amp;rsquo;t been updated in 4 years.  Another &lt;a href="https://www.google.co.uk/search?q=gems+rails+nested+form"&gt;quick search&lt;/a&gt; shows me there&amp;rsquo;s also &lt;a href="https://github.com/nathanvda/cocoon"&gt;https://github.com/nathanvda/cocoon&lt;/a&gt; with 2,445 stars and was updated as recently as 3 days ago.  Glad I did that search, or I might not have found this other important contender which looks like the field leader at the moment.  Let&amp;rsquo;s try it out - following the README instructions on how to install &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Using Cocoon requires the nested models that we haven&amp;rsquo;t set up yet, and then has options for using Rails Formtastic, SimpleForm or Standard Rails forms.  I&amp;rsquo;m tempted to go for standard Rails forms, since I don&amp;rsquo;t want to take on too much at once.  I&amp;rsquo;ll start with the migration, I guess, to pull the github_url out of the project and into a separate table &amp;hellip;&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;761_multiple_source_repository&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ rails g model SourceRepository url:string
+      invoke  active_record
+      create    db/migrate/20170918083218_create_source_repositories.rb
+      create    app/models/source_repository.rb
+      invoke    rspec
+      create      spec/models/source_repository_spec.rb
+      invoke      factory_girl
+      create        spec/factories/source_repositories.rb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I can then edit the created model to have the setup that Cocoon requires:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SourceRepository&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="n"&gt;belongs_to&lt;/span&gt; &lt;span class="ss"&gt;:project&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and refer to it in the existing Project class:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Project&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+  &lt;span class="nf"&gt;has_many&lt;/span&gt; &lt;span class="ss"&gt;:source_repositories&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;inverse_of&lt;/span&gt; &lt;span class="ss"&gt;:project&lt;/span&gt;
+  &lt;span class="n"&gt;accepts_nested_attributes_for&lt;/span&gt; &lt;span class="ss"&gt;:source_repositories&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;reject_if: :all_blank&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;allow_destroy: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Using an online HAML to ERB converter I can get the project example forms in ERB, and adjust to our needs:&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;form_for&lt;/span&gt; &lt;span class="vi"&gt;@project&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"field"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;label&lt;/span&gt; &lt;span class="ss"&gt;:name&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;br/&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;text_field&lt;/span&gt; &lt;span class="ss"&gt;:name&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"field"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;label&lt;/span&gt; &lt;span class="ss"&gt;:description&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;br/&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;text_field&lt;/span&gt; &lt;span class="ss"&gt;:description&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;h3&amp;gt;&lt;/span&gt;Source Repositories&lt;span class="nt"&gt;&amp;lt;/h3&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"source_repositories"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;fields_for&lt;/span&gt; &lt;span class="ss"&gt;:source_repositories&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;source_repository&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+      &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="s1"&gt;'source_repository_fields'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;f: &lt;/span&gt;&lt;span class="n"&gt;source_repository&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"links"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to_add_association&lt;/span&gt; &lt;span class="s1"&gt;'add source_repository'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:source_repositories&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;submit&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and the partial:&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"nested-fields"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"field"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;label&lt;/span&gt; &lt;span class="ss"&gt;:url&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;br/&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;text_field&lt;/span&gt; &lt;span class="ss"&gt;:url&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to_remove_association&lt;/span&gt; &lt;span class="s2"&gt;"remove source repository"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and after a few misteps back and forth to add the correct references to the model/migration:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;CreateSourceRepositories&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Migration&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;change&lt;/span&gt;
+    &lt;span class="n"&gt;create_table&lt;/span&gt; &lt;span class="ss"&gt;:source_repositories&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;string&lt;/span&gt; &lt;span class="ss"&gt;:url&lt;/span&gt;
+      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;string&lt;/span&gt; &lt;span class="ss"&gt;:url&lt;/span&gt;
+      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;references&lt;/span&gt; &lt;span class="ss"&gt;:project&lt;/span&gt; &lt;span class="c1"&gt;# &amp;lt;-- needed this&lt;/span&gt;
+
+      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;timestamps&lt;/span&gt; &lt;span class="ss"&gt;null: &lt;/span&gt;&lt;span class="kp"&gt;false&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I was rewarded with seeing the boiler plate form allowing me to both add and remove source repositories:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/vy7u9shkciiljc7/Screenshot%202017-09-18%2009.53.22.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Hopefully a bit of cleanup and formatting and this will look nice and have more functionality that I was able to immediately hand-roll.  I could probably have implemented dynamic removal of form fields in the same time it took me to get proof of concept on this gem.  However using this gem will hopefully make our system less suprising to new developers who might have seen this gem on other projects, and we&amp;rsquo;ll potentially get the benefits of upgrades and fixes to the gem itself.&lt;/p&gt;
+
+&lt;p&gt;Of course, despite getting the interface working, the repository datat that I inputted was not actually saved to the database as such, but then I hadn&amp;rsquo;t got that part working in my own hand-rolled version either :-)&lt;/p&gt;
+
+&lt;p&gt;I can see the data being passed back:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Started POST "/projects" for ::1 at 2017-09-18 08:56:32 +0000
+Processing by ProjectsController#create as HTML
+  Parameters: {"utf8"=&amp;gt;"✓", "authenticity_token"=&amp;gt;"0/yym9qPkJcAgoxhJqfg2UIOfDEFIDda2qW2VWZCVl2AF0/fytCniCb8bJb/qy1ZV0f/CXYDc9mvGBElB51A4g==", "project"=&amp;gt;{"title"=&amp;gt;"test", "image_url"=&amp;gt;"", "description"=&amp;gt;"test", "status"=&amp;gt;"Active", "github_url"=&amp;gt;"", "source_repositories_attributes"=&amp;gt;{"1505724773160"=&amp;gt;{"url"=&amp;gt;"test", "_destroy"=&amp;gt;"false"}, "1505724775431"=&amp;gt;{"url"=&amp;gt;"test2", "_destroy"=&amp;gt;"false"}, "1505724776802"=&amp;gt;{"url"=&amp;gt;"test3", "_destroy"=&amp;gt;"false"}}, "pivotaltracker_url"=&amp;gt;""}, "commit"=&amp;gt;"Submit"}
+  User Load (0.6ms)  SELECT  "users".* FROM "users" WHERE "users"."deleted_at" IS NULL AND "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 3]]
+  Event Load (1.5ms)  SELECT "events".* FROM "events" WHERE "events"."category" = $1  [["category", "Scrum"]]
+Unpermitted parameter: source_repositories_attributes
+   (0.2ms)  BEGIN
+  Project Exists (2.8ms)  SELECT  1 AS one FROM "projects" WHERE ("projects"."id" IS NOT NULL) AND "projects"."slug" = 'test' LIMIT 1
+  SQL (4.6ms)  INSERT INTO "projects" ("title", "description", "status", "github_url", "pivotaltracker_url", "image_url", "user_id", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["title", "test"], ["description", "test"], ["status", "Active"], ["github_url", ""], ["pivotaltracker_url", ""], ["image_url", ""], ["user_id", 3], ["slug", "test-8018e213-701c-40bd-aa02-caa3025ae4ba"], ["created_at", "2017-09-18 08:56:33.028974"], ["updated_at", "2017-09-18 08:56:33.028974"]]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I was about to say that I&amp;rsquo;d leave fixing that till tommorrow, but I had a quick idea it was to do with strong parameters, and it was:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;project_params&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;permit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:description&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:pitch&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:created&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:status&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:user_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:github_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:pivotaltracker_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:pivotaltracker_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:image_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;source_repositories_attributes: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:url&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We need to specify the nested required attributes.  We are now saving our new repo information to the database thanks to &lt;a href="https://stackoverflow.com/questions/15919761/rails-4-nested-attributes-unpermitted-parameters"&gt;Stack Overflow&lt;/a&gt;!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Digging into the Multiple Project Repos</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/15/av-ecosystem-review-digging-in-to-multiple-project-repos-blog/"/>
     <id>http://blog.url.com/2017/09/15/av-ecosystem-review-digging-in-to-multiple-project-repos-blog/</id>
     <published>2017-09-15T01:00:00+01:00</published>
-    <updated>2017-11-14T21:19:19+00:00</updated>
+    <updated>2017-11-15T20:40:03+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -430,42 +542,6 @@ cucumber features/documents.feature:130 # Scenario: A user can insert an image
 &lt;p&gt;I could add that to the exceptions, but that approach is dangerous as it&amp;rsquo;s easy to forget which tests are omitted in CI - Jon&amp;rsquo;s approach on LocalSupport to re-run failing tests seems more sensible.  I&amp;rsquo;d also love to get it so that we only output the full test details when they fail, which would also be addressed by Jon&amp;rsquo;s approach.  I&amp;rsquo;ll add that chore to the WSO issues - actually I find I already &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1803"&gt;have one&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Maybe a vote on that is in order &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Email What Next</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/12/av-ecosystem-review-what-next/"/>
-    <id>http://blog.url.com/2017/09/12/av-ecosystem-review-what-next/</id>
-    <published>2017-09-12T01:00:00+01:00</published>
-    <updated>2017-11-08T20:11:24+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="whats next" src="/images/whats_next.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I&amp;rsquo;ve looked back at my list from yesterday as I tried to work out how to start the week:&lt;/p&gt;
-
-&lt;p&gt;1) review the process of people coming in from adwords&lt;br&gt;
-2) fix the email SPF setting&lt;br&gt;
-3) more work on greeter bots&lt;br&gt;
-4) search for other areas of ecosystem that are blocked up&lt;br&gt;
-5) preparing that video for dropbox to debug github image embeds  &lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s looking like we&amp;rsquo;ve fixed the email SPF setting (thanks Federico!) and I&amp;rsquo;ve submitted the video to dropbox about their links not working in Github and Pivotal markdown, but they&amp;rsquo;ve not replied yet (checking the email sidetracked me while I unsubscribed from five things), so no joy on that getting fixed yet.  It might be procrastination, but I think I&amp;rsquo;ll put off reviewing people flowing into the site for a week to see if I can get my easy  &amp;ldquo;insert-screenshot&amp;rdquo; functionality back.  I really want to put the new community-wide code of conduct into the website and the greeter bots, but the community is discussing it and so it might be good to leave that a couple of days (but no longer).  Thinking about important areas of the ecosystem, I&amp;rsquo;ve got hanging items in terms of WebSiteOne.  I&amp;rsquo;ve got a slew of content tickets relating to Premium that have been hanging around for ages, and I said in last Friday&amp;rsquo;s WSO meeting that I&amp;rsquo;d take on the multiple source repository task.&lt;/p&gt;
-
-&lt;p&gt;One of our project maintainers had dropped in the WSO channel to mention this was an issue - that&amp;rsquo;s a faily solid prod.  There&amp;rsquo;s no direct revenue growth attached to it, but the health of the community relies on active healthy projects.  I&amp;rsquo;ve also got to get the board cleared up - every hanging ticket is extra noise that I (and others) have to process every time we look at it &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Just looking at the board, I got distracted by other tickets - checking that LocalSupport deployed to production correctly and that the latest code on WSO staging is making sense &amp;hellip; I&amp;rsquo;ve kicked off the karma calculator there and should ask Praveen to check his features there &amp;hellip; but back to the board.   I&amp;rsquo;ve got one ticket for making the Premium page questions pop-out to reduce the amount of text on the page overall &amp;hellip; and that&amp;rsquo;s what I&amp;rsquo;ve managed to do this morning. &lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://staging.agileventures.org/premium"&gt;https://staging.agileventures.org/premium&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;At least edit that page on the staging server.  I&amp;rsquo;ve also saved an HTML copy into the staticpages view directory that will move the ticket from ready to in progress on the waffle board:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1816"&gt;https://github.com/AgileVentures/WebsiteOne/pull/1816&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m also thinking that ultimately we may need to make these pages slightly less editable, and more generated.  We&amp;rsquo;ll see.  I think other devs also need to have copies of them locally.  Either way I&amp;rsquo;ll get feedback on the staging server from the Marketing team before pushing live.&lt;/p&gt;
-
-&lt;p&gt;p.s. did a &lt;a href="https://gist.github.com/tansaku/6450f322f7505880872eb287c0ca36b0"&gt;node rep and included standardjs&lt;/a&gt; &lt;/p&gt;
 </content>
   </entry>
 </feed>
