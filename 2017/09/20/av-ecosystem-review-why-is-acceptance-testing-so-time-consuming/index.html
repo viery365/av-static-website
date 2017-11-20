@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Why is Acceptance Testing so Time Consuming?</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_09 x2017_09_20 x2017_09_20_av-ecosystem-review-why-is-acceptance-testing-so-time-consuming x2017_09_20_av-ecosystem-review-why-is-acceptance-testing-so-time-consuming_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/20/av-ecosystem-review-why-is-acceptance-testing-so-time-consuming/">AV EcoSystem Review Why is Acceptance Testing so Time Consuming?</a></h2>
+        <h5 class='date'>20 Sep 2017</h5>
+    <p><img alt="acceptance testing" src="/images/acceptance_testing.jpg" /></p>
+
+<p>I think I&rsquo;m almost there with acceptance testing this multiple repo feature, but it makes me wonder why acceptance testing always seems to be so time consuming.  I&rsquo;m just wrapping up a private project where acceptance testing of electron apps was a real pain, and I really question if it was time well spent since the resulting acceptance tests are slow and unreliable.  Perhaps all that time would have been better spent on unit tests and getting a really coherent domain model sorted out.  The acceptance testing framework I&rsquo;m using for Rails is a bit more stable, although it&rsquo;s all a matter of degree; and already I&rsquo;ve spent more time on the acceptance testing than on the feature itself for the multiple repo feature.  Although in the process I&rsquo;ve learnt more precisely about the way the feature works and the nuances of the Cocoon gem.  Anyway, to attempt to wrap that up I&rsquo;m going to try and get the dynamic repo form fields to be labelled numerically to make the acceptance testing easier, and try and avoid some of the issues brought up in this SO post:</p>
+
+<p><a href="https://stackoverflow.com/questions/23184690/testing-fields-added-dynamically-by-cocoon-using-rspec-and-capybara">https://stackoverflow.com/questions/23184690/testing-fields-added-dynamically-by-cocoon-using-rspec-and-capybara</a></p>
+
+<p>I modified the code from <a href="https://github.com/nathanvda/cocoon/issues/374">https://github.com/nathanvda/cocoon/issues/374</a> like so:</p>
+<pre class="highlight javascript"><code>  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'ready'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#source_repositories'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'cocoon:after-insert'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">added_repo</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">sourceRepositories</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#project_form'</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.nested-fields'</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">sourceRepositoriesSize</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">sourceRepositories</span><span class="p">).</span><span class="nx">size</span><span class="p">();</span>
+
+      <span class="nx">$</span><span class="p">(</span><span class="nx">sourceRepositories</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.repo_field_label'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">'GitHub url (primary)'</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="nx">sourceRepositoriesSize</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">sourceRepositoriesSize</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+          <span class="nx">$</span><span class="p">(</span><span class="nx">sourceRepositories</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.repo_field_label'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s2">`GitHub url (</span><span class="p">${</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">}</span><span class="s2">)`</span><span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">})</span>
+</code></pre>
+<p>with the idea to adjust the label names dynamically, but in the first instance the script didn&rsquo;t seem to run at all - I set a breakpoint in the chrome debugger, and loading the page didn&rsquo;t stop there, making me think something wasn&rsquo;t hooked up properly.  At least I thought that for a moment, and then I re-ran and it seemed like it did hook up. Hmm.  Well that gives me what I was hoping for:</p>
+
+<p><img src="https://dl.dropbox.com/s/404eit68ham28ow/Screenshot%202017-09-20%2009.35.59.png" /></p>
+
+<p>I then spent 15 minutes trying to refactor to use <code>forEach</code> or <code>for ... in</code> all to no avail as the jQuery is returning an object with numeric keys rather than an array, and there are other enumerable properties on the object, so let&rsquo;s see if the acceptance test can distinguish these form fields &hellip; and no. Clicking on the &ldquo;add more repos&rdquo; link in the test does not appear to be generating the additional repo text field.  And maybe I never had that working in the test.  I worked out how to display an initial default field, but that doesn&rsquo;t require any JavaScript.   Ugh, I&rsquo;m really regretting the time I just spent failing to refactor the JavaScript.  It feels like the JavaScript is just not even running for this test.</p>
+
+<p>So now I feel stuck.  The functionality is working beautifully in the browser as I test it manually, but not in the test.  I have the @javascript tag on this test - other javascript tests run.  What I&rsquo;m unclear about here is how can I go about checking that JavaScript is actually working in the test.  Looking at our hook definitions I see the following:</p>
+<pre class="highlight ruby"><code><span class="no">After</span> <span class="s1">'@javascript'</span> <span class="k">do</span>
+  <span class="no">Capybara</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="s1">'session_pool'</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">_</span><span class="p">,</span> <span class="n">session</span><span class="o">|</span>
+    <span class="k">next</span> <span class="k">unless</span> <span class="n">session</span><span class="p">.</span><span class="nf">driver</span><span class="p">.</span><span class="nf">is_a?</span><span class="p">(</span><span class="no">Capybara</span><span class="o">::</span><span class="no">Poltergeist</span><span class="o">::</span><span class="no">Driver</span><span class="p">)</span>
+    <span class="n">session</span><span class="p">.</span><span class="nf">driver</span><span class="p">.</span><span class="nf">restart</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>According to the <a href="https://github.com/teamcapybara/capybara#using-capybara-with-cucumber">Capybara docs</a> simply tagging with <code>@javascript</code> should be sufficient &hellip; and when I hook on the debugger I can see that Capybara is using the expected poltergeist<em>billy javascript</em>driver:</p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>761_multiple_source_repository<span class="o">)]</span><span class="nv">$ </span>
+→ be cucumber features/projects/create_projects.feature:63
+
+<span class="o">[</span>Coveralls] Using SimpleCov<span class="s1">'s '</span>rails<span class="s1">' settings.
+Using the default profile...
+@vcr
+Feature: Create projects
+  As a member of AgileVentures
+  So that I can create a focal point for an AgileVentures project
+  I would like to create a new project profile
+
+  @javascript
+  Scenario: Saving a new project with multiple repositories: success       # features/projects/create_projects.feature:64
+    Given I am logged in                                                   # features/step_definitions/user_steps.rb:63
+    And I am on the "Projects" page                                        # features/step_definitions/basic_steps.rb:84
+    When I click the very stylish "New Project" button                     # features/step_definitions/basic_steps.rb:291
+    When I fill in "Title" with "multiple repo project"                    # features/step_definitions/basic_steps.rb:140
+    And I fill in "Description" with "has lots of code"                    # features/step_definitions/basic_steps.rb:140
+    And I fill in "GitHub url (primary)" with "http://www.github.com/new"  # features/step_definitions/basic_steps.rb:140
+    And I click "Add more repos"                                           # features/step_definitions/basic_steps.rb:88
+Return value is: nil
+
+[390, 399] in /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/features/step_definitions/basic_steps.rb
+   390: end
+   391: 
+   392: 
+   393: And(/^I debug$/) do
+   394:   byebug
+=&gt; 395: end
+   396: 
+   397: 
+   398: And(/^the window size is wide$/) do
+   399:   Capybara.page.current_window.resize_to(1300,400)
+(byebug) 
+(byebug) Capybara.current_driver
+:poltergeist_billy
+</span></code></pre>
+<p>I dug through the documentation and found various things of interest:</p>
+
+<ul>
+<li><p><a href="#">https://github.com/teamcapybara/capybara#asynchronous-javascript-ajax-and-friends</a></p></li>
+<li><p><a href="http://www.jonathanleighton.com/articles/2012/poltergeist-0-6-0/">http://www.jonathanleighton.com/articles/2012/poltergeist-0-6-0/</a></p></li>
+<li><p><a href="https://github.com/teampoltergeist/poltergeist/issues/755">https://github.com/teampoltergeist/poltergeist/issues/755</a></p></li>
+<li><p><a href="https://github.com/thoughtbot/capybara-webkit#configuration">https://github.com/thoughtbot/capybara-webkit#configuration</a></p></li>
+<li><p><a href="https://github.com/teampoltergeist/poltergeist#remote-debugging-experimental">https://github.com/teampoltergeist/poltergeist#remote-debugging-experimental</a></p></li>
+</ul>
+
+<p>and the upshot of all this and some other hacking is that I now have remote debugging setup, which makes it look like JavaScript is running, in as much as the second field has been generated, but that it hasn&rsquo;t been renamed by the embedded script:</p>
+
+<p><img src="https://dl.dropbox.com/s/n2m1i3skeu12szp/Screenshot%202017-09-20%2010.25.54.png" /></p>
+
+<p>So I&rsquo;m guessing I need to move this code to somewhere it might more reliably be run.  It clearly runs in the browser - ah, it looks like the ES6 interpolation I used might not be working &hellip; yes, that was it - okay - this is a great step forward;  being able to see JS errors in capybara tests, yay!</p>
+
+<p>And so now the interactive parts of the test passed, and I am onto errors that are all about me making sure that the data has been stored and updated correctly.  Tomorrow&rsquo;s work is clear &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>

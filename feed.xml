@@ -69,6 +69,108 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Why is Acceptance Testing so Time Consuming?</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/20/av-ecosystem-review-why-is-acceptance-testing-so-time-consuming/"/>
+    <id>http://blog.url.com/2017/09/20/av-ecosystem-review-why-is-acceptance-testing-so-time-consuming/</id>
+    <published>2017-09-20T01:00:00+01:00</published>
+    <updated>2017-11-20T20:13:35+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="acceptance testing" src="/images/acceptance_testing.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I think I&amp;rsquo;m almost there with acceptance testing this multiple repo feature, but it makes me wonder why acceptance testing always seems to be so time consuming.  I&amp;rsquo;m just wrapping up a private project where acceptance testing of electron apps was a real pain, and I really question if it was time well spent since the resulting acceptance tests are slow and unreliable.  Perhaps all that time would have been better spent on unit tests and getting a really coherent domain model sorted out.  The acceptance testing framework I&amp;rsquo;m using for Rails is a bit more stable, although it&amp;rsquo;s all a matter of degree; and already I&amp;rsquo;ve spent more time on the acceptance testing than on the feature itself for the multiple repo feature.  Although in the process I&amp;rsquo;ve learnt more precisely about the way the feature works and the nuances of the Cocoon gem.  Anyway, to attempt to wrap that up I&amp;rsquo;m going to try and get the dynamic repo form fields to be labelled numerically to make the acceptance testing easier, and try and avoid some of the issues brought up in this SO post:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/23184690/testing-fields-added-dynamically-by-cocoon-using-rspec-and-capybara"&gt;https://stackoverflow.com/questions/23184690/testing-fields-added-dynamically-by-cocoon-using-rspec-and-capybara&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I modified the code from &lt;a href="https://github.com/nathanvda/cocoon/issues/374"&gt;https://github.com/nathanvda/cocoon/issues/374&lt;/a&gt; like so:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;  &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'ready'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+    &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#source_repositories'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'cocoon:after-insert'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;added_repo&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;sourceRepositories&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#project_form'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'.nested-fields'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;sourceRepositoriesSize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositories&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;size&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+      &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositories&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nx"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'.repo_field_label'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'GitHub url (primary)'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositoriesSize&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;sourceRepositoriesSize&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+          &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositories&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nx"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'.repo_field_label'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;`GitHub url (&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;)`&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;});&lt;/span&gt;
+  &lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;with the idea to adjust the label names dynamically, but in the first instance the script didn&amp;rsquo;t seem to run at all - I set a breakpoint in the chrome debugger, and loading the page didn&amp;rsquo;t stop there, making me think something wasn&amp;rsquo;t hooked up properly.  At least I thought that for a moment, and then I re-ran and it seemed like it did hook up. Hmm.  Well that gives me what I was hoping for:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/404eit68ham28ow/Screenshot%202017-09-20%2009.35.59.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I then spent 15 minutes trying to refactor to use &lt;code&gt;forEach&lt;/code&gt; or &lt;code&gt;for ... in&lt;/code&gt; all to no avail as the jQuery is returning an object with numeric keys rather than an array, and there are other enumerable properties on the object, so let&amp;rsquo;s see if the acceptance test can distinguish these form fields &amp;hellip; and no. Clicking on the &amp;ldquo;add more repos&amp;rdquo; link in the test does not appear to be generating the additional repo text field.  And maybe I never had that working in the test.  I worked out how to display an initial default field, but that doesn&amp;rsquo;t require any JavaScript.   Ugh, I&amp;rsquo;m really regretting the time I just spent failing to refactor the JavaScript.  It feels like the JavaScript is just not even running for this test.&lt;/p&gt;
+
+&lt;p&gt;So now I feel stuck.  The functionality is working beautifully in the browser as I test it manually, but not in the test.  I have the @javascript tag on this test - other javascript tests run.  What I&amp;rsquo;m unclear about here is how can I go about checking that JavaScript is actually working in the test.  Looking at our hook definitions I see the following:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;After&lt;/span&gt; &lt;span class="s1"&gt;'@javascript'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'session_pool'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="k"&gt;next&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;is_a?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Poltergeist&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Driver&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;restart&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;According to the &lt;a href="https://github.com/teamcapybara/capybara#using-capybara-with-cucumber"&gt;Capybara docs&lt;/a&gt; simply tagging with &lt;code&gt;@javascript&lt;/code&gt; should be sufficient &amp;hellip; and when I hook on the debugger I can see that Capybara is using the expected poltergeist&lt;em&gt;billy javascript&lt;/em&gt;driver:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;761_multiple_source_repository&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ be cucumber features/projects/create_projects.feature:63
+
+&lt;span class="o"&gt;[&lt;/span&gt;Coveralls] Using SimpleCov&lt;span class="s1"&gt;'s '&lt;/span&gt;rails&lt;span class="s1"&gt;' settings.
+Using the default profile...
+@vcr
+Feature: Create projects
+  As a member of AgileVentures
+  So that I can create a focal point for an AgileVentures project
+  I would like to create a new project profile
+
+  @javascript
+  Scenario: Saving a new project with multiple repositories: success       # features/projects/create_projects.feature:64
+    Given I am logged in                                                   # features/step_definitions/user_steps.rb:63
+    And I am on the "Projects" page                                        # features/step_definitions/basic_steps.rb:84
+    When I click the very stylish "New Project" button                     # features/step_definitions/basic_steps.rb:291
+    When I fill in "Title" with "multiple repo project"                    # features/step_definitions/basic_steps.rb:140
+    And I fill in "Description" with "has lots of code"                    # features/step_definitions/basic_steps.rb:140
+    And I fill in "GitHub url (primary)" with "http://www.github.com/new"  # features/step_definitions/basic_steps.rb:140
+    And I click "Add more repos"                                           # features/step_definitions/basic_steps.rb:88
+Return value is: nil
+
+[390, 399] in /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/features/step_definitions/basic_steps.rb
+   390: end
+   391: 
+   392: 
+   393: And(/^I debug$/) do
+   394:   byebug
+=&amp;gt; 395: end
+   396: 
+   397: 
+   398: And(/^the window size is wide$/) do
+   399:   Capybara.page.current_window.resize_to(1300,400)
+(byebug) 
+(byebug) Capybara.current_driver
+:poltergeist_billy
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I dug through the documentation and found various things of interest:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="#"&gt;https://github.com/teamcapybara/capybara#asynchronous-javascript-ajax-and-friends&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="http://www.jonathanleighton.com/articles/2012/poltergeist-0-6-0/"&gt;http://www.jonathanleighton.com/articles/2012/poltergeist-0-6-0/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/teampoltergeist/poltergeist/issues/755"&gt;https://github.com/teampoltergeist/poltergeist/issues/755&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/thoughtbot/capybara-webkit#configuration"&gt;https://github.com/thoughtbot/capybara-webkit#configuration&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/teampoltergeist/poltergeist#remote-debugging-experimental"&gt;https://github.com/teampoltergeist/poltergeist#remote-debugging-experimental&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and the upshot of all this and some other hacking is that I now have remote debugging setup, which makes it look like JavaScript is running, in as much as the second field has been generated, but that it hasn&amp;rsquo;t been renamed by the embedded script:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/n2m1i3skeu12szp/Screenshot%202017-09-20%2010.25.54.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;m guessing I need to move this code to somewhere it might more reliably be run.  It clearly runs in the browser - ah, it looks like the ES6 interpolation I used might not be working &amp;hellip; yes, that was it - okay - this is a great step forward;  being able to see JS errors in capybara tests, yay!&lt;/p&gt;
+
+&lt;p&gt;And so now the interactive parts of the test passed, and I am onto errors that are all about me making sure that the data has been stored and updated correctly.  Tomorrow&amp;rsquo;s work is clear &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Gem Polishing</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/19/av-ecosystem-review-gem-polishing/"/>
     <id>http://blog.url.com/2017/09/19/av-ecosystem-review-gem-polishing/</id>
@@ -325,99 +427,6 @@ Already up-to-date.
 &lt;p&gt;Although it feels like I&amp;rsquo;m handrolling javascript here for a feature that must have been built over and over again.  Aha &lt;a href="https://github.com/ncri/nested_form_fields"&gt;https://github.com/ncri/nested&lt;em&gt;form&lt;/em&gt;fields&lt;/a&gt; well perhaps I should have a go with that then :-)  Still good to refresh my understanding of this wiring &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;There&amp;rsquo;s also &lt;a href="https://github.com/ryanb/nested_form"&gt;https://github.com/ryanb/nested_form&lt;/a&gt; but that hasn&amp;rsquo;t been updated since 2013 &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Clearing Waffle</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/14/av-ecosystem-review-clearing-waffle/"/>
-    <id>http://blog.url.com/2017/09/14/av-ecosystem-review-clearing-waffle/</id>
-    <published>2017-09-14T01:00:00+01:00</published>
-    <updated>2017-11-13T20:28:29+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="waffle" src="/images/waffle.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I woke at 4am this morning and couldn&amp;rsquo;t go back to sleep.  I lay with my thoughts for 90 minutes before I couldn&amp;rsquo;t bear it any longer and put on audio comedy from Christopher Titus.  Painful thoughts about kids football and tangled electron apps.  Now I&amp;rsquo;m having trouble focusing on the keyboard, but want to enjoy having cleared the &amp;ldquo;Please Check&amp;rdquo; column of the WebSiteOne waffle board yesterday:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/x9br4bz8lefcz2l/Screenshot%202017-09-14%2009.27.24.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve just tested the two merged chunks of code on develop and they&amp;rsquo;re working so I&amp;rsquo;ll move them to staging:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (1750_client_type)]$ 
-→ git checkout develop
-Switched to branch 'develop'
-Your branch is up-to-date with 'origin/develop'.
-[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (develop)]$ 
-→ git pull origin develop
-remote: Counting objects: 15, done.
-remote: Compressing objects: 100% (3/3), done.
-remote: Total 15 (delta 12), reused 14 (delta 12), pack-reused 0
-Unpacking objects: 100% (15/15), done.
-From http://github.com/AgileVentures/WebsiteOne
- * branch              develop    -&amp;gt; FETCH_HEAD
-   5c998b01..7309fb7d  develop    -&amp;gt; origin/develop
-Updating 5c998b01..7309fb7d
-Fast-forward
- app/views/events/_form.html.erb          |  2 +-
- app/views/layouts/_footer.html.erb       |  1 +
- features/basic_layout.feature            |  1 +
- features/events/client_meetings.feature  | 44 ++++++++++++++++++++++++++++++++++++++++++++
- features/events/show_event.feature       |  8 ++++++++
- features/step_definitions/event_steps.rb |  4 ++++
- 6 files changed, 59 insertions(+), 1 deletion(-)
- create mode 100644 features/events/client_meetings.feature
-[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (develop)]$ 
-→ git checkout staging
-Switched to branch 'staging'
-Your branch is up-to-date with 'origin/staging'.
-[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (staging)]$ 
-→ git rebase develop
-First, rewinding head to replay your work on top of it...
-Fast-forwarded staging to develop.
-[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (staging)]$ 
-→ git push origin staging
-Total 0 (delta 0), reused 0 (delta 0)
-To http://github.com/AgileVentures/WebsiteOne
-   5c998b01..7309fb7d  staging -&amp;gt; staging
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So I&amp;rsquo;ll double check on my proposed changes to the Premium page in the marketing meeting today. I&amp;rsquo;ve managed a little run down the &amp;ldquo;in progress&amp;rdquo; tickets, checking in with what others are doing, and given that all the other changes to Premium pages are dependent on feedback on the currently proposed change to the Premium page, I think I can allow myself to take a stab at the &amp;ldquo;multiple source repositiory&amp;rdquo; ticket:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/761"&gt;https://github.com/AgileVentures/WebsiteOne/issues/761&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;and I moved the project scenarios round, and did a first pass at a scenario to cover multiple repo submission:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="nt"&gt;@javascript&lt;/span&gt;
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;Saving a new project with multiple repositories&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;success&lt;/span&gt;
-    &lt;span class="nf"&gt;Given&lt;/span&gt; I am logged in
-    &lt;span class="nf"&gt;And&lt;/span&gt; I am on the &lt;span class="s"&gt;"Projects"&lt;/span&gt; page
-    &lt;span class="nf"&gt;When&lt;/span&gt; I click the very stylish &lt;span class="s"&gt;"New Project"&lt;/span&gt; button
-    &lt;span class="nf"&gt;When&lt;/span&gt; I fill in &lt;span class="s"&gt;"Title"&lt;/span&gt; with &lt;span class="s"&gt;"multiple repo project"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I fill in &lt;span class="s"&gt;"Description"&lt;/span&gt; with &lt;span class="s"&gt;"has lots of code"&lt;/span&gt;
-    &lt;span class="err"&gt;And I fill in "GitHub link" with "http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//www.github.com/new"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I click &lt;span class="s"&gt;"Add repo"&lt;/span&gt;
-    &lt;span class="err"&gt;And I fill in "GitHub link 2" with "http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//www.github.com/new2"&lt;/span&gt;
-    &lt;span class="err"&gt;And I fill in "Issue Tracker link" with "http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;//www.waffle.com/new"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I select &lt;span class="s"&gt;"Status"&lt;/span&gt; to &lt;span class="s"&gt;"Active"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I click the &lt;span class="s"&gt;"Submit"&lt;/span&gt; button
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should be on the &lt;span class="s"&gt;"Show"&lt;/span&gt; page for project &lt;span class="s"&gt;"multiple repo project"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should see &lt;span class="s"&gt;"Project was successfully created."&lt;/span&gt;
-    &lt;span class="err"&gt;And I should see&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Text&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;"multiple&lt;/span&gt; &lt;span class="n"&gt;repo&lt;/span&gt; &lt;span class="n"&gt;project&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;lots&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;ACTIVE&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should see a link to &lt;span class="s"&gt;"multiple repo project"&lt;/span&gt; on github
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should see a link to &lt;span class="s"&gt;"multiple repo project"&lt;/span&gt; on Pivotal Tracker
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and I found a set of links on dynamically adding extra fields in Rails:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/42540858/add-more-fields-to-form-dynamically-in-rails"&gt;https://stackoverflow.com/questions/42540858/add-more-fields-to-form-dynamically-in-rails&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://jyrkis-blogs.blogspot.co.uk/2014/06/adding-fields-on-fly-with-ruby-on-rails.html"&gt;http://jyrkis-blogs.blogspot.co.uk/2014/06/adding-fields-on-fly-with-ruby-on-rails.html&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/25588101/rails-fields-for-and-javascript-to-dynamically-add-and-remove-fields-in-a-form"&gt;https://stackoverflow.com/questions/25588101/rails-fields-for-and-javascript-to-dynamically-add-and-remove-fields-in-a-form&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/35185689/rails-4-complex-forms-and-nested-attributes"&gt;https://stackoverflow.com/questions/35185689/rails-4-complex-forms-and-nested-attributes&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Test is ugly but will get into that and the implementation tommorrow.  In the meantime staging deployed - features are working there and I&amp;rsquo;m pushing to production.  Clear up, clear up, clear up &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
