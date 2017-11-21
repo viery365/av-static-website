@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Agile Ventures</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_09 x2017_09_21 x2017_09_21_av-ecosystem-review-cocoon-home-straight x2017_09_21_av-ecosystem-review-cocoon-home-straight_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/21/av-ecosystem-review-cocoon-home-straight/"></a></h2>
+        <h5 class='date'>21 Sep 2017</h5>
+    <p>title: AV EcoSystem Review Cocoon Home Straight
+date: 2017-09-21
+tags: </p>
+
+<h2>author: Sam Joseph</h2>
+
+<p><img alt="home straight" src="/images/Home_Straight.jpg" /></p>
+
+<p>So the answer to my question of yesterday, &ldquo;Why is Acceptance Testing so hard&rdquo; is that any coding is hard when you can&rsquo;t get error messages.  The remote debug inspector I set up yesterday allowed me to see that our Capybara/Poltergeist/PhantomJS setup could not handle ES6 string interpolations.  It raises the question about why not, but I want to push on with this feature.</p>
+
+<p>The test is now failing on this error:</p>
+<pre class="highlight plaintext"><code>    And I should see a link to "multiple repo project" on github            # features/step_definitions/projects_steps.rb:84
+      undefined method `split' for nil:NilClass (NoMethodError)
+      ./features/step_definitions/projects_steps.rb:86:in `/^I (should not|should) see a link to "(.*?)" on github$/'
+      features/projects/create_projects.feature:84:in `And I should see a link to "multiple repo project" on github'
+</code></pre>
+<p>because the GitHub URL is being stored in a new location that&rsquo;s not reflected in the project page.  The project page currently shows the GitHub link via this code:</p>
+<pre class="highlight erb"><code><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"small"</span><span class="nt">&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">"</span><span class="si">#{</span><span class="vi">@project</span><span class="p">.</span><span class="nf">github_url</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">'/'</span><span class="p">).</span><span class="nf">last</span><span class="si">}</span><span class="s2"> "</span><span class="p">,</span> <span class="vi">@project</span><span class="p">.</span><span class="nf">github_url</span> <span class="cp">%&gt;</span>on GitHub<span class="nt">&lt;/span&gt;</span>
+</code></pre>
+<p>which explains the error in the test.  Just to see if it worked I threw the following into the project model:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">github_url</span>
+    <span class="n">source_repositories</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">url</span>
+  <span class="k">end</span>
+</code></pre>
+<p>and I was rewarded with a completely passing acceptance test.  However I have various issues to address:</p>
+
+<ul>
+<li>the acceptance test does not check that the second repo has been stored</li>
+<li>the acceptance test is not very readable</li>
+<li>the project page does not currently display all the repos</li>
+<li>the project has various unit tests based on being able to set the github_url</li>
+<li>the project model validates the URL</li>
+<li>the process for safely migrating the existing data on production</li>
+</ul>
+
+<p>and maybe others I haven&rsquo;t thought of yet, so I&rsquo;m tempted to run the other project acceptance tests and see what breaks &hellip; other acceptance tests are breaking because the create project form has changed and they can&rsquo;t now find the form fields they expect.  I updated a few label strings in the tests and that project code to:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">github_url</span>
+    <span class="n">source_repositories</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">try</span><span class="p">(</span><span class="ss">:url</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre>
+<p>and all the project &ldquo;create&rdquo; acceptance tests are green; so I kick off a run of the rest of the project acceptance tests.  Am I being bad here?  Shouldn&rsquo;t I be clearly setting out my domain model and getting all my unit tests in place first?  My defense is that I&rsquo;m sidling up on that, trying to use the existing tests from the outside in to give me the bigger picture here.  I very definitely don&rsquo;t plan to just hack the app code until all the acceptance tests pass :-)</p>
+
+<p>I get the project &ldquo;show&rdquo; acceptance tests to pass with the following changed step definition:</p>
+<pre class="highlight ruby"><code><span class="no">Given</span><span class="p">(</span><span class="sr">/^the following projects exist:$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">table</span><span class="o">|</span>
+  <span class="n">table</span><span class="p">.</span><span class="nf">hashes</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="o">|</span>
+    <span class="k">if</span> <span class="nb">hash</span><span class="p">[</span><span class="ss">:author</span><span class="p">].</span><span class="nf">present?</span>
+      <span class="n">u</span> <span class="o">=</span> <span class="no">User</span><span class="p">.</span><span class="nf">find_by_first_name</span> <span class="nb">hash</span><span class="p">[</span><span class="ss">:author</span><span class="p">]</span>
+      <span class="n">project</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="nb">hash</span><span class="p">.</span><span class="nf">except</span><span class="p">(</span><span class="s1">'author'</span><span class="p">,</span> <span class="s1">'tags'</span><span class="p">).</span><span class="nf">merge</span><span class="p">(</span><span class="ss">user_id: </span><span class="n">u</span><span class="p">.</span><span class="nf">id</span><span class="p">))</span>
+    <span class="k">else</span>
+      <span class="n">project</span> <span class="o">=</span> <span class="n">default_test_author</span><span class="p">.</span><span class="nf">projects</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="nb">hash</span><span class="p">.</span><span class="nf">except</span><span class="p">(</span><span class="s1">'author'</span><span class="p">,</span> <span class="s1">'tags'</span><span class="p">))</span>
+    <span class="k">end</span>
+    <span class="k">if</span> <span class="nb">hash</span><span class="p">[</span><span class="ss">:github_url</span><span class="p">].</span><span class="nf">present?</span>
+      <span class="n">project</span><span class="p">.</span><span class="nf">source_repositories</span><span class="p">.</span><span class="nf">build</span><span class="p">(</span><span class="ss">url: </span><span class="nb">hash</span><span class="p">[</span><span class="ss">:github_url</span><span class="p">])</span> <span class="c1"># &lt;-- change here</span>
+    <span class="k">end</span>
+    <span class="k">if</span> <span class="nb">hash</span><span class="p">[</span><span class="ss">:tags</span><span class="p">]</span>
+      <span class="n">project</span><span class="p">.</span><span class="nf">tag_list</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nb">hash</span><span class="p">[</span><span class="ss">:tags</span><span class="p">],</span> <span class="ss">parse: </span><span class="kp">true</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">project</span><span class="p">.</span><span class="nf">save!</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>and the project &ldquo;edit&rdquo; acceptance failures look pretty much like form field names just need to be changed, but actually the step definition needs a further change, specifically:</p>
+<pre class="highlight ruby"><code>    <span class="k">if</span> <span class="nb">hash</span><span class="p">[</span><span class="ss">:github_url</span><span class="p">].</span><span class="nf">present?</span>
+      <span class="n">project</span><span class="p">.</span><span class="nf">source_repositories</span><span class="p">.</span><span class="nf">build</span><span class="p">(</span><span class="ss">url: </span><span class="nb">hash</span><span class="p">[</span><span class="ss">:github_url</span><span class="p">])</span>
+    <span class="k">else</span>
+      <span class="n">project</span><span class="p">.</span><span class="nf">source_repositories</span><span class="p">.</span><span class="nf">build</span>
+    <span class="k">end</span>
+</code></pre>
+<p>to ensure the projects created in the background steps have the default single source repository when they start up; and with that I have all the project acceptance tests green.  Now I attack the RSpec unit and integration tests, where I expect a slew of failures that should push me towards updating the domain model effectively.</p>
+<pre class="highlight plaintext"><code>→ be rspec spec/models/project_spec.rb 
+[Coveralls] Using SimpleCov's 'rails' settings.
+
+Randomized with seed 60909
+.F...F...F....F...........
+
+Failures:
+
+  1) Project#github_repo returns the proper repo name if github url exists
+     Failure/Error: expect(project.github_repo).to eq 'AgileVentures/WebsiteOne'
+
+       expected: "AgileVentures/WebsiteOne"
+            got: ""
+
+       (compared using ==)
+     # ./spec/models/project_spec.rb:131:in `block (3 levels) in &lt;top (required)&gt;'
+
+  2) Project#github_repo_user_name deals with hyphen gracefully
+     Failure/Error: expect(subject.github_repo_user_name).to eq 'shf-project'
+
+       expected: "shf-project"
+            got: ""
+
+       (compared using ==)
+     # ./spec/models/project_spec.rb:145:in `block (3 levels) in &lt;top (required)&gt;'
+
+  3) Project#save should throw error for incomplete github url
+     Failure/Error: expect{ subject.github_repo_name }.to raise_error(NoMethodError, "undefined method `[]' for nil:NilClass")
+       expected NoMethodError with "undefined method `[]' for nil:NilClass" but nothing was raised
+     # ./spec/models/project_spec.rb:38:in `block (3 levels) in &lt;top (required)&gt;'
+
+  4) Project#save should not accept invalid github url
+     Failure/Error: expect(subject).to_not be_valid
+       expected #&lt;Project id: 1020, title: "Title 19", description: "Warp fields stabilize.", status: "We feel your presence.", created_at: nil, updated_at: nil, user_id: nil, slug: "title-19", github_url: "https:/github.com/google/instant-hangouts", pivotaltracker_url: nil, pitch: "'I AM the greatest!' - M. Ali", commit_count: 0, image_url: nil, last_github_update: nil&gt; not to be valid
+     # ./spec/models/project_spec.rb:33:in `block (3 levels) in &lt;top (required)&gt;'
+
+Finished in 0.65807 seconds (files took 8.4 seconds to load)
+26 examples, 4 failures
+
+Failed examples:
+
+rspec ./spec/models/project_spec.rb:129 # Project#github_repo returns the proper repo name if github url exists
+rspec ./spec/models/project_spec.rb:144 # Project#github_repo_user_name deals with hyphen gracefully
+rspec ./spec/models/project_spec.rb:36 # Project#save should throw error for incomplete github url
+rspec ./spec/models/project_spec.rb:31 # Project#save should not accept invalid github url
+</code></pre>
+<p>let&rsquo;s take these in turn.  The first failing spec is</p>
+<pre class="highlight plaintext"><code>    it 'returns the proper repo name if github url exists' do
+      project = build_stubbed(:project, github_url: 'https://github.com/AgileVentures/WebsiteOne')
+      expect(project.github_repo).to eq 'AgileVentures/WebsiteOne'
+    end
+</code></pre>
+<p>which I adjusted  to:</p>
+<pre class="highlight plaintext"><code>    it 'returns the proper repo name if github url exists' do
+      project = build_stubbed(:project)
+      project.source_repositories.create(url: 'https://github.com/AgileVentures/WebsiteOne')
+      expect(project.github_repo).to eq 'AgileVentures/WebsiteOne'
+    end
+</code></pre>
+<p>and then passes, and I assume we&rsquo;re not <a href="https://robots.thoughtbot.com/use-factory-girls-build-stubbed-for-a-faster-test">hitting the database</a>.  Using other similar fixes I have all the project specs passing, so I guess I&rsquo;ll run all the other specs to see if there are any other angles I&rsquo;m missing.  The other thing that occurs to me is that we should have some specs for the new SourceRepository model.  I&rsquo;m also unsure of the namings.  Should I have called it GitHubUrl or GitHubLink?  Does it matter?  I&rsquo;d love us to be able to support BitBucket and other source repositories in the future &hellip; anyhow, running the rest of the specs shows me that we&rsquo;ve got a few more issues:</p>
+<pre class="highlight plaintext"><code>Failures:
+
+  1) GithubCommitsJob.job stores total commit count only for projects that have a github_url
+     Failure/Error: expect(project.commit_count).to be &gt; 1
+
+       expected: &gt; 1
+            got:   0
+     # ./spec/jobs/github_commits_job_spec.rb:28:in `block (3 levels) in &lt;top (required)&gt;'
+
+  2) GithubCommitsJob.job stores commit counts only for users that have a github_profile_url
+     Failure/Error: expect(project.commit_counts.map(&amp;:user)).to match_array(@users_with_github_profile_urls)
+
+       expected collection contained:  [#&lt;User id: 3, email: "trey@howe.co", encrypted_password: "$2a$04$plCVt32oux72jZ5KZxe9weafqhT1Uo41SIF... receive_mailings: true, timezone_offset: nil, country_code: nil, status_count: 0, deleted_at: nil&gt;]
+       actual collection contained:    []
+       the missing elements were:      [#&lt;User id: 3, email: "trey@howe.co", encrypted_password: "$2a$04$plCVt32oux72jZ5KZxe9weafqhT1Uo41SIF... receive_mailings: true, timezone_offset: nil, country_code: nil, status_count: 0, deleted_at: nil&gt;]
+     # ./spec/jobs/github_commits_job_spec.rb:33:in `block (3 levels) in &lt;top (required)&gt;'
+
+  3) GithubCommitsJob.job stores correct total commit count for projects
+     Failure/Error: expect(project.commit_count).to eq 3116
+
+       expected: 3116
+            got: 0
+
+       (compared using ==)
+     # ./spec/jobs/github_commits_job_spec.rb:42:in `block (3 levels) in &lt;top (required)&gt;'
+
+  4) GithubCommitsJob.job stores commit counts only for projects that have a github_url
+     Failure/Error: expect(project.commit_counts.count).to eq(1)
+
+       expected: 1
+            got: 0
+
+       (compared using ==)
+     # ./spec/jobs/github_commits_job_spec.rb:23:in `block (3 levels) in &lt;top (required)&gt;'
+
+  5) GithubCommitsJob.job stores correct commit counts by user and project
+     Failure/Error: expect(CommitCount.find_by!(project: project, user: @users[0]).commit_count).to eq 481
+
+     ActiveRecord::RecordNotFound:
+       Couldn't find CommitCount
+     # /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.8/lib/active_record/core.rb:196:in `find_by!'
+     # ./spec/jobs/github_commits_job_spec.rb:37:in `block (3 levels) in &lt;top (required)&gt;'
+
+  6) GithubLastUpdatesJob#run shf-project with hyphen has correct last commit date after job run
+     Failure/Error: expect(project.reload.last_github_update).not_to be_nil
+
+       expected: not nil
+            got: nil
+     # ./spec/jobs/github_last_updates_job_spec.rb:9:in `block (4 levels) in &lt;top (required)&gt;'
+
+  7) projects/show.html.erb renders a link to the project's github page
+     Failure/Error: expect(rendered).to have_link("#{project.github_url.split('/').last}", :href =&gt; project.github_url)
+
+     NoMethodError:
+       undefined method `split' for nil:NilClass
+     # ./spec/views/projects/show.html.erb_spec.rb:42:in `block (2 levels) in &lt;top (required)&gt;'
+
+  8) projects/edit.html.erb renders project form labels
+     Failure/Error: expect(rendered).to have_text('GitHub link')
+       expected to find text "GitHub link" in "edit the Title 400 project Title Image url Description Warp fields stabilize. Status Active Closed Pending Add more repos Issue Tracker link Back $(document).on('ready', function(){ $('#source_repositories').on('cocoon:after-insert', function(e, added_repo) { var sourceRepositories = $('#project_form').find('.nested-fields'); var sourceRepositoriesSize = $(sourceRepositories).size(); if (sourceRepositoriesSize &gt; 1) { for(var i = 1; i &lt; sourceRepositoriesSize; i++){ $(sourceRepositories[i]).find('.repo_field_label').html('GitHub url ('+(i+1)+')') } } }); })"
+     # ./spec/views/projects/edit.html.erb_spec.rb:16:in `block (2 levels) in &lt;top (required)&gt;'
+
+  9) projects/edit.html.erb renders project form fields
+     Failure/Error: expect(rendered).to have_field('GitHub link')
+       expected to find field "GitHub link" but there were no matches
+     # ./spec/views/projects/edit.html.erb_spec.rb:26:in `block (2 levels) in &lt;top (required)&gt;'
+
+Finished in 1 minute 4.01 seconds (files took 9.28 seconds to load)
+940 examples, 9 failures, 2 pending
+
+Failed examples:
+
+rspec ./spec/jobs/github_commits_job_spec.rb:27 # GithubCommitsJob.job stores total commit count only for projects that have a github_url
+rspec ./spec/jobs/github_commits_job_spec.rb:32 # GithubCommitsJob.job stores commit counts only for users that have a github_profile_url
+rspec ./spec/jobs/github_commits_job_spec.rb:41 # GithubCommitsJob.job stores correct total commit count for projects
+rspec ./spec/jobs/github_commits_job_spec.rb:22 # GithubCommitsJob.job stores commit counts only for projects that have a github_url
+rspec ./spec/jobs/github_commits_job_spec.rb:36 # GithubCommitsJob.job stores correct commit counts by user and project
+rspec ./spec/jobs/github_last_updates_job_spec.rb:7 # GithubLastUpdatesJob#run shf-project with hyphen has correct last commit date after job run
+rspec ./spec/views/projects/show.html.erb_spec.rb:39 # projects/show.html.erb renders a link to the project's github page
+rspec ./spec/views/projects/edit.html.erb_spec.rb:11 # projects/edit.html.erb renders project form labels
+rspec ./spec/views/projects/edit.html.erb_spec.rb:21 # projects/edit.html.erb renders project form fields
+</code></pre>
+<p>Code relating to checking commits on Github is failing &hellip;, although those can probably be fixed by creating the projects with associated source reposiories, and those view spec failures can probably be addressed by deleting the view specs.  Although I did also need to update this scope on the Project model:</p>
+<pre class="highlight ruby"><code>  <span class="n">scope</span> <span class="ss">:with_github_url</span><span class="p">,</span> <span class="o">-&gt;</span><span class="p">{</span> <span class="n">includes</span><span class="p">(</span><span class="ss">:source_repositories</span><span class="p">).</span><span class="nf">where</span><span class="p">.</span><span class="nf">not</span><span class="p">(</span><span class="ss">source_repositories: </span><span class="p">{</span> <span class="ss">id: </span><span class="kp">nil</span> <span class="p">})</span> <span class="p">}</span>
+</code></pre>
+<p>and with that I think I may have gotten all the specs green.  There&rsquo;s still a lot to do, but I&rsquo;m reassured that I&rsquo;m covering the majority of the angles.  I&rsquo;ll push up this code into the PR and tomorrow I can work on cleaning up the domain model, tightening up the unit tests, and maybe even complete the first phase of this feature?  I note also that we have a load of cruft in the spec output - would love to clear that out, but can I prioritise it?</p>
+<pre class="highlight plaintext"><code>Randomized with seed 51520
+.....................................................Unused parameters passed to Capybara::Queries::SelectorQuery : ["/users/sign_in"]
+Unused parameters passed to Capybara::Queries::SelectorQuery : ["/users/password/new"]
+..Unused parameters passed to Capybara::Queries::SelectorQuery : ["/auth/github"]
+.............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................DEPRECATION WARNING: You attempted to assign a value which is not explicitly `true` or `false` ("never") to a boolean column. Currently this value casts to `false`. This will change to match Ruby's semantics, and will cast to `true` in Rails 5. If you would like to maintain the current behavior, you should explicitly handle the values you would like cast to `false`. (called from block (3 levels) in &lt;top (required)&gt; at /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/event_spec.rb:244)
+.DEPRECATION WARNING: You attempted to assign a value which is not explicitly `true` or `false` ("never") to a boolean column. Currently this value casts to `false`. This will change to match Ruby's semantics, and will cast to `true` in Rails 5. If you would like to maintain the current behavior, you should explicitly handle the values you would like cast to `false`. (called from block (3 levels) in &lt;top (required)&gt; at /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/event_spec.rb:239)
+........DEPRECATION WARNING: You attempted to assign a value which is not explicitly `true` or `false` ("never") to a boolean column. Currently this value casts to `false`. This will change to match Ruby's semantics, and will cast to `true` in Rails 5. If you would like to maintain the current behavior, you should explicitly handle the values you would like cast to `false`. (called from block (3 levels) in &lt;top (required)&gt; at /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/event_spec.rb:158)
+.DEPRECATION WARNING: You attempted to assign a value which is not explicitly `true` or `false` ("never") to a boolean column. Currently this value casts to `false`. This will change to match Ruby's semantics, and will cast to `true` in Rails 5. If you would like to maintain the current behavior, you should explicitly handle the values you would like cast to `false`. (called from block (3 levels) in &lt;top (required)&gt; at /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/event_spec.rb:174)
+.DEPRECATION WARNING: You attempted to assign a value which is not explicitly `true` or `false` ("never") to a boolean column. Currently this value casts to `false`. This will change to match Ruby's semantics, and will cast to `true` in Rails 5. If you would like to maintain the current behavior, you should explicitly handle the values you would like cast to `false`. (called from block (3 levels) in &lt;top (required)&gt; at /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/event_spec.rb:142)
+............................Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/event-131"]
+..Unused parameters passed to Capybara::Queries::SelectorQuery : ["/projects/title-240"]
+......................................*...............................Unused parameters passed to Capybara::Queries::SelectorQuery : ["/auth/github?origin="]
+Unused parameters passed to Capybara::Queries::SelectorQuery : ["/auth/gplus?origin="]
+.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/users/sign_up"]
+Unused parameters passed to Capybara::Queries::SelectorQuery : ["/users/password/new"]
+..Unused parameters passed to Capybara::Queries::SelectorQuery : ["/auth/github"]
+Unused parameters passed to Capybara::Queries::SelectorQuery : ["/auth/gplus"]
+......................................WARNING: Using the `raise_error` matcher without providing a specific error or message risks false positives, since `raise_error` will match when Ruby raises a `NoMethodError`, `NameError` or `ArgumentError`, potentially allowing the expectation to pass without even executing the method you are intending to call. Actual error raised was #&lt;ActiveRecord::StatementInvalid: PG::NotNullViolation: ERROR:  null value in column "user_id" violat...
+: UPDATE "authentications" SET "user_id" = $1, "updated_at" = $2 WHERE "authentications"."id" = $3&gt;. Instead consider providing a specific error class or message. This message can be suppressed by setting: `RSpec::Expectations.configuration.on_potential_false_positives = :nothing`. Called from /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/authentication_spec.rb:12:in `block (2 levels) in &lt;top (required)&gt;'.
+.............................*.......WARNING: Using the `raise_error` matcher without providing a specific error or message risks false positives, since `raise_error` will match when Ruby raises a `NoMethodError`, `NameError` or `ArgumentError`, potentially allowing the expectation to pass without even executing the method you are intending to call. Actual error raised was #&lt;ActiveRecord::RecordNotFound: User has not exposed his profile publicly&gt;. Instead consider providing a specific error class or message. This message can be suppressed by setting: `RSpec::Expectations.configuration.on_potential_false_positives = :nothing`. Called from /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/controllers/users_controller_spec.rb:67:in `block (4 levels) in &lt;top (required)&gt;'.
+..................................................................Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/1574"]
+..Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/1576"]
+..Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/1578"]
+.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/1579"]
+.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/1580"]
+.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/code"]
+.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/grow"]
+.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/learn"]
+.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/pair"]
+.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/1585"]
+.......................................................Unused parameters passed to Capybara::Queries::SelectorQuery : ["/sponsors"]
+...............................
+</code></pre>
+<p>hmmm &hellip;</p>
+
+        <h2 class='author'>by </h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
