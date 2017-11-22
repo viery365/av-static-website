@@ -45,7 +45,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/09/22/av-ecosystem-review-that-domain-review-step/"/>
     <id>http://blog.url.com/2017/09/22/av-ecosystem-review-that-domain-review-step/</id>
     <published>2017-09-22T01:00:00+01:00</published>
-    <updated>2017-11-22T21:28:36+00:00</updated>
+    <updated>2017-11-22T21:32:51+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -64,24 +64,21 @@
 &lt;/ul&gt;
 
 &lt;p&gt;So attacking from the unit test side I notice that we do not mention the &lt;code&gt;with_github_url&lt;/code&gt; scope anywhere in our tests, which I can rectify with the following:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'.with_github_url'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'returns all projects that have at least one source repository'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;source_repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;url: &lt;/span&gt;&lt;span class="s1"&gt;'https://github.com/AgileVentures/shf-project'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;project2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;project2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;source_repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;url: &lt;/span&gt;&lt;span class="s1"&gt;'https://github.com/AgileVentures/shf-project2'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with_github_url&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="kp"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;project2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
 
-&lt;p&gt;&amp;ldquo;rb
-  context &amp;rsquo;.with&lt;em&gt;github&lt;/em&gt;url&amp;rsquo; do
-    it &amp;lsquo;returns all projects that have at least one source repository&amp;rsquo; do
-      project = FactoryGirl.create(:project)
-      project.source&lt;em&gt;repositories.create(url: &amp;#39;https://github.com/AgileVentures/shf-project&amp;rsquo;)
-      project2 = FactoryGirl.create(:project)
-      project2.source&lt;/em&gt;repositories.create(url: &amp;#39;https://github.com/AgileVentures/shf-project2&amp;rsquo;)
-      expect(Project.with&lt;em&gt;github&lt;/em&gt;url).to include(project, project2)
-    end&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;it 'does not return projects that do not have a source repository' do
-  project = FactoryGirl.build(:project)
-  expect(Project.with_github_url).not_to include(project)
-end
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'does not return projects that do not have a source repository'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with_github_url&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;not_to&lt;/span&gt; &lt;span class="kp"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;end
-&amp;rdquo;`&lt;/p&gt;
-
 &lt;p&gt;although I can&amp;rsquo;t actually run it as I&amp;rsquo;m waiting for a cucumber run to complete (got to work on the performance there).  That gap allows me to agonize about whether this unit test is sufficiently rigorous, or if it simply testing the existing Rails architecture?  I think it&amp;rsquo;s the right thing.  It&amp;rsquo;s providing an executable check that the class method &lt;code&gt;.with_github_url&lt;/code&gt; is doing what we expect it to do.  &lt;/p&gt;
 
 &lt;p&gt;Bigger picture quickly, I&amp;rsquo;m not planning to immediately remove the github_url field from the projects model.  We&amp;rsquo;ll need a task to migrate all of them in to source repository models, and based on previous pain I&amp;rsquo;ll be ensuring we have a follow up task in a different PR that we deploy to production separately to delete that field later on when the dust has settled.&lt;/p&gt;

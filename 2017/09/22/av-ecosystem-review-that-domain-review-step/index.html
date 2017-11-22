@@ -106,24 +106,21 @@
 </ul>
 
 <p>So attacking from the unit test side I notice that we do not mention the <code>with_github_url</code> scope anywhere in our tests, which I can rectify with the following:</p>
+<pre class="highlight ruby"><code>  <span class="n">context</span> <span class="s1">'.with_github_url'</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s1">'returns all projects that have at least one source repository'</span> <span class="k">do</span>
+      <span class="n">project</span> <span class="o">=</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:project</span><span class="p">)</span>
+      <span class="n">project</span><span class="p">.</span><span class="nf">source_repositories</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">url: </span><span class="s1">'https://github.com/AgileVentures/shf-project'</span><span class="p">)</span>
+      <span class="n">project2</span> <span class="o">=</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:project</span><span class="p">)</span>
+      <span class="n">project2</span><span class="p">.</span><span class="nf">source_repositories</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">url: </span><span class="s1">'https://github.com/AgileVentures/shf-project2'</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="no">Project</span><span class="p">.</span><span class="nf">with_github_url</span><span class="p">).</span><span class="nf">to</span> <span class="kp">include</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">project2</span><span class="p">)</span>
+    <span class="k">end</span>
 
-<p>&ldquo;rb
-  context &rsquo;.with<em>github</em>url&rsquo; do
-    it &lsquo;returns all projects that have at least one source repository&rsquo; do
-      project = FactoryGirl.create(:project)
-      project.source<em>repositories.create(url: &#39;https://github.com/AgileVentures/shf-project&rsquo;)
-      project2 = FactoryGirl.create(:project)
-      project2.source</em>repositories.create(url: &#39;https://github.com/AgileVentures/shf-project2&rsquo;)
-      expect(Project.with<em>github</em>url).to include(project, project2)
-    end</p>
-<pre class="highlight plaintext"><code>it 'does not return projects that do not have a source repository' do
-  project = FactoryGirl.build(:project)
-  expect(Project.with_github_url).not_to include(project)
-end
+    <span class="n">it</span> <span class="s1">'does not return projects that do not have a source repository'</span> <span class="k">do</span>
+      <span class="n">project</span> <span class="o">=</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">build</span><span class="p">(</span><span class="ss">:project</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="no">Project</span><span class="p">.</span><span class="nf">with_github_url</span><span class="p">).</span><span class="nf">not_to</span> <span class="kp">include</span><span class="p">(</span><span class="n">project</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 </code></pre>
-<p>end
-&rdquo;`</p>
-
 <p>although I can&rsquo;t actually run it as I&rsquo;m waiting for a cucumber run to complete (got to work on the performance there).  That gap allows me to agonize about whether this unit test is sufficiently rigorous, or if it simply testing the existing Rails architecture?  I think it&rsquo;s the right thing.  It&rsquo;s providing an executable check that the class method <code>.with_github_url</code> is doing what we expect it to do.  </p>
 
 <p>Bigger picture quickly, I&rsquo;m not planning to immediately remove the github_url field from the projects model.  We&rsquo;ll need a task to migrate all of them in to source repository models, and based on previous pain I&rsquo;ll be ensuring we have a follow up task in a different PR that we deploy to production separately to delete that field later on when the dust has settled.</p>
