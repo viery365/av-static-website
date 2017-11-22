@@ -41,6 +41,182 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review That Domain Review Step</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/22/av-ecosystem-review-that-domain-review-step/"/>
+    <id>http://blog.url.com/2017/09/22/av-ecosystem-review-that-domain-review-step/</id>
+    <published>2017-09-22T01:00:00+01:00</published>
+    <updated>2017-11-22T21:28:36+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="domain review" src="/images/domain_review.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Okay, so I have the multiple repository functionality basically working, but it&amp;rsquo;s time to clear up and make things right &amp;hellip; here&amp;rsquo;s my checklist from yesterday:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the acceptance test does not check that the second repo has been stored&lt;/li&gt;
+&lt;li&gt;the acceptance test is not very readable&lt;/li&gt;
+&lt;li&gt;currently the project page does not display all the repos&lt;/li&gt;
+&lt;li&gt;the project has various unit tests based on being able to set the github_url&lt;/li&gt;
+&lt;li&gt;the project model validates the URL&lt;/li&gt;
+&lt;li&gt;the process for safely migrating the existing data on production&lt;/li&gt;
+&lt;li&gt;the old hand rolled js from my initial attempt is hanging around&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So attacking from the unit test side I notice that we do not mention the &lt;code&gt;with_github_url&lt;/code&gt; scope anywhere in our tests, which I can rectify with the following:&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;rb
+  context &amp;rsquo;.with&lt;em&gt;github&lt;/em&gt;url&amp;rsquo; do
+    it &amp;lsquo;returns all projects that have at least one source repository&amp;rsquo; do
+      project = FactoryGirl.create(:project)
+      project.source&lt;em&gt;repositories.create(url: &amp;#39;https://github.com/AgileVentures/shf-project&amp;rsquo;)
+      project2 = FactoryGirl.create(:project)
+      project2.source&lt;/em&gt;repositories.create(url: &amp;#39;https://github.com/AgileVentures/shf-project2&amp;rsquo;)
+      expect(Project.with&lt;em&gt;github&lt;/em&gt;url).to include(project, project2)
+    end&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;it 'does not return projects that do not have a source repository' do
+  project = FactoryGirl.build(:project)
+  expect(Project.with_github_url).not_to include(project)
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;end
+&amp;rdquo;`&lt;/p&gt;
+
+&lt;p&gt;although I can&amp;rsquo;t actually run it as I&amp;rsquo;m waiting for a cucumber run to complete (got to work on the performance there).  That gap allows me to agonize about whether this unit test is sufficiently rigorous, or if it simply testing the existing Rails architecture?  I think it&amp;rsquo;s the right thing.  It&amp;rsquo;s providing an executable check that the class method &lt;code&gt;.with_github_url&lt;/code&gt; is doing what we expect it to do.  &lt;/p&gt;
+
+&lt;p&gt;Bigger picture quickly, I&amp;rsquo;m not planning to immediately remove the github_url field from the projects model.  We&amp;rsquo;ll need a task to migrate all of them in to source repository models, and based on previous pain I&amp;rsquo;ll be ensuring we have a follow up task in a different PR that we deploy to production separately to delete that field later on when the dust has settled.&lt;/p&gt;
+
+&lt;p&gt;Okay so the cukes finished running.  I got a couple of errors in the way I&amp;rsquo;m using FactoryGirl/build_stubbed.  Fix those and I&amp;rsquo;ve got the following Project RSpec output:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ be rspec -fd spec/models/project_spec.rb 
+[Coveralls] Using SimpleCov's 'rails' settings.
+
+Randomized with seed 34619
+
+Project
+  #github_repo_user_name
+    deals with hyphen gracefully
+  #codeclimate_gpa
+    returns the CodeClimate GPA
+  #search
+    should return paginated projects with 5 per page
+  #url_for_me
+    returns correct url for show action
+    returns correct url for other actions
+  #members
+    returns followers of the project who have a public profile
+  #contribution_url
+    returns the url for the project github contribution page
+  #jitsi_room_link
+    returns correct link
+  .with_github_url
+    returns all projects that have at least one source repository
+    does not return projects that do not have a source repository
+  #youtube_tags
+    returns the tags for project including the project title
+  #github_repo
+    returns the proper repo name if github url exists
+    returns blank if github url does not exist
+  #members_tags
+    returns the tags for project members with thier youtube user names
+  #save
+    should not accept invalid Pivotal Tracker URL
+    should throw error for incomplete github url
+    should be invalid without status
+    should be invalid without description
+    should not accept invalid github url
+    has public-activity enabled
+    should respond to #create_activity
+    should be a valid with all the correct attributes
+    should be invalid without title
+    Pivotal Tracker URL
+      should accept new pivotal traker url format
+      should accept the subject id and convert that into a valid URL
+      should correct mistakes in pivotal tracker url
+    Updating friendly ids
+      should still be able to find the project by its old id
+      should regenerate the project's friendly id when the title changes
+
+Finished in 0.65804 seconds (files took 8.15 seconds to load)
+28 examples, 0 failures
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;rsquo;m not sure that this output is telling the domain story that I&amp;rsquo;d like, but let&amp;rsquo;s move on.  I was thinking that we would have to move the github url validation into source repositories, and I think we will ultimatley, but it seems to be currently allowing us to validate urls on the first repo, if I&amp;rsquo;m reading this all correctly.&lt;/p&gt;
+
+&lt;p&gt;Since I&amp;rsquo;ve created the test (for the scope) after the code (bad programmer) I quickly break the the scope and check that the test fails, which it does.  This code&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;scope&lt;/span&gt; &lt;span class="ss"&gt;:with_github_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;includes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:source_repositories&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;source_repositories: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;id: &lt;/span&gt;&lt;span class="kp"&gt;nil&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;causes this error&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;  1&lt;span class="o"&gt;)&lt;/span&gt; Project.with_github_url returns all projects that have at least one &lt;span class="nb"&gt;source &lt;/span&gt;repository
+     Failure/Error: expect&lt;span class="o"&gt;(&lt;/span&gt;Project.with_github_url&lt;span class="o"&gt;)&lt;/span&gt;.to include&lt;span class="o"&gt;(&lt;/span&gt;project, project2&lt;span class="o"&gt;)&lt;/span&gt;
+
+       expected &lt;span class="c"&gt;#&amp;lt;ActiveRecord::Relation []&amp;gt; to include #&amp;lt;Project id: 1, title: "Title 1", description: "Warp fields stabilize.", status: "We feel your prese...l, pitch: "'I AM the greatest!' - M. Ali", commit_count: 0, image_url: nil, last_github_update: nil&amp;gt; and #&amp;lt;Project id: 2, title: "Title 2", description: "Warp fields stabilize.", status: "We feel your prese...l, pitch: "'I AM the greatest!' - M. Ali", commit_count: 0, image_url: nil, last_github_update: nil&amp;gt;&lt;/span&gt;
+       Diff:
+       @@ -1,3 +1,2 @@
+       -[#&amp;lt;Project id: 1, title: &lt;span class="s2"&gt;"Title 1"&lt;/span&gt;, description: &lt;span class="s2"&gt;"Warp fields stabilize."&lt;/span&gt;, status: &lt;span class="s2"&gt;"We feel your presence."&lt;/span&gt;, created_at: &lt;span class="s2"&gt;"2017-09-22 09:12:29"&lt;/span&gt;, updated_at: &lt;span class="s2"&gt;"2017-09-22 09:12:29"&lt;/span&gt;, user_id: nil, slug: &lt;span class="s2"&gt;"title-1"&lt;/span&gt;, github_url: nil, pivotaltracker_url: nil, pitch: &lt;span class="s2"&gt;"'I AM the greatest!' - M. Ali"&lt;/span&gt;, commit_count: 0, image_url: nil, last_github_update: nil&amp;gt;,
+       - &lt;span class="c"&gt;#&amp;lt;Project id: 2, title: "Title 2", description: "Warp fields stabilize.", status: "We feel your presence.", created_at: "2017-09-22 09:12:29", updated_at: "2017-09-22 09:12:29", user_id: nil, slug: "title-2", github_url: nil, pivotaltracker_url: nil, pitch: "'I AM the greatest!' - M. Ali", commit_count: 0, image_url: nil, last_github_update: nil&amp;gt;]&lt;/span&gt;
+       +[]
+
+     &lt;span class="c"&gt;# ./spec/models/project_spec.rb:174:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So then I quickly add a simple test of the SourceRepository:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;SourceRepository&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;type: :model&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;is_expected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;belong_to&lt;/span&gt; &lt;span class="ss"&gt;:project&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which failed in the way I expected when I broke the SourceRepository.  The verbose RSpec output here is much more like what I expect as a description of my domain model:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;SourceRepository
+  should belong to project
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I add the following to the Project spec:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;is_expected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_many&lt;/span&gt; &lt;span class="ss"&gt;:source_repositories&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;is_expected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_many&lt;/span&gt; &lt;span class="ss"&gt;:documents&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;is_expected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_many&lt;/span&gt; &lt;span class="ss"&gt;:event_instances&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;is_expected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_many&lt;/span&gt; &lt;span class="ss"&gt;:commit_counts&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;is_expected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;belong_to&lt;/span&gt; &lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and I get some more domain model oriented chatter from RSpec when running the Project spec:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;Project
+  should belong to user
+  should have many source_repositories
+  should have many documents
+  should have many event_instances
+  should have many commit_counts
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I remove the hand-rolled js I started this feature on.   I rebase to develop so that I can do &lt;code&gt;git diff develop&lt;/code&gt; and look through the specific changes I made, which are:&lt;/p&gt;
+
+&lt;p&gt;1) upgrade poltergeist and add the cocoon gem
+2) adjust the projects controller to allow source repository attributes and to build a single default source repo for new projects
+3) adjust the way the &lt;code&gt;with_github_url&lt;/code&gt; scope works
+4) update the project form to give it an id, and replace the current &lt;code&gt;github_url&lt;/code&gt; text field with a nested source repo field(s) (cocoon gem syntax)
+5) added js to update source repository form field names to include numerics
+6) added a partial for creating new source repo fields
+7) migration to add the source repos table
+8) added a create projects feature and moved the create related scenarios there
+9) added a remote debugging step for cucumber
+10) removed the puffing billy proxy from the poltergeist config to allow remote debugging
+11) added factories and specs for source repo model
+12) adjusted various tests to work with the updated domain model
+13) addded more tests to Project to make the domain model more explicit
+14) deleted view specs&lt;/p&gt;
+
+&lt;p&gt;Hmmmm.  So the key missing thing in some ways is that we&amp;rsquo;re not displaying the multiple repos and the acceptance tests are not as extensive or as readable as I would like, but I have a hunch that I need to get this into production with some kind of rake task to move the data in the github&lt;em&gt;url in the Project model into the source&lt;/em&gt;repository, but I&amp;rsquo;ve created a new getter that&amp;rsquo;s blocking my access.  This &lt;a href="https://stackoverflow.com/questions/21835116/how-can-i-overwrite-a-getter-method-in-an-activerecord-model"&gt;SO post&lt;/a&gt; tells me I can reference the original active-record field via self[:github_url], so I could have a task like this:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;namespace :db do
+  desc "migrate from github url to source repository domain model (copies github_url field to source repo model)"
+  task migrate_from_github_url_to_source_repository: :environment do
+    Project.all.each do |project|
+      project.create(:source_repository, url: project[:github_url])
+    end
+  end
+
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;btw, creating the task outline with &lt;code&gt;rails g task db migrate_from_github_url_to_source_repository&lt;/code&gt; was handy - thanks Rails!&lt;/p&gt;
+
+&lt;p&gt;So then I agonize about whether I should write a test for this one off task &amp;hellip; of course thoughtbot has an &lt;a href="https://robots.thoughtbot.com/test-rake-tasks-like-a-boss"&gt;article&lt;/a&gt; on it.  But I&amp;rsquo;m out of time, will have to push that to next week, or to a refactoring chore - that&amp;rsquo;s where all the acceptance test changes will be going anyway.  This migration is the pivotal componet so I&amp;rsquo;ll test that first thing on Monday I guess &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Another free refill?</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/22/another-free-refill/"/>
     <id>http://blog.url.com/2017/09/22/another-free-refill/</id>
@@ -505,118 +681,6 @@ Feature: Create projects
 &lt;p&gt;&lt;a href="https://github.com/nathanvda/cocoon/issues/374"&gt;https://github.com/nathanvda/cocoon/issues/374&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Perhaps I can use that to fix this tomorrow &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Inspecting Gems</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/18/av-ecosystem-review-inspecting-gems/"/>
-    <id>http://blog.url.com/2017/09/18/av-ecosystem-review-inspecting-gems/</id>
-    <published>2017-09-18T01:00:00+01:00</published>
-    <updated>2017-11-15T20:44:59+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="gems" src="/images/gems.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So my AV ecosystem reviews are getting further afield.  Here I am inspecting different gems for the purpose of completing a feature to support multiple project repositories.  What are the goals of this ongoing review? It&amp;rsquo;s to focus my blogging power onto making the AV ecosystem as welcoming and easy to use as possible.  That&amp;rsquo;s the flow of people from external sources to our website, to our Slack instance and to contributing to the projects we have hosted on GitHub.  This feature is a response to a request from a project maintainer, and that&amp;rsquo;s a stakeholder that we might have overlooked, so I&amp;rsquo;ll see what giving them focus can do.&lt;/p&gt;
-
-&lt;p&gt;Last Friday after spiking an interface component for dynamic form fields in rails, I found some gems that might provide a more coherent approach.  &lt;a href="https://github.com/ncri/nested_form_fields"&gt;https://github.com/ncri/nested&lt;em&gt;form&lt;/em&gt;fields&lt;/a&gt; is my current lead candidate.  243 stars suggests it has some popularity and I can see that it was updated as recently as five days ago.  There&amp;rsquo;s also &lt;a href="https://github.com/ryanb/nested_form"&gt;https://github.com/ryanb/nested_form&lt;/a&gt; with 1,769 stars, but hasn&amp;rsquo;t been updated in 4 years.  Another &lt;a href="https://www.google.co.uk/search?q=gems+rails+nested+form"&gt;quick search&lt;/a&gt; shows me there&amp;rsquo;s also &lt;a href="https://github.com/nathanvda/cocoon"&gt;https://github.com/nathanvda/cocoon&lt;/a&gt; with 2,445 stars and was updated as recently as 3 days ago.  Glad I did that search, or I might not have found this other important contender which looks like the field leader at the moment.  Let&amp;rsquo;s try it out - following the README instructions on how to install &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Using Cocoon requires the nested models that we haven&amp;rsquo;t set up yet, and then has options for using Rails Formtastic, SimpleForm or Standard Rails forms.  I&amp;rsquo;m tempted to go for standard Rails forms, since I don&amp;rsquo;t want to take on too much at once.  I&amp;rsquo;ll start with the migration, I guess, to pull the github_url out of the project and into a separate table &amp;hellip;&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;761_multiple_source_repository&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
-→ rails g model SourceRepository url:string
-      invoke  active_record
-      create    db/migrate/20170918083218_create_source_repositories.rb
-      create    app/models/source_repository.rb
-      invoke    rspec
-      create      spec/models/source_repository_spec.rb
-      invoke      factory_girl
-      create        spec/factories/source_repositories.rb
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I can then edit the created model to have the setup that Cocoon requires:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SourceRepository&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
-  &lt;span class="n"&gt;belongs_to&lt;/span&gt; &lt;span class="ss"&gt;:project&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and refer to it in the existing Project class:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Project&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-
-  &lt;span class="nf"&gt;has_many&lt;/span&gt; &lt;span class="ss"&gt;:source_repositories&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;inverse_of&lt;/span&gt; &lt;span class="ss"&gt;:project&lt;/span&gt;
-  &lt;span class="n"&gt;accepts_nested_attributes_for&lt;/span&gt; &lt;span class="ss"&gt;:source_repositories&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;reject_if: :all_blank&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;allow_destroy: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Using an online HAML to ERB converter I can get the project example forms in ERB, and adjust to our needs:&lt;/p&gt;
-&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;form_for&lt;/span&gt; &lt;span class="vi"&gt;@project&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"field"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;label&lt;/span&gt; &lt;span class="ss"&gt;:name&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;br/&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;text_field&lt;/span&gt; &lt;span class="ss"&gt;:name&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"field"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;label&lt;/span&gt; &lt;span class="ss"&gt;:description&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;br/&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;text_field&lt;/span&gt; &lt;span class="ss"&gt;:description&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;h3&amp;gt;&lt;/span&gt;Source Repositories&lt;span class="nt"&gt;&amp;lt;/h3&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;"source_repositories"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;fields_for&lt;/span&gt; &lt;span class="ss"&gt;:source_repositories&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;source_repository&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-      &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="s1"&gt;'source_repository_fields'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;f: &lt;/span&gt;&lt;span class="n"&gt;source_repository&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"links"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to_add_association&lt;/span&gt; &lt;span class="s1"&gt;'add source_repository'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:source_repositories&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-  &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;submit&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-&lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and the partial:&lt;/p&gt;
-&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"nested-fields"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"field"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;label&lt;/span&gt; &lt;span class="ss"&gt;:url&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;br/&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;text_field&lt;/span&gt; &lt;span class="ss"&gt;:url&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-  &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to_remove_association&lt;/span&gt; &lt;span class="s2"&gt;"remove source repository"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and after a few misteps back and forth to add the correct references to the model/migration:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;CreateSourceRepositories&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Migration&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;change&lt;/span&gt;
-    &lt;span class="n"&gt;create_table&lt;/span&gt; &lt;span class="ss"&gt;:source_repositories&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;string&lt;/span&gt; &lt;span class="ss"&gt;:url&lt;/span&gt;
-      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;string&lt;/span&gt; &lt;span class="ss"&gt;:url&lt;/span&gt;
-      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;references&lt;/span&gt; &lt;span class="ss"&gt;:project&lt;/span&gt; &lt;span class="c1"&gt;# &amp;lt;-- needed this&lt;/span&gt;
-
-      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;timestamps&lt;/span&gt; &lt;span class="ss"&gt;null: &lt;/span&gt;&lt;span class="kp"&gt;false&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I was rewarded with seeing the boiler plate form allowing me to both add and remove source repositories:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/vy7u9shkciiljc7/Screenshot%202017-09-18%2009.53.22.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Hopefully a bit of cleanup and formatting and this will look nice and have more functionality that I was able to immediately hand-roll.  I could probably have implemented dynamic removal of form fields in the same time it took me to get proof of concept on this gem.  However using this gem will hopefully make our system less suprising to new developers who might have seen this gem on other projects, and we&amp;rsquo;ll potentially get the benefits of upgrades and fixes to the gem itself.&lt;/p&gt;
-
-&lt;p&gt;Of course, despite getting the interface working, the repository datat that I inputted was not actually saved to the database as such, but then I hadn&amp;rsquo;t got that part working in my own hand-rolled version either :-)&lt;/p&gt;
-
-&lt;p&gt;I can see the data being passed back:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Started POST "/projects" for ::1 at 2017-09-18 08:56:32 +0000
-Processing by ProjectsController#create as HTML
-  Parameters: {"utf8"=&amp;gt;"✓", "authenticity_token"=&amp;gt;"0/yym9qPkJcAgoxhJqfg2UIOfDEFIDda2qW2VWZCVl2AF0/fytCniCb8bJb/qy1ZV0f/CXYDc9mvGBElB51A4g==", "project"=&amp;gt;{"title"=&amp;gt;"test", "image_url"=&amp;gt;"", "description"=&amp;gt;"test", "status"=&amp;gt;"Active", "github_url"=&amp;gt;"", "source_repositories_attributes"=&amp;gt;{"1505724773160"=&amp;gt;{"url"=&amp;gt;"test", "_destroy"=&amp;gt;"false"}, "1505724775431"=&amp;gt;{"url"=&amp;gt;"test2", "_destroy"=&amp;gt;"false"}, "1505724776802"=&amp;gt;{"url"=&amp;gt;"test3", "_destroy"=&amp;gt;"false"}}, "pivotaltracker_url"=&amp;gt;""}, "commit"=&amp;gt;"Submit"}
-  User Load (0.6ms)  SELECT  "users".* FROM "users" WHERE "users"."deleted_at" IS NULL AND "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 3]]
-  Event Load (1.5ms)  SELECT "events".* FROM "events" WHERE "events"."category" = $1  [["category", "Scrum"]]
-Unpermitted parameter: source_repositories_attributes
-   (0.2ms)  BEGIN
-  Project Exists (2.8ms)  SELECT  1 AS one FROM "projects" WHERE ("projects"."id" IS NOT NULL) AND "projects"."slug" = 'test' LIMIT 1
-  SQL (4.6ms)  INSERT INTO "projects" ("title", "description", "status", "github_url", "pivotaltracker_url", "image_url", "user_id", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"  [["title", "test"], ["description", "test"], ["status", "Active"], ["github_url", ""], ["pivotaltracker_url", ""], ["image_url", ""], ["user_id", 3], ["slug", "test-8018e213-701c-40bd-aa02-caa3025ae4ba"], ["created_at", "2017-09-18 08:56:33.028974"], ["updated_at", "2017-09-18 08:56:33.028974"]]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I was about to say that I&amp;rsquo;d leave fixing that till tommorrow, but I had a quick idea it was to do with strong parameters, and it was:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;project_params&lt;/span&gt;
-    &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;permit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:description&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:pitch&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:created&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:status&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:user_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:github_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:pivotaltracker_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:pivotaltracker_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:image_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;source_repositories_attributes: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:url&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We need to specify the nested required attributes.  We are now saving our new repo information to the database thanks to &lt;a href="https://stackoverflow.com/questions/15919761/rails-4-nested-attributes-unpermitted-parameters"&gt;Stack Overflow&lt;/a&gt;!&lt;/p&gt;
 </content>
   </entry>
 </feed>

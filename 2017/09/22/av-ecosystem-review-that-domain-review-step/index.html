@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review That Domain Review Step</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_09 x2017_09_22 x2017_09_22_av-ecosystem-review-that-domain-review-step x2017_09_22_av-ecosystem-review-that-domain-review-step_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/22/av-ecosystem-review-that-domain-review-step/">AV EcoSystem Review That Domain Review Step</a></h2>
+        <h5 class='date'>22 Sep 2017</h5>
+    <p><img alt="domain review" src="/images/domain_review.jpg" /></p>
+
+<p>Okay, so I have the multiple repository functionality basically working, but it&rsquo;s time to clear up and make things right &hellip; here&rsquo;s my checklist from yesterday:</p>
+
+<ul>
+<li>the acceptance test does not check that the second repo has been stored</li>
+<li>the acceptance test is not very readable</li>
+<li>currently the project page does not display all the repos</li>
+<li>the project has various unit tests based on being able to set the github_url</li>
+<li>the project model validates the URL</li>
+<li>the process for safely migrating the existing data on production</li>
+<li>the old hand rolled js from my initial attempt is hanging around</li>
+</ul>
+
+<p>So attacking from the unit test side I notice that we do not mention the <code>with_github_url</code> scope anywhere in our tests, which I can rectify with the following:</p>
+
+<p>&ldquo;rb
+  context &rsquo;.with<em>github</em>url&rsquo; do
+    it &lsquo;returns all projects that have at least one source repository&rsquo; do
+      project = FactoryGirl.create(:project)
+      project.source<em>repositories.create(url: &#39;https://github.com/AgileVentures/shf-project&rsquo;)
+      project2 = FactoryGirl.create(:project)
+      project2.source</em>repositories.create(url: &#39;https://github.com/AgileVentures/shf-project2&rsquo;)
+      expect(Project.with<em>github</em>url).to include(project, project2)
+    end</p>
+<pre class="highlight plaintext"><code>it 'does not return projects that do not have a source repository' do
+  project = FactoryGirl.build(:project)
+  expect(Project.with_github_url).not_to include(project)
+end
+</code></pre>
+<p>end
+&rdquo;`</p>
+
+<p>although I can&rsquo;t actually run it as I&rsquo;m waiting for a cucumber run to complete (got to work on the performance there).  That gap allows me to agonize about whether this unit test is sufficiently rigorous, or if it simply testing the existing Rails architecture?  I think it&rsquo;s the right thing.  It&rsquo;s providing an executable check that the class method <code>.with_github_url</code> is doing what we expect it to do.  </p>
+
+<p>Bigger picture quickly, I&rsquo;m not planning to immediately remove the github_url field from the projects model.  We&rsquo;ll need a task to migrate all of them in to source repository models, and based on previous pain I&rsquo;ll be ensuring we have a follow up task in a different PR that we deploy to production separately to delete that field later on when the dust has settled.</p>
+
+<p>Okay so the cukes finished running.  I got a couple of errors in the way I&rsquo;m using FactoryGirl/build_stubbed.  Fix those and I&rsquo;ve got the following Project RSpec output:</p>
+<pre class="highlight plaintext"><code>→ be rspec -fd spec/models/project_spec.rb 
+[Coveralls] Using SimpleCov's 'rails' settings.
+
+Randomized with seed 34619
+
+Project
+  #github_repo_user_name
+    deals with hyphen gracefully
+  #codeclimate_gpa
+    returns the CodeClimate GPA
+  #search
+    should return paginated projects with 5 per page
+  #url_for_me
+    returns correct url for show action
+    returns correct url for other actions
+  #members
+    returns followers of the project who have a public profile
+  #contribution_url
+    returns the url for the project github contribution page
+  #jitsi_room_link
+    returns correct link
+  .with_github_url
+    returns all projects that have at least one source repository
+    does not return projects that do not have a source repository
+  #youtube_tags
+    returns the tags for project including the project title
+  #github_repo
+    returns the proper repo name if github url exists
+    returns blank if github url does not exist
+  #members_tags
+    returns the tags for project members with thier youtube user names
+  #save
+    should not accept invalid Pivotal Tracker URL
+    should throw error for incomplete github url
+    should be invalid without status
+    should be invalid without description
+    should not accept invalid github url
+    has public-activity enabled
+    should respond to #create_activity
+    should be a valid with all the correct attributes
+    should be invalid without title
+    Pivotal Tracker URL
+      should accept new pivotal traker url format
+      should accept the subject id and convert that into a valid URL
+      should correct mistakes in pivotal tracker url
+    Updating friendly ids
+      should still be able to find the project by its old id
+      should regenerate the project's friendly id when the title changes
+
+Finished in 0.65804 seconds (files took 8.15 seconds to load)
+28 examples, 0 failures
+</code></pre>
+<p>I&rsquo;m not sure that this output is telling the domain story that I&rsquo;d like, but let&rsquo;s move on.  I was thinking that we would have to move the github url validation into source repositories, and I think we will ultimatley, but it seems to be currently allowing us to validate urls on the first repo, if I&rsquo;m reading this all correctly.</p>
+
+<p>Since I&rsquo;ve created the test (for the scope) after the code (bad programmer) I quickly break the the scope and check that the test fails, which it does.  This code</p>
+<pre class="highlight ruby"><code>  <span class="n">scope</span> <span class="ss">:with_github_url</span><span class="p">,</span> <span class="o">-&gt;</span><span class="p">{</span> <span class="n">includes</span><span class="p">(</span><span class="ss">:source_repositories</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="ss">source_repositories: </span><span class="p">{</span> <span class="ss">id: </span><span class="kp">nil</span> <span class="p">})</span> <span class="p">}</span>
+</code></pre>
+<p>causes this error</p>
+<pre class="highlight shell"><code>  1<span class="o">)</span> Project.with_github_url returns all projects that have at least one <span class="nb">source </span>repository
+     Failure/Error: expect<span class="o">(</span>Project.with_github_url<span class="o">)</span>.to include<span class="o">(</span>project, project2<span class="o">)</span>
+
+       expected <span class="c">#&lt;ActiveRecord::Relation []&gt; to include #&lt;Project id: 1, title: "Title 1", description: "Warp fields stabilize.", status: "We feel your prese...l, pitch: "'I AM the greatest!' - M. Ali", commit_count: 0, image_url: nil, last_github_update: nil&gt; and #&lt;Project id: 2, title: "Title 2", description: "Warp fields stabilize.", status: "We feel your prese...l, pitch: "'I AM the greatest!' - M. Ali", commit_count: 0, image_url: nil, last_github_update: nil&gt;</span>
+       Diff:
+       @@ -1,3 +1,2 @@
+       -[#&lt;Project id: 1, title: <span class="s2">"Title 1"</span>, description: <span class="s2">"Warp fields stabilize."</span>, status: <span class="s2">"We feel your presence."</span>, created_at: <span class="s2">"2017-09-22 09:12:29"</span>, updated_at: <span class="s2">"2017-09-22 09:12:29"</span>, user_id: nil, slug: <span class="s2">"title-1"</span>, github_url: nil, pivotaltracker_url: nil, pitch: <span class="s2">"'I AM the greatest!' - M. Ali"</span>, commit_count: 0, image_url: nil, last_github_update: nil&gt;,
+       - <span class="c">#&lt;Project id: 2, title: "Title 2", description: "Warp fields stabilize.", status: "We feel your presence.", created_at: "2017-09-22 09:12:29", updated_at: "2017-09-22 09:12:29", user_id: nil, slug: "title-2", github_url: nil, pivotaltracker_url: nil, pitch: "'I AM the greatest!' - M. Ali", commit_count: 0, image_url: nil, last_github_update: nil&gt;]</span>
+       +[]
+
+     <span class="c"># ./spec/models/project_spec.rb:174:in `block (3 levels) in &lt;top (required)&gt;'</span>
+
+</code></pre>
+<p>So then I quickly add a simple test of the SourceRepository:</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="no">SourceRepository</span><span class="p">,</span> <span class="ss">type: :model</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">belong_to</span> <span class="ss">:project</span><span class="p">}</span>
+<span class="k">end</span>
+</code></pre>
+<p>which failed in the way I expected when I broke the SourceRepository.  The verbose RSpec output here is much more like what I expect as a description of my domain model:</p>
+<pre class="highlight plaintext"><code>SourceRepository
+  should belong to project
+</code></pre>
+<p>I add the following to the Project spec:</p>
+<pre class="highlight ruby"><code>  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">have_many</span> <span class="ss">:source_repositories</span><span class="p">}</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">have_many</span> <span class="ss">:documents</span><span class="p">}</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">have_many</span> <span class="ss">:event_instances</span><span class="p">}</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">have_many</span> <span class="ss">:commit_counts</span><span class="p">}</span>
+
+  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">belong_to</span> <span class="ss">:user</span><span class="p">}</span>
+</code></pre>
+<p>and I get some more domain model oriented chatter from RSpec when running the Project spec:</p>
+<pre class="highlight shell"><code>Project
+  should belong to user
+  should have many source_repositories
+  should have many documents
+  should have many event_instances
+  should have many commit_counts
+</code></pre>
+<p>I remove the hand-rolled js I started this feature on.   I rebase to develop so that I can do <code>git diff develop</code> and look through the specific changes I made, which are:</p>
+
+<p>1) upgrade poltergeist and add the cocoon gem
+2) adjust the projects controller to allow source repository attributes and to build a single default source repo for new projects
+3) adjust the way the <code>with_github_url</code> scope works
+4) update the project form to give it an id, and replace the current <code>github_url</code> text field with a nested source repo field(s) (cocoon gem syntax)
+5) added js to update source repository form field names to include numerics
+6) added a partial for creating new source repo fields
+7) migration to add the source repos table
+8) added a create projects feature and moved the create related scenarios there
+9) added a remote debugging step for cucumber
+10) removed the puffing billy proxy from the poltergeist config to allow remote debugging
+11) added factories and specs for source repo model
+12) adjusted various tests to work with the updated domain model
+13) addded more tests to Project to make the domain model more explicit
+14) deleted view specs</p>
+
+<p>Hmmmm.  So the key missing thing in some ways is that we&rsquo;re not displaying the multiple repos and the acceptance tests are not as extensive or as readable as I would like, but I have a hunch that I need to get this into production with some kind of rake task to move the data in the github<em>url in the Project model into the source</em>repository, but I&rsquo;ve created a new getter that&rsquo;s blocking my access.  This <a href="https://stackoverflow.com/questions/21835116/how-can-i-overwrite-a-getter-method-in-an-activerecord-model">SO post</a> tells me I can reference the original active-record field via self[:github_url], so I could have a task like this:</p>
+<pre class="highlight plaintext"><code>namespace :db do
+  desc "migrate from github url to source repository domain model (copies github_url field to source repo model)"
+  task migrate_from_github_url_to_source_repository: :environment do
+    Project.all.each do |project|
+      project.create(:source_repository, url: project[:github_url])
+    end
+  end
+
+end
+</code></pre>
+<p>btw, creating the task outline with <code>rails g task db migrate_from_github_url_to_source_repository</code> was handy - thanks Rails!</p>
+
+<p>So then I agonize about whether I should write a test for this one off task &hellip; of course thoughtbot has an <a href="https://robots.thoughtbot.com/test-rake-tasks-like-a-boss">article</a> on it.  But I&rsquo;m out of time, will have to push that to next week, or to a refactoring chore - that&rsquo;s where all the acceptance test changes will be going anyway.  This migration is the pivotal componet so I&rsquo;ll test that first thing on Monday I guess &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
