@@ -41,6 +41,141 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Always One More Test</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/25/av-ecosystem-review-always-one-more-test/"/>
+    <id>http://blog.url.com/2017/09/25/av-ecosystem-review-always-one-more-test/</id>
+    <published>2017-09-25T01:00:00+01:00</published>
+    <updated>2017-11-23T19:59:38+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="one more test" src="/images/one_more_test.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So all of last week&amp;rsquo;s ecosystem review blogs were devoted to this new multiple repository feature.  And I think today too.  I hope today is the last since I really want to get on to clearing up some other content work and getting the new Code of Conduct front and center.  So I&amp;rsquo;ve just pulled out the latest develop and used the new &lt;code&gt;rake vcr_billy_caches:reset&lt;/code&gt; command to clean up the caches.  Bit difficult to remember, and did I update the docs?  The answer is no :-( but done now.  So I think I already have tests of rake commands, the style of which I can copy to test our data migration &amp;hellip; unlike &lt;a href="https://robots.thoughtbot.com/test-rake-tasks-like-a-boss"&gt;thoughtbot&lt;/a&gt; I&amp;rsquo;ve been going with Cucumber, which might run a little slower, but I can more easily see the data setup, so I stamp out a devops feature like so:&lt;/p&gt;
+&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="nt"&gt;@vcr&lt;/span&gt; &lt;span class="nt"&gt;@rake&lt;/span&gt;
+&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Update from github urls to source repository model
+  As a website admin,
+  I want to move existing github urls to source repositories
+  So that the system supports multiple repositories per project
+
+  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; projects have been added to database
+    &lt;span class="err"&gt;Given the following legacy projects exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;title&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;github_url&lt;/span&gt;                                    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;commit_count&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;WebsiteTwo&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;awesome&lt;/span&gt; &lt;span class="n"&gt;autograder&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;https://github.com/AgileVentures/WebsiteTwo&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt;            &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;WebsiteOne&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;website&lt;/span&gt; &lt;span class="n"&gt;one&lt;/span&gt; &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;https://github.com/AgileVentures/WebsiteOne&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;inactive&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt;            &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;edx&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;MOOC&lt;/span&gt; &lt;span class="n"&gt;platform&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;https://github.com/edx&lt;/span&gt;                        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt;            &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Unity&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Unity&lt;/span&gt; &lt;span class="n"&gt;project&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt;                                               &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt;            &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;LocalSupport&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scheduler&lt;/span&gt; &lt;span class="n"&gt;queue&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;https://github.com/AgileVentures/LocalSupport&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt;            &lt;span class="p"&gt;|&lt;/span&gt;
+
+  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Run the data migration to copy github urls to source repositories
+    &lt;span class="nf"&gt;When&lt;/span&gt; I run the rake task for migrating github urls
+    &lt;span class="err"&gt;Then I should see projects with following details&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;title&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;status&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;github_url&lt;/span&gt;                                    &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;WebsiteTwo&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;https://github.com/AgileVentures/WebsiteTwo&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;WebsiteOne&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;inactive&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;https://github.com/AgileVentures/WebsiteOne&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;edx&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;https://github.com/edx&lt;/span&gt;                        &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Unity&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt;                                               &lt;span class="p"&gt;|&lt;/span&gt;
+      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;LocalSupport&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;https://github.com/AgileVentures/LocalSupport&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which means I need a couple of new step definitions:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I run the rake task for migrating github urls$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="vg"&gt;$rake&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'db:migrate_from_github_url_to_source_repository'&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;Given&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^the following legacy projects exist:$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="c1"&gt;# table is a table.hashes.keys # =&amp;gt; [:title, :description, :github_url, :status, :commit_count]&lt;/span&gt;
+  &lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hashes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;default_test_author&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;projects&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;except&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'author'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'tags'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save!&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which as usual requires an update to the &lt;code&gt;@rake&lt;/code&gt; hook:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Before&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'@rake'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;scenario&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="vg"&gt;$rake&lt;/span&gt;
+    &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'rake'&lt;/span&gt;
+    &lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rake_require&lt;/span&gt; &lt;span class="s1"&gt;'tasks/scheduler'&lt;/span&gt;
+    &lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rake_require&lt;/span&gt; &lt;span class="s1"&gt;'tasks/migrate_plans'&lt;/span&gt;
+    &lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rake_require&lt;/span&gt; &lt;span class="s1"&gt;'tasks/create_plans'&lt;/span&gt;
+    &lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rake_require&lt;/span&gt; &lt;span class="s1"&gt;'tasks/db'&lt;/span&gt;
+    &lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;define_task&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:environment&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="vg"&gt;$rake&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Task&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which allowed me to isolate one syntax error in my rake task with this error:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    When I run the rake task for migrating github urls                        # features/step_definitions/devops_steps.rb:67
+      undefined method `create' for #&amp;lt;Project:0x007ffabb789318&amp;gt;
+      Did you mean?  created_at (NoMethodError)
+      ./lib/tasks/db.rake:5:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'
+      ./lib/tasks/db.rake:4:in `block (2 levels) in &amp;lt;top (required)&amp;gt;'
+      ./features/step_definitions/devops_steps.rb:68:in `/^I run the rake task for migrating github urls$/'
+      features/devops/migrate_github_urls.feature:17:in `When I run the rake task for migrating github urls'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;so I updated the task to:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;namespace :db do
+  desc "migrate from github url to source repository domain model (copies github_url field to source repo model)"
+  task migrate_from_github_url_to_source_repository: :environment do
+    Project.all.each do |project|
+      project.source_repositories.create(url: project[:github_url])
+    end
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which got the task running, but I was not seeing the projects I wanted:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  Scenario: Run the data migration to copy github urls to source repositories # features/devops/migrate_github_urls.feature:16
+    When I run the rake task for migrating github urls                        # features/step_definitions/devops_steps.rb:67
+    Then I should see projects with following details:                        # features/step_definitions/projects_steps.rb:126
+      | title        | status   | github_url                                    |
+      | WebsiteTwo   | active   | https://github.com/AgileVentures/WebsiteTwo   |
+      | WebsiteOne   | inactive | https://github.com/AgileVentures/WebsiteOne   |
+      | edx          | active   | https://github.com/edx                        |
+      | Unity        | active   |                                               |
+      | LocalSupport | active   | https://github.com/AgileVentures/LocalSupport |
+
+      expected: 0
+           got: 1
+
+      (compared using ==)
+       (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/projects_steps.rb:131:in `block (2 levels) in &amp;lt;top (required)&amp;gt;'
+      ./features/step_definitions/projects_steps.rb:129:in `each'
+      ./features/step_definitions/projects_steps.rb:129:in `/^I should see projects with following details:$/'
+      features/devops/migrate_github_urls.feature:18:in `Then I should see projects with following details:'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(wish I could get the green red and blue in github syntax markup for cuke and rspec output &amp;hellip;) and I see that the step definition appears to be hard coded to be doing something for commit counts:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I should see projects with following details:$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="c1"&gt;# table is a Cucumber::Core::Ast::DataTable&lt;/span&gt;
+   &lt;span class="n"&gt;projects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hashes&lt;/span&gt;
+   &lt;span class="n"&gt;projects&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; 
+      &lt;span class="n"&gt;updated_project&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"title"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;updated_project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;commit_count&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"commit_count"&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;to_i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I guess I&amp;rsquo;ll rename that to be more explicit about what it&amp;rsquo;s doing and similarly for my own one (could create some generic method that did what the step said, but not now):&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I should see projects looked up by title with first source repository same as github_url:$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="c1"&gt;# table is a Cucumber::Core::Ast::DataTable&lt;/span&gt;
+  &lt;span class="n"&gt;projects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hashes&lt;/span&gt;
+  &lt;span class="n"&gt;projects&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="n"&gt;updated_project&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"title"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;updated_project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;github_url&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"github_url"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;updated_project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;source_repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;url&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"github_url"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^I should see projects looked up by title with the correct commit count:$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="c1"&gt;# table is a Cucumber::Core::Ast::DataTable&lt;/span&gt;
+  &lt;span class="n"&gt;projects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hashes&lt;/span&gt;
+  &lt;span class="n"&gt;projects&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="n"&gt;updated_project&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"title"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;updated_project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;commit_count&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"commit_count"&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;to_i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which all now passes, but since I created the task before the test, I need to break the test; which I can do by commenting out the rake step and pleasingly that gives me the right fail.  Okay, I think I can pack this up and if the CI passes we can get it onto develop and start some manual tests there&amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review That Domain Review Step</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/22/av-ecosystem-review-that-domain-review-step/"/>
     <id>http://blog.url.com/2017/09/22/av-ecosystem-review-that-domain-review-step/</id>
@@ -595,89 +730,6 @@ Return value is: nil
 &lt;p&gt;So I&amp;rsquo;m guessing I need to move this code to somewhere it might more reliably be run.  It clearly runs in the browser - ah, it looks like the ES6 interpolation I used might not be working &amp;hellip; yes, that was it - okay - this is a great step forward;  being able to see JS errors in capybara tests, yay!&lt;/p&gt;
 
 &lt;p&gt;And so now the interactive parts of the test passed, and I am onto errors that are all about me making sure that the data has been stored and updated correctly.  Tomorrow&amp;rsquo;s work is clear &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Gem Polishing</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/19/av-ecosystem-review-gem-polishing/"/>
-    <id>http://blog.url.com/2017/09/19/av-ecosystem-review-gem-polishing/</id>
-    <published>2017-09-19T01:00:00+01:00</published>
-    <updated>2017-11-16T20:56:37+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="diamond polisher" src="/images/diamond_polisher.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I&amp;rsquo;m on the train into london for a meeting with the NHS, but unlike in my last year of blogging it&amp;rsquo;s not time to agonize about how everything&amp;rsquo;s going, but time to focus on finishing up this feature for multiple project repositories.  Yesterday I checked that I could get the basic functionality that we need using the &lt;a href="https://github.com/nathanvda/cocoon"&gt;Cocoon gem&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Now I need to hook it up to the acceptance tests, consider whether we need unit tests, and work on the styling of the form.  A bit of kicking around with CSS and I got it to look like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ye8fwrjwksuntil/Screenshot%202017-09-19%2009.41.43.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now to get the acceptance test working the first issue I have is that I&amp;rsquo;ve removed the field that we used to use for adding GitHub links, so the test fails to find it, and still fails to find it even after I rename the field &amp;hellip;&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;761_multiple_source_repository&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
-→ be cucumber features/projects/create_projects.feature:64
-&lt;span class="o"&gt;[&lt;/span&gt;Coveralls] Using SimpleCov&lt;span class="s1"&gt;'s '&lt;/span&gt;rails&lt;span class="s1"&gt;' settings.
-Using the default profile...
-@vcr
-Feature: Create projects
-  As a member of AgileVentures
-  So that I can create a focal point for an AgileVentures project
-  I would like to create a new project profile
-
-  @javascript
-  Scenario: Saving a new project with multiple repositories: success       # features/projects/create_projects.feature:64
-    Given I am logged in                                                   # features/step_definitions/user_steps.rb:63
-    And I am on the "Projects" page                                        # features/step_definitions/basic_steps.rb:84
-    When I click the very stylish "New Project" button                     # features/step_definitions/basic_steps.rb:291
-    When I fill in "Title" with "multiple repo project"                    # features/step_definitions/basic_steps.rb:140
-    And I fill in "Description" with "has lots of code"                    # features/step_definitions/basic_steps.rb:140
-    And I fill in "GitHub link" with "http://www.github.com/new"           # features/step_definitions/basic_steps.rb:140
-      Unable to find field "GitHub link" (Capybara::ElementNotFound)
-      ./features/step_definitions/basic_steps.rb:141:in `/^I fill in "([^"]*)" with "([^"]*)"$/'&lt;/span&gt;
-      features/projects/create_projects.feature:70:in &lt;span class="sb"&gt;`&lt;/span&gt;And I fill &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="s2"&gt;"GitHub link"&lt;/span&gt; with &lt;span class="s2"&gt;"http://www.github.com/new"&lt;/span&gt;&lt;span class="s1"&gt;'
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The actual name of the field is now:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;project[source_repositories_attributes][0][url]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Strangely despite having capitalized the H in GitHub, the label is rendered in the page as follows:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;label&lt;/span&gt; &lt;span class="na"&gt;for=&lt;/span&gt;&lt;span class="s"&gt;"project_source_repositories_attributes_0_GitHub Link"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Github link&lt;span class="nt"&gt;&amp;lt;/label&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;that&amp;rsquo;s from:&lt;/p&gt;
-&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;'nested-fields form-group'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;'field form-group'&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;label&lt;/span&gt; &lt;span class="s1"&gt;'GitHub Link'&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;text_field&lt;/span&gt; &lt;span class="ss"&gt;:url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;placeholder: &lt;/span&gt;&lt;span class="s1"&gt;'https://github.com/projectname'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;class: &lt;/span&gt;&lt;span class="s1"&gt;'form-control input-lg'&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-  &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to_remove_association&lt;/span&gt; &lt;span class="s1"&gt;'Delete repo'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;class: &lt;/span&gt;&lt;span class="s1"&gt;'btn btn-danger'&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For some reason it&amp;rsquo;s being downcased? Well I&amp;rsquo;ll just go with the downcase then.  Hmm, I guess I&amp;rsquo;m restricted as to how I use the label method on the Rails form.  I thought I could just replace &lt;code&gt;:url&lt;/code&gt; with the text that I wanted, but no go.  I switch back to url and try to fill in the field &amp;ldquo;Url&amp;rdquo;, but no and also no joy for &lt;code&gt;project[source_repositories_attributes][0][url]&lt;/code&gt; or &lt;code&gt;project_source_repositories_attributes_0_url&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;What I can see when I debug and inspect the HTML that capybara is seeing is that even though I have JavaScript enabled, it does not seem like the dynamic form fields are being created.  Instead I see this:&lt;/p&gt;
-&lt;pre class="highlight html"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;\"links&lt;/span&gt; &lt;span class="na"&gt;form-group&lt;/span&gt;&lt;span class="err"&gt;\"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-
-  &lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;\"btn&lt;/span&gt; &lt;span class="na"&gt;btn-default&lt;/span&gt; &lt;span class="na"&gt;add_fields&lt;/span&gt;&lt;span class="err"&gt;\"&lt;/span&gt; &lt;span class="na"&gt;data-association=&lt;/span&gt;&lt;span class="s"&gt;\"source_repository\"&lt;/span&gt; &lt;span class="na"&gt;data-associations=&lt;/span&gt;&lt;span class="s"&gt;\"source_repositories\"&lt;/span&gt; &lt;span class="na"&gt;data-association-insertion-template=&lt;/span&gt;&lt;span class="s"&gt;\"&amp;amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;'nested-fields form-group'&lt;/span&gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;gt&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;lt&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="na"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;'field form-group'&lt;/span&gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;gt&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;
-      &lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;lt&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="na"&gt;label&lt;/span&gt; &lt;span class="na"&gt;title=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;GitHub&lt;/span&gt; &lt;span class="na"&gt;url&lt;/span&gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;quot&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt; &lt;span class="na"&gt;for=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;project_source_repositories_attributes_new_source_repositories_url&amp;amp;quot;&amp;amp;gt;Url&amp;amp;lt;/label&amp;amp;gt;&lt;/span&gt;
-      &lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;lt&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="na"&gt;input&lt;/span&gt; &lt;span class="na"&gt;placeholder=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;https://github.com/projectname&amp;amp;quot;&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;form-control&lt;/span&gt; &lt;span class="na"&gt;input-lg&lt;/span&gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;quot&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;text&amp;amp;quot;&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;project[source_repositories_attributes][new_source_repositories][url]&amp;amp;quot;&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;project_source_repositories_attributes_new_source_repositories_url&amp;amp;quot;&lt;/span&gt; &lt;span class="err"&gt;/&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;gt&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;lt&lt;/span&gt;&lt;span class="err"&gt;;/&lt;/span&gt;&lt;span class="na"&gt;div&lt;/span&gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;gt&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;
-    &lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;lt&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="na"&gt;input&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;hidden&amp;amp;quot;&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;project[source_repositories_attributes][new_source_repositories][_destroy]&amp;amp;quot;&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;project_source_repositories_attributes_new_source_repositories__destroy&amp;amp;quot;&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;false&amp;amp;quot;&lt;/span&gt; &lt;span class="err"&gt;/&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;gt&lt;/span&gt;&lt;span class="err"&gt;;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;lt&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="na"&gt;a&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;btn&lt;/span&gt; &lt;span class="na"&gt;btn-danger&lt;/span&gt; &lt;span class="na"&gt;remove_fields&lt;/span&gt; &lt;span class="na"&gt;dynamic&lt;/span&gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;quot&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;&amp;amp;quot;#&amp;amp;quot;&amp;amp;gt;Delete&lt;/span&gt; &lt;span class="na"&gt;repo&lt;/span&gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;lt&lt;/span&gt;&lt;span class="err"&gt;;/&lt;/span&gt;&lt;span class="na"&gt;a&lt;/span&gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;gt&lt;/span&gt;&lt;span class="err"&gt;;&lt;/span&gt;
-  &lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;lt&lt;/span&gt;&lt;span class="err"&gt;;/&lt;/span&gt;&lt;span class="na"&gt;div&lt;/span&gt;&lt;span class="err"&gt;&amp;amp;&lt;/span&gt;&lt;span class="na"&gt;gt&lt;/span&gt;&lt;span class="err"&gt;;\"&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;\"#\"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;Add more repos&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which looks like the raw HTML that Cocoon delivers before JavaScript adjusts it.  I wonder if that&amp;rsquo;s because I&amp;rsquo;m doing this on the train without internet connection (and that&amp;rsquo;s affecting loading some needed js); but I can see the Cocoon js being loaded in chrome when I test manually &amp;hellip; ah, I think I see the problem.  The project doesn&amp;rsquo;t have a default first repo - we have to click &amp;lsquo;Add repos&amp;rsquo; once first &amp;hellip; or we can build one by default:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new&lt;/span&gt;
-    &lt;span class="vi"&gt;@project&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;
-    &lt;span class="vi"&gt;@project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;source_repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;build&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and leaves me wondering if there is some way to have the different fields be numbered 1, 2, 3 etc. That would make the Cucumber/Capybara testing easier and it looks like there might be an approach that does that here:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/nathanvda/cocoon/issues/374"&gt;https://github.com/nathanvda/cocoon/issues/374&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Perhaps I can use that to fix this tomorrow &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

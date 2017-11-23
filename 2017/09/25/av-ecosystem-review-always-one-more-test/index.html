@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Always One More Test</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_09 x2017_09_25 x2017_09_25_av-ecosystem-review-always-one-more-test x2017_09_25_av-ecosystem-review-always-one-more-test_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/25/av-ecosystem-review-always-one-more-test/">AV EcoSystem Review Always One More Test</a></h2>
+        <h5 class='date'>25 Sep 2017</h5>
+    <p><img alt="one more test" src="/images/one_more_test.jpg" /></p>
+
+<p>So all of last week&rsquo;s ecosystem review blogs were devoted to this new multiple repository feature.  And I think today too.  I hope today is the last since I really want to get on to clearing up some other content work and getting the new Code of Conduct front and center.  So I&rsquo;ve just pulled out the latest develop and used the new <code>rake vcr_billy_caches:reset</code> command to clean up the caches.  Bit difficult to remember, and did I update the docs?  The answer is no :-( but done now.  So I think I already have tests of rake commands, the style of which I can copy to test our data migration &hellip; unlike <a href="https://robots.thoughtbot.com/test-rake-tasks-like-a-boss">thoughtbot</a> I&rsquo;ve been going with Cucumber, which might run a little slower, but I can more easily see the data setup, so I stamp out a devops feature like so:</p>
+<pre class="highlight gherkin"><code><span class="nt">@vcr</span> <span class="nt">@rake</span>
+<span class="kd">Feature</span><span class="p">:</span> Update from github urls to source repository model
+  As a website admin,
+  I want to move existing github urls to source repositories
+  So that the system supports multiple repositories per project
+
+  <span class="kn">Background</span><span class="p">:</span> projects have been added to database
+    <span class="err">Given the following legacy projects exist</span><span class="p">:</span>
+      <span class="p">|</span> <span class="nv">title</span>        <span class="p">|</span> <span class="nv">description</span>         <span class="p">|</span> <span class="nv">github_url</span>                                    <span class="p">|</span> <span class="nv">status</span>   <span class="p">|</span> <span class="nv">commit_count</span> <span class="p">|</span>
+      <span class="p">|</span> <span class="n">WebsiteTwo</span>   <span class="p">|</span> <span class="n">awesome</span> <span class="n">autograder</span>  <span class="p">|</span> <span class="n">https://github.com/AgileVentures/WebsiteTwo</span>   <span class="p">|</span> <span class="n">active</span>   <span class="p">|</span> <span class="n">1</span>            <span class="p">|</span>
+      <span class="p">|</span> <span class="n">WebsiteOne</span>   <span class="p">|</span> <span class="n">website</span> <span class="n">one</span> <span class="n">project</span> <span class="p">|</span> <span class="n">https://github.com/AgileVentures/WebsiteOne</span>   <span class="p">|</span> <span class="n">inactive</span> <span class="p">|</span> <span class="n">1</span>            <span class="p">|</span>
+      <span class="p">|</span> <span class="n">edx</span>          <span class="p">|</span> <span class="n">MOOC</span> <span class="n">platform</span>       <span class="p">|</span> <span class="n">https://github.com/edx</span>                        <span class="p">|</span> <span class="n">active</span>   <span class="p">|</span> <span class="n">1</span>            <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Unity</span>        <span class="p">|</span> <span class="n">Unity</span> <span class="n">project</span>       <span class="p">|</span>                                               <span class="p">|</span> <span class="n">active</span>   <span class="p">|</span> <span class="n">1</span>            <span class="p">|</span>
+      <span class="p">|</span> <span class="n">LocalSupport</span> <span class="p">|</span> <span class="n">Scheduler</span> <span class="n">queue</span>     <span class="p">|</span> <span class="n">https://github.com/AgileVentures/LocalSupport</span> <span class="p">|</span> <span class="n">active</span>   <span class="p">|</span> <span class="n">1</span>            <span class="p">|</span>
+
+  <span class="kn">Scenario</span><span class="p">:</span> Run the data migration to copy github urls to source repositories
+    <span class="nf">When</span> I run the rake task for migrating github urls
+    <span class="err">Then I should see projects with following details</span><span class="p">:</span>
+      <span class="p">|</span> <span class="nv">title</span>        <span class="p">|</span> <span class="nv">status</span>   <span class="p">|</span> <span class="nv">github_url</span>                                    <span class="p">|</span>
+      <span class="p">|</span> <span class="n">WebsiteTwo</span>   <span class="p">|</span> <span class="n">active</span>   <span class="p">|</span> <span class="n">https://github.com/AgileVentures/WebsiteTwo</span>   <span class="p">|</span>
+      <span class="p">|</span> <span class="n">WebsiteOne</span>   <span class="p">|</span> <span class="n">inactive</span> <span class="p">|</span> <span class="n">https://github.com/AgileVentures/WebsiteOne</span>   <span class="p">|</span>
+      <span class="p">|</span> <span class="n">edx</span>          <span class="p">|</span> <span class="n">active</span>   <span class="p">|</span> <span class="n">https://github.com/edx</span>                        <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Unity</span>        <span class="p">|</span> <span class="n">active</span>   <span class="p">|</span>                                               <span class="p">|</span>
+      <span class="p">|</span> <span class="n">LocalSupport</span> <span class="p">|</span> <span class="n">active</span>   <span class="p">|</span> <span class="n">https://github.com/AgileVentures/LocalSupport</span> <span class="p">|</span>
+</code></pre>
+<p>which means I need a couple of new step definitions:</p>
+<pre class="highlight ruby"><code><span class="no">When</span><span class="p">(</span><span class="sr">/^I run the rake task for migrating github urls$/</span><span class="p">)</span> <span class="k">do</span>
+  <span class="vg">$rake</span><span class="p">[</span><span class="s1">'db:migrate_from_github_url_to_source_repository'</span><span class="p">].</span><span class="nf">execute</span>
+<span class="k">end</span>
+
+<span class="no">Given</span><span class="p">(</span><span class="sr">/^the following legacy projects exist:$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">table</span><span class="o">|</span>
+  <span class="c1"># table is a table.hashes.keys # =&gt; [:title, :description, :github_url, :status, :commit_count]</span>
+  <span class="n">table</span><span class="p">.</span><span class="nf">hashes</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="o">|</span>
+    <span class="n">project</span> <span class="o">=</span> <span class="n">default_test_author</span><span class="p">.</span><span class="nf">projects</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="nb">hash</span><span class="p">.</span><span class="nf">except</span><span class="p">(</span><span class="s1">'author'</span><span class="p">,</span> <span class="s1">'tags'</span><span class="p">))</span>
+    <span class="n">project</span><span class="p">.</span><span class="nf">save!</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>which as usual requires an update to the <code>@rake</code> hook:</p>
+<pre class="highlight ruby"><code><span class="no">Before</span><span class="p">(</span><span class="s1">'@rake'</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">scenario</span><span class="o">|</span>
+  <span class="k">unless</span> <span class="vg">$rake</span>
+    <span class="nb">require</span> <span class="s1">'rake'</span>
+    <span class="no">Rake</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">rake_require</span> <span class="s1">'tasks/scheduler'</span>
+    <span class="no">Rake</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">rake_require</span> <span class="s1">'tasks/migrate_plans'</span>
+    <span class="no">Rake</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">rake_require</span> <span class="s1">'tasks/create_plans'</span>
+    <span class="no">Rake</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">rake_require</span> <span class="s1">'tasks/db'</span>
+    <span class="no">Rake</span><span class="o">::</span><span class="no">Task</span><span class="p">.</span><span class="nf">define_task</span><span class="p">(</span><span class="ss">:environment</span><span class="p">)</span>
+    <span class="vg">$rake</span> <span class="o">=</span> <span class="no">Rake</span><span class="o">::</span><span class="no">Task</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>which allowed me to isolate one syntax error in my rake task with this error:</p>
+<pre class="highlight plaintext"><code>    When I run the rake task for migrating github urls                        # features/step_definitions/devops_steps.rb:67
+      undefined method `create' for #&lt;Project:0x007ffabb789318&gt;
+      Did you mean?  created_at (NoMethodError)
+      ./lib/tasks/db.rake:5:in `block (3 levels) in &lt;top (required)&gt;'
+      ./lib/tasks/db.rake:4:in `block (2 levels) in &lt;top (required)&gt;'
+      ./features/step_definitions/devops_steps.rb:68:in `/^I run the rake task for migrating github urls$/'
+      features/devops/migrate_github_urls.feature:17:in `When I run the rake task for migrating github urls'
+</code></pre>
+<p>so I updated the task to:</p>
+<pre class="highlight plaintext"><code>namespace :db do
+  desc "migrate from github url to source repository domain model (copies github_url field to source repo model)"
+  task migrate_from_github_url_to_source_repository: :environment do
+    Project.all.each do |project|
+      project.source_repositories.create(url: project[:github_url])
+    end
+  end
+end
+</code></pre>
+<p>which got the task running, but I was not seeing the projects I wanted:</p>
+<pre class="highlight plaintext"><code>  Scenario: Run the data migration to copy github urls to source repositories # features/devops/migrate_github_urls.feature:16
+    When I run the rake task for migrating github urls                        # features/step_definitions/devops_steps.rb:67
+    Then I should see projects with following details:                        # features/step_definitions/projects_steps.rb:126
+      | title        | status   | github_url                                    |
+      | WebsiteTwo   | active   | https://github.com/AgileVentures/WebsiteTwo   |
+      | WebsiteOne   | inactive | https://github.com/AgileVentures/WebsiteOne   |
+      | edx          | active   | https://github.com/edx                        |
+      | Unity        | active   |                                               |
+      | LocalSupport | active   | https://github.com/AgileVentures/LocalSupport |
+
+      expected: 0
+           got: 1
+
+      (compared using ==)
+       (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/projects_steps.rb:131:in `block (2 levels) in &lt;top (required)&gt;'
+      ./features/step_definitions/projects_steps.rb:129:in `each'
+      ./features/step_definitions/projects_steps.rb:129:in `/^I should see projects with following details:$/'
+      features/devops/migrate_github_urls.feature:18:in `Then I should see projects with following details:'
+</code></pre>
+<p>(wish I could get the green red and blue in github syntax markup for cuke and rspec output &hellip;) and I see that the step definition appears to be hard coded to be doing something for commit counts:</p>
+<pre class="highlight ruby"><code><span class="no">Then</span><span class="p">(</span><span class="sr">/^I should see projects with following details:$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">table</span><span class="o">|</span>
+  <span class="c1"># table is a Cucumber::Core::Ast::DataTable</span>
+   <span class="n">projects</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="nf">hashes</span>
+   <span class="n">projects</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span> <span class="n">project</span> <span class="o">|</span> 
+      <span class="n">updated_project</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">find_by_title</span><span class="p">(</span><span class="n">project</span><span class="p">[</span><span class="s2">"title"</span><span class="p">])</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">updated_project</span><span class="p">.</span><span class="nf">commit_count</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">project</span><span class="p">[</span><span class="s2">"commit_count"</span><span class="p">].</span><span class="nf">to_i</span><span class="p">)</span>
+   <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>I guess I&rsquo;ll rename that to be more explicit about what it&rsquo;s doing and similarly for my own one (could create some generic method that did what the step said, but not now):</p>
+<pre class="highlight ruby"><code><span class="no">Then</span><span class="p">(</span><span class="sr">/^I should see projects looked up by title with first source repository same as github_url:$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">table</span><span class="o">|</span>
+  <span class="c1"># table is a Cucumber::Core::Ast::DataTable</span>
+  <span class="n">projects</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="nf">hashes</span>
+  <span class="n">projects</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span> <span class="n">project</span> <span class="o">|</span>
+    <span class="n">updated_project</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">find_by_title</span><span class="p">(</span><span class="n">project</span><span class="p">[</span><span class="s2">"title"</span><span class="p">])</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">updated_project</span><span class="p">.</span><span class="nf">github_url</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">project</span><span class="p">[</span><span class="s2">"github_url"</span><span class="p">])</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">updated_project</span><span class="p">.</span><span class="nf">source_repositories</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">url</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">project</span><span class="p">[</span><span class="s2">"github_url"</span><span class="p">])</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre><pre class="highlight ruby"><code><span class="no">Then</span><span class="p">(</span><span class="sr">/^I should see projects looked up by title with the correct commit count:$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">table</span><span class="o">|</span>
+  <span class="c1"># table is a Cucumber::Core::Ast::DataTable</span>
+  <span class="n">projects</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="nf">hashes</span>
+  <span class="n">projects</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span> <span class="n">project</span> <span class="o">|</span>
+    <span class="n">updated_project</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">find_by_title</span><span class="p">(</span><span class="n">project</span><span class="p">[</span><span class="s2">"title"</span><span class="p">])</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">updated_project</span><span class="p">.</span><span class="nf">commit_count</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">project</span><span class="p">[</span><span class="s2">"commit_count"</span><span class="p">].</span><span class="nf">to_i</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>which all now passes, but since I created the task before the test, I need to break the test; which I can do by commenting out the rake step and pleasingly that gives me the right fail.  Okay, I think I can pack this up and if the CI passes we can get it onto develop and start some manual tests there&hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
