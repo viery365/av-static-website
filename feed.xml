@@ -41,6 +41,153 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Return to the Greeter Bots</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/26/av-ecosystem-review-return-to-the-greeter-bots/"/>
+    <id>http://blog.url.com/2017/09/26/av-ecosystem-review-return-to-the-greeter-bots/</id>
+    <published>2017-09-26T01:00:00+01:00</published>
+    <updated>2017-11-27T20:43:53+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="bots" src="/images/../images/bots2.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I had no comments on the multiple source repository pull request (apart from my own), so I&amp;rsquo;ve merged that to play with on develop.  I want to pop back all the way to up to reviewing the flow of folks through AgileVentures and my experiments with the getting started pages, but there&amp;rsquo;s a couple of stops on the way.   First is to get the new code of conduct more prominent, and sort out the greeter bots; as well as finishing up the changes to the Premium Mob/F2F pages.&lt;/p&gt;
+
+&lt;p&gt;So let&amp;rsquo;s start with the greeter bot, which should mention the code of conduct, I think.  First up I&amp;rsquo;ll merge in the simple unit tests I added previously:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot &lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ npm &lt;span class="nb"&gt;test&lt;/span&gt;
+
+&lt;span class="gp"&gt;&amp;gt; &lt;/span&gt;greeter_bot@1.0.0 &lt;span class="nb"&gt;test&lt;/span&gt; /Users/tansaku/Documents/GitHub/AgileVentures/greeter_bot
+&lt;span class="gp"&gt;&amp;gt; &lt;/span&gt;mocha &lt;span class="nb"&gt;test&lt;/span&gt;/&lt;span class="k"&gt;**&lt;/span&gt;/&lt;span class="k"&gt;*&lt;/span&gt;.js
+
+  Bot
+    ✓ should include linked techtalk channel &lt;span class="k"&gt;in &lt;/span&gt;greeting
+    ✓ should include linked new_members channel &lt;span class="k"&gt;in &lt;/span&gt;greeting
+    ✓ should include linked random channel &lt;span class="k"&gt;in &lt;/span&gt;greeting
+
+  3 passing &lt;span class="o"&gt;(&lt;/span&gt;9ms&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;They&amp;rsquo;re all passing on master, and now I can test drive the addition of the code of conduct link:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;  &lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'should include link to our code of conduct'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+    &lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;greeting&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;to&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;https://github.com/AgileVentures/AgileVentures/blob/master/CODE_OF_CONDUCT.md|code of conduct&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which fails:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot &lt;span class="o"&gt;(&lt;/span&gt;6_add_code_of_conduct&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ npm &lt;span class="nb"&gt;test&lt;/span&gt;
+
+&lt;span class="gp"&gt;&amp;gt; &lt;/span&gt;greeter_bot@1.0.0 &lt;span class="nb"&gt;test&lt;/span&gt; /Users/tansaku/Documents/GitHub/AgileVentures/greeter_bot
+&lt;span class="gp"&gt;&amp;gt; &lt;/span&gt;mocha &lt;span class="nb"&gt;test&lt;/span&gt;/&lt;span class="k"&gt;**&lt;/span&gt;/&lt;span class="k"&gt;*&lt;/span&gt;.js
+
+  Bot
+    ✓ should include linked techtalk channel &lt;span class="k"&gt;in &lt;/span&gt;greeting
+    ✓ should include linked new_members channel &lt;span class="k"&gt;in &lt;/span&gt;greeting
+    ✓ should include linked random channel &lt;span class="k"&gt;in &lt;/span&gt;greeting
+    1&lt;span class="o"&gt;)&lt;/span&gt; should include link to our code of conduct
+
+
+  3 passing &lt;span class="o"&gt;(&lt;/span&gt;14ms&lt;span class="o"&gt;)&lt;/span&gt;
+  1 failing
+
+  1&lt;span class="o"&gt;)&lt;/span&gt; Bot should include link to our code of conduct:
+     AssertionError: expected &lt;span class="s1"&gt;'Welcome and great to have you with us! Please do introduce yourself in &amp;lt;#C02G8J689|new_members&amp;gt; (if you haven\'&lt;/span&gt;t already&lt;span class="o"&gt;)&lt;/span&gt;, and &lt;span class="k"&gt;if &lt;/span&gt;you have any general technical thoughts/issues/questions please ask &lt;span class="k"&gt;in&lt;/span&gt; &amp;lt;&lt;span class="c"&gt;#C02AA0ARR|techtalk&amp;gt; - &amp;lt;#C0285CSUH|random&amp;gt; is for everything else :slightly_smiling_face:\n\n\nbtw, are you interested in React, Elixir or RSpec?  We\'re offering a &amp;lt;https://www.agileventures.org/premium-mob-offer|free Premium mob programming session&amp;gt; to anyone who likes us on facebook.com/agileventures or follows us on twitter.com/agileventures ...' to include '&amp;lt;https://github.com/AgileVentures/AgileVentures/blob/master/CODE_OF_CONDUCT.md|code of conduct&amp;gt;'&lt;/span&gt;
+      at Context.&amp;lt;anonymous&amp;gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;test&lt;/span&gt;/greeting_test.js:20:25&lt;span class="o"&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;greeting.js updated:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="nx"&gt;greeting&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;"\n\n\nPlease help us make AgileVentures a welcoming place by following our &amp;lt;https://github.com/AgileVentures/AgileVentures/blob/master/CODE_OF_CONDUCT.md|code of conduct&amp;gt;"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and the tests pass:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot (6_add_code_of_conduct)]$ 
+→ npm test
+
+&amp;gt; greeter_bot@1.0.0 test /Users/tansaku/Documents/GitHub/AgileVentures/greeter_bot
+&amp;gt; mocha test/**/*.js
+
+  Bot
+    ✓ should include linked techtalk channel in greeting
+    ✓ should include linked new_members channel in greeting
+    ✓ should include linked random channel in greeting
+    ✓ should include link to our code of conduct
+
+  4 passing (9ms)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So now it&amp;rsquo;s a bit of a pain to do a complete manual test of this as it requires creating a new dummy user and signing up to a slack instance where this bot is installed.  So I just push to production from the branch:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/greeter_bot (6_add_code_of_conduct)]$ 
+→ git push -f azure-production 6_add_code_of_conduct:master
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A nice feature would be to be able to chat to the bot and get it to spit out the greeting at will, which would be handy for checking the format, if not the complete cycle of the functionality.  I&amp;rsquo;ll add that to the issues as I&amp;rsquo;ve been doing with every other thought as it comes up:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/greeter_bot/issues/17"&gt;Support messaging to bot&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/greeter_bot/issues/16"&gt;Improve Templating&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/greeter_bot/issues/15"&gt;Follow Standard JS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;but for now I have to wait for someone to join our slack instance to see the effect of the current change.  In the meantime I should get the link to the code of conduct into our Getting Started &amp;hellip; (also thinking that maybe we should migrate it from GitHub to be on our site), but one thing at a time.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropboxusercontent.com/s/49uuoke3uap9kpp/Screenshot%202017-09-26%2009.59.43.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;d also love to update the project greeter bot to work with the new shared #wiki&lt;em&gt;edu&lt;/em&gt;dash_collab channel that links our Slack to the WikiEdu folks.  There also I now have tests that are passing:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/project_greeter_bot (master)]$ 
+→ npm test
+
+&amp;gt; project_greeter_bot@0.0.0 test /Users/tansaku/Documents/GitHub/AgileVentures/project_greeter_bot
+&amp;gt; mocha test/**/*.js
+
+  Project Greeter bot
+    ✓ should have LocalSupport channel greeting
+    ✓ should have WebSiteOne channel greeting
+    ✓ should have Rundfunk Mitbestimmen channel greeting
+    ✓ should have Wiki EDU dashboard channel greeting
+
+  4 passing (12ms)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A test failed and passed, since I am using the channel ids in tests:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/project_greeter_bot (25_update_wiki_edu_channel)]$ 
+→ npm test
+
+&amp;gt; project_greeter_bot@0.0.0 test /Users/tansaku/Documents/GitHub/AgileVentures/project_greeter_bot
+&amp;gt; mocha test/**/*.js
+
+  Project Greeter bot
+    ✓ should have LocalSupport channel greeting
+    ✓ should have WebSiteOne channel greeting
+    ✓ should have Rundfunk Mitbestimmen channel greeting
+    1) should have Wiki EDU dashboard channel greeting
+
+  3 passing (11ms)
+  1 failing
+
+  1) Project Greeter bot should have Wiki EDU dashboard channel greeting:
+     AssertionError: expected { Object (C0KK907B5, C029E8G80, ...) } to have own property 'C36MNPWTD'
+      at Context.&amp;lt;anonymous&amp;gt; (test/greetings_spec.js:17:35)
+
+npm ERR! Test failed.  See above for more details.
+
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/project_greeter_bot (25_update_wiki_edu_channel)]$ 
+→ npm test
+
+&amp;gt; project_greeter_bot@0.0.0 test /Users/tansaku/Documents/GitHub/AgileVentures/project_greeter_bot
+&amp;gt; mocha test/**/*.js
+
+  Project Greeter bot
+    ✓ should have LocalSupport channel greeting
+    ✓ should have WebSiteOne channel greeting
+    ✓ should have Rundfunk Mitbestimmen channel greeting
+    ✓ should have Wiki EDU dashboard channel greeting
+
+
+  4 passing (9ms)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Would be good to be &lt;a href="https://github.com/AgileVentures/project_greeter_bot/issues/27"&gt;looking those up off the slack api&lt;/a&gt;, maybe?  Anyhow, I deployed that branch to production, since the change in the id will only make sense on production, and we&amp;rsquo;ll have to wait for someone to join the new shared channel and see &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Phew, so that&amp;rsquo;s all the hanging bot stuff deployed (if not checked), and reminds me of all the little other tasks I&amp;rsquo;d like to do with the bots to make them and their projects friendlier, but I think that&amp;rsquo;s for another week - tomorrow I hope to be on to the Premium pages &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Always One More Test</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/25/av-ecosystem-review-always-one-more-test/"/>
     <id>http://blog.url.com/2017/09/25/av-ecosystem-review-always-one-more-test/</id>
@@ -628,108 +775,6 @@ Unused parameters passed to Capybara::Queries::SelectorQuery : ["/auth/gplus"]
 ...............................
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;hmmm &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Why is Acceptance Testing so Time Consuming?</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/20/av-ecosystem-review-why-is-acceptance-testing-so-time-consuming/"/>
-    <id>http://blog.url.com/2017/09/20/av-ecosystem-review-why-is-acceptance-testing-so-time-consuming/</id>
-    <published>2017-09-20T01:00:00+01:00</published>
-    <updated>2017-11-20T20:13:35+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="acceptance testing" src="/images/acceptance_testing.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I think I&amp;rsquo;m almost there with acceptance testing this multiple repo feature, but it makes me wonder why acceptance testing always seems to be so time consuming.  I&amp;rsquo;m just wrapping up a private project where acceptance testing of electron apps was a real pain, and I really question if it was time well spent since the resulting acceptance tests are slow and unreliable.  Perhaps all that time would have been better spent on unit tests and getting a really coherent domain model sorted out.  The acceptance testing framework I&amp;rsquo;m using for Rails is a bit more stable, although it&amp;rsquo;s all a matter of degree; and already I&amp;rsquo;ve spent more time on the acceptance testing than on the feature itself for the multiple repo feature.  Although in the process I&amp;rsquo;ve learnt more precisely about the way the feature works and the nuances of the Cocoon gem.  Anyway, to attempt to wrap that up I&amp;rsquo;m going to try and get the dynamic repo form fields to be labelled numerically to make the acceptance testing easier, and try and avoid some of the issues brought up in this SO post:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/23184690/testing-fields-added-dynamically-by-cocoon-using-rspec-and-capybara"&gt;https://stackoverflow.com/questions/23184690/testing-fields-added-dynamically-by-cocoon-using-rspec-and-capybara&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I modified the code from &lt;a href="https://github.com/nathanvda/cocoon/issues/374"&gt;https://github.com/nathanvda/cocoon/issues/374&lt;/a&gt; like so:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;  &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'ready'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
-    &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#source_repositories'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'cocoon:after-insert'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;added_repo&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-      &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;sourceRepositories&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#project_form'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'.nested-fields'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-      &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;sourceRepositoriesSize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositories&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;size&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-
-      &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositories&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nx"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'.repo_field_label'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'GitHub url (primary)'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositoriesSize&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;sourceRepositoriesSize&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-          &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositories&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nx"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'.repo_field_label'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;`GitHub url (&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;)`&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="p"&gt;});&lt;/span&gt;
-  &lt;span class="p"&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;with the idea to adjust the label names dynamically, but in the first instance the script didn&amp;rsquo;t seem to run at all - I set a breakpoint in the chrome debugger, and loading the page didn&amp;rsquo;t stop there, making me think something wasn&amp;rsquo;t hooked up properly.  At least I thought that for a moment, and then I re-ran and it seemed like it did hook up. Hmm.  Well that gives me what I was hoping for:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/404eit68ham28ow/Screenshot%202017-09-20%2009.35.59.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I then spent 15 minutes trying to refactor to use &lt;code&gt;forEach&lt;/code&gt; or &lt;code&gt;for ... in&lt;/code&gt; all to no avail as the jQuery is returning an object with numeric keys rather than an array, and there are other enumerable properties on the object, so let&amp;rsquo;s see if the acceptance test can distinguish these form fields &amp;hellip; and no. Clicking on the &amp;ldquo;add more repos&amp;rdquo; link in the test does not appear to be generating the additional repo text field.  And maybe I never had that working in the test.  I worked out how to display an initial default field, but that doesn&amp;rsquo;t require any JavaScript.   Ugh, I&amp;rsquo;m really regretting the time I just spent failing to refactor the JavaScript.  It feels like the JavaScript is just not even running for this test.&lt;/p&gt;
-
-&lt;p&gt;So now I feel stuck.  The functionality is working beautifully in the browser as I test it manually, but not in the test.  I have the @javascript tag on this test - other javascript tests run.  What I&amp;rsquo;m unclear about here is how can I go about checking that JavaScript is actually working in the test.  Looking at our hook definitions I see the following:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;After&lt;/span&gt; &lt;span class="s1"&gt;'@javascript'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'session_pool'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="k"&gt;next&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;is_a?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Poltergeist&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Driver&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;driver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;restart&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;According to the &lt;a href="https://github.com/teamcapybara/capybara#using-capybara-with-cucumber"&gt;Capybara docs&lt;/a&gt; simply tagging with &lt;code&gt;@javascript&lt;/code&gt; should be sufficient &amp;hellip; and when I hook on the debugger I can see that Capybara is using the expected poltergeist&lt;em&gt;billy javascript&lt;/em&gt;driver:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;761_multiple_source_repository&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
-→ be cucumber features/projects/create_projects.feature:63
-
-&lt;span class="o"&gt;[&lt;/span&gt;Coveralls] Using SimpleCov&lt;span class="s1"&gt;'s '&lt;/span&gt;rails&lt;span class="s1"&gt;' settings.
-Using the default profile...
-@vcr
-Feature: Create projects
-  As a member of AgileVentures
-  So that I can create a focal point for an AgileVentures project
-  I would like to create a new project profile
-
-  @javascript
-  Scenario: Saving a new project with multiple repositories: success       # features/projects/create_projects.feature:64
-    Given I am logged in                                                   # features/step_definitions/user_steps.rb:63
-    And I am on the "Projects" page                                        # features/step_definitions/basic_steps.rb:84
-    When I click the very stylish "New Project" button                     # features/step_definitions/basic_steps.rb:291
-    When I fill in "Title" with "multiple repo project"                    # features/step_definitions/basic_steps.rb:140
-    And I fill in "Description" with "has lots of code"                    # features/step_definitions/basic_steps.rb:140
-    And I fill in "GitHub url (primary)" with "http://www.github.com/new"  # features/step_definitions/basic_steps.rb:140
-    And I click "Add more repos"                                           # features/step_definitions/basic_steps.rb:88
-Return value is: nil
-
-[390, 399] in /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/features/step_definitions/basic_steps.rb
-   390: end
-   391: 
-   392: 
-   393: And(/^I debug$/) do
-   394:   byebug
-=&amp;gt; 395: end
-   396: 
-   397: 
-   398: And(/^the window size is wide$/) do
-   399:   Capybara.page.current_window.resize_to(1300,400)
-(byebug) 
-(byebug) Capybara.current_driver
-:poltergeist_billy
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I dug through the documentation and found various things of interest:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href="#"&gt;https://github.com/teamcapybara/capybara#asynchronous-javascript-ajax-and-friends&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href="http://www.jonathanleighton.com/articles/2012/poltergeist-0-6-0/"&gt;http://www.jonathanleighton.com/articles/2012/poltergeist-0-6-0/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/teampoltergeist/poltergeist/issues/755"&gt;https://github.com/teampoltergeist/poltergeist/issues/755&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/thoughtbot/capybara-webkit#configuration"&gt;https://github.com/thoughtbot/capybara-webkit#configuration&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/teampoltergeist/poltergeist#remote-debugging-experimental"&gt;https://github.com/teampoltergeist/poltergeist#remote-debugging-experimental&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;and the upshot of all this and some other hacking is that I now have remote debugging setup, which makes it look like JavaScript is running, in as much as the second field has been generated, but that it hasn&amp;rsquo;t been renamed by the embedded script:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/n2m1i3skeu12szp/Screenshot%202017-09-20%2010.25.54.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I&amp;rsquo;m guessing I need to move this code to somewhere it might more reliably be run.  It clearly runs in the browser - ah, it looks like the ES6 interpolation I used might not be working &amp;hellip; yes, that was it - okay - this is a great step forward;  being able to see JS errors in capybara tests, yay!&lt;/p&gt;
-
-&lt;p&gt;And so now the interactive parts of the test passed, and I am onto errors that are all about me making sure that the data has been stored and updated correctly.  Tomorrow&amp;rsquo;s work is clear &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
