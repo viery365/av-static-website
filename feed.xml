@@ -41,6 +41,82 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Yanking Back to Premium</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/27/av-ecosystem-review-yanking-back-to-premium/"/>
+    <id>http://blog.url.com/2017/09/27/av-ecosystem-review-yanking-back-to-premium/</id>
+    <published>2017-09-27T01:00:00+01:00</published>
+    <updated>2017-11-28T21:42:43+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="yanked" src="/images/../images/yanked.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So in the backdrop yesterday a javascript bug in the multiple repos for projects feature led me to some refactoring that also fixed the bug, which I thought was pretty neat:&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="nx"&gt;WebsiteOne&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;define&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Projects'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="na"&gt;ensure_github_url_numbering&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;sourceRepositories&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#project_form'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'.nested-fields'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;sourceRepositoriesSize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositories&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;size&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositoriesSize&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;sourceRepositoriesSize&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+          &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositories&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nx"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'.repo_field_label'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'GitHub url ('&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;')'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+
+&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'ready'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;WebsiteOne&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Projects&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ensure_github_url_numbering&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+  &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#source_repositories'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'cocoon:after-insert'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;added_repo&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;WebsiteOne&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Projects&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ensure_github_url_numbering&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I had realised that the github url numbering was not being executed on initial page load, and so I extracted the function that performed it into our application name space and now call it both on page load and when the form is dynamically updated.  Should I have done the refactoring earlier?  I don&amp;rsquo;t think that would have highlighted the issue particularly, and I left off factoring because I wanted to see what direction I&amp;rsquo;d be pushed in next.&lt;/p&gt;
+
+&lt;p&gt;Anyhow, so the siren song of the Waffle board is calling, since I&amp;rsquo;ve started a spike to see if we can replace the agile-bot with a chunk of Ruby code, and that has an interesting interaction with a feature that Corey wants to work on.  Still we don&amp;rsquo;t have anything in the &amp;ldquo;Please check&amp;rdquo; column, and I must force myself to get to these outstanding Premium content tickets that I&amp;rsquo;ve got assigned to me in the &amp;ldquo;ready&amp;rdquo; column:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropboxusercontent.com/s/xqtuv7s55czfr5p/Screenshot%202017-09-27%2009.48.32.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Although I&amp;rsquo;m also desperate to get in some of the changes suggested in the marketing meeting as a result of feedback that indicates folks are not understanding the additional value that comes from Premium Mob and F2F.  From my action items there I can do a quick update of the overview page like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropboxusercontent.com/s/apwfkulugmnj4z8/Screenshot%202017-09-27%2009.52.42.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and I tweaked the language at the top, but I&amp;rsquo;m not convinced this will have much impact:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropboxusercontent.com/s/z1e41padz22gvao/Screenshot%202017-09-27%2009.56.35.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m thinking that images of people in hangouts in the Premium Mob and F2F pages will be what makes the difference.  Okay, let&amp;rsquo;s start with the mob page.  I previously took a copy of the Premium page in html into version control, although we are still storing it in the db.  Potentially confusing, but good backup for when I do things like accidentally blow away the changes I make on staging.  So I&amp;rsquo;m running out of time, but the key thing to make progress on the ticket is to turn the list of Premium Mob features into a set of whys, which I did in a blog:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Mob programming sessions with an assigned AV Mentor each week&lt;/li&gt;
+&lt;li&gt;Professional Development Planning Support&lt;/li&gt;
+&lt;li&gt;Free accesss to Udemy Complete Elixir &amp;amp; Phoenix Bootcamp course (usual price $50)&lt;/li&gt;
+&lt;li&gt;Free accesss to Udemy React Redux course (usual price $180)&lt;/li&gt;
+&lt;li&gt;25% discount on &amp;ldquo;Effective Testing with RSpec 3&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;10% discount on Upcase membership&lt;/li&gt;
+&lt;li&gt;Free access to the &amp;ldquo;Phoenix Inside Out&amp;rdquo; book series&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&amp;ndash;&amp;gt; Related Questions&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You want to level up on the latest hot technologies like Elixir and React?&lt;/li&gt;
+&lt;li&gt;You want to get a personalised professional development plan to achieve your goals?&lt;/li&gt;
+&lt;li&gt;You want to master mob programming online?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And for reference since it took 10 minutes to find it - my blog on that is &lt;a href="http://nonprofits.agileventures.org/2017/06/26/private-design-sprint-day-minus-one-blog/"&gt;http://nonprofits.agileventures.org/2017/06/26/private-design-sprint-day-minus-one-blog/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;So editing up the HTML I got half the Premium Mob page done, which is at least a start.  Will finish tomorrow:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ko5h8eraiwy5l63/Screenshot%202017-09-27%2010.38.32.png?dl=1" /&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Return to the Greeter Bots</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/26/av-ecosystem-review-return-to-the-greeter-bots/"/>
     <id>http://blog.url.com/2017/09/26/av-ecosystem-review-return-to-the-greeter-bots/</id>
@@ -521,260 +597,6 @@ end
 &lt;p&gt;As I was giving up, a prominent MOOC platform offers me to beta-test courses for free. Free refill is the end of resolution and the beginning of passive hyperactivity! You may begin your training week with a course on Embedded systems and end, on friday, with a course on PythonML on friday, without completing any. Does it make sense to participate in a mob programming session about RSPEC on monday, another one about phoenix on wednesday, on the last one about React on friday, when you only need to develop a small web app with React?&lt;/p&gt;
 
 &lt;p&gt;AgileVenture Premium Mob includes some kind of Professional Development Planning Support. I may ask the team to help me clean my training plan. But I&amp;rsquo;m still afraid they will tell me to stop learning Tensor Flow or the nitty gritty of Intel Parallel Architecture if I don&amp;rsquo;t have any prospect to work in these fields in the next year! &lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Cocoon Home Straight</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/21/av-ecosystem-review-cocoon-home-straight/"/>
-    <id>http://blog.url.com/2017/09/21/av-ecosystem-review-cocoon-home-straight/</id>
-    <published>2017-09-21T01:00:00+01:00</published>
-    <updated>2017-11-21T21:45:17+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="home straight" src="/images/Home_Straight.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So the answer to my question of yesterday, &amp;ldquo;Why is Acceptance Testing so hard&amp;rdquo; is that any coding is hard when you can&amp;rsquo;t get error messages.  The remote debug inspector I set up yesterday allowed me to see that our Capybara/Poltergeist/PhantomJS setup could not handle ES6 string interpolations.  It raises the question about why not, but I want to push on with this feature.&lt;/p&gt;
-
-&lt;p&gt;The test is now failing on this error:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    And I should see a link to "multiple repo project" on github            # features/step_definitions/projects_steps.rb:84
-      undefined method `split' for nil:NilClass (NoMethodError)
-      ./features/step_definitions/projects_steps.rb:86:in `/^I (should not|should) see a link to "(.*?)" on github$/'
-      features/projects/create_projects.feature:84:in `And I should see a link to "multiple repo project" on github'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;because the GitHub URL is being stored in a new location that&amp;rsquo;s not reflected in the project page.  The project page currently shows the GitHub link via this code:&lt;/p&gt;
-&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"small"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;link_to&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="vi"&gt;@project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;github_url&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;last&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="vi"&gt;@project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;github_url&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;on GitHub&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which explains the error in the test.  Just to see if it worked I threw the following into the project model:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;github_url&lt;/span&gt;
-    &lt;span class="n"&gt;source_repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;url&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and I was rewarded with a completely passing acceptance test.  However I have various issues to address:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;the acceptance test does not check that the second repo has been stored&lt;/li&gt;
-&lt;li&gt;the acceptance test is not very readable&lt;/li&gt;
-&lt;li&gt;the project page does not currently display all the repos&lt;/li&gt;
-&lt;li&gt;the project has various unit tests based on being able to set the github_url&lt;/li&gt;
-&lt;li&gt;the project model validates the URL&lt;/li&gt;
-&lt;li&gt;the process for safely migrating the existing data on production&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;and maybe others I haven&amp;rsquo;t thought of yet, so I&amp;rsquo;m tempted to run the other project acceptance tests and see what breaks &amp;hellip; other acceptance tests are breaking because the create project form has changed and they can&amp;rsquo;t now find the form fields they expect.  I updated a few label strings in the tests and that project code to:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;github_url&lt;/span&gt;
-    &lt;span class="n"&gt;source_repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;try&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and all the project &amp;ldquo;create&amp;rdquo; acceptance tests are green; so I kick off a run of the rest of the project acceptance tests.  Am I being bad here?  Shouldn&amp;rsquo;t I be clearly setting out my domain model and getting all my unit tests in place first?  My defense is that I&amp;rsquo;m sidling up on that, trying to use the existing tests from the outside in to give me the bigger picture here.  I very definitely don&amp;rsquo;t plan to just hack the app code until all the acceptance tests pass :-)&lt;/p&gt;
-
-&lt;p&gt;I get the project &amp;ldquo;show&amp;rdquo; acceptance tests to pass with the following changed step definition:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Given&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^the following projects exist:$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hashes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:author&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt;
-      &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by_first_name&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:author&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-      &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;except&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'author'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'tags'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;merge&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;user_id: &lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;
-      &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;default_test_author&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;projects&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;except&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'author'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'tags'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:github_url&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt;
-      &lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;source_repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;url: &lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:github_url&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="c1"&gt;# &amp;lt;-- change here&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:tags&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-      &lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;tag_list&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:tags&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="ss"&gt;parse: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save!&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and the project &amp;ldquo;edit&amp;rdquo; acceptance failures look pretty much like form field names just need to be changed, but actually the step definition needs a further change, specifically:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:github_url&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt;
-      &lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;source_repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;url: &lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:github_url&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;
-      &lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;source_repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;build&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;to ensure the projects created in the background steps have the default single source repository when they start up; and with that I have all the project acceptance tests green.  Now I attack the RSpec unit and integration tests, where I expect a slew of failures that should push me towards updating the domain model effectively.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ be rspec spec/models/project_spec.rb 
-[Coveralls] Using SimpleCov's 'rails' settings.
-
-Randomized with seed 60909
-.F...F...F....F...........
-
-Failures:
-
-  1) Project#github_repo returns the proper repo name if github url exists
-     Failure/Error: expect(project.github_repo).to eq 'AgileVentures/WebsiteOne'
-
-       expected: "AgileVentures/WebsiteOne"
-            got: ""
-
-       (compared using ==)
-     # ./spec/models/project_spec.rb:131:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'
-
-  2) Project#github_repo_user_name deals with hyphen gracefully
-     Failure/Error: expect(subject.github_repo_user_name).to eq 'shf-project'
-
-       expected: "shf-project"
-            got: ""
-
-       (compared using ==)
-     # ./spec/models/project_spec.rb:145:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'
-
-  3) Project#save should throw error for incomplete github url
-     Failure/Error: expect{ subject.github_repo_name }.to raise_error(NoMethodError, "undefined method `[]' for nil:NilClass")
-       expected NoMethodError with "undefined method `[]' for nil:NilClass" but nothing was raised
-     # ./spec/models/project_spec.rb:38:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'
-
-  4) Project#save should not accept invalid github url
-     Failure/Error: expect(subject).to_not be_valid
-       expected #&amp;lt;Project id: 1020, title: "Title 19", description: "Warp fields stabilize.", status: "We feel your presence.", created_at: nil, updated_at: nil, user_id: nil, slug: "title-19", github_url: "https:/github.com/google/instant-hangouts", pivotaltracker_url: nil, pitch: "'I AM the greatest!' - M. Ali", commit_count: 0, image_url: nil, last_github_update: nil&amp;gt; not to be valid
-     # ./spec/models/project_spec.rb:33:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'
-
-Finished in 0.65807 seconds (files took 8.4 seconds to load)
-26 examples, 4 failures
-
-Failed examples:
-
-rspec ./spec/models/project_spec.rb:129 # Project#github_repo returns the proper repo name if github url exists
-rspec ./spec/models/project_spec.rb:144 # Project#github_repo_user_name deals with hyphen gracefully
-rspec ./spec/models/project_spec.rb:36 # Project#save should throw error for incomplete github url
-rspec ./spec/models/project_spec.rb:31 # Project#save should not accept invalid github url
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;let&amp;rsquo;s take these in turn.  The first failing spec is&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    it 'returns the proper repo name if github url exists' do
-      project = build_stubbed(:project, github_url: 'https://github.com/AgileVentures/WebsiteOne')
-      expect(project.github_repo).to eq 'AgileVentures/WebsiteOne'
-    end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which I adjusted  to:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    it 'returns the proper repo name if github url exists' do
-      project = build_stubbed(:project)
-      project.source_repositories.create(url: 'https://github.com/AgileVentures/WebsiteOne')
-      expect(project.github_repo).to eq 'AgileVentures/WebsiteOne'
-    end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and then passes, and I assume we&amp;rsquo;re not &lt;a href="https://robots.thoughtbot.com/use-factory-girls-build-stubbed-for-a-faster-test"&gt;hitting the database&lt;/a&gt;.  Using other similar fixes I have all the project specs passing, so I guess I&amp;rsquo;ll run all the other specs to see if there are any other angles I&amp;rsquo;m missing.  The other thing that occurs to me is that we should have some specs for the new SourceRepository model.  I&amp;rsquo;m also unsure of the namings.  Should I have called it GitHubUrl or GitHubLink?  Does it matter?  I&amp;rsquo;d love us to be able to support BitBucket and other source repositories in the future &amp;hellip; anyhow, running the rest of the specs shows me that we&amp;rsquo;ve got a few more issues:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Failures:
-
-  1) GithubCommitsJob.job stores total commit count only for projects that have a github_url
-     Failure/Error: expect(project.commit_count).to be &amp;gt; 1
-
-       expected: &amp;gt; 1
-            got:   0
-     # ./spec/jobs/github_commits_job_spec.rb:28:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'
-
-  2) GithubCommitsJob.job stores commit counts only for users that have a github_profile_url
-     Failure/Error: expect(project.commit_counts.map(&amp;amp;:user)).to match_array(@users_with_github_profile_urls)
-
-       expected collection contained:  [#&amp;lt;User id: 3, email: "trey@howe.co", encrypted_password: "$2a$04$plCVt32oux72jZ5KZxe9weafqhT1Uo41SIF... receive_mailings: true, timezone_offset: nil, country_code: nil, status_count: 0, deleted_at: nil&amp;gt;]
-       actual collection contained:    []
-       the missing elements were:      [#&amp;lt;User id: 3, email: "trey@howe.co", encrypted_password: "$2a$04$plCVt32oux72jZ5KZxe9weafqhT1Uo41SIF... receive_mailings: true, timezone_offset: nil, country_code: nil, status_count: 0, deleted_at: nil&amp;gt;]
-     # ./spec/jobs/github_commits_job_spec.rb:33:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'
-
-  3) GithubCommitsJob.job stores correct total commit count for projects
-     Failure/Error: expect(project.commit_count).to eq 3116
-
-       expected: 3116
-            got: 0
-
-       (compared using ==)
-     # ./spec/jobs/github_commits_job_spec.rb:42:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'
-
-  4) GithubCommitsJob.job stores commit counts only for projects that have a github_url
-     Failure/Error: expect(project.commit_counts.count).to eq(1)
-
-       expected: 1
-            got: 0
-
-       (compared using ==)
-     # ./spec/jobs/github_commits_job_spec.rb:23:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'
-
-  5) GithubCommitsJob.job stores correct commit counts by user and project
-     Failure/Error: expect(CommitCount.find_by!(project: project, user: @users[0]).commit_count).to eq 481
-
-     ActiveRecord::RecordNotFound:
-       Couldn't find CommitCount
-     # /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/activerecord-4.2.8/lib/active_record/core.rb:196:in `find_by!'
-     # ./spec/jobs/github_commits_job_spec.rb:37:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'
-
-  6) GithubLastUpdatesJob#run shf-project with hyphen has correct last commit date after job run
-     Failure/Error: expect(project.reload.last_github_update).not_to be_nil
-
-       expected: not nil
-            got: nil
-     # ./spec/jobs/github_last_updates_job_spec.rb:9:in `block (4 levels) in &amp;lt;top (required)&amp;gt;'
-
-  7) projects/show.html.erb renders a link to the project's github page
-     Failure/Error: expect(rendered).to have_link("#{project.github_url.split('/').last}", :href =&amp;gt; project.github_url)
-
-     NoMethodError:
-       undefined method `split' for nil:NilClass
-     # ./spec/views/projects/show.html.erb_spec.rb:42:in `block (2 levels) in &amp;lt;top (required)&amp;gt;'
-
-  8) projects/edit.html.erb renders project form labels
-     Failure/Error: expect(rendered).to have_text('GitHub link')
-       expected to find text "GitHub link" in "edit the Title 400 project Title Image url Description Warp fields stabilize. Status Active Closed Pending Add more repos Issue Tracker link Back $(document).on('ready', function(){ $('#source_repositories').on('cocoon:after-insert', function(e, added_repo) { var sourceRepositories = $('#project_form').find('.nested-fields'); var sourceRepositoriesSize = $(sourceRepositories).size(); if (sourceRepositoriesSize &amp;gt; 1) { for(var i = 1; i &amp;lt; sourceRepositoriesSize; i++){ $(sourceRepositories[i]).find('.repo_field_label').html('GitHub url ('+(i+1)+')') } } }); })"
-     # ./spec/views/projects/edit.html.erb_spec.rb:16:in `block (2 levels) in &amp;lt;top (required)&amp;gt;'
-
-  9) projects/edit.html.erb renders project form fields
-     Failure/Error: expect(rendered).to have_field('GitHub link')
-       expected to find field "GitHub link" but there were no matches
-     # ./spec/views/projects/edit.html.erb_spec.rb:26:in `block (2 levels) in &amp;lt;top (required)&amp;gt;'
-
-Finished in 1 minute 4.01 seconds (files took 9.28 seconds to load)
-940 examples, 9 failures, 2 pending
-
-Failed examples:
-
-rspec ./spec/jobs/github_commits_job_spec.rb:27 # GithubCommitsJob.job stores total commit count only for projects that have a github_url
-rspec ./spec/jobs/github_commits_job_spec.rb:32 # GithubCommitsJob.job stores commit counts only for users that have a github_profile_url
-rspec ./spec/jobs/github_commits_job_spec.rb:41 # GithubCommitsJob.job stores correct total commit count for projects
-rspec ./spec/jobs/github_commits_job_spec.rb:22 # GithubCommitsJob.job stores commit counts only for projects that have a github_url
-rspec ./spec/jobs/github_commits_job_spec.rb:36 # GithubCommitsJob.job stores correct commit counts by user and project
-rspec ./spec/jobs/github_last_updates_job_spec.rb:7 # GithubLastUpdatesJob#run shf-project with hyphen has correct last commit date after job run
-rspec ./spec/views/projects/show.html.erb_spec.rb:39 # projects/show.html.erb renders a link to the project's github page
-rspec ./spec/views/projects/edit.html.erb_spec.rb:11 # projects/edit.html.erb renders project form labels
-rspec ./spec/views/projects/edit.html.erb_spec.rb:21 # projects/edit.html.erb renders project form fields
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Code relating to checking commits on Github is failing &amp;hellip;, although those can probably be fixed by creating the projects with associated source reposiories, and those view spec failures can probably be addressed by deleting the view specs.  Although I did also need to update this scope on the Project model:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;scope&lt;/span&gt; &lt;span class="ss"&gt;:with_github_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;includes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:source_repositories&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;not&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;source_repositories: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;id: &lt;/span&gt;&lt;span class="kp"&gt;nil&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and with that I think I may have gotten all the specs green.  There&amp;rsquo;s still a lot to do, but I&amp;rsquo;m reassured that I&amp;rsquo;m covering the majority of the angles.  I&amp;rsquo;ll push up this code into the PR and tomorrow I can work on cleaning up the domain model, tightening up the unit tests, and maybe even complete the first phase of this feature?  I note also that we have a load of cruft in the spec output - would love to clear that out, but can I prioritise it?&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Randomized with seed 51520
-.....................................................Unused parameters passed to Capybara::Queries::SelectorQuery : ["/users/sign_in"]
-Unused parameters passed to Capybara::Queries::SelectorQuery : ["/users/password/new"]
-..Unused parameters passed to Capybara::Queries::SelectorQuery : ["/auth/github"]
-.............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................DEPRECATION WARNING: You attempted to assign a value which is not explicitly `true` or `false` ("never") to a boolean column. Currently this value casts to `false`. This will change to match Ruby's semantics, and will cast to `true` in Rails 5. If you would like to maintain the current behavior, you should explicitly handle the values you would like cast to `false`. (called from block (3 levels) in &amp;lt;top (required)&amp;gt; at /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/event_spec.rb:244)
-.DEPRECATION WARNING: You attempted to assign a value which is not explicitly `true` or `false` ("never") to a boolean column. Currently this value casts to `false`. This will change to match Ruby's semantics, and will cast to `true` in Rails 5. If you would like to maintain the current behavior, you should explicitly handle the values you would like cast to `false`. (called from block (3 levels) in &amp;lt;top (required)&amp;gt; at /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/event_spec.rb:239)
-........DEPRECATION WARNING: You attempted to assign a value which is not explicitly `true` or `false` ("never") to a boolean column. Currently this value casts to `false`. This will change to match Ruby's semantics, and will cast to `true` in Rails 5. If you would like to maintain the current behavior, you should explicitly handle the values you would like cast to `false`. (called from block (3 levels) in &amp;lt;top (required)&amp;gt; at /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/event_spec.rb:158)
-.DEPRECATION WARNING: You attempted to assign a value which is not explicitly `true` or `false` ("never") to a boolean column. Currently this value casts to `false`. This will change to match Ruby's semantics, and will cast to `true` in Rails 5. If you would like to maintain the current behavior, you should explicitly handle the values you would like cast to `false`. (called from block (3 levels) in &amp;lt;top (required)&amp;gt; at /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/event_spec.rb:174)
-.DEPRECATION WARNING: You attempted to assign a value which is not explicitly `true` or `false` ("never") to a boolean column. Currently this value casts to `false`. This will change to match Ruby's semantics, and will cast to `true` in Rails 5. If you would like to maintain the current behavior, you should explicitly handle the values you would like cast to `false`. (called from block (3 levels) in &amp;lt;top (required)&amp;gt; at /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/event_spec.rb:142)
-............................Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/event-131"]
-..Unused parameters passed to Capybara::Queries::SelectorQuery : ["/projects/title-240"]
-......................................*...............................Unused parameters passed to Capybara::Queries::SelectorQuery : ["/auth/github?origin="]
-Unused parameters passed to Capybara::Queries::SelectorQuery : ["/auth/gplus?origin="]
-.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/users/sign_up"]
-Unused parameters passed to Capybara::Queries::SelectorQuery : ["/users/password/new"]
-..Unused parameters passed to Capybara::Queries::SelectorQuery : ["/auth/github"]
-Unused parameters passed to Capybara::Queries::SelectorQuery : ["/auth/gplus"]
-......................................WARNING: Using the `raise_error` matcher without providing a specific error or message risks false positives, since `raise_error` will match when Ruby raises a `NoMethodError`, `NameError` or `ArgumentError`, potentially allowing the expectation to pass without even executing the method you are intending to call. Actual error raised was #&amp;lt;ActiveRecord::StatementInvalid: PG::NotNullViolation: ERROR:  null value in column "user_id" violat...
-: UPDATE "authentications" SET "user_id" = $1, "updated_at" = $2 WHERE "authentications"."id" = $3&amp;gt;. Instead consider providing a specific error class or message. This message can be suppressed by setting: `RSpec::Expectations.configuration.on_potential_false_positives = :nothing`. Called from /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/authentication_spec.rb:12:in `block (2 levels) in &amp;lt;top (required)&amp;gt;'.
-.............................*.......WARNING: Using the `raise_error` matcher without providing a specific error or message risks false positives, since `raise_error` will match when Ruby raises a `NoMethodError`, `NameError` or `ArgumentError`, potentially allowing the expectation to pass without even executing the method you are intending to call. Actual error raised was #&amp;lt;ActiveRecord::RecordNotFound: User has not exposed his profile publicly&amp;gt;. Instead consider providing a specific error class or message. This message can be suppressed by setting: `RSpec::Expectations.configuration.on_potential_false_positives = :nothing`. Called from /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/controllers/users_controller_spec.rb:67:in `block (4 levels) in &amp;lt;top (required)&amp;gt;'.
-..................................................................Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/1574"]
-..Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/1576"]
-..Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/1578"]
-.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/1579"]
-.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/1580"]
-.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/code"]
-.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/grow"]
-.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/learn"]
-.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/pair"]
-.Unused parameters passed to Capybara::Queries::SelectorQuery : ["/events/1585"]
-.......................................................Unused parameters passed to Capybara::Queries::SelectorQuery : ["/sponsors"]
-...............................
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;hmmm &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Yanking Back to Premium</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_09 x2017_09_27 x2017_09_27_av-ecosystem-review-yanking-back-to-premium x2017_09_27_av-ecosystem-review-yanking-back-to-premium_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/09/27/av-ecosystem-review-yanking-back-to-premium/">AV EcoSystem Review Yanking Back to Premium</a></h2>
+        <h5 class='date'>27 Sep 2017</h5>
+    <p><img alt="yanked" src="/images/../images/yanked.png" /></p>
+
+<p>So in the backdrop yesterday a javascript bug in the multiple repos for projects feature led me to some refactoring that also fixed the bug, which I thought was pretty neat:</p>
+<pre class="highlight javascript"><code><span class="nx">WebsiteOne</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">'Projects'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">ensure_github_url_numbering</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">sourceRepositories</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#project_form'</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.nested-fields'</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">sourceRepositoriesSize</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">sourceRepositories</span><span class="p">).</span><span class="nx">size</span><span class="p">();</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="nx">sourceRepositoriesSize</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">sourceRepositoriesSize</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">$</span><span class="p">(</span><span class="nx">sourceRepositories</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nx">find</span><span class="p">(</span><span class="s1">'.repo_field_label'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">'GitHub url ('</span> <span class="o">+</span> <span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">')'</span><span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'ready'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">WebsiteOne</span><span class="p">.</span><span class="nx">Projects</span><span class="p">.</span><span class="nx">ensure_github_url_numbering</span><span class="p">()</span>
+
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'#source_repositories'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'cocoon:after-insert'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">added_repo</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">WebsiteOne</span><span class="p">.</span><span class="nx">Projects</span><span class="p">.</span><span class="nx">ensure_github_url_numbering</span><span class="p">()</span>
+  <span class="p">});</span>
+<span class="p">})</span>
+</code></pre>
+<p>I had realised that the github url numbering was not being executed on initial page load, and so I extracted the function that performed it into our application name space and now call it both on page load and when the form is dynamically updated.  Should I have done the refactoring earlier?  I don&rsquo;t think that would have highlighted the issue particularly, and I left off factoring because I wanted to see what direction I&rsquo;d be pushed in next.</p>
+
+<p>Anyhow, so the siren song of the Waffle board is calling, since I&rsquo;ve started a spike to see if we can replace the agile-bot with a chunk of Ruby code, and that has an interesting interaction with a feature that Corey wants to work on.  Still we don&rsquo;t have anything in the &ldquo;Please check&rdquo; column, and I must force myself to get to these outstanding Premium content tickets that I&rsquo;ve got assigned to me in the &ldquo;ready&rdquo; column:</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/xqtuv7s55czfr5p/Screenshot%202017-09-27%2009.48.32.png?dl=1" /></p>
+
+<p>Although I&rsquo;m also desperate to get in some of the changes suggested in the marketing meeting as a result of feedback that indicates folks are not understanding the additional value that comes from Premium Mob and F2F.  From my action items there I can do a quick update of the overview page like so:</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/apwfkulugmnj4z8/Screenshot%202017-09-27%2009.52.42.png?dl=1" /></p>
+
+<p>and I tweaked the language at the top, but I&rsquo;m not convinced this will have much impact:</p>
+
+<p><img src="https://dl.dropboxusercontent.com/s/z1e41padz22gvao/Screenshot%202017-09-27%2009.56.35.png?dl=1" /></p>
+
+<p>I&rsquo;m thinking that images of people in hangouts in the Premium Mob and F2F pages will be what makes the difference.  Okay, let&rsquo;s start with the mob page.  I previously took a copy of the Premium page in html into version control, although we are still storing it in the db.  Potentially confusing, but good backup for when I do things like accidentally blow away the changes I make on staging.  So I&rsquo;m running out of time, but the key thing to make progress on the ticket is to turn the list of Premium Mob features into a set of whys, which I did in a blog:</p>
+
+<ul>
+<li>Mob programming sessions with an assigned AV Mentor each week</li>
+<li>Professional Development Planning Support</li>
+<li>Free accesss to Udemy Complete Elixir &amp; Phoenix Bootcamp course (usual price $50)</li>
+<li>Free accesss to Udemy React Redux course (usual price $180)</li>
+<li>25% discount on &ldquo;Effective Testing with RSpec 3&rdquo;</li>
+<li>10% discount on Upcase membership</li>
+<li>Free access to the &ldquo;Phoenix Inside Out&rdquo; book series</li>
+</ul>
+
+<p>&ndash;&gt; Related Questions</p>
+
+<ul>
+<li>You want to level up on the latest hot technologies like Elixir and React?</li>
+<li>You want to get a personalised professional development plan to achieve your goals?</li>
+<li>You want to master mob programming online?</li>
+</ul>
+
+<p>And for reference since it took 10 minutes to find it - my blog on that is <a href="http://nonprofits.agileventures.org/2017/06/26/private-design-sprint-day-minus-one-blog/">http://nonprofits.agileventures.org/2017/06/26/private-design-sprint-day-minus-one-blog/</a>.</p>
+
+<p>So editing up the HTML I got half the Premium Mob page done, which is at least a start.  Will finish tomorrow:</p>
+
+<p><img src="https://dl.dropbox.com/s/ko5h8eraiwy5l63/Screenshot%202017-09-27%2010.38.32.png?dl=1" /></p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
