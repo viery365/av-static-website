@@ -41,6 +41,48 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Sorting Premium F2F Page</title>
+    <link rel="alternate" href="http://blog.url.com/2017/09/29/av-ecosystem-review-premium-f2f-page/"/>
+    <id>http://blog.url.com/2017/09/29/av-ecosystem-review-premium-f2f-page/</id>
+    <published>2017-09-29T01:00:00+01:00</published>
+    <updated>2017-11-30T20:04:31+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Blurgh, so I couldn&amp;rsquo;t sleep last night - too much late night under nines football admin coming up on whatsapp - new comedy album from Patton Oswalt put paid to an overactive brain and eventually I slept.  I took my one day jogging pass.  I try to jog every weekday morning, but I usually let myself off one day if I&amp;rsquo;m feeling run down.  Got to the computer in reasonable time.  Not feeling very perky.  Could use a coffee - I&amp;rsquo;m at the end of my second week without coffee.  Got totally distracted by Slack and ending up checking all email, twitter and facebook and fixing a few things up, but actually not too much to distract me, and I&amp;rsquo;m finally back to the blog face, where I&amp;rsquo;m thinking I will try to charge the Premium F2F page changes out of the way.&lt;/p&gt;
+
+&lt;p&gt;I start off by pushing the Premium Mob change PR up and getting it into the &amp;ldquo;Please Check&amp;rdquo; column:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/yh244zrmqixhr2s/Screenshot%202017-09-29%2010.07.53.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;And then I can open up a branch for ticket 1714 (Adjust Premium F2F page) to get that ticket off the ready column where it&amp;rsquo;s been languishing with me assigned to it.  So the change in the wording we have in mind is as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;One hour of pair programming time with an AV Mentor on an AV project each month&lt;/li&gt;
+&lt;li&gt;Voting rights in AV general meetings&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;–&amp;gt; Related Questions&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You want personalised individual support to improve your coding and pairing skills?&lt;/li&gt;
+&lt;li&gt;You want to influence the future direction of the AgileVentures charity?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;from &lt;a href="http://nonprofits.agileventures.org/2017/06/26/private-design-sprint-day-minus-one-blog/"&gt;http://nonprofits.agileventures.org/2017/06/26/private-design-sprint-day-minus-one-blog/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;and after a bit of HTML manipulation that&amp;rsquo;s done:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/pagssviw40dc0ka/Screenshot%202017-09-29%2010.29.32.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and pushing the backup of the HTML into a PR I get both the premium page updates in the &amp;ldquo;Please Check&amp;rdquo; column:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/5525qjulecdnsbg/Screenshot%202017-09-29%2010.32.27.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now there&amp;rsquo;s just the rest of the board to clear up - I think next week I have to start fresh with a big review of what the priorities are for the whole ecosystem - although it would be lovely to tidy up that agilebot replacement spike &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Sorting Premium Mob Page</title>
     <link rel="alternate" href="http://blog.url.com/2017/09/28/av-ecosystem-review-sorting-premium-mob-page/"/>
     <id>http://blog.url.com/2017/09/28/av-ecosystem-review-sorting-premium-mob-page/</id>
@@ -420,179 +462,6 @@ end
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;which all now passes, but since I created the task before the test, I need to break the test; which I can do by commenting out the rake step and pleasingly that gives me the right fail.  Okay, I think I can pack this up and if the CI passes we can get it onto develop and start some manual tests there&amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review That Domain Review Step</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/22/av-ecosystem-review-that-domain-review-step/"/>
-    <id>http://blog.url.com/2017/09/22/av-ecosystem-review-that-domain-review-step/</id>
-    <published>2017-09-22T01:00:00+01:00</published>
-    <updated>2017-11-22T21:32:51+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="domain review" src="/images/domain_review.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Okay, so I have the multiple repository functionality basically working, but it&amp;rsquo;s time to clear up and make things right &amp;hellip; here&amp;rsquo;s my checklist from yesterday:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;the acceptance test does not check that the second repo has been stored&lt;/li&gt;
-&lt;li&gt;the acceptance test is not very readable&lt;/li&gt;
-&lt;li&gt;currently the project page does not display all the repos&lt;/li&gt;
-&lt;li&gt;the project has various unit tests based on being able to set the github_url&lt;/li&gt;
-&lt;li&gt;the project model validates the URL&lt;/li&gt;
-&lt;li&gt;the process for safely migrating the existing data on production&lt;/li&gt;
-&lt;li&gt;the old hand rolled js from my initial attempt is hanging around&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;So attacking from the unit test side I notice that we do not mention the &lt;code&gt;with_github_url&lt;/code&gt; scope anywhere in our tests, which I can rectify with the following:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'.with_github_url'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'returns all projects that have at least one source repository'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;source_repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;url: &lt;/span&gt;&lt;span class="s1"&gt;'https://github.com/AgileVentures/shf-project'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;project2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;project2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;source_repositories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;url: &lt;/span&gt;&lt;span class="s1"&gt;'https://github.com/AgileVentures/shf-project2'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with_github_url&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="kp"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;project2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'does not return projects that do not have a source repository'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;project&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:project&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with_github_url&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;not_to&lt;/span&gt; &lt;span class="kp"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;although I can&amp;rsquo;t actually run it as I&amp;rsquo;m waiting for a cucumber run to complete (got to work on the performance there).  That gap allows me to agonize about whether this unit test is sufficiently rigorous, or if it simply testing the existing Rails architecture?  I think it&amp;rsquo;s the right thing.  It&amp;rsquo;s providing an executable check that the class method &lt;code&gt;.with_github_url&lt;/code&gt; is doing what we expect it to do.  &lt;/p&gt;
-
-&lt;p&gt;Bigger picture quickly, I&amp;rsquo;m not planning to immediately remove the github_url field from the projects model.  We&amp;rsquo;ll need a task to migrate all of them in to source repository models, and based on previous pain I&amp;rsquo;ll be ensuring we have a follow up task in a different PR that we deploy to production separately to delete that field later on when the dust has settled.&lt;/p&gt;
-
-&lt;p&gt;Okay so the cukes finished running.  I got a couple of errors in the way I&amp;rsquo;m using FactoryGirl/build_stubbed.  Fix those and I&amp;rsquo;ve got the following Project RSpec output:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ be rspec -fd spec/models/project_spec.rb 
-[Coveralls] Using SimpleCov's 'rails' settings.
-
-Randomized with seed 34619
-
-Project
-  #github_repo_user_name
-    deals with hyphen gracefully
-  #codeclimate_gpa
-    returns the CodeClimate GPA
-  #search
-    should return paginated projects with 5 per page
-  #url_for_me
-    returns correct url for show action
-    returns correct url for other actions
-  #members
-    returns followers of the project who have a public profile
-  #contribution_url
-    returns the url for the project github contribution page
-  #jitsi_room_link
-    returns correct link
-  .with_github_url
-    returns all projects that have at least one source repository
-    does not return projects that do not have a source repository
-  #youtube_tags
-    returns the tags for project including the project title
-  #github_repo
-    returns the proper repo name if github url exists
-    returns blank if github url does not exist
-  #members_tags
-    returns the tags for project members with thier youtube user names
-  #save
-    should not accept invalid Pivotal Tracker URL
-    should throw error for incomplete github url
-    should be invalid without status
-    should be invalid without description
-    should not accept invalid github url
-    has public-activity enabled
-    should respond to #create_activity
-    should be a valid with all the correct attributes
-    should be invalid without title
-    Pivotal Tracker URL
-      should accept new pivotal traker url format
-      should accept the subject id and convert that into a valid URL
-      should correct mistakes in pivotal tracker url
-    Updating friendly ids
-      should still be able to find the project by its old id
-      should regenerate the project's friendly id when the title changes
-
-Finished in 0.65804 seconds (files took 8.15 seconds to load)
-28 examples, 0 failures
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I&amp;rsquo;m not sure that this output is telling the domain story that I&amp;rsquo;d like, but let&amp;rsquo;s move on.  I was thinking that we would have to move the github url validation into source repositories, and I think we will ultimatley, but it seems to be currently allowing us to validate urls on the first repo, if I&amp;rsquo;m reading this all correctly.&lt;/p&gt;
-
-&lt;p&gt;Since I&amp;rsquo;ve created the test (for the scope) after the code (bad programmer) I quickly break the the scope and check that the test fails, which it does.  This code&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;scope&lt;/span&gt; &lt;span class="ss"&gt;:with_github_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;includes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:source_repositories&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;source_repositories: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;id: &lt;/span&gt;&lt;span class="kp"&gt;nil&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;causes this error&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;  1&lt;span class="o"&gt;)&lt;/span&gt; Project.with_github_url returns all projects that have at least one &lt;span class="nb"&gt;source &lt;/span&gt;repository
-     Failure/Error: expect&lt;span class="o"&gt;(&lt;/span&gt;Project.with_github_url&lt;span class="o"&gt;)&lt;/span&gt;.to include&lt;span class="o"&gt;(&lt;/span&gt;project, project2&lt;span class="o"&gt;)&lt;/span&gt;
-
-       expected &lt;span class="c"&gt;#&amp;lt;ActiveRecord::Relation []&amp;gt; to include #&amp;lt;Project id: 1, title: "Title 1", description: "Warp fields stabilize.", status: "We feel your prese...l, pitch: "'I AM the greatest!' - M. Ali", commit_count: 0, image_url: nil, last_github_update: nil&amp;gt; and #&amp;lt;Project id: 2, title: "Title 2", description: "Warp fields stabilize.", status: "We feel your prese...l, pitch: "'I AM the greatest!' - M. Ali", commit_count: 0, image_url: nil, last_github_update: nil&amp;gt;&lt;/span&gt;
-       Diff:
-       @@ -1,3 +1,2 @@
-       -[#&amp;lt;Project id: 1, title: &lt;span class="s2"&gt;"Title 1"&lt;/span&gt;, description: &lt;span class="s2"&gt;"Warp fields stabilize."&lt;/span&gt;, status: &lt;span class="s2"&gt;"We feel your presence."&lt;/span&gt;, created_at: &lt;span class="s2"&gt;"2017-09-22 09:12:29"&lt;/span&gt;, updated_at: &lt;span class="s2"&gt;"2017-09-22 09:12:29"&lt;/span&gt;, user_id: nil, slug: &lt;span class="s2"&gt;"title-1"&lt;/span&gt;, github_url: nil, pivotaltracker_url: nil, pitch: &lt;span class="s2"&gt;"'I AM the greatest!' - M. Ali"&lt;/span&gt;, commit_count: 0, image_url: nil, last_github_update: nil&amp;gt;,
-       - &lt;span class="c"&gt;#&amp;lt;Project id: 2, title: "Title 2", description: "Warp fields stabilize.", status: "We feel your presence.", created_at: "2017-09-22 09:12:29", updated_at: "2017-09-22 09:12:29", user_id: nil, slug: "title-2", github_url: nil, pivotaltracker_url: nil, pitch: "'I AM the greatest!' - M. Ali", commit_count: 0, image_url: nil, last_github_update: nil&amp;gt;]&lt;/span&gt;
-       +[]
-
-     &lt;span class="c"&gt;# ./spec/models/project_spec.rb:174:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So then I quickly add a simple test of the SourceRepository:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;SourceRepository&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;type: :model&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;is_expected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;belong_to&lt;/span&gt; &lt;span class="ss"&gt;:project&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which failed in the way I expected when I broke the SourceRepository.  The verbose RSpec output here is much more like what I expect as a description of my domain model:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;SourceRepository
-  should belong to project
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I add the following to the Project spec:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;is_expected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_many&lt;/span&gt; &lt;span class="ss"&gt;:source_repositories&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;is_expected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_many&lt;/span&gt; &lt;span class="ss"&gt;:documents&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;is_expected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_many&lt;/span&gt; &lt;span class="ss"&gt;:event_instances&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;is_expected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_many&lt;/span&gt; &lt;span class="ss"&gt;:commit_counts&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;is_expected&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;belong_to&lt;/span&gt; &lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and I get some more domain model oriented chatter from RSpec when running the Project spec:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;Project
-  should belong to user
-  should have many source_repositories
-  should have many documents
-  should have many event_instances
-  should have many commit_counts
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I remove the hand-rolled js I started this feature on.   I rebase to develop so that I can do &lt;code&gt;git diff develop&lt;/code&gt; and look through the specific changes I made, which are:&lt;/p&gt;
-
-&lt;p&gt;1) upgrade poltergeist and add the cocoon gem
-2) adjust the projects controller to allow source repository attributes and to build a single default source repo for new projects
-3) adjust the way the &lt;code&gt;with_github_url&lt;/code&gt; scope works
-4) update the project form to give it an id, and replace the current &lt;code&gt;github_url&lt;/code&gt; text field with a nested source repo field(s) (cocoon gem syntax)
-5) added js to update source repository form field names to include numerics
-6) added a partial for creating new source repo fields
-7) migration to add the source repos table
-8) added a create projects feature and moved the create related scenarios there
-9) added a remote debugging step for cucumber
-10) removed the puffing billy proxy from the poltergeist config to allow remote debugging
-11) added factories and specs for source repo model
-12) adjusted various tests to work with the updated domain model
-13) addded more tests to Project to make the domain model more explicit
-14) deleted view specs&lt;/p&gt;
-
-&lt;p&gt;Hmmmm.  So the key missing thing in some ways is that we&amp;rsquo;re not displaying the multiple repos and the acceptance tests are not as extensive or as readable as I would like, but I have a hunch that I need to get this into production with some kind of rake task to move the data in the github&lt;em&gt;url in the Project model into the source&lt;/em&gt;repository, but I&amp;rsquo;ve created a new getter that&amp;rsquo;s blocking my access.  This &lt;a href="https://stackoverflow.com/questions/21835116/how-can-i-overwrite-a-getter-method-in-an-activerecord-model"&gt;SO post&lt;/a&gt; tells me I can reference the original active-record field via self[:github_url], so I could have a task like this:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;namespace :db do
-  desc "migrate from github url to source repository domain model (copies github_url field to source repo model)"
-  task migrate_from_github_url_to_source_repository: :environment do
-    Project.all.each do |project|
-      project.create(:source_repository, url: project[:github_url])
-    end
-  end
-
-end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;btw, creating the task outline with &lt;code&gt;rails g task db migrate_from_github_url_to_source_repository&lt;/code&gt; was handy - thanks Rails!&lt;/p&gt;
-
-&lt;p&gt;So then I agonize about whether I should write a test for this one off task &amp;hellip; of course thoughtbot has an &lt;a href="https://robots.thoughtbot.com/test-rake-tasks-like-a-boss"&gt;article&lt;/a&gt; on it.  But I&amp;rsquo;m out of time, will have to push that to next week, or to a refactoring chore - that&amp;rsquo;s where all the acceptance test changes will be going anyway.  This migration is the pivotal componet so I&amp;rsquo;ll test that first thing on Monday I guess &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
