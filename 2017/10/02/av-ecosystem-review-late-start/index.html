@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Late Start</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_22 blog_page_22_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_10 x2017_10_02 x2017_10_02_av-ecosystem-review-late-start x2017_10_02_av-ecosystem-review-late-start_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,65 +83,77 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/10/02/av-ecosystem-review-late-start/">AV EcoSystem Review Late Start</a></h2>
+        <h5 class='date'> 2 Oct 2017</h5>
+    <p>So Monday morning was slow and I got to the computer late, and immediately got distracted by listening to the end of the Tech Done Right podcast, which mentioned the closing of DevBootcamp and IronYard coding bootcamps.  Shake up in the industry.  I want my focus for this week to be sorting out my ruby-fication spike of the AgileBot, but now I&rsquo;m low on time.  I decided to focus on the clear-up from last week where I was updating the Premium Mob and Premium F2F pages on staging.  I have no comments on my PRs or in Slack, so I&rsquo;m going to assume no one has any issues here.  I update those pages via the Mercury editor in the live site and take a stab at merging the backup copies into the main repo, but there&rsquo;s branch updating and merging to sort first &hellip;, conflicts between my two branches.</p>
 
-          <p>Page 22 of 24</p>
+<p>So while they&rsquo;re building, can I make some super-quick progress on the agile-bot rubyfication to get the week started?  I update the branch there, pull up the set of changes.  I think the set of things we need is:</p>
 
-            <p><a href="/blog/page/21/">Previous page</a></p>
+<p>1) new tests of the SlackService
+2) checking all existing tests pass
+3) extracting the channel config to depend on deployment instance</p>
 
-          <h2><a href="/2016/09/21/missed-ships/">Missed Ships</a></h2>
-          <h3>Sep 21</h3>
-          <p>I got confused yesterday about adjustments to the pairing schedule.  I thought Michael was going to be available later in the day, but actually he had to leave early.   As a result our pairing was contracted to an hour, and he started on a new task...</p>
-          <h2><a href="/2016/09/20/clearing-the-decks/">Clearing the Decks</a></h2>
-          <h3>Sep 20</h3>
-          <p>Monday involved continuing on two “clear the decks” tickets that Michael and I had started on the previous Thursday and Friday. The heuristics in my mind thus included:</p>
+<p>In the meantime I used my admin privileges to force merge the Premium mob page backup PRs - they don&rsquo;t affect the codebase so waiting for the semaphore build is silly.  That gives us a nice clean &ldquo;Please Check&rdquo; column on the waffle board:</p>
+
+<p><img src="https://dl.dropbox.com/s/zpg8yqzayk08t8z/Screenshot%202017-10-02%2010.36.22.png?dl=1" /></p>
+
+<p>where we can also see my agile-bot spike in progress.  I really want to do another high level overview, but the AV Community meeting on Friday reinforced my notion that we have to clear up the bot messaging in Slack #general.  At the moment, all the pings about meeting starting with Google hangout hash ids in urls etc. looks really messy. </p>
+
+<p><img src="https://dl.dropbox.com/s/5tbperpnc3nqsvu/Screenshot%202017-10-02%2010.42.54.png?dl=1" /></p>
+
+<p>A new member in the AV Community meeting was saying we should do our best to make everything as welcoming as possible.  What I really want is hyperlinks to the meetings where we say something like &ldquo;Meeting starting soon, newcomers welcome :-)&rdquo;  And this rubyfication of the agilebot could get that for us this week if I&rsquo;m lucky.  The existing SlackService failing tests give me a good entry point for tomorrow AM if I can get to the computer earlier:</p>
+<pre class="highlight shell"><code>Failures:
+
+  1<span class="o">)</span> SlackService.post_yt_link sends a post request to the agile-bot with the proper data
+     Failure/Error: elsif hangout.type <span class="o">==</span> <span class="s2">"PairProgramming"</span>
+
+     NoMethodError:
+       undefined method <span class="sb">`</span><span class="nb">type</span><span class="s1">' for #&lt;EventInstance:0x007f9a4d36c5b0&gt;
+     # /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/activemodel-4.2.8/lib/active_model/attribute_methods.rb:433:in `method_missing'</span>
+     <span class="c"># ./app/services/slack_service.rb:62:in `post_yt_link'</span>
+     <span class="c"># ./spec/services/slack_service_spec.rb:52:in `block (3 levels) in &lt;top (required)&gt;'</span>
+
+  2<span class="o">)</span> SlackService.post_hangout_notification does not fail when event has no associated project
+     Failure/Error: CHANNELS[project.try<span class="o">(</span>:slug<span class="o">)</span>.to_sym]
+
+     NoMethodError:
+       undefined method <span class="sb">`</span>to_sym<span class="s1">' for nil:NilClass
+       Did you mean?  to_s
+     # ./app/services/slack_service.rb:51:in `channel_for_project'</span>
+     <span class="c"># ./app/services/slack_service.rb:13:in `post_hangout_notification'</span>
+     <span class="c"># ./spec/services/slack_service_spec.rb:27:in `block (3 levels) in &lt;top (required)&gt;'</span>
+
+  3<span class="o">)</span> SlackService.post_hangout_notification sends a post request to the agile-bot with the proper data
+     Failure/Error: send_slack_message client, CHANNELS[:general], <span class="s2">"#{hangout.title}: #{hangout.link}"</span>, hangout.user
+
+     NoMethodError:
+       undefined method <span class="sb">`</span>link<span class="s1">' for #&lt;EventInstance:0x007f9a4d983458&gt;
+     # /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/activemodel-4.2.8/lib/active_model/attribute_methods.rb:433:in `method_missing'</span>
+     <span class="c"># ./app/services/slack_service.rb:25:in `post_hangout_notification'</span>
+     <span class="c"># ./spec/services/slack_service_spec.rb:19:in `block (3 levels) in &lt;top (required)&gt;'</span>
+
+Finished <span class="k">in </span>1 minute 3.18 seconds <span class="o">(</span>files took 12.25 seconds to load<span class="o">)</span>
+899 examples, 3 failures, 1 pending
+</code></pre>
+<h3>Related Videos:</h3>
 
 <ul>
-<li>clear the decks before starting on something else big</li>
-<li>finish what you’ve started</li>
+<li><a href="https://youtu.be/ufWc1Gg3hQ4">AV Community Meeting</a></li>
 </ul>
-          <h2><a href="/2016/09/19/business-as-usual/">Business as Usual</a></h2>
-          <h3>Sep 19</h3>
-          <p>Trying to run a business is notoriously hard.  How about a charity?  A volunteer organisation?  I’m starting to see some patterns from the last few years.  I notice at the Karate classes that I do with my kids that there’s been a huge turnover of participants...</p>
-          <h2><a href="/2016/09/16/driveby-coding/">DriveBy Coding</a></h2>
-          <h3>Sep 16</h3>
-          <p>Had another day of trying to work quick and light. I’m thinking of calling it “drive-by coding”.  The idea is to try and avoid getting stuck for too long on any one thing.</p>
 
-<p>I managed to be good to my word of yesterday and get to work on some of the...</p>
-          <h2><a href="/2016/09/15/feels-like-progress/">Feels like Progress</a></h2>
-          <h3>Sep 15</h3>
-          <p>Wednesday felt good this week.  My eldest son was cycling to high school by himself for a second day - an extra 40 minutes for me really coming in handy to catch up with administrative stuff.  The automation of the Thunderbird mailing allowing me to...</p>
-          <h2><a href="/2016/09/14/production-staging-similarity/">Production and Staging Similarity</a></h2>
-          <h3>Sep 14</h3>
-          <p>So Michael and I finished up an important piece of work on the <a href="https://github.com/AgileVentures/agile-bot">AgileBot</a> yesterday.  At least we completed something we had started working on a while ago, which was getting the AgileBot legacy code wrapped in tests, and refactoring the config out of...</p>
-          <h2><a href="/2016/09/13/eye-on-the-ball/">Eye on the Ball</a></h2>
-          <h3>Sep 13</h3>
-          <p>My last few days have been taken up a lot with transferring data between iPhones.  This has been precipitated by the gradually faltering abilities of my 2 year old iPhone 5S:  Trickle charge not working, normal charging intermittent except with specific...</p>
-          <h2><a href="/2016/09/12/people-are-strange-i-mean-me/">People Are Strange, I Mean Me</a></h2>
-          <h3>Sep 12</h3>
-          <p>Okay, so I feel like a bit of a social klutz.  Often there are ideas that seem really important and well-formed in my head, and then I say them and it comes out as a mess.  Also, I think I’m not so good about reading the mood-music of the social group...</p>
-          <h2><a href="/2016/09/09/patience/">Patience</a></h2>
-          <h3>Sep  9</h3>
-          <p>Following on from yesterday’s <a href="http://nonprofits.agileventures.org/2016/09/08/where-to-change/">post</a> on working with the node stack in AgileBot, Michael had overnight addressed two of my concerns.  He’d upgraded from jasmine-node to jasmine-npm, which was allowing our tests to fail in the correct way, i.e. not with...</p>
-          <h2><a href="/2016/09/08/where-to-change/">Where to Change?</a></h2>
-          <h3>Sep  8</h3>
-          <p>Trying to improve the test harness on the agile-bot yesterday was rather frustrating.  AgileBot is written in CoffeeScript and runs in the Hubot framework, which runs in Node.  It was originally spiked with no tests as a way of providing a service...</p>
-
-            <p><a href="/blog/page/23/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -199,6 +212,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
