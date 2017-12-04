@@ -45,7 +45,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/10/02/av-ecosystem-review-late-start/"/>
     <id>http://blog.url.com/2017/10/02/av-ecosystem-review-late-start/</id>
     <published>2017-10-02T01:00:00+01:00</published>
-    <updated>2017-12-04T20:42:56+00:00</updated>
+    <updated>2017-12-04T21:06:18+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -53,9 +53,9 @@
 
 &lt;p&gt;So while they&amp;rsquo;re building, can I make some super-quick progress on the agile-bot rubyfication to get the week started?  I update the branch there, pull up the set of changes.  I think the set of things we need is:&lt;/p&gt;
 
-&lt;p&gt;1) new tests of the SlackService
-2) checking all existing tests pass
-3) extracting the channel config to depend on deployment instance&lt;/p&gt;
+&lt;p&gt;1) new tests of the SlackService&lt;br&gt;
+2) checking all existing tests pass&lt;br&gt;
+3) extracting the channel config to depend on deployment instance  &lt;/p&gt;
 
 &lt;p&gt;In the meantime I used my admin privileges to force merge the Premium mob page backup PRs - they don&amp;rsquo;t affect the codebase so waiting for the semaphore build is silly.  That gives us a nice clean &amp;ldquo;Please Check&amp;rdquo; column on the waffle board:&lt;/p&gt;
 
