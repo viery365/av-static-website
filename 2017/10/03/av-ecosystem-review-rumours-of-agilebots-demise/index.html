@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Rumours of AgileBots Demise</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_10 x2017_10_03 x2017_10_03_av-ecosystem-review-rumours-of-agilebots-demise x2017_10_03_av-ecosystem-review-rumours-of-agilebots-demise_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/10/03/av-ecosystem-review-rumours-of-agilebots-demise/">AV EcoSystem Rumours of AgileBots Demise</a></h2>
+        <h5 class='date'> 3 Oct 2017</h5>
+    <p><img alt="demise" src="/images/demise.jpg" /></p>
+
+<p>Early to bed and early to rise makes a man &hellip; do a 5K jog to the top of the nearest hill and get to the computer early to start working on tests of the new rubyfied agilebot.  I start by pulling the latest from develop and merging to my local branch.  Let&rsquo;s start by hitting each of the three regression errors I saw yesterday:</p>
+<pre class="highlight shell"><code>  1<span class="o">)</span> SlackService.post_yt_link sends a post request to the agile-bot with the proper data
+     Failure/Error: elsif hangout.type <span class="o">==</span> <span class="s2">"PairProgramming"</span>
+
+     NoMethodError:
+       undefined method <span class="sb">`</span><span class="nb">type</span><span class="s1">' for #&lt;EventInstance:0x007f9a4d36c5b0&gt;
+     # /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/activemodel-4.2.8/lib/active_model/attribute_methods.rb:433:in `method_missing'</span>
+     <span class="c"># ./app/services/slack_service.rb:62:in `post_yt_link'</span>
+     <span class="c"># ./spec/services/slack_service_spec.rb:52:in `block (3 levels) in &lt;top (required)&gt;'</span>
+</code></pre>
+<p>That&rsquo;s from this test:</p>
+<pre class="highlight ruby"><code>    <span class="n">it</span> <span class="s1">'sends a post request to the agile-bot with the proper data'</span> <span class="k">do</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">yt_video_id</span> <span class="o">=</span> <span class="s1">'mock_url'</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">project</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span> <span class="ss">slug: </span><span class="s1">'localsupport'</span><span class="p">,</span> <span class="ss">title: </span><span class="s1">'Local Support'</span><span class="p">,</span> <span class="ss">description: </span><span class="s1">'hmmm'</span><span class="p">,</span> <span class="ss">status: </span><span class="s1">'active'</span><span class="p">)</span>
+
+      <span class="n">subject</span><span class="p">.</span><span class="nf">post_yt_link</span><span class="p">(</span><span class="n">hangout</span><span class="p">)</span>
+
+      <span class="n">assert_requested</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="s1">'https://agile-bot.herokuapp.com/hubot/hangouts-video-notify'</span><span class="p">,</span> <span class="ss">times: </span><span class="mi">1</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">req</span><span class="o">|</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="nf">body</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="s2">"title=MockEvent&amp;video=https%3A%2F%2Fyoutu.be%2Fmock_url&amp;type=PairProgramming&amp;host_name=random&amp;host_avatar=</span><span class="si">#{</span><span class="n">gravatar</span><span class="si">}</span><span class="s2">&amp;project=local-support"</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+</code></pre>
+<p>Which happens to highlight a code path that I hadn&rsquo;t tested yet, where I&rsquo;m still using the AgileBot CoffeeScript variable name. I can fix that easily by moving to:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">post_yt_link</span><span class="p">(</span><span class="n">hangout</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">unless</span> <span class="no">Features</span><span class="p">.</span><span class="nf">slack</span><span class="p">.</span><span class="nf">notifications</span><span class="p">.</span><span class="nf">enabled</span>
+    <span class="k">return</span> <span class="k">if</span> <span class="n">hangout</span><span class="p">.</span><span class="nf">yt_video_id</span><span class="p">.</span><span class="nf">blank?</span>
+
+    <span class="n">video</span> <span class="o">=</span> <span class="s2">"https://youtu.be/</span><span class="si">#{</span><span class="n">hangout</span><span class="p">.</span><span class="nf">yt_video_id</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="k">if</span> <span class="n">hangout</span><span class="p">.</span><span class="nf">category</span> <span class="o">==</span> <span class="s2">"Scrum"</span>
+      <span class="n">send_slack_message</span> <span class="n">client</span><span class="p">,</span> <span class="no">CHANNELS</span><span class="p">[</span><span class="ss">:general</span><span class="p">],</span> <span class="s2">"Video/Livestream for </span><span class="si">#{</span><span class="n">hangout</span><span class="p">.</span><span class="nf">title</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">video</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">hangout</span><span class="p">.</span><span class="nf">user</span>
+    <span class="k">elsif</span> <span class="n">hangout</span><span class="p">.</span><span class="nf">category</span> <span class="o">==</span> <span class="s2">"PairProgramming"</span> <span class="c1"># &lt;-- problem was `hangout.type` here</span>
+      <span class="n">channel</span> <span class="o">=</span> <span class="n">channel_for_project</span><span class="p">(</span><span class="n">hangout</span><span class="p">.</span><span class="nf">project</span><span class="p">)</span>
+      <span class="k">unless</span> <span class="n">channel</span> <span class="o">==</span> <span class="no">CHANNELS</span><span class="p">[</span><span class="ss">:cs169</span><span class="p">]</span>
+        <span class="n">send_slack_message</span> <span class="n">client</span><span class="p">,</span> <span class="no">CHANNELS</span><span class="p">[</span><span class="ss">:general</span><span class="p">],</span> <span class="s2">"Video/Livestream for </span><span class="si">#{</span><span class="n">hangout</span><span class="p">.</span><span class="nf">title</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">video</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">hangout</span><span class="p">.</span><span class="nf">user</span>
+        <span class="n">send_slack_message</span> <span class="n">client</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="s2">"Video/Livestream for </span><span class="si">#{</span><span class="n">hangout</span><span class="p">.</span><span class="nf">title</span><span class="si">}</span><span class="s2">: </span><span class="si">#{</span><span class="n">video</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">hangout</span><span class="p">.</span><span class="nf">user</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+  <span class="k">end</span>
+</code></pre>
+<p>and then I get a new error:</p>
+<pre class="highlight shell"><code>  1<span class="o">)</span> SlackService.post_yt_link sends a post request to the agile-bot with the proper data
+     Failure/Error: send_slack_message client, CHANNELS[:general], <span class="s2">"Video/Livestream for #{hangout.title}: #{video}"</span>, hangout.user
+
+     NameError:
+       undefined <span class="nb">local </span>variable or method <span class="sb">`</span>client<span class="s1">' for SlackService:Module
+     # ./app/services/slack_service.rb:65:in `post_yt_link'</span>
+     <span class="c"># ./spec/services/slack_service_spec.rb:52:in `block (3 levels) in &lt;top (required)&gt;'</span>
+</code></pre>
+<p>Which is another easy fix (another code path not tested) - by adding the following code:</p>
+<pre class="highlight ruby"><code><span class="n">client</span> <span class="o">=</span> <span class="no">Slack</span><span class="o">::</span><span class="no">Web</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span>
+</code></pre>
+<p>Of course part of me (and maybe you) is screaming, don&rsquo;t fix the regressions, you should be working out precisely the tests needed for the model you actually have, and worrying about regressions later.  However I can&rsquo;t stand the idea that I replicate a load of the existing tests, and then have to process those regression errors later.  Running through the regression errors gets my head back in the space - it&rsquo;s less effort mentally, bad perhaps, but I&rsquo;m doing this in blogging fragments each morning.  No one is paying me big bucks to spend proper programming days on this.  I&rsquo;ve got to go with what I can manage.  Also, and perhaps more importantly, the existing tests are supposed to be proper checks of what we want from this service, and that&rsquo;s not changing.</p>
+
+<p>Anyhow, now I get another error:</p>
+<pre class="highlight plaintext"><code>  1) SlackService.post_yt_link sends a post request to the agile-bot with the proper data
+     Failure/Error: client.chat_postMessage(channel: channel, text: text, username: user.display_name, icon_url: user.gravatar_url, link_names: 1)
+
+     UncaughtThrowError:
+       uncaught throw #&lt;ArgumentError: Required arguments :channel missing&gt;
+     # /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/slack-ruby-client-0.7.7/lib/slack/web/api/endpoints/chat.rb:69:in `throw'
+     # /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/slack-ruby-client-0.7.7/lib/slack/web/api/endpoints/chat.rb:69:in `chat_postMessage'
+     # ./app/services/slack_service.rb:38:in `send_slack_message'
+     # ./app/services/slack_service.rb:68:in `post_yt_link'
+     # ./spec/services/slack_service_spec.rb:52:in `block (3 levels) in &lt;top (required)&gt;'
+</code></pre>
+<p>Which looks a little more complicated, but is actually just another chunk of code missing from the youtube posting path (which I hadn&rsquo;t tested manually).  The following should fix that:</p>
+<pre class="highlight ruby"><code><span class="n">channel</span> <span class="o">=</span> <span class="n">channel_for_project</span><span class="p">(</span><span class="n">hangout</span><span class="p">.</span><span class="nf">project</span><span class="p">)</span>
+</code></pre>
+<p>but it doesn&rsquo;t because the project created for the test doesn&rsquo;t have a corresponding channel in the test fixtures.  There&rsquo;s a number of changes that I could make to the large test <code>describe</code> block to fix all this:</p>
+<pre class="highlight ruby"><code>  <span class="n">describe</span> <span class="s1">'.post_yt_link'</span> <span class="k">do</span>
+    <span class="n">before</span> <span class="p">{</span> <span class="n">stub_request</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="s1">'https://agile-bot.herokuapp.com/hubot/hangouts-video-notify'</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="n">let</span><span class="p">(</span><span class="ss">:hangout</span><span class="p">)</span> <span class="p">{</span> <span class="no">EventInstance</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'MockEvent'</span><span class="p">,</span> <span class="ss">category: </span><span class="s2">"PairProgramming"</span><span class="p">,</span> <span class="ss">hangout_url: </span><span class="s2">"mock_url"</span><span class="p">,</span> <span class="ss">user: </span><span class="n">user</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'sends a post request to the agile-bot with the proper data'</span> <span class="k">do</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">yt_video_id</span> <span class="o">=</span> <span class="s1">'mock_url'</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">project</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span> <span class="ss">slug: </span><span class="s1">'localsupport'</span><span class="p">,</span> <span class="ss">title: </span><span class="s1">'Local Support'</span><span class="p">,</span> <span class="ss">description: </span><span class="s1">'hmmm'</span><span class="p">,</span> <span class="ss">status: </span><span class="s1">'active'</span><span class="p">)</span>
+
+      <span class="n">subject</span><span class="p">.</span><span class="nf">post_yt_link</span><span class="p">(</span><span class="n">hangout</span><span class="p">)</span>
+
+      <span class="n">assert_requested</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="s1">'https://agile-bot.herokuapp.com/hubot/hangouts-video-notify'</span><span class="p">,</span> <span class="ss">times: </span><span class="mi">1</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">req</span><span class="o">|</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="nf">body</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="s2">"title=MockEvent&amp;video=https%3A%2F%2Fyoutu.be%2Fmock_url&amp;type=PairProgramming&amp;host_name=random&amp;host_avatar=</span><span class="si">#{</span><span class="n">gravatar</span><span class="si">}</span><span class="s2">&amp;project=local-support"</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'does not post youtube video link if yt_video_id is blank'</span> <span class="k">do</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">yt_video_id</span> <span class="o">=</span> <span class="s1">'    '</span>
+
+      <span class="n">subject</span><span class="p">.</span><span class="nf">post_yt_link</span><span class="p">(</span><span class="n">hangout</span><span class="p">)</span>
+
+      <span class="n">assert_not_requested</span><span class="p">(</span><span class="ss">:post</span><span class="p">,</span> <span class="s1">'https://agile-bot.herokuapp.com/hubot/hangouts-video-notify'</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre>
+<p>but the looming question is what level should these tests stub at.  Options are:</p>
+
+<p>1) stub the internal method of the class under test
+2) stub at the level of the Slack client
+3) stub at the level of the post request to the Slack API</p>
+
+<p>I could make arguments for each.  It&rsquo;s tempting to go for 3) because the existing test is stubbing there, but I feel that&rsquo;s the job of an acceptance test, which I hope we already have.  Stubbing at the internal method level feels too fine grained.  I&rsquo;m going to use dependency injection and go for 2), stubbing at the level of the Slack client.  I change the method signature like so:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">post_yt_link</span><span class="p">(</span><span class="n">hangout</span><span class="p">,</span> <span class="n">client</span> <span class="o">=</span> <span class="no">Slack</span><span class="o">::</span><span class="no">Web</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
+</code></pre>
+<p>and the tests like so:</p>
+<pre class="highlight ruby"><code>  <span class="n">describe</span> <span class="s1">'.post_yt_link'</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:hangout</span><span class="p">)</span> <span class="p">{</span> <span class="no">EventInstance</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'MockEvent'</span><span class="p">,</span> <span class="ss">category: </span><span class="s2">"PairProgramming"</span><span class="p">,</span> <span class="ss">hangout_url: </span><span class="s2">"mock_url"</span><span class="p">,</span> <span class="ss">user: </span><span class="n">user</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:client</span><span class="p">)</span> <span class="p">{</span> <span class="n">spy</span><span class="p">(</span><span class="ss">:slack_client</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'sends a post request to the agile-bot with the proper data'</span> <span class="k">do</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">yt_video_id</span> <span class="o">=</span> <span class="s1">'mock_url'</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">project</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span> <span class="ss">slug: </span><span class="s1">'websiteone'</span><span class="p">,</span> <span class="ss">title: </span><span class="s1">'WebSiteOne'</span><span class="p">,</span> <span class="ss">description: </span><span class="s1">'hmmm'</span><span class="p">,</span> <span class="ss">status: </span><span class="s1">'active'</span><span class="p">)</span>
+
+      <span class="n">subject</span><span class="p">.</span><span class="nf">post_yt_link</span><span class="p">(</span><span class="n">hangout</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">have_received</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="ss">channel: </span><span class="s1">'C29J4QQ9W'</span><span class="p">,</span> <span class="ss">text: </span><span class="s1">''</span><span class="p">,</span> <span class="ss">username: </span><span class="s1">''</span><span class="p">,</span> <span class="ss">icon_url: </span><span class="s1">''</span><span class="p">,</span> <span class="ss">link_names: </span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'does not post youtube video link if yt_video_id is blank'</span> <span class="k">do</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">yt_video_id</span> <span class="o">=</span> <span class="s1">'    '</span>
+      <span class="n">subject</span><span class="p">.</span><span class="nf">post_yt_link</span><span class="p">(</span><span class="n">hangout</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">not_to</span> <span class="n">have_received</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre>
+<p>Off the top of my head I&rsquo;m not sure exactly what all the componets are that the client should receive as argument components, so I&rsquo;m just putting in blanks and will run it and pull out the exact elements, checking that they are what I expect, and then hopefully make the test go green; &hellip; and I get what I&rsquo;m expecting:</p>
+<pre class="highlight plaintext"><code>  1) SlackService.post_yt_link sends a post request to the agile-bot with the proper data
+     Failure/Error: expect(client).to have_received(:chat_postMessage).with(channel: 'C29J4QQ9W', text: '', username: '', icon_url: '', link_names: 1)
+
+       #&lt;Double :slack_client&gt; received :chat_postMessage with unexpected arguments
+         expected: ({:channel=&gt;"C29J4QQ9W", :text=&gt;"", :username=&gt;"", :icon_url=&gt;"", :link_names=&gt;1})
+              got: ({:channel=&gt;"C0TLAE1MH", :text=&gt;"Video/Livestream for MockEvent: https://youtu.be/mock_url", :username...con_url=&gt;"https://www.gravatar.com/avatar/47548e7f026bc689ba743b2af2d391ee?d=retro", :link_names=&gt;1}) (1 time)
+                   ({:channel=&gt;"C29J4QQ9W", :text=&gt;"Video/Livestream for MockEvent: https://youtu.be/mock_url", :username...con_url=&gt;"https://www.gravatar.com/avatar/47548e7f026bc689ba743b2af2d391ee?d=retro", :link_names=&gt;1}) (1 time)
+     # ./spec/services/slack_service_spec.rb:53:in `block (3 levels) in &lt;top (required)&gt;'
+</code></pre>
+<p>which reminds me that actually we hit the end point twice, but I can also test for that explcitly like so:</p>
+<pre class="highlight ruby"><code>    <span class="n">let</span><span class="p">(</span><span class="ss">:expected_post_args</span><span class="p">)</span> <span class="k">do</span>
+      <span class="p">{</span>
+        <span class="ss">text: </span><span class="s1">'Video/Livestream for MockEvent: https://youtu.be/mock_url'</span><span class="p">,</span>
+        <span class="ss">username: </span><span class="n">user</span><span class="p">.</span><span class="nf">display_name</span><span class="p">,</span>
+        <span class="ss">icon_url: </span><span class="n">user</span><span class="p">.</span><span class="nf">gravatar_url</span><span class="p">,</span>
+        <span class="ss">link_names: </span><span class="mi">1</span>
+      <span class="p">}</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'sends the correct slack message to the correct channels'</span> <span class="k">do</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">yt_video_id</span> <span class="o">=</span> <span class="s1">'mock_url'</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">project</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">slug: </span><span class="s1">'websiteone'</span><span class="p">,</span> <span class="ss">title: </span><span class="s1">'WebSiteOne'</span><span class="p">,</span> <span class="ss">description: </span><span class="s1">'hmmm'</span><span class="p">,</span> <span class="ss">status: </span><span class="s1">'active'</span><span class="p">)</span>
+
+      <span class="n">subject</span><span class="p">.</span><span class="nf">post_yt_link</span><span class="p">(</span><span class="n">hangout</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">have_received</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">expected_post_args</span><span class="p">.</span><span class="nf">merge!</span><span class="p">(</span><span class="ss">channel: </span><span class="s1">'C0TLAE1MH'</span><span class="p">))</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">have_received</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">expected_post_args</span><span class="p">.</span><span class="nf">merge!</span><span class="p">(</span><span class="ss">channel: </span><span class="s1">'C29J4QQ9W'</span><span class="p">))</span>
+    <span class="k">end</span>
+</code></pre>
+<p>Although I have to admit, there were a few rounds of thrashing to get there :-)  So I happened to start on the <code>.post_yt_link</code> method, and so basically I&rsquo;ll now need to do similar for the <code>.post_hangout_notification</code> method tests, although I&rsquo;m feeling a little nervous about using spies, since I&rsquo;d like to be checking that we don&rsquo;t send any messages we don&rsquo;t expect:</p>
+<pre class="highlight ruby"><code>  <span class="n">describe</span> <span class="s1">'.post_hangout_notification'</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:hangout</span><span class="p">)</span> <span class="p">{</span> <span class="no">EventInstance</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'MockEvent'</span><span class="p">,</span> <span class="ss">category: </span><span class="s2">"PairProgramming"</span><span class="p">,</span> <span class="ss">hangout_url: </span><span class="s2">"mock_url"</span><span class="p">,</span> <span class="ss">user: </span><span class="n">user</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:client</span><span class="p">)</span> <span class="p">{</span> <span class="n">spy</span><span class="p">(</span><span class="ss">:slack_client</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'sends the correct slack message to the correct channels'</span> <span class="k">do</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">project</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">slug: </span><span class="s1">'cs169'</span><span class="p">,</span> <span class="ss">title: </span><span class="s1">'Edx'</span><span class="p">,</span> <span class="ss">description: </span><span class="s1">'hmm'</span><span class="p">,</span> <span class="ss">status: </span><span class="s1">'active'</span><span class="p">)</span>
+
+      <span class="n">subject</span><span class="p">.</span><span class="nf">post_hangout_notification</span><span class="p">(</span><span class="n">hangout</span><span class="p">)</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">have_received</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">expected_post_args</span><span class="p">.</span><span class="nf">merge!</span><span class="p">(</span><span class="ss">channel: </span><span class="s1">'C0TLAE1MH'</span><span class="p">))</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">have_received</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">expected_post_args</span><span class="p">.</span><span class="nf">merge!</span><span class="p">(</span><span class="ss">channel: </span><span class="s1">'C29J4CYA2'</span><span class="p">))</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'does not fail when event has no associated project'</span> <span class="k">do</span>
+      <span class="n">subject</span><span class="p">.</span><span class="nf">post_hangout_notification</span><span class="p">(</span><span class="n">hangout</span><span class="p">)</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">have_received</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">expected_post_args</span><span class="p">.</span><span class="nf">merge!</span><span class="p">(</span><span class="ss">channel: </span><span class="s1">'C0TLAE1MH'</span><span class="p">))</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'does not post notification if hangout url is blank'</span> <span class="k">do</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">hangout_url</span> <span class="o">=</span> <span class="s2">"     "</span>
+
+      <span class="n">subject</span><span class="p">.</span><span class="nf">post_hangout_notification</span><span class="p">(</span><span class="n">hangout</span><span class="p">)</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">not_to</span> <span class="n">have_received</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre>
+<p>but I have some more general errors still from untested codepaths:</p>
+<pre class="highlight plaintext"><code>  1) SlackService.post_hangout_notification sends the correct slack message to the correct channels
+     Failure/Error: send_slack_message client, CHANNELS[:general], "#{hangout.title}: #{hangout.link}", hangout.user
+
+     NoMethodError:
+       undefined method `link' for #&lt;EventInstance:0x007fe269d2ca50&gt;
+     # /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/activemodel-4.2.8/lib/active_model/attribute_methods.rb:433:in `method_missing'
+     # ./app/services/slack_service.rb:23:in `post_hangout_notification'
+     # ./spec/services/slack_service_spec.rb:18:in `block (3 levels) in &lt;top (required)&gt;'
+
+  2) SlackService.post_hangout_notification does not fail when event has no associated project
+     Failure/Error: CHANNELS[project.try(:slug).to_sym]
+
+     NoMethodError:
+       undefined method `to_sym' for nil:NilClass
+       Did you mean?  to_s
+     # ./app/services/slack_service.rb:49:in `channel_for_project'
+     # ./app/services/slack_service.rb:11:in `post_hangout_notification'
+     # ./spec/services/slack_service_spec.rb:25:in `block (3 levels) in &lt;top (required)&gt;'
+</code></pre>
+<p>which are some little syntax misses of mine.  I fix those and then after a lot of hammering I end up with this:</p>
+<pre class="highlight ruby"><code><span class="n">describe</span> <span class="no">SlackService</span> <span class="k">do</span>
+  <span class="n">subject</span><span class="p">(</span><span class="ss">:slack_service</span><span class="p">)</span> <span class="p">{</span> <span class="no">SlackService</span> <span class="p">}</span>
+
+  <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">User</span><span class="p">.</span><span class="nf">new</span> <span class="ss">email: </span><span class="s1">'random@random.com'</span> <span class="p">}</span>
+
+  <span class="n">before</span> <span class="p">{</span> <span class="no">Features</span><span class="p">.</span><span class="nf">slack</span><span class="p">.</span><span class="nf">notifications</span><span class="p">.</span><span class="nf">enabled</span> <span class="o">=</span> <span class="kp">true</span> <span class="p">}</span>
+
+  <span class="n">describe</span> <span class="s1">'.post_hangout_notification'</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:hangout</span><span class="p">)</span> <span class="p">{</span> <span class="no">EventInstance</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'MockEvent'</span><span class="p">,</span> <span class="ss">category: </span><span class="s2">"PairProgramming"</span><span class="p">,</span> <span class="ss">hangout_url: </span><span class="s2">"mock_url"</span><span class="p">,</span> <span class="ss">user: </span><span class="n">user</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:client</span><span class="p">)</span> <span class="p">{</span> <span class="n">double</span><span class="p">(</span><span class="ss">:slack_client</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="c1"># @TODO Improve the message format to hide the URL details ... and welcome newcomers ...</span>
+    <span class="c1"># @TODO we should pass in CHANNELS and GITTER ROOMS work out a way to handle that based on deployed instance, e.g staging, production etc.</span>
+
+    <span class="n">let</span><span class="p">(</span><span class="ss">:general_channel_post_args</span><span class="p">)</span> <span class="k">do</span>
+      <span class="p">{</span>
+          <span class="ss">channel: </span><span class="s1">'C0TLAE1MH'</span><span class="p">,</span>
+          <span class="ss">text: </span><span class="s1">'MockEvent: mock_url'</span><span class="p">,</span>
+          <span class="ss">username: </span><span class="n">user</span><span class="p">.</span><span class="nf">display_name</span><span class="p">,</span>
+          <span class="ss">icon_url: </span><span class="n">user</span><span class="p">.</span><span class="nf">gravatar_url</span><span class="p">,</span>
+          <span class="ss">link_names: </span><span class="mi">1</span>
+      <span class="p">}</span>
+    <span class="k">end</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:project_channel_post_args</span><span class="p">)</span> <span class="k">do</span>
+      <span class="p">{</span>
+          <span class="ss">channel: </span><span class="s1">'C29J4QQ9W'</span><span class="p">,</span>
+          <span class="ss">text: </span><span class="s1">'@here MockEvent: mock_url'</span><span class="p">,</span>
+          <span class="ss">username: </span><span class="n">user</span><span class="p">.</span><span class="nf">display_name</span><span class="p">,</span>
+          <span class="ss">icon_url: </span><span class="n">user</span><span class="p">.</span><span class="nf">gravatar_url</span><span class="p">,</span>
+          <span class="ss">link_names: </span><span class="mi">1</span>
+      <span class="p">}</span>
+    <span class="k">end</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:pairing_notifications_channel_post_args</span><span class="p">)</span> <span class="k">do</span>
+      <span class="p">{</span>
+          <span class="ss">channel: </span><span class="s1">'C29J3DPGW'</span><span class="p">,</span>
+          <span class="ss">text: </span><span class="s1">'@channel MockEvent: mock_url'</span><span class="p">,</span>
+          <span class="ss">username: </span><span class="n">user</span><span class="p">.</span><span class="nf">display_name</span><span class="p">,</span>
+          <span class="ss">icon_url: </span><span class="n">user</span><span class="p">.</span><span class="nf">gravatar_url</span><span class="p">,</span>
+          <span class="ss">link_names: </span><span class="mi">1</span>
+      <span class="p">}</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'sends the correct slack message to the correct channels for pairing'</span> <span class="k">do</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">project</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'websiteone'</span><span class="p">,</span> <span class="ss">description: </span><span class="s1">'hmm'</span><span class="p">,</span> <span class="ss">status: </span><span class="s1">'active'</span><span class="p">)</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">general_channel_post_args</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">project_channel_post_args</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">pairing_notifications_channel_post_args</span><span class="p">)</span>
+
+      <span class="n">slack_service</span><span class="p">.</span><span class="nf">post_hangout_notification</span><span class="p">(</span><span class="n">hangout</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'does not fail when event has no associated project for pairing'</span> <span class="k">do</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">general_channel_post_args</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">pairing_notifications_channel_post_args</span><span class="p">)</span>
+
+      <span class="n">slack_service</span><span class="p">.</span><span class="nf">post_hangout_notification</span><span class="p">(</span><span class="n">hangout</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="n">xit</span> <span class="s1">'should ping gitter when the project is cs169'</span>
+    <span class="n">xit</span> <span class="s1">'sends the correct slack message to the correct channels for scrums'</span>
+    <span class="n">xit</span> <span class="s1">'does not fail when event has no associated project for scrums'</span>
+    <span class="n">xit</span> <span class="s1">'does not post notification if hangout url is blank for scrums'</span>
+
+    <span class="n">it</span> <span class="s1">'does not post notification if hangout url is blank for pairing'</span> <span class="k">do</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">hangout_url</span> <span class="o">=</span> <span class="s2">"     "</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">not_to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">)</span>
+
+      <span class="n">slack_service</span><span class="p">.</span><span class="nf">post_hangout_notification</span><span class="p">(</span><span class="n">hangout</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="n">describe</span> <span class="s1">'.post_yt_link'</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:hangout</span><span class="p">)</span> <span class="p">{</span> <span class="no">EventInstance</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'MockEvent'</span><span class="p">,</span> <span class="ss">category: </span><span class="s2">"PairProgramming"</span><span class="p">,</span> <span class="ss">hangout_url: </span><span class="s2">"mock_url"</span><span class="p">,</span> <span class="ss">user: </span><span class="n">user</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:client</span><span class="p">)</span> <span class="p">{</span> <span class="n">spy</span><span class="p">(</span><span class="ss">:slack_client</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:expected_post_args</span><span class="p">)</span> <span class="k">do</span>
+      <span class="p">{</span>
+        <span class="ss">text: </span><span class="s1">'Video/Livestream for MockEvent: https://youtu.be/mock_url'</span><span class="p">,</span>
+        <span class="ss">username: </span><span class="n">user</span><span class="p">.</span><span class="nf">display_name</span><span class="p">,</span>
+        <span class="ss">icon_url: </span><span class="n">user</span><span class="p">.</span><span class="nf">gravatar_url</span><span class="p">,</span>
+        <span class="ss">link_names: </span><span class="mi">1</span>
+      <span class="p">}</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'sends the correct slack message to the correct channels for pairing'</span> <span class="k">do</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">yt_video_id</span> <span class="o">=</span> <span class="s1">'mock_url'</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">project</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">slug: </span><span class="s1">'websiteone'</span><span class="p">,</span> <span class="ss">title: </span><span class="s1">'WebSiteOne'</span><span class="p">,</span> <span class="ss">description: </span><span class="s1">'hmmm'</span><span class="p">,</span> <span class="ss">status: </span><span class="s1">'active'</span><span class="p">)</span>
+
+      <span class="n">slack_service</span><span class="p">.</span><span class="nf">post_yt_link</span><span class="p">(</span><span class="n">hangout</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">have_received</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">expected_post_args</span><span class="p">.</span><span class="nf">merge!</span><span class="p">(</span><span class="ss">channel: </span><span class="s1">'C0TLAE1MH'</span><span class="p">))</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">to</span> <span class="n">have_received</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="n">expected_post_args</span><span class="p">.</span><span class="nf">merge!</span><span class="p">(</span><span class="ss">channel: </span><span class="s1">'C29J4QQ9W'</span><span class="p">))</span>
+    <span class="k">end</span>
+
+    <span class="n">xit</span> <span class="s1">'sends the correct slack message to the correct channels for scrums'</span>
+    <span class="n">xit</span> <span class="s1">'does not post youtube video link if yt_video_id is blank for scrums'</span>
+
+    <span class="n">it</span> <span class="s1">'does not post youtube video link if yt_video_id is blank for pairing'</span> <span class="k">do</span>
+      <span class="n">hangout</span><span class="p">.</span><span class="nf">yt_video_id</span> <span class="o">=</span> <span class="s1">'    '</span>
+      <span class="n">slack_service</span><span class="p">.</span><span class="nf">post_yt_link</span><span class="p">(</span><span class="n">hangout</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+
+      <span class="n">expect</span><span class="p">(</span><span class="n">client</span><span class="p">).</span><span class="nf">not_to</span> <span class="n">have_received</span><span class="p">(</span><span class="ss">:chat_postMessage</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>For some reason I can&rsquo;t seem to move away from spies on the yt_link posts, but everything is green and I&rsquo;ve added pending tests for all the other paths we need to check and TODOs for the other improvements we need.  Hopefully a fresh look tomorrow will get this to the point we can try out on staging &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
