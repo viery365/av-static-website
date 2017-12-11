@@ -5,10 +5,121 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-10-03T01:00:00+01:00</updated>
+  <updated>2017-10-04T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Slack Service Cucumber Regressions</title>
+    <link rel="alternate" href="http://blog.url.com/2017/10/04/av-ecosystem-review-slack-service-cucumber-regressions/"/>
+    <id>http://blog.url.com/2017/10/04/av-ecosystem-review-slack-service-cucumber-regressions/</id>
+    <published>2017-10-04T01:00:00+01:00</published>
+    <updated>2017-12-11T21:01:27+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="regression testing" src="/images/Guitest.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve got the RSpec unit(?) tests green for the new version of the WSO Slack Service that takes the AgileBot microservice completely out of the picture.  I start the day by merging the latest from develop, which is a gem bump from dependabot (I have mixed feelings about these automated PRs for gem upgrades).  Then I check that we&amp;rsquo;re still green for the RSpec.  Dangerous to be pulling in other changes when I still have pending RSpecs and failing cukes, but hmmm &amp;hellip; anyway, here are the regression failures from running the cukes on the new Slack service:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;#&amp;lt;Double "Logger"&amp;gt; was originally created in one example but has leaked into another example and can no longer be used. rspec-mocks' doubles are designed to only last for one example, and you need to create a new one in each example you wish to use it for. (RSpec::Mocks::ExpiredTestDoubleError)&lt;/span&gt;
+./app/services/slack_service.rb:35:in &lt;span class="sb"&gt;`&lt;/span&gt;send_slack_message&lt;span class="s1"&gt;'
+./app/services/slack_service.rb:14:in `post_hangout_notification'&lt;/span&gt;
+./app/controllers/event_instances_controller.rb:15:in &lt;span class="sb"&gt;`&lt;/span&gt;update&lt;span class="s1"&gt;'
+./features/step_definitions/event_steps.rb:266:in `/^the HangoutConnection has pinged to indicate the event (start|continuing)$/'&lt;/span&gt;
+features/events/live_event.feature:21:in &lt;span class="sb"&gt;`&lt;/span&gt;And the HangoutConnection has pinged to indicate the event start&lt;span class="s1"&gt;'
+
+# all the below were of the same form as above
+
+Failing Scenarios:
+cucumber features/events/live_event.feature:19 # Scenario: Ongoing ping from HangoutConnection app keeps event alive
+cucumber features/events/live_event.feature:30 # Scenario: Lack of ping from HangoutConnection after two minutes kills events
+cucumber features/events/upcoming_events.feature:34 # Scenario: Shows event past end time when still live
+cucumber features/twitter.feature:13 # Scenario: Event going live without valid live stream does not cause youtube link to be tweeted
+cucumber features/twitter.feature:18 # Scenario: Event going live without valid live stream will have youtube link tweeted later when live
+cucumber features/twitter.feature:27 # Scenario: Event going live without valid live stream still causes hangout link to be tweeted
+cucumber features/twitter.feature:32 # Scenario: Event going live with valid livestream causes tweets of hangout link and youtube link to be sent
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So the specs are all green, and the cukes that are failing are all hitting this issue of a double leaking from one example to another &amp;hellip;, and they pass individually, and I can&amp;rsquo;t see any mention of &amp;ldquo;Logger&amp;rdquo; in the step definitions. Weird.  I trace through the stack trace above and again see no mention of a &lt;code&gt;double :logger&lt;/code&gt; being created anywhere &amp;hellip; no mention of any doubles anywhere in the cuke step definitions.  Something from factoryGirl?  No mention of doubles there &amp;hellip; I try running all the &lt;code&gt;live_event.feature&lt;/code&gt; cukes together and yes, the error recurrs.  So the first scenario passes:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  Background:
+    Given following events exist:
+      | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
+      | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
+
+  Scenario: Event is seen to be live when event is started a minute previously
+    Given an event "Scrum"
+    And the HangoutConnection has pinged to indicate the event start
+    Then the event should be live
+    And after one minute
+    Then the event should still be live
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but then the following two fail:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  Scenario: Ongoing ping from HangoutConnection app keeps event alive
+    Given an event "Scrum"
+    And the HangoutConnection has pinged to indicate the event start
+    Then the event should be live
+    And after three minutes
+    When the HangoutConnection pings to indicate the event is ongoing
+    Then the event should still be live
+    And after three more minutes
+    When the HangoutConnection pings to indicate the event is ongoing
+    Then the event should still be live
+
+  Scenario: Lack of ping from HangoutConnection after two minutes kills events
+    Given an event "Scrum"
+    And the HangoutConnection has pinged to indicate the event start
+    Then the event should be live
+    And after three minutes
+    Then the event should be dead
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;with the same Logger issue.  I also notice that the test runs are hitting the test Slack instance, which is not ideal &amp;hellip; we&amp;rsquo;re covered by VCR I think &amp;hellip; so I&amp;rsquo;m not going to add extra stubs immediately, and I think if I can solve this Logger issue I can make progress.  Previous experience would make me suspect the background step creating events via factories, but inspection shows that it is creating a normal active record element:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Given&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^following events exist:$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hashes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:project_id&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;title: &lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'project'&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'project'&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;blank?&lt;/span&gt;
+    &lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delete&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'project'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;hash&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The hangout ping step is rather long:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;When(/^the HangoutConnection has pinged to indicate the event (start|continuing)$/) do |type|
+  participants = {"0"=&amp;gt;{"id"=&amp;gt;"hangout2750757B_ephemeral.id.google.com^a85dcb4670", "hasMicrophone"=&amp;gt;"true", "hasCamera"=&amp;gt;"true", "hasAppEnabled"=&amp;gt;"true", "isBroadcaster"=&amp;gt;"true", "isInBroadcast"=&amp;gt;"true", "displayIndex"=&amp;gt;"0", "person"=&amp;gt;{"id"=&amp;gt;"108533475599002820142", "displayName"=&amp;gt;"Alejandro Babio", "image"=&amp;gt;{"url"=&amp;gt;"https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"}, "na"=&amp;gt;"false"}, "locale"=&amp;gt;"en", "na"=&amp;gt;"false"}}
+  header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
+  put "/hangouts/@google_id", {title: @event.name, host_id: '3', event_id: @event.id,
+                               participants: participants, hangout_url: 'http://hangout.test',
+                               hoa_status: 'live', project_id: '1', category: 'Scrum', yt_video_id: '11'}
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but again, there&amp;rsquo;s no indication of any mocking, stubbing, doubles or loggers.  I google the error message and the only place I see it is in the RSpec docs: &lt;a href="https://relishapp.com/rspec/rspec-mocks/docs/basics/scope"&gt;https://relishapp.com/rspec/rspec-mocks/docs/basics/scope&lt;/a&gt; where we see an example of a double being added to an object and then being referred to in another instance, but this is Cucumber and not RSpec, although we&amp;rsquo;re using RSpec commands in the step definitions.  So the place to look is the steps that are using those RSpec commands, e.g. &lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    Then the event should be live
+    And after one minute
+    Then the event should still be live
+&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^the event should (still )?be live$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;ignore&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_content&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'This event is now live!'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;And&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^after one (more )?minute$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;ignore&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="no"&gt;Delorean&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;time_travel_to&lt;/span&gt; &lt;span class="s1"&gt;'1 minute from now'&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^the event should (still )?be live$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;ignore&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;event_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_content&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'This event is now live!'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So the state we&amp;rsquo;re carrying over is the &lt;code&gt;@event&lt;/code&gt; instance, but that should get recreated for each scenario &amp;hellip; I try removing all the expectation steps from the scenarios, but the issue still occurs.  The failure is specifically on the attempt to ping the event start, and the error is thrown in the slack service when we try to send the slack message &amp;hellip; I take out that line and we pass:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  def send_slack_message(client, channel, text, user)
+    client.chat_postMessage(channel: channel, text: text, username: user.display_name, icon_url: user.gravatar_url, link_names: 1)
+  end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There&amp;rsquo;s no mention of doubles in the SlackRubyClient github issues, but there is mention of some &lt;a href="https://github.com/slack-ruby/slack-ruby-client/issues/104"&gt;thread leak issue&lt;/a&gt; that was fixed, but also mentions that the SlackRubyClient has a logger &amp;hellip; I try setting that to nil, in our Rails initializer, to no avail, so I go ahead and open an issue on the SlackRubyClient repo:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/slack-ruby/slack-ruby-client/issues/174"&gt;https://github.com/slack-ruby/slack-ruby-client/issues/174&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;which I seem to have fixed the issue by setting the slack client logger to the Rails.logger&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Slack::Web::Client.new(logger: Rails.logger)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So now I just have to decide whether these acceptance tests need to explicitly check that the SlackService is operating correctly rather than just catching them in VCR &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Rumours of AgileBots Demise</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/03/av-ecosystem-review-rumours-of-agilebots-demise/"/>
@@ -503,82 +614,6 @@ Finished &lt;span class="k"&gt;in &lt;/span&gt;1 minute 3.18 seconds &lt;span cl
 &lt;p&gt;&lt;img src="https://dl.dropboxusercontent.com/s/70dz9b00t4cc8pb/Screenshot%202017-09-28%2009.52.10.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;I was all excited about adding images yesterday, but now I&amp;rsquo;m not so sure - at least large images in the dropdowns seem a little shocking - maybe smaller ones with text flowing around them &amp;hellip;?  Re-editing these pages is quite exhausting - all the copy and pasting of text into precise places of HTML.  Think I&amp;rsquo;ll leave the Premium F2F page till tomorrow &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Yanking Back to Premium</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/27/av-ecosystem-review-yanking-back-to-premium/"/>
-    <id>http://blog.url.com/2017/09/27/av-ecosystem-review-yanking-back-to-premium/</id>
-    <published>2017-09-27T01:00:00+01:00</published>
-    <updated>2017-11-28T21:47:32+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="yanked" src="/images/yanked.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So in the backdrop yesterday a javascript bug in the multiple repos for projects feature led me to some refactoring that also fixed the bug, which I thought was pretty neat:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="nx"&gt;WebsiteOne&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;define&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Projects'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="na"&gt;ensure_github_url_numbering&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-      &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;sourceRepositories&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#project_form'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'.nested-fields'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-      &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;sourceRepositoriesSize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositories&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;size&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-
-      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositoriesSize&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;sourceRepositoriesSize&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-          &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;sourceRepositories&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nx"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'.repo_field_label'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'GitHub url ('&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;')'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;});&lt;/span&gt;
-
-&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'ready'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nx"&gt;WebsiteOne&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Projects&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ensure_github_url_numbering&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-
-  &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#source_repositories'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'cocoon:after-insert'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;added_repo&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nx"&gt;WebsiteOne&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Projects&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ensure_github_url_numbering&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-  &lt;span class="p"&gt;});&lt;/span&gt;
-&lt;span class="p"&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I had realised that the github url numbering was not being executed on initial page load, and so I extracted the function that performed it into our application name space and now call it both on page load and when the form is dynamically updated.  Should I have done the refactoring earlier?  I don&amp;rsquo;t think that would have highlighted the issue particularly, and I left off factoring because I wanted to see what direction I&amp;rsquo;d be pushed in next.&lt;/p&gt;
-
-&lt;p&gt;Anyhow, so the siren song of the Waffle board is calling, since I&amp;rsquo;ve started a spike to see if we can replace the agile-bot with a chunk of Ruby code, and that has an interesting interaction with a feature that Corey wants to work on.  Still we don&amp;rsquo;t have anything in the &amp;ldquo;Please check&amp;rdquo; column, and I must force myself to get to these outstanding Premium content tickets that I&amp;rsquo;ve got assigned to me in the &amp;ldquo;ready&amp;rdquo; column:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropboxusercontent.com/s/xqtuv7s55czfr5p/Screenshot%202017-09-27%2009.48.32.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Although I&amp;rsquo;m also desperate to get in some of the changes suggested in the marketing meeting as a result of feedback that indicates folks are not understanding the additional value that comes from Premium Mob and F2F.  From my action items there I can do a quick update of the overview page like so:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropboxusercontent.com/s/apwfkulugmnj4z8/Screenshot%202017-09-27%2009.52.42.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and I tweaked the language at the top, but I&amp;rsquo;m not convinced this will have much impact:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropboxusercontent.com/s/z1e41padz22gvao/Screenshot%202017-09-27%2009.56.35.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m thinking that images of people in hangouts in the Premium Mob and F2F pages will be what makes the difference.  Okay, let&amp;rsquo;s start with the mob page.  I previously took a copy of the Premium page in html into version control, although we are still storing it in the db.  Potentially confusing, but good backup for when I do things like accidentally blow away the changes I make on staging.  So I&amp;rsquo;m running out of time, but the key thing to make progress on the ticket is to turn the list of Premium Mob features into a set of whys, which I did in a blog:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Mob programming sessions with an assigned AV Mentor each week&lt;/li&gt;
-&lt;li&gt;Professional Development Planning Support&lt;/li&gt;
-&lt;li&gt;Free accesss to Udemy Complete Elixir &amp;amp; Phoenix Bootcamp course (usual price $50)&lt;/li&gt;
-&lt;li&gt;Free accesss to Udemy React Redux course (usual price $180)&lt;/li&gt;
-&lt;li&gt;25% discount on &amp;ldquo;Effective Testing with RSpec 3&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;10% discount on Upcase membership&lt;/li&gt;
-&lt;li&gt;Free access to the &amp;ldquo;Phoenix Inside Out&amp;rdquo; book series&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&amp;ndash;&amp;gt; Related Questions&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;You want to level up on the latest hot technologies like Elixir and React?&lt;/li&gt;
-&lt;li&gt;You want to get a personalised professional development plan to achieve your goals?&lt;/li&gt;
-&lt;li&gt;You want to master mob programming online?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And for reference since it took 10 minutes to find it - my blog on that is &lt;a href="http://nonprofits.agileventures.org/2017/06/26/private-design-sprint-day-minus-one-blog/"&gt;http://nonprofits.agileventures.org/2017/06/26/private-design-sprint-day-minus-one-blog/&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;So editing up the HTML I got half the Premium Mob page done, which is at least a start.  Will finish tomorrow:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ko5h8eraiwy5l63/Screenshot%202017-09-27%2010.38.32.png?dl=1" /&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>

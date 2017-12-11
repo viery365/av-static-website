@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Slack Service Cucumber Regressions</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_10 x2017_10_04 x2017_10_04_av-ecosystem-review-slack-service-cucumber-regressions x2017_10_04_av-ecosystem-review-slack-service-cucumber-regressions_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/10/04/av-ecosystem-review-slack-service-cucumber-regressions/">AV EcoSystem Slack Service Cucumber Regressions</a></h2>
+        <h5 class='date'> 4 Oct 2017</h5>
+    <p><img alt="regression testing" src="/images/Guitest.jpg" /></p>
+
+<p>I&rsquo;ve got the RSpec unit(?) tests green for the new version of the WSO Slack Service that takes the AgileBot microservice completely out of the picture.  I start the day by merging the latest from develop, which is a gem bump from dependabot (I have mixed feelings about these automated PRs for gem upgrades).  Then I check that we&rsquo;re still green for the RSpec.  Dangerous to be pulling in other changes when I still have pending RSpecs and failing cukes, but hmmm &hellip; anyway, here are the regression failures from running the cukes on the new Slack service:</p>
+<pre class="highlight shell"><code><span class="c">#&lt;Double "Logger"&gt; was originally created in one example but has leaked into another example and can no longer be used. rspec-mocks' doubles are designed to only last for one example, and you need to create a new one in each example you wish to use it for. (RSpec::Mocks::ExpiredTestDoubleError)</span>
+./app/services/slack_service.rb:35:in <span class="sb">`</span>send_slack_message<span class="s1">'
+./app/services/slack_service.rb:14:in `post_hangout_notification'</span>
+./app/controllers/event_instances_controller.rb:15:in <span class="sb">`</span>update<span class="s1">'
+./features/step_definitions/event_steps.rb:266:in `/^the HangoutConnection has pinged to indicate the event (start|continuing)$/'</span>
+features/events/live_event.feature:21:in <span class="sb">`</span>And the HangoutConnection has pinged to indicate the event start<span class="s1">'
+
+# all the below were of the same form as above
+
+Failing Scenarios:
+cucumber features/events/live_event.feature:19 # Scenario: Ongoing ping from HangoutConnection app keeps event alive
+cucumber features/events/live_event.feature:30 # Scenario: Lack of ping from HangoutConnection after two minutes kills events
+cucumber features/events/upcoming_events.feature:34 # Scenario: Shows event past end time when still live
+cucumber features/twitter.feature:13 # Scenario: Event going live without valid live stream does not cause youtube link to be tweeted
+cucumber features/twitter.feature:18 # Scenario: Event going live without valid live stream will have youtube link tweeted later when live
+cucumber features/twitter.feature:27 # Scenario: Event going live without valid live stream still causes hangout link to be tweeted
+cucumber features/twitter.feature:32 # Scenario: Event going live with valid livestream causes tweets of hangout link and youtube link to be sent
+</span></code></pre>
+<p>So the specs are all green, and the cukes that are failing are all hitting this issue of a double leaking from one example to another &hellip;, and they pass individually, and I can&rsquo;t see any mention of &ldquo;Logger&rdquo; in the step definitions. Weird.  I trace through the stack trace above and again see no mention of a <code>double :logger</code> being created anywhere &hellip; no mention of any doubles anywhere in the cuke step definitions.  Something from factoryGirl?  No mention of doubles there &hellip; I try running all the <code>live_event.feature</code> cukes together and yes, the error recurrs.  So the first scenario passes:</p>
+<pre class="highlight plaintext"><code>  Background:
+    Given following events exist:
+      | name       | description             | category        | start_datetime          | duration | repeats | time_zone | project | repeats_weekly_each_days_of_the_week_mask | repeats_every_n_weeks |
+      | Scrum      | Daily scrum meeting     | Scrum           | 2014/02/03 07:00:00 UTC | 150      | never   | UTC       |         |                                           |                       |
+
+  Scenario: Event is seen to be live when event is started a minute previously
+    Given an event "Scrum"
+    And the HangoutConnection has pinged to indicate the event start
+    Then the event should be live
+    And after one minute
+    Then the event should still be live
+</code></pre>
+<p>but then the following two fail:</p>
+<pre class="highlight plaintext"><code>  Scenario: Ongoing ping from HangoutConnection app keeps event alive
+    Given an event "Scrum"
+    And the HangoutConnection has pinged to indicate the event start
+    Then the event should be live
+    And after three minutes
+    When the HangoutConnection pings to indicate the event is ongoing
+    Then the event should still be live
+    And after three more minutes
+    When the HangoutConnection pings to indicate the event is ongoing
+    Then the event should still be live
+
+  Scenario: Lack of ping from HangoutConnection after two minutes kills events
+    Given an event "Scrum"
+    And the HangoutConnection has pinged to indicate the event start
+    Then the event should be live
+    And after three minutes
+    Then the event should be dead
+</code></pre>
+<p>with the same Logger issue.  I also notice that the test runs are hitting the test Slack instance, which is not ideal &hellip; we&rsquo;re covered by VCR I think &hellip; so I&rsquo;m not going to add extra stubs immediately, and I think if I can solve this Logger issue I can make progress.  Previous experience would make me suspect the background step creating events via factories, but inspection shows that it is creating a normal active record element:</p>
+<pre class="highlight ruby"><code><span class="no">Given</span><span class="p">(</span><span class="sr">/^following events exist:$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">table</span><span class="o">|</span>
+  <span class="n">table</span><span class="p">.</span><span class="nf">hashes</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="o">|</span>
+    <span class="nb">hash</span><span class="p">[</span><span class="ss">:project_id</span><span class="p">]</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">find_by</span><span class="p">(</span><span class="ss">title: </span><span class="nb">hash</span><span class="p">[</span><span class="s1">'project'</span><span class="p">]).</span><span class="nf">id</span> <span class="k">unless</span> <span class="nb">hash</span><span class="p">[</span><span class="s1">'project'</span><span class="p">].</span><span class="nf">blank?</span>
+    <span class="nb">hash</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="s1">'project'</span><span class="p">)</span>
+    <span class="no">Event</span><span class="p">.</span><span class="nf">create!</span><span class="p">(</span><span class="nb">hash</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>The hangout ping step is rather long:</p>
+<pre class="highlight plaintext"><code>When(/^the HangoutConnection has pinged to indicate the event (start|continuing)$/) do |type|
+  participants = {"0"=&gt;{"id"=&gt;"hangout2750757B_ephemeral.id.google.com^a85dcb4670", "hasMicrophone"=&gt;"true", "hasCamera"=&gt;"true", "hasAppEnabled"=&gt;"true", "isBroadcaster"=&gt;"true", "isInBroadcast"=&gt;"true", "displayIndex"=&gt;"0", "person"=&gt;{"id"=&gt;"108533475599002820142", "displayName"=&gt;"Alejandro Babio", "image"=&gt;{"url"=&gt;"https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"}, "na"=&gt;"false"}, "locale"=&gt;"en", "na"=&gt;"false"}}
+  header 'ORIGIN', 'a-hangout-opensocial.googleusercontent.com'
+  put "/hangouts/@google_id", {title: @event.name, host_id: '3', event_id: @event.id,
+                               participants: participants, hangout_url: 'http://hangout.test',
+                               hoa_status: 'live', project_id: '1', category: 'Scrum', yt_video_id: '11'}
+end
+</code></pre>
+<p>but again, there&rsquo;s no indication of any mocking, stubbing, doubles or loggers.  I google the error message and the only place I see it is in the RSpec docs: <a href="https://relishapp.com/rspec/rspec-mocks/docs/basics/scope">https://relishapp.com/rspec/rspec-mocks/docs/basics/scope</a> where we see an example of a double being added to an object and then being referred to in another instance, but this is Cucumber and not RSpec, although we&rsquo;re using RSpec commands in the step definitions.  So the place to look is the steps that are using those RSpec commands, e.g. </p>
+<pre class="highlight plaintext"><code>    Then the event should be live
+    And after one minute
+    Then the event should still be live
+</code></pre><pre class="highlight ruby"><code><span class="no">Then</span><span class="p">(</span><span class="sr">/^the event should (still )?be live$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">ignore</span><span class="o">|</span>
+  <span class="n">visit</span> <span class="n">event_path</span><span class="p">(</span><span class="vi">@event</span><span class="p">)</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">).</span><span class="nf">to</span> <span class="n">have_content</span><span class="p">(</span><span class="s1">'This event is now live!'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre><pre class="highlight ruby"><code><span class="no">And</span><span class="p">(</span><span class="sr">/^after one (more )?minute$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">ignore</span><span class="o">|</span>
+  <span class="no">Delorean</span><span class="p">.</span><span class="nf">time_travel_to</span> <span class="s1">'1 minute from now'</span>
+<span class="k">end</span>
+</code></pre><pre class="highlight ruby"><code><span class="no">Then</span><span class="p">(</span><span class="sr">/^the event should (still )?be live$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">ignore</span><span class="o">|</span>
+  <span class="n">visit</span> <span class="n">event_path</span><span class="p">(</span><span class="vi">@event</span><span class="p">)</span>
+  <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">).</span><span class="nf">to</span> <span class="n">have_content</span><span class="p">(</span><span class="s1">'This event is now live!'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>So the state we&rsquo;re carrying over is the <code>@event</code> instance, but that should get recreated for each scenario &hellip; I try removing all the expectation steps from the scenarios, but the issue still occurs.  The failure is specifically on the attempt to ping the event start, and the error is thrown in the slack service when we try to send the slack message &hellip; I take out that line and we pass:</p>
+<pre class="highlight plaintext"><code>  def send_slack_message(client, channel, text, user)
+    client.chat_postMessage(channel: channel, text: text, username: user.display_name, icon_url: user.gravatar_url, link_names: 1)
+  end
+</code></pre>
+<p>There&rsquo;s no mention of doubles in the SlackRubyClient github issues, but there is mention of some <a href="https://github.com/slack-ruby/slack-ruby-client/issues/104">thread leak issue</a> that was fixed, but also mentions that the SlackRubyClient has a logger &hellip; I try setting that to nil, in our Rails initializer, to no avail, so I go ahead and open an issue on the SlackRubyClient repo:</p>
+
+<p><a href="https://github.com/slack-ruby/slack-ruby-client/issues/174">https://github.com/slack-ruby/slack-ruby-client/issues/174</a></p>
+
+<p>which I seem to have fixed the issue by setting the slack client logger to the Rails.logger</p>
+<pre class="highlight plaintext"><code>Slack::Web::Client.new(logger: Rails.logger)
+</code></pre>
+<p>So now I just have to decide whether these acceptance tests need to explicitly check that the SlackService is operating correctly rather than just catching them in VCR &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
