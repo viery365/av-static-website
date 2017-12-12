@@ -5,10 +5,91 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-10-04T01:00:00+01:00</updated>
+  <updated>2017-10-05T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Pride Comes Before A Fall</title>
+    <link rel="alternate" href="http://blog.url.com/2017/10/05/av-ecosystem-review-pride-comes-before-a-fall/"/>
+    <id>http://blog.url.com/2017/10/05/av-ecosystem-review-pride-comes-before-a-fall/</id>
+    <published>2017-10-05T01:00:00+01:00</published>
+    <updated>2017-12-12T21:21:32+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="pride" src="/images/pride.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So they say that pride comes before a fall.  Just after being so pleased with myself for fixing the strange double leakage issue introduced by the new Slack gem (pass in Rails.logger) I got notices that I&amp;rsquo;d posted some secret tokens to GitHub.  In committing the latest vcr cassettes I had inadvertently included the slack and gitter api tokens.  It&amp;rsquo;s a relatively easy fix with the following code in the VCR config:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;filter_sensitive_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;SLACK_AUTH_TOKEN&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;ENV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'SLACK_AUTH_TOKEN'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;filter_sensitive_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;GITTER_API_TOKEN&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;ENV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'GITTER_API_TOKEN'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but I&amp;rsquo;ll have to regenerate the existing tokens &amp;hellip; anyway, we&amp;rsquo;re running out of week to get this feature fixed up.  The key issues outstanding (now that we have all the existing tests passing) are:&lt;/p&gt;
+
+&lt;p&gt;1) managing the different Slack and Gitter room ids for staging and production
+2) deciding whether to add explicit cukes that check that the Slack and Gitter APIs are hit
+3) filling out all the pending unit tests&lt;/p&gt;
+
+&lt;p&gt;I think I&amp;rsquo;ve got to start with item 1.  On agile-bot Michael and I set up a separate ENV var (&lt;code&gt;LIVE_ENV&lt;/code&gt;) to specify whether the &amp;ldquo;production&amp;rdquo; Slack should be hit &amp;hellip; I had half a mind to check which URL the instance was running against, but probably easier to re-use the &lt;code&gt;LIVE_ENV&lt;/code&gt; concept.  I take a stab with the ugly:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;ENV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'LIVE_ENV'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'production'&lt;/span&gt;
+    &lt;span class="no"&gt;CHANNELS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;"asyncvoter"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C2HGJF54G"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"autograder"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C0UFNHRAB"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"betasaasers"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C02AHEA5P"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"binghamton-university-bike-share"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C033Z02P9"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"codealia"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C0297TUQC"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+        &lt;span class="s2"&gt;"pairing_notifications"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C02BNVCM1"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"standup_notifications"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C02B4QH1C"&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="no"&gt;GITTER_ROOMS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;"saasbook/MOOC"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"544100afdb8155e6700cc5e4"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"saasbook/AV102"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"55e42db80fc9f982beaf2725"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"AgileVentures/agile-bot"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"56b8bdffe610378809c070cc"&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;else&lt;/span&gt;
+    &lt;span class="no"&gt;CHANNELS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;"cs169"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C29J4CYA2"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"websiteone"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C29J4QQ9W"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"general"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C0TLAE1MH"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"pairing_notifications"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C29J3DPGW"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"standup_notifications"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C29JE6HGR"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="no"&gt;GITTER_ROOMS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;"saasbook/MOOC"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"56b8bdffe610378809c070cc"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"saasbook/AV102"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"56b8bdffe610378809c070cc"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;"AgileVentures/agile-bot"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"56b8bdffe610378809c070cc"&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which maybe should be loaded from a file - I have a funny reticence to load things from files.  I&amp;rsquo;ve never been so comfortable with grabbing stuff from files - a legacy from Java where it was such a pain?  In Ruby it&amp;rsquo;s pretty damn trivial.  I guess when I have stuff formatted in one way, stepping through and reformatting for yaml or what have you causes my motivation to collapse.  What we really want in the end is to be looking all these up from the Slack API, so I&amp;rsquo;m going to leave that for a refactoring, get the rest of the unit tests to pass and try to get this onto staging to see if my claims that we can replace the agile-bot are close to true.&lt;/p&gt;
+
+&lt;p&gt;So I stab about a bit and with a fair amount of replication of tests (and some refactoring), I get the output of the RSpec test to this:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;SlackService
+  .post_hangout_notification
+    PairProgramming
+      sends the correct slack message to the correct channels
+      does not post notification if hangout url is blank
+      does not fail when event has no associated project
+      should ping gitter and slack (but not general) when the project is cs169
+    Scrums
+      does not post notification if hangout url is blank for pairing
+      should ping slack when the project is cs169
+      does not fail when event has no associated project
+      sends the correct slack message to the correct channels
+  .post_yt_link
+    Scrums
+      does not post youtube video link if yt_video_id is blank
+      sends the correct slack message to the correct channels
+    PairProgramming
+      does not ping slack when the project is cs169
+      does not post youtube video link if yt_video_id is blank
+      sends the correct slack message to the correct channels
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which I think is a lot better coverage than we have had.  What I&amp;rsquo;d really like is a local report of coverage for this file for these tests.  There&amp;rsquo;s also a lot of replication in the SlackService file itself, but I think I will leave a major refactor here until I&amp;rsquo;ve seen all our existing functionality replicated.  First let&amp;rsquo;s get this PR merged, and onto staging where I can test all the settings against hitting a backup Slack instance, and then ease this into production &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Slack Service Cucumber Regressions</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/04/av-ecosystem-review-slack-service-cucumber-regressions/"/>
@@ -590,30 +671,6 @@ Finished &lt;span class="k"&gt;in &lt;/span&gt;1 minute 3.18 seconds &lt;span cl
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/5525qjulecdnsbg/Screenshot%202017-09-29%2010.32.27.png?dl=0" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now there&amp;rsquo;s just the rest of the board to clear up - I think next week I have to start fresh with a big review of what the priorities are for the whole ecosystem - although it would be lovely to tidy up that agilebot replacement spike &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Sorting Premium Mob Page</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/28/av-ecosystem-review-sorting-premium-mob-page/"/>
-    <id>http://blog.url.com/2017/09/28/av-ecosystem-review-sorting-premium-mob-page/</id>
-    <published>2017-09-28T01:00:00+01:00</published>
-    <updated>2017-11-29T20:42:40+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So the multiple repo functionality got deployed yesterday, which elicited a positive response from the user who&amp;rsquo;d reminded us about the need for this functionality:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropboxusercontent.com/s/jsg8oz8pdjenbk4/Screenshot%202017-09-28%2009.32.02.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;but so back to the Premium Mob page grindstone, which I started yesterday &amp;hellip; and in fairly short order I&amp;rsquo;ve got that sorted on staging, cleaning up yesterday&amp;rsquo;s text about the &amp;ldquo;why&amp;rdquo; questions:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropboxusercontent.com/s/ry1bu60e7ea8qef/Screenshot%202017-09-28%2009.51.49.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and getting the faq into the dropdown bullet format:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropboxusercontent.com/s/70dz9b00t4cc8pb/Screenshot%202017-09-28%2009.52.10.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I was all excited about adding images yesterday, but now I&amp;rsquo;m not so sure - at least large images in the dropdowns seem a little shocking - maybe smaller ones with text flowing around them &amp;hellip;?  Re-editing these pages is quite exhausting - all the copy and pasting of text into precise places of HTML.  Think I&amp;rsquo;ll leave the Premium F2F page till tomorrow &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
