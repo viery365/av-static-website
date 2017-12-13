@@ -5,22 +5,104 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-10-05T01:00:00+01:00</updated>
+  <updated>2017-10-06T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Back to Front</title>
+    <link rel="alternate" href="http://blog.url.com/2017/10/06/av-ecosystem-review-back-to-front/"/>
+    <id>http://blog.url.com/2017/10/06/av-ecosystem-review-back-to-front/</id>
+    <published>2017-10-06T01:00:00+01:00</published>
+    <updated>2017-12-13T21:53:58+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="Back to Front" src="/images/back_to_front.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;This morning was back to front as I squeezed in an AgileVentures trustee meeting and LocalSupport client meeting before blogging, all due to time constraints on the part of other meeting participants.  Now I&amp;rsquo;m struggling to sort my day out alongside processing the &amp;ldquo;ingressive&amp;rdquo;/&amp;ldquo;congressive&amp;rdquo; concepts introduced by Eugenia Cheng in the latest &lt;a href="https://www.greaterthancode.com/2017/07/05/episode-038-category-theory-for-normal-humans/"&gt;greater than code&lt;/a&gt; podcast that I was listening to.  At the risk of falling into my naval-gazing blogs of last year I start wondering if &amp;ldquo;ingressive&amp;rdquo; sports that have winners are &amp;ldquo;bad&amp;rdquo; and I agonise about whether the competitive football matches my boys take part in (and I coach for) are all retrograde steps preventing myself and my boys from contributing positively to society.  I do have fantasies of some kind of team activity for youngsters that involves charity work, but I can&amp;rsquo;t immediately work out a way to get the kids excited about it &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Anyway, at least my work is &amp;ldquo;congressive&amp;rdquo;, I hope - trying to bring together groups of volunteers to help other charities with technology interventions.  Although often the one to one interactions can end up being &amp;ldquo;ingressive&amp;rdquo;.  I&amp;rsquo;ve been trying so hard to &amp;ldquo;win&amp;rdquo; the smart person competition for so long, it&amp;rsquo;s difficult for me to change my spots.  Still, today I&amp;rsquo;m trying to stab out the ruby-fied agile-bot.  I&amp;rsquo;ve not been adding extra publicity to the PR updates I&amp;rsquo;ve been doing.  I almost shy away from reviews of this latest code as there&amp;rsquo;s so much to improve, but I can&amp;rsquo;t bear not having an end to end operation that allows me to start tidying up and managing our slack messaging.  So, that naval-gazing aside, where are we?  We have a PR:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1835"&gt;https://github.com/AgileVentures/WebsiteOne/pull/1835&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s merge it, which should get it onto develop, but I need it on staging to really check what&amp;rsquo;s going on.  Okay, so maybe that&amp;rsquo;s a window to work out what&amp;rsquo;s happening with dependabot, which is opening new PRs every time a dependency updates.  Noisy at the moment - maybe it will settle down.  Either way I think the need to keep re-starting builds due to our intermittent fails is a real pain, so perhaps I can quickly get this &amp;ldquo;second run&amp;rdquo; system that we have on LocalSupport set up on WebSiteOne &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;What we have on Localsupport is a travis build that includes the following:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;bundle exec rake cucumber:second_try
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;let&amp;rsquo;s pull in the latest develop updates and get a branch on WSO set up with that:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (develop)]$ 
+→ git checkout -b 1803_setup_cuke_second_run_on_fail
+Switched to a new branch '1803_setup_cuke_second_run_on_fail'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now add the following to &lt;code&gt;lib/tasks/cucumber.rake&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;    &lt;span class="n"&gt;desc&lt;/span&gt; &lt;span class="s1"&gt;'Run all features, record any failures'&lt;/span&gt;
+    &lt;span class="no"&gt;Cucumber&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="ss"&gt;first_try: &lt;/span&gt;&lt;span class="s1"&gt;'test:prepare'&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="s1"&gt;'run all features and record failures'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;binary&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vendored_cucumber_bin&lt;/span&gt;
+      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;fork&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt; &lt;span class="c1"&gt;# You may get faster startup if you set this to false&lt;/span&gt;
+      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;profile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'first_try'&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="n"&gt;desc&lt;/span&gt; &lt;span class="s1"&gt;'Run failures if any exist'&lt;/span&gt;
+    &lt;span class="no"&gt;Cucumber&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="ss"&gt;second_try: &lt;/span&gt;&lt;span class="s1"&gt;'test:prepare'&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="s1"&gt;'rerun any recorded failures'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;binary&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vendored_cucumber_bin&lt;/span&gt;
+      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;fork&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt; &lt;span class="c1"&gt;# You may get faster startup if you set this to false&lt;/span&gt;
+      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;profile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'second_try'&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and this to &lt;code&gt;config/cucumber.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;first_try&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;  &lt;span class="s"&gt;NEVER_FAIL=true  &amp;lt;%= std_opts %&amp;gt; --format rerun --out rerun.txt features --strict --tags ~@wip&lt;/span&gt;
+&lt;span class="na"&gt;second_try&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;NEVER_FAIL=false &amp;lt;%= std_opts %&amp;gt; @rerun.txt  --strict --tags ~@wip&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and then we need to see if we adjust the sempahore running options to hit this.  In the process I go into &lt;code&gt;lib/tasks/ci.rake&lt;/code&gt; and change it so it hits first&lt;em&gt;try and second&lt;/em&gt;try (and not ci_cucumber) like so:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;env&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;production?&lt;/span&gt;
+  &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'rspec/core/rake_task'&lt;/span&gt;
+  &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'cucumber/rake/task'&lt;/span&gt;
+  &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'coveralls/rake/task'&lt;/span&gt;
+
+  &lt;span class="no"&gt;Coveralls&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;RakeTask&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;
+
+  &lt;span class="no"&gt;Cucumber&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Rake&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:ci_cucumber&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cucumber_opts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'--tags ~@intermittent-ci-js-fail'&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="n"&gt;namespace&lt;/span&gt; &lt;span class="ss"&gt;:ci&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;desc&lt;/span&gt; &lt;span class="s1"&gt;'Run Rspec and Cucumber then push coverage report to coveralls'&lt;/span&gt;
+    &lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="ss"&gt;tests: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:spec&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'cucumber:first_try'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'cucumber:second_try'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'coveralls:push'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I also update semaphore so that the Jasmine tests run first:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/he1c9x865rja5i0/Screenshot%202017-10-06%2011.07.26.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and I push and see &amp;hellip; the problem is the delayed feedback loop is that I need to wait for an intermittent failure to see if this all works.  If the &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1868"&gt;PR&lt;/a&gt; passes I guess I merge and see &amp;hellip; and the failing first try has broken the semaphore build:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Failing Scenarios:
+cucumber -p first_try features/documents.feature:169 # Scenario: Insert media model rejects badly formatted youtube links
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ah, we also need the folowing in &lt;code&gt;features/support/env.rb&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# To be used in conjunction with rerun option, so that we don't return a failing&lt;/span&gt;
+&lt;span class="c1"&gt;# exit code until the second try fails&lt;/span&gt;
+&lt;span class="nb"&gt;at_exit&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;ENV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'NEVER_FAIL'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'true'&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and we&amp;rsquo;ll see if that works, but it might take the rest of the day &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Pride Comes Before A Fall</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/05/av-ecosystem-review-pride-comes-before-a-fall/"/>
     <id>http://blog.url.com/2017/10/05/av-ecosystem-review-pride-comes-before-a-fall/</id>
     <published>2017-10-05T01:00:00+01:00</published>
-    <updated>2017-12-12T21:21:32+00:00</updated>
+    <updated>2017-12-13T21:40:10+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
     <content type="html">&lt;p&gt;&lt;img alt="pride" src="/images/pride.jpg" /&gt;&lt;/p&gt;
 
-&lt;p&gt;So they say that pride comes before a fall.  Just after being so pleased with myself for fixing the strange double leakage issue introduced by the new Slack gem (pass in Rails.logger) I got notices that I&amp;rsquo;d posted some secret tokens to GitHub.  In committing the latest vcr cassettes I had inadvertently included the slack and gitter api tokens.  It&amp;rsquo;s a relatively easy fix with the following code in the VCR config:&lt;/p&gt;
+&lt;p&gt;So they say that pride comes before a fall.  Just after being so pleased with myself for fixing the strange double leakage issue introduced by the new Slack gem (pass in Rails.logger), I got notices that I&amp;rsquo;d posted some secret tokens to GitHub.  In committing the latest vcr cassettes I had inadvertently included the Slack and Gitter api tokens.  It&amp;rsquo;s a relatively easy fix with the following code in the VCR config:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;filter_sensitive_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;SLACK_AUTH_TOKEN&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;ENV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'SLACK_AUTH_TOKEN'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;filter_sensitive_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;GITTER_API_TOKEN&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;ENV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'GITTER_API_TOKEN'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -30,7 +112,7 @@
 2) deciding whether to add explicit cukes that check that the Slack and Gitter APIs are hit
 3) filling out all the pending unit tests&lt;/p&gt;
 
-&lt;p&gt;I think I&amp;rsquo;ve got to start with item 1.  On agile-bot Michael and I set up a separate ENV var (&lt;code&gt;LIVE_ENV&lt;/code&gt;) to specify whether the &amp;ldquo;production&amp;rdquo; Slack should be hit &amp;hellip; I had half a mind to check which URL the instance was running against, but probably easier to re-use the &lt;code&gt;LIVE_ENV&lt;/code&gt; concept.  I take a stab with the ugly:&lt;/p&gt;
+&lt;p&gt;I think I&amp;rsquo;ve got to start with item 1.  On agile-bot, Michael and I set up a separate ENV var (&lt;code&gt;LIVE_ENV&lt;/code&gt;) to specify whether the &amp;ldquo;production&amp;rdquo; Slack should be hit &amp;hellip; I had half a mind to check which URL the instance was running against, but probably easier to re-use the &lt;code&gt;LIVE_ENV&lt;/code&gt; concept.  I take a stab with the ugly:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;ENV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'LIVE_ENV'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'production'&lt;/span&gt;
     &lt;span class="no"&gt;CHANNELS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="s2"&gt;"asyncvoter"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"C2HGJF54G"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -63,7 +145,7 @@
     &lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Which maybe should be loaded from a file - I have a funny reticence to load things from files.  I&amp;rsquo;ve never been so comfortable with grabbing stuff from files - a legacy from Java where it was such a pain?  In Ruby it&amp;rsquo;s pretty damn trivial.  I guess when I have stuff formatted in one way, stepping through and reformatting for yaml or what have you causes my motivation to collapse.  What we really want in the end is to be looking all these up from the Slack API, so I&amp;rsquo;m going to leave that for a refactoring, get the rest of the unit tests to pass and try to get this onto staging to see if my claims that we can replace the agile-bot are close to true.&lt;/p&gt;
+&lt;p&gt;Which maybe should be loaded from a file - I have a funny reticence to load things from files.  I&amp;rsquo;ve never been so comfortable with grabbing stuff from files - a legacy from Java where it was such a pain?  In Ruby it&amp;rsquo;s pretty damn trivial.  I guess when I have stuff formatted in one way, stepping through and reformatting for yaml, or what have you, causes my motivation to collapse.  What we really want in the end is to be looking all these up from the Slack API, so I&amp;rsquo;m going to leave that for a refactoring, get the rest of the unit tests to pass and try to get this onto staging to see if my claims that we can replace the agile-bot are close to true.&lt;/p&gt;
 
 &lt;p&gt;So I stab about a bit and with a fair amount of replication of tests (and some refactoring), I get the output of the RSpec test to this:&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;SlackService
@@ -87,7 +169,7 @@
       does not post youtube video link if yt_video_id is blank
       sends the correct slack message to the correct channels
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Which I think is a lot better coverage than we have had.  What I&amp;rsquo;d really like is a local report of coverage for this file for these tests.  There&amp;rsquo;s also a lot of replication in the SlackService file itself, but I think I will leave a major refactor here until I&amp;rsquo;ve seen all our existing functionality replicated.  First let&amp;rsquo;s get this PR merged, and onto staging where I can test all the settings against hitting a backup Slack instance, and then ease this into production &amp;hellip;&lt;/p&gt;
+&lt;p&gt;Which I think is a lot better coverage than we have had.  What I&amp;rsquo;d really like is a local report of coverage for this file for these tests.  There&amp;rsquo;s also a lot of replication in the SlackService file itself, but I think I will leave a major refactor here until I&amp;rsquo;ve seen all our existing functionality replicated.  First, let&amp;rsquo;s get this PR merged and onto staging, where I can test all the settings against hitting a backup Slack instance, and then ease this into production &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -629,48 +711,6 @@ Finished &lt;span class="k"&gt;in &lt;/span&gt;1 minute 3.18 seconds &lt;span cl
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://youtu.be/ufWc1Gg3hQ4"&gt;AV Community Meeting&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Sorting Premium F2F Page</title>
-    <link rel="alternate" href="http://blog.url.com/2017/09/29/av-ecosystem-review-premium-f2f-page/"/>
-    <id>http://blog.url.com/2017/09/29/av-ecosystem-review-premium-f2f-page/</id>
-    <published>2017-09-29T01:00:00+01:00</published>
-    <updated>2017-11-30T20:04:31+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Blurgh, so I couldn&amp;rsquo;t sleep last night - too much late night under nines football admin coming up on whatsapp - new comedy album from Patton Oswalt put paid to an overactive brain and eventually I slept.  I took my one day jogging pass.  I try to jog every weekday morning, but I usually let myself off one day if I&amp;rsquo;m feeling run down.  Got to the computer in reasonable time.  Not feeling very perky.  Could use a coffee - I&amp;rsquo;m at the end of my second week without coffee.  Got totally distracted by Slack and ending up checking all email, twitter and facebook and fixing a few things up, but actually not too much to distract me, and I&amp;rsquo;m finally back to the blog face, where I&amp;rsquo;m thinking I will try to charge the Premium F2F page changes out of the way.&lt;/p&gt;
-
-&lt;p&gt;I start off by pushing the Premium Mob change PR up and getting it into the &amp;ldquo;Please Check&amp;rdquo; column:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/yh244zrmqixhr2s/Screenshot%202017-09-29%2010.07.53.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;And then I can open up a branch for ticket 1714 (Adjust Premium F2F page) to get that ticket off the ready column where it&amp;rsquo;s been languishing with me assigned to it.  So the change in the wording we have in mind is as follows:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;One hour of pair programming time with an AV Mentor on an AV project each month&lt;/li&gt;
-&lt;li&gt;Voting rights in AV general meetings&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;–&amp;gt; Related Questions&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;You want personalised individual support to improve your coding and pairing skills?&lt;/li&gt;
-&lt;li&gt;You want to influence the future direction of the AgileVentures charity?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;from &lt;a href="http://nonprofits.agileventures.org/2017/06/26/private-design-sprint-day-minus-one-blog/"&gt;http://nonprofits.agileventures.org/2017/06/26/private-design-sprint-day-minus-one-blog/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;and after a bit of HTML manipulation that&amp;rsquo;s done:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/pagssviw40dc0ka/Screenshot%202017-09-29%2010.29.32.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and pushing the backup of the HTML into a PR I get both the premium page updates in the &amp;ldquo;Please Check&amp;rdquo; column:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/5525qjulecdnsbg/Screenshot%202017-09-29%2010.32.27.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now there&amp;rsquo;s just the rest of the board to clear up - I think next week I have to start fresh with a big review of what the priorities are for the whole ecosystem - although it would be lovely to tidy up that agilebot replacement spike &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

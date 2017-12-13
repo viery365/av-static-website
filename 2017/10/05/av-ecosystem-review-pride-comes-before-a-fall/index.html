@@ -93,7 +93,7 @@
         <h5 class='date'> 5 Oct 2017</h5>
     <p><img alt="pride" src="/images/pride.jpg" /></p>
 
-<p>So they say that pride comes before a fall.  Just after being so pleased with myself for fixing the strange double leakage issue introduced by the new Slack gem (pass in Rails.logger) I got notices that I&rsquo;d posted some secret tokens to GitHub.  In committing the latest vcr cassettes I had inadvertently included the slack and gitter api tokens.  It&rsquo;s a relatively easy fix with the following code in the VCR config:</p>
+<p>So they say that pride comes before a fall.  Just after being so pleased with myself for fixing the strange double leakage issue introduced by the new Slack gem (pass in Rails.logger), I got notices that I&rsquo;d posted some secret tokens to GitHub.  In committing the latest vcr cassettes I had inadvertently included the Slack and Gitter api tokens.  It&rsquo;s a relatively easy fix with the following code in the VCR config:</p>
 <pre class="highlight ruby"><code>  <span class="n">c</span><span class="p">.</span><span class="nf">filter_sensitive_data</span><span class="p">(</span><span class="s1">'&lt;SLACK_AUTH_TOKEN&gt;'</span><span class="p">)</span> <span class="p">{</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'SLACK_AUTH_TOKEN'</span><span class="p">]</span> <span class="p">}</span>
   <span class="n">c</span><span class="p">.</span><span class="nf">filter_sensitive_data</span><span class="p">(</span><span class="s1">'&lt;GITTER_API_TOKEN&gt;'</span><span class="p">)</span> <span class="p">{</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'GITTER_API_TOKEN'</span><span class="p">]</span> <span class="p">}</span>
 </code></pre>
@@ -103,7 +103,7 @@
 2) deciding whether to add explicit cukes that check that the Slack and Gitter APIs are hit
 3) filling out all the pending unit tests</p>
 
-<p>I think I&rsquo;ve got to start with item 1.  On agile-bot Michael and I set up a separate ENV var (<code>LIVE_ENV</code>) to specify whether the &ldquo;production&rdquo; Slack should be hit &hellip; I had half a mind to check which URL the instance was running against, but probably easier to re-use the <code>LIVE_ENV</code> concept.  I take a stab with the ugly:</p>
+<p>I think I&rsquo;ve got to start with item 1.  On agile-bot, Michael and I set up a separate ENV var (<code>LIVE_ENV</code>) to specify whether the &ldquo;production&rdquo; Slack should be hit &hellip; I had half a mind to check which URL the instance was running against, but probably easier to re-use the <code>LIVE_ENV</code> concept.  I take a stab with the ugly:</p>
 <pre class="highlight ruby"><code>  <span class="k">if</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'LIVE_ENV'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'production'</span>
     <span class="no">CHANNELS</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">"asyncvoter"</span><span class="p">:</span> <span class="s2">"C2HGJF54G"</span><span class="p">,</span>
@@ -136,7 +136,7 @@
     <span class="p">}</span>
   <span class="k">end</span>
 </code></pre>
-<p>Which maybe should be loaded from a file - I have a funny reticence to load things from files.  I&rsquo;ve never been so comfortable with grabbing stuff from files - a legacy from Java where it was such a pain?  In Ruby it&rsquo;s pretty damn trivial.  I guess when I have stuff formatted in one way, stepping through and reformatting for yaml or what have you causes my motivation to collapse.  What we really want in the end is to be looking all these up from the Slack API, so I&rsquo;m going to leave that for a refactoring, get the rest of the unit tests to pass and try to get this onto staging to see if my claims that we can replace the agile-bot are close to true.</p>
+<p>Which maybe should be loaded from a file - I have a funny reticence to load things from files.  I&rsquo;ve never been so comfortable with grabbing stuff from files - a legacy from Java where it was such a pain?  In Ruby it&rsquo;s pretty damn trivial.  I guess when I have stuff formatted in one way, stepping through and reformatting for yaml, or what have you, causes my motivation to collapse.  What we really want in the end is to be looking all these up from the Slack API, so I&rsquo;m going to leave that for a refactoring, get the rest of the unit tests to pass and try to get this onto staging to see if my claims that we can replace the agile-bot are close to true.</p>
 
 <p>So I stab about a bit and with a fair amount of replication of tests (and some refactoring), I get the output of the RSpec test to this:</p>
 <pre class="highlight plaintext"><code>SlackService
@@ -160,7 +160,7 @@
       does not post youtube video link if yt_video_id is blank
       sends the correct slack message to the correct channels
 </code></pre>
-<p>Which I think is a lot better coverage than we have had.  What I&rsquo;d really like is a local report of coverage for this file for these tests.  There&rsquo;s also a lot of replication in the SlackService file itself, but I think I will leave a major refactor here until I&rsquo;ve seen all our existing functionality replicated.  First let&rsquo;s get this PR merged, and onto staging where I can test all the settings against hitting a backup Slack instance, and then ease this into production &hellip;</p>
+<p>Which I think is a lot better coverage than we have had.  What I&rsquo;d really like is a local report of coverage for this file for these tests.  There&rsquo;s also a lot of replication in the SlackService file itself, but I think I will leave a major refactor here until I&rsquo;ve seen all our existing functionality replicated.  First, let&rsquo;s get this PR merged and onto staging, where I can test all the settings against hitting a backup Slack instance, and then ease this into production &hellip;</p>
 
         <h2 class='author'>by Sam Joseph</h2>
       </div>  
