@@ -5,10 +5,68 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-10-06T01:00:00+01:00</updated>
+  <updated>2017-10-09T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Dropping Agile Bot</title>
+    <link rel="alternate" href="http://blog.url.com/2017/10/09/av-ecosystem-review-dropping-agile-bot/"/>
+    <id>http://blog.url.com/2017/10/09/av-ecosystem-review-dropping-agile-bot/</id>
+    <published>2017-10-09T01:00:00+01:00</published>
+    <updated>2017-12-14T20:37:02+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="Clouds" src="/images/clouds.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Right, so, on Friday I tested the new rubyfied Agile bot on staging, and it appeared to work fine, posting messages to both Slack and Gitter.  I thought I had made a list somewhere of the other things I really wanted to sort for this code.  Can&amp;rsquo;t find them in blogs, issue or pull request.  I did have some TODOs in the codebase.  I did get pretty solid unit test coverage (I think) and I set up something to switch in and out from the testing slack channels to the live slack channels (with real people in).  I&amp;rsquo;ve got the LIVE_ENV, Gitter and Slack env vars set on production, so in principle this is all good to go.  I kick the site around on staging a bit and notice the past scrum embedded videos aren&amp;rsquo;t playing - same on production.  I get distracted going to youtube to ensure that our videos are &amp;ldquo;embed-enabled&amp;rdquo;, and that fixes that for the more recent videos.  Okay, so we need to make the default settings there &amp;ldquo;embed-enabled&amp;rdquo;:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://support.google.com/youtube/answer/2660027?hl=en-GB"&gt;https://support.google.com/youtube/answer/2660027?hl=en-GB&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;but basically this new bot needs testing in production and I need to see if it pings correctly for this morning&amp;rsquo;s Martin Fowler scrum, although my internet connection has just gone down &amp;hellip; urgh &amp;hellip; I&amp;rsquo;m a bit late to the desk today, but I&amp;rsquo;m excusing myself that I paired a Premium F2F trial yesterday (Sunday) and occasionally I&amp;rsquo;ve got to give myself a bit of a break, but what I really want to do today is at least start the text change for agile bot that will provide more welcoming messages in Slack.  My internet comes back on and I&amp;rsquo;m distracted by not being able to sort this embedding issue:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1879"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1879&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;but let&amp;rsquo;s do this deploy!&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;1852_support_sponsored_users_adding_new_card_for_premium&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ git checkout staging
+Switched to branch &lt;span class="s1"&gt;'staging'&lt;/span&gt;
+Your branch is up-to-date with &lt;span class="s1"&gt;'origin/staging'&lt;/span&gt;.
+&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;staging&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ git pull origin staging
+From http://github.com/AgileVentures/WebsiteOne
+ &lt;span class="k"&gt;*&lt;/span&gt; branch              staging    -&amp;gt; FETCH_HEAD
+Already up-to-date.
+&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;staging&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ git checkout master
+Switched to branch &lt;span class="s1"&gt;'master'&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ git rebase staging
+First, rewinding head to replay your work on top of it...
+Fast-forwarded master to staging.
+&lt;span class="o"&gt;[&lt;/span&gt;tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne &lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;
+→ git push origin master
+Total 0 &lt;span class="o"&gt;(&lt;/span&gt;delta 0&lt;span class="o"&gt;)&lt;/span&gt;, reused 0 &lt;span class="o"&gt;(&lt;/span&gt;delta 0&lt;span class="o"&gt;)&lt;/span&gt;
+To http://github.com/AgileVentures/WebsiteOne
+   724012d8..84eab076  master -&amp;gt; master
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;right, that&amp;rsquo;s on the way to master (assuming the CI passes).  I created a ticket for the change to the messaging I want to make:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The google hangout URLs are really ugly - hoping we can improve the post to slack to something like:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Martin Fowler Scrum - all welcome - discuss any project! :-) click to join
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;where &amp;ldquo;click to join&amp;rdquo; is hyperlinked to the hangout (or jitsy) or whatever&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;https://github.com/AgileVentures/WebsiteOne/issues/1880&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ll start a vote on that in Slack, and turn off the PR notifications (since dependabot is so active) &amp;hellip; and I wonder if we should get every dependabot thing merged first before moving on to this Slack messaging improvement?  Well, it all hinges on how this production deploy goes and whether we have to fix a lot of things up.  Let&amp;rsquo;s see if this is stable and then we&amp;rsquo;ll decide.  I do want to jump several levels back up to review the ecosystem from the top down before the end of this week &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Back to Front</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/06/av-ecosystem-review-back-to-front/"/>
@@ -177,7 +235,7 @@ cucumber -p first_try features/documents.feature:169 # Scenario: Insert media mo
     <link rel="alternate" href="http://blog.url.com/2017/10/04/av-ecosystem-review-slack-service-cucumber-regressions/"/>
     <id>http://blog.url.com/2017/10/04/av-ecosystem-review-slack-service-cucumber-regressions/</id>
     <published>2017-10-04T01:00:00+01:00</published>
-    <updated>2017-12-11T21:01:27+00:00</updated>
+    <updated>2017-12-14T20:30:48+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -641,76 +699,6 @@ end
 &lt;p&gt;Every desktop application from IDE to word processors will probably include some kind of remote pair working feature sooner or later. C9 already includes some simple pair-programming features, for instance.  &lt;/p&gt;
 
 &lt;p&gt;Bugs in the code? Don&amp;rsquo;t blame me, it&amp;rsquo;s my pair programming partner who fooled around!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Late Start</title>
-    <link rel="alternate" href="http://blog.url.com/2017/10/02/av-ecosystem-review-late-start/"/>
-    <id>http://blog.url.com/2017/10/02/av-ecosystem-review-late-start/</id>
-    <published>2017-10-02T01:00:00+01:00</published>
-    <updated>2017-12-04T21:14:35+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="late start" src="/images/late_start.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So Monday morning was slow and I got to the computer late, and immediately got distracted by listening to the end of the Tech Done Right podcast, which mentioned the closing of DevBootcamp and IronYard coding bootcamps.  Shake up in the industry.  I want my focus for this week to be sorting out my ruby-fication spike of the AgileBot, but now I&amp;rsquo;m low on time.  I decided to focus on the clear-up from last week where I was updating the Premium Mob and Premium F2F pages on staging.  I have no comments on my PRs or in Slack, so I&amp;rsquo;m going to assume no one has any issues here.  I update those pages via the Mercury editor in the live site and take a stab at merging the backup copies into the main repo, but there&amp;rsquo;s branch updating and merging to sort first &amp;hellip;, conflicts between my two branches.&lt;/p&gt;
-
-&lt;p&gt;So while they&amp;rsquo;re building, can I make some super-quick progress on the agile-bot rubyfication to get the week started?  I update the branch there, pull up the set of changes.  I think the set of things we need is:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;new tests of the SlackService&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;checking all existing tests pass&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;extracting the channel config to depend on deployment instance&lt;br&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;In the meantime I used my admin privileges to force merge the Premium mob page backup PRs - they don&amp;rsquo;t affect the codebase so waiting for the semaphore build is silly.  That gives us a nice clean &amp;ldquo;Please Check&amp;rdquo; column on the waffle board:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/zpg8yqzayk08t8z/Screenshot%202017-10-02%2010.36.22.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;where we can also see my agile-bot spike in progress.  I really want to do another high level overview, but the AV Community meeting on Friday reinforced my notion that we have to clear up the bot messaging in Slack #general.  At the moment, all the pings about meeting starting with Google hangout hash ids in urls etc. looks really messy. &lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/5tbperpnc3nqsvu/Screenshot%202017-10-02%2010.42.54.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;A new member in the AV Community meeting was saying we should do our best to make everything as welcoming as possible.  What I really want is hyperlinks to the meetings where we say something like &amp;ldquo;Meeting starting soon, newcomers welcome :-)&amp;rdquo;  And this rubyfication of the agilebot could get that for us this week if I&amp;rsquo;m lucky.  The existing SlackService failing tests give me a good entry point for tomorrow AM if I can get to the computer earlier:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;Failures:
-
-  1&lt;span class="o"&gt;)&lt;/span&gt; SlackService.post_yt_link sends a post request to the agile-bot with the proper data
-     Failure/Error: elsif hangout.type &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"PairProgramming"&lt;/span&gt;
-
-     NoMethodError:
-       undefined method &lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="s1"&gt;' for #&amp;lt;EventInstance:0x007f9a4d36c5b0&amp;gt;
-     # /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/activemodel-4.2.8/lib/active_model/attribute_methods.rb:433:in `method_missing'&lt;/span&gt;
-     &lt;span class="c"&gt;# ./app/services/slack_service.rb:62:in `post_yt_link'&lt;/span&gt;
-     &lt;span class="c"&gt;# ./spec/services/slack_service_spec.rb:52:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'&lt;/span&gt;
-
-  2&lt;span class="o"&gt;)&lt;/span&gt; SlackService.post_hangout_notification does not fail when event has no associated project
-     Failure/Error: CHANNELS[project.try&lt;span class="o"&gt;(&lt;/span&gt;:slug&lt;span class="o"&gt;)&lt;/span&gt;.to_sym]
-
-     NoMethodError:
-       undefined method &lt;span class="sb"&gt;`&lt;/span&gt;to_sym&lt;span class="s1"&gt;' for nil:NilClass
-       Did you mean?  to_s
-     # ./app/services/slack_service.rb:51:in `channel_for_project'&lt;/span&gt;
-     &lt;span class="c"&gt;# ./app/services/slack_service.rb:13:in `post_hangout_notification'&lt;/span&gt;
-     &lt;span class="c"&gt;# ./spec/services/slack_service_spec.rb:27:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'&lt;/span&gt;
-
-  3&lt;span class="o"&gt;)&lt;/span&gt; SlackService.post_hangout_notification sends a post request to the agile-bot with the proper data
-     Failure/Error: send_slack_message client, CHANNELS[:general], &lt;span class="s2"&gt;"#{hangout.title}: #{hangout.link}"&lt;/span&gt;, hangout.user
-
-     NoMethodError:
-       undefined method &lt;span class="sb"&gt;`&lt;/span&gt;link&lt;span class="s1"&gt;' for #&amp;lt;EventInstance:0x007f9a4d983458&amp;gt;
-     # /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/activemodel-4.2.8/lib/active_model/attribute_methods.rb:433:in `method_missing'&lt;/span&gt;
-     &lt;span class="c"&gt;# ./app/services/slack_service.rb:25:in `post_hangout_notification'&lt;/span&gt;
-     &lt;span class="c"&gt;# ./spec/services/slack_service_spec.rb:19:in `block (3 levels) in &amp;lt;top (required)&amp;gt;'&lt;/span&gt;
-
-Finished &lt;span class="k"&gt;in &lt;/span&gt;1 minute 3.18 seconds &lt;span class="o"&gt;(&lt;/span&gt;files took 12.25 seconds to load&lt;span class="o"&gt;)&lt;/span&gt;
-899 examples, 3 failures, 1 pending
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;Related Videos:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://youtu.be/ufWc1Gg3hQ4"&gt;AV Community Meeting&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>

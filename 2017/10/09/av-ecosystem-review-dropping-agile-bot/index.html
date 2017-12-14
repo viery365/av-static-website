@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Dropping Agile Bot</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_20 blog_page_20_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_10 x2017_10_09 x2017_10_09_av-ecosystem-review-dropping-agile-bot x2017_10_09_av-ecosystem-review-dropping-agile-bot_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,70 +83,69 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/10/09/av-ecosystem-review-dropping-agile-bot/">AV EcoSystem Dropping Agile Bot</a></h2>
+        <h5 class='date'> 9 Oct 2017</h5>
+    <p><img alt="Clouds" src="/images/clouds.jpg" /></p>
 
-          <p>Page 20 of 24</p>
+<p>Right, so, on Friday I tested the new rubyfied Agile bot on staging, and it appeared to work fine, posting messages to both Slack and Gitter.  I thought I had made a list somewhere of the other things I really wanted to sort for this code.  Can&rsquo;t find them in blogs, issue or pull request.  I did have some TODOs in the codebase.  I did get pretty solid unit test coverage (I think) and I set up something to switch in and out from the testing slack channels to the live slack channels (with real people in).  I&rsquo;ve got the LIVE_ENV, Gitter and Slack env vars set on production, so in principle this is all good to go.  I kick the site around on staging a bit and notice the past scrum embedded videos aren&rsquo;t playing - same on production.  I get distracted going to youtube to ensure that our videos are &ldquo;embed-enabled&rdquo;, and that fixes that for the more recent videos.  Okay, so we need to make the default settings there &ldquo;embed-enabled&rdquo;:</p>
 
-            <p><a href="/blog/page/19/">Previous page</a></p>
+<p><a href="https://support.google.com/youtube/answer/2660027?hl=en-GB">https://support.google.com/youtube/answer/2660027?hl=en-GB</a></p>
 
-          <h2><a href="/2016/10/26/pulled-in-different-directions/">Pulled in Different Directions</a></h2>
-          <h3>Oct 26</h3>
-          <p>The PremiumPlus upgrade deploy appeared to go completely smoothly.  The test migration ran fine locally (with a copy of the production data).  Given we can’t financially afford to completely replicate the production data on staging I took a risk and...</p>
-          <h2><a href="/2016/10/25/solo-coding/">Solo Coding</a></h2>
-          <h3>Oct 25</h3>
-          <p><a href="http://nonprofits.agileventures.org/2016/10/21/yak-shaving/">Yak shaving</a> aside I managed to make time for some solo coding.  There was work outstanding on a feature to allow users to upgrade from Premium to PremiumPlus.  Michael and I had designed some extra domain features in a previous session, but they hadn...</p>
-          <h2><a href="/2016/10/24/tying-up-loose-ends/">Tying Up Loose Ends</a></h2>
-          <h3>Oct 24</h3>
-          <p>So after <a href="http://nonprofits.agileventures.org/2016/10/21/yak-shaving/">Yak shaving</a> around Heroku automated PR deploys, we finally got them working.  Raoul joined us in the “Martin Fowler” scrum and through a process of both disabling the PR deploys, AND deleting the GitHub webhooks that Heroku had installed,...</p>
-          <h2><a href="/2016/10/21/yak-shaving/">Yak Shaving</a></h2>
-          <h3>Oct 21</h3>
-          <p>So I thought I’d try and get a little solo programming time in today, but it turned into a yak-shaving devops session. Yak shaving? It’s when you end up needing a ladder to paint your house, and you have to borrow a ladder from your friend, but you...</p>
-          <h2><a href="/2016/10/20/to-pair-or-not-to-pair/">To Pair or Not To Pair</a></h2>
-          <h3>Oct 20</h3>
-          <p>Okay, some coding needs to get done.  Right now there are several things that might bring in more critical revenue for AgileVentures:</p>
+<p>but basically this new bot needs testing in production and I need to see if it pings correctly for this morning&rsquo;s Martin Fowler scrum, although my internet connection has just gone down &hellip; urgh &hellip; I&rsquo;m a bit late to the desk today, but I&rsquo;m excusing myself that I paired a Premium F2F trial yesterday (Sunday) and occasionally I&rsquo;ve got to give myself a bit of a break, but what I really want to do today is at least start the text change for agile bot that will provide more welcoming messages in Slack.  My internet comes back on and I&rsquo;m distracted by not being able to sort this embedding issue:</p>
 
-<ul>
-<li><a href="https://github.com/AgileVentures/WebsiteOne/issues/1342">PayPal integration</a></li>
-<li><a href="https://github.com/AgileVentures/WebsiteOne/issues/1344">Sponsor others functionality</a></li>
-<li><a href="https://github.com/AgileVentures/WebsiteOne/issues/1343">Mid range premium plans</a></li>
-</ul>
+<p><a href="https://github.com/AgileVentures/WebsiteOne/issues/1879">https://github.com/AgileVentures/WebsiteOne/issues/1879</a></p>
 
-<p>I have at least one potential sign up...</p>
-          <h2><a href="/2016/10/19/bug-hunt/">Bug Hunt</a></h2>
-          <h3>Oct 19</h3>
-          <p>For about 12 hours now our Google Hangouts plugin have been failing.  I discovered it yesterday when I tried to start the “Kent Beck” scrum.  I opened an <a href="https://github.com/AgileVentures/HangoutConnection/issues/34">issue on our HangoutConnection repo</a>.  The Hangout plugin was asking for authorisation, which it...</p>
-          <h2><a href="/2016/10/18/lacking-narrative-thread/">Lacking Narrative Thread</a></h2>
-          <h3>Oct 18</h3>
-          <p>There is a lot going on, and heads up this blog post meanders over the stuff that happened yesterday rather than having a coherent narrative thread.  So how’s that different from any of your blogs you ask?  Very funny :-) So anyway we got a docker...</p>
-          <h2><a href="/2016/10/17/something-for-the-weekend/">Something for the Weekend</a></h2>
-          <h3>Oct 17</h3>
-          <p>I usually try and keep my weekends work free.  I’ve done that for a long time, since I was about 25 and I had a period where I had worked through a few weekends and felt pretty damn drained and exhausted in each following week.  It made me really unpleasantly...</p>
-          <h2><a href="/2016/10/14/online-conferences/">Online Conferences</a></h2>
-          <h3>Oct 14</h3>
-          <p>Gave my first ever talk at a remote online conference on Thursday.  It’s been a while since I spoke at any kind of conference actually.  I used to give talks pretty regularly as an academic and running meet ups, but I’ve got out of the swing of it...</p>
-          <h2><a href="/2016/10/13/agile-pricing-plans/">Agile Pricing Plans</a></h2>
-          <h3>Oct 13</h3>
-          <p>Continuing with my non-pairing streak, I got a fair few things sorted today.  A highlight being prototyping the new pricing plans for AgileVentures.  The current draft looks like:</p>
+<p>but let&rsquo;s do this deploy!</p>
+<pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>1852_support_sponsored_users_adding_new_card_for_premium<span class="o">)]</span><span class="nv">$ </span>
+→ git checkout staging
+Switched to branch <span class="s1">'staging'</span>
+Your branch is up-to-date with <span class="s1">'origin/staging'</span>.
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>staging<span class="o">)]</span><span class="nv">$ </span>
+→ git pull origin staging
+From http://github.com/AgileVentures/WebsiteOne
+ <span class="k">*</span> branch              staging    -&gt; FETCH_HEAD
+Already up-to-date.
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>staging<span class="o">)]</span><span class="nv">$ </span>
+→ git checkout master
+Switched to branch <span class="s1">'master'</span>
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>master<span class="o">)]</span><span class="nv">$ </span>
+→ git rebase staging
+First, rewinding head to replay your work on top of it...
+Fast-forwarded master to staging.
+<span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne <span class="o">(</span>master<span class="o">)]</span><span class="nv">$ </span>
+→ git push origin master
+Total 0 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+To http://github.com/AgileVentures/WebsiteOne
+   724012d8..84eab076  master -&gt; master
+</code></pre>
+<p>right, that&rsquo;s on the way to master (assuming the CI passes).  I created a ticket for the change to the messaging I want to make:</p>
 
-<ul>
-<li>£10/month: Premium - private slack group, RubyMine license, eligibility...</li>
-</ul>
+<blockquote>
+<p>The google hangout URLs are really ugly - hoping we can improve the post to slack to something like:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>Martin Fowler Scrum - all welcome - discuss any project! :-) click to join
+</code></pre>
+<blockquote>
+<p>where &ldquo;click to join&rdquo; is hyperlinked to the hangout (or jitsy) or whatever</p>
+</blockquote>
 
-            <p><a href="/blog/page/21/">Next page</a></p>
+<p>https://github.com/AgileVentures/WebsiteOne/issues/1880</p>
 
+<p>I&rsquo;ll start a vote on that in Slack, and turn off the PR notifications (since dependabot is so active) &hellip; and I wonder if we should get every dependabot thing merged first before moving on to this Slack messaging improvement?  Well, it all hinges on how this production deploy goes and whether we have to fix a lot of things up.  Let&rsquo;s see if this is stable and then we&rsquo;ll decide.  I do want to jump several levels back up to review the ecosystem from the top down before the end of this week &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -204,6 +204,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
