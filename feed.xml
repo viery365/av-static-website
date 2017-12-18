@@ -5,10 +5,90 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-10-09T01:00:00+01:00</updated>
+  <updated>2017-10-10T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title/>
+    <link rel="alternate" href="http://blog.url.com/2017/10/10/av-ecosystem-review-long-live-agilebot/"/>
+    <id>http://blog.url.com/2017/10/10/av-ecosystem-review-long-live-agilebot/</id>
+    <published>2017-10-10T01:00:00+01:00</published>
+    <updated>2017-12-18T21:01:43+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;title: AV EcoSystem Long Live AgileBot
+tags: &lt;/p&gt;
+
+&lt;h2&gt;author: Sam Joseph&lt;/h2&gt;
+
+&lt;p&gt;&lt;img alt="live long and prosper" src="/images/live_long_and_prosper.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The AgileBot rubyification yesterday was not without a slight speed bump yesterday as I had set the &lt;code&gt;LIVE_ENV&lt;/code&gt; parameter incorrectly on production and got a 500 error when I tried to start the Martin Fowler scrum.  However we still managed a scrum, although I was slightly more stressed than usual with my internet also dropping in and out, but we had two full scrums yesterday with a new project proposed in each.  It seems like the welcoming language that I added is working backwards through time to revitalize the scrums - let&amp;rsquo;s see how that goes today :-)&lt;/p&gt;
+
+&lt;p&gt;Anyhow, as soon as the scrum was over I was able to fix my slip, and the &amp;ldquo;Kent&amp;rdquo; Beck scrum went out just as intended on the correct Slack channels, as did the Autograders client meeting and the SHF project meeting, which automatically pinged the relevant channels, yay!  So now that&amp;rsquo;s working I think I can safely shut down the separate node/hubot AgileBot instances and save us $14 a month in Heroku fees.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/0f1hjompo116pzr/Screenshot%202017-10-10%2009.53.44.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s a good feeling.  Equivalent (monetarily at least) to signing a new Premium member.   In the process I also saw that Redeemify production is costing us $7 a month.  I turned that off.  Would be great to get more cost savings with the AgileVentures&amp;rsquo; WebSiteOne monolith that&amp;rsquo;s currently costing us just under $90 a month.  $50 is two dynos on the Heroku standard plan:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ornq35b2xudjt05/Screenshot%202017-10-10%2009.57.56.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;d really like to better understand what&amp;rsquo;s using up all this memory and processing on the main site.  We seem to be over our 1GB memory most of the time.  Michael and I had previously identified a time zone gem as being a bit of a culprit there.  We have a ticket for this - perhaps it should be my focus after the next high level review:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1288"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1288&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;According to New Relic the app server time is distributed like so&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/br0mx5p34sxm12j/Screenshot%202017-10-10%2010.02.28.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I wonder if that implies that we should be optimising the VisitorsController?  Which also makes me think about creating a middleman site to be a light weight host of the landing page &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Anyhow, what I really wanted to do this morning was knock off a couple of quick features that &amp;ldquo;should&amp;rdquo; be easy now that we have the agile bot in Ruby.  &lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;hyperlink the URLs to videos/hangouts&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;ensure that videos also get shared to project channels&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;remove the dates from the automated pings&lt;br&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I start with 1) and start by refactoring the message contents in the test to DRY them out:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s1"&gt;'MockEvent: mock_url'&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:here_message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s2"&gt;"@here &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:channel_message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s2"&gt;"@channel &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Checked that stayed green, and then did a similar refactoring in the app code itself:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;    &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hangout_url&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+    &lt;span class="n"&gt;here_message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"@here &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+    &lt;span class="n"&gt;channel_message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"@channel &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and got that green.  So now I could test drive the new hyperlink format like so:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;mock_url|MockEvent&amp;gt;'&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;see that fail and then make the change in the app code:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hangout_url&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;|&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;gt;"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and then see all the tests pass.  Now what I needed to do was see that this had the correct effect in a Slack instance, so I started the rails instance locally, and checked I had the Slack authorization token pointing to the test Slack instance.  Then, once I had properly sourced the bash file and removed the safeties on posting to Slack from local I was able to see we were getting the correct message hyperlinking that I wanted (for so long!):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/a3k1yxm570u6s63/Screenshot%202017-10-10%2010.29.07.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;And that was so easy that I was tempted to do the same with the video links, and since I was there I also ensured the videos got shared with project channels &amp;hellip; and I got that in a PR:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="https://github.com/AgileVentures/WebsiteOne/pull/1887" src="https://github.com/AgileVentures/WebsiteOne/pull/1887" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and there we go.  I still really want to remove the unecessary dates from the slack pings, but hopefully I can do that tomorrow and then still have time to do a high level review with Thursday and Friday.  Then perhaps the performance review next week &amp;hellip;?&lt;/p&gt;
+
+&lt;h2&gt;Related Videos&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://youtu.be/6lpTEsVnK5Y"&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://youtu.be/vHDRXgGsSiM"&gt;&amp;ldquo;Kent Beck&amp;rdquo; Scrum&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;p.s. I threw in a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1888"&gt;refactoring ticket&lt;/a&gt; as there&amp;rsquo;s the code could look better, and by the time I got back with my coffee the build passed (thanks cucumber second retry) and I got it merged in to see if we could try it before the next scrum &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Dropping Agile Bot</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/09/av-ecosystem-review-dropping-agile-bot/"/>
@@ -668,37 +748,6 @@ end
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;For some reason I can&amp;rsquo;t seem to move away from spies on the yt_link posts, but everything is green and I&amp;rsquo;ve added pending tests for all the other paths we need to check and TODOs for the other improvements we need.  Hopefully a fresh look tomorrow will get this to the point we can try out on staging &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>The pilot+copilot organizational pattern</title>
-    <link rel="alternate" href="http://blog.url.com/2017/10/02/pilot-copilot-organizational-pattern/"/>
-    <id>http://blog.url.com/2017/10/02/pilot-copilot-organizational-pattern/</id>
-    <published>2017-10-02T01:00:00+01:00</published>
-    <updated>2017-10-04T21:52:30+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="pair flying" src="/images/pairflying.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;In 2002, I graduated a distance-learning masters in applied mathematics. Every month, the university mailed me an A4 enveloppe containing the course support. I was supposed to learn from the course material and returned the completed assignments within a month. A month later, I would receive an answer key. Should I have a question, I could mail it to the professor and wait for his reply. The whole process was cumbersome. I was often behind schedule. Interactivity was near to zero. &lt;/p&gt;
-
-&lt;p&gt;Later on, I participated in the MOOC endeavour. The video of the instructor gave a feeling of a one-to-one training session. Discussion forums, deadlines, follow-up mails, peer-reviews grounded the learning process. There were meetups too. And a MOOC about Agile Development using Ruby On Rails offered remote pair-programming sessions between participants. &lt;/p&gt;
-
-&lt;p&gt;Pair-programmming reuses the rather old organizational pattern of pilot+copilot : double-check, higher focusing, external view, and stronger engagement. You may object that programming is very different from flying. Yes, it is! &lt;/p&gt;
-
-&lt;p&gt;But programming requires a strong level of accuracy too. Your pairing fellow is both a watch dog that tells you not to call a library without checking how it works, not to cut and paste code across your work, and an inspiration to experiment with new ways of coding. As some aerobatic aircrafts don&amp;rsquo;t include a copilot seat, some programs are implemented by lone wolves in the wild.&lt;/p&gt;
-
-&lt;p&gt;Tools like teamviewer, logmein, skype, hangout or joinme have been instrumental to the success of remote pair working. There is still room for improvement:&lt;/p&gt;
-
-&lt;p&gt;1) In a face-to-face meeting, there is a desk between the two interlocutors. Webcams should recreate this confortable spacing. I&amp;rsquo;m neither a barber nor a dental professional!
-2) Remote working platforms lack of interoperability. Some only run on Windows, some require to install a software, others are more suitable for mobile use&amp;hellip; and don&amp;rsquo;t try to connect to hangout with skype
-3) Security is a weak point for all of these platforms. Choosing which window you share, which you don&amp;rsquo;t, masking your passwords or your personal information are not intuitive. In my earlier days, I remembered displaying my passwords on a recorded session. Not so good a security practice!
-4) Optimizing the screen definition so that everybody can watch comfortably is not supported either.&lt;/p&gt;
-
-&lt;p&gt;Every desktop application from IDE to word processors will probably include some kind of remote pair working feature sooner or later. C9 already includes some simple pair-programming features, for instance.  &lt;/p&gt;
-
-&lt;p&gt;Bugs in the code? Don&amp;rsquo;t blame me, it&amp;rsquo;s my pair programming partner who fooled around!&lt;/p&gt;
 </content>
   </entry>
 </feed>
