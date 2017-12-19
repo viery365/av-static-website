@@ -150,19 +150,21 @@
 <p>Was there another setting we missed?  Anyway, should be off in production for performance (I imagine)</p>
 
 <ol>
-<li><p>Add the Cite Extension</p>
-<pre class="highlight plaintext"><code>## Cite Extension
+<li>Add the Cite Extension</li>
+</ol>
 
-wfLoadExtension( 'Cite' );
-</code></pre></li>
-<li><p>VisualEditor setup</p></li>
+<p>## Cite Extension</p>
+
+<p>wfLoadExtension( &#39;Cite&rsquo; );</p>
+
+<ol>
+<li>VisualEditor setup</li>
 </ol>
 
 <p>a) follow instructions at <a href="https://www.mediawiki.org/wiki/Extension:VisualEditor">https://www.mediawiki.org/wiki/Extension:VisualEditor</a>
-   b) <code>wget https://extdist.wmflabs.org/dist/extensions/VisualEditor-REL1_28-93528b7.tar.gz</code> in extensions directory <code>~/apps/mediawiki/htdocs/extensions</code> 
-   c) add configuration to end of <code>LocalSettings.php</code></p>
-<pre class="highlight plaintext"><code>```
-## Visual Editor
+  b) <code>wget https://extdist.wmflabs.org/dist/extensions/VisualEditor-REL1_28-93528b7.tar.gz</code> in extensions directory <code>~/apps/mediawiki/htdocs/extensions</code> 
+  c) add configuration to end of <code>LocalSettings.php</code></p>
+<pre class="highlight plaintext"><code>## Visual Editor
 
 wfLoadExtension( 'VisualEditor' );
 
@@ -178,14 +180,10 @@ $wgHiddenPrefs[] = 'visualeditor-enable';
 
 // OPTIONAL: Enable VisualEditor's experimental code features
 #$wgDefaultUserOptions['visualeditor-enable-experimental'] = 1;
-```
-
-d) add the Parsoid service following these instructions: [https://www.mediawiki.org/wiki/Parsoid/Setup](https://www.mediawiki.org/wiki/Parsoid/Setup) but note that first we have to install nodejs, which involved pulling in the nodesource:
-
-```sh
-$ wget -qO- https://deb.nodesource.com/setup_4.x | sudo bash -
+</code></pre>
+<p>d) add the Parsoid service following these instructions: <a href="https://www.mediawiki.org/wiki/Parsoid/Setup">https://www.mediawiki.org/wiki/Parsoid/Setup</a> but note that first we have to install nodejs, which involved pulling in the nodesource:</p>
+<pre class="highlight plaintext"><code>$ wget -qO- https://deb.nodesource.com/setup_4.x | sudo bash -
 $ sudo apt-get install nodejs
-```
 </code></pre>
 <p>and the above worked fine last week, but now I am getting:</p>
 <pre class="highlight plaintext"><code>sudo apt-get install parsoid
