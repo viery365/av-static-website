@@ -93,11 +93,11 @@
         <h5 class='date'>23 May 2017</h5>
     <p><img alt="mediawiki" src="/images/MediaWiki.svg" /></p>
 
-<p>Ahhh, so the rebuilding the MediaWiki stack on Azure leaks over three days and I suspect it may be more.  Yesterday I got stuck trying to open a port for the VisualEditor and I suspect there will be other blocks, but that&rsquo;s why I&rsquo;m forcing myself through this to have it all documented so it&rsquo;s not a pain when we are really short on time.  I also got distracted playing with inkscape this morning, but that&rsquo;s another story.</p>
+<p>Ahhh, so rebuilding the MediaWiki stack on Azure leaks over three days and I suspect it may be more.  Yesterday I got stuck trying to open a port for the VisualEditor and I suspect there will be other blocks, but that&rsquo;s why I&rsquo;m forcing myself through this to have it all documented so it&rsquo;s not a pain when we are really short on time.  I also got distracted playing with inkscape this morning, but that&rsquo;s another story.</p>
 
-<p>I&rsquo;m not sure that I have time, but I couldn&rsquo;t help checking to see if removing the security rule would prevent the VisualEditor from working, and unless there&rsquo;s some kind of caching going on that I understand, it looks like the security rule really isn&rsquo;t necessary.  I certainly suspected that, since it isn&rsquo;t connected up to anything else in the system.  So in principle I can delete those security rules and that&rsquo;s one less thing to maintain and organise.  Confusing, because we definitely need security rules like that to work with AWS.  Presumably we&rsquo;d need them for some other kinds of configuration on Azure &hellip;</p>
+<p>I&rsquo;m not sure that I have time, but I couldn&rsquo;t help checking to see if removing the security rule in Azure would prevent the VisualEditor from working, and unless there&rsquo;s some kind of caching going on that I understand, it looks like the security rule really isn&rsquo;t necessary.  I certainly suspected that, since it isn&rsquo;t connected up to anything else in the system.  So in principle I can delete those security rules and that&rsquo;s one less thing to maintain and organise.  Confusing, because we definitely need security rules like that to work with AWS.  Presumably we&rsquo;d need them for some other kinds of configuration on Azure &hellip;</p>
 
-<p>So the next thing to set up is the SSL, which I remember as somewhat complicated AND there&rsquo;s making sure that the Visual Editor continues to work with the SSL on.  There&rsquo;s also the moderation component, the wikieditor, and the banner.  Also I&rsquo;d like to see if there&rsquo;s some way to run MediaWiki&rsquo;s cucumber tests</p>
+<p>The next thing to set up is the SSL, which I remember as somewhat complicated AND there&rsquo;s making sure that the Visual Editor continues to work with the SSL on.  There&rsquo;s also the moderation component, the wikieditor, and the banner.  Also I&rsquo;d like to see if there&rsquo;s some way to run MediaWiki&rsquo;s cucumber tests</p>
 
 <p>Although I see from the manual that we musn&rsquo;t run the unit tests on a production wiki: https://www.mediawiki.org/wiki/Manual:PHP<em>unit</em>testing/Running<em>the</em>unit<em>tests  Perhaps the browser testing is safer: https://www.mediawiki.org/wiki/Browser</em>testing but it looks like these might also make a mess of a production system.</p>
 
@@ -140,75 +140,75 @@ $wgModerationEmail = $wgEmergencyContact;
 <pre class="highlight plaintext"><code>$ sudo apt-get install git
 $ git clone https://github.com/edwardspec/mediawiki-moderation
 </code></pre>
-<p>All the instructions for that are here: https://www.mediawiki.org/wiki/Extension:Moderation#Installation but note that we also need to ensure that the root git directory gets renamed from <code>mediawiki-moderation</code> to <code>Moderation</code>.  I can see that&rsquo;s all working as expected on IE11 and also that the maintainer of the Moderation extension has pushed my suggested change to the moderation banner into the master branch of the Moderation GitHub repo.</p>
+<p>All the instructions for that are <a href="https://www.mediawiki.org/wiki/Extension:Moderation#Installation">here</a> but note that we also need to ensure that the root git directory gets renamed from <code>mediawiki-moderation</code> to <code>Moderation</code>.  I can see that&rsquo;s all working as expected on IE11 and also that the maintainer of the Moderation extension has pushed my suggested change to the moderation banner into the master branch of the Moderation GitHub repo.</p>
 
-<p>There&rsquo;s also the CSS to set up, so that we can have our banner throughtout</p>
-<pre class="highlight plaintext"><code>## Allow Common.css to load on restricted pages 
+<p>There&rsquo;s also the CSS to set up, so that we can have our banner throughout</p>
+<pre class="highlight php"><code>## Allow Common.css to load on restricted pages 
 
 $wgAllowSiteCSSOnRestrictedPages = true;
 
 </code></pre>
 <p>and then drop the following into the Mediawiki:Common.css page:</p>
-<pre class="highlight plaintext"><code>/* CSS placed here will be applied to all skins */
+<pre class="highlight css"><code><span class="c">/* CSS placed here will be applied to all skins */</span>
 
-#mw-head{
-    margin-top:123px;
-}
-.mw-wiki-logo{
-    background-image: none;
-}
+<span class="nf">#mw-head</span><span class="p">{</span>
+    <span class="nl">margin-top</span><span class="p">:</span><span class="m">123px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.mw-wiki-logo</span><span class="p">{</span>
+    <span class="nl">background-image</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
 
-#hlp-banner {
-   /* background:url('https://www.dropbox.com/s/2yokso0fkd3bivt/Screenshot%202017-05-08%2010.40.18.png?dl=1'); */
-    width:100%;
-    min-height:123px;
-}
+<span class="nf">#hlp-banner</span> <span class="p">{</span>
+   <span class="c">/* background:url('https://www.dropbox.com/s/2yokso0fkd3bivt/Screenshot%202017-05-08%2010.40.18.png?dl=1'); */</span>
+    <span class="nl">width</span><span class="p">:</span><span class="m">100%</span><span class="p">;</span>
+    <span class="nl">min-height</span><span class="p">:</span><span class="m">123px</span><span class="p">;</span>
+<span class="p">}</span>
 
-#block-mhl-hlp-mhl-hlp-logo {
-    background: #003992;
-}
+<span class="nf">#block-mhl-hlp-mhl-hlp-logo</span> <span class="p">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="m">#003992</span><span class="p">;</span>
+<span class="p">}</span>
 
-#block-mhl-hlp-mhl-hlp-logo .content {
-    position: relative;
-}
+<span class="nf">#block-mhl-hlp-mhl-hlp-logo</span> <span class="nc">.content</span> <span class="p">{</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+<span class="p">}</span>
 
-#block-mhl-hlp-mhl-hlp-logo .block-inner {
-    margin: auto;
-    max-width: 1200px;
-    text-align: right;
-}
+<span class="nf">#block-mhl-hlp-mhl-hlp-logo</span> <span class="nc">.block-inner</span> <span class="p">{</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">max-width</span><span class="p">:</span> <span class="m">1200px</span><span class="p">;</span>
+    <span class="nl">text-align</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
+<span class="p">}</span>
 
-#block-mhl-hlp-mhl-hlp-logo .content:before {
-    background: url(https://www.healthylondon.org/sites/all/themes/nhslondon/assets/img/hlp-people2.png) left bottom no-repeat;
-    background-size: 135px 115px;
-    float: left;
-}
+<span class="nf">#block-mhl-hlp-mhl-hlp-logo</span> <span class="nc">.content</span><span class="nd">:before</span> <span class="p">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="sx">url(https://www.healthylondon.org/sites/all/themes/nhslondon/assets/img/hlp-people2.png)</span> <span class="nb">left</span> <span class="nb">bottom</span> <span class="nb">no-repeat</span><span class="p">;</span>
+    <span class="nl">background-size</span><span class="p">:</span> <span class="m">135px</span> <span class="m">115px</span><span class="p">;</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+<span class="p">}</span>
 
-#block-mhl-hlp-mhl-hlp-logo .content:after {
-    background: url(https://www.healthylondon.org/sites/all/themes/nhslondon/assets/img/hlp-people1.png) right bottom no-repeat;
-    background-size: 130px 115px;
-    float: right;
-}
+<span class="nf">#block-mhl-hlp-mhl-hlp-logo</span> <span class="nc">.content</span><span class="nd">:after</span> <span class="p">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="sx">url(https://www.healthylondon.org/sites/all/themes/nhslondon/assets/img/hlp-people1.png)</span> <span class="nb">right</span> <span class="nb">bottom</span> <span class="nb">no-repeat</span><span class="p">;</span>
+    <span class="nl">background-size</span><span class="p">:</span> <span class="m">130px</span> <span class="m">115px</span><span class="p">;</span>
+    <span class="nl">float</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
+<span class="p">}</span>
 
-#block-mhl-hlp-mhl-hlp-logo .content:before, #block-mhl-hlp-mhl-hlp-logo .content:after {
-    content: '';
-    display: inline-block;
-    height: 120px;
-    margin-top: 5px;
-    width: 140px;
-}
+<span class="nf">#block-mhl-hlp-mhl-hlp-logo</span> <span class="nc">.content</span><span class="nd">:before</span><span class="o">,</span> <span class="nf">#block-mhl-hlp-mhl-hlp-logo</span> <span class="nc">.content</span><span class="nd">:after</span> <span class="p">{</span>
+    <span class="nl">content</span><span class="p">:</span> <span class="s2">''</span><span class="p">;</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
+    <span class="nl">margin-top</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">140px</span><span class="p">;</span>
+<span class="p">}</span>
 
-@media (max-width: 767px) { 
-    #block-mhl-hlp-mhl-hlp-logo img {
-      width: 220px;
-    }
-}
+<span class="k">@media</span> <span class="p">(</span><span class="n">max-width</span><span class="p">:</span> <span class="m">767px</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="nf">#block-mhl-hlp-mhl-hlp-logo</span> <span class="nt">img</span> <span class="p">{</span>
+      <span class="nl">width</span><span class="p">:</span> <span class="m">220px</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-@media (max-width: 767px) {
-    #block-mhl-hlp-mhl-hlp-logo .content:after, #block-mhl-hlp-mhl-hlp-logo .content:before {
-        display: none;
-    }
-}
+<span class="k">@media</span> <span class="p">(</span><span class="n">max-width</span><span class="p">:</span> <span class="m">767px</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">#block-mhl-hlp-mhl-hlp-logo</span> <span class="nc">.content</span><span class="nd">:after</span><span class="o">,</span> <span class="nf">#block-mhl-hlp-mhl-hlp-logo</span> <span class="nc">.content</span><span class="nd">:before</span> <span class="p">{</span>
+        <span class="nl">display</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 <p>If I recall I made some edits to the Vector template to get the HLP banner in there.  Here&rsquo;s the diff of before and after:</p>
 <pre class="highlight plaintext"><code>97,106d96
@@ -227,11 +227,11 @@ $wgAllowSiteCSSOnRestrictedPages = true;
 ---
 &gt; 
 </code></pre>
-<p>Which is enough to produce our nice resizable banner.  Okay time to get that SSL in there.  I had thought this was going to be a real pain on Azure, but actually it&rsquo;s all pretty much Apache configuration.  Maybe I get into that tomorrow, as I suspect there will be some sticking points &hellip; I&rsquo;ve posted some notes about how I did it last time:</p>
+<p>Which is enough to produce our nice resizable banner.  Okay time to get that SSL in there.  I had thought this was going to be a real pain on Azure, but actually it&rsquo;s all pretty much Apache configuration.  Maybe I&rsquo;ll get into that tomorrow, as I suspect there will be some sticking points &hellip; I&rsquo;ve posted some notes about how I did it last time:</p>
 
-<p>https://community.bitnami.com/t/installing-certbot-for-lets-encrypt-ssl-certificate/46431/2</p>
+<p><a href="https://community.bitnami.com/t/installing-certbot-for-lets-encrypt-ssl-certificate/46431/2">https://community.bitnami.com/t/installing-certbot-for-lets-encrypt-ssl-certificate/46431/2</a></p>
 
-<p>and I need to follow up with the developer there.  Let&rsquo;s try for that in <a href="http://nonprofits.agileventures.org/2017/05/24/azure-mediawiki-stack-part4/">part 4</a> and if I&rsquo;m lucky I&rsquo;ll also get to testing the backup stuff &hellip; and also test importing all the data from the production system into the backup system.</p>
+<p>and I need to follow up with the developer there.  Let&rsquo;s try for that in <a href="http://nonprofits.agileventures.org/2017/05/24/azure-mediawiki-stack-part4/">part 4</a> and if I&rsquo;m lucky I&rsquo;ll also get to testing the backup stuff &hellip; and also test importing all the data from the production system into the backup system &hellip;</p>
 
         <h2 class='author'>by Sam Joseph</h2>
       </div>  
