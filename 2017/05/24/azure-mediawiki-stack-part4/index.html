@@ -95,15 +95,15 @@
 
 <p>Well I totally failed to get down to my blogging today, checking Slack and Email first.  And blogging this week has become a series on getting the Azure MediaWiki stack up, which arguably should be a single document &hellip; but then lots of people break complex things over multiple blogs.  It will need a lot of polishing back and forth as my stream of consciousness gets in the way of documenting things.  At least yesterday I managed to feel like I was making progress by getting the banner in there so that the cloned site looks like this:</p>
 
-<p><img alt="cloned site with banner" src="https://www.dropbox.com/s/cze89vat8f09xs5/Screenshot%202017-05-24%2009.50.00.png?dl=1" /></p>
+<p><img alt="cloned site with banner" src="https://dl.dropbox.com/s/cze89vat8f09xs5/Screenshot%202017-05-24%2009.50.00.png?dl=1" /></p>
 
 <p>So the remaining hurdle is just setting up SSL, which as I was saying I&rsquo;d partially documented in some comments in a post on the bitnami community:</p>
 
-<p>https://community.bitnami.com/t/installing-certbot-for-lets-encrypt-ssl-certificate/46431/2</p>
+<p><a href="https://community.bitnami.com/t/installing-certbot-for-lets-encrypt-ssl-certificate/46431/2">https://community.bitnami.com/t/installing-certbot-for-lets-encrypt-ssl-certificate/46431/2</a></p>
 
 <p>The original post points us to the bitnami documentation on using LetsEncrypt:</p>
 
-<p>https://docs.bitnami.com/aws/components/apache/#how-to-install-the-lets-encrypt-client</p>
+<p><a href="https://docs.bitnami.com/aws/components/apache/#how-to-install-the-lets-encrypt-client">https://docs.bitnami.com/aws/components/apache/#how-to-install-the-lets-encrypt-client</a></p>
 
 <p>Which walks us through installing something called certbot, during which I got/get the following error:</p>
 <pre class="highlight plaintext"><code>Failed to find executable apache2ctl in PATH: /opt/bitnami/sqlite/bin:/opt/bitnami/php/bin:/opt/bitnami/mysql/bin:/opt/bitnami/apache2/bin:/opt/bitnami/common/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
@@ -160,14 +160,14 @@ IMPORTANT NOTES:
 
 </code></pre>
 <p>which then needs to be installed in the Apache webserver according to the docs, but when I try the next step:</p>
-<pre class="highlight plaintext"><code>sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/fullchain.pem /opt/bitnami/apache2/conf/server.crt
+<pre class="highlight shell"><code>sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/fullchain.pem /opt/bitnami/apache2/conf/server.crt
 sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/privkey.pem /opt/bitnami/apache2/conf/server.key
 </code></pre>
 <p>I&rsquo;m told that the files already exist:</p>
 <pre class="highlight plaintext"><code>ln: failed to create symbolic link ‘/opt/bitnami/apache2/conf/server.key’: File exists
 </code></pre>
 <p>and so I start to wonder if I&rsquo;m following different instructions from last time.  I restarted the server</p>
-<pre class="highlight plaintext"><code>sudo /opt/bitnami/ctlscript.sh restart apache
+<pre class="highlight shell"><code>sudo /opt/bitnami/ctlscript.sh restart apache
 </code></pre>
 <p>but the https was not working.  My history from doing this the last time around shows me making various modifications to the Apache config</p>
 <pre class="highlight plaintext"><code>  379  nano httpd.conf 
@@ -208,14 +208,14 @@ sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/privkey.pem 
   414  sudo /opt/bitnami/ctlscript.sh restart apache
 </code></pre>
 <p>but I can tell I&rsquo;m not getting the full history as I don&rsquo;t see any reference to letsencrypt and I was definitely running the following at some point:</p>
-<pre class="highlight plaintext"><code>./letsencrypt-auto --apache --apache-server-root /opt/bitnami/apache2 --apache-challenge-location /opt/bitnami/apache2 --apache-handle-sites FALSE --apache-vhost-root /opt/bitnami/apache2/conf/bitnami -d &lt;domain-name&gt;
+<pre class="highlight shell"><code>./letsencrypt-auto --apache --apache-server-root /opt/bitnami/apache2 --apache-challenge-location /opt/bitnami/apache2 --apache-handle-sites FALSE --apache-vhost-root /opt/bitnami/apache2/conf/bitnami -d &lt;domain-name&gt;
 </code></pre>
 <p>I had a poke around in the Apache config and saw differences that made me wonder if the new Bitnami stack had changed, or if I had just run a different certbot command this time around.  Https wasn&rsquo;t working, but I saw the cert was from example.com, so I backed up the existing cert and key files and got the link command to work:</p>
-<pre class="highlight plaintext"><code>$ sudo mv  /opt/bitnami/apache2/conf/server.crt /opt/bitnami/apache2/conf/server-original.crt
-$ sudo mv  /opt/bitnami/apache2/conf/server.key /opt/bitnami/apache2/conf/server-original.key
-$ sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/fullchain.pem /opt/bitnami/apache2/conf/server.crt
-$ sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/privkey.pem /opt/bitnami/apache2/conf/server.key
-$ sudo /opt/bitnami/ctlscript.sh restart apache
+<pre class="highlight shell"><code><span class="gp">$ </span>sudo mv  /opt/bitnami/apache2/conf/server.crt /opt/bitnami/apache2/conf/server-original.crt
+<span class="gp">$ </span>sudo mv  /opt/bitnami/apache2/conf/server.key /opt/bitnami/apache2/conf/server-original.key
+<span class="gp">$ </span>sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/fullchain.pem /opt/bitnami/apache2/conf/server.crt
+<span class="gp">$ </span>sudo ln -s /etc/letsencrypt/live/hlp-wiki-develop.agileventures.org/privkey.pem /opt/bitnami/apache2/conf/server.key
+<span class="gp">$ </span>sudo /opt/bitnami/ctlscript.sh restart apache
 </code></pre>
 <p>and then it worked. So either I made it harder than it actually was last time, or something got easier, or I just found a different command that was easier to work with out of the box.  However the trick is now enforcing https and then making sure the VisualEditor can still work over https, but I think that will be for tomorrow&rsquo;s blog i.e. <a href="http://nonprofits.agileventures.org/2017/05/25/azure-mediawiki-stack-part5/">part 5!</a> &hellip;</p>
 
