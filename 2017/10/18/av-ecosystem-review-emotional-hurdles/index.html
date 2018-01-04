@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Emotional Hurdles</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_10 x2017_10_18 x2017_10_18_av-ecosystem-review-emotional-hurdles x2017_10_18_av-ecosystem-review-emotional-hurdles_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/10/18/av-ecosystem-review-emotional-hurdles/">AV EcoSystem Emotional Hurdles</a></h2>
+        <h5 class='date'>18 Oct 2017</h5>
+    <p><img alt="hurdles" src="/images/hurdles.jpg" /></p>
+
+<p>Late to the blogface due to feelings of lethargy and accidentally reading all my Slack and Emails.  Not so many of them as I was checking them pretty late last night as well - blurgh.  However the mixed strategy of investigating performance and a new static landing page site in parallel seems to be going reasonably well.  At least I&rsquo;m making some progress on both fronts.  I&rsquo;ve got the loaderio tag on staging:</p>
+
+<p><a href="https://staging.agileventures.org/loaderio-bd60fb88537b106821044fd9098f271c.html">https://staging.agileventures.org/loaderio-bd60fb88537b106821044fd9098f271c.html</a></p>
+
+<p>And the helpful folks at loaderio showed me how I could get the load test to hit <a href="https://staging.agileventures.org">https://staging.agileventures.org</a> rather than the herokuapp URL, so time to kick off a load test.  But actually no, because now we have a new hash code lookup, blargh.  So I could try and make this dynamic, but perhaps it won&rsquo;t change now that we have fixed to staging.agileventures.org, but then again perhaps it will change for every new test we create.  Verification via DNS is now an option &hellip; either way it&rsquo;s going to take an hour or two to actually get to the load test.  So I set up a dynamic approach with the following in the routes file:</p>
+<pre class="highlight ruby"><code><span class="k">def</span> <span class="nf">loaderio_token</span>
+  <span class="p">(</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'LOADERIO_TOKEN'</span><span class="p">]</span> <span class="o">||</span> <span class="s2">"loaderio-296a53739de683b99e3a2c4d7944230f"</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="no">WebsiteOne</span><span class="o">::</span><span class="no">Application</span><span class="p">.</span><span class="nf">routes</span><span class="p">.</span><span class="nf">draw</span> <span class="k">do</span>
+
+  <span class="n">get</span> <span class="n">loaderio_token</span> <span class="o">=&gt;</span> <span class="s1">'static_pages#loaderio'</span>
+</code></pre>
+<p>and this in the static pages controller</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">loaderio</span>
+    <span class="n">render</span> <span class="ss">plain: </span><span class="no">ENV</span><span class="p">[</span><span class="s1">'LOADERIO_TOKEN'</span><span class="p">]</span> <span class="o">||</span> <span class="s2">"loaderio-296a53739de683b99e3a2c4d7944230f"</span><span class="p">,</span> <span class="ss">layout: </span><span class="kp">false</span>
+  <span class="k">end</span>
+</code></pre>
+<p>And I get a pull request in, but now I have to wait for the CI to pass.  So I have to task swap somewhat.  It&rsquo;s all about the emotional hurdles.  I was de-motivated to look into performance testing as I thought it would be a pain to set up and difficult to get to the bottom of the problem.  I&rsquo;m reinvigorated by having found loaderio, even though I haven&rsquo;t actually got it working yet.  Conversely while I was more excited about getting a middleman landing page set up, I&rsquo;ve now taken an emotional knock due to the challenges I encountered yesterday with middleman-deploy.  And that&rsquo;s even when I got it all working, but the knock is from finding that both middleman-gh-pages and middleman-deploy are looking a little under-maintained.  Middleman-deploy is marginally more active, and does have some nice functionality.  My next task there is sorting out the asset pathways, and actually maybe they will just start working when we deploy to a custom domain &hellip; although I was pestering myself with instead staying focused on the performance issue and reading more about Ruby memory management.  Here&rsquo;s what Heroku says:</p>
+
+<blockquote>
+<p>If you’re getting R14 - Memory quota exceeded errors, it means your application is using swap memory. Swap uses the disk to store memory instead of RAM. Disk speed is significantly slower than RAM, so page access time is greatly increased. This leads to a significant degradation in application performance. An application that is swapping will be much slower than one that is not. No one wants a slow application, so getting rid of R14 Memory quota exceeded errors on your application is very important.</p>
+</blockquote>
+
+<p>The suggested solutions include:</p>
+
+<ul>
+<li><a href="https://devcenter.heroku.com/articles/ruby-memory-use#ruby-2-0-upgrade">Upgrading to at least Ruby 2.1</a></li>
+<li><a href="https://devcenter.heroku.com/articles/ruby-memory-use#memory-leaks">Looking for memory leaks</a></li>
+<li><a href="https://devcenter.heroku.com/articles/ruby-memory-use#too-many-workers">Avoiding too many webserver workers</a></li>
+<li><a href="https://devcenter.heroku.com/articles/ruby-memory-use#forking-behavior-of-puma-worker-processes">Forking behavior of Puma worker processes</a></li>
+<li><a href="https://devcenter.heroku.com/articles/ruby-memory-use#too-much-memory-used-at-runtime">Too much memory used at runtime</a></li>
+<li><a href="https://devcenter.heroku.com/articles/ruby-memory-use#gc-tuning">GC tuning</a></li>
+<li><a href="https://devcenter.heroku.com/articles/ruby-memory-use#dyno-size-and-performance">Dyno size and performance</a></li>
+</ul>
+
+<p>So we&rsquo;re already on Ruby 2.3.1, but I don&rsquo;t think we spent any time looking for memory leaks yet, and the project <a href="https://github.com/schneems/derailed_benchmarks">derailed_benchmarks</a> appears to be something we can run locally to check, so we can quickly get into that while we wait for the load test environment to be ready &hellip; I follow the install instructions and kick off <code>bundle exec derailed bundle:mem</code> to profile our gems.  I think must have done this before as I recognise the output:</p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (1826_derailed_benchmarks)]$ 
+→ bundle exec derailed bundle:mem
+TOP: 120.8359 MiB
+  nearest_time_zone: 48.3281 MiB
+  rails/all: 17.0625 MiB
+    active_record/railtie: 7.7188 MiB
+</code></pre>
+<p>and the identification of <code>nearest_time_zone</code> as the most memory consuming gem, more even than Rails itself.  After Rails the following three are the biggest:</p>
+<pre class="highlight plaintext"><code>  pivotal-tracker-api: 9.3438 MiB
+  bootstrap-sass: 6.1289 MiB
+  octokit: 5.1992 MiB
+</code></pre>
+<p>what I don&rsquo;t think we ran before was the check for leaking memory &hellip;</p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (1826_derailed_benchmarks)]$ 
+→ bundle exec derailed exec perf:mem_over_time
+Booting: production
+/Users/tansaku/.rvm/gems/ruby-2.3.1/gems/airbrake-ruby-2.2.2/lib/airbrake-ruby/notifier.rb:33:in `initialize': :project_id is required (Airbrake::Error)
+    from /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/airbrake-ruby-2.2.2/lib/airbrake-ruby.rb:135:in `new'
+    from /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/airbrake-ruby-2.2.2/lib/airbrake-ruby.rb:135:in `configure'
+    from /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/config/initializers/airbrake.rb:2:in `&lt;top (required)&gt;'
+</code></pre>
+<p>which gets stuck because trying to run in production we need an airbrake id, amongst many other things &hellip; so in a flurry of firing and forgetting I get an AIRBRAKE token and id in and create a production database:</p>
+<pre class="highlight plaintext"><code>$ pg_dump -U postgres websiteone_development | psql -U postgres websiteone_production
+</code></pre>
+<p>and also deploy the loaderio dynamic token to staging and also set up a landing.agileventures.org domain and configure that &hellip; now the deploy to staging won&rsquo;t finish till the CI passes so I can&rsquo;t actually fire and forget that.  I can try <a href="http://landing.agileventures.org">http://landing.agileventures.org</a> and in fact that does exactly what I suspect - it&rsquo;s working and the CSS/JS assets are being pulled in correctly.  So that&rsquo;s a nice unblocked feeling &hellip; but with derailed_benchmarks I&rsquo;m stuck on:</p>
+<pre class="highlight plaintext"><code>→ AIRBRAKE_PROJECT_ID=6 AIRBRAKE_API_KEY=XXXX bundle exec derailed exec perf:mem_over_time
+Booting: production
+Endpoint: "/"
+/Users/tansaku/.rvm/gems/ruby-2.3.1/gems/derailed_benchmarks-1.3.2/lib/derailed_benchmarks/tasks.rb:72: warning: already initialized constant DERAILED_APP
+/Users/tansaku/.rvm/gems/ruby-2.3.1/gems/derailed_benchmarks-1.3.2/lib/derailed_benchmarks/tasks.rb:23: warning: previous definition of DERAILED_APP was here
+PID: 79590
+211.39453125
+/Users/tansaku/.rvm/gems/ruby-2.3.1/gems/derailed_benchmarks-1.3.2/lib/derailed_benchmarks/tasks.rb:92:in `call_app': Bad request:  (RuntimeError)
+    from /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/derailed_benchmarks-1.3.2/lib/derailed_benchmarks/tasks.rb:174:in `block (3 levels) in &lt;top (required)&gt;'
+    from /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/derailed_benchmarks-1.3.2/lib/derailed_benchmarks/tasks.rb:173:in `times'
+    from /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/derailed_benchmarks-1.3.2/lib/derailed_benchmarks/tasks.rb:173:in `block (2 levels) in &lt;top (required)&gt;'
+</code></pre>
+<p>so after a few searches I open an issue:</p>
+
+<p><a href="https://github.com/schneems/derailed_benchmarks/issues/110">https://github.com/schneems/derailed_benchmarks/issues/110</a></p>
+
+<p>and call it a day &hellip; but no I see that staging has depoyed so I kick off a test:</p>
+
+<p><img alt="config the homepage test" src="https://dl.dropbox.com/s/f5e6tu71lctah7o/Screenshot%202017-10-19%2010.53.45.png?dl=0" /></p>
+
+<p>which gives these results:</p>
+
+<p><img src="https://dl.dropbox.com/s/5han2hh44m7n1bx/Screenshot%202017-10-19%2010.54.38.png?dl=0" /></p>
+
+<p>which I now need to work out how to interpret - apparently the test was aborted due to reaching an error threshold.  I think what we are seeing here is the requests timing out as the server comes under heavy load.  I need to run this again while watching the logs &hellip; and when I do I see the memory errors:</p>
+<pre class="highlight plaintext"><code>2017-10-19T09:58:58.775050+00:00 heroku[web.1]: Process running mem=680M(133.0%)
+2017-10-19T09:58:58.775050+00:00 heroku[web.1]: Error R14 (Memory quota exceeded)
+</code></pre>
+<p>so at least now we have a way to test possible solutions to the problem &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
