@@ -118,7 +118,7 @@
 
 <p>So where I&rsquo;m confused now is how good a clone I have of the first box, and the best way to upgrade the first box.  I have another layer of indirection with the first box using the wiki.healthylondon.org domain name, but I don&rsquo;t think that should affect things too seriously &hellip; is it possible that I was completely misdiagnosing the VisualEditor failures?  It&rsquo;s possible, because we had that very tricky bug where only pages with outstanding edits held in the moderation queue were blocking the editor, but I thought that was only on IE.</p>
 
-<p>I checked the chrome developer tools network panel and all the requests to the VisualEditor are going across https.  I&rsquo;ll check on IE and then I think its time to get down to work.  I want to:</p>
+<p>I checked the chrome developer tools network panel and all the requests to the VisualEditor are going across https.  I&rsquo;ll check on IE but if it&rsquo;s working there then we&rsquo;ve completed the staging setup and now its really time to get down to work.  I want to:</p>
 
 <ol>
 <li>clone across the data from the production server</li>
@@ -128,7 +128,7 @@
 <li>use this as a base to test out other things like defaulting create page to the VisualEditor, etc.</li>
 </ol>
 
-<p>What I&rsquo;d really like to do is have a mechanism for &ldquo;switching&rdquo; the production server to the newly created box and retiring the old one, so that I can avoid having to upgrade the boxes in place.  It seems like that switching would require DNS changes that take a long time to propagate.  I wonder if Azure has some mechanism for switching between virtual machines &hellip;?  What I&rsquo;d really like is a broader team to do this all with, but that&rsquo;d require another level of funding &hellip;</p>
+<p>What I&rsquo;d really like to do is have a mechanism for &ldquo;switching&rdquo; the production server to the newly created box and retiring the old one, so that I can avoid having to upgrade the boxes in place.  It seems like that switching would require DNS changes that take a long time to propagate.  I wonder if Azure has some mechanism for switching between virtual machines &hellip;?  What I&rsquo;d really like is a bigger team to do this all with, but that&rsquo;d require another level of funding &hellip;</p>
 
         <h2 class='author'>by Sam Joseph</h2>
       </div>  
