@@ -10,11 +10,77 @@
     <name>Blog Author</name>
   </author>
   <entry>
+    <title>AV EcoSystem Task Switching</title>
+    <link rel="alternate" href="http://blog.url.com/2017/10/18/av-ecosystem-review-task-switching/"/>
+    <id>http://blog.url.com/2017/10/18/av-ecosystem-review-task-switching/</id>
+    <published>2017-10-18T01:00:00+01:00</published>
+    <updated>2018-01-08T21:18:48+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="task switching" src="/images/task_switching.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;They say that task-switching is very inefficient and that while we think we&amp;rsquo;re multi-tasking we&amp;rsquo;re actually just doing one task after another and not achieving productive focus on any.  Ironically I seem to be task switching all day long, and sometimes that&amp;rsquo;s all about managing motivation.  Yesterday I couldn&amp;rsquo;t decide between making a middleman landing page for the AV main site and investigating the performance issues we have with the site on Heroku.  So I started off on both &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/tansaku/av-landing-page"&gt;https://github.com/tansaku/av-landing-page&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;On the middleman side I think the key things I need to check are:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;deployment to github pages&lt;/li&gt;
+&lt;li&gt;CSS pipeline&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;while for heroku performance it&amp;rsquo;s just reading docs.  I pull the docs up on my big monitor.  I install loader.io on the staging site, but find it is already installed.  Although it hasn&amp;rsquo;t ever been used by the look of it &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="getting started tips from loader.io" src="https://dl.dropbox.com/s/reu4c637j16izcc/Screenshot%202017-10-18%2009.58.50.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and so I set up an initial load test:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="intial load test form" src="https://dl.dropbox.com/s/lx5yei9gm1udy6w/Screenshot%202017-10-18%2010.00.06.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;but I can&amp;rsquo;t seem to test against our custom endpoint - I send a help request for that.  In the meantime I have to get a static file served on staging in order to start the load test &amp;hellip; so I get a pull request in for that.  I check that it works locally, but I&amp;rsquo;ll need that to pass CI to get it onto staging.  I could force it up there, but it gives me a reasonable excuse to task switch and check the middleman items.  If I recall correctly we used a middleman-gh-pages plugin for the static nonprofit site in order to get middleman on github pages, but I wonder if that will work with the latest version of middleman?&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/edgecase/middleman-gh-pages"&gt;MiddleManGHPages&lt;/a&gt; hasn&amp;rsquo;t been updated in a couple of years and there is also now &lt;a href="https://github.com/middleman-contrib/middleman-deploy"&gt;MiddleManDeploy&lt;/a&gt; which has been more recently updated and has more stars.  A &lt;a href="https://ashfurrow.com/blog/building-static-sites-with-middleman/"&gt;2017 blog&lt;/a&gt; mentions successfully using middleman-gh-pages and it is working for us on the static site with a middleman 4.1.7.  Stick with what I know? Try something new?  The following code in the README of middleman-deploy makes me want to try it:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# Rakefile&lt;/span&gt;
+&lt;span class="n"&gt;namespace&lt;/span&gt; &lt;span class="ss"&gt;:deploy&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;deploy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Deploying to &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+    &lt;span class="nb"&gt;system&lt;/span&gt; &lt;span class="s2"&gt;"TARGET=&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; bundle exec middleman deploy"&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="ss"&gt;:staging&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;deploy&lt;/span&gt; &lt;span class="ss"&gt;:staging&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="ss"&gt;:production&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;deploy&lt;/span&gt; &lt;span class="ss"&gt;:production&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ rake deploy:staging
+$ rake deploy:production
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I like having staging and production endpoints - something I&amp;rsquo;ve been missing in the static nonprofit site.  In the meantime the pull request for the loaderio static page passed, so I pull that in and will need to wait for it to deply to develop before I can then move it on to staging for testing (or I test on develop &amp;hellip;), back to middleman deploy I find I need to upgrade to a newer version of middleman-deploy to get things working:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/middleman-contrib/middleman-deploy/issues/93"&gt;https://github.com/middleman-contrib/middleman-deploy/issues/93&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;but so the current README is out of date and the PR that fixes this has been hanging around for a year &amp;hellip; then there&amp;rsquo;s another issue to fix:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/middleman-contrib/middleman-deploy/issues/100"&gt;https://github.com/middleman-contrib/middleman-deploy/issues/100&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;and then &lt;code&gt;build&lt;/code&gt; and &lt;code&gt;deploy&lt;/code&gt; both work, and I would appear to have successfully deployed to:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://tansaku.github.io/av-landing-page/"&gt;https://tansaku.github.io/av-landing-page/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;although I&amp;rsquo;d feel better if the middleman-deploy 2.0 gem was out of alpha &amp;hellip; and I notice that the default middleman site assets are not loading on gh-pages.  Something to multi-task on tomorrow as I start the load tests &amp;hellip; :-)&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Emotional Hurdles</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/18/av-ecosystem-review-emotional-hurdles/"/>
     <id>http://blog.url.com/2017/10/18/av-ecosystem-review-emotional-hurdles/</id>
     <published>2017-10-18T01:00:00+01:00</published>
-    <updated>2018-01-04T22:24:30+00:00</updated>
+    <updated>2018-01-08T21:14:21+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -118,7 +184,7 @@ PID: 79590
     <link rel="alternate" href="http://blog.url.com/2017/10/17/av-ecosystem-review-death-warmed-up/"/>
     <id>http://blog.url.com/2017/10/17/av-ecosystem-review-death-warmed-up/</id>
     <published>2017-10-17T01:00:00+01:00</published>
-    <updated>2018-01-03T22:18:21+00:00</updated>
+    <updated>2018-01-08T21:14:21+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -170,7 +236,7 @@ Using /Users/tansaku/.rvm/gems/ruby-2.4.1
     <link rel="alternate" href="http://blog.url.com/2017/10/16/av-ecosystem-review-tweaking-getting-started/"/>
     <id>http://blog.url.com/2017/10/16/av-ecosystem-review-tweaking-getting-started/</id>
     <published>2017-10-16T01:00:00+01:00</published>
-    <updated>2018-01-02T22:13:56+00:00</updated>
+    <updated>2018-01-08T21:14:21+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -206,7 +272,7 @@ Using /Users/tansaku/.rvm/gems/ruby-2.4.1
     <link rel="alternate" href="http://blog.url.com/2017/10/13/av-ecosystem-review-how-to-get-started/"/>
     <id>http://blog.url.com/2017/10/13/av-ecosystem-review-how-to-get-started/</id>
     <published>2017-10-13T01:00:00+01:00</published>
-    <updated>2017-12-21T22:13:35+00:00</updated>
+    <updated>2018-01-08T21:14:21+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -270,7 +336,7 @@ e) allowing the user to search for project via tech stack  &lt;/p&gt;
     <link rel="alternate" href="http://blog.url.com/2017/10/12/av-ecosystem-review-big-picture/"/>
     <id>http://blog.url.com/2017/10/12/av-ecosystem-review-big-picture/</id>
     <published>2017-10-12T01:00:00+01:00</published>
-    <updated>2017-12-20T21:11:54+00:00</updated>
+    <updated>2018-01-08T21:14:21+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -327,79 +393,6 @@ e) allowing the user to search for project via tech stack  &lt;/p&gt;
 5) Medium&lt;/p&gt;
 
 &lt;p&gt;and that flow through from one of or other of these sources to landing on our site and what the users sees - and whether we get them to the &amp;ldquo;getting started&amp;rdquo; page and get them activated &amp;hellip; of course it&amp;rsquo;s all in vain if the site has serious performance issues &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Late to the Blogface</title>
-    <link rel="alternate" href="http://blog.url.com/2017/10/11/av-ecosystem-review-late-to-the-blogface/"/>
-    <id>http://blog.url.com/2017/10/11/av-ecosystem-review-late-to-the-blogface/</id>
-    <published>2017-10-11T01:00:00+01:00</published>
-    <updated>2017-12-19T21:57:11+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="late" src="/images/late.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Well, I am very late to the blogface this morning after doing a 7.5km jog and then experimenting with making an eggs benedict for the first time in my life.  To compound it I had two podcasts to post to Twitter and Slack and in an exhausted over-fed state I had little resistance to reviewing all my Slack and email messages.  I stopped short of looking at all the Twitter notifications.  There&amp;rsquo;s definitely some kind of micro-message addiction going on here.   I can&amp;rsquo;t remember what it was I was excited to work on.  Maybe it was clipping the time/dates off the Slack messages.  I&amp;rsquo;m pretty pleased with how far we&amp;rsquo;ve come in dropping the old Agile bot (leading to $21 a month savings), and producing a new Ruby agile-bot as part of our Rails monolith that is now messaging like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/wo71jxlx2knvr6m/Screenshot%202017-10-11%2010.31.38.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve added what I hope is a welcoming tone to both the reminder and the event title.  I suspect that the time/date stamp is being added to the event instance title, so that the date is available in views like &amp;ldquo;Previous scrums&amp;rdquo;:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/998m7v4fzmc747h/Screenshot%202017-10-11%2010.33.29.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;but it makes no sense in the context of the Slack chat.  We did have one member a bit confused by the new syntax, since the direct links to the hangouts etc. were no longer visible.  Not ideal - perhaps we need a click to join message?  What I&amp;rsquo;d really like to work out is where in the code flow the date/timestamp is getting added to the event instance title &amp;hellip; a little search and I think it&amp;rsquo;s being set in the form that starts the event instance in the event show page, which uses a topic helper in the EventHelper:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;topic&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;event_schedule&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; - &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;current_occurrence_time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event_schedule&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now rather than changing that - perhaps I can set it up so that the post to Slack uses the event name and not the event instance title.  That would mean adding more mocks to the slack Service spec - and also highlights the need for acceptance tests that exercise this pathway (and make the high level motivations clear).  If I&amp;rsquo;d got to the computer at 9am maybe - right now I just want to get a quick fix and move on.  Particularly I want to move on to even higher level review for Thursday and Friday, so can I slip this out?  Or will I get distracted by replacing the ActiveRecord models in the SlackService spec with mock_models &amp;hellip; which I do, but then I think, actually perhaps displaying the UTC time and day is kind of useful in our Slack since people are in different timezones and often referring to UTC can be helpful as a kind of baseline.  Hmmm, maybe I should just go for a quick refactoring ticket to scratch my code itch?&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve also got the dependabot upgrades to work through &amp;hellip; I&amp;rsquo;ve merged in the bump to rails 4.2.10.  I&amp;rsquo;m wondering if I should just splurge in all the rest that are passing &amp;hellip; well, anyway, I got a chunk of the SlackService spec working with mock_models:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;    &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'PairProgramming'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:websiteone_project&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;mock_model&lt;/span&gt; &lt;span class="no"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;slug: &lt;/span&gt;&lt;span class="s1"&gt;'websiteone'&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-      &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:websiteone_hangout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;mock_model&lt;/span&gt; &lt;span class="no"&gt;EventInstance&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;title: &lt;/span&gt;&lt;span class="s1"&gt;'MockEvent'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;category: &lt;/span&gt;&lt;span class="s2"&gt;"PairProgramming"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;hangout_url: &lt;/span&gt;&lt;span class="s2"&gt;"mock_url"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;user: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;project: &lt;/span&gt;&lt;span class="n"&gt;websiteone_project&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-      &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'sends the correct slack message to the correct channels when associated with a project'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;slack_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:chat_postMessage&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;general_channel_post_args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;slack_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:chat_postMessage&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;websiteone_project_channel_post_args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;slack_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:chat_postMessage&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pairing_notifications_channel_post_args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-        &lt;span class="n"&gt;slack_service&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;post_hangout_notification&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;websiteone_hangout&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slack_client&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;gitter_client&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-
-      &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:no_project_hangout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;mock_model&lt;/span&gt; &lt;span class="no"&gt;EventInstance&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;title: &lt;/span&gt;&lt;span class="s1"&gt;'MockEvent'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;category: &lt;/span&gt;&lt;span class="s2"&gt;"PairProgramming"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;hangout_url: &lt;/span&gt;&lt;span class="s2"&gt;"mock_url"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;user: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;project: &lt;/span&gt;&lt;span class="kp"&gt;nil&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-      &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'does not fail when event has no associated project'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;slack_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:chat_postMessage&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;general_channel_post_args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;slack_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:chat_postMessage&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pairing_notifications_channel_post_args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-        &lt;span class="n"&gt;slack_service&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;post_hangout_notification&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;no_project_hangout&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slack_client&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;gitter_client&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-
-      &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:cs169_project&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;mock_model&lt;/span&gt; &lt;span class="no"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;slug: &lt;/span&gt;&lt;span class="s1"&gt;'cs169'&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:cs169_hangout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;mock_model&lt;/span&gt; &lt;span class="no"&gt;EventInstance&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;title: &lt;/span&gt;&lt;span class="s1"&gt;'MockEvent'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;category: &lt;/span&gt;&lt;span class="s2"&gt;"PairProgramming"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;hangout_url: &lt;/span&gt;&lt;span class="s2"&gt;"mock_url"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;user: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;project: &lt;/span&gt;&lt;span class="n"&gt;cs169_project&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-      &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'should ping gitter and slack (but not general) when the project is cs169'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gitter_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:messages&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'56b8bdffe610378809c070cc'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;limit: &lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_return&lt;/span&gt;&lt;span class="p"&gt;([])&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gitter_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:send_message&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'[MockEvent with random](mock_url) is starting NOW!'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"56b8bdffe610378809c070cc"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;slack_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:chat_postMessage&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cs169_project_channel_post_args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;slack_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:chat_postMessage&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pairing_notifications_channel_post_args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-        &lt;span class="n"&gt;slack_service&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;post_hangout_notification&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cs169_hangout&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slack_client&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;gitter_client&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-
-      &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:missing_url_hangout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;mock_model&lt;/span&gt; &lt;span class="no"&gt;EventInstance&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;title: &lt;/span&gt;&lt;span class="s1"&gt;'MockEvent'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;category: &lt;/span&gt;&lt;span class="s2"&gt;"PairProgramming"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;hangout_url: &lt;/span&gt;&lt;span class="s2"&gt;"  "&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;user: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-      &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'does not post notification if hangout url is blank'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-        &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;slack_client&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;not_to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:chat_postMessage&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-        &lt;span class="n"&gt;slack_service&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;post_hangout_notification&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;missing_url_hangout&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slack_client&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;gitter_client&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which is kind of an improvement - slightly faster than creating real ActiveRecord models.  Slightly less realistic, so pushing this away from integration and towards unit testing.  Re-arranging deck chairs?  I&amp;rsquo;d love to boil this code down to make it clean and transparent, but perhaps that&amp;rsquo;s something for a pairing session where my pair partner can keep me on the straight and narrow.  Time to jump back up a few levels, starting tomorrow - let&amp;rsquo;s check in on the changes to the &amp;ldquo;Getting Started&amp;rdquo; page and the flow of how people arrive there.&lt;/p&gt;
 </content>
   </entry>
 </feed>
