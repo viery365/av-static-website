@@ -5,10 +5,145 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-10-19T01:00:00+01:00</updated>
+  <updated>2017-10-20T01:00:00+01:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Performance Tuning</title>
+    <link rel="alternate" href="http://blog.url.com/2017/10/20/av-ecosystem-review-performance-tuning-ftw/"/>
+    <id>http://blog.url.com/2017/10/20/av-ecosystem-review-performance-tuning-ftw/</id>
+    <published>2017-10-20T01:00:00+01:00</published>
+    <updated>2018-01-09T21:10:00+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="preformance tuning" src="/images/../images/preformance_tuning.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Late to the blogface yada, yada, yada.  I&amp;rsquo;m really enjoying performance tuning.  Let&amp;rsquo;s take another look at what&amp;rsquo;s going on.  I can see from yesterday&amp;rsquo;s test runs that I quickly pushed the AV site into to heavy memory error territory.  I also restarted the server after the tests and what&amp;rsquo;s interesting is to see that we actually start encountering memory errors on the staging server in the absence of performance testing:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="heroku metrics" src="https://dl.dropbox.com/s/532rzq46emgci3h/Screenshot%202017-10-20%2010.19.45.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The staging server is not coming under any particular load, which implies that we&amp;rsquo;ve got some sort of memory leak just in the resting state of the server.  Not ideal.  It&amp;rsquo;s also clear that the simple throw money at the problem would be to double the size of the memory, and help Heroku with their bottom line, but it would be far more satisfying to actually solve the problem.  I&amp;rsquo;ve had no follow up on my question in the issues of &lt;code&gt;derailed_benchmarks&lt;/code&gt; about why we get an error running &lt;code&gt;perf:mem_over_time&lt;/code&gt; on the production app locally.  However the Heroku metrics indicate we do have a memory leak, so perhaps we can skip that and move on the analysis phase.  All the &lt;code&gt;perf:mem_over_time&lt;/code&gt; operation tells us is that we are using 211MiB on startup, which I can see matches the restart value for memory usage on heroku.  Let&amp;rsquo;s try the &amp;ldquo;Dissecting a Memory Leak&amp;rdquo; suggestion: &lt;code&gt;perf:objects&lt;/code&gt;.  That may just hit the same error, and in fact is does. &lt;/p&gt;
+
+&lt;p&gt;I had two quick ideas for fixes - turning off https locally and checking that I can see the app in a browser running locally in production mode.  I did the former and was able to do the latter, and didn&amp;rsquo;t see an improvement.  But then realised I was turning off https in LocalSupport, not WebSiteOne.  I switched that off and we were in business:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ AIRBRAKE_PROJECT_ID=6 AIRBRAKE_API_KEY=b681e09 bundle exec derailed exec perf:mem_over_time
+Booting: production
+Endpoint: "/"
+/Users/tansaku/.rvm/gems/ruby-2.3.1/gems/derailed_benchmarks-1.3.2/lib/derailed_benchmarks/tasks.rb:72: warning: already initialized constant DERAILED_APP
+/Users/tansaku/.rvm/gems/ruby-2.3.1/gems/derailed_benchmarks-1.3.2/lib/derailed_benchmarks/tasks.rb:23: warning: previous definition of DERAILED_APP was here
+PID: 92587
+213.2734375
+237.4296875
+247.52734375
+252.6953125
+257.9375
+260.125
+262.21875
+265.7578125
+272.25
+274.1640625
+274.796875
+275.80078125
+276.546875
+277.171875
+277.60546875
+278.09375
+278.6015625
+278.8359375
+279.28125
+281.1171875
+281.26953125
+281.390625
+281.57421875
+281.67578125
+281.859375
+281.03125
+270.57421875
+270.9296875
+271.6640625
+271.984375
+272.671875
+250.19921875
+251.328125
+242.16015625
+240.8203125
+241.41796875
+241.546875
+...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So what we are waiting to see here is if the memory never levels off.  Another waiting activity.  And actually sometimes the memory level is dropping before gradually creeping up again - hmmm.  And nowhere near the levels we&amp;rsquo;re seeing running this on Heroku.  Of course this test is profiling what&amp;rsquo;s happening locally on the OSX machine, not whatever virtual machine is in use on Heroku.  Here&amp;rsquo;s our puma config:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;workers Integer(ENV['PUMA_WORKERS'] || 3)
+threads Integer(ENV['MIN_THREADS']  || 1), Integer(ENV['MAX_THREADS'] || 16)
+
+preload_app!
+
+rackup      DefaultRackup
+port        ENV['PORT']     || 3000
+environment ENV['RACK_ENV'] || 'development'
+
+on_worker_boot do
+  # worker specific setup
+  ActiveSupport.on_load(:active_record) do
+    config = ActiveRecord::Base.configurations[Rails.env] ||
+                Rails.application.config.database_configuration[Rails.env]
+    config['pool'] = ENV['MAX_THREADS'] || 16
+    ActiveRecord::Base.establish_connection(config)
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So things we could try include:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;reducing the number of puma workers (although we have 2 on staging and 1 on production already)&lt;/li&gt;
+&lt;li&gt;try a puma worker killer&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Other things that spring to mind are adjusting the number of threads (MAX&lt;em&gt;THREADS = 3 on staging, 2 on production), but I think we had a round of tweaking puma workers and threads to no avail.   The rest of this Puma config looks okay.  RACK&lt;/em&gt;ENV must be production &amp;hellip; but now I can run &lt;code&gt;perf:objects&lt;/code&gt; and I get the following info about which gems are allocating the most memory:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;allocated memory by gem
+-----------------------------------
+   7874184  ice_cube-0.11.1
+   7862554  activesupport-4.2.10
+   1372984  tzinfo-1.2.3
+    760790  ruby-2.3.1/lib
+    751451  activerecord-4.2.10
+    121937  WebsiteOne/app
+    114186  newrelic_rpm-4.1.0.333
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and the retained memory by location:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;retained memory by location
+-----------------------------------
+     23609  /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/app/views/visitors/index.html.erb:1
+      5200  /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/newrelic_rpm-4.1.0.333/lib/new_relic/agent/transaction/trace_node.rb:24
+      5016  /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/newrelic_rpm-4.1.0.333/lib/new_relic/agent/transaction/trace.rb:54
+      3384  /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/rack-1.6.8/lib/rack/mock.rb:92
+      2240  /Users/tansaku/.rvm/gems/ruby-2.3.1/gems/newrelic_rpm-4.1.0.333/lib/new_relic/agent/transaction/trace_node.rb:35
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and various other stuff that makes it feel like it&amp;rsquo;s the event scheduling time and timezone stuff that&amp;rsquo;s causing the biggest memory headaches.  The Puma worker killer is a stop gap.  I guess the best looking options are:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;try removing the &lt;code&gt;nearest_time_zone&lt;/code&gt; gem since it&amp;rsquo;s the biggest memory hog&lt;/li&gt;
+&lt;li&gt;dissect the visitors index.html.erb file to work out where it&amp;rsquo;s snagging on memory&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I tried removing the timing section and re-running the memory performance over time, but it just jumped up.  I ran the perf:objects again and that knocked the index.html.erb file out of the &amp;ldquo;retained memory by location&amp;rdquo; list.  I notice that the home page is not using the application layout for some reason.  Time with zone from active&lt;em&gt;support is still being heavily used.  It seems like ice&lt;/em&gt;cube is being heavily activated, even when I think I&amp;rsquo;ve removed the time/scheduling stuff from the home page.  I wonder if that&amp;rsquo;s just its resting state &amp;hellip;?  I run the analysis again removing everything from the home page and yes the icecube stuff disappears.  It looks like we are rendering other sub-elements that are pulling in info on event scheduling hmmm &amp;hellip; so I guess I should analyze the different partials:&lt;/p&gt;
+
+&lt;p&gt;1) &lt;em&gt;head.html.erb: javascript and stylesheet include tags - nothing suspicious
+2) _navbar.html.erb: checks if user is signed in, user presentation, checking for next event (avoided on home page?)
+3) _require&lt;/em&gt;users&lt;em&gt;profile.html.erb:  some stuff from user - rarely displayed
+4) _footer.html.erb: static page paths and not much else
+5) _round&lt;/em&gt;banners.html.erb: next event stuff&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;nearest_time_zone&lt;/code&gt; is tied up with various things for the User and looks like it will be tricky to understand, let alone remove &amp;hellip; re-running it seems like it&amp;rsquo;s only the event portion of the round banners that&amp;rsquo;s giving us memory overhead here.  Weirdly I can&amp;rsquo;t even work out where the event object is coming from &amp;hellip; ah, we have some before_filters in the ApplicationController:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  before_filter :get_next_scrum, :store_location, unless: -&amp;gt; { request.xhr? }
+
+  def get_next_scrum
+    @next_event = Event.next_occurrence(:Scrum)
+  end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which I guess brings us to the main issue for the loading of the home page, which is that we want to display the time to the next event, and that requires working out when the next event is, and we are generating the full schedule from IceCube on the fly each time.  In principle it would be far more efficient to have it so that all events, and their repeats, were stored (say in a db) and then fetched read-only when needed.  They could then be updated on write operations, which would be far less frequent &amp;hellip; but that would be a major refactoring of the system.  If the homepage still wants to include the countdown, then a static site is not going to help much &amp;hellip; hmmm.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Task Switching</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/19/av-ecosystem-review-task-switching/"/>
@@ -329,70 +464,6 @@ e) allowing the user to search for project via tech stack  &lt;/p&gt;
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/78z9ugrvabo8f7h/Screenshot%202017-10-13%2010.44.57.png?dl=1" /&gt;&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;m sure there are a series of Rails caching operations that we could use to improve these, but tuning the current monolith while trying to work out what&amp;rsquo;s happening with really slow feedback about whether site performance is improving does not fill me with excitement &amp;hellip; well I&amp;rsquo;ll think about it over the weekend.  I guess next week I could spend the morning av ecosystem review blogs setting up a middleman site and seeing how easily I can re-create the current home page in it &amp;hellip; Or is there something I should tweak in getting started first?  Maybe just encouraging folks to click join on the project pages?&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Big Picture</title>
-    <link rel="alternate" href="http://blog.url.com/2017/10/12/av-ecosystem-review-big-picture/"/>
-    <id>http://blog.url.com/2017/10/12/av-ecosystem-review-big-picture/</id>
-    <published>2017-10-12T01:00:00+01:00</published>
-    <updated>2018-01-08T21:14:21+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="big picture" src="/images/big_picture.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Right, time to get back up to the big picture.  What I&amp;rsquo;ve been meaning to do for a while is try and draw the flow of folks exposure to AgileVentures through to varying levels of engagement.  I wanted to start by embedding some images of the ads we have served by Google, but first up they are taking me through a tutorial for their new site layout:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/accgwjtlosy9tv9/Screenshot%202017-10-12%2009.45.20.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Maybe we need something similar to make AV.org more understandable perhaps?  Anyway, previously there was a &amp;ldquo;tools&amp;rdquo; menu in AdWords or something that is supposed to allow us to see what our ads look like.  One might expect to see them when doing a search for keywords on Google, but we&amp;rsquo;re usually competing with so many other campaigns from other parties that&amp;rsquo;s not usually reliable.  I just tried and got distracted for 10 minutes checking out &lt;a href="http://www.opencharityuk.org/"&gt;http://www.opencharityuk.org/&lt;/a&gt;  I can&amp;rsquo;t see our ads, and I can&amp;rsquo;t find the tools section in the new AdWords interface, but they did say some things weren&amp;rsquo;t available - so I go back to the old interface where I find the tool, but I get the usual, your ad not available for one reason or another:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/12jtlh9bcbdw66t/Screenshot%202017-10-12%2009.56.57.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I try for different regions, UK, SA, India. No joy.  Now I saw Lara catch an ad and she did post it in the marketing Slack for me, and I think I even saved it, but for the life of me I can&amp;rsquo;t find it now.  Five minutes of searching on Slack and I have it:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/jdaescgckn00v5o/Screenshot%202017-10-12%2010.02.43.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;According to our Adwords dashboard we&amp;rsquo;re serving over 200,000 ads a month(?) with over 10,000 click throughs, mainly for ads like these:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/04x3ffk8lsynpsl/Screenshot%202017-10-12%2010.03.01.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;where the message is &amp;ldquo;level up your coding skills&amp;rdquo;, and that settles my paranoia slightly that we&amp;rsquo;re only targeting novice coders.  Although it would be great if we could be targeting folks who want to level up their &amp;ldquo;tech team skills&amp;rdquo;, their &amp;ldquo;agile development&amp;rdquo; and so on.  What&amp;rsquo;s so frustrating about the AdWords interface is that I can&amp;rsquo;t easily see what the ads look like.  Although actually this panel comes close:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/zfw778rqt55v8v6/Screenshot%202017-10-12%2010.07.24.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Ah and then I can click through, okay &amp;hellip;, so this ad was served 14.25% of the time (to those who are searching &amp;ldquo;open-source&amp;rdquo; and &amp;ldquo;developers&amp;rdquo;) - weird how it looks like a link to a sub page, but actually we just link to the top page&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/axq4e4qlba677vu/Screenshot%202017-10-12%2010.08.37.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;This ad served 31.85% of the time:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ua9fg0lyekwqzh2/Screenshot%202017-10-12%2010.10.56.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and most of the rest on the level up your coding skills, and we have an overview showing the number of conversions for each:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/764gqj5wwqa3zv3/Screenshot%202017-10-12%2010.12.31.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;And these four ads are all being served as part of a campaign that has multiple keywords associated with it, but particularly &amp;ldquo;code&amp;rdquo;, &amp;ldquo;open source&amp;rdquo; and &amp;ldquo;[coding]&amp;rdquo;:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/xl4v308cwdqacia/Screenshot%202017-10-12%2010.15.17.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The new AdWords inteface is not making any of this much clearer.  According to Google Analytics a huge proportion of our click throughs are coming from India and we don&amp;rsquo;t know why.  Is that just a reflection of India&amp;rsquo;s large population being interested in Agile coding, or some settings artifact?  In analytics I can&amp;rsquo;t even be sure if the majority of the Indian visitors are actually coming in through ads, or from some other source, and AdWords doesn&amp;rsquo;t seem to let me see the location of where click throughs are coming through, frustrating.&lt;/p&gt;
-
-&lt;p&gt;Okay, so I push through to a breakdown of the Indian sub-continent and add &amp;ldquo;Source/Medium&amp;rdquo; as a secondary dimension, which makes it look like everyone there is coming in through Google ads, although I can&amp;rsquo;t be sure &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/2ns92oi7ao69tca/Screenshot%202017-10-12%2010.26.47.png?dl=1" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now we could burn more time drilling into this, but I&amp;rsquo;m not feeling like for all the AdWords we&amp;rsquo;ve served we&amp;rsquo;ve converted many users to paying for Premium.  We&amp;rsquo;re certainly getting sign ups for the main site, which is great for bulking out our mailing list, but far fewer are signing into Slack and becoming active.  I&amp;rsquo;m out of time today, but so perhaps where I need to focus tomorrow is our different marketing channels:&lt;/p&gt;
-
-&lt;p&gt;1) Google Adwords
-2) Twitter
-3) Facebook
-4) LinkedIn
-5) Medium&lt;/p&gt;
-
-&lt;p&gt;and that flow through from one of or other of these sources to landing on our site and what the users sees - and whether we get them to the &amp;ldquo;getting started&amp;rdquo; page and get them activated &amp;hellip; of course it&amp;rsquo;s all in vain if the site has serious performance issues &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
