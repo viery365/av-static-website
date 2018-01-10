@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Dripping Tap</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_10 x2017_10_30 x2017_10_30_av-ecosystem-review-dripping-tap x2017_10_30_av-ecosystem-review-dripping-tap_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/10/30/av-ecosystem-review-dripping-tap/">AV EcoSystem Dripping Tap</a></h2>
+        <h5 class='date'>30 Oct 2017</h5>
+    <p><img alt="dripping tap" src="/images/dripping_tap.jpg" /></p>
+
+<p>Back after a break, getting back into the routine.  One thing being away highlighted was that we have awesome enthusiastic new members who have the run the scrums while I was away, and awesome enthusiastic long term members (i.e. federico) running the mobs and marketing meetings.  Having other folks start the scrums highlighted one of the outstanding niggles that we have with the new manual updates that Lokesh was working on over the summer.  For those scrums that repeat daily, pushing a new hangout live seems to also push out the youtube link from the previous day.</p>
+
+<p>I&rsquo;d been coping with this by simply deleting the incorrect link, but that&rsquo;s a hacky manual fix that&rsquo;s going to flummox any new folks.  It&rsquo;s been a dripping tap for a while.  Does it indicate that I&rsquo;m fundamentally incompetent that I haven&rsquo;t fixed it or got someone to fix it?  I hope not.  There always seems to be fifty different things that need to be done and it&rsquo;s usually unclear what the long term pros and cons of each will be.  Okay, no more navel-gazing, let&rsquo;s see if we can fix this issue that burns up my time, and is confusing for others.</p>
+
+<p>The confusing thing about this bug is that it took me a while to work out the pattern of when it occurred.  Specifically it only occurs when there was an event of the same type that ran the day before, and then not every time.  I think it may be occurring when an event is started within 24 hours of the previous event.  I had previously opened a ticket on the subject:</p>
+
+<p><a href="https://github.com/AgileVentures/WebsiteOne/issues/1809">https://github.com/AgileVentures/WebsiteOne/issues/1809</a></p>
+
+<p>So the clear procedure here would be to try and replicate the issue with a cucumber test.  Although I can&rsquo;t seem to help myself but first have a little gander at the code that I think might cause the problem.  The EventsController grabs the most recent_hangout like so:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">show</span>
+    <span class="vi">@event_schedule</span> <span class="o">=</span> <span class="vi">@event</span><span class="p">.</span><span class="nf">next_occurrences</span>
+    <span class="vi">@recent_hangout</span> <span class="o">=</span> <span class="vi">@event</span><span class="p">.</span><span class="nf">recent_hangouts</span><span class="p">.</span><span class="nf">first</span>
+    <span class="n">render</span> <span class="ss">partial: </span><span class="s1">'hangouts_management'</span> <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="nf">xhr?</span>
+  <span class="k">end</span>
+</code></pre>
+<p>and the form for manually updating the event includes the YouTube URL from this <code>@recent_hangout</code>:</p>
+<pre class="highlight erb"><code><span class="cp">&lt;%=</span> <span class="n">hidden_field_tag</span> <span class="s1">'yt_url'</span><span class="p">,</span> <span class="vi">@recent_hangout</span><span class="p">.</span><span class="nf">try!</span><span class="p">(</span><span class="ss">:yt_url</span><span class="p">)</span> <span class="cp">%&gt;</span>
+</code></pre>
+<p>the <code>@recent_hangout</code> is grabbed from the database by some code in the events model:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">recent_hangouts</span>
+    <span class="n">event_instances</span>
+      <span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="s1">'updated_at BETWEEN ? AND ?'</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="nf">days</span><span class="p">.</span><span class="nf">ago</span> <span class="o">+</span> <span class="n">duration</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">end_of_day</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">order</span><span class="p">(</span><span class="ss">updated_at: :desc</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre>
+<p>I wonder if we need a different date range in here &hellip;?  So here&rsquo;s where I might run off into spiking code, so I drop back to create a new Cucumber scenario:</p>
+<pre class="highlight gherkin"><code>  <span class="kn">Scenario</span><span class="p">:</span> Event doesn't ping old youtube URL
+    <span class="err">Given the date is "2014 Feb 5th 6</span><span class="p">:</span><span class="err">59am"</span>
+    <span class="nf">And</span> that we're spying on the SlackService
+    <span class="nf">When</span> I manually set a hangout link for event <span class="s">"Repeat Scrum"</span>
+    <span class="nf">Then</span> the Hangout URL is posted in Slack
+    <span class="nf">And</span> the Youtube URL is not posted in Slack
+</code></pre>
+<p>which relies on a couple of new step definitions</p>
+<pre class="highlight ruby"><code><span class="no">And</span><span class="p">(</span><span class="sr">/^that we're spying on the SlackService$/</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">allow</span><span class="p">(</span><span class="no">SlackService</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span> <span class="ss">:post_yt_link</span>
+  <span class="n">allow</span><span class="p">(</span><span class="no">SlackService</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span> <span class="ss">:post_hangout_notification</span>
+<span class="k">end</span>
+
+<span class="no">Then</span><span class="p">(</span><span class="sr">/^the Youtube URL is not posted in Slack$/</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">expect</span><span class="p">(</span><span class="no">SlackService</span><span class="p">).</span><span class="nf">not_to</span> <span class="n">have_received</span> <span class="ss">:post_yt_link</span>
+<span class="k">end</span>
+
+<span class="no">And</span><span class="p">(</span><span class="sr">/^the Hangout URL is posted in Slack$/</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">expect</span><span class="p">(</span><span class="no">SlackService</span><span class="p">).</span><span class="nf">to</span> <span class="n">have_received</span> <span class="ss">:post_hangout_notification</span>
+<span class="k">end</span>
+</code></pre>
+<p>and we catch the error we&rsquo;ve been experiencing in the live system:</p>
+<pre class="highlight shell"><code>  Scenario: Event doesn<span class="s1">'t ping old youtube URL                  # features/hangouts/edit_hangout_url.feature:41
+    Given the date is "2014 Feb 5th 6:59am"                     # features/step_definitions/event_steps.rb:94
+    And that we'</span>re spying on the SlackService                   <span class="c"># features/step_definitions/hangout_steps.rb:212</span>
+    When I manually <span class="nb">set </span>a hangout link <span class="k">for </span>event <span class="s2">"Repeat Scrum"</span> <span class="c"># features/step_definitions/hangout_steps.rb:108</span>
+    Then the Hangout URL is posted <span class="k">in </span>Slack                     <span class="c"># features/step_definitions/hangout_steps.rb:221</span>
+    And the Youtube URL is not posted <span class="k">in </span>Slack                  <span class="c"># features/step_definitions/hangout_steps.rb:217</span>
+      <span class="o">(</span>SlackService<span class="o">)</span>.post_yt_link<span class="o">(</span>no args<span class="o">)</span>
+          expected: 0 <span class="nb">times </span>with any arguments
+          received: 1 <span class="nb">time</span> <span class="o">(</span>RSpec::Mocks::MockExpectationError<span class="o">)</span>
+      ./features/step_definitions/hangout_steps.rb:218:in <span class="sb">`</span>/^the Youtube URL is not posted <span class="k">in </span>Slack<span class="nv">$/</span><span class="s1">'
+      features/hangouts/edit_hangout_url.feature:46:in `And the Youtube URL is not posted in Slack'</span>
+
+Failing Scenarios:
+cucumber features/hangouts/edit_hangout_url.feature:41 <span class="c"># Scenario: Event doesn't ping old youtube URL</span>
+</code></pre>
+<p>So can we fix it?  I think the date range must be wrong somehow - beginning of day vs end of day, or subtract the duration rather than adding it &hellip; my intuitions are not bearing fruit - I hook the thing on the debugger:</p>
+<pre class="highlight shell"><code><span class="o">[</span>212, 221] <span class="k">in</span> /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/app/models/event.rb
+   212: 
+   213:   def recent_hangouts
+   214:     debugger
+   215:     event_instances
+   216:       .where<span class="o">(</span><span class="s1">'updated_at BETWEEN ? AND ?'</span>, 1.days.ago + duration, DateTime.now.end_of_day<span class="o">)</span>
+<span class="gp">=&gt; </span>217:       .order<span class="o">(</span>updated_at: :desc<span class="o">)</span>
+   218:   end
+   219: 
+   220:   def less_than_ten_till_start?
+   221:     <span class="k">return </span><span class="nb">true </span><span class="k">if </span>within_current_event_duration?
+<span class="o">(</span>byebug<span class="o">)</span> 1.days.ago + duration
+Tue, 04 Feb 2014 06:59:22 UTC +00:00
+<span class="o">(</span>byebug<span class="o">)</span> DateTime.now.end_of_day
+Wed, 05 Feb 2014 23:59:59 +0000
+<span class="o">(</span>byebug<span class="o">)</span> event_instances.where<span class="o">(</span><span class="s1">'updated_at BETWEEN ? AND ?'</span>, 1.days.ago + duration, DateTime.now.end_of_day<span class="o">)</span>
+<span class="c">#&lt;ActiveRecord::AssociationRelation [#&lt;EventInstance id: 2, event_id: 2, title: "HangoutsFlow", hangout_url: "http://hangout.test", created_at: "2014-02-04 07:00:00", updated_at: "2014-02-04 07:03:00", uid: "100", category: "Scrum", project_id: nil, user_id: 1, yt_video_id: "QWERT55", participants: {"0"=&gt;{"id"=&gt;"hangout2750757B_ephemeral.id.google.com^a85dcb4670", "hasMicrophone"=&gt;"true", "hasCamera"=&gt;"true", "hasAppEnabled"=&gt;"true", "isBroadcaster"=&gt;"true", "isInBroadcast"=&gt;"true", "displayIndex"=&gt;"0", "person"=&gt;{"id"=&gt;"108533475599002820142", "displayName"=&gt;"Alejandro Babio", "image"=&gt;{"url"=&gt;"https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"}, "na"=&gt;"false"}, "locale"=&gt;"en", "na"=&gt;"false"}}, hoa_status: "started", url_set_directly: true, youtube_tweet_sent: false&gt;]&gt;</span>
+</code></pre>
+<p>I think I see the problem - this duration addition is not working &hellip;</p>
+<pre class="highlight shell"><code><span class="o">(</span>byebug<span class="o">)</span> 1.days.ago + duration
+Tue, 04 Feb 2014 07:00:00 UTC +00:00
+<span class="o">(</span>byebug<span class="o">)</span> 1.days.ago
+Tue, 04 Feb 2014 06:59:52 UTC +00:00
+<span class="o">(</span>byebug<span class="o">)</span> 1.days.ago + 30.minutes
+Tue, 04 Feb 2014 07:30:22 UTC +00:00
+<span class="o">(</span>byebug<span class="o">)</span> 1.days.ago + duration.minutes
+Tue, 04 Feb 2014 07:15:27 UTC +00:00
+</code></pre>
+<p>This is the fix:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">recent_hangouts</span>
+    <span class="n">event_instances</span>
+      <span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="s1">'updated_at BETWEEN ? AND ?'</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="nf">days</span><span class="p">.</span><span class="nf">ago</span> <span class="o">+</span> <span class="n">duration</span><span class="p">.</span><span class="nf">minutes</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">end_of_day</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">order</span><span class="p">(</span><span class="ss">updated_at: :desc</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre>
+<p>but will it break lots of other things? The other scenarios in that feature pass, so I push the fix up onto the bugfix branch and let the CI run, while kicking off the full set of hangout features locally.  The cukes still take a long time to run even on my local machine (&gt;10 minutes), so I tend to run them in small batches.  Another dripping tap perhaps &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
