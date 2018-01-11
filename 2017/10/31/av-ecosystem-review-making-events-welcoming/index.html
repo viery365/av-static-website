@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Making Events Welcoming</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_10 x2017_10_31 x2017_10_31_av-ecosystem-review-making-events-welcoming x2017_10_31_av-ecosystem-review-making-events-welcoming_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/10/31/av-ecosystem-review-making-events-welcoming/">AV EcoSystem Making Events Welcoming</a></h2>
+        <h5 class='date'>31 Oct 2017</h5>
+    <p><img alt="welcoming" src="/images/../images/welcoming.jpg" /></p>
+
+<p>So I have the new code on staging to avoid reposting old YouTube URLs on Slack. So let&rsquo;s start by pushing that out to production:</p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (staging)]$ 
+→ git pull origin staging
+warning: redirecting to https://github.com/AgileVentures/WebsiteOne/
+From http://github.com/AgileVentures/WebsiteOne
+ * branch              staging    -&gt; FETCH_HEAD
+Already up-to-date.
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (staging)]$ 
+→ git checkout master
+Switched to branch 'master'
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (master)]$ 
+→ git rebase staging
+First, rewinding head to replay your work on top of it...
+Fast-forwarded master to staging.
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (master)]$ 
+→ git push origin master
+warning: redirecting to https://github.com/AgileVentures/WebsiteOne/
+Total 0 (delta 0), reused 0 (delta 0)
+To http://github.com/AgileVentures/WebsiteOne
+   a3521705..259467f6  master -&gt; master
+</code></pre>
+<p>Hopefully that will be one less thing to worry about this week.  Now the other issue was the one pointed out by Will, that having the YouTube message being almost identical to the hangout link, which can be confusing.  We have a ticket for that:</p>
+
+<p><a href="https://github.com/AgileVentures/WebsiteOne/issues/1921">https://github.com/AgileVentures/WebsiteOne/issues/1921</a></p>
+
+<p>I kicked off an asynchronous vote in the websiteone channel.  I&rsquo;m conflicted about whether this is the thing to work on.  I really want our events to be as welcoming as possible, but there&rsquo;s so many potentially valuable things in the waffle board.  Let&rsquo;s at least start this one; although then again, maybe that&rsquo;s the wrong approach.  Perhaps I should be clearing out existing and stale tickets.  The challenge with this ticket is that I&rsquo;ve put the welcoming message in the title of the main daily scrums:</p>
+
+<blockquote>
+<p>&ldquo;Martin Fowler&rdquo; Scrum and Pair Hookup - All Welcome :-) Discuss Any Project, Ask Any Question, Or Just Listen In :-)</p>
+</blockquote>
+
+<p>and the YouTube slack ping is using the following ruby to generate the hyperlink:</p>
+<pre class="highlight ruby"><code><span class="n">message</span> <span class="o">=</span> <span class="s2">"&lt;</span><span class="si">#{</span><span class="n">video</span><span class="si">}</span><span class="s2">|Video/Livestream for </span><span class="si">#{</span><span class="n">hangout</span><span class="p">.</span><span class="nf">title</span><span class="si">}</span><span class="s2">&gt;"</span>
+</code></pre>
+<p>so the entire title appears in the hyperlink.  Perhaps the solution would be:</p>
+<pre class="highlight ruby"><code><span class="n">message</span> <span class="o">=</span> <span class="s2">"&lt;</span><span class="si">#{</span><span class="n">video</span><span class="si">}</span><span class="s2">|Click here to listen in to the Video/Livestream&gt; for </span><span class="si">#{</span><span class="n">hangout</span><span class="p">.</span><span class="nf">title</span><span class="si">}</span><span class="s2">"</span>
+</code></pre>
+<p>I&rsquo;m caught between not wanting to have the welcoming message appear on everbody&rsquo;s scrum events, and wanting to be able to refer to the title separately.  </p>
+
+<p>The message for the hangout link is as follows:</p>
+<pre class="highlight ruby"><code><span class="n">message</span> <span class="o">=</span> <span class="s2">"&lt;</span><span class="si">#{</span><span class="n">hangout</span><span class="p">.</span><span class="nf">hangout_url</span><span class="si">}</span><span class="s2">|</span><span class="si">#{</span><span class="n">hangout</span><span class="p">.</span><span class="nf">title</span><span class="si">}</span><span class="s2">&gt;"</span>
+</code></pre>
+<p>and maybe it should be </p>
+<pre class="highlight ruby"><code><span class="n">message</span> <span class="o">=</span> <span class="s2">"&lt;</span><span class="si">#{</span><span class="n">hangout</span><span class="p">.</span><span class="nf">hangout_url</span><span class="si">}</span><span class="s2">|Click here to participate in&gt; </span><span class="si">#{</span><span class="n">hangout</span><span class="p">.</span><span class="nf">title</span><span class="si">}</span><span class="s2">"</span>
+</code></pre>
+<p>although I guess we&rsquo;d acutally like the folks who want to listen in to actually join the hangout (as Will did) so that we can get them talking &hellip; hmm :-)  Maybe a reasonable compromise would be:</p>
+<pre class="highlight ruby"><code><span class="n">message</span> <span class="o">=</span> <span class="s2">"&lt;</span><span class="si">#{</span><span class="n">video</span><span class="si">}</span><span class="s2">|Video/Livestream&gt; for </span><span class="si">#{</span><span class="n">hangout</span><span class="p">.</span><span class="nf">title</span><span class="si">}</span><span class="s2">"</span>
+</code></pre>
+<p>Part of the issue is that it&rsquo;s difficult to judge it until one sees how it actually appears in Slack.  Which makes me wonder if I can run it locally for one of our Slack test instances.  In the background Heroku is having issues and I can&rsquo;t deploy yesterday&rsquo;s fix to production :-(</p>
+
+<p>Thinking back about the AV ecosystem review philosophy I recall that my last idea starting from the ads we serve on Google is that we could be serving ads about the free access to mobs and f2f sessions.  We could just do that on Google, but we&rsquo;re talking about a signup form that allows us to track how many are signing up from particular campaigns.  Which is then another thing that sits on the TODO list and blocks us from using the Google ad revenue from working on something that might actually lead to new sign ups for paid services, which would be obvious whether we are tracking how many people signed up for them or not &hellip; could we be tracking the social media likes and follows?</p>
+
+<p>Other things are:</p>
+
+<ul>
+<li>performance issues on the site</li>
+<li>tawk.to site integrated chat system</li>
+<li>replacing the mercury editor so we can move to Rails 5</li>
+<li>supporting private events</li>
+<li>looking at long running cukes</li>
+<li>hosting our own jitsi</li>
+<li>making the main page counter dynamic</li>
+<li>notifying the project creator when people join a project</li>
+<li>having getting started page tick off progress</li>
+<li>better modelling of premium users</li>
+<li>allowing premium users to change payment methods</li>
+<li>start hangout button not working &hellip;</li>
+</ul>
+
+<p>I don&rsquo;t think I&rsquo;ve experienced any 500 timeouts on the events pages since we rolled out the the icecube upgrade.  I&rsquo;m conflicted about tawk.to after seeing OdinProjects lovely gitter integration.  Replacing the mercury editor feels like a big job.  Corey seems to be stalled working on private events.  The cukes are an ongoing bleed.  I should look at jitsi with Sigu &hellip; making the main page counter dynamic would probably help us look more professional.  Notifying project creators when people click to join their projects could help connect people, as could adding some progress tracking to the &ldquo;getting started&rdquo; pages.  Better modelling of all the Premium users would probably make my life easier and support better predictions, while allowing Premiums to change payment plans would help money flow.  The Start Hangout button not working is a nasty fail point for newcomers trying to pair - particularly those starting the MOOC &hellip;</p>
+
+<p>Gosh, I&rsquo;m really not sure what to work on and the time change means the scrum is coming up soon.  I think I&rsquo;ll have to leave it there today.  I really do want to make events more welcoming, but I think I need to spend some more time reflecting on how to divide up my labour &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>

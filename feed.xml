@@ -5,10 +5,95 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-10-30T00:00:00+00:00</updated>
+  <updated>2017-10-31T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Making Events Welcoming</title>
+    <link rel="alternate" href="http://blog.url.com/2017/10/31/av-ecosystem-review-making-events-welcoming/"/>
+    <id>http://blog.url.com/2017/10/31/av-ecosystem-review-making-events-welcoming/</id>
+    <published>2017-10-31T00:00:00+00:00</published>
+    <updated>2018-01-11T20:19:50+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="welcoming" src="/images/../images/welcoming.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I have the new code on staging to avoid reposting old YouTube URLs on Slack. So let&amp;rsquo;s start by pushing that out to production:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (staging)]$ 
+→ git pull origin staging
+warning: redirecting to https://github.com/AgileVentures/WebsiteOne/
+From http://github.com/AgileVentures/WebsiteOne
+ * branch              staging    -&amp;gt; FETCH_HEAD
+Already up-to-date.
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (staging)]$ 
+→ git checkout master
+Switched to branch 'master'
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (master)]$ 
+→ git rebase staging
+First, rewinding head to replay your work on top of it...
+Fast-forwarded master to staging.
+[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (master)]$ 
+→ git push origin master
+warning: redirecting to https://github.com/AgileVentures/WebsiteOne/
+Total 0 (delta 0), reused 0 (delta 0)
+To http://github.com/AgileVentures/WebsiteOne
+   a3521705..259467f6  master -&amp;gt; master
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Hopefully that will be one less thing to worry about this week.  Now the other issue was the one pointed out by Will, that having the YouTube message being almost identical to the hangout link, which can be confusing.  We have a ticket for that:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1921"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1921&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I kicked off an asynchronous vote in the websiteone channel.  I&amp;rsquo;m conflicted about whether this is the thing to work on.  I really want our events to be as welcoming as possible, but there&amp;rsquo;s so many potentially valuable things in the waffle board.  Let&amp;rsquo;s at least start this one; although then again, maybe that&amp;rsquo;s the wrong approach.  Perhaps I should be clearing out existing and stale tickets.  The challenge with this ticket is that I&amp;rsquo;ve put the welcoming message in the title of the main daily scrums:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum and Pair Hookup - All Welcome :-) Discuss Any Project, Ask Any Question, Or Just Listen In :-)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;and the YouTube slack ping is using the following ruby to generate the hyperlink:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;video&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;|Video/Livestream for &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;gt;"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;so the entire title appears in the hyperlink.  Perhaps the solution would be:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;video&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;|Click here to listen in to the Video/Livestream&amp;gt; for &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;rsquo;m caught between not wanting to have the welcoming message appear on everbody&amp;rsquo;s scrum events, and wanting to be able to refer to the title separately.  &lt;/p&gt;
+
+&lt;p&gt;The message for the hangout link is as follows:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hangout_url&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;|&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;gt;"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and maybe it should be &lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hangout_url&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;|Click here to participate in&amp;gt; &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;although I guess we&amp;rsquo;d acutally like the folks who want to listen in to actually join the hangout (as Will did) so that we can get them talking &amp;hellip; hmm :-)  Maybe a reasonable compromise would be:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;video&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;|Video/Livestream&amp;gt; for &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Part of the issue is that it&amp;rsquo;s difficult to judge it until one sees how it actually appears in Slack.  Which makes me wonder if I can run it locally for one of our Slack test instances.  In the background Heroku is having issues and I can&amp;rsquo;t deploy yesterday&amp;rsquo;s fix to production :-(&lt;/p&gt;
+
+&lt;p&gt;Thinking back about the AV ecosystem review philosophy I recall that my last idea starting from the ads we serve on Google is that we could be serving ads about the free access to mobs and f2f sessions.  We could just do that on Google, but we&amp;rsquo;re talking about a signup form that allows us to track how many are signing up from particular campaigns.  Which is then another thing that sits on the TODO list and blocks us from using the Google ad revenue from working on something that might actually lead to new sign ups for paid services, which would be obvious whether we are tracking how many people signed up for them or not &amp;hellip; could we be tracking the social media likes and follows?&lt;/p&gt;
+
+&lt;p&gt;Other things are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;performance issues on the site&lt;/li&gt;
+&lt;li&gt;tawk.to site integrated chat system&lt;/li&gt;
+&lt;li&gt;replacing the mercury editor so we can move to Rails 5&lt;/li&gt;
+&lt;li&gt;supporting private events&lt;/li&gt;
+&lt;li&gt;looking at long running cukes&lt;/li&gt;
+&lt;li&gt;hosting our own jitsi&lt;/li&gt;
+&lt;li&gt;making the main page counter dynamic&lt;/li&gt;
+&lt;li&gt;notifying the project creator when people join a project&lt;/li&gt;
+&lt;li&gt;having getting started page tick off progress&lt;/li&gt;
+&lt;li&gt;better modelling of premium users&lt;/li&gt;
+&lt;li&gt;allowing premium users to change payment methods&lt;/li&gt;
+&lt;li&gt;start hangout button not working &amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I don&amp;rsquo;t think I&amp;rsquo;ve experienced any 500 timeouts on the events pages since we rolled out the the icecube upgrade.  I&amp;rsquo;m conflicted about tawk.to after seeing OdinProjects lovely gitter integration.  Replacing the mercury editor feels like a big job.  Corey seems to be stalled working on private events.  The cukes are an ongoing bleed.  I should look at jitsi with Sigu &amp;hellip; making the main page counter dynamic would probably help us look more professional.  Notifying project creators when people click to join their projects could help connect people, as could adding some progress tracking to the &amp;ldquo;getting started&amp;rdquo; pages.  Better modelling of all the Premium users would probably make my life easier and support better predictions, while allowing Premiums to change payment plans would help money flow.  The Start Hangout button not working is a nasty fail point for newcomers trying to pair - particularly those starting the MOOC &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Gosh, I&amp;rsquo;m really not sure what to work on and the time change means the scrum is coming up soon.  I think I&amp;rsquo;ll have to leave it there today.  I really do want to make events more welcoming, but I think I need to spend some more time reflecting on how to divide up my labour &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Dripping Tap</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/30/av-ecosystem-review-dripping-tap/"/>
@@ -477,42 +562,6 @@ Using /Users/tansaku/.rvm/gems/ruby-2.4.1
 &lt;p&gt;&lt;a href="https://github.com/tansaku/av-landing-page"&gt;https://github.com/tansaku/av-landing-page&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Tomorrow I&amp;rsquo;ll look at deploying to github pages and seeing if I can get the CSS pipeline set up &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Tweaking Getting Started</title>
-    <link rel="alternate" href="http://blog.url.com/2017/10/16/av-ecosystem-review-tweaking-getting-started/"/>
-    <id>http://blog.url.com/2017/10/16/av-ecosystem-review-tweaking-getting-started/</id>
-    <published>2017-10-16T01:00:00+01:00</published>
-    <updated>2018-01-08T21:14:21+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Busy weekend and errands this morning mean I&amp;rsquo;m late to the blogface again, but perhaps that&amp;rsquo;s a good excuse to just focus on tweaking the &amp;ldquo;Getting Started&amp;rdquo; page, rather than building a middleman site as a performant home page replacement.  I start with the initial &amp;ldquo;Getting Started&amp;rdquo; page where I remove some inactive projects and add some new ones. I see that over the weekend Federico has edited the same page, to add an animation of the flow about how to get started saying hello in Slack, which is great.  There&amp;rsquo;s also a color scheme change.  I go in and make my project edits.&lt;/p&gt;
-
-&lt;p&gt;I was going to add a screenshot of the welcome process, but as I look carefully I see Federico is actually copy/pasting from the precise text in the page.  Text I was hoping to remove and replace with an image to make the whole thing less wordy &amp;hellip; hmm, I put back the text I removed and remove the image:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/53sng86et75cwou/Screenshot%202017-10-16%2010.18.34.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve updated the projects to include Y and peer power:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/hcsfi6z771pvyb6/Screenshot%202017-10-16%2010.22.26.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;And I leave it at that.  I go on to step 2, and think it seems odd not to be using hyperlinks on all these terms that are being described here:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/0nabm1p22p6ggk8/Screenshot%202017-10-16%2010.23.55.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I mean, maybe we shouldn&amp;rsquo;t hyperlink off our site here, but people can use the back button and this should be a resource that can allow folks to get more information.  All the more reason we should store progress through the getting-started track I guess.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/6tu2ooyrp4ccj4l/Screenshot%202017-10-16%2010.30.47.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I add optional to the hyperlink to step 7 (since that is optionally starting your own project), and leave it at that.  I recall that Will was saying that the &amp;ldquo;listen in&amp;rdquo; phrase in the non-logged in version of the link to the scrum was the key thing that got him involved.  Perhaps we could adjust the phrasing for logged in users too, to get more in the scrums &amp;hellip;  I create a ticket for that:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1915"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1915&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;but I have added &amp;ldquo;All Welcome! Discuss Any Project, Ask Any Question!&amp;rdquo; to the title of the events.  Maybe I can just tweak that &amp;hellip; or will this be enough?&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/rnlzuzl9tobqp3c/Screenshot%202017-10-16%2010.47.01.png?dl=0" /&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>
