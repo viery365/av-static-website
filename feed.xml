@@ -5,16 +5,64 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-10-31T00:00:00+00:00</updated>
+  <updated>2017-11-01T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
   <entry>
-    <title>AV EcoSystem Making Events Welcoming</title>
+    <title>AV EcoSystem Review Headaches</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/01/av-ecosystem-review-headaches/"/>
+    <id>http://blog.url.com/2017/11/01/av-ecosystem-review-headaches/</id>
+    <published>2017-11-01T00:00:00+00:00</published>
+    <updated>2018-01-15T21:01:34+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="headache" src="/images/headache.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m feeling a bit rough - maybe coming down with something.  Bit of a headache at the computer.  Have burnt early start on handing off the AgileVentures sticker send out.  Will it actually make sense to make a shop front where folks can buy stickers and other AgileVentures swag?  Would that ever he anything other than a trivial source of revenue?&lt;/p&gt;
+
+&lt;p&gt;Just had to stop to put on warm clothing as it cools down here in the UK.  Headaches literally and figuratively. Drink lots of water and ease myself into the day.  So, heroku had issues all day yesterday and I &lt;em&gt;think&lt;/em&gt; we deployed the fixes for old youtube links being pinged, but we still had the same problem in the Kent Beck scrum yesterday afternoon.  I had deployed manually and got an odd message at the end of the deploy:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;remote: -----&amp;gt; Launching...
+remote:        Released v296
+remote:        https://websiteone-production.herokuapp.com/ deployed to Heroku
+remote: 
+remote: Verifying deploy... done.
+error: Could not read c93108679daff7e04ea8d6408b172c1aed987389
+fatal: Failed to traverse parents of commit 600ecd2a36175294d8ba8a18e8b0f0c318402487
+error: failed to run repack
+To heroku.com:websiteone-production.git
+   a3521705..259467f6  master -&amp;gt; master
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I guess the deploy worked - would be nice if we had a page somewhere in the site that told us what commit it was on.  Actually Heroku shows us that and it does seem like it&amp;rsquo;s deployed.  So is the fix I thought I had applied not working in production &amp;hellip;? I guess I see how it goes today and then circle back on it tomorrow and do a local test with production data if it&amp;rsquo;s still an issue.&lt;/p&gt;
+
+&lt;p&gt;So the real headache is choosing where to focus next.  I generated a big list of things yesterday from reviewing the WebSiteOne waffle board.  There are good reasons for working on any number of them.  But maybe the backlog of PRs from dependabot and open stuff in the waffle board is the real challenge?  What I could do with is, say, five other volunteers working on this semi-regularly with me.&lt;/p&gt;
+
+&lt;p&gt;My inclination is to say that we need to push some of our AdWords budget at promoting our mob programming sessions.  And I don&amp;rsquo;t want to wait to have created a sign up form.  We are doing sign up via people following us on twitter and liking our page on facebook.  The target can be having people click through to our social media links.  I&amp;rsquo;m also frustrated that I&amp;rsquo;m not feeling more comfortable with Google AdWords.  It feels like it should be a simple thing to use, but somehow my mental model is not quite there.  Part of me thinks I need to read up on Adwords, or take a course, but I have terrible trouble focusing on stuff I&amp;rsquo;m not interacting with, things that I can&amp;rsquo;t interactively test.  It&amp;rsquo;s like I&amp;rsquo;m deeply suspicious that anything written down will not be up to date.&lt;/p&gt;
+
+&lt;p&gt;Anyway, so I start by creating a Google Ad Campaign.  Immediately there are choices between &amp;ldquo;Search Network with Display Select&amp;rdquo; and &amp;ldquo;Search Network Only&amp;rdquo;.  I read an article about the difference, but have no real way to judge the value of one over the other to us, so I go with &amp;ldquo;Search Network Only&amp;rdquo; which is what all our current campaigns are.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/79slyq3k2slwmsl/Screenshot%202017-11-01%2010.15.04.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I throw in our landing page and some random keywords:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/y4ngbqedas629wf/Screenshot%202017-11-01%2010.18.22.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;And then I get the view I love, the one where we can see the form of the ad:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/j399vz9voklwg3c/Screenshot%202017-11-01%2010.20.34.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So now we have a campagin that is ready to go.  I&amp;rsquo;m not actually sure how to kick it off, maybe it&amp;rsquo;s started already?  I&amp;rsquo;m not sure how we set the targets for the campaign.  I&amp;rsquo;d like success to be folks clicking through to http://facebook.com/agileventures or http://twitter.com/agileventures.  I find that there&amp;rsquo;s a process of creating conversions, which seems to involve javascript.  Not sure that will play well with out mercury editable pages.  Okay, I&amp;rsquo;m going to leave it there for today and see if I can engage the rest of the marketing team on this.&lt;/p&gt;
+
+&lt;p&gt;what I would like to do is add a video of an example session to the premium mob page, which I do and then I go to make coffee.  Still on the decaf - could use a hit of real coffee about now, but not sure that will help in the long run &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>AV EcoSystem Review Making Events Welcoming</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/31/av-ecosystem-review-making-events-welcoming/"/>
     <id>http://blog.url.com/2017/10/31/av-ecosystem-review-making-events-welcoming/</id>
     <published>2017-10-31T00:00:00+00:00</published>
-    <updated>2018-01-11T21:09:35+00:00</updated>
+    <updated>2018-01-15T20:57:00+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -95,11 +143,11 @@ To http://github.com/AgileVentures/WebsiteOne
 </content>
   </entry>
   <entry>
-    <title>AV EcoSystem Dripping Tap</title>
+    <title>AV EcoSystem Review Dripping Tap</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/30/av-ecosystem-review-dripping-tap/"/>
     <id>http://blog.url.com/2017/10/30/av-ecosystem-review-dripping-tap/</id>
     <published>2017-10-30T00:00:00+00:00</published>
-    <updated>2018-01-10T20:46:57+00:00</updated>
+    <updated>2018-01-15T20:57:00+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -208,15 +256,15 @@ Tue, 04 Feb 2014 07:15:27 UTC +00:00
 </content>
   </entry>
   <entry>
-    <title>AV EcoSystem Performance Tuning FTW</title>
+    <title>AV EcoSystem Review Performance Tuning FTW</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/20/av-ecosystem-review-performance-tuning-ftw/"/>
     <id>http://blog.url.com/2017/10/20/av-ecosystem-review-performance-tuning-ftw/</id>
     <published>2017-10-20T01:00:00+01:00</published>
-    <updated>2018-01-09T21:50:26+00:00</updated>
+    <updated>2018-01-15T20:57:01+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img alt="preformance tuning" src="/images/performance_tuning.jpg" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img alt="performance tuning" src="/images/performance_tuning.jpg" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Late to the blogface yada, yada, yada.  I&amp;rsquo;m really enjoying performance tuning.  Let&amp;rsquo;s take another look at what&amp;rsquo;s going on.  I can see from yesterday&amp;rsquo;s test runs that I quickly pushed the AV site into to heavy memory error territory.  I also restarted the server after the tests and what&amp;rsquo;s interesting is to see that we actually start encountering memory errors on the staging server in the absence of performance testing:&lt;/p&gt;
 
@@ -343,11 +391,11 @@ end
 </content>
   </entry>
   <entry>
-    <title>AV EcoSystem Task Switching</title>
+    <title>AV EcoSystem Review Task Switching</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/19/av-ecosystem-review-task-switching/"/>
     <id>http://blog.url.com/2017/10/19/av-ecosystem-review-task-switching/</id>
     <published>2017-10-19T01:00:00+01:00</published>
-    <updated>2018-01-08T21:45:42+00:00</updated>
+    <updated>2018-01-15T20:57:31+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -409,11 +457,11 @@ $ rake deploy:production
 </content>
   </entry>
   <entry>
-    <title>AV EcoSystem Emotional Hurdles</title>
+    <title>AV EcoSystem Review Emotional Hurdles</title>
     <link rel="alternate" href="http://blog.url.com/2017/10/18/av-ecosystem-review-emotional-hurdles/"/>
     <id>http://blog.url.com/2017/10/18/av-ecosystem-review-emotional-hurdles/</id>
     <published>2017-10-18T01:00:00+01:00</published>
-    <updated>2018-01-08T21:14:21+00:00</updated>
+    <updated>2018-01-15T20:56:59+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -510,58 +558,6 @@ PID: 79590
 2017-10-19T09:58:58.775050+00:00 heroku[web.1]: Error R14 (Memory quota exceeded)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;so at least now we have a way to test possible solutions to the problem &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Death Warmed Up</title>
-    <link rel="alternate" href="http://blog.url.com/2017/10/17/av-ecosystem-review-death-warmed-up/"/>
-    <id>http://blog.url.com/2017/10/17/av-ecosystem-review-death-warmed-up/</id>
-    <published>2017-10-17T01:00:00+01:00</published>
-    <updated>2018-01-08T21:14:21+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="death" src="/images/death.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I am having trouble getting started this morning.  &amp;ldquo;Death warmed up&amp;rdquo; is hyperbole, but despite my best efforts it&amp;rsquo;s 10am before I&amp;rsquo;ve hit the blogface.  Various things interfered.  A 2.5 km jog with my twin boys, although to be honest they weren&amp;rsquo;t slowing me down.  Doing extra long Japanese tests for my older boy now (he&amp;rsquo;s 12); five Karate kata&amp;rsquo;s - my morning routine is starting to take a fair chunk of time.  I felt lethargic independently of all that - my stomach is a bit off.  I&amp;rsquo;ve been experimenting with reducing the amount of dairy in my diet.  Also I gave up coffee for the last three weeks.  This really is the sort of situation I&amp;rsquo;d self-medicate with caffeine to get going, but I have this idea that that isn&amp;rsquo;t a good approach for me in the long run.&lt;/p&gt;
-
-&lt;p&gt;Also there&amp;rsquo;s the never-ending sets of chores.  Ordering new contact lenses this morning (should I get laser eye-surgery? or am I too attached to my look with glasses? I only use contact lenses for sport), driving to three supermarkets last night to finally find small bottles of carbonated water (my vice) and to the hardware store to buy equipment to help with redoing the front yard during my time off next week (kid&amp;rsquo;s half term).  And then I&amp;rsquo;m fielding quotes from builders to re-do our upstairs bathroom.  So many things suck up time :-)&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d had the idea this week to start building a middleman site to begin prototyping new front pages for the main AgileVentures website.  I did make some tweaks to the Getting Started pages yesterday, although Federico had got an animation in there and made other changes.  The blog I pushed out last night had more stats on the Getting Started pages from a few months back, but right now I&amp;rsquo;ve got no head for stats.  What&amp;rsquo;s fun?  What&amp;rsquo;s the priority for the community?  I guess it&amp;rsquo;s a toss up between the two things we were looking at in our design sprint.  Adjusting the home pages to try and better explain what we&amp;rsquo;re all about, or a structured guide that gets folks really engaged in projects (attending scrums, submitting PRs etc.), and maybe tracks their progress to boot.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m fearful of adding more complexity to the WebSiteOne Rails monolith, and so I think I&amp;rsquo;d like to experiment with a middleman front end that I have high confidence won&amp;rsquo;t run into performance issues.  Maybe the time should be spent on investigating the Rails performance issues we have, but I&amp;rsquo;m suspicious that that will take more time for an uncertain result.&lt;/p&gt;
-
-&lt;p&gt;The tricky bit (or just the bit we have to be careful with) for the middleman approach will be the switch over to point http://www.agileventure.org to the GitHub pages, and then creating https://projects.agileventures.org or something to point to the Rails app &amp;hellip; or I just start reading the Heroku notes on memory errors again.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://devcenter.heroku.com/articles/optimizing-dyno-usage"&gt;https://devcenter.heroku.com/articles/optimizing-dyno-usage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://devcenter.heroku.com/articles/ruby-memory-use"&gt;https://devcenter.heroku.com/articles/ruby-memory-use&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The difficulty here is with being able to test the impact of changes that we make.  Unless we get some load testing set up.  Heroku has guidelines on that, and an &amp;ldquo;add on&amp;rdquo; to get us started:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://devcenter.heroku.com/articles/load-testing-guidelines"&gt;https://devcenter.heroku.com/articles/load-testing-guidelines&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://elements.heroku.com/addons/loaderio"&gt;https://elements.heroku.com/addons/loaderio&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I&amp;rsquo;m not going to get much done today, but I guess I can throw up a quick middleman app and perhaps alternate these two approaches to feel out which one is going to reap the biggest reward:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/middleman/middleman"&gt;https://github.com/middleman/middleman&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;because I can&amp;rsquo;t bear just reading docs and slow turnarounds for debugging - I want to be making something and encountering issues in real time! :-) Just installing the latest middleman I realise that maybe I should upgrade Ruby.  Ruby 2.4.2 wouldn&amp;rsquo;t install so I backed out to Ruby 2.4.1.  This was the error from Ruby 2.4.2 on OSX:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/usr/local/Homebrew/Library/Homebrew/brew.rb:12:in `&amp;lt;main&amp;gt;': Homebrew must be run under Ruby 2.3! (RuntimeError)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Hmmm &amp;hellip; 2.4.1 installed and I set it to default:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures ]$ 
-→ rvm use 2.4.1 --default
-Using /Users/tansaku/.rvm/gems/ruby-2.4.1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Although I note c9 is on 2.4.0, so I guess I should install that too; ah, but I have it already &amp;hellip; so then I install middleman in the 2.4.1 space.  Although I&amp;rsquo;m actually in the 2.4.0 - maybe I need the ruby version on the command prompt &amp;hellip; anyway, in fairly short order I have boiler plate middleman code at:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/tansaku/av-landing-page"&gt;https://github.com/tansaku/av-landing-page&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Tomorrow I&amp;rsquo;ll look at deploying to github pages and seeing if I can get the CSS pipeline set up &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

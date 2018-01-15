@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Headaches</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_23 blog_page_23_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_11 x2017_11_01 x2017_11_01_av-ecosystem-review-headaches x2017_11_01_av-ecosystem-review-headaches_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,63 +83,59 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/11/01/av-ecosystem-review-headaches/">AV EcoSystem Review Headaches</a></h2>
+        <h5 class='date'> 1 Nov 2017</h5>
+    <p><img alt="headache" src="/images/headache.jpg" /></p>
 
-          <p>Page 23 of 25</p>
+<p>I&rsquo;m feeling a bit rough - maybe coming down with something.  Bit of a headache at the computer.  Have burnt early start on handing off the AgileVentures sticker send out.  Will it actually make sense to make a shop front where folks can buy stickers and other AgileVentures swag?  Would that ever he anything other than a trivial source of revenue?</p>
 
-            <p><a href="/blog/page/22/">Previous page</a></p>
+<p>Just had to stop to put on warm clothing as it cools down here in the UK.  Headaches literally and figuratively. Drink lots of water and ease myself into the day.  So, heroku had issues all day yesterday and I <em>think</em> we deployed the fixes for old youtube links being pinged, but we still had the same problem in the Kent Beck scrum yesterday afternoon.  I had deployed manually and got an odd message at the end of the deploy:</p>
+<pre class="highlight plaintext"><code>remote: -----&gt; Launching...
+remote:        Released v296
+remote:        https://websiteone-production.herokuapp.com/ deployed to Heroku
+remote: 
+remote: Verifying deploy... done.
+error: Could not read c93108679daff7e04ea8d6408b172c1aed987389
+fatal: Failed to traverse parents of commit 600ecd2a36175294d8ba8a18e8b0f0c318402487
+error: failed to run repack
+To heroku.com:websiteone-production.git
+   a3521705..259467f6  master -&gt; master
+</code></pre>
+<p>I guess the deploy worked - would be nice if we had a page somewhere in the site that told us what commit it was on.  Actually Heroku shows us that and it does seem like it&rsquo;s deployed.  So is the fix I thought I had applied not working in production &hellip;? I guess I see how it goes today and then circle back on it tomorrow and do a local test with production data if it&rsquo;s still an issue.</p>
 
-          <h2><a href="/2016/09/30/pride-comes-before-a-fall/">Pride Comes Before a Fall</a></h2>
-          <h3>Sep 30</h3>
-          <p>They say pride comes before a fall.  Looking back at yesterday’s blog I was feeling pretty pleased about how we’d split things up as regards the development of the new Karma feature.  That was getting deployed in the background yesterday whilst Michael...</p>
-          <h2><a href="/2016/09/29/ducking-and-diving/">Ducking and Diving</a></h2>
-          <h3>Sep 29</h3>
-          <p>So having partially recovered from the cold I was able to pair program again today.  Interleaving work on the Karma calculation and the premium memberships, we now had an outstanding PR for premium upgrade buttons, so we ducked back to the Karma work...</p>
-          <h2><a href="/2016/09/28/fallow-day/">Fallow Day</a></h2>
-          <h3>Sep 28</h3>
-          <p>Today was a fallow day.  I’d been knocked back with a fever, sore throat and tummy trouble from the latest virus doing the rounds at my kids “Virus Exchange Camps”, … sorry, I mean schools.  I’ve no idea if anyone else talks about fallow days, but...</p>
-          <h2><a href="/2016/09/27/dodging-a-bullet/">Dodging a Bullet</a></h2>
-          <h3>Sep 27</h3>
-          <p>So Monday was the day to see if our new domain model components would ease the process of delivering a new feature. As warm up I did a quick refactoring on our Karma calculation changes that Raoul had requested.  There was the possibility of re-using...</p>
-          <h2><a href="/2016/09/26/confident-coding/">Confident Coding</a></h2>
-          <h3>Sep 26</h3>
-          <p>Friday I tried to improve on Thursday’s performance.  I proposed to Michael that we try to rotate driver/navigator roles more frequently and that we put aside the work on the Karma calculation; instead focusing on the domain model for the Premium members...</p>
-          <h2><a href="/2016/09/23/longer-than-expected/">Longer than Expected</a></h2>
-          <h3>Sep 23</h3>
-          <p>Adding the function to give Karma credit for attending hangouts took longer than expected.  Ironically spiking it had been fast, but adding a test for it was time consuming and frustrating.  I’m trying to dissect why that was.  Looking back I can see...</p>
-          <h2><a href="/2016/09/22/cant-we-go-any-faster/">Can't We Go Any Faster?</a></h2>
-          <h3>Sep 22</h3>
-          <p>Got the pairing times right today, but didn’t get started as early as we could.  Having a family and working from home means that things can easily come up, like suddenly my eldest needs a new school approved calculator which is sold out on Amazon...</p>
-          <h2><a href="/2016/09/21/missed-ships/">Missed Ships</a></h2>
-          <h3>Sep 21</h3>
-          <p>I got confused yesterday about adjustments to the pairing schedule.  I thought Michael was going to be available later in the day, but actually he had to leave early.   As a result our pairing was contracted to an hour, and he started on a new task...</p>
-          <h2><a href="/2016/09/20/clearing-the-decks/">Clearing the Decks</a></h2>
-          <h3>Sep 20</h3>
-          <p>Monday involved continuing on two “clear the decks” tickets that Michael and I had started on the previous Thursday and Friday. The heuristics in my mind thus included:</p>
+<p>So the real headache is choosing where to focus next.  I generated a big list of things yesterday from reviewing the WebSiteOne waffle board.  There are good reasons for working on any number of them.  But maybe the backlog of PRs from dependabot and open stuff in the waffle board is the real challenge?  What I could do with is, say, five other volunteers working on this semi-regularly with me.</p>
 
-<ul>
-<li>clear the decks before starting on something else big</li>
-<li>finish what you’ve started</li>
-</ul>
-          <h2><a href="/2016/09/19/business-as-usual/">Business as Usual</a></h2>
-          <h3>Sep 19</h3>
-          <p>Trying to run a business is notoriously hard.  How about a charity?  A volunteer organisation?  I’m starting to see some patterns from the last few years.  I notice at the Karate classes that I do with my kids that there’s been a huge turnover of participants...</p>
+<p>My inclination is to say that we need to push some of our AdWords budget at promoting our mob programming sessions.  And I don&rsquo;t want to wait to have created a sign up form.  We are doing sign up via people following us on twitter and liking our page on facebook.  The target can be having people click through to our social media links.  I&rsquo;m also frustrated that I&rsquo;m not feeling more comfortable with Google AdWords.  It feels like it should be a simple thing to use, but somehow my mental model is not quite there.  Part of me thinks I need to read up on Adwords, or take a course, but I have terrible trouble focusing on stuff I&rsquo;m not interacting with, things that I can&rsquo;t interactively test.  It&rsquo;s like I&rsquo;m deeply suspicious that anything written down will not be up to date.</p>
 
-            <p><a href="/blog/page/24/">Next page</a></p>
+<p>Anyway, so I start by creating a Google Ad Campaign.  Immediately there are choices between &ldquo;Search Network with Display Select&rdquo; and &ldquo;Search Network Only&rdquo;.  I read an article about the difference, but have no real way to judge the value of one over the other to us, so I go with &ldquo;Search Network Only&rdquo; which is what all our current campaigns are.</p>
 
+<p><img src="https://dl.dropbox.com/s/79slyq3k2slwmsl/Screenshot%202017-11-01%2010.15.04.png?dl=0" /></p>
+
+<p>I throw in our landing page and some random keywords:</p>
+
+<p><img src="https://dl.dropbox.com/s/y4ngbqedas629wf/Screenshot%202017-11-01%2010.18.22.png?dl=0" /></p>
+
+<p>And then I get the view I love, the one where we can see the form of the ad:</p>
+
+<p><img src="https://dl.dropbox.com/s/j399vz9voklwg3c/Screenshot%202017-11-01%2010.20.34.png?dl=0" /></p>
+
+<p>So now we have a campagin that is ready to go.  I&rsquo;m not actually sure how to kick it off, maybe it&rsquo;s started already?  I&rsquo;m not sure how we set the targets for the campaign.  I&rsquo;d like success to be folks clicking through to http://facebook.com/agileventures or http://twitter.com/agileventures.  I find that there&rsquo;s a process of creating conversions, which seems to involve javascript.  Not sure that will play well with out mercury editable pages.  Okay, I&rsquo;m going to leave it there for today and see if I can engage the rest of the marketing team on this.</p>
+
+<p>what I would like to do is add a video of an example session to the premium mob page, which I do and then I go to make coffee.  Still on the decaf - could use a hit of real coffee about now, but not sure that will help in the long run &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -197,6 +194,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
