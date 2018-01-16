@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Headaches Receding</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_11 x2017_11_02 x2017_11_02_av-ecosystem-review-headaches-receding x2017_11_02_av-ecosystem-review-headaches-receding_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/11/02/av-ecosystem-review-headaches-receding/">AV EcoSystem Review Headaches Receding</a></h2>
+        <h5 class='date'> 2 Nov 2017</h5>
+    <p><img alt="headaches receding" src="/images/headaches_receding.jpg" /></p>
+
+<p>Urgh, minor headache again today, drinking lots of water.  Night before last a Halloween sweeties over-indulged child had caused me broken sleep.  Ended up drinking coffee again, hmm. Somewhat Slack/Email distracted.  Really odd thing is that the fix that I pushed out for the Youtube link over-updates in Slack is that it seems to have fixed the morning &ldquo;Martin Fowler&rdquo; scrum, but not the afternoon &ldquo;Kent Beck&rdquo; scrum.  Of all the different possible outcomes I could have expected &hellip; this is the least predictable.</p>
+
+<p>I would have imagined that the fix would work, or not work, but not that it would work for one scrum and not the other.  To refresh our memories, the fix was that in the <code>recent_hangouts</code> method we were adding the <code>duration</code> FixNum rather than the actual number of minutes when setting the window over which we search for previously running hangouts.  We fixed it by using <code>duration.minutes</code> to ensure we were using the correct unit:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">recent_hangouts</span>
+    <span class="n">event_instances</span>
+      <span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="s1">'updated_at BETWEEN ? AND ?'</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="nf">days</span><span class="p">.</span><span class="nf">ago</span> <span class="o">+</span> <span class="n">duration</span><span class="p">.</span><span class="nf">minutes</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">end_of_day</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">order</span><span class="p">(</span><span class="ss">updated_at: :desc</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre>
+<p>My mental model of the bug is complete, except this working for one scrum and not the other.  I&rsquo;m drawn to move on to other things, but this niggles me.  Let&rsquo;s import the production data to my local machine - instructions are here:</p>
+
+<p><a href="https://devcenter.heroku.com/articles/heroku-postgres-import-export">https://devcenter.heroku.com/articles/heroku-postgres-import-export</a></p>
+<pre class="highlight shell"><code><span class="gp">$ </span>heroku pg:backups:capture -r production
+<span class="gp">$ </span>heroku pg:backups:download -r production
+<span class="gp">$ </span>pg_restore --verbose --clean --no-acl --no-owner -h localhost -d websiteone_development latest.dump
+</code></pre>
+<p>now run the rails console and let&rsquo;s investigate. </p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (develop)]$ 
+→ be rails c
+Loading development environment (Rails 4.2.10)
+[1] pry(main)&gt; DateTime.now.end_of_day
+=&gt; Thu, 02 Nov 2017 23:59:59 +0000
+</code></pre>
+<p>I wonder if it relates to the time zone on the server?</p>
+<pre class="highlight plaintext"><code>→ heroku run rails c -r production
+Running rails c on ⬢ websiteone-production... ⣟ connecting, run.9360 ⢿Standard-1X)
+                                              ⣷
+Running rails c on ⬢ websiteone-production... up, run.9360 (Standard-1X)
+DateTime.now.end_of_day
+
+Loading production environment (Rails 4.2.10)
+irb(main):001:0&gt; DateTime.now.end_of_day
+=&gt; Thu, 02 Nov 2017 23:59:59 +0000
+</code></pre>
+<p>Okay, both server and my local machine running in UTC it seems &hellip;  I potter about looking at the scrums, and I think I know the issue.  We are looking at the <code>updated_at</code> time rather than <code>created_at</code> and if I push the video attachment later then the previous days scrum is showing up in the active window.  So options include switching like so:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">recent_hangouts</span>
+    <span class="n">event_instances</span>
+      <span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="s1">'created_at BETWEEN ? AND ?'</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="nf">days</span><span class="p">.</span><span class="nf">ago</span> <span class="o">+</span> <span class="n">duration</span><span class="p">.</span><span class="nf">minutes</span><span class="p">,</span> <span class="no">DateTime</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">end_of_day</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">order</span><span class="p">(</span><span class="ss">created_at: :desc</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre>
+<p><code>updated_at</code> was more important when we had the Google hangout API live pinging our system, which doesn&rsquo;t happen now.  Maybe we can get that again with Jitsi, but even then I&rsquo;m not sure this <code>recent_hangouts</code> method needs to work against the updated_at info - let&rsquo;s make that change and see if if breaks any tests &hellip; while that&rsquo;s running I can think about the test that might expose the flaw &hellip; (all the hangout cukes pass).</p>
+
+<p>Funny running the full set I got a new error I never saw:</p>
+<pre class="highlight plaintext"><code>SecurityError: DOM Exception 18: An attempt was made to break through the security policy of the user agent.
+
+  phantomjs://code/connection.js:9
+  phantomjs://code/connection.js:9 in Connection
+  phantomjs://code/main.js:8 in Poltergeist
+</code></pre>
+<p>In the meantime I think I saw how a simple change to <code>updated_at</code> in the database setup for my original bug fix test could expose this wrinkle on the issue &hellip; yes, if I set the last <code>updated_at</code> value of the previous scrum to after the duration of the event then I see the bug I was getting in production.  So the current bug-wrapping scenario stays as it was, and for good measure I add a comment to the issue in question:</p>
+<pre class="highlight gherkin"><code>  <span class="c"># wraps bug described in https://github.com/AgileVentures/WebsiteOne/issues/1809</span>
+  <span class="kn">Scenario</span><span class="p">:</span> Event doesn't ping old youtube URL
+    <span class="err">Given the date is "2014 Feb 5th 6</span><span class="p">:</span><span class="err">59am"</span>
+    <span class="nf">And</span> that we're spying on the SlackService
+    <span class="nf">When</span> I manually set a hangout link for event <span class="s">"Repeat Scrum"</span>
+    <span class="nf">Then</span> the Hangout URL is posted in Slack
+    <span class="nf">And</span> the Youtube URL is not posted in Slack
+</code></pre>
+<p>and then having checked that the test captures the bug (perhaps ideally the test itself should explicitly set the <code>updated_at</code> value?) and then fixed it again I push things up to see how the CI handles them.  I&rsquo;ll add that change as a refactoring ticket and move on I think - running out of time today.  Really want to get this all into production and have it sorted to put my mind at rest &hellip;</p>
+
+<p><a href="https://github.com/AgileVentures/WebsiteOne/issues/1939">https://github.com/AgileVentures/WebsiteOne/issues/1939</a></p>
+
+<p>As <a href="https://medium.com/@cess/agile-ventures-experience-629c0e3028b0">Cess says &ldquo;sips coffee, grabs another ticket&rdquo;</a> although I&rsquo;ll be grabbing an admin task or two I think &hellip; :-)</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
