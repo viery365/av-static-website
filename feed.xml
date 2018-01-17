@@ -5,10 +5,57 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-02T00:00:00+00:00</updated>
+  <updated>2017-11-03T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Tying Up the Week</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/03/av-ecosystem-review-tying-up-the-week/"/>
+    <id>http://blog.url.com/2017/11/03/av-ecosystem-review-tying-up-the-week/</id>
+    <published>2017-11-03T00:00:00+00:00</published>
+    <updated>2018-01-17T20:25:16+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="tying up" src="/images/tying_up.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I didn&amp;rsquo;t manage to get the &lt;code&gt;updated_at&lt;/code&gt; -&amp;gt; &lt;code&gt;created_at&lt;/code&gt; fix deployed in advance of the Kent Beck scrum yesterday, so I still can&amp;rsquo;t say for certain that I have fixed the bug where the old YouTube link gets posted on daily events.  I believe everything is deployed now, so we&amp;rsquo;ll have a proper test of that today.  Gosh I really hope there isn&amp;rsquo;t some other concealed bug.  I&amp;rsquo;d hoped to bash out a fix and quickly move on to other things, but it seems to have take all week.&lt;/p&gt;
+
+&lt;p&gt;That said I have got a &amp;ldquo;Premium Mob&amp;rdquo; ad added to the AdWords and although it&amp;rsquo;s not live yet, I showed it in the marketing meeting along with a slew of other ideas that seemed to go down quite well.  Lara&amp;rsquo;s going to configure the keywords and ad groups and get that out, so I can focus on other things.  Thanks Lara!  I haven&amp;rsquo;t encountered any 500 errors trying to load events pages this week, but I also don&amp;rsquo;t see any big improvement in the aggregate stats, weird.  Still that brings me back to the set of things I thought of from reviewing the waffle board earlier in the week:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;tawk.to site integrated chat system&lt;/li&gt;
+&lt;li&gt;replacing the mercury editor so we can move to Rails 5&lt;/li&gt;
+&lt;li&gt;supporting private events&lt;/li&gt;
+&lt;li&gt;looking at long running cukes&lt;/li&gt;
+&lt;li&gt;hosting our own jitsi&lt;/li&gt;
+&lt;li&gt;making main page counter dynamic&lt;/li&gt;
+&lt;li&gt;notifying project creator when people join project&lt;/li&gt;
+&lt;li&gt;having getting started page tick off progress&lt;/li&gt;
+&lt;li&gt;better modelling of premium users&lt;/li&gt;
+&lt;li&gt;allowing premium users to change payment methods&lt;/li&gt;
+&lt;li&gt;start hangout button not working &amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &amp;ldquo;Start hangout&amp;rdquo; button feels particularly problematic as students from the MOOC will try to use it and I think it will just not work.  Perhaps a quick disabling of it is in order &amp;hellip; I&amp;rsquo;m also full of thoughts from the LocalSupport meeting yesterday and wonder if AV ecosystem review blogs should extend to cover the operational flow of projects like LocalSupport?&lt;/p&gt;
+
+&lt;p&gt;I think I&amp;rsquo;ll get a quick something on it started &amp;hellip; checking the #websiteone channel I notice some voting has gone on in async votes I started during the week - that&amp;rsquo;s cool.  I update the tickets with the votes (would be great if that happened automatically), and add some labels for &amp;ldquo;beginner-friendly&amp;rdquo; and &amp;ldquo;up-for-grabs&amp;rdquo;, as well as assigning myself to the &amp;ldquo;remove start hangout on air button ticket&amp;rdquo;.  I create a branch and hack out the button to replace it with:&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt; &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;button_to&lt;/span&gt; &lt;span class="s1"&gt;'Start Hangout Instructions'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'https://support.google.com/youtube/answer/7083786'&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which gives us a bit of a boilerplate start:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ailmb73picj4oxh/Screenshot%202017-11-03%2010.37.37.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;but at least it&amp;rsquo;s a start &amp;hellip; will need some styling - actually that&amp;rsquo;s not too difficult to add:&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;button_to&lt;/span&gt; &lt;span class="s1"&gt;'Start Hangout Instructions'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'https://support.google.com/youtube/answer/7083786'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;class: &lt;/span&gt;&lt;span class="s2"&gt;"btn btn-primary"&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and I can also make it open in a new tab:&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;button_to&lt;/span&gt; &lt;span class="s1"&gt;'Start Hangout Instructions'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'https://support.google.com/youtube/answer/7083786'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;class: &lt;/span&gt;&lt;span class="s2"&gt;"btn btn-primary"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;form: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;target: &lt;/span&gt;&lt;span class="s1"&gt;'_blank'&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So now we&amp;rsquo;ll have to see what tests that all breaks, but really this needs to get out, since we&amp;rsquo;ve currently got a dangerous broken feature in production &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Headaches Receding</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/02/av-ecosystem-review-headaches-receding/"/>
@@ -465,72 +512,6 @@ end
   end
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;which I guess brings us to the main issue for the loading of the home page, which is that we want to display the time to the next event, and that requires working out when the next event is, and we are generating the full schedule from IceCube on the fly each time.  In principle it would be far more efficient to have it so that all events, and their repeats, were stored (say in a db) and then fetched read-only when needed.  They could then be updated on write operations, which would be far less frequent &amp;hellip; but that would be a major refactoring of the system.  If the homepage still wants to include the countdown, then a static site is not going to help much &amp;hellip; hmmm.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Task Switching</title>
-    <link rel="alternate" href="http://blog.url.com/2017/10/19/av-ecosystem-review-task-switching/"/>
-    <id>http://blog.url.com/2017/10/19/av-ecosystem-review-task-switching/</id>
-    <published>2017-10-19T01:00:00+01:00</published>
-    <updated>2018-01-15T20:57:31+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="task switching" src="/images/task_switching.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;They say that task-switching is very inefficient and that while we think we&amp;rsquo;re multi-tasking we&amp;rsquo;re actually just doing one task after another and not achieving productive focus on any.  Ironically I seem to be task switching all day long, and sometimes that&amp;rsquo;s all about managing motivation.  Yesterday I couldn&amp;rsquo;t decide between making a middleman landing page for the AV main site and investigating the performance issues we have with the site on Heroku.  So I started off on both &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/tansaku/av-landing-page"&gt;https://github.com/tansaku/av-landing-page&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;On the middleman side I think the key things I need to check are:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;deployment to github pages&lt;/li&gt;
-&lt;li&gt;CSS pipeline&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;while for heroku performance it&amp;rsquo;s just reading docs.  I pull the docs up on my big monitor.  I install loader.io on the staging site, but find it is already installed.  Although it hasn&amp;rsquo;t ever been used by the look of it &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="getting started tips from loader.io" src="https://dl.dropbox.com/s/reu4c637j16izcc/Screenshot%202017-10-18%2009.58.50.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and so I set up an initial load test:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="intial load test form" src="https://dl.dropbox.com/s/lx5yei9gm1udy6w/Screenshot%202017-10-18%2010.00.06.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;but I can&amp;rsquo;t seem to test against our custom endpoint - I send a help request for that.  In the meantime I have to get a static file served on staging in order to start the load test &amp;hellip; so I get a pull request in for that.  I check that it works locally, but I&amp;rsquo;ll need that to pass CI to get it onto staging.  I could force it up there, but it gives me a reasonable excuse to task switch and check the middleman items.  If I recall correctly we used a middleman-gh-pages plugin for the static nonprofit site in order to get middleman on github pages, but I wonder if that will work with the latest version of middleman?&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/edgecase/middleman-gh-pages"&gt;MiddleManGHPages&lt;/a&gt; hasn&amp;rsquo;t been updated in a couple of years and there is also now &lt;a href="https://github.com/middleman-contrib/middleman-deploy"&gt;MiddleManDeploy&lt;/a&gt; which has been more recently updated and has more stars.  A &lt;a href="https://ashfurrow.com/blog/building-static-sites-with-middleman/"&gt;2017 blog&lt;/a&gt; mentions successfully using middleman-gh-pages and it is working for us on the static site with a middleman 4.1.7.  Stick with what I know? Try something new?  The following code in the README of middleman-deploy makes me want to try it:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# Rakefile&lt;/span&gt;
-&lt;span class="n"&gt;namespace&lt;/span&gt; &lt;span class="ss"&gt;:deploy&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;deploy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Deploying to &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-    &lt;span class="nb"&gt;system&lt;/span&gt; &lt;span class="s2"&gt;"TARGET=&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; bundle exec middleman deploy"&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="ss"&gt;:staging&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;deploy&lt;/span&gt; &lt;span class="ss"&gt;:staging&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="ss"&gt;:production&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;deploy&lt;/span&gt; &lt;span class="ss"&gt;:production&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ rake deploy:staging
-$ rake deploy:production
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I like having staging and production endpoints - something I&amp;rsquo;ve been missing in the static nonprofit site.  In the meantime the pull request for the loaderio static page passed, so I pull that in and will need to wait for it to deply to develop before I can then move it on to staging for testing (or I test on develop &amp;hellip;), back to middleman deploy I find I need to upgrade to a newer version of middleman-deploy to get things working:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/middleman-contrib/middleman-deploy/issues/93"&gt;https://github.com/middleman-contrib/middleman-deploy/issues/93&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;but so the current README is out of date and the PR that fixes this has been hanging around for a year &amp;hellip; then there&amp;rsquo;s another issue to fix:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/middleman-contrib/middleman-deploy/issues/100"&gt;https://github.com/middleman-contrib/middleman-deploy/issues/100&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;and then &lt;code&gt;build&lt;/code&gt; and &lt;code&gt;deploy&lt;/code&gt; both work, and I would appear to have successfully deployed to:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://tansaku.github.io/av-landing-page/"&gt;https://tansaku.github.io/av-landing-page/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;although I&amp;rsquo;d feel better if the middleman-deploy 2.0 gem was out of alpha &amp;hellip; and I notice that the default middleman site assets are not loading on gh-pages.  Something to multi-task on tomorrow as I start the load tests &amp;hellip; :-)&lt;/p&gt;
 </content>
   </entry>
 </feed>
