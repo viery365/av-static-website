@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Calendaring/Scheduling</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_12 blog_page_12_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_11 x2017_11_07 x2017_11_07_av-ecosystem-review-calendaring-scheduling x2017_11_07_av-ecosystem-review-calendaring-scheduling_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,82 +83,49 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/11/07/av-ecosystem-review-calendaring-scheduling/">AV EcoSystem Review Calendaring/Scheduling</a></h2>
+        <h5 class='date'> 7 Nov 2017</h5>
+    <p><img alt="Calendaring" src="/images/calendaring.jpg" /></p>
 
-          <p>Page 12 of 26</p>
+<p>Still under the weather. Wondering if I need some sort of calendar/schedule booker to allow people to grab chunks of my time.  Had been trying to get several sets of people booked for paid mobs and F2F sessions in either email and Slack and its all being a bit of mess.  Chuck from Ruby Rogues uses a booking system to organise when he has Skype calls with people.  I&rsquo;m loathe to give up executive control of who I&rsquo;m talking to when.  </p>
 
-            <p><a href="/blog/page/11/">Previous page</a></p>
+<p>Anyhow, I&rsquo;m finally getting the fix for the broken hangout link out on production for websiteone along with the modified messaging format for the slack notifications.  Thank goodness.  I&rsquo;ve also got folks from the MOOC reporting not being able to find pair partners, which I think is due to the nastily broken hangout on air button.  Must post something to the forums and in the chat about that &hellip;</p>
 
-          <h2><a href="/2017/03/31/nhs-design-sprint-day-six/">NHS Design Sprint Day Six</a></h2>
-          <h3>Mar 31</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
+<p>What I really want to get on to is running this performance check on staging.  Ah, what I need is a feature flag that allows me to turn off the next scrum time banner on the home page &hellip; although it&rsquo;s actually the pre-loading of the event that&rsquo;s the resource consuming component (I think) so I try with:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">get_next_scrum</span>
+    <span class="vi">@next_event</span> <span class="o">=</span> <span class="no">Event</span><span class="p">.</span><span class="nf">next_occurrence</span><span class="p">(</span><span class="ss">:Scrum</span><span class="p">)</span> <span class="k">if</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'GET_NEXT_SCRUM'</span><span class="p">]</span>
+  <span class="k">end</span>
+</code></pre>
+<p>in the application controller, and a quick check shows that that turns off the &ldquo;next event&rdquo; notifications not just on the homepage, but throughout the site.  Well definitely worth getting on staging for a test to see if removing that would give us a significant performance improvement.  However as a standalone change it will break some tests - I see the visitors controller spec is failing.  Path of least resistance is to probably move to the Rails config setup we have and mark it on by default for tests?</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">get_next_scrum</span>
+    <span class="vi">@next_event</span> <span class="o">=</span> <span class="no">Event</span><span class="p">.</span><span class="nf">next_occurrence</span><span class="p">(</span><span class="ss">:Scrum</span><span class="p">)</span> <span class="k">if</span> <span class="no">Features</span><span class="p">.</span><span class="nf">get_next_scrum</span><span class="p">.</span><span class="nf">enabled</span>
+  <span class="k">end</span>
+</code></pre>
+<p>and then in <code>config/settings/test.yml</code>:</p>
+<pre class="highlight yaml"><code><span class="na">features</span><span class="pi">:</span>
+  <span class="na">get_next_scrum</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="s">true</span>
+</code></pre>
+<p>but the following in <code>config/settings/production.yml</code> and <code>config/settings/development.yml</code>:</p>
+<pre class="highlight yaml"><code><span class="na">features</span><span class="pi">:</span>
+  <span class="na">get_next_scrum</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="s">&lt;%= ENV['GET_NEXT_SCRUM'] %&gt;</span>
+</code></pre>
+<p>Quick tests with ENV var on and off locally make it seem like this is all working.  Okay, let&rsquo;s get it on staging and run some load tests &hellip;</p>
 
-<p>So Friday I had an intense day of meetings at NHS headquarters.  At the beginning of the week I had been suggesting to the change manager that Friday would be a day of prototype testing.  They’d arranged a series of meetings–three in person, two...</p>
-          <h2><a href="/2017/03/31/nhs-design-sprint-day-five/">NHS Design Sprint Day Five</a></h2>
-          <h3>Mar 31</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
-
-<p>Yesterday I worked from my home office and had a phone call with a Clinical Commissioning Group (CCG) commissioner.  We tried Skype, but it seemed like the NHS firewall was blocking us again. We switched to iPhone FaceTime and we were able to speak...</p>
-          <h2><a href="/2017/03/30/nhs-design-sprint-day-four/">NHS Design Sprint Day Four</a></h2>
-          <h3>Mar 30</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
-
-<p>I’m getting a bit punch drunk keeping up with all the different AgileVentures projects and driving the NHS design sprint forward at the same time, as well as doing all the admin and legal stuff to get the NHS contracts all sorted before the end of...</p>
-          <h2><a href="/2017/03/29/nhs-design-sprint-day-three/">NHS Design Sprint Day Three</a></h2>
-          <h3>Mar 29</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
-
-<p>So I realise that the sequencing on these sprint blogs is kind of off kilter, since I’m writing the blog on the morning of a given design sprint day, and actually talking about what happened the previous day :-/  Also, the normal five day design...</p>
-          <h2><a href="/2017/03/28/nhs-design-sprint-day-two/">NHS Design Sprint Day Two</a></h2>
-          <h3>Mar 28</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
-
-<p>So I was heading into London for the second day in a row to continue our impromptu design sprint with the NHS’s Healthy London Partnership (HLP).  According to the Google Ventures book on the subject, “Day One” of a design sprint consists of the...</p>
-          <h2><a href="/2017/03/27/nhs-design-sprint-day-one/">NHS Design Sprint Day One</a></h2>
-          <h3>Mar 27</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
-
-<p>So I’m heading in to central London again to work on this new UK National Health Service (NHS) wiki contract.  I’d already taken the train south of the river to meet with “Healthy London Partnership” (HLP) staff at NHS headquarters on Friday.  The...</p>
-          <h2><a href="/2017/03/24/conflicted/">Conflicted</a></h2>
-          <h3>Mar 24</h3>
-          <p><img alt="conflicted" src="/images/conflicted.jpg"></p>
-
-<p>What a week!  So many developments and me so internally conflicted.  Let me summarise some of the developments:</p>
-
-<ol>
-<li>The UK Health Service (NHS) awards the AgileVentures charity a small grant to develop, host and moderate a “Social Prescribing” wiki</li>
-</ol>
-          <h2><a href="/2017/03/23/pullrequest-feedback-by-blog/">Pull Request Feedback by Blog</a></h2>
-          <h3>Mar 23</h3>
-          <p><img alt="feedback" src="/images/feedback2.jpg"></p>
-
-<p>So in the blogs over the last two days I managed to get to the bottom of the problems on one LocalSupport pull request from a Premium member (Zmago).  It’s clear from that experience that I’ve got to adjust the develop branch so that VCR/PuffingBilly...</p>
-          <h2><a href="/2017/03/22/debugging-by-blog/">Debugging by Blog</a></h2>
-          <h3>Mar 22</h3>
-          <p><img alt="debugging" src="/images/debugging.png"></p>
-
-<p>Right, on to part 2 of “debugging by blog”, my attempt to force myself to work through code blockers while debugging.  Currently it’s LocalSupport, where we’ve had a weird CI failure that wasn’t replicated locally for myself or Zmago on our respective...</p>
-          <h2><a href="/2017/03/21/long-running-pull-requests/">Long Running PRs</a></h2>
-          <h3>Mar 21</h3>
-          <p><img alt="long running" src="/images/long_running.JPG"></p>
-
-<p>So the SSL encryption is all now working on <a href="https://www.agileventures.org/">AgileVenture’s production site</a>.  The slight login oddities on staging appear to have been just staging oddities.  I think maybe we could address them by re-cloning the production database to staging.  That...</p>
-
-            <p><a href="/blog/page/13/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -216,6 +184,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

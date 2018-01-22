@@ -5,10 +5,48 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-06T00:00:00+00:00</updated>
+  <updated>2017-11-07T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Calendaring/Scheduling</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/07/av-ecosystem-review-calendaring-scheduling/"/>
+    <id>http://blog.url.com/2017/11/07/av-ecosystem-review-calendaring-scheduling/</id>
+    <published>2017-11-07T00:00:00+00:00</published>
+    <updated>2018-01-22T20:48:23+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="Calendaring" src="/images/calendaring.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Still under the weather. Wondering if I need some sort of calendar/schedule booker to allow people to grab chunks of my time.  Had been trying to get several sets of people booked for paid mobs and F2F sessions in either email and Slack and its all being a bit of mess.  Chuck from Ruby Rogues uses a booking system to organise when he has Skype calls with people.  I&amp;rsquo;m loathe to give up executive control of who I&amp;rsquo;m talking to when.  &lt;/p&gt;
+
+&lt;p&gt;Anyhow, I&amp;rsquo;m finally getting the fix for the broken hangout link out on production for websiteone along with the modified messaging format for the slack notifications.  Thank goodness.  I&amp;rsquo;ve also got folks from the MOOC reporting not being able to find pair partners, which I think is due to the nastily broken hangout on air button.  Must post something to the forums and in the chat about that &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;What I really want to get on to is running this performance check on staging.  Ah, what I need is a feature flag that allows me to turn off the next scrum time banner on the home page &amp;hellip; although it&amp;rsquo;s actually the pre-loading of the event that&amp;rsquo;s the resource consuming component (I think) so I try with:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_next_scrum&lt;/span&gt;
+    &lt;span class="vi"&gt;@next_event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_occurrence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:Scrum&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;ENV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'GET_NEXT_SCRUM'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;in the application controller, and a quick check shows that that turns off the &amp;ldquo;next event&amp;rdquo; notifications not just on the homepage, but throughout the site.  Well definitely worth getting on staging for a test to see if removing that would give us a significant performance improvement.  However as a standalone change it will break some tests - I see the visitors controller spec is failing.  Path of least resistance is to probably move to the Rails config setup we have and mark it on by default for tests?&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_next_scrum&lt;/span&gt;
+    &lt;span class="vi"&gt;@next_event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_occurrence&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:Scrum&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;Features&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;get_next_scrum&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;enabled&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and then in &lt;code&gt;config/settings/test.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;features&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;get_next_scrum&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;enabled&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but the following in &lt;code&gt;config/settings/production.yml&lt;/code&gt; and &lt;code&gt;config/settings/development.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;features&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;get_next_scrum&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;enabled&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= ENV['GET_NEXT_SCRUM'] %&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Quick tests with ENV var on and off locally make it seem like this is all working.  Okay, let&amp;rsquo;s get it on staging and run some load tests &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Nicely Formatted Slack Updates</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/06/av-ecosystem-review-nicely-formatted-slack-updates/"/>
@@ -309,119 +347,6 @@ To http://github.com/AgileVentures/WebsiteOne
 &lt;p&gt;I don&amp;rsquo;t think I&amp;rsquo;ve experienced any 500 timeouts on the events pages since we rolled out the the icecube upgrade.  I&amp;rsquo;m conflicted about tawk.to after seeing OdinProjects lovely gitter integration.  Replacing the mercury editor feels like a big job.  Corey seems to be stalled working on private events.  The cukes are an ongoing bleed.  I should look at jitsi with Sigu &amp;hellip; making the main page counter dynamic would probably help us look more professional.  Notifying project creators when people click to join their projects could help connect people, as could adding some progress tracking to the &amp;ldquo;getting started&amp;rdquo; pages.  Better modelling of all the Premium users would probably make my life easier and support better predictions, while allowing Premiums to change payment plans would help money flow.  The Start Hangout button not working is a nasty fail point for newcomers trying to pair - particularly those starting the MOOC &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;Gosh, I&amp;rsquo;m really not sure what to work on and the time change means the scrum is coming up soon.  I think I&amp;rsquo;ll have to leave it there today.  I really do want to make events more welcoming, but I think I need to spend some more time reflecting on how to divide up my labour &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Dripping Tap</title>
-    <link rel="alternate" href="http://blog.url.com/2017/10/30/av-ecosystem-review-dripping-tap/"/>
-    <id>http://blog.url.com/2017/10/30/av-ecosystem-review-dripping-tap/</id>
-    <published>2017-10-30T00:00:00+00:00</published>
-    <updated>2018-01-15T20:57:00+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="dripping tap" src="/images/dripping_tap.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Back after a break, getting back into the routine.  One thing being away highlighted was that we have awesome enthusiastic new members who have the run the scrums while I was away, and awesome enthusiastic long term members (i.e. federico) running the mobs and marketing meetings.  Having other folks start the scrums highlighted one of the outstanding niggles that we have with the new manual updates that Lokesh was working on over the summer.  For those scrums that repeat daily, pushing a new hangout live seems to also push out the youtube link from the previous day.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d been coping with this by simply deleting the incorrect link, but that&amp;rsquo;s a hacky manual fix that&amp;rsquo;s going to flummox any new folks.  It&amp;rsquo;s been a dripping tap for a while.  Does it indicate that I&amp;rsquo;m fundamentally incompetent that I haven&amp;rsquo;t fixed it or got someone to fix it?  I hope not.  There always seems to be fifty different things that need to be done and it&amp;rsquo;s usually unclear what the long term pros and cons of each will be.  Okay, no more navel-gazing, let&amp;rsquo;s see if we can fix this issue that burns up my time, and is confusing for others.&lt;/p&gt;
-
-&lt;p&gt;The confusing thing about this bug is that it took me a while to work out the pattern of when it occurred.  Specifically it only occurs when there was an event of the same type that ran the day before, and then not every time.  I think it may be occurring when an event is started within 24 hours of the previous event.  I had previously opened a ticket on the subject:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1809"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1809&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;So the clear procedure here would be to try and replicate the issue with a cucumber test.  Although I can&amp;rsquo;t seem to help myself but first have a little gander at the code that I think might cause the problem.  The EventsController grabs the most recent_hangout like so:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;show&lt;/span&gt;
-    &lt;span class="vi"&gt;@event_schedule&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vi"&gt;@event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;next_occurrences&lt;/span&gt;
-    &lt;span class="vi"&gt;@recent_hangout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vi"&gt;@event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;recent_hangouts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;partial: &lt;/span&gt;&lt;span class="s1"&gt;'hangouts_management'&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;xhr?&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and the form for manually updating the event includes the YouTube URL from this &lt;code&gt;@recent_hangout&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;hidden_field_tag&lt;/span&gt; &lt;span class="s1"&gt;'yt_url'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="vi"&gt;@recent_hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;try!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:yt_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;the &lt;code&gt;@recent_hangout&lt;/code&gt; is grabbed from the database by some code in the events model:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;recent_hangouts&lt;/span&gt;
-    &lt;span class="n"&gt;event_instances&lt;/span&gt;
-      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'updated_at BETWEEN ? AND ?'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;days&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;end_of_day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;updated_at: :desc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I wonder if we need a different date range in here &amp;hellip;?  So here&amp;rsquo;s where I might run off into spiking code, so I drop back to create a new Cucumber scenario:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Event doesn't ping old youtube URL
-    &lt;span class="err"&gt;Given the date is "2014 Feb 5th 6&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;59am"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; that we're spying on the SlackService
-    &lt;span class="nf"&gt;When&lt;/span&gt; I manually set a hangout link for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
-    &lt;span class="nf"&gt;Then&lt;/span&gt; the Hangout URL is posted in Slack
-    &lt;span class="nf"&gt;And&lt;/span&gt; the Youtube URL is not posted in Slack
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which relies on a couple of new step definitions&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;And&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^that we're spying on the SlackService$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;SlackService&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt; &lt;span class="ss"&gt;:post_yt_link&lt;/span&gt;
-  &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;SlackService&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt; &lt;span class="ss"&gt;:post_hangout_notification&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;Then&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^the Youtube URL is not posted in Slack$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;SlackService&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;not_to&lt;/span&gt; &lt;span class="n"&gt;have_received&lt;/span&gt; &lt;span class="ss"&gt;:post_yt_link&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;And&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/^the Hangout URL is posted in Slack$/&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;SlackService&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_received&lt;/span&gt; &lt;span class="ss"&gt;:post_hangout_notification&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and we catch the error we&amp;rsquo;ve been experiencing in the live system:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;  Scenario: Event doesn&lt;span class="s1"&gt;'t ping old youtube URL                  # features/hangouts/edit_hangout_url.feature:41
-    Given the date is "2014 Feb 5th 6:59am"                     # features/step_definitions/event_steps.rb:94
-    And that we'&lt;/span&gt;re spying on the SlackService                   &lt;span class="c"&gt;# features/step_definitions/hangout_steps.rb:212&lt;/span&gt;
-    When I manually &lt;span class="nb"&gt;set &lt;/span&gt;a hangout link &lt;span class="k"&gt;for &lt;/span&gt;event &lt;span class="s2"&gt;"Repeat Scrum"&lt;/span&gt; &lt;span class="c"&gt;# features/step_definitions/hangout_steps.rb:108&lt;/span&gt;
-    Then the Hangout URL is posted &lt;span class="k"&gt;in &lt;/span&gt;Slack                     &lt;span class="c"&gt;# features/step_definitions/hangout_steps.rb:221&lt;/span&gt;
-    And the Youtube URL is not posted &lt;span class="k"&gt;in &lt;/span&gt;Slack                  &lt;span class="c"&gt;# features/step_definitions/hangout_steps.rb:217&lt;/span&gt;
-      &lt;span class="o"&gt;(&lt;/span&gt;SlackService&lt;span class="o"&gt;)&lt;/span&gt;.post_yt_link&lt;span class="o"&gt;(&lt;/span&gt;no args&lt;span class="o"&gt;)&lt;/span&gt;
-          expected: 0 &lt;span class="nb"&gt;times &lt;/span&gt;with any arguments
-          received: 1 &lt;span class="nb"&gt;time&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;RSpec::Mocks::MockExpectationError&lt;span class="o"&gt;)&lt;/span&gt;
-      ./features/step_definitions/hangout_steps.rb:218:in &lt;span class="sb"&gt;`&lt;/span&gt;/^the Youtube URL is not posted &lt;span class="k"&gt;in &lt;/span&gt;Slack&lt;span class="nv"&gt;$/&lt;/span&gt;&lt;span class="s1"&gt;'
-      features/hangouts/edit_hangout_url.feature:46:in `And the Youtube URL is not posted in Slack'&lt;/span&gt;
-
-Failing Scenarios:
-cucumber features/hangouts/edit_hangout_url.feature:41 &lt;span class="c"&gt;# Scenario: Event doesn't ping old youtube URL&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So can we fix it?  I think the date range must be wrong somehow - beginning of day vs end of day, or subtract the duration rather than adding it &amp;hellip; my intuitions are not bearing fruit - I hook the thing on the debugger:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;212, 221] &lt;span class="k"&gt;in&lt;/span&gt; /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/app/models/event.rb
-   212: 
-   213:   def recent_hangouts
-   214:     debugger
-   215:     event_instances
-   216:       .where&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'updated_at BETWEEN ? AND ?'&lt;/span&gt;, 1.days.ago + duration, DateTime.now.end_of_day&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="gp"&gt;=&amp;gt; &lt;/span&gt;217:       .order&lt;span class="o"&gt;(&lt;/span&gt;updated_at: :desc&lt;span class="o"&gt;)&lt;/span&gt;
-   218:   end
-   219: 
-   220:   def less_than_ten_till_start?
-   221:     &lt;span class="k"&gt;return &lt;/span&gt;&lt;span class="nb"&gt;true &lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;within_current_event_duration?
-&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; 1.days.ago + duration
-Tue, 04 Feb 2014 06:59:22 UTC +00:00
-&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; DateTime.now.end_of_day
-Wed, 05 Feb 2014 23:59:59 +0000
-&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; event_instances.where&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'updated_at BETWEEN ? AND ?'&lt;/span&gt;, 1.days.ago + duration, DateTime.now.end_of_day&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;span class="c"&gt;#&amp;lt;ActiveRecord::AssociationRelation [#&amp;lt;EventInstance id: 2, event_id: 2, title: "HangoutsFlow", hangout_url: "http://hangout.test", created_at: "2014-02-04 07:00:00", updated_at: "2014-02-04 07:03:00", uid: "100", category: "Scrum", project_id: nil, user_id: 1, yt_video_id: "QWERT55", participants: {"0"=&amp;gt;{"id"=&amp;gt;"hangout2750757B_ephemeral.id.google.com^a85dcb4670", "hasMicrophone"=&amp;gt;"true", "hasCamera"=&amp;gt;"true", "hasAppEnabled"=&amp;gt;"true", "isBroadcaster"=&amp;gt;"true", "isInBroadcast"=&amp;gt;"true", "displayIndex"=&amp;gt;"0", "person"=&amp;gt;{"id"=&amp;gt;"108533475599002820142", "displayName"=&amp;gt;"Alejandro Babio", "image"=&amp;gt;{"url"=&amp;gt;"https://lh4.googleusercontent.com/-p4ahDFi9my0/AAAAAAAAAAI/AAAAAAAAAAA/n-WK7pTcJa0/s96-c/photo.jpg"}, "na"=&amp;gt;"false"}, "locale"=&amp;gt;"en", "na"=&amp;gt;"false"}}, hoa_status: "started", url_set_directly: true, youtube_tweet_sent: false&amp;gt;]&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I think I see the problem - this duration addition is not working &amp;hellip;&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; 1.days.ago + duration
-Tue, 04 Feb 2014 07:00:00 UTC +00:00
-&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; 1.days.ago
-Tue, 04 Feb 2014 06:59:52 UTC +00:00
-&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; 1.days.ago + 30.minutes
-Tue, 04 Feb 2014 07:30:22 UTC +00:00
-&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; 1.days.ago + duration.minutes
-Tue, 04 Feb 2014 07:15:27 UTC +00:00
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This is the fix:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;recent_hangouts&lt;/span&gt;
-    &lt;span class="n"&gt;event_instances&lt;/span&gt;
-      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'updated_at BETWEEN ? AND ?'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;days&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minutes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;end_of_day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;updated_at: :desc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;but will it break lots of other things? The other scenarios in that feature pass, so I push the fix up onto the bugfix branch and let the CI run, while kicking off the full set of hangout features locally.  The cukes still take a long time to run even on my local machine (&amp;gt;10 minutes), so I tend to run them in small batches.  Another dripping tap perhaps &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
