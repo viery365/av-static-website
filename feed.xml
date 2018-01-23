@@ -5,10 +5,61 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-07T00:00:00+00:00</updated>
+  <updated>2017-11-08T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Performance Testing</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/08/av-ecosystem-review-performance-testing/"/>
+    <id>http://blog.url.com/2017/11/08/av-ecosystem-review-performance-testing/</id>
+    <published>2017-11-08T00:00:00+00:00</published>
+    <updated>2018-01-23T20:55:35+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="performancetesting" src="/images/performance_testing.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The new slack update message notifications for scrum hangouts and YouTube links is out and working:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/fam5pv49ug99lcc/Screenshot%202017-11-08%2010.35.44.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and at least two users are happy with the change.  So now I really must push on to the peformance issues.  I&amp;rsquo;ve merged the new feature flag that allows us to turn off the pre-loading of the next scrum, but I need that on staging to test it against production data &amp;hellip; I&amp;rsquo;ve got my load test of the homepage all ready to go on heroku via loader.io.&lt;/p&gt;
+
+&lt;p&gt;In the meantime I guess I should check that the new flag is working as expected on &lt;a href="https://develop.agileventures.org/"&gt;https://develop.agileventures.org/&lt;/a&gt;, but I go there and the next scrum is still on the home page:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/5bpzaknnj99icn1/Screenshot%202017-11-08%2010.46.43.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Hmm, no notification of deployment to develop - I guess I&amp;rsquo;ll force it:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (develop)]$ 
+→ git push develop develop:master
+Counting objects: 13, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (13/13), 1.86 KiB | 1.86 MiB/s, done.
+Total 13 (delta 10), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote: 
+remote: -----&amp;gt; Node.js app detected
+...
+remote:        https://websiteone-develop.herokuapp.com/ deployed to Heroku
+remote: 
+remote: Verifying deploy... done.
+To heroku.com:websiteone-develop.git
+   da240d16..f1e4c750  develop -&amp;gt; master
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And now the upcoming scrum is removed from the develop server.  I set the feature flag via the Heroku settings interface:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/hi2fsemtzjjhgbo/Screenshot%202017-11-08%2010.51.57.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and the upcoming scrum is back with us.  Okay, feature flag is working as expected, but no sign of the build completing on staging.  I guess I will force it up so I can at least kick off the test before my next meeting, which I do &amp;hellip; and I get emailed the results - greater than 50% improvement:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/a0qsfp7jv17uf30/Screenshot%202017-11-08%2015.47.33.png?dl=1" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Some decisions to be made here &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Calendaring/Scheduling</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/07/av-ecosystem-review-calendaring-scheduling/"/>
@@ -262,91 +313,6 @@ To heroku.com:websiteone-production.git
 &lt;p&gt;So now we have a campagin that is ready to go.  I&amp;rsquo;m not actually sure how to kick it off, maybe it&amp;rsquo;s started already?  I&amp;rsquo;m not sure how we set the targets for the campaign.  I&amp;rsquo;d like success to be folks clicking through to http://facebook.com/agileventures or http://twitter.com/agileventures.  I find that there&amp;rsquo;s a process of creating conversions, which seems to involve javascript.  Not sure that will play well with out mercury editable pages.  Okay, I&amp;rsquo;m going to leave it there for today and see if I can engage the rest of the marketing team on this.&lt;/p&gt;
 
 &lt;p&gt;what I would like to do is add a video of an example session to the premium mob page, which I do and then I go to make coffee.  Still on the decaf - could use a hit of real coffee about now, but not sure that will help in the long run &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Making Events Welcoming</title>
-    <link rel="alternate" href="http://blog.url.com/2017/10/31/av-ecosystem-review-making-events-welcoming/"/>
-    <id>http://blog.url.com/2017/10/31/av-ecosystem-review-making-events-welcoming/</id>
-    <published>2017-10-31T00:00:00+00:00</published>
-    <updated>2018-01-15T20:57:00+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="welcoming" src="/images/welcoming.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I have the new code on staging to avoid reposting old YouTube URLs on Slack. So let&amp;rsquo;s start by pushing that out to production:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (staging)]$ 
-→ git pull origin staging
-warning: redirecting to https://github.com/AgileVentures/WebsiteOne/
-From http://github.com/AgileVentures/WebsiteOne
- * branch              staging    -&amp;gt; FETCH_HEAD
-Already up-to-date.
-[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (staging)]$ 
-→ git checkout master
-Switched to branch 'master'
-[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (master)]$ 
-→ git rebase staging
-First, rewinding head to replay your work on top of it...
-Fast-forwarded master to staging.
-[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (master)]$ 
-→ git push origin master
-warning: redirecting to https://github.com/AgileVentures/WebsiteOne/
-Total 0 (delta 0), reused 0 (delta 0)
-To http://github.com/AgileVentures/WebsiteOne
-   a3521705..259467f6  master -&amp;gt; master
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Hopefully that will be one less thing to worry about this week.  Now the other issue was the one pointed out by Will, that having the YouTube message being almost identical to the hangout link, which can be confusing.  We have a ticket for that:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1921"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1921&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I kicked off an asynchronous vote in the websiteone channel.  I&amp;rsquo;m conflicted about whether this is the thing to work on.  I really want our events to be as welcoming as possible, but there&amp;rsquo;s so many potentially valuable things in the waffle board.  Let&amp;rsquo;s at least start this one; although then again, maybe that&amp;rsquo;s the wrong approach.  Perhaps I should be clearing out existing and stale tickets.  The challenge with this ticket is that I&amp;rsquo;ve put the welcoming message in the title of the main daily scrums:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;Martin Fowler&amp;rdquo; Scrum and Pair Hookup - All Welcome :-) Discuss Any Project, Ask Any Question, Or Just Listen In :-)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;and the YouTube slack ping is using the following ruby to generate the hyperlink:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;video&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;|Video/Livestream for &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;gt;"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;so the entire title appears in the hyperlink.  Perhaps the solution would be:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;video&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;|Click here to listen in to the Video/Livestream&amp;gt; for &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I&amp;rsquo;m caught between not wanting to have the welcoming message appear on everbody&amp;rsquo;s scrum events, and wanting to be able to refer to the title separately.  &lt;/p&gt;
-
-&lt;p&gt;The message for the hangout link is as follows:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hangout_url&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;|&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;gt;"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and maybe it should be &lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hangout_url&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;|Click here to participate in&amp;gt; &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;although I guess we&amp;rsquo;d acutally like the folks who want to listen in to actually join the hangout (as Will did) so that we can get them talking &amp;hellip; hmm :-)  Maybe a reasonable compromise would be:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;video&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;|Video/Livestream&amp;gt; for &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;hangout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;title&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Part of the issue is that it&amp;rsquo;s difficult to judge it until one sees how it actually appears in Slack.  Which makes me wonder if I can run it locally for one of our Slack test instances.  In the background Heroku is having issues and I can&amp;rsquo;t deploy yesterday&amp;rsquo;s fix to production :-(&lt;/p&gt;
-
-&lt;p&gt;Thinking back about the AV ecosystem review philosophy I recall that my last idea starting from the ads we serve on Google is that we could be serving ads about the free access to mobs and f2f sessions.  We could just do that on Google, but we&amp;rsquo;re talking about a signup form that allows us to track how many are signing up from particular campaigns.  Which is then another thing that sits on the TODO list and blocks us from using the Google ad revenue from working on something that might actually lead to new sign ups for paid services, which would be obvious whether we are tracking how many people signed up for them or not &amp;hellip; could we be tracking the social media likes and follows?&lt;/p&gt;
-
-&lt;p&gt;Other things are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;performance issues on the site&lt;/li&gt;
-&lt;li&gt;tawk.to site integrated chat system&lt;/li&gt;
-&lt;li&gt;replacing the mercury editor so we can move to Rails 5&lt;/li&gt;
-&lt;li&gt;supporting private events&lt;/li&gt;
-&lt;li&gt;looking at long running cukes&lt;/li&gt;
-&lt;li&gt;hosting our own jitsi&lt;/li&gt;
-&lt;li&gt;making the main page counter dynamic&lt;/li&gt;
-&lt;li&gt;notifying the project creator when people join a project&lt;/li&gt;
-&lt;li&gt;having getting started page tick off progress&lt;/li&gt;
-&lt;li&gt;better modelling of premium users&lt;/li&gt;
-&lt;li&gt;allowing premium users to change payment methods&lt;/li&gt;
-&lt;li&gt;start hangout button not working &amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I don&amp;rsquo;t think I&amp;rsquo;ve experienced any 500 timeouts on the events pages since we rolled out the the icecube upgrade.  I&amp;rsquo;m conflicted about tawk.to after seeing OdinProjects lovely gitter integration.  Replacing the mercury editor feels like a big job.  Corey seems to be stalled working on private events.  The cukes are an ongoing bleed.  I should look at jitsi with Sigu &amp;hellip; making the main page counter dynamic would probably help us look more professional.  Notifying project creators when people click to join their projects could help connect people, as could adding some progress tracking to the &amp;ldquo;getting started&amp;rdquo; pages.  Better modelling of all the Premium users would probably make my life easier and support better predictions, while allowing Premiums to change payment plans would help money flow.  The Start Hangout button not working is a nasty fail point for newcomers trying to pair - particularly those starting the MOOC &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Gosh, I&amp;rsquo;m really not sure what to work on and the time change means the scrum is coming up soon.  I think I&amp;rsquo;ll have to leave it there today.  I really do want to make events more welcoming, but I think I need to spend some more time reflecting on how to divide up my labour &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

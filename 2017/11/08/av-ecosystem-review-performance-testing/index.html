@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Performance Testing</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_14 blog_page_14_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_11 x2017_11_08 x2017_11_08_av-ecosystem-review-performance-testing x2017_11_08_av-ecosystem-review-performance-testing_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,84 +83,62 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/11/08/av-ecosystem-review-performance-testing/">AV EcoSystem Review Performance Testing</a></h2>
+        <h5 class='date'> 8 Nov 2017</h5>
+    <p><img alt="performancetesting" src="/images/performance_testing.jpg" /></p>
 
-          <p>Page 14 of 26</p>
+<p>The new slack update message notifications for scrum hangouts and YouTube links is out and working:</p>
 
-            <p><a href="/blog/page/13/">Previous page</a></p>
+<p><img src="https://dl.dropbox.com/s/fam5pv49ug99lcc/Screenshot%202017-11-08%2010.35.44.png?dl=0" /></p>
 
-          <h2><a href="/2017/03/06/balance/">Balance</a></h2>
-          <h3>Mar  6</h3>
-          <p><img alt="balance" src="/images/balance.jpg"></p>
+<p>and at least two users are happy with the change.  So now I really must push on to the peformance issues.  I&rsquo;ve merged the new feature flag that allows us to turn off the pre-loading of the next scrum, but I need that on staging to test it against production data &hellip; I&rsquo;ve got my load test of the homepage all ready to go on heroku via loader.io.</p>
 
-<p>I didn’t have any Premium pairing this Sunday, and my twin boys’ football match was rained off, so I had a relatively calm day, staying completely off Slack and Email.  I collapsed after lunch and slept for three hours - catching up lost sleep from...</p>
-          <h2><a href="/2017/03/03/bids-and-coding-zen/">Bids and Coding Zen</a></h2>
-          <h3>Mar  3</h3>
-          <p><img alt="zen stones" src="/images/zen.jpg"></p>
+<p>In the meantime I guess I should check that the new flag is working as expected on <a href="https://develop.agileventures.org/">https://develop.agileventures.org/</a>, but I go there and the next scrum is still on the home page:</p>
 
-<p>One of the reasons I got disenchanted with academia was the process of writing grant applications for research funds.  It seemed to involve a huge amount of work to describe the work you would do if someone gave you some money.  There’d be several...</p>
-          <h2><a href="/2017/03/02/distracted/">Distracted</a></h2>
-          <h3>Mar  2</h3>
-          <p><img alt="distracted" src="/images/distracted.jpg"></p>
+<p><img src="https://dl.dropbox.com/s/5bpzaknnj99icn1/Screenshot%202017-11-08%2010.46.43.png?dl=0" /></p>
 
-<p>So after taking a full week away from Slack and Email I managed to start work again without too much obsessive checking of messages on my phone.  At least for the last ten days I’m not checking it when I first wake up and, instead, leaving it till...</p>
-          <h2><a href="/2017/03/01/communication-and-coding/">Commmunication and Coding</a></h2>
-          <h3>Mar  1</h3>
-          <p><img alt="feedback" src="/images/feedback.jpg"></p>
+<p>Hmm, no notification of deployment to develop - I guess I&rsquo;ll force it:</p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (develop)]$ 
+→ git push develop develop:master
+Counting objects: 13, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (13/13), 1.86 KiB | 1.86 MiB/s, done.
+Total 13 (delta 10), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote: 
+remote: -----&gt; Node.js app detected
+...
+remote:        https://websiteone-develop.herokuapp.com/ deployed to Heroku
+remote: 
+remote: Verifying deploy... done.
+To heroku.com:websiteone-develop.git
+   da240d16..f1e4c750  develop -&gt; master
+</code></pre>
+<p>And now the upcoming scrum is removed from the develop server.  I set the feature flag via the Heroku settings interface:</p>
 
-<p>So I got some great feedback from FutureLearn after I’d followed up to say how much I enjoyed their technical test and interview process (which included discussion and pair programming).  Here’s what they said:</p>
+<p><img src="https://dl.dropbox.com/s/hi2fsemtzjjhgbo/Screenshot%202017-11-08%2010.51.57.png?dl=0" /></p>
 
-<blockquote>
-<p>Thanks again for coming in — I’m...</p>
-</blockquote>
-          <h2><a href="/2017/02/27/commitment/">Commitment</a></h2>
-          <h3>Feb 27</h3>
-          <p><img alt="commitment sign" src="/images/commitment.jpg"></p>
+<p>and the upcoming scrum is back with us.  Okay, feature flag is working as expected, but no sign of the build completing on staging.  I guess I will force it up so I can at least kick off the test before my next meeting, which I do &hellip; and I get emailed the results - greater than 50% improvement:</p>
 
-<p>Urgh, another mild cold :-( but a productive few days.  We had our new style WebSiteOne kick-off meeting on Friday following Michael’s suggestion that we re-start the meetings, but that we each bring up to three tickets that we care about; rather...</p>
-          <h2><a href="/2017/02/24/not-much-programming/">Not Much Programming</a></h2>
-          <h3>Feb 24</h3>
-          <p><img alt="typing at keyboard" src="/images/coding.jpg"></p>
+<p><img src="https://dl.dropbox.com/s/a0qsfp7jv17uf30/Screenshot%202017-11-08%2015.47.33.png?dl=1" /></p>
 
-<p>As I review and publish blogs from several months ago to Medium, it’s clear I’m doing a lot less programming than I was.  I’ve been doing more charity admin and, I guess, “business development”.  I’ve stopped pair programming regularly with Michael...</p>
-          <h2><a href="/2017/02/24/learn-by-sweeping/">Learn by sweeping</a></h2>
-          <h3>Feb 24</h3>
-          <p><img alt="ship" src="/images/ship.jpg"></p>
+<p>Some decisions to be made here &hellip;</p>
 
-<p>Life is full of apprenticeship, eating, walking, talking, dealing with our social environment, reading, writing, counting, programming. We have learnt, discovered or invented anything we do. Pedagogy is everywhere and everybody is a teacher.</p>
-
-<p>If...</p>
-          <h2><a href="/2017/02/23/asking-questions/">Asking Questions</a></h2>
-          <h3>Feb 23</h3>
-          <p><img alt="questions" src="/images/questions.png"></p>
-
-<p>The final part of the FutureLearn interview was a chat with a client specialist and front end developer, with questions about my experiences in teams and working with clients.  I enjoyed the conversation, and it allowed me to articulate something...</p>
-          <h2><a href="/2017/02/22/second-interview/">Second Interview</a></h2>
-          <h3>Feb 22</h3>
-          <p><img alt="second interview" src="/images/second-interview.jpg"></p>
-
-<p>So yesterday I found myself in a second interview for a “Ruby developer” job at the UK MOOC provider, FutureLearn.  I’ve been applying for jobs here and there over the last six months as it’s nice to keep one’s options open.  Having surrendered to...</p>
-          <h2><a href="/2017/02/21/a-little-less-conversation/">A Little Less Conversation</a></h2>
-          <h3>Feb 21</h3>
-          <p><img alt="elvis" src="/images/elvis.jpg"></p>
-
-<p>Yesterday was basically coming back up to speed after a week away from digital communication, gradually transfering the various items from Email and Slack into my TODO list.  I managed to deploy the latest agile-bot config changes to production,...</p>
-
-            <p><a href="/blog/page/15/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -218,6 +197,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
