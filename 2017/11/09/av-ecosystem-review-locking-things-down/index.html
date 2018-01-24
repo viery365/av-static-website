@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Locking Things Down</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_4 blog_page_4_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_11 x2017_11_09 x2017_11_09_av-ecosystem-review-locking-things-down x2017_11_09_av-ecosystem-review-locking-things-down_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,88 +83,58 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/11/09/av-ecosystem-review-locking-things-down/">AV EcoSystem Review Locking Things Down</a></h2>
+        <h5 class='date'> 9 Nov 2017</h5>
+    <p><img alt="locking" src="/images/locking_pliers.jpg" /></p>
 
-          <p>Page 4 of 26</p>
+<p>So I had to put off blogging for a while today.  My station keeping regulars have been starting to get in the way of certain emails and admin that I keep putting off.  That done I&rsquo;ve got to get a google meta-tag out to the main site to unlock appointment functionality in google calendar.  We&rsquo;ve also got the issue of some new folks (accidentally?) editing the getting started pages, which is becoming a pain, and I&rsquo;m thinking adding another feature flag there is the way to go &hellip;</p>
 
-            <p><a href="/blog/page/3/">Previous page</a></p>
+<p>I&rsquo;ve already got the google tag on develop and I push that towards staging &hellip; we&rsquo;ve also got the performance issue, and I&rsquo;ve had the thought that we could try turning off the &ldquo;Next Event&rdquo; functionality on the main site for a week and see if anyone misses it.  But okay, let&rsquo;s get a feature flag on the page editing set up.  That&rsquo;s pretty straightforward in <code>static_pages/show.html.erb</code>:</p>
+<pre class="highlight erb"><code>    <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">user_signed_in?</span> <span class="n">and</span> <span class="no">Features</span><span class="p">.</span><span class="nf">edit_static_pages</span><span class="p">.</span><span class="nf">enabled</span> <span class="cp">%&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+        <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">custom_css_btn</span> <span class="s1">'edit'</span><span class="p">,</span> <span class="s1">'fa-2x fa fa-pencil-square-o'</span><span class="p">,</span> <span class="n">mercury_edit_path</span><span class="p">,</span> <span class="ss">id: </span><span class="s1">'edit_link'</span><span class="p">,</span>
+                               <span class="ss">data: </span><span class="p">{</span><span class="ss">save_url: </span><span class="n">static_page_mercury_update_path</span><span class="p">(</span><span class="vi">@page</span><span class="p">.</span><span class="nf">slug</span><span class="p">)}</span> <span class="cp">%&gt;</span>
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre>
+<p>or so I thought.  A quick byebug showed a dangerous edge there:</p>
+<pre class="highlight shell"><code><span class="o">[</span>16, 25] <span class="k">in</span> /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/app/views/static_pages/show.html.erb
+   16:       &lt;div <span class="nv">id</span><span class="o">=</span><span class="s2">"static_page_title"</span> <span class="nv">style</span><span class="o">=</span><span class="s2">"display: inline;"</span> data-mercury<span class="o">=</span><span class="s2">"simple"</span> data-type<span class="o">=</span><span class="s2">"editable"</span>&gt;&lt;%<span class="o">=</span> @page.title %&gt;&lt;/div&gt;
+   17:     &lt;/h1&gt;
+   18:   &lt;/div&gt;
+   19:   &lt;div <span class="nv">id</span><span class="o">=</span><span class="s2">"page-side-panel"</span>&gt;
+   20:     &lt;% byebug %&gt;
+<span class="gp">=&gt; </span>21:     &lt;% <span class="k">if </span>user_signed_in? and Features.edit_static_pages.enabled?%&gt;
+   22:       &lt;ul&gt;
+   23:         &lt;li&gt;&lt;%<span class="o">=</span> custom_css_btn <span class="s1">'edit'</span>, <span class="s1">'fa-2x fa fa-pencil-square-o'</span>, mercury_edit_path, id: <span class="s1">'edit_link'</span>,
+   24:                                data: <span class="o">{</span>save_url: static_page_mercury_update_path<span class="o">(</span>@page.slug<span class="o">)}</span> %&gt;
+   25:       &lt;/ul&gt;
+<span class="o">(</span>byebug<span class="o">)</span> Features
+Features
+<span class="o">(</span>byebug<span class="o">)</span> Features.edit_static_pages
+<span class="c">#&lt;Config::Options enabled=true&gt;</span>
+<span class="o">(</span>byebug<span class="o">)</span> Features.edit_static_pages.enabled?
+nil
+<span class="o">(</span>byebug<span class="o">)</span> Features.edit_static_pages.enabled
+<span class="nb">true</span>
+</code></pre>
+<p>fixed that and got it up.  Glad I didn&rsquo;t postpone getting the google verification tag in the pipeline for this, but really want to get this out too.  In the meantime the build on staging passed and I was able to check the verification tag on staging.  Pushed that on to production.  I noticed that I also have the new Puma upgrade, so I thought I&rsquo;d kick off a load test on staging to see what improvement that gives us (if any).  Emails back from that test - 23ms improvement - nothing to write home about.</p>
 
-          <h2><a href="/2017/09/22/av-ecosystem-review-that-domain-review-step/">AV EcoSystem Review That Domain Review Step</a></h2>
-          <h3>Sep 22</h3>
-          <p><img alt="domain review" src="/images/domain_review.jpg"></p>
+<p>Aha, production deployed, site verified and Google calendar enabled for the Google AgileVentures nonprofit team - result? We&rsquo;ll see &hellip;</p>
 
-<p>Okay, so I have the multiple repository functionality basically working, but it’s time to clear up and make things right … here’s my checklist from yesterday:</p>
-
-<ul>
-<li>the acceptance test does not check that the second repo has been stored</li>
-<li>the acceptance...</li>
-</ul>
-          <h2><a href="/2017/09/22/another-free-refill/">Another free refill?</a></h2>
-          <h3>Sep 22</h3>
-          <p><img alt="free refill" src="/images/freerefill.jpg"></p>
-
-<p>Earlier this year, I undertook a training session targeting small business manager to teach them how to improve profitability of business projects. The course instructor showed us a rather clear way to deal with profitabiliy. First, you estimate...</p>
-          <h2><a href="/2017/09/21/av-ecosystem-review-cocoon-home-straight/">AV EcoSystem Review Cocoon Home Straight</a></h2>
-          <h3>Sep 21</h3>
-          <p><img alt="home straight" src="/images/Home_Straight.jpg"></p>
-
-<p>So the answer to my question of yesterday, “Why is Acceptance Testing so hard” is that any coding is hard when you can’t get error messages.  The remote debug inspector I set up yesterday allowed me to see that our Capybara/Poltergeist/PhantomJS...</p>
-          <h2><a href="/2017/09/20/av-ecosystem-review-why-is-acceptance-testing-so-time-consuming/">AV EcoSystem Review Why is Acceptance Testing so Time Consuming?</a></h2>
-          <h3>Sep 20</h3>
-          <p><img alt="acceptance testing" src="/images/acceptance_testing.jpg"></p>
-
-<p>I think I’m almost there with acceptance testing this multiple repo feature, but it makes me wonder why acceptance testing always seems to be so time consuming.  I’m just wrapping up a private project where acceptance testing of electron apps was...</p>
-          <h2><a href="/2017/09/19/av-ecosystem-review-gem-polishing/">AV EcoSystem Review Gem Polishing</a></h2>
-          <h3>Sep 19</h3>
-          <p><img alt="diamond polisher" src="/images/diamond_polisher.jpg"></p>
-
-<p>So I’m on the train into london for a meeting with the NHS, but unlike in my last year of blogging it’s not time to agonize about how everything’s going, but time to focus on finishing up this feature for multiple project repositories.  Yesterday...</p>
-          <h2><a href="/2017/09/18/av-ecosystem-review-inspecting-gems/">AV EcoSystem Review Inspecting Gems</a></h2>
-          <h3>Sep 18</h3>
-          <p><img alt="gems" src="/images/gems.jpg"></p>
-
-<p>So my AV ecosystem reviews are getting further afield.  Here I am inspecting different gems for the purpose of completing a feature to support multiple project repositories.  What are the goals of this ongoing review? It’s to focus my blogging power...</p>
-          <h2><a href="/2017/09/15/av-ecosystem-review-digging-in-to-multiple-project-repos-blog/">AV EcoSystem Review Digging into the Multiple Project Repos</a></h2>
-          <h3>Sep 15</h3>
-          <p><img alt="digging" src="/images/digging.jpg"></p>
-
-<p>So, struggling through tears for my father (just listened to a &gt;Code episode on mental health) I’m bringing myself to focus on continuing this user rerequest feature about multiple repos for AV projects.  Let’s warm up by making sure all our local...</p>
-          <h2><a href="/2017/09/14/av-ecosystem-review-clearing-waffle/">AV EcoSystem Review Clearing Waffle</a></h2>
-          <h3>Sep 14</h3>
-          <p><img alt="waffle" src="/images/waffle.jpg"></p>
-
-<p>So I woke at 4am this morning and couldn’t go back to sleep.  I lay with my thoughts for 90 minutes before I couldn’t bear it any longer and put on audio comedy from Christopher Titus.  Painful thoughts about kids football and tangled electron apps...</p>
-          <h2><a href="/2017/09/13/av-ecosystem-review-clearing-the-backlog/">AV EcoSystem Review Clearing the Backlog</a></h2>
-          <h3>Sep 13</h3>
-          <p><img alt="backlog" src="/images/backlog.jpg"></p>
-
-<p>So I’m calling this clearing the backlog, but argh, I want to start on that new coding ticket rather than the older content ones in the WebSiteOne waffle board.  My heuristics for board review are check the “Please Check” tickets.  There I have a...</p>
-          <h2><a href="/2017/09/12/av-ecosystem-review-what-next/">AV EcoSystem Review Email What Next</a></h2>
-          <h3>Sep 12</h3>
-          <p><img alt="whats next" src="/images/whats_next.jpg"></p>
-
-<p>So I’ve looked back at my list from yesterday as I tried to work out how to start the week:</p>
-
-<p>1) review the process of people coming in from adwords<br>
-2) fix the email SPF setting<br>
-3) more work on greeter bots<br>
-4) search for other areas of ecosystem that...</p>
-
-            <p><a href="/blog/page/5/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -222,6 +193,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

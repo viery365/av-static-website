@@ -5,10 +5,57 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-08T00:00:00+00:00</updated>
+  <updated>2017-11-09T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Locking Things Down</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/09/av-ecosystem-review-locking-things-down/"/>
+    <id>http://blog.url.com/2017/11/09/av-ecosystem-review-locking-things-down/</id>
+    <published>2017-11-09T00:00:00+00:00</published>
+    <updated>2018-01-24T21:09:45+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="locking" src="/images/locking_pliers.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I had to put off blogging for a while today.  My station keeping regulars have been starting to get in the way of certain emails and admin that I keep putting off.  That done I&amp;rsquo;ve got to get a google meta-tag out to the main site to unlock appointment functionality in google calendar.  We&amp;rsquo;ve also got the issue of some new folks (accidentally?) editing the getting started pages, which is becoming a pain, and I&amp;rsquo;m thinking adding another feature flag there is the way to go &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve already got the google tag on develop and I push that towards staging &amp;hellip; we&amp;rsquo;ve also got the performance issue, and I&amp;rsquo;ve had the thought that we could try turning off the &amp;ldquo;Next Event&amp;rdquo; functionality on the main site for a week and see if anyone misses it.  But okay, let&amp;rsquo;s get a feature flag on the page editing set up.  That&amp;rsquo;s pretty straightforward in &lt;code&gt;static_pages/show.html.erb&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt;    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;user_signed_in?&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="no"&gt;Features&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;edit_static_pages&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;enabled&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;custom_css_btn&lt;/span&gt; &lt;span class="s1"&gt;'edit'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'fa-2x fa fa-pencil-square-o'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mercury_edit_path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;id: &lt;/span&gt;&lt;span class="s1"&gt;'edit_link'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                               &lt;span class="ss"&gt;data: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;save_url: &lt;/span&gt;&lt;span class="n"&gt;static_page_mercury_update_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;slug&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or so I thought.  A quick byebug showed a dangerous edge there:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;16, 25] &lt;span class="k"&gt;in&lt;/span&gt; /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/app/views/static_pages/show.html.erb
+   16:       &amp;lt;div &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"static_page_title"&lt;/span&gt; &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"display: inline;"&lt;/span&gt; data-mercury&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"simple"&lt;/span&gt; data-type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"editable"&lt;/span&gt;&amp;gt;&amp;lt;%&lt;span class="o"&gt;=&lt;/span&gt; @page.title %&amp;gt;&amp;lt;/div&amp;gt;
+   17:     &amp;lt;/h1&amp;gt;
+   18:   &amp;lt;/div&amp;gt;
+   19:   &amp;lt;div &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"page-side-panel"&lt;/span&gt;&amp;gt;
+   20:     &amp;lt;% byebug %&amp;gt;
+&lt;span class="gp"&gt;=&amp;gt; &lt;/span&gt;21:     &amp;lt;% &lt;span class="k"&gt;if &lt;/span&gt;user_signed_in? and Features.edit_static_pages.enabled?%&amp;gt;
+   22:       &amp;lt;ul&amp;gt;
+   23:         &amp;lt;li&amp;gt;&amp;lt;%&lt;span class="o"&gt;=&lt;/span&gt; custom_css_btn &lt;span class="s1"&gt;'edit'&lt;/span&gt;, &lt;span class="s1"&gt;'fa-2x fa fa-pencil-square-o'&lt;/span&gt;, mercury_edit_path, id: &lt;span class="s1"&gt;'edit_link'&lt;/span&gt;,
+   24:                                data: &lt;span class="o"&gt;{&lt;/span&gt;save_url: static_page_mercury_update_path&lt;span class="o"&gt;(&lt;/span&gt;@page.slug&lt;span class="o"&gt;)}&lt;/span&gt; %&amp;gt;
+   25:       &amp;lt;/ul&amp;gt;
+&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; Features
+Features
+&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; Features.edit_static_pages
+&lt;span class="c"&gt;#&amp;lt;Config::Options enabled=true&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; Features.edit_static_pages.enabled?
+nil
+&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; Features.edit_static_pages.enabled
+&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;fixed that and got it up.  Glad I didn&amp;rsquo;t postpone getting the google verification tag in the pipeline for this, but really want to get this out too.  In the meantime the build on staging passed and I was able to check the verification tag on staging.  Pushed that on to production.  I noticed that I also have the new Puma upgrade, so I thought I&amp;rsquo;d kick off a load test on staging to see what improvement that gives us (if any).  Emails back from that test - 23ms improvement - nothing to write home about.&lt;/p&gt;
+
+&lt;p&gt;Aha, production deployed, site verified and Google calendar enabled for the Google AgileVentures nonprofit team - result? We&amp;rsquo;ll see &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Performance Testing</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/08/av-ecosystem-review-performance-testing/"/>
@@ -265,54 +312,6 @@ irb(main):001:0&amp;gt; DateTime.now.end_of_day
 &lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1939"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1939&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;As &lt;a href="https://medium.com/@cess/agile-ventures-experience-629c0e3028b0"&gt;Cess says &amp;ldquo;sips coffee, grabs another ticket&amp;rdquo;&lt;/a&gt; although I&amp;rsquo;ll be grabbing an admin task or two I think &amp;hellip; :-)&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Headaches</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/01/av-ecosystem-review-headaches/"/>
-    <id>http://blog.url.com/2017/11/01/av-ecosystem-review-headaches/</id>
-    <published>2017-11-01T00:00:00+00:00</published>
-    <updated>2018-01-15T21:01:34+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="headache" src="/images/headache.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m feeling a bit rough - maybe coming down with something.  Bit of a headache at the computer.  Have burnt early start on handing off the AgileVentures sticker send out.  Will it actually make sense to make a shop front where folks can buy stickers and other AgileVentures swag?  Would that ever he anything other than a trivial source of revenue?&lt;/p&gt;
-
-&lt;p&gt;Just had to stop to put on warm clothing as it cools down here in the UK.  Headaches literally and figuratively. Drink lots of water and ease myself into the day.  So, heroku had issues all day yesterday and I &lt;em&gt;think&lt;/em&gt; we deployed the fixes for old youtube links being pinged, but we still had the same problem in the Kent Beck scrum yesterday afternoon.  I had deployed manually and got an odd message at the end of the deploy:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;remote: -----&amp;gt; Launching...
-remote:        Released v296
-remote:        https://websiteone-production.herokuapp.com/ deployed to Heroku
-remote: 
-remote: Verifying deploy... done.
-error: Could not read c93108679daff7e04ea8d6408b172c1aed987389
-fatal: Failed to traverse parents of commit 600ecd2a36175294d8ba8a18e8b0f0c318402487
-error: failed to run repack
-To heroku.com:websiteone-production.git
-   a3521705..259467f6  master -&amp;gt; master
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I guess the deploy worked - would be nice if we had a page somewhere in the site that told us what commit it was on.  Actually Heroku shows us that and it does seem like it&amp;rsquo;s deployed.  So is the fix I thought I had applied not working in production &amp;hellip;? I guess I see how it goes today and then circle back on it tomorrow and do a local test with production data if it&amp;rsquo;s still an issue.&lt;/p&gt;
-
-&lt;p&gt;So the real headache is choosing where to focus next.  I generated a big list of things yesterday from reviewing the WebSiteOne waffle board.  There are good reasons for working on any number of them.  But maybe the backlog of PRs from dependabot and open stuff in the waffle board is the real challenge?  What I could do with is, say, five other volunteers working on this semi-regularly with me.&lt;/p&gt;
-
-&lt;p&gt;My inclination is to say that we need to push some of our AdWords budget at promoting our mob programming sessions.  And I don&amp;rsquo;t want to wait to have created a sign up form.  We are doing sign up via people following us on twitter and liking our page on facebook.  The target can be having people click through to our social media links.  I&amp;rsquo;m also frustrated that I&amp;rsquo;m not feeling more comfortable with Google AdWords.  It feels like it should be a simple thing to use, but somehow my mental model is not quite there.  Part of me thinks I need to read up on Adwords, or take a course, but I have terrible trouble focusing on stuff I&amp;rsquo;m not interacting with, things that I can&amp;rsquo;t interactively test.  It&amp;rsquo;s like I&amp;rsquo;m deeply suspicious that anything written down will not be up to date.&lt;/p&gt;
-
-&lt;p&gt;Anyway, so I start by creating a Google Ad Campaign.  Immediately there are choices between &amp;ldquo;Search Network with Display Select&amp;rdquo; and &amp;ldquo;Search Network Only&amp;rdquo;.  I read an article about the difference, but have no real way to judge the value of one over the other to us, so I go with &amp;ldquo;Search Network Only&amp;rdquo; which is what all our current campaigns are.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/79slyq3k2slwmsl/Screenshot%202017-11-01%2010.15.04.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I throw in our landing page and some random keywords:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/y4ngbqedas629wf/Screenshot%202017-11-01%2010.18.22.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;And then I get the view I love, the one where we can see the form of the ad:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/j399vz9voklwg3c/Screenshot%202017-11-01%2010.20.34.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So now we have a campagin that is ready to go.  I&amp;rsquo;m not actually sure how to kick it off, maybe it&amp;rsquo;s started already?  I&amp;rsquo;m not sure how we set the targets for the campaign.  I&amp;rsquo;d like success to be folks clicking through to http://facebook.com/agileventures or http://twitter.com/agileventures.  I find that there&amp;rsquo;s a process of creating conversions, which seems to involve javascript.  Not sure that will play well with out mercury editable pages.  Okay, I&amp;rsquo;m going to leave it there for today and see if I can engage the rest of the marketing team on this.&lt;/p&gt;
-
-&lt;p&gt;what I would like to do is add a video of an example session to the premium mob page, which I do and then I go to make coffee.  Still on the decaf - could use a hit of real coffee about now, but not sure that will help in the long run &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
