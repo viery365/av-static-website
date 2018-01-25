@@ -5,10 +5,32 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-09T00:00:00+00:00</updated>
+  <updated>2017-11-10T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Confusion Reigns</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/10/av-ecosystem-review-confusion-reigns/"/>
+    <id>http://blog.url.com/2017/11/10/av-ecosystem-review-confusion-reigns/</id>
+    <published>2017-11-10T00:00:00+00:00</published>
+    <updated>2018-01-25T19:23:16+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="confusion" src="/images/confusion.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Hmm, so the last two days I&amp;rsquo;ve adopted a new pattern of focusing first thing not on blogging, but on completing tasks from the previous night that I worry I&amp;rsquo;m not going to get done at all if I prioritize my repeating daily tasks.  It&amp;rsquo;s also partly that my energy is at a massive low this week as I fight off the after-effects of the stomach bug from the weekend.  Adjusting the order of the morning has allowed me to reduce my stress level about repeated procrastination on certain items, and also get out a new google calendar appointment booking system to allow people to book pairing time with me:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/6o1mpaniv0k3u4s/Screenshot%202017-11-10%2011.15.29.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve successfully taken some bookings, but it&amp;rsquo;s not as smooth as I would like.  It appears to require that people accept an email invitation after booking to confirm their slot, which seems rather error prone.  I&amp;rsquo;ve also started pulling in AV events to my Google nonprofit calendar associated with sam@agileventures.org.  I&amp;rsquo;ve been avoiding using Google calendar for a while as I don&amp;rsquo;t like the way it restricts me, but the ad hoc scheduling I&amp;rsquo;ve been using is being overwhelmed by trying to manage all the different pairing bookings.  I&amp;rsquo;d love something integrated smoothly into the AV site, but am giving Google&amp;rsquo;s appointment scheduler a go after seeing that youcanbook.me doesn&amp;rsquo;t have a nonprofit discount and we don&amp;rsquo;t have engineering capacity coming out of our ears at the moment.&lt;/p&gt;
+
+&lt;p&gt;I have to say I&amp;rsquo;m confused about what I&amp;rsquo;m in the middle of doing.  I&amp;rsquo;ve got two personal phone calls I&amp;rsquo;m making in parallel to blogging.  Trying to reduce our car insurance and sort out some personal tax issues.  Both things that involve being on hold for a good long time.  These interminal admin things need to get done, or hundreds of pounds just drifts away &amp;hellip; and I&amp;rsquo;m out of my comfort zone having to listen to tinny hold music instead of my spotify while I write my blog.  Okay, car insurance reduced, yay! No tax refund, boo!&lt;/p&gt;
+
+&lt;p&gt;I totally can&amp;rsquo;t find my list of things that needed to get sorted, but in the WSO meeting I got some agreement that we could try out switching off the next event functionality as a way to check for performance improvements, which makes me think the focus for next week should be on our own jitsi meeting hosting, to see if we can get reliable performance from that and replace hangouts with something that will offer us an API for deeper integration with our site &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Locking Things Down</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/09/av-ecosystem-review-locking-things-down/"/>
@@ -235,83 +257,6 @@ cucumber -p second_try features/hangouts/hangout.feature:68 # Scenario: Display 
 &lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;button_to&lt;/span&gt; &lt;span class="s1"&gt;'Start Hangout Instructions'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'https://support.google.com/youtube/answer/7083786'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;class: &lt;/span&gt;&lt;span class="s2"&gt;"btn btn-primary"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;form: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;target: &lt;/span&gt;&lt;span class="s1"&gt;'_blank'&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;So now we&amp;rsquo;ll have to see what tests that all breaks, but really this needs to get out, since we&amp;rsquo;ve currently got a dangerous broken feature in production &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Headaches Receding</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/02/av-ecosystem-review-headaches-receding/"/>
-    <id>http://blog.url.com/2017/11/02/av-ecosystem-review-headaches-receding/</id>
-    <published>2017-11-02T00:00:00+00:00</published>
-    <updated>2018-01-16T21:06:46+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="headaches receding" src="/images/headaches_receding.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Urgh, minor headache again today, drinking lots of water.  Night before last a Halloween sweeties over-indulged child had caused me broken sleep.  Ended up drinking coffee again, hmm. Somewhat Slack/Email distracted.  Really odd thing is that the fix that I pushed out for the Youtube link over-updates in Slack is that it seems to have fixed the morning &amp;ldquo;Martin Fowler&amp;rdquo; scrum, but not the afternoon &amp;ldquo;Kent Beck&amp;rdquo; scrum.  Of all the different possible outcomes I could have expected &amp;hellip; this is the least predictable.&lt;/p&gt;
-
-&lt;p&gt;I would have imagined that the fix would work, or not work, but not that it would work for one scrum and not the other.  To refresh our memories, the fix was that in the &lt;code&gt;recent_hangouts&lt;/code&gt; method we were adding the &lt;code&gt;duration&lt;/code&gt; FixNum rather than the actual number of minutes when setting the window over which we search for previously running hangouts.  We fixed it by using &lt;code&gt;duration.minutes&lt;/code&gt; to ensure we were using the correct unit:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;recent_hangouts&lt;/span&gt;
-    &lt;span class="n"&gt;event_instances&lt;/span&gt;
-      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'updated_at BETWEEN ? AND ?'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;days&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minutes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;end_of_day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;updated_at: :desc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;My mental model of the bug is complete, except this working for one scrum and not the other.  I&amp;rsquo;m drawn to move on to other things, but this niggles me.  Let&amp;rsquo;s import the production data to my local machine - instructions are here:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://devcenter.heroku.com/articles/heroku-postgres-import-export"&gt;https://devcenter.heroku.com/articles/heroku-postgres-import-export&lt;/a&gt;&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="gp"&gt;$ &lt;/span&gt;heroku pg:backups:capture -r production
-&lt;span class="gp"&gt;$ &lt;/span&gt;heroku pg:backups:download -r production
-&lt;span class="gp"&gt;$ &lt;/span&gt;pg_restore --verbose --clean --no-acl --no-owner -h localhost -d websiteone_development latest.dump
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;now run the rails console and let&amp;rsquo;s investigate. &lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (develop)]$ 
-→ be rails c
-Loading development environment (Rails 4.2.10)
-[1] pry(main)&amp;gt; DateTime.now.end_of_day
-=&amp;gt; Thu, 02 Nov 2017 23:59:59 +0000
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I wonder if it relates to the time zone on the server?&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ heroku run rails c -r production
-Running rails c on ⬢ websiteone-production... ⣟ connecting, run.9360 ⢿Standard-1X)
-                                              ⣷
-Running rails c on ⬢ websiteone-production... up, run.9360 (Standard-1X)
-DateTime.now.end_of_day
-
-Loading production environment (Rails 4.2.10)
-irb(main):001:0&amp;gt; DateTime.now.end_of_day
-=&amp;gt; Thu, 02 Nov 2017 23:59:59 +0000
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Okay, both server and my local machine running in UTC it seems &amp;hellip;  I potter about looking at the scrums, and I think I know the issue.  We are looking at the &lt;code&gt;updated_at&lt;/code&gt; time rather than &lt;code&gt;created_at&lt;/code&gt; and if I push the video attachment later then the previous days scrum is showing up in the active window.  So options include switching like so:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;recent_hangouts&lt;/span&gt;
-    &lt;span class="n"&gt;event_instances&lt;/span&gt;
-      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'created_at BETWEEN ? AND ?'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;days&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;minutes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;end_of_day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;order&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;created_at: :desc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;updated_at&lt;/code&gt; was more important when we had the Google hangout API live pinging our system, which doesn&amp;rsquo;t happen now.  Maybe we can get that again with Jitsi, but even then I&amp;rsquo;m not sure this &lt;code&gt;recent_hangouts&lt;/code&gt; method needs to work against the updated_at info - let&amp;rsquo;s make that change and see if if breaks any tests &amp;hellip; while that&amp;rsquo;s running I can think about the test that might expose the flaw &amp;hellip; (all the hangout cukes pass).&lt;/p&gt;
-
-&lt;p&gt;Funny running the full set I got a new error I never saw:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;SecurityError: DOM Exception 18: An attempt was made to break through the security policy of the user agent.
-
-  phantomjs://code/connection.js:9
-  phantomjs://code/connection.js:9 in Connection
-  phantomjs://code/main.js:8 in Poltergeist
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In the meantime I think I saw how a simple change to &lt;code&gt;updated_at&lt;/code&gt; in the database setup for my original bug fix test could expose this wrinkle on the issue &amp;hellip; yes, if I set the last &lt;code&gt;updated_at&lt;/code&gt; value of the previous scrum to after the duration of the event then I see the bug I was getting in production.  So the current bug-wrapping scenario stays as it was, and for good measure I add a comment to the issue in question:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="c"&gt;# wraps bug described in https://github.com/AgileVentures/WebsiteOne/issues/1809&lt;/span&gt;
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Event doesn't ping old youtube URL
-    &lt;span class="err"&gt;Given the date is "2014 Feb 5th 6&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;59am"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; that we're spying on the SlackService
-    &lt;span class="nf"&gt;When&lt;/span&gt; I manually set a hangout link for event &lt;span class="s"&gt;"Repeat Scrum"&lt;/span&gt;
-    &lt;span class="nf"&gt;Then&lt;/span&gt; the Hangout URL is posted in Slack
-    &lt;span class="nf"&gt;And&lt;/span&gt; the Youtube URL is not posted in Slack
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and then having checked that the test captures the bug (perhaps ideally the test itself should explicitly set the &lt;code&gt;updated_at&lt;/code&gt; value?) and then fixed it again I push things up to see how the CI handles them.  I&amp;rsquo;ll add that change as a refactoring ticket and move on I think - running out of time today.  Really want to get this all into production and have it sorted to put my mind at rest &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1939"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1939&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;As &lt;a href="https://medium.com/@cess/agile-ventures-experience-629c0e3028b0"&gt;Cess says &amp;ldquo;sips coffee, grabs another ticket&amp;rdquo;&lt;/a&gt; although I&amp;rsquo;ll be grabbing an admin task or two I think &amp;hellip; :-)&lt;/p&gt;
 </content>
   </entry>
 </feed>
