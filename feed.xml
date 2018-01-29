@@ -5,16 +5,125 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-10T00:00:00+00:00</updated>
+  <updated>2017-11-13T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review New Mobs and Communication</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/13/av-ecosystem-review-new-mobs-and-communication/"/>
+    <id>http://blog.url.com/2017/11/13/av-ecosystem-review-new-mobs-and-communication/</id>
+    <published>2017-11-13T00:00:00+00:00</published>
+    <updated>2018-01-29T20:41:05+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="confusion" src="/images/mob_communication.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;m rushing myself to push out the days schedule on the Slack #general channel as I&amp;rsquo;ve scheduled two new mobs to start:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;@here (note, all times in UTC)
+
+TODAY'S EVENTS
+==============
+
+* 10:30 - 11:30 UTC : WebDev (OdinProject) Mob (for Premium Members - free trial if you like us on fb or follow us on twitter)
+* 12:00 - 12:15 UTC : "Martin Fowler" Scrum and Pair Hookup - https://www.agileventures.org/events/martin-fowler-scrum-and-pair-hookup
+* 13:00 - 14:00 UTC : Deep Learning Mob (for Premium Members - free trial if you like us on fb or follow us on twitter)
+* 15:00 - 16:00 UTC: Phoenix 1.3 Guides Daily Mob (FREE) - 
+https://www.agileventures.org/events/phoenix-1-3-guides-daily-mob-free
+* 15:00 - 15:45 UTC : BetaSaaSers/AutoGraders client meeting - https://www.agileventures.org/events/autograders-client-meeting
+* 16:15 - 16:30 UTC : "Kent Beck" Scrum and Pair Hookup - https://www.agileventures.org/events/kent-beck-scrum-and-pair-hookup
+* 16:30 - 17:00 UTC : SHF Sprint review and planning - https://www.agileventures.org/events/shf-sprint-review-and-planning
+
+Full details at: https://www.agileventures.org/events
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;rsquo;m probably overloading myself.  Sunday afternoon I did two pairing sessions (one paid, one free trial) and the AV Community meeting and I&amp;rsquo;m getting set up for more pairing.  In the community meeting Michael said that mobs are a good source of revenue and that caused me to pause sice I think that while they definitely are a source of revenue, for the amount of time involved in supporting them we&amp;rsquo;re not getting a wonderful return, particularly since we made them weekly and we&amp;rsquo;ve made the Premium mob fee cover attending any of the currently running mobs &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I think both the mobs (and the F2F packages - given that they include all the mobs) are extraordinarily good deals compared to the prices of similar services from other online mentoring services; although I guess it&amp;rsquo;s all a matter of opinion.&lt;/p&gt;
+
+&lt;p&gt;Either way I&amp;rsquo;m getting caught between getting station keeping activities done:&lt;/p&gt;
+
+&lt;p&gt;a) manual slack invites
+b) manual daily schedule posts to Slack
+c) gem upgrades on WSO
+d) checking social media for follows for free trials&lt;/p&gt;
+
+&lt;p&gt;and running free trials and then actual mobs and pairing sessions themselves.  I was half expecting to have private paid projects taking up half my time, but that isn&amp;rsquo;t the case at the moment, so I guess it makes sense to ramp up the mobs and pairing to bring in more AV revenue.&lt;/p&gt;
+
+&lt;p&gt;I need to run more Simplify, Eliminate, Delegate, Automate passes on what I&amp;rsquo;m doing.  I&amp;rsquo;m still holding on to posting the schedules myself because of the difficultly automating them.  Although they did seem to start working on another Slack instance, &amp;hellip; but I also like being able to tweak them daily.  Posting them also forces me to think about the schedule.  What I could do quickly this morning is actually try to re-automate the Slack invites.  At least run the task from the heroku production command line.  We&amp;rsquo;ve been using an undocumented endpoint for a year somewhat reliably, but it seems to have broken:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/slackhq/slack-api-docs/issues/30#issuecomment-341399842"&gt;https://github.com/slackhq/slack-api-docs/issues/30#issuecomment-341399842&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;and so I&amp;rsquo;ve been invited manually through the Slack UI.  Maybe I can see some sort of error if I test via the rails console.  I&amp;rsquo;ve been using the following to get the most recent user emails:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;last&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;email&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here&amp;rsquo;s our invite code:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SlackInviteJob&lt;/span&gt;
+  &lt;span class="kp"&gt;include&lt;/span&gt; &lt;span class="no"&gt;SuckerPunch&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Job&lt;/span&gt;
+
+  &lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'https://agileventures.slack.com/api/users.admin.invite'&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;uri&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;URI&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt; &lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Net&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;HTTP&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;post_form&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="ss"&gt;channels: &lt;/span&gt;&lt;span class="s1"&gt;'C02G8J689,C0285CSUH,C02AA0ARR'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="ss"&gt;token: &lt;/span&gt;&lt;span class="no"&gt;Slack&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;AUTH_TOKEN&lt;/span&gt;
+    &lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;
+    &lt;span class="n"&gt;json_response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;body&lt;/span&gt;
+    &lt;span class="n"&gt;slack_error_message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'error'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;json_response&lt;/span&gt;
+  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
+    &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
+  &lt;span class="k"&gt;ensure&lt;/span&gt;
+    &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'ok'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+      &lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slack_error_message&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;deliver_later&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;SlackInviteJob&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'guravareddy.jetlee@gmail.com'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which gives me the following error:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;ActiveJob::SerializationError: Unsupported argument type: NameError
+    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/arguments.rb:71:in `serialize_argument'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/arguments.rb:35:in `block in serialize'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/arguments.rb:35:in `map'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/arguments.rb:35:in `serialize'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/core.rb:86:in `serialize_arguments'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/core.rb:72:in `serialize'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/queue_adapters/inline_adapter.rb:14:in `enqueue'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/enqueuing.rb:71:in `block in enqueue'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:117:in `call'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:505:in `call'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:498:in `block (2 levels) in around'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:343:in `block (2 levels) in simple'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/logging.rb:14:in `block (3 levels) in &amp;lt;module:Logging&amp;gt;'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/logging.rb:43:in `block in tag_logger'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and that does not make sense to me.  What I&amp;rsquo;d hope is that all the error handling that we&amp;rsquo;ve installed would tell us when things like this are going wrong.  No.  Nor does AirBrake seem to tell us about this kind of stuff.  Configuration is all off I guess.&lt;/p&gt;
+
+&lt;p&gt;Ah, okay, there is a piece of our code in the extended error message:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:92:in `__run_callbacks__'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:778:in `_run_enqueue_callbacks'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:81:in `run_callbacks'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/enqueuing.rb:67:in `enqueue'
+    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/configured_job.rb:13:in `perform_later'
+    from /app/vendor/bundle/ruby/2.3.0/gems/actionmailer-4.2.10/lib/action_mailer/message_delivery.rb:112:in `enqueue_delivery'
+    from /app/vendor/bundle/ruby/2.3.0/gems/actionmailer-4.2.10/lib/action_mailer/message_delivery.rb:68:in `deliver_later'
+    from /app/app/jobs/slack_invite_job.rb:21:in `perform'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It looks like somehow our AdminMailer is failing &amp;hellip; Can I run the internals directly?  I can and it seems like it worked for me, but interestingly I couldn&amp;rsquo;t get the slack auth token via &lt;code&gt;Slack::AUTH_TOKEN&lt;/code&gt;.  I had to hard code it.  I also tried it with nil, and seemed to be able to get an error message delivered.   I guess we need error catching on the admin mailing, and I need to defend against nil tokens maybe?  Perhaps I can fix that all up tomorrow &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Confusion Reigns</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/10/av-ecosystem-review-confusion-reigns/"/>
     <id>http://blog.url.com/2017/11/10/av-ecosystem-review-confusion-reigns/</id>
     <published>2017-11-10T00:00:00+00:00</published>
-    <updated>2018-01-26T09:38:12+00:00</updated>
+    <updated>2018-01-25T19:23:16+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -36,7 +145,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/11/09/av-ecosystem-review-locking-things-down/"/>
     <id>http://blog.url.com/2017/11/09/av-ecosystem-review-locking-things-down/</id>
     <published>2017-11-09T00:00:00+00:00</published>
-    <updated>2018-01-26T09:38:12+00:00</updated>
+    <updated>2018-01-24T21:09:45+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -83,7 +192,7 @@ nil
     <link rel="alternate" href="http://blog.url.com/2017/11/08/av-ecosystem-review-performance-testing/"/>
     <id>http://blog.url.com/2017/11/08/av-ecosystem-review-performance-testing/</id>
     <published>2017-11-08T00:00:00+00:00</published>
-    <updated>2018-01-26T09:38:12+00:00</updated>
+    <updated>2018-01-23T20:55:35+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -134,7 +243,7 @@ To heroku.com:websiteone-develop.git
     <link rel="alternate" href="http://blog.url.com/2017/11/07/av-ecosystem-review-calendaring-scheduling/"/>
     <id>http://blog.url.com/2017/11/07/av-ecosystem-review-calendaring-scheduling/</id>
     <published>2017-11-07T00:00:00+00:00</published>
-    <updated>2018-01-26T09:38:12+00:00</updated>
+    <updated>2018-01-22T20:48:23+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -172,7 +281,7 @@ To heroku.com:websiteone-develop.git
     <link rel="alternate" href="http://blog.url.com/2017/11/06/av-ecosystem-review-nicely-formatted-slack-updates/"/>
     <id>http://blog.url.com/2017/11/06/av-ecosystem-review-nicely-formatted-slack-updates/</id>
     <published>2017-11-06T00:00:00+00:00</published>
-    <updated>2018-01-26T09:38:12+00:00</updated>
+    <updated>2018-01-18T20:48:30+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -210,53 +319,6 @@ cucumber -p second_try features/hangouts/hangout.feature:68 # Scenario: Display 
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;which basically fixed everything once I added the relevant id in the places where the hangout button appears.  So I went ahead and merged in the messaging format changes for the Slack notifications.  Reviewed a few dependabot gem upgrade PRs, and I&amp;rsquo;m now waiting for the CI to pass on the Hangout button fix.  I&amp;rsquo;d really like to get that out today.  I&amp;rsquo;d love to have the Slack message changes out before the first scrum, but that&amp;rsquo;s in 20 minutes now, so probably no chance of that.  Maybe by the afternoon one.  Okay, one step at a time, keep plodding on.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Tying Up the Week</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/03/av-ecosystem-review-tying-up-the-week/"/>
-    <id>http://blog.url.com/2017/11/03/av-ecosystem-review-tying-up-the-week/</id>
-    <published>2017-11-03T00:00:00+00:00</published>
-    <updated>2018-01-26T09:38:12+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="tying up" src="/images/tying_up.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I didn&amp;rsquo;t manage to get the &lt;code&gt;updated_at&lt;/code&gt; -&amp;gt; &lt;code&gt;created_at&lt;/code&gt; fix deployed in advance of the Kent Beck scrum yesterday, so I still can&amp;rsquo;t say for certain that I have fixed the bug where the old YouTube link gets posted on daily events.  I believe everything is deployed now, so we&amp;rsquo;ll have a proper test of that today.  Gosh I really hope there isn&amp;rsquo;t some other concealed bug.  I&amp;rsquo;d hoped to bash out a fix and quickly move on to other things, but it seems to have take all week.&lt;/p&gt;
-
-&lt;p&gt;That said I have got a &amp;ldquo;Premium Mob&amp;rdquo; ad added to the AdWords and although it&amp;rsquo;s not live yet, I showed it in the marketing meeting along with a slew of other ideas that seemed to go down quite well.  Lara&amp;rsquo;s going to configure the keywords and ad groups and get that out, so I can focus on other things.  Thanks Lara!  I haven&amp;rsquo;t encountered any 500 errors trying to load events pages this week, but I also don&amp;rsquo;t see any big improvement in the aggregate stats, weird.  Still that brings me back to the set of things I thought of from reviewing the waffle board earlier in the week:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;tawk.to site integrated chat system&lt;/li&gt;
-&lt;li&gt;replacing the mercury editor so we can move to Rails 5&lt;/li&gt;
-&lt;li&gt;supporting private events&lt;/li&gt;
-&lt;li&gt;looking at long running cukes&lt;/li&gt;
-&lt;li&gt;hosting our own jitsi&lt;/li&gt;
-&lt;li&gt;making main page counter dynamic&lt;/li&gt;
-&lt;li&gt;notifying project creator when people join project&lt;/li&gt;
-&lt;li&gt;having getting started page tick off progress&lt;/li&gt;
-&lt;li&gt;better modelling of premium users&lt;/li&gt;
-&lt;li&gt;allowing premium users to change payment methods&lt;/li&gt;
-&lt;li&gt;start hangout button not working &amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The &amp;ldquo;Start hangout&amp;rdquo; button feels particularly problematic as students from the MOOC will try to use it and I think it will just not work.  Perhaps a quick disabling of it is in order &amp;hellip; I&amp;rsquo;m also full of thoughts from the LocalSupport meeting yesterday and wonder if AV ecosystem review blogs should extend to cover the operational flow of projects like LocalSupport?&lt;/p&gt;
-
-&lt;p&gt;I think I&amp;rsquo;ll get a quick something on it started &amp;hellip; checking the #websiteone channel I notice some voting has gone on in async votes I started during the week - that&amp;rsquo;s cool.  I update the tickets with the votes (would be great if that happened automatically), and add some labels for &amp;ldquo;beginner-friendly&amp;rdquo; and &amp;ldquo;up-for-grabs&amp;rdquo;, as well as assigning myself to the &amp;ldquo;remove start hangout on air button ticket&amp;rdquo;.  I create a branch and hack out the button to replace it with:&lt;/p&gt;
-&lt;pre class="highlight erb"&gt;&lt;code&gt; &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;button_to&lt;/span&gt; &lt;span class="s1"&gt;'Start Hangout Instructions'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'https://support.google.com/youtube/answer/7083786'&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which gives us a bit of a boilerplate start:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ailmb73picj4oxh/Screenshot%202017-11-03%2010.37.37.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;but at least it&amp;rsquo;s a start &amp;hellip; will need some styling - actually that&amp;rsquo;s not too difficult to add:&lt;/p&gt;
-&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;button_to&lt;/span&gt; &lt;span class="s1"&gt;'Start Hangout Instructions'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'https://support.google.com/youtube/answer/7083786'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;class: &lt;/span&gt;&lt;span class="s2"&gt;"btn btn-primary"&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and I can also make it open in a new tab:&lt;/p&gt;
-&lt;pre class="highlight erb"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;button_to&lt;/span&gt; &lt;span class="s1"&gt;'Start Hangout Instructions'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'https://support.google.com/youtube/answer/7083786'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;class: &lt;/span&gt;&lt;span class="s2"&gt;"btn btn-primary"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;form: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;target: &lt;/span&gt;&lt;span class="s1"&gt;'_blank'&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So now we&amp;rsquo;ll have to see what tests that all breaks, but really this needs to get out, since we&amp;rsquo;ve currently got a dangerous broken feature in production &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
