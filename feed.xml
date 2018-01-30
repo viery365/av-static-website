@@ -5,16 +5,156 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-13T00:00:00+00:00</updated>
+  <updated>2017-11-14T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Catching Everything Possible</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/14/av-ecosystem-review-catching-everything-possible/"/>
+    <id>http://blog.url.com/2017/11/14/av-ecosystem-review-catching-everything-possible/</id>
+    <published>2017-11-14T00:00:00+00:00</published>
+    <updated>2018-01-30T21:02:34+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="confusion" src="/images/catching.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;9:20am blogface start - go me!  So I really want to get on to working on jitsi on the server, but I got my teeth into this Slack invite yesterday, and I really want to push up some more robust code that will allow this process of inviting new users into Slack to be re-automated.  Yesterday I seemed to be able to successfully invite someone from the rRails command line on Heroku, which makes it seem like Slack&amp;rsquo;s unofficial admin invite endpoint is still working, but that there is problem with the code when running in production.  Here&amp;rsquo;s the code again:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SlackInviteJob&lt;/span&gt;
+  &lt;span class="kp"&gt;include&lt;/span&gt; &lt;span class="no"&gt;SuckerPunch&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Job&lt;/span&gt;
+
+  &lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'https://agileventures.slack.com/api/users.admin.invite'&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;uri&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;URI&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt; &lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Net&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;HTTP&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;post_form&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="ss"&gt;channels: &lt;/span&gt;&lt;span class="s1"&gt;'C02G8J689,C0285CSUH,C02AA0ARR'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="ss"&gt;token: &lt;/span&gt;&lt;span class="no"&gt;Slack&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;AUTH_TOKEN&lt;/span&gt;
+    &lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;
+    &lt;span class="n"&gt;json_response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;body&lt;/span&gt;
+    &lt;span class="n"&gt;slack_error_message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'error'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;json_response&lt;/span&gt;
+  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
+    &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
+  &lt;span class="k"&gt;ensure&lt;/span&gt;
+    &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'ok'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+      &lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slack_error_message&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;deliver_later&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There seemed to be some error when calling the AdminMailer &lt;code&gt;ActiveJob::SerializationError: Unsupported argument type: NameError&lt;/code&gt; which I don&amp;rsquo;t understand. I google it and there&amp;rsquo;s an &lt;a href="https://stackoverflow.com/questions/40894727/activejobserializationerror-unsupported-argument-type-time-datetime"&gt;SO post&lt;/a&gt; on how this might be related to JSON not being able to handled by a job.  Possibly the &lt;code&gt;slack_error_message&lt;/code&gt; being a nested JSON object that can&amp;rsquo;t be handled by the AdminMailer.&lt;/p&gt;
+
+&lt;p&gt;The other thing I was seeing was that from the Rails command line the &lt;code&gt;Slack::AUTH_TOKEN&lt;/code&gt; is nil, although it definitely worked in the past.  I see we have a couple of closed tickets for previous fixes of this kind of issue:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;[feature switched off](https://github.com/AgileVentures/WebsiteOne/issues/1434]&lt;/li&gt;
+&lt;li&gt;[development token expired](https://github.com/AgileVentures/WebsiteOne/issues/1247]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I&amp;rsquo;ve renewed the token and the feature is active.  Right now I&amp;rsquo;m struggling with finding a ticket to attach this to.  I think I&amp;rsquo;m going to open a chore just to improve the robustness of the SlackInviteJob:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1962"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1962&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;and I started an async vote on that.  I&amp;rsquo;m going to start by reviewing the test for this job:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;SlackInviteJob&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;SlackInviteJob&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s1"&gt;'random@random.com'&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;stub_const&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Slack::AUTH_TOKEN'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'test'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'sends a post request to invite the user to slack and returns the proper response'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;stub_request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:post&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;SlackInviteJob&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;
+        &lt;span class="nf"&gt;to_return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;body: &lt;/span&gt;&lt;span class="s1"&gt;'{"ok": true}'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'ok'&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;be_truthy&lt;/span&gt;
+    &lt;span class="n"&gt;assert_requested&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:post&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;SlackInviteJob&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;times: &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;req&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;body&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="s2"&gt;"email=&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;CGI&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;escape&lt;/span&gt; &lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;amp;channels=&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;CGI&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;escape&lt;/span&gt; &lt;span class="s1"&gt;'C02G8J689,C0285CSUH,C02AA0ARR'&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;amp;token=test"&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'when invite attempt fails notify admin'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;StandardError&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt; &lt;span class="s1"&gt;'boom!'&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;stub_request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:post&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;SlackInviteJob&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_raise&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'sends the email later'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive_message_chain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:deliver_later&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'includes information about user and error'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive_message_chain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:deliver_later&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'when slack response not ok should notify admin'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;stub_request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:post&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;SlackInviteJob&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;body: &lt;/span&gt;&lt;span class="s1"&gt;'{"ok": false, "error": "already invited"}'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'sends the email later'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive_message_chain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:deliver_later&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'includes information about user and error'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive_message_chain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:deliver_later&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"already invited"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which basically looks okay, and passes locally.  What I&amp;rsquo;m suspicious of is this &lt;code&gt;Slack::AUTH_TOKEN&lt;/code&gt;.  We have a Slack initializer:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Slack&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;configure&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;token&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ENV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'SLACK_AUTH_TOKEN'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;logger&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which is part of the &lt;a href="https://github.com/slack-ruby/slack-ruby-client"&gt;SlackRubyClient&lt;/a&gt; that we&amp;rsquo;re using.  There&amp;rsquo;s no mention of &lt;code&gt;Slack::AUTH_TOKEN&lt;/code&gt; in that gem, and locally I can&amp;rsquo;t get it to work, although I can refer to the token directly:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[3] pry(main)&amp;gt; Slack.config
+=&amp;gt; Slack::Config
+[4] pry(main)&amp;gt; Slack.config.token
+=&amp;gt; "xoxb-asdafasdfafafsafsasfasfafsaff"
+[5] pry(main)&amp;gt; Slack::AUTH_TOKEN
+NameError: uninitialized constant Slack::AUTH_TOKEN
+from (pry):5:in `&amp;lt;main&amp;gt;'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I think I&amp;rsquo;m going to follow my first intuition which was to add dependency injection to this gem rather than stubbing the constant as we do.  Also I guess what we don&amp;rsquo;t have is an acceptance test that might flush out this kind of bug.  Hmm.  Let&amp;rsquo;s start with dependency injection &amp;hellip; I go with:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;token&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Slack&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;token&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;StandardError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'token is nil'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;token&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;nil?&lt;/span&gt;
+    &lt;span class="n"&gt;uri&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;URI&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt; &lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Net&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;HTTP&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;post_form&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="ss"&gt;channels: &lt;/span&gt;&lt;span class="s1"&gt;'C02G8J689,C0285CSUH,C02AA0ARR'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="ss"&gt;token: &lt;/span&gt;&lt;span class="n"&gt;token&lt;/span&gt;
+    &lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I feel like I want better backup for the AdminMailer, but I am really at a loss as to how to defend against this serialization error.  As I google more I get the sense that the problem may come from trying to serialize the thing to deliver later.  Somehow serialising doesn&amp;rsquo;t work for some data structures and that&amp;rsquo;s needed for &lt;code&gt;deliver_later&lt;/code&gt; so I&amp;rsquo;m going to try with:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;try&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:to_json&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;slack_error_message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;try&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:to_json&lt;/span&gt;&lt;span class="p"&gt;)).&lt;/span&gt;&lt;span class="nf"&gt;deliver_later&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;which is now being tested with a partial match:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;String&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;because running &lt;code&gt;to_json&lt;/code&gt; on the error ends up including the full stack chase and the line numbers will vary from machine to machine, so we just match against a String.  Okay, some progress I think - let&amp;rsquo;s get this into production and see what happens :-)&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review New Mobs and Communication</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/13/av-ecosystem-review-new-mobs-and-communication/"/>
     <id>http://blog.url.com/2017/11/13/av-ecosystem-review-new-mobs-and-communication/</id>
     <published>2017-11-13T00:00:00+00:00</published>
-    <updated>2018-01-29T20:41:05+00:00</updated>
+    <updated>2018-01-30T20:53:19+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -274,51 +414,6 @@ To heroku.com:websiteone-develop.git
     &lt;span class="na"&gt;enabled&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= ENV['GET_NEXT_SCRUM'] %&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Quick tests with ENV var on and off locally make it seem like this is all working.  Okay, let&amp;rsquo;s get it on staging and run some load tests &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Nicely Formatted Slack Updates</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/06/av-ecosystem-review-nicely-formatted-slack-updates/"/>
-    <id>http://blog.url.com/2017/11/06/av-ecosystem-review-nicely-formatted-slack-updates/</id>
-    <published>2017-11-06T00:00:00+00:00</published>
-    <updated>2018-01-18T20:48:30+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="tying up" src="/images/nicely_formatted_slack_messages.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Urgh, stomach bug yesterday so I had to cancel Sunday free trial Premium F2F pairing.  Still weak today, but at least it seems we finally fixed the youtube link extra posting issue once I rolled out the &lt;code&gt;updated_at&lt;/code&gt; &amp;ndash;&amp;gt; &lt;code&gt;created_at&lt;/code&gt; switch for the &lt;code&gt;recent_hangouts&lt;/code&gt; method on events.  I think this week might need to focus on performance or maybe on our jitsi server.  Oh yes, and I&amp;rsquo;d started on trying to fix up our broken &amp;ldquo;start hangout&amp;rdquo; button &amp;hellip; I&amp;rsquo;d left the tests running over the weekend.  The event show view spec is failing.  I decide to delete that - our acceptance tests should check the user interface and we should force logic out of the views to have them tested in unit tests.  With that the specs are passing, and we&amp;rsquo;ll see about the cukes.&lt;/p&gt;
-
-&lt;p&gt;In the meantime I&amp;rsquo;ll just bash out this change I&amp;rsquo;ve finally settled on for the Slack message updates for hangouts and YouTube updates, or I would if I hadn&amp;rsquo;t just kicked off a cuke test run locally - doh, I&amp;rsquo;ve pushed the deleted view spec to the branch, so CI will build it.  I&amp;rsquo;m weak from not eating yesterday - I can feel today will have lots of similar simple mistakes.  Do I do that performance check on staging to see if removing the information about the next upcoming hangout will make a big impact on our performance?  That&amp;rsquo;d require my local system to not be running all the cukes it is right now, urgh.  So I just kill the local run of the cukes and get the tiny messaging format fix in for the Slack messages.  Oh wow, now that I have it in ruby/rspec the change is so extraordinarily simple (compared to the CoffeeScript Hubot Microservice we had set up) that I can almost forgive myself for not completing the Hangout button fix that I&amp;rsquo;d started on Friday.   &lt;/p&gt;
-
-&lt;p&gt;In the meantime the CI gives me the failures for the hangout button removal:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  @javascript
-  Scenario: Display hangout button on a project's page   # features/hangouts/hangout.feature:68
-    Given I am a member of project "WebsiteOne"          # features/step_definitions/projects_steps.rb:50
-    And I am on the "Show" page for project "WebsiteOne" # features/step_definitions/basic_steps.rb:255
-    Then I should see hangout button                     # features/step_definitions/hangout_steps.rb:11
-      expected to find css "#liveHOA-placeholder" but there were no matches (RSpec::Expectations::ExpectationNotMetError)
-      ./features/step_definitions/hangout_steps.rb:15:in `/^I should (not )?see hangout button$/'
-      features/hangouts/hangout.feature:71:in `Then I should see hangout button'
-
-Failing Scenarios:
-cucumber -p second_try features/documents.feature:156 # Scenario: Insert media model accepts full url youtube links
-cucumber -p second_try features/events/show_event.feature:36 # Scenario Outline: Do not show hangout button until 10 minutes before scheduled start time, and while event is running, Examples (#1)
-cucumber -p second_try features/events/show_event.feature:37 # Scenario Outline: Do not show hangout button until 10 minutes before scheduled start time, and while event is running, Examples (#2)
-cucumber -p second_try features/events/show_event.feature:40 # Scenario Outline: Do not show hangout button until 10 minutes before scheduled start time, and while event is running, Examples (#5)
-cucumber -p second_try features/hangouts/hangout.feature:31 # Scenario: Create a hangout for a scrum event
-cucumber -p second_try features/hangouts/hangout.feature:68 # Scenario: Display hangout button on a project's page
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So I adjusted the relevant hangout check step definition to:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Then&lt;/span&gt; &lt;span class="sr"&gt;/^I should (not )?see hangout button$/&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;absent&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;absent&lt;/span&gt;
-    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;not_to&lt;/span&gt; &lt;span class="n"&gt;have_css&lt;/span&gt; &lt;span class="s1"&gt;'#hoa_instructions'&lt;/span&gt;
-  &lt;span class="k"&gt;else&lt;/span&gt;
-    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have_css&lt;/span&gt; &lt;span class="s2"&gt;"#hoa_instructions"&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which basically fixed everything once I added the relevant id in the places where the hangout button appears.  So I went ahead and merged in the messaging format changes for the Slack notifications.  Reviewed a few dependabot gem upgrade PRs, and I&amp;rsquo;m now waiting for the CI to pass on the Hangout button fix.  I&amp;rsquo;d really like to get that out today.  I&amp;rsquo;d love to have the Slack message changes out before the first scrum, but that&amp;rsquo;s in 20 minutes now, so probably no chance of that.  Maybe by the afternoon one.  Okay, one step at a time, keep plodding on.&lt;/p&gt;
 </content>
   </entry>
 </feed>
