@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Running Repairs</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_11 x2017_11_15 x2017_11_15_av-ecosystem-review-running-repairs x2017_11_15_av-ecosystem-review-running-repairs_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/11/15/av-ecosystem-review-running-repairs/">AV EcoSystem Review Running Repairs</a></h2>
+        <h5 class='date'>15 Nov 2017</h5>
+    <p><img alt="running repairs" src="/images/running_repairs.jpg" /></p>
+
+<p>9:24 am blog face, but no&ndash;9:29 am&ndash;since I got distracted by Slack and email.  Yesterday I rolled out some code to make the automated Slack sign up more robust.  The code is on production now, and so maybe a test from the heroku command line is the way to go &hellip;</p>
+<pre class="highlight shell"><code><span class="gp">irb(main):003:0&gt; </span>SlackInviteJob.new.perform<span class="o">(</span>User.last.email<span class="o">)</span>
+<span class="o">[</span>ActiveJob] <span class="o">[</span>ActionMailer::DeliveryJob] <span class="o">[</span>ff673d08-8c78-403c-a740-268417c9a4c7] Performing ActionMailer::DeliveryJob from Inline<span class="o">(</span>mailers<span class="o">)</span> with arguments: <span class="s2">"AdminMailer"</span>, <span class="s2">"failed_to_invite_user_to_slack"</span>, <span class="s2">"deliver_now"</span>, <span class="s2">"email@email.com"</span>, nil, <span class="s2">"</span><span class="se">\"</span><span class="s2">already_invited</span><span class="se">\"</span><span class="s2">"</span>
+<span class="o">[</span>ActiveJob] <span class="o">[</span>ActionMailer::DeliveryJob] <span class="o">[</span>ff673d08-8c78-403c-a740-268417c9a4c7]   Rendered admin_mailer/failed_to_invite_user_to_slack.html.erb within layouts/mailer <span class="o">(</span>0.9ms<span class="o">)</span>
+<span class="o">[</span>ActiveJob] <span class="o">[</span>ActionMailer::DeliveryJob] <span class="o">[</span>ff673d08-8c78-403c-a740-268417c9a4c7] 
+Sent mail to support@agileventures.org <span class="o">(</span>215.3ms<span class="o">)</span>
+<span class="o">[</span>ActiveJob] <span class="o">[</span>ActionMailer::DeliveryJob] <span class="o">[</span>ff673d08-8c78-403c-a740-268417c9a4c7] Performed ActionMailer::DeliveryJob from Inline<span class="o">(</span>mailers<span class="o">)</span> <span class="k">in </span>386.04ms
+<span class="o">[</span>ActiveJob] Enqueued ActionMailer::DeliveryJob <span class="o">(</span>Job ID: ff673d08-8c78-403c-a740-268417c9a4c7<span class="o">)</span> to Inline<span class="o">(</span>mailers<span class="o">)</span> with arguments: <span class="s2">"AdminMailer"</span>, <span class="s2">"failed_to_invite_user_to_slack"</span>, <span class="s2">"deliver_now"</span>, <span class="s2">"email@email.com"</span>, nil, <span class="s2">"</span><span class="se">\"</span><span class="s2">already_invited</span><span class="se">\"</span><span class="s2">"</span>
+<span class="gp">=&gt; </span><span class="o">{</span><span class="s2">"ok"</span><span class="o">=</span>&gt;false, <span class="s2">"error"</span><span class="o">=</span>&gt;<span class="s2">"already_invited"</span><span class="o">}</span>
+</code></pre>
+<p>Now that looks like we might be in business.  The most recently signed up member has already been invited, and I get a sensible error message when running the SlackInviteJob from the command line.  Let&rsquo;s see if the last 50 have all been invited?  Seven haven&rsquo;t.  That&rsquo;s the lowest number over the last ten days that I&rsquo;ve been manually inviting.  Those seven could have signed up before the deploy.  The acid test will be tomorrow when we&rsquo;ll see if it&rsquo;s zero. If it&rsquo;s not, there&rsquo;s still something to fix.</p>
+
+<p>Robert had been making the point that we needed to make it easier for folks to get into Slack and that the page that was the top hit on Google for &ldquo;Agile Ventures Slack&rdquo; was an <a href="https://www.agileventures.org/projects/agileventures-community/documents/introduction-to-the-agileventures-slack-channel">old one</a>, so I quickly updated that to ensure it mentioned the new sign up process.</p>
+
+<p>The other running repair we need to make is on the events system where non-repeating single events are not showing up in the future event list.  Maybe they never did?  We need an acceptance test to expose this.  Something like this:</p>
+<pre class="highlight gherkin"><code><span class="nt">@vcr</span>
+<span class="kd">Feature</span><span class="p">:</span> List Single Events
+  As a site user
+  So I can find events relevant to me that are happening now
+  I would like to see one off events
+
+  <span class="kn">Background</span><span class="p">:</span>
+    <span class="err">Given the following projects exist</span><span class="p">:</span>
+      <span class="p">|</span> <span class="nv">title</span> <span class="p">|</span> <span class="nv">description</span>          <span class="p">|</span> <span class="nv">pitch</span> <span class="p">|</span> <span class="nv">status</span> <span class="p">|</span>
+      <span class="p">|</span> <span class="n">cs169</span> <span class="p">|</span> <span class="n">greetings</span> <span class="n">earthlings</span> <span class="p">|</span>       <span class="p">|</span> <span class="n">active</span> <span class="p">|</span>
+    <span class="err">Given following events exist</span><span class="p">:</span>
+      <span class="p">|</span> <span class="nv">name</span> <span class="p">|</span> <span class="nv">description</span>      <span class="p">|</span> <span class="nv">category</span>         <span class="p">|</span> <span class="nv">start_datetime</span>          <span class="p">|</span> <span class="nv">duration</span> <span class="p">|</span> <span class="nv">repeats</span> <span class="p">|</span> <span class="nv">time_zone</span> <span class="p">|</span> <span class="nv">project</span> <span class="p">|</span> 
+      <span class="p">|</span> <span class="n">Once</span> <span class="p">|</span> <span class="n">Once</span> <span class="n">off</span> <span class="n">meeting</span> <span class="p">|</span> <span class="n">Pair</span> <span class="n">Programming</span> <span class="p">|</span> <span class="n">2016/05/02</span> <span class="n">07:00:00</span> <span class="n">UTC</span> <span class="p">|</span> <span class="n">150</span>      <span class="p">|</span> <span class="n">never</span>   <span class="p">|</span> <span class="n">UTC</span>       <span class="p">|</span>  <span class="n">cs169</span>  <span class="p">|</span>
+
+  <span class="kn">Scenario</span><span class="p">:</span> Show correct timezone
+    <span class="err">Given the date is "2016/05/01 09</span><span class="p">:</span><span class="err">15</span><span class="p">:</span><span class="err">00</span> <span class="err">UTC"</span>
+    <span class="nf">And</span> I am on events index page
+    <span class="nf">Then</span> I should see <span class="s">"Once"</span>
+    <span class="err">And the local time element should be set to "2016-05-02T07</span><span class="p">:</span><span class="err">00</span><span class="p">:</span><span class="err">00Z"</span>
+
+</code></pre>
+<p>However that passes out of the box, so perhaps there&rsquo;s something about when there are also repeating events in the mix &hellip;?  Maybe I should hook locally on the debugger?  I do that and see that a newly created event is not listed in the upcoming events.  It seems that a newly created single event has it&rsquo;s repeat_ends set to true by default and so it&rsquo;s not captured in the list of future events:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">base_future_events</span><span class="p">(</span><span class="n">project</span><span class="p">)</span>
+    <span class="n">project</span><span class="p">.</span><span class="nf">nil?</span> <span class="p">?</span> <span class="no">Event</span><span class="p">.</span><span class="nf">future_events</span> <span class="p">:</span> <span class="no">Event</span><span class="p">.</span><span class="nf">future_events</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">project_id: </span><span class="n">project</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">future_events</span>
+    <span class="no">Event</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="s1">'repeat_ends = false OR repeat_ends IS NULL OR repeat_ends_on &gt; ?'</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">upcoming_events</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="kp">nil</span><span class="p">)</span>
+    <span class="n">events</span> <span class="o">=</span> <span class="no">Event</span><span class="p">.</span><span class="nf">base_future_events</span><span class="p">(</span><span class="n">project</span><span class="p">).</span><span class="nf">inject</span><span class="p">([])</span> <span class="k">do</span> <span class="o">|</span><span class="n">memo</span><span class="p">,</span> <span class="n">event</span><span class="o">|</span>
+      <span class="n">memo</span> <span class="o">&lt;&lt;</span> <span class="n">event</span><span class="p">.</span><span class="nf">next_occurrences</span>
+    <span class="k">end</span><span class="p">.</span><span class="nf">flatten</span><span class="p">.</span><span class="nf">sort_by</span> <span class="p">{</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span> <span class="n">e</span><span class="p">[</span><span class="ss">:time</span><span class="p">]</span> <span class="p">}</span>
+    <span class="no">Event</span><span class="p">.</span><span class="nf">remove_past_events</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre>
+<p>My test was passing because it&rsquo;s not creating the event in the same way that the form does, with <code>repeat_ends</code> set to true. I adjust the test and it fails, and I can get it to pass with the following change:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">future_events</span>
+    <span class="no">Event</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="s1">'repeats = \'never\' OR repeat_ends = false OR repeat_ends IS NULL OR repeat_ends_on &gt; ?'</span><span class="p">,</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">)</span>
+  <span class="k">end</span>
+</code></pre>
+<p>Is this a new thing?  Maybe this never worked.  A complete overhaul of the events system is certainly in order.  There&rsquo;s so much more clean up here, but let&rsquo;s fix the bleed in production first &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
