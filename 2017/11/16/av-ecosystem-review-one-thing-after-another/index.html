@@ -138,41 +138,41 @@ Coverage report generated for RSpec to /Users/tansaku/Documents/GitHub/AgileVent
 <p><img src="https://dl.dropbox.com/s/xzo0oe3pgnquepo/Screenshot%202017-11-16%2009.52.32.png?dl=0" /></p>
 
 <p>and it seems that we can&rsquo;t use the variable <code>ga</code> in the modified sense in the current google analytics code:</p>
-<pre class="highlight plaintext"><code>WebsiteOne.define('GoogleAnalytics', function() {
-  window._gaq = [];
-  window._gaq.push(['_setAccount', 'UA-47795185-1'])
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+<pre class="highlight javascript"><code><span class="nx">WebsiteOne</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">'GoogleAnalytics'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">_gaq</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">_gaq</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="s1">'_setAccount'</span><span class="p">,</span> <span class="s1">'UA-47795185-1'</span><span class="p">])</span>
+  <span class="kd">var</span> <span class="nx">ga</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'script'</span><span class="p">);</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'text/javascript'</span><span class="p">;</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="nx">ga</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'https:'</span> <span class="o">==</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="p">?</span> <span class="s1">'https://ssl'</span> <span class="p">:</span> <span class="s1">'http://www'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'.google-analytics.com/ga.js'</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'script'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">ga</span><span class="p">,</span> <span class="nx">s</span><span class="p">);</span>
 
-  function init() {
-    window._gaq.push(['_trackPageview']);
-  }
+  <span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">_gaq</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="s1">'_trackPageview'</span><span class="p">]);</span>
+  <span class="p">}</span>
 
-  var GA_LOCAL_STORAGE_KEY = 'ga:clientId';
+  <span class="kd">var</span> <span class="nx">GA_LOCAL_STORAGE_KEY</span> <span class="o">=</span> <span class="s1">'ga:clientId'</span><span class="p">;</span>
 
-  // the code below leads to the following error
-  // Uncaught TypeError: ga is not a function
-  //
-  if (window.localStorage) {
-    ga('create', 'UA-47795185-1', {
-      'storage': 'none',
-      'clientId': localStorage.getItem(GA_LOCAL_STORAGE_KEY)
-    });
-    ga(function(tracker) {
-      localStorage.setItem(GA_LOCAL_STORAGE_KEY, tracker.get('clientId'));
-    });
-  }
-  else {
-    ga('create', 'UA-47795185-1', 'auto');
-  }
+  <span class="c1">// the code below leads to the following error</span>
+  <span class="c1">// Uncaught TypeError: ga is not a function</span>
+  <span class="c1">//</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">localStorage</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">ga</span><span class="p">(</span><span class="s1">'create'</span><span class="p">,</span> <span class="s1">'UA-47795185-1'</span><span class="p">,</span> <span class="p">{</span>
+      <span class="s1">'storage'</span><span class="p">:</span> <span class="s1">'none'</span><span class="p">,</span>
+      <span class="s1">'clientId'</span><span class="p">:</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">GA_LOCAL_STORAGE_KEY</span><span class="p">)</span>
+    <span class="p">});</span>
+    <span class="nx">ga</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tracker</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">GA_LOCAL_STORAGE_KEY</span><span class="p">,</span> <span class="nx">tracker</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'clientId'</span><span class="p">));</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">ga</span><span class="p">(</span><span class="s1">'create'</span><span class="p">,</span> <span class="s1">'UA-47795185-1'</span><span class="p">,</span> <span class="s1">'auto'</span><span class="p">);</span>
+  <span class="p">}</span>
 
-  ga('send', 'pageview');
+  <span class="nx">ga</span><span class="p">(</span><span class="s1">'send'</span><span class="p">,</span> <span class="s1">'pageview'</span><span class="p">);</span>
 
-  return {
-    init: init
-  };
-});
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">init</span><span class="p">:</span> <span class="nx">init</span>
+  <span class="p">};</span>
+<span class="p">});</span>
 </code></pre>
 <p>I think what we have here is a mix of old and new GA tracking code, and the problem that none of it actually gets run until we go intro production where google analytics is switched on.  Looking up both old and new code I can&rsquo;t immediately see a way to reconcile them, so I&rsquo;ve commented out the offending code, and so will get that up until we can work out an effective combined approach.</p>
 
