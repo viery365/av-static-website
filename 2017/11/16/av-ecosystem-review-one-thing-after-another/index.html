@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review One Thing After Another</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_17 blog_page_17_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_11 x2017_11_16 x2017_11_16_av-ecosystem-review-one-thing-after-another x2017_11_16_av-ecosystem-review-one-thing-after-another_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,78 +83,108 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/11/16/av-ecosystem-review-one-thing-after-another/">AV EcoSystem Review One Thing After Another</a></h2>
+        <h5 class='date'>16 Nov 2017</h5>
+    <p><img alt="typewriter" src="/images/typewriter.jpg" /></p>
 
-          <p>Page 17 of 27</p>
+<p>Some days it&rsquo;s just one thing after another.  As Wednesday was drawing to a close I was feeling pretty pleased to have fixes out for our Slack invites (confirmed as all the recent sign ups had already been invited this morning), and for one-off events not showing up.  I knew we also had some kind of javascript error affecting the calendar popups on the create event page, but it turns out that some kind of failure in our Google Analytics code is systematically breaking JavaScript througout the site.  I managed to fix that last night by turning off the analytics, but that&rsquo;s a short term fix as we need that working.</p>
 
-            <p><a href="/blog/page/16/">Previous page</a></p>
+<p>Am I just fire-fighting crazily here?  I&rsquo;m thinking about the requests that Federico put in for RSVPs, alerts when members join projects, Fred asking for the jitsi server &hellip;  Anyway this is systemic and we need to report analytics to the trustees.  I was able to replicate the failure on staging - perhaps I can replicate it locally.  I can trigger the error locally by running the server like so:</p>
+<pre class="highlight plaintext"><code>ENABLE_GOOGLE_ANALYTICS=true be rails s
+</code></pre>
+<p>The Jasmine tests work fine even with analytics enabled:</p>
+<pre class="highlight plaintext"><code>→ ENABLE_GOOGLE_ANALYTICS=true bej
+[35019] Puma starting in cluster mode...
+[35019] * Version 3.10.0 (ruby 2.3.1-p112), codename: Russell's Teapot
+[35019] * Min threads: 1, max threads: 16
+[35019] * Environment: development
+[35019] * Process workers: 3
+[35019] * Preloading application
+[35019] * Listening on tcp://0.0.0.0:51775
+[35019] Use Ctrl-C to stop
+Waiting for jasmine server on 51775...
+[35019] - Worker 0 (pid: 35027) booted, phase: 0
+[35019] - Worker 1 (pid: 35028) booted, phase: 0
+[35019] - Worker 2 (pid: 35029) booted, phase: 0
+jasmine server started
+.............................................****..........................
+Pending:
+    eventDatePicker hides event repeat options by default
+      awaiting refactor of related form for use in fixture
 
-          <h2><a href="/2017/01/23/passing_a_threshold/">Passing a Threshold</a></h2>
-          <h3>Jan 23</h3>
-          <p><img alt="threshold" src="/images/threshold.png"></p>
+    eventDatePicker shows event repeat options when event is set to repeat
+      awaiting refactor of related form for use in fixture
 
-<p>I collapsed with my cold after lunch on Friday and didn’t wake up until after the “Kent Beck” scrum time.  I cancelled the remaining meetings for the day and took it easy; doing a little light devops work on WebsiteOne and LocalSupport later in the...</p>
-          <h2><a href="/2017/01/20/under-the-weather/">Under the Weather</a></h2>
-          <h3>Jan 20</h3>
-          <p><img alt="under the weather" src="/images/under_the_weather.jpg"></p>
+    eventDatePicker shows event repeat optional ending when event is set to end
+      awaiting refactor of related form for use in fixture
 
-<p>Today I have mixed feelings.  I’m frustrated to be “under the weather”; my throat has swollen up and I feel exhausted.  A cold I guess.  I’m chewing my way through a ton of raw ginger.  I keep chunks in a little plastic pot so that I can pretty much...</p>
-          <h2><a href="/2017/01/19/punch-drunk/">Punch Drunk</a></h2>
-          <h3>Jan 19</h3>
-          <p><img alt="punch drunk" src="/images/punch_drunk.jpg"></p>
+    eventDatePicker hides event repeat optional ending when event is set to never end
+      awaiting refactor of related form for use in fixture
 
-<p>Feeling pretty rough today, like someone’s been punching me in the head for a while.  Reasonably productive day yesterday.  Got to bed at 10:30pm, but my “good” knee was starting to ache from the new physio exercises I’m doing for my “bad” knee....</p>
-          <h2><a href="/2017/01/18/coding-vs-admin/">Coding vs Admin</a></h2>
-          <h3>Jan 18</h3>
-          <p><img alt="administration" src="/images/administration.jpg"></p>
+75 specs, 0 failures, 4 pending specs
+Coverage report generated for RSpec to /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/coverage. 122 / 3516 LOC (3.47%) covered.
+[35029] ! Detected parent died, dying
+[35028] ! Detected parent died, dying
+[35027] ! Detected parent died, dying
+</code></pre>
+<p>The local error is easier to understand:</p>
 
-<p>Pat was commenting that my recent blogs don’t have so many technical deep dives and are more admin focused.  That’s probably a reflection that I’m doing less coding and more admin recently.  I’ve spent a couple of hours over the last few days trying...</p>
-          <h2><a href="/2017/01/17/server-monitoring/">Server Monitoring</a></h2>
-          <h3>Jan 17</h3>
-          <p><img alt="Server Monitoring" src="/images/server-monitoring.jpg"></p>
+<p><img src="https://dl.dropbox.com/s/xzo0oe3pgnquepo/Screenshot%202017-11-16%2009.52.32.png?dl=0" /></p>
 
-<p>So I’m still forcing myself to think about DevOps in preparation for my talk on Thursday.  Other things being equal I’d be blogging about our new marketing activities and how Google will potentially give us $10,000 a month of AdWords, and how there...</p>
-          <h2><a href="/2017/01/16/hosting-costs/">Hosting Costs</a></h2>
-          <h3>Jan 16</h3>
-          <p><img alt="hosting" src="/images/hosting.jpg"></p>
+<p>and it seems that we can&rsquo;t use the variable <code>ga</code> in the modified sense in the current google analytics code:</p>
+<pre class="highlight plaintext"><code>WebsiteOne.define('GoogleAnalytics', function() {
+  window._gaq = [];
+  window._gaq.push(['_setAccount', 'UA-47795185-1'])
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 
-<p>There’s lots I’d like to talk about.  Premium pairing on new non-profit IT support plans, <a href="https://www.youtube.com/watch?v=P66oJafqqng">helping Kenyan students get started with LocalSupport</a>, <a href="https://www.youtube.com/watch?v=zrz6ct9wIUs">meeting with the LocalSupport client</a>, deploying LocalSupport via the new drie push Github interface,...</p>
-          <h2><a href="/2017/01/13/legacy-maintenance-plans/">Legacy Maintenance Plans</a></h2>
-          <h3>Jan 13</h3>
-          <p><img alt="legacy code" src="/images/legacy_code.jpg"></p>
+  function init() {
+    window._gaq.push(['_trackPageview']);
+  }
 
-<p>When does an app become legacy?  I’d say pretty much as soon as you have anything deployed that anyone is using.  In my experience development on projects can stall and restart, but as long as people are deriving value from the application it needs...</p>
-          <h2><a href="/2017/01/12/deployment-devops/">Deployment DevOps</a></h2>
-          <h3>Jan 12</h3>
-          <p><img alt="devops" src="/images/devops.png"></p>
+  var GA_LOCAL_STORAGE_KEY = 'ga:clientId';
 
-<p>I’m thinking alot about DevOps at the moment.  Partly because I’m giving a talk titled “DevOps on a Budget” a week from today at the remote DevOps conference.  I’m talking to folks on Slack about it, listening to the Ruby Rogues talk about it, listening...</p>
-          <h2><a href="/2017/01/11/dazed-and-confused/">Dazed and Confused</a></h2>
-          <h3>Jan 11</h3>
-          <p><img alt="dazed" src="/images/dazed.jpg"></p>
+  // the code below leads to the following error
+  // Uncaught TypeError: ga is not a function
+  //
+  if (window.localStorage) {
+    ga('create', 'UA-47795185-1', {
+      'storage': 'none',
+      'clientId': localStorage.getItem(GA_LOCAL_STORAGE_KEY)
+    });
+    ga(function(tracker) {
+      localStorage.setItem(GA_LOCAL_STORAGE_KEY, tracker.get('clientId'));
+    });
+  }
+  else {
+    ga('create', 'UA-47795185-1', 'auto');
+  }
 
-<p>I did not manage to catch up on my sleep yesterday and I was up late fixing some coding mistakes, but somehow I don’t feel quite as washed out as yesterday.  I still feel like I’m chess boxing.  Which of the many different things on my list should...</p>
-          <h2><a href="/2017/01/10/tired-but-pushing-on/">Tired but Pushing On</a></h2>
-          <h3>Jan 10</h3>
-          <p><img alt="tired" src="/images/tired.jpg"></p>
+  ga('send', 'pageview');
 
-<p>I’m tired today.  Busy weekend.  Back to coaching kids football Saturday morning, “Bob Martin” scrum, taking eldest to guitar practice and round the supermarket and making supper.  Relatively calm Saturday evening, but then a frantic Sunday, with...</p>
+  return {
+    init: init
+  };
+});
+</code></pre>
+<p>I think what we have here is a mix of old and new GA tracking code, and the problem that none of it actually gets run until we go intro production where google analytics is switched on.  Looking up both old and new code I can&rsquo;t immediately see a way to reconcile them, so I&rsquo;ve commented out the offending code, and so will get that up until we can work out an effective combined approach.</p>
 
-            <p><a href="/blog/page/18/">Next page</a></p>
+<p>I think rather than switching GA code on and off globally we should have different account ids for different instances and set that via ENV vars &hellip;</p>
 
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -212,6 +243,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
