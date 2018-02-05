@@ -5,16 +5,80 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-16T00:00:00+00:00</updated>
+  <updated>2017-11-20T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Behind on Reports</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/20/av-ecosystem-review-behind-on-reports/"/>
+    <id>http://blog.url.com/2017/11/20/av-ecosystem-review-behind-on-reports/</id>
+    <published>2017-11-20T00:00:00+00:00</published>
+    <updated>2018-02-05T22:04:08+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="typewriter" src="/images/../images/reportt.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Totally distracted by Slack and Email, but more importantly behind on reports.  I was just a couple of days late on the NHS HLP monthly report, but I&amp;rsquo;m now a good weekend behind on the AgileVentures monthly report.  These monthly reports are part of the deal with the AgileVentures trustees for my consulting company providing the core AgileVentures support contract.   I have been working through creating the latest one, but the explosion of new mobs and pairing sessions, and procrastination on my part means there&amp;rsquo;s still a chunk to do.  &lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m also massively behind on my usual checkins with Premium members.  We&amp;rsquo;re trying to move the report around so that it&amp;rsquo;s less detailed stats that take me too long to put together and focuses on the progress of the individual premium members.  I&amp;rsquo;d really like a clear day to review where we are with each individual Premium member.  Having created the initial report structure with lots of details I&amp;rsquo;ve kind of fallen into a trap of trying to replicate those details every month.  Should I then burn time trying to automate parts of the report.   Drop some of those stats?&lt;/p&gt;
+
+&lt;p&gt;I just spent ten minutes getting the stats together for the last month of mobs:&lt;/p&gt;
+
+&lt;p&gt;| Date      | Mob Topic | #Attendees | Names                                                 |
+|&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;|&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;|&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;|&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-|
+| 10/13 Fri | React     | 5          | Sam, Fred, Michael and Ose (trial)                    |
+| 10/17 Tue | Rspec     | 5          | Federico, Michael, Siba (trial), Brent and Sigu       |
+| 10/18 Wed | Elixir    | 6          | Sam, Federico, Ryder, Michael, Sigu and Zmago         |
+| 10/20 Fri | React     | 7          | Sam, Federico, Michael, Mikael, Ryder, Zmago and Fred |
+| 10/24 Tue | Rspec     | 3          | Federico, Brent, Dennis (trial) and Michael           |
+| 10/25 Wed | Elixir    | 6          | Federico, Lara, Ryder, Sigu and Fred                  |
+| 10/27 Fri | React     | 4          | Federico, Michael, Mikael and Fred                    |
+| 10/31 Tue | Rspec     | 3          | Federico, Brent and Michael                           |
+| 11/1  Wed | Elixir    | 3          | Sam, Federico, and Ryder                              |
+| 11/3  Fri | React     | 4          | Sam, Federico, Ryder and Fred                         |
+| 11/7 Tue  | Rspec     | 4          | Federico, Sigu, Stella and Brent                      |
+| 11/8 Wed  | Elixir    | 3          | Sam, Federico and Zmago                               |
+| 11/10 Fri | React     | 7          | Sam, Stella, Federico, Mikael, Michael and Fred       |
+| 11/13 Mon | WebDev    | 6          | Sam, Michael, Lara, Fiona, Linda, Kiran               |
+| 11/14 Tue | RSpec     | 3          | Federico, Stella and Brent                            |
+| 11/15 Wed | Elixir    | 3          | Sam, Federico and Zmago                               |
+| 11/17 Fri | React     | 4          | Sam, Fred, Michael and Federico                       |
+| 11/17 Fri | AduRoR    | 3          | Sam, Brent and Bill                                   |&lt;/p&gt;
+
+&lt;p&gt;Do I need to check with everyone before sharing their first names above? I guess I can run it through an anonymizer if anyone is bothered.  I&amp;rsquo;m keen to share these stats, and I&amp;rsquo;m really keen on transparency, but not everyone wants every part of what they do transparent.  &lt;/p&gt;
+
+&lt;p&gt;Now I&amp;rsquo;ve spent another 10 minutes getting all the data on F2F pairing sessions:&lt;/p&gt;
+
+&lt;p&gt;| Date      | F2F Topic     | Who            |
+|&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;|&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;|&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-|
+| 9/14 Thu  | R/Data Mining | Michael        |
+| 9/18 Mon  | Phoenix       | Federico       |
+| 10/16 Mon | Phoenix       | Federico       |
+| 10/17 Tue | Rails/Jitsi   | Sigu (trial)   |
+| 10/17 Tue | Rails         | Will (trial)   |
+| 10/31 Tue | Rails         | Ryder          |
+| 11/6 Mon  | Rails/React   | Sage (trial)   |
+| 11/9 Thu  | R/Data Mining | Michael        |
+| 11/10 Fri | Rails         | Brent          |
+| 11/12 Sun | Rails         | Piotr (trial)  |
+| 11/12 Sun | Rails         | Marian         |
+| 11/14 Tue | Rails         | Stella (trial) |
+| 11/14 Tue | Rails         | Rose           |
+| 11/15 Wed | Rails         | Philip         |
+| 11/16 Thu | Phoenix       | Ben (trial)    |
+| 11/17 Fri | Phoenix       | Ryder          |&lt;/p&gt;
+
+&lt;p&gt;and so with the work from last week on meetings stats and web stats, I&amp;rsquo;ve finished the main stats part of the report, but not the update of individual Premium members, or reaching out to all the Premiums to check how they are doing.  With my schedule today that&amp;rsquo;ll have to be tomorrow &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review One Thing After Another</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/16/av-ecosystem-review-one-thing-after-another/"/>
     <id>http://blog.url.com/2017/11/16/av-ecosystem-review-one-thing-after-another/</id>
     <published>2017-11-16T00:00:00+00:00</published>
-    <updated>2018-02-01T20:06:05+00:00</updated>
+    <updated>2018-02-05T22:01:09+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -25,7 +89,7 @@
 &lt;p&gt;Am I just fire-fighting crazily here?  I&amp;rsquo;m thinking about the requests that Federico put in for RSVPs, alerts when members join projects, Fred asking for the jitsi server &amp;hellip;  Anyway this is systemic and we need to report analytics to the trustees.  I was able to replicate the failure on staging - perhaps I can replicate it locally.  I can trigger the error locally by running the server like so:&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;ENABLE_GOOGLE_ANALYTICS=true be rails s
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The Jasmine tests work fine even with analytics enabled:&lt;/p&gt;
+&lt;p&gt;The Jasmine tests work fine, even with analytics enabled:&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ ENABLE_GOOGLE_ANALYTICS=true bej
 [35019] Puma starting in cluster mode...
 [35019] * Version 3.10.0 (ruby 2.3.1-p112), codename: Russell's Teapot
@@ -101,9 +165,9 @@ Coverage report generated for RSpec to /Users/tansaku/Documents/GitHub/AgileVent
   &lt;span class="p"&gt;};&lt;/span&gt;
 &lt;span class="p"&gt;});&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I think what we have here is a mix of old and new GA tracking code, and the problem that none of it actually gets run until we go intro production where google analytics is switched on.  Looking up both old and new code I can&amp;rsquo;t immediately see a way to reconcile them, so I&amp;rsquo;ve commented out the offending code, and so will get that up until we can work out an effective combined approach.&lt;/p&gt;
+&lt;p&gt;I think what we have here is a mix of old and new GA tracking code, and the problem that none of it actually gets run until we go into production, where google analytics is switched on.  Looking up both old and new code, I can&amp;rsquo;t immediately see a way to reconcile them, so I&amp;rsquo;ve commented out the offending code, and so will get that up until we can work out an effective combined approach.&lt;/p&gt;
 
-&lt;p&gt;I think rather than switching GA code on and off globally we should have different account ids for different instances and set that via ENV vars &amp;hellip;&lt;/p&gt;
+&lt;p&gt;I think rather than switching GA code on and off globally we should have different account ids for different instances, and set that via ENV vars &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -446,53 +510,6 @@ d) checking social media for follows for free trials&lt;/p&gt;
 &lt;p&gt;I have to say I&amp;rsquo;m confused about what I&amp;rsquo;m in the middle of doing.  I&amp;rsquo;ve got two personal phone calls I&amp;rsquo;m making in parallel to blogging.  Trying to reduce our car insurance and sort out some personal tax issues.  Both things that involve being on hold for a good long time.  These interminal admin things need to get done, or hundreds of pounds just drifts away &amp;hellip; and I&amp;rsquo;m out of my comfort zone having to listen to tinny hold music instead of my spotify while I write my blog.  Okay, car insurance reduced, yay! No tax refund, boo!&lt;/p&gt;
 
 &lt;p&gt;I totally can&amp;rsquo;t find my list of things that needed to get sorted, but in the WSO meeting I got some agreement that we could try out switching off the next event functionality as a way to check for performance improvements, which makes me think the focus for next week should be on our own jitsi meeting hosting, to see if we can get reliable performance from that and replace hangouts with something that will offer us an API for deeper integration with our site &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Locking Things Down</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/09/av-ecosystem-review-locking-things-down/"/>
-    <id>http://blog.url.com/2017/11/09/av-ecosystem-review-locking-things-down/</id>
-    <published>2017-11-09T00:00:00+00:00</published>
-    <updated>2018-01-24T21:09:45+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="locking" src="/images/locking_pliers.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I had to put off blogging for a while today.  My station keeping regulars have been starting to get in the way of certain emails and admin that I keep putting off.  That done I&amp;rsquo;ve got to get a google meta-tag out to the main site to unlock appointment functionality in google calendar.  We&amp;rsquo;ve also got the issue of some new folks (accidentally?) editing the getting started pages, which is becoming a pain, and I&amp;rsquo;m thinking adding another feature flag there is the way to go &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve already got the google tag on develop and I push that towards staging &amp;hellip; we&amp;rsquo;ve also got the performance issue, and I&amp;rsquo;ve had the thought that we could try turning off the &amp;ldquo;Next Event&amp;rdquo; functionality on the main site for a week and see if anyone misses it.  But okay, let&amp;rsquo;s get a feature flag on the page editing set up.  That&amp;rsquo;s pretty straightforward in &lt;code&gt;static_pages/show.html.erb&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight erb"&gt;&lt;code&gt;    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;user_signed_in?&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="no"&gt;Features&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;edit_static_pages&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;enabled&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-      &lt;span class="nt"&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;custom_css_btn&lt;/span&gt; &lt;span class="s1"&gt;'edit'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'fa-2x fa fa-pencil-square-o'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mercury_edit_path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;id: &lt;/span&gt;&lt;span class="s1"&gt;'edit_link'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                               &lt;span class="ss"&gt;data: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;save_url: &lt;/span&gt;&lt;span class="n"&gt;static_page_mercury_update_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@page&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;slug&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-      &lt;span class="nt"&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
-    &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;or so I thought.  A quick byebug showed a dangerous edge there:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;16, 25] &lt;span class="k"&gt;in&lt;/span&gt; /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/app/views/static_pages/show.html.erb
-   16:       &amp;lt;div &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"static_page_title"&lt;/span&gt; &lt;span class="nv"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"display: inline;"&lt;/span&gt; data-mercury&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"simple"&lt;/span&gt; data-type&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"editable"&lt;/span&gt;&amp;gt;&amp;lt;%&lt;span class="o"&gt;=&lt;/span&gt; @page.title %&amp;gt;&amp;lt;/div&amp;gt;
-   17:     &amp;lt;/h1&amp;gt;
-   18:   &amp;lt;/div&amp;gt;
-   19:   &amp;lt;div &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"page-side-panel"&lt;/span&gt;&amp;gt;
-   20:     &amp;lt;% byebug %&amp;gt;
-&lt;span class="gp"&gt;=&amp;gt; &lt;/span&gt;21:     &amp;lt;% &lt;span class="k"&gt;if &lt;/span&gt;user_signed_in? and Features.edit_static_pages.enabled?%&amp;gt;
-   22:       &amp;lt;ul&amp;gt;
-   23:         &amp;lt;li&amp;gt;&amp;lt;%&lt;span class="o"&gt;=&lt;/span&gt; custom_css_btn &lt;span class="s1"&gt;'edit'&lt;/span&gt;, &lt;span class="s1"&gt;'fa-2x fa fa-pencil-square-o'&lt;/span&gt;, mercury_edit_path, id: &lt;span class="s1"&gt;'edit_link'&lt;/span&gt;,
-   24:                                data: &lt;span class="o"&gt;{&lt;/span&gt;save_url: static_page_mercury_update_path&lt;span class="o"&gt;(&lt;/span&gt;@page.slug&lt;span class="o"&gt;)}&lt;/span&gt; %&amp;gt;
-   25:       &amp;lt;/ul&amp;gt;
-&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; Features
-Features
-&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; Features.edit_static_pages
-&lt;span class="c"&gt;#&amp;lt;Config::Options enabled=true&amp;gt;&lt;/span&gt;
-&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; Features.edit_static_pages.enabled?
-nil
-&lt;span class="o"&gt;(&lt;/span&gt;byebug&lt;span class="o"&gt;)&lt;/span&gt; Features.edit_static_pages.enabled
-&lt;span class="nb"&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;fixed that and got it up.  Glad I didn&amp;rsquo;t postpone getting the google verification tag in the pipeline for this, but really want to get this out too.  In the meantime the build on staging passed and I was able to check the verification tag on staging.  Pushed that on to production.  I noticed that I also have the new Puma upgrade, so I thought I&amp;rsquo;d kick off a load test on staging to see what improvement that gives us (if any).  Emails back from that test - 23ms improvement - nothing to write home about.&lt;/p&gt;
-
-&lt;p&gt;Aha, production deployed, site verified and Google calendar enabled for the Google AgileVentures nonprofit team - result? We&amp;rsquo;ll see &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

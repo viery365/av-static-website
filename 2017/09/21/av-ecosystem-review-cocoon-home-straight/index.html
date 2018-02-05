@@ -93,7 +93,7 @@
         <h5 class='date'>21 Sep 2017</h5>
     <p><img alt="home straight" src="/images/Home_Straight.jpg" /></p>
 
-<p>So the answer to my question of yesterday, &ldquo;Why is Acceptance Testing so hard&rdquo; is that any coding is hard when you can&rsquo;t get error messages.  The remote debug inspector I set up yesterday allowed me to see that our Capybara/Poltergeist/PhantomJS setup could not handle ES6 string interpolations.  It raises the question about why not, but I want to push on with this feature.</p>
+<p>So the answer to my question of yesterday, &ldquo;Why is Acceptance Testing so hard?&rdquo; is that any coding is hard when you can&rsquo;t get error messages.  The remote debug inspector I set up yesterday allowed me to see that our Capybara/Poltergeist/PhantomJS setup could not handle ES6 string interpolations.  It raises the question about why not, but I want to push on with this feature.</p>
 
 <p>The test is now failing on this error:</p>
 <pre class="highlight plaintext"><code>    And I should see a link to "multiple repo project" on github            # features/step_definitions/projects_steps.rb:84
@@ -109,7 +109,7 @@
     <span class="n">source_repositories</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">url</span>
   <span class="k">end</span>
 </code></pre>
-<p>and I was rewarded with a completely passing acceptance test.  However I have various issues to address:</p>
+<p>and I was rewarded with a completely passing acceptance test.  However, I have various issues to address:</p>
 
 <ul>
 <li>the acceptance test does not check that the second repo has been stored</li>
@@ -299,7 +299,7 @@ rspec ./spec/views/projects/edit.html.erb_spec.rb:21 # projects/edit.html.erb re
 <p>Code relating to checking commits on Github is failing &hellip;, although those can probably be fixed by creating the projects with associated source reposiories, and those view spec failures can probably be addressed by deleting the view specs.  Although I did also need to update this scope on the Project model:</p>
 <pre class="highlight ruby"><code>  <span class="n">scope</span> <span class="ss">:with_github_url</span><span class="p">,</span> <span class="o">-&gt;</span><span class="p">{</span> <span class="n">includes</span><span class="p">(</span><span class="ss">:source_repositories</span><span class="p">).</span><span class="nf">where</span><span class="p">.</span><span class="nf">not</span><span class="p">(</span><span class="ss">source_repositories: </span><span class="p">{</span> <span class="ss">id: </span><span class="kp">nil</span> <span class="p">})</span> <span class="p">}</span>
 </code></pre>
-<p>and with that I think I may have gotten all the specs green.  There&rsquo;s still a lot to do, but I&rsquo;m reassured that I&rsquo;m covering the majority of the angles.  I&rsquo;ll push up this code into the PR and tomorrow I can work on cleaning up the domain model, tightening up the unit tests, and maybe even complete the first phase of this feature?  I note also that we have a load of cruft in the spec output - would love to clear that out, but can I prioritise it?</p>
+<p>And with that I think I may have gotten all the specs green.  There&rsquo;s still a lot to do, but I&rsquo;m reassured that I&rsquo;m covering the majority of the angles.  I&rsquo;ll push up this code into the PR and tomorrow I can work on cleaning up the domain model, tightening up the unit tests, and maybe even complete the first phase of this feature?  I note also that we have a load of cruft in the spec output - would love to clear that out, but can I prioritise it?</p>
 <pre class="highlight plaintext"><code>Randomized with seed 51520
 .....................................................Unused parameters passed to Capybara::Queries::SelectorQuery : ["/users/sign_in"]
 Unused parameters passed to Capybara::Queries::SelectorQuery : ["/users/password/new"]

@@ -98,7 +98,7 @@
 <p>Am I just fire-fighting crazily here?  I&rsquo;m thinking about the requests that Federico put in for RSVPs, alerts when members join projects, Fred asking for the jitsi server &hellip;  Anyway this is systemic and we need to report analytics to the trustees.  I was able to replicate the failure on staging - perhaps I can replicate it locally.  I can trigger the error locally by running the server like so:</p>
 <pre class="highlight plaintext"><code>ENABLE_GOOGLE_ANALYTICS=true be rails s
 </code></pre>
-<p>The Jasmine tests work fine even with analytics enabled:</p>
+<p>The Jasmine tests work fine, even with analytics enabled:</p>
 <pre class="highlight plaintext"><code>→ ENABLE_GOOGLE_ANALYTICS=true bej
 [35019] Puma starting in cluster mode...
 [35019] * Version 3.10.0 (ruby 2.3.1-p112), codename: Russell's Teapot
@@ -174,9 +174,9 @@ Coverage report generated for RSpec to /Users/tansaku/Documents/GitHub/AgileVent
   <span class="p">};</span>
 <span class="p">});</span>
 </code></pre>
-<p>I think what we have here is a mix of old and new GA tracking code, and the problem that none of it actually gets run until we go intro production where google analytics is switched on.  Looking up both old and new code I can&rsquo;t immediately see a way to reconcile them, so I&rsquo;ve commented out the offending code, and so will get that up until we can work out an effective combined approach.</p>
+<p>I think what we have here is a mix of old and new GA tracking code, and the problem that none of it actually gets run until we go into production, where google analytics is switched on.  Looking up both old and new code, I can&rsquo;t immediately see a way to reconcile them, so I&rsquo;ve commented out the offending code, and so will get that up until we can work out an effective combined approach.</p>
 
-<p>I think rather than switching GA code on and off globally we should have different account ids for different instances and set that via ENV vars &hellip;</p>
+<p>I think rather than switching GA code on and off globally we should have different account ids for different instances, and set that via ENV vars &hellip;</p>
 
         <h2 class='author'>by Sam Joseph</h2>
       </div>  
