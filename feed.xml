@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/11/20/av-ecosystem-review-behind-on-reports/"/>
     <id>http://blog.url.com/2017/11/20/av-ecosystem-review-behind-on-reports/</id>
     <published>2017-11-20T00:00:00+00:00</published>
-    <updated>2018-02-05T22:10:02+00:00</updated>
+    <updated>2018-02-06T20:52:54+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -22,7 +22,7 @@
 
 &lt;p&gt;Totally distracted by Slack and Email, but more importantly behind on reports.  I was just a couple of days late on the NHS HLP monthly report, but I&amp;rsquo;m now a good weekend behind on the AgileVentures monthly report.  These monthly reports are part of the deal with the AgileVentures trustees for my consulting company providing the core AgileVentures support contract.   I have been working through creating the latest one, but the explosion of new mobs and pairing sessions, and procrastination on my part means there&amp;rsquo;s still a chunk to do.  &lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;m also massively behind on my usual checkins with Premium members.  We&amp;rsquo;re trying to move the report around so that it&amp;rsquo;s less detailed stats that take me too long to put together and focuses on the progress of the individual premium members.  I&amp;rsquo;d really like a clear day to review where we are with each individual Premium member.  Having created the initial report structure with lots of details I&amp;rsquo;ve kind of fallen into a trap of trying to replicate those details every month.  Should I then burn time trying to automate parts of the report.   Drop some of those stats?&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m also massively behind on my usual checkins with Premium members.  We&amp;rsquo;re trying to move the report around so that it&amp;rsquo;s less detailed stats that take me too long to put together and focuses on the progress of the individual premium members.  I&amp;rsquo;d really like a clear day to review where we are with each individual Premium member.  Having created the initial report structure with lots of details, I&amp;rsquo;ve kind of fallen into a trap of trying to replicate those details every month.  Should I then burn time trying to automate parts of the report?   Drop some of those stats?&lt;/p&gt;
 
 &lt;p&gt;I just spent ten minutes getting the stats together for the last month of mobs:&lt;/p&gt;
 
@@ -70,7 +70,31 @@
 | 11/16 Thu | Phoenix       | Ben (trial)    |
 | 11/17 Fri | Phoenix       | Ryder          |&lt;/p&gt;
 
-&lt;p&gt;and so with the work from last week on meetings stats and web stats, I&amp;rsquo;ve finished the main stats part of the report, but not the update of individual Premium members, or reaching out to all the Premiums to check how they are doing.  With my schedule today that&amp;rsquo;ll have to be tomorrow &amp;hellip;&lt;/p&gt;
+&lt;p&gt;And so with the work from last week on meetings stats and web stats, I&amp;rsquo;ve finished the main stats part of the report, but not the update of individual Premium members, or reaching out to all the Premiums to check how they are doing.  With my schedule today that&amp;rsquo;ll have to be tomorrow &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>AV EcoSystem Review Packing Too Much In</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/17/av-ecosystem-review-packing-too-much-in-blog/"/>
+    <id>http://blog.url.com/2017/11/17/av-ecosystem-review-packing-too-much-in-blog/</id>
+    <published>2017-11-17T00:00:00+00:00</published>
+    <updated>2018-02-06T20:56:32+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="packing too much in " src="/images/packing_too_much_in.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I squeezed in a LocalSupport client meeting this morning and I have an F2F pairing session coming up, so there&amp;rsquo;s not much time for review.  I&amp;rsquo;m thinking I should focus next week on Jitsi on Azure, although I&amp;rsquo;d love to revisit our slack bots, pings, and even consider a react-ification of our getting started pages.&lt;/p&gt;
+
+&lt;p&gt;However I think the most important thing for me to do right now is work through the follow up from the LocalSupport client meeting.  LocalSupport is our longest running project and is a key part of the AgileVentures ecosystem.  I had what felt like  a productive meeting, in that I had managed to implement some cost savings for LocalSupport by switching to free https certificates.  I still wonder if I should have been further questioning whether VAHC really wanted to push forward with this project, but hey, who knows?&lt;/p&gt;
+
+&lt;p&gt;The key thing now is that the client asked to have put on a &amp;ldquo;back burner&amp;rdquo; certain tickets that had been started by some developers.  These relate to members of the public being able to submit new events.  We also rejected a ticket on the breadcrumbs functionality in the system.  Now I have the choice to be alerting developers through the Pivotal Tracker system or through Slack.  I&amp;rsquo;ll start with the tracker, and then maybe follow up in Slack.  It&amp;rsquo;s potentially a sensitive thing as it will probably mean shifting people around on what they&amp;rsquo;re working on and some careful explanations of what&amp;rsquo;s going on.&lt;/p&gt;
+
+&lt;p&gt;Just jumping to GitHub to review the pull requests I see GitHub now has new vulnerability checks:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/81z7w7hkh3tacb3/Screenshot%202017-11-17%2010.49.35.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is flagging a low risk vulnerability in RuboCop - we can easily upgrade that, but I don&amp;rsquo;t want to get distracted &amp;hellip; so much to pack in, so little time &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -488,28 +512,6 @@ d) checking social media for follows for free trials&lt;/p&gt;
     from /app/app/jobs/slack_invite_job.rb:21:in `perform'
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;It looks like somehow our AdminMailer is failing &amp;hellip; Can I run the internals directly?  I can and it seems like it worked for me, but interestingly I couldn&amp;rsquo;t get the slack auth token via &lt;code&gt;Slack::AUTH_TOKEN&lt;/code&gt;.  I had to hard code it.  I also tried it with nil, and seemed to be able to get an error message delivered.   I guess we need error catching on the admin mailing, and I need to defend against nil tokens maybe?  Perhaps I can fix that all up tomorrow &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Confusion Reigns</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/10/av-ecosystem-review-confusion-reigns/"/>
-    <id>http://blog.url.com/2017/11/10/av-ecosystem-review-confusion-reigns/</id>
-    <published>2017-11-10T00:00:00+00:00</published>
-    <updated>2018-01-25T19:23:16+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="confusion" src="/images/confusion.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Hmm, so the last two days I&amp;rsquo;ve adopted a new pattern of focusing first thing not on blogging, but on completing tasks from the previous night that I worry I&amp;rsquo;m not going to get done at all if I prioritize my repeating daily tasks.  It&amp;rsquo;s also partly that my energy is at a massive low this week as I fight off the after-effects of the stomach bug from the weekend.  Adjusting the order of the morning has allowed me to reduce my stress level about repeated procrastination on certain items, and also get out a new google calendar appointment booking system to allow people to book pairing time with me:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/6o1mpaniv0k3u4s/Screenshot%202017-11-10%2011.15.29.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve successfully taken some bookings, but it&amp;rsquo;s not as smooth as I would like.  It appears to require that people accept an email invitation after booking to confirm their slot, which seems rather error prone.  I&amp;rsquo;ve also started pulling in AV events to my Google nonprofit calendar associated with sam@agileventures.org.  I&amp;rsquo;ve been avoiding using Google calendar for a while as I don&amp;rsquo;t like the way it restricts me, but the ad hoc scheduling I&amp;rsquo;ve been using is being overwhelmed by trying to manage all the different pairing bookings.  I&amp;rsquo;d love something integrated smoothly into the AV site, but am giving Google&amp;rsquo;s appointment scheduler a go after seeing that youcanbook.me doesn&amp;rsquo;t have a nonprofit discount and we don&amp;rsquo;t have engineering capacity coming out of our ears at the moment.&lt;/p&gt;
-
-&lt;p&gt;I have to say I&amp;rsquo;m confused about what I&amp;rsquo;m in the middle of doing.  I&amp;rsquo;ve got two personal phone calls I&amp;rsquo;m making in parallel to blogging.  Trying to reduce our car insurance and sort out some personal tax issues.  Both things that involve being on hold for a good long time.  These interminal admin things need to get done, or hundreds of pounds just drifts away &amp;hellip; and I&amp;rsquo;m out of my comfort zone having to listen to tinny hold music instead of my spotify while I write my blog.  Okay, car insurance reduced, yay! No tax refund, boo!&lt;/p&gt;
-
-&lt;p&gt;I totally can&amp;rsquo;t find my list of things that needed to get sorted, but in the WSO meeting I got some agreement that we could try out switching off the next event functionality as a way to check for performance improvements, which makes me think the focus for next week should be on our own jitsi meeting hosting, to see if we can get reliable performance from that and replace hangouts with something that will offer us an API for deeper integration with our site &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
