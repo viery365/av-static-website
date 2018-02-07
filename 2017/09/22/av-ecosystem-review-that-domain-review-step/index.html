@@ -121,9 +121,9 @@
     <span class="k">end</span>
   <span class="k">end</span>
 </code></pre>
-<p>although I can&rsquo;t actually run it as I&rsquo;m waiting for a cucumber run to complete (got to work on the performance there).  That gap allows me to agonize about whether this unit test is sufficiently rigorous, or if it simply testing the existing Rails architecture?  I think it&rsquo;s the right thing.  It&rsquo;s providing an executable check that the class method <code>.with_github_url</code> is doing what we expect it to do.  </p>
+<p>although I can&rsquo;t actually run it as I&rsquo;m waiting for a cucumber run to complete (got to work on the performance there).  That gap allows me to agonize about whether this unit test is sufficiently rigorous, or if it&rsquo;s simply testing the existing Rails architecture.  I think it&rsquo;s the right thing.  It&rsquo;s providing an executable check that the class method <code>.with_github_url</code> is doing what we expect it to do.  </p>
 
-<p>Bigger picture quickly, I&rsquo;m not planning to immediately remove the github_url field from the projects model.  We&rsquo;ll need a task to migrate all of them in to source repository models, and based on previous pain I&rsquo;ll be ensuring we have a follow up task in a different PR that we deploy to production separately to delete that field later on when the dust has settled.</p>
+<p>Bigger picture quickly, I&rsquo;m not planning to immediately remove the github_url field from the projects model.  We&rsquo;ll need a task to migrate all of them in to source repository models, and based on previous pain, I&rsquo;ll be ensuring we have a follow up task in a different PR that we deploy to production separately to delete that field later on when the dust has settled.</p>
 
 <p>Okay so the cukes finished running.  I got a couple of errors in the way I&rsquo;m using FactoryGirl/build_stubbed.  Fix those and I&rsquo;ve got the following Project RSpec output:</p>
 <pre class="highlight plaintext"><code>→ be rspec -fd spec/models/project_spec.rb 
@@ -180,7 +180,7 @@ Finished in 0.65804 seconds (files took 8.15 seconds to load)
 </code></pre>
 <p>I&rsquo;m not sure that this output is telling the domain story that I&rsquo;d like, but let&rsquo;s move on.  I was thinking that we would have to move the github url validation into source repositories, and I think we will ultimatley, but it seems to be currently allowing us to validate urls on the first repo, if I&rsquo;m reading this all correctly.</p>
 
-<p>Since I&rsquo;ve created the test (for the scope) after the code (bad programmer) I quickly break the the scope and check that the test fails, which it does.  This code</p>
+<p>Since I&rsquo;ve created the test (for the scope) after the code (bad programmer), I quickly break the the scope and check that the test fails, which it does.  This code</p>
 <pre class="highlight ruby"><code>  <span class="n">scope</span> <span class="ss">:with_github_url</span><span class="p">,</span> <span class="o">-&gt;</span><span class="p">{</span> <span class="n">includes</span><span class="p">(</span><span class="ss">:source_repositories</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="ss">source_repositories: </span><span class="p">{</span> <span class="ss">id: </span><span class="kp">nil</span> <span class="p">})</span> <span class="p">}</span>
 </code></pre>
 <p>causes this error</p>
@@ -239,7 +239,7 @@ Finished in 0.65804 seconds (files took 8.15 seconds to load)
 13) addded more tests to Project to make the domain model more explicit
 14) deleted view specs</p>
 
-<p>Hmmmm.  So the key missing thing in some ways is that we&rsquo;re not displaying the multiple repos and the acceptance tests are not as extensive or as readable as I would like, but I have a hunch that I need to get this into production with some kind of rake task to move the data in the github<em>url in the Project model into the source</em>repository, but I&rsquo;ve created a new getter that&rsquo;s blocking my access.  This <a href="https://stackoverflow.com/questions/21835116/how-can-i-overwrite-a-getter-method-in-an-activerecord-model">SO post</a> tells me I can reference the original active-record field via self[:github_url], so I could have a task like this:</p>
+<p>Hmmmm.  So the key missing thing in some ways is that we&rsquo;re not displaying the multiple repos and the acceptance tests are not as extensive or as readable as I would like, but I have a hunch that I need to get this into production with some kind of rake task to move the data&ndash;in the github<em>url, in the Project model&ndash;into the source</em>repository, but I&rsquo;ve created a new getter that&rsquo;s blocking my access.  This <a href="https://stackoverflow.com/questions/21835116/how-can-i-overwrite-a-getter-method-in-an-activerecord-model">SO post</a> tells me I can reference the original active-record field via self[:github_url], so I could have a task like this:</p>
 <pre class="highlight plaintext"><code>namespace :db do
   desc "migrate from github url to source repository domain model (copies github_url field to source repo model)"
   task migrate_from_github_url_to_source_repository: :environment do
@@ -250,9 +250,9 @@ Finished in 0.65804 seconds (files took 8.15 seconds to load)
 
 end
 </code></pre>
-<p>btw, creating the task outline with <code>rails g task db migrate_from_github_url_to_source_repository</code> was handy - thanks Rails!</p>
+<p>By the way, creating the task outline with <code>rails g task db migrate_from_github_url_to_source_repository</code> was handy - thanks Rails!</p>
 
-<p>So then I agonize about whether I should write a test for this one off task &hellip; of course thoughtbot has an <a href="https://robots.thoughtbot.com/test-rake-tasks-like-a-boss">article</a> on it.  But I&rsquo;m out of time, will have to push that to next week, or to a refactoring chore - that&rsquo;s where all the acceptance test changes will be going anyway.  This migration is the pivotal componet so I&rsquo;ll test that first thing on Monday I guess &hellip;</p>
+<p>So then I agonize about whether I should write a test for this one off task &hellip; of course thoughtbot has an <a href="https://robots.thoughtbot.com/test-rake-tasks-like-a-boss">article</a> on it.  But I&rsquo;m out of time; will have to push that to next week, or to a refactoring chore - that&rsquo;s where all the acceptance test changes will be going anyway.  This migration is the pivotal component, so I&rsquo;ll test that first thing on Monday, I guess &hellip;</p>
 
         <h2 class='author'>by Sam Joseph</h2>
       </div>  

@@ -5,10 +5,40 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-20T00:00:00+00:00</updated>
+  <updated>2017-11-21T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Completing Reports</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/21/av-ecosystem-review-completing-reports/"/>
+    <id>http://blog.url.com/2017/11/21/av-ecosystem-review-completing-reports/</id>
+    <published>2017-11-21T00:00:00+00:00</published>
+    <updated>2018-02-07T21:26:40+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="report" src="/images/report.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Reports almost completed, just trying to summarise where we are with all the different Premium members.  Trying also to reach out to check in with each of them.  I was doing that weekly but have fallen behind.  I&amp;rsquo;ve configured Stripe to ping a #mentor-notifications channel whenever we get a payment.  I try to thank each member individually.  Paypal sends me an email, and we don&amp;rsquo;t have any reminder system for those who&amp;rsquo;ve been block sponsored by bootcamps so I particularly fall behind on those checkins :-(&lt;/p&gt;
+
+&lt;p&gt;Working through the Stripe notifications in #mentors-notifications involves me being in Slack and so I get distracted by Slack, although this morning I am getting distracted by answering questions to Premium members, and even looking at requests for upgrades so that&amp;rsquo;s pretty good.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the executive summary of the finally finished report:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Not such a great month, in that we lost our main corporate sponsor.  We did gain a new one, but they are offering services in kind rather than cash.  The couple of Premium member cancellations were balanced by sponsored members taking over payment of their memberships.&lt;/p&gt;
+
+&lt;p&gt;Sam started new mobs and ran many free trial F2F sessions which are looking like they might make for a nice set of upgrades and new members next month.  We shall have to wait and see.&lt;/p&gt;
+
+&lt;p&gt;We rolled out video embeds for the NHS project and are still negotiating with the literary society over their web and database project.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I keep meaning to move all the data on Premiums into some coherent form and also to reach out to members consistenly to let them know about our new offerings.  This month I&amp;rsquo;ve just been in a scramble to make sure I reach out to everyone.  I&amp;rsquo;m going to try and keep the report template for the next month open and make updates to it as they come in.  I&amp;rsquo;m reticent to start recording all our data about Premium members in AgileCRM.  It says we&amp;rsquo;d need to pay for automation.  I&amp;rsquo;m tempted to start putting notes into a spreadsheet - or should all the data be being stored in WebSiteOne?  We&amp;rsquo;re starting to improve the model there with work from Michael and Marian; and me updating the data itself.  &lt;/p&gt;
+
+&lt;p&gt;I think the key use case for AgileCRM or any system for showing status on Premium&amp;rsquo;s is to allow mentors such as Lara and Federico to be able to get a bit more background on the different people they&amp;rsquo;re talking to.  There are privacy concerns with all this personal data.  Maybe we need some Mentors Convenant that would be agreed to before we give new mentors access to all the data on the mentees &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Behind on Reports</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/20/av-ecosystem-review-behind-on-reports/"/>
@@ -403,115 +433,6 @@ from (pry):5:in `&amp;lt;main&amp;gt;'
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;String&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;because running &lt;code&gt;to_json&lt;/code&gt; on the error ends up including the full stack chase and the line numbers will vary from machine to machine, so we just match against a String.  Okay, some progress I think - let&amp;rsquo;s get this into production and see what happens :-)&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review New Mobs and Communication</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/13/av-ecosystem-review-new-mobs-and-communication/"/>
-    <id>http://blog.url.com/2017/11/13/av-ecosystem-review-new-mobs-and-communication/</id>
-    <published>2017-11-13T00:00:00+00:00</published>
-    <updated>2018-01-30T20:53:19+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="confusion" src="/images/mob_communication.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I&amp;rsquo;m rushing myself to push out the days schedule on the Slack #general channel as I&amp;rsquo;ve scheduled two new mobs to start:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;@here (note, all times in UTC)
-
-TODAY'S EVENTS
-==============
-
-* 10:30 - 11:30 UTC : WebDev (OdinProject) Mob (for Premium Members - free trial if you like us on fb or follow us on twitter)
-* 12:00 - 12:15 UTC : "Martin Fowler" Scrum and Pair Hookup - https://www.agileventures.org/events/martin-fowler-scrum-and-pair-hookup
-* 13:00 - 14:00 UTC : Deep Learning Mob (for Premium Members - free trial if you like us on fb or follow us on twitter)
-* 15:00 - 16:00 UTC: Phoenix 1.3 Guides Daily Mob (FREE) - 
-https://www.agileventures.org/events/phoenix-1-3-guides-daily-mob-free
-* 15:00 - 15:45 UTC : BetaSaaSers/AutoGraders client meeting - https://www.agileventures.org/events/autograders-client-meeting
-* 16:15 - 16:30 UTC : "Kent Beck" Scrum and Pair Hookup - https://www.agileventures.org/events/kent-beck-scrum-and-pair-hookup
-* 16:30 - 17:00 UTC : SHF Sprint review and planning - https://www.agileventures.org/events/shf-sprint-review-and-planning
-
-Full details at: https://www.agileventures.org/events
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I&amp;rsquo;m probably overloading myself.  Sunday afternoon I did two pairing sessions (one paid, one free trial) and the AV Community meeting and I&amp;rsquo;m getting set up for more pairing.  In the community meeting Michael said that mobs are a good source of revenue and that caused me to pause sice I think that while they definitely are a source of revenue, for the amount of time involved in supporting them we&amp;rsquo;re not getting a wonderful return, particularly since we made them weekly and we&amp;rsquo;ve made the Premium mob fee cover attending any of the currently running mobs &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I think both the mobs (and the F2F packages - given that they include all the mobs) are extraordinarily good deals compared to the prices of similar services from other online mentoring services; although I guess it&amp;rsquo;s all a matter of opinion.&lt;/p&gt;
-
-&lt;p&gt;Either way I&amp;rsquo;m getting caught between getting station keeping activities done:&lt;/p&gt;
-
-&lt;p&gt;a) manual slack invites
-b) manual daily schedule posts to Slack
-c) gem upgrades on WSO
-d) checking social media for follows for free trials&lt;/p&gt;
-
-&lt;p&gt;and running free trials and then actual mobs and pairing sessions themselves.  I was half expecting to have private paid projects taking up half my time, but that isn&amp;rsquo;t the case at the moment, so I guess it makes sense to ramp up the mobs and pairing to bring in more AV revenue.&lt;/p&gt;
-
-&lt;p&gt;I need to run more Simplify, Eliminate, Delegate, Automate passes on what I&amp;rsquo;m doing.  I&amp;rsquo;m still holding on to posting the schedules myself because of the difficultly automating them.  Although they did seem to start working on another Slack instance, &amp;hellip; but I also like being able to tweak them daily.  Posting them also forces me to think about the schedule.  What I could do quickly this morning is actually try to re-automate the Slack invites.  At least run the task from the heroku production command line.  We&amp;rsquo;ve been using an undocumented endpoint for a year somewhat reliably, but it seems to have broken:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/slackhq/slack-api-docs/issues/30#issuecomment-341399842"&gt;https://github.com/slackhq/slack-api-docs/issues/30#issuecomment-341399842&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;and so I&amp;rsquo;ve been invited manually through the Slack UI.  Maybe I can see some sort of error if I test via the rails console.  I&amp;rsquo;ve been using the following to get the most recent user emails:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;last&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;email&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here&amp;rsquo;s our invite code:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SlackInviteJob&lt;/span&gt;
-  &lt;span class="kp"&gt;include&lt;/span&gt; &lt;span class="no"&gt;SuckerPunch&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Job&lt;/span&gt;
-
-  &lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'https://agileventures.slack.com/api/users.admin.invite'&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;uri&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;URI&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt; &lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;
-    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Net&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;HTTP&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;post_form&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="ss"&gt;channels: &lt;/span&gt;&lt;span class="s1"&gt;'C02G8J689,C0285CSUH,C02AA0ARR'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="ss"&gt;token: &lt;/span&gt;&lt;span class="no"&gt;Slack&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;AUTH_TOKEN&lt;/span&gt;
-    &lt;span class="p"&gt;})&lt;/span&gt;
-    &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;
-    &lt;span class="n"&gt;json_response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;body&lt;/span&gt;
-    &lt;span class="n"&gt;slack_error_message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'error'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;json_response&lt;/span&gt;
-  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-    &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-  &lt;span class="k"&gt;ensure&lt;/span&gt;
-    &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'ok'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-      &lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slack_error_message&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;deliver_later&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;SlackInviteJob&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'guravareddy.jetlee@gmail.com'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Which gives me the following error:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;ActiveJob::SerializationError: Unsupported argument type: NameError
-    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/arguments.rb:71:in `serialize_argument'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/arguments.rb:35:in `block in serialize'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/arguments.rb:35:in `map'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/arguments.rb:35:in `serialize'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/core.rb:86:in `serialize_arguments'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/core.rb:72:in `serialize'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/queue_adapters/inline_adapter.rb:14:in `enqueue'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/enqueuing.rb:71:in `block in enqueue'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:117:in `call'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:505:in `call'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:498:in `block (2 levels) in around'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:343:in `block (2 levels) in simple'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/logging.rb:14:in `block (3 levels) in &amp;lt;module:Logging&amp;gt;'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/logging.rb:43:in `block in tag_logger'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and that does not make sense to me.  What I&amp;rsquo;d hope is that all the error handling that we&amp;rsquo;ve installed would tell us when things like this are going wrong.  No.  Nor does AirBrake seem to tell us about this kind of stuff.  Configuration is all off I guess.&lt;/p&gt;
-
-&lt;p&gt;Ah, okay, there is a piece of our code in the extended error message:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:92:in `__run_callbacks__'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:778:in `_run_enqueue_callbacks'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.10/lib/active_support/callbacks.rb:81:in `run_callbacks'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/enqueuing.rb:67:in `enqueue'
-    from /app/vendor/bundle/ruby/2.3.0/gems/activejob-4.2.10/lib/active_job/configured_job.rb:13:in `perform_later'
-    from /app/vendor/bundle/ruby/2.3.0/gems/actionmailer-4.2.10/lib/action_mailer/message_delivery.rb:112:in `enqueue_delivery'
-    from /app/vendor/bundle/ruby/2.3.0/gems/actionmailer-4.2.10/lib/action_mailer/message_delivery.rb:68:in `deliver_later'
-    from /app/app/jobs/slack_invite_job.rb:21:in `perform'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It looks like somehow our AdminMailer is failing &amp;hellip; Can I run the internals directly?  I can and it seems like it worked for me, but interestingly I couldn&amp;rsquo;t get the slack auth token via &lt;code&gt;Slack::AUTH_TOKEN&lt;/code&gt;.  I had to hard code it.  I also tried it with nil, and seemed to be able to get an error message delivered.   I guess we need error catching on the admin mailing, and I need to defend against nil tokens maybe?  Perhaps I can fix that all up tomorrow &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
