@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/11/22/av-ecosystem-review-what-the-hell-was-I-doing/"/>
     <id>http://blog.url.com/2017/11/22/av-ecosystem-review-what-the-hell-was-I-doing/</id>
     <published>2017-11-22T00:00:00+00:00</published>
-    <updated>2018-02-08T21:13:41+00:00</updated>
+    <updated>2018-02-08T21:16:23+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -39,9 +39,8 @@
 &lt;p&gt;I flicked my eyes over other older and unvoted tickets in the waffle board.  So much stuff that could be worked on.  Who knows which are the key set that take us where we want to be, i.e. a clear comprehensible site that allows people to onboard and work productively together on open source charity projects.  Part of me wants to knock off the oldest hanging pull requests by taking over the work of those who&amp;rsquo;ve just dropped away.&lt;/p&gt;
 
 &lt;p&gt;However I did also start looking at alternate home page designs as part of thinking about how we can improve performance and do A/B testing on different landing pages in terms of how they bring folks on board.  And maybe that&amp;rsquo;s the most important part of our funnel?  Anyway, here&amp;rsquo;s some of the keyword searches that have had our Google ad served, and the number of click throughs they&amp;rsquo;ve received:&lt;/p&gt;
-
-&lt;p&gt;| Keyword                    | Quality Score | Clicks | Impr.  |
-|&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-|&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;|&amp;mdash;&amp;mdash;&amp;ndash;|&amp;mdash;&amp;mdash;&amp;ndash;|
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;| Keyword                    | Quality Score | Clicks | Impr.  |
+|----------------------------|---------------|--------|--------|
 | code                       | 3             | 8897   | 137126 |
 | github                     | 3             | 2588   | 39468  |
 | open source                | 3             | 810    | 20893  |
@@ -61,8 +60,8 @@
 | agile process models       | 3             | 14     | 167    |
 | app developer              | 3             | 13     | 442    |
 | what is agile development  | 4             | 12     | 136    |
-| code programmer            | 3             | 10     | 142    |&lt;/p&gt;
-
+| code programmer            | 3             | 10     | 142    |
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Quality runs from 1 to 10 and our quality scores are low because these keywords are not appearing on our landing pages.  This means that we have to pay Google more of our ad budget for them.  Apparently our Google ad budget will go further if we can increase the instance of these terms on our home page.  In principle, a straightforward fix, and gets me thinking about getting set up for the A/B test of some alternate home pages, based on what we developed for our design sprint back in June.  &lt;/p&gt;
 
 &lt;p&gt;So I go ahead and create a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1982"&gt;ticket&lt;/a&gt;, actually using part of the form template that we have (should I adjust those?), and reflect on how I still don&amp;rsquo;t know if any of our Google AdWords activity has actually led to any revenue.  I know we&amp;rsquo;ve got a couple of thousand additional users, but I don&amp;rsquo;t know if any of them have helped make this whole enterprise more sustainable &amp;hellip;&lt;/p&gt;
