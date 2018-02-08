@@ -5,16 +5,143 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-21T00:00:00+00:00</updated>
+  <updated>2017-11-22T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review What The Hell Was I Doing?</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/22/av-ecosystem-review-what-the-hell-was-I-doing/"/>
+    <id>http://blog.url.com/2017/11/22/av-ecosystem-review-what-the-hell-was-I-doing/</id>
+    <published>2017-11-22T00:00:00+00:00</published>
+    <updated>2018-02-08T21:04:18+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="report" src="/images/report.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Hmm, my intention had been to work on the Azure Jitsi setup this week, but the last two mornings were taken up with finishing the AgileVentures monthly report for the trustees.  I did another quick bit of work on the main AgileVentures website to swap outgoing and incoming sponsor logos for Federico and deploy the new Premium member API for Michael.  Those are both now live, and I&amp;rsquo;m reflecting on whether to do more things that unblock others.  The first thing that springs to mind is the changes to the home page language that Lara has suggested based on analysis of the Google Adwords data.&lt;/p&gt;
+
+&lt;p&gt;Other things going on include closing out all these dependabot gem upgrades; and whether we need to shut them off so we can see what we are doing.  Other hanging pull requests (oldest first) include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;upgrading to Rails 5 (blocked by mercury editor) - Matt&lt;/li&gt;
+&lt;li&gt;replacing mercury editor with alternate (medium clone) - Matt&lt;/li&gt;
+&lt;li&gt;automate streaming youtube from Jitsi - Lokesh&lt;/li&gt;
+&lt;li&gt;add text search form to members page - Ghost&lt;/li&gt;
+&lt;li&gt;bug fix for empty github repo - Praveen&lt;/li&gt;
+&lt;li&gt;refactoring slack service - Me&lt;/li&gt;
+&lt;li&gt;add tawkto chat client - Me&lt;/li&gt;
+&lt;li&gt;add calendar support - Sigu&lt;/li&gt;
+&lt;li&gt;add sponsor relation - Michael/Marian&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I flicked my eyes over other older and unvoted tickets in the waffle board.  So much stuff that could be worked on.  Who knows which are the key set that take us where we want to be, i.e. a clear comprehensible site that allows people to onboard and work productively together on open source charity projects.  Part of me wants to knock off the oldest hanging pull requests by just taking over the work of those who&amp;rsquo;ve just dropped away.&lt;/p&gt;
+
+&lt;p&gt;However I did also start looking at alternate home page designs as part of thinking about how we can improve performance and do A/B testing on different landing pages in terms of how they bring folks on board.  And maybe that&amp;rsquo;s the most important part of our funnel?  Anyway, here&amp;rsquo;s some of the keyword searches that have had our Google ad served, and the number of click throughs they&amp;rsquo;ve received:&lt;/p&gt;
+
+&lt;p&gt;| Keyword                    | Quality Score | Clicks | Impr.  |
+|&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-|&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;|&amp;mdash;&amp;mdash;&amp;ndash;|&amp;mdash;&amp;mdash;&amp;ndash;|
+| code                       | 3             | 8897   | 137126 |
+| github                     | 3             | 2588   | 39468  |
+| open source                | 3             | 810    | 20893  |
+| agile methodology          | 4             | 340    | 7837   |
+| [coding]                   | 5             | 236    | 7865   |
+| agile method               | 2             | 125    | 2167   |
+| agile model                | 3             | 105    | 1279   |
+| agile development          | 4             | 73     | 1363   |
+| scrum                      | 3             | 58     | 1970   |
+| website coding             | 1             | 49     | 787    |
+| agile process              | 3             | 44     | 543    |
+| Ruby on Rails              | 1             | 33     | 523    |
+| applications development   | 1             | 25     | 827    |
+| improve programming skills | 2             | 20     | 200    |
+| agile project              | 2             | 17     | 379    |
+| agile testing              | 1             | 17     | 407    |
+| agile process models       | 3             | 14     | 167    |
+| app developer              | 3             | 13     | 442    |
+| what is agile development  | 4             | 12     | 136    |
+| code programmer            | 3             | 10     | 142    |&lt;/p&gt;
+
+&lt;p&gt;Quality runs from 1 to 10 and our quality scores are low because these keywords are not appearing on our landing pages.  This means that we have to pay Google more of our ad budget for them.  Apparently our Google ad budget will go further if we can increase the instance of these terms on our home page.  In principle, a straightforward fix, and gets me thinking about getting set up for the A/B test of some alternate home pages, based on what we developed for our design sprint back in June.  &lt;/p&gt;
+
+&lt;p&gt;So I go ahead and create a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1982"&gt;ticket&lt;/a&gt;, actually using part of the form template that we have (should I adjust those?), and reflect on how I still don&amp;rsquo;t know if any of our Google AdWords activity has actually led to any revenue.  I know we&amp;rsquo;ve got a couple of thousand additional users, but I don&amp;rsquo;t know if any of them have helped make this whole enterprise more sustainable &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Anyway, given I have a ticket, that gives me license to create a branch on which to do the work.  Let&amp;rsquo;s review the chunks of text we have on the home page:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Project Launch Pad&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;AgileVentures is the perfect place to kick-start a project. Our system of openness and lack of hierarchy means anybody can start a project. In fact, many of our current projects were initiated by our own members!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;Crowdsourced Learning&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;By crowd-sourcing our projects, we attract developers from diverse backgrounds: students, freelancers, designers, teachers, and many more from all corners of the globe. Our members are driven by their passion to learn code and make a contribution to society.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;Social Coding&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;We have regular daily meetings (scrums) online where our members get together, discuss projects, share knowledge and plan programming sessions. We love pair programming, nobody works alone in this community!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;Open Source&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;We love all things Open Source, we are fully transparent in our development process, we record videos of all our meetings through Google+ Hangouts, our code is freely available on the web on GitHub and our project plans are publicly viewable on Pivotal Tracker.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So there are things I&amp;rsquo;d love to change here, but the funny thing is that of the different keywords I&amp;rsquo;m supposed to be adding we do mention some of them several times:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;code: 2&lt;/li&gt;
+&lt;li&gt;github: 2&lt;/li&gt;
+&lt;li&gt;open source: 2&lt;/li&gt;
+&lt;li&gt;agile methodology: 0&lt;/li&gt;
+&lt;li&gt;coding: 1&lt;/li&gt;
+&lt;li&gt;scrum: &lt;/li&gt;
+&lt;li&gt;website coding: 0&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It makes me wonder if what we need are custom landing pages for our different Google AdWords campaigns, so that folks searching for particular content can land on a page that speaks their language?&lt;/p&gt;
+
+&lt;p&gt;Anyhow, I&amp;rsquo;ve taken a stab at adding more of the keywords into our langauge.  Just tweaks really, but also to mention the focus on charity and non-profit.  Let&amp;rsquo;s get this up and see:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Project Launch Pad&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Want to start a new charity or non-profit coding project? Our community of open source practitioners can help you get started coding and using agile methodology to deliver value quickly to your end users.  &lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;Crowdsourced Learning&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;By crowd-sourcing our projects, we attract developers from diverse backgrounds: students, freelancers, designers, teachers, and many more from all corners of the globe. Our members are driven by their passion to learn to code and make a contribution to society.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;Social Coding&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;We have regular daily meetings (scrums) online where our members get together, discuss projects, share knowledge and plan programming sessions. We love pair programming, mob programming and shared code review to help everyone learn and improve.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;Open Source&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;We love all things Open Source and are fully transparent in our development process. We record videos of all our meetings through Google Hangouts; all our code can be viewed on GitHub and our project plans are publicly viewable on systems like Pivotal Tracker.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And I get that up in a pull request.  Gosh, I so don&amp;rsquo;t know what&amp;rsquo;s the key place to push on.  Doing things that people ask for is a reasonable first order heuristic, I guess.  Another is clearing up hanging PRs.  The clear pattern that I see is that when I reach out to people individually, that is what seems to have the highest success rate in terms of bringing in new contracts and subscriptions &amp;hellip; hmmm &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Completing Reports</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/21/av-ecosystem-review-completing-reports/"/>
     <id>http://blog.url.com/2017/11/21/av-ecosystem-review-completing-reports/</id>
     <published>2017-11-21T00:00:00+00:00</published>
-    <updated>2018-02-07T21:26:40+00:00</updated>
+    <updated>2018-02-08T21:03:51+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -22,7 +149,7 @@
 
 &lt;p&gt;Reports almost completed, just trying to summarise where we are with all the different Premium members.  Trying also to reach out to check in with each of them.  I was doing that weekly but have fallen behind.  I&amp;rsquo;ve configured Stripe to ping a #mentor-notifications channel whenever we get a payment.  I try to thank each member individually.  Paypal sends me an email, and we don&amp;rsquo;t have any reminder system for those who&amp;rsquo;ve been block sponsored by bootcamps so I particularly fall behind on those checkins :-(&lt;/p&gt;
 
-&lt;p&gt;Working through the Stripe notifications in #mentors-notifications involves me being in Slack and so I get distracted by Slack, although this morning I am getting distracted by answering questions to Premium members, and even looking at requests for upgrades so that&amp;rsquo;s pretty good.&lt;/p&gt;
+&lt;p&gt;Working through the Stripe notifications in #mentors-notifications involves me being in Slack and so I get distracted by Slack, although this morning I am getting distracted by answering questions to Premium members, and even looking at requests for upgrades, so that&amp;rsquo;s pretty good.&lt;/p&gt;
 
 &lt;p&gt;Here&amp;rsquo;s the executive summary of the finally finished report:&lt;/p&gt;
 
@@ -34,9 +161,9 @@
 &lt;p&gt;We rolled out video embeds for the NHS project and are still negotiating with the literary society over their web and database project.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;I keep meaning to move all the data on Premiums into some coherent form and also to reach out to members consistenly to let them know about our new offerings.  This month I&amp;rsquo;ve just been in a scramble to make sure I reach out to everyone.  I&amp;rsquo;m going to try and keep the report template for the next month open and make updates to it as they come in.  I&amp;rsquo;m reticent to start recording all our data about Premium members in AgileCRM.  It says we&amp;rsquo;d need to pay for automation.  I&amp;rsquo;m tempted to start putting notes into a spreadsheet - or should all the data be being stored in WebSiteOne?  We&amp;rsquo;re starting to improve the model there with work from Michael and Marian; and me updating the data itself.  &lt;/p&gt;
+&lt;p&gt;I keep meaning to move all the data on Premiums into some coherent form and also to reach out to members consistenly to let them know about our new offerings.  This month I&amp;rsquo;ve just been in a scramble to make sure I reach out to everyone.  I&amp;rsquo;m going to try and keep the report template for the next month open and make updates to it as they come in.  I&amp;rsquo;m reticent to start recording all our data about Premium members in AgileCRM.  It says we&amp;rsquo;d need to pay for automation.  I&amp;rsquo;m tempted to start putting notes into a spreadsheet - or should all the data be being stored in WebSiteOne?  We&amp;rsquo;re starting to improve the model there, with work from Michael and Marian; and me updating the data itself.  &lt;/p&gt;
 
-&lt;p&gt;I think the key use case for AgileCRM or any system for showing status on Premium&amp;rsquo;s is to allow mentors such as Lara and Federico to be able to get a bit more background on the different people they&amp;rsquo;re talking to.  There are privacy concerns with all this personal data.  Maybe we need some Mentors Convenant that would be agreed to before we give new mentors access to all the data on the mentees &amp;hellip;&lt;/p&gt;
+&lt;p&gt;I think the key use case for AgileCRM, or any system for showing status on Premiums, is to allow mentors such as Lara and Federico to be able to get a bit more background on the different people they&amp;rsquo;re talking to.  There are privacy concerns with all this personal data.  Maybe we need some Mentors Convenant that would be agreed to before we give new mentors access to all the data on the mentees &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -293,146 +420,6 @@ Sent mail to support@agileventures.org &lt;span class="o"&gt;(&lt;/span&gt;215.3
   &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Is this a new thing?  Maybe this never worked.  A complete overhaul of the events system is certainly in order.  There&amp;rsquo;s so much more clean up here, but let&amp;rsquo;s fix the bleed in production first &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Catching Everything Possible</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/14/av-ecosystem-review-catching-everything-possible/"/>
-    <id>http://blog.url.com/2017/11/14/av-ecosystem-review-catching-everything-possible/</id>
-    <published>2017-11-14T00:00:00+00:00</published>
-    <updated>2018-01-30T21:02:34+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="confusion" src="/images/catching.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;9:20am blogface start - go me!  So I really want to get on to working on jitsi on the server, but I got my teeth into this Slack invite yesterday, and I really want to push up some more robust code that will allow this process of inviting new users into Slack to be re-automated.  Yesterday I seemed to be able to successfully invite someone from the rRails command line on Heroku, which makes it seem like Slack&amp;rsquo;s unofficial admin invite endpoint is still working, but that there is problem with the code when running in production.  Here&amp;rsquo;s the code again:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SlackInviteJob&lt;/span&gt;
-  &lt;span class="kp"&gt;include&lt;/span&gt; &lt;span class="no"&gt;SuckerPunch&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Job&lt;/span&gt;
-
-  &lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'https://agileventures.slack.com/api/users.admin.invite'&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;uri&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;URI&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt; &lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;
-    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Net&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;HTTP&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;post_form&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="ss"&gt;channels: &lt;/span&gt;&lt;span class="s1"&gt;'C02G8J689,C0285CSUH,C02AA0ARR'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="ss"&gt;token: &lt;/span&gt;&lt;span class="no"&gt;Slack&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;AUTH_TOKEN&lt;/span&gt;
-    &lt;span class="p"&gt;})&lt;/span&gt;
-    &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;
-    &lt;span class="n"&gt;json_response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;body&lt;/span&gt;
-    &lt;span class="n"&gt;slack_error_message&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'error'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;json_response&lt;/span&gt;
-  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-    &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-  &lt;span class="k"&gt;ensure&lt;/span&gt;
-    &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;json_response&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'ok'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-      &lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;slack_error_message&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;deliver_later&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There seemed to be some error when calling the AdminMailer &lt;code&gt;ActiveJob::SerializationError: Unsupported argument type: NameError&lt;/code&gt; which I don&amp;rsquo;t understand. I google it and there&amp;rsquo;s an &lt;a href="https://stackoverflow.com/questions/40894727/activejobserializationerror-unsupported-argument-type-time-datetime"&gt;SO post&lt;/a&gt; on how this might be related to JSON not being able to handled by a job.  Possibly the &lt;code&gt;slack_error_message&lt;/code&gt; being a nested JSON object that can&amp;rsquo;t be handled by the AdminMailer.&lt;/p&gt;
-
-&lt;p&gt;The other thing I was seeing was that from the Rails command line the &lt;code&gt;Slack::AUTH_TOKEN&lt;/code&gt; is nil, although it definitely worked in the past.  I see we have a couple of closed tickets for previous fixes of this kind of issue:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;[feature switched off](https://github.com/AgileVentures/WebsiteOne/issues/1434]&lt;/li&gt;
-&lt;li&gt;[development token expired](https://github.com/AgileVentures/WebsiteOne/issues/1247]&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I&amp;rsquo;ve renewed the token and the feature is active.  Right now I&amp;rsquo;m struggling with finding a ticket to attach this to.  I think I&amp;rsquo;m going to open a chore just to improve the robustness of the SlackInviteJob:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1962"&gt;https://github.com/AgileVentures/WebsiteOne/issues/1962&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;and I started an async vote on that.  I&amp;rsquo;m going to start by reviewing the test for this job:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;SlackInviteJob&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;SlackInviteJob&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s1"&gt;'random@random.com'&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;stub_const&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Slack::AUTH_TOKEN'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'test'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'sends a post request to invite the user to slack and returns the proper response'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;stub_request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:post&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;SlackInviteJob&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;
-        &lt;span class="nf"&gt;to_return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;body: &lt;/span&gt;&lt;span class="s1"&gt;'{"ok": true}'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'ok'&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;be_truthy&lt;/span&gt;
-    &lt;span class="n"&gt;assert_requested&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:post&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;SlackInviteJob&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;times: &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;req&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;body&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="s2"&gt;"email=&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;CGI&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;escape&lt;/span&gt; &lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;amp;channels=&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;CGI&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;escape&lt;/span&gt; &lt;span class="s1"&gt;'C02G8J689,C0285CSUH,C02AA0ARR'&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;amp;token=test"&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'when invite attempt fails notify admin'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;StandardError&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt; &lt;span class="s1"&gt;'boom!'&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;stub_request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:post&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;SlackInviteJob&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;and_raise&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'sends the email later'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive_message_chain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:deliver_later&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'includes information about user and error'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive_message_chain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:deliver_later&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'when slack response not ok should notify admin'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;stub_request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:post&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;SlackInviteJob&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;body: &lt;/span&gt;&lt;span class="s1"&gt;'{"ok": false, "error": "already invited"}'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'sends the email later'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive_message_chain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:deliver_later&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'includes information about user and error'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive_message_chain&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:deliver_later&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"already invited"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which basically looks okay, and passes locally.  What I&amp;rsquo;m suspicious of is this &lt;code&gt;Slack::AUTH_TOKEN&lt;/code&gt;.  We have a Slack initializer:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Slack&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;configure&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;token&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ENV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'SLACK_AUTH_TOKEN'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;logger&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which is part of the &lt;a href="https://github.com/slack-ruby/slack-ruby-client"&gt;SlackRubyClient&lt;/a&gt; that we&amp;rsquo;re using.  There&amp;rsquo;s no mention of &lt;code&gt;Slack::AUTH_TOKEN&lt;/code&gt; in that gem, and locally I can&amp;rsquo;t get it to work, although I can refer to the token directly:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[3] pry(main)&amp;gt; Slack.config
-=&amp;gt; Slack::Config
-[4] pry(main)&amp;gt; Slack.config.token
-=&amp;gt; "xoxb-asdafasdfafafsafsasfasfafsaff"
-[5] pry(main)&amp;gt; Slack::AUTH_TOKEN
-NameError: uninitialized constant Slack::AUTH_TOKEN
-from (pry):5:in `&amp;lt;main&amp;gt;'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I think I&amp;rsquo;m going to follow my first intuition which was to add dependency injection to this gem rather than stubbing the constant as we do.  Also I guess what we don&amp;rsquo;t have is an acceptance test that might flush out this kind of bug.  Hmm.  Let&amp;rsquo;s start with dependency injection &amp;hellip; I go with:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;token&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Slack&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;token&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="no"&gt;StandardError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'token is nil'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;token&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;nil?&lt;/span&gt;
-    &lt;span class="n"&gt;uri&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;URI&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt; &lt;span class="no"&gt;SLACK_INVITE_URL&lt;/span&gt;
-    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Net&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;HTTP&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;post_form&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="ss"&gt;channels: &lt;/span&gt;&lt;span class="s1"&gt;'C02G8J689,C0285CSUH,C02AA0ARR'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="ss"&gt;token: &lt;/span&gt;&lt;span class="n"&gt;token&lt;/span&gt;
-    &lt;span class="p"&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I feel like I want better backup for the AdminMailer, but I am really at a loss as to how to defend against this serialization error.  As I google more I get the sense that the problem may come from trying to serialize the thing to deliver later.  Somehow serialising doesn&amp;rsquo;t work for some data structures and that&amp;rsquo;s needed for &lt;code&gt;deliver_later&lt;/code&gt; so I&amp;rsquo;m going to try with:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;try&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:to_json&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;slack_error_message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;try&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:to_json&lt;/span&gt;&lt;span class="p"&gt;)).&lt;/span&gt;&lt;span class="nf"&gt;deliver_later&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which is now being tested with a partial match:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;AdminMailer&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:failed_to_invite_user_to_slack&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;String&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;because running &lt;code&gt;to_json&lt;/code&gt; on the error ends up including the full stack chase and the line numbers will vary from machine to machine, so we just match against a String.  Okay, some progress I think - let&amp;rsquo;s get this into production and see what happens :-)&lt;/p&gt;
 </content>
   </entry>
 </feed>
