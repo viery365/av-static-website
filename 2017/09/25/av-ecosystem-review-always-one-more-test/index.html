@@ -93,7 +93,7 @@
         <h5 class='date'>25 Sep 2017</h5>
     <p><img alt="one more test" src="/images/one_more_test.jpg" /></p>
 
-<p>So all of last week&rsquo;s ecosystem review blogs were devoted to this new multiple repository feature.  And I think today too.  I hope today is the last since I really want to get on to clearing up some other content work and getting the new Code of Conduct front and center.  So I&rsquo;ve just pulled out the latest develop and used the new <code>rake vcr_billy_caches:reset</code> command to clean up the caches.  Bit difficult to remember, and did I update the docs?  The answer is no :-( but done now.  So I think I already have tests of rake commands, the style of which I can copy to test our data migration &hellip; unlike <a href="https://robots.thoughtbot.com/test-rake-tasks-like-a-boss">thoughtbot</a> I&rsquo;ve been going with Cucumber, which might run a little slower, but I can more easily see the data setup, so I stamp out a devops feature like so:</p>
+<p>So all of last week&rsquo;s ecosystem review blogs were devoted to this new multiple repository feature.  And I think today too.  I hope today is the last, since I really want to get on to clearing up some other content work and getting the new Code of Conduct front and center.  So I&rsquo;ve just pulled out the latest develop and used the new <code>rake vcr_billy_caches:reset</code> command to clean up the caches.  Bit difficult to remember, and did I update the docs?  The answer is no :-( but done now.  So I think I already have tests of rake commands, the style of which I can copy to test our data migration &hellip; unlike <a href="https://robots.thoughtbot.com/test-rake-tasks-like-a-boss">thoughtbot</a>, I&rsquo;ve been going with Cucumber, which might run a little slower, but I can more easily see the data setup, so I stamp out a devops feature like so:</p>
 <pre class="highlight gherkin"><code><span class="nt">@vcr</span> <span class="nt">@rake</span>
 <span class="kd">Feature</span><span class="p">:</span> Update from github urls to source repository model
   As a website admin,
@@ -185,7 +185,7 @@ end
       ./features/step_definitions/projects_steps.rb:129:in `/^I should see projects with following details:$/'
       features/devops/migrate_github_urls.feature:18:in `Then I should see projects with following details:'
 </code></pre>
-<p>(wish I could get the green red and blue in github syntax markup for cuke and rspec output &hellip;) and I see that the step definition appears to be hard coded to be doing something for commit counts:</p>
+<p>(wish I could get the green, red, and blue in Github syntax markup for cuke and rspec output &hellip;) and I see that the step definition appears to be hard coded to be doing something for commit counts:</p>
 <pre class="highlight ruby"><code><span class="no">Then</span><span class="p">(</span><span class="sr">/^I should see projects with following details:$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">table</span><span class="o">|</span>
   <span class="c1"># table is a Cucumber::Core::Ast::DataTable</span>
    <span class="n">projects</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="nf">hashes</span>
