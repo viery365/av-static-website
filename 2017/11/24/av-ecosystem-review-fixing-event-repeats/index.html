@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Fixing Event Repeats</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_14 blog_page_14_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_11 x2017_11_24 x2017_11_24_av-ecosystem-review-fixing-event-repeats x2017_11_24_av-ecosystem-review-fixing-event-repeats_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,88 +83,44 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/11/24/av-ecosystem-review-fixing-event-repeats/">AV EcoSystem Review Fixing Event Repeats</a></h2>
+        <h5 class='date'>24 Nov 2017</h5>
+    <p><img alt="broom" src="/images/fixing.jpg" /></p>
 
-          <p>Page 14 of 27</p>
+<p>So the Semaphore CI was busy burning away yesterday as it re-ran all the different dependabot pull requests, and a few of them have gone green &hellip; and I can also now update the medium-editor PR to the base branch, which seemed to be blocked all day yesterday:</p>
 
-            <p><a href="/blog/page/13/">Previous page</a></p>
+<p><img src="https://dl.dropbox.com/s/zs5jgyf1bl5hx2z/Screenshot%202017-11-24%2010.32.46.png?dl=0" /></p>
 
-          <h2><a href="/2017/03/23/pullrequest-feedback-by-blog/">Pull Request Feedback by Blog</a></h2>
-          <h3>Mar 23</h3>
-          <p><img alt="feedback" src="/images/feedback2.jpg"></p>
+<p>In the background I guess I&rsquo;m supposed to be getting tweaks to the home page text out to production.  I rebase staging into production and push out, and see we&rsquo;ve got a few things in there:</p>
 
-<p>So in the blogs over the last two days I managed to get to the bottom of the problems on one LocalSupport pull request from a Premium member (Zmago).  It’s clear from that experience that I’ve got to adjust the develop branch so that VCR/PuffingBilly...</p>
-          <h2><a href="/2017/03/22/debugging-by-blog/">Debugging by Blog</a></h2>
-          <h3>Mar 22</h3>
-          <p><img alt="debugging" src="/images/debugging.png"></p>
+<p><img src="https://dl.dropbox.com/s/l5bpb26nuklllp8/Screenshot%202017-11-24%2010.35.53.png?dl=0" /></p>
 
-<p>Right, on to part 2 of “debugging by blog”, my attempt to force myself to work through code blockers while debugging.  Currently it’s LocalSupport, where we’ve had a weird CI failure that wasn’t replicated locally for myself or Zmago on our respective...</p>
-          <h2><a href="/2017/03/21/long-running-pull-requests/">Long Running PRs</a></h2>
-          <h3>Mar 21</h3>
-          <p><img alt="long running" src="/images/long_running.JPG"></p>
+<p>Will be good to give them a chance to settle in on production &hellip; there are eight dependabot PRs that are now green.  Shall I just dump them in to develop?  I do, but I&rsquo;m burning time, and I didn&rsquo;t leave myself much time for blogging today.  In addition Fridays are now super busy with mobs and pairing.  I wanted to get into this deprecation warning about <code>repeat_ends</code> for events &hellip; maybe after the WSO meeting later today &hellip;</p>
 
-<p>So the SSL encryption is all now working on <a href="https://www.agileventures.org/">AgileVenture’s production site</a>.  The slight login oddities on staging appear to have been just staging oddities.  I think maybe we could address them by re-cloning the production database to staging.  That...</p>
-          <h2><a href="/2017/03/20/security-first/">Security First</a></h2>
-          <h3>Mar 20</h3>
-          <p><img alt="security" src="/images/security.png"></p>
+<p>It would be great to work through and remove any gems we don&rsquo;t need.  Some related items here:</p>
 
-<p>We’re in the process of rolling out “https” support on the main AgileVentures site.  We’ve had “https” or “ssl” encoding set up on the LocalSupport project for a couple of years.  LocalSupport users are not a technical community so we don’t have...</p>
-          <h2><a href="/2017/03/17/private-pairing/">Private Pairing</a></h2>
-          <h3>Mar 17</h3>
-          <p><img alt="privacy" src="/images/private-keep-out.jpg"></p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/14333963/how-to-find-unused-gems-in-my-gemfile/28628993#28628993">https://stackoverflow.com/questions/14333963/how-to-find-unused-gems-in-my-gemfile/28628993#28628993</a></li>
+<li><a href="https://github.com/pboling/gem_bench">https://github.com/pboling/gem_bench</a></li>
+</ul>
 
-<p>Where to start? Intense week.  Just finished a one hour private pairing session on the <a href="http://codingdojo.org/kata/Tennis/">tennis kata</a> with a Ruby programmer I met on the <a href="http://www.rubyonrails.link/">RailsLink Slack</a>.  They were suggesting Vim/Tmux, but we ended up using Hangouts and GitHub pong.  It was a good...</p>
-          <h2><a href="/2017/03/16/who-needs-frameworks/">Who Needs Frameworks?</a></h2>
-          <h3>Mar 16</h3>
-          <p><img alt="frameworks" src="/images/frameworks.JPG"></p>
+<p>Okay, I managed to get us down to a single page of pull-requests, and opened all the others to look at the fails to see if they&rsquo;re just intermittent ones.  There seems to be some really weird random fails from coveralls - that needs sorting too.</p>
 
-<p>I listen to a different podcast every morning.  Last Friday it was <a href="http://www.greaterthancode.com/podcast/episode-014-rashaun-stovall-snuggs/">“Greater than Code” with Ra’Shaun Stovall (Snuggs)</a>.  It was pretty mind expanding with quotes and questions like the following:</p>
+<p>End of day, and I&rsquo;m still no closer to working on this event <code>repeat_ends</code> issue.  Although I do feel like a new focus is called for - make the projects super developer friendly and easy to onboard and that way we get more folks working on all the small fixes that would make the main AV site more welcoming &hellip;</p>
 
-<blockquote>
-<p>seniors often try to hold on to the complexity they...</p>
-</blockquote>
-          <h2><a href="/2017/03/15/show-me-the-code/">Show me the Code</a></h2>
-          <h3>Mar 15</h3>
-          <p><img alt="code" src="/images/code.jpg"></p>
-
-<p>Federico made a comment on one of my recent blogs:</p>
-
-<blockquote>
-<p>code_in_blog == good</p>
-</blockquote>
-
-<p>I wish I was coding more.  I am getting to do some code in the Premium mobbing sessions.  My productive coding efforts are snatched between meetings with me throwing up spikes...</p>
-          <h2><a href="/2017/03/14/hangouts-filling-up/">Hangouts Filling Up</a></h2>
-          <h3>Mar 14</h3>
-          <p><img alt="full" src="/images/full.jpg"></p>
-
-<p>Monday saw full hangouts for the “Martin Fowler” and “Kent Beck” scrums.  It was at least partly because SUNY Binghamton students were coming in to vote as part of their class assignment, but also the return of previous regulars such as Tong Wei...</p>
-          <h2><a href="/2017/03/10/day-by-day/">Day by Day</a></h2>
-          <h3>Mar 10</h3>
-          <p><img alt="day" src="/images/day.jpg"></p>
-
-<p>Day by day I’m getting one item off my desk.  I’m not sure why it’s so painful.  Over the last 10 days I’ve got off new passport applications for myself and my eldest son, sent off tax liability statements for the AgileVentures bank account, and...</p>
-          <h2><a href="/2017/03/09/sprinting/">Sprinting</a></h2>
-          <h3>Mar  9</h3>
-          <p><img alt="sprinting" src="/images/sprinting.jpg"></p>
-
-<p>Well I totally failed to avoid Slack and Email before blogging this AM.  Again I was sucked in to Slack by posting the update about the podcast that I’d listened to during my morning jog.  I’d had this idea to post to Twitter and then leave posting...</p>
-
-            <p><a href="/blog/page/15/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -222,6 +179,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

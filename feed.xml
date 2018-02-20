@@ -5,10 +5,43 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-23T00:00:00+00:00</updated>
+  <updated>2017-11-24T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Fixing Event Repeats</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/24/av-ecosystem-review-fixing-event-repeats/"/>
+    <id>http://blog.url.com/2017/11/24/av-ecosystem-review-fixing-event-repeats/</id>
+    <published>2017-11-24T00:00:00+00:00</published>
+    <updated>2018-02-20T21:20:21+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="broom" src="/images/fixing.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So the Semaphore CI was busy burning away yesterday as it re-ran all the different dependabot pull requests, and a few of them have gone green &amp;hellip; and I can also now update the medium-editor PR to the base branch, which seemed to be blocked all day yesterday:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/zs5jgyf1bl5hx2z/Screenshot%202017-11-24%2010.32.46.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the background I guess I&amp;rsquo;m supposed to be getting tweaks to the home page text out to production.  I rebase staging into production and push out, and see we&amp;rsquo;ve got a few things in there:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/l5bpb26nuklllp8/Screenshot%202017-11-24%2010.35.53.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Will be good to give them a chance to settle in on production &amp;hellip; there are eight dependabot PRs that are now green.  Shall I just dump them in to develop?  I do, but I&amp;rsquo;m burning time, and I didn&amp;rsquo;t leave myself much time for blogging today.  In addition Fridays are now super busy with mobs and pairing.  I wanted to get into this deprecation warning about &lt;code&gt;repeat_ends&lt;/code&gt; for events &amp;hellip; maybe after the WSO meeting later today &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;It would be great to work through and remove any gems we don&amp;rsquo;t need.  Some related items here:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/14333963/how-to-find-unused-gems-in-my-gemfile/28628993#28628993"&gt;https://stackoverflow.com/questions/14333963/how-to-find-unused-gems-in-my-gemfile/28628993#28628993&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/pboling/gem_bench"&gt;https://github.com/pboling/gem_bench&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Okay, I managed to get us down to a single page of pull-requests, and opened all the others to look at the fails to see if they&amp;rsquo;re just intermittent ones.  There seems to be some really weird random fails from coveralls - that needs sorting too.&lt;/p&gt;
+
+&lt;p&gt;End of day, and I&amp;rsquo;m still no closer to working on this event &lt;code&gt;repeat_ends&lt;/code&gt; issue.  Although I do feel like a new focus is called for - make the projects super developer friendly and easy to onboard and that way we get more folks working on all the small fixes that would make the main AV site more welcoming &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Sweeping Up</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/23/av-ecosystem-review-sweeping-up/"/>
@@ -315,103 +348,6 @@
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/81z7w7hkh3tacb3/Screenshot%202017-11-17%2010.49.35.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;This is flagging a low risk vulnerability in RuboCop - we can easily upgrade that, but I don&amp;rsquo;t want to get distracted &amp;hellip; so much to pack in, so little time &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review One Thing After Another</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/16/av-ecosystem-review-one-thing-after-another/"/>
-    <id>http://blog.url.com/2017/11/16/av-ecosystem-review-one-thing-after-another/</id>
-    <published>2017-11-16T00:00:00+00:00</published>
-    <updated>2018-02-05T22:01:09+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="typewriter" src="/images/typewriter.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Some days it&amp;rsquo;s just one thing after another.  As Wednesday was drawing to a close I was feeling pretty pleased to have fixes out for our Slack invites (confirmed as all the recent sign ups had already been invited this morning), and for one-off events not showing up.  I knew we also had some kind of javascript error affecting the calendar popups on the create event page, but it turns out that some kind of failure in our Google Analytics code is systematically breaking JavaScript througout the site.  I managed to fix that last night by turning off the analytics, but that&amp;rsquo;s a short term fix as we need that working.&lt;/p&gt;
-
-&lt;p&gt;Am I just fire-fighting crazily here?  I&amp;rsquo;m thinking about the requests that Federico put in for RSVPs, alerts when members join projects, Fred asking for the jitsi server &amp;hellip;  Anyway this is systemic and we need to report analytics to the trustees.  I was able to replicate the failure on staging - perhaps I can replicate it locally.  I can trigger the error locally by running the server like so:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;ENABLE_GOOGLE_ANALYTICS=true be rails s
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The Jasmine tests work fine, even with analytics enabled:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;→ ENABLE_GOOGLE_ANALYTICS=true bej
-[35019] Puma starting in cluster mode...
-[35019] * Version 3.10.0 (ruby 2.3.1-p112), codename: Russell's Teapot
-[35019] * Min threads: 1, max threads: 16
-[35019] * Environment: development
-[35019] * Process workers: 3
-[35019] * Preloading application
-[35019] * Listening on tcp://0.0.0.0:51775
-[35019] Use Ctrl-C to stop
-Waiting for jasmine server on 51775...
-[35019] - Worker 0 (pid: 35027) booted, phase: 0
-[35019] - Worker 1 (pid: 35028) booted, phase: 0
-[35019] - Worker 2 (pid: 35029) booted, phase: 0
-jasmine server started
-.............................................****..........................
-Pending:
-    eventDatePicker hides event repeat options by default
-      awaiting refactor of related form for use in fixture
-
-    eventDatePicker shows event repeat options when event is set to repeat
-      awaiting refactor of related form for use in fixture
-
-    eventDatePicker shows event repeat optional ending when event is set to end
-      awaiting refactor of related form for use in fixture
-
-    eventDatePicker hides event repeat optional ending when event is set to never end
-      awaiting refactor of related form for use in fixture
-
-75 specs, 0 failures, 4 pending specs
-Coverage report generated for RSpec to /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/coverage. 122 / 3516 LOC (3.47%) covered.
-[35029] ! Detected parent died, dying
-[35028] ! Detected parent died, dying
-[35027] ! Detected parent died, dying
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The local error is easier to understand:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/xzo0oe3pgnquepo/Screenshot%202017-11-16%2009.52.32.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and it seems that we can&amp;rsquo;t use the variable &lt;code&gt;ga&lt;/code&gt; in the modified sense in the current google analytics code:&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="nx"&gt;WebsiteOne&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;define&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'GoogleAnalytics'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nb"&gt;window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;_gaq&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[];&lt;/span&gt;
-  &lt;span class="nb"&gt;window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;_gaq&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;'_setAccount'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'UA-47795185-1'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;ga&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;createElement&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'script'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="nx"&gt;ga&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'text/javascript'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;ga&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;async&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="nx"&gt;ga&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;src&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'https:'&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;location&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;protocol&lt;/span&gt; &lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="s1"&gt;'https://ssl'&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'http://www'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;'.google-analytics.com/ga.js'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getElementsByTagName&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'script'&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parentNode&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;insertBefore&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ga&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-  &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;init&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nb"&gt;window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;_gaq&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;'_trackPageview'&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;GA_LOCAL_STORAGE_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'ga:clientId'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-  &lt;span class="c1"&gt;// the code below leads to the following error&lt;/span&gt;
-  &lt;span class="c1"&gt;// Uncaught TypeError: ga is not a function&lt;/span&gt;
-  &lt;span class="c1"&gt;//&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;localStorage&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nx"&gt;ga&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'create'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'UA-47795185-1'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-      &lt;span class="s1"&gt;'storage'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'none'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-      &lt;span class="s1"&gt;'clientId'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;localStorage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getItem&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;GA_LOCAL_STORAGE_KEY&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="p"&gt;});&lt;/span&gt;
-    &lt;span class="nx"&gt;ga&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;tracker&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-      &lt;span class="nx"&gt;localStorage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setItem&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;GA_LOCAL_STORAGE_KEY&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;tracker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'clientId'&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
-    &lt;span class="p"&gt;});&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nx"&gt;ga&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'create'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'UA-47795185-1'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'auto'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="nx"&gt;ga&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'send'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'pageview'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="na"&gt;init&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;init&lt;/span&gt;
-  &lt;span class="p"&gt;};&lt;/span&gt;
-&lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I think what we have here is a mix of old and new GA tracking code, and the problem that none of it actually gets run until we go into production, where google analytics is switched on.  Looking up both old and new code, I can&amp;rsquo;t immediately see a way to reconcile them, so I&amp;rsquo;ve commented out the offending code, and so will get that up until we can work out an effective combined approach.&lt;/p&gt;
-
-&lt;p&gt;I think rather than switching GA code on and off globally we should have different account ids for different instances, and set that via ENV vars &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
