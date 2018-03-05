@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Code Hospitality</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_8 blog_page_8_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_11 x2017_11_27 x2017_11_27_av-ecosystem-review-code-hospitality x2017_11_27_av-ecosystem-review-code-hospitality_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,74 +83,113 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/11/27/av-ecosystem-review-code-hospitality/">AV EcoSystem Review Code Hospitality</a></h2>
+        <h5 class='date'>27 Nov 2017</h5>
+    <p><img alt="broom" src="/images/hospitality.jpg" /></p>
 
-          <p>Page 8 of 27</p>
+<p>Pairing with Marian over the weekend we managed to clear up the last piece of junk in the RSpec log, the deprecation warning about the event_repeats boolean column in the events table.  It turned out that we could fix it simply by adjusting the specs, since it was they that were trying to force strings into the boolean column, not any part of the main app.  We drifted over a few other areas where issues could be investigated or things refactored.  We saw the code that was supposed to email notify us when there are 500 errors (which I never receive) and it looked like we could make the events code simpler, by pulling the string &ndash;&gt; boolean transformations into the select options.</p>
 
-            <p><a href="/blog/page/7/">Previous page</a></p>
+<p>I wanted to focus this morning on code hospitality a la Nadia Odunayo, but I&rsquo;ve been distracted by Slack and Email already, and putting the above items into new of existing issues:</p>
 
-          <h2><a href="/2017/07/12/av-website-review-part-six/">AV Website Review Part 6</a></h2>
-          <h3>Jul 12</h3>
-          <p>So my spike of adding ReCaptcha to the sign up page went pretty well.  It all seems to be passing in CI.  I was expecting lots of the sign up tests to break, but they all passed.  I guess because they don’t have javascript enabled?  It tempts me to...</p>
-          <h2><a href="/2017/07/11/av-website-review-part-five/">AV Website Review Part 5</a></h2>
-          <h3>Jul 11</h3>
-          <p>So what I really meant to do yesterday was to look at the flows going through various pages in the site via Google Analytics.  Here’s a view that compares June with May this year:</p>
+<ul>
+<li><a href="https://github.com/AgileVentures/WebsiteOne/issues/1808#issuecomment-347133830">500 error notifications</a></li>
+<li><a href="https://github.com/AgileVentures/WebsiteOne/issues/1992">Event form refactoring</a></li>
+</ul>
 
-<p><img alt="behaviour flow around sign up page, may vs jun" src="https://dl.dropbox.com/s/hf47so53v8lnhyw/Screenshot%202017-07-11%2009.23.15.png?dl=1"></p>
+<p>Anyhow, I found <a href="https://gist.github.com/nodunayo/c919477906aab6c1af6065ff8e868d3e">Nadia&rsquo;s README template</a>, so perhaps I can just quickly do a version for AgileVentures WebSiteOne</p>
 
-<p>It’s perhaps even more revealing to compare June this year with June...</p>
-          <h2><a href="/2017/07/10/av-website-review-part-four/">AV Website Review Part 4</a></h2>
-          <h3>Jul 10</h3>
-          <p><img alt="conflicted" src="/images/conflicted.jpg"></p>
+<h1>AgileVentures WebSiteOne</h1>
 
-<p>I’m conflicted about what to review on the website next.  Part of me wants to start breaking the “Getting Started” page up into pieces, and showing animated gifs for each.  There’s also the “About Us” page and the need for privacy statement pages...</p>
-          <h2><a href="/2017/07/07/av-website-review-part-three/">AV Website Review Part 3</a></h2>
-          <h3>Jul  7</h3>
-          <p>I’m still struggling to get back to former health and energy levels, but I’m pleased to have reviewed and made some changes to the website.  Let’s continue.  Looking at “Getting Started” yesterday made me think about the projects page again.  Effectively...</p>
-          <h2><a href="/2017/07/06/av-website-review-part-two/">AV Website Review Part 2</a></h2>
-          <h3>Jul  6</h3>
-          <p>So I’m deeply tempted to continue with the premium page review.  I think making all the new questions have their explanations in pop-out form would probably be an improvement, but I know that’s a sticky hour or so of manipulating HTML.  Very unDRY...</p>
-          <h2><a href="/2017/07/05/av-website-review-part-one/">AV Website Review Part 1</a></h2>
-          <h3>Jul  5</h3>
-          <p><img alt="new dawn" src="/images/new_dawn.jpg"></p>
+<p>This app powers the AgileVentures main developer site, showing lists of active projects, members, upcoming events, past event recordings, as well as all the machinery for Premium membership payments</p>
 
-<p>Right, new dawn.  I could be blogging about all the conversations we had about testing yesterday, but my new resolution is to get the AV website sorted out in terms of usability, readability and user flow one day at a time.  Immediately I’m torn...</p>
-          <h2><a href="/2017/07/04/all-good-things/">All Good Things ...</a></h2>
-          <h3>Jul  4</h3>
-          <p><img alt="good things" src="/images/good_things.jpg"></p>
+<h2>Installation</h2>
 
-<p>I’ve been daily blogging for a year now.  Working day blogs that is.  I haven’t been blogging on weekends, or national holidays, or during my vacations.  I’ve been pretty consistent.  I think there’s been a couple of days where work was super busy...</p>
-          <h2><a href="/2017/07/03/private-design-sprint-day-five/">Private Design Sprint Day Five</a></h2>
-          <h3>Jul  3</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
+<ul>
+<li>link to installation doc</li>
+</ul>
 
-<p>It was a frenetic last day but we managed to run usability tests with five different people.  I had to reach out to my personal network to fill all the slots, as well as stretching out of the precise demographic range that we had targeted, but I...</p>
-          <h2><a href="/2017/06/30/private-design-sprint-day-four/">Private Design Sprint Day Four</a></h2>
-          <h3>Jun 30</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
+<h2>Usage</h2>
 
-<p>I’m heading in to London on the train for day 5 following a frenetic day in London yesterday.  We got access to our space a little late, but proceeded to make good progress on the prototype with the designer cranking out a landscape, logo and background...</p>
-          <h2><a href="/2017/06/29/private-design-sprint-day-three/">Private Design Sprint Day Three</a></h2>
-          <h3>Jun 29</h3>
-          <p><img alt="design sprint" src="/images/design_sprint.png"></p>
+<ul>
+<li>???</li>
+</ul>
 
-<p>I’m heading into London on the train for day 4 as we have a location switch for the last two days.  The last three days we’ve been in a somewhat remote location which would be difficult for testers to reach, so the last two days are in central London...</p>
+<h2>Contributing</h2>
 
-            <p><a href="/blog/page/9/">Next page</a></p>
+<ul>
+<li>link to contributing guide</li>
+</ul>
 
+<h2>History</h2>
+
+<ul>
+<li>Sam Joseph had the idea for an online pairing community where everyone worked together to use the agile development methodology to deliver solutions to IT charities and non-profits.  Thomas Ochman joined as project manager and led the development of the WebSiteOne codebase with Bryan Yap serving as technical lead.  Initialy Sam was the notional &ldquo;client&rdquo;, not getting involved in the tech development, and many different volunteers contributed code.  Later Raoul joined as project manager as Thomas and Bryan had less and less time for the project.  Sam switched roles joining Raoul as project manager, and is now the sole project manager as Raoul became unavailable.<br></li>
+</ul>
+
+<h2>Approaches</h2>
+
+<ul>
+<li>Agile Development
+
+<ul>
+<li>We try to work from user stories in regular sprints, offer daily standups, and get regular feedback from end users</li>
+</ul></li>
+<li>Behaviour Driven Development (BDD)
+
+<ul>
+<li>We use Cucumber and RSpec testing tools that describe the behaviours of the system and its units</li>
+<li>We try to work outside in, starting with acceptance tests, dropping to unit tests and then writing application code</li>
+<li>We do spike occasionally to work out what&rsquo;s going on, but then either throw away the spike, or make sure all our tests break before wrapping in tests (by strategically or globally breaking things)</li>
+<li>Where possible we go for declarative over imperative scenarios in our acceptance tests, trying to boil down the high level features to be easily comprehensible in terms of user intention</li>
+</ul></li>
+<li>Domain Driven Design (DDD)
+
+<ul>
+<li>Sometimes we switch to inside out, trying to adjust the underlying entity schema to better represent the domain model</li>
+</ul></li>
+<li>Self-documenting code
+
+<ul>
+<li>We prefer executable documentation (tests) and relatively short methods where the method and variable names effectively document the code</li>
+</ul></li>
+</ul>
+
+<h2>Reading material</h2>
+
+<ul>
+<li><a href="#">Imperative vs Declarative</a></li>
+<li><a href="#">JavaScript Accpetance test trials</a></li>
+<li><a href="#">What is DDD?</a></li>
+</ul>
+
+<h2>Walkthroughs</h2>
+
+<ul>
+<li>Some new feature we added &hellip;
+
+<ul>
+<li>Here is the original feature request</li>
+<li>This is the <a href="#">spec</a> that was written</li>
+<li>Here&rsquo;s the <a href="#">code</a> that fixed that spec</li>
+<li>And then <a href="#">we refactored it</a></li>
+</ul></li>
+</ul>
+
+<p>That&rsquo;s a start - more tomorrow &hellip;  </p>
+
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -208,6 +248,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

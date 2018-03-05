@@ -5,16 +5,118 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-24T00:00:00+00:00</updated>
+  <updated>2017-11-27T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Code Hospitality</title>
+    <link rel="alternate" href="http://blog.url.com/2017/11/27/av-ecosystem-review-code-hospitality/"/>
+    <id>http://blog.url.com/2017/11/27/av-ecosystem-review-code-hospitality/</id>
+    <published>2017-11-27T00:00:00+00:00</published>
+    <updated>2018-03-05T20:53:17+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="broom" src="/images/hospitality.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Pairing with Marian over the weekend we managed to clear up the last piece of junk in the RSpec log, the deprecation warning about the event_repeats boolean column in the events table.  It turned out that we could fix it simply by adjusting the specs, since it was they that were trying to force strings into the boolean column, not any part of the main app.  We drifted over a few other areas where issues could be investigated or things refactored.  We saw the code that was supposed to email notify us when there are 500 errors (which I never receive) and it looked like we could make the events code simpler, by pulling the string &amp;ndash;&amp;gt; boolean transformations into the select options.&lt;/p&gt;
+
+&lt;p&gt;I wanted to focus this morning on code hospitality a la Nadia Odunayo, but I&amp;rsquo;ve been distracted by Slack and Email already, and putting the above items into new of existing issues:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1808#issuecomment-347133830"&gt;500 error notifications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1992"&gt;Event form refactoring&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Anyhow, I found &lt;a href="https://gist.github.com/nodunayo/c919477906aab6c1af6065ff8e868d3e"&gt;Nadia&amp;rsquo;s README template&lt;/a&gt;, so perhaps I can just quickly do a version for AgileVentures WebSiteOne&lt;/p&gt;
+
+&lt;h1&gt;AgileVentures WebSiteOne&lt;/h1&gt;
+
+&lt;p&gt;This app powers the AgileVentures main developer site, showing lists of active projects, members, upcoming events, past event recordings, as well as all the machinery for Premium membership payments&lt;/p&gt;
+
+&lt;h2&gt;Installation&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;link to installation doc&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Usage&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;???&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Contributing&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;link to contributing guide&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;History&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sam Joseph had the idea for an online pairing community where everyone worked together to use the agile development methodology to deliver solutions to IT charities and non-profits.  Thomas Ochman joined as project manager and led the development of the WebSiteOne codebase with Bryan Yap serving as technical lead.  Initialy Sam was the notional &amp;ldquo;client&amp;rdquo;, not getting involved in the tech development, and many different volunteers contributed code.  Later Raoul joined as project manager as Thomas and Bryan had less and less time for the project.  Sam switched roles joining Raoul as project manager, and is now the sole project manager as Raoul became unavailable.&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Approaches&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Agile Development
+
+&lt;ul&gt;
+&lt;li&gt;We try to work from user stories in regular sprints, offer daily standups, and get regular feedback from end users&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Behaviour Driven Development (BDD)
+
+&lt;ul&gt;
+&lt;li&gt;We use Cucumber and RSpec testing tools that describe the behaviours of the system and its units&lt;/li&gt;
+&lt;li&gt;We try to work outside in, starting with acceptance tests, dropping to unit tests and then writing application code&lt;/li&gt;
+&lt;li&gt;We do spike occasionally to work out what&amp;rsquo;s going on, but then either throw away the spike, or make sure all our tests break before wrapping in tests (by strategically or globally breaking things)&lt;/li&gt;
+&lt;li&gt;Where possible we go for declarative over imperative scenarios in our acceptance tests, trying to boil down the high level features to be easily comprehensible in terms of user intention&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Domain Driven Design (DDD)
+
+&lt;ul&gt;
+&lt;li&gt;Sometimes we switch to inside out, trying to adjust the underlying entity schema to better represent the domain model&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Self-documenting code
+
+&lt;ul&gt;
+&lt;li&gt;We prefer executable documentation (tests) and relatively short methods where the method and variable names effectively document the code&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Reading material&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#"&gt;Imperative vs Declarative&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#"&gt;JavaScript Accpetance test trials&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#"&gt;What is DDD?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Walkthroughs&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Some new feature we added &amp;hellip;
+
+&lt;ul&gt;
+&lt;li&gt;Here is the original feature request&lt;/li&gt;
+&lt;li&gt;This is the &lt;a href="#"&gt;spec&lt;/a&gt; that was written&lt;/li&gt;
+&lt;li&gt;Here&amp;rsquo;s the &lt;a href="#"&gt;code&lt;/a&gt; that fixed that spec&lt;/li&gt;
+&lt;li&gt;And then &lt;a href="#"&gt;we refactored it&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That&amp;rsquo;s a start - more tomorrow &amp;hellip;  &lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Fixing Event Repeats</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/24/av-ecosystem-review-fixing-event-repeats/"/>
     <id>http://blog.url.com/2017/11/24/av-ecosystem-review-fixing-event-repeats/</id>
     <published>2017-11-24T00:00:00+00:00</published>
-    <updated>2018-02-20T21:20:21+00:00</updated>
+    <updated>2018-03-05T20:47:41+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -22,13 +124,13 @@
 
 &lt;p&gt;So the Semaphore CI was busy burning away yesterday as it re-ran all the different dependabot pull requests, and a few of them have gone green &amp;hellip; and I can also now update the medium-editor PR to the base branch, which seemed to be blocked all day yesterday:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/zs5jgyf1bl5hx2z/Screenshot%202017-11-24%2010.32.46.png?dl=0" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/zs5jgyf1bl5hx2z/Screenshot%202017-11-24%2010.32.46.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;In the background I guess I&amp;rsquo;m supposed to be getting tweaks to the home page text out to production.  I rebase staging into production and push out, and see we&amp;rsquo;ve got a few things in there:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/l5bpb26nuklllp8/Screenshot%202017-11-24%2010.35.53.png?dl=0" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/l5bpb26nuklllp8/Screenshot%202017-11-24%2010.35.53.png" /&gt;&lt;/p&gt;
 
-&lt;p&gt;Will be good to give them a chance to settle in on production &amp;hellip; there are eight dependabot PRs that are now green.  Shall I just dump them in to develop?  I do, but I&amp;rsquo;m burning time, and I didn&amp;rsquo;t leave myself much time for blogging today.  In addition Fridays are now super busy with mobs and pairing.  I wanted to get into this deprecation warning about &lt;code&gt;repeat_ends&lt;/code&gt; for events &amp;hellip; maybe after the WSO meeting later today &amp;hellip;&lt;/p&gt;
+&lt;p&gt;Will be good to give them a chance to settle in on production &amp;hellip; there are eight dependabot PRs that are now green.  Shall I just dump them in to develop?  I do, but I&amp;rsquo;m burning time, and I didn&amp;rsquo;t leave myself much time for blogging today.  In addition, Fridays are now super busy with mobs and pairing.  I wanted to get into this deprecation warning about &lt;code&gt;repeat_ends&lt;/code&gt; for events &amp;hellip; maybe after the WSO meeting later today &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;It would be great to work through and remove any gems we don&amp;rsquo;t need.  Some related items here:&lt;/p&gt;
 
@@ -324,30 +426,6 @@
 | 11/17 Fri | Phoenix       | Ryder          |&lt;/p&gt;
 
 &lt;p&gt;And so with the work from last week on meetings stats and web stats, I&amp;rsquo;ve finished the main stats part of the report, but not the update of individual Premium members, or reaching out to all the Premiums to check how they are doing.  With my schedule today that&amp;rsquo;ll have to be tomorrow &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Packing Too Much In</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/17/av-ecosystem-review-packing-too-much-in-blog/"/>
-    <id>http://blog.url.com/2017/11/17/av-ecosystem-review-packing-too-much-in-blog/</id>
-    <published>2017-11-17T00:00:00+00:00</published>
-    <updated>2018-02-06T20:56:32+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="packing too much in " src="/images/packing_too_much_in.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I squeezed in a LocalSupport client meeting this morning and I have an F2F pairing session coming up, so there&amp;rsquo;s not much time for review.  I&amp;rsquo;m thinking I should focus next week on Jitsi on Azure, although I&amp;rsquo;d love to revisit our slack bots, pings, and even consider a react-ification of our getting started pages.&lt;/p&gt;
-
-&lt;p&gt;However I think the most important thing for me to do right now is work through the follow up from the LocalSupport client meeting.  LocalSupport is our longest running project and is a key part of the AgileVentures ecosystem.  I had what felt like  a productive meeting, in that I had managed to implement some cost savings for LocalSupport by switching to free https certificates.  I still wonder if I should have been further questioning whether VAHC really wanted to push forward with this project, but hey, who knows?&lt;/p&gt;
-
-&lt;p&gt;The key thing now is that the client asked to have put on a &amp;ldquo;back burner&amp;rdquo; certain tickets that had been started by some developers.  These relate to members of the public being able to submit new events.  We also rejected a ticket on the breadcrumbs functionality in the system.  Now I have the choice to be alerting developers through the Pivotal Tracker system or through Slack.  I&amp;rsquo;ll start with the tracker, and then maybe follow up in Slack.  It&amp;rsquo;s potentially a sensitive thing as it will probably mean shifting people around on what they&amp;rsquo;re working on and some careful explanations of what&amp;rsquo;s going on.&lt;/p&gt;
-
-&lt;p&gt;Just jumping to GitHub to review the pull requests I see GitHub now has new vulnerability checks:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/81z7w7hkh3tacb3/Screenshot%202017-11-17%2010.49.35.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;This is flagging a low risk vulnerability in RuboCop - we can easily upgrade that, but I don&amp;rsquo;t want to get distracted &amp;hellip; so much to pack in, so little time &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
