@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Getting Stuck</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_11 x2017_11_29 x2017_11_29_av-ecosystem-review-getting-stuck x2017_11_29_av-ecosystem-review-getting-stuck_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/11/29/av-ecosystem-review-getting-stuck/">AV EcoSystem Review Getting Stuck</a></h2>
+        <h5 class='date'>29 Nov 2017</h5>
+    <p><img alt="getting stuck" src="/images/getting_stuck.jpg" /></p>
+
+<p>I&rsquo;m getting a bit stuck.  My motivation to clear things off my desk has completely collapsed.  Today I did my social media station keeping before opening the blog.  I&rsquo;d love to get to the computer at 8am like I sometimes used to and get a real meaty chunk of work by 10am to then have the motivation to hit on non social-media admin.  Gosh, social media is gamified addiction fun, isn&rsquo;t it?</p>
+
+<p>Anyhow, I&rsquo;ve cleared all the dependabot low hanging fruit, so I&rsquo;m rebuilding some older PRs, which might just be falling foul of intermittent fails.  Gosh, that&rsquo;s a time sink - that reminds me about my plan to try and get the medium-editor in place so we can drop mercury.  I&rsquo;m also slighltly stuck on my revision to the WSO README for fear of getting into arguments about the accuracy of the project history - maybe better to leave that section out?  Maybe I move the new draft README out of my last blog and into a placeholder location &hellip;</p>
+
+<p><a href="https://github.com/AgileVentures/WebsiteOne/blob/develop/README-draft.md">https://github.com/AgileVentures/WebsiteOne/blob/develop/README-draft.md</a></p>
+
+<p>So keep polishing the README, sort out the pending issues showing up in the test output, work on the medium editor branch, or fix some of the niggly things, e.g. the formatting issue that Susanna highlighted yesterday?  I think I can get a quick win on this <a href="https://github.com/AgileVentures/WebsiteOne/issues/1994">formatting issue</a> from Susanna.  I make a branch and amend an existing cucumber test:</p>
+<pre class="highlight gherkin"><code>  <span class="kn">Background</span><span class="p">:</span>
+    <span class="err">Given following events exist</span><span class="p">:</span>
+      <span class="p">|</span> <span class="nv">name</span>       <span class="p">|</span> <span class="nv">description</span>             <span class="p">|</span> <span class="nv">category</span>        <span class="p">|</span> <span class="nv">start_datetime</span>          <span class="p">|</span> <span class="nv">duration</span> <span class="p">|</span> <span class="nv">repeats</span> <span class="p">|</span> <span class="nv">time_zone</span> <span class="p">|</span> <span class="nv">project</span> <span class="p">|</span> <span class="nv">repeats_weekly_each_days_of_the_week_mask</span> <span class="p">|</span> <span class="nv">repeats_every_n_weeks</span> <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Standup</span>    <span class="p">|</span> <span class="n">Daily</span> <span class="n">standup</span> <span class="n">meeting&lt;br&gt;woot!</span>   <span class="p">|</span> <span class="n">Scrum</span>           <span class="p">|</span> <span class="n">2014/02/03</span> <span class="n">07:00:00</span> <span class="n">UTC</span> <span class="p">|</span> <span class="n">150</span>      <span class="p">|</span> <span class="n">weekly</span>  <span class="p">|</span> <span class="n">UTC</span>       <span class="p">|</span>         <span class="p">|</span>   <span class="n">15</span>                                      <span class="p">|</span>     <span class="n">1</span>                 <span class="p">|</span>
+
+  <span class="kn">Scenario</span><span class="p">:</span> Show correct timezone
+    <span class="err">Given the date is "2016/05/01 09</span><span class="p">:</span><span class="err">15</span><span class="p">:</span><span class="err">00</span> <span class="err">UTC"</span>
+    <span class="nf">And</span> I am on events index page
+    <span class="nf">Then</span> I should see <span class="s">"Standup"</span>
+    <span class="err">And the local time element should be set to "2016-05-10T07</span><span class="p">:</span><span class="err">00</span><span class="p">:</span><span class="err">00Z"</span>
+    <span class="nf">And</span> I should not see <span class="s">"&lt;br&gt;"</span>
+</code></pre>
+<p>which fails in the way I expect, i.e. the html tag shows up in the list view as Susanna pointed out.  I want to refactor the cuke, but I must fix the issue first, which might be as simple as just adding the <code>auto_link</code> command to the relevant part of the view:</p>
+<pre class="highlight erb"><code>              <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="n">auto_link</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="nf">description</span><span class="p">.</span><span class="nf">truncate</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="ss">separator: </span><span class="sr">/\s/</span><span class="p">))</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+</code></pre>
+<p>It is.  So can I make the cuke a better example of self documentation?  I refactor it to:</p>
+<pre class="highlight gherkin"><code><span class="nt">@vcr</span>
+<span class="kd">Feature</span><span class="p">:</span> List Repeating Events
+  As an event creator
+  So that I don't have to keep making separate events for repeating meetings
+  I would like everyone to see repeats of regular events
+
+  <span class="kn">Background</span><span class="p">:</span>
+    <span class="err">Given following events exist</span><span class="p">:</span>
+      <span class="p">|</span> <span class="nv">name</span>       <span class="p">|</span> <span class="nv">description</span>             <span class="p">|</span> <span class="nv">category</span>        <span class="p">|</span> <span class="nv">start_datetime</span>          <span class="p">|</span> <span class="nv">duration</span> <span class="p">|</span> <span class="nv">repeats</span> <span class="p">|</span> <span class="nv">time_zone</span> <span class="p">|</span> <span class="nv">project</span> <span class="p">|</span> <span class="nv">repeats_weekly_each_days_of_the_week_mask</span> <span class="p">|</span> <span class="nv">repeats_every_n_weeks</span> <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Standup</span>    <span class="p">|</span> <span class="n">Daily</span> <span class="n">standup</span> <span class="n">meeting&lt;br&gt;woot!</span>   <span class="p">|</span> <span class="n">Scrum</span>           <span class="p">|</span> <span class="n">2014/02/03</span> <span class="n">07:00:00</span> <span class="n">UTC</span> <span class="p">|</span> <span class="n">150</span>      <span class="p">|</span> <span class="n">weekly</span>  <span class="p">|</span> <span class="n">UTC</span>       <span class="p">|</span>         <span class="p">|</span>   <span class="n">15</span>                                      <span class="p">|</span>     <span class="n">1</span>                 <span class="p">|</span>
+    <span class="err">Given the date is "2016/05/01 09</span><span class="p">:</span><span class="err">15</span><span class="p">:</span><span class="err">00</span> <span class="err">UTC"</span>
+    <span class="nf">When</span> I am on events index page
+
+  <span class="kn">Scenario</span><span class="p">:</span> Show correct timezone for repeating event
+    <span class="nf">Then</span> I should see <span class="s">"Standup"</span>
+    <span class="err">And the local time element should be set to "2016-05-10T07</span><span class="p">:</span><span class="err">00</span><span class="p">:</span><span class="err">00Z"</span>
+
+  <span class="kn">Scenario</span><span class="p">:</span> <span class="nf">Do</span> not show raw HTML in repeating event description
+    <span class="nf">Then</span> I should not see <span class="s">"&lt;br&gt;"</span>
+</code></pre>
+<p>It feels like a waste of resources to break it into two scenarios when it&rsquo;s the same set up and it&rsquo;s effectively reloading the entire system twice to check for something that could be checked in sequence.  Perhaps it would be better to get the intent of the second scenario in the step definition itself.  I adjust like so:</p>
+<pre class="highlight gherkin"><code>  <span class="kn">Scenario</span><span class="p">:</span> Show correct timezone for repeating event
+    <span class="err">Given the date is "2016/05/01 09</span><span class="p">:</span><span class="err">15</span><span class="p">:</span><span class="err">00</span> <span class="err">UTC"</span>
+    <span class="nf">When</span> I am on events index page
+    <span class="nf">Then</span> I should see <span class="s">"Standup"</span>
+    <span class="err">And the local time element should be set to "2016-05-10T07</span><span class="p">:</span><span class="err">00</span><span class="p">:</span><span class="err">00Z"</span>
+    <span class="nf">And</span> I should not see any HTML tags
+</code></pre>
+<p>Would love to adjust the background step so it wasn&rsquo;t quite so wide &hellip; I&rsquo;ve got it down to:</p>
+<pre class="highlight gherkin"><code><span class="nt">@vcr</span>
+<span class="kd">Feature</span><span class="p">:</span> List Repeating Events
+  As an event creator
+  So that I don't have to keep making separate events for repeating meetings
+  I would like everyone to see repeats of regular events
+
+  <span class="kn">Background</span><span class="p">:</span>
+    <span class="err">Given the following events exist that repeat every weekday</span><span class="p">:</span>
+      <span class="p">|</span> <span class="nv">name</span>    <span class="p">|</span> <span class="nv">description</span>     <span class="p">|</span> <span class="nv">category</span> <span class="p">|</span> <span class="nv">start_datetime</span>          <span class="p">|</span> <span class="nv">duration</span> <span class="p">|</span> <span class="nv">time_zone</span> <span class="p">|</span>
+      <span class="p">|</span> <span class="n">Standup</span> <span class="p">|</span> <span class="n">always&lt;br&gt;woot!</span> <span class="p">|</span> <span class="n">Scrum</span>    <span class="p">|</span> <span class="n">2014/02/03</span> <span class="n">07:00:00</span> <span class="n">UTC</span> <span class="p">|</span> <span class="n">150</span>      <span class="p">|</span> <span class="n">UTC</span>       <span class="p">|</span>
+
+  <span class="kn">Scenario</span><span class="p">:</span> Show correct timezone for repeating event
+    <span class="err">Given the date is "2016/05/01 09</span><span class="p">:</span><span class="err">15</span><span class="p">:</span><span class="err">00</span> <span class="err">UTC"</span>
+    <span class="nf">When</span> I am on events index page
+    <span class="nf">Then</span> I should see <span class="s">"Standup"</span>
+    <span class="nf">And</span> I should see <span class="s">"woot!"</span>
+    <span class="err">And the local time element should be set to "2016-05-10T07</span><span class="p">:</span><span class="err">00</span><span class="p">:</span><span class="err">00Z"</span>
+    <span class="nf">And</span> I should not see any HTML tags
+</code></pre>
+<p>I&rsquo;d still like to add more explanation to the <code>local time element should be set to &quot;2016-05-10T07:00:00Z&quot;</code> step so that it explains that this is the raw element that the javascript library <code>local_time</code> uses to display the correct time zone to the user and that we gave up testing the execution of that, since the headless browser can&rsquo;t easily be manipulated to a different time zone.  Still my ideal Scenario text would be more like:</p>
+<pre class="highlight gherkin"><code>  <span class="kn">Scenario</span><span class="p">:</span> Show correct timezone for repeating event
+    <span class="nf">Given</span> the date is a weekday in 2016
+    <span class="nf">When</span> I am on events index page
+    <span class="nf">Then</span> I should see the event title and description
+    <span class="nf">And</span> I should not see any HTML tags
+    <span class="nf">And</span> the elements needed by the local_time js library that shows times in the users timezone should be set correctly
+</code></pre>
+<p>where the intention for each line is explicit.  I&rsquo;ll leave that for another time, as I&rsquo;ve performed several refactorings already.  At least I now have some aspirational text to put in the new README draft.</p>
+
+<p>Well that makes me feel heaps better, to actually have a <a href="https://github.com/AgileVentures/WebsiteOne/pull/1995">quick fix</a> for something reported by a Premium user.  I do need to get on to that medium editor thing in order to speed up our overall process.  Even the double run of the cukes hasn&rsquo;t really addressed our failing javascript tests.  I guess the trick is to keep fixing things up, improving the cukes and getting those as examples into the system documentation showing how we are trying to improve things &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
