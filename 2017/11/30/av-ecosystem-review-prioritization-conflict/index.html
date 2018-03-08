@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Prioritization Conflict</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_11 x2017_11_30 x2017_11_30_av-ecosystem-review-prioritization-conflict x2017_11_30_av-ecosystem-review-prioritization-conflict_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/11/30/av-ecosystem-review-prioritization-conflict/">AV EcoSystem Review Prioritization Conflict</a></h2>
+        <h5 class='date'>30 Nov 2017</h5>
+    <p><img alt="switches" src="/images/switches.jpg" /></p>
+
+<p>Blargh.  Let&rsquo;s get the latest fix deployed on WebSiteOne.  Recently these blogs are little WebSiteOne admin activities and then the release process gets smeared out over the day.  What would it be like to actually focus on a single project for a day or, gasp, for a whole week?  I&rsquo;ve also made the process more complicated by switching off the staging and develop servers when we&rsquo;re not using them, in order to save money.  It&rsquo;s also easy to burn time on these dependabot gem upgrades, although do I sense I&rsquo;m getting a handle on them now?  Could we even turn back on the PR updates in the #websiteone channel?</p>
+
+<p>I&rsquo;m suddenly paranoid about the Google login failing, should I be on that?  Let&rsquo;s try to clean up first.  We&rsquo;ve got pending notices in the Jasmine tests and RSpec.  I&rsquo;ve got <a href="https://github.com/AgileVentures/WebsiteOne/pull/1858#issuecomment-348141856">half an idea</a> about how to fix the <code>local_time</code> gem upgrade that dependabot is recommending, but heuristic: I already pulled in one dependabot today; stay on target.</p>
+
+<p>Jasmine has this set of pending statements:</p>
+<pre class="highlight plaintext"><code>Pending:
+        eventDatePicker hides event repeat options by default
+          awaiting refactor of related form for use in fixture
+
+        eventDatePicker shows event repeat options when event is set to repeat
+          awaiting refactor of related form for use in fixture
+
+        eventDatePicker shows event repeat optional ending when event is set to end
+          awaiting refactor of related form for use in fixture
+
+        eventDatePicker hides event repeat optional ending when event is set to never end
+          awaiting refactor of related form for use in fixture
+</code></pre>
+<p>and RSpec this:</p>
+<pre class="highlight plaintext"><code>  1) Karma add some examples to (or delete) /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/karma_spec.rb
+     # Not yet implemented
+     # ./spec/models/karma_spec.rb:4
+
+</code></pre>
+<p>The eventDatePickerSpec concern seems to be that the fixture is too large.  Just delete the test? It says it is awaiting refactor of the form, but that doesn&rsquo;t look like it will be happening anytime soon &hellip;, so I make some specs with a fixture in a separate file:</p>
+<pre class="highlight javascript"><code><span class="nx">describe</span><span class="p">(</span><span class="s1">'eventDatePicker'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Michael is concerned that fixture is large and involved and creating too complex a seam</span>
+    <span class="nx">loadFixtures</span><span class="p">(</span><span class="s1">'event_datepicker.html'</span><span class="p">);</span>
+    <span class="nx">eventDatepicker</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'hides event repeat options by default'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeats_options'</span><span class="p">)).</span><span class="nx">toBeHidden</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeats_weekly_options'</span><span class="p">)).</span><span class="nx">toBeHidden</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'.event_option'</span><span class="p">)).</span><span class="nx">toBeHidden</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'shows event repeat options when event is set to repeat'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#event_repeats'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">'weekly'</span><span class="p">)</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#event_repeats'</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">'change'</span><span class="p">)</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeats_options'</span><span class="p">)).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeHidden</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeats_weekly_options'</span><span class="p">)).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeHidden</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'.event_option'</span><span class="p">)).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeHidden</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'shows event repeat optional ending when event is set to end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#event_repeats'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">'weekly'</span><span class="p">)</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#event_repeats'</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">'change'</span><span class="p">)</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeat_ends_on_label'</span><span class="p">)).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeHidden</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeat_ends_on'</span><span class="p">)).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeHidden</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'hides event repeat optional ending when event is set to never end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#event_repeats'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">'weekly'</span><span class="p">)</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#event_repeats'</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">'change'</span><span class="p">)</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#event_repeat_ends_string'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">'never'</span><span class="p">)</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#event_repeat_ends_string'</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">'change'</span><span class="p">)</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeat_ends_on_label'</span><span class="p">)).</span><span class="nx">toBeHidden</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeat_ends_on'</span><span class="p">)).</span><span class="nx">toBeHidden</span><span class="p">();</span>
+  <span class="p">});</span>
+
+<span class="p">});</span>
+</code></pre>
+<p>and making it all work involves me breaking out the js debugger and stepping through to see which elements are being hidden when:</p>
+
+<p><img src="https://dl.dropbox.com/s/zsckxs1juv27wax/Screenshot%202017-11-30%2010.47.52.png?dl=0" /></p>
+
+<p>I feel paranoid that this is all yesterday&rsquo;s tech.   I notice the JasmineJQuery library is looking for a new maintainer, and apparently some folks are using <a href="https://github.com/tmpvar/jsdom">https://github.com/tmpvar/jsdom</a></p>
+
+<p>I could also be refactoring out some of the operations in this test &hellip; I equivocate and go for it:</p>
+<pre class="highlight javascript"><code><span class="nx">describe</span><span class="p">(</span><span class="s1">'eventDatePicker'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Michael is concerned that fixture is large and involved and creating too complex a seam</span>
+    <span class="nx">loadFixtures</span><span class="p">(</span><span class="s1">'event_datepicker.html'</span><span class="p">);</span>
+    <span class="nx">eventDatepicker</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">set_event_repeats_to_weekly</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#event_repeats'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">'weekly'</span><span class="p">)</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#event_repeats'</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">'change'</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="kd">var</span> <span class="nx">set_event_repeat_ends_to_never</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#event_repeat_ends_string'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">'never'</span><span class="p">)</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#event_repeat_ends_string'</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">'change'</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'hides event repeat options by default'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeats_options'</span><span class="p">)).</span><span class="nx">toBeHidden</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeats_weekly_options'</span><span class="p">)).</span><span class="nx">toBeHidden</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'.event_option'</span><span class="p">)).</span><span class="nx">toBeHidden</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'shows event repeat options when event is set to repeat'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">set_event_repeats_to_weekly</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeats_options'</span><span class="p">)).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeHidden</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeats_weekly_options'</span><span class="p">)).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeHidden</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'.event_option'</span><span class="p">)).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeHidden</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'shows event repeat optional ending when event is set to end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">set_event_repeats_to_weekly</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeat_ends_on_label'</span><span class="p">)).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeHidden</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeat_ends_on'</span><span class="p">)).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeHidden</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s1">'hides event repeat optional ending when event is set to never end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">set_event_repeats_to_weekly</span><span class="p">();</span>
+    <span class="nx">set_event_repeat_ends_to_never</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeat_ends_on_label'</span><span class="p">)).</span><span class="nx">toBeHidden</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#repeat_ends_on'</span><span class="p">)).</span><span class="nx">toBeHidden</span><span class="p">();</span>
+  <span class="p">});</span>
+
+<span class="p">});</span>
+</code></pre>
+<p>It works and I&rsquo;m rewarded with fully passing Jasmine specs, no pending, and I think the intention of the code above is now slighlty better in terms of self-documenting the intention by method names rather than comments.  We still have the issue that the fixture is too large, but that can be updated as and when.  Really the parts of the fixture that are relevant are just a few items being shown and hidden.  Ideally the fixture could be auto-generated, but really my concern here is just clearing the deck for others to work on things.</p>
+
+<p>I create a ticket for clearing pending items.  Can I also get the RSpec sorted?  The Karma class is this:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Karma</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+<span class="k">end</span>
+</code></pre>
+<p>and the spec is</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'spec_helper'</span>
+
+<span class="no">RSpec</span><span class="p">.</span><span class="nf">describe</span> <span class="no">Karma</span><span class="p">,</span> <span class="ss">type: :model</span> <span class="k">do</span>
+  <span class="n">pending</span> <span class="s2">"add some examples to (or delete) </span><span class="si">#{</span><span class="kp">__FILE__</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+</code></pre>
+<p>I don&rsquo;t know that the Karma model is yet doing anything special that needs testing.  I think this is boiler plate.  I&rsquo;m going to delete the pending message, since I hate deleting files where I might want to add something later, hmmm.  I go for:</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'spec_helper'</span>
+
+<span class="no">RSpec</span><span class="p">.</span><span class="nf">describe</span> <span class="no">Karma</span><span class="p">,</span> <span class="ss">type: :model</span> <span class="k">do</span>
+  <span class="c1"># no new functionality besides standard ActiveRecord functions yet</span>
+<span class="k">end</span>
+</code></pre>
+<p>and then I screw up by pushing to develop instead of creating a branch.  Urgh, I amend the commit name to say it fixes the pending issue, but can&rsquo;t force push that up to develop because it&rsquo;s protected.  Blargh.  I remove the protection, force that up, and then put the protection back on.  Not ideal. Getting there.  Gotta finish up the blog.  Shame to pollute my inner space with this constant pressure to work faster, do more.  Need to meditate on that, but no time :-)</p>
+
+<p>Anyhow, I think what I&rsquo;ve got is now a pretty clean output from both Jasmine and RSpec.  Now if we really want to clean up the cucumber output then we&rsquo;ve got to move on to removing this Mercury editor.  So I update that <a href="https://github.com/AgileVentures/WebsiteOne/pull/1767">branch</a> and I guess I work on that tomorrow, pulling examples from what I do into the new README &hellip; also our coverage tracking seems to be broken.  Need to get that fixed up too &hellip; no rest for the wicked &hellip; and no respite from the prioritization conflicts &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
