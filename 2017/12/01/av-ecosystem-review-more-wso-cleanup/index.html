@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review More WSO CleanUp</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_25 blog_page_25_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_12 x2017_12_01 x2017_12_01_av-ecosystem-review-more-wso-cleanup x2017_12_01_av-ecosystem-review-more-wso-cleanup_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,58 +83,58 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/12/01/av-ecosystem-review-more-wso-cleanup/">AV EcoSystem Review More WSO CleanUp</a></h2>
+        <h5 class='date'> 1 Dec 2017</h5>
+    <p><img alt="cleanup" src="/images/cleanup.jpg" /></p>
 
-          <p>Page 25 of 28</p>
+<p>So running the cuke tests I get this one bit of extraneous output:</p>
+<pre class="highlight plaintext"><code>Encountered Error in get: 404 Resource Not Found: {"code":"route_not_found","kind":"error","error":"The path you requested has no valid endpoint."}
+</code></pre>
+<p>and of course huge dumps of VCR and Puffing Billy cache changes.  I can clean that up with our <code>rake vcr_billy_caches:reset</code> commmand but I wonder what other projects do.  Perhaps I should ask the VCR folks.  I think the issue we have is that we need to throw out some of our old caches and reload, dealing with the pain that will cause &hellip; maybe we need some VCR version of dependabot that will throw out old caches for us?</p>
 
-            <p><a href="/blog/page/24/">Previous page</a></p>
+<p>I posted the <a href="https://groups.google.com/forum/#!topic/vcr-ruby/8DoA7MUq-38">following to the vcr-ruby mailing list</a>:</p>
 
-          <h2><a href="/2016/10/04/anatomy-of-a-question/">Anatomy of a Question</a></h2>
-          <h3>Oct  4</h3>
-          <p>It’s really interesting to hear that <a href="https://hackernoon.com/the-decline-of-stack-overflow-7cb69faa575d#.frp6i4ncr">StackOverflow (SO) might be on the decline</a>.  John Slegers writes a really interesting <a href="https://hackernoon.com/the-decline-of-stack-overflow-7cb69faa575d#.frp6i4ncr">blog post</a> detailing some of the issues that the community is having.  In summary the suggestion is that StackOverflow is not...</p>
-          <h2><a href="/2016/10/03/edx-automation-in-review/">Reviewing My EdX Automation</a></h2>
-          <h3>Oct  3</h3>
-          <p>Michael was away on Friday and I busied myself with admin work.  I was making clones of the “Agile Development using Ruby on Rails” MOOC for instructors around the world (two in the US, one in Ireland).  The instructors are provided with Small Private...</p>
-          <h2><a href="/2016/09/30/pride-comes-before-a-fall/">Pride Comes Before a Fall</a></h2>
-          <h3>Sep 30</h3>
-          <p>They say pride comes before a fall.  Looking back at yesterday’s blog I was feeling pretty pleased about how we’d split things up as regards the development of the new Karma feature.  That was getting deployed in the background yesterday whilst Michael...</p>
-          <h2><a href="/2016/09/29/ducking-and-diving/">Ducking and Diving</a></h2>
-          <h3>Sep 29</h3>
-          <p>So having partially recovered from the cold I was able to pair program again today.  Interleaving work on the Karma calculation and the premium memberships, we now had an outstanding PR for premium upgrade buttons, so we ducked back to the Karma work...</p>
-          <h2><a href="/2016/09/28/fallow-day/">Fallow Day</a></h2>
-          <h3>Sep 28</h3>
-          <p>Today was a fallow day.  I’d been knocked back with a fever, sore throat and tummy trouble from the latest virus doing the rounds at my kids “Virus Exchange Camps”, … sorry, I mean schools.  I’ve no idea if anyone else talks about fallow days, but...</p>
-          <h2><a href="/2016/09/27/dodging-a-bullet/">Dodging a Bullet</a></h2>
-          <h3>Sep 27</h3>
-          <p>So Monday was the day to see if our new domain model components would ease the process of delivering a new feature. As warm up I did a quick refactoring on our Karma calculation changes that Raoul had requested.  There was the possibility of re-using...</p>
-          <h2><a href="/2016/09/26/confident-coding/">Confident Coding</a></h2>
-          <h3>Sep 26</h3>
-          <p>Friday I tried to improve on Thursday’s performance.  I proposed to Michael that we try to rotate driver/navigator roles more frequently and that we put aside the work on the Karma calculation; instead focusing on the domain model for the Premium members...</p>
-          <h2><a href="/2016/09/23/longer-than-expected/">Longer than Expected</a></h2>
-          <h3>Sep 23</h3>
-          <p>Adding the function to give Karma credit for attending hangouts took longer than expected.  Ironically spiking it had been fast, but adding a test for it was time consuming and frustrating.  I’m trying to dissect why that was.  Looking back I can see...</p>
-          <h2><a href="/2016/09/22/cant-we-go-any-faster/">Can't We Go Any Faster?</a></h2>
-          <h3>Sep 22</h3>
-          <p>Got the pairing times right today, but didn’t get started as early as we could.  Having a family and working from home means that things can easily come up, like suddenly my eldest needs a new school approved calculator which is sold out on Amazon...</p>
-          <h2><a href="/2016/09/21/missed-ships/">Missed Ships</a></h2>
-          <h3>Sep 21</h3>
-          <p>I got confused yesterday about adjustments to the pairing schedule.  I thought Michael was going to be available later in the day, but actually he had to leave early.   As a result our pairing was contracted to an hour, and he started on a new task...</p>
+<blockquote>
+<p>Hi everyone,</p>
 
-            <p><a href="/blog/page/26/">Next page</a></p>
+<p>We&rsquo;ve been using VCR in our rails projects for a long time (and now puffing billy as well) and I&rsquo;m concerned about how confusing cached network recordings are for new contributors that we onboard.</p>
 
+<p>We also seem to end up with a fair few new network cache files when tests fail and so on, which show up in <code>git status</code>.  New contributors wonder what these files are for, try to add the cache directories to .gitignore, or do other strange things.</p>
+
+<p>We&rsquo;ve recently introduced a rake task <code>rake vcr_billy_caches:reset</code> to make it easy to reset the caches to the way they are in the current branch, but I wonder if there isn&rsquo;t some better long term solution.</p>
+
+<p>I wonder if we&rsquo;re using VCR incorrectly, or perhaps not updating our cached network files frequently enough.  I&rsquo;m a little scared to delete large swathes of recorded files for the extra work that might pop up in terms of ensuring that everything works again, but perhaps I&rsquo;m being silly.  It&rsquo;s just that it&rsquo;s all volunteer time, so well, anyway.  Here are the two main OS projects I&rsquo;m running that use VCR:</p>
+
+<p>https://github.com/AgileVentures/LocalSupport</p>
+
+<p>https://github.com/AgileVentures/WebSiteOne</p>
+
+<p>I&rsquo;ve added sections to our contributing docs, but I feel like all my text should probably be replaced with images or a video: https://github.com/AgileVentures/LocalSupport/blob/develop/CONTRIBUTING.md#acceptance-testing&ndash;caching</p>
+
+<p>I just wondered if others had similar experiences and any suggestions.</p>
+
+<p>Many thanks in advance</p>
+
+<p>Best, Sam</p>
+</blockquote>
+
+<p>I also opened a <a href="https://github.com/vcr/vcr/issues/672">GitHub issue</a> to also mention the idea of some sort of automated tool to delete old cache files.  </p>
+
+<p>Annoyingly I&rsquo;m almost out of time this morning, and I wanted to see if I could fix the <code>local_time</code> update that dependabot was suggesting, as well as cleaning out the cruft in the Cucumber logs.  I was also thinking that the ultra slow cukes needed to be worked on.  Hmmm, leave <code>local_time</code> to next week I guess &hellip; urgh, and I left a hanging PR to update some of the Slack channels that get pinged &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -192,6 +193,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

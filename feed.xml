@@ -5,10 +5,57 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-11-30T00:00:00+00:00</updated>
+  <updated>2017-12-01T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review More WSO CleanUp</title>
+    <link rel="alternate" href="http://blog.url.com/2017/12/01/av-ecosystem-review-more-wso-cleanup/"/>
+    <id>http://blog.url.com/2017/12/01/av-ecosystem-review-more-wso-cleanup/</id>
+    <published>2017-12-01T00:00:00+00:00</published>
+    <updated>2018-03-12T21:03:25+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="cleanup" src="/images/cleanup.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So running the cuke tests I get this one bit of extraneous output:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Encountered Error in get: 404 Resource Not Found: {"code":"route_not_found","kind":"error","error":"The path you requested has no valid endpoint."}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and of course huge dumps of VCR and Puffing Billy cache changes.  I can clean that up with our &lt;code&gt;rake vcr_billy_caches:reset&lt;/code&gt; commmand but I wonder what other projects do.  Perhaps I should ask the VCR folks.  I think the issue we have is that we need to throw out some of our old caches and reload, dealing with the pain that will cause &amp;hellip; maybe we need some VCR version of dependabot that will throw out old caches for us?&lt;/p&gt;
+
+&lt;p&gt;I posted the &lt;a href="https://groups.google.com/forum/#!topic/vcr-ruby/8DoA7MUq-38"&gt;following to the vcr-ruby mailing list&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Hi everyone,&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve been using VCR in our rails projects for a long time (and now puffing billy as well) and I&amp;rsquo;m concerned about how confusing cached network recordings are for new contributors that we onboard.&lt;/p&gt;
+
+&lt;p&gt;We also seem to end up with a fair few new network cache files when tests fail and so on, which show up in &lt;code&gt;git status&lt;/code&gt;.  New contributors wonder what these files are for, try to add the cache directories to .gitignore, or do other strange things.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve recently introduced a rake task &lt;code&gt;rake vcr_billy_caches:reset&lt;/code&gt; to make it easy to reset the caches to the way they are in the current branch, but I wonder if there isn&amp;rsquo;t some better long term solution.&lt;/p&gt;
+
+&lt;p&gt;I wonder if we&amp;rsquo;re using VCR incorrectly, or perhaps not updating our cached network files frequently enough.  I&amp;rsquo;m a little scared to delete large swathes of recorded files for the extra work that might pop up in terms of ensuring that everything works again, but perhaps I&amp;rsquo;m being silly.  It&amp;rsquo;s just that it&amp;rsquo;s all volunteer time, so well, anyway.  Here are the two main OS projects I&amp;rsquo;m running that use VCR:&lt;/p&gt;
+
+&lt;p&gt;https://github.com/AgileVentures/LocalSupport&lt;/p&gt;
+
+&lt;p&gt;https://github.com/AgileVentures/WebSiteOne&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve added sections to our contributing docs, but I feel like all my text should probably be replaced with images or a video: https://github.com/AgileVentures/LocalSupport/blob/develop/CONTRIBUTING.md#acceptance-testing&amp;ndash;caching&lt;/p&gt;
+
+&lt;p&gt;I just wondered if others had similar experiences and any suggestions.&lt;/p&gt;
+
+&lt;p&gt;Many thanks in advance&lt;/p&gt;
+
+&lt;p&gt;Best, Sam&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I also opened a &lt;a href="https://github.com/vcr/vcr/issues/672"&gt;GitHub issue&lt;/a&gt; to also mention the idea of some sort of automated tool to delete old cache files.  &lt;/p&gt;
+
+&lt;p&gt;Annoyingly I&amp;rsquo;m almost out of time this morning, and I wanted to see if I could fix the &lt;code&gt;local_time&lt;/code&gt; update that dependabot was suggesting, as well as cleaning out the cruft in the Cucumber logs.  I was also thinking that the ultra slow cukes needed to be worked on.  Hmmm, leave &lt;code&gt;local_time&lt;/code&gt; to next week I guess &amp;hellip; urgh, and I left a hanging PR to update some of the Slack channels that get pinged &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Prioritization Conflict</title>
     <link rel="alternate" href="http://blog.url.com/2017/11/30/av-ecosystem-review-prioritization-conflict/"/>
@@ -485,70 +532,6 @@
 &lt;p&gt;Okay, I managed to get us down to a single page of pull-requests, and opened all the others to look at the fails to see if they&amp;rsquo;re just intermittent ones.  There seems to be some really weird random fails from coveralls - that needs sorting too.&lt;/p&gt;
 
 &lt;p&gt;End of day, and I&amp;rsquo;m still no closer to working on this event &lt;code&gt;repeat_ends&lt;/code&gt; issue.  Although I do feel like a new focus is called for - make the projects super developer friendly and easy to onboard and that way we get more folks working on all the small fixes that would make the main AV site more welcoming &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Sweeping Up</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/23/av-ecosystem-review-sweeping-up/"/>
-    <id>http://blog.url.com/2017/11/23/av-ecosystem-review-sweeping-up/</id>
-    <published>2017-11-23T00:00:00+00:00</published>
-    <updated>2018-02-19T21:53:28+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="broom" src="/images/broom.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So confused about where to direct my efforts.  Maybe it doesn&amp;rsquo;t matter?  Maybe I should be avoiding code like Avdi Grimm?  I&amp;rsquo;m going to start by trying to clear up all the dependabot PRs.&lt;/p&gt;
-
-&lt;p&gt;I just used my administrator privileges to merge in upgrades to:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1898"&gt;Brakeman&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1899"&gt;Bullet&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1900"&gt;Bundler-Audit&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1901"&gt;Jasmine&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I&amp;rsquo;m not really clear what the first three gems do.  Jasmine allows us to unit test our JavaScript.  Trying to update all these four in succession, leading to merges getting stuck through the GitHub UI.  I&amp;rsquo;ve banged on them and I think they&amp;rsquo;re all through now.  I pull those changes locally to update my gems locally.&lt;/p&gt;
-
-&lt;p&gt;One project manager experienced a 500 error last night that I assume was performance related, but we get nothing from systems like AirBrake that are supposed to tell us about these things.  I sort of feel like for a system of this size, what we need is four full time engineers to keep maintaining it all.  Maybe upgrading to Rails 5 is the key?  Maybe spending no time with my family? Or maybe re-doing the whole thing in WordPress like Avdi and Chuck &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Anyway, I&amp;rsquo;m putting my head down and getting every dependabot automated gem upgrade PR through now.  I generally shy away from making multiple changes like this, but I&amp;rsquo;m sick of the dependabot PRs drowning out the human PRs.  Of course even once I&amp;rsquo;ve got the green ones through, there are all those that have come through and caught on the CI.  Now some are clearly failing because code needs to change, but others will just be from intermittent jasmine fails.  I think if we could rip out Mercury and replace it with a new editor, and that might get rid of half the intermittent fails, and maybe clear the way to get onto Rails 5.  However, I am unclear precisely what Rails 5 really buys us - maybe the ability to use websockets cleanly and so avoid a lot of stale data for our users in their browsers.  That said, realistically we could fix some of the current staleness issues with timers.&lt;/p&gt;
-
-&lt;p&gt;The difficultly with this dependabot system is that we&amp;rsquo;ve got hundreds of gems and there&amp;rsquo;s always going to be gem versions being bumped.  So even if I get through the current lot, there&amp;rsquo;ll be more to come.  Perhaps the trick is to get new members merging these PRs?  Although that would mean needing to give them merge privileges &amp;hellip; the ones where there&amp;rsquo;s work required are generally tricky and not necessarily a good place for new members.  Perhaps just having them take the green PRs and running them locally to double check the CI?&lt;/p&gt;
-
-&lt;p&gt;So as I try to merge in more, I get conflicts in the Gemfile and Gemfile.lock, which I try to patch up.  I go to all the other dependabot failing PRs and update their branches.  Am I just doing a very long slow drawn out &lt;code&gt;bundle update&lt;/code&gt; here?  Every single gem has to be tested with each other, in each combination.  The other issue is that every PR puts a load on our CI and our CI blocks deployment, so I&amp;rsquo;ve probably set us up to be unable to deploy anything today.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve got a chunk of gems upgraded and I&amp;rsquo;m running the tests locally to check, but I don&amp;rsquo;t have so much faith in the tests. Hmmm.  What I do really want to do is get that new editor that Matt started working on and update the branch.  Matt&amp;rsquo;s been MIA for the longest of the different contributors.  I&amp;rsquo;m also seeing various messy messages in our build output.  When unclear about direction I guess maybe it&amp;rsquo;s best just to focus on cleaning things up &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Frustratingly when I run RSpec in progress mode I can&amp;rsquo;t see which tests the deprecation warnings are coming from.  The main ones I&amp;rsquo;m getting are:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;DEPRECATION WARNING: You attempted to assign a value which is not explicitly `true` or `false` ("never") to a boolean column. Currently this value casts to `false`. This will change to match Ruby's semantics, and will cast to `true` in Rails 5. If you would like to maintain the current behavior, you should explicitly handle the values you would like cast to `false`. (called from block (3 levels) in &amp;lt;top (required)&amp;gt; at /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/event_spec.rb:244)
-&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Unused parameters passed to Capybara::Queries::SelectorQuery : ["/auth/github"]
-&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;WARNING: Using the `raise_error` matcher without providing a specific error or message risks false positives, since `raise_error` will match when Ruby raises a `NoMethodError`, `NameError` or `ArgumentError`, potentially allowing the expectation to pass without even executing the method you are intending to call. Actual error raised was #&amp;lt;ActiveRecord::StatementInvalid: PG::NotNullViolation: ERROR:  null value in column "user_id" violat...
-: UPDATE "authentications" SET "user_id" = $1, "updated_at" = $2 WHERE "authentications"."id" = $3&amp;gt;. Instead consider providing a specific error class or message. This message can be suppressed by setting: `RSpec::Expectations.configuration.on_potential_false_positives = :nothing`. Called from /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/spec/models/authentication_spec.rb:12:in `block (2 levels) in &amp;lt;top (required)&amp;gt;'.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Ah, actually some of the error messages are telling me where the problems are arising &amp;hellip;  of course kicking off a cucumber test run locally blocks me from doing any coding work on the project for 10 minutes+ since we still have these stupidly long running tests in places &amp;hellip; I guess I will do my station keeping (social media updates) until they finish&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Only one failure in the cukes:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Encountered Error in get: 404 Resource Not Found: {"code":"route_not_found","kind":"error","error":"The path you requested has no valid endpoint."}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Having merged the conflict in the Medium-editor branch, I&amp;rsquo;m not even getting the chance to update the branch, so let&amp;rsquo;s at least try to clear up some cruft in the RSpec output.&lt;/p&gt;
-
-&lt;p&gt;The first item seems a little tricky, although it looks like we do need to fix it before we move to Rails 5, and it seems like I can fix it at the spec level as simply as adding this to the event model:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;repeat_ends&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;repeat_ends&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;super&lt;/span&gt; &lt;span class="n"&gt;repeat_ends&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'on'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and fixing the factories to ensure they used &amp;lsquo;on&amp;rsquo; and &amp;#39;never&amp;rsquo; rather than booleans.  The issue here is that the underlying column type for &lt;code&gt;repeat_ends&lt;/code&gt; is boolean, but the model is working with it as a string.  Of course the real question is how the acceptance tests perform now.  I get a sequence of errors - if I&amp;rsquo;m lucky they are all about factories (being used in the Cukes).  They are not - they are actually using the full form, and we have javascript running in the browser to set things up - and it&amp;rsquo;s not showing certain fields.  There&amp;rsquo;s some complexity to fix all this, and even if I have the tests passing, I won&amp;rsquo;t be sure I haven&amp;rsquo;t introduced a bug into our events management.&lt;/p&gt;
-
-&lt;p&gt;Fixing the &lt;code&gt;raise_error&lt;/code&gt; issue is a trivial change to the spec:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'must have an associated user'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="c1"&gt;# Bryan: validations done at database level to avoid complications, but will raise exceptions&lt;/span&gt;
-    &lt;span class="vi"&gt;@auth&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;user_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;
-    &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="vi"&gt;@auth&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;save&lt;/span&gt; &lt;span class="p"&gt;}.&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;raise_error&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;StatementInvalid&lt;/span&gt; &lt;span class="c1"&gt;# &amp;lt;-- add this error type here&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And I decide to delete all the view specs, as those warnings are telling me that many of them aren&amp;rsquo;t testing what they should be.  In the ideal world I&amp;rsquo;d work through every single one and work out where they&amp;rsquo;re corresponding to in terms of missing acceptance test functionality, but part of the overall problem here is not having the resources to maintain so much code.  I think I need to hack and slash a bit to make some kind of progress.  Maybe I can spend tomorrow debugging the events &lt;code&gt;repeat_ends&lt;/code&gt; issue and I&amp;rsquo;ll have the RSpec output cleaned out.  Not sure that&amp;rsquo;s where my attention is most needed, but when I really can&amp;rsquo;t decide what high level issue to focus on, I guess it&amp;rsquo;s not a bad thing to do some sweeping up &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
