@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/12/01/av-ecosystem-review-more-wso-cleanup/"/>
     <id>http://blog.url.com/2017/12/01/av-ecosystem-review-more-wso-cleanup/</id>
     <published>2017-12-01T00:00:00+00:00</published>
-    <updated>2018-03-12T21:03:25+00:00</updated>
+    <updated>2018-03-12T21:05:23+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -23,7 +23,7 @@
 &lt;p&gt;So running the cuke tests I get this one bit of extraneous output:&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;Encountered Error in get: 404 Resource Not Found: {"code":"route_not_found","kind":"error","error":"The path you requested has no valid endpoint."}
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and of course huge dumps of VCR and Puffing Billy cache changes.  I can clean that up with our &lt;code&gt;rake vcr_billy_caches:reset&lt;/code&gt; commmand but I wonder what other projects do.  Perhaps I should ask the VCR folks.  I think the issue we have is that we need to throw out some of our old caches and reload, dealing with the pain that will cause &amp;hellip; maybe we need some VCR version of dependabot that will throw out old caches for us?&lt;/p&gt;
+&lt;p&gt;and of course huge dumps of VCR and Puffing Billy cache changes.  I can clean that up with our &lt;code&gt;rake vcr_billy_caches:reset&lt;/code&gt; commmand but I wonder what other projects do?  Perhaps I should ask the VCR folks?  I think the issue we have is that we need to throw out some of our old caches and reload, dealing with the pain that will cause &amp;hellip; maybe we need some VCR version of dependabot that will throw out old caches for us?&lt;/p&gt;
 
 &lt;p&gt;I posted the &lt;a href="https://groups.google.com/forum/#!topic/vcr-ruby/8DoA7MUq-38"&gt;following to the vcr-ruby mailing list&lt;/a&gt;:&lt;/p&gt;
 
@@ -404,11 +404,11 @@
     <link rel="alternate" href="http://blog.url.com/2017/11/27/av-ecosystem-review-code-hospitality/"/>
     <id>http://blog.url.com/2017/11/27/av-ecosystem-review-code-hospitality/</id>
     <published>2017-11-27T00:00:00+00:00</published>
-    <updated>2018-03-05T20:53:17+00:00</updated>
+    <updated>2018-03-12T21:03:59+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;&lt;img alt="broom" src="/images/hospitality.jpg" /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img alt="hospitality" src="/images/hospitality.jpg" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Pairing with Marian over the weekend we managed to clear up the last piece of junk in the RSpec log, the deprecation warning about the event_repeats boolean column in the events table.  It turned out that we could fix it simply by adjusting the specs, since it was they that were trying to force strings into the boolean column, not any part of the main app.  We drifted over a few other areas where issues could be investigated or things refactored.  We saw the code that was supposed to email notify us when there are 500 errors (which I never receive) and it looked like we could make the events code simpler, by pulling the string &amp;ndash;&amp;gt; boolean transformations into the select options.&lt;/p&gt;
 

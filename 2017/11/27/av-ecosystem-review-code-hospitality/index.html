@@ -91,7 +91,7 @@
       <div class="col-lg-8 text-left">
         <h2 class='title'><a href="/2017/11/27/av-ecosystem-review-code-hospitality/">AV EcoSystem Review Code Hospitality</a></h2>
         <h5 class='date'>27 Nov 2017</h5>
-    <p><img alt="broom" src="/images/hospitality.jpg" /></p>
+    <p><img alt="hospitality" src="/images/hospitality.jpg" /></p>
 
 <p>Pairing with Marian over the weekend we managed to clear up the last piece of junk in the RSpec log, the deprecation warning about the event_repeats boolean column in the events table.  It turned out that we could fix it simply by adjusting the specs, since it was they that were trying to force strings into the boolean column, not any part of the main app.  We drifted over a few other areas where issues could be investigated or things refactored.  We saw the code that was supposed to email notify us when there are 500 errors (which I never receive) and it looked like we could make the events code simpler, by pulling the string &ndash;&gt; boolean transformations into the select options.</p>
 
