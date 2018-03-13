@@ -5,10 +5,40 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-12-01T00:00:00+00:00</updated>
+  <updated>2017-12-04T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review More WSO CleanUp</title>
+    <link rel="alternate" href="http://blog.url.com/2017/12/04/av-ecosystem-review-no-good-choices/"/>
+    <id>http://blog.url.com/2017/12/04/av-ecosystem-review-no-good-choices/</id>
+    <published>2017-12-04T00:00:00+00:00</published>
+    <updated>2018-03-13T21:07:06+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Urgh, so I&amp;rsquo;ve got a mild cold, but I desparately want to clear up and fix a few things with the Slack notifications.  Also the Google login and signup is broken.  However in addition I think I must use my morning blogs this week to work on the Anthony Powell society database that we just got the contract for.  Of course between the cold and rebooting my computer and getting distracted by Slack I&amp;rsquo;m now out of time for really getting anything done before the WebDev Mob.  I guess maybe the thing to do is cancel the other meetings later in the day.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m really not sure what the right choice is.  Maybe I should just be sleeping the whole day &amp;hellip; I guess I&amp;rsquo;ll at least start by opening LibreOffice Base &amp;hellip;, although the LibreOffice starts up with a document rather than a database.  I&amp;rsquo;m going to need to remember how to run the Base software itself.  Ah, okay, it looks like it is all one package.  I think LibreOffice accidentally opened a text file and so re-started in document mode.  Now restarting it I get a view of the recent files that includes the charity database components I was testing beforehand:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/1yk586ws45z9hcr/Screenshot%202017-12-04%2010.23.48.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Opening libre-test.odb I get the familiar database design interfaces and the sample form I created for the membership database:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/1vbjqqs6y5qvid7/Screenshot%202017-12-04%2010.25.12.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;What we want it to look like is something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/y3xtz17fge1lm90/Screenshot%202017-12-04%2010.26.39.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Which is how the AP folks have their current Lotus Approach set up.  It would be nice to have a set of specific user stories, where I can ensure each one works.  I think I can infer the user stories from the forms and what the secretary showed me previously.  I could probably triple or quadruple the whole time spent on the system trying to set up some kind of automated acceptance testing &amp;hellip; although I have found a related blog on the subject:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://mmohrhard.wordpress.com/2016/09/07/ui-testing-in-libreoffice/"&gt;https://mmohrhard.wordpress.com/2016/09/07/ui-testing-in-libreoffice/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;but now it&amp;rsquo;s time for the webdev mob &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review More WSO CleanUp</title>
     <link rel="alternate" href="http://blog.url.com/2017/12/01/av-ecosystem-review-more-wso-cleanup/"/>
@@ -499,39 +529,6 @@
 &lt;/ul&gt;
 
 &lt;p&gt;That&amp;rsquo;s a start - more tomorrow &amp;hellip;  &lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Fixing Event Repeats</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/24/av-ecosystem-review-fixing-event-repeats/"/>
-    <id>http://blog.url.com/2017/11/24/av-ecosystem-review-fixing-event-repeats/</id>
-    <published>2017-11-24T00:00:00+00:00</published>
-    <updated>2018-03-05T20:47:41+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="broom" src="/images/fixing.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So the Semaphore CI was busy burning away yesterday as it re-ran all the different dependabot pull requests, and a few of them have gone green &amp;hellip; and I can also now update the medium-editor PR to the base branch, which seemed to be blocked all day yesterday:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/zs5jgyf1bl5hx2z/Screenshot%202017-11-24%2010.32.46.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;In the background I guess I&amp;rsquo;m supposed to be getting tweaks to the home page text out to production.  I rebase staging into production and push out, and see we&amp;rsquo;ve got a few things in there:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/l5bpb26nuklllp8/Screenshot%202017-11-24%2010.35.53.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Will be good to give them a chance to settle in on production &amp;hellip; there are eight dependabot PRs that are now green.  Shall I just dump them in to develop?  I do, but I&amp;rsquo;m burning time, and I didn&amp;rsquo;t leave myself much time for blogging today.  In addition, Fridays are now super busy with mobs and pairing.  I wanted to get into this deprecation warning about &lt;code&gt;repeat_ends&lt;/code&gt; for events &amp;hellip; maybe after the WSO meeting later today &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;It would be great to work through and remove any gems we don&amp;rsquo;t need.  Some related items here:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/14333963/how-to-find-unused-gems-in-my-gemfile/28628993#28628993"&gt;https://stackoverflow.com/questions/14333963/how-to-find-unused-gems-in-my-gemfile/28628993#28628993&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/pboling/gem_bench"&gt;https://github.com/pboling/gem_bench&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Okay, I managed to get us down to a single page of pull-requests, and opened all the others to look at the fails to see if they&amp;rsquo;re just intermittent ones.  There seems to be some really weird random fails from coveralls - that needs sorting too.&lt;/p&gt;
-
-&lt;p&gt;End of day, and I&amp;rsquo;m still no closer to working on this event &lt;code&gt;repeat_ends&lt;/code&gt; issue.  Although I do feel like a new focus is called for - make the projects super developer friendly and easy to onboard and that way we get more folks working on all the small fixes that would make the main AV site more welcoming &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

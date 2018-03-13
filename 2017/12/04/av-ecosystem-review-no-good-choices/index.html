@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review More WSO CleanUp</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_8 blog_page_8_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_12 x2017_12_04 x2017_12_04_av-ecosystem-review-no-good-choices x2017_12_04_av-ecosystem-review-no-good-choices_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,76 +83,41 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/12/04/av-ecosystem-review-no-good-choices/">AV EcoSystem Review More WSO CleanUp</a></h2>
+        <h5 class='date'> 4 Dec 2017</h5>
+    <p>Urgh, so I&rsquo;ve got a mild cold, but I desparately want to clear up and fix a few things with the Slack notifications.  Also the Google login and signup is broken.  However in addition I think I must use my morning blogs this week to work on the Anthony Powell society database that we just got the contract for.  Of course between the cold and rebooting my computer and getting distracted by Slack I&rsquo;m now out of time for really getting anything done before the WebDev Mob.  I guess maybe the thing to do is cancel the other meetings later in the day.</p>
 
-          <p>Page 8 of 28</p>
+<p>I&rsquo;m really not sure what the right choice is.  Maybe I should just be sleeping the whole day &hellip; I guess I&rsquo;ll at least start by opening LibreOffice Base &hellip;, although the LibreOffice starts up with a document rather than a database.  I&rsquo;m going to need to remember how to run the Base software itself.  Ah, okay, it looks like it is all one package.  I think LibreOffice accidentally opened a text file and so re-started in document mode.  Now restarting it I get a view of the recent files that includes the charity database components I was testing beforehand:</p>
 
-            <p><a href="/blog/page/7/">Previous page</a></p>
+<p><img src="https://dl.dropbox.com/s/1yk586ws45z9hcr/Screenshot%202017-12-04%2010.23.48.png?dl=0" /></p>
 
-          <h2><a href="/2017/07/19/av-website-review-part-eleven/">AV Website Review Part 11</a></h2>
-          <h3>Jul 19</h3>
-          <p>So I’ve got some suggested channel greeter bot text from at least one project maintainer.  I’m also running behind today, and I’m trying to get the websiteone sign up changes deployed … I checked that the recaptcha sign up works on staging, which it...</p>
-          <h2><a href="/2017/07/18/av-website-review-part-ten/">AV Website Review Part 10</a></h2>
-          <h3>Jul 18</h3>
-          <p>So I think I should step away from the project greeting bots and just check the new sign up flow as it gets deployed.  First thing is that I need reCaptcha keys on the heroku servers:</p>
+<p>Opening libre-test.odb I get the familiar database design interfaces and the sample form I created for the membership database:</p>
 
-<p><img src="https://dl.dropbox.com/s/9wti29f0ihs7s7e/Screenshot%202017-07-18%2009.39.37.png"></p>
+<p><img src="https://dl.dropbox.com/s/1vbjqqs6y5qvid7/Screenshot%202017-12-04%2010.25.12.png?dl=0" /></p>
 
-<p>Fixing that gives us the new reCaptcha sign up page:</p>
+<p>What we want it to look like is something like this:</p>
 
-<p><img src="https://dl.dropbox.com/s/hncj4kvhndkebst/Screenshot%202017-07-18%2009.44.07.png"></p>
+<p><img src="https://dl.dropbox.com/s/y3xtz17fge1lm90/Screenshot%202017-12-04%2010.26.39.png?dl=0" /></p>
 
-<p>which...</p>
-          <h2><a href="/2017/07/17/av-website-review-part-nine/">AV Website Review Part 8</a></h2>
-          <h3>Jul 17</h3>
-          <p><img alt="times up" src="/images/expired.jpg"></p>
+<p>Which is how the AP folks have their current Lotus Approach set up.  It would be nice to have a set of specific user stories, where I can ensure each one works.  I think I can infer the user stories from the forms and what the secretary showed me previously.  I could probably triple or quadruple the whole time spent on the system trying to set up some kind of automated acceptance testing &hellip; although I have found a related blog on the subject:</p>
 
-<p>So no one joined the LocalSupport channel over the weekend and thus there’s no immediate chance to see the new project greeting bot in action.  Other project maintainers have come back to me with mixed responses.  Some enthusiastic, some more cautious...</p>
-          <h2><a href="/2017/07/14/av-website-review-part-eight/">AV Website Review Part 9</a></h2>
-          <h3>Jul 14</h3>
-          <p><img alt="robots" src="/images/robots.png"></p>
+<p><a href="https://mmohrhard.wordpress.com/2016/09/07/ui-testing-in-libreoffice/">https://mmohrhard.wordpress.com/2016/09/07/ui-testing-in-libreoffice/</a></p>
 
-<p>So the discussion in marketing was about adding a time limit to the message about the Premium Mob special offer, and any changes can now be submitted as a pull request.  There also seemed to be general agreement that we should avoid bots doing the...</p>
-          <h2><a href="/2017/07/13/av-website-review-part-seven/">AV Website Review Part 7</a></h2>
-          <h3>Jul 13</h3>
-          <p>So overnight some new folks signed up for the AgileVentures slack.  It seems like the greeter bot on Azure/Dokku has succesfully greeted a handful of new members, so I’ve turned off the greeter bot on EC2 and shut down the instance, which should save...</p>
-          <h2><a href="/2017/07/12/av-website-review-part-six/">AV Website Review Part 6</a></h2>
-          <h3>Jul 12</h3>
-          <p>So my spike of adding ReCaptcha to the sign up page went pretty well.  It all seems to be passing in CI.  I was expecting lots of the sign up tests to break, but they all passed.  I guess because they don’t have javascript enabled?  It tempts me to...</p>
-          <h2><a href="/2017/07/11/av-website-review-part-five/">AV Website Review Part 5</a></h2>
-          <h3>Jul 11</h3>
-          <p>So what I really meant to do yesterday was to look at the flows going through various pages in the site via Google Analytics.  Here’s a view that compares June with May this year:</p>
+<p>but now it&rsquo;s time for the webdev mob &hellip;</p>
 
-<p><img alt="behaviour flow around sign up page, may vs jun" src="https://dl.dropbox.com/s/hf47so53v8lnhyw/Screenshot%202017-07-11%2009.23.15.png?dl=1"></p>
-
-<p>It’s perhaps even more revealing to compare June this year with June...</p>
-          <h2><a href="/2017/07/10/av-website-review-part-four/">AV Website Review Part 4</a></h2>
-          <h3>Jul 10</h3>
-          <p><img alt="conflicted" src="/images/conflicted.jpg"></p>
-
-<p>I’m conflicted about what to review on the website next.  Part of me wants to start breaking the “Getting Started” page up into pieces, and showing animated gifs for each.  There’s also the “About Us” page and the need for privacy statement pages...</p>
-          <h2><a href="/2017/07/07/av-website-review-part-three/">AV Website Review Part 3</a></h2>
-          <h3>Jul  7</h3>
-          <p>I’m still struggling to get back to former health and energy levels, but I’m pleased to have reviewed and made some changes to the website.  Let’s continue.  Looking at “Getting Started” yesterday made me think about the projects page again.  Effectively...</p>
-          <h2><a href="/2017/07/06/av-website-review-part-two/">AV Website Review Part 2</a></h2>
-          <h3>Jul  6</h3>
-          <p>So I’m deeply tempted to continue with the Premium page review.  I think making all the new questions have their explanations in pop-out form would probably be an improvement, but I know that’s a sticky hour or so of manipulating HTML.  Very unDRY...</p>
-
-            <p><a href="/blog/page/9/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -210,6 +176,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
