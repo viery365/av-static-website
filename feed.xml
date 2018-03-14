@@ -5,20 +5,74 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-12-04T00:00:00+00:00</updated>
+  <updated>2017-12-05T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Easily Distracted When Sick</title>
+    <link rel="alternate" href="http://blog.url.com/2017/12/05/av-ecosystem-review-easily-distracted-when-sick/"/>
+    <id>http://blog.url.com/2017/12/05/av-ecosystem-review-easily-distracted-when-sick/</id>
+    <published>2017-12-05T00:00:00+00:00</published>
+    <updated>2018-03-14T20:20:36+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="sneeze" src="/images/sneeze.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I didn&amp;rsquo;t get far with the Anthony Powell work yesterday, but I did at least get all the software running and get my head back into the problem space.  That was enough to take the edge off my anxiety about getting it started early.  I&amp;rsquo;m also onboarding a few new developers to WSO which ameliorates my worries about bleeds there.  This morning I got totally distracted by email and Slack, but in the procrastination wheel picture of things I did get a few things done.  Now let&amp;rsquo;s focus.  I&amp;rsquo;m tempted to see if I can bash the auto-generated form in LibreOffice Base to look like the exising Lotus Approach one.  The voice in my head worries that I should be writing out user stories.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Can enter new member information&lt;/li&gt;
+&lt;li&gt;Can browse member information in same form&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The database dump we have from Lotus Approach appears to have five tables:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Members&lt;/li&gt;
+&lt;li&gt;Subs&lt;/li&gt;
+&lt;li&gt;Gift Aid&lt;/li&gt;
+&lt;li&gt;Recurring Subs (transactional)&lt;/li&gt;
+&lt;li&gt;Member types&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;and we have a dump of each with the addresses randomized.&lt;/p&gt;
+
+&lt;p&gt;LibreOffice Base (like Lotus Approach and MS Access) provides a form interface where we can page through the rows in the database, and add new information.  I guess the key things to do are the make the forms look usable and ensure that the different tables have the right relationships set up.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve also already imported three of the tables into the system.  I can&amp;rsquo;t remember how I did first time around.  I&amp;rsquo;ve previously referred to:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://help.libreoffice.org/Common/Importing_and_Exporting_Data_in_Base"&gt;https://help.libreoffice.org/Common/Importing&lt;em&gt;and&lt;/em&gt;Exporting&lt;em&gt;Data&lt;/em&gt;in_Base&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;which basically involves opening the existing dbf files and copying and pasting all the existing rows into the tables section of a LOB database, and then using the import wizard.  I had a go at trying to match up the datatypes, which reminds me that I&amp;rsquo;ll probably need to start this over from scratch to get all the datatypes working properly &amp;hellip; as well as ensuring that I&amp;rsquo;m updated to the very latest LibreOffice version.   Hmm, I wonder if a Trello board or Pivotal Tracker is in order to track all the tasks?  I&amp;rsquo;m leaning towards Pivotal since being able to accept/reject by default will be a good match for this project.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve got the form design system working so that I start manipulating the auto-generated form to look more like the existing Lotus Approach form:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/5grezldftymxi4z/Screenshot%202017-12-05%2010.52.43.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;but now a key feature is being able to have a form field that refers to another table.  There are some videos online:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://thefrugalcomputerguy.com/libreoffice-base/Base17.php"&gt;http://thefrugalcomputerguy.com/libreoffice-base/Base17.php&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;but I browse around and read a few help forums, and then I&amp;rsquo;ve pretty much worked out how to put sub-forms into a form that link to a different table and slave certain fields to the record being shown in the main form.  It&amp;rsquo;s not working at the moment, but I guess that might be due to different field data types:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/xi07mk1ckua2tgq/Screenshot%202017-12-05%2011.17.34.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I think the sensible thing to do is to re-import the data.  What I should also do is give our clients a sensible timeline, such as showing them mockups of the new interfaces by the end of the week, and a first version to play with by the end of the following week &amp;hellip; hopefully that should put a lid on both my anxiety and theirs :-)&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review No Good Choices</title>
     <link rel="alternate" href="http://blog.url.com/2017/12/04/av-ecosystem-review-no-good-choices/"/>
     <id>http://blog.url.com/2017/12/04/av-ecosystem-review-no-good-choices/</id>
     <published>2017-12-04T00:00:00+00:00</published>
-    <updated>2018-03-13T21:13:31+00:00</updated>
+    <updated>2018-03-14T20:11:58+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
-    <content type="html">&lt;p&gt;Urgh, so I&amp;rsquo;ve got a mild cold, but I desparately want to clear up and fix a few things with the Slack notifications.  Also the Google login and signup is broken.  However in addition I think I must use my morning blogs this week to work on the Anthony Powell society database that we just got the contract for.  Of course between the cold and rebooting my computer and getting distracted by Slack I&amp;rsquo;m now out of time for really getting anything done before the WebDev Mob.  I guess maybe the thing to do is cancel the other meetings later in the day.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Urgh, so I&amp;rsquo;ve got a mild cold, but I desparately want to clear up and fix a few things with the Slack notifications.  Also the Google login and signup is broken.  However in addition I think I must use my morning blogs this week to work on the Anthony Powell Society database that we just got the contract for.  Of course between the cold and rebooting my computer and getting distracted by Slack I&amp;rsquo;m now out of time for really getting anything done before the WebDev Mob.  I guess maybe the thing to do is cancel the other meetings later in the day.&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;m really not sure what the right choice is.  Maybe I should just be sleeping the whole day &amp;hellip; I guess I&amp;rsquo;ll at least start by opening LibreOffice Base &amp;hellip;, although the LibreOffice starts up with a document rather than a database.  I&amp;rsquo;m going to need to remember how to run the Base software itself.  Ah, okay, it looks like it is all one package.  I think LibreOffice accidentally opened a text file and so re-started in document mode.  Now restarting it I get a view of the recent files that includes the charity database components I was testing beforehand:&lt;/p&gt;
 
@@ -427,108 +481,6 @@
 &lt;p&gt;So looking through all the cucumber scenarios I&amp;rsquo;m not finding wonderful examples of the declarative style I think we should be using, and this is at least as true for the cucumber scenarios I have written myself :-(  I guess the edit future event timezone related work that Michael and I implemented is closest.  I&amp;rsquo;m going to have to go back through some old pull requests to work out other walkthrough examples.  I also note that we don&amp;rsquo;t have any documentation on how to use the website, either in git or on the site itself.  I guess I&amp;rsquo;ve always been slightly skeptical of the value of that sort of written documentation in that it becomes another thing to maintain that folks don&amp;rsquo;t even necessarily read.&lt;/p&gt;
 
 &lt;p&gt;Blurgh, overall I don&amp;rsquo;t think things are very hospitable and it feels like a mountain to climb to try and make them so.  One step at a time I guess &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Code Hospitality</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/27/av-ecosystem-review-code-hospitality/"/>
-    <id>http://blog.url.com/2017/11/27/av-ecosystem-review-code-hospitality/</id>
-    <published>2017-11-27T00:00:00+00:00</published>
-    <updated>2018-03-12T21:03:59+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="hospitality" src="/images/hospitality.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Pairing with Marian over the weekend we managed to clear up the last piece of junk in the RSpec log, the deprecation warning about the event_repeats boolean column in the events table.  It turned out that we could fix it simply by adjusting the specs, since it was they that were trying to force strings into the boolean column, not any part of the main app.  We drifted over a few other areas where issues could be investigated or things refactored.  We saw the code that was supposed to email notify us when there are 500 errors (which I never receive) and it looked like we could make the events code simpler, by pulling the string &amp;ndash;&amp;gt; boolean transformations into the select options.&lt;/p&gt;
-
-&lt;p&gt;I wanted to focus this morning on code hospitality a la Nadia Odunayo, but I&amp;rsquo;ve been distracted by Slack and Email already, and putting the above items into new of existing issues:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1808#issuecomment-347133830"&gt;500 error notifications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1992"&gt;Event form refactoring&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Anyhow, I found &lt;a href="https://gist.github.com/nodunayo/c919477906aab6c1af6065ff8e868d3e"&gt;Nadia&amp;rsquo;s README template&lt;/a&gt;, so perhaps I can just quickly do a version for AgileVentures WebSiteOne&lt;/p&gt;
-
-&lt;h1&gt;AgileVentures WebSiteOne&lt;/h1&gt;
-
-&lt;p&gt;This app powers the AgileVentures main developer site, showing lists of active projects, members, upcoming events, past event recordings, as well as all the machinery for Premium membership payments&lt;/p&gt;
-
-&lt;h2&gt;Installation&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;link to installation doc&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Usage&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;???&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Contributing&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;link to contributing guide&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;History&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Sam Joseph had the idea for an online pairing community where everyone worked together to use the agile development methodology to deliver solutions to IT charities and non-profits.  Thomas Ochman joined as project manager and led the development of the WebSiteOne codebase with Bryan Yap serving as technical lead.  Initialy Sam was the notional &amp;ldquo;client&amp;rdquo;, not getting involved in the tech development, and many different volunteers contributed code.  Later Raoul joined as project manager as Thomas and Bryan had less and less time for the project.  Sam switched roles joining Raoul as project manager, and is now the sole project manager as Raoul became unavailable.&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Approaches&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Agile Development
-
-&lt;ul&gt;
-&lt;li&gt;We try to work from user stories in regular sprints, offer daily standups, and get regular feedback from end users&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Behaviour Driven Development (BDD)
-
-&lt;ul&gt;
-&lt;li&gt;We use Cucumber and RSpec testing tools that describe the behaviours of the system and its units&lt;/li&gt;
-&lt;li&gt;We try to work outside in, starting with acceptance tests, dropping to unit tests and then writing application code&lt;/li&gt;
-&lt;li&gt;We do spike occasionally to work out what&amp;rsquo;s going on, but then either throw away the spike, or make sure all our tests break before wrapping in tests (by strategically or globally breaking things)&lt;/li&gt;
-&lt;li&gt;Where possible we go for declarative over imperative scenarios in our acceptance tests, trying to boil down the high level features to be easily comprehensible in terms of user intention&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Domain Driven Design (DDD)
-
-&lt;ul&gt;
-&lt;li&gt;Sometimes we switch to inside out, trying to adjust the underlying entity schema to better represent the domain model&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Self-documenting code
-
-&lt;ul&gt;
-&lt;li&gt;We prefer executable documentation (tests) and relatively short methods where the method and variable names effectively document the code&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Reading material&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#"&gt;Imperative vs Declarative&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#"&gt;JavaScript Accpetance test trials&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#"&gt;What is DDD?&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Walkthroughs&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Some new feature we added &amp;hellip;
-
-&lt;ul&gt;
-&lt;li&gt;Here is the original feature request&lt;/li&gt;
-&lt;li&gt;This is the &lt;a href="#"&gt;spec&lt;/a&gt; that was written&lt;/li&gt;
-&lt;li&gt;Here&amp;rsquo;s the &lt;a href="#"&gt;code&lt;/a&gt; that fixed that spec&lt;/li&gt;
-&lt;li&gt;And then &lt;a href="#"&gt;we refactored it&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;That&amp;rsquo;s a start - more tomorrow &amp;hellip;  &lt;/p&gt;
 </content>
   </entry>
 </feed>
