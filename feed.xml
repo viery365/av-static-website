@@ -5,10 +5,45 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-12-05T00:00:00+00:00</updated>
+  <updated>2017-12-06T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Crawling Along</title>
+    <link rel="alternate" href="http://blog.url.com/2017/12/06/av-ecosystem-review-crawling-along/"/>
+    <id>http://blog.url.com/2017/12/06/av-ecosystem-review-crawling-along/</id>
+    <published>2017-12-06T00:00:00+00:00</published>
+    <updated>2018-03-15T20:20:41+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="bug" src="/images/../images/bug.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Well I think I&amp;rsquo;ve forged a reasonable anxiety management strategy with the following schedule for the Anthony Powell Membership database:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;by Dec 8th - screenshots of membership database interface for you to approve&lt;/li&gt;
+&lt;li&gt;by Dec 15th - alpha version of membership database for you to approve&lt;/li&gt;
+&lt;li&gt;by Jan 5th - beta version of membership database adjusted as per feedback&lt;/li&gt;
+&lt;li&gt;by Jan 31st - release version of membership database adjusted as per feedback, including full migration &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;which the client says they are happy with, and I&amp;rsquo;ve queried about how the Membership Types table doesn&amp;rsquo;t seem to be used in the interface.  After yesterday&amp;rsquo;s blog I was fiddling with the system on the train and once I have the fields in the right data format, subforms linking in related tables was all working.  Ironically it seems we don&amp;rsquo;t immediately need that, but good to know that all works.  The form designer is not dissimilar from Keynote or PowerPoint:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/eqeny8wkgv225x0/Screenshot%202017-12-06%2011.53.53.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m slowly pulling the fields around, trying to work out how to set the default font.  One thing I need to do is to be able to switch Member Grade to a drop down with different options &amp;hellip; I&amp;rsquo;ve got that working using the list box wizard, but as soon as I try to add any formatting to the list box the drop down functionality stops working:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/tlrx6xodqs4fw1p/Screenshot%202017-12-06%2013.46.39.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;ve asked on a forum:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://ask.libreoffice.org/en/question/140023/base-list-box-dropdown-breaks-when-any-formatting-added/"&gt;https://ask.libreoffice.org/en/question/140023/base-list-box-dropdown-breaks-when-any-formatting-added/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;but in the short term, unformatted should be fine.  Better work through the rest of the interfaces quick to see if I find any other sticking points &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Easily Distracted When Sick</title>
     <link rel="alternate" href="http://blog.url.com/2017/12/05/av-ecosystem-review-easily-distracted-when-sick/"/>
@@ -387,100 +422,6 @@
 &lt;p&gt;where the intention for each line is explicit.  I&amp;rsquo;ll leave that for another time, as I&amp;rsquo;ve performed several refactorings already.  At least I now have some aspirational text to put in the new README draft.&lt;/p&gt;
 
 &lt;p&gt;Well that makes me feel heaps better, to actually have a &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1995"&gt;quick fix&lt;/a&gt; for something reported by a Premium user.  I do need to get on to that medium editor thing in order to speed up our overall process.  Even the double run of the cukes hasn&amp;rsquo;t really addressed our failing javascript tests.  I guess the trick is to keep fixing things up, improving the cukes and getting those as examples into the system documentation showing how we are trying to improve things &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Even More Hospitable</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/28/av-ecosystem-review-even-more-hospitable/"/>
-    <id>http://blog.url.com/2017/11/28/av-ecosystem-review-even-more-hospitable/</id>
-    <published>2017-11-28T00:00:00+00:00</published>
-    <updated>2018-03-06T21:51:37+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="namaste" src="/images/namaste.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So, continuing to work from &lt;a href="https://gist.github.com/nodunayo/c919477906aab6c1af6065ff8e868d3e"&gt;Nadia&amp;rsquo;s README template&lt;/a&gt;: &lt;/p&gt;
-
-&lt;h1&gt;AgileVentures WebSiteOne&lt;/h1&gt;
-
-&lt;p&gt;This &lt;a href="http://rubyonrails.org/"&gt;Ruby on Rails&lt;/a&gt; app powers the &lt;a href="http://agileventures.org/"&gt;AgileVentures main developer site&lt;/a&gt;, showing lists of active &lt;a href="https://www.agileventures.org/projects"&gt;projects&lt;/a&gt;, &lt;a href="https://www.agileventures.org/users"&gt;members&lt;/a&gt;, &lt;a href="https://www.agileventures.org/events"&gt;upcoming events&lt;/a&gt;, &lt;a href="https://www.agileventures.org/scrums"&gt;past event recordings&lt;/a&gt;, as well as all the machinery for &lt;a href="https://www.agileventures.org/pricing"&gt;Premium membership payments&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2&gt;Installation&lt;/h2&gt;
-
-&lt;p&gt;See the &lt;a href="docs/project_setup.md"&gt;Project Setup&lt;/a&gt; documentation&lt;/p&gt;
-
-&lt;h2&gt;Usage&lt;/h2&gt;
-
-&lt;p&gt;:construction: UNDER CONSTRUCTION :construction:&lt;/p&gt;
-
-&lt;p&gt;See the site &lt;a href="docs/how_to_use_the_site.md"&gt;How To&lt;/a&gt; documentation&lt;/p&gt;
-
-&lt;h2&gt;Contributing&lt;/h2&gt;
-
-&lt;p&gt;See our &lt;a href="CONTRIBUTING.md"&gt;Contribution guidelines&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2&gt;History&lt;/h2&gt;
-
-&lt;p&gt;in 2011 Sam Joseph had the idea for an online pairing community where everyone worked together to use the agile development methodology to deliver solutions to IT charities and non-profits.  Thomas Ochman joined as project manager and led the development of the WebSiteOne codebase with Bryan Yap serving as technical lead.  Initialy Sam was the notional &amp;ldquo;client&amp;rdquo;, not getting involved in the tech development, and many different volunteers contributed code.  During this phase the events, projects and user systems were developed.  There was also a blog-like articles system.  Yaro Appletov led a tight integration with Google hangouts to allow recordable hangouts to be launched from the site and report back telemetry.&lt;/p&gt;
-
-&lt;p&gt;Later Raoul Diffou joined to take over as project manager as Thomas and Bryan had less and less time for the project.  Sam took over the technical lead role in 2016 and also started pairing with Raoul as project manager.  Later in 2016 as Raoul had less and less time Sam became the sole project manager.  During the course of 2016 Sam and long time AV contributor, Michael, revised the events framework, and replaced the articles system with a Premium payments framework intended to help ensure AV was sustainable into the future.  In 2017 Google withdrew their Hangouts API, breaking various functionality in the site.  Sam and Lokesh Sharma replaced the API integration with manual updates, and Sam pulled in the agile-bot node microservice so that WSO now communicates directly with Slack to alert members about new online meetings and their recordings.&lt;/p&gt;
-
-&lt;h2&gt;Approaches&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Agile Development
-
-&lt;ul&gt;
-&lt;li&gt;We try to work from user stories in regular sprints, offer daily standups, and get regular feedback from end users.  We try to reflect regularly on our process and experiment with incremental changes to how we get things done.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Behaviour Driven Development (BDD)
-
-&lt;ul&gt;
-&lt;li&gt;We use Cucumber and RSpec testing tools that describe the behaviours of the system and its units&lt;/li&gt;
-&lt;li&gt;We try to work outside in, starting with acceptance tests, dropping to unit tests and then writing application code&lt;/li&gt;
-&lt;li&gt;We do spike application code occasionally to work out what&amp;rsquo;s going on, but then either throw away the spike, or make sure all our tests break before wrapping the application code in tests (by strategically or globally breaking things)&lt;/li&gt;
-&lt;li&gt;Where possible we go for declarative over imperative scenarios in our acceptance tests, trying to boil down the high level features to be easily comprehensible in terms of user intention&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Domain Driven Design (DDD)
-
-&lt;ul&gt;
-&lt;li&gt;Sometimes we switch to inside out, trying to adjust the underlying entity schema to better represent the domain model&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Self-documenting code
-
-&lt;ul&gt;
-&lt;li&gt;We prefer executable documentation (tests) and relatively short methods where the method and variable names effectively document the code&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Reading material&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://fasteragile.com/blog/2015/01/19/declarative-user-stories-translate-to-good-cucumber-features/"&gt;Imperative vs Declarative Cucumber&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://bibwild.wordpress.com/2016/02/18/struggling-towards-reliable-capybara-javascript-testing/"&gt;JavaScript Acceptance test trials&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Walkthroughs&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;An example of a simple interface change&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Here is the original &lt;a href="features/jitsi_meet/start_jitsi_button.feature#L1"&gt;user story&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Here is the original &lt;a href="features/jitsi_meet/start_jitsi_button.feature#L15"&gt;cucumber scenario&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;We did not write a spec, as this would have involved a view spec which we don&amp;rsquo;t feel add any value&lt;/li&gt;
-&lt;li&gt;Here&amp;rsquo;s the &lt;a href="app/views/events/show.html.erb#L38"&gt;code&lt;/a&gt; that implemented the feature&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;An example of a new feature involving a database change
-&amp;hellip;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;An example of a bug fix
-&amp;hellip;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;So looking through all the cucumber scenarios I&amp;rsquo;m not finding wonderful examples of the declarative style I think we should be using, and this is at least as true for the cucumber scenarios I have written myself :-(  I guess the edit future event timezone related work that Michael and I implemented is closest.  I&amp;rsquo;m going to have to go back through some old pull requests to work out other walkthrough examples.  I also note that we don&amp;rsquo;t have any documentation on how to use the website, either in git or on the site itself.  I guess I&amp;rsquo;ve always been slightly skeptical of the value of that sort of written documentation in that it becomes another thing to maintain that folks don&amp;rsquo;t even necessarily read.&lt;/p&gt;
-
-&lt;p&gt;Blurgh, overall I don&amp;rsquo;t think things are very hospitable and it feels like a mountain to climb to try and make them so.  One step at a time I guess &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
