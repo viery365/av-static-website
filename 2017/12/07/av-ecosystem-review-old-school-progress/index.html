@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>AV EcoSystem Review Easily Distracted When Sick</title>
+    <title>AV EcoSystem Review Old School Progress</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,7 +40,7 @@
 
     </script>
 </head>
-<body class="x2017 x2017_12 x2017_12_05 x2017_12_05_av-ecosystem-review-easily-distracted-when-sick x2017_12_05_av-ecosystem-review-easily-distracted-when-sick_index">
+<body class="x2017 x2017_12 x2017_12_07 x2017_12_07_av-ecosystem-review-old-school-progress x2017_12_07_av-ecosystem-review-old-school-progress_index">
     <link href="/stylesheets/highlighting.css" rel="stylesheet" />
 <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -89,51 +89,23 @@
       <div class="col-lg-2">
       </div>
       <div class="col-lg-8 text-left">
-        <h2 class='title'><a href="/2017/12/05/av-ecosystem-review-easily-distracted-when-sick/">AV EcoSystem Review Easily Distracted When Sick</a></h2>
-        <h5 class='date'> 5 Dec 2017</h5>
-    <p><img alt="sneeze" src="/images/sneeze.png" /></p>
+        <h2 class='title'><a href="/2017/12/07/av-ecosystem-review-old-school-progress/">AV EcoSystem Review Old School Progress</a></h2>
+        <h5 class='date'> 7 Dec 2017</h5>
+    <p><img alt="bug" src="/images/old_school.jpg" /></p>
 
-<p>So I didn&rsquo;t get far with the Anthony Powell work yesterday, but I did at least get all the software running and get my head back into the problem space.  That was enough to take the edge off my anxiety about getting it started early.  I&rsquo;m also onboarding a few new developers to WSO which ameliorates my worries about bleeds there.  This morning I got totally distracted by email and Slack, but in the procrastination wheel picture of things I did get a few things done.  Now let&rsquo;s focus.  I&rsquo;m tempted to see if I can bash the auto-generated form in LibreOffice Base to look like the exising Lotus Approach one.  The voice in my head worries that I should be writing out user stories.</p>
+<p>So I&rsquo;m pretty far from reviewing the AV ecosystem here.  I&rsquo;m devoting my blog driven development this week to making progress on the Anthony Powell Society membership database.  It&rsquo;s old school in that I&rsquo;m using LibreOffice Base, which is an open source version of MS Access.  I used to teach a course on MS Access and Excel back at HPU and it&rsquo;s that experience that puts me in a position to deliver on the Anthony Powell Society project.  The APSoc have eschewed a cloud based membership database as they don&rsquo;t believe their members would make use of an online offering, and don&rsquo;t want to get locked in to some particular cloud offering.</p>
 
-<ol>
-<li>Can enter new member information</li>
-<li>Can browse member information in same form</li>
-<li>&hellip;</li>
-</ol>
+<p>They&rsquo;d been managing their membership database using Lotus Approach for many years, and one of the big advantages there was the WYSIWYG interface that allowed the secretary to tinker with the forms and relationships in the system without having to be a hard core programmer.  Lotus Approach has been sunsetted and so I&rsquo;m currently replicating the entire system for them in LibreOffice Base.  I had a reply to <a href="https://ask.libreoffice.org/en/question/140023/base-list-box-dropdown-breaks-when-any-formatting-added/">my query on the ask.libreoffice.org site</a> about formatting breaking the list box dropdown. Although it doesn&rsquo;t fix the issue it is good to see that the community is responsive.</p>
 
-<p>The database dump we have from Lotus Approach appears to have five tables:</p>
+<p>No one seems to know <a href="https://ask.libreoffice.org/en/question/27384/how-to-change-the-default-font-in-libreoffice-base-form-wizard/">how to change the default font in Base</a> but I need to kick on since I&rsquo;ve promised mock ups of the forms for the APSoc for tomorrow.  What&rsquo;s annoying is how slowly Base runs on my computer - I did do a restart the other day, hmmm.</p>
 
-<ol>
-<li>Members</li>
-<li>Subs</li>
-<li>Gift Aid</li>
-<li>Recurring Subs (transactional)</li>
-<li>Member types</li>
-</ol>
+<p>So LibreOffice crashes a couple of times and I lose 10 minutes of work, although I do work out how to change the background color and so make the Member Information form look more and more like the original from Lotus Approach:</p>
 
-<p>and we have a dump of each with the addresses randomized.</p>
+<p><img src="https://dl.dropbox.com/s/ph3redhshw4p0cm/Screenshot%202017-12-07%2011.48.14.png?dl=0" /></p>
 
-<p>LibreOffice Base (like Lotus Approach and MS Access) provides a form interface where we can page through the rows in the database, and add new information.  I guess the key things to do are to make the forms look usable and ensure that the different tables have the right relationships set up.</p>
+<p>I also accidentally disconnect the form from the data source and have a few frantic moments getting it connected back up.  I&rsquo;m thinking that I need to email the client to work out some of the more esoteric elements in the form that I haven&rsquo;t added yet, but actually I see their detailed documentation includes exactly what we need there, so hopefully a good 90 minutes tomorrow and I can have mockups of at least the main form, if not the &ldquo;Subscription Paid&rdquo;, &ldquo;Gift Aid Declarations&rdquo; and &ldquo;Standing Order Details&rdquo; pages, which are simpler, but do include table embedding that I haven&rsquo;t done yet &hellip;</p>
 
-<p>I&rsquo;ve also already imported three of the tables into the system.  I can&rsquo;t remember how I did first time around.  I&rsquo;ve previously referred to:</p>
-
-<p><a href="https://help.libreoffice.org/Common/Importing_and_Exporting_Data_in_Base">https://help.libreoffice.org/Common/Importing<em>and</em>Exporting<em>Data</em>in_Base</a></p>
-
-<p>which basically involves opening the existing dbf files and copying and pasting all the existing rows into the tables section of a LOB database, and then using the import wizard.  I had a go at trying to match up the datatypes, which reminds me that I&rsquo;ll probably need to start this over from scratch to get all the datatypes working properly &hellip; as well as ensuring that I&rsquo;m updated to the very latest LibreOffice version.   Hmm, I wonder if a Trello board or Pivotal Tracker is in order to track all the tasks?  I&rsquo;m leaning towards Pivotal since being able to accept/reject by default will be a good match for this project.</p>
-
-<p>I&rsquo;ve got the form design system working so that I start manipulating the auto-generated form to look more like the existing Lotus Approach form:</p>
-
-<p><img src="https://dl.dropbox.com/s/5grezldftymxi4z/Screenshot%202017-12-05%2010.52.43.png?dl=0" /></p>
-
-<p>but now a key feature is being able to have a form field that refers to another table.  There are some videos online:</p>
-
-<p><a href="http://thefrugalcomputerguy.com/libreoffice-base/Base17.php">http://thefrugalcomputerguy.com/libreoffice-base/Base17.php</a></p>
-
-<p>but I browse around and read a few help forums, and then I&rsquo;ve pretty much worked out how to put sub-forms into a form that link to a different table and slave certain fields to the record being shown in the main form.  It&rsquo;s not working at the moment, but I guess that might be due to different field data types:</p>
-
-<p><img src="https://dl.dropbox.com/s/xi07mk1ckua2tgq/Screenshot%202017-12-05%2011.17.34.png?dl=0" /></p>
-
-<p>So I think the sensible thing to do is to re-import the data.  What I should also do is give our clients a sensible timeline, such as showing them mockups of the new interfaces by the end of the week, and a first version to play with by the end of the following week &hellip; hopefully that should put a lid on both my anxiety and theirs :-)</p>
+<p>So slow going, and it&rsquo;s frustrating that most Premium members probably won&rsquo;t be interested in this project as it&rsquo;s not really using the latest tech.  I think it&rsquo;s a wonderful example of adapting to the needs of the client, and it&rsquo;s good food for thought for our own membership/subscription model, but not many other synergies emerging here &hellip;</p>
 
         <h2 class='author'>by Sam Joseph</h2>
       </div>  

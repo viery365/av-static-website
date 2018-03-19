@@ -5,16 +5,42 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-12-06T00:00:00+00:00</updated>
+  <updated>2017-12-07T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Old School Progress</title>
+    <link rel="alternate" href="http://blog.url.com/2017/12/07/av-ecosystem-review-old-school-progress/"/>
+    <id>http://blog.url.com/2017/12/07/av-ecosystem-review-old-school-progress/</id>
+    <published>2017-12-07T00:00:00+00:00</published>
+    <updated>2018-03-19T21:27:32+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="bug" src="/images/old_school.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;m pretty far from reviewing the AV ecosystem here.  I&amp;rsquo;m devoting my blog driven development this week to making progress on the Anthony Powell Society membership database.  It&amp;rsquo;s old school in that I&amp;rsquo;m using LibreOffice Base, which is an open source version of MS Access.  I used to teach a course on MS Access and Excel back at HPU and it&amp;rsquo;s that experience that puts me in a position to deliver on the Anthony Powell Society project.  The APSoc have eschewed a cloud based membership database as they don&amp;rsquo;t believe their members would make use of an online offering, and don&amp;rsquo;t want to get locked in to some particular cloud offering.&lt;/p&gt;
+
+&lt;p&gt;They&amp;rsquo;d been managing their membership database using Lotus Approach for many years, and one of the big advantages there was the WYSIWYG interface that allowed the secretary to tinker with the forms and relationships in the system without having to be a hard core programmer.  Lotus Approach has been sunsetted and so I&amp;rsquo;m currently replicating the entire system for them in LibreOffice Base.  I had a reply to &lt;a href="https://ask.libreoffice.org/en/question/140023/base-list-box-dropdown-breaks-when-any-formatting-added/"&gt;my query on the ask.libreoffice.org site&lt;/a&gt; about formatting breaking the list box dropdown. Although it doesn&amp;rsquo;t fix the issue it is good to see that the community is responsive.&lt;/p&gt;
+
+&lt;p&gt;No one seems to know &lt;a href="https://ask.libreoffice.org/en/question/27384/how-to-change-the-default-font-in-libreoffice-base-form-wizard/"&gt;how to change the default font in Base&lt;/a&gt; but I need to kick on since I&amp;rsquo;ve promised mock ups of the forms for the APSoc for tomorrow.  What&amp;rsquo;s annoying is how slowly Base runs on my computer - I did do a restart the other day, hmmm.&lt;/p&gt;
+
+&lt;p&gt;So LibreOffice crashes a couple of times and I lose 10 minutes of work, although I do work out how to change the background color and so make the Member Information form look more and more like the original from Lotus Approach:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ph3redhshw4p0cm/Screenshot%202017-12-07%2011.48.14.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I also accidentally disconnect the form from the data source and have a few frantic moments getting it connected back up.  I&amp;rsquo;m thinking that I need to email the client to work out some of the more esoteric elements in the form that I haven&amp;rsquo;t added yet, but actually I see their detailed documentation includes exactly what we need there, so hopefully a good 90 minutes tomorrow and I can have mockups of at least the main form, if not the &amp;ldquo;Subscription Paid&amp;rdquo;, &amp;ldquo;Gift Aid Declarations&amp;rdquo; and &amp;ldquo;Standing Order Details&amp;rdquo; pages, which are simpler, but do include table embedding that I haven&amp;rsquo;t done yet &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;So slow going, and it&amp;rsquo;s frustrating that most Premium members probably won&amp;rsquo;t be interested in this project as it&amp;rsquo;s not really using the latest tech.  I think it&amp;rsquo;s a wonderful example of adapting to the needs of the client, and it&amp;rsquo;s good food for thought for our own membership/subscription model, but not many other synergies emerging here &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Crawling Along</title>
     <link rel="alternate" href="http://blog.url.com/2017/12/06/av-ecosystem-review-crawling-along/"/>
     <id>http://blog.url.com/2017/12/06/av-ecosystem-review-crawling-along/</id>
     <published>2017-12-06T00:00:00+00:00</published>
-    <updated>2018-03-15T20:26:22+00:00</updated>
+    <updated>2018-03-19T21:23:59+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -29,13 +55,13 @@
 &lt;li&gt;by Jan 31st - release version of membership database adjusted as per feedback, including full migration &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;which the client says they are happy with, and I&amp;rsquo;ve queried about how the Membership Types table doesn&amp;rsquo;t seem to be used in the interface.  After yesterday&amp;rsquo;s blog I was fiddling with the system on the train and once I have the fields in the right data format, subforms linking in related tables was all working.  Ironically it seems we don&amp;rsquo;t immediately need that, but good to know that all works.  The form designer is not dissimilar from Keynote or PowerPoint:&lt;/p&gt;
+&lt;p&gt;which the client says they are happy with, and I&amp;rsquo;ve queried about how the Membership Types table doesn&amp;rsquo;t seem to be used in the interface.  After yesterday&amp;rsquo;s blog I was fiddling with the system on the train and once I had the fields in the right data format, subforms linking in related tables was all working.  Ironically it seems we don&amp;rsquo;t immediately need that, but good to know that all works.  The form designer is not dissimilar from Keynote or PowerPoint:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/eqeny8wkgv225x0/Screenshot%202017-12-06%2011.53.53.png?dl=0" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/eqeny8wkgv225x0/Screenshot%202017-12-06%2011.53.53.png" /&gt;&lt;/p&gt;
 
-&lt;p&gt;I&amp;rsquo;m slowly pulling the fields around, trying to work out how to set the default font.  One thing I need to do is to be able to switch Member Grade to a drop down with different options &amp;hellip; I&amp;rsquo;ve got that working using the list box wizard, but as soon as I try to add any formatting to the list box the drop down functionality stops working:&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m slowly pulling the fields around, trying to work out how to set the default font.  One thing I need to do is to be able to switch Member Grade to a drop down with different options &amp;hellip; I&amp;rsquo;ve got that working using the list box wizard, but as soon as I try to add any formatting to the list box, the drop down functionality stops working:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/tlrx6xodqs4fw1p/Screenshot%202017-12-06%2013.46.39.png?dl=0" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/tlrx6xodqs4fw1p/Screenshot%202017-12-06%2013.46.39.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;So I&amp;rsquo;ve asked on a forum:&lt;/p&gt;
 
@@ -49,7 +75,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/12/05/av-ecosystem-review-easily-distracted-when-sick/"/>
     <id>http://blog.url.com/2017/12/05/av-ecosystem-review-easily-distracted-when-sick/</id>
     <published>2017-12-05T00:00:00+00:00</published>
-    <updated>2018-03-14T20:20:36+00:00</updated>
+    <updated>2018-03-19T21:23:59+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -75,7 +101,7 @@
 
 &lt;p&gt;and we have a dump of each with the addresses randomized.&lt;/p&gt;
 
-&lt;p&gt;LibreOffice Base (like Lotus Approach and MS Access) provides a form interface where we can page through the rows in the database, and add new information.  I guess the key things to do are the make the forms look usable and ensure that the different tables have the right relationships set up.&lt;/p&gt;
+&lt;p&gt;LibreOffice Base (like Lotus Approach and MS Access) provides a form interface where we can page through the rows in the database, and add new information.  I guess the key things to do are to make the forms look usable and ensure that the different tables have the right relationships set up.&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;ve also already imported three of the tables into the system.  I can&amp;rsquo;t remember how I did first time around.  I&amp;rsquo;ve previously referred to:&lt;/p&gt;
 
@@ -327,101 +353,6 @@
 &lt;p&gt;and then I screw up by pushing to develop instead of creating a branch.  Urgh, I amend the commit name to say it fixes the pending issue, but can&amp;rsquo;t force push that up to develop because it&amp;rsquo;s protected.  Blargh.  I remove the protection, force that up, and then put the protection back on.  Not ideal. Getting there.  Gotta finish up the blog.  Shame to pollute my inner space with this constant pressure to work faster, do more.  Need to meditate on that, but no time :-)&lt;/p&gt;
 
 &lt;p&gt;Anyhow, I think what I&amp;rsquo;ve got is now a pretty clean output from both Jasmine and RSpec.  Now if we really want to clean up the cucumber output then we&amp;rsquo;ve got to move on to removing this Mercury editor.  So I update that &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1767"&gt;branch&lt;/a&gt; and I guess I work on that tomorrow, pulling examples from what I do into the new README &amp;hellip; also our coverage tracking seems to be broken.  Need to get that fixed up too &amp;hellip; no rest for the wicked &amp;hellip; and no respite from the prioritization conflicts &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Getting Stuck</title>
-    <link rel="alternate" href="http://blog.url.com/2017/11/29/av-ecosystem-review-getting-stuck/"/>
-    <id>http://blog.url.com/2017/11/29/av-ecosystem-review-getting-stuck/</id>
-    <published>2017-11-29T00:00:00+00:00</published>
-    <updated>2018-03-07T21:54:08+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="getting stuck" src="/images/getting_stuck.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m getting a bit stuck.  My motivation to clear things off my desk has completely collapsed.  Today I did my social media station keeping before opening the blog.  I&amp;rsquo;d love to get to the computer at 8am like I sometimes used to and get a real meaty chunk of work by 10am to then have the motivation to hit on non social-media admin.  Gosh, social media is gamified addiction fun, isn&amp;rsquo;t it?&lt;/p&gt;
-
-&lt;p&gt;Anyhow, I&amp;rsquo;ve cleared all the dependabot low hanging fruit, so I&amp;rsquo;m rebuilding some older PRs, which might just be falling foul of intermittent fails.  Gosh, that&amp;rsquo;s a time sink - that reminds me about my plan to try and get the medium-editor in place so we can drop mercury.  I&amp;rsquo;m also slighltly stuck on my revision to the WSO README for fear of getting into arguments about the accuracy of the project history - maybe better to leave that section out?  Maybe I move the new draft README out of my last blog and into a placeholder location &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/AgileVentures/WebsiteOne/blob/develop/README-draft.md"&gt;https://github.com/AgileVentures/WebsiteOne/blob/develop/README-draft.md&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;So keep polishing the README, sort out the pending issues showing up in the test output, work on the medium editor branch, or fix some of the niggly things, e.g. the formatting issue that Susanna highlighted yesterday?  I think I can get a quick win on this &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/1994"&gt;formatting issue&lt;/a&gt; from Susanna.  I make a branch and amend an existing cucumber test:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="err"&gt;Given following events exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt;             &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;category&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;start_datetime&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;duration&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;time_zone&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;project&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats_weekly_each_days_of_the_week_mask&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats_every_n_weeks&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Standup&lt;/span&gt;    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Daily&lt;/span&gt; &lt;span class="n"&gt;standup&lt;/span&gt; &lt;span class="n"&gt;meeting&amp;lt;br&amp;gt;woot!&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;           &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014/02/03&lt;/span&gt; &lt;span class="n"&gt;07:00:00&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;150&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;weekly&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt;   &lt;span class="n"&gt;15&lt;/span&gt;                                      &lt;span class="p"&gt;|&lt;/span&gt;     &lt;span class="n"&gt;1&lt;/span&gt;                 &lt;span class="p"&gt;|&lt;/span&gt;
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Show correct timezone
-    &lt;span class="err"&gt;Given the date is "2016/05/01 09&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;15&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt; &lt;span class="err"&gt;UTC"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I am on events index page
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Standup"&lt;/span&gt;
-    &lt;span class="err"&gt;And the local time element should be set to "2016-05-10T07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00Z"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see &lt;span class="s"&gt;"&amp;lt;br&amp;gt;"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;which fails in the way I expect, i.e. the html tag shows up in the list view as Susanna pointed out.  I want to refactor the cuke, but I must fix the issue first, which might be as simple as just adding the &lt;code&gt;auto_link&lt;/code&gt; command to the relevant part of the view:&lt;/p&gt;
-&lt;pre class="highlight erb"&gt;&lt;code&gt;              &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;auto_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;description&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;truncate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;120&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;separator: &lt;/span&gt;&lt;span class="sr"&gt;/\s/&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It is.  So can I make the cuke a better example of self documentation?  I refactor it to:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="nt"&gt;@vcr&lt;/span&gt;
-&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; List Repeating Events
-  As an event creator
-  So that I don't have to keep making separate events for repeating meetings
-  I would like everyone to see repeats of regular events
-
-  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="err"&gt;Given following events exist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt;             &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;category&lt;/span&gt;        &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;start_datetime&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;duration&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;time_zone&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;project&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats_weekly_each_days_of_the_week_mask&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;repeats_every_n_weeks&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Standup&lt;/span&gt;    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Daily&lt;/span&gt; &lt;span class="n"&gt;standup&lt;/span&gt; &lt;span class="n"&gt;meeting&amp;lt;br&amp;gt;woot!&lt;/span&gt;   &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;           &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014/02/03&lt;/span&gt; &lt;span class="n"&gt;07:00:00&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;150&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;weekly&lt;/span&gt;  &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt;         &lt;span class="p"&gt;|&lt;/span&gt;   &lt;span class="n"&gt;15&lt;/span&gt;                                      &lt;span class="p"&gt;|&lt;/span&gt;     &lt;span class="n"&gt;1&lt;/span&gt;                 &lt;span class="p"&gt;|&lt;/span&gt;
-    &lt;span class="err"&gt;Given the date is "2016/05/01 09&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;15&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt; &lt;span class="err"&gt;UTC"&lt;/span&gt;
-    &lt;span class="nf"&gt;When&lt;/span&gt; I am on events index page
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Show correct timezone for repeating event
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Standup"&lt;/span&gt;
-    &lt;span class="err"&gt;And the local time element should be set to "2016-05-10T07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00Z"&lt;/span&gt;
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nf"&gt;Do&lt;/span&gt; not show raw HTML in repeating event description
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should not see &lt;span class="s"&gt;"&amp;lt;br&amp;gt;"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It feels like a waste of resources to break it into two scenarios when it&amp;rsquo;s the same set up and it&amp;rsquo;s effectively reloading the entire system twice to check for something that could be checked in sequence.  Perhaps it would be better to get the intent of the second scenario in the step definition itself.  I adjust like so:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Show correct timezone for repeating event
-    &lt;span class="err"&gt;Given the date is "2016/05/01 09&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;15&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt; &lt;span class="err"&gt;UTC"&lt;/span&gt;
-    &lt;span class="nf"&gt;When&lt;/span&gt; I am on events index page
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Standup"&lt;/span&gt;
-    &lt;span class="err"&gt;And the local time element should be set to "2016-05-10T07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00Z"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see any HTML tags
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Would love to adjust the background step so it wasn&amp;rsquo;t quite so wide &amp;hellip; I&amp;rsquo;ve got it down to:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;&lt;span class="nt"&gt;@vcr&lt;/span&gt;
-&lt;span class="kd"&gt;Feature&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; List Repeating Events
-  As an event creator
-  So that I don't have to keep making separate events for repeating meetings
-  I would like everyone to see repeats of regular events
-
-  &lt;span class="kn"&gt;Background&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="err"&gt;Given the following events exist that repeat every weekday&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;name&lt;/span&gt;    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;description&lt;/span&gt;     &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;category&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;start_datetime&lt;/span&gt;          &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;duration&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;time_zone&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
-      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Standup&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;always&amp;lt;br&amp;gt;woot!&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Scrum&lt;/span&gt;    &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;2014/02/03&lt;/span&gt; &lt;span class="n"&gt;07:00:00&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;150&lt;/span&gt;      &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;UTC&lt;/span&gt;       &lt;span class="p"&gt;|&lt;/span&gt;
-
-  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Show correct timezone for repeating event
-    &lt;span class="err"&gt;Given the date is "2016/05/01 09&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;15&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt; &lt;span class="err"&gt;UTC"&lt;/span&gt;
-    &lt;span class="nf"&gt;When&lt;/span&gt; I am on events index page
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see &lt;span class="s"&gt;"Standup"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should see &lt;span class="s"&gt;"woot!"&lt;/span&gt;
-    &lt;span class="err"&gt;And the local time element should be set to "2016-05-10T07&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;00Z"&lt;/span&gt;
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see any HTML tags
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I&amp;rsquo;d still like to add more explanation to the &lt;code&gt;local time element should be set to &amp;quot;2016-05-10T07:00:00Z&amp;quot;&lt;/code&gt; step so that it explains that this is the raw element that the javascript library &lt;code&gt;local_time&lt;/code&gt; uses to display the correct time zone to the user and that we gave up testing the execution of that, since the headless browser can&amp;rsquo;t easily be manipulated to a different time zone.  Still my ideal Scenario text would be more like:&lt;/p&gt;
-&lt;pre class="highlight gherkin"&gt;&lt;code&gt;  &lt;span class="kn"&gt;Scenario&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; Show correct timezone for repeating event
-    &lt;span class="nf"&gt;Given&lt;/span&gt; the date is a weekday in 2016
-    &lt;span class="nf"&gt;When&lt;/span&gt; I am on events index page
-    &lt;span class="nf"&gt;Then&lt;/span&gt; I should see the event title and description
-    &lt;span class="nf"&gt;And&lt;/span&gt; I should not see any HTML tags
-    &lt;span class="nf"&gt;And&lt;/span&gt; the elements needed by the local_time js library that shows times in the users timezone should be set correctly
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;where the intention for each line is explicit.  I&amp;rsquo;ll leave that for another time, as I&amp;rsquo;ve performed several refactorings already.  At least I now have some aspirational text to put in the new README draft.&lt;/p&gt;
-
-&lt;p&gt;Well that makes me feel heaps better, to actually have a &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/1995"&gt;quick fix&lt;/a&gt; for something reported by a Premium user.  I do need to get on to that medium editor thing in order to speed up our overall process.  Even the double run of the cukes hasn&amp;rsquo;t really addressed our failing javascript tests.  I guess the trick is to keep fixing things up, improving the cukes and getting those as examples into the system documentation showing how we are trying to improve things &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
