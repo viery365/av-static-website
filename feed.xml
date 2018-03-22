@@ -5,10 +5,61 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-12-08T00:00:00+00:00</updated>
+  <updated>2017-12-11T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Client Feedback</title>
+    <link rel="alternate" href="http://blog.url.com/2017/12/11/av-ecosystem-review-client-feedback/"/>
+    <id>http://blog.url.com/2017/12/11/av-ecosystem-review-client-feedback/</id>
+    <published>2017-12-11T00:00:00+00:00</published>
+    <updated>2018-03-22T20:54:02+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="client feedback" src="/images/client_feedback.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I got out a screenshot of the main APSoc LibreOffice Base Member Information form to the client late Friday, and over the weekend they&amp;rsquo;ve given me very detailed feedback on changes they want to the form.  Agile is all about providing working software as early as possible, but this seems like a nice shortcut to increase the chances that the resulting system will be what the client wants.  I&amp;rsquo;ve ordered a new HDMI cable so I can start developing on my windows machine (although will that just be a distraction?), and so I&amp;rsquo;m going to have a go at making all the changes requested on my mac.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Adjust label font (Liberation Sans &amp;ndash;&amp;gt; Tahoma)&lt;/li&gt;
+&lt;li&gt;Have membership number be numeric only&lt;/li&gt;
+&lt;li&gt;Align last updated field with Member Information title&lt;/li&gt;
+&lt;li&gt;Align all field names with left edge of inputs&lt;/li&gt;
+&lt;li&gt;Reduce size of date fields&lt;/li&gt;
+&lt;li&gt;All dates should have 4 digit years  &amp;lt;&amp;mdash; not sure&lt;/li&gt;
+&lt;li&gt;Reduce size of &amp;ldquo;Known as&amp;rdquo; and &amp;ldquo;Salutation&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Wants to know signficance of white vs grey boxes &amp;lt;&amp;ndash; can explain&lt;/li&gt;
+&lt;li&gt;First line of address in top box &amp;lt;&amp;ndash; data issue - some addresses in odd places&lt;/li&gt;
+&lt;li&gt;Move &amp;ldquo;Local Group&amp;rdquo; up to address along with &amp;ldquo;N/L&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Move up &amp;ldquo;NM N/L&amp;rdquo; also&lt;/li&gt;
+&lt;li&gt;Remove KCM only text&lt;/li&gt;
+&lt;li&gt;Move &amp;ldquo;City &amp;hellip; Country&amp;rdquo; row up&lt;/li&gt;
+&lt;li&gt;Align Country field&lt;/li&gt;
+&lt;li&gt;Country drop down should be full list of countries &amp;lt;&amp;ndash; will need to investigate&lt;/li&gt;
+&lt;li&gt;Fix Mobile Phone font&lt;/li&gt;
+&lt;li&gt;Remove Fax field (and data from DB) &amp;lt;&amp;ndash; we don&amp;rsquo;t have final DB - am I supposed to provide a new schema?&lt;/li&gt;
+&lt;li&gt;Remove &amp;ldquo;Dietary Requirements&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Replace with &amp;ldquo;Email Address 2&amp;rdquo; &amp;lt;&amp;ndash; need to add this to DB&lt;/li&gt;
+&lt;li&gt;Remove “Gift Membership &amp;hellip;” from screen and DB (again the info can be moved to “Notes” by me after migration).&lt;/li&gt;
+&lt;li&gt;Expand “Notes” top full width of screen.&lt;/li&gt;
+&lt;li&gt;Align check boxes&lt;/li&gt;
+&lt;li&gt;“Last Update”, “Date Joined” and “Member#” should be automatically generated and not keyable – these should have a grey background; other fields a white background. All other fields are potentially changeable although some will default.&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Work Phone&amp;rdquo; and &amp;ldquo;Mobile Phone&amp;rdquo; fields should align with the fields in the row above.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So I&amp;rsquo;ve done most of the cosmetic changes and some of the data ones:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/oz1u6wksr1c40mw/Screenshot%202017-12-11%2010.25.27.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;In about 30 minutes, but that leaves me with a set of things I need to check &amp;hellip; over the course of the day I also got LibreOffice installed on my Windows machine where it seems to run a little faster, and I can confirm that it looks sensible on Windows; and seems to have all the right basic functionality.&lt;/p&gt;
+
+&lt;p&gt;The feedback from the client is very specific.  Some of the items are just tiny ones that I would have fixed in a subsequent pass.  Others are micro-changes for alignment and so on that I would have got to eventually.  It feels like many of these changes are ones that they&amp;rsquo;ll be able to make themselves when they are all set up with the software.  Others are more substantive.  Great to keep them in the loop.  For some reason I bristled at the font change suggestions; I think partly because I was having such trouble setting a default font, but as I familiarise myself further with the software I was able to make the requisite changes in short order.  It is great when one is able to show clients/users that you respond to their requests.  I think it builds a really positive relationship, but of course one needs to be able to say no when the amount of work explodes.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m optimisitic I can get the majority of the work done over the course of the next week without having to break stride, but we&amp;rsquo;ll see.  The interesting question is whether we want to start paying for Chatlio since this work was generated through that system, or if there&amp;rsquo;ll be any kind of similar work generated if we complete well on this.  I&amp;rsquo;ve got other people asking for quotes on website refreshes, so that&amp;rsquo;s probably the place to start before re-opening the web-chat deluge &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Paid Project on Schedule</title>
     <link rel="alternate" href="http://blog.url.com/2017/12/08/av-ecosystem-review-paid-project-on-schedule/"/>
@@ -172,53 +223,6 @@
 &lt;p&gt;&lt;a href="https://mmohrhard.wordpress.com/2016/09/07/ui-testing-in-libreoffice/"&gt;https://mmohrhard.wordpress.com/2016/09/07/ui-testing-in-libreoffice/&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;but now it&amp;rsquo;s time for the webdev mob &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review More WSO CleanUp</title>
-    <link rel="alternate" href="http://blog.url.com/2017/12/01/av-ecosystem-review-more-wso-cleanup/"/>
-    <id>http://blog.url.com/2017/12/01/av-ecosystem-review-more-wso-cleanup/</id>
-    <published>2017-12-01T00:00:00+00:00</published>
-    <updated>2018-03-12T21:05:23+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="cleanup" src="/images/cleanup.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So running the cuke tests I get this one bit of extraneous output:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Encountered Error in get: 404 Resource Not Found: {"code":"route_not_found","kind":"error","error":"The path you requested has no valid endpoint."}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and of course huge dumps of VCR and Puffing Billy cache changes.  I can clean that up with our &lt;code&gt;rake vcr_billy_caches:reset&lt;/code&gt; commmand but I wonder what other projects do?  Perhaps I should ask the VCR folks?  I think the issue we have is that we need to throw out some of our old caches and reload, dealing with the pain that will cause &amp;hellip; maybe we need some VCR version of dependabot that will throw out old caches for us?&lt;/p&gt;
-
-&lt;p&gt;I posted the &lt;a href="https://groups.google.com/forum/#!topic/vcr-ruby/8DoA7MUq-38"&gt;following to the vcr-ruby mailing list&lt;/a&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Hi everyone,&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ve been using VCR in our rails projects for a long time (and now puffing billy as well) and I&amp;rsquo;m concerned about how confusing cached network recordings are for new contributors that we onboard.&lt;/p&gt;
-
-&lt;p&gt;We also seem to end up with a fair few new network cache files when tests fail and so on, which show up in &lt;code&gt;git status&lt;/code&gt;.  New contributors wonder what these files are for, try to add the cache directories to .gitignore, or do other strange things.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ve recently introduced a rake task &lt;code&gt;rake vcr_billy_caches:reset&lt;/code&gt; to make it easy to reset the caches to the way they are in the current branch, but I wonder if there isn&amp;rsquo;t some better long term solution.&lt;/p&gt;
-
-&lt;p&gt;I wonder if we&amp;rsquo;re using VCR incorrectly, or perhaps not updating our cached network files frequently enough.  I&amp;rsquo;m a little scared to delete large swathes of recorded files for the extra work that might pop up in terms of ensuring that everything works again, but perhaps I&amp;rsquo;m being silly.  It&amp;rsquo;s just that it&amp;rsquo;s all volunteer time, so well, anyway.  Here are the two main OS projects I&amp;rsquo;m running that use VCR:&lt;/p&gt;
-
-&lt;p&gt;https://github.com/AgileVentures/LocalSupport&lt;/p&gt;
-
-&lt;p&gt;https://github.com/AgileVentures/WebSiteOne&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve added sections to our contributing docs, but I feel like all my text should probably be replaced with images or a video: https://github.com/AgileVentures/LocalSupport/blob/develop/CONTRIBUTING.md#acceptance-testing&amp;ndash;caching&lt;/p&gt;
-
-&lt;p&gt;I just wondered if others had similar experiences and any suggestions.&lt;/p&gt;
-
-&lt;p&gt;Many thanks in advance&lt;/p&gt;
-
-&lt;p&gt;Best, Sam&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I also opened a &lt;a href="https://github.com/vcr/vcr/issues/672"&gt;GitHub issue&lt;/a&gt; to also mention the idea of some sort of automated tool to delete old cache files.  &lt;/p&gt;
-
-&lt;p&gt;Annoyingly I&amp;rsquo;m almost out of time this morning, and I wanted to see if I could fix the &lt;code&gt;local_time&lt;/code&gt; update that dependabot was suggesting, as well as cleaning out the cruft in the Cucumber logs.  I was also thinking that the ultra slow cukes needed to be worked on.  Hmmm, leave &lt;code&gt;local_time&lt;/code&gt; to next week I guess &amp;hellip; urgh, and I left a hanging PR to update some of the Slack channels that get pinged &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

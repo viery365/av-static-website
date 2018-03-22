@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Client Feedback</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_3 blog_page_3_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_12 x2017_12_11 x2017_12_11_av-ecosystem-review-client-feedback x2017_12_11_av-ecosystem-review-client-feedback_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,91 +83,62 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/12/11/av-ecosystem-review-client-feedback/">AV EcoSystem Review Client Feedback</a></h2>
+        <h5 class='date'>11 Dec 2017</h5>
+    <p><img alt="client feedback" src="/images/client_feedback.png" /></p>
 
-          <p>Page 3 of 28</p>
+<p>I got out a screenshot of the main APSoc LibreOffice Base Member Information form to the client late Friday, and over the weekend they&rsquo;ve given me very detailed feedback on changes they want to the form.  Agile is all about providing working software as early as possible, but this seems like a nice shortcut to increase the chances that the resulting system will be what the client wants.  I&rsquo;ve ordered a new HDMI cable so I can start developing on my windows machine (although will that just be a distraction?), and so I&rsquo;m going to have a go at making all the changes requested on my mac.</p>
 
-            <p><a href="/blog/page/2/">Previous page</a></p>
+<ol>
+<li>Adjust label font (Liberation Sans &ndash;&gt; Tahoma)</li>
+<li>Have membership number be numeric only</li>
+<li>Align last updated field with Member Information title</li>
+<li>Align all field names with left edge of inputs</li>
+<li>Reduce size of date fields</li>
+<li>All dates should have 4 digit years  &lt;&mdash; not sure</li>
+<li>Reduce size of &ldquo;Known as&rdquo; and &ldquo;Salutation&rdquo;</li>
+<li>Wants to know signficance of white vs grey boxes &lt;&ndash; can explain</li>
+<li>First line of address in top box &lt;&ndash; data issue - some addresses in odd places</li>
+<li>Move &ldquo;Local Group&rdquo; up to address along with &ldquo;N/L&rdquo;</li>
+<li>Move up &ldquo;NM N/L&rdquo; also</li>
+<li>Remove KCM only text</li>
+<li>Move &ldquo;City &hellip; Country&rdquo; row up</li>
+<li>Align Country field</li>
+<li>Country drop down should be full list of countries &lt;&ndash; will need to investigate</li>
+<li>Fix Mobile Phone font</li>
+<li>Remove Fax field (and data from DB) &lt;&ndash; we don&rsquo;t have final DB - am I supposed to provide a new schema?</li>
+<li>Remove &ldquo;Dietary Requirements&rdquo;</li>
+<li>Replace with &ldquo;Email Address 2&rdquo; &lt;&ndash; need to add this to DB</li>
+<li>Remove “Gift Membership &hellip;” from screen and DB (again the info can be moved to “Notes” by me after migration).</li>
+<li>Expand “Notes” top full width of screen.</li>
+<li>Align check boxes</li>
+<li>“Last Update”, “Date Joined” and “Member#” should be automatically generated and not keyable – these should have a grey background; other fields a white background. All other fields are potentially changeable although some will default.</li>
+<li>&ldquo;Work Phone&rdquo; and &ldquo;Mobile Phone&rdquo; fields should align with the fields in the row above.</li>
+</ol>
 
-          <h2><a href="/2017/11/13/av-ecosystem-review-new-mobs-and-communication/">AV EcoSystem Review New Mobs and Communication</a></h2>
-          <h3>Nov 13</h3>
-          <p><img alt="confusion" src="/images/mob_communication.jpg"></p>
+<p>So I&rsquo;ve done most of the cosmetic changes and some of the data ones:</p>
 
-<p>So I’m rushing myself to push out the days schedule on the Slack #general channel as I’ve scheduled two new mobs to start:</p>
-<pre class="highlight plaintext"><code>@here (note, all times in UTC)
+<p><img src="https://dl.dropbox.com/s/oz1u6wksr1c40mw/Screenshot%202017-12-11%2010.25.27.png?dl=0" /></p>
 
-TODAY'S EVENTS
-==============
+<p>In about 30 minutes, but that leaves me with a set of things I need to check &hellip; over the course of the day I also got LibreOffice installed on my Windows machine where it seems to run a little faster, and I can confirm that it looks sensible on Windows; and seems to have all the right basic functionality.</p>
 
-* 10:30 - 11:30 UTC : WebDev (OdinProject) Mob (for Premium...</code></pre>
-          <h2><a href="/2017/11/10/av-ecosystem-review-confusion-reigns/">AV EcoSystem Review Confusion Reigns</a></h2>
-          <h3>Nov 10</h3>
-          <p><img alt="confusion" src="/images/confusion.png"></p>
+<p>The feedback from the client is very specific.  Some of the items are just tiny ones that I would have fixed in a subsequent pass.  Others are micro-changes for alignment and so on that I would have got to eventually.  It feels like many of these changes are ones that they&rsquo;ll be able to make themselves when they are all set up with the software.  Others are more substantive.  Great to keep them in the loop.  For some reason I bristled at the font change suggestions; I think partly because I was having such trouble setting a default font, but as I familiarise myself further with the software I was able to make the requisite changes in short order.  It is great when one is able to show clients/users that you respond to their requests.  I think it builds a really positive relationship, but of course one needs to be able to say no when the amount of work explodes.</p>
 
-<p>Hmm, so the last two days I’ve adopted a new pattern of focusing first thing not on blogging, but on completing tasks from the previous night that I worry I’m not going to get done at all if I prioritize my repeating daily tasks.  It’s also partly...</p>
-          <h2><a href="/2017/11/09/av-ecosystem-review-locking-things-down/">AV EcoSystem Review Locking Things Down</a></h2>
-          <h3>Nov  9</h3>
-          <p><img alt="locking" src="/images/locking_pliers.jpg"></p>
+<p>I&rsquo;m optimisitic I can get the majority of the work done over the course of the next week without having to break stride, but we&rsquo;ll see.  The interesting question is whether we want to start paying for Chatlio since this work was generated through that system, or if there&rsquo;ll be any kind of similar work generated if we complete well on this.  I&rsquo;ve got other people asking for quotes on website refreshes, so that&rsquo;s probably the place to start before re-opening the web-chat deluge &hellip;</p>
 
-<p>So I had to put off blogging for a while today.  My station keeping regulars have been starting to get in the way of certain emails and admin that I keep putting off.  That done I’ve got to get a google meta-tag out to the main site to unlock appointment...</p>
-          <h2><a href="/2017/11/08/av-ecosystem-review-performance-testing/">AV EcoSystem Review Performance Testing</a></h2>
-          <h3>Nov  8</h3>
-          <p><img alt="performancetesting" src="/images/performance_testing.jpg"></p>
-
-<p>The new slack update message notifications for scrum hangouts and YouTube links is out and working:</p>
-
-<p><img src="https://dl.dropbox.com/s/fam5pv49ug99lcc/Screenshot%202017-11-08%2010.35.44.png?dl=0"></p>
-
-<p>and at least two users are happy with the change.  So now I really must push on to the peformance issues.  I’ve merged the new feature flag that...</p>
-          <h2><a href="/2017/11/07/av-ecosystem-review-calendaring-scheduling/">AV EcoSystem Review Calendaring/Scheduling</a></h2>
-          <h3>Nov  7</h3>
-          <p><img alt="Calendaring" src="/images/calendaring.jpg"></p>
-
-<p>Still under the weather. Wondering if I need some sort of calendar/schedule booker to allow people to grab chunks of my time.  Had been trying to get several sets of people booked for paid mobs and F2F sessions in either email and Slack and its all...</p>
-          <h2><a href="/2017/11/06/av-ecosystem-review-nicely-formatted-slack-updates/">AV EcoSystem Review Nicely Formatted Slack Updates</a></h2>
-          <h3>Nov  6</h3>
-          <p><img alt="tying up" src="/images/nicely_formatted_slack_messages.png"></p>
-
-<p>Urgh, stomach bug yesterday so I had to cancel Sunday free trial Premium F2F pairing.  Still weak today, but at least it seems we finally fixed the youtube link extra posting issue once I rolled out the <code>updated_at</code> –&gt; <code>created_at</code> switch for the <code>recent_hangouts</code></p>
-          <h2><a href="/2017/11/03/av-ecosystem-review-tying-up-the-week/">AV EcoSystem Review Tying Up the Week</a></h2>
-          <h3>Nov  3</h3>
-          <p><img alt="tying up" src="/images/tying_up.jpg"></p>
-
-<p>So I didn’t manage to get the <code>updated_at</code> -&gt; <code>created_at</code> fix deployed in advance of the Kent Beck scrum yesterday, so I still can’t say for certain that I have fixed the bug where the old YouTube link gets posted on daily events.  I believe everything...</p>
-          <h2><a href="/2017/11/02/av-ecosystem-review-headaches-receding/">AV EcoSystem Review Headaches Receding</a></h2>
-          <h3>Nov  2</h3>
-          <p><img alt="headaches receding" src="/images/headaches_receding.jpg"></p>
-
-<p>Urgh, minor headache again today, drinking lots of water.  Night before last a Halloween sweeties over-indulged child had caused me broken sleep.  Ended up drinking coffee again, hmm. Somewhat Slack/Email distracted.  Really odd thing is that the...</p>
-          <h2><a href="/2017/11/01/av-ecosystem-review-headaches/">AV EcoSystem Review Headaches</a></h2>
-          <h3>Nov  1</h3>
-          <p><img alt="headache" src="/images/headache.jpg"></p>
-
-<p>I’m feeling a bit rough - maybe coming down with something.  Bit of a headache at the computer.  Have burnt early start on handing off the AgileVentures sticker send out.  Will it actually make sense to make a shop front where folks can buy stickers...</p>
-          <h2><a href="/2017/10/31/av-ecosystem-review-making-events-welcoming/">AV EcoSystem Review Making Events Welcoming</a></h2>
-          <h3>Oct 31</h3>
-          <p><img alt="welcoming" src="/images/welcoming.png"></p>
-
-<p>So I have the new code on staging to avoid reposting old YouTube URLs on Slack. So let’s start by pushing that out to production:</p>
-<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (staging)]$ 
-→ git pull origin staging
-warning: redirecting...</code></pre>
-
-            <p><a href="/blog/page/4/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -225,6 +197,7 @@ warning: redirecting...</code></pre>
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
