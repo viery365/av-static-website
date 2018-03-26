@@ -5,10 +5,52 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-12-11T00:00:00+00:00</updated>
+  <updated>2017-12-12T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Old School Progress</title>
+    <link rel="alternate" href="http://blog.url.com/2017/12/12/av-ecosystem-review-old-school/"/>
+    <id>http://blog.url.com/2017/12/12/av-ecosystem-review-old-school/</id>
+    <published>2017-12-12T00:00:00+00:00</published>
+    <updated>2018-03-26T22:05:09+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="bug" src="/images/old_school.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m in the second week of a cold - I think it&amp;rsquo;s getting better, but I suspect that not resting properly last week is causing it to drag out for a second.  Totally distracted by Slack and Email this AM, but there we go. At least I have my PC set up with LibreOffice so that I can develop on a similar machine to that of the client.  What I also notice is that the project greeter bots seem to have stopped.   Would like to be working on them, but have to prioritise client work (I think).  Maybe I can just push an empty commit to see if they start up &amp;hellip; so I merge the outstanding pull request:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/AgileVentures/project_greeter_bot/pull/26"&gt;https://github.com/AgileVentures/project&lt;em&gt;greeter&lt;/em&gt;bot/pull/26&lt;/a&gt; &lt;/p&gt;
+
+&lt;p&gt;and push that out to production.  And then I get sucked in, shaving several yaks, I update the installation docs for project greeter bot and asyncvoter so that I can link them into greeting bot messages for those channels, and then I push that out from a branch.  Okay, totally distracted; might as well go on twitter and tweet the podcasts I just listened to.  Okay procrastination explosion; now I need to get to the list of follow up items I had from yesterday&amp;rsquo;s client work &amp;hellip; the outstanding issues were that:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;all dates should have 4 digit years&lt;/li&gt;
+&lt;li&gt;explain the significance of white vs grey boxes&lt;/li&gt;
+&lt;li&gt;first line of address in top box&lt;/li&gt;
+&lt;li&gt;country drop down should be full list of countries&lt;/li&gt;
+&lt;li&gt;adjust DB schema?&lt;/li&gt;
+&lt;li&gt;add second email address to schema&lt;/li&gt;
+&lt;li&gt;“Last Update”, “Date Joined” and “Member#” should be automatically generated and not keyable – these should have a grey background; other fields a white background. All other fields are potentially changeable although some will default&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I also notice that the mobile phone text is the wrong font &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;m tempted to make these changes on the PC and see how they transfer back to the mac.  I start by fixing up the mobile phone text field.  The 4 digit year thing is interesting in that the data that we&amp;rsquo;ve imported has two digit years, although that might be an artifact of the import process.  I&amp;rsquo;m not sure if we have the date fields in the right format &amp;hellip; ah, it appears we do, so then there&amp;rsquo;s a question about how they are presented in the form.  There&amp;rsquo;s a section on date formats in the docs, but as with many things in LibreOffice it&amp;rsquo;s not clear if it&amp;rsquo;s specific to the base component:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://help.libreoffice.org/Common/Number_Format_Codes#Date_Formats"&gt;https://help.libreoffice.org/Common/Number&lt;em&gt;Format&lt;/em&gt;Codes#Date_Formats&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Not very googleable, this issue, but when I edit the database table itself, I see an option to set a default format, so that sorts that.  The other non-trivial one is the list of countries for a dropdown menu, so I ask a question about that on the libreoffice forum:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://ask.libreoffice.org/en/question/140501/base-dropdown-country-list/"&gt;https://ask.libreoffice.org/en/question/140501/base-dropdown-country-list/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;but I get side-tracked into that when what I should probably be doing is mocking up the other interface screens &amp;hellip; and now I&amp;rsquo;ve got the country thing working, but I&amp;rsquo;ve somehow blown away a load of country data.  Frustrating; I&amp;rsquo;m getting distracted by additional work requested when I should be focused on the core &amp;hellip; at least I will force myself to copy the existing form and make it into the &amp;ldquo;Subscription Payment&amp;rdquo; form.  However now the software has locked up on the PC &amp;hellip; so I killed it and now I have it giving me a copy of the form which I&amp;rsquo;m working up to be the Subscription Payments form.  I&amp;rsquo;ve added a subform and I can see that migrating to new membership IDs is going to be non-trivial, given they are the primary keys for relating all these tables.  And then I&amp;rsquo;m sort of stuck on displaying a sort of spreadsheet view of all the subscription payments in the new form.  I can create tables, but I&amp;rsquo;m not sure that&amp;rsquo;s the right thing, but aha, I have found the &amp;ldquo;table control&amp;rdquo; form element that I think we need, and that looks about right.  Phew, so looks like we can probably get all the functionality we need, although the migration feels like it will be painful &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/dm3liajv1l0lflh/Screenshot%202017-12-12%2011.40.52.png?dl=0" /&gt;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Client Feedback</title>
     <link rel="alternate" href="http://blog.url.com/2017/12/11/av-ecosystem-review-client-feedback/"/>
@@ -193,36 +235,6 @@
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/xi07mk1ckua2tgq/Screenshot%202017-12-05%2011.17.34.png?dl=0" /&gt;&lt;/p&gt;
 
 &lt;p&gt;So I think the sensible thing to do is to re-import the data.  What I should also do is give our clients a sensible timeline, such as showing them mockups of the new interfaces by the end of the week, and a first version to play with by the end of the following week &amp;hellip; hopefully that should put a lid on both my anxiety and theirs :-)&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review No Good Choices</title>
-    <link rel="alternate" href="http://blog.url.com/2017/12/04/av-ecosystem-review-no-good-choices/"/>
-    <id>http://blog.url.com/2017/12/04/av-ecosystem-review-no-good-choices/</id>
-    <published>2017-12-04T00:00:00+00:00</published>
-    <updated>2018-03-14T20:11:58+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Urgh, so I&amp;rsquo;ve got a mild cold, but I desparately want to clear up and fix a few things with the Slack notifications.  Also the Google login and signup is broken.  However in addition I think I must use my morning blogs this week to work on the Anthony Powell Society database that we just got the contract for.  Of course between the cold and rebooting my computer and getting distracted by Slack I&amp;rsquo;m now out of time for really getting anything done before the WebDev Mob.  I guess maybe the thing to do is cancel the other meetings later in the day.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m really not sure what the right choice is.  Maybe I should just be sleeping the whole day &amp;hellip; I guess I&amp;rsquo;ll at least start by opening LibreOffice Base &amp;hellip;, although the LibreOffice starts up with a document rather than a database.  I&amp;rsquo;m going to need to remember how to run the Base software itself.  Ah, okay, it looks like it is all one package.  I think LibreOffice accidentally opened a text file and so re-started in document mode.  Now restarting it I get a view of the recent files that includes the charity database components I was testing beforehand:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/1yk586ws45z9hcr/Screenshot%202017-12-04%2010.23.48.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Opening libre-test.odb I get the familiar database design interfaces and the sample form I created for the membership database:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/1vbjqqs6y5qvid7/Screenshot%202017-12-04%2010.25.12.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;What we want it to look like is something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/y3xtz17fge1lm90/Screenshot%202017-12-04%2010.26.39.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Which is how the AP folks have their current Lotus Approach set up.  It would be nice to have a set of specific user stories, where I can ensure each one works.  I think I can infer the user stories from the forms and what the secretary showed me previously.  I could probably triple or quadruple the whole time spent on the system trying to set up some kind of automated acceptance testing &amp;hellip; although I have found a related blog on the subject:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://mmohrhard.wordpress.com/2016/09/07/ui-testing-in-libreoffice/"&gt;https://mmohrhard.wordpress.com/2016/09/07/ui-testing-in-libreoffice/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;but now it&amp;rsquo;s time for the webdev mob &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
