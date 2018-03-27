@@ -5,10 +5,34 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-12-12T00:00:00+00:00</updated>
+  <updated>2017-12-13T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Client Project Focus</title>
+    <link rel="alternate" href="http://blog.url.com/2017/12/13/av-ecosystem-review-client-project-focus/"/>
+    <id>http://blog.url.com/2017/12/13/av-ecosystem-review-client-project-focus/</id>
+    <published>2017-12-13T00:00:00+00:00</published>
+    <updated>2018-03-27T21:23:50+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="focus" src="/images/focus.jpeg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So despite pushing out fresh code all the dokku/azure bots still appear to be offline.  Would love to fix that, but yet I feel I should prioritize the client work.  I guess I can restart the dokku containers.   Has something in azure changed, blocking a new port?  Has rolling out metplus into dokku had some knock on impact?  Ah, I&amp;rsquo;m wrong; it looks like the main greeting bot did work overnight.  So I go back and post the welcome message manually to the few new slack folk.  Not sure about the greeter bots, but I&amp;rsquo;ve posted all the active project links in &lt;code&gt;#new\_members&lt;/code&gt; channel, so maybe we&amp;rsquo;ll see a few folks join channels and then we can tell if the project greeter bot is working again.&lt;/p&gt;
+
+&lt;p&gt;Yesterday I found the little widget that allows me to embed a spreadsheet view of another table in a LibreOffice Base form.  Now I need to be able to embed list boxes in it (which is relatively easy) and maybe have them point to other tables, which perhaps needs a sub-form in the table widget, hmm.&lt;/p&gt;
+
+&lt;p&gt;In the background someone has answered my &lt;a href="https://ask.libreoffice.org/en/question/140501/base-dropdown-country-list/"&gt;question about countries in list boxes on ask libreoffice&lt;/a&gt; pointing to a countries table that comes with MySQL. Not sure if LibreOffice has MySQL installed, or that&amp;rsquo;s just a suggestion about where to get the data from, but they also point out that the SQL query needs to return the name of the country twice, so I try that, but the program locks up on me.  I think there&amp;rsquo;s something about list boxes in LibreOffice that I haven&amp;rsquo;t got quite down yet.  In the table widget I&amp;rsquo;ve got listboxes that are giving drop downs from the table data, but aren&amp;rsquo;t showing the relevant field itself &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s a funny thing here - should I be trying to read the documentation about how to get it to work - I keep falling asleep whenever I try to read almost any documentation.  I generally make more progress just bashing on the interface and posting to help forums.  But perhaps I should just be getting mockups of the last two forms and sending them to the client, for what I will assume is reams of feedback that I could easily get distracted by.&lt;/p&gt;
+
+&lt;p&gt;I force quit LibreOffice on the PC and re-start and adjust the query to return &amp;ldquo;Name&amp;rdquo; twice, but that leads to no particular change to the countries list box.  I guess I&amp;rsquo;ll need to re-import the data, since the countries column got wiped out last time around.  There&amp;rsquo;s also the issue that the country names in the existing data don&amp;rsquo;t necessarily match the spelling/abbreviations in the list that I added.  Need to leave that for now; does the double name return help in the subscriptions payment form? &amp;hellip; it does, but needed to be combined with intelligence from another answer on &lt;a href="https://ask.libreoffice.org/en/question/65146/a-dropdown-list-inside-a-control-grid-table-with-sql-consult-in-base/?answer=65195#post-id-65195"&gt;ask libre office&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Okay, so maybe now I can bash out the other two forms &amp;hellip;?  Urgh, but it&amp;rsquo;s locking up on the PC again &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Old School</title>
     <link rel="alternate" href="http://blog.url.com/2017/12/12/av-ecosystem-review-old-school/"/>
@@ -181,60 +205,6 @@
 &lt;p&gt;&lt;a href="https://ask.libreoffice.org/en/question/140023/base-list-box-dropdown-breaks-when-any-formatting-added/"&gt;https://ask.libreoffice.org/en/question/140023/base-list-box-dropdown-breaks-when-any-formatting-added/&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;but in the short term, unformatted should be fine.  Better work through the rest of the interfaces quick to see if I find any other sticking points &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Easily Distracted When Sick</title>
-    <link rel="alternate" href="http://blog.url.com/2017/12/05/av-ecosystem-review-easily-distracted-when-sick/"/>
-    <id>http://blog.url.com/2017/12/05/av-ecosystem-review-easily-distracted-when-sick/</id>
-    <published>2017-12-05T00:00:00+00:00</published>
-    <updated>2018-03-19T21:23:59+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="sneeze" src="/images/sneeze.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I didn&amp;rsquo;t get far with the Anthony Powell work yesterday, but I did at least get all the software running and get my head back into the problem space.  That was enough to take the edge off my anxiety about getting it started early.  I&amp;rsquo;m also onboarding a few new developers to WSO which ameliorates my worries about bleeds there.  This morning I got totally distracted by email and Slack, but in the procrastination wheel picture of things I did get a few things done.  Now let&amp;rsquo;s focus.  I&amp;rsquo;m tempted to see if I can bash the auto-generated form in LibreOffice Base to look like the exising Lotus Approach one.  The voice in my head worries that I should be writing out user stories.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Can enter new member information&lt;/li&gt;
-&lt;li&gt;Can browse member information in same form&lt;/li&gt;
-&lt;li&gt;&amp;hellip;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;The database dump we have from Lotus Approach appears to have five tables:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Members&lt;/li&gt;
-&lt;li&gt;Subs&lt;/li&gt;
-&lt;li&gt;Gift Aid&lt;/li&gt;
-&lt;li&gt;Recurring Subs (transactional)&lt;/li&gt;
-&lt;li&gt;Member types&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;and we have a dump of each with the addresses randomized.&lt;/p&gt;
-
-&lt;p&gt;LibreOffice Base (like Lotus Approach and MS Access) provides a form interface where we can page through the rows in the database, and add new information.  I guess the key things to do are to make the forms look usable and ensure that the different tables have the right relationships set up.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve also already imported three of the tables into the system.  I can&amp;rsquo;t remember how I did first time around.  I&amp;rsquo;ve previously referred to:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://help.libreoffice.org/Common/Importing_and_Exporting_Data_in_Base"&gt;https://help.libreoffice.org/Common/Importing&lt;em&gt;and&lt;/em&gt;Exporting&lt;em&gt;Data&lt;/em&gt;in_Base&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;which basically involves opening the existing dbf files and copying and pasting all the existing rows into the tables section of a LOB database, and then using the import wizard.  I had a go at trying to match up the datatypes, which reminds me that I&amp;rsquo;ll probably need to start this over from scratch to get all the datatypes working properly &amp;hellip; as well as ensuring that I&amp;rsquo;m updated to the very latest LibreOffice version.   Hmm, I wonder if a Trello board or Pivotal Tracker is in order to track all the tasks?  I&amp;rsquo;m leaning towards Pivotal since being able to accept/reject by default will be a good match for this project.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve got the form design system working so that I start manipulating the auto-generated form to look more like the existing Lotus Approach form:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/5grezldftymxi4z/Screenshot%202017-12-05%2010.52.43.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;but now a key feature is being able to have a form field that refers to another table.  There are some videos online:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://thefrugalcomputerguy.com/libreoffice-base/Base17.php"&gt;http://thefrugalcomputerguy.com/libreoffice-base/Base17.php&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;but I browse around and read a few help forums, and then I&amp;rsquo;ve pretty much worked out how to put sub-forms into a form that link to a different table and slave certain fields to the record being shown in the main form.  It&amp;rsquo;s not working at the moment, but I guess that might be due to different field data types:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/xi07mk1ckua2tgq/Screenshot%202017-12-05%2011.17.34.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I think the sensible thing to do is to re-import the data.  What I should also do is give our clients a sensible timeline, such as showing them mockups of the new interfaces by the end of the week, and a first version to play with by the end of the following week &amp;hellip; hopefully that should put a lid on both my anxiety and theirs :-)&lt;/p&gt;
 </content>
   </entry>
 </feed>

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Client Project Focus</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_24 blog_page_24_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_12 x2017_12_13 x2017_12_13_av-ecosystem-review-client-project-focus x2017_12_13_av-ecosystem-review-client-project-focus_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,66 +83,35 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/12/13/av-ecosystem-review-client-project-focus/">AV EcoSystem Review Client Project Focus</a></h2>
+        <h5 class='date'>13 Dec 2017</h5>
+    <p><img alt="focus" src="/images/focus.jpeg" /></p>
 
-          <p>Page 24 of 28</p>
+<p>So despite pushing out fresh code all the dokku/azure bots still appear to be offline.  Would love to fix that, but yet I feel I should prioritize the client work.  I guess I can restart the dokku containers.   Has something in azure changed, blocking a new port?  Has rolling out metplus into dokku had some knock on impact?  Ah, I&rsquo;m wrong; it looks like the main greeting bot did work overnight.  So I go back and post the welcome message manually to the few new slack folk.  Not sure about the greeter bots, but I&rsquo;ve posted all the active project links in <code>#new\_members</code> channel, so maybe we&rsquo;ll see a few folks join channels and then we can tell if the project greeter bot is working again.</p>
 
-            <p><a href="/blog/page/23/">Previous page</a></p>
+<p>Yesterday I found the little widget that allows me to embed a spreadsheet view of another table in a LibreOffice Base form.  Now I need to be able to embed list boxes in it (which is relatively easy) and maybe have them point to other tables, which perhaps needs a sub-form in the table widget, hmm.</p>
 
-          <h2><a href="/2016/10/28/opportunity-in-disguise/">Opportunity in Disguise</a></h2>
-          <h3>Oct 28</h3>
-          <p>The new plan payment end points are winding their way to production, and I stepped back to the AsyncVoter code (which was now green) following a mob session including Michael, Raphael and Alex yesterday.  I wasn’t there so apologies if I left anyone...</p>
-          <h2><a href="/2016/10/27/red-green-refactor/">Red Green Refactor (Against the Clock)</a></h2>
-          <h3>Oct 27</h3>
-          <p>While the AsynVoter folks got down to mobbing on their first feature, I got on with some solo-coding on payment end points for the new intermediate level Premium payment plans.  I did want to try out <a href="https://github.com/rebelidealist/stripe-ruby-mock">ruby-stripe-mock</a> because while I do like the absolutist...</p>
-          <h2><a href="/2016/10/26/pulled-in-different-directions/">Pulled in Different Directions</a></h2>
-          <h3>Oct 26</h3>
-          <p>The PremiumPlus upgrade deploy appeared to go completely smoothly.  The test migration ran fine locally (with a copy of the production data).  Given we can’t financially afford to completely replicate the production data on staging I took a risk and...</p>
-          <h2><a href="/2016/10/25/solo-coding/">Solo Coding</a></h2>
-          <h3>Oct 25</h3>
-          <p><a href="http://nonprofits.agileventures.org/2016/10/21/yak-shaving/">Yak shaving</a> aside I managed to make time for some solo coding.  There was work outstanding on a feature to allow users to upgrade from Premium to PremiumPlus.  Michael and I had designed some extra domain features in a previous session, but they hadn...</p>
-          <h2><a href="/2016/10/24/tying-up-loose-ends/">Tying Up Loose Ends</a></h2>
-          <h3>Oct 24</h3>
-          <p>So after <a href="http://nonprofits.agileventures.org/2016/10/21/yak-shaving/">Yak shaving</a> around Heroku automated PR deploys, we finally got them working.  Raoul joined us in the “Martin Fowler” scrum and through a process of both disabling the PR deploys, AND deleting the GitHub webhooks that Heroku had installed,...</p>
-          <h2><a href="/2016/10/21/yak-shaving/">Yak Shaving</a></h2>
-          <h3>Oct 21</h3>
-          <p>So I thought I’d try and get a little solo programming time in today, but it turned into a yak-shaving devops session. Yak shaving? It’s when you end up needing a ladder to paint your house, and you have to borrow a ladder from your friend, but you...</p>
-          <h2><a href="/2016/10/20/to-pair-or-not-to-pair/">To Pair or Not To Pair</a></h2>
-          <h3>Oct 20</h3>
-          <p>Okay, some coding needs to get done.  Right now there are several things that might bring in more critical revenue for AgileVentures:</p>
+<p>In the background someone has answered my <a href="https://ask.libreoffice.org/en/question/140501/base-dropdown-country-list/">question about countries in list boxes on ask libreoffice</a> pointing to a countries table that comes with MySQL. Not sure if LibreOffice has MySQL installed, or that&rsquo;s just a suggestion about where to get the data from, but they also point out that the SQL query needs to return the name of the country twice, so I try that, but the program locks up on me.  I think there&rsquo;s something about list boxes in LibreOffice that I haven&rsquo;t got quite down yet.  In the table widget I&rsquo;ve got listboxes that are giving drop downs from the table data, but aren&rsquo;t showing the relevant field itself &hellip;</p>
 
-<ul>
-<li><a href="https://github.com/AgileVentures/WebsiteOne/issues/1342">PayPal integration</a></li>
-<li><a href="https://github.com/AgileVentures/WebsiteOne/issues/1344">Sponsor others functionality</a></li>
-<li><a href="https://github.com/AgileVentures/WebsiteOne/issues/1343">Mid range premium plans</a></li>
-</ul>
+<p>It&rsquo;s a funny thing here - should I be trying to read the documentation about how to get it to work - I keep falling asleep whenever I try to read almost any documentation.  I generally make more progress just bashing on the interface and posting to help forums.  But perhaps I should just be getting mockups of the last two forms and sending them to the client, for what I will assume is reams of feedback that I could easily get distracted by.</p>
 
-<p>I have at least one potential sign up...</p>
-          <h2><a href="/2016/10/19/bug-hunt/">Bug Hunt</a></h2>
-          <h3>Oct 19</h3>
-          <p>For about 12 hours now our Google Hangouts plugin have been failing.  I discovered it yesterday when I tried to start the “Kent Beck” scrum.  I opened an <a href="https://github.com/AgileVentures/HangoutConnection/issues/34">issue on our HangoutConnection repo</a>.  The Hangout plugin was asking for authorisation, which it...</p>
-          <h2><a href="/2016/10/18/lacking-narrative-thread/">Lacking Narrative Thread</a></h2>
-          <h3>Oct 18</h3>
-          <p>There is a lot going on, and heads up this blog post meanders over the stuff that happened yesterday rather than having a coherent narrative thread.  So how’s that different from any of your blogs you ask?  Very funny :-) So anyway we got a docker...</p>
-          <h2><a href="/2016/10/17/something-for-the-weekend/">Something for the Weekend</a></h2>
-          <h3>Oct 17</h3>
-          <p>I usually try and keep my weekends work free.  I’ve done that for a long time, since I was about 25 and I had a period where I had worked through a few weekends and felt pretty damn drained and exhausted in each following week.  It made me really unpleasantly...</p>
+<p>I force quit LibreOffice on the PC and re-start and adjust the query to return &ldquo;Name&rdquo; twice, but that leads to no particular change to the countries list box.  I guess I&rsquo;ll need to re-import the data, since the countries column got wiped out last time around.  There&rsquo;s also the issue that the country names in the existing data don&rsquo;t necessarily match the spelling/abbreviations in the list that I added.  Need to leave that for now; does the double name return help in the subscriptions payment form? &hellip; it does, but needed to be combined with intelligence from another answer on <a href="https://ask.libreoffice.org/en/question/65146/a-dropdown-list-inside-a-control-grid-table-with-sql-consult-in-base/?answer=65195#post-id-65195">ask libre office</a>.</p>
 
-            <p><a href="/blog/page/25/">Next page</a></p>
+<p>Okay, so maybe now I can bash out the other two forms &hellip;?  Urgh, but it&rsquo;s locking up on the PC again &hellip;</p>
 
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -200,6 +170,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
