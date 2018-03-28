@@ -5,10 +5,38 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-12-13T00:00:00+00:00</updated>
+  <updated>2017-12-14T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review LibreOffice Locking Up</title>
+    <link rel="alternate" href="http://blog.url.com/2017/12/14/av-ecosystem-review-libreoffice-locking-up/"/>
+    <id>http://blog.url.com/2017/12/14/av-ecosystem-review-libreoffice-locking-up/</id>
+    <published>2017-12-14T00:00:00+00:00</published>
+    <updated>2018-03-28T21:09:12+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="lock" src="/images/lock.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Creating the new forms on the PC seems to be leading to lots of LibreOffice locking up &amp;hellip;, and now in the process of trying to transfer it back to the Mac I seem to have lost two days worth of work, argh!  I had set the PC system on auto-save to every one minute &amp;hellip; something about using dropbox?  I can review all the past versions on dropbox, but none of them have the work from yesterday.  Somehow whatever I did yesterday didn&amp;rsquo;t get saved to dropbox.  Frustrating.  At least I still have the knowledge of how to get things done.  Practice run I guess.  I&amp;rsquo;m not sure if the locking up and crashing is due to basic instability in the software or my overall approach of copy and paste.  I can&amp;rsquo;t bear re-creating items from scratch, particularly when I have to then re-set all the fonts individually.  Alright here we go again &amp;hellip; so new devops feature, create a cold backup at the end of each day.&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;m back on the mac where things are running a bit more smoothly - maybe developing out of dropbox was a bad idea.  Things running okay at the moment, allowing me to get a screen shot of the subscription payment screen:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/d5a6ja8jvokiut4/Screenshot%202017-12-14%2010.35.49.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now on to where I got in trouble on the PC.  Copying the subscription payment form to make the GiftAid and StandingOrder forms.  This time around I recreate the table element from scratch and it is pretty smooth:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/b9epna64eh9ty85/Screenshot%202017-12-14%2011.25.05.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, on to standing order details:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/63a2g5s1hgra9t2/Screenshot%202017-12-14%2010.48.44.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Okay, I think I might have done it and I now have mockups to show to the client &amp;hellip; no point tweaking them till we hear all that they want updated.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Client Project Focus</title>
     <link rel="alternate" href="http://blog.url.com/2017/12/13/av-ecosystem-review-client-project-focus/"/>
@@ -170,41 +198,6 @@
 &lt;p&gt;I also accidentally disconnect the form from the data source and have a few frantic moments getting it connected back up.  I&amp;rsquo;m thinking that I need to email the client to work out some of the more esoteric elements in the form that I haven&amp;rsquo;t added yet, but actually I see their detailed documentation includes exactly what we need there, so hopefully a good 90 minutes tomorrow and I can have mockups of at least the main form, if not the &amp;ldquo;Subscription Paid&amp;rdquo;, &amp;ldquo;Gift Aid Declarations&amp;rdquo; and &amp;ldquo;Standing Order Details&amp;rdquo; pages, which are simpler, but do include table embedding that I haven&amp;rsquo;t done yet &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;So slow going, and it&amp;rsquo;s frustrating that most Premium members probably won&amp;rsquo;t be interested in this project as it&amp;rsquo;s not really using the latest tech.  I think it&amp;rsquo;s a wonderful example of adapting to the needs of the client, and it&amp;rsquo;s good food for thought for our own membership/subscription model, but not many other synergies emerging here &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Crawling Along</title>
-    <link rel="alternate" href="http://blog.url.com/2017/12/06/av-ecosystem-review-crawling-along/"/>
-    <id>http://blog.url.com/2017/12/06/av-ecosystem-review-crawling-along/</id>
-    <published>2017-12-06T00:00:00+00:00</published>
-    <updated>2018-03-19T21:23:59+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="bug" src="/images/bug.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Well I think I&amp;rsquo;ve forged a reasonable anxiety management strategy with the following schedule for the Anthony Powell Membership database:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;by Dec 8th - screenshots of membership database interface for you to approve&lt;/li&gt;
-&lt;li&gt;by Dec 15th - alpha version of membership database for you to approve&lt;/li&gt;
-&lt;li&gt;by Jan 5th - beta version of membership database adjusted as per feedback&lt;/li&gt;
-&lt;li&gt;by Jan 31st - release version of membership database adjusted as per feedback, including full migration &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;which the client says they are happy with, and I&amp;rsquo;ve queried about how the Membership Types table doesn&amp;rsquo;t seem to be used in the interface.  After yesterday&amp;rsquo;s blog I was fiddling with the system on the train and once I had the fields in the right data format, subforms linking in related tables was all working.  Ironically it seems we don&amp;rsquo;t immediately need that, but good to know that all works.  The form designer is not dissimilar from Keynote or PowerPoint:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/eqeny8wkgv225x0/Screenshot%202017-12-06%2011.53.53.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m slowly pulling the fields around, trying to work out how to set the default font.  One thing I need to do is to be able to switch Member Grade to a drop down with different options &amp;hellip; I&amp;rsquo;ve got that working using the list box wizard, but as soon as I try to add any formatting to the list box, the drop down functionality stops working:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/tlrx6xodqs4fw1p/Screenshot%202017-12-06%2013.46.39.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I&amp;rsquo;ve asked on a forum:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://ask.libreoffice.org/en/question/140023/base-list-box-dropdown-breaks-when-any-formatting-added/"&gt;https://ask.libreoffice.org/en/question/140023/base-list-box-dropdown-breaks-when-any-formatting-added/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;but in the short term, unformatted should be fine.  Better work through the rest of the interfaces quick to see if I find any other sticking points &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
