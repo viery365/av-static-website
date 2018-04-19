@@ -5,16 +5,67 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-12-15T00:00:00+00:00</updated>
+  <updated>2017-12-17T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Back To Premium Analysis</title>
+    <link rel="alternate" href="http://blog.url.com/2017/12/17/av-ecosystem-review-back-to-premium-analysis/"/>
+    <id>http://blog.url.com/2017/12/17/av-ecosystem-review-back-to-premium-analysis/</id>
+    <published>2017-12-17T00:00:00+00:00</published>
+    <updated>2018-04-19T21:23:36+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="premium stats back" src="/images/premium-stats-back.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So there&amp;rsquo;s feedback from the APSoc client, and clearly some more work to do on the LibreOffice Base application, but I don&amp;rsquo;t think I can delay a review of the AV Premium members.  I used to be doing weekly reach outs, but with the new pairing and mobbing sessions I&amp;rsquo;m several weeks behind.  I also need to generate the latest monthly report for the trustees.  I&amp;rsquo;ve been adding data on mobs/pairing/meetings as I have them so that shouldn&amp;rsquo;t take so much time, but I also need to get the data in the WSO site accurate for Michael&amp;rsquo;s machine learning enterprise.  For that purpose we&amp;rsquo;ve created an API that allows us to get a list of the status of all the Premium users.  Using the great &lt;code&gt;jq&lt;/code&gt; library I can get nicely formatted json on the command line using a command like:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;curl -H "Authorization: Token token=1234" https://www.agileventures.org/api/subscriptions.json | jq
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and that gives me data like so:&lt;/p&gt;
+&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;email&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"sponsor_email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"started_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"2017-03-06"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"ended_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"plan_name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Premium"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"payment_source"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"PaymentSource::PayPal"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;email&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"sponsor_email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"started_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"2017-03-09"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"ended_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"plan_name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Premium"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"payment_source"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"PaymentSource::Stripe"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now what I need to do is go through ensuring this data is accurate and up to date.  First up I have an honorary member who hacked the PayPal endpoint in a security intrusion test.  This is not relevant data for the machine learning system.  The next is one who was sponsored, but now has a full time job and hasn&amp;rsquo;t been making use of the Premium Mob membership.  They&amp;rsquo;ve demurred paying their own way, saying they need time to get things organised.  I think I could sensibly mark these two as honorary members since they both contributed so much on the open source side.  I go ahead and create an honorary membership:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;irb(main):003:0&amp;gt; Plan.create name: 'Honorary Premium'
+=&amp;gt; #&amp;lt;Plan id: 12, name: "Honorary Premium", free_trial_length_days: nil, third_party_identifier: nil, amount: nil, created_at: "2017-12-18 09:58:46", updated_at: "2017-12-18 09:58:46", category: nil&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I set the first user to honorary, and that bumps them to the bottom of the list, so I can try and hook up the correct sponsor email to the second premium.  That was pretty easy, but now I also need to indicate the end of the sponsorship and that it&amp;rsquo;s passed on to another member.  I add an end to the sponsorship, but leave the &amp;ldquo;passing on&amp;rdquo; till I get to that sponsee.  I start making lists of who to check in with, who to send follow up forms to, and about which sponsee positions we need to fill.  Problem with this is that it seems to be taking me ages to crawl through making updates, considering whether to reach out to people, whether to follow up on inactive members.&lt;/p&gt;
+
+&lt;p&gt;Anyhow, I&amp;rsquo;ve managed the first five in the list and now we come up against a subscription with no associated user.  It was started on &amp;ldquo;2017-04-25&amp;rdquo;, so can I match that with someone in the Stripe interface, since that&amp;rsquo;s the payment type &amp;hellip; but none of the Stripe customers was created even close to that date (according to the stripe interface). Doh, no, ugh, it&amp;rsquo;s PayPal.  Where we do have a member who started at that time.  It looks like I also created a subscription for that user a few days afterwards&lt;/p&gt;
+&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;email&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"sponsor_email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"started_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"2017-04-29"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"ended_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"plan_name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Premium Mob"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"payment_source"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"PaymentSource::PayPal"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Sensibly I hook that up correctly, and delete the inaccurate account, ah, but actually that&amp;rsquo;s the initial Premium that the member had for four days before upgrading to Premium Mob, so to hook that up we need to adjust the database model to support multiple subscriptions.  Hmm, looks like I&amp;rsquo;ll need to hit this every morning this week to get things sorted &amp;hellip; and maybe more &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Recording Help Videos</title>
     <link rel="alternate" href="http://blog.url.com/2017/12/15/av-ecosystem-review-recording-help-videos/"/>
     <id>http://blog.url.com/2017/12/15/av-ecosystem-review-recording-help-videos/</id>
     <published>2017-12-15T00:00:00+00:00</published>
-    <updated>2018-04-10T09:43:07+01:00</updated>
+    <updated>2018-04-19T21:19:12+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -44,7 +95,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/12/14/av-ecosystem-review-libreoffice-locking-up/"/>
     <id>http://blog.url.com/2017/12/14/av-ecosystem-review-libreoffice-locking-up/</id>
     <published>2017-12-14T00:00:00+00:00</published>
-    <updated>2018-04-10T09:40:01+01:00</updated>
+    <updated>2018-03-28T21:09:12+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -72,7 +123,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/12/13/av-ecosystem-review-client-project-focus/"/>
     <id>http://blog.url.com/2017/12/13/av-ecosystem-review-client-project-focus/</id>
     <published>2017-12-13T00:00:00+00:00</published>
-    <updated>2018-04-10T09:40:01+01:00</updated>
+    <updated>2018-03-27T21:23:50+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -96,7 +147,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/12/12/av-ecosystem-review-old-school/"/>
     <id>http://blog.url.com/2017/12/12/av-ecosystem-review-old-school/</id>
     <published>2017-12-12T00:00:00+00:00</published>
-    <updated>2018-04-10T09:40:01+01:00</updated>
+    <updated>2018-03-26T22:08:15+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -138,7 +189,7 @@
     <link rel="alternate" href="http://blog.url.com/2017/12/11/av-ecosystem-review-client-feedback/"/>
     <id>http://blog.url.com/2017/12/11/av-ecosystem-review-client-feedback/</id>
     <published>2017-12-11T00:00:00+00:00</published>
-    <updated>2018-04-10T09:40:01+01:00</updated>
+    <updated>2018-03-22T20:54:02+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -182,26 +233,6 @@
 &lt;p&gt;The feedback from the client is very specific.  Some of the items are just tiny ones that I would have fixed in a subsequent pass.  Others are micro-changes for alignment and so on that I would have got to eventually.  It feels like many of these changes are ones that they&amp;rsquo;ll be able to make themselves when they are all set up with the software.  Others are more substantive.  Great to keep them in the loop.  For some reason I bristled at the font change suggestions; I think partly because I was having such trouble setting a default font, but as I familiarise myself further with the software I was able to make the requisite changes in short order.  It is great when one is able to show clients/users that you respond to their requests.  I think it builds a really positive relationship, but of course one needs to be able to say no when the amount of work explodes.&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;m optimisitic I can get the majority of the work done over the course of the next week without having to break stride, but we&amp;rsquo;ll see.  The interesting question is whether we want to start paying for Chatlio since this work was generated through that system, or if there&amp;rsquo;ll be any kind of similar work generated if we complete well on this.  I&amp;rsquo;ve got other people asking for quotes on website refreshes, so that&amp;rsquo;s probably the place to start before re-opening the web-chat deluge &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Paid Project on Schedule</title>
-    <link rel="alternate" href="http://blog.url.com/2017/12/08/av-ecosystem-review-paid-project-on-schedule/"/>
-    <id>http://blog.url.com/2017/12/08/av-ecosystem-review-paid-project-on-schedule/</id>
-    <published>2017-12-08T00:00:00+00:00</published>
-    <updated>2018-04-10T09:40:01+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="project management" src="/images/project-management.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I&amp;rsquo;ve told the APSoc that I&amp;rsquo;d send them mockups of the interfaces today.  I&amp;rsquo;m getting used to LibreOffice, e.g. leave the control panel open to more easily edit labels etc. It&amp;rsquo;s still painfully slow, and I&amp;rsquo;ve now realised that to speed up I need to keep the control panel closed when I want to move things around.  The copy and paste seems to work only intermittently, but I&amp;rsquo;m getting there &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/7sc51p52z5saxkg/Screenshot%202017-12-08%2017.59.55.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;A few more crashes, and I had the above.  Haven&amp;rsquo;t managed to get all the different interfaces setup, but I realised that each of them was basically a clone of the first with some different sub forms, so better get the first one completed before moving on.  I need to get the checkboxes functioning, and see if there&amp;rsquo;s a way to make the dropdowns choose only unique items when we&amp;rsquo;re offering options.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve also ordered a new HDMI cable which should allow me to use my Windows PC for development.  Given that the clients will be working on Windows, it would be good to be testing there, and I wonder if actually LibreOffice might work more consistenly there.  It would be a big step forward if the copy and paste would work on Windows &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
