@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Back To Premium Analysis</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2017 x2017_12 x2017_12_18 x2017_12_18_av-ecosystem-review-back-to-premium-analysis x2017_12_18_av-ecosystem-review-back-to-premium-analysis_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/12/18/av-ecosystem-review-back-to-premium-analysis/">AV EcoSystem Review Back To Premium Analysis</a></h2>
+        <h5 class='date'>18 Dec 2017</h5>
+    <p><img alt="premium stats back" src="/images/premium-stats-back.jpg" /></p>
+
+<p>So there&rsquo;s feedback from the APSoc client, and clearly some more work to do on the LibreOffice Base application, but I don&rsquo;t think I can delay a review of the AV Premium members.  I used to be doing weekly reach outs, but with the new pairing and mobbing sessions I&rsquo;m several weeks behind.  I also need to generate the latest monthly report for the trustees.  I&rsquo;ve been adding data on mobs/pairing/meetings as I have them so that shouldn&rsquo;t take so much time, but I also need to get the data in the WSO site accurate for Michael&rsquo;s machine learning enterprise.  For that purpose we&rsquo;ve created an API that allows us to get a list of the status of all the Premium users.  Using the great <code>jq</code> library I can get nicely formatted json on the command line using a command like:</p>
+<pre class="highlight plaintext"><code>curl -H "Authorization: Token token=1234" https://www.agileventures.org/api/subscriptions.json | jq
+</code></pre>
+<p>and that gives me data like so:</p>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;email&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sponsor_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"started_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-06"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ended_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PaymentSource::PayPal"</span><span class="w">
+  </span><span class="p">}</span><span class="err">,</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;email&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sponsor_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"started_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-09"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ended_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PaymentSource::Stripe"</span><span class="w">
+  </span><span class="p">}</span><span class="err">,</span><span class="w">
+</span></code></pre>
+<p>Now what I need to do is go through ensuring this data is accurate and up to date.  First up I have an honorary member who hacked the PayPal endpoint in a security intrusion test.  This is not relevant data for the machine learning system.  The next is one who was sponsored, but now has a full time job and hasn&rsquo;t been making use of the Premium Mob membership.  They&rsquo;ve demurred paying their own way, saying they need time to get things organised.  I think I could sensibly mark these two as honorary members since they both contributed so much on the open source side.  I go ahead and create an honorary membership:</p>
+<pre class="highlight plaintext"><code>irb(main):003:0&gt; Plan.create name: 'Honorary Premium'
+=&gt; #&lt;Plan id: 12, name: "Honorary Premium", free_trial_length_days: nil, third_party_identifier: nil, amount: nil, created_at: "2017-12-18 09:58:46", updated_at: "2017-12-18 09:58:46", category: nil&gt;
+</code></pre>
+<p>I set the first user to honorary, and that bumps them to the bottom of the list, so I can try and hook up the correct sponsor email to the second premium.  That was pretty easy, but now I also need to indicate the end of the sponsorship and that it&rsquo;s passed on to another member.  I add an end to the sponsorship, but leave the &ldquo;passing on&rdquo; till I get to that sponsee.  I start making lists of who to check in with, who to send follow up forms to, and about which sponsee positions we need to fill.  Problem with this is that it seems to be taking me ages to crawl through making updates, considering whether to reach out to people, whether to follow up on inactive members.</p>
+
+<p>Anyhow, I&rsquo;ve managed the first five in the list and now we come up against a subscription with no associated user.  It was started on &ldquo;2017-04-25&rdquo;, so can I match that with someone in the Stripe interface, since that&rsquo;s the payment type &hellip; but none of the Stripe customers was created even close to that date (according to the stripe interface). Doh, no, ugh, it&rsquo;s PayPal.  Where we do have a member who started at that time.  It looks like I also created a subscription for that user a few days afterwards</p>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;email&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sponsor_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"started_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-04-29"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ended_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium Mob"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PaymentSource::PayPal"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Sensibly I hook that up correctly, and delete the inaccurate account, ah, but actually that&rsquo;s the initial Premium that the member had for four days before upgrading to Premium Mob, so to hook that up we need to adjust the database model to support multiple subscriptions.  Hmm, looks like I&rsquo;ll need to hit this every morning this week to get things sorted &hellip; and maybe more &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>

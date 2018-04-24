@@ -5,15 +5,53 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-12-17T00:00:00+00:00</updated>
+  <updated>2017-12-19T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
   <entry>
+    <title>AV EcoSystem Review Digging into Premium Data</title>
+    <link rel="alternate" href="http://blog.url.com/2017/12/19/av-ecosystem-review-digging-into-premium-data/"/>
+    <id>http://blog.url.com/2017/12/19/av-ecosystem-review-digging-into-premium-data/</id>
+    <published>2017-12-19T00:00:00+00:00</published>
+    <updated>2018-04-24T21:13:08+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="premium stats back" src="/images/digging-in.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Yesterday I got stuck in to reviewing the Premium data from our API.  It was slow going, but at least I started.  Hoping I can plow through a chunk today.  Starting with our first ever Premium member, I reach out them to say hi and check how they are doing.  The next is a long term Premium who cancelled recently.  I see that they also deleted their account from AgileVentures a few days before reaching out to me in person.  I can sense that members would love to be able to cancel without having to interact with a human - perhaps we should prioritise that functionality?&lt;/p&gt;
+
+&lt;p&gt;I also notice that the starting dates for a few members are off, probably reflecting us adding in data structures after the first few members had signed up.  Using the Stripe dashboard to get the initial creation dates I adjust that data.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;irb(main):007:0&amp;gt; u.subscription.ended_at = Date.parse('15-11-2017')
+=&amp;gt; Wed, 15 Nov 2017
+irb(main):008:0&amp;gt; u.save
+=&amp;gt; true
+irb(main):009:0&amp;gt; u.subscription.started_at = Date.parse('01-08-2016')
+=&amp;gt; Mon, 01 Aug 2016
+irb(main):010:0&amp;gt; u.save
+=&amp;gt; true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I reach out to those members too and update my big file of notes about those members.  Next up we have a hanging subscription that&amp;rsquo;s not associated with any user and the date doesn&amp;rsquo;t match anything in Stripe and PayPal.   Looks like an accidental creation on the day I was retrospectively filling in data for the earliest few members.  I checked that it&amp;rsquo;s not associated with any members, even deleted ones, so I delete that subscription entity:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;irb(main):022:0&amp;gt; s = Subscription.find(20)
+=&amp;gt; #&amp;lt;Premium id: 20, type: "Premium", started_at: "2016-10-25 16:46:56", ended_at: nil, user_id: nil, plan_id: 2, sponsor_id: nil&amp;gt;
+irb(main):023:0&amp;gt; User.with_deleted.all.count
+=&amp;gt; 6704
+irb(main):024:0&amp;gt; User.with_deleted.all.select{|u| u.subscription &amp;amp;&amp;amp; u.subscription.id == 20}
+=&amp;gt; []
+irb(main):025:0&amp;gt; s.destroy
+=&amp;gt; #&amp;lt;Premium id: 20, type: "Premium", started_at: "2016-10-25 16:46:56", ended_at: nil, user_id: nil, plan_id: 2, sponsor_id: nil&amp;gt;
+irb(main):026:0&amp;gt; s = Subscription.find(20)
+ActiveRecord::RecordNotFound: Couldn't find Subscription with 'id'=20
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and I&amp;rsquo;m managing to update about five records a day at the current rate &amp;hellip; hmmm&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Back To Premium Analysis</title>
-    <link rel="alternate" href="http://blog.url.com/2017/12/17/av-ecosystem-review-back-to-premium-analysis/"/>
-    <id>http://blog.url.com/2017/12/17/av-ecosystem-review-back-to-premium-analysis/</id>
-    <published>2017-12-17T00:00:00+00:00</published>
+    <link rel="alternate" href="http://blog.url.com/2017/12/18/av-ecosystem-review-back-to-premium-analysis/"/>
+    <id>http://blog.url.com/2017/12/18/av-ecosystem-review-back-to-premium-analysis/</id>
+    <published>2017-12-18T00:00:00+00:00</published>
     <updated>2018-04-19T21:23:36+01:00</updated>
     <author>
       <name>Article Author</name>
@@ -182,57 +220,6 @@
 &lt;p&gt;but I get side-tracked into that when what I should probably be doing is mocking up the other interface screens &amp;hellip; and now I&amp;rsquo;ve got the country thing working, but I&amp;rsquo;ve somehow blown away a load of country data.  Frustrating; I&amp;rsquo;m getting distracted by additional work requested when I should be focused on the core &amp;hellip; at least I will force myself to copy the existing form and make it into the &amp;ldquo;Subscription Payment&amp;rdquo; form.  However now the software has locked up on the PC &amp;hellip; so I killed it and now I have it giving me a copy of the form which I&amp;rsquo;m working up to be the Subscription Payments form.  I&amp;rsquo;ve added a subform and I can see that migrating to new membership IDs is going to be non-trivial, given they are the primary keys for relating all these tables.  And then I&amp;rsquo;m sort of stuck on displaying a sort of spreadsheet view of all the subscription payments in the new form.  I can create tables, but I&amp;rsquo;m not sure that&amp;rsquo;s the right thing, but aha, I have found the &amp;ldquo;table control&amp;rdquo; form element that I think we need, and that looks about right.  Phew, so looks like we can probably get all the functionality we need, although the migration feels like it will be painful &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/dm3liajv1l0lflh/Screenshot%202017-12-12%2011.40.52.png?dl=0" /&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Client Feedback</title>
-    <link rel="alternate" href="http://blog.url.com/2017/12/11/av-ecosystem-review-client-feedback/"/>
-    <id>http://blog.url.com/2017/12/11/av-ecosystem-review-client-feedback/</id>
-    <published>2017-12-11T00:00:00+00:00</published>
-    <updated>2018-03-22T20:54:02+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="client feedback" src="/images/client_feedback.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I got out a screenshot of the main APSoc LibreOffice Base Member Information form to the client late Friday, and over the weekend they&amp;rsquo;ve given me very detailed feedback on changes they want to the form.  Agile is all about providing working software as early as possible, but this seems like a nice shortcut to increase the chances that the resulting system will be what the client wants.  I&amp;rsquo;ve ordered a new HDMI cable so I can start developing on my windows machine (although will that just be a distraction?), and so I&amp;rsquo;m going to have a go at making all the changes requested on my mac.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Adjust label font (Liberation Sans &amp;ndash;&amp;gt; Tahoma)&lt;/li&gt;
-&lt;li&gt;Have membership number be numeric only&lt;/li&gt;
-&lt;li&gt;Align last updated field with Member Information title&lt;/li&gt;
-&lt;li&gt;Align all field names with left edge of inputs&lt;/li&gt;
-&lt;li&gt;Reduce size of date fields&lt;/li&gt;
-&lt;li&gt;All dates should have 4 digit years  &amp;lt;&amp;mdash; not sure&lt;/li&gt;
-&lt;li&gt;Reduce size of &amp;ldquo;Known as&amp;rdquo; and &amp;ldquo;Salutation&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;Wants to know signficance of white vs grey boxes &amp;lt;&amp;ndash; can explain&lt;/li&gt;
-&lt;li&gt;First line of address in top box &amp;lt;&amp;ndash; data issue - some addresses in odd places&lt;/li&gt;
-&lt;li&gt;Move &amp;ldquo;Local Group&amp;rdquo; up to address along with &amp;ldquo;N/L&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;Move up &amp;ldquo;NM N/L&amp;rdquo; also&lt;/li&gt;
-&lt;li&gt;Remove KCM only text&lt;/li&gt;
-&lt;li&gt;Move &amp;ldquo;City &amp;hellip; Country&amp;rdquo; row up&lt;/li&gt;
-&lt;li&gt;Align Country field&lt;/li&gt;
-&lt;li&gt;Country drop down should be full list of countries &amp;lt;&amp;ndash; will need to investigate&lt;/li&gt;
-&lt;li&gt;Fix Mobile Phone font&lt;/li&gt;
-&lt;li&gt;Remove Fax field (and data from DB) &amp;lt;&amp;ndash; we don&amp;rsquo;t have final DB - am I supposed to provide a new schema?&lt;/li&gt;
-&lt;li&gt;Remove &amp;ldquo;Dietary Requirements&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;Replace with &amp;ldquo;Email Address 2&amp;rdquo; &amp;lt;&amp;ndash; need to add this to DB&lt;/li&gt;
-&lt;li&gt;Remove “Gift Membership &amp;hellip;” from screen and DB (again the info can be moved to “Notes” by me after migration).&lt;/li&gt;
-&lt;li&gt;Expand “Notes” top full width of screen.&lt;/li&gt;
-&lt;li&gt;Align check boxes&lt;/li&gt;
-&lt;li&gt;“Last Update”, “Date Joined” and “Member#” should be automatically generated and not keyable – these should have a grey background; other fields a white background. All other fields are potentially changeable although some will default.&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;Work Phone&amp;rdquo; and &amp;ldquo;Mobile Phone&amp;rdquo; fields should align with the fields in the row above.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;So I&amp;rsquo;ve done most of the cosmetic changes and some of the data ones:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/oz1u6wksr1c40mw/Screenshot%202017-12-11%2010.25.27.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;In about 30 minutes, but that leaves me with a set of things I need to check &amp;hellip; over the course of the day I also got LibreOffice installed on my Windows machine where it seems to run a little faster, and I can confirm that it looks sensible on Windows; and seems to have all the right basic functionality.&lt;/p&gt;
-
-&lt;p&gt;The feedback from the client is very specific.  Some of the items are just tiny ones that I would have fixed in a subsequent pass.  Others are micro-changes for alignment and so on that I would have got to eventually.  It feels like many of these changes are ones that they&amp;rsquo;ll be able to make themselves when they are all set up with the software.  Others are more substantive.  Great to keep them in the loop.  For some reason I bristled at the font change suggestions; I think partly because I was having such trouble setting a default font, but as I familiarise myself further with the software I was able to make the requisite changes in short order.  It is great when one is able to show clients/users that you respond to their requests.  I think it builds a really positive relationship, but of course one needs to be able to say no when the amount of work explodes.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m optimisitic I can get the majority of the work done over the course of the next week without having to break stride, but we&amp;rsquo;ll see.  The interesting question is whether we want to start paying for Chatlio since this work was generated through that system, or if there&amp;rsquo;ll be any kind of similar work generated if we complete well on this.  I&amp;rsquo;ve got other people asking for quotes on website refreshes, so that&amp;rsquo;s probably the place to start before re-opening the web-chat deluge &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>

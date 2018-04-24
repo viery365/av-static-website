@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>AV EcoSystem Review Back To Premium Analysis</title>
+    <title>AV EcoSystem Review Digging into Premium Data</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,7 +40,7 @@
 
     </script>
 </head>
-<body class="x2017 x2017_12 x2017_12_17 x2017_12_17_av-ecosystem-review-back-to-premium-analysis x2017_12_17_av-ecosystem-review-back-to-premium-analysis_index">
+<body class="x2017 x2017_12 x2017_12_19 x2017_12_19_av-ecosystem-review-digging-into-premium-data x2017_12_19_av-ecosystem-review-digging-into-premium-data_index">
     <link href="/stylesheets/highlighting.css" rel="stylesheet" />
 <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -89,48 +89,35 @@
       <div class="col-lg-2">
       </div>
       <div class="col-lg-8 text-left">
-        <h2 class='title'><a href="/2017/12/17/av-ecosystem-review-back-to-premium-analysis/">AV EcoSystem Review Back To Premium Analysis</a></h2>
-        <h5 class='date'>17 Dec 2017</h5>
-    <p><img alt="premium stats back" src="/images/premium-stats-back.jpg" /></p>
+        <h2 class='title'><a href="/2017/12/19/av-ecosystem-review-digging-into-premium-data/">AV EcoSystem Review Digging into Premium Data</a></h2>
+        <h5 class='date'>19 Dec 2017</h5>
+    <p><img alt="premium stats back" src="/images/digging-in.jpg" /></p>
 
-<p>So there&rsquo;s feedback from the APSoc client, and clearly some more work to do on the LibreOffice Base application, but I don&rsquo;t think I can delay a review of the AV Premium members.  I used to be doing weekly reach outs, but with the new pairing and mobbing sessions I&rsquo;m several weeks behind.  I also need to generate the latest monthly report for the trustees.  I&rsquo;ve been adding data on mobs/pairing/meetings as I have them so that shouldn&rsquo;t take so much time, but I also need to get the data in the WSO site accurate for Michael&rsquo;s machine learning enterprise.  For that purpose we&rsquo;ve created an API that allows us to get a list of the status of all the Premium users.  Using the great <code>jq</code> library I can get nicely formatted json on the command line using a command like:</p>
-<pre class="highlight plaintext"><code>curl -H "Authorization: Token token=1234" https://www.agileventures.org/api/subscriptions.json | jq
-</code></pre>
-<p>and that gives me data like so:</p>
-<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;email&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"sponsor_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"started_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-06"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"ended_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payment_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PaymentSource::PayPal"</span><span class="w">
-  </span><span class="p">}</span><span class="err">,</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;email&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"sponsor_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"started_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-09"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"ended_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payment_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PaymentSource::Stripe"</span><span class="w">
-  </span><span class="p">}</span><span class="err">,</span><span class="w">
-</span></code></pre>
-<p>Now what I need to do is go through ensuring this data is accurate and up to date.  First up I have an honorary member who hacked the PayPal endpoint in a security intrusion test.  This is not relevant data for the machine learning system.  The next is one who was sponsored, but now has a full time job and hasn&rsquo;t been making use of the Premium Mob membership.  They&rsquo;ve demurred paying their own way, saying they need time to get things organised.  I think I could sensibly mark these two as honorary members since they both contributed so much on the open source side.  I go ahead and create an honorary membership:</p>
-<pre class="highlight plaintext"><code>irb(main):003:0&gt; Plan.create name: 'Honorary Premium'
-=&gt; #&lt;Plan id: 12, name: "Honorary Premium", free_trial_length_days: nil, third_party_identifier: nil, amount: nil, created_at: "2017-12-18 09:58:46", updated_at: "2017-12-18 09:58:46", category: nil&gt;
-</code></pre>
-<p>I set the first user to honorary, and that bumps them to the bottom of the list, so I can try and hook up the correct sponsor email to the second premium.  That was pretty easy, but now I also need to indicate the end of the sponsorship and that it&rsquo;s passed on to another member.  I add an end to the sponsorship, but leave the &ldquo;passing on&rdquo; till I get to that sponsee.  I start making lists of who to check in with, who to send follow up forms to, and about which sponsee positions we need to fill.  Problem with this is that it seems to be taking me ages to crawl through making updates, considering whether to reach out to people, whether to follow up on inactive members.</p>
+<p>Yesterday I got stuck in to reviewing the Premium data from our API.  It was slow going, but at least I started.  Hoping I can plow through a chunk today.  Starting with our first ever Premium member, I reach out them to say hi and check how they are doing.  The next is a long term Premium who cancelled recently.  I see that they also deleted their account from AgileVentures a few days before reaching out to me in person.  I can sense that members would love to be able to cancel without having to interact with a human - perhaps we should prioritise that functionality?</p>
 
-<p>Anyhow, I&rsquo;ve managed the first five in the list and now we come up against a subscription with no associated user.  It was started on &ldquo;2017-04-25&rdquo;, so can I match that with someone in the Stripe interface, since that&rsquo;s the payment type &hellip; but none of the Stripe customers was created even close to that date (according to the stripe interface). Doh, no, ugh, it&rsquo;s PayPal.  Where we do have a member who started at that time.  It looks like I also created a subscription for that user a few days afterwards</p>
-<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;email&gt;"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"sponsor_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"started_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-04-29"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"ended_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium Mob"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payment_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PaymentSource::PayPal"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Sensibly I hook that up correctly, and delete the inaccurate account, ah, but actually that&rsquo;s the initial Premium that the member had for four days before upgrading to Premium Mob, so to hook that up we need to adjust the database model to support multiple subscriptions.  Hmm, looks like I&rsquo;ll need to hit this every morning this week to get things sorted &hellip; and maybe more &hellip;</p>
+<p>I also notice that the starting dates for a few members are off, probably reflecting us adding in data structures after the first few members had signed up.  Using the Stripe dashboard to get the initial creation dates I adjust that data.</p>
+<pre class="highlight plaintext"><code>irb(main):007:0&gt; u.subscription.ended_at = Date.parse('15-11-2017')
+=&gt; Wed, 15 Nov 2017
+irb(main):008:0&gt; u.save
+=&gt; true
+irb(main):009:0&gt; u.subscription.started_at = Date.parse('01-08-2016')
+=&gt; Mon, 01 Aug 2016
+irb(main):010:0&gt; u.save
+=&gt; true
+</code></pre>
+<p>I reach out to those members too and update my big file of notes about those members.  Next up we have a hanging subscription that&rsquo;s not associated with any user and the date doesn&rsquo;t match anything in Stripe and PayPal.   Looks like an accidental creation on the day I was retrospectively filling in data for the earliest few members.  I checked that it&rsquo;s not associated with any members, even deleted ones, so I delete that subscription entity:</p>
+<pre class="highlight plaintext"><code>irb(main):022:0&gt; s = Subscription.find(20)
+=&gt; #&lt;Premium id: 20, type: "Premium", started_at: "2016-10-25 16:46:56", ended_at: nil, user_id: nil, plan_id: 2, sponsor_id: nil&gt;
+irb(main):023:0&gt; User.with_deleted.all.count
+=&gt; 6704
+irb(main):024:0&gt; User.with_deleted.all.select{|u| u.subscription &amp;&amp; u.subscription.id == 20}
+=&gt; []
+irb(main):025:0&gt; s.destroy
+=&gt; #&lt;Premium id: 20, type: "Premium", started_at: "2016-10-25 16:46:56", ended_at: nil, user_id: nil, plan_id: 2, sponsor_id: nil&gt;
+irb(main):026:0&gt; s = Subscription.find(20)
+ActiveRecord::RecordNotFound: Couldn't find Subscription with 'id'=20
+</code></pre>
+<p>and I&rsquo;m managing to update about five records a day at the current rate &hellip; hmmm</p>
 
         <h2 class='author'>by Sam Joseph</h2>
       </div>  
