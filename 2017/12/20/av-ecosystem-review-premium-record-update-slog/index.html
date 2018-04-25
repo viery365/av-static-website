@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Premium Record Update Slog</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_9 blog_page_9_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_12 x2017_12_20 x2017_12_20_av-ecosystem-review-premium-record-update-slog x2017_12_20_av-ecosystem-review-premium-record-update-slog_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,78 +83,37 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/12/20/av-ecosystem-review-premium-record-update-slog/">AV EcoSystem Review Premium Record Update Slog</a></h2>
+        <h5 class='date'>20 Dec 2017</h5>
+    <p><img alt="slog" src="/images/slog.bmp" /></p>
 
-          <p>Page 9 of 29</p>
+<p>Another day, another five or so Premium records to review - let&rsquo;s get started.  I update the starting date of another early Premium sign up and email them to see how they are doing:</p>
+<pre class="highlight plaintext"><code>irb(main):001:0&gt; u = User.find_by email: '...'
+=&gt; #&lt;User ...&gt;
+irb(main):002:0&gt; u.subscription
+=&gt; #&lt;Premium id: .., type: "Premium", started_at: "2016-10-25 16:46:56", ended_at: nil, user_id: ..., plan_id: 1, sponsor_id: nil&gt;
+irb(main):003:0&gt; u.subscription.started_at = DateTime.parse("2016-10-15 11:37:08")
+=&gt; Sat, 15 Oct 2016 11:37:08 +0000
+irb(main):004:0&gt; u.save
+=&gt; true
+</code></pre>
+<p>I do pretty much the same thing for three more members, and reach out to each of them as well.  One of them is a member who pays their own way for Premium and is sponsored for an upgrade to Mob and to F2F - not sure how we represent that, but the first subscription I update is just their Premium account, so leave that as is I guess.</p>
 
-            <p><a href="/blog/page/8/">Previous page</a></p>
+<p>Blurgh, I am not getting very far each morning - distracted by Slack/Email, early Premium F2F trial sessions eating into my mornings &hellip;</p>
 
-          <h2><a href="/2017/08/24/av-ecosystem-review-return/">AV EcoSystem Review Return</a></h2>
-          <h3>Aug 24</h3>
-          <p><img alt="ecosystem" src="/images/ecosystem.jpg"></p>
-
-<p>I’m back from my travels and it’s time to get back to work, jet-lagged or not.  I was working on my travels but eschewed blogging and hangouts, as is my usual practice.  My plan now I’m back is to keep focusing on the AgileVentures “ecosystem”, by...</p>
-          <h2><a href="/2017/07/20/av-website-review-part-twelve/">AV Website Review Part 12</a></h2>
-          <h3>Jul 20</h3>
-          <p>So I’ll be taking a blogging/reviewing break for my Japan trip - perhaps I can get up to date pushing out some old blogs.  Over the last couple of weeks of these “reviews” of the AV website (and associated ecosystem) I’ve managed to get some changes...</p>
-          <h2><a href="/2017/07/19/av-website-review-part-eleven/">AV Website Review Part 11</a></h2>
-          <h3>Jul 19</h3>
-          <p>So I’ve got some suggested channel greeter bot text from at least one project maintainer.  I’m also running behind today, and I’m trying to get the websiteone sign up changes deployed … I checked that the recaptcha sign up works on staging, which it...</p>
-          <h2><a href="/2017/07/18/av-website-review-part-ten/">AV Website Review Part 10</a></h2>
-          <h3>Jul 18</h3>
-          <p>So I think I should step away from the project greeting bots and just check the new sign up flow as it gets deployed.  First thing is that I need reCaptcha keys on the heroku servers:</p>
-
-<p><img src="https://dl.dropbox.com/s/9wti29f0ihs7s7e/Screenshot%202017-07-18%2009.39.37.png"></p>
-
-<p>Fixing that gives us the new reCaptcha sign up page:</p>
-
-<p><img src="https://dl.dropbox.com/s/hncj4kvhndkebst/Screenshot%202017-07-18%2009.44.07.png"></p>
-
-<p>which...</p>
-          <h2><a href="/2017/07/17/av-website-review-part-nine/">AV Website Review Part 9</a></h2>
-          <h3>Jul 17</h3>
-          <p><img alt="times up" src="/images/expired.jpg"></p>
-
-<p>So no one joined the LocalSupport channel over the weekend and thus there’s no immediate chance to see the new project greeting bot in action.  Other project maintainers have come back to me with mixed responses.  Some enthusiastic, some more cautious...</p>
-          <h2><a href="/2017/07/14/av-website-review-part-eight/">AV Website Review Part 9</a></h2>
-          <h3>Jul 14</h3>
-          <p><img alt="robots" src="/images/robots.png"></p>
-
-<p>So the discussion in marketing was about adding a time limit to the message about the Premium Mob special offer, and any changes can now be submitted as a pull request.  There also seemed to be general agreement that we should avoid bots doing the...</p>
-          <h2><a href="/2017/07/13/av-website-review-part-seven/">AV Website Review Part 7</a></h2>
-          <h3>Jul 13</h3>
-          <p>So overnight some new folks signed up for the AgileVentures Slack.  It seems like the greeter bot on Azure/Dokku has succesfully greeted a handful of new members, which allows me to turn off the greeter bot on EC2 and shut down the instance, which...</p>
-          <h2><a href="/2017/07/12/av-website-review-part-six/">AV Website Review Part 6</a></h2>
-          <h3>Jul 12</h3>
-          <p>So my spike of adding ReCaptcha to the sign up page went pretty well.  It all seems to be passing in CI.  I was expecting lots of the sign up tests to break, but they all passed.  I guess because they don’t have javascript enabled?  It tempts me to...</p>
-          <h2><a href="/2017/07/11/av-website-review-part-five/">AV Website Review Part 5</a></h2>
-          <h3>Jul 11</h3>
-          <p>So what I really meant to do yesterday was to look at the flows going through various pages in the site via Google Analytics.  Here’s a view that compares June with May this year:</p>
-
-<p><img alt="behaviour flow around sign up page, may vs jun" src="https://dl.dropbox.com/s/hf47so53v8lnhyw/Screenshot%202017-07-11%2009.23.15.png?dl=1"></p>
-
-<p>It’s perhaps even more revealing to compare June this year with June...</p>
-          <h2><a href="/2017/07/10/av-website-review-part-four/">AV Website Review Part 4</a></h2>
-          <h3>Jul 10</h3>
-          <p><img alt="conflicted" src="/images/conflicted.jpg"></p>
-
-<p>I’m conflicted about what to review on the website next.  Part of me wants to start breaking the “Getting Started” page up into pieces, and showing animated gifs for each.  There’s also the “About Us” page and the need for privacy statement pages...</p>
-
-            <p><a href="/blog/page/10/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -212,6 +172,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
