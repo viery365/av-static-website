@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Premium Data Tweaks</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_19 blog_page_19_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_12 x2017_12_21 x2017_12_21_av-ecosystem-review-more-premium-data-tweaks x2017_12_21_av-ecosystem-review-more-premium-data-tweaks_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,78 +83,48 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/12/21/av-ecosystem-review-more-premium-data-tweaks/">AV EcoSystem Review Premium Data Tweaks</a></h2>
+        <h5 class='date'>21 Dec 2017</h5>
+    <p><img alt="tweak" src="/images/tweak.jpg" /></p>
 
-          <p>Page 19 of 29</p>
+<p>Kids off school - slightly earlier to the computer, but no earlier to the blogface.  Although, I guess I did stop to review all my Slack and email.  Urgh.  Feel like I need to take a free day from Xmas to get this all completed.  Let&rsquo;s push on trying to update the Premium user data in the system, updating my notes on Premium users, and reaching out to those I haven&rsquo;t spoken to in a while.  Next up I have three Premium members who got 12 months of Premium membership bundled with the CraftAcademy bootcamp fees:</p>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sponsor_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"started_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-07"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ended_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PaymentSource::CraftAcademy"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>So now I have the trouble of needing to represent those members who&rsquo;ve started paying their own way since their sponsored membership ended.  That&rsquo;s a refactoring of our data model.  Will have to leave that, but can mark those members who&rsquo;ve not renewed as having ended.</p>
+<pre class="highlight plaintext"><code>irb(main):001:0&gt; u = User.find_by email: '...'
+irb(main):002:0&gt; u.subscription.ended_at = Date.parse('2017-11-07')
+=&gt; Tue, 07 Nov 2017
+irb(main):003:0&gt; u.save
+</code></pre>
+<p>Then I come to a user who had Premium sponsored for a year by another user, and has since had initial sponsorship layered on top by a different sponsor.  Another situation where we need the user <code>has_many</code> subscriptions relationship, but I can add the sponsor relation and the fact that the basic Premium subscription will end after 12 months &hellip; should I stick future <code>end_dates</code> in there? I guess so - it&rsquo;s obvious from our experience with sponsorship that we need to be clearer with end points.  I think it might also help people make more effective use of their sponsorship; having a time limit, that is.  Anyhow, I start by linking up the sponsorship relation for this subscription:</p>
+<pre class="highlight plaintext"><code>irb(main):013:0&gt; u = User.find_by email: '...'
+irb(main):014:0&gt; s = User.find_by email: '...'
+irb(main):015:0&gt; u.subscription.sponsor = s
+irb(main):016:0&gt; u.save
+=&gt; true
+</code></pre>
+<p>Still only making my way through about five members a day - gonna need to find a clear day to complete this &hellip;</p>
 
-            <p><a href="/blog/page/18/">Previous page</a></p>
-
-          <h2><a href="/2017/01/31/paid-projects/">Paid Projects</a></h2>
-          <h3>Jan 31</h3>
-          <p><img alt="cash" src="/images/cash.png"></p>
-
-<p>It was a busy Monday with us recording the <a href="http://soundcloud.com/agileventures/agile-book-club-podcast-episode-1-fifty-quick-ideas-to-improve-your-user-stories-by-adzic-evans/download.mp3">first of our “Agile Book Club” podcasts</a>, and other back to back meetings.  There’s lots to discuss and plan on the marketing front, now that the Google AdWords grant is driving five times the usual traffic...</p>
-          <h2><a href="/2017/01/30/sponsoring-resource-challenged-developers/">Sponsoring Resource Challenged Developers</a></h2>
-          <h3>Jan 30</h3>
-          <p><img alt="sponsorship" src="/images/sponsorship.jpg"></p>
-
-<p>It was an exciting Friday as our first sponsored Premium member made their first pull request against the LocalSupport open source project.  We’d onboarded a Kenyan student before the break having received sponsorship for an AgileVentures Premium...</p>
-          <h2><a href="/2017/01/26/non-invasive-progress/">NonInvasive Progress</a></h2>
-          <h3>Jan 26</h3>
-          <p><img alt="airplane vortex" src="/images/airplane_vortex_edit.jpg"></p>
-
-<p>My cold last week meant there’s a delay between the first publication of my daily blogs and the reviews I get from the AV community (particularly Federico).  I’m still going though.  My current routine is knock out a blog in the morning, and review...</p>
-          <h2><a href="/2017/01/25/browser-tabs-and-procrastination/">Browser Tabs and Procrastination</a></h2>
-          <h3>Jan 25</h3>
-          <p><img alt="procrastination" src="/images/procrastination.jpg"></p>
-
-<p>First day back in the office as the cold recedes.  Feel like I could happily stay in bed, but am worried my legs are cramping up.  Distracted trying to get to the blog.  Can’t think of a title. Ended up applying for MailChimp’s nonprofit discount...</p>
-          <h2><a href="/2017/01/24/always-in-production/">Always in Production</a></h2>
-          <h3>Jan 24</h3>
-          <p><img alt="production" src="/images/production.jpg"></p>
-
-<p>My cold is receding.  Does that justify me pushing myself through activities and work over the last three days?  Maybe I’d be better quicker or not feeling quite so exhausted if I’d rested the last three days, but my boys got their football matches...</p>
-          <h2><a href="/2017/01/23/passing_a_threshold/">Passing a Threshold</a></h2>
-          <h3>Jan 23</h3>
-          <p><img alt="threshold" src="/images/threshold.png"></p>
-
-<p>I collapsed with my cold after lunch on Friday and didn’t wake up until after the “Kent Beck” scrum time.  I cancelled the remaining meetings for the day and took it easy; doing a little light devops work on WebsiteOne and LocalSupport later in the...</p>
-          <h2><a href="/2017/01/20/under-the-weather/">Under the Weather</a></h2>
-          <h3>Jan 20</h3>
-          <p><img alt="under the weather" src="/images/under_the_weather.jpg"></p>
-
-<p>Today I have mixed feelings.  I’m frustrated to be “under the weather”; my throat has swollen up and I feel exhausted.  A cold I guess.  I’m chewing my way through a ton of raw ginger.  I keep chunks in a little plastic pot so that I can pretty much...</p>
-          <h2><a href="/2017/01/19/punch-drunk/">Punch Drunk</a></h2>
-          <h3>Jan 19</h3>
-          <p><img alt="punch drunk" src="/images/punch_drunk.jpg"></p>
-
-<p>Feeling pretty rough today, like someone’s been punching me in the head for a while.  Reasonably productive day yesterday.  Got to bed at 10:30pm, but my “good” knee was starting to ache from the new physio exercises I’m doing for my “bad” knee....</p>
-          <h2><a href="/2017/01/18/coding-vs-admin/">Coding vs Admin</a></h2>
-          <h3>Jan 18</h3>
-          <p><img alt="administration" src="/images/administration.jpg"></p>
-
-<p>Pat was commenting that my recent blogs don’t have so many technical deep dives and are more admin focused.  That’s probably a reflection that I’m doing less coding and more admin recently.  I’ve spent a couple of hours over the last few days trying...</p>
-          <h2><a href="/2017/01/17/server-monitoring/">Server Monitoring</a></h2>
-          <h3>Jan 17</h3>
-          <p><img alt="Server Monitoring" src="/images/server-monitoring.jpg"></p>
-
-<p>So I’m still forcing myself to think about DevOps in preparation for my talk on Thursday.  Other things being equal I’d be blogging about our new marketing activities and how Google will potentially give us $10,000 a month of AdWords, and how there...</p>
-
-            <p><a href="/blog/page/20/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -212,6 +183,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

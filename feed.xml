@@ -5,10 +5,47 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-12-20T00:00:00+00:00</updated>
+  <updated>2017-12-21T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Premium Data Tweaks</title>
+    <link rel="alternate" href="http://blog.url.com/2017/12/21/av-ecosystem-review-more-premium-data-tweaks/"/>
+    <id>http://blog.url.com/2017/12/21/av-ecosystem-review-more-premium-data-tweaks/</id>
+    <published>2017-12-21T00:00:00+00:00</published>
+    <updated>2018-04-26T20:51:29+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="tweak" src="/images/tweak.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Kids off school - slightly earlier to the computer, but no earlier to the blogface.  Although, I guess I did stop to review all my Slack and email.  Urgh.  Feel like I need to take a free day from Xmas to get this all completed.  Let&amp;rsquo;s push on trying to update the Premium user data in the system, updating my notes on Premium users, and reaching out to those I haven&amp;rsquo;t spoken to in a while.  Next up I have three Premium members who got 12 months of Premium membership bundled with the CraftAcademy bootcamp fees:&lt;/p&gt;
+&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"..."&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"sponsor_email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"started_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"2016-11-07"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"ended_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"plan_name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Premium"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"payment_source"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"PaymentSource::CraftAcademy"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So now I have the trouble of needing to represent those members who&amp;rsquo;ve started paying their own way since their sponsored membership ended.  That&amp;rsquo;s a refactoring of our data model.  Will have to leave that, but can mark those members who&amp;rsquo;ve not renewed as having ended.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;irb(main):001:0&amp;gt; u = User.find_by email: '...'
+irb(main):002:0&amp;gt; u.subscription.ended_at = Date.parse('2017-11-07')
+=&amp;gt; Tue, 07 Nov 2017
+irb(main):003:0&amp;gt; u.save
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then I come to a user who had Premium sponsored for a year by another user, and has since had initial sponsorship layered on top by a different sponsor.  Another situation where we need the user &lt;code&gt;has_many&lt;/code&gt; subscriptions relationship, but I can add the sponsor relation and the fact that the basic Premium subscription will end after 12 months &amp;hellip; should I stick future &lt;code&gt;end_dates&lt;/code&gt; in there? I guess so - it&amp;rsquo;s obvious from our experience with sponsorship that we need to be clearer with end points.  I think it might also help people make more effective use of their sponsorship; having a time limit, that is.  Anyhow, I start by linking up the sponsorship relation for this subscription:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;irb(main):013:0&amp;gt; u = User.find_by email: '...'
+irb(main):014:0&amp;gt; s = User.find_by email: '...'
+irb(main):015:0&amp;gt; u.subscription.sponsor = s
+irb(main):016:0&amp;gt; u.save
+=&amp;gt; true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Still only making my way through about five members a day - gonna need to find a clear day to complete this &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Premium Record Update Slog</title>
     <link rel="alternate" href="http://blog.url.com/2017/12/20/av-ecosystem-review-premium-record-update-slog/"/>
@@ -180,30 +217,6 @@ ActiveRecord::RecordNotFound: Couldn't find Subscription with 'id'=20
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/63a2g5s1hgra9t2/Screenshot%202017-12-14%2010.48.44.png?dl=0" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Okay, I think I might have done it and I now have mockups to show to the client &amp;hellip; no point tweaking them till we hear all that they want updated.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Client Project Focus</title>
-    <link rel="alternate" href="http://blog.url.com/2017/12/13/av-ecosystem-review-client-project-focus/"/>
-    <id>http://blog.url.com/2017/12/13/av-ecosystem-review-client-project-focus/</id>
-    <published>2017-12-13T00:00:00+00:00</published>
-    <updated>2018-03-27T21:23:50+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="focus" src="/images/focus.jpeg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So despite pushing out fresh code all the dokku/azure bots still appear to be offline.  Would love to fix that, but yet I feel I should prioritize the client work.  I guess I can restart the dokku containers.   Has something in azure changed, blocking a new port?  Has rolling out metplus into dokku had some knock on impact?  Ah, I&amp;rsquo;m wrong; it looks like the main greeting bot did work overnight.  So I go back and post the welcome message manually to the few new slack folk.  Not sure about the greeter bots, but I&amp;rsquo;ve posted all the active project links in &lt;code&gt;#new\_members&lt;/code&gt; channel, so maybe we&amp;rsquo;ll see a few folks join channels and then we can tell if the project greeter bot is working again.&lt;/p&gt;
-
-&lt;p&gt;Yesterday I found the little widget that allows me to embed a spreadsheet view of another table in a LibreOffice Base form.  Now I need to be able to embed list boxes in it (which is relatively easy) and maybe have them point to other tables, which perhaps needs a sub-form in the table widget, hmm.&lt;/p&gt;
-
-&lt;p&gt;In the background someone has answered my &lt;a href="https://ask.libreoffice.org/en/question/140501/base-dropdown-country-list/"&gt;question about countries in list boxes on ask libreoffice&lt;/a&gt; pointing to a countries table that comes with MySQL. Not sure if LibreOffice has MySQL installed, or that&amp;rsquo;s just a suggestion about where to get the data from, but they also point out that the SQL query needs to return the name of the country twice, so I try that, but the program locks up on me.  I think there&amp;rsquo;s something about list boxes in LibreOffice that I haven&amp;rsquo;t got quite down yet.  In the table widget I&amp;rsquo;ve got listboxes that are giving drop downs from the table data, but aren&amp;rsquo;t showing the relevant field itself &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s a funny thing here - should I be trying to read the documentation about how to get it to work - I keep falling asleep whenever I try to read almost any documentation.  I generally make more progress just bashing on the interface and posting to help forums.  But perhaps I should just be getting mockups of the last two forms and sending them to the client, for what I will assume is reams of feedback that I could easily get distracted by.&lt;/p&gt;
-
-&lt;p&gt;I force quit LibreOffice on the PC and re-start and adjust the query to return &amp;ldquo;Name&amp;rdquo; twice, but that leads to no particular change to the countries list box.  I guess I&amp;rsquo;ll need to re-import the data, since the countries column got wiped out last time around.  There&amp;rsquo;s also the issue that the country names in the existing data don&amp;rsquo;t necessarily match the spelling/abbreviations in the list that I added.  Need to leave that for now; does the double name return help in the subscriptions payment form? &amp;hellip; it does, but needed to be combined with intelligence from another answer on &lt;a href="https://ask.libreoffice.org/en/question/65146/a-dropdown-list-inside-a-control-grid-table-with-sql-consult-in-base/?answer=65195#post-id-65195"&gt;ask libre office&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Okay, so maybe now I can bash out the other two forms &amp;hellip;?  Urgh, but it&amp;rsquo;s locking up on the PC again &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
