@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Not Completing Premium Review</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_9 blog_page_9_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_12 x2017_12_22 x2017_12_22_av-ecosystem-review-not-completing-premium-review x2017_12_22_av-ecosystem-review-not-completing-premium-review_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,78 +83,104 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/12/22/av-ecosystem-review-not-completing-premium-review/">AV EcoSystem Review Not Completing Premium Review</a></h2>
+        <h5 class='date'>22 Dec 2017</h5>
+    <p><img alt="not completing" src="/images/not-completing.jpg" /></p>
 
-          <p>Page 9 of 29</p>
+<p>So I reckon I&rsquo;ve spent about 40 minutes each morning this week working through Premium members.  I think I&rsquo;ve reviewed 20 and, where possible, got their data updated and correct in the WSO system so that we have a &ldquo;single source of truth&rdquo; for data about Premium members, and that it can be exposed over the secure Premium API for use by the machine learning system.  Of course we&rsquo;re throwing up various changes that are needed in the data model and there&rsquo;s going to need to be more hooking up to the Slack and Paypal APIs in order to ensure that changes to Premium statuses can be coordinated directly through the WSO site, both by admins and by the individual members themselves.  I&rsquo;ll forge on this morning.  The latest is an orphaned subscription:</p>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sponsor_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"started_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-28"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ended_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium Mob"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PaymentSource::Stripe"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Matching up the timings I can see that this is an orphaned subscription created when a Premium Mob member upgraded to Premium F2F.  I won&rsquo;t be able to clear this up until we have a different relation in the database model.  I wonder if that&rsquo;s the thing to start on.  I find a relevant ticket in the waffle board and check out a branch for that and then change the relation between users and subscriptions to a <code>has_many</code>:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+    <span class="n">has_many</span> <span class="ss">:subscription</span><span class="p">,</span> <span class="ss">autosave: </span><span class="kp">true</span>
+</code></pre>
+<p>That creates a series of failures in the specs where attempts to get <code>user.subscription.plan</code> are not working because we would now have to talk about <code>user.subscriptions</code>.  I guess we should replace <code>user.subscription</code> with something like <code>user.current_subscription</code> where we&rsquo;d find the user&rsquo;s subscription that didn&rsquo;t have an <code>ended_at</code> date.  We&rsquo;d also need to ensure that the user only had one active subscription at a time.  So various changes, and I could dive into those, but maybe making the connection to as many Premium members as possible is the key thing &hellip;</p>
 
-            <p><a href="/blog/page/8/">Previous page</a></p>
+<p>I&rsquo;m caught for a moment about whether I should try and update the <code>ended_at</code> date for the old Premium Mob subscription for the member who upgraded to F2F, which I decided to do for consistency:</p>
+<pre class="highlight plaintext"><code>irb(main):002:0&gt; pp Subscription.all.select{|s| s.user.nil?} ; nil
+[#&lt;Subscription:0x007faf45ddd0c8
+  id: 40,
+  type: nil,
+  started_at: Tue, 28 Feb 2017 02:00:22 UTC +00:00,
+  ended_at: nil,
+  user_id: nil,
+  plan_id: 2,
+  sponsor_id: nil&gt;,
+ #&lt;PremiumF2F:0x007faf3f729b60
+  id: 32,
+  type: "PremiumF2F",
+  started_at: Tue, 03 Jan 2017 18:00:24 UTC +00:00,
+  ended_at: nil,
+  user_id: nil,
+  plan_id: 3,
+  sponsor_id: nil&gt;,
+ #&lt;Premium:0x007faf3f729930
+  id: 3,
+  type: "Premium",
+  started_at: Tue, 25 Oct 2016 16:46:56 UTC +00:00,
+  ended_at: nil,
+  user_id: nil,
+  plan_id: 1,
+  sponsor_id: nil&gt;,
+ #&lt;Subscription:0x007faf3f7288a0
+  id: 58,
+  type: nil,
+  started_at: Thu, 10 Nov 2016 11:11:00 UTC +00:00,
+  ended_at: nil,
+  user_id: nil,
+  plan_id: 1,
+  sponsor_id: nil&gt;,
+ #&lt;Subscription:0x007faf45deff20
+  id: 46,
+  type: nil,
+  started_at: Wed, 03 May 2017 18:47:13 UTC +00:00,
+  ended_at: nil,
+  user_id: nil,
+  plan_id: 2,
+  sponsor_id: nil&gt;,
+ #&lt;Subscription:0x007faf45def8b8
+  id: 44,
+  type: nil,
+  started_at: Tue, 25 Apr 2017 08:41:15 UTC +00:00,
+  ended_at: nil,
+  user_id: nil,
+  plan_id: 1,
+  sponsor_id: nil&gt;]
+irb(main):003:0&gt; s = Subscription.find(40)
+=&gt; #&lt;Subscription id: 40, type: nil, started_at: "2017-02-28 02:00:22", ended_at: nil, user_id: nil, plan_id: 2, sponsor_id: nil&gt;
+irb(main):004:0&gt; u = User.find_by email: '...'
+irb(main):005:0&gt; u.subscription.started_at
+=&gt; Fri, 14 Jul 2017 01:17:42 UTC +00:00
+irb(main):006:0&gt; s.ended_at = u.subscription.started_at
+=&gt; Fri, 14 Jul 2017 01:17:42 UTC +00:00
+irb(main):007:0&gt; s.save
+</code></pre>
+<p>Next up I have a member who got three months of Premium from CraftAcademy South Africa, but they are in the system as paying via Stripe since that&rsquo;s how CA SA paid.  The member is now paying their own way (also over Stripe), and again we need support for multiple subscriptions per user to update that.  The next member is also a CraftAcademy South Africa graduate who is paying their own way, and subsequently upgraded to Premium Mob.  Again, I won&rsquo;t be able to fix these up without the domain model changes.  I guess I push on and fix up what I can and then take another pass once I get the domain model fix out.</p>
 
-          <h2><a href="/2017/08/29/av-ecosystem-review-yak-shaving/">AV EcoSystem Review Yak Shaving</a></h2>
-          <h3>Aug 29</h3>
-          <p><img alt="yak" src="/images/yak.jpg"></p>
+<p>I note what I&rsquo;m not doing recently is remembering to work with Mob level members on their professional development plans &hellip; although I don&rsquo;t know how much folks really appreciate that.  It&rsquo;s kind of a challenging thing for busy people to keep up with &hellip;</p>
 
-<p>Okay, I think I’m coming out of the jet-lag - still not sure things are making sense though, and there’s a lot of yak-shaving to get back to the workface.  I wrote two AV ecosystem review pieces on Thursday and Friday last week and I have to refer...</p>
-          <h2><a href="/2017/08/25/av-ecosystem-review-bounce-drop/">AV EcoSystem Review Bounce Drop</a></h2>
-          <h3>Aug 25</h3>
-          <p><img alt="bounce rate" src="/images/bounce_rate.jpg"></p>
+<p>I think that&rsquo;s last one for today now.  A Premium Plus member who downgraded to Premium F2F and that all needs to be represented to.  That domain model &hellip;</p>
 
-<p>Right, time to work out the difference between “bounce rate” and “drop off”.  Maybe it’s the jetlag or just me getting old, but reading <a href="http://www.rankraiser.com/rankraiser/difference-between-google-bounce-rate-and-drop-offs/">this article</a> I’m not immediately getting it.  Let’s dig in:</p>
-
-<p>Bounce Rate is apparently the percentage of total...</p>
-          <h2><a href="/2017/08/24/av-ecosystem-review-return/">AV EcoSystem Review Return</a></h2>
-          <h3>Aug 24</h3>
-          <p><img alt="ecosystem" src="/images/ecosystem.jpg"></p>
-
-<p>I’m back from my travels and it’s time to get back to work, jet-lagged or not.  I was working on my travels but eschewed blogging and hangouts, as is my usual practice.  My plan now I’m back is to keep focusing on the AgileVentures “ecosystem”, by...</p>
-          <h2><a href="/2017/07/20/av-website-review-part-twelve/">AV Website Review Part 12</a></h2>
-          <h3>Jul 20</h3>
-          <p>So I’ll be taking a blogging/reviewing break for my Japan trip - perhaps I can get up to date pushing out some old blogs.  Over the last couple of weeks of these “reviews” of the AV website (and associated ecosystem) I’ve managed to get some changes...</p>
-          <h2><a href="/2017/07/19/av-website-review-part-eleven/">AV Website Review Part 11</a></h2>
-          <h3>Jul 19</h3>
-          <p>So I’ve got some suggested channel greeter bot text from at least one project maintainer.  I’m also running behind today, and I’m trying to get the websiteone sign up changes deployed … I checked that the recaptcha sign up works on staging, which it...</p>
-          <h2><a href="/2017/07/18/av-website-review-part-ten/">AV Website Review Part 10</a></h2>
-          <h3>Jul 18</h3>
-          <p>So I think I should step away from the project greeting bots and just check the new sign up flow as it gets deployed.  First thing is that I need reCaptcha keys on the heroku servers:</p>
-
-<p><img src="https://dl.dropbox.com/s/9wti29f0ihs7s7e/Screenshot%202017-07-18%2009.39.37.png"></p>
-
-<p>Fixing that gives us the new reCaptcha sign up page:</p>
-
-<p><img src="https://dl.dropbox.com/s/hncj4kvhndkebst/Screenshot%202017-07-18%2009.44.07.png"></p>
-
-<p>which...</p>
-          <h2><a href="/2017/07/17/av-website-review-part-nine/">AV Website Review Part 9</a></h2>
-          <h3>Jul 17</h3>
-          <p><img alt="times up" src="/images/expired.jpg"></p>
-
-<p>So no one joined the LocalSupport channel over the weekend and thus there’s no immediate chance to see the new project greeting bot in action.  Other project maintainers have come back to me with mixed responses.  Some enthusiastic, some more cautious...</p>
-          <h2><a href="/2017/07/14/av-website-review-part-eight/">AV Website Review Part 9</a></h2>
-          <h3>Jul 14</h3>
-          <p><img alt="robots" src="/images/robots.png"></p>
-
-<p>So the discussion in marketing was about adding a time limit to the message about the Premium Mob special offer, and any changes can now be submitted as a pull request.  There also seemed to be general agreement that we should avoid bots doing the...</p>
-          <h2><a href="/2017/07/13/av-website-review-part-seven/">AV Website Review Part 7</a></h2>
-          <h3>Jul 13</h3>
-          <p>So overnight some new folks signed up for the AgileVentures Slack.  It seems like the greeter bot on Azure/Dokku has succesfully greeted a handful of new members, which allows me to turn off the greeter bot on EC2 and shut down the instance, which...</p>
-          <h2><a href="/2017/07/12/av-website-review-part-six/">AV Website Review Part 6</a></h2>
-          <h3>Jul 12</h3>
-          <p>So my spike of adding ReCaptcha to the sign up page went pretty well.  It all seems to be passing in CI.  I was expecting lots of the sign up tests to break, but they all passed.  I guess because they don’t have javascript enabled?  It tempts me to...</p>
-
-            <p><a href="/blog/page/10/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -212,6 +239,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
