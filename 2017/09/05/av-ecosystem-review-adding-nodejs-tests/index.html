@@ -91,7 +91,7 @@
       <div class="col-lg-8 text-left">
         <h2 class='title'><a href="/2017/09/05/av-ecosystem-review-adding-nodejs-tests/">AV EcoSystem Review Adding NodeJS Tests</a></h2>
         <h5 class='date'> 5 Sep 2017</h5>
-    <p>Argh, so I got distracted by Slack and blogging and twitter and even though I sat down at the computer at 9am it&rsquo;s 10am.  At least I got a few important emails and things out of the way (I think), but so after making a slew of changes to the Slack greeter bots, I feel I can&rsquo;t put off adding test frameworks any longer.  There&rsquo;s some bugs going out that I can&rsquo;t catch with simple automated tests (the way messages get formatted in a real slack instance), but I&rsquo;ve definitely wasted a little time on some silly bugs that automated tests would have caught.  In the meantime I can see that the new changes to the syntax for the main greeter bot are all in place:</p>
+    <p>Argh, so I got distracted by Slack and blogging and Twitter and even though I sat down at the computer at 9am it&rsquo;s 10am.  At least I got a few important emails and things out of the way (I think), but so after making a slew of changes to the Slack greeter bots, I feel I can&rsquo;t put off adding test frameworks any longer.  There&rsquo;s some bugs going out that I can&rsquo;t catch with simple automated tests (the way messages get formatted in a real Slack instance), but I&rsquo;ve definitely wasted a little time on some silly bugs that automated tests would have caught.  In the meantime I can see that the new changes to the syntax for the main greeter bot are all in place:</p>
 
 <p><img src="https://user-images.githubusercontent.com/30216/30053660-798a6e8c-9221-11e7-927d-ea20f462cc55.png" /></p>
 
@@ -186,7 +186,7 @@ Switched to a new branch <span class="s1">'4_add_tests'</span>
   <span class="p">});</span>
 <span class="p">});</span>
 </code></pre>
-<p>Okay, so I got a bit fancy and installed chai so I could work with the expect/include syntax I like, and then I got all like &ldquo;this project needs a proper structure&rdquo; and moved things around.  I think it still works.  With only a couple of unit tests and no acceptance tests, I may have completely broken the project - my little local test that it starts up may conceal other issues &hellip; but at least I&rsquo;ve broken down some little mental barriers.  Starting node tests from scratch and reminding myself how we go through re-structuring a node app.  Some progress today - on to the continuing review tomorrow &hellip; or add tests to project<em>greeter</em>bot &hellip; jump from level to level, enjoy, code!</p>
+<p>Okay, so I got a bit fancy and installed chai so I could work with the expect/include syntax I like, and then I got all like &ldquo;this project needs a proper structure&rdquo; and moved things around.  I think it still works.  With only a couple of unit tests and no acceptance tests, it&rsquo;s entirely possible that my latest changes may have completely broken the project.  The little local test that it simply starts up may conceal other issues &hellip; but at least I&rsquo;ve broken down some little mental barriers about starting node tests from scratch and reminding myself how we go through re-structuring a node app.  Some progress today at least.  So, on to the continuing review tomorrow? &hellip; or add tests to project<em>greeter</em>bot? &hellip; jump from level to level, enjoy! code! enjoy!</p>
 
         <h2 class='author'>by Sam Joseph</h2>
       </div>  
