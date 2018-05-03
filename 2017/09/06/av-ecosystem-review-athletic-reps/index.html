@@ -93,9 +93,9 @@
         <h5 class='date'> 6 Sep 2017</h5>
     <p><img alt="meeting" src="/images/reps.jpg" /></p>
 
-<p>So I&rsquo;ve managed to get to the blog-face a little earlier today despite Slack/Twitter/Email distractions, but I&rsquo;m going to stick to the adding tests flow that I started yesterday as a way of getting some athletic reps in on node testing.  That said, we&rsquo;ve got a fairly serious bleed on our emails getting marked as spam that may prevent me from spending much more time on code in these sessions.  Can I afford a 15 minute rep on node tests every morning for the next two weeks?  So many regular station keeping activities that the days are packed!</p>
+<p>So I&rsquo;ve managed to get to the blog-face a little earlier today despite Slack/Twitter/Email distractions, but I&rsquo;m going to stick to the &ldquo;adding tests&rdquo; flow that I started yesterday as a way of getting some athletic reps in on node testing.  That said, we&rsquo;ve got a fairly serious bleed on our emails getting marked as spam that may prevent me from spending much more time on code in these sessions.  Can I afford a 15 minute rep on node tests every morning for the next two weeks?  So many regular station keeping activities that the days are packed!</p>
 
-<p>Anyhow, so at least from yesterday we have some tests in the <code>greeter_bot</code> project.  Let&rsquo;s get to the <code>project_greeter_bot</code> project.  Where would I start?  Grab the issue id for creating tests from the project itself, that&rsquo;s <a href="https://github.com/AgileVentures/project_greeter_bot/issues/5">https://github.com/AgileVentures/project<em>greeter</em>bot/issues/5</a> - funny how it feels like breaking the ice on something in order to push through the little &ldquo;I&rsquo;m not sure where to start&rdquo; feeling.  Bring up the terminal in the right directory.  No outstanding pull requests on the project, pull the latest code from master:</p>
+<p>Anyhow, so at least from yesterday we have some tests in the <code>greeter_bot</code> project.  Let&rsquo;s get to the completely different <code>project_greeter_bot</code> project.  Where would I start?  Grab the issue id for creating tests from the project itself, that&rsquo;s <a href="https://github.com/AgileVentures/project_greeter_bot/issues/5">https://github.com/AgileVentures/project<em>greeter</em>bot/issues/5</a> - funny how it feels like breaking the ice on something in order to push through the little &ldquo;I&rsquo;m not sure where to start&rdquo; feeling.  Bring up the terminal in the right directory.  No outstanding pull requests on the project, pull the latest code from master:</p>
 <pre class="highlight shell"><code><span class="o">[</span>tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/project_greeter_bot <span class="o">(</span>master<span class="o">)]</span><span class="nv">$ </span>
 → git pull origin master
 remote: Counting objects: 1, <span class="k">done</span>.
@@ -191,7 +191,7 @@ project_greeter_bot@0.0.0 /Users/tansaku/Documents/GitHub/AgileVentures/project_
 
 SyntaxError: Unexpected token {
 </code></pre>
-<p>I&rsquo;ve not remembered some of the syntax from yesterday.  This is the point of the rep - find the pain point that you would not otherwise find if you just copied and pasted the code.  Can I now solve this without resorting to looking up the solution &hellip; It&rsquo;s so tempting to just go look at the correct syntax, but I will force myself to slowly read the error message, <code>SyntaxError: Unexpected token {</code> so maybe just try dropping the curly braces &hellip; no both the following fail:</p>
+<p>I&rsquo;ve not remembered some of the syntax from yesterday.  This is the point of the rep - find the pain point that you would not find if you just copied and pasted the code.  Can I now solve this without resorting to looking up the solution &hellip; It&rsquo;s so tempting to just go look at the correct syntax, but I will force myself to slowly read the error message, <code>SyntaxError: Unexpected token {</code> so maybe just try dropping the curly braces &hellip; no both the following fail:</p>
 <pre class="highlight javascript"><code><span class="nx">require</span> <span class="nx">expect</span> <span class="nx">from</span> <span class="s1">'chai'</span><span class="p">;</span>
 </code></pre><pre class="highlight javascript"><code><span class="nx">require</span> <span class="p">{</span> <span class="s1">'expect'</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'chai'</span><span class="p">;</span>
 </code></pre>
@@ -236,7 +236,7 @@ Error: Cannot find module <span class="s1">'greetings'</span>
   <span class="p">});</span>
 <span class="p">});</span>
 </code></pre>
-<p>Yes, that&rsquo;s it.  Okay, must remember the pluralization on <code>module exports = ...</code> and that this is different from React&rsquo;s <code>export default &lt;function&gt;</code>.  A quick update of the tests to something a little more meaningful, a check that things basically still work running the server locally against the old AV mentors instance and the pull request is in:</p>
+<p>Yes, that&rsquo;s it.  Okay, must remember the pluralization on <code>module.exports = ...</code> and that this is different from React&rsquo;s <code>export default &lt;function&gt;</code>.  A quick update of the tests to something a little more meaningful, a check that things basically still work running the server locally against the old AV mentors instance and the pull request is in:</p>
 
 <p><a href="https://github.com/AgileVentures/project_greeter_bot/pull/23">https://github.com/AgileVentures/project<em>greeter</em>bot/pull/23</a></p>
 
@@ -252,7 +252,7 @@ Error: Cannot find module <span class="s1">'greetings'</span>
 
 <p>For another day I guess - back to the grindstone &hellip;</p>
 
-<p>p.s. just wondering does the code of conduct hold the maintainers to treat all the contributors with respecting as well as the contributors treating each other with respect? looks like it does &hellip;</p>
+<p>p.s. just wondering does the code of conduct hold the maintainers to treat all the contributors with respect as well as the contributors treating each other with respect? looks like it does &hellip;</p>
 
         <h2 class='author'>by Sam Joseph</h2>
       </div>  
