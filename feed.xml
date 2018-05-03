@@ -5,10 +5,121 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2017-12-22T00:00:00+00:00</updated>
+  <updated>2018-01-02T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review New Year Same Conflicts</title>
+    <link rel="alternate" href="http://blog.url.com/2018/01/02/av-ecosystem-review-new-year-same-conflicts/"/>
+    <id>http://blog.url.com/2018/01/02/av-ecosystem-review-new-year-same-conflicts/</id>
+    <published>2018-01-02T00:00:00+00:00</published>
+    <updated>2018-05-03T21:09:51+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="new year" src="/images/newyear2018.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The start of a new year; some of the same conflicts remaining, though.  Leaving off from the last week of last year, I really want to adjust our Premium membership domain model to more accurately reflect the way in which members upgrade and downgrade.  Perhaps even more critically I want to set up private event functionality that would automate some of the process by which potential members try out premium sessions and get presented with the option to upgrade.  Unfortunately I don&amp;rsquo;t think I can work on either, as I must deliver the beta-version of the membership database to the Anthony Powell society.  The timeframe is entirely of my own making of course, and it will be reasonably interesting and pleasing to get the membership database done, but I&amp;rsquo;ve not got much interest from many Premium members in my LibreOffice development work &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;The concept behind AgileVentures is that folks can skill up by working/observing real projects with real customers as they progress.  The problem seems to be that in many cases it&amp;rsquo;s not the latest new tech that&amp;rsquo;s needed to get the job done.  Or maybe it&amp;rsquo;s that the process of learning through client work is just too traumatic?  Anyway, if I want to make time to add new features to WebSiteOne I&amp;rsquo;ll need to crack on with the APSoc database &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the list of issues with the alpha version that the client identified:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;MembershipTypes DB&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Doesn&amp;rsquo;t need &amp;ldquo;Code Letter&amp;rdquo; field&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Countries DB&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Can we have UK and USA as the top two please as they&amp;rsquo;re the most used&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Member Information Form&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Unable to add/save a new member record – see error below! – probably applies to all forms&lt;/li&gt;
+&lt;li&gt;Cannot key into &amp;ldquo;Mobile Phone&amp;rdquo; – cursor won&amp;rsquo;t go there!&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Local Group&amp;rdquo; needs to be correctly populated – maybe we need a table of the groups?  The groups should be: London, Baltic, Germany, Great Lakes, Toronto, NE USA, Australia, California, Texas&lt;/li&gt;
+&lt;li&gt;Switch positions of &amp;ldquo;N/L&amp;rdquo; and &amp;ldquo;NM N/L&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Tab sequence should be – see Member&lt;em&gt;Form&lt;/em&gt;Tab_Seq.pdf – similar sequences for other forms.  Unnumbered keyable fields do not need to appear in the tab sequence (but could after numbered fields)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Membership DB&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We can remove the fields: “Gift&lt;em&gt;Donor”, “Fax”, “Diet&lt;/em&gt;Rqts”, “Address”, “Crap”, “C_N” – see comments to the DB specification&lt;/li&gt;
+&lt;li&gt;Add the field “Address4”&lt;/li&gt;
+&lt;li&gt;Reformat the content of “Member_No” &lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Subscription Payment Form&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Don&amp;rsquo;t need &amp;ldquo;Member Card&amp;rdquo; field as we don&amp;rsquo;t use membership cards&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Amount Paid&amp;rdquo;, please can it display with a £ sign&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Pay Method&amp;rdquo; dropdown needs populating; options should be: PayPal, Credit Card, Cheque, Bank Transfer, Standing Order, Cash, Other.  Worth putting this in a new table so it can be changed easily?&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;CC No&amp;rdquo; and CC&amp;quot;Expiry&amp;quot; fields can be removed as we don&amp;rsquo;t store this&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Rate Paid&amp;rdquo;, please can the items in the dropdown be sequenced as&lt;/li&gt;
+&lt;li&gt;Whenever try adding a record of new subscription I get:&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/fleeiuezj046z4b/image003.jpg?dl=0" /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Removal of fields means &amp;ldquo;Notes&amp;rdquo; could be positioned to the right of the payments lines to reduce the size of the form&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Keying say &amp;ldquo;15&amp;rdquo; in a date field adds the date from the field above or is it the last date enetered?), unless the field above is blank&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Subs DB&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Remove &amp;ldquo;Member Card&amp;rdquo; field as we don&amp;rsquo;t use membership cards&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Remove &amp;ldquo;CC No&amp;rdquo; and CC&amp;quot;Expiry&amp;quot; fields as we don&amp;rsquo;t store this&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Form doesn&amp;rsquo;t need to show &amp;ldquo;Letters&amp;rdquo;, &amp;ldquo;Known As&amp;rdquo;, &amp;ldquo;Salutation&amp;rdquo;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Gift Aid Declaration Form&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;If there is a completed record of a declaration, with a blank &amp;ldquo;To Date&amp;rdquo; then the &amp;ldquo;Gift Aid&amp;rdquo; checkbox should be checked&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Declaration line items, can the fields be less wide, and then again &amp;ldquo;Notes&amp;rdquo; can go to right of the line items and form size reduces&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Same error as in Subscription Payment Form when adding a record&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Standing Order Details Form&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;This is a duplicate of the Gift Aid Declaration Form&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Lots to do here - I&amp;rsquo;m going to start with the section on the Membership information form:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Member Information Form
+
+&lt;ul&gt;
+&lt;li&gt;Unable to add/save a new member record – see error below! – probably applies to all forms&lt;/li&gt;
+&lt;li&gt;Cannot key into &amp;ldquo;Mobile Phone&amp;rdquo; – cursor won&amp;rsquo;t go there!&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Local Group&amp;rdquo; needs to be correctly populated – maybe we need a table of the groups?  The groups should be: London, Baltic, Germany, Great Lakes, Toronto, NE USA, Australia, California, Texas&lt;/li&gt;
+&lt;li&gt;Switch positions of &amp;ldquo;N/L&amp;rdquo; and &amp;ldquo;NM N/L&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Tab sequence should be – see Member&lt;em&gt;Form&lt;/em&gt;Tab_Seq.pdf – similar sequences for other forms.  Unnumbered keyable fields do not need to appear in the tab sequence (but could after numbered fields)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I knock off some low hanging fruit by switching the positions of &amp;ldquo;N/L&amp;rdquo; and &amp;ldquo;NM N/L&amp;rdquo;.  I confirm that the &amp;ldquo;Mobile Phone&amp;rdquo; can&amp;rsquo;t be entered - can&amp;rsquo;t see anything in the settings about why it wouldn&amp;rsquo;t work, so I delete it and copy over the &amp;ldquo;Work Phone&amp;rdquo; text box.  That doesn&amp;rsquo;t fix it, hmm.  I realise the problem is that the text label above it is too large and preventing cursor selection, so I resize that and we have two minor issues fixed.  I&amp;rsquo;m tempted to work on other less threatening issues like the tab sequence but this inability to save is likely to be the big blocker, so I&amp;rsquo;m going to hit that next.  I replicate the error:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/yi6szspyshvrmgl/Screenshot%202018-01-02%2010.29.22.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So the problems seems to be that our automatically added ID columns from the data import are not set up as primary keys that will get an autoincremented ID added with new records.  That&amp;rsquo;s a simple fix thanks to &lt;a href="https://forum.openoffice.org/en/forum/viewtopic.php?f=61&amp;amp;t=64324"&gt;this forum post&lt;/a&gt;, and that now works fine, although I can see all sorts of little niggly issues now that I start entering data rather than just focusing on the form layout.&lt;/p&gt;
+
+&lt;p&gt;Ironically, just adding UK and USA at the top of the countries field turns out to be non-trivial, but I can clearly do it if I re-import the countries data.  Let&amp;rsquo;s check the process of adjusting the tab sequence to flush out anything else that could turn out to be harder than I expect.  The client has sent this diagram of the tab sequence they want:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/gw06wl2inhioh69/Screenshot%202018-01-02%2010.50.01.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and sorting that isn&amp;rsquo;t too hard once I find &lt;a href="https://forum.openoffice.org/en/forum/viewtopic.php?f=39&amp;amp;t=9484"&gt;this forum post&lt;/a&gt; that helps me navigate to the tab ordering tool.  Of course now LibreOffice is gradually slowing, and I&amp;rsquo;m worried it&amp;rsquo;s going to crash again.   I think I&amp;rsquo;ve worked out the trick, to avoid losing too much work, of saving not just in the form view, but also in the main database page.  Now it&amp;rsquo;s spinning beachballs on each screen.  Guess it&amp;rsquo;s time to grab a coffee &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Still stuck - I kill it, recover the db and lose only a tiny bit of work.  I make changes to the tab order, save, and that seems to work.  There&amp;rsquo;s a chunk more to do, but with a run up I could maybe get it all done tomorrow &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Not Completing Premium Review</title>
     <link rel="alternate" href="http://blog.url.com/2017/12/22/av-ecosystem-review-not-completing-premium-review/"/>
@@ -252,36 +363,6 @@ ActiveRecord::RecordNotFound: Couldn't find Subscription with 'id'=20
   &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Sensibly I hook that up correctly, and delete the inaccurate account, ah, but actually that&amp;rsquo;s the initial Premium that the member had for four days before upgrading to Premium Mob, so to hook that up we need to adjust the database model to support multiple subscriptions.  Hmm, looks like I&amp;rsquo;ll need to hit this every morning this week to get things sorted &amp;hellip; and maybe more &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Recording Help Videos</title>
-    <link rel="alternate" href="http://blog.url.com/2017/12/15/av-ecosystem-review-recording-help-videos/"/>
-    <id>http://blog.url.com/2017/12/15/av-ecosystem-review-recording-help-videos/</id>
-    <published>2017-12-15T00:00:00+00:00</published>
-    <updated>2018-04-19T21:19:12+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="camera recording" src="/images/camera-recording.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I must be several weeks (months even?) and several layers of procrastination out from actually reviewing the AV ecosystem, since I&amp;rsquo;m pretty much using my blogging time to get focused work done on client projects and our main website project management.  It&amp;rsquo;s all still part of the AV ecosystem of course.  The client projects I&amp;rsquo;m working with are clients of AgileVentures, as is, naturally, the main website.  My days are full of mobs and f2f pairings, again all part of the AV ecosystem.  One day, one day, I&amp;rsquo;ll get back to the big picture.&lt;/p&gt;
-
-&lt;p&gt;In the meantime the Anthony Powell Society client is apparently pretty happy with the screenshots of the forms for their membership database.  I did say we&amp;rsquo;d have an alpha version of their system ready for them today, but I&amp;rsquo;m reasonably confident I can make a few tweaks and get that done later today.   What I really haven&amp;rsquo;t got done yet is the help videos for the NHS wiki, which really needs to get done, so I&amp;rsquo;m going to switch to that in my blog time this morning.  I was trying to get it done last night, but quicktime kept crashing.  I did manage to get my computer re-booted, so let&amp;rsquo;s have another go and drive through them.  My plan is to make draft videos off the cuff (more or less) and then take the transcript and use it via auto-prompt to make them sound a bit more professional. I don&amp;rsquo;t think I, or the backdrop of my home office, look good enough at the moment (maybe after Xmas), so I&amp;rsquo;ll not do any in picture video of my talking head this time around.&lt;/p&gt;
-
-&lt;p&gt;Here&amp;rsquo;s the first one:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://youtu.be/Z21mZqNTPMQ"&gt;Search Video&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And then I went on to record another six of varying quality, but at least we have something done.  These can individually be re-recorded to improve them.  I&amp;rsquo;ve created a playlist for those:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/playlist?list=PLuyBZ95Nkc4aqffFG436Xcn3HaJF7xRzO"&gt;Video Playlist&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And also managed to get a last round of changes to the APSoc database and send them an alpha version before scrum, so I&amp;rsquo;m making some progress today.  Really need to get the reports sorted too &amp;hellip; back to the grindstone.&lt;/p&gt;
 </content>
   </entry>
 </feed>
