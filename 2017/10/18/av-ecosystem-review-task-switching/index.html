@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_7 blog_page_7_index">
-    <!-- Navigation -->
+<body class="x2017 x2017_10 x2017_10_18 x2017_10_18_av-ecosystem-review-task-switching x2017_10_18_av-ecosystem-review-task-switching_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,88 +83,75 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2017/10/18/av-ecosystem-review-task-switching/"></a></h2>
+        <h5 class='date'>18 Oct 2017</h5>
+    <p>They say that task-switching is very inefficient and that while we think we&rsquo;re multi-tasking we&rsquo;re not actually being really efficient.  Ironically I&rsquo;m task switching all day long, and sometimes that&rsquo;s all about managing motivation.  Yesterday I couldn&rsquo;t decide between making a middleman landing page for the AV main site and investigating the performance issues we have with the site on Heroku.  So I started off on both &hellip;</p>
 
-          <p>Page 7 of 29</p>
+<p><a href="https://github.com/tansaku/av-landing-page">https://github.com/tansaku/av-landing-page</a></p>
 
-            <p><a href="/blog/page/6/">Previous page</a></p>
+<p>So on the middleman side I think the key things I need to check are:</p>
 
-          <h2><a href="/2017/09/28/av-ecosystem-review-sorting-premium-mob-page/">AV EcoSystem Review Sorting Premium Mob Page</a></h2>
-          <h3>Sep 28</h3>
-          <p>So the multiple repo functionality got deployed yesterday, which elicited a positive response from the user who’d reminded us about the need for this functionality:</p>
+<ol>
+<li>deployment to github pages</li>
+<li>CSS pipeline</li>
+</ol>
 
-<p><img src="https://dl.dropboxusercontent.com/s/jsg8oz8pdjenbk4/Screenshot%202017-09-28%2009.32.02.png"></p>
+<p>while for heroku performance it&rsquo;s just reading docs.  I pull the docs up on my big monitor.  I install loader.io on the staging site, but find it is already installed.  Although it hasn&rsquo;t ever been used by the look of it &hellip;</p>
 
-<p>but so back to the Premium Mob page grindstone, which I started yesterday … and...</p>
-          <h2><a href="/2017/09/27/av-ecosystem-review-yanking-back-to-premium/">AV EcoSystem Review Yanking Back to Premium</a></h2>
-          <h3>Sep 27</h3>
-          <p><img alt="yanked" src="/images/yanked.jpg"></p>
+<p><img alt="getting started tips from loader.io" src="https://dl.dropbox.com/s/reu4c637j16izcc/Screenshot%202017-10-18%2009.58.50.png?dl=0" /></p>
 
-<p>So in the backdrop yesterday a javascript bug in the multiple repos for projects feature led me to some refactoring that also fixed the bug, which I thought was pretty neat:</p>
-<pre class="highlight javascript"><code><span class="nx">WebsiteOne</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">'Projects'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="p">{</span>
-    <span class="na">ensure_github_url_numbering</span></code></pre>
-          <h2><a href="/2017/09/26/av-ecosystem-review-return-to-the-greeter-bots/">AV EcoSystem Review Return to the Greeter Bots</a></h2>
-          <h3>Sep 26</h3>
-          <p><img alt="bots" src="/images/bots2.png"></p>
+<p>and set up an initial load test:</p>
 
-<p>I had no comments on the multiple source repository pull request (apart from my own), so I’ve merged that to play with on develop.  I want to pop back all the way to up to reviewing the flow of folks through AgileVentures and my experiments with...</p>
-          <h2><a href="/2017/09/25/av-ecosystem-review-always-one-more-test/">AV EcoSystem Review Always One More Test</a></h2>
-          <h3>Sep 25</h3>
-          <p><img alt="one more test" src="/images/one_more_test.jpg"></p>
+<p><img alt="intial load test form" src="https://dl.dropbox.com/s/lx5yei9gm1udy6w/Screenshot%202017-10-18%2010.00.06.png?dl=0" /></p>
 
-<p>So all of last week’s ecosystem review blogs were devoted to this new multiple repository feature.  And I think today too.  I hope today is the last, since I really want to get on to clearing up some other content work and getting the new Code of...</p>
-          <h2><a href="/2017/09/22/av-ecosystem-review-that-domain-review-step/">AV EcoSystem Review That Domain Review Step</a></h2>
-          <h3>Sep 22</h3>
-          <p><img alt="domain review" src="/images/domain_review.jpg"></p>
+<p>but I can&rsquo;t seem to test against our custom endpoint - I send a help request for that.  In the meantime I have to get a static file served on staging in order to start the load test &hellip; so I get a pull request in for that.  I check that it works locally, but I&rsquo;ll need that to pass CI to get it onto staging.  I could force it up there, but it gives me a reasonable excuse to task switch and check the middleman items.  If I recall correctly we used a middleman-gh-pages plugin for the static nonprofit site in order to get middleman on github pages, but I wonder if that will work with the latest version of middleman?</p>
 
-<p>Okay, so I have the multiple repository functionality basically working, but it’s time to clear up and make things right … here’s my checklist from yesterday:</p>
+<p><a href="https://github.com/edgecase/middleman-gh-pages">MiddleManGHPages</a> hasn&rsquo;t been updated in a couple of years and there is also now <a href="https://github.com/middleman-contrib/middleman-deploy">MiddleManDeploy</a> which has been more recently updated and has more stars.  A <a href="https://ashfurrow.com/blog/building-static-sites-with-middleman/">2017 blog</a> mentions successfully using middleman-gh-pages and it is working for us on the static site with a middleman 4.1.7.  Stick with what I know? Try something new?  The following code in the README of middleman-deploy makes me want to try it:</p>
+<pre class="highlight ruby"><code><span class="c1"># Rakefile</span>
+<span class="n">namespace</span> <span class="ss">:deploy</span> <span class="k">do</span>
+  <span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"Deploying to </span><span class="si">#{</span><span class="n">env</span><span class="si">}</span><span class="s2">"</span>
+    <span class="nb">system</span> <span class="s2">"TARGET=</span><span class="si">#{</span><span class="n">env</span><span class="si">}</span><span class="s2"> bundle exec middleman deploy"</span>
+  <span class="k">end</span>
 
-<ul>
-<li>the acceptance test does not check that the second repo has been stored</li>
-<li>the acceptance...</li>
-</ul>
-          <h2><a href="/2017/09/22/another-free-refill/">Another free refill?</a></h2>
-          <h3>Sep 22</h3>
-          <p><img alt="free refill" src="/images/freerefill.jpg"></p>
+  <span class="n">task</span> <span class="ss">:staging</span> <span class="k">do</span>
+    <span class="n">deploy</span> <span class="ss">:staging</span>
+  <span class="k">end</span>
 
-<p>Earlier this year, I undertook a training session targeting small business manager to teach them how to improve profitability of business projects. The course instructor showed us a rather clear way to deal with profitabiliy. First, you estimate...</p>
-          <h2><a href="/2017/09/21/av-ecosystem-review-cocoon-home-straight/">AV EcoSystem Review Cocoon Home Straight</a></h2>
-          <h3>Sep 21</h3>
-          <p><img alt="home straight" src="/images/Home_Straight.jpg"></p>
+  <span class="n">task</span> <span class="ss">:production</span> <span class="k">do</span>
+    <span class="n">deploy</span> <span class="ss">:production</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre><pre class="highlight plaintext"><code>$ rake deploy:staging
+$ rake deploy:production
+</code></pre>
+<p>I like having staging and production endpoints - something I&rsquo;ve been missing in the static nonprofit site.  In the meantime the pull request for the loaderio static page passed, so I pull that in and will need to wait for it to deply to develop before I can then move it on to staging for testing (or I test on develop &hellip;), back to middleman deploy I find I need to upgrade to a newer version of middleman-deploy to get things working:</p>
 
-<p>So the answer to my question of yesterday, “Why is Acceptance Testing so hard?” is that any coding is hard when you can’t get error messages.  The remote debug inspector I set up yesterday allowed me to see that our Capybara/Poltergeist/PhantomJS...</p>
-          <h2><a href="/2017/09/20/av-ecosystem-review-why-is-acceptance-testing-so-time-consuming/">AV EcoSystem Review Why is Acceptance Testing so Time Consuming?</a></h2>
-          <h3>Sep 20</h3>
-          <p><img alt="acceptance testing" src="/images/acceptance_testing.jpg"></p>
+<p>https://github.com/middleman-contrib/middleman-deploy/issues/93</p>
 
-<p>I think I’m almost there with acceptance testing this multiple repo feature, but it makes me wonder why acceptance testing always seems to be so time consuming.  I’m just wrapping up a private project where acceptance testing of electron apps was...</p>
-          <h2><a href="/2017/09/19/av-ecosystem-review-gem-polishing/">AV EcoSystem Review Gem Polishing</a></h2>
-          <h3>Sep 19</h3>
-          <p><img alt="diamond polisher" src="/images/diamond_polisher.jpg"></p>
+<p>but so the current README is out of date and the PR that fixes this has been hanging around for a year &hellip; then there&rsquo;s another issue to fix:</p>
 
-<p>So I’m on the train into london for a meeting with the NHS, but unlike in my last year of blogging it’s not time to agonize about how everything’s going, but time to focus on finishing up this feature for multiple project repositories.  Yesterday...</p>
-          <h2><a href="/2017/09/18/av-ecosystem-review-inspecting-gems/">AV EcoSystem Review Inspecting Gems</a></h2>
-          <h3>Sep 18</h3>
-          <p><img alt="gems" src="/images/gems.jpg"></p>
+<p>https://github.com/middleman-contrib/middleman-deploy/issues/100</p>
 
-<p>So my AV ecosystem reviews are getting further afield.  Here I am inspecting different gems for the purpose of completing a feature to support multiple project repositories.  What are the goals of this ongoing review? It’s to focus my blogging power...</p>
+<p>and then <code>build</code> and <code>deploy</code> both work, and I would appear to have successfully deployed to:</p>
 
-            <p><a href="/blog/page/8/">Next page</a></p>
+<p>https://tansaku.github.io/av-landing-page/</p>
 
+<p>although I&rsquo;d feel better if the middleman-deploy 2.0 gem was out of alpha &hellip; and I notice that the default middleman site assets are not loading on gh-pages.  Something to multi-task on tomorrow as I start the load tests &hellip; :-)</p>
+
+        <h2 class='author'>by </h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -222,6 +210,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

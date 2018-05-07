@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Task Switching</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2018 x2018_01 x2018_01_03 x2018_01_03_av-ecosystem-review-task-switching x2018_01_03_av-ecosystem-review-task-switching_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2018/01/03/av-ecosystem-review-task-switching/">AV EcoSystem Review Task Switching</a></h2>
+        <h5 class='date'> 3 Jan 2018</h5>
+    <p><img alt="task switching" src="/images/taskswitching.jpg" /></p>
+
+<p>They say that task switching is bad for getting things done.  Clearly some tasks require more concentration, but then there&rsquo;s also the issue of getting bored with the task at hand.  There&rsquo;s also the issue of switching between documenting (blogging?) a task and getting that task done.  Yesterday morning after about an hour (?) of blog-driven work on the APSoc membership database I switched to admin tasks and then the rest of the day.  It was about 5pm before I got some more free programming time and was able to punch in some time on WebSiteOne where I think I had more done test-driving the creation of a <code>current_subscription</code> method on our User model.  </p>
+
+<p>Given a free choice I&rsquo;d probably carry on with that right now, but I have a 5th Jan deadline that I committed to for the APSoc, so I best get that sorted first.  It was a good feeling to sort the &ldquo;AutoValue&rdquo; fields on the APSoc membership database so that data could be inserted, but there&rsquo;s something about the interplay between tests and code that I love.  The LibreOffice Base system is not really amenable to unit tests, although for all I know they have unit tests under the hood as part of the development suite.  However designing a client application via the graphical interface does not involve me writing any kind of tests and given the sensitivity of the application I&rsquo;m not inspired to check out the acceptance testing frameworks that are available.  I burned a lot of time on a private client coding project trying to get comprehensive acceptance testing set up for Electron, and I&rsquo;m becoming a lot more circumspect about the range of acceptance tests that I&rsquo;ll try to employ these days.</p>
+
+<p>On the WebSiteOne project, I&rsquo;m in a phase of Domain Driven Design, where I&rsquo;m tweaking a relationship in the data model that I believe is needed to accurately replicate the nature of our Premium subscriptions.  I&rsquo;ve started with making the database model change, and I&rsquo;m working out from there - I&rsquo;m in the unit tests for the model, and much as I say I love the interplay, yesterday was tricky where it seemed I had to discard a fast running mocked test for a slower integration test using FactoryGirl. I turned this:</p>
+<pre class="highlight ruby"><code>  <span class="n">context</span> <span class="s1">'look up stripe id from subscription'</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:subscription</span><span class="p">)</span> <span class="p">{</span> <span class="n">mock_model</span><span class="p">(</span><span class="no">Subscription</span><span class="p">,</span> <span class="ss">save: </span><span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">before</span> <span class="p">{</span> <span class="n">allow</span><span class="p">(</span><span class="n">subscription</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span><span class="p">(</span><span class="ss">:[]=</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'asks subscription for identifier'</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">subscription</span><span class="p">).</span><span class="nf">to</span> <span class="n">receive</span> <span class="ss">:identifier</span>
+      <span class="n">subject</span><span class="p">.</span><span class="nf">subscription</span> <span class="o">=</span> <span class="n">subscription</span>
+      <span class="n">subject</span><span class="p">.</span><span class="nf">stripe_customer_id</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre>
+<p>into this:</p>
+<pre class="highlight ruby"><code>  <span class="n">context</span> <span class="s1">'supporting current subscription'</span> <span class="k">do</span>
+    <span class="n">subject</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="ss">:with_karma</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:premium</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:plan</span><span class="p">,</span> <span class="ss">name: </span><span class="s1">'Premium'</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:premium_mob</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:plan</span><span class="p">,</span> <span class="ss">name: </span><span class="s1">'Premium Mob'</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:payment_source</span><span class="p">)</span> <span class="p">{</span> <span class="no">PaymentSource</span><span class="o">::</span><span class="no">PayPal</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">identifier: </span><span class="s1">'75e'</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="c1"># presence of type (no longer used) in the Subscriptions model is confusing ...</span>
+    <span class="c1"># should get rid of all the STI classes ...</span>
+
+    <span class="n">let!</span><span class="p">(</span><span class="ss">:subscription1</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:subscription</span><span class="p">,</span> <span class="ss">user: </span><span class="n">user</span><span class="p">,</span> <span class="ss">plan: </span><span class="n">premium</span><span class="p">,</span> <span class="ss">started_at: </span><span class="mi">2</span><span class="p">.</span><span class="nf">days</span><span class="p">.</span><span class="nf">ago</span><span class="p">,</span> <span class="ss">ended_at: </span><span class="mi">1</span><span class="p">.</span><span class="nf">day</span><span class="p">.</span><span class="nf">ago</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let!</span><span class="p">(</span><span class="ss">:subscription2</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:subscription</span><span class="p">,</span> <span class="ss">user: </span><span class="n">user</span><span class="p">,</span> <span class="ss">plan: </span><span class="n">premium_mob</span><span class="p">,</span> <span class="ss">started_at: </span><span class="mi">1</span><span class="p">.</span><span class="nf">day</span><span class="p">.</span><span class="nf">ago</span><span class="p">,</span> <span class="ss">payment_source: </span><span class="n">payment_source</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s1">'returns subscription that has started and has not ended'</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">current_subscription</span><span class="p">.</span><span class="nf">id</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="n">subscription2</span><span class="p">.</span><span class="nf">id</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">'asks subscription for identifier'</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">subject</span><span class="p">.</span><span class="nf">stripe_customer_id</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span> <span class="s1">'75e'</span>
+    <span class="k">end</span>
+
+  <span class="k">end</span>
+</code></pre>
+<p>I&rsquo;m a bit uncomfortable with all this FactoryGirl stuff, but I&rsquo;m exercising the following new method on the user model:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">current_subscription</span>
+    <span class="n">current_subscriptions</span> <span class="o">=</span> <span class="n">subscriptions</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">ended_at: </span><span class="kp">nil</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="s1">'started_at &lt; :now'</span><span class="p">,</span> <span class="p">{</span><span class="ss">now: </span><span class="no">DateTime</span><span class="p">.</span><span class="nf">now</span><span class="p">})</span>
+    <span class="k">return</span> <span class="kp">nil</span> <span class="k">if</span> <span class="n">current_subscriptions</span><span class="p">.</span><span class="nf">nil?</span> <span class="n">or</span> <span class="n">current_subscriptions</span><span class="p">.</span><span class="nf">empty?</span>
+    <span class="n">current_subscriptions</span><span class="p">.</span><span class="nf">first</span>
+  <span class="k">end</span>
+</code></pre>
+<p>and stubbing it would require a rather long stub chain.  Ironically the APSoc system is also a database running SQL under the hood, and at points I end up writing queries that could be the subject of unit tests, but it&rsquo;s a different beast.  In the WSO code I&rsquo;ve just changed what was a unit test into an integration test, and I&rsquo;m slowly moving up the chain and realising I could have driven this from an acceptance test that ensured the state of subscriptions after an upgrade, although it wouldn&rsquo;t be a black box test &hellip;</p>
+
+<p>Last night I wasn&rsquo;t blog driving the WSO RoR coding as I wanted to move fast, but now I&rsquo;ve burnt 30 minutes this morning (mixed in with trying to chat with BT about our intermittment business broadband issues).  Partly the blogging is supposed to help me stay focused on a task, but it can also be a distraction or a great way of thinking through a problem, depending on the circumstances.  So anyway, I&rsquo;ve pulled up yesterday&rsquo;s blog with the list of outstanding tasks for the APSoc db.  Let&rsquo;s take a pass over things that might be sticky/tricky:</p>
+
+<p>Outstanding items:</p>
+
+<ul>
+<li>Completing tab sequence changes</li>
+<li>Local Group sub-table</li>
+<li>Remove various fields from the db</li>
+<li>Reformat the content of Member_No</li>
+<li>Various layout changes</li>
+<li>Couple of UI interaction issues</li>
+<li>Standing Order Details form appears to be a duplicate</li>
+</ul>
+
+<p>Okay, so I think the Member<em>No change might be the sticky one.  If I recall the client is suggesting making a change in the format of the membership number which might make for a tricky migration.  I&rsquo;m tempted to just work though the list, making all the changes that are simple, and putting off anything that could take a little longer, specifically the Local Group sub-table and the Member</em>No thing for the moment.</p>
+
+<p>Although as I look at it in more detail I see they want something else from the Member<em>No.  This is not the RecNo that is the &ldquo;primary key&rdquo;.  It&rsquo;s a composite that they want to be built from &ldquo;Member</em>Types<em>Code</em>Letter + RecNo&rdquo;.  Hmm, should this be a dynamically constructed field?  I&rsquo;m not sure where the Member<em>Types</em>Code_Letter is coming from &hellip; Didn&rsquo;t they just ask the CodeLetter be deleted from the membership types table?</p>
+
+<p>Anyway, I&rsquo;ve deleted the fields they didn&rsquo;t want in the membership table, so let&rsquo;s make sure that the membership form still works &hellip; so I can view records and edit them after the table changes.  Here&rsquo;s where acceptance tests might save me from needing to exhaustively test all things like adding a new record &hellip; perhaps I can delete the test one and re-add - that worked fine.</p>
+
+<p>So the biggest surprise is that my work creating the Standing Order form appears to have been lost.  I could have sworn I went through creating that, but this bloody double save requirement is my bane.  It&rsquo;s not enough to click save on the form editor - you also have to click save on the main database page in order to ensure everything is actually saved to disk - insane.  I&rsquo;ve just dredged up the memory about how to create the correct subform, and now the app has crashed again.  In my other parallel task BT says they have detected a possible fault on our line and they are looking into it - which is better news.  But LibreOffice is back to the spinning beach ball of death &hellip; time to kill it and restart.  Argh, and now the entire file is corrupted - my entire two days work lost by the look of it &hellip;</p>
+
+<p>I spent 15 minutes kicking things around.  The backup files are all zero size, no go.  I think I&rsquo;ll start again tomorrow &hellip; new process - take a backup each day &mdash; maybe develop in dropbox?</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>

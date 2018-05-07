@@ -5,10 +5,94 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2018-01-02T00:00:00+00:00</updated>
+  <updated>2018-01-03T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Task Switching</title>
+    <link rel="alternate" href="http://blog.url.com/2018/01/03/av-ecosystem-review-task-switching/"/>
+    <id>http://blog.url.com/2018/01/03/av-ecosystem-review-task-switching/</id>
+    <published>2018-01-03T00:00:00+00:00</published>
+    <updated>2018-05-07T21:24:54+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="task switching" src="/images/taskswitching.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;They say that task switching is bad for getting things done.  Clearly some tasks require more concentration, but then there&amp;rsquo;s also the issue of getting bored with the task at hand.  There&amp;rsquo;s also the issue of switching between documenting (blogging?) a task and getting that task done.  Yesterday morning after about an hour (?) of blog-driven work on the APSoc membership database I switched to admin tasks and then the rest of the day.  It was about 5pm before I got some more free programming time and was able to punch in some time on WebSiteOne where I think I had more done test-driving the creation of a &lt;code&gt;current_subscription&lt;/code&gt; method on our User model.  &lt;/p&gt;
+
+&lt;p&gt;Given a free choice I&amp;rsquo;d probably carry on with that right now, but I have a 5th Jan deadline that I committed to for the APSoc, so I best get that sorted first.  It was a good feeling to sort the &amp;ldquo;AutoValue&amp;rdquo; fields on the APSoc membership database so that data could be inserted, but there&amp;rsquo;s something about the interplay between tests and code that I love.  The LibreOffice Base system is not really amenable to unit tests, although for all I know they have unit tests under the hood as part of the development suite.  However designing a client application via the graphical interface does not involve me writing any kind of tests and given the sensitivity of the application I&amp;rsquo;m not inspired to check out the acceptance testing frameworks that are available.  I burned a lot of time on a private client coding project trying to get comprehensive acceptance testing set up for Electron, and I&amp;rsquo;m becoming a lot more circumspect about the range of acceptance tests that I&amp;rsquo;ll try to employ these days.&lt;/p&gt;
+
+&lt;p&gt;On the WebSiteOne project, I&amp;rsquo;m in a phase of Domain Driven Design, where I&amp;rsquo;m tweaking a relationship in the data model that I believe is needed to accurately replicate the nature of our Premium subscriptions.  I&amp;rsquo;ve started with making the database model change, and I&amp;rsquo;m working out from there - I&amp;rsquo;m in the unit tests for the model, and much as I say I love the interplay, yesterday was tricky where it seemed I had to discard a fast running mocked test for a slower integration test using FactoryGirl. I turned this:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'look up stripe id from subscription'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;mock_model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Subscription&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;save: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:[]=&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'asks subscription for identifier'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt; &lt;span class="ss"&gt;:identifier&lt;/span&gt;
+      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscription&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subscription&lt;/span&gt;
+      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer_id&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;into this:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'supporting current subscription'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:with_karma&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:premium&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;name: &lt;/span&gt;&lt;span class="s1"&gt;'Premium'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:premium_mob&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;name: &lt;/span&gt;&lt;span class="s1"&gt;'Premium Mob'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:payment_source&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;PayPal&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;identifier: &lt;/span&gt;&lt;span class="s1"&gt;'75e'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# presence of type (no longer used) in the Subscriptions model is confusing ...&lt;/span&gt;
+    &lt;span class="c1"&gt;# should get rid of all the STI classes ...&lt;/span&gt;
+
+    &lt;span class="n"&gt;let!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;user: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;plan: &lt;/span&gt;&lt;span class="n"&gt;premium&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;started_at: &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;days&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;ended_at: &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;day&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;let!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;user: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;plan: &lt;/span&gt;&lt;span class="n"&gt;premium_mob&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;started_at: &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;day&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;payment_source: &lt;/span&gt;&lt;span class="n"&gt;payment_source&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'returns subscription that has started and has not ended'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current_subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="n"&gt;subscription2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'asks subscription for identifier'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer_id&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="s1"&gt;'75e'&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;rsquo;m a bit uncomfortable with all this FactoryGirl stuff, but I&amp;rsquo;m exercising the following new method on the user model:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;current_subscription&lt;/span&gt;
+    &lt;span class="n"&gt;current_subscriptions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;ended_at: &lt;/span&gt;&lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'started_at &amp;lt; :now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;now: &lt;/span&gt;&lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;nil?&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;empty?&lt;/span&gt;
+    &lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and stubbing it would require a rather long stub chain.  Ironically the APSoc system is also a database running SQL under the hood, and at points I end up writing queries that could be the subject of unit tests, but it&amp;rsquo;s a different beast.  In the WSO code I&amp;rsquo;ve just changed what was a unit test into an integration test, and I&amp;rsquo;m slowly moving up the chain and realising I could have driven this from an acceptance test that ensured the state of subscriptions after an upgrade, although it wouldn&amp;rsquo;t be a black box test &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Last night I wasn&amp;rsquo;t blog driving the WSO RoR coding as I wanted to move fast, but now I&amp;rsquo;ve burnt 30 minutes this morning (mixed in with trying to chat with BT about our intermittment business broadband issues).  Partly the blogging is supposed to help me stay focused on a task, but it can also be a distraction or a great way of thinking through a problem, depending on the circumstances.  So anyway, I&amp;rsquo;ve pulled up yesterday&amp;rsquo;s blog with the list of outstanding tasks for the APSoc db.  Let&amp;rsquo;s take a pass over things that might be sticky/tricky:&lt;/p&gt;
+
+&lt;p&gt;Outstanding items:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Completing tab sequence changes&lt;/li&gt;
+&lt;li&gt;Local Group sub-table&lt;/li&gt;
+&lt;li&gt;Remove various fields from the db&lt;/li&gt;
+&lt;li&gt;Reformat the content of Member_No&lt;/li&gt;
+&lt;li&gt;Various layout changes&lt;/li&gt;
+&lt;li&gt;Couple of UI interaction issues&lt;/li&gt;
+&lt;li&gt;Standing Order Details form appears to be a duplicate&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Okay, so I think the Member&lt;em&gt;No change might be the sticky one.  If I recall the client is suggesting making a change in the format of the membership number which might make for a tricky migration.  I&amp;rsquo;m tempted to just work though the list, making all the changes that are simple, and putting off anything that could take a little longer, specifically the Local Group sub-table and the Member&lt;/em&gt;No thing for the moment.&lt;/p&gt;
+
+&lt;p&gt;Although as I look at it in more detail I see they want something else from the Member&lt;em&gt;No.  This is not the RecNo that is the &amp;ldquo;primary key&amp;rdquo;.  It&amp;rsquo;s a composite that they want to be built from &amp;ldquo;Member&lt;/em&gt;Types&lt;em&gt;Code&lt;/em&gt;Letter + RecNo&amp;rdquo;.  Hmm, should this be a dynamically constructed field?  I&amp;rsquo;m not sure where the Member&lt;em&gt;Types&lt;/em&gt;Code_Letter is coming from &amp;hellip; Didn&amp;rsquo;t they just ask the CodeLetter be deleted from the membership types table?&lt;/p&gt;
+
+&lt;p&gt;Anyway, I&amp;rsquo;ve deleted the fields they didn&amp;rsquo;t want in the membership table, so let&amp;rsquo;s make sure that the membership form still works &amp;hellip; so I can view records and edit them after the table changes.  Here&amp;rsquo;s where acceptance tests might save me from needing to exhaustively test all things like adding a new record &amp;hellip; perhaps I can delete the test one and re-add - that worked fine.&lt;/p&gt;
+
+&lt;p&gt;So the biggest surprise is that my work creating the Standing Order form appears to have been lost.  I could have sworn I went through creating that, but this bloody double save requirement is my bane.  It&amp;rsquo;s not enough to click save on the form editor - you also have to click save on the main database page in order to ensure everything is actually saved to disk - insane.  I&amp;rsquo;ve just dredged up the memory about how to create the correct subform, and now the app has crashed again.  In my other parallel task BT says they have detected a possible fault on our line and they are looking into it - which is better news.  But LibreOffice is back to the spinning beach ball of death &amp;hellip; time to kill it and restart.  Argh, and now the entire file is corrupted - my entire two days work lost by the look of it &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I spent 15 minutes kicking things around.  The backup files are all zero size, no go.  I think I&amp;rsquo;ll start again tomorrow &amp;hellip; new process - take a backup each day &amp;mdash; maybe develop in dropbox?&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review New Year Same Conflicts</title>
     <link rel="alternate" href="http://blog.url.com/2018/01/02/av-ecosystem-review-new-year-same-conflicts/"/>
@@ -312,57 +396,6 @@ irb(main):026:0&amp;gt; s = Subscription.find(20)
 ActiveRecord::RecordNotFound: Couldn't find Subscription with 'id'=20
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;and I&amp;rsquo;m managing to update about five records a day at the current rate &amp;hellip; hmmm&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Back To Premium Analysis</title>
-    <link rel="alternate" href="http://blog.url.com/2017/12/18/av-ecosystem-review-back-to-premium-analysis/"/>
-    <id>http://blog.url.com/2017/12/18/av-ecosystem-review-back-to-premium-analysis/</id>
-    <published>2017-12-18T00:00:00+00:00</published>
-    <updated>2018-04-19T21:23:36+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="premium stats back" src="/images/premium-stats-back.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So there&amp;rsquo;s feedback from the APSoc client, and clearly some more work to do on the LibreOffice Base application, but I don&amp;rsquo;t think I can delay a review of the AV Premium members.  I used to be doing weekly reach outs, but with the new pairing and mobbing sessions I&amp;rsquo;m several weeks behind.  I also need to generate the latest monthly report for the trustees.  I&amp;rsquo;ve been adding data on mobs/pairing/meetings as I have them so that shouldn&amp;rsquo;t take so much time, but I also need to get the data in the WSO site accurate for Michael&amp;rsquo;s machine learning enterprise.  For that purpose we&amp;rsquo;ve created an API that allows us to get a list of the status of all the Premium users.  Using the great &lt;code&gt;jq&lt;/code&gt; library I can get nicely formatted json on the command line using a command like:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;curl -H "Authorization: Token token=1234" https://www.agileventures.org/api/subscriptions.json | jq
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and that gives me data like so:&lt;/p&gt;
-&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;email&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"sponsor_email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"started_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"2017-03-06"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"ended_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"plan_name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Premium"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"payment_source"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"PaymentSource::PayPal"&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;email&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"sponsor_email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"started_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"2017-03-09"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"ended_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"plan_name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Premium"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"payment_source"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"PaymentSource::Stripe"&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now what I need to do is go through ensuring this data is accurate and up to date.  First up I have an honorary member who hacked the PayPal endpoint in a security intrusion test.  This is not relevant data for the machine learning system.  The next is one who was sponsored, but now has a full time job and hasn&amp;rsquo;t been making use of the Premium Mob membership.  They&amp;rsquo;ve demurred paying their own way, saying they need time to get things organised.  I think I could sensibly mark these two as honorary members since they both contributed so much on the open source side.  I go ahead and create an honorary membership:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;irb(main):003:0&amp;gt; Plan.create name: 'Honorary Premium'
-=&amp;gt; #&amp;lt;Plan id: 12, name: "Honorary Premium", free_trial_length_days: nil, third_party_identifier: nil, amount: nil, created_at: "2017-12-18 09:58:46", updated_at: "2017-12-18 09:58:46", category: nil&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I set the first user to honorary, and that bumps them to the bottom of the list, so I can try and hook up the correct sponsor email to the second premium.  That was pretty easy, but now I also need to indicate the end of the sponsorship and that it&amp;rsquo;s passed on to another member.  I add an end to the sponsorship, but leave the &amp;ldquo;passing on&amp;rdquo; till I get to that sponsee.  I start making lists of who to check in with, who to send follow up forms to, and about which sponsee positions we need to fill.  Problem with this is that it seems to be taking me ages to crawl through making updates, considering whether to reach out to people, whether to follow up on inactive members.&lt;/p&gt;
-
-&lt;p&gt;Anyhow, I&amp;rsquo;ve managed the first five in the list and now we come up against a subscription with no associated user.  It was started on &amp;ldquo;2017-04-25&amp;rdquo;, so can I match that with someone in the Stripe interface, since that&amp;rsquo;s the payment type &amp;hellip; but none of the Stripe customers was created even close to that date (according to the stripe interface). Doh, no, ugh, it&amp;rsquo;s PayPal.  Where we do have a member who started at that time.  It looks like I also created a subscription for that user a few days afterwards&lt;/p&gt;
-&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;email&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"sponsor_email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"started_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"2017-04-29"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"ended_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"plan_name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Premium Mob"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"payment_source"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"PaymentSource::PayPal"&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Sensibly I hook that up correctly, and delete the inaccurate account, ah, but actually that&amp;rsquo;s the initial Premium that the member had for four days before upgrading to Premium Mob, so to hook that up we need to adjust the database model to support multiple subscriptions.  Hmm, looks like I&amp;rsquo;ll need to hit this every morning this week to get things sorted &amp;hellip; and maybe more &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
