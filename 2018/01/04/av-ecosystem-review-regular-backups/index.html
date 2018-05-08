@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Regular Backups</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_17 blog_page_17_index">
-    <!-- Navigation -->
+<body class="x2018 x2018_01 x2018_01_04 x2018_01_04_av-ecosystem-review-regular-backups x2018_01_04_av-ecosystem-review-regular-backups_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,88 +83,41 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2018/01/04/av-ecosystem-review-regular-backups/">AV EcoSystem Review Regular Backups</a></h2>
+        <h5 class='date'> 4 Jan 2018</h5>
+    <p><img alt="backup" src="/images/backup.jpg" /></p>
 
-          <p>Page 17 of 30</p>
+<p>So leaving it overnight has not magically fixed the corrupted database file, and it seems I&rsquo;ve lost several hours work from the last few days, and I can&rsquo;t figure out any easy way to recover it.  Brent was suggesting git, but the annoying thing about this LibreOffice Base (MSOffice/LotusApproach) style system is that the data is stored along with db schema and interface.  I can&rsquo;t really put this in a public git repository.  I could set up a private git account on GitHub through AgileVentures, for which this is a project, but I&rsquo;m going to take a stab at a dropbox backed up approach.  Cloning the system at critical points.</p>
 
-            <p><a href="/blog/page/16/">Previous page</a></p>
+<p>I start by adjusting all the tables so that the autovalue is set on the primary fields, which should clear up the main issue the client experienced in the alpha version, which was an inability to save data.  I&rsquo;m now working with the odb in dropbox and I can see the version history going past:</p>
 
-          <h2><a href="/2017/03/15/show-me-the-code/">Show me the Code</a></h2>
-          <h3>Mar 15</h3>
-          <p><img alt="code" src="/images/code.jpg"></p>
+<p><img src="https://dl.dropbox.com/s/4imbyibc39ilidm/Screenshot%202018-01-04%2010.00.23.png?dl=0" /></p>
 
-<p>Federico made a comment on one of my recent blogs:</p>
+<p>I&rsquo;d moved off dropbox before because I was worried that the dropbox syncing might be causing problems and a previous attempt to backup from dropbox hadn&rsquo;t worked, but I think I&rsquo;ve worked out that there&rsquo;s a double save operation required and I&rsquo;ll keep tracking the dropbox updates to check I&rsquo;m getting proper backups and I don&rsquo;t lose any more work &hellip;</p>
 
-<blockquote>
-<p>code_in_blog == good</p>
-</blockquote>
+<p>Now onto trying to fix the Standing Order form that I was sure I did before Xmas, but appears to have been lost (not properly saved), the editing of which caused the main crash yesterday &hellip;</p>
 
-<p>I wish I was coding more.  I am getting to do some code in the Premium mobbing sessions.  My productive coding efforts are snatched between meetings with me throwing up spikes...</p>
-          <h2><a href="/2017/03/14/hangouts-filling-up/">Hangouts Filling Up</a></h2>
-          <h3>Mar 14</h3>
-          <p><img alt="full" src="/images/full.jpg"></p>
+<p>So I get the form updated (i.e. the subform that connects to the recurring sub table), and it seems okay, but then I try to add a new form field and we get the spinning beach ball of death again.  This was the point yesterday when I killed the system and we lost all the data.  I note now that dropbox is stuck trying to upload the latest version.  Maybe the trick is that I have to create a new subform from scratch rather than modifying the existing one, but this is a silly game of guess what&rsquo;s causing the problem &hellip; hmm, should I switch back to working on the PC?  Should we have just gone with MSAccess, or tried harder to convince the client to go with a cloud based solution?  Personally I&rsquo;m still enamoured with the feature that the client loved about Lotus Approach which was their ability to tweak the forms themselves.</p>
 
-<p>Monday saw full hangouts for the “Martin Fowler” and “Kent Beck” scrums.  It was at least partly because SUNY Binghamton students were coming in to vote as part of their class assignment, but also the return of previous regulars such as Tong Wei...</p>
-          <h2><a href="/2017/03/10/day-by-day/">Day by Day</a></h2>
-          <h3>Mar 10</h3>
-          <p><img alt="day" src="/images/day.jpg"></p>
+<p>Anyway, this time I was less hasty about killing the application and in about five minutes, while I looked up the latest version of LibreOffice (I think there&rsquo;s a new version out) and fired up my PC, the libre on my Mac unlocked and I was able to save it &hellip; it locked up again a little time later, so I killed it and was able to recover with the latest version of LibreOffice for mac.  I sorted out the Standing Order Details form.  Here&rsquo;s a screenshot to prove it:</p>
 
-<p>Day by day I’m getting one item off my desk.  I’m not sure why it’s so painful.  Over the last 10 days I’ve got off new passport applications for myself and my eldest son, sent off tax liability statements for the AgileVentures bank account, and...</p>
-          <h2><a href="/2017/03/09/sprinting/">Sprinting</a></h2>
-          <h3>Mar  9</h3>
-          <p><img alt="sprinting" src="/images/sprinting.jpg"></p>
+<p><img src="https://dl.dropbox.com/s/ve6vacheeuz4a69/Screenshot%202018-01-04%2011.58.33.png?dl=0" /></p>
 
-<p>Well I totally failed to avoid Slack and Email before blogging this AM.  Again I was sucked in to Slack by posting the update about the podcast that I’d listened to during my morning jog.  I’d had this idea to post to Twitter and then leave posting...</p>
-          <h2><a href="/2017/03/08/grants-and-prototyping/">Grants and Prototyping</a></h2>
-          <h3>Mar  8</h3>
-          <p><img alt="balance" src="/images/grants.jpg"></p>
+<p>Carefully saving after each change, and now I guess I&rsquo;ll have to push on the rest tomorrow, after making a backup copy.</p>
 
-<p>So my process of taking one thing off my desk a day is at least keeping my desk in a steady state rather than becoming completely overwhelemed with pieces of paper.  I still haven’t thrown out my old filing cabinet, and I got caught by Slack/Email...</p>
-          <h2><a href="/2017/03/07/analytics-visualization/">Analytics Visualization</a></h2>
-          <h3>Mar  7</h3>
-          <p><img alt="balance" src="/images/visualization.png"></p>
-
-<p>I pushed out some changes to the main AgileVentures landing page last night.  I’d had a set ready from last week’s sprint on Friday, but rather than push them straight out I’d held them on staging and posted an image of them to the #websiteone channel...</p>
-          <h2><a href="/2017/03/06/balance/">Balance</a></h2>
-          <h3>Mar  6</h3>
-          <p><img alt="balance" src="/images/balance.jpg"></p>
-
-<p>I didn’t have any Premium pairing this Sunday, and my twin boys’ football match was rained off, so I had a relatively calm day, staying completely off Slack and Email.  I collapsed after lunch and slept for three hours - catching up lost sleep from...</p>
-          <h2><a href="/2017/03/03/bids-and-coding-zen/">Bids and Coding Zen</a></h2>
-          <h3>Mar  3</h3>
-          <p><img alt="zen stones" src="/images/zen.jpg"></p>
-
-<p>One of the reasons I got disenchanted with academia was the process of writing grant applications for research funds.  It seemed to involve a huge amount of work to describe the work you would do if someone gave you some money.  There’d be several...</p>
-          <h2><a href="/2017/03/02/distracted/">Distracted</a></h2>
-          <h3>Mar  2</h3>
-          <p><img alt="distracted" src="/images/distracted.jpg"></p>
-
-<p>So after taking a full week away from Slack and Email I managed to start work again without too much obsessive checking of messages on my phone.  At least for the last ten days I’m not checking it when I first wake up and, instead, leaving it till...</p>
-          <h2><a href="/2017/03/01/communication-and-coding/">Commmunication and Coding</a></h2>
-          <h3>Mar  1</h3>
-          <p><img alt="feedback" src="/images/feedback.jpg"></p>
-
-<p>So I got some great feedback from FutureLearn after I’d followed up to say how much I enjoyed their technical test and interview process (which included discussion and pair programming).  Here’s what they said:</p>
-
-<blockquote>
-<p>Thanks again for coming in — I’m...</p>
-</blockquote>
-
-            <p><a href="/blog/page/18/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -222,6 +176,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
