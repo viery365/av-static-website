@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_17 blog_page_17_index">
-    <!-- Navigation -->
+<body class="x2018 x2018_01 x2018_01_08 x2018_01_08_av-ecosystem-review-tight-corner x2018_01_08_av-ecosystem-review-tight-corner_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,88 +83,55 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2018/01/08/av-ecosystem-review-tight-corner/"></a></h2>
+        <h5 class='date'> 8 Jan 2018</h5>
+    <p>So my estimates were all wrong.  I had hoped to complete the membership database beta for APSoc in two mornings last week, and then be able to move back to things that were arguably more core AV ecosystem.  The task itself was no harder than expected, but the repeatedly crashing LibreOffice Base lost two mornings&rsquo; work and then slowed me to a crawl as I instituted a series of different more extreme backup options.  Having missed the deadline for Friday, I&rsquo;ve pushed back to next Friday, and now potentially I lose another week of mornings that I would like to have devoted to the AV ecosystem.  </p>
 
-          <p>Page 17 of 30</p>
+<p>I&rsquo;m now weighing up whether I try and combine the dropbox backups I have with git, and I see there&rsquo;s some interesting SO posts about this:</p>
 
-            <p><a href="/blog/page/16/">Previous page</a></p>
+<p><a href="https://stackoverflow.com/questions/1960799/using-git-and-dropbox-together-effectively">https://stackoverflow.com/questions/1960799/using-git-and-dropbox-together-effectively</a></p>
 
-          <h2><a href="/2017/03/16/who-needs-frameworks/">Who Needs Frameworks?</a></h2>
-          <h3>Mar 16</h3>
-          <p><img alt="frameworks" src="/images/frameworks.JPG"></p>
+<p>And it looks like it could work.  But I think I&rsquo;ll burn time with set up for potentially not much gain.  I think the key is doing the LibreOffice double save and restarting it each time I make any progress.  It feels late in the day to try and switch to another piece of software such as MSAccess.  Interacting in read/write mode with LibreOffice feels fairly stable.  It&rsquo;s the occasional random lockups, when actually editing the interface, that cause me headaches.  Hopefully for the client it will be solid, but if not I guess I&rsquo;ll have to pay for MSAccess and re-do it all there.</p>
 
-<p>I listen to a different podcast every morning.  Last Friday it was <a href="http://www.greaterthancode.com/podcast/episode-014-rashaun-stovall-snuggs/">“Greater than Code” with Ra’Shaun Stovall (Snuggs)</a>.  It was pretty mind expanding with quotes and questions like the following:</p>
+<p>The other thing I&rsquo;ve been experimenting with is boosting the allocated memory for the app.  Let&rsquo;s see if that helps today.  Maybe I can sort out the Countries DB to have USA and UK at the top &hellip; I try to create a countries table from scratch, but I have trouble setting the primary key.  And almost immediately I have the spinning beachball of death.  Is this something about the size and structure of the system I&rsquo;ve created here within LibreOffice DB?  That I&rsquo;m using it on Mac (I get similar issues on PC)? That both my computers are too old and slow?</p>
 
-<blockquote>
-<p>seniors often try to hold on to the complexity they...</p>
-</blockquote>
-          <h2><a href="/2017/03/15/show-me-the-code/">Show me the Code</a></h2>
-          <h3>Mar 15</h3>
-          <p><img alt="code" src="/images/code.jpg"></p>
+<p>So I managed to create the adjusted countries table by just allowing the db to create its own primary key, and then finally pasting in data from Google sheets:</p>
 
-<p>Federico made a comment on one of my recent blogs:</p>
+<p><img src="https://dl.dropbox.com/s/rkw7tt19t85jtqu/Screenshot%202018-01-08%2009.54.07.png?dl=0" /></p>
+
+<p>But now I can&rsquo;t insert any records.  Seems like we lost all the auto-value settings on all the table IDs somewhere last week.  I&rsquo;d better send this revised version off to the client, before they start testing the buggy one I sent on Friday.</p>
 
 <blockquote>
-<p>code_in_blog == good</p>
+<p>Hope you had a good weekend and apologies again for the deadline slippage.</p>
+
+<p>We&rsquo;ve just been working on the system and if you do run any more tests I&rsquo;d encourage you to work against this version (rather than the one sent on Friday):</p>
 </blockquote>
 
-<p>I wish I was coding more.  I am getting to do some code in the Premium mobbing sessions.  My productive coding efforts are snatched between meetings with me throwing up spikes...</p>
-          <h2><a href="/2017/03/14/hangouts-filling-up/">Hangouts Filling Up</a></h2>
-          <h3>Mar 14</h3>
-          <p><img alt="full" src="/images/full.jpg"></p>
+<p>LINK TO BETA VERSION 2</p>
 
-<p>Monday saw full hangouts for the “Martin Fowler” and “Kent Beck” scrums.  It was at least partly because SUNY Binghamton students were coming in to vote as part of their class assignment, but also the return of previous regulars such as Tong Wei...</p>
-          <h2><a href="/2017/03/10/day-by-day/">Day by Day</a></h2>
-          <h3>Mar 10</h3>
-          <p><img alt="day" src="/images/day.jpg"></p>
+<blockquote>
+<p>This one has the the UK and USA at the top of the countries list, and another insert bug fixed (or rather refixed).</p>
 
-<p>Day by day I’m getting one item off my desk.  I’m not sure why it’s so painful.  Over the last 10 days I’ve got off new passport applications for myself and my eldest son, sent off tax liability statements for the AgileVentures bank account, and...</p>
-          <h2><a href="/2017/03/09/sprinting/">Sprinting</a></h2>
-          <h3>Mar  9</h3>
-          <p><img alt="sprinting" src="/images/sprinting.jpg"></p>
+<p>Given that we&rsquo;re behind schedule we&rsquo;ll try and give you daily updates this week.  However - please don&rsquo;t feel obliged to test things daily.  We just want to make sure that when you do get a chance to test that you&rsquo;re working against the latest and greatest.</p>
 
-<p>Well I totally failed to avoid Slack and Email before blogging this AM.  Again I was sucked in to Slack by posting the update about the podcast that I’d listened to during my morning jog.  I’d had this idea to post to Twitter and then leave posting...</p>
-          <h2><a href="/2017/03/08/grants-and-prototyping/">Grants and Prototyping</a></h2>
-          <h3>Mar  8</h3>
-          <p><img alt="balance" src="/images/grants.jpg"></p>
+<p>Again, we plan to have all your items of feedback addressed by Friday.</p>
 
-<p>So my process of taking one thing off my desk a day is at least keeping my desk in a steady state rather than becoming completely overwhelemed with pieces of paper.  I still haven’t thrown out my old filing cabinet, and I got caught by Slack/Email...</p>
-          <h2><a href="/2017/03/07/analytics-visualization/">Analytics Visualization</a></h2>
-          <h3>Mar  7</h3>
-          <p><img alt="balance" src="/images/visualization.png"></p>
+<p>Best, Sam</p>
+</blockquote>
 
-<p>I pushed out some changes to the main AgileVentures landing page last night.  I’d had a set ready from last week’s sprint on Friday, but rather than push them straight out I’d held them on staging and posted an image of them to the #websiteone channel...</p>
-          <h2><a href="/2017/03/06/balance/">Balance</a></h2>
-          <h3>Mar  6</h3>
-          <p><img alt="balance" src="/images/balance.jpg"></p>
-
-<p>I didn’t have any Premium pairing this Sunday, and my twin boys’ football match was rained off, so I had a relatively calm day, staying completely off Slack and Email.  I collapsed after lunch and slept for three hours - catching up lost sleep from...</p>
-          <h2><a href="/2017/03/03/bids-and-coding-zen/">Bids and Coding Zen</a></h2>
-          <h3>Mar  3</h3>
-          <p><img alt="zen stones" src="/images/zen.jpg"></p>
-
-<p>One of the reasons I got disenchanted with academia was the process of writing grant applications for research funds.  It seemed to involve a huge amount of work to describe the work you would do if someone gave you some money.  There’d be several...</p>
-          <h2><a href="/2017/03/02/distracted/">Distracted</a></h2>
-          <h3>Mar  2</h3>
-          <p><img alt="distracted" src="/images/distracted.jpg"></p>
-
-<p>So after taking a full week away from Slack and Email I managed to start work again without too much obsessive checking of messages on my phone.  At least for the last ten days I’m not checking it when I first wake up and, instead, leaving it till...</p>
-
-            <p><a href="/blog/page/18/">Next page</a></p>
-
+        <h2 class='author'>by </h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -222,6 +190,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>
