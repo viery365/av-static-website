@@ -5,10 +5,62 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2018-01-08T00:00:00+00:00</updated>
+  <updated>2018-01-09T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Distracted By The Real Thing</title>
+    <link rel="alternate" href="http://blog.url.com/2018/01/09/av-ecosystem-review-distracted-by-the-real-thing/"/>
+    <id>http://blog.url.com/2018/01/09/av-ecosystem-review-distracted-by-the-real-thing/</id>
+    <published>2018-01-09T00:00:00+00:00</published>
+    <updated>2018-05-14T21:14:01+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="distraction" src="/images/distraction.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ironically after getting more sleep last night I feel groggier this morning.  Sunday night I couldn&amp;rsquo;t sleep re-hashing my 9-year old twins lost football (soccer) match (I&amp;rsquo;m the coach).  Don&amp;rsquo;t want to be strung out thinking about it, but I am every pretty much every time they lose; although it&amp;rsquo;s particularly bad when I think the opposing coach is not setting a good example.  Despite the lack of sleep on Sunday, yesterday was a solid day.  I slept properly last night, but is this a cold coming on?  Urgh.  Been distracted this morning, but maybe by the right stuff?  I&amp;rsquo;ve done a quick Slack/Email review and edited the &lt;a href="https://www.agileventures.org/premium-f2f-offer"&gt;AV Premium F2F offer page&lt;/a&gt; to include connecting to me on LinkedIn.  I keep wondering what to do with the random folks connecting to me there - might as well be offering them a free hour of pairing on a charity project.&lt;/p&gt;
+
+&lt;p&gt;And now I want to just quickly follow through with Will&amp;rsquo;s advice on changes to the Premium Sponsorship form, and get the revised version out to a few folks:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Okay. This is only a side note, but I read this interesting article about names: http://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/ TLDR: have a single &amp;ldquo;name&amp;rdquo; field&lt;/p&gt;
+
+&lt;p&gt;Each question should have a reason. I want to know why you need to know what country I live in, for a premium membership.&lt;/p&gt;
+
+&lt;p&gt;The resume could be a lot of work. Shouldn&amp;rsquo;t the questions ask everything you want to know?&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;If you&amp;rsquo;re working remotely, where is the company based? *&amp;rdquo; shouldn&amp;rsquo;t have an asterisk.&lt;/p&gt;
+
+&lt;p&gt;Edited-down mob programming videos might get more folks applying.&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Please upload a cover letter indicating how you think you would benefit from the Premium membership you are applying for&amp;rdquo; could become just &amp;ldquo;How do you think you would benefit from the Premium membership you are applying for?&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So now it&amp;rsquo;s much shorter:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/m29aa7wl36fiuw5/Screenshot%202018-01-09%2010.32.39.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;but I must jump back to the APSoc membership database, and my new backup ritual which involves copying the previous days file in dropbox and relabelling it with the day I&amp;rsquo;m starting on.  Giving LibreOffice Base an extra 2GB of Java memory does not appear to have helped with the lock up issues.  &lt;/p&gt;
+
+&lt;p&gt;But let&amp;rsquo;s start with correctly populating the Local Group field in the membership form.  I create and populate a new table, and in short order I have the Local Group dropdown as requested:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/w93hp5cyr700a9i/Screenshot%202018-01-09%2010.45.43.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now I duplicate the version and restart LibreOffice.  And then I work on a new dropdown for pay method on the subscription payment form.  I create the table, but then trying to set up the relation we get stuck again.  I go make coffee, come back, still stuck.  I kill the app, and re-start.  I&amp;rsquo;m lucky - this time we&amp;rsquo;re able to recover the corrupted file:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/cms13nfe5rtu8nd/Screenshot%202018-01-09%2011.09.14.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ac9vdcxbhwlfpkk/Screenshot%202018-01-09%2011.10.30.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;but I&amp;rsquo;ve got no basis to diagnose the issue &amp;hellip; I make a quick extra backup and continue, and I get it working:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/anclrh7bi983wpb/Screenshot%202018-01-09%2011.13.11.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;There is no particular pattern - although sense problems come when I double up on things, e.g. add a table in the SQL view by double clicking, but then also click the add button &amp;hellip; okay, enough for today, I&amp;rsquo;m going to pass this version on to the client, as I said I would do that daily this week.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Tight Corner</title>
     <link rel="alternate" href="http://blog.url.com/2018/01/08/av-ecosystem-review-tight-corner/"/>
@@ -373,43 +425,6 @@ irb(main):007:0&amp;gt; s.save
 &lt;p&gt;I note what I&amp;rsquo;m not doing recently is remembering to work with Mob level members on their professional development plans &amp;hellip; although I don&amp;rsquo;t know how much folks really appreciate that.  It&amp;rsquo;s kind of a challenging thing for busy people to keep up with &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;I think that&amp;rsquo;s last one for today now.  A Premium Plus member who downgraded to Premium F2F and that all needs to be represented to.  That domain model &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Premium Data Tweaks</title>
-    <link rel="alternate" href="http://blog.url.com/2017/12/21/av-ecosystem-review-more-premium-data-tweaks/"/>
-    <id>http://blog.url.com/2017/12/21/av-ecosystem-review-more-premium-data-tweaks/</id>
-    <published>2017-12-21T00:00:00+00:00</published>
-    <updated>2018-05-01T21:53:44+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="tweak" src="/images/tweak.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Kids off school - slightly earlier to the computer, but no earlier to the blogface.  Although, I guess I did stop to review all my Slack and email.  Urgh.  Feel like I need to take a free day from Xmas to get this all completed.  Let&amp;rsquo;s push on trying to update the Premium user data in the system, updating my notes on Premium users, and reaching out to those I haven&amp;rsquo;t spoken to in a while.  Next up I have three Premium members who got 12 months of Premium membership bundled with the CraftAcademy bootcamp fees:&lt;/p&gt;
-&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"..."&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"sponsor_email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"started_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"2016-11-07"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"ended_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"plan_name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Premium"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"payment_source"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"PaymentSource::CraftAcademy"&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So now I have the trouble of needing to represent those members who&amp;rsquo;ve started paying their own way since their sponsored membership ended.  That&amp;rsquo;s a refactoring of our data model.  Will have to leave that, but can mark those members who&amp;rsquo;ve not renewed as having ended.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;irb(main):001:0&amp;gt; u = User.find_by email: '...'
-irb(main):002:0&amp;gt; u.subscription.ended_at = Date.parse('2017-11-07')
-=&amp;gt; Tue, 07 Nov 2017
-irb(main):003:0&amp;gt; u.save
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Then I come to a user who had Premium sponsored for a year by another user, and has since had initial sponsorship layered on top by a different sponsor.  Another situation where we need the user &lt;code&gt;has_many&lt;/code&gt; subscriptions relationship, but I can add the sponsor relation and the fact that the basic Premium subscription will end after 12 months &amp;hellip; should I stick future &lt;code&gt;end_dates&lt;/code&gt; in there? I guess so - it&amp;rsquo;s obvious from our experience with sponsorship that we need to be clearer with end points.  I think it might also help people make more effective use of their sponsorship; having a time limit, that is.  Anyhow, I start by linking up the sponsorship relation for this subscription:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;irb(main):013:0&amp;gt; u = User.find_by email: '...'
-irb(main):014:0&amp;gt; s = User.find_by email: '...'
-irb(main):015:0&amp;gt; u.subscription.sponsor = s
-irb(main):016:0&amp;gt; u.save
-=&amp;gt; true
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Still only making my way through about five members a day - gonna need to find a clear day to complete this &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
