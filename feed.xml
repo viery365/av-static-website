@@ -110,6 +110,47 @@
 </content>
   </entry>
   <entry>
+    <title>AV EcoSystem Review Beta Release Deadline</title>
+    <link rel="alternate" href="http://blog.url.com/2018/01/05/av-ecosystem-review-beta-release-deadline/"/>
+    <id>http://blog.url.com/2018/01/05/av-ecosystem-review-beta-release-deadline/</id>
+    <published>2018-01-05T00:00:00+00:00</published>
+    <updated>2018-05-15T21:34:33+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="distraction" src="/images/../images/dealine.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Okay, so I&amp;rsquo;m up against the deadline for the beta release of the APSoc membership database.  The timeline I gave them at the beginning of the project was:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;by Dec 8th - screenshots of membership database interface for you to approve&lt;/li&gt;
+&lt;li&gt;by Dec 15th - alpha version of membership database for you to approve&lt;/li&gt;
+&lt;li&gt;by Jan 5th - beta version of membership database adjusted as per feedback&lt;/li&gt;
+&lt;li&gt;by Jan 31st - release version of membership database adjusted as per feedback, including full migration &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I managed to avoid losing any work yesterday, let&amp;rsquo;s see if we can do the same today with appropriate dropbox backups.  What I need to do now is work through their list of fixes again, re-fixing the stuff I lost from Tuesday and Wednesday.&lt;/p&gt;
+
+&lt;h2&gt;Fixes (membership form)&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bring all text entry fields to front and labels to back&lt;/li&gt;
+&lt;li&gt;Delete junk at bottom of form&lt;/li&gt;
+&lt;li&gt;start renaming the elements that still have default names&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And already I&amp;rsquo;ve got the spinning beachball - okay - time to move to the PC - I duplicate the latest system and add a &amp;ldquo;-pc&amp;rdquo; tag on it, but it&amp;rsquo;s reporting as a corrupted file and I can&amp;rsquo;t open it on the PC.  A little dance and I restore the previous version from dropbox and get it opened on the PC.  Tense moments.&lt;/p&gt;
+
+&lt;h2&gt;Fixes (membership form) (cont. on PC)&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;swapped NL and NML checkboxes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and after merely 60 seconds of normal function on the PC the software has locked up again.  Gosh, am I going to have to tell the client that we&amp;rsquo;ll have to switch to Microsoft Access &amp;hellip;?  I had another go with the recovered version on Mac, and I used the advice in &lt;a href="http://lowendmac.com/2014/speed-up-libreoffice-on-your-mac/"&gt;this post&lt;/a&gt; to increase the amount of memory being made available to the LibreOffice on Mac, and I&amp;rsquo;ve made some progress, finishing up the tab sequence changes on the membership form, and now putting through a series of changes to the Subscription Payment form.  I&amp;rsquo;ve saved and backed those up, but now onto the Gift Aid form, where a series of small formatting changes leads the system to lock up again!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>AV EcoSystem Review Regular Backups</title>
     <link rel="alternate" href="http://blog.url.com/2018/01/04/av-ecosystem-review-regular-backups/"/>
     <id>http://blog.url.com/2018/01/04/av-ecosystem-review-regular-backups/</id>
@@ -332,99 +373,6 @@
 &lt;p&gt;and sorting that isn&amp;rsquo;t too hard once I find &lt;a href="https://forum.openoffice.org/en/forum/viewtopic.php?f=39&amp;amp;t=9484"&gt;this forum post&lt;/a&gt; that helps me navigate to the tab ordering tool.  Of course now LibreOffice is gradually slowing, and I&amp;rsquo;m worried it&amp;rsquo;s going to crash again.   I think I&amp;rsquo;ve worked out the trick, to avoid losing too much work, of saving not just in the form view, but also in the main database page.  Now it&amp;rsquo;s spinning beachballs on each screen.  Guess it&amp;rsquo;s time to grab a coffee &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;Still stuck - I kill it, recover the db and lose only a tiny bit of work.  I make changes to the tab order, save, and that seems to work.  There&amp;rsquo;s a chunk more to do, but with a run up I could maybe get it all done tomorrow &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Not Completing Premium Review</title>
-    <link rel="alternate" href="http://blog.url.com/2017/12/22/av-ecosystem-review-not-completing-premium-review/"/>
-    <id>http://blog.url.com/2017/12/22/av-ecosystem-review-not-completing-premium-review/</id>
-    <published>2017-12-22T00:00:00+00:00</published>
-    <updated>2018-05-01T21:55:18+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="not completing" src="/images/not-completing.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I reckon I&amp;rsquo;ve spent about 40 minutes each morning this week working through Premium members.  I think I&amp;rsquo;ve reviewed 20 and, where possible, got their data updated and correct in the WSO system so that we have a &amp;ldquo;single source of truth&amp;rdquo; for data about Premium members, and that it can be exposed over the secure Premium API for use by the machine learning system.  Of course we&amp;rsquo;re throwing up various changes that are needed in the data model and there&amp;rsquo;s going to need to be more hooking up to the Slack and Paypal APIs in order to ensure that changes to Premium statuses can be coordinated directly through the WSO site, both by admins and by the individual members themselves.  I&amp;rsquo;ll forge on this morning.  The latest is an orphaned subscription:&lt;/p&gt;
-&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"sponsor_email"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"started_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"2017-02-28"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"ended_on"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"plan_name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Premium Mob"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nt"&gt;"payment_source"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"PaymentSource::Stripe"&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Matching up the timings I can see that this is an orphaned subscription created when a Premium Mob member upgraded to Premium F2F.  I won&amp;rsquo;t be able to clear this up until we have a different relation in the database model.  I wonder if that&amp;rsquo;s the thing to start on.  I find a relevant ticket in the waffle board and check out a branch for that and then change the relation between users and subscriptions to a &lt;code&gt;has_many&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
-    &lt;span class="n"&gt;has_many&lt;/span&gt; &lt;span class="ss"&gt;:subscription&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;autosave: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That creates a series of failures in the specs where attempts to get &lt;code&gt;user.subscription.plan&lt;/code&gt; are not working because we would now have to talk about &lt;code&gt;user.subscriptions&lt;/code&gt;.  I guess we should replace &lt;code&gt;user.subscription&lt;/code&gt; with something like &lt;code&gt;user.current_subscription&lt;/code&gt; where we&amp;rsquo;d find the user&amp;rsquo;s subscription that didn&amp;rsquo;t have an &lt;code&gt;ended_at&lt;/code&gt; date.  We&amp;rsquo;d also need to ensure that the user only had one active subscription at a time.  So various changes, and I could dive into those, but maybe making the connection to as many Premium members as possible is the key thing &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m caught for a moment about whether I should try and update the &lt;code&gt;ended_at&lt;/code&gt; date for the old Premium Mob subscription for the member who upgraded to F2F, which I decided to do for consistency:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;irb(main):002:0&amp;gt; pp Subscription.all.select{|s| s.user.nil?} ; nil
-[#&amp;lt;Subscription:0x007faf45ddd0c8
-  id: 40,
-  type: nil,
-  started_at: Tue, 28 Feb 2017 02:00:22 UTC +00:00,
-  ended_at: nil,
-  user_id: nil,
-  plan_id: 2,
-  sponsor_id: nil&amp;gt;,
- #&amp;lt;PremiumF2F:0x007faf3f729b60
-  id: 32,
-  type: "PremiumF2F",
-  started_at: Tue, 03 Jan 2017 18:00:24 UTC +00:00,
-  ended_at: nil,
-  user_id: nil,
-  plan_id: 3,
-  sponsor_id: nil&amp;gt;,
- #&amp;lt;Premium:0x007faf3f729930
-  id: 3,
-  type: "Premium",
-  started_at: Tue, 25 Oct 2016 16:46:56 UTC +00:00,
-  ended_at: nil,
-  user_id: nil,
-  plan_id: 1,
-  sponsor_id: nil&amp;gt;,
- #&amp;lt;Subscription:0x007faf3f7288a0
-  id: 58,
-  type: nil,
-  started_at: Thu, 10 Nov 2016 11:11:00 UTC +00:00,
-  ended_at: nil,
-  user_id: nil,
-  plan_id: 1,
-  sponsor_id: nil&amp;gt;,
- #&amp;lt;Subscription:0x007faf45deff20
-  id: 46,
-  type: nil,
-  started_at: Wed, 03 May 2017 18:47:13 UTC +00:00,
-  ended_at: nil,
-  user_id: nil,
-  plan_id: 2,
-  sponsor_id: nil&amp;gt;,
- #&amp;lt;Subscription:0x007faf45def8b8
-  id: 44,
-  type: nil,
-  started_at: Tue, 25 Apr 2017 08:41:15 UTC +00:00,
-  ended_at: nil,
-  user_id: nil,
-  plan_id: 1,
-  sponsor_id: nil&amp;gt;]
-irb(main):003:0&amp;gt; s = Subscription.find(40)
-=&amp;gt; #&amp;lt;Subscription id: 40, type: nil, started_at: "2017-02-28 02:00:22", ended_at: nil, user_id: nil, plan_id: 2, sponsor_id: nil&amp;gt;
-irb(main):004:0&amp;gt; u = User.find_by email: '...'
-irb(main):005:0&amp;gt; u.subscription.started_at
-=&amp;gt; Fri, 14 Jul 2017 01:17:42 UTC +00:00
-irb(main):006:0&amp;gt; s.ended_at = u.subscription.started_at
-=&amp;gt; Fri, 14 Jul 2017 01:17:42 UTC +00:00
-irb(main):007:0&amp;gt; s.save
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Next up I have a member who got three months of Premium from CraftAcademy South Africa, but they are in the system as paying via Stripe since that&amp;rsquo;s how CA SA paid.  The member is now paying their own way (also over Stripe), and again we need support for multiple subscriptions per user to update that.  The next member is also a CraftAcademy South Africa graduate who is paying their own way, and subsequently upgraded to Premium Mob.  Again, I won&amp;rsquo;t be able to fix these up without the domain model changes.  I guess I push on and fix up what I can and then take another pass once I get the domain model fix out.&lt;/p&gt;
-
-&lt;p&gt;I note what I&amp;rsquo;m not doing recently is remembering to work with Mob level members on their professional development plans &amp;hellip; although I don&amp;rsquo;t know how much folks really appreciate that.  It&amp;rsquo;s kind of a challenging thing for busy people to keep up with &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I think that&amp;rsquo;s last one for today now.  A Premium Plus member who downgraded to Premium F2F and that all needs to be represented to.  That domain model &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
