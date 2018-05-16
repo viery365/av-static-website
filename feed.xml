@@ -5,10 +5,83 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2018-01-09T00:00:00+00:00</updated>
+  <updated>2018-01-10T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Damn Estimates</title>
+    <link rel="alternate" href="http://blog.url.com/2018/01/10/av-ecosystem-review-damn-estimates/"/>
+    <id>http://blog.url.com/2018/01/10/av-ecosystem-review-damn-estimates/</id>
+    <published>2018-01-10T00:00:00+00:00</published>
+    <updated>2018-05-16T21:39:46+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="distraction" src="/images/estimates.jpeg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I had an email from the APSoc client yesterday evening:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Thanks for Beta 3.  I’ve started having a look at this but not got far.  However some initial feedback …&lt;/p&gt;
+
+&lt;p&gt;General&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Whenever try to do any updates to a table, or use the wizard to set up and edit a query, the system locks me out (seemingly indefinitely) while using up to 20% of CPU and trashing the hard disk.  I end up having to kill the task in Task Manager and restart my machine to clear the problem.  This may well be something peculiar in my system and not down to you – but any clues appreciated.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Otherwise the forms generally look much better.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Member Information Form&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;NM N/L should work as follows.  (a) If person is a non-member then NM N/L checked should force N/L to be set ON.  (b) If person is non-member then NM N/L unchecked forces N/L to be OFF.  &amp;copy; If person is a member then NM N/L has no effect.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Subscription Payment Form&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Expires field needs a simple list of dates, plus N/A and 9999.  Currently contains lots of duplicates.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Gift Aid Form&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Doesn&amp;rsquo;t need checkboxes O/S, SO, 5for4&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Also doesn&amp;rsquo;t need Letters, Salutation&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Standing Order Form&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Doesn&amp;rsquo;t display!  Just have a blank pink screen.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;More when I get a chance over the next couple of days.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Which is all great feedback, but makes me think we cannot continue with LibreOffice Base.  Maybe that&amp;rsquo;s reactionary, but I&amp;rsquo;ve now created the Standing Order Form twice and although I now have backups of it, it&amp;rsquo;s just randomly gone blank in the latest version that I&amp;rsquo;ve shared with the client.&lt;/p&gt;
+
+&lt;p&gt;I had been thinking that the lock up problem had only been affecting me when I&amp;rsquo;d been editing the system and the querying portion of the system had been stable on their platform, as it appears to have been on mine.  To hear that they are having serious lock up issues makes me think there&amp;rsquo;s no real way forward here.  I&amp;rsquo;ve got no clear way to debug the crashes that I&amp;rsquo;m getting, and although I can see some chatter about this on the message boards I don&amp;rsquo;t think I can afford to invest 10&amp;rsquo;s of hours into tracking down the cause of the crash, particularly when there&amp;rsquo;s no guarantee that it&amp;rsquo;ll even be fixable.  The workflow with LibreOffice Base with the crashes is appalling.&lt;/p&gt;
+
+&lt;p&gt;Now maybe I&amp;rsquo;ve done something terribly inappropriate with the system importing the legacy data and the way I have the forms setup etc. but I&amp;rsquo;m tempted to suspect something related to having switched from Mac to PC and back.  It all seemed fine, but maybe some weird line endings got in there.  In particular even though the system is open source, the lack of transparency of the system being developed makes me despair of getting to the bottom of things in short order.  In principle the database file is a zip file that can be unpacked and have its components expected, but I was unable to unzip when the app was crashing.&lt;/p&gt;
+
+&lt;p&gt;I thought LibreOffice Base was a good option as there was a large responsive community and an initial import of the client&amp;rsquo;s data went fine, and an initial setup of various relations went well.  It looked like it has all the functionality that we need, and that&amp;rsquo;s been born out during further development, but the crashing, lack of automatic backup and the monolithic file format makes me think we are better off cutting our losses and switching to Zoho or MSAccess.  The options as I see them are:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Continue to push on and try to somehow debug the crashes&lt;/li&gt;
+&lt;li&gt;Try to recreate a version from scratch on PC only (might avoid crashing issue, might not)&lt;/li&gt;
+&lt;li&gt;Set something up in Zoho&lt;/li&gt;
+&lt;li&gt;Set something up in MSAccess&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I&amp;rsquo;m leaning towards options 3 and 4 in that I suspect there&amp;rsquo;s a lower likelihood of encountering the crash issue, and perhaps more cohorent support, although I&amp;rsquo;m not sure.&lt;/p&gt;
+
+&lt;p&gt;So I just got set up with a Zoho account and emailed them about non-profit discounts, but I don&amp;rsquo;t seem to have an XLSX file for the main members db, and although Zoho says it will import mdb files it can&amp;rsquo;t handle the ones from the APSoc dump.  The MSAccess Office 365 offering seems to be only available on PC.  TT-Exchange which we&amp;rsquo;re already a member of has MSAccess 2013 for £12, while the main MS page has Office365 for £1.50 a month per user.  Guess I&amp;rsquo;ll apply for the latter, but I get stuck - I start the application process, but then can&amp;rsquo;t select AgileVentures - we already have a charity account, but then I can&amp;rsquo;t log in to it.  Ugh, so stuck on two fronts there.  At least I&amp;rsquo;ve pushed forward on both pathways &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Gah, so I need to ask the client for an XLS export of the member database to even test Zoho, and I maybe need to contact MicroSoft support to even get set up with their charity plan &amp;hellip; I think I&amp;rsquo;m going to email the client to let them know my concerns and ask for the appropriate files.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Distracted By The Real Thing</title>
     <link rel="alternate" href="http://blog.url.com/2018/01/09/av-ecosystem-review-distracted-by-the-real-thing/"/>
@@ -262,117 +335,6 @@
 &lt;p&gt;So the biggest surprise is that my work creating the Standing Order form appears to have been lost.  I could have sworn I went through creating that, but this bloody double save requirement is my bane.  It&amp;rsquo;s not enough to click save on the form editor - you also have to click save on the main database page in order to ensure everything is actually saved to disk - insane.  I&amp;rsquo;ve just dredged up the memory about how to create the correct subform, and now the app has crashed again.  In my other parallel task BT says they have detected a possible fault on our line and they are looking into it - which is better news.  But LibreOffice is back to the spinning beach ball of death &amp;hellip; time to kill it and restart.  Argh, and now the entire file is corrupted - my entire two days work lost by the look of it &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;I spent 15 minutes kicking things around.  The backup files are all zero size, no go.  I think I&amp;rsquo;ll start again tomorrow &amp;hellip; new process - take a backup each day &amp;mdash; maybe develop in dropbox?&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review New Year Same Conflicts</title>
-    <link rel="alternate" href="http://blog.url.com/2018/01/02/av-ecosystem-review-new-year-same-conflicts/"/>
-    <id>http://blog.url.com/2018/01/02/av-ecosystem-review-new-year-same-conflicts/</id>
-    <published>2018-01-02T00:00:00+00:00</published>
-    <updated>2018-05-03T21:09:51+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="new year" src="/images/newyear2018.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The start of a new year; some of the same conflicts remaining, though.  Leaving off from the last week of last year, I really want to adjust our Premium membership domain model to more accurately reflect the way in which members upgrade and downgrade.  Perhaps even more critically I want to set up private event functionality that would automate some of the process by which potential members try out premium sessions and get presented with the option to upgrade.  Unfortunately I don&amp;rsquo;t think I can work on either, as I must deliver the beta-version of the membership database to the Anthony Powell society.  The timeframe is entirely of my own making of course, and it will be reasonably interesting and pleasing to get the membership database done, but I&amp;rsquo;ve not got much interest from many Premium members in my LibreOffice development work &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;The concept behind AgileVentures is that folks can skill up by working/observing real projects with real customers as they progress.  The problem seems to be that in many cases it&amp;rsquo;s not the latest new tech that&amp;rsquo;s needed to get the job done.  Or maybe it&amp;rsquo;s that the process of learning through client work is just too traumatic?  Anyway, if I want to make time to add new features to WebSiteOne I&amp;rsquo;ll need to crack on with the APSoc database &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Here&amp;rsquo;s the list of issues with the alpha version that the client identified:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;MembershipTypes DB&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Doesn&amp;rsquo;t need &amp;ldquo;Code Letter&amp;rdquo; field&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Countries DB&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Can we have UK and USA as the top two please as they&amp;rsquo;re the most used&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Member Information Form&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Unable to add/save a new member record – see error below! – probably applies to all forms&lt;/li&gt;
-&lt;li&gt;Cannot key into &amp;ldquo;Mobile Phone&amp;rdquo; – cursor won&amp;rsquo;t go there!&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;Local Group&amp;rdquo; needs to be correctly populated – maybe we need a table of the groups?  The groups should be: London, Baltic, Germany, Great Lakes, Toronto, NE USA, Australia, California, Texas&lt;/li&gt;
-&lt;li&gt;Switch positions of &amp;ldquo;N/L&amp;rdquo; and &amp;ldquo;NM N/L&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;Tab sequence should be – see Member&lt;em&gt;Form&lt;/em&gt;Tab_Seq.pdf – similar sequences for other forms.  Unnumbered keyable fields do not need to appear in the tab sequence (but could after numbered fields)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Membership DB&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;We can remove the fields: “Gift&lt;em&gt;Donor”, “Fax”, “Diet&lt;/em&gt;Rqts”, “Address”, “Crap”, “C_N” – see comments to the DB specification&lt;/li&gt;
-&lt;li&gt;Add the field “Address4”&lt;/li&gt;
-&lt;li&gt;Reformat the content of “Member_No” &lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Subscription Payment Form&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Don&amp;rsquo;t need &amp;ldquo;Member Card&amp;rdquo; field as we don&amp;rsquo;t use membership cards&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;Amount Paid&amp;rdquo;, please can it display with a £ sign&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;Pay Method&amp;rdquo; dropdown needs populating; options should be: PayPal, Credit Card, Cheque, Bank Transfer, Standing Order, Cash, Other.  Worth putting this in a new table so it can be changed easily?&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;CC No&amp;rdquo; and CC&amp;quot;Expiry&amp;quot; fields can be removed as we don&amp;rsquo;t store this&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;Rate Paid&amp;rdquo;, please can the items in the dropdown be sequenced as&lt;/li&gt;
-&lt;li&gt;Whenever try adding a record of new subscription I get:&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/fleeiuezj046z4b/image003.jpg?dl=0" /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Removal of fields means &amp;ldquo;Notes&amp;rdquo; could be positioned to the right of the payments lines to reduce the size of the form&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Keying say &amp;ldquo;15&amp;rdquo; in a date field adds the date from the field above or is it the last date enetered?), unless the field above is blank&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Subs DB&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Remove &amp;ldquo;Member Card&amp;rdquo; field as we don&amp;rsquo;t use membership cards&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Remove &amp;ldquo;CC No&amp;rdquo; and CC&amp;quot;Expiry&amp;quot; fields as we don&amp;rsquo;t store this&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Form doesn&amp;rsquo;t need to show &amp;ldquo;Letters&amp;rdquo;, &amp;ldquo;Known As&amp;rdquo;, &amp;ldquo;Salutation&amp;rdquo;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Gift Aid Declaration Form&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;If there is a completed record of a declaration, with a blank &amp;ldquo;To Date&amp;rdquo; then the &amp;ldquo;Gift Aid&amp;rdquo; checkbox should be checked&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Declaration line items, can the fields be less wide, and then again &amp;ldquo;Notes&amp;rdquo; can go to right of the line items and form size reduces&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Same error as in Subscription Payment Form when adding a record&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Standing Order Details Form&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;This is a duplicate of the Gift Aid Declaration Form&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Lots to do here - I&amp;rsquo;m going to start with the section on the Membership information form:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Member Information Form
-
-&lt;ul&gt;
-&lt;li&gt;Unable to add/save a new member record – see error below! – probably applies to all forms&lt;/li&gt;
-&lt;li&gt;Cannot key into &amp;ldquo;Mobile Phone&amp;rdquo; – cursor won&amp;rsquo;t go there!&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;Local Group&amp;rdquo; needs to be correctly populated – maybe we need a table of the groups?  The groups should be: London, Baltic, Germany, Great Lakes, Toronto, NE USA, Australia, California, Texas&lt;/li&gt;
-&lt;li&gt;Switch positions of &amp;ldquo;N/L&amp;rdquo; and &amp;ldquo;NM N/L&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;Tab sequence should be – see Member&lt;em&gt;Form&lt;/em&gt;Tab_Seq.pdf – similar sequences for other forms.  Unnumbered keyable fields do not need to appear in the tab sequence (but could after numbered fields)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I knock off some low hanging fruit by switching the positions of &amp;ldquo;N/L&amp;rdquo; and &amp;ldquo;NM N/L&amp;rdquo;.  I confirm that the &amp;ldquo;Mobile Phone&amp;rdquo; can&amp;rsquo;t be entered - can&amp;rsquo;t see anything in the settings about why it wouldn&amp;rsquo;t work, so I delete it and copy over the &amp;ldquo;Work Phone&amp;rdquo; text box.  That doesn&amp;rsquo;t fix it, hmm.  I realise the problem is that the text label above it is too large and preventing cursor selection, so I resize that and we have two minor issues fixed.  I&amp;rsquo;m tempted to work on other less threatening issues like the tab sequence but this inability to save is likely to be the big blocker, so I&amp;rsquo;m going to hit that next.  I replicate the error:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/yi6szspyshvrmgl/Screenshot%202018-01-02%2010.29.22.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So the problems seems to be that our automatically added ID columns from the data import are not set up as primary keys that will get an autoincremented ID added with new records.  That&amp;rsquo;s a simple fix thanks to &lt;a href="https://forum.openoffice.org/en/forum/viewtopic.php?f=61&amp;amp;t=64324"&gt;this forum post&lt;/a&gt;, and that now works fine, although I can see all sorts of little niggly issues now that I start entering data rather than just focusing on the form layout.&lt;/p&gt;
-
-&lt;p&gt;Ironically, just adding UK and USA at the top of the countries field turns out to be non-trivial, but I can clearly do it if I re-import the countries data.  Let&amp;rsquo;s check the process of adjusting the tab sequence to flush out anything else that could turn out to be harder than I expect.  The client has sent this diagram of the tab sequence they want:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/gw06wl2inhioh69/Screenshot%202018-01-02%2010.50.01.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;and sorting that isn&amp;rsquo;t too hard once I find &lt;a href="https://forum.openoffice.org/en/forum/viewtopic.php?f=39&amp;amp;t=9484"&gt;this forum post&lt;/a&gt; that helps me navigate to the tab ordering tool.  Of course now LibreOffice is gradually slowing, and I&amp;rsquo;m worried it&amp;rsquo;s going to crash again.   I think I&amp;rsquo;ve worked out the trick, to avoid losing too much work, of saving not just in the form view, but also in the main database page.  Now it&amp;rsquo;s spinning beachballs on each screen.  Guess it&amp;rsquo;s time to grab a coffee &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Still stuck - I kill it, recover the db and lose only a tiny bit of work.  I make changes to the tab order, save, and that seems to work.  There&amp;rsquo;s a chunk more to do, but with a run up I could maybe get it all done tomorrow &amp;hellip;&lt;/p&gt;
 </content>
   </entry>
 </feed>
