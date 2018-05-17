@@ -5,10 +5,72 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2018-01-10T00:00:00+00:00</updated>
+  <updated>2018-01-11T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Painful Decisions</title>
+    <link rel="alternate" href="http://blog.url.com/2018/01/11/av-ecosystem-review-painful-decisions/"/>
+    <id>http://blog.url.com/2018/01/11/av-ecosystem-review-painful-decisions/</id>
+    <published>2018-01-11T00:00:00+00:00</published>
+    <updated>2018-05-17T20:43:48+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="hardest thing and the right thing" src="/images/hardest-and-right.jpeg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The APSoc has responded calmly to the email I sent about the problems with LibreOffice Base.  Here&amp;rsquo;s what I sent:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Thanks for this.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s disturbing to hear that you&amp;rsquo;re experiencing lock up.  We have been experiencing that too, but only with the system in edit mode, i.e. editing the UI, tables etc.  updates to tables have been working fine.  These lock ups are pretty much what caused us to be late delivering last week.  That you&amp;rsquo;re encountering them to makes me think that we have a particularly tricky issue to solve here and some important decisions to make.&lt;/p&gt;
+
+&lt;p&gt;Rest assured that the problems fall on our side and not yours.  We&amp;rsquo;ve given a fixed quote for this, and will do whatever is necessary to deliver robust and stable software by the final deadline however many additional hours are required on our side.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m going to be discussing the options in a team meeting today, and will come back to you with some alternative approaches to consider by the end of the day.  In the meantime I notice that, in the database pack we originally received from you, there are a number of file formats including XLSX, but notably we do not have an XLSX formatted file for the subscription or members tables; while we do have them for the gift aid, member types and recurring subs tables.  Is there any chance you could provide XLSX files for the subscription and members tables as this would help with debugging and testing alternatives.&lt;/p&gt;
+
+&lt;p&gt;Many thanks in advance&lt;/p&gt;
+
+&lt;p&gt;Best, Sam&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;They responded with:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Ah-ha … thanks for this … I’m glad it isn’t just me getting lock-ups and being stupid!  The lock-ups seem to happen as soon as I select “Queries” and use the Wizard.  Sometimes it just locks Libre and I can continue with other things; at other times everything locks until I kill Libre.  If I then try to restart Libre and access the beta file I get “General Error: General input/output error” until I refresh the Libre file from the supplied one.  This also happens if I try creating anything more than a very simple report.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;As well as including the files I requested and answering a few other outstanding questions and some other feedback on the interface.  I also had a call yesterday from Zoho indicating that the non-profit discount is 20% if we pay a year up front (instead of the usual 10%), which is not a huge boost, but I guess I at least use the new file from the client to check out Zoho&amp;rsquo;s offering.&lt;/p&gt;
+
+&lt;p&gt;In short order it gives me the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/3g8557dfmr00nzq/Screenshot%202018-01-11%2010.08.47.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I see I can also import different sets of choices for the country field&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/c3nw135pu5wn6f2/Screenshot%202018-01-11%2010.12.35.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;but I can see a fair chunk of work required to get this set up to where the client might be passing happy (including being able to generate all the forms and reports they like), and then there&amp;rsquo;s the question of the monthly fees.  In the meantime I got MS Access 2013 for £14.40 through the tt-exchange using AgileVentures charity status.  And &amp;hellip; they are going to physically deliver shrink-wrapped software to my address?  What, no download?  Seems like we won&amp;rsquo;t receive anything for five days, hmm.&lt;/p&gt;
+
+&lt;p&gt;I can see MS Access 2016 being offered for close to £100 from Tekgia on a charity offer.  Hmmm. So I had another go at getting in through the MS portal to no joy.  I did seem to be able to get access to the basic office suite through our existing nonprofit setup by going through the sam@agileventures.org login in my safari browser.  I finally found a help request form and submitted a help request:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://nonprofitcontactus.microsoftcrmportals.com/contact-us/"&gt;https://nonprofitcontactus.microsoftcrmportals.com/contact-us/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;and I would have pasted in here the help request but super-irritatingly I can&amp;rsquo;t go back to the form and they don&amp;rsquo;t send me a copy &amp;hellip; although they send me a notification that they&amp;rsquo;ll get back to me in about 5 business days:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/qwm32xhnsr14tuk/Screenshot%202018-01-11%2010.45.32.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ugh, I guess the main question on my mind is whether Zoho can produce the reports the client needs, and maybe more importantly the complex subforms &amp;hellip; the other alternatives I have are build their system from scratch in LibreOffice on PC, and/or force through and buy a copy of MS Access 2016.  £100 is not insane from Tekgia, but will be frustrating if we can get it for £1.50 a month as part of our MS nonprofit status, of I&amp;rsquo;ve doubled up having already spend £12 on MS access and I&amp;rsquo;ve missed the download button or it will arrive tomorrow.&lt;/p&gt;
+
+&lt;p&gt;I do have MS Access 2007 on my machine - should I perhaps start playing with that?  Quick answer is that I can&amp;rsquo;t import the LibreOffice odb format into MS Access 2007.  Also, it looks like Zoho does support subforms:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://www.zoho.com/creator/help/forms/creating-subforms.html"&gt;https://www.zoho.com/creator/help/forms/creating-subforms.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I have been able to import the XLSX table into MS Access 2007, so that&amp;rsquo;s a basic route forward I guess &amp;hellip; painful decisions ahead.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Damn Estimates</title>
     <link rel="alternate" href="http://blog.url.com/2018/01/10/av-ecosystem-review-damn-estimates/"/>
@@ -251,90 +313,6 @@
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ve6vacheeuz4a69/Screenshot%202018-01-04%2011.58.33.png?dl=0" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Carefully saving after each change, and now I guess I&amp;rsquo;ll have to push on the rest tomorrow, after making a backup copy.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Task Switching</title>
-    <link rel="alternate" href="http://blog.url.com/2018/01/03/av-ecosystem-review-task-switching/"/>
-    <id>http://blog.url.com/2018/01/03/av-ecosystem-review-task-switching/</id>
-    <published>2018-01-03T00:00:00+00:00</published>
-    <updated>2018-05-07T21:24:54+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="task switching" src="/images/taskswitching.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;They say that task switching is bad for getting things done.  Clearly some tasks require more concentration, but then there&amp;rsquo;s also the issue of getting bored with the task at hand.  There&amp;rsquo;s also the issue of switching between documenting (blogging?) a task and getting that task done.  Yesterday morning after about an hour (?) of blog-driven work on the APSoc membership database I switched to admin tasks and then the rest of the day.  It was about 5pm before I got some more free programming time and was able to punch in some time on WebSiteOne where I think I had more done test-driving the creation of a &lt;code&gt;current_subscription&lt;/code&gt; method on our User model.  &lt;/p&gt;
-
-&lt;p&gt;Given a free choice I&amp;rsquo;d probably carry on with that right now, but I have a 5th Jan deadline that I committed to for the APSoc, so I best get that sorted first.  It was a good feeling to sort the &amp;ldquo;AutoValue&amp;rdquo; fields on the APSoc membership database so that data could be inserted, but there&amp;rsquo;s something about the interplay between tests and code that I love.  The LibreOffice Base system is not really amenable to unit tests, although for all I know they have unit tests under the hood as part of the development suite.  However designing a client application via the graphical interface does not involve me writing any kind of tests and given the sensitivity of the application I&amp;rsquo;m not inspired to check out the acceptance testing frameworks that are available.  I burned a lot of time on a private client coding project trying to get comprehensive acceptance testing set up for Electron, and I&amp;rsquo;m becoming a lot more circumspect about the range of acceptance tests that I&amp;rsquo;ll try to employ these days.&lt;/p&gt;
-
-&lt;p&gt;On the WebSiteOne project, I&amp;rsquo;m in a phase of Domain Driven Design, where I&amp;rsquo;m tweaking a relationship in the data model that I believe is needed to accurately replicate the nature of our Premium subscriptions.  I&amp;rsquo;ve started with making the database model change, and I&amp;rsquo;m working out from there - I&amp;rsquo;m in the unit tests for the model, and much as I say I love the interplay, yesterday was tricky where it seemed I had to discard a fast running mocked test for a slower integration test using FactoryGirl. I turned this:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'look up stripe id from subscription'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;mock_model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Subscription&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;save: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;allow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:[]=&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'asks subscription for identifier'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subscription&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt; &lt;span class="ss"&gt;:identifier&lt;/span&gt;
-      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscription&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subscription&lt;/span&gt;
-      &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer_id&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;into this:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'supporting current subscription'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:with_karma&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:premium&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;name: &lt;/span&gt;&lt;span class="s1"&gt;'Premium'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:premium_mob&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:plan&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;name: &lt;/span&gt;&lt;span class="s1"&gt;'Premium Mob'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:payment_source&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;PaymentSource&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;PayPal&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;identifier: &lt;/span&gt;&lt;span class="s1"&gt;'75e'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="c1"&gt;# presence of type (no longer used) in the Subscriptions model is confusing ...&lt;/span&gt;
-    &lt;span class="c1"&gt;# should get rid of all the STI classes ...&lt;/span&gt;
-
-    &lt;span class="n"&gt;let!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;user: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;plan: &lt;/span&gt;&lt;span class="n"&gt;premium&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;started_at: &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;days&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;ended_at: &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;day&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;let!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;FactoryGirl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:subscription&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;user: &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;plan: &lt;/span&gt;&lt;span class="n"&gt;premium_mob&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;started_at: &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;day&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ago&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;payment_source: &lt;/span&gt;&lt;span class="n"&gt;payment_source&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'returns subscription that has started and has not ended'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current_subscription&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="n"&gt;subscription2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s1"&gt;'asks subscription for identifier'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;stripe_customer_id&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt; &lt;span class="s1"&gt;'75e'&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I&amp;rsquo;m a bit uncomfortable with all this FactoryGirl stuff, but I&amp;rsquo;m exercising the following new method on the user model:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;current_subscription&lt;/span&gt;
-    &lt;span class="n"&gt;current_subscriptions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;ended_at: &lt;/span&gt;&lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'started_at &amp;lt; :now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;now: &lt;/span&gt;&lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;nil?&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;empty?&lt;/span&gt;
-    &lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and stubbing it would require a rather long stub chain.  Ironically the APSoc system is also a database running SQL under the hood, and at points I end up writing queries that could be the subject of unit tests, but it&amp;rsquo;s a different beast.  In the WSO code I&amp;rsquo;ve just changed what was a unit test into an integration test, and I&amp;rsquo;m slowly moving up the chain and realising I could have driven this from an acceptance test that ensured the state of subscriptions after an upgrade, although it wouldn&amp;rsquo;t be a black box test &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Last night I wasn&amp;rsquo;t blog driving the WSO RoR coding as I wanted to move fast, but now I&amp;rsquo;ve burnt 30 minutes this morning (mixed in with trying to chat with BT about our intermittment business broadband issues).  Partly the blogging is supposed to help me stay focused on a task, but it can also be a distraction or a great way of thinking through a problem, depending on the circumstances.  So anyway, I&amp;rsquo;ve pulled up yesterday&amp;rsquo;s blog with the list of outstanding tasks for the APSoc db.  Let&amp;rsquo;s take a pass over things that might be sticky/tricky:&lt;/p&gt;
-
-&lt;p&gt;Outstanding items:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Completing tab sequence changes&lt;/li&gt;
-&lt;li&gt;Local Group sub-table&lt;/li&gt;
-&lt;li&gt;Remove various fields from the db&lt;/li&gt;
-&lt;li&gt;Reformat the content of Member_No&lt;/li&gt;
-&lt;li&gt;Various layout changes&lt;/li&gt;
-&lt;li&gt;Couple of UI interaction issues&lt;/li&gt;
-&lt;li&gt;Standing Order Details form appears to be a duplicate&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Okay, so I think the Member&lt;em&gt;No change might be the sticky one.  If I recall the client is suggesting making a change in the format of the membership number which might make for a tricky migration.  I&amp;rsquo;m tempted to just work though the list, making all the changes that are simple, and putting off anything that could take a little longer, specifically the Local Group sub-table and the Member&lt;/em&gt;No thing for the moment.&lt;/p&gt;
-
-&lt;p&gt;Although as I look at it in more detail I see they want something else from the Member&lt;em&gt;No.  This is not the RecNo that is the &amp;ldquo;primary key&amp;rdquo;.  It&amp;rsquo;s a composite that they want to be built from &amp;ldquo;Member&lt;/em&gt;Types&lt;em&gt;Code&lt;/em&gt;Letter + RecNo&amp;rdquo;.  Hmm, should this be a dynamically constructed field?  I&amp;rsquo;m not sure where the Member&lt;em&gt;Types&lt;/em&gt;Code_Letter is coming from &amp;hellip; Didn&amp;rsquo;t they just ask the CodeLetter be deleted from the membership types table?&lt;/p&gt;
-
-&lt;p&gt;Anyway, I&amp;rsquo;ve deleted the fields they didn&amp;rsquo;t want in the membership table, so let&amp;rsquo;s make sure that the membership form still works &amp;hellip; so I can view records and edit them after the table changes.  Here&amp;rsquo;s where acceptance tests might save me from needing to exhaustively test all things like adding a new record &amp;hellip; perhaps I can delete the test one and re-add - that worked fine.&lt;/p&gt;
-
-&lt;p&gt;So the biggest surprise is that my work creating the Standing Order form appears to have been lost.  I could have sworn I went through creating that, but this bloody double save requirement is my bane.  It&amp;rsquo;s not enough to click save on the form editor - you also have to click save on the main database page in order to ensure everything is actually saved to disk - insane.  I&amp;rsquo;ve just dredged up the memory about how to create the correct subform, and now the app has crashed again.  In my other parallel task BT says they have detected a possible fault on our line and they are looking into it - which is better news.  But LibreOffice is back to the spinning beach ball of death &amp;hellip; time to kill it and restart.  Argh, and now the entire file is corrupted - my entire two days work lost by the look of it &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I spent 15 minutes kicking things around.  The backup files are all zero size, no go.  I think I&amp;rsquo;ll start again tomorrow &amp;hellip; new process - take a backup each day &amp;mdash; maybe develop in dropbox?&lt;/p&gt;
 </content>
   </entry>
 </feed>
