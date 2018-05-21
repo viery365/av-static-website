@@ -173,7 +173,7 @@
 
 <p>Hopefully a bit of cleanup and formatting and this will look nice and have more functionality that I was able to immediately hand-roll.  I could probably have implemented dynamic removal of form fields in the same time it took me to get proof of concept on this gem.  However using this gem will hopefully make our system less suprising to new developers who might have seen this gem on other projects, and we&rsquo;ll potentially get the benefits of upgrades and fixes to the gem itself.</p>
 
-<p>Of course, despite getting the interface working, the repository datat that I inputted was not actually saved to the database as such, but then I hadn&rsquo;t got that part working in my own hand-rolled version either :-)</p>
+<p>Of course, despite getting the interface working, the repository data that I inputted was not actually saved to the database as such, but then I hadn&rsquo;t got that part working in my own hand-rolled version either :-)</p>
 
 <p>I can see the data being passed back:</p>
 <pre class="highlight plaintext"><code>Started POST "/projects" for ::1 at 2017-09-18 08:56:32 +0000
@@ -191,7 +191,7 @@ Unpermitted parameter: source_repositories_attributes
     <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:project</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="ss">:description</span><span class="p">,</span> <span class="ss">:pitch</span><span class="p">,</span> <span class="ss">:created</span><span class="p">,</span> <span class="ss">:status</span><span class="p">,</span> <span class="ss">:user_id</span><span class="p">,</span> <span class="ss">:github_url</span><span class="p">,</span> <span class="ss">:pivotaltracker_url</span><span class="p">,</span> <span class="ss">:pivotaltracker_id</span><span class="p">,</span> <span class="ss">:image_url</span><span class="p">,</span> <span class="ss">source_repositories_attributes: </span><span class="p">[</span><span class="ss">:url</span><span class="p">])</span>
   <span class="k">end</span>
 </code></pre>
-<p>We need to specify the nested required attributes.  We are now saving our new repo information to the database thanks to <a href="https://stackoverflow.com/questions/15919761/rails-4-nested-attributes-unpermitted-parameters">Stack Overflow</a>!</p>
+<p>We also needed to specify the nested required attributes, and now we are saving our new repo information to the database thanks to <a href="https://stackoverflow.com/questions/15919761/rails-4-nested-attributes-unpermitted-parameters">Stack Overflow</a>!</p>
 
         <h2 class='author'>by Sam Joseph</h2>
       </div>  
