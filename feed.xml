@@ -5,10 +5,50 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2018-01-11T00:00:00+00:00</updated>
+  <updated>2018-01-12T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Starting Over</title>
+    <link rel="alternate" href="http://blog.url.com/2018/01/12/av-ecosystem-review-starting-over/"/>
+    <id>http://blog.url.com/2018/01/12/av-ecosystem-review-starting-over/</id>
+    <published>2018-01-12T00:00:00+00:00</published>
+    <updated>2018-05-21T21:15:23+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="starting over" src="/images/starting_over.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Yesterday I sent the APSoc client the following email:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;So I think we need to make some decisions about how to proceed.&lt;/p&gt;
+
+&lt;p&gt;At the moment we are thinking that the best alternatives are to either go with MS Access, or with Zoho Creator.  Using the XLSX you just provided we&amp;rsquo;ve started projects in both MS Access and Zoho Creator.  It&amp;rsquo;s obviously not ideal to have to switch platform at this stage, but the instability of LibreOffice Base makes it seem like we can&amp;rsquo;t continue with that platform.&lt;/p&gt;
+
+&lt;p&gt;Zoho Creator is a cloud solution that replicates much of the MSAccess/LotusApproach functionality, and comes with a £10 a month price tag, but reduced to £8 for charities.&lt;/p&gt;
+
+&lt;p&gt;MS offers Access as part of Office 365 for £1.50 a month (for charities), and Access is also available standalone.  Access 2013 is available for £12 for charities and Access 2016 is available for about £95.  I&amp;rsquo;m keen to know if you already have a copy of Access and whether you have strong preferences here.&lt;/p&gt;
+
+&lt;p&gt;I know that you were looking to avoid any monthly charges, and anticipate that you might prefer the standalone MS Access option.  If you do currently have a copy of MS Access please let us know which version you have.&lt;/p&gt;
+
+&lt;p&gt;Please let me know if you&amp;rsquo;d like a call to discuss the alternatives.  We&amp;rsquo;re planning to work through the weekend to get the project back on schedule on a new platform.&lt;/p&gt;
+
+&lt;p&gt;Apologies for the inconvenience.&lt;/p&gt;
+
+&lt;p&gt;Best, Sam&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;and I haven&amp;rsquo;t heard back yet, so I guess I&amp;rsquo;m going to take a stab at moving the MS Access version forward.  Zoho Creator was nice and zippy, and MS Access feels sluggish, but I suspect that the monthly charge for Zoho could be a dealbreaker.&lt;/p&gt;
+
+&lt;p&gt;It took about 40 minutes but I got a draft form for members up in Access 2007:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/5khkijp2qr728gj/Screenshot%202018-01-12%2011.33.31.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;With at least one dropdown linking to a different table.  Overall the UI is easily better than the latest LibreOffice even though I&amp;rsquo;m using MSAccess from 10 years back.  Hmm, maybe I should have just started with Access for a simple life, but we&amp;rsquo;ll see.  Now I&amp;rsquo;m tempted to see what&amp;rsquo;s the best I can get out of Zoho &amp;hellip; I immediately run up against a couple of (perhaps minor) issues, which are that we can&amp;rsquo;t easily convert fields from multi-line to single-line and back again.  Also my attempts to adjust a drop down field to radio buttons fails.  I think I&amp;rsquo;ll give up there.  I&amp;rsquo;m pretty sure the client is going to be much happier with the results from MSAccess, and I can develop faster there too &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Painful Decisions</title>
     <link rel="alternate" href="http://blog.url.com/2018/01/11/av-ecosystem-review-painful-decisions/"/>
@@ -76,7 +116,7 @@
     <link rel="alternate" href="http://blog.url.com/2018/01/10/av-ecosystem-review-damn-estimates/"/>
     <id>http://blog.url.com/2018/01/10/av-ecosystem-review-damn-estimates/</id>
     <published>2018-01-10T00:00:00+00:00</published>
-    <updated>2018-05-16T21:39:46+01:00</updated>
+    <updated>2018-05-21T21:12:38+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -124,9 +164,9 @@
 
 &lt;p&gt;Which is all great feedback, but makes me think we cannot continue with LibreOffice Base.  Maybe that&amp;rsquo;s reactionary, but I&amp;rsquo;ve now created the Standing Order Form twice and although I now have backups of it, it&amp;rsquo;s just randomly gone blank in the latest version that I&amp;rsquo;ve shared with the client.&lt;/p&gt;
 
-&lt;p&gt;I had been thinking that the lock up problem had only been affecting me when I&amp;rsquo;d been editing the system and the querying portion of the system had been stable on their platform, as it appears to have been on mine.  To hear that they are having serious lock up issues makes me think there&amp;rsquo;s no real way forward here.  I&amp;rsquo;ve got no clear way to debug the crashes that I&amp;rsquo;m getting, and although I can see some chatter about this on the message boards I don&amp;rsquo;t think I can afford to invest 10&amp;rsquo;s of hours into tracking down the cause of the crash, particularly when there&amp;rsquo;s no guarantee that it&amp;rsquo;ll even be fixable.  The workflow with LibreOffice Base with the crashes is appalling.&lt;/p&gt;
+&lt;p&gt;I had been thinking that the lock up problem had only been affecting me when I&amp;rsquo;d been editing the system and the querying portion of the system had been stable on their platform, as it appears to have been on mine.  To hear that they are having serious lock up issues makes me think there&amp;rsquo;s no real way forward here.  I&amp;rsquo;ve got no clear way to debug the crashes that I&amp;rsquo;m getting; and although I can see some chatter about this on the message boards, I don&amp;rsquo;t think I can afford to invest 10&amp;rsquo;s of hours into tracking down the cause of the crash, particularly when there&amp;rsquo;s no guarantee that it&amp;rsquo;ll even be fixable.  The workflow with LibreOffice Base with the crashes is appalling.&lt;/p&gt;
 
-&lt;p&gt;Now maybe I&amp;rsquo;ve done something terribly inappropriate with the system importing the legacy data and the way I have the forms setup etc. but I&amp;rsquo;m tempted to suspect something related to having switched from Mac to PC and back.  It all seemed fine, but maybe some weird line endings got in there.  In particular even though the system is open source, the lack of transparency of the system being developed makes me despair of getting to the bottom of things in short order.  In principle the database file is a zip file that can be unpacked and have its components expected, but I was unable to unzip when the app was crashing.&lt;/p&gt;
+&lt;p&gt;Now maybe I&amp;rsquo;ve done something terribly inappropriate with the system importing the legacy data and the way I have the forms setup etc. but I&amp;rsquo;m tempted to suspect something related to having switched from Mac to PC and back.  It all seemed fine, but maybe some weird line endings got in there.  In particular even though the system is open source, the lack of transparency of the system being developed makes me despair of getting to the bottom of things in short order.  In principle the database file is a zip file that can be unpacked and have its components inspected, but I was unable to unzip when the app was crashing.&lt;/p&gt;
 
 &lt;p&gt;I thought LibreOffice Base was a good option as there was a large responsive community and an initial import of the client&amp;rsquo;s data went fine, and an initial setup of various relations went well.  It looked like it has all the functionality that we need, and that&amp;rsquo;s been born out during further development, but the crashing, lack of automatic backup and the monolithic file format makes me think we are better off cutting our losses and switching to Zoho or MSAccess.  The options as I see them are:&lt;/p&gt;
 
@@ -139,7 +179,7 @@
 
 &lt;p&gt;I&amp;rsquo;m leaning towards options 3 and 4 in that I suspect there&amp;rsquo;s a lower likelihood of encountering the crash issue, and perhaps more cohorent support, although I&amp;rsquo;m not sure.&lt;/p&gt;
 
-&lt;p&gt;So I just got set up with a Zoho account and emailed them about non-profit discounts, but I don&amp;rsquo;t seem to have an XLSX file for the main members db, and although Zoho says it will import mdb files it can&amp;rsquo;t handle the ones from the APSoc dump.  The MSAccess Office 365 offering seems to be only available on PC.  TT-Exchange which we&amp;rsquo;re already a member of has MSAccess 2013 for £12, while the main MS page has Office365 for £1.50 a month per user.  Guess I&amp;rsquo;ll apply for the latter, but I get stuck - I start the application process, but then can&amp;rsquo;t select AgileVentures - we already have a charity account, but then I can&amp;rsquo;t log in to it.  Ugh, so stuck on two fronts there.  At least I&amp;rsquo;ve pushed forward on both pathways &amp;hellip;&lt;/p&gt;
+&lt;p&gt;So I just got set up with a Zoho account and emailed them about non-profit discounts, but I don&amp;rsquo;t seem to have an XLSX file for the main members db, and although Zoho says it will import mdb files it can&amp;rsquo;t handle the ones from the APSoc dump.  The MSAccess Office 365 offering seems to be only available on PC.  TT-Exchange, which we&amp;rsquo;re already a member of, has MSAccess 2013 for £12, while the main MS page has Office365 for £1.50 a month per user.  Guess I&amp;rsquo;ll apply for the latter, but I get stuck - I start the application process, but then can&amp;rsquo;t select AgileVentures - we already have a charity account, but then I can&amp;rsquo;t log in to it.  Ugh, so stuck on two fronts there.  At least I&amp;rsquo;ve pushed forward on both pathways &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;Gah, so I need to ask the client for an XLS export of the member database to even test Zoho, and I maybe need to contact MicroSoft support to even get set up with their charity plan &amp;hellip; I think I&amp;rsquo;m going to email the client to let them know my concerns and ask for the appropriate files.&lt;/p&gt;
 </content>
@@ -149,13 +189,13 @@
     <link rel="alternate" href="http://blog.url.com/2018/01/09/av-ecosystem-review-distracted-by-the-real-thing/"/>
     <id>http://blog.url.com/2018/01/09/av-ecosystem-review-distracted-by-the-real-thing/</id>
     <published>2018-01-09T00:00:00+00:00</published>
-    <updated>2018-05-14T21:17:47+01:00</updated>
+    <updated>2018-05-21T21:12:38+01:00</updated>
     <author>
       <name>Article Author</name>
     </author>
     <content type="html">&lt;p&gt;&lt;img alt="distraction" src="/images/distraction.jpg" /&gt;&lt;/p&gt;
 
-&lt;p&gt;Ironically after getting more sleep last night I feel groggier this morning.  Sunday night I couldn&amp;rsquo;t sleep re-hashing my 9-year old twins lost football (soccer) match (I&amp;rsquo;m the coach).  Don&amp;rsquo;t want to be strung out thinking about it, but I am every pretty much every time they lose; although it&amp;rsquo;s particularly bad when I think the opposing coach is not setting a good example.  Despite the lack of sleep on Sunday, yesterday was a solid day.  I slept properly last night, but is this a cold coming on?  Urgh.  Been distracted this morning, but maybe by the right stuff?  I&amp;rsquo;ve done a quick Slack/Email review and edited the &lt;a href="https://www.agileventures.org/premium-f2f-offer"&gt;AV Premium F2F offer page&lt;/a&gt; to include connecting to me on LinkedIn.  I keep wondering what to do with the random folks connecting to me there - might as well be offering them a free hour of pairing on a charity project.&lt;/p&gt;
+&lt;p&gt;Ironically after getting more sleep last night I feel groggier this morning.  Sunday night I couldn&amp;rsquo;t sleep re-hashing my 9-year old twins lost football (soccer) match (I&amp;rsquo;m the coach).  Don&amp;rsquo;t want to be strung out thinking about it, but I am, pretty much every time they lose; although it&amp;rsquo;s particularly bad when I think the opposing coach is not setting a good example.  Despite the lack of sleep on Sunday, yesterday was a solid day.  I slept properly last night, but is this a cold coming on?  Urgh.  Been distracted this morning, but maybe by the right stuff?  I&amp;rsquo;ve done a quick Slack/Email review and edited the &lt;a href="https://www.agileventures.org/premium-f2f-offer"&gt;AV Premium F2F offer page&lt;/a&gt; to include connecting to me on LinkedIn.  I keep wondering what to do with the random folks connecting to me there - might as well be offering them a free hour of pairing on a charity project.&lt;/p&gt;
 
 &lt;p&gt;And now I want to just quickly follow through with Will&amp;rsquo;s advice on changes to the Premium Sponsorship form, and get the revised version out to a few folks:&lt;/p&gt;
 
@@ -177,7 +217,7 @@
 
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/m29aa7wl36fiuw5/Screenshot%202018-01-09%2010.32.39.png?dl=0" /&gt;&lt;/p&gt;
 
-&lt;p&gt;but I must jump back to the APSoc membership database, and my new backup ritual which involves copying the previous days file in dropbox and relabelling it with the day I&amp;rsquo;m starting on.  Giving LibreOffice Base an extra 2GB of Java memory does not appear to have helped with the lock up issues.  &lt;/p&gt;
+&lt;p&gt;But I must jump back to the APSoc membership database, and my new backup ritual which involves copying the previous day&amp;rsquo;s file in dropbox and relabelling it with the day I&amp;rsquo;m starting on.  Giving LibreOffice Base an extra 2GB of Java memory does not appear to have helped with the lock up issues.  &lt;/p&gt;
 
 &lt;p&gt;But let&amp;rsquo;s start with correctly populating the Local Group field in the membership form.  I create and populate a new table, and in short order I have the Local Group dropdown as requested:&lt;/p&gt;
 
@@ -189,11 +229,11 @@
 
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ac9vdcxbhwlfpkk/Screenshot%202018-01-09%2011.10.30.png?dl=0" /&gt;&lt;/p&gt;
 
-&lt;p&gt;but I&amp;rsquo;ve got no basis to diagnose the issue &amp;hellip; I make a quick extra backup and continue, and I get it working:&lt;/p&gt;
+&lt;p&gt;But I&amp;rsquo;ve got no basis to diagnose the issue &amp;hellip; I make a quick extra backup and continue, and I get it working:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/anclrh7bi983wpb/Screenshot%202018-01-09%2011.13.11.png?dl=0" /&gt;&lt;/p&gt;
 
-&lt;p&gt;There is no particular pattern - although sense problems come when I double up on things, e.g. add a table in the SQL view by double clicking, but then also click the add button &amp;hellip; okay, enough for today, I&amp;rsquo;m going to pass this version on to the client, as I said I would do that daily this week.&lt;/p&gt;
+&lt;p&gt;There is no particular pattern - although I sense problems come when I double up on things, e.g. add a table in the SQL view by double clicking, but then also click the add button &amp;hellip; okay, enough for today. I&amp;rsquo;m going to pass this version on to the client, as I said I would do that daily this week.&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -283,36 +323,6 @@
 &lt;/ul&gt;
 
 &lt;p&gt;and after merely 60 seconds of normal function on the PC the software has locked up again.  Gosh, am I going to have to tell the client that we&amp;rsquo;ll have to switch to Microsoft Access &amp;hellip;?  I had another go with the recovered version on Mac, and I used the advice in &lt;a href="http://lowendmac.com/2014/speed-up-libreoffice-on-your-mac/"&gt;this post&lt;/a&gt; to increase the amount of memory being made available to the LibreOffice on Mac, and I&amp;rsquo;ve made some progress, finishing up the tab sequence changes on the membership form, and now putting through a series of changes to the Subscription Payment form.  I&amp;rsquo;ve saved and backed those up, but now onto the Gift Aid form, where a series of small formatting changes leads the system to lock up again!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Regular Backups</title>
-    <link rel="alternate" href="http://blog.url.com/2018/01/04/av-ecosystem-review-regular-backups/"/>
-    <id>http://blog.url.com/2018/01/04/av-ecosystem-review-regular-backups/</id>
-    <published>2018-01-04T00:00:00+00:00</published>
-    <updated>2018-05-08T21:06:45+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="backup" src="/images/backup.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So leaving it overnight has not magically fixed the corrupted database file, and it seems I&amp;rsquo;ve lost several hours work from the last few days, and I can&amp;rsquo;t figure out any easy way to recover it.  Brent was suggesting git, but the annoying thing about this LibreOffice Base (MSOffice/LotusApproach) style system is that the data is stored along with db schema and interface.  I can&amp;rsquo;t really put this in a public git repository.  I could set up a private git account on GitHub through AgileVentures, for which this is a project, but I&amp;rsquo;m going to take a stab at a dropbox backed up approach.  Cloning the system at critical points.&lt;/p&gt;
-
-&lt;p&gt;I start by adjusting all the tables so that the autovalue is set on the primary fields, which should clear up the main issue the client experienced in the alpha version, which was an inability to save data.  I&amp;rsquo;m now working with the odb in dropbox and I can see the version history going past:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/4imbyibc39ilidm/Screenshot%202018-01-04%2010.00.23.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;d moved off dropbox before because I was worried that the dropbox syncing might be causing problems and a previous attempt to backup from dropbox hadn&amp;rsquo;t worked, but I think I&amp;rsquo;ve worked out that there&amp;rsquo;s a double save operation required and I&amp;rsquo;ll keep tracking the dropbox updates to check I&amp;rsquo;m getting proper backups and I don&amp;rsquo;t lose any more work &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Now onto trying to fix the Standing Order form that I was sure I did before Xmas, but appears to have been lost (not properly saved), the editing of which caused the main crash yesterday &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;So I get the form updated (i.e. the subform that connects to the recurring sub table), and it seems okay, but then I try to add a new form field and we get the spinning beach ball of death again.  This was the point yesterday when I killed the system and we lost all the data.  I note now that dropbox is stuck trying to upload the latest version.  Maybe the trick is that I have to create a new subform from scratch rather than modifying the existing one, but this is a silly game of guess what&amp;rsquo;s causing the problem &amp;hellip; hmm, should I switch back to working on the PC?  Should we have just gone with MSAccess, or tried harder to convince the client to go with a cloud based solution?  Personally I&amp;rsquo;m still enamoured with the feature that the client loved about Lotus Approach which was their ability to tweak the forms themselves.&lt;/p&gt;
-
-&lt;p&gt;Anyway, this time I was less hasty about killing the application and in about five minutes, while I looked up the latest version of LibreOffice (I think there&amp;rsquo;s a new version out) and fired up my PC, the libre on my Mac unlocked and I was able to save it &amp;hellip; it locked up again a little time later, so I killed it and was able to recover with the latest version of LibreOffice for mac.  I sorted out the Standing Order Details form.  Here&amp;rsquo;s a screenshot to prove it:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ve6vacheeuz4a69/Screenshot%202018-01-04%2011.58.33.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Carefully saving after each change, and now I guess I&amp;rsquo;ll have to push on the rest tomorrow, after making a backup copy.&lt;/p&gt;
 </content>
   </entry>
 </feed>
