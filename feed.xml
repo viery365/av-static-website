@@ -5,10 +5,78 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2018-01-12T00:00:00+00:00</updated>
+  <updated>2018-01-15T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Getting Back on Track</title>
+    <link rel="alternate" href="http://blog.url.com/2018/01/15/av-ecosystem-review-getting-back-on-track/"/>
+    <id>http://blog.url.com/2018/01/15/av-ecosystem-review-getting-back-on-track/</id>
+    <published>2018-01-15T00:00:00+00:00</published>
+    <updated>2018-05-24T21:25:00+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="track" src="/images/track.jpeg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m a bit of a wreck this morning.  I didn&amp;rsquo;t sleep well - woke up at 4am brain full of kids football.  I did write down a new drill for training (I coach 7aside soccer for nine year olds) and then listened to standup comedy on audio for 2 hours to stop my brain endlessly turning over the same thoughts again and again.  Not dissimilar to last Sunday night/Monday morning.  Emotionally charged football matches.  This weekend&amp;rsquo;s was less intense (draw instead of a loss), but I worked three hours in the afternoon to get the APSoc&amp;rsquo;s membership database recreated on MS Access now that I got the green light from the client to switch.  This is all because LibreOffice is crashing too frequently and ZohoCreator looks like it doesn&amp;rsquo;t might not have all the functionality we need.&lt;/p&gt;
+
+&lt;p&gt;I made reasonable progress yesterday although I was popping paracetamol and ibuprofen to push on in the last hour.  I think I&amp;rsquo;ve got us back to the place we were in LibreOffice, and actually got a few more supporting tables to populate the dropdown lists correctly.  However there&amp;rsquo;s a clear additional chunk of functionality that I hadn&amp;rsquo;t really been focusing on.  A load of specification for default values, computed fields and so forth.  I&amp;rsquo;d love to have a break from the project this week, so I think the thing to do is label what we have as an MS Access alpha version and re-work the schedule.  Here are screenshots of the different forms done in Access.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ydoubyw95wb1zhc/Screenshot%202018-01-15%2009.28.44.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/eoi4nm5e655wnhq/Screenshot%202018-01-15%2009.29.14.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/rel3yqy4ur1rujc/Screenshot%202018-01-15%2009.31.58.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/jqch3s2dbyujrzi/Screenshot%202018-01-15%2009.32.19.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Wonder if I should set up a Trello board for all the different bits of functionality?  I guess I&amp;rsquo;ll get the new schedule approved.  The old schedule had been:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;by Dec 8th - screenshots of membership database interface for you to approve&lt;/li&gt;
+&lt;li&gt;by Dec 15th - alpha version of membership database for you to approve&lt;/li&gt;
+&lt;li&gt;by Jan 5th - beta version of membership database adjusted as per feedback&lt;/li&gt;
+&lt;li&gt;by Jan 31st - release version of membership database adjusted as per feedback, including full migration &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;so if we have the alpha version now, then perhaps we can set the beta version for Jan 26th, and then release version on Feb 9th, so that&amp;rsquo;s&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;by Jan 26th - beta version of membership database adjusted as per feedback&lt;/li&gt;
+&lt;li&gt;by Feb 9th - release version of membership database adjusted as per feedback, including full migration&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;which I put in an email to the client:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Thanks for your email - hope you had a good weekend.&lt;/p&gt;
+
+&lt;p&gt;We now have an alpha version in MSAccess, which you can access here:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;[DROP BOX LINK]&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In case you don&amp;rsquo;t have a copy of MSAccess please find screenshots of all the forms attached.
+Thanks so much for all the detailed feedback over the last few weeks.  I believe we have a good chunk of the issues addressed in this MS Access alpha version, but certainly not all. In particular, as you noticed, the majority of fields are not folllowing the defaulted/calculated/midified rules from the database definition.   This is simply as we hadn&amp;rsquo;t started work on implementing them yet.   Please rest assured that they will be implemented in the next version.&lt;/p&gt;
+
+&lt;p&gt;Given the software issues we encountered with LibreOffice we&amp;rsquo;d like to propose the following new schedule for delivery:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;by Jan 26th - beta version of membership database adjusted as per feedback&lt;/li&gt;
+&lt;li&gt;by Feb 9th - release version of membership database adjusted as per feedback, including full migration&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Our sincere apologies for the slippage and we hope the new schedule meets with your approval.&lt;/p&gt;
+
+&lt;p&gt;Best, Sam&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;and I&amp;rsquo;ll send that later today.  Now what I really want is some coffee and perhaps I can dive into my outstanding pull request on updating the WSO Premium model so that it can support the sponsor relations we need to more accurately represent our Premium membership data &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Starting Over</title>
     <link rel="alternate" href="http://blog.url.com/2018/01/12/av-ecosystem-review-starting-over/"/>
@@ -282,47 +350,6 @@
 &lt;/blockquote&gt;
 
 &lt;p&gt;A tight corner indeed - can I bank effectively and avoid coming a cropper?&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Beta Release Deadline</title>
-    <link rel="alternate" href="http://blog.url.com/2018/01/05/av-ecosystem-review-beta-release-deadline/"/>
-    <id>http://blog.url.com/2018/01/05/av-ecosystem-review-beta-release-deadline/</id>
-    <published>2018-01-05T00:00:00+00:00</published>
-    <updated>2018-05-15T21:57:47+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="deadline" src="/images/deadline.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Okay, so I&amp;rsquo;m up against the deadline for the beta release of the APSoc membership database.  The timeline I gave them at the beginning of the project was:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;by Dec 8th - screenshots of membership database interface for you to approve&lt;/li&gt;
-&lt;li&gt;by Dec 15th - alpha version of membership database for you to approve&lt;/li&gt;
-&lt;li&gt;by Jan 5th - beta version of membership database adjusted as per feedback&lt;/li&gt;
-&lt;li&gt;by Jan 31st - release version of membership database adjusted as per feedback, including full migration &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I managed to avoid losing any work yesterday, let&amp;rsquo;s see if we can do the same today with appropriate dropbox backups.  What I need to do now is work through their list of fixes again, re-fixing the stuff I lost from Tuesday and Wednesday.&lt;/p&gt;
-
-&lt;h2&gt;Fixes (membership form)&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Bring all text entry fields to front and labels to back&lt;/li&gt;
-&lt;li&gt;Delete junk at bottom of form&lt;/li&gt;
-&lt;li&gt;start renaming the elements that still have default names&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And already I&amp;rsquo;ve got the spinning beachball - okay - time to move to the PC - I duplicate the latest system and add a &amp;ldquo;-pc&amp;rdquo; tag on it, but it&amp;rsquo;s reporting as a corrupted file and I can&amp;rsquo;t open it on the PC.  A little dance and I restore the previous version from dropbox and get it opened on the PC.  Tense moments.&lt;/p&gt;
-
-&lt;h2&gt;Fixes (membership form) (cont. on PC)&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;swapped NL and NML checkboxes&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;and after merely 60 seconds of normal function on the PC the software has locked up again.  Gosh, am I going to have to tell the client that we&amp;rsquo;ll have to switch to Microsoft Access &amp;hellip;?  I had another go with the recovered version on Mac, and I used the advice in &lt;a href="http://lowendmac.com/2014/speed-up-libreoffice-on-your-mac/"&gt;this post&lt;/a&gt; to increase the amount of memory being made available to the LibreOffice on Mac, and I&amp;rsquo;ve made some progress, finishing up the tab sequence changes on the membership form, and now putting through a series of changes to the Subscription Payment form.  I&amp;rsquo;ve saved and backed those up, but now onto the Gift Aid form, where a series of small formatting changes leads the system to lock up again!&lt;/p&gt;
 </content>
   </entry>
 </feed>
