@@ -5,10 +5,237 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2018-01-15T00:00:00+00:00</updated>
+  <updated>2018-01-16T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Damned JavaScript Acceptance Tests</title>
+    <link rel="alternate" href="http://blog.url.com/2018/01/16/av-ecosystem-review-damned-javascript-acceptance-tests/"/>
+    <id>http://blog.url.com/2018/01/16/av-ecosystem-review-damned-javascript-acceptance-tests/</id>
+    <published>2018-01-16T00:00:00+00:00</published>
+    <updated>2018-06-04T20:53:26+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="acceptance tests" src="/images/acceptance_testing_diagram.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So the APSoc client has approved the MSAccess alpha and the new timescale, so I can spend a week on the AV website and the rest of the ecosystem.  I made some progress with the Premium/Sponsor domain upgrade yesterday, and I suspect I have everything in place, but I&amp;rsquo;m getting what look suspiciously like a series of intermittent javascript acceptance test failures.  These really do seem to be the bane of our projects.  I&amp;rsquo;ve got a series of failures that disappear when I pop in the debugger.  For example:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (1429_have_premium_upgrades_close_out_old_subscription)]$ 
+→ be cucumber features/premium/upgrade_membership.feature:36
+
+Using the default profile...
+@stripe_javascript @javascript
+Feature: Allow Users to Upgrade Membership
+  As a site admin
+  So that we can achieve financial stability
+  I would like users to be able to upgrade their premium plans
+
+  As a software developer
+  So that I can receive additional support in my professional development journey
+  I would like to be able to upgrade my support plan, and understand what that plan includes
+
+  Background:                       # features/premium/upgrade_membership.feature:11
+    Given the following plans exist # features/step_definitions/premium_steps.rb:58
+      | name        | id         | amount | free_trial_length_days |
+      | Premium     | premium    | 1000   | 7                      |
+      | Premium Mob | premiummob | 2500   | 0                      |
+    And the following users exist   # features/step_definitions/user_steps.rb:228
+      | first_name | last_name | email                  | github_profile_url         | last_sign_in_ip |
+      | Alice      | Jones     | alice@btinternet.co.uk | http://github.com/AliceSky | 127.0.0.1       |
+
+  Scenario: User upgrades to premium from free tier                 # features/premium/upgrade_membership.feature:36
+    Given I am logged in                                            # features/step_definitions/user_steps.rb:63
+    When I am on my profile page                                    # features/step_definitions/user_steps.rb:389
+    Then I should see a tooltip explanation of Premium              # features/step_definitions/premium_steps.rb:121
+    And I click "Upgrade to Premium"                                # features/step_definitions/basic_steps.rb:90
+    And I click "Subscribe" within the card_section                 # features/step_definitions/contained_search_steps.rb:33
+    When I fill in appropriate card details for premium             # features/step_definitions/premium_steps.rb:6
+    Then I should see "Premium Member"                              # features/step_definitions/basic_steps.rb:202
+    And my profile page should reflect that I am a "Premium" member # features/step_definitions/premium_steps.rb:131
+      expected to find text "Premium Member" in "Anders Persson ABOUT PROJECTS MEMBERS PREMIUM EVENTS GETTING STARTED Anders Persson 0 Premium Sweden Europe/Stockholm (UTC+01:00) Member for less than a minute Edit Set status Basic Member About Skills About me Omnis voluptatem voluptatem in et asperiores eveniet. Anders Persson has no publicly viewable Youtube videos. Learn More About Us Getting Started Dashboard Opportunities Blog Press Kit Social Facebook Twitter Our Sponsors Standup Bot Craft Academy Mooqita RubyMine Becoming a sponsor AgileVentures - Crowdsourced Learning Contact us Send a traditional email to info@agileventures.org. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963" (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/premium_steps.rb:134:in `/^my profile page should reflect that I am a "([^"]*)" member$/'
+      features/premium/upgrade_membership.feature:44:in `And my profile page should reflect that I am a "Premium" member'
+    And I should see button "Upgrade to Premium Mob"                # features/step_definitions/basic_steps.rb:232
+    And I should see myself in the premium members list             # features/step_definitions/premium_steps.rb:75
+WARN: Screenshot could not be saved. `page.current_path` is empty.
+
+Failing Scenarios:
+cucumber features/premium/upgrade_membership.feature:36 # Scenario: User upgrades to premium from free tier
+
+1 scenario (1 failed)
+12 steps (1 failed, 2 skipped, 9 passed)
+0m18.349s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In principle this test could be affected by the changes I&amp;rsquo;ve been making to the domain model, but if I stick in a debug breakpoint at the point that the view is trying to check the status of the member, it comes up as Premium and the test passes.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    Then I should see "Premium Member"                              # features/step_definitions/basic_steps.rb:202
+
+[68, 77] in /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/app/views/users/profile/_summary.html.erb
+   68:                          class: 'user-profile-btn',
+   69:                          type: 'button' %&amp;gt;&amp;lt;/p&amp;gt;
+   70:         &amp;lt;/li&amp;gt;
+   71:     &amp;lt;% end %&amp;gt;
+   72:       &amp;lt;% byebug  # the presence of this allows features/premium/upgrade_membership.feature:36 to pass for me locally %&amp;gt;
+=&amp;gt; 73:       &amp;lt;li&amp;gt;&amp;lt;%= presenter.user.membership_type %&amp;gt; Member&amp;lt;/li&amp;gt;
+   74:       &amp;lt;% if presenter.user.membership_type == 'Premium' %&amp;gt;
+   75:         &amp;lt;li&amp;gt;&amp;lt;%= render 'users/profile/premium_mob_upgrade', presenter: presenter  %&amp;gt;&amp;lt;/li&amp;gt;
+   76:       &amp;lt;% elsif presenter.user.membership_type == 'Basic' %&amp;gt;
+   77:         &amp;lt;li&amp;gt;&amp;lt;%= render 'users/profile/premium_upgrade', presenter: presenter %&amp;gt;&amp;lt;/li&amp;gt;
+(byebug) presenter.user.membership_type
+"Premium"
+(byebug) c
+    And my profile page should reflect that I am a "Premium" member # features/step_definitions/premium_steps.rb:131
+    And I should see button "Upgrade to Premium Mob"                # features/step_definitions/basic_steps.rb:232
+    And I should see myself in the premium members list             # features/step_definitions/premium_steps.rb:75
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and similarly if I slap in a byebug at the point that the user&amp;rsquo;s plan is updated we get the same pass:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    When I fill in appropriate card details for premium             # features/step_definitions/premium_steps.rb:6
+
+[3, 12] in /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/app/services/add_subscription_to_user_for_plan.rb
+    3:   def self.with(user, sponsor, time, plan, payment_source, subscription_klass = Subscription)
+    4:     ensure_all_previous_subscriptions_are_ended(user, time)
+    5:     user.subscriptions &amp;lt;&amp;lt; subscription_klass.new(started_at: time, sponsor: sponsor, plan: plan, payment_source: payment_source)
+    6:     user.title_list &amp;lt;&amp;lt; plan.name
+    7:     byebug
+=&amp;gt;  8:     user.save!
+    9:   end
+   10: 
+   11:   def self.ensure_all_previous_subscriptions_are_ended(user, time)
+   12:     unended_subs = user.subscriptions.select { |s| s.ended_at.nil? }
+(byebug) c
+    Then I should see "Premium Member"                              # features/step_definitions/basic_steps.rb:202
+    And my profile page should reflect that I am a "Premium" member # features/step_definitions/premium_steps.rb:131
+    And I should see button "Upgrade to Premium Mob"                # features/step_definitions/basic_steps.rb:232
+    And I should see myself in the premium members list             # features/step_definitions/premium_steps.rb:75
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So my hypothesis is that the request to check the profile page is going through so fast that the request for data about the user is coming back before the update has taken place.  The changes I&amp;rsquo;ve made mean the update does take longer.  If my hypothesis is correct, the question is how to make sure that the cuke step to look up the profile page waits until the previous operation has executed.  It occurs to me that Cucumber steps that hit a new endpoint on the server can be treated almost like fire and forget operations. Makes me think of JavaScript non-blocking activity.  Maybe this isn&amp;rsquo;t at all about JavaScript, sorry JavaScript.  Maybe the check that I have &lt;code&gt;&amp;quot;Then I should see &amp;quot;Premium Member&amp;quot;&lt;/code&gt; is passing too quickly?  Strange though, I&amp;rsquo;m pretty sure that page won&amp;rsquo;t have Premium Member in it until the transaction has gone through, but is the database in a separate thread?  I didn&amp;rsquo;t think the page would update until the database action completed, but I guess that we go to the create method in the subscriptions controller via a redirect that&amp;rsquo;s triggered from our javascript Stripe form &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;So I change the step to be &lt;code&gt;Then I should see &amp;quot;Thanks, you&amp;#39;re now an AgileVentures Premium Member&amp;quot;&lt;/code&gt;, which really can&amp;rsquo;t display until the create method has completed, but I get the same error.  Nice hypothesis, but not supported by the data &amp;hellip; hmm, so I create a new step that will check the member status has changed under the hood:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;And(/^I am a "([^"]*)" Member$/) do |type|
+  expect(@user.membership_type).to eq type
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and that fails too:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    Then I should see "Thanks, you're now an AgileVentures Premium Member" # features/step_definitions/basic_steps.rb:202
+    And I am a "Premium" Member                                            # features/step_definitions/premium_steps.rb:144
+
+      expected: "Premium"
+           got: "Basic"
+
+      (compared using ==)
+       (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/premium_steps.rb:145:in `/^I am a "([^"]*)" Member$/'
+      features/premium/upgrade_membership.feature:44:in `And I am a "Premium" Member'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which makes me wonder if this something to do with our database transaction and cleaner.  I was skeptical but I found this &lt;a href="https://stackoverflow.com/a/40185853/316729"&gt;SO answer&lt;/a&gt; which suggesting changing our cleaner from &lt;code&gt;after(:each)&lt;/code&gt; to &lt;code&gt;append_after(:each)&lt;/code&gt; and it appears to have worked &amp;hellip;?  This is the change:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;append_after&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:each&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="no"&gt;DatabaseCleaner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;clean&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;in &lt;code&gt;spec_helper.rb&lt;/code&gt;, but after two passes, I cleaned up the extraneous steps and I get a fail again.  Rats.  Again, a feature that takes X amount of time to develop, but takes 5X time to sort out its flaky acceptance tests.  Anyhow, so now I print out the user subscriptions at the point the user has been updated and in the new step to check:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    When I fill in appropriate card details for premium                    # features/step_definitions/premium_steps.rb:6
+#&amp;lt;Subscription id: 1, type: nil, started_at: "2018-01-16 10:07:10", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&amp;gt;
+    Then I should see "Thanks, you're now an AgileVentures Premium Member" # features/step_definitions/basic_steps.rb:202
+    And I am a "Premium" Member                                            # features/step_definitions/premium_steps.rb:144
+      ["#&amp;lt;Subscription id: 1, type: nil, started_at: \"2018-01-16 10:07:10\", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&amp;gt;"]
+
+      expected: "Premium"
+           got: "Basic"
+
+      (compared using ==)
+       (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/premium_steps.rb:146:in `/^I am a "([^"]*)" Member$/'
+      features/premium/upgrade_membership.feature:44:in `And I am a "Premium" Member'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Weird thing here is that both the subscription states look correct, so why does the membership type not report correctly &amp;hellip; which leads me to:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;current_subscription&lt;/span&gt;
+    &lt;span class="n"&gt;current_subscriptions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;ended_at: &lt;/span&gt;&lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'started_at &amp;lt; :now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;now: &lt;/span&gt;&lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;nil?&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;empty?&lt;/span&gt;
+    &lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;ah, so maybe that &lt;code&gt;&amp;lt;&lt;/code&gt; should be &lt;code&gt;&amp;lt;=&lt;/code&gt;.  So that helps it pass, but the problem with an intermittent fail is that a single pass is not enough and I clean up and then I get another fail again &amp;hellip; okay, so I then manage to catch another fail with some more logging:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;current_subscription&lt;/span&gt;
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"all user subs: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;inspect&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;}"&lt;/span&gt;
+    &lt;span class="n"&gt;current_subscriptions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;ended_at: &lt;/span&gt;&lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'started_at &amp;lt;= :now'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;now: &lt;/span&gt;&lt;span class="no"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"current subs: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;inspect&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;}"&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;nil?&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;empty?&lt;/span&gt;
+    &lt;span class="n"&gt;current_subscriptions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;#&amp;lt;Subscription id: 1, type: nil, started_at: "2018-01-16 10:17:55", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&amp;gt;
+    Then I should see "Thanks, you're now an AgileVentures Premium Member" # features/step_definitions/basic_steps.rb:202
+all user subs: ["#&amp;lt;Subscription id: 1, type: nil, started_at: \"2018-01-16 10:17:55\", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&amp;gt;"]
+current subs: []
+    And I am a "Premium" Member                                            # features/step_definitions/premium_steps.rb:145
+      ["#&amp;lt;Subscription id: 1, type: nil, started_at: \"2018-01-16 10:17:55\", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&amp;gt;"]
+
+      expected: "Premium"
+           got: "Basic"
+
+      (compared using ==)
+       (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/premium_steps.rb:147:in `/^I am a "([^"]*)" Member$/'
+      features/premium/upgrade_membership.feature:44:in `And I am a "Premium" Member'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So, we can somehow have a situation where the current subs query does not report what we expect.  The datetimes appear to be specfic to seconds &amp;hellip; maybe I should grab all the subscriptions and filter on the ruby side?&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  def current_subscription
+    puts "all user subs: #{subscriptions.map{|s| s.inspect}}"
+    now = DateTime.now
+    puts now
+    current_subscriptions = subscriptions.select{|s| s.ended_at.nil? and s.started_at &amp;lt;= now}
+    puts "current subs: #{current_subscriptions.map{|s| s.inspect}}"
+    return nil if current_subscriptions.nil? or current_subscriptions.empty?
+    current_subscriptions.first
+  end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but that also fails!  Weird - I even print out the time:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;all user subs: ["#&amp;lt;Subscription id: 1, type: nil, started_at: \"2018-01-16 10:27:11\", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&amp;gt;"]
+2018-01-16T10:27:11+00:00
+s.ended_at.nil?: true
+s.started_at &amp;lt;= now: false
+current subs: []
+    And I am a "Premium" Member                                            # features/step_definitions/premium_steps.rb:145
+      ["#&amp;lt;Subscription id: 1, type: nil, started_at: \"2018-01-16 10:27:11\", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&amp;gt;"]
+
+      expected: "Premium"
+           got: "Basic"
+
+      (compared using ==)
+       (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/premium_steps.rb:147:in `/^I am a "([^"]*)" Member$/'
+      features/premium/upgrade_membership.feature:44:in `And I am a "Premium" Member'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It makes it look like when the time exactly matches the equality is not there.  Guess I should drop to a unit test:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    context 'just started a new plan' do
+      before { subscription2.ended_at = now ; subscription2.save }
+      let!(:subscription3) { FactoryGirl.create(:subscription, user: user, plan: premium_f2f, started_at: now, payment_source: payment_source) }
+
+      it 'returns subscription that has started right now and has not ended' do
+        expect(user.current_subscription.id).to eq subscription3.id
+      end
+    end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;but that doesn&amp;rsquo;t fail in the way I expect, but it looks like the following tip about converting the datetimes to integers seems to work from the print out I&amp;rsquo;m getting running the cuke test &amp;hellip;&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;    Then I should see "Thanks, you're now an AgileVentures Premium Member" # features/step_definitions/basic_steps.rb:202
+1: s.ended_at.nil?: true
+1: s.started_at &amp;lt;= now: false
+1: s.started_at.to_i &amp;lt;= now.to_i: true
+1: s.ended_at.nil?: true
+1: s.started_at &amp;lt;= now: false
+1: s.started_at.to_i &amp;lt;= now.to_i: true
+    And my profile page should reflect that I am a "Premium" member        # features/step_definitions/premium_steps.rb:131
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice how the &lt;code&gt;s.started_at &amp;lt;= now&lt;/code&gt; is false while &lt;code&gt;s.started_at.to_i &amp;lt;= now.to_i&lt;/code&gt; is true.  I got the idea from:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://makandracards.com/makandra/1057-why-two-ruby-time-objects-are-not-equal-although-they-appear-to-be"&gt;https://makandracards.com/makandra/1057-why-two-ruby-time-objects-are-not-equal-although-they-appear-to-be&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;When I use &lt;code&gt;to_i&lt;/code&gt; to compare the dates all the tests pass in batch and in the CI, making it seem like we&amp;rsquo;ve licked the intermittent fail issue, which seems to have been completely unrelated to JavaScript, but a function of the system looking for subscriptions that started in the past, and the cuke tests running fast enough that sometimes (and only sometimes) when the new subscription was created in the same second as the check for the current_subscription, the user would still be reported as not having upgraded to the new subscription.  The fix should have been just changing &amp;rsquo;&amp;lt;&amp;rsquo; to &amp;rsquo;&amp;lt;=&amp;rsquo; but the date comparison seems to require switching to integers to make it work as we expect.&lt;/p&gt;
+
+&lt;p&gt;What&amp;rsquo;s frustrating is that the new unit test checks for the &lt;code&gt;&amp;lt;=&lt;/code&gt; but somehow using factory girl (or something) does not replicate the exact way that the dates get set up when the whole thing runs in the acceptance test, so I have the system working now, but not a nice unit test precisely nailing the concealed bug &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Time to wrap up for now - I&amp;rsquo;ll leave notes in the code - I wonder if this is a known Rails issue &amp;hellip; anyway, apologies to JavaScript for thinking it was all your fault - not in this case :-)&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Getting Back on Track</title>
     <link rel="alternate" href="http://blog.url.com/2018/01/15/av-ecosystem-review-getting-back-on-track/"/>
@@ -302,54 +529,6 @@ Thanks so much for all the detailed feedback over the last few weeks.  I believe
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/anclrh7bi983wpb/Screenshot%202018-01-09%2011.13.11.png?dl=0" /&gt;&lt;/p&gt;
 
 &lt;p&gt;There is no particular pattern - although I sense problems come when I double up on things, e.g. add a table in the SQL view by double clicking, but then also click the add button &amp;hellip; okay, enough for today. I&amp;rsquo;m going to pass this version on to the client, as I said I would do that daily this week.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Tight Corner</title>
-    <link rel="alternate" href="http://blog.url.com/2018/01/08/av-ecosystem-review-tight-corner/"/>
-    <id>http://blog.url.com/2018/01/08/av-ecosystem-review-tight-corner/</id>
-    <published>2018-01-08T00:00:00+00:00</published>
-    <updated>2018-05-10T21:59:40+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="tight corner" src="/images/tight_corner.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So my estimates were all wrong.  I had hoped to complete the membership database beta for APSoc in two mornings last week, and then be able to move back to things that were arguably more core AV ecosystem.  The task itself was no harder than expected, but the repeatedly crashing LibreOffice Base lost two mornings&amp;rsquo; work and then slowed me to a crawl as I instituted a variety of different (and increasingly extreme) backup options.  Having missed the deadline for Friday, I&amp;rsquo;ve pushed back to the following Friday, and now potentially I lose another week of mornings that I would like to have devoted to the AV ecosystem.  &lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m now weighing up whether I try and combine the dropbox backups I have with git, and I see there&amp;rsquo;s some interesting SO posts about this:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/1960799/using-git-and-dropbox-together-effectively"&gt;https://stackoverflow.com/questions/1960799/using-git-and-dropbox-together-effectively&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;And it looks like it could work.  But I think I&amp;rsquo;ll burn time with set up for potentially not much gain.  I think the key is doing the LibreOffice double save and restarting it each time I make any progress.  It feels late in the day to try and switch to another piece of software such as MSAccess.  Interacting in read/write mode with LibreOffice feels fairly stable.  It&amp;rsquo;s the occasional random lockups, when actually editing the interface, that cause me headaches.  Hopefully for the client it will be solid, but if not I guess I&amp;rsquo;ll have to pay for MSAccess and re-do it all there.&lt;/p&gt;
-
-&lt;p&gt;The other thing I&amp;rsquo;ve been experimenting with is boosting the allocated memory for the app.  Let&amp;rsquo;s see if that helps today.  Maybe I can sort out the Countries DB to have USA and UK at the top &amp;hellip; I try to create a countries table from scratch, but I have trouble setting the primary key.  And almost immediately I have the spinning beachball of death.  Is this something about the size and structure of the system I&amp;rsquo;ve created here within LibreOffice DB?  That I&amp;rsquo;m using it on Mac? Although I do get similar issues on PC.  Or is it that both my computers are too old and slow?&lt;/p&gt;
-
-&lt;p&gt;Anyway I managed to create the adjusted countries table by just allowing the db to create its own primary key, and then finally pasting in data from Google sheets:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/rkw7tt19t85jtqu/Screenshot%202018-01-08%2009.54.07.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;But now I can&amp;rsquo;t insert any records.  Seems like we lost all the auto-value settings on all the table IDs somewhere last week.  I&amp;rsquo;d better send this revised version off to the client, before they start testing the buggy one I sent on Friday.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Hope you had a good weekend and apologies again for the deadline slippage.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ve just been working on the system and if you do run any more tests I&amp;rsquo;d encourage you to work against this version (rather than the one sent on Friday):&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;LINK TO BETA VERSION 2&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;This one has the the UK and USA at the top of the countries list, and another insert bug fixed (or rather refixed).&lt;/p&gt;
-
-&lt;p&gt;Given that we&amp;rsquo;re behind schedule we&amp;rsquo;ll try and give you daily updates this week.  However - please don&amp;rsquo;t feel obliged to test things daily.  We just want to make sure that when you do get a chance to test that you&amp;rsquo;re working against the latest and greatest.&lt;/p&gt;
-
-&lt;p&gt;Again, we plan to have all your items of feedback addressed by Friday.&lt;/p&gt;
-
-&lt;p&gt;Best, Sam&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;A tight corner indeed - can I bank effectively and avoid coming a cropper?&lt;/p&gt;
 </content>
   </entry>
 </feed>

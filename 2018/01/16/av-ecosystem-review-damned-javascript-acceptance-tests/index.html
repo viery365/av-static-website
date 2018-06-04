@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>AV EcoSystem Review Damned JavaScript Acceptance Tests</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/stylesheets/site.css" rel="stylesheet" />
+    <script src="/javascripts/all.js"></script>
+    <link href="/images/favicon.ico" rel="icon" type="image/ico" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-91621093-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</head>
+<body class="x2018 x2018_01 x2018_01_16 x2018_01_16_av-ecosystem-review-damned-javascript-acceptance-tests x2018_01_16_av-ecosystem-review-damned-javascript-acceptance-tests_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top"><img width="175" src="/images/av-logo-inverse.png" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="/#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#why-us">Why us?</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#case-studies">Case Studies</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#subscribe">Subscribe</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+<section id="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2018/01/16/av-ecosystem-review-damned-javascript-acceptance-tests/">AV EcoSystem Review Damned JavaScript Acceptance Tests</a></h2>
+        <h5 class='date'>16 Jan 2018</h5>
+    <p><img alt="acceptance tests" src="/images/acceptance_testing_diagram.png" /></p>
+
+<p>So the APSoc client has approved the MSAccess alpha and the new timescale, so I can spend a week on the AV website and the rest of the ecosystem.  I made some progress with the Premium/Sponsor domain upgrade yesterday, and I suspect I have everything in place, but I&rsquo;m getting what look suspiciously like a series of intermittent javascript acceptance test failures.  These really do seem to be the bane of our projects.  I&rsquo;ve got a series of failures that disappear when I pop in the debugger.  For example:</p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (1429_have_premium_upgrades_close_out_old_subscription)]$ 
+→ be cucumber features/premium/upgrade_membership.feature:36
+
+Using the default profile...
+@stripe_javascript @javascript
+Feature: Allow Users to Upgrade Membership
+  As a site admin
+  So that we can achieve financial stability
+  I would like users to be able to upgrade their premium plans
+
+  As a software developer
+  So that I can receive additional support in my professional development journey
+  I would like to be able to upgrade my support plan, and understand what that plan includes
+
+  Background:                       # features/premium/upgrade_membership.feature:11
+    Given the following plans exist # features/step_definitions/premium_steps.rb:58
+      | name        | id         | amount | free_trial_length_days |
+      | Premium     | premium    | 1000   | 7                      |
+      | Premium Mob | premiummob | 2500   | 0                      |
+    And the following users exist   # features/step_definitions/user_steps.rb:228
+      | first_name | last_name | email                  | github_profile_url         | last_sign_in_ip |
+      | Alice      | Jones     | alice@btinternet.co.uk | http://github.com/AliceSky | 127.0.0.1       |
+
+  Scenario: User upgrades to premium from free tier                 # features/premium/upgrade_membership.feature:36
+    Given I am logged in                                            # features/step_definitions/user_steps.rb:63
+    When I am on my profile page                                    # features/step_definitions/user_steps.rb:389
+    Then I should see a tooltip explanation of Premium              # features/step_definitions/premium_steps.rb:121
+    And I click "Upgrade to Premium"                                # features/step_definitions/basic_steps.rb:90
+    And I click "Subscribe" within the card_section                 # features/step_definitions/contained_search_steps.rb:33
+    When I fill in appropriate card details for premium             # features/step_definitions/premium_steps.rb:6
+    Then I should see "Premium Member"                              # features/step_definitions/basic_steps.rb:202
+    And my profile page should reflect that I am a "Premium" member # features/step_definitions/premium_steps.rb:131
+      expected to find text "Premium Member" in "Anders Persson ABOUT PROJECTS MEMBERS PREMIUM EVENTS GETTING STARTED Anders Persson 0 Premium Sweden Europe/Stockholm (UTC+01:00) Member for less than a minute Edit Set status Basic Member About Skills About me Omnis voluptatem voluptatem in et asperiores eveniet. Anders Persson has no publicly viewable Youtube videos. Learn More About Us Getting Started Dashboard Opportunities Blog Press Kit Social Facebook Twitter Our Sponsors Standup Bot Craft Academy Mooqita RubyMine Becoming a sponsor AgileVentures - Crowdsourced Learning Contact us Send a traditional email to info@agileventures.org. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963" (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/premium_steps.rb:134:in `/^my profile page should reflect that I am a "([^"]*)" member$/'
+      features/premium/upgrade_membership.feature:44:in `And my profile page should reflect that I am a "Premium" member'
+    And I should see button "Upgrade to Premium Mob"                # features/step_definitions/basic_steps.rb:232
+    And I should see myself in the premium members list             # features/step_definitions/premium_steps.rb:75
+WARN: Screenshot could not be saved. `page.current_path` is empty.
+
+Failing Scenarios:
+cucumber features/premium/upgrade_membership.feature:36 # Scenario: User upgrades to premium from free tier
+
+1 scenario (1 failed)
+12 steps (1 failed, 2 skipped, 9 passed)
+0m18.349s
+</code></pre>
+<p>In principle this test could be affected by the changes I&rsquo;ve been making to the domain model, but if I stick in a debug breakpoint at the point that the view is trying to check the status of the member, it comes up as Premium and the test passes.</p>
+<pre class="highlight plaintext"><code>    Then I should see "Premium Member"                              # features/step_definitions/basic_steps.rb:202
+
+[68, 77] in /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/app/views/users/profile/_summary.html.erb
+   68:                          class: 'user-profile-btn',
+   69:                          type: 'button' %&gt;&lt;/p&gt;
+   70:         &lt;/li&gt;
+   71:     &lt;% end %&gt;
+   72:       &lt;% byebug  # the presence of this allows features/premium/upgrade_membership.feature:36 to pass for me locally %&gt;
+=&gt; 73:       &lt;li&gt;&lt;%= presenter.user.membership_type %&gt; Member&lt;/li&gt;
+   74:       &lt;% if presenter.user.membership_type == 'Premium' %&gt;
+   75:         &lt;li&gt;&lt;%= render 'users/profile/premium_mob_upgrade', presenter: presenter  %&gt;&lt;/li&gt;
+   76:       &lt;% elsif presenter.user.membership_type == 'Basic' %&gt;
+   77:         &lt;li&gt;&lt;%= render 'users/profile/premium_upgrade', presenter: presenter %&gt;&lt;/li&gt;
+(byebug) presenter.user.membership_type
+"Premium"
+(byebug) c
+    And my profile page should reflect that I am a "Premium" member # features/step_definitions/premium_steps.rb:131
+    And I should see button "Upgrade to Premium Mob"                # features/step_definitions/basic_steps.rb:232
+    And I should see myself in the premium members list             # features/step_definitions/premium_steps.rb:75
+</code></pre>
+<p>and similarly if I slap in a byebug at the point that the user&rsquo;s plan is updated we get the same pass:</p>
+<pre class="highlight plaintext"><code>    When I fill in appropriate card details for premium             # features/step_definitions/premium_steps.rb:6
+
+[3, 12] in /Users/tansaku/Documents/GitHub/AgileVentures/WebsiteOne/app/services/add_subscription_to_user_for_plan.rb
+    3:   def self.with(user, sponsor, time, plan, payment_source, subscription_klass = Subscription)
+    4:     ensure_all_previous_subscriptions_are_ended(user, time)
+    5:     user.subscriptions &lt;&lt; subscription_klass.new(started_at: time, sponsor: sponsor, plan: plan, payment_source: payment_source)
+    6:     user.title_list &lt;&lt; plan.name
+    7:     byebug
+=&gt;  8:     user.save!
+    9:   end
+   10: 
+   11:   def self.ensure_all_previous_subscriptions_are_ended(user, time)
+   12:     unended_subs = user.subscriptions.select { |s| s.ended_at.nil? }
+(byebug) c
+    Then I should see "Premium Member"                              # features/step_definitions/basic_steps.rb:202
+    And my profile page should reflect that I am a "Premium" member # features/step_definitions/premium_steps.rb:131
+    And I should see button "Upgrade to Premium Mob"                # features/step_definitions/basic_steps.rb:232
+    And I should see myself in the premium members list             # features/step_definitions/premium_steps.rb:75
+</code></pre>
+<p>So my hypothesis is that the request to check the profile page is going through so fast that the request for data about the user is coming back before the update has taken place.  The changes I&rsquo;ve made mean the update does take longer.  If my hypothesis is correct, the question is how to make sure that the cuke step to look up the profile page waits until the previous operation has executed.  It occurs to me that Cucumber steps that hit a new endpoint on the server can be treated almost like fire and forget operations. Makes me think of JavaScript non-blocking activity.  Maybe this isn&rsquo;t at all about JavaScript, sorry JavaScript.  Maybe the check that I have <code>&quot;Then I should see &quot;Premium Member&quot;</code> is passing too quickly?  Strange though, I&rsquo;m pretty sure that page won&rsquo;t have Premium Member in it until the transaction has gone through, but is the database in a separate thread?  I didn&rsquo;t think the page would update until the database action completed, but I guess that we go to the create method in the subscriptions controller via a redirect that&rsquo;s triggered from our javascript Stripe form &hellip;</p>
+
+<p>So I change the step to be <code>Then I should see &quot;Thanks, you&#39;re now an AgileVentures Premium Member&quot;</code>, which really can&rsquo;t display until the create method has completed, but I get the same error.  Nice hypothesis, but not supported by the data &hellip; hmm, so I create a new step that will check the member status has changed under the hood:</p>
+<pre class="highlight plaintext"><code>And(/^I am a "([^"]*)" Member$/) do |type|
+  expect(@user.membership_type).to eq type
+end
+</code></pre>
+<p>and that fails too:</p>
+<pre class="highlight plaintext"><code>    Then I should see "Thanks, you're now an AgileVentures Premium Member" # features/step_definitions/basic_steps.rb:202
+    And I am a "Premium" Member                                            # features/step_definitions/premium_steps.rb:144
+
+      expected: "Premium"
+           got: "Basic"
+
+      (compared using ==)
+       (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/premium_steps.rb:145:in `/^I am a "([^"]*)" Member$/'
+      features/premium/upgrade_membership.feature:44:in `And I am a "Premium" Member'
+</code></pre>
+<p>Which makes me wonder if this something to do with our database transaction and cleaner.  I was skeptical but I found this <a href="https://stackoverflow.com/a/40185853/316729">SO answer</a> which suggesting changing our cleaner from <code>after(:each)</code> to <code>append_after(:each)</code> and it appears to have worked &hellip;?  This is the change:</p>
+<pre class="highlight ruby"><code>  <span class="n">config</span><span class="p">.</span><span class="nf">append_after</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">DatabaseCleaner</span><span class="p">.</span><span class="nf">clean</span>
+  <span class="k">end</span>
+</code></pre>
+<p>in <code>spec_helper.rb</code>, but after two passes, I cleaned up the extraneous steps and I get a fail again.  Rats.  Again, a feature that takes X amount of time to develop, but takes 5X time to sort out its flaky acceptance tests.  Anyhow, so now I print out the user subscriptions at the point the user has been updated and in the new step to check:</p>
+<pre class="highlight plaintext"><code>    When I fill in appropriate card details for premium                    # features/step_definitions/premium_steps.rb:6
+#&lt;Subscription id: 1, type: nil, started_at: "2018-01-16 10:07:10", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&gt;
+    Then I should see "Thanks, you're now an AgileVentures Premium Member" # features/step_definitions/basic_steps.rb:202
+    And I am a "Premium" Member                                            # features/step_definitions/premium_steps.rb:144
+      ["#&lt;Subscription id: 1, type: nil, started_at: \"2018-01-16 10:07:10\", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&gt;"]
+
+      expected: "Premium"
+           got: "Basic"
+
+      (compared using ==)
+       (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/premium_steps.rb:146:in `/^I am a "([^"]*)" Member$/'
+      features/premium/upgrade_membership.feature:44:in `And I am a "Premium" Member'
+</code></pre>
+<p>Weird thing here is that both the subscription states look correct, so why does the membership type not report correctly &hellip; which leads me to:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">current_subscription</span>
+    <span class="n">current_subscriptions</span> <span class="o">=</span> <span class="n">subscriptions</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">ended_at: </span><span class="kp">nil</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="s1">'started_at &lt; :now'</span><span class="p">,</span> <span class="p">{</span><span class="ss">now: </span><span class="no">DateTime</span><span class="p">.</span><span class="nf">now</span><span class="p">})</span>
+    <span class="k">return</span> <span class="kp">nil</span> <span class="k">if</span> <span class="n">current_subscriptions</span><span class="p">.</span><span class="nf">nil?</span> <span class="n">or</span> <span class="n">current_subscriptions</span><span class="p">.</span><span class="nf">empty?</span>
+    <span class="n">current_subscriptions</span><span class="p">.</span><span class="nf">first</span>
+  <span class="k">end</span>
+</code></pre>
+<p>ah, so maybe that <code>&lt;</code> should be <code>&lt;=</code>.  So that helps it pass, but the problem with an intermittent fail is that a single pass is not enough and I clean up and then I get another fail again &hellip; okay, so I then manage to catch another fail with some more logging:</p>
+<pre class="highlight ruby"><code>  <span class="k">def</span> <span class="nf">current_subscription</span>
+    <span class="nb">puts</span> <span class="s2">"all user subs: </span><span class="si">#{</span><span class="n">subscriptions</span><span class="p">.</span><span class="nf">map</span><span class="p">{</span><span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">s</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">}"</span>
+    <span class="n">current_subscriptions</span> <span class="o">=</span> <span class="n">subscriptions</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">ended_at: </span><span class="kp">nil</span><span class="p">).</span><span class="nf">where</span><span class="p">(</span><span class="s1">'started_at &lt;= :now'</span><span class="p">,</span> <span class="p">{</span><span class="ss">now: </span><span class="no">DateTime</span><span class="p">.</span><span class="nf">now</span><span class="p">})</span>
+    <span class="nb">puts</span> <span class="s2">"current subs: </span><span class="si">#{</span><span class="n">current_subscriptions</span><span class="p">.</span><span class="nf">map</span><span class="p">{</span><span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">s</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">}"</span>
+    <span class="k">return</span> <span class="kp">nil</span> <span class="k">if</span> <span class="n">current_subscriptions</span><span class="p">.</span><span class="nf">nil?</span> <span class="n">or</span> <span class="n">current_subscriptions</span><span class="p">.</span><span class="nf">empty?</span>
+    <span class="n">current_subscriptions</span><span class="p">.</span><span class="nf">first</span>
+  <span class="k">end</span>
+</code></pre><pre class="highlight plaintext"><code>#&lt;Subscription id: 1, type: nil, started_at: "2018-01-16 10:17:55", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&gt;
+    Then I should see "Thanks, you're now an AgileVentures Premium Member" # features/step_definitions/basic_steps.rb:202
+all user subs: ["#&lt;Subscription id: 1, type: nil, started_at: \"2018-01-16 10:17:55\", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&gt;"]
+current subs: []
+    And I am a "Premium" Member                                            # features/step_definitions/premium_steps.rb:145
+      ["#&lt;Subscription id: 1, type: nil, started_at: \"2018-01-16 10:17:55\", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&gt;"]
+
+      expected: "Premium"
+           got: "Basic"
+
+      (compared using ==)
+       (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/premium_steps.rb:147:in `/^I am a "([^"]*)" Member$/'
+      features/premium/upgrade_membership.feature:44:in `And I am a "Premium" Member'
+</code></pre>
+<p>So, we can somehow have a situation where the current subs query does not report what we expect.  The datetimes appear to be specfic to seconds &hellip; maybe I should grab all the subscriptions and filter on the ruby side?</p>
+<pre class="highlight plaintext"><code>  def current_subscription
+    puts "all user subs: #{subscriptions.map{|s| s.inspect}}"
+    now = DateTime.now
+    puts now
+    current_subscriptions = subscriptions.select{|s| s.ended_at.nil? and s.started_at &lt;= now}
+    puts "current subs: #{current_subscriptions.map{|s| s.inspect}}"
+    return nil if current_subscriptions.nil? or current_subscriptions.empty?
+    current_subscriptions.first
+  end
+</code></pre>
+<p>but that also fails!  Weird - I even print out the time:</p>
+<pre class="highlight plaintext"><code>all user subs: ["#&lt;Subscription id: 1, type: nil, started_at: \"2018-01-16 10:27:11\", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&gt;"]
+2018-01-16T10:27:11+00:00
+s.ended_at.nil?: true
+s.started_at &lt;= now: false
+current subs: []
+    And I am a "Premium" Member                                            # features/step_definitions/premium_steps.rb:145
+      ["#&lt;Subscription id: 1, type: nil, started_at: \"2018-01-16 10:27:11\", ended_at: nil, user_id: 2, plan_id: 1, sponsor_id: 2&gt;"]
+
+      expected: "Premium"
+           got: "Basic"
+
+      (compared using ==)
+       (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/premium_steps.rb:147:in `/^I am a "([^"]*)" Member$/'
+      features/premium/upgrade_membership.feature:44:in `And I am a "Premium" Member'
+</code></pre>
+<p>It makes it look like when the time exactly matches the equality is not there.  Guess I should drop to a unit test:</p>
+<pre class="highlight plaintext"><code>    context 'just started a new plan' do
+      before { subscription2.ended_at = now ; subscription2.save }
+      let!(:subscription3) { FactoryGirl.create(:subscription, user: user, plan: premium_f2f, started_at: now, payment_source: payment_source) }
+
+      it 'returns subscription that has started right now and has not ended' do
+        expect(user.current_subscription.id).to eq subscription3.id
+      end
+    end
+</code></pre>
+<p>but that doesn&rsquo;t fail in the way I expect, but it looks like the following tip about converting the datetimes to integers seems to work from the print out I&rsquo;m getting running the cuke test &hellip;</p>
+<pre class="highlight plaintext"><code>    Then I should see "Thanks, you're now an AgileVentures Premium Member" # features/step_definitions/basic_steps.rb:202
+1: s.ended_at.nil?: true
+1: s.started_at &lt;= now: false
+1: s.started_at.to_i &lt;= now.to_i: true
+1: s.ended_at.nil?: true
+1: s.started_at &lt;= now: false
+1: s.started_at.to_i &lt;= now.to_i: true
+    And my profile page should reflect that I am a "Premium" member        # features/step_definitions/premium_steps.rb:131
+</code></pre>
+<p>Notice how the <code>s.started_at &lt;= now</code> is false while <code>s.started_at.to_i &lt;= now.to_i</code> is true.  I got the idea from:</p>
+
+<p><a href="https://makandracards.com/makandra/1057-why-two-ruby-time-objects-are-not-equal-although-they-appear-to-be">https://makandracards.com/makandra/1057-why-two-ruby-time-objects-are-not-equal-although-they-appear-to-be</a></p>
+
+<p>When I use <code>to_i</code> to compare the dates all the tests pass in batch and in the CI, making it seem like we&rsquo;ve licked the intermittent fail issue, which seems to have been completely unrelated to JavaScript, but a function of the system looking for subscriptions that started in the past, and the cuke tests running fast enough that sometimes (and only sometimes) when the new subscription was created in the same second as the check for the current_subscription, the user would still be reported as not having upgraded to the new subscription.  The fix should have been just changing &rsquo;&lt;&rsquo; to &rsquo;&lt;=&rsquo; but the date comparison seems to require switching to integers to make it work as we expect.</p>
+
+<p>What&rsquo;s frustrating is that the new unit test checks for the <code>&lt;=</code> but somehow using factory girl (or something) does not replicate the exact way that the dates get set up when the whole thing runs in the acceptance test, so I have the system working now, but not a nice unit test precisely nailing the concealed bug &hellip;</p>
+
+<p>Time to wrap up for now - I&rsquo;ll leave notes in the code - I wonder if this is a known Rails issue &hellip; anyway, apologies to JavaScript for thinking it was all your fault - not in this case :-)</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
+      </div>  
+      <div class="col-lg-2">
+      </div>
+    </div>  
+  </div>  
+</section>  
+<footer>
+    <div class="container">
+        <section id="contact">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>AgileVentures</h3>
+                <p class="blurb text-muted">Our purpose is to develop better more affordable software solutions to enable non-profits to be more effective and more efficient. We also host a <a href="http://www.agileventures.org">learning community</a> around <a href="https://www.edx.org/xseries/agile-development-using-ruby-rails">free online courses</a> that enable developers to improve their team and software skills, and then to apply them on socially useful projects for non-profits. We are a Charitable Incorporated Organisation (CIO) in the UK. Ref #1170963</p>
+            </div>
+            <div class="col-md-4">
+                <h3>What we do</h3>
+                <div class="list">
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Websites</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Apps</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Process Automation</span></i>
+                    <i class="fa fa-check fa-lg fa-text"><span class='font-override'>&nbsp;&nbsp;Software Projects</span></i>
+                </div>
+                <h4>More on our <a href="/blog">Blog</a></h4>
+            </div>
+            <div class="col-md-4">
+                <h3>Contact Us</h3>
+                <div class="contact-list">
+                  <!-- <i class="fa fa-envelope fa-lg fa-text fa-fw"><span class='font-override'>&nbsp;&nbsp;</i> -->
+                  <i class="fa fa-lg fa-text"><a class='mail' href='mailto:nonprofits@agileventures.org'>nonprofits@<wbr>agileventures.org</a></span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>AgileVentures</span></i>
+                  <!-- <i class="fa fa-map-marker fa-lg fa-text fa-fw"></i> -->
+                  <i class="fa fa-lg fa-text"><span class='font-override'>The Lodge</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>64 Pinner Road</span></i>
+                  <i class="fa fa-lg fa-text"><span class='font-override'>Harrow, HA1 4HZ</span></i>
+                </div>
+            </div>
+        </div>
+        </section>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li><a href="/privacy">Privacy Policy</a>
+                    </li>
+                    <li><a href="/terms">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; AgileVentures 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://twitter.com/AgileVentures"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/agileventures"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="https://www.linkedin.com/company/agileventures"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </section>
+</footer>
+
+
+</body>
+</html>
