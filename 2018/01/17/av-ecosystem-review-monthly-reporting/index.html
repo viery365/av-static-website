@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Monthly Reporting</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_26 blog_page_26_index">
-    <!-- Navigation -->
+<body class="x2018 x2018_01 x2018_01_17 x2018_01_17_av-ecosystem-review-monthly-reporting x2018_01_17_av-ecosystem-review-monthly-reporting_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,66 +83,41 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2018/01/17/av-ecosystem-review-monthly-reporting/">AV EcoSystem Review Monthly Reporting</a></h2>
+        <h5 class='date'>17 Jan 2018</h5>
+    <p><img alt="monthly reporting" src="/images/monthly_reporting.jpg" /></p>
 
-          <p>Page 26 of 30</p>
+<p>So I&rsquo;ve got in my <a href="https://github.com/AgileVentures/WebsiteOne/pull/2039">PR for updating the premium/sponsor model</a> to have the system maintain records of the different subscriptions a user has over time.  The PR is green and there is at least one refactorings that could be done, but I think I sensibly open that as a <a href="https://github.com/AgileVentures/WebsiteOne/issues/2103">refactoring ticket</a> rather than slowing the release of this.  In the process of doing so I end up closing the 20 or so airbrake errors about overrunning requests, that seem to have been fixed with the performance fix I released (taking the countdown to next scrum off the homepage).</p>
 
-            <p><a href="/blog/page/25/">Previous page</a></p>
+<p>Right, so I want to get that deployed today if I can.  In the meantime I&rsquo;m trying to finish up the monthly report for the AgileVentures trustees.  What I&rsquo;d love to be able to do is get this change deployed and then review all the premium accounts as I did before Xmas and ensure that we have all the subscription history changes sorted, and then I can have the report include some sort of up to date stats for the trustees.  </p>
 
-          <h2><a href="/2016/10/28/opportunity-in-disguise/">Opportunity in Disguise</a></h2>
-          <h3>Oct 28</h3>
-          <p>The new plan payment end points are winding their way to production, and I stepped back to the AsyncVoter code (which was now green) following a mob session including Michael, Raphael and Alex yesterday.  I wasn’t there so apologies if I left anyone...</p>
-          <h2><a href="/2016/10/27/red-green-refactor/">Red Green Refactor (Against the Clock)</a></h2>
-          <h3>Oct 27</h3>
-          <p>While the AsynVoter folks got down to mobbing on their first feature, I got on with some solo-coding on payment end points for the new intermediate level Premium payment plans.  I did want to try out <a href="https://github.com/rebelidealist/stripe-ruby-mock">ruby-stripe-mock</a> because while I do like the absolutist...</p>
-          <h2><a href="/2016/10/26/pulled-in-different-directions/">Pulled in Different Directions</a></h2>
-          <h3>Oct 26</h3>
-          <p>The PremiumPlus upgrade deploy appeared to go completely smoothly.  The test migration ran fine locally (with a copy of the production data).  Given we can’t financially afford to completely replicate the production data on staging I took a risk and...</p>
-          <h2><a href="/2016/10/25/solo-coding/">Solo Coding</a></h2>
-          <h3>Oct 25</h3>
-          <p><a href="http://nonprofits.agileventures.org/2016/10/21/yak-shaving/">Yak shaving</a> aside I managed to make time for some solo coding.  There was work outstanding on a feature to allow users to upgrade from Premium to PremiumPlus.  Michael and I had designed some extra domain features in a previous session, but they hadn...</p>
-          <h2><a href="/2016/10/24/tying-up-loose-ends/">Tying Up Loose Ends</a></h2>
-          <h3>Oct 24</h3>
-          <p>So after <a href="http://nonprofits.agileventures.org/2016/10/21/yak-shaving/">Yak shaving</a> around Heroku automated PR deploys, we finally got them working.  Raoul joined us in the “Martin Fowler” scrum and through a process of both disabling the PR deploys, AND deleting the GitHub webhooks that Heroku had installed,...</p>
-          <h2><a href="/2016/10/21/yak-shaving/">Yak Shaving</a></h2>
-          <h3>Oct 21</h3>
-          <p>So I thought I’d try and get a little solo programming time in today, but it turned into a yak-shaving devops session. Yak shaving? It’s when you end up needing a ladder to paint your house, and you have to borrow a ladder from your friend, but you...</p>
-          <h2><a href="/2016/10/20/to-pair-or-not-to-pair/">To Pair or Not To Pair</a></h2>
-          <h3>Oct 20</h3>
-          <p>Okay, some coding needs to get done.  Right now there are several things that might bring in more critical revenue for AgileVentures:</p>
+<p>I&rsquo;m kind of struggling with the reports, trying to make the stats reported be something that&rsquo;s actually of use to us.  Is it sensible for me to be reporting data like this about the WebSiteOne coordination meetings:</p>
 
-<ul>
-<li><a href="https://github.com/AgileVentures/WebsiteOne/issues/1342">PayPal integration</a></li>
-<li><a href="https://github.com/AgileVentures/WebsiteOne/issues/1344">Sponsor others functionality</a></li>
-<li><a href="https://github.com/AgileVentures/WebsiteOne/issues/1343">Mid range premium plans</a></li>
-</ul>
+<p><img src="https://dl.dropbox.com/s/r4fsvru82gmpu38/Screenshot%202018-01-17%2009.57.57.png?dl=0" /></p>
 
-<p>I have at least one potential sign up...</p>
-          <h2><a href="/2016/10/19/bug-hunt/">Bug Hunt</a></h2>
-          <h3>Oct 19</h3>
-          <p>For about 12 hours now our Google Hangouts plugin have been failing.  I discovered it yesterday when I tried to start the “Kent Beck” scrum.  I opened an <a href="https://github.com/AgileVentures/HangoutConnection/issues/34">issue on our HangoutConnection repo</a>.  The Hangout plugin was asking for authorisation, which it...</p>
-          <h2><a href="/2016/10/18/lacking-narrative-thread/">Lacking Narrative Thread</a></h2>
-          <h3>Oct 18</h3>
-          <p>There is a lot going on, and heads up this blog post meanders over the stuff that happened yesterday rather than having a coherent narrative thread.  So how’s that different from any of your blogs you ask?  Very funny :-) So anyway we got a docker...</p>
-          <h2><a href="/2016/10/17/something-for-the-weekend/">Something for the Weekend</a></h2>
-          <h3>Oct 17</h3>
-          <p>I usually try and keep my weekends work free.  I’ve done that for a long time, since I was about 25 and I had a period where I had worked through a few weekends and felt pretty damn drained and exhausted in each following week.  It made me really unpleasantly...</p>
+<p>It&rsquo;s relevant in that part of my responsibility to the trustees is to ensure that the WebSiteOne coordination meetings are held.  I guess it&rsquo;s not an unhelpful summary for me to remind me who&rsquo;s attended the meetings over the course of the last month.  I also report various google analytics and new relic stats for the month.  Keeping my eye on these is good, but I&rsquo;ve got into this habit (in both AV and NHS reports) of creating little paragraphs like:</p>
 
-            <p><a href="/blog/page/27/">Next page</a></p>
+<blockquote>
+<p>This month: From Dec 17 to Jan 15 we had 294 unique visitors to the site, of which 70% were new visitors.  The average session length was 3 minutes and 31 seconds and the bounce rate was ~47%.  Pages per session was 3.39. </p>
+</blockquote>
 
+<p>Which are slightly fiddly to pull out of the Google Analytics interface and I wonder if I shouldn&rsquo;t just stick in the graphic that Analytics provides, or even whether these are statisics of consequence?  I know that most of the trustees are not interested in the real specific numbers here, and that part of the point of the report is that someone is keeping an eye on these things.  It would be great if the report was totally automated.  At least I&rsquo;d be interested in reading it &hellip; I&rsquo;d be even more interested in better understanding what viewers of the website were really thinking as they viewed the site.</p>
+
+<p>I had meant to come back and finish this during the day, but no rest for the wicked - okay, onto the next one &hellip;</p>
+
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -200,6 +176,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

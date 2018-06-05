@@ -5,10 +5,40 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2018-01-16T00:00:00+00:00</updated>
+  <updated>2018-01-17T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Monthly Reporting</title>
+    <link rel="alternate" href="http://blog.url.com/2018/01/17/av-ecosystem-review-monthly-reporting/"/>
+    <id>http://blog.url.com/2018/01/17/av-ecosystem-review-monthly-reporting/</id>
+    <published>2018-01-17T00:00:00+00:00</published>
+    <updated>2018-06-05T21:02:08+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="monthly reporting" src="/images/monthly_reporting.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I&amp;rsquo;ve got in my &lt;a href="https://github.com/AgileVentures/WebsiteOne/pull/2039"&gt;PR for updating the premium/sponsor model&lt;/a&gt; to have the system maintain records of the different subscriptions a user has over time.  The PR is green and there is at least one refactorings that could be done, but I think I sensibly open that as a &lt;a href="https://github.com/AgileVentures/WebsiteOne/issues/2103"&gt;refactoring ticket&lt;/a&gt; rather than slowing the release of this.  In the process of doing so I end up closing the 20 or so airbrake errors about overrunning requests, that seem to have been fixed with the performance fix I released (taking the countdown to next scrum off the homepage).&lt;/p&gt;
+
+&lt;p&gt;Right, so I want to get that deployed today if I can.  In the meantime I&amp;rsquo;m trying to finish up the monthly report for the AgileVentures trustees.  What I&amp;rsquo;d love to be able to do is get this change deployed and then review all the premium accounts as I did before Xmas and ensure that we have all the subscription history changes sorted, and then I can have the report include some sort of up to date stats for the trustees.  &lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m kind of struggling with the reports, trying to make the stats reported be something that&amp;rsquo;s actually of use to us.  Is it sensible for me to be reporting data like this about the WebSiteOne coordination meetings:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/r4fsvru82gmpu38/Screenshot%202018-01-17%2009.57.57.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s relevant in that part of my responsibility to the trustees is to ensure that the WebSiteOne coordination meetings are held.  I guess it&amp;rsquo;s not an unhelpful summary for me to remind me who&amp;rsquo;s attended the meetings over the course of the last month.  I also report various google analytics and new relic stats for the month.  Keeping my eye on these is good, but I&amp;rsquo;ve got into this habit (in both AV and NHS reports) of creating little paragraphs like:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This month: From Dec 17 to Jan 15 we had 294 unique visitors to the site, of which 70% were new visitors.  The average session length was 3 minutes and 31 seconds and the bounce rate was ~47%.  Pages per session was 3.39. &lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Which are slightly fiddly to pull out of the Google Analytics interface and I wonder if I shouldn&amp;rsquo;t just stick in the graphic that Analytics provides, or even whether these are statisics of consequence?  I know that most of the trustees are not interested in the real specific numbers here, and that part of the point of the report is that someone is keeping an eye on these things.  It would be great if the report was totally automated.  At least I&amp;rsquo;d be interested in reading it &amp;hellip; I&amp;rsquo;d be even more interested in better understanding what viewers of the website were really thinking as they viewed the site.&lt;/p&gt;
+
+&lt;p&gt;I had meant to come back and finish this during the day, but no rest for the wicked - okay, onto the next one &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Damned JavaScript Acceptance Tests</title>
     <link rel="alternate" href="http://blog.url.com/2018/01/16/av-ecosystem-review-damned-javascript-acceptance-tests/"/>
@@ -477,58 +507,6 @@ Thanks so much for all the detailed feedback over the last few weeks.  I believe
 &lt;p&gt;So I just got set up with a Zoho account and emailed them about non-profit discounts, but I don&amp;rsquo;t seem to have an XLSX file for the main members db, and although Zoho says it will import mdb files it can&amp;rsquo;t handle the ones from the APSoc dump.  The MSAccess Office 365 offering seems to be only available on PC.  TT-Exchange, which we&amp;rsquo;re already a member of, has MSAccess 2013 for £12, while the main MS page has Office365 for £1.50 a month per user.  Guess I&amp;rsquo;ll apply for the latter, but I get stuck - I start the application process, but then can&amp;rsquo;t select AgileVentures - we already have a charity account, but then I can&amp;rsquo;t log in to it.  Ugh, so stuck on two fronts there.  At least I&amp;rsquo;ve pushed forward on both pathways &amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;Gah, so I need to ask the client for an XLS export of the member database to even test Zoho, and I maybe need to contact MicroSoft support to even get set up with their charity plan &amp;hellip; I think I&amp;rsquo;m going to email the client to let them know my concerns and ask for the appropriate files.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Distracted By The Real Thing</title>
-    <link rel="alternate" href="http://blog.url.com/2018/01/09/av-ecosystem-review-distracted-by-the-real-thing/"/>
-    <id>http://blog.url.com/2018/01/09/av-ecosystem-review-distracted-by-the-real-thing/</id>
-    <published>2018-01-09T00:00:00+00:00</published>
-    <updated>2018-05-21T21:12:38+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="distraction" src="/images/distraction.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Ironically after getting more sleep last night I feel groggier this morning.  Sunday night I couldn&amp;rsquo;t sleep re-hashing my 9-year old twins lost football (soccer) match (I&amp;rsquo;m the coach).  Don&amp;rsquo;t want to be strung out thinking about it, but I am, pretty much every time they lose; although it&amp;rsquo;s particularly bad when I think the opposing coach is not setting a good example.  Despite the lack of sleep on Sunday, yesterday was a solid day.  I slept properly last night, but is this a cold coming on?  Urgh.  Been distracted this morning, but maybe by the right stuff?  I&amp;rsquo;ve done a quick Slack/Email review and edited the &lt;a href="https://www.agileventures.org/premium-f2f-offer"&gt;AV Premium F2F offer page&lt;/a&gt; to include connecting to me on LinkedIn.  I keep wondering what to do with the random folks connecting to me there - might as well be offering them a free hour of pairing on a charity project.&lt;/p&gt;
-
-&lt;p&gt;And now I want to just quickly follow through with Will&amp;rsquo;s advice on changes to the Premium Sponsorship form, and get the revised version out to a few folks:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Okay. This is only a side note, but I read this interesting article about names: &lt;a href="http://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/"&gt;http://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/&lt;/a&gt; TLDR: have a single &amp;ldquo;name&amp;rdquo; field&lt;/p&gt;
-
-&lt;p&gt;Each question should have a reason. I want to know why you need to know what country I live in, for a premium membership.&lt;/p&gt;
-
-&lt;p&gt;The resume could be a lot of work. Shouldn&amp;rsquo;t the questions ask everything you want to know?&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;If you&amp;rsquo;re working remotely, where is the company based? *&amp;rdquo; shouldn&amp;rsquo;t have an asterisk.&lt;/p&gt;
-
-&lt;p&gt;Edited-down mob programming videos might get more folks applying.&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;Please upload a cover letter indicating how you think you would benefit from the Premium membership you are applying for&amp;rdquo; could become just &amp;ldquo;How do you think you would benefit from the Premium membership you are applying for?&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So now it&amp;rsquo;s much shorter:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/m29aa7wl36fiuw5/Screenshot%202018-01-09%2010.32.39.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;But I must jump back to the APSoc membership database, and my new backup ritual which involves copying the previous day&amp;rsquo;s file in dropbox and relabelling it with the day I&amp;rsquo;m starting on.  Giving LibreOffice Base an extra 2GB of Java memory does not appear to have helped with the lock up issues.  &lt;/p&gt;
-
-&lt;p&gt;But let&amp;rsquo;s start with correctly populating the Local Group field in the membership form.  I create and populate a new table, and in short order I have the Local Group dropdown as requested:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/w93hp5cyr700a9i/Screenshot%202018-01-09%2010.45.43.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now I duplicate the version and restart LibreOffice.  And then I work on a new dropdown for pay method on the subscription payment form.  I create the table, but then trying to set up the relation we get stuck again.  I go make coffee, come back, still stuck.  I kill the app, and re-start.  I&amp;rsquo;m lucky - this time we&amp;rsquo;re able to recover the corrupted file:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/cms13nfe5rtu8nd/Screenshot%202018-01-09%2011.09.14.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/ac9vdcxbhwlfpkk/Screenshot%202018-01-09%2011.10.30.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;But I&amp;rsquo;ve got no basis to diagnose the issue &amp;hellip; I make a quick extra backup and continue, and I get it working:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/anclrh7bi983wpb/Screenshot%202018-01-09%2011.13.11.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;There is no particular pattern - although I sense problems come when I double up on things, e.g. add a table in the SQL view by double clicking, but then also click the add button &amp;hellip; okay, enough for today. I&amp;rsquo;m going to pass this version on to the client, as I said I would do that daily this week.&lt;/p&gt;
 </content>
   </entry>
 </feed>
