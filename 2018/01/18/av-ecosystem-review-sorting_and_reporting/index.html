@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Agile Ventures</title>
+    <title>AV EcoSystem Review Sorting and Reporting</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,9 @@
 
     </script>
 </head>
-<body class="blog blog_page blog_page_8 blog_page_8_index">
-    <!-- Navigation -->
+<body class="x2018 x2018_01 x2018_01_18 x2018_01_18_av-ecosystem-review-sorting_and_reporting x2018_01_18_av-ecosystem-review-sorting_and_reporting_index">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+<!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -82,86 +83,58 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 <section id="blog">
   <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-        </div>
-        <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 text-left">
+        <h2 class='title'><a href="/2018/01/18/av-ecosystem-review-sorting_and_reporting/">AV EcoSystem Review Sorting and Reporting</a></h2>
+        <h5 class='date'>18 Jan 2018</h5>
+    <p><img alt="deploy" src="/images/deploy.jpeg" /></p>
 
-          <p>Page 8 of 31</p>
+<p>Didn&rsquo;t complete the AV report yesterday, or deploy the new premium model code. All booked up with exciting Premium F2F sessions, and this morning I had to spend an hour catching up with emails for various possible gigs to cover what the charity work does not.  So, right, let&rsquo;s get that new code on staging &hellip; which involves me rebasing to staging and pushing that up.  I didn&rsquo;t manually check develop &hellip; that&rsquo;s partly because I&rsquo;m turning the servers off to save money.  Funny, if I&rsquo;d left them on over night I&rsquo;d immediately have something I could check; it only takes 30 seconds (navigating to heroku, flicking a switch) to get them on, but sometimes that can feel like a real pain.  Anyway, got the develop server up, not even sure how to really check that things are really working &hellip; I guess I sign up random guy as a premium member:</p>
 
-            <p><a href="/blog/page/7/">Previous page</a></p>
+<p><img src="https://dl.dropbox.com/s/oyvrnyrbso5ouy4/Screenshot%202018-01-18%2010.37.43.png?dl=0" /></p>
 
-          <h2><a href="/2017/09/29/av-ecosystem-review-premium-f2f-page/">AV EcoSystem Review Sorting Premium F2F Page</a></h2>
-          <h3>Sep 29</h3>
-          <p>Blurgh, so I couldn’t sleep last night - too much late night under nines football admin coming up on whatsapp - new comedy album from Patton Oswalt put paid to an overactive brain and eventually I slept.  I took my one day jogging pass.  I try to jog...</p>
-          <h2><a href="/2017/09/28/av-ecosystem-review-sorting-premium-mob-page/">AV EcoSystem Review Sorting Premium Mob Page</a></h2>
-          <h3>Sep 28</h3>
-          <p>So the multiple repo functionality got deployed yesterday, which elicited a positive response from the user who’d reminded us about the need for this functionality:</p>
+<p>and then upgrade to mob:</p>
 
-<p><img src="https://dl.dropboxusercontent.com/s/jsg8oz8pdjenbk4/Screenshot%202017-09-28%2009.32.02.png"></p>
+<p><img src="https://dl.dropbox.com/s/i95alz97si8nra1/Screenshot%202018-01-18%2010.38.28.png?dl=0" /></p>
 
-<p>but so back to the Premium Mob page grindstone, which I started yesterday … and...</p>
-          <h2><a href="/2017/09/27/av-ecosystem-review-yanking-back-to-premium/">AV EcoSystem Review Yanking Back to Premium</a></h2>
-          <h3>Sep 27</h3>
-          <p><img alt="yanked" src="/images/yanked.jpg"></p>
+<p>and I don&rsquo;t get any errors and the site looks okay.  And so I should be able to see the subscription relations in the rails console:</p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (staging)]$ 
+→ heroku run rails c -r develop
+Running rails c on ⬢ websiteone-develop... up, run.5865 (Hobby)
+Loading production environment (Rails 4.2.10)
+irb(main):001:0&gt; u = User.find_by email: 'random@random.com'
+=&gt; #&lt;User id: 88, email: "random@random.com", created_at: "2016-02-24 11:09:56", updated_at: "2018-01-18 10:38:22", first_name: "Random", last_name: "Guy", display_email: false, slug: "random-guy", youtube_id: nil, display_profile: true, latitude: nil, longitude: nil, country_name: nil, city: nil, region: nil, youtube_user_name: nil, github_profile_url: nil, display_hire_me: false, bio: "rektktktk", receive_mailings: true, country_code: nil, timezone_offset: nil, status_count: 0, deleted_at: nil&gt;
+irb(main):002:0&gt; u.subscriptions
+=&gt; #&lt;ActiveRecord::Associations::CollectionProxy [#&lt;Subscription id: 12, type: nil, started_at: "2018-01-18 10:38:22", ended_at: nil, user_id: 88, plan_id: 2, sponsor_id: 88&gt;, #&lt;Subscription id: 11, type: nil, started_at: "2018-01-18 10:37:49", ended_at: "2018-01-18 10:38:22", user_id: 88, plan_id: 1, sponsor_id: 88&gt;]&gt;
+</code></pre>
+<p>And that is all looking exactly as it should with one subscription being closed out and the new one started, so this code is winging its way to staging, where we can test with some more realistic data.  The build just passed there, but deploy will take a little longer - will leave that till tomorrow and push on with this report. Time to work out what AsyncVoter meetings we ran.  Hmm, maybe I need to bring up with the trustees some modifications to the report format &hellip;</p>
 
-<p>So in the backdrop yesterday a javascript bug in the multiple repos for projects feature led me to some refactoring that also fixed the bug, which I thought was pretty neat:</p>
-<pre class="highlight javascript"><code><span class="nx">WebsiteOne</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">'Projects'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="p">{</span>
-    <span class="na">ensure_github_url_numbering</span></code></pre>
-          <h2><a href="/2017/09/26/av-ecosystem-review-return-to-the-greeter-bots/">AV EcoSystem Review Return to the Greeter Bots</a></h2>
-          <h3>Sep 26</h3>
-          <p><img alt="bots" src="/images/bots2.png"></p>
+<p>In the background I&rsquo;m seeing if I can get Heroku managing the SSL certs for HarrowCN for us:</p>
+<pre class="highlight plaintext"><code>[tansaku@Samuels-MBP:~/Documents/GitHub/AgileVentures/LocalSupport (develop)]$ 
+→ heroku certs:auto:enable -r staging
+Enabling Automatic Certificate Management... done
+=== Your certificate will now be managed by Heroku.  Check the status by running heroku certs:auto.
+[tansaku@Samuels-MBP:~/Documents/GitHub/AgileVentures/LocalSupport (141687181_import_charity_data_from_commission)]$ 
+→ heroku certs:auto -r staging
+=== Automatic Certificate Management is enabled on harrowcn-staging
 
-<p>I had no comments on the multiple source repository pull request (apart from my own), so I’ve merged that to play with on develop.  I want to pop back all the way to up to reviewing the flow of folks through AgileVentures and my experiments with...</p>
-          <h2><a href="/2017/09/25/av-ecosystem-review-always-one-more-test/">AV EcoSystem Review Always One More Test</a></h2>
-          <h3>Sep 25</h3>
-          <p><img alt="one more test" src="/images/one_more_test.jpg"></p>
+Domain                   Status
+───────────────────────  ───────
+staging.harrowcn.org.uk  Waiting
+</code></pre>
+<p>If that all works and we could get the AV WSO certs self-managed that would be one less thing I need to worry about, i.e. renewing letsencrypt certificates every three months.  Okay, so now the new code is deployed to staging - probably best to get that deploy completed, so that I can uncover any pain that might lurk there - creating the report doesn&rsquo;t pose such risks.  Okay, so tested on staging, looks good - pushing to master, and HarrowCN SSL looks good self managed (I guess?).  Could try production update there too &hellip; updated the AsyncVoter report a little, still lots to do &hellip;!</p>
 
-<p>So all of last week’s ecosystem review blogs were devoted to this new multiple repository feature.  And I think today too.  I hope today is the last, since I really want to get on to clearing up some other content work and getting the new Code of...</p>
-          <h2><a href="/2017/09/22/av-ecosystem-review-that-domain-review-step/">AV EcoSystem Review That Domain Review Step</a></h2>
-          <h3>Sep 22</h3>
-          <p><img alt="domain review" src="/images/domain_review.jpg"></p>
-
-<p>Okay, so I have the multiple repository functionality basically working, but it’s time to clear up and make things right … here’s my checklist from yesterday:</p>
-
-<ul>
-<li>the acceptance test does not check that the second repo has been stored</li>
-<li>the acceptance...</li>
-</ul>
-          <h2><a href="/2017/09/22/another-free-refill/">Another free refill?</a></h2>
-          <h3>Sep 22</h3>
-          <p><img alt="free refill" src="/images/freerefill.jpg"></p>
-
-<p>Earlier this year, I undertook a training session targeting small business manager to teach them how to improve profitability of business projects. The course instructor showed us a rather clear way to deal with profitabiliy. First, you estimate...</p>
-          <h2><a href="/2017/09/21/av-ecosystem-review-cocoon-home-straight/">AV EcoSystem Review Cocoon Home Straight</a></h2>
-          <h3>Sep 21</h3>
-          <p><img alt="home straight" src="/images/Home_Straight.jpg"></p>
-
-<p>So the answer to my question of yesterday, “Why is Acceptance Testing so hard?” is that any coding is hard when you can’t get error messages.  The remote debug inspector I set up yesterday allowed me to see that our Capybara/Poltergeist/PhantomJS...</p>
-          <h2><a href="/2017/09/20/av-ecosystem-review-why-is-acceptance-testing-so-time-consuming/">AV EcoSystem Review Why is Acceptance Testing so Time Consuming?</a></h2>
-          <h3>Sep 20</h3>
-          <p><img alt="acceptance testing" src="/images/acceptance_testing.jpg"></p>
-
-<p>I think I’m almost there with acceptance testing this multiple repo feature, but it makes me wonder why acceptance testing always seems to be so time consuming.  I’m just wrapping up a private project where acceptance testing of electron apps was...</p>
-          <h2><a href="/2017/09/19/av-ecosystem-review-gem-polishing/">AV EcoSystem Review Gem Polishing</a></h2>
-          <h3>Sep 19</h3>
-          <p><img alt="diamond polisher" src="/images/diamond_polisher.jpg"></p>
-
-<p>So I’m on the train into london for a meeting with the NHS, but unlike in my last year of blogging it’s not time to agonize about how everything’s going, but time to focus on finishing up this feature for multiple project repositories.  Yesterday...</p>
-
-            <p><a href="/blog/page/9/">Next page</a></p>
-
+        <h2 class='author'>by Sam Joseph</h2>
       </div>  
       <div class="col-lg-2">
       </div>
     </div>  
-  </div>
-</section>
-
+  </div>  
+</section>  
 <footer>
     <div class="container">
         <section id="contact">
@@ -220,6 +193,7 @@
     </div>
     </section>
 </footer>
+
 
 </body>
 </html>

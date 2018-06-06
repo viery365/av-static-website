@@ -5,10 +5,57 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2018-01-17T00:00:00+00:00</updated>
+  <updated>2018-01-18T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Sorting and Reporting</title>
+    <link rel="alternate" href="http://blog.url.com/2018/01/18/av-ecosystem-review-sorting_and_reporting/"/>
+    <id>http://blog.url.com/2018/01/18/av-ecosystem-review-sorting_and_reporting/</id>
+    <published>2018-01-18T00:00:00+00:00</published>
+    <updated>2018-06-06T21:34:07+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="deploy" src="/images/deploy.jpeg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Didn&amp;rsquo;t complete the AV report yesterday, or deploy the new premium model code. All booked up with exciting Premium F2F sessions, and this morning I had to spend an hour catching up with emails for various possible gigs to cover what the charity work does not.  So, right, let&amp;rsquo;s get that new code on staging &amp;hellip; which involves me rebasing to staging and pushing that up.  I didn&amp;rsquo;t manually check develop &amp;hellip; that&amp;rsquo;s partly because I&amp;rsquo;m turning the servers off to save money.  Funny, if I&amp;rsquo;d left them on over night I&amp;rsquo;d immediately have something I could check; it only takes 30 seconds (navigating to heroku, flicking a switch) to get them on, but sometimes that can feel like a real pain.  Anyway, got the develop server up, not even sure how to really check that things are really working &amp;hellip; I guess I sign up random guy as a premium member:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/oyvrnyrbso5ouy4/Screenshot%202018-01-18%2010.37.43.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and then upgrade to mob:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/i95alz97si8nra1/Screenshot%202018-01-18%2010.38.28.png?dl=0" /&gt;&lt;/p&gt;
+
+&lt;p&gt;and I don&amp;rsquo;t get any errors and the site looks okay.  And so I should be able to see the subscription relations in the rails console:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/Github/AgileVentures/WebsiteOne (staging)]$ 
+→ heroku run rails c -r develop
+Running rails c on ⬢ websiteone-develop... up, run.5865 (Hobby)
+Loading production environment (Rails 4.2.10)
+irb(main):001:0&amp;gt; u = User.find_by email: 'random@random.com'
+=&amp;gt; #&amp;lt;User id: 88, email: "random@random.com", created_at: "2016-02-24 11:09:56", updated_at: "2018-01-18 10:38:22", first_name: "Random", last_name: "Guy", display_email: false, slug: "random-guy", youtube_id: nil, display_profile: true, latitude: nil, longitude: nil, country_name: nil, city: nil, region: nil, youtube_user_name: nil, github_profile_url: nil, display_hire_me: false, bio: "rektktktk", receive_mailings: true, country_code: nil, timezone_offset: nil, status_count: 0, deleted_at: nil&amp;gt;
+irb(main):002:0&amp;gt; u.subscriptions
+=&amp;gt; #&amp;lt;ActiveRecord::Associations::CollectionProxy [#&amp;lt;Subscription id: 12, type: nil, started_at: "2018-01-18 10:38:22", ended_at: nil, user_id: 88, plan_id: 2, sponsor_id: 88&amp;gt;, #&amp;lt;Subscription id: 11, type: nil, started_at: "2018-01-18 10:37:49", ended_at: "2018-01-18 10:38:22", user_id: 88, plan_id: 1, sponsor_id: 88&amp;gt;]&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And that is all looking exactly as it should with one subscription being closed out and the new one started, so this code is winging its way to staging, where we can test with some more realistic data.  The build just passed there, but deploy will take a little longer - will leave that till tomorrow and push on with this report. Time to work out what AsyncVoter meetings we ran.  Hmm, maybe I need to bring up with the trustees some modifications to the report format &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;In the background I&amp;rsquo;m seeing if I can get Heroku managing the SSL certs for HarrowCN for us:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[tansaku@Samuels-MBP:~/Documents/GitHub/AgileVentures/LocalSupport (develop)]$ 
+→ heroku certs:auto:enable -r staging
+Enabling Automatic Certificate Management... done
+=== Your certificate will now be managed by Heroku.  Check the status by running heroku certs:auto.
+[tansaku@Samuels-MBP:~/Documents/GitHub/AgileVentures/LocalSupport (141687181_import_charity_data_from_commission)]$ 
+→ heroku certs:auto -r staging
+=== Automatic Certificate Management is enabled on harrowcn-staging
+
+Domain                   Status
+───────────────────────  ───────
+staging.harrowcn.org.uk  Waiting
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If that all works and we could get the AV WSO certs self-managed that would be one less thing I need to worry about, i.e. renewing letsencrypt certificates every three months.  Okay, so now the new code is deployed to staging - probably best to get that deploy completed, so that I can uncover any pain that might lurk there - creating the report doesn&amp;rsquo;t pose such risks.  Okay, so tested on staging, looks good - pushing to master, and HarrowCN SSL looks good self managed (I guess?).  Could try production update there too &amp;hellip; updated the AsyncVoter report a little, still lots to do &amp;hellip;!&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Monthly Reporting</title>
     <link rel="alternate" href="http://blog.url.com/2018/01/17/av-ecosystem-review-monthly-reporting/"/>
@@ -434,79 +481,6 @@ Thanks so much for all the detailed feedback over the last few weeks.  I believe
 &lt;p&gt;&lt;a href="https://www.zoho.com/creator/help/forms/creating-subforms.html"&gt;https://www.zoho.com/creator/help/forms/creating-subforms.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;I have been able to import the XLSX table into MS Access 2007, so that&amp;rsquo;s a basic route forward I guess &amp;hellip; painful decisions ahead.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Damn Estimates</title>
-    <link rel="alternate" href="http://blog.url.com/2018/01/10/av-ecosystem-review-damn-estimates/"/>
-    <id>http://blog.url.com/2018/01/10/av-ecosystem-review-damn-estimates/</id>
-    <published>2018-01-10T00:00:00+00:00</published>
-    <updated>2018-05-21T21:12:38+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="distraction" src="/images/estimates.jpeg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So I had an email from the APSoc client yesterday evening:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Thanks for Beta 3.  I’ve started having a look at this but not got far.  However some initial feedback …&lt;/p&gt;
-
-&lt;p&gt;General&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Whenever try to do any updates to a table, or use the wizard to set up and edit a query, the system locks me out (seemingly indefinitely) while using up to 20% of CPU and trashing the hard disk.  I end up having to kill the task in Task Manager and restart my machine to clear the problem.  This may well be something peculiar in my system and not down to you – but any clues appreciated.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Otherwise the forms generally look much better.&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Member Information Form&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;NM N/L should work as follows.  (a) If person is a non-member then NM N/L checked should force N/L to be set ON.  (b) If person is non-member then NM N/L unchecked forces N/L to be OFF.  &amp;copy; If person is a member then NM N/L has no effect.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Subscription Payment Form&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Expires field needs a simple list of dates, plus N/A and 9999.  Currently contains lots of duplicates.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Gift Aid Form&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Doesn&amp;rsquo;t need checkboxes O/S, SO, 5for4&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Also doesn&amp;rsquo;t need Letters, Salutation&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Standing Order Form&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Doesn&amp;rsquo;t display!  Just have a blank pink screen.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;More when I get a chance over the next couple of days.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Which is all great feedback, but makes me think we cannot continue with LibreOffice Base.  Maybe that&amp;rsquo;s reactionary, but I&amp;rsquo;ve now created the Standing Order Form twice and although I now have backups of it, it&amp;rsquo;s just randomly gone blank in the latest version that I&amp;rsquo;ve shared with the client.&lt;/p&gt;
-
-&lt;p&gt;I had been thinking that the lock up problem had only been affecting me when I&amp;rsquo;d been editing the system and the querying portion of the system had been stable on their platform, as it appears to have been on mine.  To hear that they are having serious lock up issues makes me think there&amp;rsquo;s no real way forward here.  I&amp;rsquo;ve got no clear way to debug the crashes that I&amp;rsquo;m getting; and although I can see some chatter about this on the message boards, I don&amp;rsquo;t think I can afford to invest 10&amp;rsquo;s of hours into tracking down the cause of the crash, particularly when there&amp;rsquo;s no guarantee that it&amp;rsquo;ll even be fixable.  The workflow with LibreOffice Base with the crashes is appalling.&lt;/p&gt;
-
-&lt;p&gt;Now maybe I&amp;rsquo;ve done something terribly inappropriate with the system importing the legacy data and the way I have the forms setup etc. but I&amp;rsquo;m tempted to suspect something related to having switched from Mac to PC and back.  It all seemed fine, but maybe some weird line endings got in there.  In particular even though the system is open source, the lack of transparency of the system being developed makes me despair of getting to the bottom of things in short order.  In principle the database file is a zip file that can be unpacked and have its components inspected, but I was unable to unzip when the app was crashing.&lt;/p&gt;
-
-&lt;p&gt;I thought LibreOffice Base was a good option as there was a large responsive community and an initial import of the client&amp;rsquo;s data went fine, and an initial setup of various relations went well.  It looked like it has all the functionality that we need, and that&amp;rsquo;s been born out during further development, but the crashing, lack of automatic backup and the monolithic file format makes me think we are better off cutting our losses and switching to Zoho or MSAccess.  The options as I see them are:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Continue to push on and try to somehow debug the crashes&lt;/li&gt;
-&lt;li&gt;Try to recreate a version from scratch on PC only (might avoid crashing issue, might not)&lt;/li&gt;
-&lt;li&gt;Set something up in Zoho&lt;/li&gt;
-&lt;li&gt;Set something up in MSAccess&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;I&amp;rsquo;m leaning towards options 3 and 4 in that I suspect there&amp;rsquo;s a lower likelihood of encountering the crash issue, and perhaps more cohorent support, although I&amp;rsquo;m not sure.&lt;/p&gt;
-
-&lt;p&gt;So I just got set up with a Zoho account and emailed them about non-profit discounts, but I don&amp;rsquo;t seem to have an XLSX file for the main members db, and although Zoho says it will import mdb files it can&amp;rsquo;t handle the ones from the APSoc dump.  The MSAccess Office 365 offering seems to be only available on PC.  TT-Exchange, which we&amp;rsquo;re already a member of, has MSAccess 2013 for £12, while the main MS page has Office365 for £1.50 a month per user.  Guess I&amp;rsquo;ll apply for the latter, but I get stuck - I start the application process, but then can&amp;rsquo;t select AgileVentures - we already have a charity account, but then I can&amp;rsquo;t log in to it.  Ugh, so stuck on two fronts there.  At least I&amp;rsquo;ve pushed forward on both pathways &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Gah, so I need to ask the client for an XLS export of the member database to even test Zoho, and I maybe need to contact MicroSoft support to even get set up with their charity plan &amp;hellip; I think I&amp;rsquo;m going to email the client to let them know my concerns and ask for the appropriate files.&lt;/p&gt;
 </content>
   </entry>
 </feed>
