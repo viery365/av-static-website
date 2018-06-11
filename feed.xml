@@ -5,10 +5,73 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2018-01-18T00:00:00+00:00</updated>
+  <updated>2018-01-20T00:00:00+00:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>AV EcoSystem Review Back to MSAccess</title>
+    <link rel="alternate" href="http://blog.url.com/2018/01/20/av-ecosystem-review-back-to-msaccess/"/>
+    <id>http://blog.url.com/2018/01/20/av-ecosystem-review-back-to-msaccess/</id>
+    <published>2018-01-20T00:00:00+00:00</published>
+    <updated>2018-06-11T21:29:42+01:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="msaccess" src="/images/../images/msaccess.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Another week, and I need to switch back to the APSoc project and its continuing development on MSAccess.  I did manage to complete the new Premium-Subscription data model update in WebSiteOne last week, but I did not manage to update all the data to take advantage of it, and I still haven&amp;rsquo;t completed the monthly report to the AV trustees.  Anyway, let&amp;rsquo;s do a chunk on the APSoc project.  The client apparently has Office 365 (aka Office 2016), so arguably I should be working on the same, but since what I&amp;rsquo;ve created so far seems to be working for them okay, I&amp;rsquo;m tempted to continue in MSAccess 2007 and see how far we can get.  I think we&amp;rsquo;ve now got access to the latest Office products through our charity status, but I&amp;rsquo;m worried about burning hours on install and getting used to the new interface when I want to properly wrap by head around all the nuances of the data requirements from the client.&lt;/p&gt;
+
+&lt;p&gt;I guess I can kick off a download of the latest office in the background without investing too much time.  Although it seems from trying to log into the service center that our account isn&amp;rsquo;t recognized.  Just the kind of thing I could burn time on.  Let&amp;rsquo;s get into the client requirements.  MS send me a verification code, so I follow through on my windows machine &amp;hellip; the other issue is that I&amp;rsquo;m on Windows 7 Ultimate and I&amp;rsquo;ve no idea how that will work (if at all) with Office 365.  Anyway, client requirements.  I&amp;rsquo;m still conflicted about whether I should move all this into a Trello, but taking their last email, we&amp;rsquo;ve got the subscription payment form &amp;ldquo;rate paid dropdown&amp;rdquo; including the items they want.  They want the membership number to change somehow:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Currently Member_No is constructed as (Approach formula): &lt;/p&gt;
+
+&lt;p&gt;Combine(AP&lt;em&gt;Soc&lt;/em&gt;Member&lt;em&gt;Types.&amp;ldquo;Code Letter&amp;rdquo;, &amp;rsquo;/&amp;rsquo;, NumToText(AP&lt;/em&gt;Soc_Members.RecNo, &amp;lsquo;00000&amp;rsquo;))&lt;/p&gt;
+
+&lt;p&gt;So in the new system that would be&lt;/p&gt;
+
+&lt;p&gt;CODE_LETTE from MembershipTypes Table / RECNO from Membership Table (as 5 digits with leading zeroes)&lt;/p&gt;
+
+&lt;p&gt;I want the CODE_LETTE deleted from this formula and from the MembershipTypes Table.&lt;/p&gt;
+
+&lt;p&gt;So MEMBERNO becomes just RECNO (as 5 digits with leading zeroes)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I&amp;rsquo;m going to leave that for the moment.  They also want to be able to flip between forms and stay on the same record.  That isn&amp;rsquo;t happening by default in Access 2007.  There&amp;rsquo;s an &lt;a href="https://stackoverflow.com/questions/38592699/access-how-to-open-a-second-form-to-the-same-record-as-the-first"&gt;SO post&lt;/a&gt; on that that might help, but again I&amp;rsquo;m tempted to leave this.  Although I can&amp;rsquo;t help myself googling a little more.  There&amp;rsquo;s a very old &lt;a href="https://arstechnica.com/civis/viewtopic.php?f=20&amp;amp;t=745702"&gt;Arstechnica post&lt;/a&gt; and a few other forum posts on the topic for where we might have buttons to link to other forms that would open that new form with the same record.  Seems fiddly, will get into that later.&lt;/p&gt;
+
+&lt;p&gt;The status and expires dropdown on each form I fixed up the week before last.  The outstanding issues from the last email (which admittedly was feedback on the last LibreOffice version) are defaults for the GA Type dropdown and the Member No and Member Grade.  Let&amp;rsquo;s start on those &amp;hellip; For the GA Type dropdown the two values required are &amp;ldquo;All donations from&amp;rdquo; and &amp;ldquo;Single donation&amp;rdquo;; apparently the first of these should be the default.   I use a value list here instead of a separate table.  Seems pretty straightforward.  I&amp;rsquo;ve already got &amp;ldquo;Member Grade&amp;rdquo; and &amp;ldquo;Date Joined&amp;rdquo; defaulting correctly in the main member form.&lt;/p&gt;
+
+&lt;p&gt;I notice that some of the dates aren&amp;rsquo;t fitting in their boxes, and switch them all to the more compact general date format, as well as reflecting on how it would be nice if the surrounding &amp;ldquo;member form&amp;rdquo; on each form was just some sort of single boilerplate &amp;hellip; but anyway, this all brings me to the various notes on the data model about default values for different fields in the membership database.  Previously I was trying to create fields in the database tables that were automatically generated from other fields, but that didn&amp;rsquo;t seem to work.  I guess I can set default values, but really we want the combined values like full name to be recalculated on the fly &amp;hellip; I find a &lt;a href="http://allenbrowne.com/casu-14.html"&gt;good article&lt;/a&gt; on using queries of calculated results.   So I implement that, but it only works some of the time and I&amp;rsquo;m not sure why &amp;hellip; an initial problem was that I had the macros disabled.  Switched those on, but it still only worked sometimes.  I ended up adding a series of refresh statements and it now seems to have worked:&lt;/p&gt;
+&lt;pre class="highlight vb"&gt;&lt;code&gt;&lt;span class="k"&gt;Option&lt;/span&gt; &lt;span class="n"&gt;Compare&lt;/span&gt; &lt;span class="n"&gt;Database&lt;/span&gt;
+
+&lt;span class="k"&gt;Private&lt;/span&gt; &lt;span class="k"&gt;Sub&lt;/span&gt; &lt;span class="nf"&gt;First_Name_AfterUpdate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="k"&gt;Call&lt;/span&gt; &lt;span class="n"&gt;Last_Name_AfterUpdate&lt;/span&gt;
+&lt;span class="k"&gt;End&lt;/span&gt; &lt;span class="k"&gt;Sub&lt;/span&gt;
+
+&lt;span class="k"&gt;Private&lt;/span&gt; &lt;span class="k"&gt;Sub&lt;/span&gt; &lt;span class="nf"&gt;Last_Name_AfterUpdate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="n"&gt;full_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;Me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;First_Name&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;Me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Middle_Name&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;Me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Last_Name&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="s"&gt;" "&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;Me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Letters&lt;/span&gt;
+  &lt;span class="k"&gt;Me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="err"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Full&lt;/span&gt; &lt;span class="n"&gt;Name&lt;/span&gt;&lt;span class="err"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;full_name&lt;/span&gt;
+  &lt;span class="k"&gt;Me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Refresh&lt;/span&gt;
+  &lt;span class="k"&gt;Me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Recalc&lt;/span&gt;
+  &lt;span class="k"&gt;Me&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Requery&lt;/span&gt;
+&lt;span class="k"&gt;End&lt;/span&gt; &lt;span class="k"&gt;Sub&lt;/span&gt;
+
+&lt;span class="k"&gt;Private&lt;/span&gt; &lt;span class="k"&gt;Sub&lt;/span&gt; &lt;span class="nf"&gt;Letters_AfterUpdate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="k"&gt;Call&lt;/span&gt; &lt;span class="n"&gt;Last_Name_AfterUpdate&lt;/span&gt;
+&lt;span class="k"&gt;End&lt;/span&gt; &lt;span class="k"&gt;Sub&lt;/span&gt;
+
+&lt;span class="k"&gt;Private&lt;/span&gt; &lt;span class="k"&gt;Sub&lt;/span&gt; &lt;span class="nf"&gt;Middle_Name_AfterUpdate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="k"&gt;Call&lt;/span&gt; &lt;span class="n"&gt;Last_Name_AfterUpdate&lt;/span&gt;
+&lt;span class="k"&gt;End&lt;/span&gt; &lt;span class="k"&gt;Sub&lt;/span&gt;
+
+&lt;span class="k"&gt;Private&lt;/span&gt; &lt;span class="k"&gt;Sub&lt;/span&gt; &lt;span class="nf"&gt;Title_AfterUpdate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="k"&gt;Call&lt;/span&gt; &lt;span class="n"&gt;Last_Name_AfterUpdate&lt;/span&gt;
+&lt;span class="k"&gt;End&lt;/span&gt; &lt;span class="k"&gt;Sub&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is exactly why I did not want to spend an hour trying to download Office 365 as I suspected it would take me an hour to ensure that I could have calculated fields working, which is the key thing for getting most of the rest of the functionality that the client wants &amp;hellip;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>AV EcoSystem Review Sorting and Reporting</title>
     <link rel="alternate" href="http://blog.url.com/2018/01/18/av-ecosystem-review-sorting_and_reporting/"/>
@@ -419,68 +482,6 @@ Thanks so much for all the detailed feedback over the last few weeks.  I believe
 &lt;p&gt;&lt;img src="https://dl.dropbox.com/s/5khkijp2qr728gj/Screenshot%202018-01-12%2011.33.31.png?dl=0" /&gt;&lt;/p&gt;
 
 &lt;p&gt;With at least one dropdown linking to a different table.  Overall the UI is easily better than the latest LibreOffice even though I&amp;rsquo;m using MSAccess from 10 years back.  Hmm, maybe I should have just started with Access for a simple life, but we&amp;rsquo;ll see.  Now I&amp;rsquo;m tempted to see what&amp;rsquo;s the best I can get out of Zoho &amp;hellip; I immediately run up against a couple of (perhaps minor) issues, which are that we can&amp;rsquo;t easily convert fields from multi-line to single-line and back again.  Also my attempts to adjust a drop down field to radio buttons fails.  I think I&amp;rsquo;ll give up there.  I&amp;rsquo;m pretty sure the client is going to be much happier with the results from MSAccess, and I can develop faster there too &amp;hellip;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>AV EcoSystem Review Painful Decisions</title>
-    <link rel="alternate" href="http://blog.url.com/2018/01/11/av-ecosystem-review-painful-decisions/"/>
-    <id>http://blog.url.com/2018/01/11/av-ecosystem-review-painful-decisions/</id>
-    <published>2018-01-11T00:00:00+00:00</published>
-    <updated>2018-05-17T20:43:48+01:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="hardest thing and the right thing" src="/images/hardest-and-right.jpeg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The APSoc has responded calmly to the email I sent about the problems with LibreOffice Base.  Here&amp;rsquo;s what I sent:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Thanks for this.&lt;/p&gt;
-
-&lt;p&gt;That&amp;rsquo;s disturbing to hear that you&amp;rsquo;re experiencing lock up.  We have been experiencing that too, but only with the system in edit mode, i.e. editing the UI, tables etc.  updates to tables have been working fine.  These lock ups are pretty much what caused us to be late delivering last week.  That you&amp;rsquo;re encountering them to makes me think that we have a particularly tricky issue to solve here and some important decisions to make.&lt;/p&gt;
-
-&lt;p&gt;Rest assured that the problems fall on our side and not yours.  We&amp;rsquo;ve given a fixed quote for this, and will do whatever is necessary to deliver robust and stable software by the final deadline however many additional hours are required on our side.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m going to be discussing the options in a team meeting today, and will come back to you with some alternative approaches to consider by the end of the day.  In the meantime I notice that, in the database pack we originally received from you, there are a number of file formats including XLSX, but notably we do not have an XLSX formatted file for the subscription or members tables; while we do have them for the gift aid, member types and recurring subs tables.  Is there any chance you could provide XLSX files for the subscription and members tables as this would help with debugging and testing alternatives.&lt;/p&gt;
-
-&lt;p&gt;Many thanks in advance&lt;/p&gt;
-
-&lt;p&gt;Best, Sam&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;They responded with:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Ah-ha … thanks for this … I’m glad it isn’t just me getting lock-ups and being stupid!  The lock-ups seem to happen as soon as I select “Queries” and use the Wizard.  Sometimes it just locks Libre and I can continue with other things; at other times everything locks until I kill Libre.  If I then try to restart Libre and access the beta file I get “General Error: General input/output error” until I refresh the Libre file from the supplied one.  This also happens if I try creating anything more than a very simple report.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;As well as including the files I requested and answering a few other outstanding questions and some other feedback on the interface.  I also had a call yesterday from Zoho indicating that the non-profit discount is 20% if we pay a year up front (instead of the usual 10%), which is not a huge boost, but I guess I at least use the new file from the client to check out Zoho&amp;rsquo;s offering.&lt;/p&gt;
-
-&lt;p&gt;In short order it gives me the following:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/3g8557dfmr00nzq/Screenshot%202018-01-11%2010.08.47.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I see I can also import different sets of choices for the country field&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/c3nw135pu5wn6f2/Screenshot%202018-01-11%2010.12.35.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;but I can see a fair chunk of work required to get this set up to where the client might be passing happy (including being able to generate all the forms and reports they like), and then there&amp;rsquo;s the question of the monthly fees.  In the meantime I got MS Access 2013 for £14.40 through the tt-exchange using AgileVentures charity status.  And &amp;hellip; they are going to physically deliver shrink-wrapped software to my address?  What, no download?  Seems like we won&amp;rsquo;t receive anything for five days, hmm.&lt;/p&gt;
-
-&lt;p&gt;I can see MS Access 2016 being offered for close to £100 from Tekgia on a charity offer.  Hmmm. So I had another go at getting in through the MS portal to no joy.  I did seem to be able to get access to the basic office suite through our existing nonprofit setup by going through the sam@agileventures.org login in my safari browser.  I finally found a help request form and submitted a help request:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://nonprofitcontactus.microsoftcrmportals.com/contact-us/"&gt;https://nonprofitcontactus.microsoftcrmportals.com/contact-us/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;and I would have pasted in here the help request but super-irritatingly I can&amp;rsquo;t go back to the form and they don&amp;rsquo;t send me a copy &amp;hellip; although they send me a notification that they&amp;rsquo;ll get back to me in about 5 business days:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://dl.dropbox.com/s/qwm32xhnsr14tuk/Screenshot%202018-01-11%2010.45.32.png?dl=0" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Ugh, I guess the main question on my mind is whether Zoho can produce the reports the client needs, and maybe more importantly the complex subforms &amp;hellip; the other alternatives I have are build their system from scratch in LibreOffice on PC, and/or force through and buy a copy of MS Access 2016.  £100 is not insane from Tekgia, but will be frustrating if we can get it for £1.50 a month as part of our MS nonprofit status, of I&amp;rsquo;ve doubled up having already spend £12 on MS access and I&amp;rsquo;ve missed the download button or it will arrive tomorrow.&lt;/p&gt;
-
-&lt;p&gt;I do have MS Access 2007 on my machine - should I perhaps start playing with that?  Quick answer is that I can&amp;rsquo;t import the LibreOffice odb format into MS Access 2007.  Also, it looks like Zoho does support subforms:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://www.zoho.com/creator/help/forms/creating-subforms.html"&gt;https://www.zoho.com/creator/help/forms/creating-subforms.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I have been able to import the XLSX table into MS Access 2007, so that&amp;rsquo;s a basic route forward I guess &amp;hellip; painful decisions ahead.&lt;/p&gt;
 </content>
   </entry>
 </feed>
