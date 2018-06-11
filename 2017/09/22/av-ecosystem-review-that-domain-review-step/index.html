@@ -121,9 +121,9 @@
     <span class="k">end</span>
   <span class="k">end</span>
 </code></pre>
-<p>although I can&rsquo;t actually run it as I&rsquo;m waiting for a cucumber run to complete (got to work on the performance there).  That gap allows me to agonize about whether this unit test is sufficiently rigorous, or if it&rsquo;s simply testing the existing Rails architecture.  I think it&rsquo;s the right thing.  It&rsquo;s providing an executable check that the class method <code>.with_github_url</code> is doing what we expect it to do.  </p>
+<p>although I can&rsquo;t actually run it as I&rsquo;m waiting for the cucumber suite to finish running (got to work on the performance there).  That gap allows me to agonize about whether this unit test is sufficiently rigorous, or if it&rsquo;s simply testing the existing Rails architecture.  I think it&rsquo;s the right thing.  It&rsquo;s providing an executable check that the class method <code>.with_github_url</code> is doing what we expect it to do.  </p>
 
-<p>Bigger picture quickly, I&rsquo;m not planning to immediately remove the github_url field from the projects model.  We&rsquo;ll need a task to migrate all of them in to source repository models, and based on previous pain, I&rsquo;ll be ensuring we have a follow up task in a different PR that we deploy to production separately to delete that field later on when the dust has settled.</p>
+<p>Bigger picture quickly, I&rsquo;m not planning to immediately remove the <code>github_url</code> field from the projects model.  We&rsquo;ll need a task to migrate all of them in to source repository models, and based on previous pain, I&rsquo;ll be ensuring we have a follow up task in a different PR that we deploy to production separately to delete that field later on when the dust has settled.</p>
 
 <p>Okay so the cukes finished running.  I got a couple of errors in the way I&rsquo;m using FactoryGirl/build_stubbed.  Fix those and I&rsquo;ve got the following Project RSpec output:</p>
 <pre class="highlight plaintext"><code>→ be rspec -fd spec/models/project_spec.rb 
@@ -207,12 +207,12 @@ Finished in 0.65804 seconds (files took 8.15 seconds to load)
   should belong to project
 </code></pre>
 <p>I add the following to the Project spec:</p>
-<pre class="highlight ruby"><code>  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">have_many</span> <span class="ss">:source_repositories</span><span class="p">}</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">have_many</span> <span class="ss">:documents</span><span class="p">}</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">have_many</span> <span class="ss">:event_instances</span><span class="p">}</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">have_many</span> <span class="ss">:commit_counts</span><span class="p">}</span>
+<pre class="highlight ruby"><code>  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">have_many</span> <span class="ss">:source_repositories</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">have_many</span> <span class="ss">:documents</span> <span class="p">}</span> 
+  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">have_many</span> <span class="ss">:event_instances</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">have_many</span> <span class="ss">:commit_counts</span> <span class="p">}</span>
 
-  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">belong_to</span> <span class="ss">:user</span><span class="p">}</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">is_expected</span><span class="p">.</span><span class="nf">to</span> <span class="n">belong_to</span> <span class="ss">:user</span> <span class="p">}</span>
 </code></pre>
 <p>and I get some more domain model oriented chatter from RSpec when running the Project spec:</p>
 <pre class="highlight shell"><code>Project
@@ -240,15 +240,15 @@ Finished in 0.65804 seconds (files took 8.15 seconds to load)
 14) deleted view specs</p>
 
 <p>Hmmmm.  So the key missing thing in some ways is that we&rsquo;re not displaying the multiple repos and the acceptance tests are not as extensive or as readable as I would like, but I have a hunch that I need to get this into production with some kind of rake task to move the data&ndash;in the github<em>url, in the Project model&ndash;into the source</em>repository, but I&rsquo;ve created a new getter that&rsquo;s blocking my access.  This <a href="https://stackoverflow.com/questions/21835116/how-can-i-overwrite-a-getter-method-in-an-activerecord-model">SO post</a> tells me I can reference the original active-record field via self[:github_url], so I could have a task like this:</p>
-<pre class="highlight plaintext"><code>namespace :db do
-  desc "migrate from github url to source repository domain model (copies github_url field to source repo model)"
-  task migrate_from_github_url_to_source_repository: :environment do
-    Project.all.each do |project|
-      project.create(:source_repository, url: project[:github_url])
-    end
-  end
+<pre class="highlight ruby"><code><span class="n">namespace</span> <span class="ss">:db</span> <span class="k">do</span>
+  <span class="n">desc</span> <span class="s2">"migrate from github url to source repository domain model (copies github_url field to source repo model)"</span>
+  <span class="n">task</span> <span class="ss">migrate_from_github_url_to_source_repository: :environment</span> <span class="k">do</span>
+    <span class="no">Project</span><span class="p">.</span><span class="nf">all</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">project</span><span class="o">|</span>
+      <span class="n">project</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:source_repository</span><span class="p">,</span> <span class="ss">url: </span><span class="n">project</span><span class="p">[</span><span class="ss">:github_url</span><span class="p">])</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 
-end
+<span class="k">end</span>
 </code></pre>
 <p>By the way, creating the task outline with <code>rails g task db migrate_from_github_url_to_source_repository</code> was handy - thanks Rails!</p>
 
